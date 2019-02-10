@@ -36,15 +36,17 @@ class ProfileRoutes extends React.Component {
     if (!member.data) {
       return (
         <>
-          <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} isProfileRoute />} />
-          <Spinner />
+          <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} />} />
+          <div className='profile-route-loading'>
+            <Spinner />
+          </div>
         </>
       );
     }
 
     return (
       <>
-        <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} isProfileRoute />} />
+        <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} />} />
         <Switch>
           <Route path={`${match.url}/account`} exact render={route => <Account />} />
           <Route path={`${match.url}/clan/:view?/:subView?`} exact render={route => <Clan view={route.match.params.view} subView={route.match.params.subView} />} />

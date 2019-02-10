@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
-function BuildProfileLink({ to, children, component, member, ...rest }) {
+function BuildProfileLink(props) {
+  const { to, children, component, member, onClick, isActive, ...rest } = props;
   const LinkComponent = component || Link;
 
   let memberPrefix = member.characterId ? `/${member.membershipType}/${member.membershipId}/${member.characterId}` : '';
@@ -11,7 +12,7 @@ function BuildProfileLink({ to, children, component, member, ...rest }) {
   let state = typeof to === 'object' ? to.state : false;
 
   return (
-    <LinkComponent to={{ pathname: `${memberPrefix}${pathname}`, state: state || undefined }}>
+    <LinkComponent to={{ pathname: `${memberPrefix}${pathname}`, state: state || undefined }} onClick={onClick || null} {...(LinkComponent === NavLink ? { isActive } : null)}>
       {children}
     </LinkComponent>
   );

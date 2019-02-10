@@ -20,6 +20,7 @@ function loadMemberAndReset(membershipType, membershipId, characterId) {
     membershipType,
     characterId: null,
     data: false,
+    prevData: false,
     error: false,
     loading: true
   };
@@ -91,9 +92,10 @@ export default function memberReducer(state = defaultState, action) {
       };
     case 'MEMBER_LOADED':
       if (state.prevData !== data) data.updated = new Date().getTime();
+      // console.log(characterId);
       return {
         ...state,
-        characterId,
+        characterId: state.characterId ? state.characterId : data.profile.characters.data[0].characterId,
         data: data,
         prevData: state.data,
         loading: false,

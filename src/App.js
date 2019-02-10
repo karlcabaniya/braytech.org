@@ -10,7 +10,6 @@ import './App.css';
 import './components/PresentationNode.css';
 
 import './utils/i18n';
-import { isProfileRoute, themeOverride } from './utils/globals';
 import dexie from './utils/dexie';
 import * as bungie from './utils/bungie';
 import GoogleAnalytics from './components/GoogleAnalytics';
@@ -18,7 +17,6 @@ import store from './utils/reduxStore';
 import manifest from './utils/manifest';
 import * as ls from './utils/localStorage';
 
-import Loading from './components/Loading';
 import Header from './components/Header';
 import Tooltip from './components/Tooltip';
 import Footer from './components/Footer';
@@ -28,6 +26,7 @@ import RefreshService from './components/RefreshService';
 
 import ProfileRoutes from './ProfileRoutes';
 
+import Loading from './views/Loading';
 import Index from './views/Index';
 import CharacterSelect from './views/CharacterSelect';
 import Vendors from './views/Vendors';
@@ -147,27 +146,20 @@ class App extends React.Component {
     window.removeEventListener('resize', this.updateViewport);
   }
 
-  wrapperClassName(route) {
-    const override = themeOverride(route.location.pathname);
-    return cx('wrapper', override || this.props.theme.selected, {
-      'profile-route': isProfileRoute(route.location.pathname, true)
-    });
-  }
-
   render() {
     if (!window.ga) {
       GoogleAnalytics.init();
     }
 
     if (this.state.status.code !== 'ready') {
-      return <Loading state={this.state.status} theme={this.props.theme.selected} />;
+      return <Loading state={this.state.status} />;
     }
 
     return (
       <BrowserRouter>
         <Route
           render={route => (
-            <div className={this.wrapperClassName(route)}>
+            <div className={cx('wrapper', this.props.theme.selected)}>
               <NotificationApp updateAvailable={this.props.updateAvailable} />
               <NotificationProgress />
 
@@ -184,7 +176,7 @@ class App extends React.Component {
                   <Route
                     render={() => (
                       <>
-                        <Route render={route => <Header route={route} {...this.state} {...this.props} themeOverride={themeOverride(route.location.pathname)} isProfileRoute />} />
+                        <Route render={route => <Header route={route} {...this.state} {...this.props} />} />
                         <Switch>
                           <RedirectRoute path='/account' exact />
                           <RedirectRoute path='/clan/' exact />

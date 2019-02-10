@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import { isProfileRoute } from '../../utils/globals';
 import getVendors from '../../utils/getVendors';
 import Spinner from '../../components/Spinner';
 import Item from '../../components/Item';
@@ -36,7 +35,7 @@ class Vendors extends React.Component {
 
       if (vendors[vendorHash].ErrorCode !== 1) {
         return (
-          <div className={cx('view', this.props.theme.selected, { 'profile-route': isProfileRoute('/vendors', this.props.member.data) })} id='vendors'>
+          <div className={cx('view', this.props.theme.selected)} id='vendors'>
             <div className='pane'>
               <div className='header'>
                 <div className='sub-header sub'>
@@ -109,7 +108,7 @@ class Vendors extends React.Component {
       });
 
       return (
-        <div className={cx('view', this.props.theme.selected, { 'profile-route': isProfileRoute('/vendors', this.props.member.data) })} id='vendors'>
+        <div className={cx('view', this.props.theme.selected)} id='vendors'>
           <div className='pane'>
             <div className='header'>
               <div className='sub-header sub'>
@@ -157,7 +156,7 @@ class Vendors extends React.Component {
       );
     } else {
       return (
-        <div className={cx('view', this.props.theme.selected, { 'profile-route': isProfileRoute('/vendors', this.props.member.data) })} id='vendors'>
+        <div className={cx('view', this.props.theme.selected)} id='vendors'>
           <div className='pane'>
             <div className='header'>
               <div className='sub-header sub'>

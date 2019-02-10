@@ -15,10 +15,10 @@
   font-size: 14px;
 }
 
-#get-profile .error .sub-header {
+/* #get-profile .error .sub-header {
   border-bottom: 2px solid #F44336;
   color: #F44336;
-}
+} */
 
 #get-profile .search {
   position: relative;

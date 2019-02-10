@@ -37,7 +37,6 @@ class Header extends React.Component {
   };
 
   navOverlayLink = state => {
-    console.log('fuck');
     if (state) {
       return (
         <div className='trigger' onClick={this.toggleNav}>
@@ -267,19 +266,17 @@ class Header extends React.Component {
                   if (view.profile) {
                     return (
                       <li key={view.slug}>
-                        <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
-                          {view.name}
-                        </ProfileNavLink>
+                        <div className='name'>{view.name}</div>
                         <div className='description'>{view.desc}</div>
+                        <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
                       </li>
                     );
                   } else {
                     return (
                       <li key={view.slug}>
-                        <NavLink to={view.slug} exact={view.exact}>
-                          {view.name}
-                        </NavLink>
+                        <div className='name'>{view.name}</div>
                         <div className='description'>{view.desc}</div>
+                        <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
                       </li>
                     );
                   }

@@ -24,10 +24,6 @@
   fill: #fff;
 }
 
-.wrapper.light-mode:not(.profile-route) .spinner svg polygon {
-  fill: #000;
-}
-
 .spinner svg .a {
   animation: spinner_bits_a 2s linear infinite;
 }

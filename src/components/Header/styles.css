@@ -110,31 +110,30 @@
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 3rem;
   z-index: 17;
-  background-color: #f1f1f1;
+  background-color: #11171c;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
 
 #header .nav ul {
-  margin: 0;
+  margin: 2rem 0;
 }
 
 #header .nav ul li {
-  margin: 0 0 1rem;
   display: block;
+  padding: 10px 3rem;
   flex-basis: 100%;
   position: relative;
 }
 
 #header .nav ul li a {
-  height: unset;
-  padding: unset;
-  position: unset;
-  display: inline-block;
-  margin: 0 0 0.6rem;
-  color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 14px;
 }
 
@@ -143,9 +142,9 @@
   position: absolute;
   bottom: 0px;
   height: 100%;
-  left: -8px;
+  left: 0;
   width: 2px;
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 1);
   transition: transform 0.2s;
   transform: scaleX(0);
 }
@@ -155,12 +154,13 @@
 }
 
 #header .nav ul li a.active {
-  color: #000;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 #header .nav ul li .description {
+  margin: 6px 0 0;
   display: block;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 #header.profile-header {
@@ -325,7 +325,7 @@ html.backdropfilter #header.profile-header .braytech {
 
 #header.profile-header .characters .list li .progress-bar .bar .fill {
   background-color: #5aa366;
-  transition: width .5s;
+  transition: width 0.5s;
 }
 
 #header.profile-header .characters .list li .progress-bar.capped .bar .fill {
@@ -403,7 +403,6 @@ html.backdropfilter #header.profile-header .braytech {
 }
 
 @media screen and (max-width: 1200px) {
-
   #header.navOpen {
     position: fixed !important;
   }
@@ -434,16 +433,15 @@ html.backdropfilter #header.profile-header .braytech {
     font-size: 12px;
     margin: 0 7px 0 0;
   }
-  
-  #header.profile-header {
 
+  #header.profile-header {
   }
 
   #header.profile-header .characters {
     width: 100%;
     max-width: 512px;
   }
-  
+
   #header.profile-header .characters .list li {
     padding: 0 0 0 calc(96px + 32px);
   }
@@ -458,12 +456,21 @@ html.backdropfilter #header.profile-header .braytech {
     padding: 0 2rem;
     width: 100%;
   }
+
   #header .ui {
     margin: 0 2rem 0;
   }
+
   #header .nav {
-    padding: 2rem;
     height: calc(100% - 40px);
+  }
+
+  #header .nav ul {
+    margin: 1rem 0;
+  }
+
+  #header .nav ul li {
+    padding: 10px 2rem;
   }
 
   #header.profile-header {
@@ -473,7 +480,7 @@ html.backdropfilter #header.profile-header .braytech {
   #header.profile-header .ui {
     margin: 0 2rem;
   }
-  
+
   #header.profile-header .profile {
     padding: 0;
     height: 112px;
@@ -514,27 +521,6 @@ html.backdropfilter #header.profile-header .braytech {
     height: 7px;
   }
 }
-
-
-/* #header.dark-mode .nav {
-  background-color: #131313;
-}
-
-#header.dark-mode .nav ul li a {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-#header.dark-mode .nav ul li a::before {
-  background-color: rgb(255, 255, 255);
-}
-
-#header.dark-mode .nav ul li a.active {
-  color: rgb(255, 255, 255);
-}
-
-#header.dark-mode .nav ul li .description {
-  color: rgba(255, 255, 255, 0.5);
-} */
 
 #header.profile-header.dark-mode .background {
   background-color: #1a1a1a;
