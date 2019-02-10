@@ -15,19 +15,12 @@ import Spinner from './components/Spinner';
 
 class ProfileRoutes extends React.Component {
   componentDidMount() {
-    const { member, match } = this.props;
-    const { membershipId, membershipType, characterId } = match.params;
+    const { membershipId, membershipType, characterId } = this.props.match.params;
 
-    if ((!member.data && !member.loading) || member.membershipId !== membershipId || parseInt(member.membershipType, 10) !== parseInt(membershipType, 10)) {
-      store.dispatch({
-        type: 'MEMBER_LOAD_NEW_MEMBERSHIP',
-        payload: { membershipType: parseInt(membershipType, 10), membershipId }
-      });
-    }
-
-    if (member.characterId !== characterId) {
-      store.dispatch({ type: 'MEMBER_CHARACTER_SELECT', payload: { membershipType, membershipId, characterId } });
-    }
+    store.dispatch({
+      type: 'MEMBER_SET_BY_PROFILE_ROUTE',
+      payload: { membershipType, membershipId, characterId }
+    });
   }
 
   render() {
