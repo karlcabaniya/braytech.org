@@ -23,6 +23,8 @@ import Header from './components/Header';
 import Tooltip from './components/Tooltip';
 import Footer from './components/Footer';
 import NotificationApp from './components/NotificationApp';
+import NotificationProgress from './components/NotificationProgress';
+import RefreshService from './components/RefreshService';
 
 import ProfileRoutes from './ProfileRoutes';
 
@@ -167,12 +169,12 @@ class App extends React.Component {
           render={route => (
             <div className={this.wrapperClassName(route)}>
               <NotificationApp updateAvailable={this.props.updateAvailable} />
-              {/* <NotificationProgress /> */}
+              <NotificationProgress />
 
               {/* Don't run the refresh service if we're currently selecting
                 a character, as the refresh will cause the member to
                 continually reload itself */}
-              {/* <Route path='/character-select' children={({ match, ...rest }) => !match && <RefreshService {...this.props} />} /> */}
+              <Route path='/character-select' children={({ match, ...rest }) => !match && <RefreshService {...this.props} />} />
 
               <Tooltip {...route} />
               <Route component={GoogleAnalytics.GoogleAnalytics} />

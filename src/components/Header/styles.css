@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(135, 135, 135, 0.2);
   color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
 }
@@ -175,12 +175,12 @@
 }
 
 #header.profile-header .braytech {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(135, 135, 135, 0.2);
   color: rgba(255, 255, 255, 0.8);
 }
 
 html.backdropfilter #header.profile-header .braytech {
-  backdrop-filter: blur(7px) brightness(1.2);
+  backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
 }
 
 #header.profile-header .ui {
