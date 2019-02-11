@@ -18,8 +18,23 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
-      navOpen: false
+      navOpen: false,
+      lastUpdate: false,
+      updateFlash: false
     };
+
+    this.updateFlash = false;
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (prevProps.member.data.updated !== this.props.member.data.updated && this.state.lastUpdate !== this.props.member.data.updated && !this.state.updateFlash) {
+      this.setState({ lastUpdate: this.props.member.data.updated, updateFlash: true });
+    }
+    if (this.state.updateFlash) {
+      window.setTimeout(() => {
+        this.setState({ updateFlash: false });
+      }, 1000);
+    }
   }
 
   toggleNav = () => {
@@ -120,8 +135,6 @@ class Header extends React.Component {
 
     let profileRoute = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)\/(\w+)/);
     let profileView = profileRoute ? profileRoute[1] : false;
-
-    console.log(this.props);
 
     let profileEl = null;
 

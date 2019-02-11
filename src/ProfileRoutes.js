@@ -25,7 +25,7 @@ class ProfileRoutes extends React.Component {
 
   render() {
     const { member, location, match } = this.props;
-    console.log(member, location, match);
+    // console.log(member, location, match);
 
     if (member.error) {
       // Character select will be able to display the error for us & prompt

@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?4qc432') format('woff');
+  src: url('destiny.woff?ptedqw') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -8,6 +8,7 @@
 [class^="destiny-"], [class*=" destiny-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'destiny' !important;
+  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -19,8 +20,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.destiny-healing_sword:before {
-  content: "\e056";
+.destiny-dim:before {
+  content: "\e9ea";
+}
+.destiny-destiny-sets:before {
+  content: "\e9e9";
 }
 .destiny-arrow:before {
   content: "\e9e0";
@@ -262,6 +266,54 @@
 .destiny-wire_rifle:before {
   content: "\e9dc";
 }
+.destiny-road_kill:before {
+  content: "\f11a";
+}
+.destiny-ghost:before {
+  content: "\f113";
+}
+.destiny-ship:before {
+  content: "\f128";
+}
+.destiny-uniF129:before {
+  content: "\f129";
+}
+.destiny-bungie:before {
+  content: "\f133";
+}
+.destiny-uniF12C:before {
+  content: "\f12c";
+}
+.destiny-uniF140:before {
+  content: "\f140";
+}
+.destiny-uniF13F:before {
+  content: "\f13f";
+}
+.destiny-uniF145:before {
+  content: "\f145";
+}
+.destiny-uniF144:before {
+  content: "\f144";
+}
+.destiny-uniF14A:before {
+  content: "\f14a";
+}
+.destiny-uniF147:before {
+  content: "\f147";
+}
+.destiny-uniF148:before {
+  content: "\f148";
+}
+.destiny-uniF14C:before {
+  content: "\f14c";
+}
+.destiny-no_ghost:before {
+  content: "\f14b";
+}
+.destiny-clan_banner:before {
+  content: "\f143";
+}
 .destiny-ammo_heavy:before {
   content: "\48";
   color: #a981fc;
@@ -303,7 +355,7 @@
 .destiny-srl:before {
   content: "\e9a3";
 }
-.destiny-ghost:before {
+.destiny-ghost1:before {
   content: "\e9a4";
 }
 .destiny-gambit_hostiles:before {
@@ -541,11 +593,35 @@
 .destiny-fallen_spider:before {
   content: "\e99f";
 }
+.destiny-uniF108:before {
+  content: "\f108";
+}
+.destiny-uniF126:before {
+  content: "\f126";
+}
+.destiny-uniF106:before {
+  content: "\f106";
+}
+.destiny-uniF109:before {
+  content: "\f109";
+}
+.destiny-uniF107:before {
+  content: "\f107";
+}
 .destiny-fallen_dusk:before {
   content: "\e96d";
 }
 .destiny-fallen_exile:before {
   content: "\e90e";
+}
+.destiny-uniF10F:before {
+  content: "\f10f";
+}
+.destiny-uniF10A:before {
+  content: "\f10a";
+}
+.destiny-faction_red_legion1:before {
+  content: "\f149";
 }
 .destiny-fallen_winter:before {
   content: "\e90f";
@@ -977,31 +1053,4 @@
 }
 .destiny-class_warlock:before {
   content: "\e90c";
-}
-.destiny-void_blades:before {
-  content: "\e057";
-}
-.destiny-meteor_strike:before {
-  content: "\e058";
-}
-.destiny-thermal_maul:before {
-  content: "\e060";
-}
-.destiny-void_shield:before {
-  content: "\e061";
-}
-.destiny-thermal_knives:before {
-  content: "\e062";
-}
-.destiny-arc_staff:before {
-  content: "\e063";
-}
-.destiny-nova_pulse1:before {
-  content: "\e064";
-}
-.destiny-arc_beam1:before {
-  content: "\e065";
-}
-.destiny-machinegun1:before {
-  content: "\e154";
 }

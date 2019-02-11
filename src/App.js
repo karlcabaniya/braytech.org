@@ -33,11 +33,9 @@ import Vendors from './views/Vendors';
 import Inspect from './views/Inspect';
 import Read from './views/Read';
 import Settings from './views/Settings';
-import Pride from './views/Pride';
 import Credits from './views/Credits';
 import Resources from './views/Resources';
 import ClanBannerBuilder from './views/Resources/ClanBannerBuilder';
-import GodRolls from './views/Resources/GodRolls';
 
 const RedirectRoute = props => <Route {...props} render={({ location }) => <Redirect to={{ pathname: '/character-select', state: { from: location } }} />} />;
 
@@ -190,11 +188,9 @@ class App extends React.Component {
                           <Route path='/inspect/:hash?' exact component={Inspect} />
                           <Route path='/read/:kind?/:hash?' exact component={Read} />
                           <Route path='/settings' exact render={() => <Settings availableLanguages={this.availableLanguages} />} />
-                          <Route path='/pride' exact component={Pride} />
                           <Route path='/credits' exact component={Credits} />
                           <Route path='/resources' exact component={Resources} />
                           <Route path='/resources/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
-                          <Route path='/resources/god-rolls' exact component={GodRolls} />
                           <Route path='/' exact component={Index} />
                         </Switch>
                       </>

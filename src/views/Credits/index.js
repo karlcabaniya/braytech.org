@@ -7,92 +7,79 @@ import cx from 'classnames';
 import './styles.css';
 
 class Credits extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
-  componentWillUnmount() {}
-
   render() {
     const { t } = this.props;
 
+    let thanks = [
+      {
+        name: 'Vendal Thornheart',
+        icon: 'bungie',
+        description: 'Senior Software Engineer, Bungie. His efforts literally enable this web site, and similar, to function. Herein known as the Architect.'
+      },
+      {
+        name: 'Michael Pearson',
+        icon: 'destiny',
+        description: 'Responsible for refactoring core components that have brought Braytech properly into 2019. He lives in a tree house.'
+      },
+      {
+        name: 'Josh Hunt',
+        icon: 'destiny-sets',
+        description: 'Has served as an inpiration through his own API work on projects such as Destiny Sets and Friendgame, and has encouraged me to be better repeatedly.'
+      },
+      {
+        name: 'Richard Deveraux',
+        icon: 'patrol',
+        description: 'From what I understand, lowlines is a pioneer in all things Destiny and Destiny api stuff. His meticulous work helps power Braytech\'s checklists.' 
+      },
+      {
+        name: 'Rob Jones',
+        icon: 'dim',
+        description: 'delphiactual prototyped the very popular This Week view. He seems pretty cool, too.' 
+      },
+      {
+        name: 'João Paulo Marquesini',
+        icon: 'ghost',
+        description: 'The very handsome developer of the Light Light app laid the foundations for a multilingual Braytech.' 
+      }
+    ];
+
     return (
       <div className={cx('view', this.props.theme.selected)} id='credits'>
-        <div className='content'>
-          <div className='name'>{t('Credits')}</div>
-          <div className='description'>
-            <p>Thanks to Bungie in general for a great game and a great API. Thanks to vthornheart, the boys in the DIM Slack, and for everyone who's excitement motivates me.</p>
-            <p>
-              The repo is at{' '}
-              <a href='https://github.com/justrealmilk/braytech.org' target='_blank' rel='noopener noreferrer'>
-                justrealmilk/braytech.org
-              </a>
-              .{' '}
-              <a href='https://github.com/justrealmilk/braytech.org/issues' target='_blank' rel='noopener noreferrer'>
-                Issues?
-              </a>
-            </p>
-            <ul>
-              <li>
-                <strong>{t('Translations')}</strong>
-                <ul>
-                  <li>
-                    <a href='https://github.com/marquesinijatinha' target='_blank' rel='noopener noreferrer'>
-                      João Paulo (Português Brasileiro)
-                    </a>
-                  </li>
-                  <li>
-                    <a href='https://github.com/koenigderluegner' target='_blank' rel='noopener noreferrer'>
-                      Alex Niersmann (Deutsch)
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <strong>{t('Index')}</strong>
-                <ul>
-                  <li>
-                    <a href='https://www.artstation.com/artwork/33PaD' target='_blank' rel='noopener noreferrer'>
-                      Image
-                    </a>{' '}
-                    by Jesse van Dijk / Bungie
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <strong>{t('Checklists')}</strong>
-                <ul>
-                  <li>
-                    <a href='https://github.com/mipearson' target='_blank' rel='noopener noreferrer'>
-                      Michael Pearson
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <strong>{t('This Week')}</strong>
-                <ul>
-                  <li>
-                    <a href='https://github.com/delphiactual' target='_blank' rel='noopener noreferrer'>
-                      Rob Jones
-                    </a>
-                  </li>
-                  <li>
-                    <a href='https://github.com/koenigderluegner' target='_blank' rel='noopener noreferrer'>
-                      Alex Niersmann
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+        <div className='module intro'>
+          <div className='page-header'>
+            <div className='name'>{t('Credits')}</div>
+            <div className='description'>{t('The Architects and Guardians that make Braytech possible.')}</div>
+          </div>
+          <div className='text'>
+            <p>Braytech's history spans the life of Destiny 2's release. There's been many changes in its trajectory, and it continues to soar. I, justrealmilk, have been aided in my journey by a handful of generous developers, designers, and friendly blueberries, to build this passion project out of the ground from rudimentary HTML and jQuery.</p>
+            <p>Love for this game is as undying as the Light itself.</p>
           </div>
         </div>
+        <div className='module thanks'>
+          <div className='sub-header sub'>
+            <div>{t('Special thanks')}</div>
+          </div>
+          <div className='persons'>
+            {thanks.map((person, index) => {
+              return (
+                <div key={index} className='person'>
+                  <div className='icon'>
+                    <span className={`destiny-${person.icon}`}></span>
+                  </div>
+                  <div className='text'>
+                    <strong>{person.name}</strong>
+                    <p>{person.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className='module'></div>
       </div>
     );
   }
