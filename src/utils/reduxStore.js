@@ -6,8 +6,6 @@ import groupMembers from './reducers/groupMembers.js';
 import refreshService from './reducers/refreshService.js';
 import triumphs from './reducers/triumphs.js';
 import collectibles from './reducers/collectibles.js';
-// import milestones from './reducers/milestones.js';
-import vendors from './reducers/vendors.js';
 import viewport from './reducers/viewport.js';
 
 const rootReducer = combineReducers({
@@ -17,7 +15,6 @@ const rootReducer = combineReducers({
   refreshService,
   triumphs,
   collectibles,
-  vendors,
   viewport
 });
 

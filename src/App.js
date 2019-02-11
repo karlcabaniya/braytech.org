@@ -29,7 +29,6 @@ import ProfileRoutes from './ProfileRoutes';
 import Loading from './views/Loading';
 import Index from './views/Index';
 import CharacterSelect from './views/CharacterSelect';
-import Vendors from './views/Vendors';
 import Inspect from './views/Inspect';
 import Read from './views/Read';
 import Settings from './views/Settings';
@@ -184,14 +183,13 @@ class App extends React.Component {
                           <RedirectRoute path='/this-week' exact />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
-                          <Route path='/vendors/:hash?' exact component={Vendors} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />
                           <Route path='/read/:kind?/:hash?' exact component={Read} />
                           <Route path='/settings' exact render={() => <Settings availableLanguages={this.availableLanguages} />} />
                           <Route path='/credits' exact component={Credits} />
                           <Route path='/resources' exact component={Resources} />
                           <Route path='/resources/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
-                          <Route path='/' exact component={Index} />
+                          <Route path='/' component={Index} />
                         </Switch>
                       </>
                     )}
