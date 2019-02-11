@@ -72,15 +72,17 @@ function Loading({ t, state }) {
             <span className='destiny-clovis_bray_device' />
           </div>
         </div>
-        <h4>Braytech {packageJSON.version}</h4>
-        <div className={cx('status', className)}>
-          <div className='message'>{t(message)}</div>
-          {state.detail ? (
-            <div className='detail'>
-              <div className='name'>{state.detail.name}:</div>
-              <div className='message'>{state.detail.message}</div>
-            </div>
-          ) : null}
+        <div className='text'>
+          <h4>Braytech {packageJSON.version}</h4>
+          <div className={cx('status', className)}>
+            <div className='message'>{t(message)}</div>
+            {state.detail ? (
+              <div className='detail'>
+                <div className='name'>{state.detail.name}:</div>
+                <div className='message'>{state.detail.message}</div>
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     );

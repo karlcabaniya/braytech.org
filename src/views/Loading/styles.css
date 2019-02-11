@@ -82,12 +82,14 @@
   filter: blur(10px);
 }
 
-#loading h4,
-#loading .status {
-  flex-basis: 100%;
+#loading .text {
+  position: absolute;
+  bottom: 7rem;
+  left: 0;
+  width: 100%;
 }
 
-#loading h4 {
+#loading .text h4 {
   font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -95,28 +97,28 @@
   margin: 0 0 1rem;
 }
 
-#loading .status {
+#loading .text .status {
   font-size: 14px;
 }
 
-#loading .status > .message {
+#loading .text .status > .message {
   max-width: 500px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-#loading .status:not(.error) > .message {
+#loading .text .status:not(.error) > .message {
   letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
 }
 
-#loading .status.error > .message {
+#loading .text .status.error > .message {
   opacity: 0.8;
   color: #f44336;
 }
 
-#loading .status .detail {
+#loading .text .status .detail {
   max-width: 500px;
   margin: 1rem auto;
   padding: 0 2rem;
@@ -126,20 +128,18 @@
   opacity: 0.6;
 }
 
-#loading .status .detail .name {
+#loading .text .status .detail .name {
   margin: 0 6px 0 0;
 }
 
 #loading .logo-feature {
   flex-basis: 100%;
-  margin: 0 0 3rem;
   display: flex;
   justify-content: center;
 }
 
 #loading .logo-feature .device {
   position: relative;
-  margin: 7rem 0 0;
   width: 96px;
   font-size: 96px;
   line-height: 74px;
@@ -163,6 +163,30 @@
 }
 
 @media screen and (max-width: 600px) {
+  #loading .bg .spokes {
+    filter: blur(5px);
+  }
+  
+  #loading .bg .radii {
+    filter: blur(4px);
+  }
+  
+  #loading .bg .orbit-1 {
+    filter: blur(2px);
+  }
+  
+  #loading .bg .orbit-2 {
+    filter: blur(2px);
+  }
+  
+  #loading .bg .orbit-3 {
+    filter: blur(1px);
+  }
+  
+  #loading .bg .center {
+    filter: blur(3px);
+  }
+
   #loading .logo-feature .device {
     width: 48px;
     font-size: 48px;
@@ -175,9 +199,5 @@
     height: 136px;
     top: -45px;
     left: -45px;
-  }
-
-  #loading .status {
-    padding: 0 0 3rem;
   }
 }
