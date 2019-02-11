@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?ptedqw') format('woff');
+  src: url('destiny.woff?pa7fvl') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -20,6 +20,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.destiny-external:before {
+  content: "\e9eb";
+}
 .destiny-dim:before {
   content: "\e9ea";
 }
@@ -284,7 +287,7 @@
 .destiny-uniF12C:before {
   content: "\f12c";
 }
-.destiny-uniF140:before {
+.destiny-raid:before {
   content: "\f140";
 }
 .destiny-uniF13F:before {
@@ -662,11 +665,8 @@
 .destiny-cryptarch:before {
   content: "\e919";
 }
-.destiny-raid2:before {
+.destiny-raid_alt:before {
   content: "\e95f";
-}
-.destiny-raid:before {
-  content: "\e995";
 }
 .destiny-the_dawning:before {
   content: "\e902";

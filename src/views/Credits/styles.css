@@ -6,45 +6,6 @@
   align-content: start;
 }
 
-
-
-.page-header {
-  position: relative;
-  margin: 24px 0 3rem;
-}
-
-.page-header::before {
-  content: ' ';
-  position: absolute;
-  top: -24px;
-  left: -16px;
-  padding: 16px 16px 24px;
-  width: 48px;
-  height: 100%;
-  box-shadow: inset 0 0 0 1px #ffffff;
-  opacity: 0.2;
-}
-
-.page-header::after {
-  content: ' ';
-  position: absolute;
-  top: -12px;
-  left: 0;
-  width: 32px;
-  border-bottom: 3px solid #ffffff;
-  opacity: 0.2;
-}
-
-.page-header .name {
-  font-size: 48px;
-  line-height: 38px;
-  font-weight: 500;
-}
-
-.page-header .description {
-  margin: 16px 0 0;
-}
-
 #credits .module {
   
 }
