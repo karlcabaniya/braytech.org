@@ -354,13 +354,6 @@ button.square.active {
   margin: 0 0 1rem;
 }
 
-@media screen and (max-width: 600px) {
-  .sub-header {
-    margin: 2rem 2rem 1rem;
-    width: calc(100% - 4rem);
-  }
-}
-
 .page-header {
   position: relative;
   margin: 24px 0 3rem;
@@ -390,12 +383,23 @@ button.square.active {
 
 .page-header .name {
   font-size: 48px;
-  line-height: 38px;
+  line-height: 1;
   font-weight: 500;
 }
 
 .page-header .description {
-  margin: 16px 0 0;
+  margin: 10px 0 0;
+}
+
+@media screen and (max-width: 600px) {
+  .sub-header {
+    margin: 2rem 2rem 1rem;
+    width: calc(100% - 4rem);
+  }
+
+  .page-header .name {
+    font-size: 36px;
+  }
 }
 
 #error {

@@ -26,32 +26,32 @@ class Collectibles extends React.Component {
   }
 
   render() {
-    const characterId = this.props.member.characterId;
-
-    const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
-    const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
-
     const highlight = parseInt(this.props.highlight, 10) || false;
 
     let collectibles = [];
 
     if (this.props.node) {
-      let tertiaryDefinition = manifest.DestinyPresentationNodeDefinition[this.props.node];
+      const tertiaryDefinition = manifest.DestinyPresentationNodeDefinition[this.props.node];
 
       if (tertiaryDefinition.children.presentationNodes.length > 0) {
         tertiaryDefinition.children.presentationNodes.forEach(node => {
-          let nodeDefinition = manifest.DestinyPresentationNodeDefinition[node.presentationNodeHash];
+          const nodeDefinition = manifest.DestinyPresentationNodeDefinition[node.presentationNodeHash];
 
           let row = [];
           let rowState = [];
 
           nodeDefinition.children.collectibles.forEach(child => {
-            let collectibleDefinition = manifest.DestinyCollectibleDefinition[child.collectibleHash];
+            const collectibleDefinition = manifest.DestinyCollectibleDefinition[child.collectibleHash];
 
             let state = 0;
-            let scope = profileCollectibles.collectibles[child.collectibleHash] ? profileCollectibles.collectibles[child.collectibleHash] : characterCollectibles[characterId].collectibles[child.collectibleHash];
-            if (scope) {
-              state = scope.state;
+            if (this.props.member.data) {
+              const characterId = this.props.member.characterId;
+              const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
+              const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
+              let scope = profileCollectibles.collectibles[child.collectibleHash] ? profileCollectibles.collectibles[child.collectibleHash] : characterCollectibles[characterId].collectibles[child.collectibleHash];
+              if (scope) {
+                state = scope.state;
+              }
             }
 
             rowState.push(state);
@@ -89,16 +89,21 @@ class Collectibles extends React.Component {
         });
       } else {
         tertiaryDefinition.children.collectibles.forEach(child => {
-          let collectibleDefinition = manifest.DestinyCollectibleDefinition[child.collectibleHash];
+          const collectibleDefinition = manifest.DestinyCollectibleDefinition[child.collectibleHash];
 
           let state = 0;
-          let scope = profileCollectibles.collectibles[child.collectibleHash] ? profileCollectibles.collectibles[child.collectibleHash] : characterCollectibles[characterId].collectibles[child.collectibleHash];
-          if (scope) {
-            state = scope.state;
-          }
+          if (this.props.member.data) {
+            const characterId = this.props.member.characterId;
+            const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
+            const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
+            let scope = profileCollectibles.collectibles[child.collectibleHash] ? profileCollectibles.collectibles[child.collectibleHash] : characterCollectibles[characterId].collectibles[child.collectibleHash];
+            if (scope) {
+              state = scope.state;
+            }
 
-          if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
-            return;
+            if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
+              return;
+            }
           }
 
           // eslint-disable-next-line eqeqeq
@@ -194,13 +199,22 @@ class Collectibles extends React.Component {
         }
 
         let state = 0;
-        let scope = profileCollectibles.collectibles[hash] ? profileCollectibles.collectibles[hash] : characterCollectibles[characterId].collectibles[hash];
-        if (scope) {
-          state = scope.state;
-        }
+        if (this.props.member.data) {
+          
+          const characterId = this.props.member.characterId;
 
-        if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
-          return;
+          const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
+          const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
+        
+          let scope = profileCollectibles.collectibles[hash] ? profileCollectibles.collectibles[hash] : characterCollectibles[characterId].collectibles[hash];
+          if (scope) {
+            state = scope.state;
+          }
+
+          if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
+            return;
+          }
+
         }
 
         collectibles.push(
