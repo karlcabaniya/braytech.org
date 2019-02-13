@@ -79,7 +79,7 @@ export function classHashToString(hash, gender) {
   let classDef = manifest.DestinyClassDefinition[hash];
   if (!classDef) return 'uh oh';
   if (classDef.genderedClassNames) {
-    return classDef.genderedClassNames[gender == 1 ? 'Female' : 'Male'];
+    return classDef.genderedClassNames[gender === 1 ? 'Female' : 'Male'];
   }
   return classDef.displayProperties.name;
 }
