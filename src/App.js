@@ -149,7 +149,7 @@ class App extends React.Component {
     }
 
     if (this.state.status.code !== 'ready') {
-      return <Loading state={this.state.status} />;
+      return <Loading state={this.state.status} theme={this.props.theme} />;
     }
 
     return (

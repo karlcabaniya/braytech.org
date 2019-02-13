@@ -1,21 +1,39 @@
 #index {
-  padding: 3rem;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-gap: 3rem;
+  padding: 0;
+  display: block;
 }
 
 #index .head {
-  background-color: #828282;
+  position: relative;
+  margin: -40px 0 0;
+  padding: calc(3rem + 40px) 3rem 3rem;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
-#index .features {
-  width: 100%;
+#index .head .image.bg {
+  background-size: cover;
+  background-position: center top;
+}
+
+#index .head .slogan {
+  position: relative;
+  max-width: 1024px;
+}
+
+#index .head .slogan .message {
+  font-size: 4vw;
+  font-weight: 500;
+  line-height: 1;
+  color: #ffffff;
+}
+
+#index .head .slogan .link {
+  margin: 1rem 0 0;
+  line-height: 1;
 }
 
 #index .logo-area {
-  padding: 3rem 3rem 1rem;
-  background-color: #ee2d1b;
+  
 }
 
 #index .logo-feature .device {
@@ -43,21 +61,28 @@
   animation: fade-in-logo-feature 7s linear forwards, rotate-logo-feature 10s linear infinite;
 }
 
-
-#index .head .name {
-  font-size: 96px;
-  font-weight: 500;
-  color: #ffffff;
-  margin: 0 0 0 -3px;
-}
-
-#index .head .description {
+#index .modules {
   padding: 3rem;
-  font-size: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 3rem;
 }
 
+#index .modules .coming-up .text {
+  font-size: 14px;
+}
 
+#index .modules .coming-up .text blockquote {
+  margin: 0 0 0.4rem;
+  padding: 0 0 0 0.6rem;
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
+  color:rgba(255, 255, 255, 0.8);
+}
 
+#index .modules .coming-up .text span.destiny-external {
+  margin: 0 0 0 6px;
+  opacity: 0.6;
+}
 
 
 
@@ -67,23 +92,21 @@
 
 @media screen and (max-width: 600px) {
   #index {
+    
+  }
+
+  #index .head {
+    padding: calc(2rem + 40px) 2rem 2rem;
+  }
+
+  #index .head .slogan .message {
+    font-size: 8vw;
+  }
+
+  #index .modules {
     padding: 2rem;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
-  }
-
-  #index .logo-area {
-    padding: 2rem 2rem 1rem;
-  }
-
-  #index .head .name {
-    font-size: 72px;
-    margin: 0 0 0 -1px;
-  }
-
-  #index .head .description {
-    padding: 2rem 2rem 1.5rem;
-    font-size: 18px;
   }
   
 }

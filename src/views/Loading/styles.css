@@ -11,8 +11,12 @@
   align-content: center;
   text-align: center;
   color: #ffffff;
-  background-color: #11171c;
+  background-color: #888888;
   z-index: 2;
+}
+
+#loading.dark-mode {
+  background-color: #212121;
 }
 
 #loading .bg {
@@ -43,42 +47,42 @@
 }
 
 #loading .bg .spokes {
-  opacity: 0.1;
+  opacity: 0.4;
   filter: blur(10px);
   transform-origin: center;
   animation: rotate-logo-feature 420s linear infinite;
 }
 
 #loading .bg .radii {
-  opacity: 0.1;
+  opacity: 0.4;
   filter: blur(20px);
   transform-origin: center;
   animation: rotate-logo-feature 420s linear infinite;
 }
 
 #loading .bg .orbit-1 {
-  opacity: 0.05;
+  opacity: 0.2;
   filter: blur(10px);
   transform-origin: center;
   animation: rotate-logo-feature 360s linear infinite;
 }
 
 #loading .bg .orbit-2 {
-  opacity: 0.05;
+  opacity: 0.2;
   filter: blur(6px);
   transform-origin: center;
   animation: rotate-logo-feature 240s linear infinite;
 }
 
 #loading .bg .orbit-3 {
-  opacity: 0.05;
+  opacity: 0.2;
   filter: blur(4px);
   transform-origin: center;
   animation: rotate-logo-feature 120s linear infinite;
 }
 
 #loading .bg .center {
-  opacity: 0.05;
+  opacity: 0.2;
   filter: blur(10px);
 }
 
@@ -114,8 +118,8 @@
 }
 
 #loading .text .status.error > .message {
-  opacity: 0.8;
-  color: #f44336;
+  opacity: 1;
+  color: #ffffff;
 }
 
 #loading .text .status .detail {
