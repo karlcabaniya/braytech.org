@@ -94,9 +94,9 @@ class Header extends React.Component {
         profile: true
       },
       {
-        name: t('Account'),
+        name: t('Legend'),
         desc: t("Bird's eye view of your overall progress"),
-        slug: '/account',
+        slug: '/legend',
         exact: true,
         profile: true
       },
@@ -111,6 +111,13 @@ class Header extends React.Component {
         name: t('This Week'),
         desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/this-week',
+        exact: true,
+        profile: true
+      },
+      {
+        name: t('Activity'),
+        desc: t("Bird's eye view of your overall progress"),
+        slug: '/activity',
         exact: true,
         profile: true
       },

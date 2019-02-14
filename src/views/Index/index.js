@@ -7,7 +7,9 @@ import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
 import ObservedImage from '../../components/ObservedImage';
+import Button from '../../components/Button';
 import captainsLog from '../../data/captainsLog';
+import { ReactComponent as Logo } from '../../components/BraytechDevice.svg';
 
 import './styles.css';
 
@@ -15,12 +17,32 @@ class Index extends React.Component {
   constructor() {
     super();
     this.state = {
-      index: Math.floor(Math.random() * (2 - 0 + 1)) + 0
+      slogan: Math.floor(Math.random() * (2 - 0 + 1)) + 0,
+      log: 0
     };
+    this.logs = captainsLog.slice().reverse();
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+  }
+
+  logPrevious = e => {
+    if (this.state.log + 1 === this.logs.length) {
+      return;
+    }
+    this.setState(prev => ({
+      log: prev.log + 1
+    }));
+  }
+
+  logNext = e => {
+    if (this.state.log === 0) {
+      return;
+    }
+    this.setState(prev => ({
+      log: prev.log - 1
+    }));
   }
 
   render() {
@@ -52,11 +74,14 @@ class Index extends React.Component {
       <div className='view' id='index'>
         <div className='head'>
           <ObservedImage className='bg image' src='/static/images/Crimson_Header.jpg' />
+          <div className='device'>
+            <Logo />
+          </div>
           <div className='slogan'>
-            <div className='message'>{slogans[this.state.index].message}</div>
+            <div className='message'>{slogans[this.state.slogan].message}</div>
             {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
             <div className='link'>
-              // <ProfileLink to={slogans[this.state.index].link.to}>{slogans[this.state.index].link.name}</ProfileLink>
+              // <ProfileLink to={slogans[this.state.slogan].link.to}>{slogans[this.state.slogan].link.name}</ProfileLink>
             </div>
           </div>
         </div>
@@ -75,11 +100,23 @@ class Index extends React.Component {
               <p>Read more on <a href='https://www.bungie.net/en/Explore/Detail/News/47607' target='_blank' rel='noopener noreferrer'>Bungie.net</a><span className='destiny-external' /></p>
             </div>
           </div>
-          <div className='changelog'>
+          <div className='change-log'>
             <div className='sub-header sub'>
               <div>Change log</div>
             </div>
-            <div>Will return...</div>
+            <div className='log-state'>
+              <div className='meta'>
+                <div className='number'>{this.logs[this.state.log].version}</div>
+                <div className='time'>
+                  <Moment fromNow>{this.logs[this.state.log].date}</Moment>
+                </div>
+              </div>
+              <div className='buttons'>
+                <Button lined text={<span className='destiny-arrow_left' />} action={this.logPrevious} disabled={this.state.log + 1 === this.logs.length ? true : false} />
+                <Button lined text={<span className='destiny-arrow_right' />} action={this.logNext} disabled={this.state.log === 0 ? true : false} />
+              </div>
+            </div>
+            <ReactMarkdown className='log-content' source={this.logs[this.state.log].content} />
           </div>
           <div className='description'>
             <p>Braytech is a Destiny fan site that allows users to view and map checklists, track and view triumphs, inspect collectibles, and a few other things too.</p>

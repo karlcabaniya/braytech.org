@@ -193,7 +193,9 @@ html.backdropfilter #header.profile-header .braytech {
 }
 
 #header.profile-header .ui {
-  margin: 0 3rem;
+  max-width: 1920px;
+  padding: 0 3rem;
+  margin: 0 auto;
 }
 
 #header.profile-header .profile {
@@ -411,7 +413,7 @@ html.backdropfilter #header.profile-header .braytech {
   color: rgba(255, 255, 255, 1);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1360px) {
   #header.navOpen {
     position: fixed !important;
   }
@@ -467,7 +469,7 @@ html.backdropfilter #header.profile-header .braytech {
   }
 
   #header .ui {
-    margin: 0 2rem 0;
+    padding: 0 2rem;
   }
 
   #header .nav {
@@ -487,7 +489,7 @@ html.backdropfilter #header.profile-header .braytech {
   }
 
   #header.profile-header .ui {
-    margin: 0 2rem;
+    padding: 0 2rem;
   }
 
   #header.profile-header .profile {
