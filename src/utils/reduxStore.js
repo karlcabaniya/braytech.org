@@ -4,6 +4,7 @@ import theme from './reducers/theme.js';
 import member from './reducers/member.js';
 import groupMembers from './reducers/groupMembers.js';
 import refreshService from './reducers/refreshService.js';
+import PGCRcache from './reducers/PGCRcache.js';
 import triumphs from './reducers/triumphs.js';
 import collectibles from './reducers/collectibles.js';
 import viewport from './reducers/viewport.js';
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   member,
   groupMembers,
   refreshService,
+  PGCRcache,
   triumphs,
   collectibles,
   viewport

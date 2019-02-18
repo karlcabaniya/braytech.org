@@ -96,7 +96,7 @@
 }
 
 #index .modules .coming-up .text blockquote {
-  margin: 0 0 0.4rem;
+  margin: 0 0 1rem;
   padding: 0 0 0 0.6rem;
   border-left: 3px solid rgba(255, 255, 255, 0.2);
   color:rgba(255, 255, 255, 0.8);
@@ -222,6 +222,14 @@
 
   #index .head {
     padding: calc(2rem + 40px) 2rem 2rem;
+  }
+
+  #index .head .device {
+    right: -3rem;
+  }
+  
+  #index .head .device svg {
+    height: 110%;
   }
 
   #index .head .slogan .message {

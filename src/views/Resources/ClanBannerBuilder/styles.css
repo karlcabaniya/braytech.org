@@ -95,11 +95,11 @@
 }
 
 #banner-builder .options .config .optionSet.decals .decal .image {
-  filter: invert(0.4);
+  opacity: 0.6;
 }
 
 #banner-builder .options .config .optionSet.decals .decal .image:nth-child(2) {
-  filter: invert(0.8);
+  opacity: 0.4;
 }
 
 #banner-builder .options .config .optionSet.gonfalonDetails .decal {
@@ -108,7 +108,7 @@
 }
 
 #banner-builder .options .config .optionSet.gonfalonDetails .decal .image {
-  filter: invert(0.8);
+  opacity: 0.6;
 }
 
 #banner-builder .options .config .optionSet.colors .option {

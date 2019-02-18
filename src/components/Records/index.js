@@ -53,6 +53,8 @@ class Records extends React.Component {
     let recordsOutput = [];
     recordsRequested.forEach(hash => {
       const recordDefinition = manifest.DestinyRecordDefinition[hash];
+      const recordScope = recordDefinition.scope || 0;
+      const recordData = recordScope === 1 ? characterRecords[characterId].records[recordDefinition.hash] : profileRecords[recordDefinition.hash];
 
       let objectives = [];
       let completionValueTotal = 0;
@@ -104,30 +106,19 @@ class Records extends React.Component {
           let objectiveDefinition = manifest.DestinyObjectiveDefinition[hash];
 
           let playerProgress = null;
-          if (profileRecords[recordDefinition.hash]) {
-            profileRecords[recordDefinition.hash].objectives.forEach(objective => {
-              if (objective.objectiveHash === hash) {
-                playerProgress = objective;
-              }
-            });
 
-            // override
-            if (hash === 1278866930 && playerProgress.complete) {
-              playerProgress.progress = 16;
+          recordData.objectives.forEach(objective => {
+            if (objective.objectiveHash === hash) {
+              playerProgress = objective;
             }
+          });
 
-            objectives.push(<ProgressBar key={`${hash}${index}`} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />);
-          } else if (characterRecords[characterId].records[recordDefinition.hash]) {
-            characterRecords[characterId].records[recordDefinition.hash].objectives.forEach(objective => {
-              if (objective.objectiveHash === hash) {
-                playerProgress = objective;
-              }
-            });
-
-            objectives.push(<ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />);
-          } else {
-            objectives.push(null);
+          // override
+          if (hash === 1278866930 && playerProgress.complete) {
+            playerProgress.progress = 16;
           }
+
+          objectives.push(<ProgressBar key={`${hash}${index}`} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />);
 
           if (playerProgress) {
             let v = parseInt(playerProgress.completionValue, 10);
@@ -142,14 +133,7 @@ class Records extends React.Component {
       let progressDistance = progressValueTotal / completionValueTotal;
       progressDistance = Number.isNaN(progressDistance) ? 0 : progressDistance;
 
-      let state;
-      if (profileRecords[recordDefinition.hash]) {
-        state = profileRecords[recordDefinition.hash] ? profileRecords[recordDefinition.hash].state : 0;
-      } else if (characterRecords[characterId].records[recordDefinition.hash]) {
-        state = characterRecords[characterId].records[recordDefinition.hash] ? characterRecords[characterId].records[recordDefinition.hash].state : 0;
-      } else {
-        state = 0;
-      }
+      let state = recordData.state || 0;
 
       if (enumerateRecordState(state).invisible) {
         return;
@@ -190,9 +174,9 @@ class Records extends React.Component {
       } else {
         let description = recordDefinition.displayProperties.description !== '' ? recordDefinition.displayProperties.description : false;
         description = !description && recordDefinition.loreHash ? manifest.DestinyLoreDefinition[recordDefinition.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
-        if (recordDefinition.hash === 2367932631) {
-          console.log(enumerateRecordState(state));
-        }
+        // if (recordDefinition.hash === 2367932631) { ????
+        //   console.log(enumerateRecordState(state));
+        // }
 
         let linkTo;
         if (link && selfLinkFrom) {
@@ -245,7 +229,7 @@ class Records extends React.Component {
                 </div>
               </div>
               <div className='objectives'>{objectives}</div>
-              {link && linkTo ? <ProfileLink to={linkTo} /> : null}
+              {link && linkTo ? !selfLinkFrom && readLink ? <Link to={linkTo} /> : <ProfileLink to={linkTo} /> : null}
             </li>
           )
         });

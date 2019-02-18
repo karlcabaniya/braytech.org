@@ -19,6 +19,10 @@
   box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.4);
 }
 
+.list.record-items li.redacted {
+  align-items: flex-start;
+}
+
 .list.record-items li .properties {
   flex-basis: 100%;
   padding: 1rem;  

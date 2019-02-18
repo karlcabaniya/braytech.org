@@ -8,6 +8,7 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../ObservedImage';
+import { ProfileLink } from '../ProfileLink';
 import { enumerateRecordState } from '../../utils/destinyEnums';
 
 import './styles.css';
@@ -68,11 +69,13 @@ class NotificationProgress extends React.Component {
     const stale = this.props.member.prevData ? this.props.member.prevData : false;
     const characterId = this.props.member.characterId;
 
-    if (!stale) {
+    if (prevProps.member.membershipId !== this.props.member.membershipId) {
+      // console.log('membershipId mismatch');
       return;
     }
 
-    if (prevProps.member.membershipId !== this.props.member.membershipId) {
+    if (!stale) {
+      // console.log('not stale yet');
       return;
     }
 
@@ -85,10 +88,14 @@ class NotificationProgress extends React.Component {
     // console.log('characterCollectibles', difference(fresh.profile.characterCollectibles.data[characterId].collectibles, stale.profile.characterCollectibles.data[characterId].collectibles));
 
     if (!this.state.progress.timedOut) {
+      // console.log('not timed out yet');
       return;
     }
 
     let profileRecords = difference(fresh.profile.profileRecords.data.records, stale.profile.profileRecords.data.records);
+    let characterRecords = difference(fresh.profile.characterRecords.data[characterId].records, stale.profile.characterRecords.data[characterId].records);
+
+    // console.log(profileRecords);
 
     let progress = {
       type: false,
@@ -103,7 +110,7 @@ class NotificationProgress extends React.Component {
           return;
         }
         let state = enumerateRecordState(profileRecords[key].state);
-        //console.log(state);
+        // console.log(state);
         if (!state.objectiveNotCompleted && !state.recordRedeemed) {
           if (progress.hash) {
             progress.number = progress.number + 1;
@@ -114,12 +121,31 @@ class NotificationProgress extends React.Component {
           progress.number = progress.number + 1;
         }
       });
+    }
 
-      if (this.state.progress.timedOut && progress.type && this.state.progress.hash !== progress.hash) {
-        this.setState({
-          progress: progress
-        });
-      }
+    if (Object.keys(characterRecords).length > 0) {
+      Object.keys(characterRecords).forEach(key => {
+        if (characterRecords[key].state === undefined) {
+          return;
+        }
+        let state = enumerateRecordState(characterRecords[key].state);
+        // console.log(state);
+        if (!state.objectiveNotCompleted && !state.recordRedeemed) {
+          if (progress.hash) {
+            progress.number = progress.number + 1;
+            return;
+          }
+          progress.type = 'record';
+          progress.hash = key;
+          progress.number = progress.number + 1;
+        }
+      });
+    }
+
+    if (this.state.progress.timedOut && progress.type && this.state.progress.hash !== progress.hash) {
+      this.setState({
+        progress: progress
+      });
     }
   }
 
@@ -177,7 +203,7 @@ class NotificationProgress extends React.Component {
             </div>
             {this.state.progress.number > 1 ? <div className='more'>And {this.state.progress.number - 1} more</div> : null}
           </div>
-          {link ? <Link to={link} /> : null}
+          {link ? <ProfileLink to={link} /> : null}
         </div>
       );
     } else {
