@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
+import moment from 'moment';
 import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
 
@@ -121,59 +122,70 @@ class StrikeHighScores extends React.Component {
           return;
         }
 
+        nightfall.clears = nightfall.clears ? nightfall.clears + 1 : 1;
+
         let entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
         if (entry) {
           sumKills = sumKills + entry.values.kills.basic.value;
           sumDeaths = sumDeaths + entry.values.deaths.basic.value;
           sumDuration = sumDuration + entry.values.activityDurationSeconds.basic.value;
-          if (entry.values.completed.basic.value === 1) {
+          if (entry.values.completed.basic.value === 1 && entry.values.completionReason.basic.value === 0) {
             sumCleared = sumCleared + entry.values.completed.basic.value;
           }
           sumSuperKills = sumSuperKills + entry.extended.values.weaponKillsSuper.basic.value;
+
+          let bestTime = nightfall.bestTime || 3600;
+          if (entry.values.completed.basic.value === 1 && entry.values.completionReason.basic.value === 0 && entry.values.activityDurationSeconds.basic.value !== 0 && entry.values.activityDurationSeconds.basic.value < bestTime) {
+            nightfall.bestTime = entry.values.activityDurationSeconds.basic.value;
+            nightfall.bestTimeInstanceId = pgcr.activityDetails.instanceId;
+          }
         }
 
         let sumScore = 0;
-        let instanceId = pgcr.activityDetails.instanceId;
-        let highScore = nightfall.score || 0;
+        let highScore = nightfall.highScore || 0;
         pgcr.entries.forEach(entry => {
           sumScore = sumScore + entry.score.basic.value;
         });
         if (sumScore > highScore) {
-          nightfall.score = sumScore;
-          nightfall.instanceId = instanceId;
+          nightfall.highScore = sumScore;
+          nightfall.highScoreInstanceId = pgcr.activityDetails.instanceId;
         }
       });
     }
+
+    console.log(nightfalls);
 
     let list = nightfalls.map(nf => {
       let definition = manifest.DestinyActivityDefinition[nf.directorActivityHash];
 
       return {
-        score: nf.score || 0,
-        instanceId: nf.instanceId,
+        clears: nf.clears,
+        highScore: nf.highScore || 0,
+        highScoreInstanceId: nf.highScoreInstanceId,
+        bestTime: nf.bestTime || false,
+        bestTimeInstanceId: nf.bestTimeInstanceId,
         definition: definition,
         element: (
-          <li key={definition.hash} className={cx({ lowScore: (nf.score || 0) < 100000 })}>
+          <li key={definition.hash} className={cx({ lowScore: (nf.highScore || 0) < 100000 })}>
             <div className='name'>{definition.displayProperties.name.replace('Nightfall: ', '')}</div>
-            <div className='score'>{!nf.score ? '—' : nf.score.toLocaleString()}</div>
+            <div className='score'>{!nf.highScore ? '—' : nf.highScore.toLocaleString()}</div>
           </li>
         )
       };
     });
 
-    list = orderBy(list, [nf => nf.score], ['desc']);
+    list = orderBy(list, [nf => nf.highScore], ['desc']);
     let topNightfall = list[0];
-    let topNightfallPGCR = PGCRcache[member.membershipId] ? PGCRcache[member.membershipId].find(pgcr => pgcr.activityDetails.instanceId === topNightfall.instanceId) : false;
-    list.unshift({
-      element: (
-        <li key='header'>
-          <div className='name'>Strike</div>
-          <div className='score'>High score</div>
-        </li>
-      )
-    });
+    let topNightfallPGCR = PGCRcache[member.membershipId] ? PGCRcache[member.membershipId].find(pgcr => pgcr.activityDetails.instanceId === topNightfall.highScoreInstanceId) : false;
 
-    console.log(topNightfallPGCR);
+    let tempList = orderBy(list.filter(nf => nf.bestTime), [nf => nf.bestTime], ['asc']);
+    let fastestNightfall = tempList[0];
+    // let fastestNightfallPGCR;
+    // if (fastestNightfall && fastestNightfall.bestTimeInstanceId) {
+    //   fastestNightfallPGCR = PGCRcache[member.membershipId] ? PGCRcache[member.membershipId].find(pgcr => pgcr.activityDetails.instanceId === fastestNightfall.bestTimeInstanceId) : false;
+    // }
+
+    let favourite = orderBy(list, [nf => nf.clears], ['desc'])[0];
 
     return (
       <>
@@ -191,7 +203,7 @@ class StrikeHighScores extends React.Component {
               <div className='properties'>
                 <div className='desc'>Top score</div>
                 <div className='name'>{topNightfall.definition.displayProperties.name.replace('Nightfall: ', '')}</div>
-                <div className='score'>{topNightfall.score.toLocaleString()}</div>
+                <div className='score'>{topNightfall.highScore.toLocaleString()}</div>
               </div>
               <div className='fireteam'>
                 <div className='sub-header sub'>
@@ -215,9 +227,25 @@ class StrikeHighScores extends React.Component {
           ) : null}
         </div>
         <div className='chart'>
-          <ul className='list'>{list.map(item => item.element)}</ul>
+          <ul className='list'>
+            <li key='header'>
+              <div className='name'>Strike</div>
+              <div className='score'>High score</div>
+            </li>
+            {list.map(item => item.element)}
+          </ul>
         </div>
         <div className='datum'>
+          <div className='d w'>
+            <div className='b'>{favourite.clears ? <>{favourite.clears} clears</> : `—`}</div>
+            <div className='v'>{favourite.definition.displayProperties.name.replace('Nightfall: ', '')}</div>
+            <div className='n'>{t('favourite')}</div>
+          </div>
+          <div className='d w'>
+            <div className='b'>{fastestNightfall ? <>{moment.duration(fastestNightfall.bestTime, 'seconds').minutes()}<span>m</span> {moment.duration(fastestNightfall.bestTime, 'seconds').seconds()}<span>s</span></> : `—`}</div>
+            <div className='v'>{fastestNightfall ? <>{fastestNightfall.definition.displayProperties.name.replace('Nightfall: ', '')}</> : `—`}</div>
+            <div className='n'>{t('fastest clear')}</div>
+          </div>
           <div className='d'>
             <div className='v'>{sumKills.toLocaleString()}</div>
             <div className='n'>{t('kills')}</div>
