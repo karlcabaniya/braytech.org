@@ -21,7 +21,7 @@ class StrikeHighScores extends React.Component {
 
   async componentDidMount() {
     const { member, PGCRcache } = this.props;
-    
+
     let charactersIds = member.data.profile.characters.data.map(c => c.characterId);
 
     // console.log(charactersIds)
@@ -42,10 +42,8 @@ class StrikeHighScores extends React.Component {
       } else if (!PGCRcache[member.membershipId]) {
         return getPGCR(member.membershipId, activity.activityDetails.instanceId);
       } else {
-
       }
     });
-
   }
 
   render() {
@@ -67,7 +65,7 @@ class StrikeHighScores extends React.Component {
       },
       {
         directorActivityHash: 3280234344,
-        name: 'Nightfall: Savathûn\'s Song'
+        name: "Nightfall: Savathûn's Song"
       },
       {
         directorActivityHash: 522318687,
@@ -112,8 +110,10 @@ class StrikeHighScores extends React.Component {
     ];
 
     let sumKills = 0;
+    let sumDeaths = 0;
     let sumCleared = 0;
     let sumDuration = 0;
+    let sumSuperKills = 0;
     if (PGCRcache[member.membershipId]) {
       PGCRcache[member.membershipId].forEach(pgcr => {
         let nightfall = nightfalls.find(nf => nf.directorActivityHash === pgcr.activityDetails.directorActivityHash);
@@ -124,21 +124,24 @@ class StrikeHighScores extends React.Component {
         let entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
         if (entry) {
           sumKills = sumKills + entry.values.kills.basic.value;
-          sumDuration = sumDuration + entry.values.activityDurationSeconds.basic.value
+          sumDeaths = sumDeaths + entry.values.deaths.basic.value;
+          sumDuration = sumDuration + entry.values.activityDurationSeconds.basic.value;
           if (entry.values.completed.basic.value === 1) {
             sumCleared = sumCleared + entry.values.completed.basic.value;
           }
+          sumSuperKills = sumSuperKills + entry.extended.values.weaponKillsSuper.basic.value;
         }
 
-        let sumScore = 0
+        let sumScore = 0;
+        let instanceId = pgcr.activityDetails.instanceId;
         let highScore = nightfall.score || 0;
         pgcr.entries.forEach(entry => {
           sumScore = sumScore + entry.score.basic.value;
         });
         if (sumScore > highScore) {
           nightfall.score = sumScore;
+          nightfall.instanceId = instanceId;
         }
-
       });
     }
 
@@ -147,10 +150,11 @@ class StrikeHighScores extends React.Component {
 
       return {
         score: nf.score || 0,
+        instanceId: nf.instanceId,
         definition: definition,
         element: (
           <li key={definition.hash} className={cx({ lowScore: (nf.score || 0) < 100000 })}>
-            <div className='name'>{definition.displayProperties.name.replace('Nightfall: ','')}</div>
+            <div className='name'>{definition.displayProperties.name.replace('Nightfall: ', '')}</div>
             <div className='score'>{!nf.score ? '—' : nf.score.toLocaleString()}</div>
           </li>
         )
@@ -159,6 +163,7 @@ class StrikeHighScores extends React.Component {
 
     list = orderBy(list, [nf => nf.score], ['desc']);
     let topNightfall = list[0];
+    let topNightfallPGCR = PGCRcache[member.membershipId] ? PGCRcache[member.membershipId].find(pgcr => pgcr.activityDetails.instanceId === topNightfall.instanceId) : false;
     list.unshift({
       element: (
         <li key='header'>
@@ -168,22 +173,46 @@ class StrikeHighScores extends React.Component {
       )
     });
 
+    console.log(topNightfallPGCR);
+
     return (
       <>
         <div className='bg' />
         <div className='top'>
-        {topNightfall ? <>
-          <ObservedImage className='image' src={`https://www.bungie.net${topNightfall.definition.pgcrImage}`} />
-          <div className='head'>
-            <div className='page-header'>
-              <div className='name'>{t('Nightfall strikes')}</div>
-              <div className='description'>{t('Your hard-won high scores from your fight against the most feared minions of the Darkness')}</div>
-            </div>
-          </div>
-          <div className='text'>
-            <div className='name'>{topNightfall.definition.displayProperties.name.replace('Nightfall: ','')}</div>
-            <div className='score'>{topNightfall.score.toLocaleString()}</div>
-          </div></> : null}
+          {topNightfall && topNightfallPGCR ? (
+            <>
+              <ObservedImage className='image pgcrImage' src={`https://www.bungie.net${topNightfall.definition.pgcrImage}`} />
+              <div className='head'>
+                <div className='page-header'>
+                  <div className='name'>{t('Nightfall strikes')}</div>
+                  <div className='description'>{t('Your hard-won high scores from your fight against the most feared minions of the Darkness')}</div>
+                </div>
+              </div>
+              <div className='properties'>
+                <div className='desc'>Top score</div>
+                <div className='name'>{topNightfall.definition.displayProperties.name.replace('Nightfall: ', '')}</div>
+                <div className='score'>{topNightfall.score.toLocaleString()}</div>
+              </div>
+              <div className='fireteam'>
+                <div className='sub-header sub'>
+                  <div>Fireteam</div>
+                  <div><Moment format="D/M/YYYY">{topNightfallPGCR.period}</Moment></div>
+                </div>
+                <ul className='list'>
+                  {topNightfallPGCR.entries.map(entry => {
+                    return (
+                      <li key={entry.characterId} className='linked'>
+                        <div className='icon'>
+                          <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} />
+                        </div>
+                        <div className='displayName'>{entry.player.destinyUserInfo.displayName}</div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </>
+          ) : null}
         </div>
         <div className='chart'>
           <ul className='list'>{list.map(item => item.element)}</ul>
@@ -192,6 +221,14 @@ class StrikeHighScores extends React.Component {
           <div className='d'>
             <div className='v'>{sumKills.toLocaleString()}</div>
             <div className='n'>{t('kills')}</div>
+          </div>
+          <div className='d'>
+            <div className='v'>{sumDeaths.toLocaleString()}</div>
+            <div className='n'>{t('deaths')}</div>
+          </div>
+          <div className='d'>
+            <div className='v'>{sumSuperKills.toLocaleString()}</div>
+            <div className='n'>{t('super kills')}</div>
           </div>
           <div className='d'>
             <div className='v'>{sumCleared.toLocaleString()}</div>

@@ -196,7 +196,7 @@
 #legend .section.strikes {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 2fr 1fr 1fr;
 }
 
 #legend .section.strikes .bg {
@@ -225,7 +225,7 @@
   position: relative;
 }
 
-#legend .section.strikes .top .image {
+#legend .section.strikes .top .image.pgcrImage {
   background-size: cover;
   width: 120%;
   mask-image: linear-gradient(90deg, hsla(217, 35%, 21%, 0.7) 20.71%, hsla(217, 35%, 21%, 0.8) 55.71%, hsla(217, 35%, 21%, 0));
@@ -241,20 +241,27 @@
   max-width: 21rem;
 }
 
-#legend .section.strikes .top .text {
+#legend .section.strikes .top .properties {
   position: absolute;
   left: 3rem;
   bottom: 3rem;
+  z-index: 2;
 }
 
-#legend .section.strikes .top .text .name {
+#legend .section.strikes .top .properties .desc {
+  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+#legend .section.strikes .top .properties .name {
   font-size: 38px;
   line-height: 1;
   font-weight: 500;
   text-transform: uppercase;
 }
 
-#legend .section.strikes .top .text .score {
+#legend .section.strikes .top .properties .score {
   font-size: 56px;
   line-height: 1;
   font-weight: 600;  
@@ -262,7 +269,7 @@
   position: relative;
 }
 
-#legend .section.strikes .top .text .score::before {
+#legend .section.strikes .top .properties .score::before {
   content: ' ';
   position: absolute;
   top: -16px;
@@ -272,6 +279,25 @@
   height: 100%;
   box-shadow: inset 0 0 0 1px #ffffff;
   opacity: 0.2;
+}
+
+#legend .section.strikes .top .fireteam {
+  position: absolute;
+  right: 0;
+  bottom: 3rem;
+  width: 270px;
+  pointer-events: none;
+}
+
+#legend .section.strikes .top .fireteam .list li .icon {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  margin: 0 16px 0 0;
+}
+
+#legend .section.strikes .top .fireteam .list li .displayName {
+  font-size: 16px;
 }
 
 #legend .section.strikes .chart {
@@ -311,7 +337,9 @@
   font-size: 18px;
 }
 
-
+#legend .section.strikes .datum {
+  grid-template-columns: repeat(2, 1fr);
+}
 
 
 
@@ -329,18 +357,22 @@
 
   #legend .section.strikes .top {
     position: relative;
-    height: 77vw;
   }
 }
 
 @media screen and (max-width: 600px) {
-  #legend .section.characters .character .datum {
+  #legend .section .datum {
     padding: 3rem 0 2rem 2rem;
     width: 100%;
   }
 
-  #legend .section.characters .character .datum .d .v {
+  #legend .section .datum .d .v {
     font-size: 18px;
+  }
+
+  #legend .section .datum .d .n {
+    margin: 4px 0 0;
+    font-size: 14px;
   }
 
   #legend .section.characters .character .datum .d .v.l {
@@ -353,33 +385,41 @@
     font-size: 8px;
   }
 
-  #legend .section.characters .character .datum .d .n {
-    margin: 4px 0 0;
-    font-size: 14px;
-  }
-
-  #legend .section.strikes .top .image {
+  #legend .section.strikes .top .image.pgcrImage {
     width: 100%;
     height: 130%;
     mask-image: linear-gradient(180deg, hsla(217, 35%, 21%, 0.9) 0%, hsla(217, 35%, 21%, 0.7) 60%, hsla(217, 35%, 21%, 0));
   }
 
   #legend .section.strikes .top .head {
-    left: 2rem;
-    top: 2rem;
+    position: relative;
+    top: unset;
+    left: unset;
+    padding: 2rem 0 7rem 2rem;
   }
 
-  #legend .section.strikes .top .text {
-    left: 2rem;
-    bottom: 2rem;
+  #legend .section.strikes .top .properties {
+    position: relative;
+    bottom: unset;
+    left: unset;
+    margin: 0 0 0 2rem;
   }
 
-  #legend .section.strikes .top .text .name {
+  #legend .section.strikes .top .properties .name {
     font-size: 24px;
   }
 
-  #legend .section.strikes .top .text .score {
+  #legend .section.strikes .top .properties .score {
     font-size: 38px;
+  }
+
+  #legend .section.strikes .top .fireteam {
+    position: relative;
+    bottom: unset;
+    left: unset;
+    padding: 0 2rem;
+    width: 100%;
+    margin: 3rem 0 2rem;
   }
 
   #legend .section.strikes .chart {
