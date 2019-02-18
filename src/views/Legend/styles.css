@@ -14,7 +14,8 @@
   align-content: flex-start;
 }
 
-#legend .section .datum .d.w {
+#legend .section .datum .d.w,
+#legend .section .datum .t.w {
   grid-column: 1/3;
 }
 
@@ -42,6 +43,11 @@
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 6px;
+}
+
+#legend .section .datum .t {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.2);
 }
 
 #legend .section.characters {
@@ -299,7 +305,7 @@
 
 #legend .section.strikes .top .fireteam {
   position: absolute;
-  right: 0;
+  right: 3rem;
   bottom: 3rem;
   width: 270px;
   pointer-events: none;
@@ -325,7 +331,7 @@
   font-size: 14px;
   margin: 0 0 6px;
   padding: 0 0 6px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
