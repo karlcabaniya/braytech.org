@@ -50,74 +50,74 @@ class StrikeHighScores extends React.Component {
 
     let strikes = [
       {
-        hash: 3749730895,
-        score: 1039797865,
-        activity: 3944547192
+        completionRecordHash: 3749730895,
+        scoreRecordHash: 1039797865,
+        activityHash: 3944547192
       },
       {
-        hash: 2737678546,
-        score: 165166474,
-        activity: 743963294
+        completionRecordHash: 2737678546,
+        scoreRecordHash: 165166474,
+        activityHash: 743963294
       },
       {
-        hash: 3054774873,
-        score: 2692332187,
-        activity: 117447065
+        completionRecordHash: 3054774873,
+        scoreRecordHash: 2692332187,
+        activityHash: 117447065
       },
       {
-        hash: 1707190649,
-        score: 3399168111,
-        activity: 1295173537
+        completionRecordHash: 1707190649,
+        scoreRecordHash: 3399168111,
+        activityHash: 1295173537
       },
       {
-        hash: 56596211,
-        score: 1526865549,
-        activity: 1549614516
+        completionRecordHash: 56596211,
+        scoreRecordHash: 1526865549,
+        activityHash: 1549614516
       },
       {
-        hash: 3145627334,
-        score: 3951275509,
-        activity: 3374205760
+        completionRecordHash: 3145627334,
+        scoreRecordHash: 3951275509,
+        activityHash: 3374205760
       },
       {
-        hash: 1336344009,
-        score: 2836924866,
-        activity: 1360385764
+        completionRecordHash: 1336344009,
+        scoreRecordHash: 2836924866,
+        activityHash: 1360385764
       },
       {
-        hash: 2782139949,
-        score: 3340846443,
-        activity: 442671778
+        completionRecordHash: 2782139949,
+        scoreRecordHash: 3340846443,
+        activityHash: 442671778
       },
       {
-        hash: 256005845,
-        score: 2099501667,
-        activity: 649648599
+        completionRecordHash: 256005845,
+        scoreRecordHash: 2099501667,
+        activityHash: 649648599
       },
       {
-        hash: 319759693,
-        score: 1060780635,
-        activity: 1035135049
+        completionRecordHash: 319759693,
+        scoreRecordHash: 1060780635,
+        activityHash: 1035135049
       },
       {
-        hash: 141268704,
-        score: 1329556468,
-        activity: 661855681
+        completionRecordHash: 141268704,
+        scoreRecordHash: 1329556468,
+        activityHash: 661855681
       },
       {
-        hash: 794103965,
-        score: 3450793480,
-        activity: 1475539136
+        completionRecordHash: 794103965,
+        scoreRecordHash: 3450793480,
+        activityHash: 1475539136
       },
       {
-        hash: 1889144800,
-        score: 2282894388,
-        activity: 561345572
+        completionRecordHash: 1889144800,
+        scoreRecordHash: 2282894388,
+        activityHash: 561345572
       },
       {
-        hash: 20431832,
-        score: 3973165904,
-        activity: 286562305
+        completionRecordHash: 20431832,
+        scoreRecordHash: 3973165904,
+        activityHash: 286562305
       }
     ];
 
