@@ -48,115 +48,101 @@ class StrikeHighScores extends React.Component {
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterRecords = member.data.profile.characterRecords.data;
 
-    let strikes = [
+    let nightfalls = [
       {
-        completionRecordHash: 3749730895,
-        scoreRecordHash: 1039797865,
-        activityHash: 3944547192
+        directorActivityHash: 936308438,
+        name: 'Nightfall: A Garden World'
       },
       {
-        completionRecordHash: 2737678546,
-        scoreRecordHash: 165166474,
-        activityHash: 743963294
+        directorActivityHash: 1282886582,
+        name: 'Nightfall: Exodus Crash'
       },
       {
-        completionRecordHash: 3054774873,
-        scoreRecordHash: 2692332187,
-        activityHash: 117447065
+        directorActivityHash: 3372160277,
+        name: 'Nightfall: Lake of Shadows'
       },
       {
-        completionRecordHash: 1707190649,
-        scoreRecordHash: 3399168111,
-        activityHash: 1295173537
+        directorActivityHash: 3280234344,
+        name: 'Nightfall: Savathûn\'s Song'
       },
       {
-        completionRecordHash: 56596211,
-        scoreRecordHash: 1526865549,
-        activityHash: 1549614516
+        directorActivityHash: 522318687,
+        name: 'Nightfall: Strange Terrain'
       },
       {
-        completionRecordHash: 3145627334,
-        scoreRecordHash: 3951275509,
-        activityHash: 3374205760
+        directorActivityHash: 3145298904,
+        name: 'Nightfall: The Arms Dealer'
       },
       {
-        completionRecordHash: 1336344009,
-        scoreRecordHash: 2836924866,
-        activityHash: 1360385764
+        directorActivityHash: 3034843176,
+        name: 'Nightfall: The Corrupted'
       },
       {
-        completionRecordHash: 2782139949,
-        scoreRecordHash: 3340846443,
-        activityHash: 442671778
+        directorActivityHash: 3701132453,
+        name: 'Nightfall: The Hollowed Lair'
       },
       {
-        completionRecordHash: 256005845,
-        scoreRecordHash: 2099501667,
-        activityHash: 649648599
+        directorActivityHash: 1034003646,
+        name: 'Nightfall: The Insight Terminus'
       },
       {
-        completionRecordHash: 319759693,
-        scoreRecordHash: 1060780635,
-        activityHash: 1035135049
+        directorActivityHash: 4259769141,
+        name: 'Nightfall: The Inverted Spire'
       },
       {
-        completionRecordHash: 141268704,
-        scoreRecordHash: 1329556468,
-        activityHash: 661855681
+        directorActivityHash: 3289589202,
+        name: 'Nightfall: The Pyramidion'
       },
       {
-        completionRecordHash: 794103965,
-        scoreRecordHash: 3450793480,
-        activityHash: 1475539136
+        directorActivityHash: 3718330161,
+        name: 'Nightfall: Tree of Probabilities'
       },
       {
-        completionRecordHash: 1889144800,
-        scoreRecordHash: 2282894388,
-        activityHash: 561345572
+        directorActivityHash: 3108813009,
+        name: 'Nightfall: Warden of Nothing'
       },
       {
-        completionRecordHash: 20431832,
-        scoreRecordHash: 3973165904,
-        activityHash: 286562305
+        directorActivityHash: 272852450,
+        name: 'Nightfall: Will of the Thousands'
       }
     ];
 
-    let list = strikes.map(strike => {
-      let scoreDefinition = manifest.DestinyRecordDefinition[strike.score];
-      let scoreRecord = characterRecords[characterId].records[strike.score];
-      let strikeRecord = profileRecords[strike.hash];
+    // let list = strikes.map(strike => {
+    //   let scoreDefinition = manifest.DestinyRecordDefinition[strike.score];
+    //   let scoreRecord = characterRecords[characterId].records[strike.score];
+    //   let strikeRecord = profileRecords[strike.hash];
 
-      let score = scoreRecord.objectives.length === 1 ? scoreRecord.objectives[0].progress : 0;
-      let completions = strikeRecord.objectives.length === 1 ? strikeRecord.objectives[0].progress : 0;
+    //   let score = scoreRecord.objectives.length === 1 ? scoreRecord.objectives[0].progress : 0;
+    //   let completions = strikeRecord.objectives.length === 1 ? strikeRecord.objectives[0].progress : 0;
 
-      return {
-        value: score,
-        activity: strike.activity,
-        element: (
-          <li key={strike.hash} className={cx({ lowScore: score < 100000 })}>
-            <div className='name'>{scoreDefinition.displayProperties.name}</div>
-            <div className='score'>{score === 0 ? '—' : score.toLocaleString()}</div>
-          </li>
-        )
-      };
-    });
+    //   return {
+    //     value: score,
+    //     activity: strike.activity,
+    //     element: (
+    //       <li key={strike.hash} className={cx({ lowScore: score < 100000 })}>
+    //         <div className='name'>{scoreDefinition.displayProperties.name}</div>
+    //         <div className='score'>{score === 0 ? '—' : score.toLocaleString()}</div>
+    //       </li>
+    //     )
+    //   };
+    // });
 
-    list = orderBy(list, [score => score.value], ['desc']);
-    let top = list[0];
-    list.unshift({
-      element: (
-        <li key='header'>
-          <div className='name'>Strike</div>
-          <div className='score'>High score</div>
-        </li>
-      )
-    });
+    // list = orderBy(list, [score => score.value], ['desc']);
+    // let top = list[0];
+    // list.unshift({
+    //   element: (
+    //     <li key='header'>
+    //       <div className='name'>Strike</div>
+    //       <div className='score'>High score</div>
+    //     </li>
+    //   )
+    // });
 
-    let topDefinition = manifest.DestinyActivityDefinition[top.activity];
+    // let topDefinition = manifest.DestinyActivityDefinition[top.activity];
 
     let nightfallKills = 0;
     let highscorePGCR;
-    let temp = 0;
+    let temp = 0;let nfs = [];
     let characterIds = member.data.profile.characters.data.map(c => c.characterId);
     PGCRcache.cache.forEach(pgcr => {
       let entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
@@ -171,15 +157,31 @@ class StrikeHighScores extends React.Component {
         temp = ttemp;
         highscorePGCR = pgcr;
       }
+      let nf = nfs.find(nf => nf.directorActivityHash === pgcr.activityDetails.directorActivityHash);
+      if (nf) {
+        if (ttemp > nf.score) {
+          nf.score = ttemp;
+        }
+      } else {
+        nfs.push({
+          directorActivityHash: pgcr.activityDetails.directorActivityHash,
+          name: manifest.DestinyActivityDefinition[pgcr.activityDetails.directorActivityHash].displayProperties.name,
+          // score: ttemp
+        })
+      }
     });
     console.log(temp, highscorePGCR);
+
+    // nfs = orderBy(nfs, [nf => nf.name], ['asc']);
+
+    // console.log(nfs)
 
     // console.log(PGCRcache.cache.filter(pgcr => pgcr.activityDetails.directorActivityHash === 936308438));
 
     return (
       <>
         <div className='bg' />
-        <div className='top'>
+        {/* <div className='top'>
           <ObservedImage className='image' src={`https://www.bungie.net${topDefinition.pgcrImage}`} />
           <div className='head'>
             <div className='page-header'>
@@ -200,7 +202,7 @@ class StrikeHighScores extends React.Component {
             <div className='v'>{nightfallKills}</div>
             <div className='n'>{t('kills')}</div>
           </div>
-        </div>
+        </div> */}
       </>
     );
   }
