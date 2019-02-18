@@ -1,14 +1,12 @@
-const defaultState = {
-  cache: []
-};
+const defaultState = {};
 
 export default function PGCRcacheReducer(state = defaultState, action) {
   switch (action.type) {
     case 'PGCR_LOADED':
-      return {
-        ...state,
-        cache: [...state.cache, action.payload]
-      };
+      let newState = {...state};
+      newState[action.payload.membershipId] = newState[action.payload.membershipId] || [];
+      newState[action.payload.membershipId] = newState[action.payload.membershipId].concat([action.payload.response]);
+      return newState;
     default:
       return state;
   }

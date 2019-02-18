@@ -298,7 +298,7 @@ class Characters extends React.Component {
               </div>
               <div className='d'>
                 <div className='v'>{Math.floor(parseInt(character.minutesPlayedTotal) / 1440)}</div>
-                <div className='n'>{Math.floor(parseInt(character.minutesPlayedTotal) / 1440) < 2 ? t('day played') : t('days played')}</div>
+                <div className='n'>{Math.floor(parseInt(character.minutesPlayedTotal) / 1440) === 1 ? t('day played') : t('days played')}</div>
               </div>
             </div>
           </div>

@@ -1,10 +1,11 @@
 import store from './reduxStore';
 import * as bungie from './bungie';
 
-export async function getPGCR(id) {
+export async function getPGCR(membershipId, id) {
   let response = await bungie.PGCR(id);
-
-  store.dispatch({ type: 'PGCR_LOADED', payload: response });
+  response.instanceId = id;
+  
+  store.dispatch({ type: 'PGCR_LOADED', payload: { membershipId, response } });
 }
 
 export default getPGCR;

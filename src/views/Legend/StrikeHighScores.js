@@ -20,7 +20,7 @@ class StrikeHighScores extends React.Component {
   }
 
   async componentDidMount() {
-    const { member } = this.props;
+    const { member, PGCRcache } = this.props;
     
     let charactersIds = member.data.profile.characters.data.map(c => c.characterId);
 
@@ -37,16 +37,20 @@ class StrikeHighScores extends React.Component {
     // console.log(activities);
 
     activities.forEach(activity => {
-      return getPGCR(activity.activityDetails.instanceId)
+      if (PGCRcache[member.membershipId] && !PGCRcache[member.membershipId].find(pgcr => pgcr.activityDetails.instanceId === activity.activityDetails.instanceId)) {
+        return getPGCR(member.membershipId, activity.activityDetails.instanceId);
+      } else if (!PGCRcache[member.membershipId]) {
+        return getPGCR(member.membershipId, activity.activityDetails.instanceId);
+      } else {
+
+      }
     });
 
   }
 
   render() {
     const { t, member, PGCRcache } = this.props;
-    const characterId = member.characterId;
-    const profileRecords = member.data.profile.profileRecords.data.records;
-    const characterRecords = member.data.profile.characterRecords.data;
+    const characterIds = member.data.profile.characters.data.map(c => c.characterId);
 
     let nightfalls = [
       {
@@ -107,82 +111,69 @@ class StrikeHighScores extends React.Component {
       }
     ];
 
-    // let list = strikes.map(strike => {
-    //   let scoreDefinition = manifest.DestinyRecordDefinition[strike.score];
-    //   let scoreRecord = characterRecords[characterId].records[strike.score];
-    //   let strikeRecord = profileRecords[strike.hash];
-
-    //   let score = scoreRecord.objectives.length === 1 ? scoreRecord.objectives[0].progress : 0;
-    //   let completions = strikeRecord.objectives.length === 1 ? strikeRecord.objectives[0].progress : 0;
-
-    //   return {
-    //     value: score,
-    //     activity: strike.activity,
-    //     element: (
-    //       <li key={strike.hash} className={cx({ lowScore: score < 100000 })}>
-    //         <div className='name'>{scoreDefinition.displayProperties.name}</div>
-    //         <div className='score'>{score === 0 ? '—' : score.toLocaleString()}</div>
-    //       </li>
-    //     )
-    //   };
-    // });
-
-    // list = orderBy(list, [score => score.value], ['desc']);
-    // let top = list[0];
-    // list.unshift({
-    //   element: (
-    //     <li key='header'>
-    //       <div className='name'>Strike</div>
-    //       <div className='score'>High score</div>
-    //     </li>
-    //   )
-    // });
-
-    // let topDefinition = manifest.DestinyActivityDefinition[top.activity];
-
-    let nightfallKills = 0;
-    let highscorePGCR;
-    let temp = 0;let nfs = [];
-    let characterIds = member.data.profile.characters.data.map(c => c.characterId);
-    PGCRcache.cache.forEach(pgcr => {
-      let entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
-      if (entry) {
-        nightfallKills = nightfallKills + entry.values.kills.basic.value
-      }
-      let ttemp = 0;
-      pgcr.entries.forEach(entry => {
-        ttemp = ttemp + entry.score.basic.value;
-      });
-      if (ttemp > temp) {
-        temp = ttemp;
-        highscorePGCR = pgcr;
-      }
-      let nf = nfs.find(nf => nf.directorActivityHash === pgcr.activityDetails.directorActivityHash);
-      if (nf) {
-        if (ttemp > nf.score) {
-          nf.score = ttemp;
+    let sumKills = 0;
+    let sumCleared = 0;
+    let sumDuration = 0;
+    if (PGCRcache[member.membershipId]) {
+      PGCRcache[member.membershipId].forEach(pgcr => {
+        let nightfall = nightfalls.find(nf => nf.directorActivityHash === pgcr.activityDetails.directorActivityHash);
+        if (!nightfall) {
+          return;
         }
-      } else {
-        nfs.push({
-          directorActivityHash: pgcr.activityDetails.directorActivityHash,
-          name: manifest.DestinyActivityDefinition[pgcr.activityDetails.directorActivityHash].displayProperties.name,
-          // score: ttemp
-        })
-      }
+
+        let entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
+        if (entry) {
+          sumKills = sumKills + entry.values.kills.basic.value;
+          sumDuration = sumDuration + entry.values.activityDurationSeconds.basic.value
+          if (entry.values.completed.basic.value === 1) {
+            sumCleared = sumCleared + entry.values.completed.basic.value;
+          }
+        }
+
+        let sumScore = 0
+        let highScore = nightfall.score || 0;
+        pgcr.entries.forEach(entry => {
+          sumScore = sumScore + entry.score.basic.value;
+        });
+        if (sumScore > highScore) {
+          nightfall.score = sumScore;
+        }
+
+      });
+    }
+
+    let list = nightfalls.map(nf => {
+      let definition = manifest.DestinyActivityDefinition[nf.directorActivityHash];
+
+      return {
+        score: nf.score || 0,
+        definition: definition,
+        element: (
+          <li key={definition.hash} className={cx({ lowScore: (nf.score || 0) < 100000 })}>
+            <div className='name'>{definition.displayProperties.name.replace('Nightfall: ','')}</div>
+            <div className='score'>{!nf.score ? '—' : nf.score.toLocaleString()}</div>
+          </li>
+        )
+      };
     });
-    console.log(temp, highscorePGCR);
 
-    // nfs = orderBy(nfs, [nf => nf.name], ['asc']);
-
-    // console.log(nfs)
-
-    // console.log(PGCRcache.cache.filter(pgcr => pgcr.activityDetails.directorActivityHash === 936308438));
+    list = orderBy(list, [nf => nf.score], ['desc']);
+    let topNightfall = list[0];
+    list.unshift({
+      element: (
+        <li key='header'>
+          <div className='name'>Strike</div>
+          <div className='score'>High score</div>
+        </li>
+      )
+    });
 
     return (
       <>
         <div className='bg' />
-        {/* <div className='top'>
-          <ObservedImage className='image' src={`https://www.bungie.net${topDefinition.pgcrImage}`} />
+        <div className='top'>
+        {topNightfall ? <>
+          <ObservedImage className='image' src={`https://www.bungie.net${topNightfall.definition.pgcrImage}`} />
           <div className='head'>
             <div className='page-header'>
               <div className='name'>{t('Nightfall strikes')}</div>
@@ -190,19 +181,27 @@ class StrikeHighScores extends React.Component {
             </div>
           </div>
           <div className='text'>
-            <div className='name'>{topDefinition.displayProperties.name}</div>
-            <div className='score'>{top.value.toLocaleString()}</div>
-          </div>
+            <div className='name'>{topNightfall.definition.displayProperties.name.replace('Nightfall: ','')}</div>
+            <div className='score'>{topNightfall.score.toLocaleString()}</div>
+          </div></> : null}
         </div>
         <div className='chart'>
           <ul className='list'>{list.map(item => item.element)}</ul>
         </div>
         <div className='datum'>
           <div className='d'>
-            <div className='v'>{nightfallKills}</div>
+            <div className='v'>{sumKills.toLocaleString()}</div>
             <div className='n'>{t('kills')}</div>
           </div>
-        </div> */}
+          <div className='d'>
+            <div className='v'>{sumCleared.toLocaleString()}</div>
+            <div className='n'>{t('completed')}</div>
+          </div>
+          <div className='d'>
+            <div className='v'>{Math.floor(parseInt(sumDuration) / 1440)}</div>
+            <div className='n'>{Math.floor(parseInt(sumDuration) / 1440) === 1 ? t('day played') : t('days played')}</div>
+          </div>
+        </div>
       </>
     );
   }
