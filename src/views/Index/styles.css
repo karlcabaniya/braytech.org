@@ -11,6 +11,7 @@
   min-height: 38vw;
   display: grid;
   align-items: end;
+  overflow: hidden;
 }
 
 #index .head .image.bg {

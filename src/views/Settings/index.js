@@ -140,40 +140,6 @@ class Settings extends React.Component {
             </li>
           </ul>
         </div>
-        <div className='module refresh-service'>
-          <div className='sub-header sub'>
-            <div>{t('Refresh service')}</div>
-          </div>
-          <div className='description'>{t("Refresh the active profile's data every 30 seconds")}</div>
-          <ul className='list settings'>
-            <li
-              key='enabled'
-              onClick={() => {
-                this.props.setRefreshServiceConfig({
-                  config: {
-                    enabled: true,
-                    frequency: 30
-                  }
-                });
-              }}
-            >
-              <Checkbox linked checked={this.props.refreshService.config.enabled} text={t('Enabled')} />
-            </li>
-            <li
-              key='disabled'
-              onClick={() => {
-                this.props.setRefreshServiceConfig({
-                  config: {
-                    enabled: false,
-                    frequency: 30
-                  }
-                });
-              }}
-            >
-              <Checkbox linked checked={!this.props.refreshService.config.enabled} text={t('Disabled')} />
-            </li>
-          </ul>
-        </div>
         <div className='module collectibles'>
           <div className='sub-header sub'>
             <div>{t('Collectibles')}</div>
@@ -198,8 +164,7 @@ function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
     theme: state.theme,
-    collectibles: state.collectibles,
-    refreshService: state.refreshService
+    collectibles: state.collectibles
   };
 }
 
@@ -210,9 +175,6 @@ function mapDispatchToProps(dispatch) {
     },
     setCollectibleDisplayState: value => {
       dispatch({ type: 'SET_COLLECTIBLES', payload: value });
-    },
-    setRefreshServiceConfig: value => {
-      dispatch({ type: 'SET_REFRESH_OPTIONS', payload: value });
     }
   };
 }

@@ -138,7 +138,7 @@ class NightfallHighScores extends React.Component {
         definition: definition,
         element: (
           <li key={definition.hash} className={cx({ lowScore: (nf.highScore || 0) < 100000 })}>
-            <div className='name'>{definition.displayProperties.name.replace('Nightfall: ', '')}</div>
+            <div className='name'>{definition.selectionScreenDisplayProperties.name}</div>
             <div className='score'>{!nf.highScore ? '—' : nf.highScore.toLocaleString()}</div>
           </li>
         )
@@ -173,7 +173,7 @@ class NightfallHighScores extends React.Component {
               </div>
               <div className='properties'>
                 <div className='desc'>Top score</div>
-                <div className='name'>{topNightfall.definition.displayProperties.name.replace('Nightfall: ', '')}</div>
+                <div className='name'>{topNightfall.definition.selectionScreenDisplayProperties.name}</div>
                 <div className='score'>{topNightfall.highScore.toLocaleString()}</div>
               </div>
               <div className='fireteam'>
@@ -202,7 +202,7 @@ class NightfallHighScores extends React.Component {
         <div className='chart'>
           <ul className='list'>
             <li key='header'>
-              <div className='name'>Strike</div>
+              <div className='name'></div>
               <div className='score'>High score</div>
             </li>
             {list.map(item => item.element)}
@@ -211,7 +211,7 @@ class NightfallHighScores extends React.Component {
         <div className='datum'>
           <div className='d w'>
             <div className='b'>{favourite ? <>{favourite.clears} clears</> : ` `}</div>
-            <div className='v'>{favourite ? <>{favourite.definition.displayProperties.name.replace('Nightfall: ', '')}</> : `—`}</div>
+            <div className='v'>{favourite ? <>{favourite.definition.selectionScreenDisplayProperties.name}</> : `—`}</div>
             <div className='n'>{t('favourite')}</div>
           </div>
           <div className='d w'>
@@ -226,7 +226,7 @@ class NightfallHighScores extends React.Component {
                 ` `
               )}
             </div>
-            <div className='v'>{fastestNightfall ? <>{fastestNightfall.definition.displayProperties.name.replace('Nightfall: ', '')}</> : `—`}</div>
+            <div className='v'>{fastestNightfall ? <>{fastestNightfall.definition.selectionScreenDisplayProperties.name}</> : `—`}</div>
             <div className='n'>{t('fastest clear')}</div>
           </div>
           <div className='d'>

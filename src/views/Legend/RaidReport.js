@@ -3,8 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
+import moment from 'moment';
 import Moment from 'react-moment';
-import orderBy from 'lodash/orderBy';
+import { orderBy, minBy } from 'lodash';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
@@ -14,6 +15,8 @@ class RaidReport extends React.Component {
     super(props);
 
     this.state = {};
+
+    this.raidReport = false;
   }
 
   fetchReport = async membershipId => {
@@ -29,7 +32,7 @@ class RaidReport extends React.Component {
   async componentDidMount() {
     const { member } = this.props;
 
-    //console.log(await this.fetchReport(member.membershipId))
+    this.raidReport = await this.fetchReport(member.membershipId);
   }
 
   render() {
@@ -142,6 +145,7 @@ class RaidReport extends React.Component {
 
     let sotpClears = false;
     let firstSotpClear = false;
+    let raids = [];
     if (PGCRcache[member.membershipId]) {
       let raidReports = PGCRcache[member.membershipId].filter(pgcr => pgcr.activityDetails.mode === 4);
 
@@ -165,22 +169,76 @@ class RaidReport extends React.Component {
       
       firstSotpClear = orderBy(sotpClears, [pgcr => pgcr.period], ['asc'])[0];
 
-      // console.log(sotpClears, firstSotpClear);
+      if (this.raidReport) {
+        let scourgeAgg = this.raidReport.activities.filter(a => SCOURGE_OF_THE_PAST.versions.map(v => v.activityHashes).flat().includes(a.activityHash));
+        let scourgeNormal = this.raidReport.activities.filter(a => SCOURGE_OF_THE_PAST.versions[0].activityHashes.includes(a.activityHash));
+        let scourgeFastest = minBy(scourgeAgg.map(a => a.values.fastestFullClear), b => b && b.value);
+        raids.push({
+          element: (
+            <li key='SCOURGE_OF_THE_PAST'>
+              <div className='name'>{SCOURGE_OF_THE_PAST.displayValue}</div>
+              <div className='normal'>{scourgeNormal.map(a => a.values.clears).reduce((a, b) => a + b, 0)}</div>
+              <div className='prestige'></div>
+              <div className='flawless'></div>
+              <div className='fastest'>
+                {scourgeFastest ? <>{moment.duration(scourgeFastest.value, 'seconds').minutes()}m {moment.duration(scourgeFastest.value, 'seconds').seconds()}s</> : null}
+              </div>
+            </li>
+          )
+        });
+
+        let lastWishAgg = this.raidReport.activities.filter(a => LAST_WISH.versions.map(v => v.activityHashes).flat().includes(a.activityHash));
+        let lastWishNormal = this.raidReport.activities.filter(a => LAST_WISH.versions[0].activityHashes.includes(a.activityHash));
+        let lastWishFastest = minBy(lastWishAgg.map(a => a.values.fastestFullClear), b => b && b.value);
+        raids.push({
+          element: (
+            <li key='LAST_WISH'>
+              <div className='name'>{LAST_WISH.displayValue}</div>
+              <div className='normal'>{lastWishNormal.map(a => a.values.clears).reduce((a, b) => a + b, 0)}</div>
+              <div className='prestige'></div>
+              <div className='flawless'></div>
+              <div className='fastest'>
+                {lastWishFastest ? <>{moment.duration(lastWishFastest.value, 'seconds').minutes()}m {moment.duration(lastWishFastest.value, 'seconds').seconds()}s</> : null}
+              </div>
+            </li>
+          )
+        });
+
+        let sosAgg = this.raidReport.activities.filter(a => SPIRE_OF_STARS.versions.map(v => v.activityHashes).flat().includes(a.activityHash));
+        let sosNormal = this.raidReport.activities.filter(a => SPIRE_OF_STARS.versions[1].activityHashes.includes(a.activityHash));
+        let sosPrestige = this.raidReport.activities.filter(a => SPIRE_OF_STARS.versions[0].activityHashes.includes(a.activityHash));
+        let sosFastest = minBy(sosAgg.map(a => a.values.fastestFullClear), b => b && b.value);
+        raids.push({
+          element: (
+            <li key='SPIRE_OF_STARS'>
+              <div className='name'>{SPIRE_OF_STARS.displayValue}</div>
+              <div className='normal'>{sosNormal.map(a => a.values.clears).reduce((a, b) => a + b, 0)}</div>
+              <div className='prestige'>{sosPrestige.map(a => a.values.clears).reduce((a, b) => a + b, 0)}</div>
+              <div className='flawless'></div>
+              <div className='fastest'>
+                {sosFastest ? <>{moment.duration(sosFastest.value, 'seconds').minutes()}m {moment.duration(sosFastest.value, 'seconds').seconds()}s</> : null}
+              </div>
+            </li>
+          )
+        });
+      }
+
+      console.log(sotpClears, firstSotpClear, this.raidReport);
     }
 
     return (
       <>
         <div className='bg' />
         <div className='first'>
+          <ObservedImage className='image pgcrImage' src={SCOURGE_OF_THE_PAST.image} />
+          <div className='head'>
+            <div className='page-header'>
+              <div className='name'>{t('Raids')}</div>
+              <div className='description'>{t('Form a fireteam of six and brave the strange and powerful realms of our enemies')}</div>
+            </div>
+          </div>
           {firstSotpClear ? (
             <>
-              <ObservedImage className='image pgcrImage' src={SCOURGE_OF_THE_PAST.image} />
-              <div className='head'>
-                <div className='page-header'>
-                  <div className='name'>{t('Raids')}</div>
-                  <div className='description'>{t('Form a fireteam of six and brave the strange and powerful realms of our enemies')}</div>
-                </div>
-              </div>
               <div className='properties'>
                 <div className='desc'>First clear</div>
                 <div className='name'>{SCOURGE_OF_THE_PAST.displayValue}</div>
@@ -210,7 +268,19 @@ class RaidReport extends React.Component {
                 </ul>
               </div>
             </>
-          ) : null}
+          ) : null }
+        </div>
+        <div className='chart'>
+          <ul className='list'>
+            <li key='header'>
+              <div className='name'></div>
+              <div className='normal'>Normal</div>
+              <div className='prestige'>Prestige</div>
+              <div className='flawless'>Flawless</div>
+              <div className='fastest'>Fastest</div>
+            </li>
+            {raids.map(r => r.element)}
+          </ul>
         </div>
         {/* <div className='summary'>
           
