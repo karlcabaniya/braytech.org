@@ -217,9 +217,9 @@ class Characters extends React.Component {
         art: '01A3-000010B4'
       },
       {
-        perkHash: 0,
+        perkHash: 3310898269,
         slug: 'arcstrider_warrior',
-        name: 'Way of the --',
+        name: 'Way of the Current',
         element: 'arc',
         art: '01E3-00001593'
       },

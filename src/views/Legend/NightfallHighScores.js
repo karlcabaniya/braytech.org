@@ -167,7 +167,7 @@ class NightfallHighScores extends React.Component {
               <ObservedImage className='image pgcrImage' src={`https://www.bungie.net${topNightfall.definition.pgcrImage}`} />
               <div className='head'>
                 <div className='page-header'>
-                  <div className='name'>{t('Nightfall strikes')}</div>
+                  <div className='name'>{t('Nightfalls')}</div>
                   <div className='description'>{t('Your hard-won high scores from your fight against the most feared minions of the Darkness')}</div>
                 </div>
               </div>
@@ -245,7 +245,7 @@ class NightfallHighScores extends React.Component {
             <div className='v'>{sumCleared.toLocaleString()}</div>
             <div className='n'>{t('completed')}</div>
           </div>
-          <div className='d'>
+          <div className='d w'>
             <div className='v'>{Math.floor(parseInt(sumDuration) / 3600)}</div>
             <div className='n'>{Math.floor(parseInt(sumDuration) / 3600) === 1 ? t('hour played') : t('hours played')}</div>
           </div>

@@ -55,7 +55,7 @@ class Legend extends React.Component {
     let ignition = await modes.map(m => { return this.cacheMachine(m); });
     
     let lit = await Promise.all(ignition);
-    console.log('done', lit);
+    //console.log('done', lit);
   }
 
   render() {

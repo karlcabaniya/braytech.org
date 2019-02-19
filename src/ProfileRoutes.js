@@ -11,8 +11,6 @@ import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
 import Account from './views/Account';
 import ThisWeek from './views/ThisWeek';
-import Inspect from './views/Inspect';
-import Read from './views/Read';
 import Header from './components/Header';
 import Spinner from './components/Spinner';
 

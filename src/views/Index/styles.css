@@ -8,6 +8,9 @@
   margin: -40px 0 0;
   padding: calc(3rem + 40px) 3rem 3rem;
   background-color: rgba(0, 0, 0, 0.1);
+  min-height: 38vw;
+  display: grid;
+  align-items: end;
 }
 
 #index .head .image.bg {
@@ -28,9 +31,9 @@
 
 #index .head .device svg {
   fill: #ffffff;
-  opacity: 0.2;
+  opacity: 0.1;
   width: auto;
-  height: 120%;
+  height: 42vw;
 }
 
 #index .head .slogan {
@@ -222,6 +225,7 @@
 
   #index .head {
     padding: calc(2rem + 40px) 2rem 2rem;
+    min-height: 70vw;
   }
 
   #index .head .device {
