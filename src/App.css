@@ -6,6 +6,8 @@
   display: flex;
   padding: 0 3rem;
   width: 100%;
+  margin: 0 auto;
+  max-width: 1920px;
 }
 
 .wrapper {
@@ -507,7 +509,7 @@ html.backdropfilter .sticky-nav{
   margin: 0 0 0 2rem;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .sticky-nav {
     width: 100%;
     padding: 1rem 2rem;
@@ -533,4 +535,12 @@ html.backdropfilter .sticky-nav{
 
 .profile-route-loading {
   padding: 3rem;
+}
+
+@media screen and (max-width: 600px) {
+
+  .profile-route-loading {
+    padding: 2rem;
+  }
+
 }

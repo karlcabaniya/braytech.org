@@ -83,11 +83,7 @@ class ProfileSearch extends React.Component {
     const { results, searching } = this.state;
 
     if (searching) {
-      return (
-        <li>
-          <Spinner mini />
-        </li>
-      );
+      return null;
     }
 
     if (results && results.length > 0) {
@@ -101,7 +97,7 @@ class ProfileSearch extends React.Component {
 
   render() {
     const { t } = this.props;
-    const { search } = this.state;
+    const { search, searching } = this.state;
 
     let history = ls.get('history.profiles') || [];
 
@@ -117,7 +113,7 @@ class ProfileSearch extends React.Component {
         </div>
 
         <div className='results'>
-          <ul className='list'>{this.resultsElement()}</ul>
+          {searching ? <Spinner mini /> : <ul className='list'>{this.resultsElement()}</ul>}
         </div>
 
         {history.length > 0 && (

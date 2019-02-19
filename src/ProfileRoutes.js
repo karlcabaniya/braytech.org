@@ -5,13 +5,12 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import store from './utils/reduxStore';
 
 import Clan from './views/Clan';
+import Legend from './views/Legend';
 import Collections from './views/Collections';
 import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
 import Account from './views/Account';
 import ThisWeek from './views/ThisWeek';
-import Inspect from './views/Inspect';
-import Read from './views/Read';
 import Header from './components/Header';
 import Spinner from './components/Spinner';
 
@@ -52,12 +51,11 @@ class ProfileRoutes extends React.Component {
         <Switch>
           <Route path={`${match.url}/account`} exact render={route => <Account />} />
           <Route path={`${match.url}/clan/:view?/:subView?`} exact render={route => <Clan view={route.match.params.view} subView={route.match.params.subView} />} />
+          <Route path={`${match.url}/legend`} exact render={route => <Legend />} />
           <Route path={`${match.url}/checklists`} exact component={Checklists} />
           <Route path={`${match.url}/collections/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Collections {...route} />} />
           <Route path={`${match.url}/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Triumphs {...route} />} />
           <Route path={`${match.url}/this-week`} exact render={() => <ThisWeek />} />
-          <Route path={`${match.url}/inspect/:hash?`} exact component={Inspect} />
-          <Route path={`${match.url}/read/:kind?/:hash?`} exact component={Read} />
         </Switch>
       </>
     );

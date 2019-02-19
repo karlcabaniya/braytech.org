@@ -23,7 +23,12 @@
   background: radial-gradient(rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.4)), linear-gradient(217deg, hsla(201, 10%, 60%, 0.8), hsla(201, 10%, 60%, 0) 70.71%), linear-gradient(127deg, hsla(29, 7%, 50%, 0.8), hsla(29, 7%, 50%, 0) 70.71%), linear-gradient(336deg, hsla(213, 20%, 50%, 0.8), hsla(213, 20%, 50%, 0) 70.71%);
 }
 
-#inspect .bg::before {
+#inspect .bg .image {
+  background-size: cover;
+  background-position: right center;
+}
+
+#inspect .bg::after {
   content: ' ';
   position: absolute;
   top: 0;
@@ -32,6 +37,11 @@
   height: 100%;
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewbox='0 0 24 24'><circle cx='1' cy='1' r='1' fill='white' ></circle></svg>");
   opacity: 0.07;
+}
+
+#inspect .image.secondaryIcon {
+  max-width: 569px;
+  max-height: 569px;
 }
 
 #inspect .rarity {
@@ -54,7 +64,381 @@
 
 #inspect .wrap {
   position: relative;
-  width: 1320px;
   margin: 4rem auto;
   padding: 0 3rem;
+  max-width: 1440px;
+  min-height: calc(100vh - 40px - 8rem);
+}
+
+#inspect .wrap .properties {
+  max-width: 600px;
+}
+
+#inspect .wrap .head {
+  margin: 0 0 2rem;
+  display: grid;
+  grid-template-columns: calc(80px + 16px) 1fr;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#inspect .wrap .head .icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  box-shadow: inset 0 0 0 3px #ececec;
+}
+
+#inspect .wrap .head .text {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+}
+
+#inspect .wrap .head .text div {
+  flex-basis: 100%;
+}
+
+#inspect .wrap .head .text .name {
+  font-size: 56px;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 45px;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 1);
+}
+
+#inspect .wrap .head .text .type {
+  font-size: 30px;
+  text-transform: uppercase;
+  line-height: 24px;
+}
+
+#inspect .wrap .description {
+  font-size: 20px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#inspect .wrap .sock {
+  margin: 2rem 0 0;
+}
+
+#inspect .wrap .sock .sub-header.sub {
+  margin: 2rem 0 1rem;
+}
+
+#inspect .wrap .sockets {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#inspect .wrap .sockets.is-perks {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19' viewBox='0 0 19 19'><rect fill='white' fill-opacity='0.1' width='19' height='1' y='9'/><rect fill='white' fill-opacity='0.1' width='1' height='19' x='9'/></svg>");
+}
+
+#inspect .wrap .sockets .socket {
+  position: relative;
+  flex-basis: 64px;
+  margin: 0 10px;
+}
+
+#inspect .wrap .sockets .socket:first-child {
+  margin-left: 0;
+}
+
+#inspect .wrap .sockets .socket:last-child {
+  margin-right: 0;
+}
+
+#inspect .wrap .sockets .socket .plug {
+  position: relative;
+  height: 64px;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#inspect .wrap .sockets .socket .plug:last-child {
+  margin: 0;
+}
+
+#inspect .wrap .sockets .socket .plug .text {
+  display: none;
+}
+
+#inspect .wrap .sockets.is-perks .socket::before {
+  content: ' ';
+  position: absolute;
+  right: -11px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#inspect .wrap .sockets.is-perks .socket .plug:not(.is-intrinsic) {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+  border-radius: 100%;
+}
+
+#inspect .wrap .sockets.is-perks .socket .plug:not(.is-intrinsic)::before {
+  content: ' ';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  border-radius: 100%;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0);
+  transition: box-shadow 0.25s;
+}
+
+#inspect .wrap .sockets.is-perks .socket .plug:not(.is-intrinsic)::after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 0.25s;
+}
+
+#inspect .wrap .sockets.is-perks .socket .plug:not(.is-intrinsic):hover::before {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+#inspect .wrap .sockets.is-perks .socket .plug:not(.is-intrinsic):hover::after {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#inspect .wrap .sockets.is-perks .socket .plug:not(.is-intrinsic).is-active {
+  background-color: #518dba;
+}
+
+#inspect .wrap .sockets.is-perks .socket .plug:not(.is-intrinsic) .icon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+#inspect .wrap .stats {
+  position: absolute;
+  bottom: 2rem;
+  right: 3rem;
+  width: 540px;
+  display: grid;
+  grid-template-columns: min-content auto;
+}
+
+#inspect .wrap .stats .primary {
+  padding: 0 16px 0 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  display: grid;
+  grid-template-columns: min-content max-content;
+  grid-gap: 6px;
+}
+
+#inspect .wrap .stats .primary .damageType {
+  font-size: 40px;
+}
+
+#inspect .wrap .stats .primary .damageType:not(.kinetic) .text {
+  padding: 0 0 0 7px;
+}
+
+#inspect .wrap .stats .primary .damageType .icon {
+  display: flex;
+}
+
+#inspect .wrap .stats .primary .damageType .icon::before {
+  font-family: 'destiny';
+}
+
+#inspect .wrap .stats .primary .damageType.solar {
+  color: #ef641f;
+}
+
+#inspect .wrap .stats .primary .damageType .icon.solar::before {
+  content: 's';
+}
+
+#inspect .wrap .stats .primary .damageType.arc {
+  color: #79bbe7;
+}
+
+#inspect .wrap .stats .primary .damageType .icon.arc::before {
+  content: 'a';
+}
+
+#inspect .wrap .stats .primary .damageType.void {
+  color: #a371c2;
+}
+
+#inspect .wrap .stats .primary .damageType .icon.void::before {
+  content: 'v';
+}
+
+#inspect .wrap .stats .primary .text .power {
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+#inspect .wrap .stats .primary .text .primaryBaseStat {
+  margin: 3px 0 0;
+  text-transform: uppercase;
+  text-align: right;
+}
+
+#inspect .wrap .stats .stat {
+  display: flex;
+  align-items: center;
+  line-height: 1.6;
+  margin: 0 0 8px;
+}
+
+#inspect .wrap .stats .stat .name {
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0 16px 0 0;
+  flex-basis: 50%;
+  height: 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#inspect .wrap .stats .stat .value {
+  flex-basis: 50%;
+  height: 16px;
+  position: relative;
+  color: #fff;
+  display: flex;
+}
+
+#inspect .wrap .stats .stat .value.bar {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#inspect .wrap .stats .stat .value.int {
+  display: flex;
+  align-items: center;
+}
+
+#inspect .wrap .stats .stat .value.masterwork {
+  color: #c6ab3c;
+}
+
+#inspect .wrap .stats .stat .value .bar {
+  height: 100%;
+  background-color: #fff;
+  position: relative;
+}
+
+#inspect .wrap .stats .stat .value .bar::before {
+  content: attr(data-value);
+  position: absolute;
+  top: 0;
+  right: -16px;
+  width: 100%;
+  height: 100%;
+  font-weight: 400;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+}
+
+#inspect .wrap .stats .stat .value .tip {
+  height: 100%;
+  background-color: #c6ab3c;
+}
+
+@media screen and (max-width: 1024px) {
+  #inspect .wrap .sockets .socket {
+    position: relative;
+    flex-basis: 48px;
+    margin: 0 10px;
+  }
+
+  #inspect .wrap .sockets .socket .plug {
+    position: relative;
+    height: 48px;
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #inspect .wrap .sockets.is-perks .socket .plug:not(.is-intrinsic) .icon {
+    position: relative;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #inspect .wrap {
+    margin: 4rem auto;
+    padding: 0 2rem;
+    min-height: unset;
+  }
+
+  #inspect .bg .image {
+    background-position: center center;
+  }
+
+  #inspect .image.secondaryIcon {
+    width: 80vw;
+    height: 80vw;
+  }
+
+  #inspect .rarity {
+    height: 70px;
+  }
+
+  #inspect .wrap .head {
+    margin: 0 0 2rem;
+    display: grid;
+    grid-template-columns: calc(48px + 16px) 1fr;
+  }
+
+  #inspect .wrap .head .icon {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    box-shadow: inset 0 0 0 2px #ececec;
+  }
+
+  #inspect .wrap .head .text {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+  }
+
+  #inspect .wrap .head .text .name {
+    font-size: 34px;
+    line-height: 28px;
+    white-space: nowrap;
+  }
+
+  #inspect .wrap .head .text .type {
+    font-size: 18px;
+    line-height: 14px;
+  }
+
+  #inspect .wrap .description {
+    font-size: 16px;
+  }
+
+  #inspect .wrap .stats {
+    position: relative;
+    width: 100%;
+    right: unset;
+    bottom: unset;
+    grid-template-columns: auto;
+  }
 }

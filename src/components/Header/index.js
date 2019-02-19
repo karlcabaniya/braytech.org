@@ -80,6 +80,13 @@ class Header extends React.Component {
         profile: true
       },
       {
+        name: t('Legend'),
+        desc: t("Bird's eye view of your overall progress"),
+        slug: '/legend',
+        exact: true,
+        profile: true
+      },
+      {
         name: t('Collections'),
         desc: t('Items your Guardian has acquired'),
         slug: '/collections',
@@ -91,13 +98,6 @@ class Header extends React.Component {
         desc: t("Records of your Guardian's achievements"),
         slug: '/triumphs',
         exact: false,
-        profile: true
-      },
-      {
-        name: t('Account'),
-        desc: t("Bird's eye view of your overall progress"),
-        slug: '/account',
-        exact: true,
         profile: true
       },
       {
@@ -114,6 +114,13 @@ class Header extends React.Component {
         exact: true,
         profile: true
       },
+      // {
+      //   name: t('Activity'),
+      //   desc: t("Bird's eye view of your overall progress"),
+      //   slug: '/activity',
+      //   exact: true,
+      //   profile: true
+      // },
       {
         name: t('Resources'),
         desc: t('Assorted Destiny-related resources'),
@@ -129,7 +136,7 @@ class Header extends React.Component {
     ];
 
     let viewsInline = false;
-    if (viewport.width >= 1360) {
+    if (viewport.width >= 1258) {
       viewsInline = true;
     }
 

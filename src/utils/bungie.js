@@ -10,10 +10,10 @@ class BungieError extends Error {
   }
 }
 
-async function apiRequest(path) {
+async function apiRequest(path, stats = false) {
   const options = { headers: { 'X-API-Key': Globals.key.bungie } };
 
-  const request = await fetch(`https://www.bungie.net${path}`, options).then(r => r.json());
+  const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options).then(r => r.json());
 
   if (request.ErrorCode !== 1) {
     throw new BungieError(request);
@@ -41,3 +41,7 @@ export const groupWeeklyRewardState = async groupId => apiRequest(`/Platform/Des
 export const getHistoricalStats = async (membershipType, membershipId, groups, modes, periodType) => apiRequest(`/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/0/Stats/?groups=${groups}&modes=${modes}&periodType=${periodType}`);
 
 export const playerSearch = async (membershipType, displayName) => apiRequest(`/Platform/Destiny2/SearchDestinyPlayer/${membershipType}/${encodeURIComponent(displayName)}/`);
+
+export const activityHistory = async (membershipType, membershipId, characterId, count, mode, page) => apiRequest(`/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${characterId}/Stats/Activities/?page=${page}&mode=${mode}&count=${count}`);
+
+export const PGCR = async id => apiRequest(`/Platform/Destiny2/Stats/PostGameCarnageReport/${id}/`, true);

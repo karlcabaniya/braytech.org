@@ -74,7 +74,7 @@ export default function memberReducer(state = defaultState, action) {
   // searches for another and clicks it before the first is finished loading.
   const membershipMatches = membershipType === state.membershipType && membershipId === state.membershipId;
   if (!membershipMatches) {
-    console.warn(action.payload);
+    // console.warn(action.payload);
     return state;
   }
 
