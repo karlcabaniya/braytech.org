@@ -254,7 +254,7 @@ class Characters extends React.Component {
       }));
 
       let subclass = equipment.find(item => item.inventory.bucketTypeHash === 3284755031);
-      console.log(subclass)
+      // console.log(subclass)
       let path = paths.find(attunement => {
         let match = subclass.itemComponents.perks.filter(perk => perk.isActive).find(perk => {
           return paths.find(attunement => attunement.perkHash === perk.perkHash);
@@ -267,7 +267,7 @@ class Characters extends React.Component {
         }
       });
 
-      console.log(path);
+      // console.log(path);
 
       chars.push({
         element: (

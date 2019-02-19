@@ -8,6 +8,8 @@ export async function getPGCR(membershipId, id) {
   response.instanceId = id;
   
   store.dispatch({ type: 'PGCR_LOADED', payload: { membershipId, response } });
+
+  return true;
 }
 
 export default getPGCR;

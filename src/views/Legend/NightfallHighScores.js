@@ -8,47 +8,14 @@ import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
 
 import manifest from '../../utils/manifest';
-import Spinner from '../../components/Spinner';
-import * as bungie from '../../utils/bungie';
-import getPGCR from '../../utils/getPGCR';
 import ObservedImage from '../../components/ObservedImage';
 
-class StrikeHighScores extends React.Component {
+class NightfallHighScores extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
 
-    this.nightfallPGCRs = 0;
-  }
-
-  async componentDidMount() {
-    const { member, PGCRcache } = this.props;
-
-    let charactersIds = member.data.profile.characters.data.map(c => c.characterId);
-
-    // console.log(charactersIds)
-
-    let requests = charactersIds.map(async c => {
-      let response = await bungie.activityHistory(member.membershipType, member.membershipId, c, 250, '46', 0);
-      return response.activities;
-    });
-
-    let activities = await Promise.all(requests);
-    activities = activities.flat();
-
-    this.nightfallPGCRs = activities.length;
-
-    // console.log(activities);
-
-    activities.forEach(activity => {
-      if (PGCRcache[member.membershipId] && activity && !PGCRcache[member.membershipId].find(pgcr => pgcr.activityDetails.instanceId === activity.activityDetails.instanceId)) {
-        return getPGCR(member.membershipId, activity.activityDetails.instanceId);
-      } else if (!PGCRcache[member.membershipId] && activity) {
-        return getPGCR(member.membershipId, activity.activityDetails.instanceId);
-      } else {
-      }
-    });
   }
 
   render() {
@@ -120,7 +87,7 @@ class StrikeHighScores extends React.Component {
     let sumDuration = 0;
     let sumSuperKills = 0;
     if (PGCRcache[member.membershipId]) {
-      PGCRcache[member.membershipId].forEach(pgcr => {
+      PGCRcache[member.membershipId].filter(pgcr => pgcr.activityDetails.mode === 46).forEach(pgcr => {
         let nightfall = nightfalls.find(nf => nf.directorActivityHash === pgcr.activityDetails.directorActivityHash);
         if (!nightfall) {
           return;
@@ -191,13 +158,6 @@ class StrikeHighScores extends React.Component {
 
     let favourite = orderBy(list.filter(nf => nf.clears), [nf => nf.clears], ['desc'])[0];
 
-    let omissions = null;
-    let PGCRSloaded = PGCRcache[member.membershipId] ? PGCRcache[member.membershipId].filter(pgcr => pgcr.activityDetails.mode === 46).length : 0;
-    if (PGCRcache[member.membershipId] && this.nightfallPGCRs !== PGCRSloaded) {
-      omissions = <>{this.nightfallPGCRs - PGCRSloaded} PGCRs could not be loaded at this time.</>
-    }
-    
-
     return (
       <>
         <div className='bg' />
@@ -219,7 +179,9 @@ class StrikeHighScores extends React.Component {
               <div className='fireteam'>
                 <div className='sub-header sub'>
                   <div>Fireteam</div>
-                  <div><Moment format="D/M/YYYY">{topNightfallPGCR.period}</Moment></div>
+                  <div>
+                    <Moment format='D/M/YYYY'>{topNightfallPGCR.period}</Moment>
+                  </div>
                 </div>
                 <ul className='list'>
                   {topNightfallPGCR.entries.map(entry => {
@@ -253,7 +215,17 @@ class StrikeHighScores extends React.Component {
             <div className='n'>{t('favourite')}</div>
           </div>
           <div className='d w'>
-            <div className='b'>{fastestNightfall ? <>{moment.duration(fastestNightfall.bestTime, 'seconds').minutes()}<span>m</span> {moment.duration(fastestNightfall.bestTime, 'seconds').seconds()}<span>s</span></> : ` `}</div>
+            <div className='b'>
+              {fastestNightfall ? (
+                <>
+                  {moment.duration(fastestNightfall.bestTime, 'seconds').minutes()}
+                  <span>m</span> {moment.duration(fastestNightfall.bestTime, 'seconds').seconds()}
+                  <span>s</span>
+                </>
+              ) : (
+                ` `
+              )}
+            </div>
             <div className='v'>{fastestNightfall ? <>{fastestNightfall.definition.displayProperties.name.replace('Nightfall: ', '')}</> : `—`}</div>
             <div className='n'>{t('fastest clear')}</div>
           </div>
@@ -274,11 +246,8 @@ class StrikeHighScores extends React.Component {
             <div className='n'>{t('completed')}</div>
           </div>
           <div className='d'>
-            <div className='v'>{Math.floor(parseInt(sumDuration) / 1440)}</div>
-            <div className='n'>{Math.floor(parseInt(sumDuration) / 1440) === 1 ? t('day played') : t('days played')}</div>
-          </div>
-          <div className='t w'>
-            <div>{!PGCRcache.loading ? omissions : null}</div>
+            <div className='v'>{Math.floor(parseInt(sumDuration) / 3600)}</div>
+            <div className='n'>{Math.floor(parseInt(sumDuration) / 3600) === 1 ? t('hour played') : t('hours played')}</div>
           </div>
         </div>
       </>
@@ -296,4 +265,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(StrikeHighScores);
+)(NightfallHighScores);

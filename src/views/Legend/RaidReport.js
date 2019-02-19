@@ -33,47 +33,9 @@ class RaidReport extends React.Component {
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t, member, PGCRcache } = this.props;
 
-    let activities = [];
-
-    // characters.forEach(character => {
-    //   chars.push({
-    //     element: (
-    //       <li key={character.characterId}>
-    //         <div className='c'>
-    //           {characterStamps(character)}
-    //         </div>
-    //         <div className='s t'>
-    //           <div className='n'>Time played</div>
-    //           <div className='v'>
-    //             {Math.floor(parseInt(character.minutesPlayedTotal) / 1440) < 2 ? (
-    //               <>
-    //                 {Math.floor(parseInt(character.minutesPlayedTotal) / 1440)} {t('day')}
-    //               </>
-    //             ) : (
-    //               <>
-    //                 {Math.floor(parseInt(character.minutesPlayedTotal) / 1440)} {t('days')}
-    //               </>
-    //             )}
-    //           </div>
-    //         </div>
-    //         <div className='s l'>
-    //           <div className='n'>Last played</div>
-    //           <div className='v'>
-    //             <Moment fromNow>{character.dateLastPlayed}</Moment>
-    //           </div>
-    //         </div>
-    //       </li>
-    //     )
-    //   });
-    // });
-
-    // return (
-    //   <ul>
-    //     {chars.map(c => c.element)}
-    //   </ul>
-    // );
+    
 
     return null;
   }
@@ -81,7 +43,8 @@ class RaidReport extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    PGCRcache: state.PGCRcache
   };
 }
 
