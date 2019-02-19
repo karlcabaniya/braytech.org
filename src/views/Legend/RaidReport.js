@@ -165,7 +165,7 @@ class RaidReport extends React.Component {
       
       firstSotpClear = orderBy(sotpClears, [pgcr => pgcr.period], ['asc'])[0];
 
-      console.log(sotpClears, firstSotpClear);
+      // console.log(sotpClears, firstSotpClear);
     }
 
     return (
