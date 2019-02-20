@@ -9,34 +9,33 @@ import { orderBy, minBy } from 'lodash';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
+import Spinner from '../../components/Spinner';
 
 class RaidReport extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
-
-    this.raidReport = false;
   }
 
-  fetchReport = async membershipId => {
-    const request = await fetch(`https://b9bv2wd97h.execute-api.us-west-2.amazonaws.com/prod/api/player/${membershipId}`).then(r => r.json());
+  // fetchReport = async membershipId => {
+  //   const request = await fetch(`https://b9bv2wd97h.execute-api.us-west-2.amazonaws.com/prod/api/player/${membershipId}`).then(r => r.json());
 
-    if (!request.response) {
-      console.log('fetch error');
-    }
+  //   if (!request.response) {
+  //     console.log('fetch error');
+  //   }
 
-    return request.response;
-  };
+  //   return request.response;
+  // };
 
-  async componentDidMount() {
-    const { member } = this.props;
+  // async componentDidMount() {
+  //   const { member } = this.props;
 
-    this.raidReport = await this.fetchReport(member.membershipId);
-  }
+  //   // this.raidReport = await this.fetchReport(member.membershipId);
+  // }
 
   render() {
-    const { t, member, PGCRcache } = this.props;
+    const { t, member, PGCRcache, cacheState, cacheLoading } = this.props;
     const characterIds = member.data.profile.characters.data.map(c => c.characterId);
 
     const getBungiePGCRImage = path => {
@@ -62,7 +61,8 @@ class RaidReport extends React.Component {
           displayValue: 'Guided Games'
         }
       ],
-      additionalStartingPhaseIndexes: [2]
+      additionalStartingPhaseIndexes: [2],
+      fullClearPhases: [0]
     };
 
     const EATER_OF_WORLDS = {
@@ -83,7 +83,8 @@ class RaidReport extends React.Component {
           activityHashes: [2164432138],
           displayValue: 'Guided Games'
         }
-      ]
+      ],
+      fullClearPhases: [0]
     };
 
     const SPIRE_OF_STARS = {
@@ -104,7 +105,8 @@ class RaidReport extends React.Component {
           activityHashes: [3004605630],
           displayValue: 'Guided Games'
         }
-      ]
+      ],
+      fullClearPhases: [0]
     };
 
     const LAST_WISH = {
@@ -122,6 +124,7 @@ class RaidReport extends React.Component {
           displayValue: 'Guided Games'
         }
       ],
+      fullClearPhases: [0],
       flawlessRecordHash: 4177910003
     };
 
@@ -140,90 +143,218 @@ class RaidReport extends React.Component {
           displayValue: 'Guided Games'
         }
       ],
+      fullClearPhases: [0],
       flawlessRecordHash: 2648109757
     };
 
-    let sotpClears = false;
+    
+
     let firstSotpClear = false;
     let raids = [];
+    let raidReports = [];
+    let aggregates = {};
     if (PGCRcache[member.membershipId]) {
-      let raidReports = PGCRcache[member.membershipId].filter(pgcr => pgcr.activityDetails.mode === 4);
+      raidReports = PGCRcache[member.membershipId].filter(pgcr => pgcr.activityDetails.mode === 4);
 
-      sotpClears = raidReports
-            .filter(pgcr => 
-              SCOURGE_OF_THE_PAST.versions
+      const getAgg = raid => {
+        return raidReports
+          .filter(pgcr =>
+            raid.versions
               .map(v => v.activityHashes)
               .flat()
               .includes(pgcr.activityDetails.directorActivityHash)
-            )
-            .filter(pgcr => {
-              let clear = false;
-              let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
-              entries.forEach(entry => {
-                if (entry.values.completed.basic.value === 1 && entry.values.completionReason.basic.value === 0) {
-                  clear = true;
-                }
-              });
-              return clear;
+          )
+          .filter(pgcr => {
+            let clear = false;
+            let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+            entries.forEach(entry => {
+              if (entry.values.completed.basic.value === 1 && entry.values.completionReason.basic.value === 0) {
+                clear = true;
+              }
             });
-      
-      firstSotpClear = orderBy(sotpClears, [pgcr => pgcr.period], ['asc'])[0];
+            return clear;
+          });
+      };
 
-      if (this.raidReport) {
-        let scourgeAgg = this.raidReport.activities.filter(a => SCOURGE_OF_THE_PAST.versions.map(v => v.activityHashes).flat().includes(a.activityHash));
-        let scourgeNormal = this.raidReport.activities.filter(a => SCOURGE_OF_THE_PAST.versions[0].activityHashes.includes(a.activityHash));
-        let scourgeFastest = minBy(scourgeAgg.map(a => a.values.fastestFullClear), b => b && b.value);
-        raids.push({
-          element: (
-            <li key='SCOURGE_OF_THE_PAST'>
-              <div className='name'>{SCOURGE_OF_THE_PAST.displayValue}</div>
-              <div className='normal'>{scourgeNormal.map(a => a.values.clears).reduce((a, b) => a + b, 0)}</div>
-              <div className='prestige'></div>
-              <div className='flawless'></div>
-              <div className='fastest'>
-                {scourgeFastest ? <>{moment.duration(scourgeFastest.value, 'seconds').minutes()}m {moment.duration(scourgeFastest.value, 'seconds').seconds()}s</> : null}
-              </div>
-            </li>
+      const getAggCleared = () => {
+        return raidReports
+          .filter(pgcr =>
+            [LEVIATHAN, EATER_OF_WORLDS, SPIRE_OF_STARS, LAST_WISH, SCOURGE_OF_THE_PAST]
+              .map(raid => raid.versions).flat()
+              .map(raid => raid.activityHashes).flat()
+              .includes(pgcr.activityDetails.directorActivityHash)
           )
-        });
+          .filter(pgcr => {
+            let clear = false;
+            let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+            entries.forEach(entry => {
+              if (entry.values.completed.basic.value === 1 && entry.values.completionReason.basic.value === 0) {
+                clear = true;
+              }
+            });
+            return clear;
+          });
+      };
 
-        let lastWishAgg = this.raidReport.activities.filter(a => LAST_WISH.versions.map(v => v.activityHashes).flat().includes(a.activityHash));
-        let lastWishNormal = this.raidReport.activities.filter(a => LAST_WISH.versions[0].activityHashes.includes(a.activityHash));
-        let lastWishFastest = minBy(lastWishAgg.map(a => a.values.fastestFullClear), b => b && b.value);
-        raids.push({
-          element: (
-            <li key='LAST_WISH'>
-              <div className='name'>{LAST_WISH.displayValue}</div>
-              <div className='normal'>{lastWishNormal.map(a => a.values.clears).reduce((a, b) => a + b, 0)}</div>
-              <div className='prestige'></div>
-              <div className='flawless'></div>
-              <div className='fastest'>
-                {lastWishFastest ? <>{moment.duration(lastWishFastest.value, 'seconds').minutes()}m {moment.duration(lastWishFastest.value, 'seconds').seconds()}s</> : null}
-              </div>
-            </li>
+      const getNormal = raid => {
+        return raidReports
+          .filter(pgcr => raid.versions.find(v => v.displayValue === 'Normal').activityHashes.includes(pgcr.activityDetails.directorActivityHash))
+          .filter(pgcr => raid.fullClearPhases.includes(pgcr.startingPhaseIndex))
+          .filter(pgcr => {
+            let clear = false;
+            let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+            entries.forEach(entry => {
+              if (entry.values.completed.basic.value === 1 && entry.values.completionReason.basic.value === 0) {
+                clear = true;
+              }
+            });
+            return clear;
+          });
+      };
+
+      const getPrestige = raid => {
+        return raidReports
+          .filter(pgcr => raid.versions.find(v => v.displayValue === 'Prestige').activityHashes.includes(pgcr.activityDetails.directorActivityHash))
+          .filter(pgcr => raid.fullClearPhases.includes(pgcr.startingPhaseIndex))
+          .filter(pgcr => {
+            let clear = false;
+            let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+            entries.forEach(entry => {
+              if (entry.values.completed.basic.value === 1 && entry.values.completionReason.basic.value === 0) {
+                clear = true;
+              }
+            });
+            return clear;
+          });
+      };
+
+      const getFlawless = raid => {
+        return raidReports
+          .filter(pgcr =>
+            raid.versions
+              .map(v => v.activityHashes)
+              .flat()
+              .includes(pgcr.activityDetails.directorActivityHash)
           )
-        });
+          .filter(pgcr => raid.fullClearPhases.includes(pgcr.startingPhaseIndex))
+          .filter(pgcr => {
+            let undying = true;
+            pgcr.entries.forEach(entry => {
+              if (entry.values.deaths.basic.value !== 0) {
+                undying = false;
+              }
+            });
+            return undying;
+          })
+          .filter(pgcr => {
+            let clear = false;
+            let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+            entries.forEach(entry => {
+              if (entry.values.completed.basic.value === 1 && entry.values.completionReason.basic.value === 0) {
+                clear = true;
+              }
+            });
+            return clear;
+          });
+      };
 
-        let sosAgg = this.raidReport.activities.filter(a => SPIRE_OF_STARS.versions.map(v => v.activityHashes).flat().includes(a.activityHash));
-        let sosNormal = this.raidReport.activities.filter(a => SPIRE_OF_STARS.versions[1].activityHashes.includes(a.activityHash));
-        let sosPrestige = this.raidReport.activities.filter(a => SPIRE_OF_STARS.versions[0].activityHashes.includes(a.activityHash));
-        let sosFastest = minBy(sosAgg.map(a => a.values.fastestFullClear), b => b && b.value);
-        raids.push({
-          element: (
-            <li key='SPIRE_OF_STARS'>
-              <div className='name'>{SPIRE_OF_STARS.displayValue}</div>
-              <div className='normal'>{sosNormal.map(a => a.values.clears).reduce((a, b) => a + b, 0)}</div>
-              <div className='prestige'>{sosPrestige.map(a => a.values.clears).reduce((a, b) => a + b, 0)}</div>
-              <div className='flawless'></div>
-              <div className='fastest'>
-                {sosFastest ? <>{moment.duration(sosFastest.value, 'seconds').minutes()}m {moment.duration(sosFastest.value, 'seconds').seconds()}s</> : null}
-              </div>
-            </li>
-          )
+      let aggCleared = getAggCleared();
+      aggregates.timePlayed = aggCleared.reduce((a, pgcr) => {
+        let v = 0;
+        let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+        entries.forEach(entry => {
+          v = v + entry.values.timePlayedSeconds.basic.value;
         });
-      }
+        return a + v;
+      }, 0);
 
-      console.log(sotpClears, firstSotpClear, this.raidReport);
+      let levAgg = getAgg(LEVIATHAN);
+      let levNormal = getNormal(LEVIATHAN);
+      let levPrestige = getPrestige(LEVIATHAN);
+      let levFastest = orderBy(levAgg.filter(p => p.startingPhaseIndex === 0), [p => p.entries[0].values.activityDurationSeconds.basic.value], ['asc'])[0];
+
+      let eowAgg = getAgg(EATER_OF_WORLDS);
+      let eowNormal = getNormal(EATER_OF_WORLDS);
+      let eowPrestige = getPrestige(EATER_OF_WORLDS);
+      let eowFastest = orderBy(eowAgg.filter(p => p.startingPhaseIndex === 0), [p => p.entries[0].values.activityDurationSeconds.basic.value], ['asc'])[0];
+
+      let sosAgg = getAgg(SPIRE_OF_STARS);
+      let sosNormal = getNormal(SPIRE_OF_STARS);
+      let sosPrestige = getPrestige(SPIRE_OF_STARS);
+      let sosFastest = orderBy(sosAgg.filter(p => p.startingPhaseIndex === 0), [p => p.entries[0].values.activityDurationSeconds.basic.value], ['asc'])[0];
+
+      let lwAgg = getAgg(LAST_WISH);
+      let lwNormal = getNormal(LAST_WISH);
+      let lwFlawless = getFlawless(LAST_WISH);
+      let lwFastest = orderBy(lwAgg.filter(p => p.startingPhaseIndex === 0), [p => p.entries[0].values.activityDurationSeconds.basic.value], ['asc'])[0];
+
+      let sotpAgg = getAgg(SCOURGE_OF_THE_PAST);
+      let sotpNormal = getNormal(SCOURGE_OF_THE_PAST);
+      let sotpFlawless = getFlawless(SCOURGE_OF_THE_PAST);
+      let sotpFastest = orderBy(sotpAgg.filter(p => p.startingPhaseIndex === 0), [p => p.entries[0].values.activityDurationSeconds.basic.value], ['asc'])[0];
+      firstSotpClear = orderBy(sotpAgg, [pgcr => pgcr.period], ['asc'])[0];
+
+      raids.push({
+        element: (
+          <li key='SCOURGE_OF_THE_PAST'>
+            <div className='name'>{SCOURGE_OF_THE_PAST.displayValue}</div>
+            <div className='normal'>{sotpNormal.length}</div>
+            <div className='prestige'>-</div>
+            <div className='flawless'>{sotpFlawless.length}</div>
+            <div className='fastest'>{sotpFastest ? sotpFastest.entries[0].values.activityDurationSeconds.basic.displayValue : `-`}</div>
+          </li>
+        )
+      });
+
+      raids.push({
+        element: (
+          <li key='LAST_WISH'>
+            <div className='name'>{LAST_WISH.displayValue}</div>
+            <div className='normal'>{lwNormal.length}</div>
+            <div className='prestige'>-</div>
+            <div className='flawless'>{lwFlawless.length}</div>
+            <div className='fastest'>{lwFastest ? lwFastest.entries[0].values.activityDurationSeconds.basic.displayValue : `-`}</div>
+          </li>
+        )
+      });
+
+      raids.push({
+        element: (
+          <li key='SPIRE_OF_STARS'>
+            <div className='name'>{SPIRE_OF_STARS.displayValue}</div>
+            <div className='normal'>{sosNormal.length}</div>
+            <div className='prestige'>{sosPrestige.length}</div>
+            <div className='flawless'>-</div>
+            <div className='fastest'>{sosFastest ? sosFastest.entries[0].values.activityDurationSeconds.basic.displayValue : `-`}</div>
+          </li>
+        )
+      });
+
+      raids.push({
+        element: (
+          <li key='EATER_OF_WORLDS'>
+            <div className='name'>{EATER_OF_WORLDS.displayValue}</div>
+            <div className='normal'>{eowNormal.length}</div>
+            <div className='prestige'>{eowPrestige.length}</div>
+            <div className='flawless'>-</div>
+            <div className='fastest'>{eowFastest ? eowFastest.entries[0].values.activityDurationSeconds.basic.displayValue : `-`}</div>
+          </li>
+        )
+      });
+
+      raids.push({
+        element: (
+          <li key='LEVIATHAN'>
+            <div className='name'>{LEVIATHAN.displayValue}</div>
+            <div className='normal'>{levNormal.length}</div>
+            <div className='prestige'>{levPrestige.length}</div>
+            <div className='flawless'>-</div>
+            <div className='fastest'>{levFastest ? levFastest.entries[0].values.activityDurationSeconds.basic.displayValue : `-`}</div>
+          </li>
+        )
+      });
+
+      // console.log(sotpAgg, firstSotpClear, sotpFastest);
     }
 
     return (
@@ -242,7 +373,9 @@ class RaidReport extends React.Component {
               <div className='properties'>
                 <div className='desc'>First clear</div>
                 <div className='name'>{SCOURGE_OF_THE_PAST.displayValue}</div>
-                <div className='score'><Moment format='D/M/YYYY'>{firstSotpClear.period}</Moment></div>
+                <div className='score'>
+                  <Moment format='D/M/YYYY'>{firstSotpClear.period}</Moment>
+                </div>
               </div>
               <div className='fireteam'>
                 <div className='sub-header sub'>
@@ -268,26 +401,35 @@ class RaidReport extends React.Component {
                 </ul>
               </div>
             </>
-          ) : null }
+          ) : null}
         </div>
-        <div className='chart'>
-          <ul className='list'>
-            <li key='header'>
-              <div className='name'></div>
-              <div className='normal'>Normal</div>
-              <div className='prestige'>Prestige</div>
-              <div className='flawless'>Flawless</div>
-              <div className='fastest'>Fastest</div>
-            </li>
-            {raids.map(r => r.element)}
-          </ul>
-        </div>
-        {/* <div className='summary'>
-          
-          <div className='datum'>
-            
+        <div className='summary'>
+          <div className='chart'>
+            <ul className='list'>
+              <li key='header'>
+                <div className='name' />
+                <div className='normal'>Normal</div>
+                <div className='prestige'>Prestige</div>
+                <div className='flawless'>Flawless</div>
+                <div className='fastest'>Fastest</div>
+              </li>
+              {raids.map(r => r.element)}
+            </ul>
           </div>
-        </div> */}
+          <div className='datum'>
+          
+            <div className='d w'>
+              <div className='v'>{Math.floor(parseInt(aggregates.timePlayed || 0) / 3600)}</div>
+              <div className='n'>{Math.floor(parseInt(aggregates.timePlayed || 0) / 3600) === 1 ? t('hour played') : t('hours played')}</div>
+            </div>
+          </div>
+          <div className='notes'>
+            <p>Raid measurements are complicated and can differ between raids themselves. This is my initial attempt at displaying raid stats based on PGCRs. Raid.report operates on similar principles but have it refined into a precise art.</p>
+            <p>These preliminary stats count only full clears. Counting full clears, again, appears to differ between raids and I'm still learning. Stats which I do feel are rliable are fastest [full clear] and flawless [runs].</p>
+            <p>This notice is current as of version 2.1.1. More soon.</p>
+          </div>
+          <div className='state'>{cacheLoading ? <Spinner mini /> : cacheState[4] !== raidReports.length ? <p>{cacheState[4] - raidReports.length} PGCRs failed to load at this minute therefore their stats are not included.</p> : null}</div>
+        </div>
       </>
     );
   }

@@ -9,6 +9,7 @@ import orderBy from 'lodash/orderBy';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
+import Spinner from '../../components/Spinner';
 
 class NightfallHighScores extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class NightfallHighScores extends React.Component {
   }
 
   render() {
-    const { t, member, PGCRcache } = this.props;
+    const { t, member, PGCRcache, cacheState, cacheLoading } = this.props;
     const characterIds = member.data.profile.characters.data.map(c => c.characterId);
 
     let nightfalls = [
@@ -81,13 +82,16 @@ class NightfallHighScores extends React.Component {
       }
     ];
 
+    let nfPGCRs = [];
     let sumKills = 0;
     let sumDeaths = 0;
     let sumCleared = 0;
     let sumDuration = 0;
     let sumSuperKills = 0;
     if (PGCRcache[member.membershipId]) {
-      PGCRcache[member.membershipId].filter(pgcr => pgcr.activityDetails.mode === 46).forEach(pgcr => {
+      nfPGCRs = PGCRcache[member.membershipId].filter(pgcr => pgcr.activityDetails.mode === 46);
+
+      nfPGCRs.forEach(pgcr => {
         let nightfall = nightfalls.find(nf => nf.directorActivityHash === pgcr.activityDetails.directorActivityHash);
         if (!nightfall) {
           return;
@@ -208,47 +212,50 @@ class NightfallHighScores extends React.Component {
             {list.map(item => item.element)}
           </ul>
         </div>
-        <div className='datum'>
-          <div className='d w'>
-            <div className='b'>{favourite ? <>{favourite.clears} clears</> : ` `}</div>
-            <div className='v'>{favourite ? <>{favourite.definition.selectionScreenDisplayProperties.name}</> : `—`}</div>
-            <div className='n'>{t('favourite')}</div>
-          </div>
-          <div className='d w'>
-            <div className='b'>
-              {fastestNightfall ? (
-                <>
-                  {moment.duration(fastestNightfall.bestTime, 'seconds').minutes()}
-                  <span>m</span> {moment.duration(fastestNightfall.bestTime, 'seconds').seconds()}
-                  <span>s</span>
-                </>
-              ) : (
-                ` `
-              )}
+        <div className='summary'>
+          <div className='datum'>
+            <div className='d w'>
+              <div className='b'>{favourite ? <>{favourite.clears} clears</> : ` `}</div>
+              <div className='v'>{favourite ? <>{favourite.definition.selectionScreenDisplayProperties.name}</> : `—`}</div>
+              <div className='n'>{t('favourite')}</div>
             </div>
-            <div className='v'>{fastestNightfall ? <>{fastestNightfall.definition.selectionScreenDisplayProperties.name}</> : `—`}</div>
-            <div className='n'>{t('fastest clear')}</div>
+            <div className='d w'>
+              <div className='b'>
+                {fastestNightfall ? (
+                  <>
+                    {moment.duration(fastestNightfall.bestTime, 'seconds').minutes()}
+                    <span>m</span> {moment.duration(fastestNightfall.bestTime, 'seconds').seconds()}
+                    <span>s</span>
+                  </>
+                ) : (
+                  ` `
+                )}
+              </div>
+              <div className='v'>{fastestNightfall ? <>{fastestNightfall.definition.selectionScreenDisplayProperties.name}</> : `—`}</div>
+              <div className='n'>{t('fastest clear')}</div>
+            </div>
+            <div className='d'>
+              <div className='v'>{sumKills.toLocaleString()}</div>
+              <div className='n'>{t('kills')}</div>
+            </div>
+            <div className='d'>
+              <div className='v'>{sumDeaths.toLocaleString()}</div>
+              <div className='n'>{t('deaths')}</div>
+            </div>
+            <div className='d'>
+              <div className='v'>{sumSuperKills.toLocaleString()}</div>
+              <div className='n'>{t('super kills')}</div>
+            </div>
+            <div className='d'>
+              <div className='v'>{sumCleared.toLocaleString()}</div>
+              <div className='n'>{t('completed')}</div>
+            </div>
+            <div className='d w'>
+              <div className='v'>{Math.floor(parseInt(sumDuration) / 3600)}</div>
+              <div className='n'>{Math.floor(parseInt(sumDuration) / 3600) === 1 ? t('hour played') : t('hours played')}</div>
+            </div>
           </div>
-          <div className='d'>
-            <div className='v'>{sumKills.toLocaleString()}</div>
-            <div className='n'>{t('kills')}</div>
-          </div>
-          <div className='d'>
-            <div className='v'>{sumDeaths.toLocaleString()}</div>
-            <div className='n'>{t('deaths')}</div>
-          </div>
-          <div className='d'>
-            <div className='v'>{sumSuperKills.toLocaleString()}</div>
-            <div className='n'>{t('super kills')}</div>
-          </div>
-          <div className='d'>
-            <div className='v'>{sumCleared.toLocaleString()}</div>
-            <div className='n'>{t('completed')}</div>
-          </div>
-          <div className='d w'>
-            <div className='v'>{Math.floor(parseInt(sumDuration) / 3600)}</div>
-            <div className='n'>{Math.floor(parseInt(sumDuration) / 3600) === 1 ? t('hour played') : t('hours played')}</div>
-          </div>
+          <div className='state'>{cacheLoading ? <Spinner mini /> : cacheState[46] !== nfPGCRs.length ? <p>{cacheState[46] - nfPGCRs.length} PGCRs failed to load at this minute therefore their stats are not included.</p> : null}</div>
         </div>
       </>
     );

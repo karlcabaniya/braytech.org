@@ -61,6 +61,13 @@
   font-size: 16px;
 }
 
+#legend .section .summary .state {
+  position: relative;
+  padding: 3rem 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
 #legend .section.characters {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -341,6 +348,7 @@
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 6px;
+  padding: 0 0 1rem;
 }
 
 #legend .section.strikes .chart ul li:last-child {
@@ -359,8 +367,12 @@
   font-size: 18px;
 }
 
-#legend .section.strikes .datum {
+#legend .section.strikes .summary .datum {
   grid-template-columns: repeat(2, 1fr);
+}
+
+#legend .section.strikes .summary .state {
+  padding: 3rem;
 }
 
 #legend .section.raids {
@@ -465,7 +477,7 @@
   pointer-events: none;
 }
 
-#legend .section.raids .chart {
+#legend .section.raids .summary {
   padding: 3rem;
   grid-column: 2/4;
 }
@@ -477,7 +489,7 @@
   padding: 0 0 6px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
 }
 
 #legend .section.raids .chart ul li:first-child {
@@ -485,17 +497,29 @@
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 6px;
+  padding: 0 0 1rem;
 }
 
 #legend .section.raids .chart ul li:last-child {
   margin: 0;
 }
 
-#legend .section.raids .chart ul li .fastest {
+/* #legend .section.raids .chart ul li .fastest {
   text-align: right;
+} */
+
+#legend .section.raids .datum {
+  grid-template-columns: repeat(2, 1fr);
+  padding: 3rem 0 0;
 }
 
-
+#legend .section.raids .notes {
+  position: relative;
+  padding: 3rem 0 0;
+  font-size: 14px;
+  max-width: 30rem;
+  color: rgba(255, 255, 255, 0.6);
+}
 
 
 
@@ -504,7 +528,8 @@
 
 @media screen and (max-width: 1280px) {
   #legend .section.characters,
-  #legend .section.strikes {
+  #legend .section.strikes,
+  #legend .section.raids {
     grid-template-columns: repeat(1, 1fr);
   }
 
@@ -550,6 +575,49 @@
     width: 100%;
     margin: 3rem 0 2rem;
   }
+
+  #legend .section.raids .first .image.pgcrImage {
+    background-position-x: 73%;
+    width: 100%;
+    height: 130%;
+    mask-image: linear-gradient(180deg, hsla(217, 35%, 21%, 0.9) 0%, hsla(217, 35%, 21%, 0.7) 60%, hsla(217, 35%, 21%, 0));
+  }
+
+  #legend .section.raids .first .head {
+    position: relative;
+    top: unset;
+    left: unset;
+    padding: 2rem 0 7rem 3rem;
+  }
+
+  #legend .section.raids .first .properties {
+    position: relative;
+    bottom: unset;
+    left: unset;
+    margin: 0 0 0 3rem;
+  }
+
+  #legend .section.raids .first .properties .name {
+    font-size: 24px;
+  }
+
+  #legend .section.raids .first .properties .score {
+    font-size: 38px;
+  }
+
+  #legend .section.raids .first .fireteam {
+    position: relative;
+    bottom: unset;
+    left: unset;
+    right: unset;
+    padding: 0 3rem;
+    width: 100%;
+    margin: 3rem 0 2rem;
+  }
+
+  #legend .section.raids .summary {
+    grid-column: auto;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -593,47 +661,50 @@
     padding: 2rem;
   }
   
-  #legend .section.strikes .datum {
+  #legend .section.strikes .summary .datum {
     padding: 1rem 0 3rem 2rem;
   }
 
-  #legend .section.raids .first .image.pgcrImage {
-    background-position-x: 73%;
-    width: 100%;
-    height: 130%;
-    mask-image: linear-gradient(180deg, hsla(217, 35%, 21%, 0.9) 0%, hsla(217, 35%, 21%, 0.7) 60%, hsla(217, 35%, 21%, 0));
+  #legend .section.strikes .summary .state {
+    padding: 2rem;
   }
 
   #legend .section.raids .first .head {
-    position: relative;
-    top: unset;
-    left: unset;
     padding: 2rem 0 7rem 2rem;
   }
 
   #legend .section.raids .first .properties {
-    position: relative;
-    bottom: unset;
-    left: unset;
     margin: 0 0 0 2rem;
   }
 
-  #legend .section.raids .first .properties .name {
-    font-size: 24px;
-  }
-
-  #legend .section.raids .first .properties .score {
-    font-size: 38px;
-  }
-
   #legend .section.raids .first .fireteam {
-    position: relative;
-    bottom: unset;
-    left: unset;
-    right: unset;
     padding: 0 2rem;
-    width: 100%;
-    margin: 3rem 0 2rem;
+  }
+
+  #legend .section.raids .summary {
+    padding: 2rem;
+  }
+
+  #legend .section.raids .chart ul li {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  #legend .section.raids .summary .chart ul li div {
+    display: none;
+  }
+
+  #legend .section.raids .summary .chart ul li .normal {
+    text-align: right;
+  }
+
+  #legend .section.raids .summary .chart ul li .name,
+  #legend .section.raids .summary .chart ul li .normal {
+    display: inherit;
+  }
+
+  #legend .section.raids .datum {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 2rem 0 0;
   }
 
 }

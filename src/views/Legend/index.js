@@ -17,7 +17,10 @@ class Legend extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      loading: true,
+      cacheState: {}
+    };
   }
 
   cacheMachine = async (mode) => {
@@ -29,14 +32,17 @@ class Legend extends React.Component {
 
     let requests = charactersIds.map(async c => {
       let response = await bungie.activityHistory(member.membershipType, member.membershipId, c, 250, mode, 0);
-      return response.activities;
+      return response.activities || [];
     });
 
     let activities = await Promise.all(requests);
     activities = activities.flat();
 
-    // console.log(activities);
-
+    this.setState(p => {
+      p.cacheState[mode] = activities.length;
+      return p;
+    });
+    
     let PGCRs = activities.map(async activity => {
       if (PGCRcache[member.membershipId] && activity && !PGCRcache[member.membershipId].find(pgcr => pgcr.activityDetails.instanceId === activity.activityDetails.instanceId)) {
         return getPGCR(member.membershipId, activity.activityDetails.instanceId);
@@ -53,24 +59,30 @@ class Legend extends React.Component {
   async componentDidMount() {
     let modes = ['46', '4'];
     let ignition = await modes.map(m => { return this.cacheMachine(m); });
-    
-    let lit = await Promise.all(ignition);
-    //console.log('done', lit);
+
+    try {
+      await Promise.all(ignition);
+    } catch (e) {
+
+    }
+
+    this.setState(p => {
+      p.loading = false;
+      return p;
+    });
   }
 
   render() {
-    const { t } = this.props;
-
     return (
       <div className={cx('view')} id='legend'>
         <div className='section characters'>
           <Characters />
         </div>
         <div className='section strikes'>
-          <NightfallHighScores />
+          <NightfallHighScores cacheLoading={this.state.loading} cacheState={this.state.cacheState} />
         </div>
         <div className='section raids'>
-          <RaidReport />
+          <RaidReport cacheLoading={this.state.loading} cacheState={this.state.cacheState} />
         </div>
       </div>
     );
