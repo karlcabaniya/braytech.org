@@ -259,11 +259,30 @@ class RaidReport extends React.Component {
       };
 
       let aggCleared = getAggCleared();
+
       aggregates.timePlayed = aggCleared.reduce((a, pgcr) => {
         let v = 0;
         let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
         entries.forEach(entry => {
           v = v + entry.values.timePlayedSeconds.basic.value;
+        });
+        return a + v;
+      }, 0);
+
+      aggregates.kills = aggCleared.reduce((a, pgcr) => {
+        let v = 0;
+        let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+        entries.forEach(entry => {
+          v = v + entry.values.kills.basic.value;
+        });
+        return a + v;
+      }, 0);
+
+      aggregates.deaths = aggCleared.reduce((a, pgcr) => {
+        let v = 0;
+        let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+        entries.forEach(entry => {
+          v = v + entry.values.deaths.basic.value;
         });
         return a + v;
       }, 0);
@@ -417,16 +436,18 @@ class RaidReport extends React.Component {
             </ul>
           </div>
           <div className='datum'>
-          
-            <div className='d w'>
+            <div className='d'>
               <div className='v'>{Math.floor(parseInt(aggregates.timePlayed || 0) / 3600)}</div>
               <div className='n'>{Math.floor(parseInt(aggregates.timePlayed || 0) / 3600) === 1 ? t('hour played') : t('hours played')}</div>
             </div>
-          </div>
-          <div className='notes'>
-            <p>Raid measurements are complicated and can differ between raids themselves. This is my initial attempt at displaying raid stats based on PGCRs. Raid.report operates on similar principles but have it refined into a precise art.</p>
-            <p>These preliminary stats count only full clears. Counting full clears, again, appears to differ between raids and I'm still learning. Stats which I do feel are rliable are fastest [full clear] and flawless [runs].</p>
-            <p>This notice is current as of version 2.1.1. More soon.</p>
+            <div className='d'>
+              <div className='v'>{(aggregates.kills || 0).toLocaleString()}</div>
+              <div className='n'>{t('kills')}</div>
+            </div>
+            <div className='d'>
+              <div className='v'>{(aggregates.deaths || 0).toLocaleString()}</div>
+              <div className='n'>{t('deaths')}</div>
+            </div>
           </div>
           <div className='state'>{cacheLoading ? <Spinner mini /> : cacheState[4] !== raidReports.length ? <p>{cacheState[4] - raidReports.length} PGCRs failed to load at this minute therefore their stats are not included.</p> : null}</div>
         </div>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
+
 #legend {
   padding: 4rem 0 0;
   padding: 0;
@@ -191,7 +193,7 @@
 }
 
 #legend .section.characters .character .bg .art .name .text {
-  font-family: 'Merriweather';
+  font-family: 'Merriweather', serif;
   font-size: 12px;
   text-align: center;
   font-weight: 300;
@@ -509,7 +511,7 @@
 } */
 
 #legend .section.raids .datum {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   padding: 3rem 0 0;
 }
 
@@ -520,8 +522,6 @@
   max-width: 30rem;
   color: rgba(255, 255, 255, 0.6);
 }
-
-
 
 
 
@@ -703,7 +703,7 @@
   }
 
   #legend .section.raids .datum {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     padding: 2rem 0 0;
   }
 
