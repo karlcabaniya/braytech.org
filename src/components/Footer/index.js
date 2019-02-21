@@ -14,7 +14,7 @@ class Footer extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, linkOnClick } = this.props;
 
     return (
       <div id='footer'>
@@ -23,7 +23,10 @@ class Footer extends React.Component {
         </div>
         <ul>
           <li>
-            <Link to='/credits'>{t('Credits')}</Link>
+            <Link to='/faq' onClick={linkOnClick}>{t('FAQ')}</Link>
+          </li>
+          <li>
+            <Link to='/credits' onClick={linkOnClick}>{t('Credits')}</Link>
           </li>
           <li>
             <a href='https://twitter.com/justrealmilk' target='_blank' rel='noopener noreferrer'>

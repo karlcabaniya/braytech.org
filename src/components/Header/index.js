@@ -10,6 +10,7 @@ import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/ProgressBar';
 import { classHashToString } from '../../utils/destinyUtils';
 import { ProfileNavLink } from '../../components/ProfileLink';
+import Footer from '../Footer';
 
 import './styles.css';
 
@@ -24,6 +25,7 @@ class Header extends React.Component {
     };
 
     this.updateFlash = false;
+    this.navEl = React.createRef();
   }
   
   componentDidUpdate(prevProps) {
@@ -35,7 +37,14 @@ class Header extends React.Component {
         this.setState({ updateFlash: false });
       }, 1000);
     }
+    if (this.state.navOpen) {
+      this.navEl.current.addEventListener('touchmove', this.nav_touchMove);
+    }
   }
+
+  nav_touchMove = e => {
+    e.preventDefault();
+  };
 
   toggleNav = () => {
     if (!this.state.navOpen) {
@@ -70,7 +79,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { t, route, viewport, member, refreshService, theme } = this.props;
+    const { t, route, viewport, member } = this.props;
     let views = [
       {
         name: t('Clan'),
@@ -246,7 +255,7 @@ class Header extends React.Component {
       <div id='header' className={cx(this.props.theme.selected, { 'profile-header': profileEl, navOpen: this.state.mobileNavOpen })}>
         <div className='braytech'>
           <div className='logo'>
-            <Link to='/'>
+            <Link to='/' onClick={this.closeNav}>
               <span className='destiny-clovis_bray_device' />
               Braytech
             </Link>
@@ -280,7 +289,7 @@ class Header extends React.Component {
             </div>
           ) : null}
           {this.state.navOpen ? (
-            <div className='nav'>
+            <div className='nav' ref={this.navEl}>
               <ul>
                 {views.map(view => {
                   if (view.profile) {
@@ -302,6 +311,7 @@ class Header extends React.Component {
                   }
                 })}
               </ul>
+              <Footer linkOnClick={this.closeNav} />
             </div>
           ) : null}
         </div>
@@ -314,8 +324,6 @@ class Header extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    refreshService: state.refreshService,
-    theme: state.theme,
     viewport: state.viewport
   };
 }

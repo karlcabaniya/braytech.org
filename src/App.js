@@ -34,6 +34,7 @@ import Read from './views/Read';
 import Settings from './views/Settings';
 import Credits from './views/Credits';
 import Resources from './views/Resources';
+import FAQ from './views/FAQ';
 import ClanBannerBuilder from './views/Resources/ClanBannerBuilder';
 
 const RedirectRoute = props => <Route {...props} render={({ location }) => <Redirect to={{ pathname: '/character-select', state: { from: location } }} />} />;
@@ -186,6 +187,7 @@ class App extends React.Component {
                           <Route path='/inspect/:hash?' exact component={Inspect} />
                           <Route path='/read/:kind?/:hash?' exact component={Read} />
                           <Route path='/settings' exact render={() => <Settings availableLanguages={this.availableLanguages} />} />
+                          <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
                           <Route path='/resources' exact component={Resources} />
                           <Route path='/resources/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
@@ -196,7 +198,7 @@ class App extends React.Component {
                   />
                 </Switch>
               </div>
-              <Footer route={route} />
+              <Footer />
             </div>
           )}
         />

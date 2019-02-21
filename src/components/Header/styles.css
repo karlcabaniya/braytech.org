@@ -121,22 +121,24 @@ html.backdropfilter #header .braytech {
   height: 100%;
   z-index: 17;
   background-color: #11171c;
+  display: grid;
+  align-content: space-between;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
 
-#header .nav ul {
+#header .nav > ul {
   margin: 2rem 0;
 }
 
-#header .nav ul li {
+#header .nav > ul li {
   display: block;
   padding: 10px 3rem;
   flex-basis: 100%;
   position: relative;
 }
 
-#header .nav ul li a {
+#header .nav > ul li a {
   position: absolute;
   top: 0;
   left: 0;
@@ -145,7 +147,7 @@ html.backdropfilter #header .braytech {
   color: rgba(255, 255, 255, 0.9);
 }
 
-#header .nav ul li a::before {
+#header .nav > ul li a::before {
   content: ' ';
   position: absolute;
   bottom: 0px;
@@ -157,19 +159,19 @@ html.backdropfilter #header .braytech {
   transform: scaleX(0);
 }
 
-#header .nav ul li a.active::before {
+#header .nav > ul li a.active::before {
   transform: scaleX(1);
 }
 
-#header .nav ul li a.active {
+#header .nav > ul li a.active {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-#header .nav ul li .name {
+#header .nav > ul li .name {
   font-size: 14px;
 }
 
-#header .nav ul li .description {
+#header .nav > ul li .description {
   margin: 6px 0 0;
   display: block;
   color: rgba(255, 255, 255, 0.5);
@@ -476,11 +478,11 @@ html.backdropfilter #header .braytech {
     height: calc(100% - 40px);
   }
 
-  #header .nav ul {
+  #header .nav > ul {
     margin: 1rem 0;
   }
 
-  #header .nav ul li {
+  #header .nav > ul li {
     padding: 10px 2rem;
   }
 
