@@ -79,7 +79,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { t, route, viewport, member } = this.props;
+    const { t, route, viewport, member, theme } = this.props;
     let views = [
       {
         name: t('Clan'),
@@ -324,6 +324,7 @@ class Header extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
+    theme: state.theme,
     viewport: state.viewport
   };
 }
