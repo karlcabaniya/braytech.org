@@ -105,7 +105,7 @@ class Clan extends React.Component {
     const { member, groupMembers } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
 
-    if ((group.groupId && groupMembers.responses.length === 0) || group.groupId !== groupMembers.groupId) {
+    if (group && ((group.groupId && groupMembers.responses.length === 0) || group.groupId !== groupMembers.groupId)) {
       if (this.refreshActive) {
         return;
       }

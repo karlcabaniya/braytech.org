@@ -147,13 +147,9 @@ class Roster extends React.Component {
             return sum + parseInt(member.profile.characters.data[key].minutesPlayedTotal);
           }, 0) / 1440
         );
-        const timePlayedAllPvE = member.historicalStats.allPvE.allTime ? member.historicalStats.allPvE.allTime.secondsPlayed.basic.value / 60 : 0;
-        const timePlayedAllPvP = member.historicalStats.allPvP.allTime ? member.historicalStats.allPvP.allTime.secondsPlayed.basic.value / 60 : 0;
+        const timePlayedAllPvE = member.historicalStats.allPvE && member.historicalStats.allPvE.allTime ? member.historicalStats.allPvE.allTime.secondsPlayed.basic.value / 60 : 0;
+        const timePlayedAllPvP = member.historicalStats.allPvP && member.historicalStats.allPvP.allTime ? member.historicalStats.allPvP.allTime.secondsPlayed.basic.value / 60 : 0;
         const timePlayedTotal = timePlayedAllPvE > timePlayedAllPvP ? Math.floor((timePlayedAllPvE / (timePlayedAllPvE + timePlayedAllPvP)) * 100) : Math.floor((timePlayedAllPvP / (timePlayedAllPvE + timePlayedAllPvP)) * 100);
-
-        // recordHashes
-        const PvPMedals = [4230088036, 3324094091, 2857093873, 1271667367, 1413337742, 3882642308, 1371679603];
-        const GambitMedals = [2507615350, 1071663279, 1298112482, 2631726056, 3158297636];
 
         let isExpanded = this.state.expanded.includes(member.destinyUserInfo.membershipId);
         let expanded = (
@@ -176,70 +172,6 @@ class Roster extends React.Component {
                   {characterStamps(character)}
                 </li>
               ))}
-            </ul>
-            <ul className='pair clears'>
-              <li className='triumphScore'>
-                <ul>
-                  <li>Triumph score</li>
-                  <li>{member.profile.profileRecords.data.score}</li>
-                </ul>
-              </li>
-              <li className='nightfalls'>
-                <ul>
-                  <li>Nightfalls completed</li>
-                  <li>{member.historicalStats.nightfall.allTime ? member.historicalStats.nightfall.allTime.activitiesCleared.basic.value : `–`}</li>
-                </ul>
-              </li>
-              <li className='raids'>
-                <ul>
-                  <li>Raids completed</li>
-                  <li>{member.historicalStats.raid.allTime ? member.historicalStats.raid.allTime.activitiesCleared.basic.value : `–`}</li>
-                </ul>
-              </li>
-            </ul>
-            <ul className='pair pvp'>
-              <li className='efficieny'>
-                <ul>
-                  <li>PvP efficiency</li>
-                  <li>{member.historicalStats.allPvP.allTime ? member.historicalStats.allPvP.allTime.efficiency.basic.displayValue : `–`}</li>
-                </ul>
-              </li>
-              <li className='medals'>
-                <ul className='medals'>
-                  {PvPMedals.map(hash => {
-                    let quantity = member.profile.profileRecords.data.records[hash].objectives[0].progress === 0 ? `–` : member.profile.profileRecords.data.records[hash].objectives[0].progress;
-                    return (
-                      <li key={hash}>
-                        <ObservedImage className='image icon' src={`${Globals.url.bungie}${manifest.DestinyRecordDefinition[hash].displayProperties.icon}`} />
-                        <div className='quantity'>{quantity}</div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </li>
-            </ul>
-            <ul className='pair gambit'>
-              <li className='efficieny'>
-                <ul>
-                  <li>Motes deposited/lost</li>
-                  <li>
-                    {member.historicalStats.pvecomp_gambit.allTime ? member.historicalStats.pvecomp_gambit.allTime.motesDeposited.basic.value : `–`} / {member.historicalStats.pvecomp_gambit.allTime ? member.historicalStats.pvecomp_gambit.allTime.motesLost.basic.value : `–`}
-                  </li>
-                </ul>
-              </li>
-              <li className='medals'>
-                <ul className='medals'>
-                  {GambitMedals.map(hash => {
-                    let quantity = member.profile.profileRecords.data.records[hash].objectives[0].progress === 0 ? `–` : member.profile.profileRecords.data.records[hash].objectives[0].progress;
-                    return (
-                      <li key={hash}>
-                        <ObservedImage className='image icon' src={`${Globals.url.bungie}${manifest.DestinyRecordDefinition[hash].displayProperties.icon}`} />
-                        <div className='quantity'>{quantity}</div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </li>
             </ul>
           </div>
         );

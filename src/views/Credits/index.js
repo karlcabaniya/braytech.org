@@ -1,20 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
+import Spinner from '../../components/Spinner';
+import ObservedImage from '../../components/ObservedImage';
+import * as responseUtils from '../../utils/responseUtils';
+import * as bungie from '../../utils/bungie';
+
 import './styles.css';
 
 class Credits extends React.Component {
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
+  constructor(props) {
+    super(props);
 
-  render() {
-    const { t } = this.props;
+    this.state = {
+      supporters: false
+    };
 
-    let thanks = [
+    this.thanks = [
       {
         name: 'Vendal Thornheart',
         icon: 'bungie',
@@ -33,19 +39,74 @@ class Credits extends React.Component {
       {
         name: 'Richard Deveraux',
         icon: 'patrol',
-        description: 'From what I understand, lowlines is a pioneer in all things Destiny and Destiny api stuff. His meticulous work helps power Braytech\'s checklists.' 
+        description: "From what I understand, lowlines is a pioneer in all things Destiny and Destiny api stuff. His meticulous work helps power Braytech's checklists."
       },
       {
         name: 'Rob Jones',
         icon: 'dim',
-        description: 'delphiactual prototyped the very popular This Week view. He seems pretty cool, too.' 
+        description: 'delphiactual prototyped the very popular This Week view. He seems pretty cool, too.'
       },
       {
         name: 'João Paulo Marquesini',
         icon: 'ghost',
-        description: 'The very handsome developer of the Light Light app laid the foundations for a multilingual Braytech.' 
+        description: 'The very handsome developer of the Light Light app laid the foundations for a multilingual Braytech.'
       }
     ];
+
+    this.supporters = [
+      {
+        t: '2',
+        i: '4611686018469271298'
+      },
+      {
+        t: '4',
+        i: '4611686018467516892'
+      },
+      {
+        t: '2',
+        i: '4611686018449350929'
+      },
+      {
+        t: '1',
+        i: '4611686018469277478'
+      }
+    ];
+  }
+
+  async getMembers(members) {
+    return await Promise.all(
+      members.map(async member => {
+        try {
+          let profile = await bungie.memberProfile(member.t, member.i, '100,200,202,204,900');
+          member.profile = profile;
+
+          if (!member.profile.characterProgressions.data) {
+            return member;
+          }
+          member.profile = responseUtils.profileScrubber(member.profile);
+
+          return member;
+        } catch (e) {
+          member.profile = false;
+          return member;
+        }
+      })
+    );
+  }
+
+  async componentDidMount() {
+    window.scrollTo(0, 0);
+
+    let memberResponses = await this.getMembers(this.supporters);
+
+    this.setState(p => {
+      p.supporters = memberResponses;
+      return p;
+    });
+  }
+
+  render() {
+    const { t } = this.props;
 
     return (
       <div className={cx('view', this.props.theme.selected)} id='credits'>
@@ -64,11 +125,11 @@ class Credits extends React.Component {
             <div>{t('Special thanks')}</div>
           </div>
           <div className='persons'>
-            {thanks.map((person, index) => {
+            {this.thanks.map((person, index) => {
               return (
                 <div key={index} className='person'>
                   <div className='icon'>
-                    <span className={`destiny-${person.icon}`}></span>
+                    <span className={`destiny-${person.icon}`} />
                   </div>
                   <div className='text'>
                     <strong>{person.name}</strong>
@@ -78,8 +139,32 @@ class Credits extends React.Component {
               );
             })}
           </div>
+          <div className='sub-header sub'>
+            <div>{t('Top ko-fi supporters')}</div>
+          </div>
+          <div className='tags'>
+            {this.state.supporters ? (
+              <ul className='list'>
+                {this.state.supporters.map((m, index) => {
+                  if (!m.profile) {
+                    return null;
+                  }
+                  return (
+                    <li key={index} className='linked'>
+                      <div className='icon'>
+                        <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${m.profile.characters.data[0].emblemPath}`} />
+                      </div>
+                      <div className='displayName'>{m.profile.profile.data.userInfo.displayName}</div>
+                      <Link to={`/${m.t}/${m.i}/${m.profile.characters.data[0].characterId}/legend`} />
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <Spinner />
+            )}
+          </div>
         </div>
-        <div className='module'></div>
       </div>
     );
   }
