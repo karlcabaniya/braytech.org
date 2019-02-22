@@ -18,7 +18,7 @@ function loadMemberAndReset(membershipType, membershipId, characterId) {
   return {
     membershipId,
     membershipType,
-    characterId: null,
+    characterId: characterId || null,
     data: false,
     prevData: false,
     error: false,
