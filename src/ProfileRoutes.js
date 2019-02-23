@@ -56,6 +56,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/collections/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Collections {...route} />} />
           <Route path={`${match.url}/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Triumphs {...route} />} />
           <Route path={`${match.url}/this-week`} exact render={() => <ThisWeek />} />
+          <Route path={`${match.url}/`} render={route => <Legend />} />
         </Switch>
       </>
     );

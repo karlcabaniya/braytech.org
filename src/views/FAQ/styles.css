@@ -75,7 +75,10 @@
   line-height: 2;
 }
 
-
+#faq del {
+  text-decoration-color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.6);
+}
 
 
 

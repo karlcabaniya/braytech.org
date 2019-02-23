@@ -31,7 +31,7 @@ class CharacterSelect extends React.Component {
     store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType, membershipId } });
 
     if (displayName) {
-      ls.update('history.profiles', { membershipType, membershipId, displayName }, true, 6);
+      ls.update('history.profiles', { membershipType, membershipId, displayName }, true, 9);
     }
   };
 

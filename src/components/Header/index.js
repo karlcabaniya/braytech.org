@@ -149,8 +149,9 @@ class Header extends React.Component {
       viewsInline = true;
     }
 
-    let profileRoute = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)\/(\w+)/);
-    let profileView = profileRoute ? profileRoute[1] : false;
+    let profileRoute = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)/);
+    let profileRouteView = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)\/(\w+)/);
+    let profileView = profileRouteView ? profileRouteView[1] : false;
 
     let profileEl = null;
 
@@ -162,7 +163,7 @@ class Header extends React.Component {
       }
     };
 
-    if (profileView && member.data) {
+    if (profileRoute && member.data) {
       const characterId = member.characterId;
       const profile = member.data.profile.profile.data;
       const characters = member.data.profile.characters.data;

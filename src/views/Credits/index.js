@@ -54,21 +54,29 @@ class Credits extends React.Component {
     ];
 
     this.supporters = [
-      {
+      { // josh
         t: '2',
         i: '4611686018469271298'
       },
-      {
+      { // chook
         t: '4',
         i: '4611686018467516892'
       },
-      {
+      { // headbug-
         t: '2',
         i: '4611686018449350929'
       },
-      {
+      { // quietbunny
         t: '1',
         i: '4611686018469277478'
+      },
+      { // inexAce#1932
+        t: '4',
+        i: '4611686018467367772'
+      },
+      { // destinybolty
+        t: '1',
+        i: '4611686018436742706'
       }
     ];
   }
@@ -77,10 +85,10 @@ class Credits extends React.Component {
     return await Promise.all(
       members.map(async member => {
         try {
-          let profile = await bungie.memberProfile(member.t, member.i, '100,200,202,204,900');
+          let profile = await bungie.memberProfile(member.t, member.i, '100,200');
           member.profile = profile;
 
-          if (!member.profile.characterProgressions.data) {
+          if (!member.profile.characters.data) {
             return member;
           }
           member.profile = responseUtils.profileScrubber(member.profile);

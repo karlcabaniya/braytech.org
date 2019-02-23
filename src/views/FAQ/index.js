@@ -19,7 +19,7 @@ class FAQ extends React.Component {
       {
         k: 'api',
         q: 'Braytech says I have completed `X` raids, but I\'ve actually completed `Y` raids?',
-        a: 'Raid stats are complicated and can differ between raids themselves. This is my initial attempt at displaying raid stats based on PGCRs. Raid.report operates on similar principles but have it refined into a precise art.\n\nRaid stats under the _Legend_ view count only full clears. Counting full clears, again, appears to differ between raids and I\'m still learning. Stats which I do feel are reliable are fastest full clear and flawless runs.\n\nWhen it comes to stats probably anywhere in life, they should never be taken at face value. Some understanding about the context and source is recommended.'
+        a: 'Raid stats are complicated and can differ between raids themselves. This is my initial attempt at displaying raid stats based on PGCRs. Raid.report operates on similar principles but have it refined into a precise art.\n\n~~Raid stats under the _Legend_ view count only full clears. Counting full clears, again, appears to differ between raids and I\'m still learning.~~Now shows all clears irrespective of checkpoints etc. Stats which I do feel are reliable are fastest full clear and flawless runs.\n\nWhen it comes to stats probably anywhere in life, they should never be taken at face value. Some understanding about the context and source is recommended.'
       },
       {
         k: 'api',

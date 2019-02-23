@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
@@ -199,7 +200,7 @@ class RaidReport extends React.Component {
       const getNormal = raid => {
         return raidReports
           .filter(pgcr => raid.versions.find(v => v.displayValue === 'Normal').activityHashes.includes(pgcr.activityDetails.directorActivityHash))
-          .filter(pgcr => raid.fullClearPhases.includes(pgcr.startingPhaseIndex))
+          // .filter(pgcr => raid.additionalStartingPhaseIndexes ? raid.fullClearPhases.concat(raid.additionalStartingPhaseIndexes).includes(pgcr.startingPhaseIndex) : raid.fullClearPhases.includes(pgcr.startingPhaseIndex))
           .filter(pgcr => {
             let clear = false;
             let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
@@ -215,7 +216,7 @@ class RaidReport extends React.Component {
       const getPrestige = raid => {
         return raidReports
           .filter(pgcr => raid.versions.find(v => v.displayValue === 'Prestige').activityHashes.includes(pgcr.activityDetails.directorActivityHash))
-          .filter(pgcr => raid.fullClearPhases.includes(pgcr.startingPhaseIndex))
+          // .filter(pgcr => raid.additionalStartingPhaseIndexes ? raid.fullClearPhases.concat(raid.additionalStartingPhaseIndexes).includes(pgcr.startingPhaseIndex) : raid.fullClearPhases.includes(pgcr.startingPhaseIndex))
           .filter(pgcr => {
             let clear = false;
             let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
@@ -283,6 +284,15 @@ class RaidReport extends React.Component {
         let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
         entries.forEach(entry => {
           v = v + entry.values.deaths.basic.value;
+        });
+        return a + v;
+      }, 0);
+
+      aggregates.superKills = aggCleared.reduce((a, pgcr) => {
+        let v = 0;
+        let entries = pgcr.entries.filter(entry => characterIds.includes(entry.characterId));
+        entries.forEach(entry => {
+          v = v + entry.extended.values.weaponKillsSuper.basic.value;
         });
         return a + v;
       }, 0);
@@ -414,6 +424,7 @@ class RaidReport extends React.Component {
                           <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} />
                         </div>
                         <div className='displayName'>{entry.player.destinyUserInfo.displayName}</div>
+                        <Link to={`/${entry.player.destinyUserInfo.membershipType}/${entry.player.destinyUserInfo.membershipId}/${entry.characterId}/`} />
                       </li>
                     );
                   })}
@@ -437,16 +448,20 @@ class RaidReport extends React.Component {
           </div>
           <div className='datum'>
             <div className='d'>
-              <div className='v'>{Math.floor(parseInt(aggregates.timePlayed || 0) / 3600)}</div>
-              <div className='n'>{Math.floor(parseInt(aggregates.timePlayed || 0) / 3600) === 1 ? t('hour played') : t('hours played')}</div>
-            </div>
-            <div className='d'>
               <div className='v'>{(aggregates.kills || 0).toLocaleString()}</div>
               <div className='n'>{t('kills')}</div>
             </div>
             <div className='d'>
               <div className='v'>{(aggregates.deaths || 0).toLocaleString()}</div>
               <div className='n'>{t('deaths')}</div>
+            </div>
+            <div className='d'>
+              <div className='v'>{(aggregates.superKills || 0).toLocaleString()}</div>
+              <div className='n'>{t('super kills')}</div>
+            </div>
+            <div className='d w'>
+              <div className='v'>{Math.floor(parseInt(aggregates.timePlayed || 0) / 3600)}</div>
+              <div className='n'>{Math.floor(parseInt(aggregates.timePlayed || 0) / 3600) === 1 ? t('hour played') : t('hours played')}</div>
             </div>
           </div>
           <div className='state'>{cacheLoading ? <Spinner mini /> : cacheState[4] !== raidReports.length ? <p>{cacheState[4] - raidReports.length} PGCRs failed to load at this minute therefore their stats are not included.</p> : null}</div>

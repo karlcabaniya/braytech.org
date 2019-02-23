@@ -1,5 +1,6 @@
 import store from '../reduxStore';
 import getMember from '../getMember';
+import * as voluspa from '../voluspa';
 
 const defaultState = {
   membershipType: false,
@@ -38,6 +39,8 @@ async function loadMember(membershipType, membershipId, characterId) {
     }
 
     store.dispatch({ type: 'MEMBER_LOADED', payload: { membershipId, membershipType, characterId, data } });
+
+    voluspa.store({ membershipId, membershipType});
   } catch (error) {
     store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error } });
     return;

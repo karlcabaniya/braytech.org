@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
@@ -195,6 +196,7 @@ class NightfallHighScores extends React.Component {
                           <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} />
                         </div>
                         <div className='displayName'>{entry.player.destinyUserInfo.displayName}</div>
+                        <Link to={`/${entry.player.destinyUserInfo.membershipType}/${entry.player.destinyUserInfo.membershipId}/${entry.characterId}/`} />
                       </li>
                     );
                   })}
