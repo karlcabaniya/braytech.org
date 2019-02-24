@@ -23,178 +23,172 @@ class Characters extends React.Component {
     const characterEquipment = member.data.profile.characterEquipment.data;
     const itemComponents = member.data.profile.itemComponents;
 
-    const characterStamps = character => (
-      <>
-        <span className={cx('stamp', 'light', { max: character.light === 650 })}>{character.light}</span>
-        <span className={cx('stamp', 'level')}>{character.baseCharacterLevel}</span>
-        <span className={cx('stamp', 'class', utils.classTypeToString(character.classType).toLowerCase())}>{utils.classTypeToString(character.classType)}</span>
-      </>
-    );
-    let  classTypes = {Titan:0, Hunter:1, Warlock:2};
-    let damageTypes = {Arc:2, Thermal:3, Void:4};
-    let identifiers = {First:'FirstPath', Second:'SecondPath', Third:'ThirdPath'};
+    let classTypes = { Titan: 0, Hunter: 1, Warlock: 2 };
+    let damageTypes = { Arc: 2, Thermal: 3, Void: 4 };
+    let identifiers = { First: 'FirstPath', Second: 'SecondPath', Third: 'ThirdPath' };
+
     const pathsCustomInfo = [
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.First,
-        art:'01A3-0000112B',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.First,
+        art: '01A3-0000112B'
       },
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.Second,
-        art:'01A3-0000112B',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.Second,
+        art: '01A3-0000112B'
       },
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.Third,
-        art:'01E3-00001598',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.Third,
+        art: '01E3-00001598'
       },
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.First,
-        art:'01A3-0000116E',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.First,
+        art: '01A3-0000116E'
       },
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.Second,
-        art:'01A3-0000116E',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.Second,
+        art: '01A3-0000116E'
       },
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.Third,
-        art:'01E3-0000159D',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.Third,
+        art: '01E3-0000159D'
       },
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Void,
-        identifier:identifiers.First,
-        art:'01A3-00001179',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Void,
+        identifier: identifiers.First,
+        art: '01A3-00001179'
       },
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Void,
-        identifier:identifiers.Second,
-        art:'01A3-00001179',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Void,
+        identifier: identifiers.Second,
+        art: '01A3-00001179'
       },
       {
-        classType:classTypes.Titan,
-        damageType:damageTypes.Void,
-        identifier:identifiers.Third,
-        art:'01E3-0000159F',
+        classType: classTypes.Titan,
+        damageType: damageTypes.Void,
+        identifier: identifiers.Third,
+        art: '01E3-0000159F'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.First,
-        art:'01A3-000010B4',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.First,
+        art: '01A3-000010B4'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.Second,
-        art:'01A3-000010B4',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.Second,
+        art: '01A3-000010B4'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.Third,
-        art:'01E3-00001593',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.Third,
+        art: '01E3-00001593'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.First,
-        art:'01A3-000010F8',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.First,
+        art: '01A3-000010F8'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.Second,
-        art:'01A3-000010F8',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.Second,
+        art: '01A3-000010F8'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.Third,
-        art:'01E3-00001595',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.Third,
+        art: '01E3-00001595'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Void,
-        identifier:identifiers.First,
-        art:'01A3-00001107',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Void,
+        identifier: identifiers.First,
+        art: '01A3-00001107'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Void,
-        identifier:identifiers.Second,
-        art:'01A3-00001107',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Void,
+        identifier: identifiers.Second,
+        art: '01A3-00001107'
       },
       {
-        classType:classTypes.Hunter,
-        damageType:damageTypes.Void,
-        identifier:identifiers.Third,
-        art:'01E3-00001596',
+        classType: classTypes.Hunter,
+        damageType: damageTypes.Void,
+        identifier: identifiers.Third,
+        art: '01E3-00001596'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.First,
-        art:'01A3-000011A1',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.First,
+        art: '01A3-000011A1'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.Second,
-        art:'01A3-000011A1',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.Second,
+        art: '01A3-000011A1'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Arc,
-        identifier:identifiers.Third,
-        art:'01E3-000015A1',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Arc,
+        identifier: identifiers.Third,
+        art: '01E3-000015A1'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.First,
-        art:'01A3-000011F1',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.First,
+        art: '01A3-000011F1'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.Second,
-        art:'01A3-000011F1',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.Second,
+        art: '01A3-000011F1'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Thermal,
-        identifier:identifiers.Third,
-        art:'01E3-000015A2',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Thermal,
+        identifier: identifiers.Third,
+        art: '01E3-000015A2'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Void,
-        identifier:identifiers.First,
-        art:'01A3-0000120D',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Void,
+        identifier: identifiers.First,
+        art: '01A3-0000120D'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Void,
-        identifier:identifiers.Second,
-        art:'01A3-0000120D',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Void,
+        identifier: identifiers.Second,
+        art: '01A3-0000120D'
       },
       {
-        classType:classTypes.Warlock,
-        damageType:damageTypes.Void,
-        identifier:identifiers.Third,
-        art:'01E3-000015A5',
+        classType: classTypes.Warlock,
+        damageType: damageTypes.Void,
+        identifier: identifiers.Third,
+        art: '01E3-000015A5'
       }
     ];
 
@@ -218,12 +212,12 @@ class Characters extends React.Component {
       let talentPath = getSubclassPath(gridDef, talentGrid);
       let damageTypes = ['', '', 'arc', 'solar', 'void'];
       let damageType = subclass.talentGrid.hudDamageType;
-      let pathCustom = pathsCustomInfo.find((p)=>p.classType == subclass.classType && p.damageType == damageType && p.identifier == talentPath.identifier);
+      let pathCustom = pathsCustomInfo.find(p => p.classType === subclass.classType && p.damageType === damageType && p.identifier === talentPath.identifier);
       let path = {
         name: talentPath.displayProperties.name,
         element: damageTypes[subclass.talentGrid.hudDamageType],
-        art:pathCustom.art
-      }
+        art: pathCustom.art
+      };
 
       chars.push({
         element: (
@@ -260,50 +254,7 @@ class Characters extends React.Component {
           </div>
         )
       });
-
     });
-
-
-
-    // let chars = [];
-
-    // characters.forEach(character => {
-    //   chars.push({
-    //     element: (
-    //       <li key={character.characterId}>
-    //         <div className='c'>
-    //           {characterStamps(character)}
-    //         </div>
-    //         <div className='s t'>
-    //           <div className='n'>Time played</div>
-    //           <div className='v'>
-    //             {Math.floor(parseInt(character.minutesPlayedTotal) / 1440) < 2 ? (
-    //               <>
-    //                 {Math.floor(parseInt(character.minutesPlayedTotal) / 1440)} {t('day')}
-    //               </>
-    //             ) : (
-    //               <>
-    //                 {Math.floor(parseInt(character.minutesPlayedTotal) / 1440)} {t('days')}
-    //               </>
-    //             )}
-    //           </div>
-    //         </div>
-    //         <div className='s l'>
-    //           <div className='n'>Last played</div>
-    //           <div className='v'>
-    //             <Moment fromNow>{character.dateLastPlayed}</Moment>
-    //           </div>
-    //         </div>
-    //       </li>
-    //     )
-    //   });
-    // });
-
-    // return (
-    //   <ul>
-    //     {chars.map(c => c.element)}
-    //   </ul>
-    // );
 
     return chars.map(c => c.element);
   }
@@ -316,17 +267,12 @@ function mapStateToProps(state, ownProps) {
 }
 
 function getSubclassPath(gridDef, talentGrid) {
-  let activatedNodes = talentGrid.nodes
-    .filter((node) => node.isActivated)
-    .map((node) => node.nodeIndex);
-  let selectedSkills =
-    gridDef.nodeCategories.filter((category) => {
-      var overlapping = category.nodeHashes
-        .filter((nodeHash) => activatedNodes.indexOf(nodeHash) > -1);
-      return overlapping.length > 0;
-    });
-  let subclassPath =
-    selectedSkills.find((nodeDef) => nodeDef.isLoreDriven);
+  let activatedNodes = talentGrid.nodes.filter(node => node.isActivated).map(node => node.nodeIndex);
+  let selectedSkills = gridDef.nodeCategories.filter(category => {
+    var overlapping = category.nodeHashes.filter(nodeHash => activatedNodes.indexOf(nodeHash) > -1);
+    return overlapping.length > 0;
+  });
+  let subclassPath = selectedSkills.find(nodeDef => nodeDef.isLoreDriven);
   return subclassPath;
 }
 
