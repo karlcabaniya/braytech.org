@@ -277,9 +277,8 @@
 }
 
 #legend .section.strikes .top .head {
-  position: absolute;
-  left: 3rem;
-  top: 3rem;
+  position: relative;
+  padding: 2rem 0 7rem 3rem;
 }
 
 #legend .section.strikes .top .head .page-header .description {
@@ -287,10 +286,8 @@
 }
 
 #legend .section.strikes .top .properties {
-  position: absolute;
-  left: 3rem;
-  bottom: 3rem;
-  z-index: 2;
+  position: relative;
+  margin: 0 0 0 3rem;
 }
 
 #legend .section.strikes .top .properties .desc {
@@ -308,7 +305,7 @@
 }
 
 #legend .section.strikes .top .properties .score {
-  font-size: 56px;
+  font-size: 48px;
   line-height: 1;
   font-weight: 600;  
   display: inline-block;
@@ -328,9 +325,8 @@
 }
 
 #legend .section.strikes .top .fireteam {
-  position: absolute;
-  right: 3rem;
-  bottom: 3rem;
+  position: relative;
+  margin: 3rem 0 3rem 3rem;
   width: 340px;
 }
 
@@ -424,9 +420,8 @@
 }
 
 #legend .section.raids .first .head {
-  position: absolute;
-  left: 3rem;
-  top: 3rem;
+  position: relative;
+  padding: 2rem 0 7rem 3rem;
 }
 
 #legend .section.raids .first .head .page-header .description {
@@ -434,10 +429,8 @@
 }
 
 #legend .section.raids .first .properties {
-  position: absolute;
-  left: 3rem;
-  bottom: 3rem;
-  z-index: 2;
+  position: relative;
+  margin: 0 0 0 3rem;
 }
 
 #legend .section.raids .first .properties .desc {
@@ -455,7 +448,7 @@
 }
 
 #legend .section.raids .first .properties .score {
-  font-size: 56px;
+  font-size: 48px;
   line-height: 1;
   font-weight: 600;  
   display: inline-block;
@@ -475,9 +468,8 @@
 }
 
 #legend .section.raids .first .fireteam {
-  position: absolute;
-  right: 3rem;
-  bottom: 3rem;
+  position: relative;
+  margin: 3rem 0 3rem 3rem;
   width: 340px;
 }
 
@@ -527,42 +519,9 @@
 
 
 @media screen and (max-width: 1760px) {
-  #legend .section.strikes .top .fireteam,
-  #legend .section.raids .first .fireteam {
-    width: 30%;
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  #legend .section.characters,
   #legend .section.strikes,
   #legend .section.raids {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  #legend .section.strikes .top,
-  #legend .section.raids .first {
-    position: relative;
-  }
-
-  #legend .section.strikes .top .image.pgcrImage {
-    width: 100%;
-    height: 130%;
-    mask-image: linear-gradient(180deg, hsla(217, 35%, 21%, 0.9) 0%, hsla(217, 35%, 21%, 0.7) 60%, hsla(217, 35%, 21%, 0));
-  }
-
-  #legend .section.strikes .top .head {
-    position: relative;
-    top: unset;
-    left: unset;
-    padding: 2rem 0 7rem 3rem;
-  }
-
-  #legend .section.strikes .top .properties {
-    position: relative;
-    bottom: unset;
-    left: unset;
-    margin: 0 0 0 3rem;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   #legend .section.strikes .top .properties .name {
@@ -571,6 +530,28 @@
 
   #legend .section.strikes .top .properties .score {
     font-size: 38px;
+  }
+
+  #legend .section.raids .first .properties .name {
+    font-size: 24px;
+  }
+
+  #legend .section.raids .first .properties .score {
+    font-size: 38px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #legend .section.characters,
+  #legend .section.strikes,
+  #legend .section.raids {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  #legend .section.strikes .top .image.pgcrImage {
+    width: 100%;
+    height: 130%;
+    mask-image: linear-gradient(180deg, hsla(217, 35%, 21%, 0.9) 0%, hsla(217, 35%, 21%, 0.7) 60%, hsla(217, 35%, 21%, 0));
   }
 
   #legend .section.strikes .top .fireteam {
@@ -588,28 +569,6 @@
     width: 100%;
     height: 130%;
     mask-image: linear-gradient(180deg, hsla(217, 35%, 21%, 0.9) 0%, hsla(217, 35%, 21%, 0.7) 60%, hsla(217, 35%, 21%, 0));
-  }
-
-  #legend .section.raids .first .head {
-    position: relative;
-    top: unset;
-    left: unset;
-    padding: 2rem 0 7rem 3rem;
-  }
-
-  #legend .section.raids .first .properties {
-    position: relative;
-    bottom: unset;
-    left: unset;
-    margin: 0 0 0 3rem;
-  }
-
-  #legend .section.raids .first .properties .name {
-    font-size: 24px;
-  }
-
-  #legend .section.raids .first .properties .score {
-    font-size: 38px;
   }
 
   #legend .section.raids .first .fireteam {
