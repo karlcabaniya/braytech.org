@@ -212,6 +212,9 @@ class Characters extends React.Component {
       let talentPath = getSubclassPath(gridDef, talentGrid);
       let damageTypes = ['', '', 'arc', 'solar', 'void'];
       let damageType = subclass.talentGrid.hudDamageType;
+      if(talentPath == null){
+        talentPath = {displayProperties:{name:t("Unknown")}, identifier:'FirstPath'};
+      }
       let pathCustom = pathsCustomInfo.find(p => p.classType === subclass.classType && p.damageType === damageType && p.identifier === talentPath.identifier);
       let path = {
         name: talentPath.displayProperties.name,
