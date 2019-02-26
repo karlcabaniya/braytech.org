@@ -73,7 +73,7 @@ class Index extends React.Component {
     return (
       <div className='view' id='index'>
         <div className='head'>
-          <ObservedImage className='bg image' src='/static/images/S5_Iron_Banner_1.jpg' />
+          <ObservedImage className='bg image' src='/static/images/Drifter_Ship_Wallpaper.jpg' />
           <div className='device'>
             <Logo />
           </div>
@@ -88,11 +88,11 @@ class Index extends React.Component {
         <div className='modules'>
           <div className='coming-up'>
             <div className='page-header'>
-              <div className='name'><span className='destiny-faction_ironbanner' /> Iron Banana</div>
+              <div className='name'>[REDACTED]</div>
               <div className='description'>What's happening this week in Destiny</div>
             </div>
             <div className='text'>
-              <p>Lord Saladin has returned to the tower to continue testing Guardians' strength and courage in his version of the Crucible.</p>
+              <p>[REDACTED]</p>
             </div>
           </div>
           <div className='change-log'>

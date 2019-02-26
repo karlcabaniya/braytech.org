@@ -139,14 +139,13 @@ class Competitive extends React.Component {
       // #region Gambit
 
       if (modes.gambit.includes(pgcr.activityDetails.mode)) {
-
         row = (
           <div className='basic'>
             <div className='mode'>{mode}</div>
             <div className='map'>{map.displayProperties.name}</div>
             <div className='motes-deposited'>{entry.extended.values.motesDeposited.basic.value}</div>
             <div className='hostiles-defeated'>{entry.extended.values.mobKills.basic.value}</div>
-            <div className='guardians-defeated'>{(entry.extended.values.invaderKills.basic.value + entry.extended.values.invasionKills.basic.value)}</div>
+            <div className='guardians-defeated'>{entry.extended.values.invaderKills.basic.value + entry.extended.values.invasionKills.basic.value}</div>
             <div className='ago'>
               <Moment fromNow>{pgcr.period}</Moment>
             </div>
@@ -164,11 +163,30 @@ class Competitive extends React.Component {
               <li key={entry.characterId} className={cx('linked', { isExpandedPlayer })} onClick={() => this.togglePlayerHandler(pgcr.activityDetails.instanceId, entry.characterId)}>
                 <div className='icon'>{!dnf ? <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} /> : null}</div>
                 <div className={cx('displayName', { dnf })}>{entry.player.destinyUserInfo.displayName}</div>
-                <div className='motes-deposited'>{entry.extended.values.motesDeposited.basic.value}</div>
-                <div className='hostiles-defeated'>{entry.extended.values.mobKills.basic.value}</div>
-                <div className='guardians-defeated'>{(entry.extended.values.invaderKills.basic.value + entry.extended.values.invasionKills.basic.value)}</div>
-                <div className='motes-lost'>{entry.extended.values.motesLost.basic.value}</div>
-                <div className='primeval-healed'>{entry.extended.values.primevalHealing.basic.displayValue}</div>
+                {!isExpandedPlayer ? (
+                  <>
+                    <div className='motes-deposited'>{entry.extended.values.motesDeposited.basic.value}</div>
+                    <div className='hostiles-defeated'>{entry.extended.values.mobKills.basic.value}</div>
+                    <div className='guardians-defeated'>{entry.extended.values.invaderKills.basic.value + entry.extended.values.invasionKills.basic.value}</div>
+                    <div className='motes-lost'>{entry.extended.values.motesLost.basic.value}</div>
+                    <div className='primeval-healed'>{entry.extended.values.primevalHealing.basic.displayValue}</div>
+                  </>
+                ) : (
+                  <>
+                    <div className='pairs'>
+                      <div className='key'>Motes deposited</div>
+                      <div className='value'>{entry.extended.values.motesDeposited.basic.value}</div>
+                      <div className='key'>Hostiles defeated</div>
+                      <div className='value'>{entry.extended.values.mobKills.basic.value}</div>
+                      <div className='key'>Guardians defeated</div>
+                      <div className='value'>{entry.extended.values.invaderKills.basic.value + entry.extended.values.invasionKills.basic.value}</div>
+                      <div className='key'>Motes lost</div>
+                      <div className='value'>{entry.extended.values.motesLost.basic.value}</div>
+                      <div className='key'>Primeval healed</div>
+                      <div className='value'>{entry.extended.values.primevalHealing.basic.displayValue}</div>
+                    </div>
+                  </>
+                )}
               </li>
             )
           });
@@ -204,11 +222,9 @@ class Competitive extends React.Component {
               </div>
               <div className='standing'>
                 <ObservedImage className='image' src={standingImage} />
-                <div className='text'>
-                  <div className='state'>{victory ? `VICTORY` : `DEFEAT`}</div>
-                  <div className='score'>{score}</div>
-                </div>
+                <div className='text'>{victory ? `VICTORY` : `DEFEAT`}</div>
               </div>
+              <div className='score'>{score}</div>
             </div>
             <div className='entries'>
               {orderBy(pgcr.teams, [t => t.score.basic.value], ['desc']).map(t => {
@@ -242,15 +258,12 @@ class Competitive extends React.Component {
             </div>
           </>
         );
-
       }
 
       // #endregion
 
       // #region Crucible (default)
-
       else {
-
         row = (
           <div className='basic'>
             <div className='mode'>{mode}</div>
@@ -315,11 +328,9 @@ class Competitive extends React.Component {
               </div>
               <div className='standing'>
                 <ObservedImage className='image' src={standingImage} />
-                <div className='text'>
-                  <div className='state'>{victory ? `VICTORY` : `DEFEAT`}</div>
-                  <div className='score'>{score}</div>
-                </div>
+                <div className='text'>{victory ? `VICTORY` : `DEFEAT`}</div>
               </div>
+              <div className='score'>{score}</div>
             </div>
             <div className='entries'>
               {orderBy(pgcr.teams, [t => t.score.basic.value], ['desc']).map(t => {
@@ -353,14 +364,13 @@ class Competitive extends React.Component {
             </div>
           </>
         );
-
       }
 
       // #endregion
 
       reports.push({
         element: (
-          <li key={pgcr.activityDetails.instanceId} className={cx('linked', { isExpanded: isExpanded, victory: victory })} onClick={() => !isExpanded ? this.expandHandler(pgcr.activityDetails.instanceId) : false}>
+          <li key={pgcr.activityDetails.instanceId} className={cx('linked', { isExpanded: isExpanded, victory: victory })} onClick={() => (!isExpanded ? this.expandHandler(pgcr.activityDetails.instanceId) : false)}>
             {!isExpanded ? row : detail}
           </li>
         )
