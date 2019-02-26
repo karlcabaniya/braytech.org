@@ -96,6 +96,13 @@ class Header extends React.Component {
         profile: true
       },
       {
+        name: t('Competitive'),
+        desc: t("?>??"),
+        slug: '/competitive',
+        exact: true,
+        profile: true
+      },
+      {
         name: t('Collections'),
         desc: t('Items your Guardian has acquired'),
         slug: '/collections',
@@ -145,7 +152,7 @@ class Header extends React.Component {
     ];
 
     let viewsInline = false;
-    if (viewport.width >= 1258) {
+    if (viewport.width >= 1350) {
       viewsInline = true;
     }
 

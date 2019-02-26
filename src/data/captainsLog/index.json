@@ -203,5 +203,15 @@
     "date": "2019-02-23T06:43:58.968Z",
     "version": "2.1.6",
     "content": "## Changes\n- Bug squash round up\n- Added top Ko-fi supports to Credits view\n- Changed my tone on raid stats - now showing all clears irrespective of checkpoints"
+  },
+  {
+    "date": "2019-02-25T06:51:02.453Z",
+    "version": "2.2.0",
+    "content": "## Changes\n- Legend view low screen res improvements\n- `REDACTED` added"
+  },
+  {
+    "date": "2019-02-25T09:18:18.725Z",
+    "version": "2.2.1",
+    "content": "## Changes\n- Competitive view added (preview)"
   }
 ]

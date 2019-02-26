@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?h1k56c') format('woff');
+  src: url('destiny.woff?bgj9fd') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -8,7 +8,6 @@
 [class^="destiny-"], [class*=" destiny-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'destiny' !important;
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -698,8 +697,14 @@
 .destiny-faction_crucible_glory:before {
   content: "\e972";
 }
+.destiny-team_alpha_alt:before {
+  content: "\e9ed";
+}
 .destiny-team_alpha:before {
   content: "\e916";
+}
+.destiny-team_bravo_alt:before {
+  content: "\e9ee";
 }
 .destiny-team_bravo:before {
   content: "\e917";

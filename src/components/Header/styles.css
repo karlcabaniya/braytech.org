@@ -415,7 +415,7 @@ html.backdropfilter #header .braytech {
   color: rgba(255, 255, 255, 1);
 }
 
-@media screen and (max-width: 1258px) {
+@media screen and (max-width: 1350px) {
   #header.navOpen {
     position: fixed !important;
   }
