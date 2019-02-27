@@ -139,7 +139,7 @@ class Header extends React.Component {
         desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/this-week',
         exact: true,
-        profile: false,
+        profile: true,
         primary: true
       },
       {
@@ -149,14 +149,7 @@ class Header extends React.Component {
         exact: true,
         profile: false,
         primary: true,
-        secondary: true
-      },
-      {
-        name: t('Resources'),
-        desc: t('Prestigious records and valued items up for grabs this week'),
-        slug: '/resources',
-        exact: false,
-        profile: false
+        hidden: true
       },
       {
         name: <span className='destiny-settings' />,
@@ -164,6 +157,20 @@ class Header extends React.Component {
         slug: '/settings',
         exact: true,
         primary: true
+      },
+      {
+        name: t('Leaderboard'),
+        desc: t('Prestigious records and valued items up for grabs this week'),
+        slug: '/leaderboard',
+        exact: true,
+        profile: false
+      },
+      {
+        name: t('Resources'),
+        desc: t('Prestigious records and valued items up for grabs this week'),
+        slug: '/resources',
+        exact: false,
+        profile: false
       }
     ];
 
@@ -257,12 +264,12 @@ class Header extends React.Component {
                           </ProfileNavLink>
                         </li>
                       );
-                    } else if (view.secondary) {
+                    } else if (view.hidden) {
                       return (
                         <li key='more'>
-                          <NavLink to={view.slug} exact={view.exact} onClick={e => { e.preventDefault(); this.openNav(); }}>
+                          <Link to={view.slug} onClick={e => { e.preventDefault(); this.openNav(); }}>
                             {view.name}
-                          </NavLink>
+                          </Link>
                         </li>
                       );
                     } else {
@@ -306,12 +313,12 @@ class Header extends React.Component {
                           </ProfileNavLink>
                         </li>
                       );
-                    } else if (view.secondary) {
+                    } else if (view.hidden) {
                       return (
                         <li key='more'>
-                          <NavLink to={view.slug} exact={view.exact} onClick={e => { e.preventDefault(); this.openNav(); }}>
+                          <Link to={view.slug} onClick={e => { e.preventDefault(); this.openNav(); }}>
                             {view.name}
-                          </NavLink>
+                          </Link>
                         </li>
                       );
                     } else {
@@ -333,25 +340,50 @@ class Header extends React.Component {
         {this.state.navOpen ? (
           <div className='nav' ref={this.navEl}>
             <div className='wrap'>
-              <ul>
-                {views.filter(v => !v.secondary).map(view => {
-                  if (view.profile) {
-                    return (
-                      <li key={view.slug}>
-                        <div className='name'>{view.name}</div>
-                        <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
-                      </li>
-                    );
-                  } else {
-                    return (
-                      <li key={view.slug}>
-                        <div className='name'>{view.name}</div>
-                        <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
-                      </li>
-                    );
-                  }
-                })}
-              </ul>
+              <div className='links'>
+                <div className='primary'>
+                  <ul>
+                    {views.filter(v => v.primary && !v.hidden).map(view => {
+                      if (view.profile) {
+                        return (
+                          <li key={view.slug}>
+                            <div className='name'>{view.name}</div>
+                            <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
+                          </li>
+                        );
+                      } else {
+                        return (
+                          <li key={view.slug}>
+                            <div className='name'>{view.name}</div>
+                            <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
+                          </li>
+                        );
+                      }
+                    })}
+                  </ul>
+                </div>
+                <div className='secondary'>
+                  <ul>
+                    {views.filter(v => !v.primary).map(view => {
+                      if (view.profile) {
+                        return (
+                          <li key={view.slug}>
+                            <div className='name'>{view.name}</div>
+                            <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
+                          </li>
+                        );
+                      } else {
+                        return (
+                          <li key={view.slug}>
+                            <div className='name'>{view.name}</div>
+                            <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
+                          </li>
+                        );
+                      }
+                    })}
+                  </ul>
+                </div>
+              </div>
               <Footer linkOnClick={this.closeNav} />
             </div>
           </div>
