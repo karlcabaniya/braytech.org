@@ -67,7 +67,7 @@ class Competitive extends React.Component {
   run = async () => {
     this.running = true;
 
-    let modes = ['19', '63', '69', '70'];
+    let modes = ['19', '63', '69', '70', '31'];
     let ignition = await modes.map(m => {
       return this.cacheMachine(m);
     });
@@ -104,7 +104,7 @@ class Competitive extends React.Component {
         total: 0,
         resets: profileRecords[559943871] ? profileRecords[559943871].objectives[0].progress : 0
       },
-      modes: [71, 73, 43, 44],
+      modes: [71, 73, 43, 44, 31],
       PGCRs: []
     };
 

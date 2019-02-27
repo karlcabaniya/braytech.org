@@ -81,6 +81,7 @@ class Competitive extends React.Component {
       clash: [71, 72, 44],
       control: [73, 74, 43],
       ironBanner: [43, 44],
+      supremacy: [31],
       survival: [37],
       countdown: [38],
       gambit: [63]
@@ -92,6 +93,8 @@ class Competitive extends React.Component {
         string = 'Clash';
       } else if (modes.control.includes(mode)) {
         string = 'Control';
+      } else if (modes.supremacy.includes(mode)) {
+        string = 'Supremacy';
       } else if (modes.survival.includes(mode)) {
         string = 'Survival';
       } else if (modes.countdown.includes(mode)) {
@@ -195,7 +198,7 @@ class Competitive extends React.Component {
         let alpha = pgcr.teams.find(t => t.teamId === 17);
         let bravo = pgcr.teams.find(t => t.teamId === 18);
         let score;
-        if (alpha) {
+        if (alpha && bravo) {
           score = (
             <>
               <div className={cx('value', 'alpha', { victory: alphaVictory })}>{alpha.score.basic.displayValue}</div>
@@ -301,7 +304,7 @@ class Competitive extends React.Component {
         let alpha = pgcr.teams.find(t => t.teamId === 17);
         let bravo = pgcr.teams.find(t => t.teamId === 18);
         let score;
-        if (alpha) {
+        if (alpha && bravo) {
           score = (
             <>
               <div className={cx('value', 'alpha', { victory: alphaVictory })}>{alpha.score.basic.displayValue}</div>

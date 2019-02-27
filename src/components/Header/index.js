@@ -27,7 +27,7 @@ class Header extends React.Component {
     this.updateFlash = false;
     this.navEl = React.createRef();
   }
-  
+
   componentDidUpdate(prevProps) {
     if (prevProps.member.data.updated !== this.props.member.data.updated && this.state.lastUpdate !== this.props.member.data.updated && !this.state.updateFlash) {
       this.setState({ lastUpdate: this.props.member.data.updated, updateFlash: true });
@@ -38,12 +38,13 @@ class Header extends React.Component {
       }, 1000);
     }
     if (this.state.navOpen) {
-      this.navEl.current.addEventListener('touchmove', this.nav_touchMove);
+      this.navEl.current.addEventListener('touchmove', this.nav_touchMove, true);
     }
   }
 
   nav_touchMove = e => {
-    e.preventDefault();
+    //e.preventDefault();
+    //e.stopPropagation()
   };
 
   toggleNav = () => {
@@ -58,6 +59,10 @@ class Header extends React.Component {
     if (this.state.navOpen) {
       this.setState({ navOpen: false });
     }
+  };
+
+  openNav = () => {
+    this.setState({ navOpen: true });
   };
 
   navOverlayLink = state => {
@@ -97,7 +102,7 @@ class Header extends React.Component {
       },
       {
         name: t('Competitive'),
-        desc: t("?>??"),
+        desc: t('?>??'),
         slug: '/competitive',
         exact: true,
         profile: true
@@ -128,20 +133,14 @@ class Header extends React.Component {
         desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/this-week',
         exact: true,
-        profile: true
+        profile: false
       },
-      // {
-      //   name: t('Activity'),
-      //   desc: t("Bird's eye view of your overall progress"),
-      //   slug: '/activity',
-      //   exact: true,
-      //   profile: true
-      // },
       {
-        name: t('Resources'),
-        desc: t('Assorted Destiny-related resources'),
-        slug: '/resources',
-        exact: false
+        name: t('More'),
+        desc: t('Prestigious records and valued items up for grabs this week'),
+        slug: '/index',
+        exact: true,
+        profile: false
       },
       {
         name: <span className='destiny-settings' />,
@@ -152,7 +151,7 @@ class Header extends React.Component {
     ];
 
     let viewsInline = false;
-    if (viewport.width >= 1350) {
+    if (viewport.width >= 1300) {
       viewsInline = true;
     }
 
@@ -296,15 +295,17 @@ class Header extends React.Component {
               </div>
             </div>
           ) : null}
-          {this.state.navOpen ? (
-            <div className='nav' ref={this.navEl}>
+        </div>
+        {profileEl}
+        {this.state.navOpen ? (
+          <div className='nav' ref={this.navEl}>
+            <div className='wrap'>
               <ul>
                 {views.map(view => {
                   if (view.profile) {
                     return (
                       <li key={view.slug}>
                         <div className='name'>{view.name}</div>
-                        <div className='description'>{view.desc}</div>
                         <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
                       </li>
                     );
@@ -312,7 +313,6 @@ class Header extends React.Component {
                     return (
                       <li key={view.slug}>
                         <div className='name'>{view.name}</div>
-                        <div className='description'>{view.desc}</div>
                         <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
                       </li>
                     );
@@ -321,9 +321,8 @@ class Header extends React.Component {
               </ul>
               <Footer linkOnClick={this.closeNav} />
             </div>
-          ) : null}
-        </div>
-        {profileEl}
+          </div>
+        ) : null}
       </div>
     );
   }
