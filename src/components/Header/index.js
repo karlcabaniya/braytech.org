@@ -91,62 +91,79 @@ class Header extends React.Component {
         desc: t('Activity and statistics'),
         slug: '/clan',
         exact: false,
-        profile: true
+        profile: true,
+        primary: true
       },
       {
         name: t('Legend'),
         desc: t("Bird's eye view of your overall progress"),
         slug: '/legend',
         exact: true,
-        profile: true
+        profile: true,
+        primary: true
       },
       {
         name: t('Competitive'),
         desc: t('?>??'),
         slug: '/competitive',
         exact: true,
-        profile: true
+        profile: true,
+        primary: true
       },
       {
         name: t('Collections'),
         desc: t('Items your Guardian has acquired'),
         slug: '/collections',
         exact: false,
-        profile: true
+        profile: true,
+        primary: true
       },
       {
         name: t('Triumphs'),
         desc: t("Records of your Guardian's achievements"),
         slug: '/triumphs',
         exact: false,
-        profile: true
+        profile: true,
+        primary: true
       },
       {
         name: t('Checklists'),
         desc: t('Made a list, check it twice'),
         slug: '/checklists',
         exact: true,
-        profile: true
+        profile: true,
+        primary: true
       },
       {
         name: t('This Week'),
         desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/this-week',
         exact: true,
-        profile: false
+        profile: false,
+        primary: true
       },
       {
         name: t('More'),
         desc: t('Prestigious records and valued items up for grabs this week'),
-        slug: '/index',
+        slug: '/',
         exact: true,
+        profile: false,
+        primary: true,
+        secondary: true
+      },
+      {
+        name: t('Resources'),
+        desc: t('Prestigious records and valued items up for grabs this week'),
+        slug: '/resources',
+        exact: false,
         profile: false
       },
       {
         name: <span className='destiny-settings' />,
         desc: 'Theme, language, collectible display state',
         slug: '/settings',
-        exact: true
+        exact: true,
+        primary: true
       }
     ];
 
@@ -231,13 +248,21 @@ class Header extends React.Component {
             {viewsInline ? (
               <div className='views'>
                 <ul>
-                  {views.map(view => {
+                  {views.filter(v => v.primary).map(view => {
                     if (view.profile) {
                       return (
                         <li key={view.slug}>
                           <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
                             {view.name}
                           </ProfileNavLink>
+                        </li>
+                      );
+                    } else if (view.secondary) {
+                      return (
+                        <li key='more'>
+                          <NavLink to={view.slug} exact={view.exact} onClick={e => { e.preventDefault(); this.openNav(); }}>
+                            {view.name}
+                          </NavLink>
                         </li>
                       );
                     } else {
@@ -267,18 +292,26 @@ class Header extends React.Component {
               Braytech
             </Link>
           </div>
-          {!viewsInline ? this.navOverlayLink(this.state.navOpen) : null}
-          {!profileEl && viewsInline ? (
+          {!viewsInline || this.state.navOpen ? this.navOverlayLink(this.state.navOpen) : null}
+          {!profileEl && viewsInline && !this.state.navOpen ? (
             <div className='ui'>
               <div className='views'>
                 <ul>
-                  {views.map(view => {
-                    if (view.profile) {
+                  {views.filter(v => v.primary).map(view => {
+                    if (view.profile && !view.secondary) {
                       return (
                         <li key={view.slug}>
                           <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
                             {view.name}
                           </ProfileNavLink>
+                        </li>
+                      );
+                    } else if (view.secondary) {
+                      return (
+                        <li key='more'>
+                          <NavLink to={view.slug} exact={view.exact} onClick={e => { e.preventDefault(); this.openNav(); }}>
+                            {view.name}
+                          </NavLink>
                         </li>
                       );
                     } else {
@@ -301,7 +334,7 @@ class Header extends React.Component {
           <div className='nav' ref={this.navEl}>
             <div className='wrap'>
               <ul>
-                {views.map(view => {
+                {views.filter(v => !v.secondary).map(view => {
                   if (view.profile) {
                     return (
                       <li key={view.slug}>

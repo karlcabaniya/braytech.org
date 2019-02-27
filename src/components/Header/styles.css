@@ -49,6 +49,19 @@ html.backdropfilter #header .braytech {
   margin: 0 7px 0 0;
 }
 
+#header .braytech .trigger {
+  padding: 1px 0 0;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+#header .braytech .trigger i {
+  font-size: 12px;
+  margin: 0 7px 0 0;
+}
+
 #header .ui {
   margin: 0;
   display: flex;
@@ -416,8 +429,16 @@ html.backdropfilter #header .nav {
   transform: scaleX(1);
 }
 
+#header .nav .wrap > ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 #header .nav .wrap > ul li a.active {
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+#header .nav .wrap > ul li a.active:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 #header .nav .wrap > ul li .name {
@@ -461,18 +482,6 @@ html.backdropfilter #header .nav {
     margin: 32px 0 0;
     width: 100%;
     max-width: 512px;
-  }
-
-  #header .braytech .trigger {
-    padding: 1px 0 0;
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-  }
-
-  #header .braytech .trigger i {
-    font-size: 12px;
-    margin: 0 7px 0 0;
   }
 
   #header.profile-header {
