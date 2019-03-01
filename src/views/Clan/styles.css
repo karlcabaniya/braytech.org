@@ -74,6 +74,7 @@
   position: relative;
   text-transform: uppercase;
   margin: 0 0 32px;
+  font-size: 18px;
 }
 
 #clan .clan-properties .memberCount::before {
@@ -88,6 +89,7 @@
 
 #clan .clan-properties .motto {
   font-style: italic;
+  font-size: 16px;
   letter-spacing: 1px;
   margin: 0 0 21px;
 }

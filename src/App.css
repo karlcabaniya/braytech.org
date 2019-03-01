@@ -391,6 +391,7 @@ button.square.active {
 
 .page-header .description {
   margin: 10px 0 0;
+  font-size: 18px;
 }
 
 @media screen and (max-width: 600px) {

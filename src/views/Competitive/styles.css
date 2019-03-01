@@ -303,6 +303,7 @@
 
   #competitive .mode .pgcr .list li .basic .map {
     text-align: right;
+    min-width: unset;
   }
 }
 

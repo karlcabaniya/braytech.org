@@ -42,6 +42,10 @@ class Competitive extends React.Component {
   };
 
   togglePlayerHandler = (instanceId, characterId) => {
+    if (this.props.viewport.width > 786) {
+      return;
+    }
+
     this.setState((prevState, props) => {
       let expandedIndex = prevState.expanded.findIndex(e => e.instanceId === instanceId);
 
@@ -291,11 +295,30 @@ class Competitive extends React.Component {
               <li key={entry.characterId} className={cx('linked', { isExpandedPlayer })} onClick={() => this.togglePlayerHandler(pgcr.activityDetails.instanceId, entry.characterId)}>
                 <div className='icon'>{!dnf ? <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} /> : null}</div>
                 <div className={cx('displayName', { dnf: dnf })}>{entry.player.destinyUserInfo.displayName}</div>
-                <div className='opponents-defeated'>{entry.values.opponentsDefeated.basic.value}</div>
-                <div className='kills'>{entry.values.kills.basic.value}</div>
-                <div className='deaths'>{entry.values.deaths.basic.value}</div>
-                <div className='assists'>{entry.values.assists.basic.value}</div>
-                <div className='efficiency'>{entry.values.efficiency.basic.displayValue}</div>
+                {!isExpandedPlayer ? (
+                  <>
+                    <div className='opponents-defeated'>{entry.values.opponentsDefeated.basic.value}</div>
+                    <div className='kills'>{entry.values.kills.basic.value}</div>
+                    <div className='deaths'>{entry.values.deaths.basic.value}</div>
+                    <div className='assists'>{entry.values.assists.basic.value}</div>
+                    <div className='efficiency'>{entry.values.efficiency.basic.displayValue}</div>
+                  </>
+                ) : (
+                  <>
+                    <div className='pairs'>
+                      <div className='key'>Opponents deposited</div>
+                      <div className='value'>{entry.values.opponentsDefeated.basic.value}</div>
+                      <div className='key'>Kills</div>
+                      <div className='value'>{entry.values.kills.basic.value}</div>
+                      <div className='key'>Deaths</div>
+                      <div className='value'>{entry.values.deaths.basic.value}</div>
+                      <div className='key'>Assists</div>
+                      <div className='value'>{entry.values.assists.basic.value}</div>
+                      <div className='key'>Efficiency</div>
+                      <div className='value'>{entry.values.efficiency.basic.displayValue}</div>
+                    </div>
+                  </>
+                )}
               </li>
             )
           });

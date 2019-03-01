@@ -159,9 +159,9 @@ class Header extends React.Component {
         primary: true
       },
       {
-        name: t('Leaderboard'),
+        name: t('Leaderboards'),
         desc: t('Prestigious records and valued items up for grabs this week'),
-        slug: '/leaderboard',
+        slug: '/leaderboards',
         exact: true,
         profile: false
       },
