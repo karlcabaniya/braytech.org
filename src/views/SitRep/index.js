@@ -9,6 +9,7 @@ import orderBy from 'lodash/orderBy';
 
 import manifest from '../../utils/manifest';
 import { ProfileLink } from '../../components/ProfileLink';
+import Collectibles from '../../components/Collectibles';
 import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/ProgressBar';
@@ -78,6 +79,10 @@ class SitRep extends React.Component {
       //   state.reward = true;
       // }
 
+      // if (manifest.DestinyMilestoneDefinition[milestone.milestoneHash].quests) {
+      //   console.log(manifest.DestinyMilestoneDefinition[milestone.milestoneHash], milestone)
+      // }
+      
       if (milestone.availableQuests) {
         let availableQuest = milestone.availableQuests[0];
 
@@ -90,12 +95,11 @@ class SitRep extends React.Component {
         displayProperties.description = manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].displayProperties.description !== '' ? manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].displayProperties.description : manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].progressDescription;
 
         let questItem = manifest.DestinyInventoryItemDefinition[availableQuest.questItemHash];
-        if (!questItem.value) {
-          return;
-        }
-        let questRewardItem = questItem.value.itemValue.find(i => i.itemHash);
-        if (questRewardItem) {
-          state.rewards.push(questRewardItem.itemHash);
+        if (questItem.value) {
+          let questRewardItem = questItem.value.itemValue.find(i => i.itemHash);
+          if (questRewardItem) {
+            state.rewards.push(questRewardItem.itemHash);
+          }
         }
       } else if (milestone.rewards) {
         if (milestone.activities && milestone.activities.length) {
@@ -225,6 +229,39 @@ class SitRep extends React.Component {
     infamy.progression.total = Object.keys(infamy.defs.rank.steps).reduce((sum, key) => {
       return sum + infamy.defs.rank.steps[key].progressTotal;
     }, 0);
+
+    const rareCollectibles = () => {
+      let checks = [
+        4274523516, // Redrix's Claymore
+        1111219481, // Redrix's Broadsword
+        3260604718, // Luna's Howl
+        3260604717, // Not Forgotten
+        4047371119, // The Mountaintop
+
+        3810740723, // Loaded Question
+        4037097478, // Nightshade
+
+        1666039008, // Breakneck
+        1660030045, // Malfeasance
+        3074058273, // The Last Word
+
+        1660030044, // Wish-Ender
+
+        199171386, // Sleeper Simulant
+        199171387, // Worldline Zero
+
+        3875807583, // Whisper of the Worm
+        3142437750, // A Thousand Wings
+
+        1469913803 // Harbinger's Echo
+      ];
+
+      return (
+        <ul className='list collection-items'>
+          <Collectibles hashes={checks} />
+        </ul>
+      );
+    };
 
     return (
       <div className='view' id='sit-rep'>
@@ -366,6 +403,12 @@ class SitRep extends React.Component {
               </div>
             </div>
           </div>
+          <div className='module rare-gear'>
+            <div className='sub-header sub'>
+              <div>{t('Rare gear')}</div>
+            </div>
+            {rareCollectibles()}
+          </div>
         </div>
         <div className='col'>
           <div className='module milestones'>
@@ -393,7 +436,8 @@ class SitRep extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    groupMembers: state.groupMembers
+    groupMembers: state.groupMembers,
+    collectibles: state.collectibles
   };
 }
 

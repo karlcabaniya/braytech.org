@@ -52,6 +52,33 @@
   font-size: 16px;
 }
 
+#sit-rep .module.rare-gear .collection-items {
+  grid-template-columns: 1fr 1fr;
+}
+
+#sit-rep .module.rare-gear .collection-items li {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#sit-rep .module.rare-gear .collection-items li.completed {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#sit-rep .module.rare-gear .collection-items li .image.dl {
+  opacity: 0.4;
+}
+
+#sit-rep .module.rare-gear .collection-items li.completed .image.dl {
+  opacity: 1;
+}
+
+#sit-rep .module.rare-gear .collection-items li:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 1);
+}
+
 #sit-rep .module.milestones .list li {
   display: block;
   height: unset;
@@ -83,6 +110,11 @@
 
 #sit-rep .module.milestones .list li .progress-bar .bar .text {
   position: relative;
+}
+
+#sit-rep .module.milestones .list li .progress-bar .bar .text .description {
+  font-weight: 500;
+  font-family: 'nhg text';
 }
 
 #sit-rep .module.milestones .list li .progress-bar .bar .fill {
@@ -143,5 +175,9 @@
     grid-column: 1/2;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
+  }
+
+  #sit-rep .module.rare-gear .collection-items {
+    grid-template-columns: 1fr;
   }
 }

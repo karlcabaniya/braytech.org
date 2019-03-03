@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?bgj9fd') format('woff');
+  src: url('destiny.woff?edwe6a') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -46,13 +46,10 @@
 .destiny-tracked-triumph_bg:before {
   content: "\e9e8";
 }
-.destiny-book_ghost_stories:before {
-  content: "\e9e3";
+.destiny-trapped_in_amber:before {
+  content: "\e9ef";
 }
-.destiny-book_awoken_reef:before {
-  content: "\e9e4";
-}
-.destiny-book_forsaken_prince:before {
+.destiny-forsaken_prince:before {
   content: "\e9e5";
 }
 .destiny-inspect_dazzle_2:before {

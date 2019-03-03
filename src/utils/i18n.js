@@ -28,7 +28,8 @@ i18n
       loadPath: '/static/locales/{{lng}}/{{ns}}.json'
     },
 
-    keySeparator: false,
+    keySeparator: '>',
+    nsSeparator: '|',
 
     interpolation: {
       escapeValue: false
