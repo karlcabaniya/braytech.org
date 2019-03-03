@@ -9,9 +9,11 @@ import orderBy from 'lodash/orderBy';
 
 import manifest from '../../utils/manifest';
 import { ProfileLink } from '../../components/ProfileLink';
+import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/ProgressBar';
-import Checkbox from '../../components/Checkbox';
+import Roster from '../../components/Roster';
+import getGroupMembers from '../../utils/getGroupMembers';
 
 import './styles.css';
 
@@ -23,11 +25,20 @@ class SitRep extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    const { member, groupMembers } = this.props;
+
+    const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
+
+    if (group) {
+      getGroupMembers(group);
+    }
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t, member, groupMembers } = this.props;
+    const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     const characterId = member.characterId;
+    const characters = member.data.profile.characters.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterProgressions = member.data.profile.characterProgressions.data;
 
@@ -172,11 +183,11 @@ class SitRep extends React.Component {
 
     const valor = {
       defs: {
-        rank: manifest.DestinyProgressionDefinition[3882308435],
+        rank: manifest.DestinyProgressionDefinition[2626549951],
         activity: manifest.DestinyActivityDefinition[2274172949]
       },
       progression: {
-        data: characterProgressions[characterId].progressions[3882308435],
+        data: characterProgressions[characterId].progressions[2626549951],
         total: 0,
         resets: profileRecords[559943871] ? profileRecords[559943871].objectives[0].progress : 0
       }
@@ -188,11 +199,11 @@ class SitRep extends React.Component {
 
     const glory = {
       defs: {
-        rank: manifest.DestinyProgressionDefinition[2679551909],
+        rank: manifest.DestinyProgressionDefinition[2000925172],
         activity: manifest.DestinyActivityDefinition[2947109551]
       },
       progression: {
-        data: characterProgressions[characterId].progressions[2679551909],
+        data: characterProgressions[characterId].progressions[2000925172],
         total: 0
       }
     };
@@ -217,31 +228,22 @@ class SitRep extends React.Component {
       return sum + infamy.defs.rank.steps[key].progressTotal;
     }, 0);
 
-    // console.log(member)
+    console.log(valor)
 
     return (
       <div className='view' id='sit-rep'>
-        <div className='col'>
-          <div className='module milestones'>
-            <div className='sub-header sub'>
-              <div>{t('Milestones')}</div>
+        <div className='head'>
+          <div className='col'>
+            <div className='page-header'>
+              <div className='name'>{t('Welcome back, Guardian')}</div>
+              <div className='description'>{t("Be in the know for what's happening around you, Guardian.")}</div>
             </div>
-            <ul className='list'>{milestones.map(m => m.element)}</ul>
+            {/* <div className='text'>
+              <p>The bottom line is, I've been building Braytech for over a year now and I'm <em>still</em> discovering amazing community projects. This is an effort to chronicle the best and brightest.</p>
+              <p>Additionally, who doesn't love the artists of Destiny? I'm curating hyperlinks to their portfolios.</p>
+            </div> */}
           </div>
-        </div>
-        <div className='col'>
-          <div className='module triumph-score'>
-            <div className='sub-header sub'>
-              <div>{t('Triumph score')}</div>
-            </div>
-            <div className='total-score'>{member.data.profile.profileRecords.data.score}</div>
-          </div>
-          <div className='module seals'>
-            <div className='sub-header sub'>
-              <div>{t('Seals earned')}</div>
-            </div>
-            <ul className='list'>{seals}</ul>
-          </div>
+          <div className='col'></div>
         </div>
         <div className='col'>
           <div className='module ranks'>
@@ -369,6 +371,24 @@ class SitRep extends React.Component {
             </div>
           </div>
         </div>
+        <div className='col'>
+          <div className='module milestones'>
+            <div className='sub-header sub'>
+              <div>{t('Milestones')}</div>
+            </div>
+            <ul className='list'>{milestones.map(m => m.element)}</ul>
+          </div>
+        </div>
+        <div className='col'>
+          {group ? <div className='module clan-roster'>
+            <div className='sub-header sub'>
+              <div>{t('Clan roster')}</div>
+              <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
+            </div>
+            <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
+            {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini linked isOnline />}
+          </div> : null}
+        </div>
       </div>
     );
   }
@@ -376,7 +396,8 @@ class SitRep extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    groupMembers: state.groupMembers
   };
 }
 

@@ -5,6 +5,48 @@
   padding: 4rem 3rem 3rem;
 }
 
+#sit-rep .head {
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 3rem;
+}
+
+#sit-rep .module.ranks .mode {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  grid-gap: 1rem;
+  margin: 0 0 2rem;
+}
+
+#sit-rep .module.ranks .mode .rank-image-set {
+  position: relative;
+  padding-bottom: 100%;
+}
+
+#sit-rep .module.ranks .mode .rank-image-set .image.rank {
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 80%;
+}
+
+#sit-rep .module.ranks .mode .properties {
+  display: grid;
+  align-content: center;
+}
+
+#sit-rep .module.ranks .mode .properties .text {
+  margin: 0 0 1rem;
+}
+
+#sit-rep .module.ranks .mode .properties .text .name {
+  font-size: 18px;
+}
+
+#sit-rep .module.ranks .mode .properties .text .resets {
+  font-size: 16px;
+}
 
 #sit-rep .module.milestones .list li {
   display: block;
@@ -45,91 +87,14 @@
   bottom: 0;
 }
 
-
-#sit-rep .total-score {
-  padding: 0 0 1rem;
-  font-size: 48px;
-  text-align: center;
-  font-weight: 600;
-}
-
-#sit-rep .module.seals ul {
-  margin: 1rem 0 2rem;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 3px;
-}
-
-#sit-rep .module.seals ul li {
+#sit-rep .module.clan-roster {
   position: relative;
-  height: unset;
-  margin: 0;
 }
 
-#sit-rep .module.seals ul li .image {
-  position: relative;
-  height: unset;
-  padding-bottom: 110%;
-}
-
-#sit-rep .module.seals ul li .image.dl {
-  opacity: 0.4;
-}
-
-#sit-rep .module.seals ul li.completed .image.dl {
-  opacity: 1;
-}
-
-#sit-rep .module.seals ul li:hover .image.dl,
-#sit-rep .module.seals ul li.completed:hover .image.dl {
-  opacity: 0.8;
-}
-
-#sit-rep .module.seals ul li a {
+#sit-rep .module.clan-roster .refresh {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  left: -2rem;
 }
-
-#sit-rep .module.ranks .mode {
-  display: grid;
-  grid-template-columns: 1fr 2.5fr;
-  grid-gap: 1rem;
-  margin: 0 0 2rem;
-}
-
-#sit-rep .module.ranks .mode .rank-image-set {
-  position: relative;
-  padding-bottom: 100%;
-}
-
-#sit-rep .module.ranks .mode .rank-image-set .image.rank {
-  top: 10%;
-  left: 10%;
-  width: 80%;
-  height: 80%;
-}
-
-#sit-rep .module.ranks .mode .properties {
-  display: grid;
-  align-content: center;
-}
-
-#sit-rep .module.ranks .mode .properties .text {
-  margin: 0 0 1rem;
-}
-
-#sit-rep .module.ranks .mode .properties .text .name {
-  font-size: 18px;
-}
-
-#sit-rep .module.ranks .mode .properties .text .resets {
-  font-size: 16px;
-}
-
-
 
 
 @media screen and (max-width: 1280px) {

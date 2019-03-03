@@ -12,6 +12,7 @@ import { ProfileLink } from '../../components/ProfileLink';
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
 import * as utils from '../../utils/destinyUtils';
+import getGroupMembers from '../../utils/getGroupMembers';
 
 import './styles.css';
 
@@ -22,6 +23,40 @@ class Roster extends React.Component {
     this.state = {
       expanded: []
     };
+  }
+
+  componentDidMount() {
+    const { member, groupMembers } = this.props;
+    const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
+
+    if (group) {
+      getGroupMembers(group);
+      this.startInterval();
+    }
+  }
+
+  callGetGroupMembers = () => {
+    const { member, groupMembers } = this.props;
+    const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
+    let now = new Date();
+
+    console.log(now - groupMembers.lastUpdated);
+
+    if (group && (now - groupMembers.lastUpdated > 30000 || group.groupId !== groupMembers.groupId)) {
+      getGroupMembers(group);
+    }
+  }
+
+  startInterval() {
+    this.refreshClanDataInterval = window.setInterval(this.callGetGroupMembers, 60000);
+  }
+
+  clearInterval() {
+    window.clearInterval(this.refreshClanDataInterval);
+  }
+
+  componentWillUnmount() {
+    this.clearInterval();
   }
 
   expandHandler = (membershipId, mini) => {
@@ -115,7 +150,7 @@ class Roster extends React.Component {
           lastPlayed: new Date(lastPlayed).getTime(),
           lastActivity: lastActivity && member.isOnline ? lastActivity.currentActivityHash : 0,
           element: (
-            <li key={member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.isOnline })}>
+            <li key={member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.isOnline, thisIsYou: member.destinyUserInfo.membershipId === this.props.member.membershipId.toString() })}>
               <div className='basic'>
                 <div className='icon'>
                   <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${lastCharacter.emblemPath}`} />

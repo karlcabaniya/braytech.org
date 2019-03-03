@@ -1,7 +1,8 @@
 const defaultState = {
   groupId: false,
   responses: [],
-  loading: false
+  loading: false,
+  lastUpdated: 0
 };
 
 export default function groupMembersReducer(state = defaultState, action) {
