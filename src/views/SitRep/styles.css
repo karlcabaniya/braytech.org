@@ -59,6 +59,11 @@
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
+#sit-rep .module.milestones .list li.well-rested {
+  background-color: rgba(90, 163, 102, 0.15);
+  box-shadow: inset 0 0 0 2px #5aa366;
+}
+
 #sit-rep .module.milestones .list li.earned {
   box-shadow: inset 0 0 0 2px #7bdcc1;
   background-color: rgba(123, 220, 193, 0.2);
@@ -80,10 +85,6 @@
   position: relative;
 }
 
-#sit-rep .module.milestones .list li .progress-bar .bar .text .description {
-
-}
-
 #sit-rep .module.milestones .list li .progress-bar .bar .fill {
   background-color: rgba(255, 255, 255, 0.8);
   height: 4px;
@@ -96,6 +97,7 @@
   display: grid;
   grid-template-columns: 20px auto;
   grid-gap: 6px;
+  align-items: center;
 }
 
 #sit-rep .module.milestones .list li .reward .image {
@@ -106,7 +108,6 @@
 
 #sit-rep .module.milestones .list li .reward .name {
   font-size: 14px;
-  line-height: 20px;
   color: rgba(255, 255, 255, 0.6);
 }
 

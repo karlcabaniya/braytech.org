@@ -13,8 +13,8 @@ import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/ProgressBar';
 import Roster from '../../components/Roster';
-import Item from '../../components/Item';
 import getGroupMembers from '../../utils/getGroupMembers';
+import * as utils from '../../utils/destinyUtils';
 
 import './styles.css';
 
@@ -39,7 +39,8 @@ class SitRep extends React.Component {
     const { t, member, groupMembers } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     const characterId = member.characterId;
-    const characters = member.data.profile.characters.data
+    const characters = member.data.profile.characters.data;
+    const character = characters.find(c => c.characterId === characterId);
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterProgressions = member.data.profile.characterProgressions.data;
 
@@ -151,77 +152,33 @@ class SitRep extends React.Component {
         )
       });
     });
+
     milestones = orderBy(milestones, [m => m.order], ['asc']);
 
-    const sealsParent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
-    const sealsData = {
-      2588182977: {
-        image: '037E-00001367.PNG',
-        nodeHash: 2588182977,
-        recordHash: 2757681677,
-        total: profileRecords[2757681677].objectives[0].completionValue,
-        completed: profileRecords[2757681677].objectives[0].progress
-      },
-      3481101973: {
-        image: '037E-00001343.PNG',
-        nodeHash: 3481101973,
-        recordHash: 3798931976,
-        total: profileRecords[3798931976].objectives[0].completionValue,
-        completed: profileRecords[3798931976].objectives[0].progress
-      },
-      147928983: {
-        image: '037E-0000134A.PNG',
-        nodeHash: 147928983,
-        recordHash: 3369119720,
-        total: profileRecords[3369119720].objectives[0].completionValue,
-        completed: profileRecords[3369119720].objectives[0].progress
-      },
-      2693736750: {
-        image: '037E-0000133C.PNG',
-        nodeHash: 2693736750,
-        recordHash: 1754983323,
-        total: profileRecords[1754983323].objectives[0].completionValue,
-        completed: profileRecords[1754983323].objectives[0].progress
-      },
-      2516503814: {
-        image: '037E-00001351.PNG',
-        nodeHash: 2516503814,
-        recordHash: 1693645129,
-        total: profileRecords[1693645129].objectives[0].completionValue,
-        completed: profileRecords[1693645129].objectives[0].progress
-      },
-      1162218545: {
-        image: '037E-00001358.PNG',
-        nodeHash: 1162218545,
-        recordHash: 2182090828,
-        total: profileRecords[2182090828].objectives[0].completionValue,
-        completed: profileRecords[2182090828].objectives[0].progress
-      },
-      2039028930: {
-        image: '0560-000000EB.PNG',
-        nodeHash: 2039028930,
-        recordHash: 2053985130,
-        total: profileRecords[2053985130].objectives[0].completionValue,
-        completed: profileRecords[2053985130].objectives[0].progress
-      }
-    };
+    const wellRestedState = utils.isWellRested(this.props.member.data.profile.characterProgressions.data[character.characterId]);
 
-    let seals = [];
-    sealsParent.children.presentationNodes.forEach(child => {
-      let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
-      seals.push(
-        <li
-          key={node.hash}
-          className={cx('linked', {
-            completed: sealsData[node.hash].completed === sealsData[node.hash].total
-          })}
-        >
-          <ObservedImage className={cx('image', 'icon')} src={`/static/images/extracts/badges/${sealsData[node.hash].image}`} />
-          <ProfileLink to={{ pathname: `/triumphs/seal/${node.hash}`, state: { from: '/' } }} />
-        </li>
-      );
-    });
-
+    if (wellRestedState.wellRested) {
+      milestones.unshift({
+        order: 0,
+        element: (
+          <li key='rest' className='well-rested'>
+            <ProgressBar
+              objectiveDefinition={{
+                progressDescription: 'Well rested',
+                completionValue: wellRestedState.requiredXP
+              }}
+              playerProgress={{
+                progress: wellRestedState.progress,
+                objectiveHash: 'rest'
+              }}
+              hideCheck
+            />
+            <div className='text'>XP gains increased by 3x for your first 3 Levels this week.</div>
+          </li>
+        )
+      });
+    }
+    
     const valor = {
       defs: {
         rank: manifest.DestinyProgressionDefinition[2626549951],
@@ -268,8 +225,6 @@ class SitRep extends React.Component {
     infamy.progression.total = Object.keys(infamy.defs.rank.steps).reduce((sum, key) => {
       return sum + infamy.defs.rank.steps[key].progressTotal;
     }, 0);
-
-    const character = characters.find(c => c.characterId === characterId);
 
     return (
       <div className='view' id='sit-rep'>
