@@ -179,6 +179,7 @@ class App extends React.Component {
                         <Switch>
                           <RedirectRoute path='/clan' />
                           <RedirectRoute path='/legend' exact />
+                          <RedirectRoute path='/sit-rep' exact />
                           <RedirectRoute path='/competitive' exact />
                           <RedirectRoute path='/checklists' exact />
                           <RedirectRoute path='/collections/' />

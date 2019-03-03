@@ -73,16 +73,15 @@ class Index extends React.Component {
     return (
       <div className='view' id='index'>
         <div className='head'>
-          <ObservedImage className='bg image' src='/static/images/Drifter_Ship_Wallpaper.jpg' />
+          <ObservedImage className='bg image' src='/static/images/Drifter_Header_01_1.jpg' />
           <div className='device'>
             <Logo />
           </div>
           <div className='slogan'>
             <div className='message'>{slogans[this.state.slogan].message}</div>
             {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-            <div className='link'>
-              // <ProfileLink to={slogans[this.state.slogan].link.to}>{slogans[this.state.slogan].link.name}</ProfileLink>
-            </div>
+            <div className='view-name'>// {slogans[this.state.slogan].link.name}</div>
+            <ProfileLink to={slogans[this.state.slogan].link.to} />
           </div>
         </div>
         <div className='modules'>

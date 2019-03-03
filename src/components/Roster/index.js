@@ -76,7 +76,7 @@ class Roster extends React.Component {
         return;
       }
 
-      if (!member.profile.characterActivities.data) {
+      if (!member.profile.characterActivities.data || !member.profile.characters.data.length) {
         if (!mini) {
           list.push({
             membershipId: member.destinyUserInfo.membershipId,

@@ -95,22 +95,6 @@ class Header extends React.Component {
         primary: true
       },
       {
-        name: t('Legend'),
-        desc: t("Bird's eye view of your overall progress"),
-        slug: '/legend',
-        exact: true,
-        profile: true,
-        primary: true
-      },
-      {
-        name: t('Competitive'),
-        desc: t('?>??'),
-        slug: '/competitive',
-        exact: true,
-        profile: true,
-        primary: true
-      },
-      {
         name: t('Collections'),
         desc: t('Items your Guardian has acquired'),
         slug: '/collections',
@@ -127,6 +111,14 @@ class Header extends React.Component {
         primary: true
       },
       {
+        name: t('This Week'),
+        desc: t('Prestigious records and valued items up for grabs this week'),
+        slug: '/this-week',
+        exact: true,
+        profile: true,
+        primary: true
+      },
+      {
         name: t('Checklists'),
         desc: t('Made a list, check it twice'),
         slug: '/checklists',
@@ -135,9 +127,17 @@ class Header extends React.Component {
         primary: true
       },
       {
-        name: t('This Week'),
-        desc: t('Prestigious records and valued items up for grabs this week'),
-        slug: '/this-week',
+        name: t('Sit Rep'),
+        desc: t('?>??'),
+        slug: '/sit-rep',
+        exact: true,
+        profile: true,
+        primary: true
+      },
+      {
+        name: t('Legend'),
+        desc: t("Bird's eye view of your overall progress"),
+        slug: '/legend',
         exact: true,
         profile: true,
         primary: true

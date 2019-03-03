@@ -63,7 +63,7 @@ class Legend extends React.Component {
     try {
       await Promise.all(ignition);
     } catch (e) {
-
+      console.log(e);
     }
 
     this.setState(p => {

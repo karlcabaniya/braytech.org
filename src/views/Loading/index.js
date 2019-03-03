@@ -42,8 +42,8 @@ const LOADING_STATE = {
 
 function Loading({ t, state, theme }) {
   if (state.code) {
-    const message = LOADING_STATE[state.code].message || LOADING_STATE.else.message;
-    const className = LOADING_STATE[state.code].className || LOADING_STATE.else.className;
+    const message = (LOADING_STATE[state.code] && LOADING_STATE[state.code].message) || LOADING_STATE.else.message;
+    const className = (LOADING_STATE[state.code] && LOADING_STATE[state.code].className) || LOADING_STATE.else.className;
 
     return (
       <div className={cx('view', theme.selected)} id='loading'>

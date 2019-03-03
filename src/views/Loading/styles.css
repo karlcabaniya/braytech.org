@@ -55,35 +55,35 @@
 
 #loading .bg .radii {
   opacity: 0.4;
-  filter: blur(20px);
+  filter: blur(10px);
   transform-origin: center;
   animation: rotate-logo-feature 420s linear infinite;
 }
 
 #loading .bg .orbit-1 {
   opacity: 0.2;
-  filter: blur(10px);
+  filter: blur(6px);
   transform-origin: center;
   animation: rotate-logo-feature 360s linear infinite;
 }
 
 #loading .bg .orbit-2 {
   opacity: 0.2;
-  filter: blur(6px);
+  filter: blur(4px);
   transform-origin: center;
   animation: rotate-logo-feature 240s linear infinite;
 }
 
 #loading .bg .orbit-3 {
   opacity: 0.2;
-  filter: blur(4px);
+  filter: blur(3px);
   transform-origin: center;
   animation: rotate-logo-feature 120s linear infinite;
 }
 
 #loading .bg .center {
   opacity: 0.2;
-  filter: blur(10px);
+  filter: blur(4px);
 }
 
 #loading .text {
@@ -157,34 +157,41 @@
   left: -70px;
   width: 236px;
   height: 236px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   animation: fade-in-logo-feature 7s linear forwards, rotate-logo-feature 21s linear infinite;
 }
 
 #loading .logo-feature .device::after {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   animation: fade-in-logo-feature 7s linear forwards, rotate-logo-feature 10s linear infinite;
+}
+
+@media screen and (orientation: portrait) {
+  #loading .bg > div {
+    width: 180vw;
+    left: -40vw;
+  }
 }
 
 @media screen and (max-width: 600px) {
   #loading .bg .spokes {
-    filter: blur(5px);
+    filter: blur(10px);
   }
   
   #loading .bg .radii {
-    filter: blur(4px);
+    filter: blur(8px);
   }
   
   #loading .bg .orbit-1 {
-    filter: blur(2px);
+    filter: blur(4px);
   }
   
   #loading .bg .orbit-2 {
-    filter: blur(2px);
+    filter: blur(4px);
   }
   
   #loading .bg .orbit-3 {
-    filter: blur(1px);
+    filter: blur(2px);
   }
   
   #loading .bg .center {
