@@ -12,6 +12,10 @@
   grid-gap: 3rem;
 }
 
+#sit-rep .head .page-header {
+  margin-bottom: 1rem;
+}
+
 #sit-rep .module.ranks .mode {
   display: grid;
   grid-template-columns: 1fr 2.5fr;
@@ -87,6 +91,25 @@
   bottom: 0;
 }
 
+#sit-rep .module.milestones .list li .reward {
+  margin: 10px 8px 0 8px;
+  display: grid;
+  grid-template-columns: 20px auto;
+  grid-gap: 6px;
+}
+
+#sit-rep .module.milestones .list li .reward .image {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+#sit-rep .module.milestones .list li .reward .name {
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 #sit-rep .module.clan-roster {
   position: relative;
 }
@@ -101,6 +124,11 @@
   #sit-rep {
     grid-template-columns: 1fr 1fr;
   }
+
+  #sit-rep .head {
+    grid-column: 1/3;
+    grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -108,5 +136,11 @@
     grid-template-columns: 1fr;
     grid-gap: 2rem;
     padding: 3rem 2rem 2rem;
+  }
+
+  #sit-rep .head {
+    grid-column: 1/2;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
   }
 }

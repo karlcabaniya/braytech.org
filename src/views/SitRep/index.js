@@ -13,6 +13,7 @@ import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/ProgressBar';
 import Roster from '../../components/Roster';
+import Item from '../../components/Item';
 import getGroupMembers from '../../utils/getGroupMembers';
 
 import './styles.css';
@@ -38,12 +39,12 @@ class SitRep extends React.Component {
     const { t, member, groupMembers } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     const characterId = member.characterId;
-    const characters = member.data.profile.characters.data;
+    const characters = member.data.profile.characters.data
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterProgressions = member.data.profile.characterProgressions.data;
 
-    const milestonesData = Object.values(member.data.milestones);
-    // console.log(milestonesData.map(m => manifest.DestinyMilestoneDefinition[m.milestoneHash]));
+    const milestonesData = Object.values(member.data.milestones).map(m => manifest.DestinyMilestoneDefinition[m.milestoneHash]);
+    // console.log(milestonesData);
 
     let milestones = [];
     Object.values(member.data.profile.characterProgressions.data[characterId].milestones).forEach(milestone => {
@@ -61,7 +62,8 @@ class SitRep extends React.Component {
         objective: {
           progress: 0,
           completionValue: 1
-        }
+        },
+        rewards: []
       };
 
       let displayProperties = {
@@ -69,26 +71,56 @@ class SitRep extends React.Component {
         description: def.displayProperties.description
       }
 
-      if (milestone.availableQuests) {
-        state.earned = milestone.availableQuests[0].status.completed;
-        state.redeemed = milestone.availableQuests[0].status.redeemed;
-        state.objective.progress = milestone.availableQuests[0].status.stepObjectives[0].progress;
-        state.objective.completionValue = milestone.availableQuests[0].status.stepObjectives[0].completionValue;
+      // console.log(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards)
 
-        displayProperties.name = manifest.DestinyMilestoneDefinition[milestone.milestoneHash].quests[milestone.availableQuests[0].questItemHash].displayProperties.name;
-        displayProperties.description = manifest.DestinyObjectiveDefinition[milestone.availableQuests[0].status.stepObjectives[0].objectiveHash].displayProperties.description !== '' ? manifest.DestinyObjectiveDefinition[milestone.availableQuests[0].status.stepObjectives[0].objectiveHash].displayProperties.description : manifest.DestinyObjectiveDefinition[milestone.availableQuests[0].status.stepObjectives[0].objectiveHash].progressDescription;
+      // if (manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards) {
+      //   state.reward = true;
+      // }
+
+      if (milestone.availableQuests) {
+        let availableQuest = milestone.availableQuests[0];
+
+        state.earned = availableQuest.status.completed;
+        state.redeemed = availableQuest.status.redeemed;
+        state.objective.progress = availableQuest.status.stepObjectives[0].progress;
+        state.objective.completionValue = availableQuest.status.stepObjectives[0].completionValue;
+
+        displayProperties.name = manifest.DestinyMilestoneDefinition[milestone.milestoneHash].quests[availableQuest.questItemHash].displayProperties.name;
+        displayProperties.description = manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].displayProperties.description !== '' ? manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].displayProperties.description : manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].progressDescription;
+
+        let questItem = manifest.DestinyInventoryItemDefinition[availableQuest.questItemHash];
+        if (!questItem.value) {
+          return;
+        }
+        let questRewardItem = questItem.value.itemValue.find(i => i.itemHash);
+        if (questRewardItem) {
+          state.rewards.push(questRewardItem.itemHash);
+        }
       } else if (milestone.rewards) {
         if (milestone.activities && milestone.activities.length) {
-          state.earned = milestone.activities[0].challenges[0].objective.complete;
-          state.objective.progress = milestone.activities[0].challenges[0].objective.progress;
-          state.objective.completionValue = milestone.activities[0].challenges[0].objective.completionValue;
+          milestone.activities.forEach(a => {
+            if (a.challenges.length > 0) {
+              a.challenges.forEach(c => {
+                state.earned = c.objective.complete;
+                state.objective.progress = c.objective.progress;
+                state.objective.completionValue = c.objective.completionValue;
+              });
+            }
+          });
         } else {
           state.earned = milestone.rewards[0].entries[0].earned;
           state.redeemed = milestone.rewards[0].entries[0].redeemed;
         }
+        
+        let rewardEntryHashes = milestone.rewards.map(r => r.entries).flat().map(r => r.rewardEntryHash);
+        let mappedRewards = rewardEntryHashes.map(r => Object.values(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards[r].rewardEntries).find(e => e.rewardEntryHash === r).items).flat().map(i => i.itemHash)
+
+        state.rewards.push(...mappedRewards);
       } else {
         return;
       }
+
+      // console.log(state.rewards)
 
       milestones.push({
         order: milestone.order,
@@ -106,6 +138,15 @@ class SitRep extends React.Component {
               hideCheck
             />
             <div className='text'>{displayProperties.description}</div>
+            {state.rewards.map((r, i) => {
+              const def = manifest.DestinyInventoryItemDefinition[r];
+              return (
+                <div key={i} className='reward'>
+                  <ObservedImage className='image' src={`https://www.bungie.net${def.displayProperties.icon}`} />
+                  <div className='name'>{def.displayProperties.name}</div>
+                </div>
+              )
+            })}
           </li>
         )
       });
@@ -228,22 +269,22 @@ class SitRep extends React.Component {
       return sum + infamy.defs.rank.steps[key].progressTotal;
     }, 0);
 
-    console.log(valor)
+    const character = characters.find(c => c.characterId === characterId);
 
     return (
       <div className='view' id='sit-rep'>
         <div className='head'>
           <div className='col'>
             <div className='page-header'>
-              <div className='name'>{t('Welcome back, Guardian')}</div>
-              <div className='description'>{t("Be in the know for what's happening around you, Guardian.")}</div>
+              <div className='name'>{t('Welcome back, ') + (character.titleRecordHash ? manifest.DestinyRecordDefinition[character.titleRecordHash].titleInfo.titlesByGenderHash[character.genderHash] : t('Guardian'))}</div>
+              <div className='description'>{t("Be more aware of your surroundings, Guardian.")}</div>
             </div>
             {/* <div className='text'>
               <p>The bottom line is, I've been building Braytech for over a year now and I'm <em>still</em> discovering amazing community projects. This is an effort to chronicle the best and brightest.</p>
               <p>Additionally, who doesn't love the artists of Destiny? I'm curating hyperlinks to their portfolios.</p>
             </div> */}
           </div>
-          <div className='col'></div>
+          {/* <div className='col'></div> */}
         </div>
         <div className='col'>
           <div className='module ranks'>
