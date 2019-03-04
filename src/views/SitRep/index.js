@@ -14,7 +14,6 @@ import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/ProgressBar';
 import Roster from '../../components/Roster';
-import getGroupMembers from '../../utils/getGroupMembers';
 import * as utils from '../../utils/destinyUtils';
 
 import './styles.css';
@@ -27,13 +26,6 @@ class SitRep extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    const { member, groupMembers } = this.props;
-
-    const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
-
-    if (group) {
-      getGroupMembers(group);
-    }
   }
 
   render() {

@@ -30,7 +30,7 @@ class Roster extends React.Component {
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
 
     if (group) {
-      getGroupMembers(group);
+      this.callGetGroupMembers(group);
       this.startInterval();
     }
   }
@@ -40,7 +40,7 @@ class Roster extends React.Component {
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     let now = new Date();
 
-    console.log(now - groupMembers.lastUpdated);
+    // console.log(now - groupMembers.lastUpdated);
 
     if (group && (now - groupMembers.lastUpdated > 30000 || group.groupId !== groupMembers.groupId)) {
       getGroupMembers(group);
