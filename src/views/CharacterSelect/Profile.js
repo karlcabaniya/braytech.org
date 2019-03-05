@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
 
 import Characters from '../../components/Characters';
-import './styles.css';
 
 class Profile extends React.Component {
   render() {

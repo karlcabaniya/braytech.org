@@ -1,0 +1,27 @@
+#leaderboards {
+  display: grid;
+  padding: 0;
+}
+
+#leaderboards .head {
+  position: relative;
+  width: 100%;
+  padding: 4rem 3rem 2rem;
+}
+
+#leaderboards .head .image.page-bg {
+  top: -40px;
+  height: calc(100% + 40px);
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.6)
+}
+
+#leaderboards .wrap {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 3rem;
+  background-color: #909090;
+}

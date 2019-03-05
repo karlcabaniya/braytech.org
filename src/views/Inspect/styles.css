@@ -224,6 +224,18 @@
   height: 48px;
 }
 
+#inspect .wrap .sockets.is-mods .socket {
+  margin: 0 4px;
+}
+
+#inspect .wrap .sockets.is-mods .socket:first-child {
+  margin-left: 0;
+}
+
+#inspect .wrap .sockets.is-mods .socket .plug:not(.is-active) {
+  display: none;
+}
+
 #inspect .wrap .stats {
   position: absolute;
   bottom: 2rem;

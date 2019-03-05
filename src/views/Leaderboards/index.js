@@ -1,13 +1,15 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withNamespaces } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import Moment from 'react-moment';
 import cx from 'classnames';
 
-
+import Ranks from '../../components/Ranks';
 
 import './styles.css';
+import ObservedImage from '../../components/ObservedImage';
 
 class Leaderboards extends React.Component {
   constructor() {
@@ -15,28 +17,34 @@ class Leaderboards extends React.Component {
     this.state = {};
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     window.scrollTo(0, 0);
-
-    console.log(await this.voluspa())
-  }
-
-  voluspa = async (offset = 0, sort = 'triumphScore') => {
-    const request = await fetch(`https://voluspa-a.braytech.org/?offset=${offset}&sort=${sort}`).then(r => r.json());
-
-    if (!request.Response) {
-      console.log('fetch error');
-    }
-
-    return request.Response;
   }
 
   render() {
+    const { t } = this.props;
 
+    console.log(this.state);
 
     return (
       <div className='view' id='leaderboards'>
-        
+        <div className='head'>
+          <ObservedImage className='image page-bg' src='/static/images/parade+final+lr.jpg' />
+          <div className='page-header'>
+            <div className='name'>{t('Leaderboards')}</div>
+            <div className='description'>{t("It's a long way to the top")}</div>
+          </div>
+        </div>
+        <div className='wrap'>
+          <div className='col'>
+            <div className='board'>
+              <div className='sub-header sub'>
+                <div>{t('Triumphs')}</div>
+              </div>
+              <Ranks />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -44,8 +52,11 @@ class Leaderboards extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    theme: state.theme
+    member: state.member
   };
 }
 
-export default compose(connect(mapStateToProps))(Leaderboards);
+export default compose(
+  connect(mapStateToProps),
+  withNamespaces()
+)(Leaderboards);

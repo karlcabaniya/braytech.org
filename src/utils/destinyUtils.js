@@ -120,21 +120,37 @@ export function classTypeToString(str) {
   return string;
 }
 
-export function membershipTypeToString(str) {
+export function membershipTypeToString(str, short = false) {
   let string;
 
-  switch (str) {
-    case 1:
-      string = 'Xbox';
-      break;
-    case 2:
-      string = 'PlayStation';
-      break;
-    case 4:
-      string = 'PC';
-      break;
-    default:
-      string = 'uh oh';
+  if (short) {
+    switch (str) {
+      case 1:
+        string = 'XB';
+        break;
+      case 2:
+        string = 'PS';
+        break;
+      case 4:
+        string = 'PC';
+        break;
+      default:
+        string = '??';
+    }
+  } else {
+    switch (str) {
+      case 1:
+        string = 'Xbox';
+        break;
+      case 2:
+        string = 'PlayStation';
+        break;
+      case 4:
+        string = 'PC';
+        break;
+      default:
+        string = 'uh oh';
+    }
   }
 
   return string;

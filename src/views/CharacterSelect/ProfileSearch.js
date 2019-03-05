@@ -9,8 +9,6 @@ import * as ls from '../../utils/localStorage';
 import * as bungie from '../../utils/bungie';
 import Spinner from '../../components/Spinner';
 
-import './styles.css';
-
 const SearchResult = p => (
   <li className='linked'>
     <a onClick={() => p.onProfileClick(p.profile.membershipType, p.profile.membershipId, p.profile.displayName)}>
