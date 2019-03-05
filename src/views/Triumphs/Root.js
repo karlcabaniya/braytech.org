@@ -78,6 +78,14 @@ class Root extends React.Component {
         recordHash: 2053985130,
         total: profileRecords[2053985130].objectives[0].completionValue,
         completed: profileRecords[2053985130].objectives[0].progress
+      },
+      991908404: {
+        text: manifest.DestinyRecordDefinition[1313291220].titleInfo.titlesByGenderHash[genderHash],
+        image: '',
+        nodeHash: 991908404,
+        recordHash: 1313291220,
+        total: profileRecords[1313291220].objectives[0].completionValue,
+        completed: profileRecords[1313291220].objectives[0].progress
       }
     };
 

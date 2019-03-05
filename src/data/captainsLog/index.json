@@ -218,5 +218,10 @@
     "date": "2019-03-03T11:24:10.745Z",
     "version": "2.2.4",
     "content": "## Changes\n- so many files altered. this is a round-up update.\n- the Sit Rep view is new\n\n## Conversation\nWhy the Sit Rep view? I didn't like the idea of forcing a user to download all of this API data as soon as they rock up to Braytech. So, I've adjusted the default view."
+  },
+  {
+    "date": "2019-03-05T17:33:43.234Z",
+    "version": "2.2.5",
+    "content": "## Changes\n- Drifter day bug slam"
   }
 ]
