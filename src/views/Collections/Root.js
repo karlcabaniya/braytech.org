@@ -167,7 +167,7 @@ class Root extends React.Component {
             <div>{t('Recently discovered')}</div>
           </div>
           <div className='recently-discovered'>
-            <ul className='list'>{recentlyDiscovered}</ul>
+            <ul className='list'>{recentlyDiscovered.reverse()}</ul>
           </div>
           <div className='sub-header sub'>
             <div>{t('Badges')}</div>

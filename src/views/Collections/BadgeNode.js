@@ -96,7 +96,8 @@ class BadgeNode extends React.Component {
       2399267278: '037E-00001D4C.png',
       701100740: '01A3-0000189C.png',
       1420354007: '01E3-0000032C.png',
-      1086048586: '01E3-00000377.png'
+      1086048586: '01E3-00000377.png',
+      2503214417: '0560-00000D7D.png'
     };
 
     //`https://www.bungie.net${badgeDefinition.displayProperties.icon}`
