@@ -139,8 +139,7 @@ class Header extends React.Component {
         desc: t("Bird's eye view of your overall progress"),
         slug: '/legend',
         exact: true,
-        profile: true,
-        primary: true
+        profile: true
       },
       {
         name: t('More'),
@@ -175,7 +174,7 @@ class Header extends React.Component {
     ];
 
     let viewsInline = false;
-    if (viewport.width >= 1300) {
+    if (viewport.width >= 1260) {
       viewsInline = true;
     }
 

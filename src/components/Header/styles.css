@@ -476,7 +476,7 @@ html.backdropfilter #header .nav {
 
 
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1260px) {
   #header.navOpen {
     position: fixed !important;
   }
