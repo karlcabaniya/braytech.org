@@ -26,6 +26,7 @@ class Collectibles extends React.Component {
   }
 
   render() {
+    const inspect = this.props.inspect ? true : false;
     const highlight = parseInt(this.props.highlight, 10) || false;
 
     let collectibles = [];
@@ -146,6 +147,7 @@ class Collectibles extends React.Component {
                 <div className='text'>
                   <div className='name'>{collectibleDefinition.displayProperties.name}</div>
                 </div>
+                {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
               </li>
             );
           }
@@ -232,7 +234,8 @@ class Collectibles extends React.Component {
             <div className='text'>
               <div className='name'>{collectibleDefinition.displayProperties.name}</div>
             </div>
-            {link && this.props.selfLinkFrom ? <ProfileLink to={{ pathname: link, state: { from: this.props.selfLinkFrom } }} /> : null}
+            {link && this.props.selfLinkFrom && !inspect ? <ProfileLink to={{ pathname: link, state: { from: this.props.selfLinkFrom } }} /> : null}
+            {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
           </li>
         );
       });

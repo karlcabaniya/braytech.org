@@ -31,24 +31,49 @@ class PresentationNode extends React.Component {
   };
 
   render() {
-    let primaryHash = this.props.primaryHash;
+    const { member } = this.props;
+    const characterId = member.characterId;
+    const characters = member.data.profile.characters.data;
+    const character = characters.find(c => c.characterId === characterId);
 
+    let classNodes = {
+      0: [811225638, 2598675734],
+      1: [3745240322, 2765771634],
+      2: [1269917845, 1573256543]
+    }
+
+    let primaryHash = this.props.primaryHash;
     let primaryDefinition = manifest.DestinyPresentationNodeDefinition[primaryHash];
 
-    let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash;
+    let secondaryHash = this.props.match.params.secondary || false;
+    let secondaryChildNodeFind = primaryDefinition.children.presentationNodes.find(child => classNodes[character.classType].includes(child.presentationNodeHash));
+    if (!secondaryHash && secondaryChildNodeFind) {
+      secondaryHash = secondaryChildNodeFind.presentationNodeHash;
+    } else if (!secondaryHash) {
+      secondaryHash = primaryDefinition.children.presentationNodes[0].presentationNodeHash;
+    } else {
+      secondaryHash = parseInt(secondaryHash, 10);
+    }
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 
-    let tertiaryHash = this.props.match.params.tertiary ? this.props.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
+    let tertiaryHash = this.props.match.params.tertiary || false;
+    let tertiaryChildNodeFind = secondaryDefinition.children.presentationNodes.find(child => classNodes[character.classType].includes(child.presentationNodeHash));
+    if (!tertiaryHash && tertiaryChildNodeFind) {
+      tertiaryHash = tertiaryChildNodeFind.presentationNodeHash;
+    } else if (!tertiaryHash) {
+      tertiaryHash = secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
+    } else {
+      tertiaryHash = parseInt(tertiaryHash, 10);
+    }
+
     let quaternaryHash = this.props.match.params.quaternary ? this.props.match.params.quaternary : false;
 
     let primaryChildren = [];
     primaryDefinition.children.presentationNodes.forEach(child => {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
-console.log(this.props)
+
       let isActive = (match, location) => {
-        if (this.props.match.params.secondary === undefined && primaryDefinition.children.presentationNodes.indexOf(child) === 0) {
-          return true;
-        } else if (match) {
+        if (secondaryHash === child.presentationNodeHash) {
           return true;
         } else {
           return false;
@@ -69,9 +94,7 @@ console.log(this.props)
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
       let isActive = (match, location) => {
-        if (this.props.match.params.tertiary === undefined && secondaryDefinition.children.presentationNodes.indexOf(child) === 0) {
-          return true;
-        } else if (match) {
+        if (tertiaryHash === child.presentationNodeHash) {
           return true;
         } else {
           return false;
@@ -86,6 +109,7 @@ console.log(this.props)
         </li>
       );
     });
+    console.log(this)
 
     return (
       <div className='node'>

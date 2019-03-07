@@ -99,6 +99,7 @@
 }
 
 #inspect .wrap .head .text .name {
+  font-family: 'nhg text';
   font-size: 56px;
   text-transform: uppercase;
   font-weight: 500;
@@ -247,7 +248,7 @@
 
 #inspect .wrap .stats .primary {
   padding: 0 16px 0 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
   display: grid;
   grid-template-columns: min-content max-content;
   grid-gap: 6px;
@@ -294,15 +295,17 @@
 }
 
 #inspect .wrap .stats .primary .text .power {
+  font-family: 'nhg text';
   font-size: 54px;
   font-weight: 500;
   line-height: 40px;
 }
 
 #inspect .wrap .stats .primary .text .primaryBaseStat {
-  margin: 3px 0 0;
+  margin: 8px 0 0;
   text-transform: uppercase;
   text-align: right;
+  font-size: 18px;
 }
 
 #inspect .wrap .stats .stat {
@@ -313,10 +316,11 @@
 }
 
 #inspect .wrap .stats .stat .name {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   padding: 0 16px 0 0;
   flex-basis: 50%;
   height: 16px;
+  font-size: 18px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -325,6 +329,7 @@
 #inspect .wrap .stats .stat .value {
   flex-basis: 50%;
   height: 16px;
+  font-size: 18px;
   position: relative;
   color: #fff;
   display: flex;

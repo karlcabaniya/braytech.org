@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -16,147 +17,168 @@ import subclass from './subclass';
 import ui from './ui';
 import sandboxPerk from './sandboxPerk';
 
-export default (profile, props) => {
-  const itemComponents = profile.data ? profile.data.profile.itemComponents : false;
+class ItemTypes extends React.Component {
 
-  if (!props.table) {
-    props.table = 'DestinyInventoryItemDefinition';
-  }
+  render() {
+    const { member, hash, itemInstanceId } = this.props;
+    const itemComponents = member.data ? member.data.profile.itemComponents : false;
 
-  let item;
-  if (props.hash === '343') {
-    item = {
-      redacted: true
-    };
-  } else {
-    item = manifest[props.table][props.hash];
-  }
+    let itemState = this.props.itemState;
+    let table = this.props.table;
 
-  if (itemComponents && props.itemInstanceId) {
-    item.itemComponents = {
-      state: props.itemState ? parseInt(props.itemState, 10) : false,
-      instance: itemComponents.instances.data[props.itemInstanceId] ? itemComponents.instances.data[props.itemInstanceId] : false,
-      sockets: itemComponents.sockets.data[props.itemInstanceId] ? itemComponents.sockets.data[props.itemInstanceId].sockets : false,
-      perks: itemComponents.perks.data[props.itemInstanceId] ? itemComponents.perks.data[props.itemInstanceId].perks : false,
-      stats: itemComponents.stats.data[props.itemInstanceId] ? itemComponents.stats.data[props.itemInstanceId].stats : false
-    };
-  }
-
-  let kind = 'ui';
-  let tier = 'basic';
-  let black;
-
-  if (item.itemType) {
-    switch (item.itemType) {
-      case 1:
-        kind = 'ui';
-        black = ui(item);
-        break;
-      case 3:
-        kind = 'weapon';
-        black = weapon(item);
-        break;
-      case 2:
-        kind = 'armour';
-        black = armour(item);
-        break;
-      case 14:
-        kind = 'emblem';
-        black = emblem(item);
-        break;
-      case 16:
-        kind = 'ui sandbox-perk';
-        black = subclass(item);
-        break;
-      case 19:
-        kind = 'mod';
-        black = mod(item);
-        break;
-      case 20:
-        kind = 'bounty';
-        black = ui(item);
-        break;
-      case 22:
-        kind = 'sparrow';
-        black = sparrow(item);
-        break;
-      case 24:
-        kind = 'ghost';
-        black = ghost(item);
-        break;
-      case 26:
-        kind = 'bounty';
-        black = bounty(item);
-        break;
-      default:
-        kind = '';
-        black = fallback(item);
+    if (!table) {
+      table = 'DestinyInventoryItemDefinition';
+    }
+  
+    let item;
+    if (hash === '343') {
+      item = {
+        redacted: true
+      };
+    } else {
+      item = manifest[table][hash];
+    }
+  
+    if (itemComponents && itemInstanceId) {
+      item.itemComponents = {
+        state: itemState ? parseInt(itemState, 10) : false,
+        instance: itemComponents.instances.data[itemInstanceId] ? itemComponents.instances.data[itemInstanceId] : false,
+        sockets: itemComponents.sockets.data[itemInstanceId] ? itemComponents.sockets.data[itemInstanceId].sockets : false,
+        perks: itemComponents.perks.data[itemInstanceId] ? itemComponents.perks.data[itemInstanceId].perks : false,
+        stats: itemComponents.stats.data[itemInstanceId] ? itemComponents.stats.data[itemInstanceId].stats : false
+      };
+    }
+  
+    let kind = 'ui';
+    let tier = 'basic';
+    let black;
+  
+    if (item.itemType) {
+      switch (item.itemType) {
+        case 1:
+          kind = 'ui';
+          black = ui(item);
+          break;
+        case 3:
+          kind = 'weapon';
+          black = weapon(item);
+          break;
+        case 2:
+          kind = 'armour';
+          black = armour(item);
+          break;
+        case 14:
+          kind = 'emblem';
+          black = emblem(item);
+          break;
+        case 16:
+          kind = 'ui sandbox-perk';
+          black = subclass(item);
+          break;
+        case 19:
+          kind = 'mod';
+          black = mod(item);
+          break;
+        case 20:
+          kind = 'bounty';
+          black = ui(item);
+          break;
+        case 22:
+          kind = 'sparrow';
+          black = sparrow(item);
+          break;
+        case 24:
+          kind = 'ghost';
+          black = ghost(item);
+          break;
+        case 26:
+          kind = 'bounty';
+          black = bounty(item);
+          break;
+        default:
+          kind = '';
+          black = fallback(item);
+      }
+    }
+  
+    if (table === 'DestinySandboxPerkDefinition') {
+      kind = 'ui name-only sandbox-perk';
+      black = sandboxPerk(item);
+    }
+  
+    if (item.inventory) {
+      switch (item.inventory.tierType) {
+        case 6:
+          tier = 'exotic';
+          break;
+        case 5:
+          tier = 'legendary';
+          break;
+        case 4:
+          tier = 'rare';
+          break;
+        case 3:
+          tier = 'uncommon';
+          break;
+        case 2:
+          tier = 'basic';
+          break;
+        default:
+          tier = 'basic';
+      }
+    }
+  
+    if (item.redacted) {
+      return (
+        <>
+          <div className='acrylic' />
+          <div className={cx('frame', 'common')}>
+            <div className='header'>
+              <div className='name'>Classified</div>
+              <div>
+                <div className='kind'>Insufficient clearance</div>
+              </div>
+            </div>
+            <div className='black'>
+              <div className='description'>
+                <pre>Keep it clean.</pre>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    } else {
+      itemState = enumerateItemState(parseInt(itemState, 10));
+      return (
+        <>
+          <div className='acrylic' />
+          <div className={cx('frame', kind, tier, { 'is-masterworked': itemState.masterworked })}>
+            <div className='header'>
+              {itemState.masterworked ? <ObservedImage className={cx('image', 'bg')} src={tier === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
+              <div className='name'>{item.displayProperties.name}</div>
+              <div>
+                <div className='kind'>{item.itemTypeDisplayName}</div>
+                {kind !== 'ui' && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
+              </div>
+            </div>
+            <div className='black'>
+              {this.props.viewport.width <= 600 && item.screenshot ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${item.screenshot}`} /> : null}
+              {black}
+            </div>
+          </div>
+        </>
+      );
     }
   }
+}
 
-  if (props.table === 'DestinySandboxPerkDefinition') {
-    kind = 'ui name-only sandbox-perk';
-    black = sandboxPerk(item);
-  }
 
-  if (item.inventory) {
-    switch (item.inventory.tierType) {
-      case 6:
-        tier = 'exotic';
-        break;
-      case 5:
-        tier = 'legendary';
-        break;
-      case 4:
-        tier = 'rare';
-        break;
-      case 3:
-        tier = 'uncommon';
-        break;
-      case 2:
-        tier = 'basic';
-        break;
-      default:
-        tier = 'basic';
-    }
-  }
 
-  if (item.redacted) {
-    return (
-      <>
-        <div className='acrylic' />
-        <div className={cx('frame', 'common')}>
-          <div className='header'>
-            <div className='name'>Classified</div>
-            <div>
-              <div className='kind'>Insufficient clearance</div>
-            </div>
-          </div>
-          <div className='black'>
-            <div className='description'>
-              <pre>Keep it clean.</pre>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  } else {
-    let itemState = enumerateItemState(parseInt(props.itemState, 10));
-    return (
-      <>
-        <div className='acrylic' />
-        <div className={cx('frame', kind, tier, { 'is-masterworked': itemState.masterworked })}>
-          <div className='header'>
-            {itemState.masterworked ? <ObservedImage className={cx('image', 'bg')} src={tier === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
-            <div className='name'>{item.displayProperties.name}</div>
-            <div>
-              <div className='kind'>{item.itemTypeDisplayName}</div>
-              {kind !== 'ui' && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
-            </div>
-          </div>
-          <div className='black'>{black}</div>
-        </div>
-      </>
-    );
-  }
-};
+function mapStateToProps(state, ownProps) {
+  return {
+    member: state.member,
+    viewport: state.viewport
+  };
+}
+
+export default connect(mapStateToProps)(ItemTypes);

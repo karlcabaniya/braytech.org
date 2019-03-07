@@ -11,6 +11,7 @@ import ObservedImage from '../../components/ObservedImage';
 import { enumerateRecordState } from '../../utils/destinyEnums';
 import RecordsAlmost from '../../components/RecordsAlmost';
 import RecordsTracked from '../../components/RecordsTracked';
+import NotificationInline from '../../components/NotificationInline';
 
 class Root extends React.Component {
   render() {
@@ -110,7 +111,10 @@ class Root extends React.Component {
           }
           nodeChildNodeChildNode.children.records.forEach(record => {
             let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];
+            let def = manifest.DestinyRecordDefinition[record.recordHash] || false;
             if (scope) {
+              scope.hash = record.recordHash;
+              scope.scoreValue = def && def.completionInfo ? def.completionInfo.ScoreValue : 0;
               states.push(scope);
               recordsStates.push(scope);
             } else {
@@ -192,6 +196,12 @@ class Root extends React.Component {
       );
     });
 
+    let unredeemedTriumphCount = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).length;
+
+    let potentialScoreGain = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).reduce((currentValue, unredeemedTriumph) => {
+      return unredeemedTriumph.scoreValue + currentValue;
+    }, 0);
+
     return (
       <>
         <div className='module'>
@@ -199,6 +209,7 @@ class Root extends React.Component {
             <div>{t('Total score')}</div>
           </div>
           <div className='total-score'>{this.props.member.data.profile.profileRecords.data.score}</div>
+          {unredeemedTriumphCount > 0 ? <NotificationInline name='Unredeemed triumphs' description={potentialScoreGain > 0 ? `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} worth ${potentialScoreGain} score to redeem` : `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} to redeem`} /> : null}
           <div className='sub-header sub'>
             <div>{t('Triumphs')}</div>
             <div>
