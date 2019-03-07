@@ -116,6 +116,12 @@ class Settings extends React.Component {
 
     return (
       <div className={cx('view', this.props.theme.selected)} id='settings'>
+        <div className='module head'>
+          <div className='page-header'>
+            <div className='name'>{t('Settings')}</div>
+            <div className='description'>{t('Configure Braytech to your liking')}</div>
+          </div>
+        </div>
         <div className='module theme'>
           <div className='sub-header sub'>
             <div>{t('Theme')}</div>

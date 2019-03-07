@@ -286,7 +286,7 @@
 
 
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1440px) {
 
   .list.record-items {
     grid-template-columns: 1fr 1fr;

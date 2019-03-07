@@ -31,10 +31,17 @@ class AboutView extends React.Component {
 
   render() {
     const { t, member, group, groupMembers, theme } = this.props;
+    const characters = member.data.profile.characters.data;
+    const characterIds = characters.map(c => c.characterId);
+
     const weeklyRewardState = this.state.weeklyRewardState;
 
     const clanLevel = group.clanInfo.d2ClanProgressions[584850370];
-    const weeklyPersonalContribution = member.data.profile.characterProgressions.data[member.characterId].progressions[540048094];
+
+    let weeklyPersonalContribution = characterIds.reduce((currentValue, characterId) => {
+      let characterProgress = member.data.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;
+      return characterProgress + currentValue;
+    }, 0);
 
     const weeklyClanEngramsDefinition = manifest.DestinyMilestoneDefinition[4253138191].rewards[1064137897].rewardEntries;
     let rewardState = null;
@@ -102,10 +109,10 @@ class AboutView extends React.Component {
               <div className='personalContribution'>
                 <div className='text'>{t('Weekly Personal XP Contribution')}</div>
                 <Checkbox
-                  completed={weeklyPersonalContribution.weeklyProgress === 5000}
+                  completed={weeklyPersonalContribution === (characterIds.length * 5000)}
                   text={
                     <>
-                      <span>{weeklyPersonalContribution.weeklyProgress}</span> / 5000
+                      <span>{weeklyPersonalContribution}</span> / {characterIds.length * 5000}
                     </>
                   }
                 />

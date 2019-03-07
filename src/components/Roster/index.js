@@ -170,7 +170,7 @@ class Roster extends React.Component {
 
         const characterStamps = character => (
           <>
-            <span className={cx('stamp', 'light', { max: character.light === 650 })}>{character.light}</span>
+            <span className={cx('stamp', 'light', { max: character.light === 700 })}>{character.light}</span>
             <span className={cx('stamp', 'level')}>{character.baseCharacterLevel}</span>
             <span className={cx('stamp', 'class', utils.classTypeToString(character.classType).toLowerCase())}>{utils.classTypeToString(character.classType)}</span>
             <span className={cx('stamp', 'clan-xp', { complete: member.profile.characterProgressions.data[character.characterId].progressions[540048094].weeklyProgress === 5000 })}>{member.profile.characterProgressions.data[character.characterId].progressions[540048094].weeklyProgress} XP</span>
