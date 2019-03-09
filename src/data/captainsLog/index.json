@@ -223,5 +223,10 @@
     "date": "2019-03-05T17:33:43.234Z",
     "version": "2.2.5",
     "content": "## Changes\n- Drifter day bug slam"
+  },
+  {
+    "date": "2019-03-09T12:29:08.263Z",
+    "version": "2.2.6",
+    "content": "## Changes\n- Quality of life improvements\n- Additional Drifter assets\n- Addition of percentage of Braytech users who've completed a triumph record added to each record"
   }
 ]

@@ -12,6 +12,7 @@ import './components/PresentationNode.css';
 import './utils/i18n';
 import dexie from './utils/dexie';
 import * as bungie from './utils/bungie';
+import * as voluspa from './utils/voluspa';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import store from './utils/reduxStore';
 import manifest from './utils/manifest';
@@ -73,7 +74,8 @@ class App extends React.Component {
           .first()
       ),
       manifestIndex: timed('getManifestIndex', bungie.manifestIndex()),
-      bungieSettings: timed('getSettings', bungie.settings())
+      bungieSettings: timed('getSettings', bungie.settings()),
+      voluspaStatistics: timed('getStatistics', voluspa.statistics())
     };
 
     const profile = ls.get('setting.profile');
@@ -120,6 +122,10 @@ class App extends React.Component {
 
     tmpManifest.settings = await this.startupRequests.bungieSettings;
     this.availableLanguages = Object.keys(manifestIndex.jsonWorldContentPaths);
+
+    tmpManifest.statistics = {
+      triumphs: await this.startupRequests.voluspaStatistics
+    };
 
     manifest.set(tmpManifest);
 

@@ -88,7 +88,7 @@ class Header extends React.Component {
     let views = [
       {
         name: t('Clan'),
-        desc: t('Activity and statistics'),
+        desc: t('Check in on your clan'),
         slug: '/clan',
         exact: false,
         profile: true,
@@ -104,7 +104,7 @@ class Header extends React.Component {
       },
       {
         name: t('Triumphs'),
-        desc: t("Records of your Guardian's achievements"),
+        desc: t("Records your Guardian has achieved"),
         slug: '/triumphs',
         exact: false,
         profile: true,
@@ -120,7 +120,7 @@ class Header extends React.Component {
       },
       {
         name: t('Checklists'),
-        desc: t('Made a list, check it twice'),
+        desc: t('Complete lists of collecibles, scannables, etc.'),
         slug: '/checklists',
         exact: true,
         profile: true,
@@ -128,7 +128,7 @@ class Header extends React.Component {
       },
       {
         name: t('Sit Rep'),
-        desc: t('?>??'),
+        desc: t('Be more aware of your surroundings, Guardian'),
         slug: '/sit-rep',
         exact: true,
         profile: true,
@@ -136,7 +136,7 @@ class Header extends React.Component {
       },
       {
         name: t('Legend'),
-        desc: t("Bird's eye view of your overall progress"),
+        desc: t("A high-level and more graphical overview of your achievements"),
         slug: '/legend',
         exact: true,
         profile: true
@@ -152,22 +152,36 @@ class Header extends React.Component {
       },
       {
         name: <span className='destiny-settings' />,
-        desc: 'Theme, language, collectible display state',
+        desc: 'Theme, collectibles, language',
         slug: '/settings',
         exact: true,
         primary: true
       },
+      // {
+      //   name: t('Leaderboards'),
+      //   desc: t('???'),
+      //   slug: '/leaderboards',
+      //   exact: true,
+      //   profile: false
+      // },
       {
-        name: t('Leaderboards'),
-        desc: t('Prestigious records and valued items up for grabs this week'),
-        slug: '/leaderboards',
-        exact: true,
+        name: t('Resources'),
+        desc: t("justrealmilk's curated list of tools and artists"),
+        slug: '/resources',
+        exact: false,
         profile: false
       },
       {
-        name: t('Resources'),
-        desc: t('Prestigious records and valued items up for grabs this week'),
-        slug: '/resources',
+        name: t('FAQ'),
+        desc: t('Answers to common queries in a mostly well-written and organised format'),
+        slug: '/faq',
+        exact: false,
+        profile: false
+      },
+      {
+        name: t('Credits'),
+        desc: t('The Architects and Guardians that make Braytech possible'),
+        slug: '/credits',
         exact: false,
         profile: false
       }
@@ -339,14 +353,15 @@ class Header extends React.Component {
         {this.state.navOpen ? (
           <div className='nav' ref={this.navEl}>
             <div className='wrap'>
-              <div className='links'>
-                <div className='primary'>
+              <div className='types'>
+                <div className='type progression'>
                   <ul>
                     {views.filter(v => v.primary && !v.hidden).map(view => {
                       if (view.profile) {
                         return (
                           <li key={view.slug}>
                             <div className='name'>{view.name}</div>
+                            <div className='description'>{view.desc}</div>
                             <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
                           </li>
                         );
@@ -354,6 +369,7 @@ class Header extends React.Component {
                         return (
                           <li key={view.slug}>
                             <div className='name'>{view.name}</div>
+                            <div className='description'>{view.desc}</div>
                             <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
                           </li>
                         );
@@ -361,13 +377,14 @@ class Header extends React.Component {
                     })}
                   </ul>
                 </div>
-                <div className='secondary'>
+                <div className='type ancillary'>
                   <ul>
                     {views.filter(v => !v.primary).map(view => {
                       if (view.profile) {
                         return (
                           <li key={view.slug}>
                             <div className='name'>{view.name}</div>
+                            <div className='description'>{view.desc}</div>
                             <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
                           </li>
                         );
@@ -375,6 +392,7 @@ class Header extends React.Component {
                         return (
                           <li key={view.slug}>
                             <div className='name'>{view.name}</div>
+                            <div className='description'>{view.desc}</div>
                             <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
                           </li>
                         );
@@ -383,7 +401,7 @@ class Header extends React.Component {
                   </ul>
                 </div>
               </div>
-              <Footer linkOnClick={this.closeNav} />
+              <Footer minimal linkOnClick={this.closeNav} />
             </div>
           </div>
         ) : null}

@@ -14,7 +14,7 @@ class Footer extends React.Component {
   }
 
   render() {
-    const { t, linkOnClick } = this.props;
+    const { t, linkOnClick, minimal } = this.props;
 
     return (
       <div id='footer'>
@@ -22,12 +22,20 @@ class Footer extends React.Component {
           © 2019 Tom Chapman <span>{packageJSON.version}</span>
         </div>
         <ul>
-          <li>
-            <Link to='/faq' onClick={linkOnClick}>{t('FAQ')}</Link>
-          </li>
-          <li>
-            <Link to='/credits' onClick={linkOnClick}>{t('Credits')}</Link>
-          </li>
+          {!minimal ? (
+            <>
+              <li>
+                <Link to='/faq' onClick={linkOnClick}>
+                  {t('FAQ')}
+                </Link>
+              </li>
+              <li>
+                <Link to='/credits' onClick={linkOnClick}>
+                  {t('Credits')}
+                </Link>
+              </li>
+            </>
+          ) : null}
           <li>
             <a href='https://twitter.com/justrealmilk' target='_blank' rel='noopener noreferrer'>
               Twitter

@@ -42,15 +42,27 @@
   margin: 0 0 0 1rem;
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 .list.record-items li .properties .text .name {
-  flex-basis: calc(100% - 2rem);
+  flex-basis: calc(100% - 6rem);
 }
 
-.list.record-items li .properties .text .score {
-  flex-basis: 2rem;
-  text-align: right;
+.list.record-items li .properties .text .meta {
+  display: flex;
+  justify-content: flex-end;
+  flex-basis: 6rem;
+}
+
+.list.record-items li .properties .text .meta .score::before {
+  content: '  /  ';
+  white-space: pre-wrap;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.list.record-items li .properties .text .meta .score {
+  
 }
 
 .list.record-items li .properties .text .description {
@@ -132,7 +144,7 @@
 .list.record-items li .track-this {
   position: absolute;
   top: -1px;
-  right: 70px;
+  right: 100px;
   width: 24px;
   height: 24px;
   cursor: pointer;

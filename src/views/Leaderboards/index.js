@@ -29,7 +29,6 @@ class Leaderboards extends React.Component {
     return (
       <div className='view' id='leaderboards'>
         <div className='head'>
-          <ObservedImage className='image page-bg' src='/static/images/parade+final+lr.jpg' />
           <div className='page-header'>
             <div className='name'>{t('Leaderboards')}</div>
             <div className='description'>{t("It's a long way to the top")}</div>
@@ -37,11 +36,11 @@ class Leaderboards extends React.Component {
         </div>
         <div className='wrap'>
           <div className='col'>
-            <div className='board'>
+            <div className='board triumphScore'>
               <div className='sub-header sub'>
                 <div>{t('Triumphs')}</div>
               </div>
-              <Ranks />
+              <Ranks includeMember />
             </div>
           </div>
         </div>

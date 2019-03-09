@@ -224,7 +224,10 @@ class Records extends React.Component {
                 </div>
                 <div className='text'>
                   <div className='name'>{recordDefinition.displayProperties.name}</div>
-                  {recordDefinition.completionInfo.ScoreValue && recordDefinition.completionInfo.ScoreValue !== 0 ? <div className='score'>{recordDefinition.completionInfo.ScoreValue}</div> : null}
+                  <div className='meta'>
+                    <div className='idk'>{manifest.statistics.triumphs && manifest.statistics.triumphs[recordDefinition.hash] ? manifest.statistics.triumphs[recordDefinition.hash] : `0.00`}%</div>
+                    {recordDefinition.completionInfo && recordDefinition.completionInfo.ScoreValue !== 0 ? <div className='score'>{recordDefinition.completionInfo.ScoreValue}</div> : null}
+                  </div>
                   <div className='description'>{description}</div>
                 </div>
               </div>

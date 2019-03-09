@@ -89,13 +89,13 @@
 
 #clan .clan-properties .motto {
   font-style: italic;
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: 1px;
   margin: 0 0 21px;
 }
 
 #clan .clan-properties .bio {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.8);
 }

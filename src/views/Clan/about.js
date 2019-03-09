@@ -69,7 +69,7 @@ class AboutView extends React.Component {
               <ReactMarkdown className='bio' escapeHtml disallowedTypes={['image', 'imageReference']} source={group.about} />
             </div>
             <div className='sub-header sub'>
-              <div>{t('Season')} 5</div>
+              <div>{t('Season')} 6</div>
             </div>
             <div className='progression'>
               <div className='clanLevel'>
