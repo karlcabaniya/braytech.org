@@ -223,7 +223,8 @@ export function stringToIcons(string) {
     '[Sword]': 'sword_heavy',
     '[Grenade Launcher]': 'grenade_launcher',
     '[Bow]': 'bow',
-    '[Machine Gune]': 'machinegun'
+    '[Machine Gun]': 'machinegun',
+    '[Machine Gune]': 'machinegun'    
   };
 
   array = string.split(/(\[.*?\])/g);
