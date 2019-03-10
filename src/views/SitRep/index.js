@@ -229,11 +229,14 @@ class SitRep extends React.Component {
         3260604718, // Luna's Howl
         3260604717, // Not Forgotten
         4047371119, // The Mountaintop
+        2335550020, // The Recluse
 
         3810740723, // Loaded Question
         4037097478, // Nightshade
+        543982652, // Oxygen SR3
 
         1666039008, // Breakneck
+        1639266456, // 21% Delirium
         1660030045, // Malfeasance
         3074058273, // The Last Word
 

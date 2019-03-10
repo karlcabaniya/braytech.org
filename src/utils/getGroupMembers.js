@@ -12,7 +12,7 @@ export async function getGroupMembers(group) {
   let memberResponses = await Promise.all(
     groupMembersResponse.results.map(async member => {
       try {
-        const [profile, historicalStats] = await Promise.all([bungie.memberProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900'), bungie.getHistoricalStats(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '1,3', '3,4,5,6,7,16,19,63', '0')]);
+        const [profile, historicalStats] = await Promise.all([bungie.memberProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900'), bungie.getHistoricalStats(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '1', '5,7', '0')]);
         member.profile = profile;
         member.historicalStats = historicalStats;
         

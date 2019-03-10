@@ -34,7 +34,7 @@ async function loadMember(membershipType, membershipId, characterId) {
     const data = await getMember(membershipType, membershipId);
 
     if (!data.profile.characterProgressions.data) {
-      store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error: new Error('private') } });
+      store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error: { message: 'private' } } });
       return;
     }
 
