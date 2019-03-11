@@ -157,13 +157,13 @@ class Header extends React.Component {
         exact: true,
         primary: true
       },
-      {
-        name: t('Leaderboards'),
-        desc: t('???'),
-        slug: '/leaderboards',
-        exact: true,
-        profile: false
-      },
+      // {
+      //   name: t('Leaderboards'),
+      //   desc: t('???'),
+      //   slug: '/leaderboards',
+      //   exact: true,
+      //   profile: false
+      // },
       {
         name: t('Resources'),
         desc: t("justrealmilk's curated list of tools and artists"),
