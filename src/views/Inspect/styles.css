@@ -1,7 +1,7 @@
 #inspect {
   position: relative;
   display: block;
-  margin: -40px 0 0 0;
+  margin: -40px auto 0;
   padding: 0;
   color: rgba(255, 255, 255, 0.8);
   --exotic: 48, 61%, 50%;
@@ -17,10 +17,13 @@
 }
 
 #inspect .grid {
+  position: relative;
+  z-index: 3;
   display: grid;
   grid-template-columns: 27rem auto;
   align-items: stretch;
   min-height: calc(100vh - 66px);
+  min-height: 100vh;
 }
 
 #inspect .col {
@@ -266,6 +269,14 @@
   height: 48px;
 }
 
+#inspect .details .sockets .socket .plug.is-intrinsic {
+  transition: transform 0.25s;
+}
+
+#inspect .details .sockets .socket .plug.is-intrinsic:hover {
+  transform: scale(1.1);
+}
+
 #inspect .details .sockets.is-mods .socket {
   margin: 0 4px;
 }
@@ -276,6 +287,38 @@
 
 #inspect .details .sockets.is-mods .socket .plug:not(.is-active):not(:first-child) {
   display: none;
+}
+
+#inspect .details .sockets.is-mods .socket .plug:not(.is-intrinsic)::before {
+  content: ' ';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0);
+  transition: box-shadow 0.25s;
+}
+
+#inspect .details .sockets.is-mods .socket .plug:not(.is-intrinsic)::after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: inset 0 0 0 2px rgb(162, 162, 162);
+  transition: box-shadow 0.25s, background-color 0.25s;
+}
+
+#inspect .details .sockets.is-mods .socket .plug:not(.is-intrinsic):hover::before {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+#inspect .details .sockets.is-mods .socket .plug:not(.is-intrinsic):hover::after {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
 }
 
 #inspect .details .stats {
@@ -355,4 +398,88 @@
   width: calc(100% - 27rem);
   background-size: cover;
   background-position-x: right;
+}
+
+#inspect.lore-open .details .socket-bros,
+#inspect.lore-open .details .stats {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#inspect .lore {
+  position: absolute;
+  top: calc(40px + 4rem);
+  left: 0;
+  width: 100%;
+  height: calc(100% - (40px + 4rem));
+  padding: 0 3rem 3rem;
+  overflow-y: auto;
+  font-size: 18px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#inspect .lore pre {
+  white-space: pre-wrap;
+  padding: 1rem 0 3rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+#inspect.lore-open .lore {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+
+  #inspect .grid {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: unset;
+    min-height: unset;
+  }
+
+  #inspect .displayProperties .text {
+    margin: 4rem 3rem 3rem 3rem;
+  }
+
+  #inspect .details {
+    padding: 3rem;
+    width: 100%;
+    backdrop-filter: unset;
+  }
+
+  #inspect .image.screenshot {
+    position: relative;
+    top: unset;
+    left: unset;
+    width: 100%;
+    height: unset;
+    padding-bottom: 56%;
+    background-size: cover;
+    background-position-x: center;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  #inspect .grid {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: unset;
+    min-height: unset;
+  }
+
+  #inspect .displayProperties .text {
+    margin: 3rem 2rem 2rem 2rem;
+  }
+
+  #inspect .details {
+    padding: 2rem;
+  }
+
 }

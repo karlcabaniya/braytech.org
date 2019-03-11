@@ -233,5 +233,10 @@
     "date": "2019-03-11T04:26:44.497Z",
     "version": "2.3.0",
     "content": "## Changes\n- Profile privacy error correctly renders once more\n- Other things but I'm tired\n- Inspect view for items - kind of beta"
+  },
+  {
+    "date": "2019-03-11T14:42:14.395Z",
+    "version": "2.3.1",
+    "content": "## Changes\n- Added Lore to Inspect view"
   }
 ]

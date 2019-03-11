@@ -18,7 +18,9 @@ class Inspect extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      loreOpen: false
+    };
   }
 
   componentDidMount() {
@@ -28,6 +30,14 @@ class Inspect extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.match.params.kind !== prevProps.match.params.kind) {
       window.scrollTo(0, 0);
+    }
+  }
+
+  toggleLore = () => {
+    if (!this.state.loreOpen) {
+      this.setState({ loreOpen: true });
+    } else {
+      this.setState({ loreOpen: false });
     }
   }
 
@@ -63,18 +73,37 @@ class Inspect extends React.Component {
           tier = 'basic';
       }
     }
-    
+
     const isArmour = item.itemType === 2 ? true : false;
     const isWeapon = item.itemType === 3 ? true : false;
 
     const perkCategoryHashes = [4241085061];
-    const modCategoryHashes = [2685412949, 590099826, 3379164649, 4265082475];
+    const modCategoryHashes = [2685412949, 590099826, 3379164649, 4265082475, 4243480345];
 
     const hasBaseStat = item.stats && manifest.DestinyStatDefinition[item.stats.primaryBaseStatHash] ? manifest.DestinyStatDefinition[item.stats.primaryBaseStatHash] : false;
 
+    const socketsPerks = sockets.filter(socket => !modCategoryHashes.includes(socket.categoryHash)).length ? sockets.filter(socket => !modCategoryHashes.includes(socket.categoryHash)).filter(socket => socket.socketTypeHash !== 1282012138) : false;
+    const socketsMods = sockets.filter(socket => modCategoryHashes.includes(socket.categoryHash)).length ? sockets.filter(socket => modCategoryHashes.includes(socket.categoryHash)) : false;
+
+    const toggleLoreLink = (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a onClick={this.toggleLore}>
+        {this.state.loreOpen ? (
+          <>
+            <i className='uniF16E' />
+            {t('Hide Lore')}
+          </>
+        ) : (
+          <>
+            <i className='uniF16B' />
+            {t('Show Lore')}
+          </>
+        )}
+      </a>
+    );
+
     return (
-      <div className={cx('view', 'dark-mode')} id='inspect'>
-        {item.screenshot ? <ObservedImage className='image screenshot' src={`${Globals.url.bungie}${item.screenshot}`} /> : null}
+      <div className={cx('view', { 'lore-open': this.state.loreOpen })} id='inspect'>
         <div className='grid'>
           <div className='col displayProperties'>
             <div className={cx('rarity', tier)} />
@@ -82,67 +111,74 @@ class Inspect extends React.Component {
               <div className='name'>{item.displayProperties.name}</div>
               <div className='type'>{item.itemTypeDisplayName}</div>
               <div className='description'>{item.displayProperties.description}</div>
-              <div className={cx('primary-stat', { isWeapon, isArmour } )}>
-                {isWeapon ? <div className={cx('damageType', damageTypeToString(item.damageTypeHashes[0]).toLowerCase())}>
-                  <div className={cx('icon', damageTypeToString(item.damageTypeHashes[0]).toLowerCase())} />
-                </div> : null}
-                {hasBaseStat ? <div className='text'>
-                  <div className='power'>630</div>
-                  <div className='primaryBaseStat'>{hasBaseStat.displayProperties.name}</div>
-                </div> : null}
+              <div className={cx('primary-stat', { isWeapon, isArmour })}>
+                {isWeapon ? (
+                  <div className={cx('damageType', damageTypeToString(item.damageTypeHashes[0]).toLowerCase())}>
+                    <div className={cx('icon', damageTypeToString(item.damageTypeHashes[0]).toLowerCase())} />
+                  </div>
+                ) : null}
+                {hasBaseStat ? (
+                  <div className='text'>
+                    <div className='power'>630</div>
+                    <div className='primaryBaseStat'>{hasBaseStat.displayProperties.name}</div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
           <div className='col details'>
+            {item.loreHash ? <div className='lore'>
+              <pre>{manifest.DestinyLoreDefinition[item.loreHash].displayProperties.description}</pre>
+            </div> : null}
             <div className='socket-bros'>
-              {sockets.filter(socket => !modCategoryHashes.includes(socket.categoryHash)).length ? (
+              {socketsPerks ? (
                 <>
                   <div className='sub-header sub'>
-                    <div>Weapon perks</div>
+                    <div>{manifest.DestinySocketCategoryDefinition[socketsPerks[0].categoryHash].displayProperties.name}</div>
                   </div>
                   <div className='sockets is-perks'>
-                    {sockets
-                      .filter(socket => !modCategoryHashes.includes(socket.categoryHash))
-                      .map((socket, index) => {
-                        return (
-                          <div key={index} className='socket'>
-                            {socket.plugs.map(plug => plug.element)}
-                          </div>
-                        );
-                      })}
+                    {socketsPerks.map((socket, index) => {
+                      return (
+                        <div key={index} className='socket'>
+                          {socket.plugs.map(plug => plug.element)}
+                        </div>
+                      );
+                    })}
                   </div>
                 </>
               ) : null}
-              {sockets.filter(socket => modCategoryHashes.includes(socket.categoryHash)).length ? (
+              {socketsMods ? (
                 <>
                   <div className='sub-header sub'>
-                    <div>Weapon mods</div>
+                    <div>{manifest.DestinySocketCategoryDefinition[socketsMods[0].categoryHash].displayProperties.name}</div>
                   </div>
                   <div className='sockets is-mods'>
-                    {sockets
-                      .filter(socket => modCategoryHashes.includes(socket.categoryHash))
-                      .map((socket, index) => {
-                        return (
-                          <div key={index} className='socket'>
-                            {socket.plugs.map(plug => plug.element)}
-                          </div>
-                        );
-                      })}
+                    {socketsMods.map((socket, index) => {
+                      return (
+                        <div key={index} className='socket'>
+                          {socket.plugs.map(plug => plug.element)}
+                        </div>
+                      );
+                    })}
                   </div>
                 </>
               ) : null}
             </div>
-            {(isWeapon || isArmour) && stats.length ? <div className='stats'>
-              <div className='sub-header sub'>
-                <div>{isWeapon ? `Weapon` : `Armour`} stats</div>
+            {(isWeapon || isArmour) && stats.length ? (
+              <div className='stats'>
+                <div className='sub-header sub'>
+                  <div>{isWeapon ? `Weapon` : `Armour`} stats</div>
+                </div>
+                <div className='values'>{stats.map(stat => stat.element)}</div>
               </div>
-              <div className='values'>{stats.map(stat => stat.element)}</div>
-            </div> : null}
+            ) : null}
           </div>
         </div>
+        {item.screenshot ? <ObservedImage className='image screenshot' src={`${Globals.url.bungie}${item.screenshot}`} /> : null}
         <div className='sticky-nav'>
           <div />
           <ul>
+            {item.loreHash ? <li>{toggleLoreLink}</li> : null}
             <li>
               <ProfileLink to={backLinkPath}>
                 <i className='uniF094' />
