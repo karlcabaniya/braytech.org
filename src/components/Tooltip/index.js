@@ -12,7 +12,8 @@ class Tooltip extends React.Component {
       hash: false,
       itemInstanceId: false,
       itemState: false,
-      table: false
+      table: false,
+      tooltipType: false
     };
 
     this.tooltip = React.createRef();
@@ -60,7 +61,8 @@ class Tooltip extends React.Component {
         hash: e.currentTarget.dataset.itemhash,
         itemInstanceId: e.currentTarget.dataset.iteminstanceid,
         itemState: e.currentTarget.dataset.itemstate,
-        table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false
+        table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false,
+        tooltipType: e.currentTarget.dataset.tooltiptype && e.currentTarget.dataset.tooltiptype !== '' ? e.currentTarget.dataset.tooltiptype : false
       });
     }
   };
@@ -70,7 +72,8 @@ class Tooltip extends React.Component {
       hash: false,
       itemInstanceId: false,
       itemState: false,
-      table: false
+      table: false,
+      tooltipType: false
     });
   };
 
@@ -89,7 +92,8 @@ class Tooltip extends React.Component {
           hash: e.currentTarget.dataset.itemhash,
           itemInstanceId: e.currentTarget.dataset.iteminstanceid,
           itemState: e.currentTarget.dataset.itemstate,
-          table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false
+          table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false,
+          tooltipType: e.currentTarget.dataset.tooltiptype && e.currentTarget.dataset.tooltiptype !== '' ? e.currentTarget.dataset.tooltiptype : false
         });
       }
     }
@@ -121,7 +125,8 @@ class Tooltip extends React.Component {
         hash: false,
         itemInstanceId: false,
         itemState: false,
-        table: false
+        table: false,
+        tooltipType: false
       });
     }
   };
@@ -138,7 +143,8 @@ class Tooltip extends React.Component {
         hash: false,
         itemInstanceId: false,
         itemState: false,
-        table: false
+        table: false,
+        tooltipType: false
       });
       this.target_bindings();
     }
@@ -166,7 +172,7 @@ class Tooltip extends React.Component {
     if (this.state.hash) {
       return (
         <div id='tooltip' ref={this.tooltip} style={{ top: `${this.mouseMoveXY.y}px`, left: `${this.mouseMoveXY.x}px` }}>
-          <ItemTypes hash={this.state.hash} itemInstanceId={this.state.itemInstanceId} itemState={this.state.itemState} table={this.state.table} />
+          <ItemTypes hash={this.state.hash} itemInstanceId={this.state.itemInstanceId} itemState={this.state.itemState} table={this.state.table} tooltipType={this.state.tooltipType} />
         </div>
       );
     } else {

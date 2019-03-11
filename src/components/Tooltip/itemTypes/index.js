@@ -20,7 +20,7 @@ import sandboxPerk from './sandboxPerk';
 class ItemTypes extends React.Component {
 
   render() {
-    const { member, hash, itemInstanceId } = this.props;
+    const { member, hash, itemInstanceId, tooltipType } = this.props;
     const itemComponents = member.data ? member.data.profile.itemComponents : false;
 
     let itemState = this.props.itemState;
@@ -104,6 +104,10 @@ class ItemTypes extends React.Component {
     if (table === 'DestinySandboxPerkDefinition') {
       kind = 'ui name-only sandbox-perk';
       black = sandboxPerk(item);
+    }
+
+    if (tooltipType) {
+      kind = tooltipType;
     }
   
     if (item.inventory) {

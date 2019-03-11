@@ -15,15 +15,20 @@
   left: -1.5rem;
 }
 
-@media screen and (max-width: 1200px) {
-}
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
   #clan > .roster {
     padding: 3rem 2rem 2rem;
     grid-gap: 2rem;
     grid-template-columns: 1fr;
   }
+
+  #clan > .roster .summary {
+    max-width: 24rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  
 
   #clan > .roster > .members .liteRefresh {
     position: absolute;

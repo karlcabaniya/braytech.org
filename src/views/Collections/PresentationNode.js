@@ -131,7 +131,7 @@ class PresentationNode extends React.Component {
         </div>
         <div className='collectibles'>
           <ul className='list tertiary collection-items'>
-            <Collectibles {...this.props} {...this.state} node={tertiaryHash} highlight={quaternaryHash} />
+            <Collectibles {...this.props} {...this.state} node={tertiaryHash} highlight={quaternaryHash} inspect />
           </ul>
         </div>
       </div>

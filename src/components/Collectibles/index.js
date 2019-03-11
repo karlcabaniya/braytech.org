@@ -110,7 +110,7 @@ class Collectibles extends React.Component {
           // eslint-disable-next-line eqeqeq
           let ref = highlight == collectibleDefinition.hash ? this.scrollToRecordRef : null;
 
-          if (collectibleDefinition.redacted) {
+          if (collectibleDefinition.redacted || collectibleDefinition.itemHash === 0) {
             collectibles.push(
               <li
                 key={collectibleDefinition.hash}

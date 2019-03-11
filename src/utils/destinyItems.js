@@ -33,7 +33,7 @@ const interpolate = (investmentValue, displayInterpolation) => {
   return Math.round(displayValue);
 };
 
-export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, socketExclusions = []) => {
+export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, socketExclusions = [], uiStyleTooltips = false) => {
   let statGroup = item.stats ? manifest.DestinyStatGroupDefinition[item.stats.statGroupHash] : false;
 
   let statModifiers = [];
@@ -155,7 +155,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           active: plug.hash === socket.singleInitialItemHash,
           definition: plug,
           element: (
-            <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash}>
+            <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
               <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon}`} />
               <div className='text'>
                 <div className='name'>{plug.displayProperties.name}</div>
@@ -172,7 +172,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         singleInitialItem = {
           definition: plug,
           element: (
-            <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash}>
+            <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
               <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon}`} />
               <div className='text'>
                 <div className='name'>{plug.displayProperties.name}</div>

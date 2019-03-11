@@ -25,7 +25,7 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__({
       actionsBlacklist: [],
-      trace: true
+      // trace: true
     })
 );
 

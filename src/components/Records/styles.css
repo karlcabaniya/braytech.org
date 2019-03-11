@@ -108,7 +108,7 @@
 }
 
 .list.record-items li.linked.completed:hover {
-  background-color: rgba(207, 191, 124, 0.8);
+  background-color: rgba(188, 173, 113, 0.8);
 }
 
 .list.record-items li.linked.completed:hover .properties .text .description {
