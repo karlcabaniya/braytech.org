@@ -68,6 +68,7 @@ class Collectibles extends React.Component {
                 <div className='icon'>
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
                 </div>
+                {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
               </li>
             );
           });

@@ -35,6 +35,7 @@ class Root extends React.Component {
             <div className='icon'>
               <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
             </div>
+            {collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: '/collections' } }} /> : null}
           </li>
         );
       });

@@ -5,6 +5,7 @@ import manifest from '../../utils/manifest';
 
 import ObservedImage from '../../components/ObservedImage';
 import Collectibles from '../../components/Collectibles';
+import * as paths from '../../utils/paths';
 import { enumerateCollectibleState } from '../../utils/destinyEnums';
 
 class BadgeNode extends React.Component {
@@ -40,7 +41,7 @@ class BadgeNode extends React.Component {
             <div>{nodeDefinition.displayProperties.name}</div>
           </div>
           <ul className='list tertiary collection-items'>
-            <Collectibles {...this.props} {...this.state} node={node.presentationNodeHash} />
+            <Collectibles {...this.props} {...this.state} node={node.presentationNodeHash} inspect selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} />
           </ul>
         </div>
       );
