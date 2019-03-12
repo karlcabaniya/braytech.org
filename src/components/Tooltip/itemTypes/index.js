@@ -125,10 +125,10 @@ class ItemTypes extends React.Component {
           tier = 'uncommon';
           break;
         case 2:
-          tier = 'basic';
+          tier = 'common';
           break;
         default:
-          tier = 'basic';
+          tier = 'common';
       }
     }
   
