@@ -3,7 +3,7 @@ import { withNamespaces } from 'react-i18next';
 
 import './styles.css';
 
-class NotificationApp extends React.Component {
+class NotificationBar extends React.Component {
   constructor(props) {
     super(props);
 
@@ -38,4 +38,4 @@ class NotificationApp extends React.Component {
   }
 }
 
-export default withNamespaces()(NotificationApp);
+export default withNamespaces()(NotificationBar);

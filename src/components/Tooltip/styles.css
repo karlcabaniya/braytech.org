@@ -438,6 +438,7 @@
 #tooltip .frame.ui .header {
   background-color: hsla(0, 0%, 0%, 0.9);
   border-top: 5px solid rgba(214, 214, 214, 0.8);
+  color: #fff;
 }
 
 #tooltip .frame.ui .black {

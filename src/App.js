@@ -21,7 +21,8 @@ import * as ls from './utils/localStorage';
 import Header from './components/Header';
 import Tooltip from './components/Tooltip';
 import Footer from './components/Footer';
-import NotificationApp from './components/NotificationApp';
+import NotificationBar from './components/NotificationBar';
+import NotificationOverlay from './components/NotificationOverlay';
 import NotificationProgress from './components/NotificationProgress';
 import RefreshService from './components/RefreshService';
 
@@ -166,7 +167,8 @@ class App extends React.Component {
         <Route
           render={route => (
             <div className={cx('wrapper', this.props.theme.selected)}>
-              <NotificationApp updateAvailable={this.props.updateAvailable} />
+              <NotificationBar updateAvailable={this.props.updateAvailable} />
+              {/* <NotificationOverlay /> */}
               <NotificationProgress />
 
               {/* Don't run the refresh service if we're currently selecting
