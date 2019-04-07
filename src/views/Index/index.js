@@ -47,68 +47,6 @@ class Index extends React.Component {
 
   render() {
 
-    let xur = manifest.DestinyVendorDefinition[2190858386];
-
-    console.log(xur)
-
-    let a = [7,8,9,10];
-
-    let defs = [];
-
-    for (let index = 0; index < xur.categories.length; index++) {
-      const element = xur.categories[index];
-
-      if (a.includes(index)) {
-
-        let list = element.vendorItemIndexes;
-
-        list.forEach(l => {
-          let hash = xur.itemList.find(h => h.vendorItemIndex === l).itemHash;
-
-          let itemDef = manifest.DestinyInventoryItemDefinition[hash];
-
-          defs.push(itemDef)
-        })
-
-
-      }
-      
-    }
-
-    function mysql_real_escape_string (str) {
-      if (typeof str != 'string')
-          return str;
-  
-      return str.replace(/[\0\x08\x09\x1a\n\r"'\\\%]/g, function (char) {
-          switch (char) {
-              case "\0":
-                  return "\\0";
-              case "\x08":
-                  return "\\b";
-              case "\x09":
-                  return "\\t";
-              case "\x1a":
-                  return "\\z";
-              case "\n":
-                  return "\\n";
-              case "\r":
-                  return "\\r";
-              case "\"":
-              case "'":
-              case "\\":
-              case "%":
-                  return "\\"+char; // prepends a backslash to backslash, percent,
-                                    // and double/single quotes
-          }
-      });
-  }
-
-    console.log(defs.map(d => {
-      return `(NULL, ${d.hash}, '${mysql_real_escape_string(d.displayProperties.name)}', '${mysql_real_escape_string(d.displayProperties.description)}', '${d.itemType}')`
-    }).join(', '))
-
-
-
     let slogans = [
       {
         message: 'Where are the Sleeper Nodes?',
