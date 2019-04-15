@@ -243,5 +243,10 @@
     "date": "2019-03-13T08:16:31.435Z",
     "version": "2.3.2",
     "content": "## Changes\n- Bye, Service Worker."
+  },
+  {
+    "date": "2019-04-16T17:48:29.750Z",
+    "version": "2.3.3",
+    "content": "## Changes\n- Improved loading screen performance\n- Tooltip touch-ups\n- NEW Dossier view"
   }
 ]

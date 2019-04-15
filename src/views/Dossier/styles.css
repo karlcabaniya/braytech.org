@@ -1,0 +1,190 @@
+#dossier {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 3rem;
+  padding: 4rem 3rem 3rem;
+}
+
+#dossier .search {
+  position: relative;
+}
+
+#dossier .form {
+  margin: 0 0 1rem;
+}
+
+#dossier .form .field input {
+  transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
+}
+
+#dossier .form .field:hover input {
+  z-index: 2;
+}
+
+#dossier .results {
+  margin: 1rem 0 0;
+}
+
+#dossier .search .sub-header ~ .sub-header {
+  margin: 2rem 0 0;
+}
+
+#dossier .results .list li .list {
+  display: flex;
+  flex-basis: 100%;
+}
+
+#dossier .results .list li .list .linked {
+  flex-basis: 100%;
+  padding: 0 1rem;
+}
+
+#dossier .results .list li.selected .list .linked {
+  flex-basis: 38px;
+  padding: 0 1rem;
+}
+
+#dossier .results .list li.selected .list .linked:first-child {
+  flex-basis: calc(100% - 41px);
+  margin: 0 3px 0 0;
+}
+
+#dossier .results .list li.linked:hover {
+  z-index: 3;
+}
+
+#dossier .results .list li.linked a {
+  padding: 0 1rem 0 0;
+}
+
+#dossier .results .list li.linked a span {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem 0 0;
+  color: #fff;
+  background-color: #4caf50;
+}
+
+#dossier .results .list li.linked a span.destiny-platform_pc {
+  background-color: #2196f3;
+}
+
+#dossier .results .list li.linked a span.destiny-platform_playstation {
+  background-color: #3f51b5;
+}
+
+#dossier .results .list li.linked.profile-remove-handler a {
+  justify-content: center;
+  padding: 0;
+}
+
+#dossier .results .list li.linked.profile-remove-handler a::before {
+  content: '\E947';
+  font-family: 'symbols';
+  font-size: 16px;
+}
+
+#dossier .members {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 3rem;
+  grid-column: 2/6;
+  position: relative;
+}
+
+#dossier .members .spinner.mini {
+  position: absolute;
+  left: -2rem;
+}
+
+#dossier .members .member {
+  display: grid;
+  grid-template-columns: 48px auto;
+  grid-gap: 1rem;
+}
+
+#dossier .members .member .characters-list {
+  grid-column: 1/3;
+}
+
+#dossier .members .member .list.items {
+  display: block;
+}
+
+#dossier .members .member .list.items .is-subclass .image {
+  transform: rotate(45deg) scale(1.42);
+}
+
+#dossier .members .member .list.items > li {
+  display: grid;
+  grid-template-columns: 48px auto;
+}
+
+#dossier .members .member .activity {
+  grid-column: 1/3;
+  padding: 0 0 14px;
+  margin: 0 0 4px;
+  line-height: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#dossier .members .member .activity .mode {
+  display: none;
+}
+
+#dossier .members .member .activity .name {
+  display: inline-block;
+}
+
+#dossier .members .member .activity .name::after {
+  content: ' ';
+  white-space: pre;
+}
+
+#dossier .members .member .activity .name.inactive {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#dossier .members .member .activity time {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#dossier .members .member .highlights {
+  /* padding: 0 0 0 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.2); */
+}
+
+#dossier .members .member .highlights .d {
+  margin: 0 0 14px;
+}
+
+#dossier .members .member .highlights .d .n {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  margin: 0 0 4px;
+}
+
+#dossier .members .member .highlights .d.armour-stats .v {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 22px);
+  grid-gap: 10px;
+}
+
+#dossier .members .member .highlights .d.armour-stats .v div {
+  text-align: center;
+}
+
+#dossier .members .member .highlights .d.armour-stats .v div div:first-child {
+  margin: 0 0 4px;
+}
+
+#dossier .members .member .highlights .d.armour-stats .v [class^="destiny-"] {
+  font-size: 22px;
+}

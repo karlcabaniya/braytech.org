@@ -3,6 +3,7 @@ import { createStore, combineReducers } from 'redux';
 import theme from './reducers/theme.js';
 import member from './reducers/member.js';
 import groupMembers from './reducers/groupMembers.js';
+import dossierMembers from './reducers/dossierMembers.js';
 import refreshService from './reducers/refreshService.js';
 import PGCRcache from './reducers/PGCRcache.js';
 import triumphs from './reducers/triumphs.js';
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   theme,
   member,
   groupMembers,
+  dossierMembers,
   refreshService,
   PGCRcache,
   triumphs,

@@ -15,7 +15,7 @@ const weapon = item => {
   let intrinsic = sockets.find(socket => (socket.singleInitialItem ? socket.singleInitialItem.definition.itemCategoryHashes.includes(2237038328) : false));
   intrinsic = intrinsic ? manifest.DestinySandboxPerkDefinition[intrinsic.singleInitialItem.definition.perks[0].perkHash] : false;
 
-  let powerLevel = '630';
+  let powerLevel = '681';
   powerLevel = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.primaryStat.value : powerLevel;
 
   let damageTypeHash = item.damageTypeHashes[0];

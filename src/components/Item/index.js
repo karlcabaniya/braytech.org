@@ -11,26 +11,13 @@ import './styles.css';
 
 class Item extends React.Component {
   render() {
-    const { data, member } = this.props;
+    const { data, member, showMemberState } = this.props;
 
     let hash = data.itemHash;
     let itemDefinition = manifest.DestinyInventoryItemDefinition[hash];
 
-    let costs = [];
-    if (data.costs) {
-      data.costs.forEach(cost => {
-        let currencyDefinition = manifest.DestinyInventoryItemDefinition[cost.itemHash];
-        costs.push(
-          <li key={currencyDefinition.hash} className='item tooltip' data-itemhash={currencyDefinition.hash}>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${currencyDefinition.displayProperties.icon}`} />
-            <div className='value'>{cost.quantity}</div>
-          </li>
-        );
-      });
-    }
-
     let state = 0;
-    if (member.data && !data.itemInstanceId) {
+    if (member.data && showMemberState) {
       let hash = itemDefinition.collectibleHash ? itemDefinition.collectibleHash : false;
       if (hash) {
         let characterId = member.characterId;
@@ -61,7 +48,6 @@ class Item extends React.Component {
               {data.quantity > 1 ? <div className='quantity'>{data.quantity}</div> : null}
             </li>
           </ul>
-          {costs.length > 0 ? <ul className='list costs'>{costs}</ul> : null}
         </>
       );
     } else {
@@ -81,7 +67,6 @@ class Item extends React.Component {
               {data.quantity > 1 ? <div className='quantity'>{data.quantity}</div> : null}
             </li>
           </ul>
-          {costs.length > 0 ? <ul className='list costs'>{costs}</ul> : null}
         </>
       );
     }
@@ -90,8 +75,7 @@ class Item extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member,
-    theme: state.theme
+    member: state.member
   };
 }
 

@@ -16,6 +16,8 @@ import ThisWeek from './views/ThisWeek';
 import Header from './components/Header';
 import Spinner from './components/Spinner';
 
+import Dossier from './views/Dossier';
+
 class ProfileRoutes extends React.Component {
   componentDidMount() {
     const { membershipId, membershipType, characterId } = this.props.match.params;
@@ -60,6 +62,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Triumphs {...route} />} />
           <Route path={`${match.url}/this-week`} exact render={() => <ThisWeek />} />>
           <Route path={`${match.url}/sit-rep`} exact render={route => <SitRep />} />
+          <Route path={`${match.url}/dossier`} render={route => <Dossier />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/sit-rep` }} />} />
         </Switch>
       </>

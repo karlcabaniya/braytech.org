@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?edwe6a') format('woff');
+  src: url('destiny.woff?pmi42h') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -8,6 +8,7 @@
 [class^="destiny-"], [class*=" destiny-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'destiny' !important;
+  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -19,6 +20,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.destiny-recovery:before {
+  content: "\e9e3";
+}
+.destiny-resilience:before {
+  content: "\e9e4";
+}
+.destiny-mobility:before {
+  content: "\e9f0";
+}
 .destiny-arrow_left:before {
   content: "\e995";
 }

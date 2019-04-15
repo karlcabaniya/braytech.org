@@ -228,9 +228,9 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         if (stat.hash === 3871231066) {
           value = value < 1 ? 1 : value;
         }
-
-        value = statModifierMasterwork ? value - statModifierMasterwork.value : value;
+        
         value = instanceStat ? instanceStat.value : value;
+        value = statModifierMasterwork ? value - statModifierMasterwork.value : value;
 
         statsOutput.push({
           displayAsNumeric: stat.displayAsNumeric,

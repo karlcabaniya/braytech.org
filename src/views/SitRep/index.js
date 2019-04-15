@@ -202,6 +202,8 @@ class SitRep extends React.Component {
       }
     };
 
+    console.log(valor)
+
     glory.progression.total = Object.keys(glory.defs.rank.steps).reduce((sum, key) => {
       return sum + glory.defs.rank.steps[key].progressTotal;
     }, 0);

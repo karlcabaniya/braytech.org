@@ -153,6 +153,10 @@ class Tooltip extends React.Component {
       this.target_bindings();
     }
 
+    if (this.props.dossierMembers.responses !== prevProps.dossierMembers.responses) {
+      this.target_bindings();
+    }
+
     if (this.state.hash) {
       this.tooltip_bindings();
     }
@@ -183,7 +187,8 @@ class Tooltip extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    dossierMembers: state.dossierMembers
   };
 }
 

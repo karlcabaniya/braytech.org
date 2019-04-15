@@ -13,8 +13,9 @@ const armour = item => {
   let intrinsic = sockets.find(socket => (socket.singleInitialItem ? socket.singleInitialItem.definition.itemCategoryHashes.includes(2237038328) : false));
   intrinsic = intrinsic ? manifest.DestinySandboxPerkDefinition[intrinsic.singleInitialItem.definition.perks[0].perkHash] : false;
 
-  let powerLevel = '630';
-  powerLevel = item.itemComponents ? item.itemComponents.instance.primaryStat.value : powerLevel;
+  let powerLevel = '681';
+  powerLevel = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.primaryStat.value : powerLevel;
+  
 
   return (
     <>
@@ -29,7 +30,7 @@ const armour = item => {
           <p>{sourceString}</p>
         </div>
       ) : null}
-      <div className='stats'>{stats.map(stat => stat.element)}</div>
+      {stats.length > 0 ? <div className='stats'>{stats.map(stat => stat.element)}</div> : null}
       <div className={cx('sockets', { 'has-sockets': sockets.length > 0 })}>
         {intrinsic ? (
           <div className='plug intrinsic'>

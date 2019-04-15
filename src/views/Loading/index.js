@@ -3,12 +3,8 @@ import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 import packageJSON from '../../../package.json';
 
-import { ReactComponent as Spokes } from './svg/spokes.svg';
-import { ReactComponent as Radii } from './svg/radii.svg';
-import { ReactComponent as Center } from './svg/center.svg';
-import { ReactComponent as Orbit1 } from './svg/orbit-1.svg';
-import { ReactComponent as Orbit2 } from './svg/orbit-2.svg';
-import { ReactComponent as Orbit3 } from './svg/orbit-3.svg';
+import ObservedImage from '../../components/ObservedImage';
+
 import './styles.css';
 
 const LOADING_STATE = {
@@ -48,24 +44,8 @@ function Loading({ t, state, theme }) {
     return (
       <div className={cx('view', theme.selected)} id='loading'>
         <div className='bg'>
-          <div className='spokes'>
-            <Spokes />
-          </div>
-          <div className='radii'>
-            <Radii />
-          </div>
-          <div className='center'>
-            <Center />
-          </div>
-          <div className='orbit-1'>
-            <Orbit1 />
-          </div>
-          <div className='orbit-2'>
-            <Orbit2 />
-          </div>
-          <div className='orbit-3'>
-            <Orbit3 />
-          </div>
+          <ObservedImage className='image bottom' src={`/static/images/extracts/flair/01A3-000003F1.png`} />
+          <ObservedImage className='image top' src={`/static/images/extracts/flair/01A3-0000015A.png`} />
         </div>
         <div className='logo-feature'>
           <div className='device'>

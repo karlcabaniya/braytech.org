@@ -179,6 +179,219 @@ export function damageTypeToString(type) {
   return string;
 }
 
+function getSubclassPath(gridDef, talentGrid) {
+  let activatedNodes = talentGrid.nodes.filter(node => node.isActivated).map(node => node.nodeIndex);
+  let selectedSkills = gridDef.nodeCategories.filter(category => {
+    var overlapping = category.nodeHashes.filter(nodeHash => activatedNodes.indexOf(nodeHash) > -1);
+    return overlapping.length > 0;
+  });
+  let subclassPath = selectedSkills.find(nodeDef => nodeDef.isLoreDriven);
+  return subclassPath;
+}
+
+export function getSubclassPathInfo(profile, characterId) {
+  const characters = profile.characters.data;
+  const characterEquipment = profile.characterEquipment.data;
+  const itemComponents = profile.itemComponents;
+
+  const classTypes = { Titan: 0, Hunter: 1, Warlock: 2 };
+  const damageTypes = { Arc: 2, Thermal: 3, Void: 4 };
+  const identifiers = { First: 'FirstPath', Second: 'SecondPath', Third: 'ThirdPath' };
+
+  const pathsCustomInfo = [
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.First,
+      art: '01A3-0000112B'
+    },
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.Second,
+      art: '01A3-0000112B'
+    },
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.Third,
+      art: '01E3-00001598'
+    },
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.First,
+      art: '01A3-0000116E'
+    },
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.Second,
+      art: '01A3-0000116E'
+    },
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.Third,
+      art: '01E3-0000159D'
+    },
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Void,
+      identifier: identifiers.First,
+      art: '01A3-00001179'
+    },
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Void,
+      identifier: identifiers.Second,
+      art: '01A3-00001179'
+    },
+    {
+      classType: classTypes.Titan,
+      damageType: damageTypes.Void,
+      identifier: identifiers.Third,
+      art: '01E3-0000159F'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.First,
+      art: '01A3-000010B4'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.Second,
+      art: '01A3-000010B4'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.Third,
+      art: '01E3-00001593'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.First,
+      art: '01A3-000010F8'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.Second,
+      art: '01A3-000010F8'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.Third,
+      art: '01E3-00001595'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Void,
+      identifier: identifiers.First,
+      art: '01A3-00001107'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Void,
+      identifier: identifiers.Second,
+      art: '01A3-00001107'
+    },
+    {
+      classType: classTypes.Hunter,
+      damageType: damageTypes.Void,
+      identifier: identifiers.Third,
+      art: '01E3-00001596'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.First,
+      art: '01A3-000011A1'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.Second,
+      art: '01A3-000011A1'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Arc,
+      identifier: identifiers.Third,
+      art: '01E3-000015A1'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.First,
+      art: '01A3-000011F1'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.Second,
+      art: '01A3-000011F1'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Thermal,
+      identifier: identifiers.Third,
+      art: '01E3-000015A2'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Void,
+      identifier: identifiers.First,
+      art: '01A3-0000120D'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Void,
+      identifier: identifiers.Second,
+      art: '01A3-0000120D'
+    },
+    {
+      classType: classTypes.Warlock,
+      damageType: damageTypes.Void,
+      identifier: identifiers.Third,
+      art: '01E3-000015A5'
+    }
+  ];
+
+  let equipment = characterEquipment[characterId].items;
+  equipment = equipment.map(item => ({
+    ...manifest.DestinyInventoryItemDefinition[item.itemHash],
+    ...item,
+    itemComponents: {
+      perks: itemComponents.perks.data[item.itemInstanceId] ? itemComponents.perks.data[item.itemInstanceId].perks : null,
+      objectives: itemComponents.objectives.data[item.itemInstanceId] ? itemComponents.objectives.data[item.itemInstanceId].objectives : null
+    }
+  }));
+
+  let subclass = equipment.find(item => item.inventory.bucketTypeHash === 3284755031);
+  let talentGrid = itemComponents.talentGrids.data[subclass.itemInstanceId];
+  let gridDef = manifest.DestinyTalentGridDefinition[talentGrid.talentGridHash];
+  let talentPath = getSubclassPath(gridDef, talentGrid);
+  let damageNames = ['', '', 'arc', 'solar', 'void'];
+  let damageType = subclass.talentGrid.hudDamageType;
+  if(talentPath == null){
+    talentPath = {displayProperties:{name: "Unknown"}, identifier:'FirstPath'};
+  }
+  let pathCustom = pathsCustomInfo.find(p => p.classType === subclass.classType && p.damageType === damageType && p.identifier === talentPath.identifier);
+  let path = {
+    name: talentPath.displayProperties.name,
+    element: damageNames[subclass.talentGrid.hudDamageType],
+    art: pathCustom.art
+  };
+
+  return path;
+}
+
 export function ammoTypeToString(type) {
   let string;
 
@@ -299,7 +512,7 @@ export function lastPlayerActivity(member) {
 
     lastCharacter = member.profile.characters.data.find(character => character.characterId === lastCharacterId);
 
-    if (lastActivity && member.isOnline) {
+    if (lastActivity && member.isOnline !== false) {
       let activity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
       let mode = activity ? (activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
 

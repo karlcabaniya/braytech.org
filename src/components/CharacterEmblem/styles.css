@@ -122,57 +122,6 @@
   background-color: #c68b15;
 }
 
-
-.characters-list.responsive {
-  width: 100%;
-  height: 0;
-  padding-bottom: calc(96 / 474 * 100%);
-}
-
-.characters-list.responsive .list li .image.emblem.missing {
-  width: calc(96 / 474 * 100% - 37px);
-  height: calc(100% - 35px);
-  top: 14px;
-  left: 14px;
-}
-
-.characters-list.responsive .list li .class {
-  left: 20%;
-  top: 14%;
-  font-size: 18px;
-}
-
-.characters-list.responsive .list li .species {
-  left: 20%;
-  top: 53%;
-  font-size: 13px;
-}
-
-.characters-list.responsive .list li .light {
-  top: 10%;
-  right: 2%;
-  font-size: 26px;
-}
-
-.characters-list.responsive .list li .light::before {
-  font-size: 11px;
-  left: -12px;
-}
-
-.characters-list.responsive .list li .level {
-  top: 51%;
-  right: 2%;
-  font-size: 14px;
-}
-
-.characters-list.responsive .list li .progress {
-  height: 7px;
-}
-
-
-
-
-
 @media screen and (max-width: 600px) {
   .characters-list {
     width: 100%;

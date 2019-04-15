@@ -20,8 +20,16 @@ import sandboxPerk from './sandboxPerk';
 class ItemTypes extends React.Component {
 
   render() {
-    const { member, hash, itemInstanceId, tooltipType } = this.props;
-    const itemComponents = member.data ? member.data.profile.itemComponents : false;
+    const { member, dossierMembers, hash, itemInstanceId, tooltipType } = this.props;
+
+    let itemComponents;
+    if (member.data && member.data.profile.itemComponents.instances.data[itemInstanceId]) {
+      itemComponents = member.data.profile.itemComponents;
+    } else if (dossierMembers.responses && dossierMembers.responses.find(d => d.profile.itemComponents.instances.data[itemInstanceId])) {
+      itemComponents = dossierMembers.responses.find(d => d.profile.itemComponents.instances.data[itemInstanceId]).profile.itemComponents;
+    } else {
+      itemComponents = false;
+    }
 
     let itemState = this.props.itemState;
     let table = this.props.table;
@@ -181,7 +189,8 @@ class ItemTypes extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    viewport: state.viewport
+    viewport: state.viewport,
+    dossierMembers: state.dossierMembers
   };
 }
 

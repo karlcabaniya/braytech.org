@@ -27,63 +27,21 @@
   height: 100%;
 }
 
-#loading .bg svg {
-  width: 100%;
-  fill: #ffffff;
+#loading .bg .image {
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
 }
 
-#loading .bg > div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-#loading .bg .spokes {
-  opacity: 0.4;
-  filter: blur(10px);
+#loading .bg .image.bottom {
   transform-origin: center;
-  animation: rotate-logo-feature 420s linear infinite;
+  animation: rotate-logo-feature 140s linear infinite;
 }
 
-#loading .bg .radii {
-  opacity: 0.4;
-  filter: blur(10px);
+#loading .bg .image.top {
   transform-origin: center;
-  animation: rotate-logo-feature 420s linear infinite;
-}
-
-#loading .bg .orbit-1 {
-  opacity: 0.2;
-  filter: blur(6px);
-  transform-origin: center;
-  animation: rotate-logo-feature 360s linear infinite;
-}
-
-#loading .bg .orbit-2 {
-  opacity: 0.2;
-  filter: blur(4px);
-  transform-origin: center;
-  animation: rotate-logo-feature 240s linear infinite;
-}
-
-#loading .bg .orbit-3 {
-  opacity: 0.2;
-  filter: blur(3px);
-  transform-origin: center;
-  animation: rotate-logo-feature 120s linear infinite;
-}
-
-#loading .bg .center {
-  opacity: 0.2;
-  filter: blur(4px);
+  animation: rotate-logo-feature 80s linear infinite reverse;
 }
 
 #loading .text {
@@ -167,37 +125,10 @@
 }
 
 @media screen and (orientation: portrait) {
-  #loading .bg > div {
-    width: 180vw;
-    left: -40vw;
-  }
+  
 }
 
 @media screen and (max-width: 600px) {
-  #loading .bg .spokes {
-    filter: blur(10px);
-  }
-  
-  #loading .bg .radii {
-    filter: blur(8px);
-  }
-  
-  #loading .bg .orbit-1 {
-    filter: blur(4px);
-  }
-  
-  #loading .bg .orbit-2 {
-    filter: blur(4px);
-  }
-  
-  #loading .bg .orbit-3 {
-    filter: blur(2px);
-  }
-  
-  #loading .bg .center {
-    filter: blur(3px);
-  }
-
   #loading .logo-feature .device {
     width: 48px;
     font-size: 48px;
