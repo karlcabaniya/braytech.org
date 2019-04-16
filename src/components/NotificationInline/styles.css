@@ -18,6 +18,11 @@
   box-shadow: inset 0 0 0 2px #bbbbbb;
 }
 
+.notification-inline.error {
+  background-color: rgba(244, 67, 54, 0.2);
+  box-shadow: inset 0 0 0 2px #F44336;
+}
+
 
 @media screen and (max-width: 600px) {
   

@@ -21,14 +21,16 @@ export async function getDossierMembers(members) {
         member.historicalStats = historicalStats;
         
         if (!member.profile.characterProgressions.data) {
+          member.error = 'privacy';
           return member;
         }
-        member.profile = responseUtils.profileScrubber(member.profile);
+        member.profile = responseUtils.profileScrubber(member.profile, 'activity');
 
         return member;
       } catch (e) {
         member.profile = false;
         member.historicalStats = false;
+        member.error = 'request';
         return member;
       }
     })

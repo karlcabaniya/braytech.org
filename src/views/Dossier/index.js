@@ -72,6 +72,15 @@ class Dossier extends React.Component {
           {dossierMembers.responses.length && dossierMembers.loading ? <Spinner mini /> : null}
           {dossierMembers.responses.length ? (
             dossierMembers.responses.map(d => {
+
+              if (!d.profile || !d.historicalStats || d.error) {
+                return (
+                  <div key={d.membershipId} className={cx('member', { self: member.membershipType === d.membershipType && member.membershipId === d.membershipId })}>
+                    <NotificationInline type={d.error === 'privacy' ? `info` : `error`} name={d.error === 'privacy' ? `Profile privacy` : `Profile failed to load`} description={d.error === 'privacy' ? `This player is hiding something 👀` : `Profile failed to load. This is a temporary error.`} />
+                  </div>
+                )
+              }
+
               const characterId = d.profile.characters.data[0].characterId;
               const equipment = d.profile.characterEquipment.data[characterId].items;
               const itemComponents = d.profile.itemComponents;
@@ -251,10 +260,6 @@ class Dossier extends React.Component {
                         </div>
                       </div>
                     </div>
-                    <div className='d'>
-                      <div className='n'>Triumph score</div>
-                      <div className='v'>{d.profile.profileRecords.data.score}</div>
-                    </div>
                     <div className='d time-played'>
                       <div className='n'>Time played</div>
                       <div className='v'>
@@ -268,6 +273,10 @@ class Dossier extends React.Component {
                           {timePlayed.map(e => e.element)}
                         </ul>
                       </div>
+                    </div>
+                    <div className='d'>
+                      <div className='n'>Triumph score</div>
+                      <div className='v'>{d.profile.profileRecords.data.score}</div>
                     </div>
                     <div className='d'>
                       <div className='n'>Valor points</div>

@@ -1,10 +1,16 @@
 import entities from 'entities';
 
-export const profileScrubber = profile => {
+export const profileScrubber = (profile, sortBy = false) => {
   // convert character response to an array
-  profile.characters.data = Object.values(profile.characters.data).sort(function(a, b) {
-    return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal);
-  });
+  if (sortBy === 'activity') {
+    profile.characters.data = Object.values(profile.characters.data).sort(function(a, b) {
+      return new Date(b.dateLastPlayed).getTime() - new Date(a.dateLastPlayed).getTime();
+    });
+  } else {
+    profile.characters.data = Object.values(profile.characters.data).sort(function(a, b) {
+      return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal);
+    });
+  }
 
   // remove dud ghost scans
   if (profile.profileProgression) {
