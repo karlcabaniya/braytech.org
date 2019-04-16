@@ -6,6 +6,7 @@ import cx from 'classnames';
 
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
+import ObservedImage from '../../components/ObservedImage';
 import manifest from '../../utils/manifest';
 
 import './styles.css';
@@ -473,11 +474,15 @@ class ThisWeek extends React.Component {
 
         nightfalls.push(
           <div key={nightfall.hash} className='content'>
-            <div className='sub-title'>{manifest.DestinyDestinationDefinition[nightfall.destinationHash].displayProperties.name}</div>
-            <h3>{nightfall.selectionScreenDisplayProperties.name}</h3>
+            <div className='module-header'>
+              <div className='sub-title'>{t('Nightfall')}</div>
+              <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
+            </div>
+            <h4>Collectibles</h4>
             <ul className='list collection-items'>
               <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
             </ul>
+            <h4>Triumphs</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
             </ul>
@@ -485,57 +490,98 @@ class ThisWeek extends React.Component {
         );
       });
 
+    // console.log(Object.values(milestones).map(m => {
+    //   m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
+    //   return m;
+    // }));
+
+    const reckoningModifiers = milestones[601087286].activities[0].modifierHashes;
+    const strikesModifiers = milestones[1437935813].activities[0].modifierHashes;
+
     return (
       <div className={cx('view', this.props.theme.selected)} id='this-week'>
         <div className='module'>
-          <div className='sub-header sub'>
-            <div>{t('Flashpoint')}</div>
-          </div>
           <div className='content'>
-            <div className='sub-title'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
-            <h3>{flashpoint.displayProperties.name}</h3>
+            <div className='page-header'>
+              <div className='sub-title'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
+              <div className='name'>{flashpoint.displayProperties.name}</div>
+            </div>
+            <h4>Triumphs</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered />
             </ul>
           </div>
-          <div className='sub-header sub'>
-            <div>{t('Escalation Protocol')}</div>
+          <div className='content'>
+            <h4>Active Modifiers: The Reckoning</h4>
+            <ul className='list modifiers'>
+              {reckoningModifiers.map(m => {
+                let modDef = manifest.DestinyActivityModifierDefinition[m];
+                return (
+                  <li>
+                    <div className='icon'>
+                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                    </div>
+                    <div className='text'>
+                      <div className='name'>{modDef.displayProperties.name}</div>
+                      <div className='description'>{modDef.displayProperties.description}</div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
           <div className='content'>
-            <div className='sub-title'>{t('Mars')}</div>
-            <h3>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</h3>
+            <h4>Active Modifiers: Heroic Activities</h4>
+            <ul className='list modifiers'>
+              {strikesModifiers.map(m => {
+                let modDef = manifest.DestinyActivityModifierDefinition[m];
+                return (
+                  <li>
+                    <div className='icon'>
+                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                    </div>
+                    <div className='text'>
+                      <div className='name'>{modDef.displayProperties.name}</div>
+                      <div className='description'>{modDef.displayProperties.description}</div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div className='content'>
+            <div className='module-header'>
+              <div className='sub-title'>{t('Escalation Protocol')}</div>
+              <div className='name'>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</div>
+            </div>
+            <h4>Collectibles</h4>
             <ul className='list collection-items'>
               <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
             </ul>
           </div>
         </div>
         <div className='module'>
-          <div className='sub-header sub'>
-            <div>{t('Nightfalls')}</div>
-          </div>
           {nightfalls}
         </div>
-        <div className='module curse'>
-          <div className='sub-header sub'>
-            <div>{t('The Curse')}</div>
-          </div>
+        <div className='module'>
           <div className='content'>
-            <div className='sub-title'>{t('The Dreaming City')}</div>
-            <h3>
-              {t('Cycle week')} {cycleInfo.week.curse}
-            </h3>
+            <div className='module-header'>
+              <div className='sub-title'>Savathûn's Curse</div>
+              <div className='name'>{cycleInfo.week.curse}/3</div>
+            </div>
+            <h4>Triumphs</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
             </ul>
           </div>
         </div>
         <div className='module'>
-          <div className='sub-header sub'>
-            <div>{t('Ascendant challenge')}</div>
-          </div>
           <div className='content'>
-            <div className='sub-title'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
-            <h3>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}</h3>
+            <div className='module-header'>
+              <div className='sub-title'>{t('Ascendant Challenge')}</div>
+              <div className='name'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
+            </div>
+            <h4>Triumphs</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
             </ul>

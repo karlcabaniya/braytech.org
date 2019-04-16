@@ -248,5 +248,10 @@
     "date": "2019-04-16T08:57:03.526Z",
     "version": "2.3.3",
     "content": "## Changes\n- Improved loading screen performance\n- Tooltip touch-ups\n- NEW Dossier view"
+  },
+  {
+    "date": "2019-04-16T22:32:07.460Z",
+    "version": "2.3.6",
+    "content": "## Changes\n- Refreshed This Week view, added modifiers"
   }
 ]
