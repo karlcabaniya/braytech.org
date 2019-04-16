@@ -40,7 +40,7 @@
 }
 
 #this-week .module .module-header .name {
-  font-size: 34px;
+  font-size: 36px;
   line-height: 1;
   font-weight: 500;
 }
@@ -150,5 +150,9 @@
 
   #this-week h3 {
     margin: 0 0 1rem;
+  }
+
+  #this-week .module .module-header .name {
+    font-size: 27px;
   }
 }
