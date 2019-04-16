@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 import Moment from 'react-moment';
+import orderBy from 'lodash/orderBy';
 
 import CharacterEmblem from '../../components/CharacterEmblem';
 import Item from '../../components/Item';
@@ -14,6 +15,7 @@ import * as ls from '../../utils/localStorage';
 import ProfileSearch from './ProfileSearch';
 import Spinner from '../../components/Spinner';
 import { enumerateCollectibleState } from '../../utils/destinyEnums';
+import NotificationInline from '../../components/NotificationInline';
 
 import './styles.css';
 
@@ -56,13 +58,12 @@ class Dossier extends React.Component {
   };
 
   render() {
-    console.log(this.props.dossierMembers);
-
-    const { member, dossierMembers } = this.props;
+    const {viewport, member, dossierMembers } = this.props;
 
     return (
       <div className='view' id='dossier'>
         <div className='control'>
+          {viewport.width < 1600 ? <NotificationInline type={`info`} name='Designed for desktops' description={`This view is intended for a minimum horizontal resolution of 1660 pixels`} /> : null}
           <div className='search'>
             <ProfileSearch onProfilesChange={this.loadProfiles} />
           </div>
@@ -74,6 +75,75 @@ class Dossier extends React.Component {
               const characterId = d.profile.characters.data[0].characterId;
               const equipment = d.profile.characterEquipment.data[characterId].items;
               const itemComponents = d.profile.itemComponents;
+              const characterCollectibles = d.profile.characterCollectibles.data;
+              const profileCollectibles = d.profile.profileCollectibles.data;
+
+              const enumerated = hash => {
+                let state = 0;
+                let scope = profileCollectibles.collectibles[hash] ? profileCollectibles.collectibles[hash] : characterCollectibles[characterId].collectibles[hash];
+                if (scope) {
+                  state = scope.state;
+                }
+
+                return enumerateCollectibleState(state);
+              }
+
+              let crucibleThreats = [
+                // 4274523516, // Redrix's Claymore
+                // 1111219481, // Redrix's Broadsword
+                3260604718, // Luna's Howl
+                3260604717, // Not Forgotten
+                4047371119, // The Mountaintop
+                2335550020, // The Recluse
+              ];
+
+              crucibleThreats = crucibleThreats.map(hash => {
+                let def = manifest.DestinyCollectibleDefinition[hash];
+
+                if (!enumerated(hash).notAcquired && !enumerated(hash).invisible) {
+                  return (
+                    <li key={hash}><span className='threat'>{def.displayProperties.name}</span></li>
+                  )
+                } else {
+                  return false;
+                }
+              });
+
+              const timePlayedTotalCharacters = Math.floor(
+                Object.keys(d.profile.characters.data).reduce((sum, key) => {
+                  return sum + parseInt(d.profile.characters.data[key].minutesPlayedTotal);
+                }, 0) / 1440
+              );
+      
+              let timePlayed = [];
+              for (const [modeName, modeObject] of Object.entries(d.historicalStats)) {
+                if (modeObject.allTime) {
+                  let modeNamePretty = '';
+                  if (modeName === 'allPvP') {
+                    modeNamePretty = 'Crucible';
+                  } else if (modeName === 'raid') {
+                    modeNamePretty = 'Raids';
+                  } else if (modeName === 'allPvECompetitive') {
+                    modeNamePretty = 'Gambit';
+                  } else {
+                    modeNamePretty = 'Vanguard';
+                  }
+      
+                  timePlayed.push({
+                    secondsPlayed: modeObject.allTime.secondsPlayed.basic.value,
+                    element: (
+                      <li key={modeName}>
+                        <ul>
+                          <li>{modeNamePretty}</li>
+                          <li>{Math.floor(modeObject.allTime.secondsPlayed.basic.value / 60 / 60)} hours</li>
+                        </ul>
+                      </li>
+                    )
+                  });
+                }
+              }
+
+              timePlayed = orderBy(timePlayed, [stamp => stamp.secondsPlayed], ['desc']);
 
               let items = equipment.map(item => ({
                 ...manifest.DestinyInventoryItemDefinition[item.itemHash],
@@ -182,6 +252,24 @@ class Dossier extends React.Component {
                       </div>
                     </div>
                     <div className='d'>
+                      <div className='n'>Triumph score</div>
+                      <div className='v'>{d.profile.profileRecords.data.score}</div>
+                    </div>
+                    <div className='d time-played'>
+                      <div className='n'>Time played</div>
+                      <div className='v'>
+                        <ul>
+                          <li>
+                            <ul>
+                              <li>All characters</li>
+                              <li>{timePlayedTotalCharacters} days</li>
+                            </ul>
+                          </li>
+                          {timePlayed.map(e => e.element)}
+                        </ul>
+                      </div>
+                    </div>
+                    <div className='d'>
                       <div className='n'>Valor points</div>
                       <div className='v'>{valor.progression.data.currentProgress}/{valor.progression.total} ({valor.progression.resets} resets)</div>
                     </div>
@@ -189,9 +277,11 @@ class Dossier extends React.Component {
                       <div className='n'>Glory points</div>
                       <div className='v'>{glory.progression.data.currentProgress}/{glory.progression.total}</div>
                     </div>
-                    <div className='d'>
-                      <div className='n'>Triumph score</div>
-                      <div className='v'>{d.profile.profileRecords.data.score}</div>
+                    <div className='d crucible-threats'>
+                      <div className='n'>Crucible threats</div>
+                      <div className='v'>
+                        <ul>{crucibleThreats.filter(e => e).length > 0 ? crucibleThreats.filter(e => e).map(e => e) : <li>No threats</li>}</ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -208,6 +298,7 @@ class Dossier extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    viewport: state.viewport,
     member: state.member,
     dossierMembers: state.dossierMembers
   };

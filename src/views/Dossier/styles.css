@@ -188,3 +188,71 @@
 #dossier .members .member .highlights .d.armour-stats .v [class^="destiny-"] {
   font-size: 22px;
 }
+
+#dossier .members .member .highlights .d.crucible-threats .v li {
+  margin: 0 0 3px;
+}
+
+#dossier .members .member .highlights .d.crucible-threats .v .threat {
+  background-color: #F44336;
+}
+
+#dossier .members .member .highlights .d.time-played .v ul li ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#dossier .members .member .highlights .d.time-played .v ul li ul li {
+  margin: 0 0 3px;
+}
+
+
+
+
+
+@media screen and (max-width: 1500px) {
+  #dossier {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  #dossier .members {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column: 2/5;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  #dossier {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  #dossier .members {
+    grid-template-columns: 1fr 1fr;
+    grid-column: 2/4;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #dossier {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #dossier .members {
+    grid-template-columns: 1fr;
+    grid-column: 2/3;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #dossier {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+    padding: 3rem 2rem 2rem;
+  }
+
+  #dossier .members {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+    grid-column: unset;
+  }
+}

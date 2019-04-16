@@ -13,32 +13,12 @@ export async function getDossierMembers(members) {
     }
   });
 
-  // let memberResponses = await Promise.all(
-  //   members.map(async member => {
-  //     try {
-  //       const [profile, historicalStats] = await Promise.all([bungie.memberProfile(member.membershipType, member.membershipId, '100,104,200,202,204,205,300,301,302,303,304,305,306,800,900'), bungie.getHistoricalStats(member.membershipType, member.membershipId, '1', '4,5,7,64', '0')]);
-  //       member.profile = profile;
-  //       member.historicalStats = historicalStats;
-        
-  //       if (!member.profile.characterProgressions.data) {
-  //         return member;
-  //       }
-  //       member.profile = responseUtils.profileScrubber(member.profile);
-
-  //       return member;
-  //     } catch (e) {
-  //       member.profile = false;
-  //       member.historicalStats = false;
-  //       return member;
-  //     }
-  //   })
-  // );
-
   let memberResponses = await Promise.all(
     members.map(async member => {
       try {
-        const [profile] = await Promise.all([bungie.memberProfile(member.membershipType, member.membershipId, '100,104,200,202,204,205,300,301,302,303,304,305,306,800,900')]);
+        const [profile, historicalStats] = await Promise.all([bungie.memberProfile(member.membershipType, member.membershipId, '100,104,200,202,204,205,300,301,302,303,304,305,306,800,900'), bungie.getHistoricalStats(member.membershipType, member.membershipId, '1', '4,5,7,64', '0')]);
         member.profile = profile;
+        member.historicalStats = historicalStats;
         
         if (!member.profile.characterProgressions.data) {
           return member;
@@ -48,6 +28,7 @@ export async function getDossierMembers(members) {
         return member;
       } catch (e) {
         member.profile = false;
+        member.historicalStats = false;
         return member;
       }
     })

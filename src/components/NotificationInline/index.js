@@ -18,10 +18,10 @@ class NotificationInline extends React.Component {
   }
 
   render() {
-    const { t, name, description } = this.props;
+    const { t, name, description, type } = this.props;
 
     return (
-      <div className='notification-inline'>
+      <div className={cx('notification-inline', { [type]: type })}>
         <div className='name'>{name}</div>
         <div className='description'>{description}</div>
       </div>
