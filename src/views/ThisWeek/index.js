@@ -503,8 +503,8 @@ class ThisWeek extends React.Component {
         <div className='module'>
           <div className='content'>
             <div className='page-header'>
-              <div className='sub-title'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
-              <div className='name'>{flashpoint.displayProperties.name}</div>
+              <div className='sub-title'>{manifest.DestinyMilestoneDefinition[463010297].displayProperties.name}</div>
+              <div className='name'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
             </div>
             <h4>Triumphs</h4>
             <ul className='list record-items'>
