@@ -23,6 +23,10 @@
   margin: 48px 0 0;
 }
 
+#this-week .module .page-header {
+  margin: 24px 0 2rem;
+}
+
 #this-week .module .module-header::after {
   content: ' ';
   position: absolute;
