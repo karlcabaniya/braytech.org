@@ -28,7 +28,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "translations": "node ./scripts/extractTranslations.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,5 +39,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "find-in-files": "^0.5.0",
+    "fs-extra": "^7.0.1"
+  }
 }
