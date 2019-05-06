@@ -1,16 +1,145 @@
 #multiplayer {
   padding: 4rem 3rem 3rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 3rem;
 }
 
-#multiplayer .module .sub-header ~ .sub-header {
+#multiplayer .module .content ~ .content .sub-header {
   margin: 3rem 0 1rem;
+}
+
+#multiplayer .module:first-child {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 3rem;
+}
+
+#multiplayer .module .content.career h4 {
+  margin: 0 0 1rem;
+  font-size: 16px;
+}
+
+#multiplayer .module .content.career h4 ~ h4 {
+  margin: 1.5rem 0 1rem;
+}
+
+#multiplayer .module .content .modes li {
+  height: unset;
+  align-items: flex-start;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+#multiplayer .module .content .modes li:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 1);
+  z-index: 2;
+}
+
+#multiplayer .module .content .modes li .icon {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+#multiplayer .module .content .modes li .icon .image {
+  position: relative;
+  width: 96px;
+  height: 117px;
+}
+
+#multiplayer .module .content .modes li .text {
+  width: calc(100% - 96px);
+  height: 117px;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: auto 72px;
+}
+
+#multiplayer .module .content .modes li .text .name {
+  font-size: 16px;
+}
+
+#multiplayer .module .content .modes li .text .minor-stats {
+  align-self: flex-end;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+#multiplayer .module .content .modes li .text .stat {
+  
+}
+
+#multiplayer .module .content .modes li .text .stat .name {
+  margin: 7px 0 0;
+  font-size: 12px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#multiplayer .module .content .modes li .text .stat .value {
+  font-size: 18px;
+  line-height: 1;
+}
+
+#multiplayer .module .content .modes li .text .kdr {
+  text-align: right;
+  align-self: flex-start;
+  grid-column: 2/2;
+  grid-row: 1/3;
+}
+
+#multiplayer .module .content .modes li .text .kdr .name {
+  font-size: 16px;
+}
+
+#multiplayer .module .content .modes li .text .kdr .value {
+  font-size: 32px;
+  line-height: 28px;
+}
+
+#multiplayer .module .content .modes li a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: background-color 0.25s, box-shadow 0.25s;
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0);
+}
+
+#multiplayer .module .content .modes li a.active::before {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 1);
 }
 
 
 
-#multiplayer .module .content:first-child .sub-header {
-  margin: 0 0 1rem;
+@media screen and (max-width: 1280px) {
+
+  #multiplayer {
+    grid-template-columns: 0.8fr 2fr;
+  }
+  
+  #multiplayer .module:first-child {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  #multiplayer {
+    padding: 3rem 2rem 2rem;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+  
+  #multiplayer .module:first-child {
+    grid-gap: 1rem;
+  }
+
 }

@@ -15,7 +15,7 @@ import * as ls from '../../utils/localStorage';
 import ProfileSearch from './ProfileSearch';
 import Spinner from '../../components/UI/Spinner';
 import { enumerateCollectibleState } from '../../utils/destinyEnums';
-import NotificationInline from '../../components/NotificationInline';
+import NotificationInline from '../../components/Notifications/NotificationInline';
 
 import './styles.css';
 

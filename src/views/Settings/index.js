@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import Checkbox from '../../components/Checkbox';
-import Button from '../../components/Button';
+import Checkbox from '../../components/UI/Checkbox';
+import Button from '../../components/UI/Button';
 import { getLanguageInfo } from '../../utils/languageInfo';
 
 import './styles.css';

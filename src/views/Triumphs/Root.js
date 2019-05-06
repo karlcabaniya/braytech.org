@@ -11,7 +11,7 @@ import ObservedImage from '../../components/ObservedImage';
 import { enumerateRecordState } from '../../utils/destinyEnums';
 import RecordsAlmost from '../../components/RecordsAlmost';
 import RecordsTracked from '../../components/RecordsTracked';
-import NotificationInline from '../../components/NotificationInline';
+import NotificationInline from '../../components/Notifications/NotificationInline';
 
 class Root extends React.Component {
   render() {

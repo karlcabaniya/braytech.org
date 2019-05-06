@@ -388,8 +388,7 @@ button.square.active {
 
 @media screen and (max-width: 600px) {
   .sub-header {
-    margin: 2rem 2rem 1rem;
-    width: calc(100% - 4rem);
+    margin: 2rem 0 1rem;
   }
 
   .page-header .name {

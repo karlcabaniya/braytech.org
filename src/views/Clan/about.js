@@ -8,7 +8,7 @@ import ClanBanner from '../../components/UI/ClanBanner';
 import Roster from '../../components/Roster';
 import Spinner from '../../components/UI/Spinner';
 import ProgressBar from '../../components/UI/ProgressBar';
-import Checkbox from '../../components/Checkbox';
+import Checkbox from '../../components/UI/Checkbox';
 import manifest from '../../utils/manifest';
 
 import './about.css';

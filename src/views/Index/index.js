@@ -7,7 +7,7 @@ import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
 import ObservedImage from '../../components/ObservedImage';
-import Button from '../../components/Button';
+import Button from '../../components/UI/Button';
 import captainsLog from '../../data/captainsLog';
 import { ReactComponent as Logo } from '../../components/BraytechDevice.svg';
 import manifest from '../../utils/manifest';
