@@ -6,7 +6,7 @@ import { withNamespaces } from 'react-i18next';
 
 import store from '../../utils/reduxStore';
 import * as ls from '../../utils/localStorage';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 import ProfileError from './ProfileError';
 
 import ProfileSearch from './ProfileSearch';

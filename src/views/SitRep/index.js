@@ -10,9 +10,9 @@ import orderBy from 'lodash/orderBy';
 import manifest from '../../utils/manifest';
 import { ProfileLink } from '../../components/ProfileLink';
 import Collectibles from '../../components/Collectibles';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 import ObservedImage from '../../components/ObservedImage';
-import ProgressBar from '../../components/ProgressBar';
+import ProgressBar from '../../components/UI/ProgressBar';
 import Roster from '../../components/Roster';
 import * as utils from '../../utils/destinyUtils';
 

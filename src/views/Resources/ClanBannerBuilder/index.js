@@ -8,8 +8,8 @@ import cx from 'classnames';
 import mapValues from 'lodash/mapValues';
 
 import ObservedImage from '../../../components/ObservedImage';
-import Spinner from '../../../components/Spinner';
-import ClanBanner from '../../../components/ClanBanner';
+import Spinner from '../../../components/UI/Spinner';
+import ClanBanner from '../../../components/UI/ClanBanner';
 
 import clanBannerManifestJson from '../../../data/clanBannerManifest';
 

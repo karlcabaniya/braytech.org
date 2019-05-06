@@ -7,14 +7,15 @@ import store from './utils/reduxStore';
 import Clan from './views/Clan';
 import Legend from './views/Legend';
 import Competitive from './views/Competitive';
+import Multiplayer from './views/Multiplayer';
 import Collections from './views/Collections';
 import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
 import Account from './views/Account';
 import SitRep from './views/SitRep';
 import ThisWeek from './views/ThisWeek';
-import Header from './components/Header';
-import Spinner from './components/Spinner';
+import Header from './components/UI/Header';
+import Spinner from './components/UI/Spinner';
 
 import Dossier from './views/Dossier';
 
@@ -63,6 +64,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/this-week`} exact render={() => <ThisWeek />} />>
           <Route path={`${match.url}/sit-rep`} exact render={route => <SitRep />} />
           <Route path={`${match.url}/dossier`} render={route => <Dossier />} />
+          <Route path={`${match.url}/multiplayer/crucible`} render={route => <Multiplayer />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/sit-rep` }} />} />
         </Switch>
       </>

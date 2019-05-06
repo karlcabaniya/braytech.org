@@ -8,7 +8,7 @@ import orderBy from 'lodash/orderBy';
 
 import manifest from '../../utils/manifest';
 import * as utils from '../../utils/destinyUtils';
-import ProgressBar from '../../components/ProgressBar';
+import ProgressBar from '../../components/UI/ProgressBar';
 
 class TimePlayed extends React.Component {
   constructor(props) {

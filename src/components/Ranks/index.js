@@ -7,12 +7,11 @@ import cx from 'classnames';
 import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
 
-import Globals from '../../utils/globals';
 import { ProfileLink } from '../../components/ProfileLink';
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
 import MemberLink from '../../components/MemberLink';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 import * as utils from '../../utils/destinyUtils';
 import * as destinyEnums from '../../utils/destinyEnums';
 import * as voluspa from '../../utils/voluspa';
@@ -85,7 +84,7 @@ class Ranks extends React.Component {
                 <div className='rank'>{member.rank}</div>
               </div>
               <div className='col'>
-                <MemberLink {...member.destinyUserInfo} />
+                <MemberLink {...member.destinyUserInfo} displayClan />
               </div>
               <div className='col'>
                 <div className='triumphScore'>{member.triumphScore.toLocaleString()}</div>
@@ -96,23 +95,25 @@ class Ranks extends React.Component {
       });
 
       let memberRank = response.memberRank;
-      ranks.push({
-        membershipId: memberRank.destinyUserInfo.membershipId,
-        rank: memberRank.rank,
-        element: (
-          <li key={memberRank.destinyUserInfo.membershipId}>
-            <div className='col'>
-              <div className='rank'>{memberRank.rank}</div>
-            </div>
-            <div className='col'>
-              <MemberLink {...memberRank.destinyUserInfo} />
-            </div>
-            <div className='col'>
-              <div className='triumphScore'>{memberRank.triumphScore.toLocaleString()}</div>
-            </div>
-          </li>
-        )
-      });
+      if (memberRank.destinyUserInfo) {
+        ranks.push({
+          membershipId: memberRank.destinyUserInfo.membershipId,
+          rank: memberRank.rank,
+          element: (
+            <li key={memberRank.destinyUserInfo.membershipId}>
+              <div className='col'>
+                <div className='rank'>{memberRank.rank}</div>
+              </div>
+              <div className='col'>
+                <MemberLink {...memberRank.destinyUserInfo} displayClan />
+              </div>
+              <div className='col'>
+                <div className='triumphScore'>{memberRank.triumphScore.toLocaleString()}</div>
+              </div>
+            </li>
+          )
+        });
+      }
 
       ranks = orderBy(ranks, [member => member.rank], ['asc']);
 

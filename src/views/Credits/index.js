@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import * as responseUtils from '../../utils/responseUtils';
 import * as bungie from '../../utils/bungie';

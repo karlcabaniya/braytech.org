@@ -58,3 +58,18 @@ export async function memberRank(membershipType = false, membershipId = false) {
   }
 
 }
+
+export async function groupRank(groupId = false) {
+  if (!groupId) {
+    return {};
+  }
+
+  const request = await fetch(`https://voluspa-a.braytech.org/member/rank/?groupId=${groupId}`).then(r => r.json())
+
+  if (request.ErrorCode === 1) {
+    return request.Response;
+  } else {
+    return {};
+  }
+
+}

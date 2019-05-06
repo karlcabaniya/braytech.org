@@ -8,7 +8,7 @@ import Globals from '../../utils/globals';
 import assign from 'lodash/assign';
 import orderBy from 'lodash/orderBy';
 import ObservedImage from '../../components/ObservedImage';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 import manifest from '../../utils/manifest';
 
 import './stats.css';

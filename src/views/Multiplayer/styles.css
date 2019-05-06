@@ -1,0 +1,16 @@
+#multiplayer {
+  padding: 4rem 3rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-gap: 3rem;
+}
+
+#multiplayer .module .sub-header ~ .sub-header {
+  margin: 3rem 0 1rem;
+}
+
+
+
+#multiplayer .module .content:first-child .sub-header {
+  margin: 0 0 1rem;
+}

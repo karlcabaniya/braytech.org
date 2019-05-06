@@ -6,10 +6,10 @@ import _ from 'lodash';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import manifest from '../../utils/manifest';
-import ObservedImage from '../ObservedImage';
-import { ProfileLink } from '../ProfileLink';
-import { enumerateRecordState } from '../../utils/destinyEnums';
+import manifest from '../../../utils/manifest';
+import ObservedImage from '../../ObservedImage';
+import { ProfileLink } from '../../ProfileLink';
+import { enumerateRecordState } from '../../../utils/destinyEnums';
 
 import './styles.css';
 

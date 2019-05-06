@@ -9,7 +9,7 @@ import cx from 'classnames';
 import * as destinyEnums from '../../utils/destinyEnums';
 import * as ls from '../../utils/localStorage';
 import * as bungie from '../../utils/bungie';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 
 const SearchResult = p => {
   let stored = ls.get('dossier.profiles') || [];

@@ -6,10 +6,14 @@ import ReactMarkdown from 'react-markdown';
 import Moment from 'react-moment';
 import cx from 'classnames';
 
+import ObservedImage from '../../components/ObservedImage';
 import Ranks from '../../components/Ranks';
 
 import './styles.css';
-import ObservedImage from '../../components/ObservedImage';
+
+import Root from './Root';
+import Member from './Member';
+import Group from './Group';
 
 class Leaderboards extends React.Component {
   constructor() {
@@ -17,35 +21,31 @@ class Leaderboards extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
   render() {
-    const { t } = this.props;
+    const { t, match } = this.props;
+    const { view, param1, param2 } = match.params;
 
-    console.log(this.state);
+    // console.log(view, param1, param2);
 
-    return (
-      <div className='view' id='leaderboards'>
-        <div className='head'>
-          <div className='page-header'>
-            <div className='name'>{t('Leaderboards')}</div>
-            <div className='description'>{t("It's a long way to the top")}</div>
-          </div>
+    if (view === 'member') {
+      return (
+        <div className='view' id='leaderboards'>
+          <Member membershipType={param1} membershipId={param2} />
         </div>
-        <div className='wrap'>
-          <div className='col'>
-            <div className='board triumphScore'>
-              <div className='sub-header sub'>
-                <div>{t('Triumphs')}</div>
-              </div>
-              <Ranks includeMember />
-            </div>
-          </div>
+      );
+    } else if (view === 'group') {
+      return (
+        <div className='view' id='leaderboards'>
+          <Group groupId={param1} />
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className='view' id='leaderboards'>
+          <Root />
+        </div>
+      );
+    }
   }
 }
 

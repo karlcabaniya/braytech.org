@@ -4,10 +4,10 @@ import cx from 'classnames';
 
 import * as bungie from '../../utils/bungie';
 import { ProfileNavLink } from '../../components/ProfileLink';
-import ClanBanner from '../../components/ClanBanner';
+import ClanBanner from '../../components/UI/ClanBanner';
 import Roster from '../../components/Roster';
-import Spinner from '../../components/Spinner';
-import ProgressBar from '../../components/ProgressBar';
+import Spinner from '../../components/UI/Spinner';
+import ProgressBar from '../../components/UI/ProgressBar';
 import Checkbox from '../../components/Checkbox';
 import manifest from '../../utils/manifest';
 

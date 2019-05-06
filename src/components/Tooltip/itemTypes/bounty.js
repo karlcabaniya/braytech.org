@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 
 import ObservedImage from '../../ObservedImage';
-import ProgressBar from '../../ProgressBar';
+import ProgressBar from '../../UI/ProgressBar';
 import manifest from '../../../utils/manifest';
 
 const bounty = item => {

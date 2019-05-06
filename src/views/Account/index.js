@@ -11,7 +11,7 @@ import Globals from '../../utils/globals';
 import ObservedImage from '../../components/ObservedImage';
 import Collectibles from '../../components/Collectibles';
 import Item from '../../components/Item';
-import ProgressBar from '../../components/ProgressBar';
+import ProgressBar from '../../components/UI/ProgressBar';
 import * as utils from '../../utils/destinyUtils';
 import manifest from '../../utils/manifest';
 

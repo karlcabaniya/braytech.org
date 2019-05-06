@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
 
-import ProgressBar from '../../components/ProgressBar';
+import ProgressBar from '../../components/UI/ProgressBar';
 
 const Checklist = props => {
   const { t, name, binding, totalItems, progressDescription, completedItems, children } = props;

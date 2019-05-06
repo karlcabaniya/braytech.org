@@ -5,11 +5,11 @@ import { Link, NavLink } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import manifest from '../../utils/manifest';
-import ObservedImage from '../../components/ObservedImage';
-import ProgressBar from '../../components/ProgressBar';
-import { classHashToString } from '../../utils/destinyUtils';
-import { ProfileNavLink } from '../../components/ProfileLink';
+import manifest from '../../../utils/manifest';
+import ObservedImage from '../../ObservedImage';
+import ProgressBar from '../../UI/ProgressBar';
+import { classHashToString } from '../../../utils/destinyUtils';
+import { ProfileNavLink } from '../../ProfileLink';
 import Footer from '../Footer';
 
 import './styles.css';
@@ -147,6 +147,13 @@ class Header extends React.Component {
         slug: '/legend',
         exact: true,
         profile: true
+      },
+      {
+        name: t('Leaderboards'),
+        desc: t("Track friends and foes almost in real-time"),
+        slug: '/leaderboards',
+        exact: true,
+        profile: false
       },
       {
         name: t('More'),

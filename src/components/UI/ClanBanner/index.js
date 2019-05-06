@@ -2,11 +2,11 @@ import React from 'react';
 import assign from 'lodash/assign';
 import isEqual from 'lodash/isEqual';
 import cx from 'classnames';
-import Globals from '../../utils/globals';
-import rgbToHsl from '../../utils/rgbToHsl';
-import Spinner from '../../components/Spinner';
+import Globals from '../../../utils/globals';
+import rgbToHsl from '../../../utils/rgbToHsl';
+import Spinner from '../../UI/Spinner';
 
-import clanBannerManifestJson from '../../data/clanBannerManifest';
+import clanBannerManifestJson from '../../../data/clanBannerManifest';
 
 import './styles.css';
 
