@@ -156,13 +156,13 @@ class Header extends React.Component {
         exact: true,
         profile: true
       },
-      {
-        name: t('Leaderboards'),
-        desc: t("Track friends and foes almost in real-time"),
-        slug: '/leaderboards',
-        exact: true,
-        profile: false
-      },
+      // {
+      //   name: t('Leaderboards'),
+      //   desc: t("Track friends and foes almost in real-time"),
+      //   slug: '/leaderboards',
+      //   exact: true,
+      //   profile: false
+      // },
       {
         name: t('More'),
         desc: t('Prestigious records and valued items up for grabs this week'),

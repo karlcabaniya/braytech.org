@@ -253,5 +253,10 @@
     "date": "2019-04-16T22:32:07.460Z",
     "version": "2.3.6",
     "content": "## Changes\n- Refreshed This Week view, added modifiers"
+  },
+  {
+    "date": "2019-05-07T19:36:46.258Z",
+    "version": "2.4.0",
+    "content": "## Changes\n\n- Added new view, _Multiplayer_\n  - This is a preview\n  - Only supports Crucible at this time but Gambit is next\n  - Auto-refreshes every 60 or 30 seconds, I can't remember which\n- Rearranged **lots** of core files and I hope I haven't broken anything"
   }
 ]
