@@ -42,10 +42,6 @@ class Competitive extends React.Component {
   };
 
   togglePlayerHandler = (instanceId, characterId) => {
-    if (this.props.viewport.width > 786) {
-      return;
-    }
-
     this.setState((prevState, props) => {
       let expandedIndex = prevState.expanded.findIndex(e => e.instanceId === instanceId);
 
@@ -71,13 +67,6 @@ class Competitive extends React.Component {
     const characterId = member.characterId;
     const characters = member.data.profile.characters.data;
     const characterIds = characters.map(c => c.characterId);
-
-    // console.log(data);
-
-    let expandPlayers = false;
-    if (viewport.width <= 786) {
-      expandPlayers = true;
-    }
 
     let reports = [];
 
@@ -151,19 +140,69 @@ class Competitive extends React.Component {
       let detail;
 
       // #region Crucible (default)
-    
+
       row = (
         <div className='basic'>
           <div className='mode'>{modeName}</div>
           <div className='map'>{map.displayProperties.name}</div>
-          <div className='opponents-defeated'>{entry.values.opponentsDefeated.basic.value}</div>
-          <div className='kills'>{entry.values.kills.basic.value}</div>
-          <div className='efficiency'>{entry.values.efficiency.basic.displayValue}</div>
           <div className='ago'>
             <Moment fromNow>{pgcr.period}</Moment>
           </div>
         </div>
       );
+
+      let displayStats = [
+        {
+          key: 'opponentsDefeated',
+          name: 'Opp. Def.',
+          type: 'value'
+        },
+        {
+          key: 'kills',
+          name: 'Kills',
+          type: 'value'
+        },
+        {
+          key: 'deaths',
+          name: 'Deaths',
+          type: 'value'
+        },
+        {
+          key: 'killsDeathsRatio',
+          name: 'K/D',
+          type: 'value',
+          round: true
+        },
+        {
+          key: 'assists',
+          name: 'Assists',
+          type: 'value'
+        },
+        {
+          key: 'weaponKillsSuper',
+          name: 'Super kills',
+          type: 'value',
+          extended: true
+        },
+        {
+          key: 'weaponKillsGrenade',
+          name: 'Grenade kills',
+          type: 'value',
+          extended: true
+        },
+        {
+          key: 'weaponKillsMelee',
+          name: 'Melee kills',
+          type: 'value',
+          extended: true
+        },
+        {
+          key: 'weaponKillsAbility',
+          name: 'Ability kills',
+          type: 'value',
+          extended: true
+        }
+      ];
 
       let entries = [];
       pgcr.entries.forEach(entry => {
@@ -174,32 +213,41 @@ class Competitive extends React.Component {
           teamId: pgcr.teams && pgcr.teams.length ? entry.values.team.basic.value : null,
           element: (
             <li key={entry.characterId} className={cx('linked', { isExpandedPlayer })} onClick={() => this.togglePlayerHandler(pgcr.activityDetails.instanceId, entry.characterId)}>
-              <div className='icon'>{!dnf ? <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} /> : null}</div>
-              <div className={cx('displayName', { dnf: dnf })}>{entry.player.destinyUserInfo.displayName}</div>
-              {!isExpandedPlayer ? (
-                <>
-                  <div className='opponents-defeated'>{entry.values.opponentsDefeated.basic.value}</div>
-                  <div className='kills'>{entry.values.kills.basic.value}</div>
-                  <div className='deaths'>{entry.values.deaths.basic.value}</div>
-                  <div className='assists'>{entry.values.assists.basic.value}</div>
-                  <div className='efficiency'>{entry.values.efficiency.basic.displayValue}</div>
-                </>
-              ) : (
-                <>
-                  <div className='pairs'>
-                    <div className='key'>Opponents deposited</div>
-                    <div className='value'>{entry.values.opponentsDefeated.basic.value}</div>
-                    <div className='key'>Kills</div>
-                    <div className='value'>{entry.values.kills.basic.value}</div>
-                    <div className='key'>Deaths</div>
-                    <div className='value'>{entry.values.deaths.basic.value}</div>
-                    <div className='key'>Assists</div>
-                    <div className='value'>{entry.values.assists.basic.value}</div>
-                    <div className='key'>Efficiency</div>
-                    <div className='value'>{entry.values.efficiency.basic.displayValue}</div>
-                  </div>
-                </>
-              )}
+              <div className='inline'>
+                <div className='icon'>{!dnf ? <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} /> : null}</div>
+                <div className={cx('displayName', { dnf: dnf })}>{entry.player.destinyUserInfo.displayName}</div>
+                {displayStats.map(s => {
+                  let value;
+                  if (s.extended) {
+                    return null;
+                  } else {
+                    value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
+                  }
+                  return (
+                    <div key={s.key} className={cx('stat', { extended: s.extended }, s.key)}>
+                      <div className='value'>{value}</div>
+                      {s.extended ? <div className='name'>{s.name}</div> : null}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className='extended'>
+                <div />
+                {displayStats.map(s => {
+                  let value;
+                  if (s.extended) {
+                    value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type];
+                  } else {
+                    value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
+                  }
+                  return (
+                    <div key={s.key} className={cx('stat', { extended: s.extended }, s.key)}>
+                      <div className='value'>{value}</div>
+                      <div className='name'>{s.name}</div>
+                    </div>
+                  );
+                })}
+              </div>
             </li>
           )
         });
@@ -240,38 +288,44 @@ class Competitive extends React.Component {
             <div className='score'>{score}</div>
           </div>
           <div className='entries'>
-            {pgcr.teams && pgcr.teams.length ? orderBy(pgcr.teams, [t => t.score.basic.value], ['desc']).map(t => {
-              return (
-                <ul key={t.teamId} className='list team'>
-                  <li className={cx('team-head', (t.teamId === 17 ? 'Alpha' : 'Bravo').toLowerCase())}>
-                    <div />
-                    <div className='team name'>{t.teamId === 17 ? 'Alpha' : 'Bravo'} team</div>
-                    <div className='opponents-defeated'>Opp. Def.</div>
-                    <div className='kills'>Kills</div>
-                    <div className='deaths'>Deaths</div>
-                    <div className='assists'>Assists</div>
-                    <div className='efficiency'>Efficiency</div>
-                    <div className='team score'>{t.score.basic.displayValue}</div>
-                  </li>
-                  {entries.filter(e => e.teamId === t.teamId).map(e => e.element)}
-                </ul>
-              );
-            }) : (
-                <ul key={t.teamId} className='list team'>
-                  <li className={cx('team-head')}>
-                    <div />
-                    <div className='team name'></div>
-                    <div className='opponents-defeated'>Opp. Def.</div>
-                    <div className='kills'>Kills</div>
-                    <div className='deaths'>Deaths</div>
-                    <div className='assists'>Assists</div>
-                    <div className='efficiency'>Efficiency</div>
-                    <div className='team score'></div>
-                  </li>
-                  {entries.map(e => e.element)}
-                </ul>
-              )
-            }
+            {pgcr.teams && pgcr.teams.length ? (
+              orderBy(pgcr.teams, [t => t.score.basic.value], ['desc']).map(t => {
+                return (
+                  <ul key={t.teamId} className='list team'>
+                    <li className={cx('team-head', (t.teamId === 17 ? 'Alpha' : 'Bravo').toLowerCase())}>
+                      <div />
+                      <div className='team name'>{t.teamId === 17 ? 'Alpha' : 'Bravo'} team</div>
+                      {displayStats.map(s => {
+                        if (s.extended) {
+                          return null;
+                        }
+                        return (
+                          <div key={s.key} className={s.key}>
+                            {s.name}
+                          </div>
+                        );
+                      })}
+                      <div className='team score'>{t.score.basic.displayValue}</div>
+                    </li>
+                    {entries.filter(e => e.teamId === t.teamId).map(e => e.element)}
+                  </ul>
+                );
+              })
+            ) : (
+              <ul key={t.teamId} className='list team'>
+                <li className={cx('team-head')}>
+                  <div />
+                  <div className='team name' />
+                  <div className='opponents-defeated'>Opp. Def.</div>
+                  <div className='kills'>Kills</div>
+                  <div className='deaths'>Deaths</div>
+                  <div className='assists'>Assists</div>
+                  <div className='efficiency'>Efficiency</div>
+                  <div className='team score' />
+                </li>
+                {entries.map(e => e.element)}
+              </ul>
+            )}
           </div>
           <div className='sticky-nav inline'>
             <div />
@@ -286,7 +340,7 @@ class Competitive extends React.Component {
           </div>
         </>
       );
-      
+
       // #endregion
 
       reports.push({

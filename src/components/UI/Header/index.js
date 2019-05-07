@@ -127,6 +127,14 @@ class Header extends React.Component {
         primary: true
       },
       {
+        name: t('Multiplayer'),
+        desc: t('Get all the details on your PvP engagements'),
+        slug: '/multiplayer',
+        exact: false,
+        profile: true,
+        primary: true
+      },
+      {
         name: t('Sit Rep'),
         desc: t('Be more aware of your surroundings, Guardian'),
         slug: '/sit-rep',

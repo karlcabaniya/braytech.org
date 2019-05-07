@@ -59,7 +59,7 @@ class Multiplayer extends React.Component {
       }
     },
     quickplay: {
-      modes: [71, 73, 48, 43, 60, 65],
+      modes: [71, 73, 43, 48, 60, 65],
       stats: {
         clashQuickplay: {
           mode: 71
@@ -67,11 +67,11 @@ class Multiplayer extends React.Component {
         controlQuickplay: {
           mode: 73
         },
-        rumble: {
-          mode: 48
-        },
         ironBannerControl: {
           mode: 43
+        },
+        rumble: {
+          mode: 48
         },
         lockdown: {
           mode: 60
@@ -91,7 +91,11 @@ class Multiplayer extends React.Component {
       return p;
     });
 
-    let [stats_allPvP, stats_competitive, stats_quickplay] = await Promise.all([bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.multiplayer.all.modes, '0'), bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.multiplayer.competitive.modes, '0'), bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.multiplayer.quickplay.modes, '0')]);
+    let [stats_allPvP, stats_competitive, stats_quickplay] = await Promise.all([
+      bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.multiplayer.all.modes, '0'),
+      bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.multiplayer.competitive.modes, '0'),
+      bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.multiplayer.quickplay.modes, '0')
+    ]);
 
     for (const mode in stats_allPvP) {
       if (stats_allPvP.hasOwnProperty(mode)) {
@@ -188,35 +192,20 @@ class Multiplayer extends React.Component {
               <div className='sub-header'>
                 <div>Crucible Career</div>
               </div>
-              <h4>Quickplay</h4>
-              <div className='progress quickplay'>
-                <ProgressBar
-                  objectiveDefinition={{
-                    progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
-                    completionValue: valor.progression.data.nextLevelAt
-                  }}
-                  playerProgress={{
-                    progress: valor.progression.data.progressToNextLevel,
-                    objectiveHash: 'valor'
-                  }}
-                  hideCheck
-                  chunky
-                />
-                <ProgressBar
-                  objectiveDefinition={{
-                    progressDescription: valor.defs.rank.displayProperties.name,
-                    completionValue: valor.progression.total
-                  }}
-                  playerProgress={{
-                    progress: valor.progression.data.currentProgress,
-                    objectiveHash: 'valor'
-                  }}
-                  hideCheck
-                  chunky
-                />
-              </div>
-              <h4>Competitive</h4>
+              <h4>Glory modes</h4>
               <div className='progress competitive'>
+                <ProgressBar
+                  objectiveDefinition={{
+                    progressDescription: glory.defs.rank.displayProperties.name,
+                    completionValue: glory.progression.total
+                  }}
+                  playerProgress={{
+                    progress: glory.progression.data.currentProgress,
+                    objectiveHash: 'glory'
+                  }}
+                  hideCheck
+                  chunky
+                />
                 <ProgressBar
                   objectiveDefinition={{
                     progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
@@ -229,14 +218,29 @@ class Multiplayer extends React.Component {
                   hideCheck
                   chunky
                 />
+              </div>
+              <h4>Valor modes</h4>
+              <div className='progress quickplay'>
                 <ProgressBar
                   objectiveDefinition={{
-                    progressDescription: glory.defs.rank.displayProperties.name,
-                    completionValue: glory.progression.total
+                    progressDescription: valor.defs.rank.displayProperties.name,
+                    completionValue: valor.progression.total
                   }}
                   playerProgress={{
-                    progress: glory.progression.data.currentProgress,
-                    objectiveHash: 'glory'
+                    progress: valor.progression.data.currentProgress,
+                    objectiveHash: 'valor'
+                  }}
+                  hideCheck
+                  chunky
+                />
+                <ProgressBar
+                  objectiveDefinition={{
+                    progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
+                    completionValue: valor.progression.data.nextLevelAt
+                  }}
+                  playerProgress={{
+                    progress: valor.progression.data.progressToNextLevel,
+                    objectiveHash: 'valor'
                   }}
                   hideCheck
                   chunky
@@ -261,7 +265,7 @@ class Multiplayer extends React.Component {
                       }
                     };
 
-                    return <Mode stats={m} isActive={isActive} />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} />;
                   })}
                 </ul>
               ) : (
@@ -270,7 +274,7 @@ class Multiplayer extends React.Component {
             </div>
             <div className='content'>
               <div className='sub-header'>
-                <div>Competitive modes</div>
+                <div>Glory modes</div>
               </div>
               {Object.values(this.multiplayer.all.stats.allPvP).length > 1 ? (
                 <ul className='list modes'>
@@ -284,7 +288,7 @@ class Multiplayer extends React.Component {
                       }
                     };
 
-                    return <Mode stats={m} isActive={isActive} />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} />;
                   })}
                 </ul>
               ) : (
@@ -293,7 +297,7 @@ class Multiplayer extends React.Component {
             </div>
             <div className='content'>
               <div className='sub-header'>
-                <div>Quickplay modes</div>
+                <div>Valor modes</div>
               </div>
               {Object.values(this.multiplayer.all.stats.allPvP).length > 1 ? (
                 <ul className='list modes'>
@@ -307,7 +311,7 @@ class Multiplayer extends React.Component {
                       }
                     };
 
-                    return <Mode stats={m} isActive={isActive} />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} />;
                   })}
                 </ul>
               ) : (

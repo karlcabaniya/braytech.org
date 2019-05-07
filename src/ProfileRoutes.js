@@ -65,6 +65,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/sit-rep`} exact render={route => <SitRep />} />
           <Route path={`${match.url}/dossier`} render={route => <Dossier />} />
           <Route path={`${match.url}/multiplayer/crucible/:mode?`} render={route => <Multiplayer {...route} />} />
+          <Route path={`${match.url}/multiplayer`} render={route => <Redirect to={{ pathname: `${match.url}/multiplayer/crucible` }} />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/sit-rep` }} />} />
         </Switch>
       </>

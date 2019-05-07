@@ -76,7 +76,7 @@ class Mode extends React.Component {
     modeIcon = altIcons.find(m => m.modes.includes(stats.mode)) ? altIcons.find(m => m.modes.includes(stats.mode)).pathname : modeIcon;
 
     return (
-      <li key={stats.mode} className='linked'>
+      <li className='linked'>
         <div className='icon'>
           <ObservedImage className='image' src={modeIcon} />
         </div>

@@ -4,7 +4,7 @@
   height: 38px;
   position: relative;
   padding: 0 1rem;
-  grid-template-columns: max-content max-content 3rem 3rem 3rem auto;
+  grid-template-columns: max-content max-content auto;
   align-items: center;
   font-size: 14px;
 }
@@ -64,7 +64,7 @@
 
 .list.reports li .head .image.bg {
   background-size: cover;
-  filter: brightness(0.8);
+  filter: brightness(0.5);
 }
 
 .list.reports li .head .detail {
@@ -84,6 +84,8 @@
 
 .list.reports li .head .detail .map,
 .list.reports li .head .detail .ago {
+  margin: 3px 0 0;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -92,7 +94,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 65%;
+  height: 60%;
   display: grid;
   align-items: end;
   justify-items: center;
@@ -108,20 +110,15 @@
   max-height: 390px;
 }
 
-#competitive .mode.gambit .pgcr .list li .head .standing .image {
-  width: 50%;
-  height: 50%;
-}
-
 .list.reports li .head .standing .text {
   position: absolute;
-  top: 80%;
+  top: 90%;
   display: grid;
   align-items: center;
   justify-items: center;
-  font-size: 1.4vw;
+  font-size: 1vw;
   font-weight: 500;
-  letter-spacing: 0.12vw;
+  letter-spacing: 0.2vw;
 }
 
 .list.reports li .head .score {
@@ -136,13 +133,13 @@
 
 .list.reports li .head .score .value {
   position: relative;
-  font-size: 1.6vw;
+  font-size: 1.4vw;
   font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
   text-align: center;
-  width: 6vw;
-  padding: 10px 16px;
+  width: 5vw;
+  padding: 8px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
@@ -172,7 +169,15 @@
 
 .list.reports li .entries .list li {
   display: grid;
+}
+
+.list.reports li .entries .list .team-head,
+.list.reports li .entries .list li .inline,
+.list.reports li .entries .list li .extended {
+  width: 100%;
+  display: grid;
   grid-template-columns: calc(38px + 16px) 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
   font-size: 14px;
 }
 
@@ -249,21 +254,72 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
+.list.reports li .entries .list .stat.extended {
+  display: none;
+}
+
+.list.reports li .entries .list .extended .stat:not(.extended) {
+  display: none;
+}
+
+.list.reports li .entries .list .isExpandedPlayer .stat.extended {
+  display: unset;
+  margin: 16px 0 10px;
+}
+
+.list.reports li .entries .list .isExpandedPlayer .inline {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.list.reports li .entries .list .isExpandedPlayer {
+  height: unset;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.list.reports li .entries .list .isExpandedPlayer:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.list.reports li .entries .list .isExpandedPlayer {
+  /* grid-column: 1/9;
+  display: grid;
+  grid-template-columns: calc(38px + 16px) 2fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+  /* margin: 16px 0 10px; */
+}
+
+.list.reports li .entries .list .isExpandedPlayer .stat .name {
+  display: block;
+  margin: 7px 0 0;
+  font-size: 12px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.list.reports li .entries .list .isExpandedPlayer .extended .stat .value {
+  font-size: 18px;
+  line-height: 1;
+}
+
 .list.reports li .sticky-nav a {
   position: relative;
   display: initial;
   padding: initial;
 }
 
-@media screen and (max-width: 768px) {
-  #competitive {
-    padding: 3rem 2rem 0;
-  }
 
-  #competitive > .modes > .mode {
-    grid-template-columns: 1fr;
-    grid-gap: 2rem;
-  }
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
 
   .list.reports li .basic {
     grid-template-columns: 1fr 1fr;
@@ -322,45 +378,46 @@
     font-size: 14px;
   }
 
-  .list.reports li .entries .list li {
-    grid-template-columns: calc(38px + 16px) 2fr 1fr;
+  .list.reports li .entries .list .team-head,
+  .list.reports li .entries .list li .inline,
+  .list.reports li .entries .list li .extended {
+    grid-template-columns: calc(38px + 16px) auto 2rem 2rem 2rem 3rem;
     font-size: 12px;
   }
-
-  .list.reports li .entries .list li > div {
+  
+  .list.reports li .entries .list .team-head .assists,
+  .list.reports li .entries .list .team-head .team.score,
+  .list.reports li .entries .list li .inline .assists {
     display: none;
   }
 
-  .list.reports li .entries .list .team-head .team.name,
-  .list.reports li .entries .list .team-head > div:first-child {
-    display: initial;
+  .list.reports li .entries .list .team-head .killsDeathsRatio,
+  .list.reports li .entries .list li .inline .killsDeathsRatio {
+    text-align: right;
+    padding: 0 1rem 0 0;
   }
 
-  .list.reports li .entries .list li .icon,
-  .list.reports li .entries .list li .opponents-defeated,
-  .list.reports li .entries .list li .motes-deposited {
-    display: initial;
+  .list.reports li .entries .list li > .extended {
+    padding: 1rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 0.5rem;
+    align-items: start;
   }
 
-  .list.reports li .entries .list .isExpandedPlayer {
-    height: unset;
-    background-color: rgba(255, 255, 255, 0.05);
+  .list.reports li .entries .list .isExpandedPlayer .extended .stat.extended {
+    margin: 0;
   }
 
-  .list.reports li .entries .list .isExpandedPlayer .pairs {
-    grid-column: 2/4;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    margin: 16px 0 10px;
+  .list.reports li .entries .list li > .extended > div {
+    display: none;
   }
 
-  .list.reports li .entries .list .isExpandedPlayer .pairs div {
-    margin: 0 0 6px;
+  .list.reports li .entries .list .isExpandedPlayer .extended .stat.assists {
+    display: unset;
   }
 
-  .list.reports li .entries .list .isExpandedPlayer .pairs .key {
-    color: rgba(255, 255, 255, 0.6);
+  .list.reports li .entries .list .isExpandedPlayer .stat .name {
+    display: block;
   }
-
 
 }
