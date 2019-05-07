@@ -13,11 +13,10 @@ import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
 import Account from './views/Account';
 import SitRep from './views/SitRep';
+import Dossier from './views/Dossier';
 import ThisWeek from './views/ThisWeek';
 import Header from './components/UI/Header';
 import Spinner from './components/UI/Spinner';
-
-import Dossier from './views/Dossier';
 
 class ProfileRoutes extends React.Component {
   componentDidMount() {

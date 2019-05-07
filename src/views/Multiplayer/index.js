@@ -3,13 +3,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
-import orderBy from 'lodash/orderBy';
 
 import * as bungie from '../../utils/bungie';
-import getPGCR from '../../utils/getPGCR';
 
 import manifest from '../../utils/manifest';
-import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/UI/ProgressBar';
 import Spinner from '../../components/UI/Spinner';
 import Mode from '../../components/Multiplayer/Mode';
@@ -22,7 +19,7 @@ class Multiplayer extends React.Component {
     super(props);
 
     this.state = {
-      loading: true
+      loading: false
     };
   }
 
@@ -130,20 +127,43 @@ class Multiplayer extends React.Component {
       }
     }
 
-    return true;
-  };
-
-  async componentDidMount() {
-    await this.fetch();
-
     this.setState(p => {
       p.loading = false;
       return p;
     });
+
+    return true;
+  };
+
+  componentDidMount() {
+    this.refreshData();
+    this.startInterval();
+  }
+
+  refreshData = async () => {
+    if (!this.state.loading) {
+      //console.log('refresh start');
+      await this.fetch();
+      //console.log('refresh end');
+    } else {
+      //console.log('refresh skipped');
+    }
+  };
+
+  startInterval() {
+    this.refreshDataInterval = window.setInterval(this.refreshData, 30000);
+  }
+
+  clearInterval() {
+    window.clearInterval(this.refreshDataInterval);
+  }
+
+  componentWillUnmount() {
+    this.clearInterval();
   }
 
   render() {
-    const { t, member, PGCRcache } = this.props;
+    const { t, member } = this.props;
     const characterId = member.characterId;
 
     const characterProgressions = member.data.profile.characterProgressions.data;
@@ -158,9 +178,7 @@ class Multiplayer extends React.Component {
         data: characterProgressions[characterId].progressions[3882308435],
         total: 0,
         resets: profileRecords[559943871] ? profileRecords[559943871].objectives[0].progress : 0
-      },
-      modes: [71, 73, 43, 44, 31],
-      PGCRs: []
+      }
     };
 
     valor.progression.total = Object.keys(valor.defs.rank.steps).reduce((sum, key) => {
@@ -175,9 +193,7 @@ class Multiplayer extends React.Component {
       progression: {
         data: characterProgressions[characterId].progressions[2679551909],
         total: 0
-      },
-      modes: [37, 38, 72, 74],
-      PGCRs: []
+      }
     };
 
     glory.progression.total = Object.keys(glory.defs.rank.steps).reduce((sum, key) => {

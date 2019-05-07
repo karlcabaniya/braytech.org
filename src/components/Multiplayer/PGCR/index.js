@@ -247,6 +247,25 @@ class Competitive extends React.Component {
                     </div>
                   );
                 })}
+                {entry.extended.weapons && entry.extended.weapons.length ? (
+                  <div className='stat extended weapons'>
+                    <div className='value'>
+                      <ul>
+                        {entry.extended.weapons.map((w, i) => {
+                          let definitionItem = manifest.DestinyInventoryItemDefinition[w.referenceId];
+                          let kills = w.values ? w.values.uniqueWeaponKills.basic.value : '0';
+                          return (
+                            <li key={i} className={cx('item', 'tooltip')} data-itemhash={definitionItem.hash}>
+                              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
+                              <div className='kills'>{kills}</div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                    <div className='name'>Weapons used</div>
+                  </div>
+                ) : null}
               </div>
             </li>
           )

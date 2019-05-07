@@ -2,14 +2,10 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import cx from 'classnames';
 import { orderBy, isEqual } from 'lodash';
 
 import * as bungie from '../../../utils/bungie';
 import getPGCR from '../../../utils/getPGCR';
-import manifest from '../../../utils/manifest';
-import ObservedImage from '../../ObservedImage';
-import ProgressBar from '../../UI/ProgressBar';
 import Spinner from '../../UI/Spinner';
 
 import PGCR from '../PGCR';
@@ -21,7 +17,7 @@ class Matches extends React.Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loading: false,
       cacheState: {}
     };
 
@@ -63,36 +59,57 @@ class Matches extends React.Component {
     return await Promise.all(PGCRs);
   };
 
-  run = async (modes, characterId) => {
-    this.running = true;
+  run = async () => {
+    const { modes, characterId = false } = this.props;
 
-    let ignition = await modes.map(m => {
-      return this.cacheMachine(m, characterId);
-    });
+    if (!this.state.loading) {
+      //console.log('matches refresh start');
 
-    try {
-      await Promise.all(ignition);
-    } catch (e) {}
+      this.running = true;
 
-    this.setState(p => {
-      p.loading = false;
-      return p;
-    });
-    this.running = false;
+      let ignition = await modes.map(m => {
+        return this.cacheMachine(m, characterId);
+      });
+  
+      try {
+        await Promise.all(ignition);
+      } catch (e) {}
+  
+      this.setState(p => {
+        p.loading = false;
+        return p;
+      });
+      this.running = false;
+
+      //console.log('matches refresh end');
+    } else {
+      //console.log('matches refresh skipped');
+    }
   }
 
   componentDidMount() {
-    const { modes, characterId = false } = this.props;
-
-    this.run(modes, characterId);
+    this.run();
+    this.startInterval();
   }
 
   componentDidUpdate(prev) {
-    const { modes, characterId = false } = this.props;
+    const { modes } = this.props;
 
     if (!isEqual(prev.modes, modes)) {
-      this.run(modes, characterId);
+      this.run();
     }
+  }
+
+  startInterval() {
+    this.refreshDataInterval = window.setInterval(this.run, 30000);
+  }
+
+  clearInterval() {
+    window.clearInterval(this.refreshDataInterval);
+  }
+
+  componentWillUnmount() {
+    this.clearInterval();
   }
 
   render() {
