@@ -127,6 +127,8 @@ class Multiplayer extends React.Component {
       }
     }
 
+    console.log(this.multiplayer)
+
     this.setState(p => {
       p.loading = false;
       return p;
@@ -209,58 +211,72 @@ class Multiplayer extends React.Component {
                 <div>Crucible Career</div>
               </div>
               <h4>Glory modes</h4>
-              <div className='progress competitive'>
-                <ProgressBar
-                  objectiveDefinition={{
-                    progressDescription: glory.defs.rank.displayProperties.name,
-                    completionValue: glory.progression.total
-                  }}
-                  playerProgress={{
-                    progress: glory.progression.data.currentProgress,
-                    objectiveHash: 'glory'
-                  }}
-                  hideCheck
-                  chunky
-                />
-                <ProgressBar
-                  objectiveDefinition={{
-                    progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
-                    completionValue: glory.progression.data.nextLevelAt
-                  }}
-                  playerProgress={{
-                    progress: glory.progression.data.progressToNextLevel,
-                    objectiveHash: 'valor'
-                  }}
-                  hideCheck
-                  chunky
-                />
+              <div className='highlight'>
+              <div className='value'>{this.multiplayer.all.stats.pvpCompetitive.secondsPlayed ? Math.floor(this.multiplayer.all.stats.pvpCompetitive.secondsPlayed.basic.value / 60 / 60) : 0} hours</div>
+                <div className='name'>Time played</div>
+              </div>
+              <div className='highlight'>
+                <div className='value progress competitive'>
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: glory.defs.rank.displayProperties.name,
+                      completionValue: glory.progression.total
+                    }}
+                    playerProgress={{
+                      progress: glory.progression.data.currentProgress,
+                      objectiveHash: 'glory'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
+                      completionValue: glory.progression.data.nextLevelAt
+                    }}
+                    playerProgress={{
+                      progress: glory.progression.data.progressToNextLevel,
+                      objectiveHash: 'valor'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                </div>
+                <div className='name'>Progress</div>
               </div>
               <h4>Valor modes</h4>
-              <div className='progress quickplay'>
-                <ProgressBar
-                  objectiveDefinition={{
-                    progressDescription: valor.defs.rank.displayProperties.name,
-                    completionValue: valor.progression.total
-                  }}
-                  playerProgress={{
-                    progress: valor.progression.data.currentProgress,
-                    objectiveHash: 'valor'
-                  }}
-                  hideCheck
-                  chunky
-                />
-                <ProgressBar
-                  objectiveDefinition={{
-                    progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
-                    completionValue: valor.progression.data.nextLevelAt
-                  }}
-                  playerProgress={{
-                    progress: valor.progression.data.progressToNextLevel,
-                    objectiveHash: 'valor'
-                  }}
-                  hideCheck
-                  chunky
-                />
+              <div className='highlight'>
+                <div className='value'>{this.multiplayer.all.stats.pvpQuickplay.secondsPlayed ? Math.floor(this.multiplayer.all.stats.pvpQuickplay.secondsPlayed.basic.value / 60 / 60) : 0} hours</div>
+                <div className='name'>Time played</div>
+              </div>
+              <div className='highlight'>
+                <div className='value progress quickplay'>
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: valor.defs.rank.displayProperties.name,
+                      completionValue: valor.progression.total
+                    }}
+                    playerProgress={{
+                      progress: valor.progression.data.currentProgress,
+                      objectiveHash: 'valor'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
+                      completionValue: valor.progression.data.nextLevelAt
+                    }}
+                    playerProgress={{
+                      progress: valor.progression.data.progressToNextLevel,
+                      objectiveHash: 'valor'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                </div>
+                <div className='name'>Progress</div>
               </div>
             </div>
           </div>

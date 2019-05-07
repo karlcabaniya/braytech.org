@@ -334,7 +334,7 @@ button.square.active {
 
 .sub-header {
   position: relative;
-  margin: 3rem 3rem 1rem;
+  margin: 0 0 1rem;
   padding: 0 0 10px;
   border-bottom: 2px solid rgba(255, 255, 255, 0.4);
   width: 100%;
@@ -387,10 +387,6 @@ button.square.active {
 }
 
 @media screen and (max-width: 600px) {
-  .sub-header {
-    margin: 2rem 0 1rem;
-  }
-
   .page-header .name {
     font-size: 36px;
   }

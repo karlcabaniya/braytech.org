@@ -24,6 +24,31 @@
   margin: 1.5rem 0 1rem;
 }
 
+#multiplayer .module .content.career .highlight {
+  margin: 0 0 1rem;
+}
+
+#multiplayer .module .content.career .highlight:last-child {
+  margin: 0;
+}
+
+#multiplayer .module .content.career .highlight .name {
+  margin: 7px 0 0;
+  font-size: 12px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#multiplayer .module .content.career .highlight .value {
+  font-size: 18px;
+  line-height: 1;
+}
+
+#multiplayer .module .content.career .highlight .value.progress {
+  margin: 0 0 10px;
+}
+
 #multiplayer .module .content .modes li {
   height: unset;
   align-items: flex-start;
@@ -135,11 +160,11 @@
   #multiplayer {
     padding: 3rem 2rem 2rem;
     grid-template-columns: 1fr;
-    grid-gap: 1rem;
+    grid-gap: 2rem;
   }
   
   #multiplayer .module:first-child {
-    grid-gap: 1rem;
+    grid-gap: 2rem;
   }
 
 }
@@ -167,24 +192,24 @@
     margin: 7px 0 0;
   }
 
-#multiplayer .module .content .modes li .text .stat .value {
-  font-size: 14px;
-}
+  #multiplayer .module .content .modes li .text .stat .value {
+    font-size: 14px;
+  }
 
-#multiplayer .module .content .modes li .text .stat .name {
-  margin: 7px 0 0;
-  font-size: 10px;
-}
+  #multiplayer .module .content .modes li .text .stat .name {
+    margin: 7px 0 0;
+    font-size: 10px;
+  }
 
-#multiplayer .module .content .modes li .text .kdr .value {
-  margin: 3px 0 0;
-  font-size: 18px;
-  line-height: 14px;
-}
+  #multiplayer .module .content .modes li .text .kdr .value {
+    margin: 3px 0 0;
+    font-size: 18px;
+    line-height: 14px;
+  }
 
-#multiplayer ul.list.reports {
-  margin: 0 0 0 calc(-2rem + 4px);
-  width: calc(100% + 4rem - 8px);
-}
+  #multiplayer ul.list.reports {
+    margin: 0 0 0 calc(-2rem + 4px);
+    width: calc(100% + 4rem - 8px);
+  }
 
 }
