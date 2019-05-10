@@ -2,13 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 
-import ObservedImage from '../../components/ObservedImage';
-import { ProfileNavLink } from '../../components/ProfileLink';
-import * as ls from '../../utils/localStorage';
-import * as paths from '../../utils/paths';
-import manifest from '../../utils/manifest';
+import ObservedImage from '../../../components/ObservedImage';
+import { ProfileNavLink } from '../../../components/ProfileLink';
+import * as ls from '../../../utils/localStorage';
+import * as paths from '../../../utils/paths';
+import manifest from '../../../utils/manifest';
 
-import Collectibles from '../../components/Collectibles';
+import Collectibles from '../../../components/Collectibles';
 
 class PresentationNode extends React.Component {
   constructor(props) {

@@ -5,13 +5,13 @@ import { withNamespaces } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
-import manifest from '../../utils/manifest';
-import { ProfileLink } from '../../components/ProfileLink';
-import ObservedImage from '../../components/ObservedImage';
-import { enumerateRecordState } from '../../utils/destinyEnums';
-import RecordsAlmost from '../../components/RecordsAlmost';
-import RecordsTracked from '../../components/RecordsTracked';
-import NotificationInline from '../../components/Notifications/NotificationInline';
+import manifest from '../../../utils/manifest';
+import { ProfileLink } from '../../../components/ProfileLink';
+import ObservedImage from '../../../components/ObservedImage';
+import { enumerateRecordState } from '../../../utils/destinyEnums';
+import RecordsAlmost from '../../../components/RecordsAlmost';
+import RecordsTracked from '../../../components/RecordsTracked';
+import NotificationInline from '../../../components/Notifications/NotificationInline';
 
 class Root extends React.Component {
   render() {

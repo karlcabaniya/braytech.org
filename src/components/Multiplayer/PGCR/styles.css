@@ -44,7 +44,7 @@
 }
 
 .list.reports li.isExpanded:hover {
-  background-color: transparent;
+  background-color: hsla(0, 0%, 100%, 0.05);
 }
 
 .list.reports li.isExpanded:hover::before,
@@ -159,11 +159,11 @@
   padding: 1rem;
 }
 
-.list.reports li .entries .list.team {
+.list.reports li .entries ul.team {
   margin: 0 0 1rem;
 }
 
-.list.reports li .entries .list.team:last-child {
+.list.reports li .entries ul.team:last-child {
   margin: 0;
 }
 
@@ -171,9 +171,36 @@
   display: grid;
 }
 
-.list.reports li .entries .list .team-head,
-.list.reports li .entries .list li .inline,
-.list.reports li .entries .list li .extended {
+.list.reports li .entries .list.fireteam {
+  width: 100%;
+  position: relative;
+  padding: 0 0 0 10px;
+}
+
+.list.reports li .entries .list.fireteam.stacked::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: calc(100% - 2px);
+  border: 1px solid #d6d6d6;
+  border-right: none;
+  transition: opacity 0.25;
+  opacity: 0.4;
+}
+
+.list.reports li .entries .list.fireteam.stacked:hover::before {
+  opacity: 0.8;
+}
+
+.list.reports li .entries .team > li:not(.team-head) {
+  height: unset;
+}
+
+.list.reports li .entries .team-head,
+.list.reports li .entries li .inline,
+.list.reports li .entries li .extended {
   width: 100%;
   display: grid;
   grid-template-columns: calc(38px + 16px) 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -181,29 +208,33 @@
   font-size: 14px;
 }
 
+.list.reports li .entries .team-head {
+  grid-template-columns: calc(38px + 16px + 10px) 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
 .list.reports li .entries .list li:last-child {
   margin: 0;
 }
 
-.list.reports li .entries .list .team-head {
+.list.reports li .entries .team-head {
   position: relative;
   background-color: rgba(255, 255, 255, 0.1);
   overflow: hidden;
   line-height: 1.1;
 }
 
-.list.reports li .entries .list .team-head.bravo {
+.list.reports li .entries .team-head.bravo {
   background-color: #60779a;
 }
 
-.list.reports li .entries .list .team-head.alpha {
+.list.reports li .entries .team-head.alpha {
   background-color: #973835;
 }
 
-.list.reports li .entries .list .team-head::before {
+.list.reports li .entries .team-head::before {
   content: '';
-  top: -5px;
-  left: 16px;
+  top: -8px;
+  left: -4px;
   font-family: 'destiny' !important;
   font-style: normal;
   font-weight: normal;
@@ -212,23 +243,23 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 48px;
+  font-size: 72px;
   opacity: 0.2;
 }
 
-.list.reports li .entries .list .team-head.bravo::before {
+.list.reports li .entries .team-head.bravo::before {
   content: '\e9ed';
 }
 
-.list.reports li .entries .list .team-head.alpha::before {
+.list.reports li .entries .team-head.alpha::before {
   content: '\e9ee';
 }
 
-.list.reports li .entries .list .team-head div:not(.team) {
+.list.reports li .entries .team-head div:not(.team) {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.list.reports li .entries .list .team-head .team.score {
+.list.reports li .entries .team-head .team.score {
   padding: 0 16px 0 0;
   text-align: right;
 }
@@ -413,22 +444,28 @@
 
   .list.reports li .entries .list li .displayName {
     font-size: 14px;
+    max-width: 100px;
+    white-space: nowrap;
   }
 
-  .list.reports li .entries .list .team-head,
+  .list.reports li .entries .team-head,
   .list.reports li .entries .list li .inline,
   .list.reports li .entries .list li .extended {
     grid-template-columns: calc(38px + 16px) auto 2rem 2rem 2rem 3rem;
     font-size: 12px;
   }
+
+  .list.reports li .entries .team-head {
+    grid-template-columns: calc(38px + 16px + 10px) auto 2rem 2rem 2rem 3rem;
+  }
   
-  .list.reports li .entries .list .team-head .assists,
-  .list.reports li .entries .list .team-head .team.score,
+  .list.reports li .entries .team-head .assists,
+  .list.reports li .entries .team-head .team.score,
   .list.reports li .entries .list li .inline .assists {
     display: none;
   }
 
-  .list.reports li .entries .list .team-head .killsDeathsRatio,
+  .list.reports li .entries .team-head .killsDeathsRatio,
   .list.reports li .entries .list li .inline .killsDeathsRatio {
     text-align: right;
     padding: 0 1rem 0 0;
@@ -436,13 +473,18 @@
 
   .list.reports li .entries .list li > .extended {
     padding: 1rem;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 0.5rem;
     align-items: start;
   }
-
+  
+  .list.reports li .entries .list .isExpandedPlayer .extended,
   .list.reports li .entries .list .isExpandedPlayer .extended .stat.extended {
     margin: 0;
+  }
+
+  .list.reports li .entries .list .isExpandedPlayer .stat.extended.weapons {
+    grid-column: 1/4;
   }
 
   .list.reports li .entries .list li > .extended > div {

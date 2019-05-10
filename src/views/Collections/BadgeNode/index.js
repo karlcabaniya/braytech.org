@@ -1,12 +1,12 @@
 import React from 'react';
 import cx from 'classnames';
 import { withNamespaces } from 'react-i18next';
-import manifest from '../../utils/manifest';
+import manifest from '../../../utils/manifest';
 
-import ObservedImage from '../../components/ObservedImage';
-import Collectibles from '../../components/Collectibles';
-import * as paths from '../../utils/paths';
-import { enumerateCollectibleState } from '../../utils/destinyEnums';
+import ObservedImage from '../../../components/ObservedImage';
+import Collectibles from '../../../components/Collectibles';
+import * as paths from '../../../utils/paths';
+import { enumerateCollectibleState } from '../../../utils/destinyEnums';
 
 class BadgeNode extends React.Component {
   render() {

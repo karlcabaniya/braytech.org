@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 
-import manifest from '../../utils/manifest';
-import { ProfileLink, ProfileNavLink } from '../../components/ProfileLink';
-import ObservedImage from '../../components/ObservedImage';
-import Records from '../../components/Records';
-import { enumerateRecordState } from '../../utils/destinyEnums';
+import manifest from '../../../utils/manifest';
+import { ProfileLink, ProfileNavLink } from '../../../components/ProfileLink';
+import ObservedImage from '../../../components/ObservedImage';
+import Records from '../../../components/Records';
+import { enumerateRecordState } from '../../../utils/destinyEnums';
 
 class PresentationNode extends React.Component {
   render() {

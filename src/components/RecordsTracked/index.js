@@ -51,11 +51,11 @@ class RecordsTracked extends React.Component {
             </div>
           </li>
         ) : null}
-        {pageLink && (this.props.location && this.props.location.pathname !== '/triumphs') && hashes.length < 1 ? (
+        {/* {pageLink && (this.props.location && this.props.location.pathname !== '/triumphs') && hashes.length < 1 ? (
           <li key='pageLink' className='linked'>
             <ProfileLink to={{ pathname: '/triumphs', state: { from: '/triumphs' } }}>See all triumphs</ProfileLink>
           </li>
-        ) : null}
+        ) : null} */}
       </ul>
     );
   }

@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
-import RecordsTracked from '../../components/RecordsTracked';
+import RecordsAlmost from '../../../components/RecordsAlmost';
 
 class Root extends React.Component {
   render() {
@@ -13,9 +13,9 @@ class Root extends React.Component {
       <>
         <div className='almost-complete'>
           <div className='sub-header sub'>
-            <div>{t('Tracked triumphs')}</div>
+            <div>{t('Almost complete')}</div>
           </div>
-          <RecordsTracked {...this.props} limit='100' selfLinkFrom='/triumphs/tracked' />
+          <RecordsAlmost {...this.props} limit='100' selfLinkFrom='/triumphs/almost-complete' />
         </div>
       </>
     );

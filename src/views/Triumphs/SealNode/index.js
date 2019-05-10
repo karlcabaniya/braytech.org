@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import manifest from '../../utils/manifest';
-import ObservedImage from '../../components/ObservedImage';
-import Records from '../../components/Records';
+import manifest from '../../../utils/manifest';
+import ObservedImage from '../../../components/ObservedImage';
+import Records from '../../../components/Records';
 
 class SealNode extends React.Component {
   render() {

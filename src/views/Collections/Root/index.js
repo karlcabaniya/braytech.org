@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 import { withNamespaces } from 'react-i18next';
-import manifest from '../../utils/manifest';
+import manifest from '../../../utils/manifest';
 
-import ObservedImage from '../../components/ObservedImage';
-import { ProfileLink } from '../../components/ProfileLink';
-import { enumerateCollectibleState } from '../../utils/destinyEnums';
+import ObservedImage from '../../../components/ObservedImage';
+import { ProfileLink } from '../../../components/ProfileLink';
+import { enumerateCollectibleState } from '../../../utils/destinyEnums';
 
 class Root extends React.Component {
   render() {
@@ -30,14 +30,25 @@ class Root extends React.Component {
       profileCollectibles.recentCollectibleHashes.forEach(child => {
         let collectibleDefinition = manifest.DestinyCollectibleDefinition[child];
 
-        recentlyDiscovered.push(
-          <li key={collectibleDefinition.hash} className={cx('item', 'tooltip')} data-itemhash={collectibleDefinition.itemHash}>
-            <div className='icon'>
-              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
-            </div>
-            {collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: '/collections' } }} /> : null}
-          </li>
-        );
+        if (collectibleDefinition.redacted || collectibleDefinition.itemHash === 0) {
+          recentlyDiscovered.push(
+            <li key={collectibleDefinition.hash} className={cx('item', 'redacted', 'tooltip')} data-itemhash='343'>
+              <div className='icon'>
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${manifest.settings.destiny2CoreSettings.undiscoveredCollectibleImage}`} />
+              </div>
+            </li>
+          );
+        } else {
+          recentlyDiscovered.push(
+            <li key={collectibleDefinition.hash} className={cx('item', 'tooltip')} data-itemhash={collectibleDefinition.itemHash}>
+              <div className='icon'>
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
+              </div>
+              {collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: '/collections' } }} /> : null}
+            </li>
+          );
+        }
+        
       });
     }
 

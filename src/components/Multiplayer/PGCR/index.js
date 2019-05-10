@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
-import { orderBy } from 'lodash';
+import { orderBy, groupBy } from 'lodash';
 import Moment from 'react-moment';
 
 import manifest from '../../../utils/manifest';
@@ -211,6 +211,7 @@ class Competitive extends React.Component {
 
         entries.push({
           teamId: pgcr.teams && pgcr.teams.length ? entry.values.team.basic.value : null,
+          fireteamId: entry.values.fireteamId ? entry.values.fireteamId.basic.value : null,
           element: (
             <li key={entry.characterId} className={cx('linked', { isExpandedPlayer })} onClick={() => this.togglePlayerHandler(pgcr.activityDetails.instanceId, entry.characterId)}>
               <div className='inline'>
@@ -309,8 +310,10 @@ class Competitive extends React.Component {
           <div className='entries'>
             {pgcr.teams && pgcr.teams.length ? (
               orderBy(pgcr.teams, [t => t.score.basic.value], ['desc']).map(t => {
+                let fireteams = Object.values(groupBy(entries.filter(e => e.teamId === t.teamId), 'fireteamId'));
+
                 return (
-                  <ul key={t.teamId} className='list team'>
+                  <ul key={t.teamId} className='team'>
                     <li className={cx('team-head', (t.teamId === 17 ? 'Alpha' : 'Bravo').toLowerCase())}>
                       <div />
                       <div className='team name'>{t.teamId === 17 ? 'Alpha' : 'Bravo'} team</div>
@@ -326,21 +329,34 @@ class Competitive extends React.Component {
                       })}
                       <div className='team score'>{t.score.basic.displayValue}</div>
                     </li>
-                    {entries.filter(e => e.teamId === t.teamId).map(e => e.element)}
+                    {fireteams.map((f, i) => {              
+                      return (
+                        <li key={i}>
+                          <ul className={cx('list', 'fireteam', { stacked: f.length > 1 })}>
+                            {f.map(e => e.element)}
+                          </ul>
+                        </li>
+                      )
+                    })}
                   </ul>
                 );
               })
             ) : (
-              <ul key={t.teamId} className='list team'>
+              <ul key={t.teamId} className='team'>
                 <li className={cx('team-head')}>
                   <div />
                   <div className='team name' />
-                  <div className='opponents-defeated'>Opp. Def.</div>
-                  <div className='kills'>Kills</div>
-                  <div className='deaths'>Deaths</div>
-                  <div className='assists'>Assists</div>
-                  <div className='efficiency'>Efficiency</div>
-                  <div className='team score' />
+                  {displayStats.map(s => {
+                    if (s.extended) {
+                      return null;
+                    }
+                    return (
+                      <div key={s.key} className={s.key}>
+                        {s.name}
+                      </div>
+                    );
+                  })}
+                  <div className='team score'></div>
                 </li>
                 {entries.map(e => e.element)}
               </ul>

@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
-import Root from './Root';
-import SealNode from './SealNode';
-import PresentationNode from './PresentationNode';
-import AlmostComplete from './AlmostComplete';
-import Tracked from './Tracked';
 
 import './styles.css';
+
+import Root from './Root/';
+import Node from './Node/';
+import SealNode from './SealNode/';
+import AlmostComplete from './AlmostComplete/';
+import Tracked from './Tracked/';
 
 class Triumphs extends React.Component {
   constructor(props) {
@@ -136,7 +137,7 @@ class Triumphs extends React.Component {
       return (
         <>
           <div className={cx('view', 'presentation-node', 'parent', this.props.theme.selected)} id='triumphs'>
-            <PresentationNode {...this.props} primaryHash={primaryHash} />
+            <Node {...this.props} primaryHash={primaryHash} />
           </div>
           <div className='sticky-nav'>
             <div />
