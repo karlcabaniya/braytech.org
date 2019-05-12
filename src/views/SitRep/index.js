@@ -253,7 +253,7 @@ class SitRep extends React.Component {
 
       return (
         <ul className='list collection-items'>
-          <Collectibles hashes={checks} />
+          <Collectibles selfLinkFrom='/sit-rep' hashes={checks} />
         </ul>
       );
     };
