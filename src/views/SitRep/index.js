@@ -10,9 +10,9 @@ import orderBy from 'lodash/orderBy';
 import manifest from '../../utils/manifest';
 import { ProfileLink } from '../../components/ProfileLink';
 import Collectibles from '../../components/Collectibles';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 import ObservedImage from '../../components/ObservedImage';
-import ProgressBar from '../../components/ProgressBar';
+import ProgressBar from '../../components/UI/ProgressBar';
 import Roster from '../../components/Roster';
 import * as utils from '../../utils/destinyUtils';
 
@@ -202,8 +202,6 @@ class SitRep extends React.Component {
       }
     };
 
-    console.log(valor)
-
     glory.progression.total = Object.keys(glory.defs.rank.steps).reduce((sum, key) => {
       return sum + glory.defs.rank.steps[key].progressTotal;
     }, 0);
@@ -255,7 +253,7 @@ class SitRep extends React.Component {
 
       return (
         <ul className='list collection-items'>
-          <Collectibles hashes={checks} />
+          <Collectibles selfLinkFrom='/sit-rep' hashes={checks} />
         </ul>
       );
     };

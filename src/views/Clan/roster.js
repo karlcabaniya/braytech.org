@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import { ProfileNavLink } from '../../components/ProfileLink';
 import Roster from '../../components/Roster';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 
 import './roster.css';
 

@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import ProgressBar from '../../components/ProgressBar';
+import ProgressBar from '../../components/UI/ProgressBar';
 
 class Ranks extends React.Component {
   constructor(props) {

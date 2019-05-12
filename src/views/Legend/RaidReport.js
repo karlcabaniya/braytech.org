@@ -10,7 +10,7 @@ import { orderBy, minBy } from 'lodash';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 
 class RaidReport extends React.Component {
   constructor(props) {

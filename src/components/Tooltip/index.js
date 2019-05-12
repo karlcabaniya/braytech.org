@@ -188,7 +188,8 @@ class Tooltip extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    dossierMembers: state.dossierMembers
+    dossierMembers: state.dossierMembers,
+    PGCRcache: state.PGCRcache
   };
 }
 

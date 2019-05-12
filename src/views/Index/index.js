@@ -7,7 +7,7 @@ import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
 import ObservedImage from '../../components/ObservedImage';
-import Button from '../../components/Button';
+import Button from '../../components/UI/Button';
 import captainsLog from '../../data/captainsLog';
 import { ReactComponent as Logo } from '../../components/BraytechDevice.svg';
 import manifest from '../../utils/manifest';
@@ -81,7 +81,7 @@ class Index extends React.Component {
     return (
       <div className='view' id='index'>
         <div className='head'>
-          <ObservedImage className='bg image' src='/static/images/The_Revelry_Header.jpg' />
+          <ObservedImage className='bg image' src='/static/images/season6_product_page_header_1.jpg' />
           <div className='device'>
             <Logo />
           </div>
@@ -95,11 +95,11 @@ class Index extends React.Component {
         <div className='modules'>
           <div className='coming-up'>
             <div className='page-header'>
-              <div className='name'>The Revelry</div>
+              <div className='name'>Season of the Drifter</div>
               <div className='description'>What's happening this week in Destiny</div>
             </div>
             <div className='text'>
-              <p>“Spring is in the air, Guardians! It’s time to kick up your heels, celebrate, and break a few rules! The people of the City love this time of year, and I wanted to share their joy with you, my good friends. Come to the Tower. Smell the flowers. And revel in all we have together.” —Eva Levante</p>
+              <p>How you livin'? I've got big plans for all you Guardians. You're gonna want t'check your equipment and buckle in, 'cus' you ain't seen nothin' yet--</p>
             </div>
           </div>
           <div className='change-log'>

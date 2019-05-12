@@ -5,12 +5,13 @@ import { withNamespaces } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
-import Root from './Root';
-import BadgeNode from './BadgeNode';
 import { ProfileLink } from '../../components/ProfileLink';
-import PresentationNode from './PresentationNode';
 
 import './styles.css';
+
+import Root from './Root/';
+import Node from './Node/';
+import BadgeNode from './BadgeNode/';
 
 class Collections extends React.Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class Collections extends React.Component {
       return (
         <>
           <div className={cx('view', 'presentation-node', this.props.theme.selected)} id='collections'>
-            <PresentationNode {...this.props} primaryHash={primaryHash} />
+            <Node {...this.props} primaryHash={primaryHash} />
           </div>
           <div className='sticky-nav'>
             <div />

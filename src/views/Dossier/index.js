@@ -6,16 +6,16 @@ import cx from 'classnames';
 import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
 
-import CharacterEmblem from '../../components/CharacterEmblem';
+import CharacterEmblem from '../../components/UI/CharacterEmblem';
 import Item from '../../components/Item';
 import manifest from '../../utils/manifest';
 import * as utils from '../../utils/destinyUtils';
 import getDossierMembers from '../../utils/getDossierMembers';
 import * as ls from '../../utils/localStorage';
 import ProfileSearch from './ProfileSearch';
-import Spinner from '../../components/Spinner';
+import Spinner from '../../components/UI/Spinner';
 import { enumerateCollectibleState } from '../../utils/destinyEnums';
-import NotificationInline from '../../components/NotificationInline';
+import NotificationInline from '../../components/Notifications/NotificationInline';
 
 import './styles.css';
 

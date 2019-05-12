@@ -18,12 +18,12 @@ import store from './utils/reduxStore';
 import manifest from './utils/manifest';
 import * as ls from './utils/localStorage';
 
-import Header from './components/Header';
+import Header from './components/UI/Header';
 import Tooltip from './components/Tooltip';
-import Footer from './components/Footer';
-import NotificationBar from './components/NotificationBar';
-import NotificationOverlay from './components/NotificationOverlay';
-import NotificationProgress from './components/NotificationProgress';
+import Footer from './components/UI/Footer';
+import NotificationBar from './components/Notifications/NotificationBar';
+import NotificationOverlay from './components/Notifications/NotificationOverlay';
+import NotificationProgress from './components/Notifications/NotificationProgress';
 import RefreshService from './components/RefreshService';
 
 import ProfileRoutes from './ProfileRoutes';
@@ -195,6 +195,7 @@ class App extends React.Component {
                           <RedirectRoute path='/triumphs' />
                           <RedirectRoute path='/this-week' exact />
                           <RedirectRoute path='/dossier' />
+                          <RedirectRoute path='/multiplayer' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />
@@ -202,7 +203,7 @@ class App extends React.Component {
                           <Route path='/settings' exact render={() => <Settings availableLanguages={this.availableLanguages} />} />
                           <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
-                          <Route path='/leaderboards' exact component={Leaderboards} />
+                          <Route path='/leaderboards/:view?/:param1?/:param2?/' render={route => <Leaderboards {...route} />} />
                           <Route path='/resources' exact component={Resources} />
                           <Route path='/resources/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
                           <Route path='/oob' component={OOB} />

@@ -10,8 +10,8 @@ import getPGCR from '../../utils/getPGCR';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
-import ProgressBar from '../../components/ProgressBar';
-import Spinner from '../../components/Spinner';
+import ProgressBar from '../../components/UI/ProgressBar';
+import Spinner from '../../components/UI/Spinner';
 
 import PGCR from './PGCR';
 

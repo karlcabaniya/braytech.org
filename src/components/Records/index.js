@@ -6,7 +6,7 @@ import cx from 'classnames';
 
 import ObservedImage from '../ObservedImage';
 import { ProfileLink } from '../../components/ProfileLink';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from '../UI/ProgressBar';
 import manifest from '../../utils/manifest';
 import { enumerateRecordState } from '../../utils/destinyEnums';
 
