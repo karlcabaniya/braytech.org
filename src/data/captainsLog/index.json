@@ -263,5 +263,10 @@
     "date": "2019-05-10T21:03:39.801Z",
     "version": "2.4.1",
     "content": "## Changes\n- further project restructuring\n- fixed a small _Collections_ root view bug\n- further work on PGCR component including displaying fireteams"
+  },
+  {
+    "date": "2019-05-12T07:38:09.212Z",
+    "version": "2.4.2",
+    "content": "- A brand new _Index_ view\n- Further VOLUSPA integration work\n- New share image for social media\n- A _Clan Roster_ view bug fix"
   }
 ]

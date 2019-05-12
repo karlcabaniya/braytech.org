@@ -34,6 +34,12 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+#footer ul li:last-child a svg {
+  position: relative;
+  top: 3px;
+  margin: 0 0 0 5px;
+}
+
 @media screen and (max-width: 600px) {
   #footer {
     padding: 1rem 2rem;

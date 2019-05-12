@@ -47,7 +47,7 @@ html.backdropfilter #header .braytech {
 
 #header .braytech .logo span {
   font-size: 13px;
-  margin: 0 7px 0 0;
+  margin: 1px 7px 0 0;
 }
 
 #header .braytech .trigger {
@@ -199,6 +199,10 @@ html.backdropfilter #header .braytech {
 #header.profile-header .background .image {
   background-size: cover;
   background-position: center bottom;
+}
+
+#header.profile-header .background .image.missing.dl {
+  opacity: 0;
 }
 
 #header.profile-header .characters {

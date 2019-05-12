@@ -125,9 +125,7 @@ class App extends React.Component {
     tmpManifest.settings = await this.startupRequests.bungieSettings;
     this.availableLanguages = Object.keys(manifestIndex.jsonWorldContentPaths);
 
-    tmpManifest.statistics = {
-      triumphs: await this.startupRequests.voluspaStatistics
-    };
+    tmpManifest.statistics = await this.startupRequests.voluspaStatistics || {};
 
     manifest.set(tmpManifest);
 

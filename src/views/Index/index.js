@@ -10,6 +10,7 @@ import ObservedImage from '../../components/ObservedImage';
 import Button from '../../components/UI/Button';
 import captainsLog from '../../data/captainsLog';
 import { ReactComponent as Logo } from '../../components/BraytechDevice.svg';
+import { ReactComponent as Patreon } from '../../components/PatreonDevice.svg';
 import manifest from '../../utils/manifest';
 import './styles.css';
 
@@ -34,7 +35,7 @@ class Index extends React.Component {
     this.setState(prev => ({
       log: prev.log + 1
     }));
-  }
+  };
 
   logNext = e => {
     if (this.state.log === 0) {
@@ -43,87 +44,106 @@ class Index extends React.Component {
     this.setState(prev => ({
       log: prev.log - 1
     }));
-  }
+  };
 
   render() {
-
-    let slogans = [
-      {
-        message: 'Where are the Sleeper Nodes?',
-        link: {
-          to: '/checklists',
-          name: 'Checklists'
-        }
-      },
-      {
-        message: 'Wish I could track triumphs outside of the game...',
-        link: {
-          to: '/triumphs',
-          name: 'Triumphs'
-        }
-      },
-      {
-        message: "What's happening for this week's endgame?",
-        link: {
-          to: '/this-week',
-          name: 'This Week'
-        }
-      },
-      {
-        message: "Track friends and foes",
-        link: {
-          to: '/dossier',
-          name: 'Dossier'
-        }
-      }
-    ];
-
     return (
       <div className='view' id='index'>
-        <div className='head'>
-          <ObservedImage className='bg image' src='/static/images/season6_product_page_header_1.jpg' />
+        <div className='module intro'>
           <div className='device'>
             <Logo />
           </div>
-          <div className='slogan'>
-            <div className='message'>{slogans[this.state.slogan].message}</div>
-            {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-            <div className='view-name'>// {slogans[this.state.slogan].link.name}</div>
-            <ProfileLink to={slogans[this.state.slogan].link.to} />
+          <div className='content'>
+            <div className='name'>BRAYTECH</div>
+            <div className='description'>
+              <p>Braytech is a Destiny fan site that allows users to view and map checklists, track and view triumphs, inspect collectibles, and so much more.</p>
+              <p>The name, Braytech, is that which Clovis Bray, one of several of the franchises' fictional entities, designates their consumer products line; weapons, armour, etc.</p>
+              <p>Braytech is a stringent exercise in game UI mimicry and quality over quantity. Additionally, it’s a learning exercise for the primary developer in terms of technology and acting on user feedback.</p>
+            </div>
           </div>
         </div>
-        <div className='modules'>
-          <div className='coming-up'>
-            <div className='page-header'>
-              <div className='name'>Season of the Drifter</div>
-              <div className='description'>What's happening this week in Destiny</div>
-            </div>
-            <div className='text'>
-              <p>How you livin'? I've got big plans for all you Guardians. You're gonna want t'check your equipment and buckle in, 'cus' you ain't seen nothin' yet--</p>
+        {manifest.statistics.general ? (
+          <div className='module stats'>
+            <div className='content'>
+              <ul>
+                <li>
+                  <div className='value'>{manifest.statistics.general.tracking.toLocaleString('en-us')}</div>
+                  <div className='name'>Tracked players</div>
+                  <div className='description'>
+                    <p>Number of players VOLUSPA is tracking through their activities and accomplishments</p>
+                  </div>
+                </li>
+                <li>
+                  <div className='value'>{manifest.statistics.general.groups.toLocaleString('en-us')}</div>
+                  <div className='name'>Tracked clans</div>
+                  <div className='description'>
+                    <p>Number of clans that tracked players identify with</p>
+                  </div>
+                </li>
+                <li>
+                  <div className='value'>{manifest.statistics.general.playedReset.toLocaleString('en-us')}</div>
+                  <div className='name'>Played reset</div>
+                  <div className='description'>
+                    <p>Number of tracked players who've played this week</p>
+                  </div>
+                </li>
+                <li>
+                  <div className='value'>{manifest.statistics.general.playedSeason.toLocaleString('en-us')}</div>
+                  <div className='name'>Played season</div>
+                  <div className='description'>
+                    <p>Number of tracked players who've played this season</p>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
-          <div className='change-log'>
-            <div className='sub-header sub'>
-              <div>Change log</div>
+        ) : null}
+        <div className='module'>
+          <div className='width-wrap'>
+            <div className='content patreon'>
+              <div className='icon'>
+                <Patreon />
+              </div>
+              <div className='text'>
+                <div className='sub-header'>
+                  <div>Patreon</div>
+                </div>
+                <div className='name'>Support through Patreon</div>
+                <div className='description'>
+                  <p>Building these beautiful interfaces and fencing with Bungie's APIs takes effort and time. I can only devote so much of it to hobby ventures, which also cost money to keep online. I have a firm stance against ads on web sites as we know them. As such, I prefer to support these projects out of my own pocket and depend on the generosity of my community.</p>
+                  <p>By supporting me, you can help ensure that I can keep these projects online, as well as help enable me to continue adding cool new features.</p>
+                </div>
+                <Button
+                  lined
+                  text='Become a Patron'
+                  action={() => {
+                    window.open('https://www.patreon.com/braytech', '_blank');
+                  }}
+                />
+              </div>
             </div>
-            <div className='log-state'>
-              <div className='meta'>
-                <div className='number'>{this.logs[this.state.log].version}</div>
-                <div className='time'>
-                  <Moment fromNow>{this.logs[this.state.log].date}</Moment>
+            <div className='content change-log'>
+              <div className='sub-header'>
+                <div>Change log</div>
+              </div>
+              <div className='log-state'>
+                <div className='meta'>
+                  <div className='number'>
+                    <span>
+                      Version <span>{this.logs[this.state.log].version}</span>
+                    </span>
+                  </div>
+                  <div className='time'>
+                    <Moment fromNow>{this.logs[this.state.log].date}</Moment>
+                  </div>
+                </div>
+                <div className='buttons'>
+                  <Button lined text={<span className='destiny-arrow_left' />} action={this.logPrevious} disabled={this.state.log + 1 === this.logs.length ? true : false} />
+                  <Button lined text={<span className='destiny-arrow_right' />} action={this.logNext} disabled={this.state.log === 0 ? true : false} />
                 </div>
               </div>
-              <div className='buttons'>
-                <Button lined text={<span className='destiny-arrow_left' />} action={this.logPrevious} disabled={this.state.log + 1 === this.logs.length ? true : false} />
-                <Button lined text={<span className='destiny-arrow_right' />} action={this.logNext} disabled={this.state.log === 0 ? true : false} />
-              </div>
+              <ReactMarkdown className='log-content' source={this.logs[this.state.log].content} />
             </div>
-            <ReactMarkdown className='log-content' source={this.logs[this.state.log].content} />
-          </div>
-          <div className='description'>
-            <p>Braytech is a Destiny fan site that allows users to view and map checklists, track and view triumphs, inspect collectibles, and a few other things too.</p>
-            <p>The name, Braytech, is that with which Clovis Bray designates their consumer products line; weapons, armour, etc.</p>
-            <p>Braytech is a stringent exercise in game UI mimicry and quality over quantity. Additionally, it’s a learning exercise for the primary developer in terms of technology and acting on user feedback.</p>
           </div>
         </div>
       </div>
@@ -132,9 +152,7 @@ class Index extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return {
-    theme: state.theme
-  };
+  return {};
 }
 
 export default compose(connect(mapStateToProps))(Index);

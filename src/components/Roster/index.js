@@ -213,7 +213,7 @@ class Roster extends React.Component {
         }
 
         playerTypeStamps = orderBy(playerTypeStamps, [stamp => stamp.secondsPlayed], ['desc']);
-        let playerTypeStampsPrimary = playerTypeStamps[0];
+        let playerTypeStampsPrimary = playerTypeStamps.length ? playerTypeStamps[0] : false;
 
         let isExpanded = this.state.expanded.includes(member.destinyUserInfo.membershipId);
         let expanded = (
@@ -237,8 +237,8 @@ class Roster extends React.Component {
             <ul className='activity' />
             <ul className='triumphScore' />
             <ul className='timeStamps'>
-              {playerTypeStamps.map(stamp => {
-                return <li>{stamp.element}</li>;
+              {playerTypeStamps.map((stamp, k) => {
+                return <li key={k}>{stamp.element}</li>;
               })}
             </ul>
           </div>
@@ -264,7 +264,7 @@ class Roster extends React.Component {
                   </Moment>
                 </div>
                 <div className='triumphScore'>{member.profile.profileRecords.data.score}</div>
-                <div className='timeStamps'>{playerTypeStampsPrimary.element}</div>
+                <div className='timeStamps'>{playerTypeStampsPrimary ? playerTypeStampsPrimary.element : null}</div>
               </div>
               {isExpanded ? expanded : null}
             </li>

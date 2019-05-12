@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 import { withNamespaces } from 'react-i18next';
+
 import packageJSON from '../../../../package.json';
+import { ReactComponent as Patreon } from '../../PatreonDevice.svg';
 
 import './styles.css';
 
@@ -47,8 +49,8 @@ class Footer extends React.Component {
             </a>
           </li>
           <li>
-            <a href='https://www.ko-fi.com/justrealmilk' target='_blank' rel='noopener noreferrer'>
-              {t('Buy me a Ko-fi')} 🍻
+            <a href='https://www.patreon.com/braytech' target='_blank' rel='noopener noreferrer'>
+              {t('Patreon')} <Patreon />
             </a>
           </li>
         </ul>

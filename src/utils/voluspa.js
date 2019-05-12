@@ -18,7 +18,7 @@ export function store(payload) {
 export async function statistics(payload) {
   try {
 
-    const request = await fetch('https://voluspa.braytech.org/statistics/triumphs', {
+    const request = await fetch('https://voluspa.braytech.org/statistics', {
       method: "GET",
       cache: "no-cache",
       headers: {
