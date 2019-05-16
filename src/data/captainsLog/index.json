@@ -268,5 +268,10 @@
     "date": "2019-05-12T07:38:09.212Z",
     "version": "2.4.2",
     "content": "- A brand new _Index_ view\n- Further VOLUSPA integration work\n- New share image for social media\n- A _Clan Roster_ view bug fix"
+  },
+  {
+    "date": "2019-05-16T10:28:16.198Z",
+    "version": "2.4.3",
+    "content": "- Renamed _Multiplayer_ view to _PGCRs_\n  - Rearranged _Crucible_ view to match new _Gambit_ view\n  - This is all still a work in progress\n  - I intend to add a _Raid_ view and an _All_ view\n - Added \"commonality percentage\" to collectibles\n - Other stuff"
   }
 ]

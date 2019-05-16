@@ -7,7 +7,7 @@ import store from './utils/reduxStore';
 import Clan from './views/Clan';
 import Legend from './views/Legend';
 import Competitive from './views/Competitive';
-import Multiplayer from './views/Multiplayer';
+import PGCRs from './views/PGCRs';
 import Collections from './views/Collections';
 import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
@@ -63,7 +63,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/this-week`} exact render={() => <ThisWeek />} />>
           <Route path={`${match.url}/sit-rep`} exact render={route => <SitRep />} />
           <Route path={`${match.url}/dossier`} render={route => <Dossier />} />
-          <Route path={`${match.url}/multiplayer/:type?/:mode?`} render={route => <Multiplayer {...route} />} />
+          <Route path={`${match.url}/pgcrs/:type?/:mode?`} render={route => <PGCRs {...route} />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/sit-rep` }} />} />
         </Switch>
       </>

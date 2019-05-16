@@ -193,7 +193,7 @@ class App extends React.Component {
                           <RedirectRoute path='/triumphs' />
                           <RedirectRoute path='/this-week' exact />
                           <RedirectRoute path='/dossier' />
-                          <RedirectRoute path='/multiplayer' />
+                          <RedirectRoute path='/pgcrs' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />

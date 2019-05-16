@@ -8,8 +8,9 @@ import './styles.css';
 
 import Root from './Root/';
 import Crucible from './Crucible/';
+import Gambit from './Gambit/';
 
-class Multiplayer extends React.Component {
+class PGCRs extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,6 +28,8 @@ class Multiplayer extends React.Component {
 
     if (type === 'crucible') {
       return <Crucible mode={mode} />;
+    } else if (type === 'gambit') {
+      return <Gambit mode={mode} />;
     } else {
       return <Root />;
     }
@@ -43,4 +46,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(Multiplayer);
+)(PGCRs);

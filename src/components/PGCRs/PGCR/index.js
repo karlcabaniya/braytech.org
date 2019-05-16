@@ -77,7 +77,7 @@ class Competitive extends React.Component {
       supremacy: [31],
       survival: [37],
       countdown: [38],
-      gambit: [63]
+      gambit: [63, 75]
     };
 
     const modeAsString = mode => {
@@ -93,7 +93,7 @@ class Competitive extends React.Component {
       } else if (modes.countdown.includes(mode)) {
         string = 'Countdown';
       } else if (modes.gambit.includes(mode)) {
-        string = 'Gambit';
+        //string = 'Gambit';
       } else {
         string = '???';
       }
@@ -151,7 +151,7 @@ class Competitive extends React.Component {
         </div>
       );
 
-      let displayStats = [
+      let displayStatsDefault = [
         {
           key: 'opponentsDefeated',
           name: 'Opp. Def.',
@@ -176,33 +176,158 @@ class Competitive extends React.Component {
         {
           key: 'assists',
           name: 'Assists',
-          type: 'value'
+          type: 'value',
+          hideInline: true
         },
         {
           key: 'weaponKillsSuper',
           name: 'Super kills',
           type: 'value',
-          extended: true
+          extended: true,
+          expanded: true
         },
         {
           key: 'weaponKillsGrenade',
           name: 'Grenade kills',
           type: 'value',
-          extended: true
+          extended: true,
+          expanded: true
         },
         {
           key: 'weaponKillsMelee',
           name: 'Melee kills',
           type: 'value',
-          extended: true
+          extended: true,
+          expanded: true
         },
         {
           key: 'weaponKillsAbility',
           name: 'Ability kills',
           type: 'value',
-          extended: true
+          extended: true,
+          expanded: true
         }
       ];
+
+      let displayStatsGambit = [
+        {
+          key: 'mobKills',
+          name: 'Mob Kills',
+          type: 'value',
+          extended: true
+        },
+        {
+          key: 'motesDeposited',
+          name: 'Motes Deposited',
+          type: 'value',
+          extended: true
+        },
+        {
+          key: 'motesLost',
+          name: 'Motes Lost',
+          type: 'value',
+          extended: true
+        },
+        {
+          key: 'invasionKills',
+          name: 'Invasion Kills',
+          type: 'value',
+          extended: true
+        },
+        {
+          key: 'blockerKills',
+          name: 'Blocker Kills',
+          type: 'value',
+          extended: true,
+          hideInline: true
+        },
+        {
+          key: 'invaderKills',
+          name: 'Invader Kills',
+          type: 'value',
+          extended: true,
+          hideInline: true
+        },
+        {
+          key: 'smallBlockersSent',
+          name: 'Small Blockers Sent',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'mediumBlockersSent',
+          name: 'Medium Blockers Sent',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'largeBlockersSent',
+          name: 'Large Blockers Sent',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'invasionKills',
+          name: 'Invasion Kills',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'invasionDeaths',
+          name: 'Invasion Deaths',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'motesDenied',
+          name: 'Motes Denied',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'primevalHealing',
+          name: 'Primeval Healing',
+          type: 'displayValue',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'invaderKills',
+          name: 'Invader Kills',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'invaderDeaths',
+          name: 'Invader Deaths',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'primevalDamage',
+          name: 'Primeval Damage',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'weaponKillsSuper',
+          name: 'Super Kills',
+          type: 'value',
+          extended: true,
+          expanded: true
+        }
+      ];
+
+      let displayStats = modes.gambit.includes(pgcr.activityDetails.mode) ? displayStatsGambit : displayStatsDefault;
 
       let entries = [];
       pgcr.entries.forEach(entry => {
@@ -217,39 +342,47 @@ class Competitive extends React.Component {
               <div className='inline'>
                 <div className='icon'>{!dnf ? <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} /> : null}</div>
                 <div className={cx('displayName', { dnf: dnf })}>{entry.player.destinyUserInfo.displayName}</div>
-                {displayStats.map(s => {
+                {displayStats.map((s, i) => {
                   let value;
-                  if (s.extended) {
+                  if (s.expanded) {
                     return null;
                   } else {
-                    value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
+                    if (s.extended) {
+                      value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type];
+                    } else {
+                      value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
+                    }
                   }
                   return (
-                    <div key={s.key} className={cx('stat', { extended: s.extended }, s.key)}>
+                    <div key={i} className={cx('stat', { hideInline: s.hideInline, extended: s.extended }, s.key)}>
+                      {s.expanded ? <div className='name'>{s.name}</div> : null}
                       <div className='value'>{value}</div>
-                      {s.extended ? <div className='name'>{s.name}</div> : null}
                     </div>
                   );
                 })}
               </div>
-              <div className='extended'>
-                <div />
-                {displayStats.map(s => {
+              <div className='expanded'>
+                {displayStats.map((s, i) => {
                   let value;
-                  if (s.extended) {
-                    value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type];
+                  if (s.expanded) {
+                    if (s.extended) {
+                      value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type].toLocaleString('en-us');
+                    } else {
+                      value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type].toLocaleString('en-us');
+                    }
                   } else {
-                    value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
+                    return null;
                   }
                   return (
-                    <div key={s.key} className={cx('stat', { extended: s.extended }, s.key)}>
-                      <div className='value'>{value}</div>
+                    <div key={i} className={cx('stat', { hideInline: s.hideInline, expanded: s.extended }, s.key)}>
                       <div className='name'>{s.name}</div>
+                      <div className='value'>{value}</div>
                     </div>
                   );
                 })}
                 {entry.extended.weapons && entry.extended.weapons.length ? (
-                  <div className='stat extended weapons'>
+                  <div className='stat expanded weapons'>
+                    <div className='name'>Weapons used</div>
                     <div className='value'>
                       <ul>
                         {entry.extended.weapons.map((w, i) => {
@@ -264,7 +397,6 @@ class Competitive extends React.Component {
                         })}
                       </ul>
                     </div>
-                    <div className='name'>Weapons used</div>
                   </div>
                 ) : null}
               </div>
@@ -317,17 +449,17 @@ class Competitive extends React.Component {
                     <li className={cx('team-head', (t.teamId === 17 ? 'Alpha' : 'Bravo').toLowerCase())}>
                       <div />
                       <div className='team name'>{t.teamId === 17 ? 'Alpha' : 'Bravo'} team</div>
-                      {displayStats.map(s => {
-                        if (s.extended) {
+                      {displayStats.map((s, i) => {
+                        if (s.expanded) {
                           return null;
                         }
                         return (
-                          <div key={s.key} className={s.key}>
+                          <div key={i} className={cx(s.name, { hideInline: s.hideInline })}>
                             {s.name}
                           </div>
                         );
                       })}
-                      <div className='team score'>{t.score.basic.displayValue}</div>
+                      <div className='team score hideInline'>{t.score.basic.displayValue}</div>
                     </li>
                     {fireteams.map((f, i) => {              
                       return (
@@ -346,17 +478,17 @@ class Competitive extends React.Component {
                 <li className={cx('team-head')}>
                   <div />
                   <div className='team name' />
-                  {displayStats.map(s => {
-                    if (s.extended) {
+                  {displayStats.map((s, i) => {
+                    if (s.expanded) {
                       return null;
                     }
                     return (
-                      <div key={s.key} className={s.key}>
+                      <div key={i} className={cx(s.name, { hideInline: s.hideInline })}>
                         {s.name}
                       </div>
                     );
                   })}
-                  <div className='team score'></div>
+                  <div className='team score hideInline'></div>
                 </li>
                 {entries.map(e => e.element)}
               </ul>

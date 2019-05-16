@@ -7,10 +7,12 @@ import cx from 'classnames';
 import * as bungie from '../../../utils/bungie';
 
 import manifest from '../../../utils/manifest';
+import { ProfileNavLink } from '../../../components/ProfileLink';
 import ProgressBar from '../../../components/UI/ProgressBar';
+import ObservedImage from '../../../components/ObservedImage';
 import Spinner from '../../../components/UI/Spinner';
-import Mode from '../../../components/Multiplayer/Mode';
-import Matches from '../../../components/Multiplayer/Matches';
+import Mode from '../../../components/PGCRs/Mode';
+import Matches from '../../../components/PGCRs/Matches';
 
 class Crucible extends React.Component {
   constructor(props) {
@@ -199,84 +201,122 @@ class Crucible extends React.Component {
     }, 0);
 
     return (
-      <div className={cx('view')} id='multiplayer'>
-        <div className='module'>
-          <div>
-            <div className='content career'>
-              <div className='sub-header'>
-                <div>Crucible Career</div>
-              </div>
-              <h4>Glory modes</h4>
-              <div className='highlight'>
-              <div className='value'>{this.crucible.all.stats.pvpCompetitive.secondsPlayed ? Math.floor(this.crucible.all.stats.pvpCompetitive.secondsPlayed.basic.value / 60 / 60) : 0} hours</div>
-                <div className='name'>Time played</div>
-              </div>
-              <div className='highlight'>
-                <div className='value progress competitive'>
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: glory.defs.rank.displayProperties.name,
-                      completionValue: glory.progression.total
-                    }}
-                    playerProgress={{
-                      progress: glory.progression.data.currentProgress,
-                      objectiveHash: 'glory'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
-                      completionValue: glory.progression.data.nextLevelAt
-                    }}
-                    playerProgress={{
-                      progress: glory.progression.data.progressToNextLevel,
-                      objectiveHash: 'valor'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                </div>
-                <div className='name'>Progress</div>
-              </div>
-              <h4>Valor modes</h4>
-              <div className='highlight'>
-                <div className='value'>{this.crucible.all.stats.pvpQuickplay.secondsPlayed ? Math.floor(this.crucible.all.stats.pvpQuickplay.secondsPlayed.basic.value / 60 / 60) : 0} hours</div>
-                <div className='name'>Time played</div>
-              </div>
-              <div className='highlight'>
-                <div className='value progress quickplay'>
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: valor.defs.rank.displayProperties.name,
-                      completionValue: valor.progression.total
-                    }}
-                    playerProgress={{
-                      progress: valor.progression.data.currentProgress,
-                      objectiveHash: 'valor'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
-                      completionValue: valor.progression.data.nextLevelAt
-                    }}
-                    playerProgress={{
-                      progress: valor.progression.data.progressToNextLevel,
-                      objectiveHash: 'valor'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                </div>
-                <div className='name'>Progress</div>
+      <div className={cx('view', 'crucible')} id='multiplayer'>
+        <div className='module-l1'>
+          <div className='module-l2'>
+            <div className='content head'>
+              <div className='page-header'>
+                <div className='name'>{t('Post Game Carnage Reports')}</div>
+                <div className='description'>{t("You know, in case you missed the match summary screen while you were busy being awesome.")}</div>
               </div>
             </div>
           </div>
-          <div>
+        </div>
+        <div className='module-l1'>
+          <div className='content views'>
+            <div className='sub-header'>
+              <div>Views</div>
+            </div>
+            <ul className='list'>
+              <li className='linked'>
+                <ProfileNavLink to='/pgcrs' exact>{t('Summary')}</ProfileNavLink>
+              </li>
+              <li className='linked'>
+                <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
+              </li>
+              <li className='linked'>
+                <ProfileNavLink to='/pgcrs/gambit'>{t('Gambit')}</ProfileNavLink>
+              </li>
+              {/* <li className='linked'>
+                <ProfileNavLink to='/pgcrs/raids'>{t('Raids')}</ProfileNavLink>
+              </li>
+              <li className='linked'>
+                <ProfileNavLink to='/pgcrs/all'>{t('All')}</ProfileNavLink>
+              </li> */}
+            </ul>
+          </div>
+          <div className='content career'>
+            <div className='sub-header'>
+              <div>Career</div>
+            </div>
+            <div className='doms'>
+              <div className='subs'>
+                <h4>Glory modes</h4>
+                <div className='highlight'>
+                <div className='value'>{this.crucible.all.stats.pvpCompetitive.secondsPlayed ? Math.floor(this.crucible.all.stats.pvpCompetitive.secondsPlayed.basic.value / 60 / 60) : 0} hours</div>
+                  <div className='name'>Time played</div>
+                </div>
+                <div className='highlight'>
+                  <div className='value progress competitive'>
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: glory.defs.rank.displayProperties.name,
+                        completionValue: glory.progression.total
+                      }}
+                      playerProgress={{
+                        progress: glory.progression.data.currentProgress,
+                        objectiveHash: 'glory'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
+                        completionValue: glory.progression.data.nextLevelAt
+                      }}
+                      playerProgress={{
+                        progress: glory.progression.data.progressToNextLevel,
+                        objectiveHash: 'valor'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                  </div>
+                  <div className='name'>Progress</div>
+                </div>
+              </div>
+              <div className='subs'>
+                <h4>Valor modes</h4>
+                <div className='highlight'>
+                  <div className='value'>{this.crucible.all.stats.pvpQuickplay.secondsPlayed ? Math.floor(this.crucible.all.stats.pvpQuickplay.secondsPlayed.basic.value / 60 / 60) : 0} hours</div>
+                  <div className='name'>Time played</div>
+                </div>
+                <div className='highlight'>
+                  <div className='value progress quickplay'>
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: valor.defs.rank.displayProperties.name,
+                        completionValue: valor.progression.total
+                      }}
+                      playerProgress={{
+                        progress: valor.progression.data.currentProgress,
+                        objectiveHash: 'valor'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
+                        completionValue: valor.progression.data.nextLevelAt
+                      }}
+                      playerProgress={{
+                        progress: valor.progression.data.progressToNextLevel,
+                        objectiveHash: 'valor'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                  </div>
+                  <div className='name'>Progress</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='module-l1'>
+          <div className='module-l2'>
             <div className='content'>
               <div className='sub-header'>
                 <div>Summative modes</div>
@@ -293,7 +333,7 @@ class Crucible extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/crucible' />;
                   })}
                 </ul>
               ) : (
@@ -316,7 +356,7 @@ class Crucible extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/crucible' />;
                   })}
                 </ul>
               ) : (
@@ -339,7 +379,7 @@ class Crucible extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/crucible' />;
                   })}
                 </ul>
               ) : (
@@ -348,7 +388,7 @@ class Crucible extends React.Component {
             </div>
           </div>
         </div>
-        <div className='module' id='matches'>
+        <div className='module-l1' id='matches'>
           <div className='content'>
             <div className='sub-header'>
               <div>Recent matches</div>

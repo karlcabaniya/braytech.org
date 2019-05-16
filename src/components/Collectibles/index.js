@@ -127,6 +127,7 @@ class Collectibles extends React.Component {
                 </div>
                 <div className='text'>
                   <div className='name'>Classified</div>
+                  <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
                 </div>
               </li>
             );
@@ -147,6 +148,7 @@ class Collectibles extends React.Component {
                 </div>
                 <div className='text'>
                   <div className='name'>{collectibleDefinition.displayProperties.name}</div>
+                  <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
                 </div>
                 {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
               </li>
@@ -234,6 +236,7 @@ class Collectibles extends React.Component {
             </div>
             <div className='text'>
               <div className='name'>{collectibleDefinition.displayProperties.name}</div>
+                  <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
             </div>
             {link && this.props.selfLinkFrom && !inspect ? <ProfileLink to={{ pathname: link, state: { from: this.props.selfLinkFrom } }} /> : null}
             {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}

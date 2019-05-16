@@ -127,9 +127,9 @@ class Header extends React.Component {
         primary: true
       },
       {
-        name: t('Multiplayer'),
-        desc: t('Get all the details on your PvP engagements'),
-        slug: '/multiplayer',
+        name: t('PGCRs'),
+        desc: t('Explore your Post Game Carnage Reports'),
+        slug: '/pgcrs',
         exact: false,
         profile: true,
         primary: true

@@ -18,7 +18,7 @@ class Mode extends React.Component {
   }
 
   render() {
-    const { t, member, stats, isActive = false } = this.props;
+    const { t, member, stats, isActive = false, root = '/multiplayer/crucible', defaultMode = 5 } = this.props;
 
     let definition = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === stats.mode);
 
@@ -69,6 +69,18 @@ class Mode extends React.Component {
       {
         modes: [43],
         pathname: '/static/images/extracts/ui/modes/0560-00001729.PNG'
+      },
+      {
+        modes: [63],
+        pathname: '/static/images/extracts/ui/modes/01E3-000012C9.PNG'
+      },
+      {
+        modes: [75],
+        pathname: '/static/images/extracts/ui/modes/0560-00001342.PNG'
+      },
+      {
+        modes: [76],
+        pathname: '/static/images/extracts/ui/modes/0560-0000134E.PNG'
       }
     ];
 
@@ -105,7 +117,7 @@ class Mode extends React.Component {
             </>
           ) : null}
         </div>
-        <ProfileNavLink isActive={isActive} to={{ pathname: stats.mode === 5 ? `/multiplayer/crucible` : `/multiplayer/crucible/${stats.mode}`, state: {  } }} onClick={() => {
+        <ProfileNavLink isActive={isActive} to={{ pathname: stats.mode === parseInt(defaultMode, 10) ? root : `${root}/${stats.mode}`, state: {  } }} onClick={() => {
           let element = document.getElementById('matches');
           element.scrollIntoView({behavior: "smooth"});
         }} />
