@@ -21,8 +21,8 @@ class Board extends React.Component {
     };
   }
 
-  offset = parseInt(this.props.offset, 10);
   limit = 1000;
+  offset = Math.floor(parseInt(this.props.offset, 10)/this.limit) * this.limit;
   callVoluspa = async (offset = this.offset, limit = this.limit) => {
     let response = await voluspa.leaderboard('triumphScore', offset, limit);
     this.setState((prevState, props) => {
@@ -41,11 +41,13 @@ class Board extends React.Component {
   componentDidUpdate(prevProps, prevState) {
 
     if (prevProps.offset !== this.props.offset) {
+      const prevDisplayOffset = parseInt(prevProps.offset, 10) || 0;
+      const prevDisplayLimit = parseInt(prevProps.limit, 10) || 20;
       const displayOffset = parseInt(this.props.offset, 10) || 0;
       const displayLimit = parseInt(this.props.limit, 10) || 20;
 
-      if (displayOffset + displayLimit > this.offset + this.limit) {
-        this.offset = this.offset + this.limit;
+      if (Math.floor(prevDisplayOffset/this.limit) * this.limit !== Math.floor(displayOffset/this.limit) * this.limit) {
+        this.offset = Math.floor(displayOffset/this.limit) * this.limit;
         this.setState({ loading: true });
         this.callVoluspa();
       }
@@ -56,7 +58,7 @@ class Board extends React.Component {
     const displayOffset = parseInt(this.props.offset, 10) || 0;
     const displayLimit = parseInt(this.props.limit, 10) || 20;
 
-    console.log(displayOffset, this.offset, displayOffset - this.offset);
+    console.log(displayOffset % this.limit, (displayOffset % this.limit) + 20)
 
     if (!this.state.loading) {
       return (
@@ -69,9 +71,9 @@ class Board extends React.Component {
                 <li className='col triumphScore'>Triumph score</li>
               </ul>
             </li>
-            {this.state.response.slice(displayOffset - this.offset, displayOffset - this.offset + displayLimit).map((m, i) => {
+            {this.state.response.slice(displayOffset % this.limit, (displayOffset % this.limit) + 20).map((m, i) => {
               return (
-                <li key={i}>
+                <li key={(m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId)}>
                   <ul>
                     <li className='col rank'>{m.rank.toLocaleString('en-us')}</li>
                     <li className='col member'>

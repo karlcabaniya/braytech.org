@@ -36,7 +36,7 @@ class MemberLink extends React.Component {
     if (this.mounted) {
       this.setState({ loading: false });
     }
-    console.log(this.data);
+    // console.log(this.data);
   }
 
   render() {
