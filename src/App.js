@@ -151,6 +151,10 @@ class App extends React.Component {
     window.removeEventListener('resize', this.updateViewport);
   }
 
+  RebindTooltips = () => {
+    this.TooltipComponent.target_bindings();
+  }
+
   render() {
     if (!window.ga) {
       GoogleAnalytics.init();
@@ -174,11 +178,11 @@ class App extends React.Component {
                 continually reload itself */}
               <Route path='/character-select' children={({ match, ...rest }) => !match && <RefreshService {...this.props} />} />
 
-              <Tooltip {...route} />
+              <Tooltip {...route} onRef={ref => (this.TooltipComponent = ref)} />
               <Route component={GoogleAnalytics.GoogleAnalytics} />
               <div className='main'>
                 <Switch>
-                  <Route path='/:membershipType([1|2|4])/:membershipId([0-9]+)/:characterId([0-9]+)' component={ProfileRoutes} />} />
+                  <Route path='/:membershipType([1|2|4])/:membershipId([0-9]+)/:characterId([0-9]+)' render={route => <ProfileRoutes {...route} RebindTooltips={this.RebindTooltips} />} />} />
                   <Route
                     render={() => (
                       <>
@@ -187,7 +191,6 @@ class App extends React.Component {
                           <RedirectRoute path='/clan' />
                           <RedirectRoute path='/legend' exact />
                           <RedirectRoute path='/sit-rep' exact />
-                          <RedirectRoute path='/competitive' exact />
                           <RedirectRoute path='/checklists' exact />
                           <RedirectRoute path='/collections/' />
                           <RedirectRoute path='/triumphs' />
@@ -201,7 +204,7 @@ class App extends React.Component {
                           <Route path='/settings' exact render={() => <Settings availableLanguages={this.availableLanguages} />} />
                           <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
-                          <Route path='/leaderboards/:view?/:param1?/:param2?/' render={route => <Leaderboards {...route} />} />
+                          <Route path='/leaderboards/:view?/:dom?/:sub?' render={route => <Leaderboards {...route} />} />
                           <Route path='/resources' exact component={Resources} />
                           <Route path='/resources/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
                           <Route path='/oob' component={OOB} />

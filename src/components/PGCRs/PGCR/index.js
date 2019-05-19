@@ -9,15 +9,18 @@ import Moment from 'react-moment';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
+import * as bungie from '../../../utils/bungie';
+import * as responseUtils from '../../../utils/responseUtils';
 
 import './styles.css';
 
-class Competitive extends React.Component {
+class PGCR extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      expanded: []
+      expanded: [],
+      playerCache: []
     };
   }
 
@@ -29,6 +32,8 @@ class Competitive extends React.Component {
         return { expanded: expanded };
       }
     });
+
+    this.updatePlayerCache(instanceId);
   };
 
   contractHandler = instanceId => {
@@ -40,6 +45,29 @@ class Competitive extends React.Component {
       }
     });
   };
+
+  updatePlayerCache = instanceId => {
+    let pgcr = this.props.data.find(p => instanceId === p.activityDetails.instanceId);
+    
+    if (pgcr) {
+      pgcr.entries.forEach(async e => {
+        let points = await this.getGloryPoints(e.player.destinyUserInfo.membershipType, e.player.destinyUserInfo.membershipId);
+        
+        
+        this.setState((state, props) => ({
+          playerCache: state.playerCache.concat({ id: e.player.destinyUserInfo.membershipType + e.player.destinyUserInfo.membershipId, gloryPoints: points })
+        }))
+      });
+    }
+    
+  }
+
+  getGloryPoints = async (membershipType, membershipId) => {
+    let response = await bungie.memberProfile(membershipType, membershipId, '202');
+
+    let value = Object.values(response.characterProgressions.data)[0].progressions[2679551909].currentProgress;
+    return value;
+  }
 
   togglePlayerHandler = (instanceId, characterId) => {
     this.setState((prevState, props) => {
@@ -61,6 +89,12 @@ class Competitive extends React.Component {
       }
     });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.expanded !== this.state.expanded) {
+      this.props.RebindTooltips();
+    }
+  }
 
   render() {
     const { t, member, viewport, data, limit } = this.props;
@@ -174,10 +208,17 @@ class Competitive extends React.Component {
           round: true
         },
         {
+          key: 'gloryPoints',
+          name: 'Glory points',
+          type: 'value',
+          async: true,
+          hideInline: true
+        },
+        {
           key: 'assists',
           name: 'Assists',
           type: 'value',
-          hideInline: true
+          expanded: true
         },
         {
           key: 'weaponKillsSuper',
@@ -349,6 +390,11 @@ class Competitive extends React.Component {
                   } else {
                     if (s.extended) {
                       value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type];
+                    } else if (s.async) {
+                      if (s.key === 'gloryPoints') {
+                        let playerCache = this.state.playerCache.find(c => c.id === (entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId));
+                        value = playerCache ? playerCache.gloryPoints : '–';
+                      }
                     } else {
                       value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
                     }
@@ -367,6 +413,11 @@ class Competitive extends React.Component {
                   if (s.expanded) {
                     if (s.extended) {
                       value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type].toLocaleString('en-us');
+                    } else if (s.async) {
+                      if (s.key === 'gloryPoints') {
+                        let playerCache = this.state.playerCache.find(c => c.id === (entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId));
+                        value = playerCache ? playerCache.gloryPoints : '–';
+                      }
                     } else {
                       value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type].toLocaleString('en-us');
                     }
@@ -533,4 +584,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(Competitive);
+)(PGCR);

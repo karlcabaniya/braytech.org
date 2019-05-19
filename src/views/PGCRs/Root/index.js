@@ -76,7 +76,7 @@ class Crucible extends React.Component {
     let displayStats = [
       {
         key: 'secondsPlayed',
-        name: 'Seconds Played',
+        name: 'Time Played',
         type: 'value',
         time: true
       },
@@ -195,7 +195,7 @@ class Crucible extends React.Component {
               {this.stats.allPvECompetitive.allTime ? (
                 <>
                   <div className='sub-header'>
-                    <div>Gamit</div>
+                    <div>Gambit</div>
                   </div>
                   <div className='stats'>
                     {displayStats.map((s, i) => {

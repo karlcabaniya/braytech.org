@@ -33,8 +33,8 @@ export async function statistics(payload) {
   }
 }
 
-export async function leaderboard(offset = 0, limit = 10) {
-  const request = await fetch(`https://voluspa.braytech.org/leaderboard/triumphScore/?limit=${limit}&offset=${offset}`).then(r => r.json())
+export async function leaderboard(sort = 'triumphScore', offset = 0, limit = 10) {
+  const request = await fetch(`https://voluspa.braytech.org/leaderboards/?sort=${sort}&limit=${limit}&offset=${offset}`).then(r => r.json())
 
   if (request.ErrorCode === 1) {
     return request.Response;

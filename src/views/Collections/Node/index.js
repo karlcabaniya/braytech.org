@@ -110,7 +110,6 @@ class PresentationNode extends React.Component {
         </li>
       );
     });
-    console.log(this)
 
     return (
       <div className='node'>

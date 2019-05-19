@@ -1,7 +1,30 @@
-#leaderboards {
-  padding: 0;
+#leaderboards.board {
+  padding: 4rem 3rem 3rem;
   display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 3rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

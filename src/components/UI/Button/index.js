@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
@@ -13,21 +14,38 @@ class Button extends React.Component {
   }
 
   render() {
-    const { classNames, text, action, invisible, disabled, lined } = this.props;
+    const { classNames, text, action, invisible, disabled, lined, anchor } = this.props;
     const theme = this.props.themeOverride || this.props.theme.selected;
 
-    return (
-      <button
-        className={cx(classNames, { lined: lined, disabled: disabled, invisible: invisible }, theme)}
-        onClick={() => {
-          if (action) {
-            action();
-          }
-        }}
-      >
-        <div className='text'>{text}</div>
-      </button>
-    );
+    if (anchor) {
+      return (
+        <Link
+          className={cx('button', classNames, { lined: lined, disabled: disabled, invisible: invisible }, theme)}
+          onClick={() => {
+            if (action) {
+              action();
+            }
+          }}
+          to={this.props.to}
+        >
+          <div className='text'>{text}</div>
+        </Link>
+      );
+    } else {
+      return (
+        <button
+          className={cx('button', classNames, { lined: lined, disabled: disabled, invisible: invisible }, theme)}
+          onClick={() => {
+            if (action) {
+              action();
+            }
+          }}
+          to={this.props.to}
+        >
+          <div className='text'>{text}</div>
+        </button>
+      );
+    }
   }
 }
 

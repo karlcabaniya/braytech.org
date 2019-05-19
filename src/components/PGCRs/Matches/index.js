@@ -121,7 +121,7 @@ class Matches extends React.Component {
       PGCRs = orderBy(PGCRcache[member.membershipId].filter(pgcr => modes.some(m => pgcr.activityDetails.modes.includes(m))), [pgcr => pgcr.period], ['desc']);
     }
 
-    return PGCRs.length ? <PGCR data={PGCRs} limit='20' /> : <Spinner />;
+    return PGCRs.length ? <PGCR data={PGCRs} limit='20' RebindTooltips={this.props.RebindTooltips} /> : <Spinner />;
   }
 }
 

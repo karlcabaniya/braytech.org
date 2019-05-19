@@ -1,0 +1,52 @@
+.board {
+  padding: 3rem;
+}
+
+.board > li {
+  height: unset;
+}
+
+.board > li::after {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  top: unset;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.board li.header ul li {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.board li ul {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 90px 260px 150px 150px 150px;
+}
+
+.board li ul li {
+  font-size: 14px;
+  margin: 0;
+}
+
+.board li ul .rank {
+  margin: 0 16px;
+  font-size: 16px;
+}
+
+.board li:not(.header) ul .sealsTotal {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 4px;
+}
+
+.board li ul .sealsTotal div {
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  background-color: #fff;
+  opacity: 0.8;
+}
