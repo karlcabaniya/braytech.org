@@ -24,7 +24,7 @@
 .board li ul {
   width: 100%;
   display: grid;
-  grid-template-columns: 90px 260px 150px 150px 150px;
+  grid-template-columns: 90px 260px auto;
 }
 
 .board li ul li {

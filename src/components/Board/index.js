@@ -16,37 +16,47 @@ class Board extends React.Component {
     super(props);
 
     this.state = {
-      loading: true
+      loading: true,
+      response: []
     };
   }
 
-  callVoluspa = async (offset = 0, limit = 20) => {
-    this.data = await voluspa.leaderboard('triumphScore', offset, limit);
-    this.setState({ loading: false });
-    console.log(this.data);
+  offset = parseInt(this.props.offset, 10);
+  limit = 1000;
+  callVoluspa = async (offset = this.offset, limit = this.limit) => {
+    let response = await voluspa.leaderboard('triumphScore', offset, limit);
+    this.setState((prevState, props) => {
+      prevState.loading = false;
+      //prevState.response = prevState.response.concat(response.data);
+      prevState.response = response.data;
+      return prevState;
+    });
+    // console.log(this.data);
   };
 
   componentDidMount() {
-    const offset = parseInt(this.props.offset, 10) || 0;
-    const limit = parseInt(this.props.limit, 10) || 20;
-
-    this.callVoluspa(offset, limit);
+    this.callVoluspa();
   }
 
   componentDidUpdate(prevProps, prevState) {
 
     if (prevProps.offset !== this.props.offset) {
-      const offset = parseInt(this.props.offset, 10) || 0;
-      const limit = parseInt(this.props.limit, 10) || 20;
+      const displayOffset = parseInt(this.props.offset, 10) || 0;
+      const displayLimit = parseInt(this.props.limit, 10) || 20;
 
-      this.setState({ loading: true });
-      this.callVoluspa(offset, limit);
+      if (displayOffset + displayLimit > this.offset + this.limit) {
+        this.offset = this.offset + this.limit;
+        this.setState({ loading: true });
+        this.callVoluspa();
+      }
     }
   }
 
   render() {
-    const offset = parseInt(this.props.offset, 10) || 0;
-    const limit = parseInt(this.props.limit, 10) || 20;
+    const displayOffset = parseInt(this.props.offset, 10) || 0;
+    const displayLimit = parseInt(this.props.limit, 10) || 20;
+
+    console.log(displayOffset, this.offset, displayOffset - this.offset);
 
     if (!this.state.loading) {
       return (
@@ -57,35 +67,25 @@ class Board extends React.Component {
                 <li className='col rank' />
                 <li className='col member'>Member</li>
                 <li className='col triumphScore'>Triumph score</li>
-                <li className='col collectionTotal'>Collection total</li>
-                <li className='col sealsTotal'>Seals total</li>
               </ul>
             </li>
-            {this.data.data.map((m, i) => {
+            {this.state.response.slice(displayOffset - this.offset, displayOffset - this.offset + displayLimit).map((m, i) => {
               return (
-                <li key={i} className=''>
+                <li key={i}>
                   <ul>
                     <li className='col rank'>{m.rank.toLocaleString('en-us')}</li>
                     <li className='col member'>
                       <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} displayName={m.destinyUserInfo.displayName} />
                     </li>
                     <li className='col triumphScore'>{m.triumphScore.toLocaleString('en-us')}</li>
-                    <li className='col collectionTotal'>{m.collectionTotal.toLocaleString('en-us')}</li>
-                    <li className='col sealsTotal'>
-                      {Object.values(m.seals)
-                        .filter(s => s)
-                        .map(s => {
-                          return <div />;
-                        })}
-                    </li>
                   </ul>
                 </li>
               );
             })}
           </ul>
           <div className='pages'>
-            <Button classNames='previous' text='Previous page' disabled={offset === 0 ? true : false} anchor to={`/leaderboards/for/triumphs${this.props.offset > 0 ? `/${this.props.offset}` : ''}`} />
-            <Button classNames='next' text='Next page' disabled={false} anchor to={`/leaderboards/for/triumphs/${offset + limit}`} />
+            <Button classNames='previous' text='Previous page' disabled={displayOffset === 0 ? true : false} anchor to={`/leaderboards/for/triumphs${displayOffset > displayLimit ? `/${displayOffset - displayLimit}` : ''}`} />
+            <Button classNames='next' text='Next page' disabled={false} anchor to={`/leaderboards/for/triumphs/${displayOffset + displayLimit}`} />
           </div>
         </>
       );
