@@ -2,6 +2,7 @@ import React from 'react';
 import orderBy from 'lodash/orderBy';
 
 import manifest from './manifest';
+import * as destinyEnums from './destinyEnums';
 
 // TODO: we can just use itemCategoryHashes for this now?
 export const isOrnament = item => item.inventory && item.inventory.stackUniqueLabel && item.plug && item.plug.plugCategoryIdentifier && item.plug.plugCategoryIdentifier.includes('skins');
@@ -10,6 +11,60 @@ export const flagEnum = (state, value) => !!(state & value);
 
 export function hasCategoryHash(item, categoryHash) {
   return item.itemCategoryHashes && item.itemCategoryHashes.includes(categoryHash);
+}
+
+export function totalValor() {
+  return Object.keys(manifest.DestinyProgressionDefinition[2626549951].steps).reduce((sum, key) => {
+    return sum + manifest.DestinyProgressionDefinition[2626549951].steps[key].progressTotal;
+  }, 0);
+}
+
+export function totalGlory() {
+  return Object.keys(manifest.DestinyProgressionDefinition[2000925172].steps).reduce((sum, key) => {
+    return sum + manifest.DestinyProgressionDefinition[2000925172].steps[key].progressTotal;
+  }, 0);
+}
+
+export function totalInfamy() {
+  return Object.keys(manifest.DestinyProgressionDefinition[2772425241].steps).reduce((sum, key) => {
+    return sum + manifest.DestinyProgressionDefinition[2772425241].steps[key].progressTotal;
+  }, 0);
+}
+
+export function collectionTotal(data) {
+  if (!data.profileCollectibles || !data.characterCollectibles) {
+    console.warn('No data provided to destinyUtils.collectionTotal');
+    return '0';
+  }
+
+  let collectionTotal = 0;
+  let profileTempCollections = {};
+
+  for (const [hash, collectible] of Object.entries(data.profileCollectibles.data.collectibles)) {
+    let collectibleState = destinyEnums.enumerateCollectibleState(collectible.state);
+    if (!collectibleState.notAcquired) {
+      if (!profileTempCollections[hash]) {
+        profileTempCollections[hash] = 1;
+      }
+    }
+  }
+
+  for (const [characterId, character] of Object.entries(data.characterCollectibles.data)) {
+    for (const [hash, collectible] of Object.entries(character.collectibles)) {
+      let collectibleState = destinyEnums.enumerateCollectibleState(collectible.state);
+      if (!collectibleState.notAcquired) {
+        if (!profileTempCollections[hash]) {
+          profileTempCollections[hash] = 1;
+        }
+      }
+    }
+  }
+
+  for (const [hash, collectible] of Object.entries(profileTempCollections)) {
+    collectionTotal++;
+  }
+
+  return collectionTotal;
 }
 
 export function genderTypeToString(str) {
@@ -84,10 +139,10 @@ export function classHashToString(hash, gender) {
   return classDef.displayProperties.name;
 }
 
-export function raceHashToString(hash, gender) {
+export function raceHashToString(hash, gender, nonGendered = false) {
   let raceDef = manifest.DestinyRaceDefinition[hash];
   if (!raceDef) return 'uh oh';
-  if (raceDef.genderedRaceNames) {
+  if (raceDef.genderedRaceNames && !nonGendered) {
     return raceDef.genderedRaceNames[gender === 1 ? 'Female' : 'Male'];
   }
   return raceDef.displayProperties.name;
@@ -379,8 +434,8 @@ export function getSubclassPathInfo(profile, characterId) {
   let talentPath = getSubclassPath(gridDef, talentGrid);
   let damageNames = ['', '', 'arc', 'solar', 'void'];
   let damageType = subclass.talentGrid.hudDamageType;
-  if(talentPath == null){
-    talentPath = {displayProperties:{name: "Unknown"}, identifier:'FirstPath'};
+  if (talentPath == null) {
+    talentPath = { displayProperties: { name: 'Unknown' }, identifier: 'FirstPath' };
   }
   let pathCustom = pathsCustomInfo.find(p => p.classType === subclass.classType && p.damageType === damageType && p.identifier === talentPath.identifier);
   let path = {
@@ -437,7 +492,7 @@ export function stringToIcons(string) {
     '[Grenade Launcher]': 'grenade_launcher',
     '[Bow]': 'bow',
     '[Machine Gun]': 'machinegun',
-    '[Machine Gune]': 'machinegun'    
+    '[Machine Gune]': 'machinegun'
   };
 
   array = string.split(/(\[.*?\])/g);
@@ -496,7 +551,7 @@ function xpRequiredForLevel(level, progressDef) {
 export function lastPlayerActivity(member) {
   let lastActivity = false;
   let lastCharacter = false;
-  let lastMode = false
+  let lastMode = false;
   let display = false;
 
   if (member.profile.characterActivities.data) {
@@ -529,11 +584,14 @@ export function lastPlayerActivity(member) {
       }
 
       if ((mode && mode.parentHashes.length) || (activity && activity.placeHash === 2961497387)) {
-        lastMode = activity.placeHash === 2961497387 ? {
-          displayProperties: {
-            name: 'Orbit'
-          }
-        } : manifest.DestinyActivityModeDefinition[mode.parentHashes[0]];
+        lastMode =
+          activity.placeHash === 2961497387
+            ? {
+                displayProperties: {
+                  name: 'Orbit'
+                }
+              }
+            : manifest.DestinyActivityModeDefinition[mode.parentHashes[0]];
       }
     }
   } else {

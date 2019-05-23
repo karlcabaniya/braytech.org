@@ -231,7 +231,7 @@ class Gambit extends React.Component {
             <div className='sub-header'>
               <div>Recent matches</div>
             </div>
-            <Matches modes={[this.props.mode ? parseInt(this.props.mode) : 63]} characterId={member.characterId} />
+            <Matches modes={[this.props.mode ? parseInt(this.props.mode) : 63]} characterId={member.characterId} RebindTooltips={this.props.RebindTooltips} />
           </div>
         </div>
       </div>

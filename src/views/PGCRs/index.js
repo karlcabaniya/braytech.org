@@ -29,7 +29,7 @@ class PGCRs extends React.Component {
     if (type === 'crucible') {
       return <Crucible mode={mode} RebindTooltips={this.props.RebindTooltips} />;
     } else if (type === 'gambit') {
-      return <Gambit mode={mode} />;
+      return <Gambit mode={mode} RebindTooltips={this.props.RebindTooltips} />;
     } else {
       return <Root />;
     }

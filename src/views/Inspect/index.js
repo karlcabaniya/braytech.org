@@ -87,7 +87,7 @@ class Inspect extends React.Component {
 
     const toggleLoreLink = (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a onClick={this.toggleLore}>
+      <a className='button' onClick={this.toggleLore}>
         {this.state.loreOpen ? (
           <>
             <i className='uniF16E' />
@@ -180,9 +180,9 @@ class Inspect extends React.Component {
           <ul>
             {item.loreHash ? <li>{toggleLoreLink}</li> : null}
             <li>
-              <ProfileLink to={backLinkPath}>
-                <i className='uniF094' />
-                {t('Back')}
+              <ProfileLink className='button' to={backLinkPath}>
+                <i className='destiny-B_Button' />
+                {t('Dismiss')}
               </ProfileLink>
             </li>
           </ul>

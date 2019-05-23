@@ -13,10 +13,10 @@ import './styles.css';
 
 class CharacterEmblem extends React.Component {
   render() {
-    const { t, profile, characterId, responsive, combat } = this.props;
+    const { t, data, characterId = data.characters.data[0].characterId, responsive, combat } = this.props;
 
-    let character = profile.characters.data.find(c => c.characterId === characterId);
-    let characterProgressions = profile.characterProgressions.data;
+    let character = data.characters.data.find(c => c.characterId === characterId);
+    let characterProgressions = data.characterProgressions.data;
 
     let capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
 
@@ -25,7 +25,7 @@ class CharacterEmblem extends React.Component {
     // let profileLink = `/${member.membershipType}/${member.membershipId}/${character.characterId}${removeMemberIds(this.props.location.pathname)}`;
 
     return (
-      <div className={cx('characters-list', { responsive } )}>
+      <div className={cx('character-emblem', { responsive } )}>
         <ul className='list'>
           <li key={character.characterId}>
             <ObservedImage
@@ -34,8 +34,8 @@ class CharacterEmblem extends React.Component {
               })}
               src={`https://www.bungie.net${character.emblemBackgroundPath ? character.emblemBackgroundPath : `/img/misc/missing_icon_d2.png`}`}
             />
-            <div className='class'>{combat ? profile.profile.data.userInfo.displayName : utils.classHashToString(character.classHash, character.genderType)}</div>
-            <div className='species'>{combat ? utils.classHashToString(character.classHash, character.genderType) : utils.raceHashToString(character.raceHash, character.genderType)}</div>
+            <div className='class'>{combat ? utils.classHashToString(character.classHash, character.genderType) : data.profile.data.userInfo.displayName}</div>
+            <div className='species'>{combat ? utils.classHashToString(character.classHash, character.genderType) : data.group ? data.group.detail.name : ''}</div>
             <div className='light'>{character.light}</div>
             <div className='level'>
               {t('Level')} {character.baseCharacterLevel}

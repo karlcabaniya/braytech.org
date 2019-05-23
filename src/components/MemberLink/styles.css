@@ -1,6 +1,7 @@
 .member-link {
   position: relative;
-  width: 216px;
+  width: 100%;
+  max-width: 270px;
   height: 38px;
   display: flex;
   align-items: center;
@@ -21,7 +22,7 @@
   height: 100%;
   pointer-events: none;
   box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0);
-  transition: box-shadow 0.25s;
+  transition: box-shadow 0.25s, background-color 0.25s;
 }
 
 .member-link::after {
@@ -39,19 +40,23 @@
 
 .member-link .emblem {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.1);
   height: 38px;
   width: 38px;
 }
 
 .member-link .emblem .image {
   background-size: cover;
-  transition: opacity 0.25s;
 }
 
 .member-link .displayName {
-  margin: 0 0 0 16px;
+  left: calc(38px + 16px);
   font-size: 16px;  
+  position: absolute;
+  white-space: nowrap;
+  width: calc(100% - (38px + 16px + 16px));
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .member-link:hover {
@@ -60,12 +65,9 @@
   z-index: 2;
 }
 
-.member-link:hover .emblem .image {
-  opacity: 0.7;
-}
-
 .member-link:hover::before {
   box-shadow: inset 0 0 0 1px #d6d6d6;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .member-link:hover::after {
@@ -82,4 +84,366 @@
   align-items: center;
   padding: 0 1rem;
   z-index: 2;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+
+  .member-link {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .member-link .displayName {
+    font-size: 14px;
+  }
+
+}
+
+
+
+
+
+
+
+
+#member-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 21;
+  display: grid;
+  align-content: center;
+  -webkit-overflow-scrolling: touch;
+  background-color: rgba(122, 122, 122, 0.4);
+}
+
+.wrapper.dark-mode #member-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+html.backdropfilter #member-overlay {
+  background-color: rgba(122, 122, 122, 0.6);
+}
+
+html.backdropfilter .wrapper.dark-mode #member-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#member-overlay .wrapper-outer {
+  position: relative;
+  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+}
+
+#member-overlay .background .border-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(180, 180, 180, 0.6);
+}
+
+#member-overlay .background .acrylic {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 1rem);
+  background-color: rgba(122, 122, 122, 0.8);
+}
+
+.wrapper.dark-mode #member-overlay .background .acrylic {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+html.backdropfilter #member-overlay .background .border-top {
+  border-top: 2px solid rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
+}
+
+html.backdropfilter #member-overlay .background .acrylic {
+  background-color: rgba(136, 136, 136, 0.4);
+  backdrop-filter: blur(7px) brightness(1.1) saturate(1.2);
+}
+
+html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
+}
+
+#member-overlay .wrapper-inner {
+  position: relative;
+  padding: 3rem;
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 474px 1fr;
+  grid-gap: 3rem;
+  font-size: 14px;
+}
+
+#member-overlay .wrapper-inner .sub-header {
+  border-bottom: none;
+  padding: 0;
+}
+
+#member-overlay .wrapper-inner .sub-header ~ .sub-header {
+  margin: 2rem 0 1rem;
+}
+
+#member-overlay .wrapper-inner .head {
+  margin: 0 0 2rem;
+  padding: 52px 0 0;
+  position: relative;
+}
+
+#member-overlay .wrapper-inner .head .displayName {
+  position: absolute;
+  font-size: 48px;
+  line-height: 40px;
+  margin: 0 0 14px;
+  top: 0;
+  left: 0;  
+  width: 100%;
+  white-space: nowrap;
+}
+
+#member-overlay .wrapper-inner .head .groupName {
+  font-size: 16px;
+  line-height: 14px;
+  margin: 0 0 1.5rem;
+}
+
+#member-overlay .wrapper-inner .stamps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 38px);
+  grid-gap: 3px;
+}
+
+#member-overlay .wrapper-inner .stamps div i {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem 0 0;
+  color: #fff;
+  background-color: rgb(80, 80, 80);
+}
+
+#member-overlay .wrapper-inner .stamps div i.destiny-platform_xbox {
+  background-color: #4CAF50;
+}
+
+#member-overlay .wrapper-inner .stamps div i.destiny-platform_pc {
+  background-color: #2196F3;
+}
+
+#member-overlay .wrapper-inner .stamps div i.destiny-platform_playstation {
+  background-color: #3F51B5;
+}
+
+#member-overlay .wrapper-inner .stamps div i.destiny-clovis_bray_device {
+  background-color: rgb(243, 41, 27);
+}
+
+#member-overlay .wrapper-inner .stamps div i.destiny-clovis_bray_device.one-hundo {
+  
+}
+
+#member-overlay .wrapper-inner .basics {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#member-overlay .wrapper-inner .basics > div {
+  position: relative;
+  font-size: 14px;
+  line-height: 10px;
+  margin: 0 0 1.5rem;
+}
+
+#member-overlay .wrapper-inner .basics > div:last-child {
+  margin: 0;
+}
+
+#member-overlay .wrapper-inner .basics div .name {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#member-overlay .wrapper-inner .basics div .value {
+  font-size: 18px;
+  margin: 0 0 14px;
+}
+
+#member-overlay .wrapper-inner .ranks {
+  margin: 0 0 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#member-overlay .wrapper-inner .ranks.error {
+  margin: 0 0 2rem;
+  grid-template-columns: 1fr;
+}
+
+#member-overlay .wrapper-inner .ranks > div {
+  position: relative;
+  font-size: 14px;
+  line-height: 10px;
+}
+
+#member-overlay .wrapper-inner .ranks div .name {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#member-overlay .wrapper-inner .ranks div .value {
+  font-size: 38px;
+  line-height: 34px;
+  margin: 0 0 14px;
+}
+
+#member-overlay .wrapper-inner .characters {
+  
+}
+
+#member-overlay .wrapper-inner .characters [class^="destiny-"] {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: rgb(75, 127, 149);
+}
+
+#member-overlay .wrapper-inner .characters .destiny-class_hunter {
+  background-color: rgb(127, 98, 76);
+}
+
+#member-overlay .wrapper-inner .characters .destiny-class_warlock {
+  background-color: rgb(42, 120, 99);
+}
+
+#member-overlay .wrapper-inner .characters .text {
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#member-overlay .wrapper-inner .characters .text div:last-child > span {
+  width: 42px;
+  display: inline-block;
+  text-align: right;
+}
+
+#member-overlay .wrapper-inner .characters .text div:last-child span:last-child span {
+  position: relative;
+  font-weight: 500;
+  color: #2ed1c9;
+}
+
+#member-overlay .wrapper-inner .characters .text div:last-child span:last-child span::before {
+  content: 'l';
+  position: absolute;
+  top: 5px;
+  left: -10px;
+  font-family: 'destiny' !important;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#member-overlay .wrapper-inner .characters .char .state {
+  margin: 10px 0 16px 54px;
+}
+
+#member-overlay .wrapper-inner .characters .char:last-child .state {
+  margin-bottom:  0;
+}
+
+#member-overlay .wrapper-inner .characters .char .state div {
+  display: inline;
+}
+
+#member-overlay .wrapper-inner .characters .char .state div::after {
+  content: ' ';
+}
+
+#member-overlay .wrapper-inner .characters .char .state .activity {
+  display: block;
+  margin: 0 0 2px;
+}
+
+#member-overlay .wrapper-inner .characters .char .state .time-before,
+#member-overlay .wrapper-inner .characters .char .state time {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+
+#member-overlay .wrapper-inner .list.progress-bars > li {
+  height: unset;
+}
+
+#member-overlay .wrapper-inner .list.progress-bars .progress-bar {
+  width: 100%;
+}
+
+#member-overlay .wrapper-inner .list.progress-bars .progress-bar .bar .fill {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#member-overlay .wrapper-inner .list.progress-bars.seals .progress-bar.complete .bar .fill {
+  background-color: #7b3274;
+}
+
+#member-overlay .wrapper-inner .list.progress-bars .progress-bar.valor .bar .fill {
+  background-color: #d08039;
+}
+
+#member-overlay .wrapper-inner .list.progress-bars .progress-bar.glory .bar .fill {
+  background-color: #bd2f28;
+}
+
+#member-overlay .wrapper-inner .list.progress-bars .progress-bar.infamy .bar .fill {
+  background-color: #269676;
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+  #member-overlay {
+    display: block;
+    overflow-y: scroll;
+  }
+
+  #member-overlay .wrapper-inner {
+    padding: 3rem 2rem 2rem;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+
+  #member-overlay .wrapper-inner .ranks {
+    grid-template-columns: 1fr 1fr;
+  }
 }

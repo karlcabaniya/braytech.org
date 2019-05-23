@@ -52,7 +52,7 @@ class Triumphs extends React.Component {
 
     let toggleCompletedLink = (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a onClick={this.toggleCompleted}>
+      <a className='button' onClick={this.toggleCompleted}>
         {this.props.collectibles.hideTriumphRecords ? (
           <>
             <i className='uniF16E' />
@@ -71,14 +71,14 @@ class Triumphs extends React.Component {
 
     if (!primaryHash) {
       return (
-        <div className={cx('view', 'presentation-node', 'root', this.props.theme.selected)} id='triumphs'>
+        <div className={cx('view', 'presentation-node', 'root')} id='triumphs'>
           <Root {...this.props} />
         </div>
       );
     } else if (primaryHash === 'seal') {
       return (
         <>
-          <div className={cx('view', 'presentation-node', this.props.theme.selected)} id='triumphs'>
+          <div className={cx('view', 'presentation-node')} id='triumphs'>
             <SealNode {...this.props} />
           </div>
           <div className='sticky-nav'>
@@ -86,8 +86,8 @@ class Triumphs extends React.Component {
             <ul>
               <li>{toggleCompletedLink}</li>
               <li>
-                <ProfileLink to={backLinkPath}>
-                  <i className='uniF094' />
+                <ProfileLink className='button' to={backLinkPath}>
+                  <i className='destiny-B_Button' />
                   {t('Back')}
                 </ProfileLink>
               </li>
@@ -98,7 +98,7 @@ class Triumphs extends React.Component {
     } else if (primaryHash === 'almost-complete') {
       return (
         <>
-          <div className={cx('view', this.props.theme.selected)} id='triumphs'>
+          <div className={cx('view')} id='triumphs'>
             <AlmostComplete {...this.props} />
           </div>
           <div className='sticky-nav'>
@@ -106,7 +106,7 @@ class Triumphs extends React.Component {
             <ul>
               <li>
                 <ProfileLink to={backLinkPath}>
-                  <i className='uniF094' />
+                  <i className='destiny-B_Button' />
                   {t('Back')}
                 </ProfileLink>
               </li>
@@ -117,7 +117,7 @@ class Triumphs extends React.Component {
     } else if (primaryHash === 'tracked') {
       return (
         <>
-          <div className={cx('view', this.props.theme.selected)} id='triumphs'>
+          <div className={cx('view')} id='triumphs'>
             <Tracked {...this.props} />
           </div>
           <div className='sticky-nav'>
@@ -125,7 +125,7 @@ class Triumphs extends React.Component {
             <ul>
               <li>
                 <ProfileLink to={backLinkPath}>
-                  <i className='uniF094' />
+                  <i className='destiny-B_Button' />
                   {t('Back')}
                 </ProfileLink>
               </li>
@@ -136,7 +136,7 @@ class Triumphs extends React.Component {
     } else {
       return (
         <>
-          <div className={cx('view', 'presentation-node', 'parent', this.props.theme.selected)} id='triumphs'>
+          <div className={cx('view', 'presentation-node', 'parent')} id='triumphs'>
             <Node {...this.props} primaryHash={primaryHash} />
           </div>
           <div className='sticky-nav'>
@@ -144,8 +144,8 @@ class Triumphs extends React.Component {
             <ul>
               <li>{toggleCompletedLink}</li>
               <li>
-                <ProfileLink to={backLinkPath}>
-                  <i className='uniF094' />
+                <ProfileLink className='button' to={backLinkPath}>
+                  <i className='destiny-B_Button' />
                   {t('Back')}
                 </ProfileLink>
               </li>
@@ -160,8 +160,7 @@ class Triumphs extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    collectibles: state.collectibles,
-    theme: state.theme
+    collectibles: state.collectibles
   };
 }
 

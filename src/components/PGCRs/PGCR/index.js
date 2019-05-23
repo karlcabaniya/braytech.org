@@ -9,6 +9,8 @@ import Moment from 'react-moment';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
+import Button from '../../UI/Button';
+import MemberLink from '../../MemberLink';
 import * as bungie from '../../../utils/bungie';
 import * as responseUtils from '../../../utils/responseUtils';
 
@@ -64,6 +66,10 @@ class PGCR extends React.Component {
 
   getGloryPoints = async (membershipType, membershipId) => {
     let response = await bungie.memberProfile(membershipType, membershipId, '202');
+
+    if (!response.characterProgressions.data) {
+      return;
+    }
 
     let value = Object.values(response.characterProgressions.data)[0].progressions[2679551909].currentProgress;
     return value;
@@ -213,6 +219,13 @@ class PGCR extends React.Component {
           type: 'value',
           async: true,
           hideInline: true
+        },
+        {
+          key: 'gloryPoints',
+          name: 'Glory points',
+          type: 'value',
+          async: true,
+          expanded: true
         },
         {
           key: 'assists',
@@ -380,9 +393,10 @@ class PGCR extends React.Component {
           fireteamId: entry.values.fireteamId ? entry.values.fireteamId.basic.value : null,
           element: (
             <li key={entry.characterId} className={cx('linked', { isExpandedPlayer })} onClick={() => this.togglePlayerHandler(pgcr.activityDetails.instanceId, entry.characterId)}>
-              <div className='inline'>
-                <div className='icon'>{!dnf ? <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${entry.player.destinyUserInfo.iconPath}`} /> : null}</div>
-                <div className={cx('displayName', { dnf: dnf })}>{entry.player.destinyUserInfo.displayName}</div>
+              <div className={cx('inline', { dnf: dnf })}>
+                <div className='member'>
+                  <MemberLink type={entry.player.destinyUserInfo.membershipType} id={entry.player.destinyUserInfo.membershipId} displayName={entry.player.destinyUserInfo.displayName} characterId={entry.characterId} />
+                </div>
                 {displayStats.map((s, i) => {
                   let value;
                   if (s.expanded) {
@@ -393,7 +407,7 @@ class PGCR extends React.Component {
                     } else if (s.async) {
                       if (s.key === 'gloryPoints') {
                         let playerCache = this.state.playerCache.find(c => c.id === (entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId));
-                        value = playerCache ? playerCache.gloryPoints : '–';
+                        value = playerCache && playerCache.gloryPoints ? playerCache.gloryPoints : '–';
                       }
                     } else {
                       value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
@@ -416,7 +430,7 @@ class PGCR extends React.Component {
                     } else if (s.async) {
                       if (s.key === 'gloryPoints') {
                         let playerCache = this.state.playerCache.find(c => c.id === (entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId));
-                        value = playerCache ? playerCache.gloryPoints : '–';
+                        value = playerCache && playerCache.gloryPoints ? playerCache.gloryPoints : '–';
                       }
                     } else {
                       value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type].toLocaleString('en-us');
@@ -425,7 +439,7 @@ class PGCR extends React.Component {
                     return null;
                   }
                   return (
-                    <div key={i} className={cx('stat', { hideInline: s.hideInline, expanded: s.extended }, s.key)}>
+                    <div key={i} className={cx('stat', { hideInline: s.hideInline, expanded: s.expanded }, s.key)}>
                       <div className='name'>{s.name}</div>
                       <div className='value'>{value}</div>
                     </div>
@@ -498,7 +512,6 @@ class PGCR extends React.Component {
                 return (
                   <ul key={t.teamId} className='team'>
                     <li className={cx('team-head', (t.teamId === 17 ? 'Alpha' : 'Bravo').toLowerCase())}>
-                      <div />
                       <div className='team name'>{t.teamId === 17 ? 'Alpha' : 'Bravo'} team</div>
                       {displayStats.map((s, i) => {
                         if (s.expanded) {
@@ -527,7 +540,6 @@ class PGCR extends React.Component {
             ) : (
               <ul key={t.teamId} className='team'>
                 <li className={cx('team-head')}>
-                  <div />
                   <div className='team name' />
                   {displayStats.map((s, i) => {
                     if (s.expanded) {
@@ -549,10 +561,10 @@ class PGCR extends React.Component {
             <div />
             <ul>
               <li>
-                <a onClick={() => this.contractHandler(pgcr.activityDetails.instanceId)}>
-                  <i className='uniF094' />
-                  {t('Close')}
-                </a>
+                  <Button action={() => this.contractHandler(pgcr.activityDetails.instanceId)}>
+                    <i className='destiny-B_Button' />
+                    {t('Close')}
+                  </Button>                    
               </li>
             </ul>
           </div>

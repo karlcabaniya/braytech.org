@@ -34,23 +34,23 @@ class Collections extends React.Component {
 
     if (!primaryHash) {
       return (
-        <div className={cx('view', 'presentation-node', 'root', this.props.theme.selected)} id='collections'>
+        <div className={cx('view', 'presentation-node', 'root')} id='collections'>
           <Root {...this.props} />
         </div>
       );
     } else if (primaryHash === 'badge') {
       return (
         <>
-          <div className={cx('view', 'presentation-node', this.props.theme.selected)} id='collections'>
+          <div className={cx('view', 'presentation-node')} id='collections'>
             <BadgeNode {...this.props} />
           </div>
           <div className='sticky-nav'>
             <div />
             <ul>
               <li>
-                <ProfileLink to={backLinkPath}>
-                  <i className='uniF094' />
-                  Back
+                <ProfileLink className='button' to={backLinkPath}>
+                  <i className='destiny-B_Button' />
+                  {t('Back')}
                 </ProfileLink>
               </li>
             </ul>
@@ -60,15 +60,15 @@ class Collections extends React.Component {
     } else {
       return (
         <>
-          <div className={cx('view', 'presentation-node', this.props.theme.selected)} id='collections'>
+          <div className={cx('view', 'presentation-node')} id='collections'>
             <Node {...this.props} primaryHash={primaryHash} />
           </div>
           <div className='sticky-nav'>
             <div />
             <ul>
               <li>
-                <ProfileLink to={backLinkPath}>
-                  <i className='uniF094' />
+                <ProfileLink className='button' to={backLinkPath}>
+                  <i className='destiny-B_Button' />
                   {t('Back')}
                 </ProfileLink>
               </li>
@@ -82,8 +82,7 @@ class Collections extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member,
-    theme: state.theme
+    member: state.member
   };
 }
 

@@ -14,35 +14,35 @@ class Button extends React.Component {
   }
 
   render() {
-    const { classNames, text, action, invisible, disabled, lined, anchor } = this.props;
+    const { classNames, text, children, action, invisible, disabled, lined, anchor } = this.props;
     const theme = this.props.themeOverride || this.props.theme.selected;
 
     if (anchor) {
       return (
         <Link
           className={cx('button', classNames, { lined: lined, disabled: disabled, invisible: invisible }, theme)}
-          onClick={() => {
+          onClick={e => {
             if (action) {
-              action();
+              action(e);
             }
           }}
           to={this.props.to}
         >
-          <div className='text'>{text}</div>
+          {text ? <div className='text'>{text}</div> : children}
         </Link>
       );
     } else {
       return (
         <button
           className={cx('button', classNames, { lined: lined, disabled: disabled, invisible: invisible }, theme)}
-          onClick={() => {
+          onClick={e => {
             if (action) {
-              action();
+              action(e);
             }
           }}
           to={this.props.to}
         >
-          <div className='text'>{text}</div>
+          {text ? <div className='text'>{text}</div> : children}
         </button>
       );
     }

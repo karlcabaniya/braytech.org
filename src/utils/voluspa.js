@@ -1,62 +1,65 @@
 export function store(payload) {
   try {
-
     fetch('https://voluspa.braytech.org/member/store', {
-      method: "POST",
-      cache: "no-cache",
+      method: 'POST',
+      cache: 'no-cache',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)
     });
-
-  } catch (e) {
-
-  }
+  } catch (e) {}
 }
 
 export async function statistics(payload) {
   try {
-
     const request = await fetch('https://voluspa.braytech.org/statistics', {
-      method: "GET",
-      cache: "no-cache",
+      method: 'GET',
+      cache: 'no-cache',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       }
     }).then(r => r.json());
 
     return request.Response.data;
+  } catch (e) {}
+}
 
-  } catch (e) {
+class VoluspaError extends Error {
+  constructor(request) {
+    super(request.Message);
 
+    this.errorCode = request.ErrorCode;
+    this.errorStatus = request.ErrorStatus;
   }
 }
 
 export async function leaderboard(sort = 'triumphScore', offset = 0, limit = 10) {
-  const request = await fetch(`https://voluspa.braytech.org/leaderboards/?sort=${sort}&limit=${limit}&offset=${offset}`).then(r => r.json())
+  try {
+    const request = await fetch(`https://voluspa.braytech.org/leaderboards/?sort=${sort}&limit=${limit}&offset=${offset}`).then(r => r.json());
 
-  if (request.ErrorCode === 1) {
+    if (request.ErrorCode !== 1) {
+      throw new VoluspaError(request);
+    }
+
     return request.Response;
-  } else {
-    return {};
-  }
-
+  } catch (e) {}
 }
 
-export async function memberRank(membershipType = false, membershipId = false) {
-  if (!membershipType) {
+export async function leaderboardPosition(membershipType = false, membershipId = false) {
+  if (!membershipType || !membershipId) {
     return {};
   }
 
-  const request = await fetch(`https://voluspa.braytech.org/member/rank/?membershipType=${membershipType}&membershipId=${membershipId}`).then(r => r.json())
+  try {
+    const request = await fetch(`https://voluspa.braytech.org/leaderboards/position?membershipType=${membershipType}&membershipId=${membershipId}`).then(r => r.json());
 
-  if (request.ErrorCode === 1) {
+    if (request.ErrorCode !== 1) {
+      throw new VoluspaError(request);
+    }
+
     return request.Response;
-  } else {
-    return {};
-  }
-
+  } catch (e) {}
 }
 
 export async function groupRank(groupId = false) {
@@ -64,12 +67,11 @@ export async function groupRank(groupId = false) {
     return {};
   }
 
-  const request = await fetch(`https://voluspa.braytech.org/member/rank/?groupId=${groupId}`).then(r => r.json())
+  const request = await fetch(`https://voluspa.braytech.org/member/rank/?groupId=${groupId}`).then(r => r.json());
 
   if (request.ErrorCode === 1) {
     return request.Response;
   } else {
     return {};
   }
-
 }

@@ -143,13 +143,6 @@ class Header extends React.Component {
         primary: true
       },
       {
-        name: t('Dossier'),
-        desc: t("Track friends and foes almost in real-time"),
-        slug: '/dossier',
-        exact: true,
-        profile: true
-      },
-      {
         name: t('Legend'),
         desc: t("A high-level and more graphical overview of your achievements"),
         slug: '/legend',

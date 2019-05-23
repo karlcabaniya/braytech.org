@@ -10,9 +10,7 @@ import PGCRs from './views/PGCRs';
 import Collections from './views/Collections';
 import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
-import Account from './views/Account';
 import SitRep from './views/SitRep';
-import Dossier from './views/Dossier';
 import ThisWeek from './views/ThisWeek';
 import Header from './components/UI/Header';
 import Spinner from './components/UI/Spinner';
@@ -52,7 +50,6 @@ class ProfileRoutes extends React.Component {
       <>
         <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} />} />
         <Switch>
-          <Route path={`${match.url}/account`} exact render={route => <Account />} />
           <Route path={`${match.url}/clan/:view?/:subView?`} exact render={route => <Clan view={route.match.params.view} subView={route.match.params.subView} />} />
           <Route path={`${match.url}/legend`} exact render={route => <Legend />} />
           <Route path={`${match.url}/checklists`} exact component={Checklists} />
@@ -60,7 +57,6 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Triumphs {...route} />} />
           <Route path={`${match.url}/this-week`} exact render={() => <ThisWeek />} />>
           <Route path={`${match.url}/sit-rep`} exact render={route => <SitRep />} />
-          <Route path={`${match.url}/dossier`} render={route => <Dossier />} />
           <Route path={`${match.url}/pgcrs/:type?/:mode?`} render={route => <PGCRs {...route} RebindTooltips={this.props.RebindTooltips} />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/sit-rep` }} />} />
         </Switch>

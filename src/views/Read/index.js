@@ -174,9 +174,9 @@ class Read extends React.Component {
             <div />
             <ul>
               <li>
-                <Link to={backLinkPath}>
-                  <i className='uniF094' />
-                  {t('Back')}
+                <Link className='button' to={backLinkPath}>
+                  <i className='destiny-B_Button' />
+                  {t('Dismiss')}
                 </Link>
               </li>
             </ul>

@@ -273,5 +273,10 @@
     "date": "2019-05-16T10:28:16.198Z",
     "version": "2.4.3",
     "content": "- Renamed _Multiplayer_ view to _PGCRs_\n  - Rearranged _Crucible_ view to match new _Gambit_ view\n  - This is all still a work in progress\n  - I intend to add a _Raid_ view and an _All_ view\n - Added \"commonality percentage\" to collectibles\n - Other stuff"
+  },
+  {
+    "date": "2019-05-23T07:07:05.505Z",
+    "version": "2.5.0",
+    "content": "- MemberLink\n- More Leaderboards work but it's still not ready\n- Updated some theme stuff\n- Updated sticky navs (the bars at the bottom of some UIs)\n- improvements to PGCRs\n- Code clean up\n- Removed Dossier view"
   }
 ]
