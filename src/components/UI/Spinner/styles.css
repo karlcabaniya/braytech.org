@@ -25,27 +25,27 @@
 }
 
 .spinner svg .a {
-  animation: spinner_bits_a 2s linear infinite;
+  animation: spinner_bits_a 1.6s linear infinite;
 }
 
 .spinner svg .b {
-  animation: spinner_bits_b 2s linear infinite;
+  animation: spinner_bits_b 1.6s linear infinite;
 }
 
 .spinner svg .c {
-  animation: spinner_bits_c 2s linear infinite;
+  animation: spinner_bits_c 1.6s linear infinite;
 }
 
 .spinner svg .d {
-  animation: spinner_bits_d 2s linear infinite;
+  animation: spinner_bits_d 1.6s linear infinite;
 }
 
 .spinner svg .e {
-  animation: spinner_bits_e 2s linear infinite;
+  animation: spinner_bits_e 1.6s linear infinite;
 }
 
 .spinner svg .f {
-  animation: spinner_bits_f 2s linear infinite;
+  animation: spinner_bits_f 1.6s linear infinite;
 }
 
 @keyframes spinner_bits_a {

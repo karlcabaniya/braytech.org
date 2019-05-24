@@ -3,8 +3,10 @@
   display: grid;
 }
 
-
-
+#leaderboards .content.head .text p {
+  max-width: 500px;
+  font-size: 16px;
+}
 
 
 
@@ -24,6 +26,8 @@
 
 @media screen and (max-width: 600px) {
 
-  
+  #leaderboards .content.head .text p {
+    font-size: 14px;
+  }
 
 }

@@ -1,5 +1,12 @@
 #leaderboards.root {
-  
+  padding: 4rem 3rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 3rem;
+}
+
+#leaderboards.root > .module:first-child {
+  grid-column: 1/4;
 }
 
 
@@ -7,7 +14,29 @@
 
 
 
+@media screen and (max-width: 1659px) {
 
+  #leaderboards.root {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  #leaderboards.root > .module:first-child {
+    grid-column: 1/3;
+  }
+
+}
+
+@media screen and (max-width: 1152px) {
+
+  #leaderboards.root {
+    grid-template-columns: 1fr;
+  }
+  
+  #leaderboards.root > .module:first-child {
+    grid-column: 1/2;
+  }
+
+}
 
 @media screen and (max-width: 1280px) {
 
@@ -23,6 +52,9 @@
 
 @media screen and (max-width: 600px) {
 
-  
+  #leaderboards.root {
+    padding: 3rem 2rem 2rem;
+    grid-gap: 2rem;
+  }
 
 }

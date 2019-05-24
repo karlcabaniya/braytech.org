@@ -20,7 +20,7 @@ export const profileScrubber = (profile, sortBy = false) => {
   }
 
   // adjust adventures checklist state https://github.com/Bungie-net/api/issues/786
-  if (profile.characterProgressions) {
+  if (profile.characterProgressions && profile.characterProgressions.data) {
     let completed = false;
 
     // Signal Light

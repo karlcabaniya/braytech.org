@@ -7,7 +7,7 @@ import cx from 'classnames';
 import './styles.css';
 
 import Root from './Root/';
-import Board from './Board/';
+import Leaderboard from './Board/';
 
 class Leaderboards extends React.Component {
   constructor(props) {
@@ -22,14 +22,20 @@ class Leaderboards extends React.Component {
 
   render() {
     const { t, member } = this.props;
+
     const view = this.props.match.params.view || false;
     const dom = this.props.match.params.dom || false;
     const sub = this.props.match.params.sub || false;
 
+    // triumphs, collections, time-played
     if (view === 'for') {
-      return <Board dom={dom} sub={sub} />;
-    } else if (view === 'gambit') {
+      return <Leaderboard type='leaderboard' metric={dom} offset={sub} />;
+
+    // a particular clan (groupId)
+    } else if (view === 'group') {
+      return <Leaderboard type='group' metric={dom} offset={sub} />;
       
+    // tracking stats, top 10s
     } else {
       return <Root />;
     }

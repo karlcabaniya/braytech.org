@@ -46,6 +46,22 @@ export async function leaderboard(sort = 'triumphScore', offset = 0, limit = 10)
   } catch (e) {}
 }
 
+export async function leaderboardGroup(groupId = false, sort = 'triumphScore') {
+  if (!groupId) {
+    return {};
+  }
+
+  try {
+    const request = await fetch(`https://voluspa.braytech.org/leaderboards/?groupId=${groupId}&sort=${sort}`).then(r => r.json());
+
+    if (request.ErrorCode !== 1) {
+      throw new VoluspaError(request);
+    }
+
+    return request.Response;
+  } catch (e) {}
+}
+
 export async function leaderboardPosition(membershipType = false, membershipId = false) {
   if (!membershipType || !membershipId) {
     return {};

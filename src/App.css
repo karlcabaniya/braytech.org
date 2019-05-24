@@ -350,6 +350,21 @@ button.square.active {
   justify-content: space-between;
 }
 
+.sub-header.alt {
+  border-bottom: 2px solid rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.sub-header.alt::after {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2rem;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
 .page-header {
   position: relative;
   margin: 24px 0 3rem;
@@ -375,6 +390,14 @@ button.square.active {
   width: 32px;
   border-bottom: 3px solid #ffffff;
   opacity: 0.2;
+}
+
+.page-header .sub-name {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 4px;
+  margin: 0 0 6px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .page-header .name {

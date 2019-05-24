@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import * as voluspa from '../../../utils/voluspa';
-import MemberLink from '../../../components/MemberLink';
+import * as bungie from '../../../utils/bungie';
 import Spinner from '../../../components/UI/Spinner';
 import Board from '../../../components/Board';
 
 import './styles.css';
 
-class For extends React.Component {
+class Leaderboard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,16 +21,16 @@ class For extends React.Component {
     };
   }
 
-  callVoluspa = async (membershipType, membershipId) => {
+  callVoluspa = async (groupId) => {
     try {
-      let response = await voluspa.leaderboardPosition(membershipType, membershipId);
+      let response = await bungie.group(groupId);
       if (!response) {
         throw Error;
       }
       this.setState((prevState, props) => {
         prevState.loading = false;
         // prevState.response = prevState.response.concat(response.data);
-        prevState.response = response.data;
+        prevState.response = response;
         return prevState;
       });
       // console.log(this.data);
@@ -45,46 +44,43 @@ class For extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.member.membershipId) {
-      this.callVoluspa(this.props.member.membershipType, this.props.member.membershipId);
+    if (this.props.groupId) {
+      this.callVoluspa(this.props.groupId);
     }
   }
 
   render() {
-    const { t, member, dom, sub } = this.props;
+    const { t, member, type, metric, offset, groupId = false } = this.props;
+
+    console.log(this.state)
+
+    let headerName;
+    if (metric === 'collectionTotal') {
+      headerName = t('Collection total');
+    } else if (metric === 'timePlayed') {
+      headerName = t('Timed played');
+    } else if (type === 'group') {
+      headerName = this.state.response ? this.state.response.detail.name : <Spinner />;
+    } else {
+      headerName = t('Triumph score');
+    }
 
     return (
       <div className={cx('view', 'for')} id='leaderboards'>
         <div className='module'>
           <div className='content head'>
             <div className='page-header'>
-              <div className='name'>{t('Triumphs')}</div>
-              <div className='description'>{t('The Braytech leaderboard for triumph score.')}</div>
+              <div className='sub-name'>{t('Leaderboards')}</div>
+              <div className='name'>{headerName}</div>
+            </div>
+            <div className='text'>
+              <p>Braytech leaderboards use a dense rank and are sorted by rank in ascending order, followed by display name in ascending order.</p>
             </div>
           </div>
-          {/* {member.membershipId ? (
-            !this.state.loading && !this.state.error ? (
-              <div className='content'>
-                <div className='position'>
-                  <div className='rank'>
-                    <div className='name'>Rank</div>
-                    <div className='value'>{this.state.response[0].ranks.triumphScore.toLocaleString('en-us')}</div>
-                  </div>
-                  <div className='triumphScore'>
-                    <div className='name'>Score</div>
-                    <div className='value'>{this.state.response[0].triumphScore.toLocaleString('en-us')}</div>
-                  </div>
-                </div>
-                <MemberLink type={member.membershipType} id={member.membershipId} groupId={this.state.response[0].destinyUserInfo.groupId} displayName={member.data ? member.data.profile.profile.data.userInfo.displayName : null} />
-              </div>
-            ) : this.state.error ? null : (
-              <Spinner />
-            )
-          ) : null} */}
         </div>
         <div className='module'>
           <div className='content'>
-            <Board offset={sub ? parseInt(sub, 10) : 0} limit='15' />
+            <Board type={type} metric={metric} offset={offset ? offset : 0} limit='15' />
           </div>
         </div>
       </div>
@@ -101,4 +97,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(For);
+)(Leaderboard);

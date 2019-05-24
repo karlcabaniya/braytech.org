@@ -211,12 +211,13 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 #member-overlay .wrapper-inner .head .displayName {
   position: absolute;
   font-size: 48px;
-  line-height: 40px;
+  line-height: 60px;
   margin: 0 0 14px;
-  top: 0;
+  top: -9px;
   left: 0;  
   width: 100%;
   white-space: nowrap;
+  mask: linear-gradient(to right, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0));
 }
 
 #member-overlay .wrapper-inner .head .groupName {
@@ -427,6 +428,47 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 #member-overlay .wrapper-inner .list.progress-bars .progress-bar.infamy .bar .fill {
   background-color: #269676;
 }
+
+.wrapper.dark-mode #member-overlay.error .background .border-top,
+#member-overlay.error .background .border-top {
+  background-color: #b54736;
+}
+
+#member-overlay.error .wrapper-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 0;
+  padding: 1rem 0 0;
+  max-width: unset;
+}
+
+#member-overlay.error .wrapper-inner > div {
+  padding: 2rem;
+}
+
+#member-overlay.error .wrapper-inner > div:first-child {
+  display: grid;
+  justify-content: right;
+  background-image: linear-gradient(to right, rgba(181, 71, 54, 0), rgba(181, 71, 54, 0.2));
+}
+
+#member-overlay.error .wrapper-inner div .icon {
+  position: relative;
+  height: 120px;
+  width: 120px;
+}
+
+#member-overlay.error .wrapper-inner .text .name {
+  font-size: 24px;
+  margin: 0 0 10px;
+}
+
+#member-overlay.error .wrapper-inner .text .description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
 
 
 

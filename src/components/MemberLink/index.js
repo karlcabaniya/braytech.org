@@ -26,6 +26,7 @@ class MemberLink extends React.Component {
     this.state = {
       loadingBasic: true,
       loadingAll: true,
+      loadingAllError: false,
       overlay: false
     };
     this.mounted = false;
@@ -58,18 +59,29 @@ class MemberLink extends React.Component {
 
       let [profile, leaderboardPosition, group] = await Promise.all(requests);
 
-      this.dataAll = {
-        ...responseUtils.profileScrubber(profile, 'activity'),
-        ranks: leaderboardPosition ? leaderboardPosition : false,
-        group: group && group.results.length ? group.results[0].group : false
-      };
+      profile = responseUtils.profileScrubber(profile, 'activity');
 
-      console.log(this.dataAll);
+      if (!profile.profileRecords.data) {
+        this.setState((prevState, props) => {
+          prevState.loadingAllError = true;
+          return prevState;
+        });
+      } else {
+        this.dataAll = {
+          ...profile,
+          ranks: leaderboardPosition ? leaderboardPosition : false,
+          group: group && group.results.length ? group.results[0].group : false
+        };
 
-      this.setState((prevState, props) => {
-        prevState.loadingAll = true;
-        return prevState;
-      });
+        console.log(this.dataAll);
+
+        this.setState((prevState, props) => {
+          prevState.loadingAllError = false;
+          prevState.loadingAll = false;
+          return prevState;
+        });
+      }
+
     }
   };
 
@@ -124,14 +136,14 @@ class MemberLink extends React.Component {
           <div className='displayName'>{displayName}</div>
         </div>
         {this.state.overlay ? (
-          <div id='member-overlay'>
+          <div id='member-overlay' className={cx({ error: this.state.loadingAllError })}>
             <div className='wrapper-outer'>
               <div className='background'>
                 <div className='border-top' />
                 <div className='acrylic' />
               </div>
-              <div className='wrapper-inner'>
-                {this.dataAll ? (
+              <div className={cx('wrapper-inner')}>
+                {!this.state.loadingAll && this.dataAll && !this.state.loadingAllError ? (
                   <>
                     <div className='module'>
                       <div className='head'>
@@ -334,9 +346,19 @@ class MemberLink extends React.Component {
                       </ul>
                     </div>
                   </>
-                ) : (
-                  <Spinner />
-                )}
+                ) : this.state.loadingAllError ? <>
+                  <div>
+                    <div className='icon'>
+                      <ObservedImage className='image' src='/static/images/extracts/ui/010A-00000552.PNG' />
+                    </div>
+                  </div>
+                  <div>
+                    <div className='text'>
+                      <div className='name'>Private profile</div>
+                      <div className='description'>This user has their profile privacy set to private</div>
+                    </div>
+                  </div>
+                </> : <Spinner />}
               </div>
               <div className='sticky-nav mini ultra-black'>
                 <div />
