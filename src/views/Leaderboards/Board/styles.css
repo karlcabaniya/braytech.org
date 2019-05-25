@@ -5,7 +5,9 @@
   grid-gap: 3rem;
 }
 
-
+#leaderboards.for .content.head .button {
+  margin: 2rem 0 0;
+}
 
 
 

@@ -278,5 +278,10 @@
     "date": "2019-05-23T07:07:05.505Z",
     "version": "2.5.0",
     "content": "- MemberLink\n- More Leaderboards work but it's still not ready\n- Updated some theme stuff\n- Updated sticky navs (the bars at the bottom of some UIs)\n- improvements to PGCRs\n- Code clean up\n- Removed Dossier view"
+  },
+  {
+    "date": "2019-05-25T12:53:09.136Z",
+    "version": "2.5.1",
+    "content": "- Leaderboards BETA release\n- Improvements to MemberLink"
   }
 ]

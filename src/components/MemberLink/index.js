@@ -15,7 +15,7 @@ import * as voluspa from '../../utils/voluspa';
 import * as responseUtils from '../../utils/responseUtils';
 import * as destinyUtils from '../../utils/destinyUtils';
 import * as destinyEnums from '../../utils/destinyEnums';
-import userStamps from '../../data/userStamps';
+import userFlair from '../../data/userFlair';
 
 import './styles.css';
 
@@ -46,40 +46,46 @@ class MemberLink extends React.Component {
     const { type, id } = this.props;
 
     if (this.mounted) {
-      this.setState((prevState, props) => {
-        prevState.overlay = true;
-        return prevState;
-      });
-
-      let requests = [
-        bungie.memberProfile(type, id, '100,200,202,204,800,900'),
-        voluspa.leaderboardPosition(type, id),
-        bungie.memberGroups(type, id)
-      ];
-
-      let [profile, leaderboardPosition, group] = await Promise.all(requests);
-
-      profile = responseUtils.profileScrubber(profile, 'activity');
-
-      if (!profile.profileRecords.data) {
-        this.setState((prevState, props) => {
-          prevState.loadingAllError = true;
-          return prevState;
-        });
-      } else {
-        this.dataAll = {
-          ...profile,
-          ranks: leaderboardPosition ? leaderboardPosition : false,
-          group: group && group.results.length ? group.results[0].group : false
-        };
-
-        console.log(this.dataAll);
+      try {
 
         this.setState((prevState, props) => {
-          prevState.loadingAllError = false;
-          prevState.loadingAll = false;
+          prevState.overlay = true;
           return prevState;
         });
+  
+        let requests = [
+          bungie.memberProfile(type, id, '100,200,202,204,800,900'),
+          voluspa.leaderboardPosition(type, id),
+          bungie.memberGroups(type, id)
+        ];
+  
+        let [profile, leaderboardPosition, group] = await Promise.all(requests);
+  
+        profile = responseUtils.profileScrubber(profile, 'activity');
+  
+        if (!profile.profileRecords.data) {
+          this.setState((prevState, props) => {
+            prevState.loadingAllError = true;
+            return prevState;
+          });
+        } else {
+          this.dataAll = {
+            ...profile,
+            ranks: leaderboardPosition ? leaderboardPosition : false,
+            group: group && group.results.length ? group.results[0].group : false
+          };
+  
+          //console.log(this.dataAll);
+  
+          this.setState((prevState, props) => {
+            prevState.loadingAllError = false;
+            prevState.loadingAll = false;
+            return prevState;
+          });
+        }
+
+      } catch (e) {
+        console.log(e);
       }
 
     }
@@ -99,12 +105,16 @@ class MemberLink extends React.Component {
     const { type, id } = this.props;
 
     if (this.mounted) {
-      let response = await bungie.memberProfile(type, id, '200');
-      this.dataBasic = responseUtils.profileScrubber(response, 'activity');
-      this.setState((prevState, props) => {
-        prevState.loadingBasic = false;
-        return prevState;
-      });
+      try {
+        let response = await bungie.memberProfile(type, id, '200');
+        this.dataBasic = responseUtils.profileScrubber(response, 'activity');
+        this.setState((prevState, props) => {
+          prevState.loadingBasic = false;
+          return prevState;
+        });
+      } catch (e) {
+
+      }
     }
   }
 
@@ -129,9 +139,18 @@ class MemberLink extends React.Component {
       );
     }
 
+    let flair = userFlair.find(f => f.user === (type + id));
+    let primaryFlair = false;
+    if (flair) {
+      primaryFlair = flair.trophies.find(t => t.primary);
+    }
+
     return (
       <>
         <div className='member-link' onClick={this.activateOverlay}>
+          {primaryFlair ? <div className={cx('user-flair', primaryFlair.classnames)}>
+            <i className={primaryFlair.icon} />
+          </div> : null}
           <div className='emblem'>{!this.state.loadingBasic && this.dataBasic ? <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} /> : null}</div>
           <div className='displayName'>{displayName}</div>
         </div>
@@ -151,13 +170,9 @@ class MemberLink extends React.Component {
                         <div className='groupName'>{this.dataAll.group ? this.dataAll.group.name : null}</div>
                         <div className='stamps'>
                           <div><i className={`destiny-platform_${destinyEnums.PLATFORMS[type].toLowerCase()}`} /></div>
-                          {userStamps.map((s, i) => {
-                            if (s.users.includes(type + id)) {
-                              return <div key={i}><i className={cx(s.icon, s.classnames)} /></div>
-                            } else {
-                              return null;
-                            }
-                          })}
+                          {flair ? flair.trophies.map((s, i) => {
+                            return <div key={i}><i className={cx(s.icon, s.classnames)} /></div>
+                          }) : null}
                         </div>
                       </div>
                       <div className='sub-header'>
@@ -173,7 +188,7 @@ class MemberLink extends React.Component {
                           <div className='name'>Triumph score</div>
                         </div>
                         <div>
-                          <div className='value'>{destinyUtils.collectionTotal(this.dataAll)}</div>
+                          <div className='value'>{destinyUtils.collectionTotal(this.dataAll).toLocaleString('en-us')}</div>
                           <div className='name'>Collection total</div>
                         </div>
                       </div>
@@ -349,7 +364,7 @@ class MemberLink extends React.Component {
                 ) : this.state.loadingAllError ? <>
                   <div>
                     <div className='icon'>
-                      <ObservedImage className='image' src='/static/images/extracts/ui/010A-00000552.PNG' />
+                      <ObservedImage className='image' src='/static/images/extracts/ui/010A-00000551.PNG' />
                     </div>
                   </div>
                   <div>
@@ -361,14 +376,16 @@ class MemberLink extends React.Component {
                 </> : <Spinner />}
               </div>
               <div className='sticky-nav mini ultra-black'>
-                <div />
-                <ul>
-                  <li>
-                    <Button action={this.deactivateOverlay}>
-                      <i className='destiny-B_Button' /> {t('Dismiss')}
-                    </Button>
-                  </li>
-                </ul>
+                <div className='sticky-nav-inner'>
+                  <div />
+                  <ul>
+                    <li>
+                      <Button action={this.deactivateOverlay}>
+                        <i className='destiny-B_Button' /> {t('Dismiss')}
+                      </Button>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

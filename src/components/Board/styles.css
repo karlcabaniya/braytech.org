@@ -57,7 +57,7 @@
   font-size: 14px;
 }
 
-.board .list .row > ul .col.focus {
+.board .list .row:not(.header) > ul .col.focus {
   font-size: 18px;
 }
 
@@ -129,15 +129,15 @@
     font-size: 14px;
   }
 
-  .board .list .row > ul .col.focus {
+  .board .list .row:not(.header) > ul .col.focus {
     font-size: 14px;
   }
 
-  .board .list .row > ul .col .abbr {
+  .board .list .row > ul .col > .abbr {
     display: unset;
   }
 
-  .board .list .row > ul .col .full {
+  .board .list .row > ul .col > .full {
     display: none;
   }
 

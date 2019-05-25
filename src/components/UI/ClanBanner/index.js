@@ -104,7 +104,7 @@ class ClanBanner extends React.Component {
   };
 
   componentWillMount() {
-    console.log('willMount', this.props.bannerData);
+    //console.log('willMount', this.props.bannerData);
   }
 
   componentDidMount() {

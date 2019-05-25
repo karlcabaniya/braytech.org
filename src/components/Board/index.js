@@ -53,7 +53,7 @@ class Board extends React.Component {
           ...leaderboard,
           leaderboardPosition: leaderboardPosition ? leaderboardPosition.data : false
         };
-        console.log(prevState.response);
+        //console.log(prevState.response);
         return prevState;
       });
     } catch (e) {
@@ -148,7 +148,7 @@ class Board extends React.Component {
                     <li className='col member'>
                       <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
                     </li>
-                    {!m.destinyUserInfo.wasPrivate ? (
+                    {!m.destinyUserInfo.wasPrivate && m.destinyUserInfo.lastScraped ? (
                       <>
                         <li className='col triumphScore focus'>{m.triumphScore.toLocaleString('en-us')}</li>
                         <li className='col collectionTotal'>{m.collectionTotal.toLocaleString('en-us')}</li>
@@ -221,7 +221,7 @@ class Board extends React.Component {
         });
       }
 
-      if (this.state.response.leaderboardPosition) {
+      if (type !== 'group' && this.state.response.leaderboardPosition) {
         let m = this.state.response.leaderboardPosition;
         let timePlayed = Math.floor(m.destinyUserInfo.timePlayed / 1440);
 
@@ -329,7 +329,7 @@ class Board extends React.Component {
                   <Button classNames='next' text='Next page' disabled={false} anchor to={`/leaderboards/for/${metric}/${displayOffset + displayLimit}`} />
                   <div className='total'>
                     <span>{(displayOffset + displayLimit + (rows.find(r => r.self) ? 1 : 0)).toLocaleString('en-us')}</span>
-                    <span>of {manifest.statistics.general.tracking.toLocaleString('en-us')}</span>
+                    <span>of {this.state.response.results.toLocaleString('en-us')}</span>
                   </div>
                 </>
               )}

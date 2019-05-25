@@ -58,7 +58,7 @@ class Index extends React.Component {
             <div className='description'>
               <p>Braytech is a Destiny fan site that allows users to view and map checklists, track and view triumphs, inspect collectibles, and so much more.</p>
               <p>The name, Braytech, is that which Clovis Bray, one of several of the franchises' fictional entities, designates their consumer products line; weapons, armour, etc.</p>
-              <p>Braytech is a stringent exercise in game UI mimicry and quality over quantity. Additionally, it’s a learning exercise for the primary developer in terms of technology and acting on user feedback.</p>
+              <p>Braytech is a stringent exercise in game UI mimicry and quality over quantity. Additionally, it’s a learning exercise for the developer in terms of new technology and acting on user feedback.</p>
             </div>
           </div>
         </div>
@@ -80,13 +80,13 @@ class Index extends React.Component {
                     <p>Number of clans that tracked players identify with</p>
                   </div>
                 </li>
-                <li>
+                {/* <li>
                   <div className='value'>{manifest.statistics.general.playedReset.toLocaleString('en-us')}</div>
                   <div className='name'>Played reset</div>
                   <div className='description'>
                     <p>Number of tracked players who've played this week</p>
                   </div>
-                </li>
+                </li> */}
                 <li>
                   <div className='value'>{manifest.statistics.general.playedSeason.toLocaleString('en-us')}</div>
                   <div className='name'>Played season</div>

@@ -38,6 +38,39 @@
   transition: box-shadow 0.25s;
 }
 
+.member-link > .user-flair {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: grid;
+  justify-content: right;
+  align-content: center;
+  overflow: hidden;
+  opacity: 0.4;
+}
+
+.member-link > .user-flair i {
+  font-size: 48px;
+  padding: 0 30px 0 0;
+  color: #fff;
+}
+
+.member-link > .user-flair.me i {
+  font-size: 72px;
+  padding: 6px 30px 0 0;
+}
+
+.member-link > .user-flair.one-hundo {
+  opacity: 0.6;
+}
+
+.member-link > .user-flair.one-hundo i {
+  color: #f12818;
+}
+
 .member-link .emblem {
   position: relative;
   background-color: rgba(255, 255, 255, 0.1);
@@ -240,7 +273,8 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   justify-content: center;
   margin: 0 1rem 0 0;
   color: #fff;
-  background-color: rgb(80, 80, 80);
+  font-size: 18px;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #member-overlay .wrapper-inner .stamps div i.destiny-platform_xbox {
@@ -256,15 +290,16 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 }
 
 #member-overlay .wrapper-inner .stamps div i.destiny-clovis_bray_device {
-  background-color: rgb(243, 41, 27);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #member-overlay .wrapper-inner .stamps div i.destiny-clovis_bray_device.one-hundo {
-  
+  background-color: rgb(241, 40, 24);
 }
 
 #member-overlay .wrapper-inner .basics {
   display: grid;
+  grid-gap: 1rem;
   grid-template-columns: 1fr;
 }
 
@@ -272,7 +307,6 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   position: relative;
   font-size: 14px;
   line-height: 10px;
-  margin: 0 0 1.5rem;
 }
 
 #member-overlay .wrapper-inner .basics > div:last-child {
@@ -281,16 +315,18 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 
 #member-overlay .wrapper-inner .basics div .name {
   color: rgba(255, 255, 255, 0.4);
+  line-height: 1.4;
 }
 
 #member-overlay .wrapper-inner .basics div .value {
   font-size: 18px;
-  margin: 0 0 14px;
+  margin: 0 0 8px;
 }
 
 #member-overlay .wrapper-inner .ranks {
   margin: 0 0 1rem;
   display: grid;
+  grid-gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -307,16 +343,21 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 
 #member-overlay .wrapper-inner .ranks div .name {
   color: rgba(255, 255, 255, 0.4);
+  line-height: 1.4;
 }
 
 #member-overlay .wrapper-inner .ranks div .value {
   font-size: 38px;
   line-height: 34px;
-  margin: 0 0 14px;
+  margin: 0 0 8px;
 }
 
 #member-overlay .wrapper-inner .characters {
   
+}
+
+#member-overlay .wrapper-inner .characters .button {
+  max-width: unset;
 }
 
 #member-overlay .wrapper-inner .characters [class^="destiny-"] {
@@ -430,8 +471,10 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 }
 
 .wrapper.dark-mode #member-overlay.error .background .border-top,
-#member-overlay.error .background .border-top {
-  background-color: #b54736;
+#member-overlay.error .background .border-top,
+html.backdropfilter #member-overlay.error .background .border-top,
+html.backdropfilter .wrapper.dark-mode #member-overlay.error .background .border-top {
+  background-color: rgb(220, 81, 59);
 }
 
 #member-overlay.error .wrapper-inner {
@@ -449,7 +492,7 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 #member-overlay.error .wrapper-inner > div:first-child {
   display: grid;
   justify-content: right;
-  background-image: linear-gradient(to right, rgba(181, 71, 54, 0), rgba(181, 71, 54, 0.2));
+  background-image: linear-gradient(to right, rgba(220, 81, 59, 0), rgba(220, 81, 59, 0.2));
 }
 
 #member-overlay.error .wrapper-inner div .icon {
@@ -468,7 +511,15 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   color: rgba(255, 255, 255, 0.6);
 }
 
-
+#member-overlay .sticky-nav-inner {
+  padding: 3rem;
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 
 
@@ -487,5 +538,36 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 
   #member-overlay .wrapper-inner .ranks {
     grid-template-columns: 1fr 1fr;
+  }
+
+  #member-overlay.error .wrapper-inner {
+    grid-template-columns: min-content auto;
+    padding: 1rem 0 0;
+  }
+  
+  #member-overlay.error .wrapper-inner > div {
+    padding: 1rem;
+  }
+
+  #member-overlay.error .wrapper-inner div .icon {
+    position: relative;
+    height: 60px;
+    width: 60px;
+  }
+
+  #member-overlay.error .wrapper-inner .text .name {
+    font-size: 18px;
+    margin: 0 0 10px;
+  }
+  
+  #member-overlay.error .wrapper-inner .text .description {
+    font-size: 14px;
+  } 
+
+  #member-overlay .sticky-nav-inner {
+    padding: unset;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }

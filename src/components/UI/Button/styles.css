@@ -2,6 +2,7 @@
 .button {
   position: relative;
   width: 100%;
+  max-width: 250px;
   height: 38px;
   margin: 0 0 3px;
   display: flex;

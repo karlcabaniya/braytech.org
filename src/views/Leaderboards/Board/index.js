@@ -6,6 +6,7 @@ import cx from 'classnames';
 
 import * as bungie from '../../../utils/bungie';
 import Spinner from '../../../components/UI/Spinner';
+import Button from '../../../components/UI/Button';
 import Board from '../../../components/Board';
 
 import './styles.css';
@@ -44,13 +45,15 @@ class Leaderboard extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.groupId) {
-      this.callVoluspa(this.props.groupId);
+    const { type, metric } = this.props;
+
+    if (type === 'group' && metric) {
+      this.callVoluspa(metric);
     }
   }
 
   render() {
-    const { t, member, type, metric, offset, groupId = false } = this.props;
+    const { t, member, type, metric, offset } = this.props;
 
     console.log(this.state)
 
@@ -76,6 +79,7 @@ class Leaderboard extends React.Component {
             <div className='text'>
               <p>Braytech leaderboards use a dense rank and are sorted by rank in ascending order, followed by display name in ascending order.</p>
             </div>
+            <Button text='Return to root' disabled={false} anchor to='/leaderboards/' />
           </div>
         </div>
         <div className='module'>

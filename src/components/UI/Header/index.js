@@ -143,13 +143,6 @@ class Header extends React.Component {
         primary: true
       },
       {
-        name: t('Legend'),
-        desc: t("A high-level and more graphical overview of your achievements"),
-        slug: '/legend',
-        exact: true,
-        profile: true
-      },
-      {
         name: t('More'),
         desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/',
@@ -167,10 +160,17 @@ class Header extends React.Component {
       },
       {
         name: t('Leaderboards'),
-        desc: t('???'),
+        desc: t('How committed are you to protecting your legacy'),
         slug: '/leaderboards',
         exact: false,
         profile: false
+      },
+      {
+        name: t('Legend'),
+        desc: t("A high-level and more graphical overview of your achievements"),
+        slug: '/legend',
+        exact: true,
+        profile: true
       },
       {
         name: t('Resources'),

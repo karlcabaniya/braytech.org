@@ -16,8 +16,10 @@ class Leaderboards extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.dom !== this.props.match.params.dom) {
+      window.scrollTo(0, 0);
+    }
   }
 
   render() {

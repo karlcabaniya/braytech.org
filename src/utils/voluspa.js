@@ -1,6 +1,6 @@
 export function store(payload) {
   try {
-    fetch('https://voluspa.braytech.org/member/store', {
+    fetch('https://voluspa.braytech.org/enqueue/store', {
       method: 'POST',
       cache: 'no-cache',
       headers: {
@@ -76,18 +76,4 @@ export async function leaderboardPosition(membershipType = false, membershipId =
 
     return request.Response;
   } catch (e) {}
-}
-
-export async function groupRank(groupId = false) {
-  if (!groupId) {
-    return {};
-  }
-
-  const request = await fetch(`https://voluspa.braytech.org/member/rank/?groupId=${groupId}`).then(r => r.json());
-
-  if (request.ErrorCode === 1) {
-    return request.Response;
-  } else {
-    return {};
-  }
 }
