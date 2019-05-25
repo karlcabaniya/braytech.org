@@ -50,19 +50,17 @@ class PGCR extends React.Component {
 
   updatePlayerCache = instanceId => {
     let pgcr = this.props.data.find(p => instanceId === p.activityDetails.instanceId);
-    
+
     if (pgcr) {
       pgcr.entries.forEach(async e => {
         let points = await this.getGloryPoints(e.player.destinyUserInfo.membershipType, e.player.destinyUserInfo.membershipId);
-        
-        
+
         this.setState((state, props) => ({
           playerCache: state.playerCache.concat({ id: e.player.destinyUserInfo.membershipType + e.player.destinyUserInfo.membershipId, gloryPoints: points })
-        }))
+        }));
       });
     }
-    
-  }
+  };
 
   getGloryPoints = async (membershipType, membershipId) => {
     let response = await bungie.memberProfile(membershipType, membershipId, '202');
@@ -72,8 +70,9 @@ class PGCR extends React.Component {
     }
 
     let value = Object.values(response.characterProgressions.data)[0].progressions[2679551909].currentProgress;
-    return value;
-  }
+
+    return value.toString();
+  };
 
   togglePlayerHandler = (instanceId, characterId) => {
     this.setState((prevState, props) => {
@@ -191,228 +190,265 @@ class PGCR extends React.Component {
         </div>
       );
 
-      let displayStatsDefault = [
-        {
-          key: 'opponentsDefeated',
-          name: 'Kills + assists',
-          abbr: 'KA',
-          type: 'value'
-        },
-        {
-          key: 'kills',
-          name: 'Kills',
-          abbr: 'K',
-          type: 'value'
-        },
-        {
-          key: 'deaths',
-          name: 'Deaths',
-          abbr: 'D',
-          type: 'value'
-        },
-        {
-          key: 'killsDeathsRatio',
-          name: 'K/D',
-          abbr: 'KD',
-          type: 'value',
-          round: true
-        },
-        {
-          key: 'gloryPoints',
-          name: 'Glory points',
-          abbr: 'G',
-          type: 'value',
-          async: true,
-          hideInline: true
-        },
-        {
-          key: 'gloryPoints',
-          name: 'Glory points',
-          type: 'value',
-          async: true,
-          expanded: true
-        },
-        {
-          key: 'assists',
-          name: 'Assists',
-          type: 'value',
-          expanded: true
-        },
-        {
-          key: 'weaponKillsSuper',
-          name: 'Super kills',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'weaponKillsGrenade',
-          name: 'Grenade kills',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'weaponKillsMelee',
-          name: 'Melee kills',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'weaponKillsAbility',
-          name: 'Ability kills',
-          type: 'value',
-          extended: true,
-          expanded: true
-        }
-      ];
-
-      let displayStatsGambit = [
-        {
-          key: 'mobKills',
-          name: 'Mob Kills',
-          abbr: 'MK',
-          type: 'value',
-          extended: true
-        },
-        {
-          key: 'motesDeposited',
-          name: 'Motes Deposited',
-          abbr: 'MD',
-          type: 'value',
-          extended: true
-        },
-        {
-          key: 'motesLost',
-          name: 'Motes Lost',
-          abbr: 'ML',
-          type: 'value',
-          extended: true
-        },
-        {
-          key: 'invasionKills',
-          name: 'Invasion Kills',
-          abbr: 'IK',
-          type: 'value',
-          extended: true
-        },
-        {
-          key: 'blockerKills',
-          name: 'Blocker Kills',
-          type: 'value',
-          extended: true,
-          hideInline: true
-        },
-        {
-          key: 'mobKills',
-          name: 'Mob Kills',
-          abbr: 'MK',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'motesDeposited',
-          name: 'Motes Deposited',
-          abbr: 'MD',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'motesLost',
-          name: 'Motes Lost',
-          abbr: 'ML',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'blockerKills',
-          name: 'Blocker Kills',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'smallBlockersSent',
-          name: 'Small Blockers Sent',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'mediumBlockersSent',
-          name: 'Medium Blockers Sent',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'largeBlockersSent',
-          name: 'Large Blockers Sent',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'invasionKills',
-          name: 'Invasion Kills',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'invasionDeaths',
-          name: 'Invasion Deaths',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'motesDenied',
-          name: 'Motes Denied',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'primevalHealing',
-          name: 'Primeval Healing',
-          type: 'displayValue',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'invaderKills',
-          name: 'Invader Kills',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'invaderDeaths',
-          name: 'Invader Deaths',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'primevalDamage',
-          name: 'Primeval Damage',
-          type: 'value',
-          extended: true,
-          expanded: true
-        },
-        {
-          key: 'weaponKillsSuper',
-          name: 'Super Kills',
-          type: 'value',
-          extended: true,
-          expanded: true
-        }
-      ];
+      let displayStatsDefault = {
+        header: [
+          {
+            key: 'opponentsDefeated',
+            name: 'Kills + assists',
+            abbr: 'KA',
+            type: 'value'
+          },
+          {
+            key: 'kills',
+            name: 'Kills',
+            abbr: 'K',
+            type: 'value'
+          },
+          {
+            key: 'deaths',
+            name: 'Deaths',
+            abbr: 'D',
+            type: 'value'
+          },
+          {
+            key: 'killsDeathsRatio',
+            name: 'K/D',
+            abbr: 'KD',
+            type: 'value',
+            round: true
+          },
+          {
+            key: 'gloryPoints',
+            name: 'Glory points',
+            abbr: 'G',
+            type: 'value',
+            async: true,
+            hideInline: true
+          }
+        ],
+        expanded: [
+          {
+            name: 'Common',
+            fields: [
+              {
+                key: 'gloryPoints',
+                name: 'Glory points',
+                type: 'value',
+                async: true
+              },              
+              {
+                key: 'weapons',
+                name: 'Weapons used'
+              }
+            ]
+          },
+          {
+            name: 'Basic',
+            fields: [
+              {
+                key: 'kills',
+                name: 'Kills',
+                type: 'value'
+              },
+              {
+                key: 'assists',
+                name: 'Assists',
+                type: 'value'
+              },
+              {
+                key: 'deaths',
+                name: 'Deaths',
+                abbr: 'D',
+                type: 'value'
+              },
+              {
+                key: 'killsDeathsRatio',
+                name: 'K/D',
+                type: 'value',
+                round: true
+              }
+            ]
+          },
+          {
+            name: 'Extra',
+            fields: [
+              {
+                key: 'precisionKills',
+                name: 'Precision kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'weaponKillsSuper',
+                name: 'Super kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'weaponKillsGrenade',
+                name: 'Grenade kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'weaponKillsMelee',
+                name: 'Melee kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'weaponKillsAbility',
+                name: 'Ability kills',
+                type: 'value',
+                extended: true
+              }
+            ]
+          }
+        ]
+      };
+      let displayStatsGambit = {
+        header: [
+          {
+            key: 'mobKills',
+            name: 'Mob Kills',
+            abbr: 'MK',
+            type: 'value',
+            extended: true
+          },
+          {
+            key: 'motesDeposited',
+            name: 'Motes Deposited',
+            abbr: 'MD',
+            type: 'value',
+            extended: true
+          },
+          {
+            key: 'motesLost',
+            name: 'Motes Lost',
+            abbr: 'ML',
+            type: 'value',
+            extended: true
+          },
+          {
+            key: 'invasionKills',
+            name: 'Invasion Kills',
+            abbr: 'IK',
+            type: 'value',
+            extended: true
+          },
+          {
+            key: 'blockerKills',
+            name: 'Blocker Kills',
+            type: 'value',
+            extended: true,
+            hideInline: true
+          }
+        ],
+        expanded: [
+          {
+            name: 'Common',
+            fields: [
+              {
+                key: 'weapons',
+                name: 'Weapons used'
+              }
+            ]
+          },
+          {
+            name: 'Mobs',
+            fields: [
+              {
+                key: 'mobKills',
+                name: 'Mob Kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'highValueKills',
+                name: 'High Value Killed',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'blockerKills',
+                name: 'Blocker Kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'smallBlockersSent',
+                name: 'Small Blockers Sent',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'mediumBlockersSent',
+                name: 'Medium Blockers Sent',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'largeBlockersSent',
+                name: 'Large Blockers Sent',
+                type: 'value',
+                extended: true
+              }
+            ]
+          },
+          {
+            name: 'Motes',
+            fields: [
+              {
+                key: 'motesDeposited',
+                name: 'Motes Deposited',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'motesLost',
+                name: 'Motes Lost',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'motesDenied',
+                name: 'Motes Denied',
+                type: 'value',
+                extended: true
+              }
+            ]
+          },
+          {
+            name: 'Invasion',
+            fields: [
+              {
+                key: 'invaderKills',
+                name: 'Invader Kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'invaderDeaths',
+                name: 'Invader Deaths',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'invasionKills',
+                name: 'Invasion Kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'invasionDeaths',
+                name: 'Invasion Deaths',
+                type: 'value',
+                extended: true
+              }
+            ]
+          }
+        ]
+      };
 
       let displayStats = modes.gambit.includes(pgcr.activityDetails.mode) ? displayStatsGambit : displayStatsDefault;
 
@@ -430,22 +466,20 @@ class PGCR extends React.Component {
                 <div className='member'>
                   <MemberLink type={entry.player.destinyUserInfo.membershipType} id={entry.player.destinyUserInfo.membershipId} displayName={entry.player.destinyUserInfo.displayName} characterId={entry.characterId} />
                 </div>
-                {displayStats.map((s, i) => {
+                {displayStats.header.map((s, i) => {
                   let value;
-                  if (s.expanded) {
-                    return null;
-                  } else {
-                    if (s.extended) {
-                      value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type];
-                    } else if (s.async) {
-                      if (s.key === 'gloryPoints') {
-                        let playerCache = this.state.playerCache.find(c => c.id === (entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId));
-                        value = playerCache && playerCache.gloryPoints ? playerCache.gloryPoints : '–';
-                      }
-                    } else {
-                      value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
+
+                  if (s.extended) {
+                    value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type];
+                  } else if (s.async) {
+                    if (s.key === 'gloryPoints') {
+                      let playerCache = this.state.playerCache.find(c => c.id === entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId);
+                      value = playerCache && playerCache.gloryPoints ? playerCache.gloryPoints : '–';
                     }
+                  } else {
+                    value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
                   }
+
                   return (
                     <div key={i} className={cx('stat', { hideInline: s.hideInline, extended: s.extended }, s.key)}>
                       {s.expanded ? <div className='name'>{s.name}</div> : null}
@@ -455,48 +489,56 @@ class PGCR extends React.Component {
                 })}
               </div>
               <div className='expanded'>
-                {displayStats.map((s, i) => {
-                  let value;
-                  if (s.expanded) {
-                    if (s.extended) {
-                      value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type].toLocaleString('en-us');
-                    } else if (s.async) {
-                      if (s.key === 'gloryPoints') {
-                        let playerCache = this.state.playerCache.find(c => c.id === (entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId));
-                        value = playerCache && playerCache.gloryPoints ? playerCache.gloryPoints : '–';
-                      }
-                    } else {
-                      value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type].toLocaleString('en-us');
-                    }
-                  } else {
-                    return null;
-                  }
+                {displayStats.expanded.map((g, i) => {
                   return (
-                    <div key={i} className={cx('stat', { hideInline: s.hideInline, expanded: s.expanded }, s.key)}>
-                      <div className='name'>{s.name}</div>
-                      <div className='value'>{value}</div>
+                    <div className='group'>
+                      {g.name ? (
+                        <div className='sub-header alt'>
+                          <div>{g.name}</div>
+                        </div>
+                      ) : null}
+                      {g.fields.map((s, i) => {
+                        let value;
+                        if (s.extended) {
+                          value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type].toLocaleString('en-us');
+                        } else if (s.async) {
+                          if (s.key === 'gloryPoints') {
+                            let playerCache = this.state.playerCache.find(c => c.id === entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId);
+                            value = playerCache && playerCache.gloryPoints ? playerCache.gloryPoints : '–';
+                          }
+                        } else if (s.key === 'weapons') {
+                          if (entry.extended.weapons && entry.extended.weapons.length) {
+                            value = (
+                              <ul>
+                                {entry.extended.weapons.map((w, i) => {
+                                  let definitionItem = manifest.DestinyInventoryItemDefinition[w.referenceId];
+                                  let kills = w.values ? w.values.uniqueWeaponKills.basic.value : '0';
+                                  return (
+                                    <li key={i} className={cx('item', 'tooltip')} data-itemhash={definitionItem.hash}>
+                                      <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
+                                      <div className='kills'>{kills}</div>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            );
+                          } else {
+                            return null;
+                          }
+                        } else {
+                          value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type].toLocaleString('en-us');
+                        }
+
+                        return (
+                          <div key={i} className={cx('stat', { hideInline: s.hideInline }, s.key)}>
+                            <div className='name'>{s.name}</div>
+                            <div className='value'>{value}</div>
+                          </div>
+                        );
+                      })}
                     </div>
                   );
                 })}
-                {entry.extended.weapons && entry.extended.weapons.length ? (
-                  <div className='stat expanded weapons'>
-                    <div className='name'>Weapons used</div>
-                    <div className='value'>
-                      <ul>
-                        {entry.extended.weapons.map((w, i) => {
-                          let definitionItem = manifest.DestinyInventoryItemDefinition[w.referenceId];
-                          let kills = w.values ? w.values.uniqueWeaponKills.basic.value : '0';
-                          return (
-                            <li key={i} className={cx('item', 'tooltip')} data-itemhash={definitionItem.hash}>
-                              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
-                              <div className='kills'>{kills}</div>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                ) : null}
               </div>
             </li>
           )
@@ -546,10 +588,7 @@ class PGCR extends React.Component {
                   <ul key={t.teamId} className='team'>
                     <li className={cx('team-head', (t.teamId === 17 ? 'Alpha' : 'Bravo').toLowerCase())}>
                       <div className='team name'>{t.teamId === 17 ? 'Alpha' : 'Bravo'} team</div>
-                      {displayStats.map((s, i) => {
-                        if (s.expanded) {
-                          return null;
-                        }
+                      {displayStats.header.map((s, i) => {
                         return (
                           <div key={i} className={cx(s.key, { hideInline: s.hideInline })}>
                             <div className='full'>{s.name}</div>
@@ -559,14 +598,12 @@ class PGCR extends React.Component {
                       })}
                       <div className='team score hideInline'>{t.score.basic.displayValue}</div>
                     </li>
-                    {fireteams.map((f, i) => {              
+                    {fireteams.map((f, i) => {
                       return (
                         <li key={i}>
-                          <ul className={cx('list', 'fireteam', { stacked: f.length > 1 })}>
-                            {f.map(e => e.element)}
-                          </ul>
+                          <ul className={cx('list', 'fireteam', { stacked: f.length > 1 })}>{f.map(e => e.element)}</ul>
                         </li>
-                      )
+                      );
                     })}
                   </ul>
                 );
@@ -574,11 +611,8 @@ class PGCR extends React.Component {
             ) : (
               <ul key={t.teamId} className='team'>
                 <li className={cx('team-head')}>
-                  <div className='team name'></div>
-                  {displayStats.map((s, i) => {
-                    if (s.expanded) {
-                      return null;
-                    }
+                  <div className='team name' />
+                  {displayStats.header.map((s, i) => {
                     return (
                       <div key={i} className={cx(s.key, { hideInline: s.hideInline })}>
                         <div className='full'>{s.name}</div>
@@ -586,16 +620,14 @@ class PGCR extends React.Component {
                       </div>
                     );
                   })}
-                  <div className='team score hideInline'></div>
+                  <div className='team score hideInline' />
                 </li>
-                {Object.values(groupBy(entries, 'fireteamId')).map((f, i) => {              
+                {Object.values(groupBy(entries, 'fireteamId')).map((f, i) => {
                   return (
                     <li key={i}>
-                      <ul className={cx('list', 'fireteam', { stacked: f.length > 1 })}>
-                        {f.map(e => e.element)}
-                      </ul>
+                      <ul className={cx('list', 'fireteam', { stacked: f.length > 1 })}>{f.map(e => e.element)}</ul>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             )}
@@ -604,10 +636,10 @@ class PGCR extends React.Component {
             <div />
             <ul>
               <li>
-                  <Button action={() => this.contractHandler(pgcr.activityDetails.instanceId)}>
-                    <i className='destiny-B_Button' />
-                    {t('Close')}
-                  </Button>                    
+                <Button action={() => this.contractHandler(pgcr.activityDetails.instanceId)}>
+                  <i className='destiny-B_Button' />
+                  {t('Close')}
+                </Button>
               </li>
             </ul>
           </div>
