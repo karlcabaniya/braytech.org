@@ -194,28 +194,33 @@ class PGCR extends React.Component {
       let displayStatsDefault = [
         {
           key: 'opponentsDefeated',
-          name: 'Opp. Def.',
+          name: 'Kills + assists',
+          abbr: 'KA',
           type: 'value'
         },
         {
           key: 'kills',
           name: 'Kills',
+          abbr: 'K',
           type: 'value'
         },
         {
           key: 'deaths',
           name: 'Deaths',
+          abbr: 'D',
           type: 'value'
         },
         {
           key: 'killsDeathsRatio',
           name: 'K/D',
+          abbr: 'KD',
           type: 'value',
           round: true
         },
         {
           key: 'gloryPoints',
           name: 'Glory points',
+          abbr: 'G',
           type: 'value',
           async: true,
           hideInline: true
@@ -267,24 +272,28 @@ class PGCR extends React.Component {
         {
           key: 'mobKills',
           name: 'Mob Kills',
+          abbr: 'MK',
           type: 'value',
           extended: true
         },
         {
           key: 'motesDeposited',
           name: 'Motes Deposited',
+          abbr: 'MD',
           type: 'value',
           extended: true
         },
         {
           key: 'motesLost',
           name: 'Motes Lost',
+          abbr: 'ML',
           type: 'value',
           extended: true
         },
         {
           key: 'invasionKills',
           name: 'Invasion Kills',
+          abbr: 'IK',
           type: 'value',
           extended: true
         },
@@ -296,11 +305,35 @@ class PGCR extends React.Component {
           hideInline: true
         },
         {
-          key: 'invaderKills',
-          name: 'Invader Kills',
+          key: 'mobKills',
+          name: 'Mob Kills',
+          abbr: 'MK',
           type: 'value',
           extended: true,
-          hideInline: true
+          expanded: true
+        },
+        {
+          key: 'motesDeposited',
+          name: 'Motes Deposited',
+          abbr: 'MD',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'motesLost',
+          name: 'Motes Lost',
+          abbr: 'ML',
+          type: 'value',
+          extended: true,
+          expanded: true
+        },
+        {
+          key: 'blockerKills',
+          name: 'Blocker Kills',
+          type: 'value',
+          extended: true,
+          expanded: true
         },
         {
           key: 'smallBlockersSent',
@@ -518,8 +551,9 @@ class PGCR extends React.Component {
                           return null;
                         }
                         return (
-                          <div key={i} className={cx(s.name, { hideInline: s.hideInline })}>
-                            {s.name}
+                          <div key={i} className={cx(s.key, { hideInline: s.hideInline })}>
+                            <div className='full'>{s.name}</div>
+                            <div className='abbr'>{s.abbr}</div>
                           </div>
                         );
                       })}
@@ -540,20 +574,29 @@ class PGCR extends React.Component {
             ) : (
               <ul key={t.teamId} className='team'>
                 <li className={cx('team-head')}>
-                  <div className='team name' />
+                  <div className='team name'></div>
                   {displayStats.map((s, i) => {
                     if (s.expanded) {
                       return null;
                     }
                     return (
-                      <div key={i} className={cx(s.name, { hideInline: s.hideInline })}>
-                        {s.name}
+                      <div key={i} className={cx(s.key, { hideInline: s.hideInline })}>
+                        <div className='full'>{s.name}</div>
+                        <div className='abbr'>{s.abbr}</div>
                       </div>
                     );
                   })}
                   <div className='team score hideInline'></div>
                 </li>
-                {entries.map(e => e.element)}
+                {Object.values(groupBy(entries, 'fireteamId')).map((f, i) => {              
+                  return (
+                    <li key={i}>
+                      <ul className={cx('list', 'fireteam', { stacked: f.length > 1 })}>
+                        {f.map(e => e.element)}
+                      </ul>
+                    </li>
+                  )
+                })}
               </ul>
             )}
           </div>

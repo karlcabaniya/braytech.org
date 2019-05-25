@@ -60,7 +60,7 @@
 
 .member-link > .user-flair.me i {
   font-size: 72px;
-  padding: 6px 30px 0 0;
+  padding-top: 6px;
 }
 
 .member-link > .user-flair.one-hundo {
@@ -134,6 +134,14 @@
 
   .member-link .displayName {
     font-size: 14px;
+  }
+
+  .member-link > .user-flair {
+    opacity: 0.2;
+  }
+
+  .member-link > .user-flair i {
+    padding-right: 4px;
   }
 
 }
