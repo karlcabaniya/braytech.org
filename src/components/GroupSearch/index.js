@@ -5,6 +5,7 @@ import { withNamespaces } from 'react-i18next';
 
 import * as bungie from '../../utils/bungie';
 import * as voluspa from '../../utils/voluspa';
+import * as responseUtils from '../../utils/responseUtils';
 import Spinner from '../../components/UI/Spinner';
 import Button from '../../components/UI/Button';
 import ClanBanner from '../../components/UI/ClanBanner';
@@ -51,8 +52,9 @@ class GroupSearch extends React.Component {
 
     this.setState({ searching: true });
     try {
-      const result = await bungie.GetGroupByName(groupName);
+      let result = await bungie.GetGroupByName(groupName);
       if (this.mounted) {
+        result = responseUtils.groupScrubber(result);
         this.setState({ result: result, searching: false });
         voluspa.store({ groupId: result.detail.groupId });
       }

@@ -51,11 +51,16 @@ export const profileScrubber = (profile, sortBy = false) => {
   return profile;
 };
 
-export const groupScrubber = groups => {
-  if (groups.results.length > 0) {
-    groups.results[0].group.clanInfo.clanCallsign = entities.decodeHTML(groups.results[0].group.clanInfo.clanCallsign);
-    groups.results[0].group.name = entities.decodeHTML(groups.results[0].group.name);
+export const groupScrubber = data => {
+  if (data.results && data.results.length) {
+    data.results[0].group.clanInfo.clanCallsign = entities.decodeHTML(data.results[0].group.clanInfo.clanCallsign);
+    data.results[0].group.motto = entities.decodeHTML(data.results[0].group.motto);
+    data.results[0].group.name = entities.decodeHTML(data.results[0].group.name);
+  } else if (data.detail) {
+    data.detail.clanInfo.clanCallsign = entities.decodeHTML(data.detail.clanInfo.clanCallsign);
+    data.detail.motto = entities.decodeHTML(data.detail.motto);
+    data.detail.name = entities.decodeHTML(data.detail.name);
   }
 
-  return groups;
+  return data;
 };

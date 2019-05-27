@@ -155,13 +155,13 @@ class PGCR extends React.Component {
         bravoVictory = pgcr.teams.find(t => t.teamId === 18 && t.standing.basic.value === 0);
 
         if (modes.crucible.includes(pgcr.activityDetails.mode)) {
-          standingImage = standing ? `/static/images/extracts/ui/01E3-000004AC.PNG` : `/static/images/extracts/ui/01E3-000004B2.PNG`;
+          standingImage = !standing ? `/static/images/extracts/ui/01E3-000004AC.PNG` : `/static/images/extracts/ui/01E3-000004B2.PNG`;
         }
         if (modes.ironBanner.includes(pgcr.activityDetails.mode)) {
-          standingImage = standing ? `/static/images/extracts/ui/0560-000006CB.PNG` : `/static/images/extracts/ui/0560-000006C8.PNG`;
+          standingImage = !standing ? `/static/images/extracts/ui/0560-000006CB.PNG` : `/static/images/extracts/ui/0560-000006C8.PNG`;
         }
         if (modes.gambit.includes(pgcr.activityDetails.mode)) {
-          standingImage = standing ? `/static/images/extracts/ui/02AF-00001F1E.PNG` : `/static/images/extracts/ui/02AF-00001F1A.PNG`;
+          standingImage = !standing ? `/static/images/extracts/ui/02AF-00001F1E.PNG` : `/static/images/extracts/ui/02AF-00001F1A.PNG`;
         }
       }
 

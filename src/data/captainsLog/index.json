@@ -288,5 +288,10 @@
     "date": "2019-05-27T04:55:45.232Z",
     "version": "2.5.2",
     "content": "- PGCRs edition"
+  },
+  {
+    "date": "2019-05-27T04:55:45.232Z",
+    "version": "2.5.3",
+    "content": "- PGCR bugs squashed\n- MemberLink Characters list now links to characters properly\n- Added active seal titles to MemberLink Characters\n- Told Leaderboards root view to check for and load if available the current user's clan"
   }
 ]

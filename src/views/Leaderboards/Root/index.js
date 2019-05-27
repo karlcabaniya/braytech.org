@@ -87,7 +87,7 @@ class Root extends React.Component {
               <div>{t('Clans')}</div>
             </div>
             <div className='content'>
-              <GroupSearch initial='Braytech.org' />
+              <GroupSearch initial={member && member.data ? member.data.groups && member.data.groups.results.length ? member.data.groups.results[0].group.name : 'Braytech.org' : 'Braytech.org'} />
             </div>
           </div>
         </div>

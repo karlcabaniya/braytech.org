@@ -16,6 +16,7 @@ import * as responseUtils from '../../utils/responseUtils';
 import * as destinyUtils from '../../utils/destinyUtils';
 import * as destinyEnums from '../../utils/destinyEnums';
 import userFlair from '../../data/userFlair';
+// import store from '../../utils/reduxStore';
 
 import './styles.css';
 
@@ -47,22 +48,17 @@ class MemberLink extends React.Component {
 
     if (this.mounted) {
       try {
-
         this.setState((prevState, props) => {
           prevState.overlay = true;
           return prevState;
         });
-  
-        let requests = [
-          bungie.memberProfile(type, id, '100,200,202,204,800,900'),
-          voluspa.leaderboardPosition(type, id),
-          bungie.memberGroups(type, id)
-        ];
-  
+
+        let requests = [bungie.memberProfile(type, id, '100,200,202,204,800,900'), voluspa.leaderboardPosition(type, id), bungie.memberGroups(type, id)];
+
         let [profile, leaderboardPosition, group] = await Promise.all(requests);
-  
+
         profile = responseUtils.profileScrubber(profile, 'activity');
-  
+
         if (!profile.profileRecords.data) {
           this.setState((prevState, props) => {
             prevState.loadingAllError = true;
@@ -74,20 +70,18 @@ class MemberLink extends React.Component {
             ranks: leaderboardPosition ? leaderboardPosition : false,
             group: group && group.results.length ? group.results[0].group : false
           };
-  
-          //console.log(this.dataAll);
-  
+
+          console.log(this.dataAll);
+
           this.setState((prevState, props) => {
             prevState.loadingAllError = false;
             prevState.loadingAll = false;
             return prevState;
           });
         }
-
       } catch (e) {
         console.log(e);
       }
-
     }
   };
 
@@ -112,9 +106,7 @@ class MemberLink extends React.Component {
           prevState.loadingBasic = false;
           return prevState;
         });
-      } catch (e) {
-
-      }
+      } catch (e) {}
     }
   }
 
@@ -124,7 +116,7 @@ class MemberLink extends React.Component {
     let characterBasic;
     if (this.dataBasic) {
       if (characterId) {
-        characterBasic = this.dataBasic.characters.data.find(c => c.characterId === characterId)
+        characterBasic = this.dataBasic.characters.data.find(c => c.characterId === characterId);
         if (!characterBasic) characterBasic = this.dataBasic.characters.data[0];
       } else {
         characterBasic = this.dataBasic.characters.data[0];
@@ -140,18 +132,20 @@ class MemberLink extends React.Component {
       );
     }
 
-    let flair = userFlair.find(f => f.user === (type + id));
+    let flair = userFlair.find(f => f.user === type + id);
     let primaryFlair = false;
     if (flair) {
       primaryFlair = flair.trophies.find(t => t.primary);
     }
-    
+
     return (
       <>
         <div className='member-link' onClick={this.activateOverlay}>
-          {primaryFlair ? <div className={cx('user-flair', primaryFlair.classnames)}>
-            <i className={primaryFlair.icon} />
-          </div> : null}
+          {primaryFlair ? (
+            <div className={cx('user-flair', primaryFlair.classnames)}>
+              <i className={primaryFlair.icon} />
+            </div>
+          ) : null}
           <div className='emblem'>{!this.state.loadingBasic && this.dataBasic ? <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} /> : null}</div>
           <div className='displayName'>{displayName}</div>
         </div>
@@ -170,10 +164,18 @@ class MemberLink extends React.Component {
                         <div className='displayName'>{displayName}</div>
                         <div className='groupName'>{this.dataAll.group ? this.dataAll.group.name : null}</div>
                         <div className='stamps'>
-                          <div><i className={`destiny-platform_${destinyEnums.PLATFORMS[type].toLowerCase()}`} /></div>
-                          {flair ? flair.trophies.map((s, i) => {
-                            return <div key={i}><i className={cx(s.icon, s.classnames)} /></div>
-                          }) : null}
+                          <div>
+                            <i className={`destiny-platform_${destinyEnums.PLATFORMS[type].toLowerCase()}`} />
+                          </div>
+                          {flair
+                            ? flair.trophies.map((s, i) => {
+                                return (
+                                  <div key={i}>
+                                    <i className={cx(s.icon, s.classnames)} />
+                                  </div>
+                                );
+                              })
+                            : null}
                         </div>
                       </div>
                       <div className='sub-header'>
@@ -181,7 +183,9 @@ class MemberLink extends React.Component {
                       </div>
                       <div className='basics'>
                         <div>
-                          <div className='value'>{timePlayed} {timePlayed === 1 ? t('day played') : t('days played')}</div>
+                          <div className='value'>
+                            {timePlayed} {timePlayed === 1 ? t('day played') : t('days played')}
+                          </div>
                           <div className='name'>Time played accross characters</div>
                         </div>
                         <div>
@@ -198,20 +202,26 @@ class MemberLink extends React.Component {
                       <div className='sub-header'>
                         <div>Leaderboards</div>
                       </div>
-                      {this.dataAll.ranks && this.dataAll.ranks.data ? <div className='ranks'>
-                        <div>
-                          <div className='value'>{this.dataAll.ranks.data.ranks.triumphScore.toLocaleString('en-us')}</div>
-                          <div className='name'>Triumph score rank</div>
+                      {this.dataAll.ranks && this.dataAll.ranks.data ? (
+                        <div className='ranks'>
+                          <div>
+                            <div className='value'>{this.dataAll.ranks.data.ranks.triumphScore.toLocaleString('en-us')}</div>
+                            <div className='name'>Triumph score rank</div>
+                          </div>
+                          <div>
+                            <div className='value'>{this.dataAll.ranks.data.ranks.collectionTotal.toLocaleString('en-us')}</div>
+                            <div className='name'>Collections rank</div>
+                          </div>
+                          <div>
+                            <div className='value'>{this.dataAll.ranks.data.ranks.timePlayed.toLocaleString('en-us')}</div>
+                            <div className='name'>Time played rank</div>
+                          </div>
                         </div>
-                        <div>
-                          <div className='value'>{this.dataAll.ranks.data.ranks.collectionTotal.toLocaleString('en-us')}</div>
-                          <div className='name'>Collections rank</div>
+                      ) : (
+                        <div className='ranks error'>
+                          <div>{this.dataAll.ranks && this.dataAll.ranks.status ? this.dataAll.ranks.status : `VOLUSPA is currently unavailable`}</div>
                         </div>
-                        <div>
-                          <div className='value'>{this.dataAll.ranks.data.ranks.timePlayed.toLocaleString('en-us')}</div>
-                          <div className='name'>Time played rank</div>
-                        </div>
-                      </div> : <div className='ranks error'>{this.dataAll.ranks && this.dataAll.ranks.status ? this.dataAll.ranks.status : `VOLUSPA is currently unavailable`}</div>}
+                      )}
                       <div className='sub-header'>
                         <div>Characters</div>
                       </div>
@@ -239,7 +249,14 @@ class MemberLink extends React.Component {
 
                             return (
                               <div key={c.characterId} className='char'>
-                                <Button className='linked' anchor to={`/${type}/${id}/${c.characterId}`} action={() => {  }}>
+                                <Button
+                                  className='linked'
+                                  anchor
+                                  to={`/${type}/${id}/${c.characterId}`}
+                                  action={() => {
+                                    /* store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: type, membershipId: id } }); */
+                                  }}
+                                >
                                   <div className='icon'>
                                     <i
                                       className={`destiny-class_${destinyUtils
@@ -260,6 +277,7 @@ class MemberLink extends React.Component {
                                     </div>
                                   </div>
                                 </Button>
+                                {c.titleRecordHash ? <div className='title'>{manifest.DestinyRecordDefinition[c.titleRecordHash].titleInfo.titlesByGenderHash[c.genderHash]}</div> : null}
                                 <div className='state'>{state}</div>
                               </div>
                             );
@@ -362,19 +380,23 @@ class MemberLink extends React.Component {
                       </ul>
                     </div>
                   </>
-                ) : this.state.loadingAllError ? <>
-                  <div>
-                    <div className='icon'>
-                      <ObservedImage className='image' src='/static/images/extracts/ui/010A-00000552.PNG' />
+                ) : this.state.loadingAllError ? (
+                  <>
+                    <div>
+                      <div className='icon'>
+                        <ObservedImage className='image' src='/static/images/extracts/ui/010A-00000552.PNG' />
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className='text'>
-                      <div className='name'>Private profile</div>
-                      <div className='description'>This user has their profile privacy set to private</div>
+                    <div>
+                      <div className='text'>
+                        <div className='name'>Private profile</div>
+                        <div className='description'>This user has their profile privacy set to private</div>
+                      </div>
                     </div>
-                  </div>
-                </> : <Spinner />}
+                  </>
+                ) : (
+                  <Spinner />
+                )}
               </div>
               <div className='sticky-nav mini ultra-black'>
                 <div className='sticky-nav-inner'>
