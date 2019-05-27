@@ -39,6 +39,10 @@ class Mode extends React.Component {
         pathname: '/static/images/extracts/ui/modes/01E3-00000059.PNG'
       },
       {
+        modes: [4],
+        pathname: '/static/images/extracts/ui/modes/01E3-00000001.PNG'
+      },
+      {
         modes: [69],
         pathname: '/static/images/extracts/ui/modes/01E3-00000181.PNG'
       },
@@ -47,7 +51,7 @@ class Mode extends React.Component {
         pathname: '/static/images/extracts/ui/modes/01E3-00000190.PNG'
       },
       {
-        modes: [72, 71],
+        modes: [72, 71, 59],
         pathname: '/static/images/extracts/ui/modes/0560-000005D0.PNG'
       },
       {
@@ -115,7 +119,7 @@ class Mode extends React.Component {
                 <div className='name'>K/D</div>
               </div>
             </>
-          ) : null}
+          ) : <div className='no-stats'><div>No stats available</div></div>}
         </div>
         <ProfileNavLink isActive={isActive} to={{ pathname: stats.mode === parseInt(defaultMode, 10) ? root : `${root}/${stats.mode}`, state: {  } }} onClick={() => {
           let element = document.getElementById('matches');

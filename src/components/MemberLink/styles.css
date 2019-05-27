@@ -239,6 +239,10 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   padding: 0;
 }
 
+#member-overlay .wrapper-inner .sub-header::after {
+  content: none;
+}
+
 #member-overlay .wrapper-inner .sub-header ~ .sub-header {
   margin: 2rem 0 1rem;
 }
@@ -360,8 +364,8 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   margin: 0 0 8px;
 }
 
-#member-overlay .wrapper-inner .characters {
-  
+#member-overlay .wrapper-inner .characters .char {
+  position: relative;
 }
 
 #member-overlay .wrapper-inner .characters .button {

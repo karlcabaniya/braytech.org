@@ -137,7 +137,7 @@ p:last-child {
   box-shadow: 0 0 0 2px #d6d6d6;
 }
 
-.list li a {
+.list li > a {
   position: absolute;
   top: 0;
   left: 0;
@@ -350,12 +350,12 @@ button.square.active {
   justify-content: space-between;
 }
 
-.sub-header.alt {
+.sub-header {
   border-bottom: 2px solid rgba(255, 255, 255, 0);
   color: rgba(255, 255, 255, 0.6);
 }
 
-.sub-header.alt::after {
+.sub-header::after {
   content: ' ';
   position: absolute;
   bottom: 0;
@@ -563,7 +563,7 @@ html.backdropfilter .sticky-nav{
 }
 
 .sticky-nav.inline {
-  padding: 0;
+  padding: 0 1rem;
 }
 
 @media screen and (max-width: 600px) {

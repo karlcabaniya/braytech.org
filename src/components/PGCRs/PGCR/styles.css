@@ -14,7 +14,7 @@
   font-size: 14px;
 }
 
-.list.reports li .basic::before {
+.list.reports li.standing .basic::before {
   content: ' ';
   position: absolute;
   top: 0;
@@ -24,7 +24,7 @@
   background-color: rgba(255, 0, 0, 0.6);
 }
 
-.list.reports li.victory .basic::before {
+.list.reports li.standing.victory .basic::before {
   background-color: rgba(255, 255, 255, 0);
 }
 

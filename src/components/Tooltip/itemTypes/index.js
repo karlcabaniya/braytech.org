@@ -20,7 +20,7 @@ import sandboxPerk from './sandboxPerk';
 class ItemTypes extends React.Component {
 
   render() {
-    const { member, dossierMembers, hash, itemInstanceId, tooltipType } = this.props;
+    const { member, dossierMembers, hash, itemInstanceId, tooltipType, rollNote = false } = this.props;
 
     let itemComponents;
     if (member.data && member.data.profile.itemComponents.instances.data[itemInstanceId]) {
@@ -173,6 +173,7 @@ class ItemTypes extends React.Component {
                 {kind !== 'ui' && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
               </div>
             </div>
+            {!item.itemComponents && rollNote ? <div className='note'>Non-instanced item (displaying collections roll)</div> : null}
             <div className='black'>
               {this.props.viewport.width <= 600 && item.screenshot ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${item.screenshot}`} /> : null}
               {black}

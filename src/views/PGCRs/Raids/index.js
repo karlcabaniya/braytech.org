@@ -13,7 +13,7 @@ import Spinner from '../../../components/UI/Spinner';
 import Mode from '../../../components/PGCRs/Mode';
 import Matches from '../../../components/PGCRs/Matches';
 
-class Gambit extends React.Component {
+class Raids extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,21 +22,12 @@ class Gambit extends React.Component {
     };
   }
 
-  gambit = {
+  raids = {
     all: {
-      modes: [63, 75, 76],
+      modes: [4],
       stats: {
-        // allPvECompetitive: {
-        //   mode: 64
-        // },
-        pvecomp_gambit: {
-          mode: 63
-        },
-        pvecomp_mamba: {
-          mode: 75
-        },
-        enigma: {
-          mode: 76
+        raid: {
+          mode: 4
         }
       }
     }
@@ -50,7 +41,7 @@ class Gambit extends React.Component {
       return p;
     });
 
-    let stats = await bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.gambit.all.modes, '0');
+    let stats = await bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.raids.all.modes, '0');
 
     for (const mode in stats) {
       if (stats.hasOwnProperty(mode)) {
@@ -58,7 +49,7 @@ class Gambit extends React.Component {
           return;
         }
         Object.entries(stats[mode].allTime).forEach(([key, value]) => {
-          this.gambit.all.stats[mode][key] = value;
+          this.raids.all.stats[mode][key] = value;
         });
       }
     }
@@ -102,25 +93,6 @@ class Gambit extends React.Component {
     const { t, member } = this.props;
     const characterId = member.characterId;
 
-    const characterProgressions = member.data.profile.characterProgressions.data;
-    const profileRecords = member.data.profile.profileRecords.data.records;
-
-    const infamy = {
-      defs: {
-        rank: manifest.DestinyProgressionDefinition[2772425241],
-        activity: manifest.DestinyActivityDefinition[2274172949]
-      },
-      progression: {
-        data: characterProgressions[characterId].progressions[2772425241],
-        total: 0,
-        resets: profileRecords[3901785488] ? profileRecords[3901785488].objectives[0].progress : 0
-      }
-    };
-
-    infamy.progression.total = Object.keys(infamy.defs.rank.steps).reduce((sum, key) => {
-      return sum + infamy.defs.rank.steps[key].progressTotal;
-    }, 0);
-
     return (
       <div className={cx('view', 'gambit')} id='multiplayer'>
         <div className='module-l1'>
@@ -161,10 +133,10 @@ class Gambit extends React.Component {
               <div className='sub-header'>
                 <div>Modes</div>
               </div>
-              {Object.values(this.gambit.all.stats.pvecomp_gambit).length > 1 ? (
+              {Object.values(this.raids.all.stats.raid).length > 1 ? (
                 <ul className='list modes'>
-                  {Object.values(this.gambit.all.stats).map(m => {
-                    let paramsMode = this.props.mode ? parseInt(this.props.mode) : 63;
+                  {Object.values(this.raids.all.stats).map(m => {
+                    let paramsMode = this.props.mode ? parseInt(this.props.mode) : 4;
                     let isActive = (match, location) => {
                       if (paramsMode === m.mode) {
                         return true;
@@ -173,7 +145,7 @@ class Gambit extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/gambit' defaultMode='63' />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/raids' defaultMode='4' />;
                   })}
                 </ul>
               ) : (
@@ -185,9 +157,9 @@ class Gambit extends React.Component {
         <div className='module-l1' id='matches'>
           <div className='content'>
             <div className='sub-header'>
-              <div>Recent matches</div>
+              <div>Recent raids</div>
             </div>
-            <Matches modes={[this.props.mode ? parseInt(this.props.mode) : 63]} characterId={member.characterId} RebindTooltips={this.props.RebindTooltips} />
+            <Matches modes={[this.props.mode ? parseInt(this.props.mode) : 4]} characterId={member.characterId} RebindTooltips={this.props.RebindTooltips} />
           </div>
         </div>
       </div>
@@ -205,4 +177,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(Gambit);
+)(Raids);

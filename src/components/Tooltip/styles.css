@@ -72,6 +72,13 @@
   text-align: right;
 }
 
+#tooltip .frame .note {
+  padding: 6px 16px;
+  background-color: rgba(156, 53, 51, 0.8);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
 #tooltip .black {
   background-color: rgba(0, 0, 0, 0.75);
 }

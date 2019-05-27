@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import { orderBy, isEqual } from 'lodash';
+import { orderBy, isEqual, flattenDepth } from 'lodash';
 
 import * as bungie from '../../../utils/bungie';
 import getPGCR from '../../../utils/getPGCR';
@@ -32,17 +32,18 @@ class Matches extends React.Component {
     // console.log(charactersIds)
 
     let requests = charactersIds.map(async c => {
-      let response = await bungie.activityHistory(member.membershipType, member.membershipId, c, 20, mode, 0);
+      let response = await bungie.activityHistory(member.membershipType, member.membershipId, c, 30, mode, 0);
       return response.activities || [];
     });
 
     let activities = await Promise.all(requests);
-    activities = activities.flat();
+    activities = flattenDepth(activities, 1);
     activities = orderBy(activities, [pgcr => pgcr.period], ['desc']);
-    activities = activities.slice(0, 20);
+    activities = activities.slice(0, 30);
 
     this.setState(p => {
-      p.cacheState[mode] = activities.length;
+      let identifier = mode ? mode : 'all';
+      p.cacheState[identifier] = activities.length;
       return p;
     });
 
@@ -67,9 +68,9 @@ class Matches extends React.Component {
 
       this.running = true;
 
-      let ignition = await modes.map(m => {
+      let ignition = modes ? await modes.map(m => {
         return this.cacheMachine(m, characterId);
-      });
+      }) : [await this.cacheMachine(false, characterId)];
   
       try {
         await Promise.all(ignition);
@@ -117,11 +118,13 @@ class Matches extends React.Component {
 
     let PGCRs = [];
     
-    if (PGCRcache[member.membershipId]) {
+    if (modes && PGCRcache[member.membershipId]) {
       PGCRs = orderBy(PGCRcache[member.membershipId].filter(pgcr => modes.some(m => pgcr.activityDetails.modes.includes(m))), [pgcr => pgcr.period], ['desc']);
+    } else if (PGCRcache[member.membershipId]) {
+      PGCRs = orderBy(PGCRcache[member.membershipId], [pgcr => pgcr.period], ['desc']);
     }
 
-    return PGCRs.length ? <PGCR data={PGCRs} limit='20' RebindTooltips={this.props.RebindTooltips} /> : <Spinner />;
+    return PGCRs.length ? <PGCR data={PGCRs} limit='30' RebindTooltips={this.props.RebindTooltips} /> : <Spinner />;
   }
 }
 

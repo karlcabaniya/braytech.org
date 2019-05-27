@@ -6,112 +6,27 @@ import cx from 'classnames';
 
 import * as bungie from '../../../utils/bungie';
 
-import manifest from '../../../utils/manifest';
 import { ProfileNavLink } from '../../../components/ProfileLink';
-import ProgressBar from '../../../components/UI/ProgressBar';
 import Spinner from '../../../components/UI/Spinner';
+import Mode from '../../../components/PGCRs/Mode';
+import Matches from '../../../components/PGCRs/Matches';
 
-import './styles.css';
-
-class Crucible extends React.Component {
+class All extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loading: false
+      
     };
-
-    this.stats = {};
   }
-
-  fetch = async () => {
-    const { member } = this.props;
-
-    this.setState(p => {
-      p.loading = true;
-      return p;
-    });
-
-    this.stats = await bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', [4, 5, 7, 64], '0');
-
-    this.setState(p => {
-      p.loading = false;
-      return p;
-    });
-
-    return true;
-  };
 
   componentDidMount() {
-    this.refreshData();
-    this.startInterval();
-  }
-
-  refreshData = async () => {
-    if (!this.state.loading) {
-      //console.log('refresh start');
-      await this.fetch();
-      //console.log('refresh end');
-    } else {
-      //console.log('refresh skipped');
-    }
-  };
-
-  startInterval() {
-    this.refreshDataInterval = window.setInterval(this.refreshData, 30000);
-  }
-
-  clearInterval() {
-    window.clearInterval(this.refreshDataInterval);
-  }
-
-  componentWillUnmount() {
-    this.clearInterval();
+    
   }
 
   render() {
     const { t, member } = this.props;
     const characterId = member.characterId;
-
-    let displayStats = [
-      {
-        key: 'secondsPlayed',
-        name: 'Time Played',
-        type: 'value',
-        time: true
-      },
-      {
-        key: 'kills',
-        name: 'Kills',
-        type: 'value'
-      },
-      {
-        key: 'deaths',
-        name: 'Deaths',
-        type: 'value'
-      },
-      {
-        key: 'suicides',
-        name: 'Suicides',
-        type: 'value'
-      },
-      {
-        key: 'longestKillSpree',
-        name: 'Longest Kill Spree',
-        type: 'value'
-      },
-      {
-        key: 'longestKillDistance',
-        name: 'Longest Kill Distance',
-        type: 'value'
-      },
-      {
-        key: 'longestSingleLife',
-        name: 'Longest Single Life',
-        type: 'value',
-        time: true
-      }
-    ];
 
     return (
       <div className={cx('view', 'root')} id='multiplayer'>
@@ -124,108 +39,38 @@ class Crucible extends React.Component {
               </div>
             </div>
           </div>
-        </div>
-        <div className='module-l1'>
-          <div className='content views'>
+          <div className='module-l2'>
             <div className='sub-header'>
-              <div>Views</div>
+              <div>Activities</div>
             </div>
-            <ul className='list'>
-              <li className='linked'>
-                <ProfileNavLink to='/pgcrs' exact>
-                  {t('Summary')}
-                </ProfileNavLink>
-              </li>
-              <li className='linked'>
-                <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
-              </li>
-              <li className='linked'>
-                <ProfileNavLink to='/pgcrs/gambit'>{t('Gambit')}</ProfileNavLink>
-              </li>
-              {/* <li className='linked'>
-                <ProfileNavLink to='/pgcrs/raids'>{t('Raids')}</ProfileNavLink>
-              </li>
-              <li className='linked'>
-                <ProfileNavLink to='/pgcrs/all'>{t('All')}</ProfileNavLink>
-              </li> */}
-            </ul>
-          </div>
-          <div className='content career'>
-            <div className='sub-header'>
-              <div>Highlights</div>
-            </div>
-            <div className='doms'>
-              <div className='subs'>None atm idk lol give me a break</div>
+            <div className='content views'>
+              <ul className='list'>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs' exact>{t('All')}</ProfileNavLink>
+                </li>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
+                </li>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs/gambit'>{t('Gambit')}</ProfileNavLink>
+                </li>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs/raids'>{t('Raids')}</ProfileNavLink>
+                </li>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs/strikes'>{t('Strikes')}</ProfileNavLink>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-        <div className='module-l1' id='stats'>
-          {this.stats.allPvP ? (
-            <div className='content'>
-              {this.stats.allPvP.allTime ? (
-                <>
-                  <div className='sub-header'>
-                    <div>Crucible</div>
-                  </div>
-                  <div className='stats'>
-                    {displayStats.map((s, i) => {
-                      let object = this.stats.allPvP;
-                      let value;
-                      if (s.time) {
-                        if (s.key === 'longestSingleLife') {
-                          value = `${Math.floor(object.allTime[s.key].basic[s.type] / 60).toLocaleString('en-us')} minutes`;
-                        } else {
-                          value = `${Math.floor(object.allTime[s.key].basic[s.type] / 60 / 60 / 24).toLocaleString('en-us')} days`;
-                        }
-                      } else if (s.key === 'longestKillDistance') {
-                        value = `${object.allTime[s.key].basic[s.type].toLocaleString('en-us')} metres`;
-                      } else {
-                        value = object.allTime[s.key].basic[s.type].toLocaleString('en-us');
-                      }
-                      return (
-                        <div key={i} className={cx('stat', s.key)}>
-                          <div className='value'>{value}</div>
-                          <div className='name'>{s.name}</div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </>
-              ) : null}
-              {this.stats.allPvECompetitive.allTime ? (
-                <>
-                  <div className='sub-header'>
-                    <div>Gambit</div>
-                  </div>
-                  <div className='stats'>
-                    {displayStats.map((s, i) => {
-                      let object = this.stats.allPvECompetitive;
-                      let value;
-                      if (s.time) {
-                        if (s.key === 'longestSingleLife') {
-                          value = `${Math.floor(object.allTime[s.key].basic[s.type] / 60).toLocaleString('en-us')} minutes`;
-                        } else {
-                          value = `${Math.floor(object.allTime[s.key].basic[s.type] / 60 / 60 / 24).toLocaleString('en-us')} days`;
-                        }
-                      } else if (s.key === 'longestKillDistance') {
-                        value = `${object.allTime[s.key].basic[s.type].toLocaleString('en-us')} metres`;
-                      } else {
-                        value = object.allTime[s.key].basic[s.type].toLocaleString('en-us');
-                      }
-                      return (
-                        <div key={i} className={cx('stat', s.key)}>
-                          <div className='value'>{value}</div>
-                          <div className='name'>{s.name}</div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </>
-              ) : null}
+        <div className='module-l1' id='matches'>
+          <div className='content'>
+            <div className='sub-header'>
+              <div>Recent activities</div>
             </div>
-          ) : (
-            <Spinner />
-          )}
+            <Matches modes={false} characterId={member.characterId} RebindTooltips={this.props.RebindTooltips} />
+          </div>
         </div>
       </div>
     );
@@ -242,4 +87,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(Crucible);
+)(All);

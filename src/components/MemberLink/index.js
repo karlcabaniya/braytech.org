@@ -125,6 +125,7 @@ class MemberLink extends React.Component {
     if (this.dataBasic) {
       if (characterId) {
         characterBasic = this.dataBasic.characters.data.find(c => c.characterId === characterId)
+        if (!characterBasic) characterBasic = this.dataBasic.characters.data[0];
       } else {
         characterBasic = this.dataBasic.characters.data[0];
       }
@@ -144,7 +145,7 @@ class MemberLink extends React.Component {
     if (flair) {
       primaryFlair = flair.trophies.find(t => t.primary);
     }
-
+    
     return (
       <>
         <div className='member-link' onClick={this.activateOverlay}>
@@ -238,7 +239,7 @@ class MemberLink extends React.Component {
 
                             return (
                               <div key={c.characterId} className='char'>
-                                <Button className='linked'>
+                                <Button className='linked' anchor to={`/${type}/${id}/${c.characterId}`} action={() => {  }}>
                                   <div className='icon'>
                                     <i
                                       className={`destiny-class_${destinyUtils
@@ -279,8 +280,8 @@ class MemberLink extends React.Component {
                               completionValue: destinyUtils.totalValor()
                             }}
                             playerProgress={{
-                              progress: this.dataAll.characterProgressions.data[this.dataBasic.characters.data[0].characterId].progressions[2626549951].currentProgress,
-                              complete: this.dataAll.characterProgressions.data[this.dataBasic.characters.data[0].characterId].progressions[2626549951].currentProgress === destinyUtils.totalValor(),
+                              progress: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2626549951].currentProgress,
+                              complete: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2626549951].currentProgress === destinyUtils.totalValor(),
                               objectiveHash: 2626549951
                             }}
                             hideCheck
@@ -295,8 +296,8 @@ class MemberLink extends React.Component {
                               completionValue: destinyUtils.totalGlory()
                             }}
                             playerProgress={{
-                              progress: this.dataAll.characterProgressions.data[this.dataBasic.characters.data[0].characterId].progressions[2000925172].currentProgress,
-                              complete: this.dataAll.characterProgressions.data[this.dataBasic.characters.data[0].characterId].progressions[2000925172].currentProgress === destinyUtils.totalGlory(),
+                              progress: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2000925172].currentProgress,
+                              complete: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2000925172].currentProgress === destinyUtils.totalGlory(),
                               objectiveHash: 2000925172
                             }}
                             hideCheck
@@ -311,8 +312,8 @@ class MemberLink extends React.Component {
                               completionValue: destinyUtils.totalInfamy()
                             }}
                             playerProgress={{
-                              progress: this.dataAll.characterProgressions.data[this.dataBasic.characters.data[0].characterId].progressions[2772425241].currentProgress,
-                              complete: this.dataAll.characterProgressions.data[this.dataBasic.characters.data[0].characterId].progressions[2772425241].currentProgress === destinyUtils.totalInfamy(),
+                              progress: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2772425241].currentProgress,
+                              complete: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2772425241].currentProgress === destinyUtils.totalInfamy(),
                               objectiveHash: 2772425241
                             }}
                             hideCheck
@@ -364,7 +365,7 @@ class MemberLink extends React.Component {
                 ) : this.state.loadingAllError ? <>
                   <div>
                     <div className='icon'>
-                      <ObservedImage className='image' src='/static/images/extracts/ui/010A-00000551.PNG' />
+                      <ObservedImage className='image' src='/static/images/extracts/ui/010A-00000552.PNG' />
                     </div>
                   </div>
                   <div>

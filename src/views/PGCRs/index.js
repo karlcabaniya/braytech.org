@@ -9,6 +9,8 @@ import './styles.css';
 import Root from './Root/';
 import Crucible from './Crucible/';
 import Gambit from './Gambit/';
+import Raids from './Raids/';
+import Strikes from './Strikes/';
 
 class PGCRs extends React.Component {
   constructor(props) {
@@ -30,8 +32,12 @@ class PGCRs extends React.Component {
       return <Crucible mode={mode} RebindTooltips={this.props.RebindTooltips} />;
     } else if (type === 'gambit') {
       return <Gambit mode={mode} RebindTooltips={this.props.RebindTooltips} />;
+    } else if (type === 'raids') {
+      return <Raids mode={mode} RebindTooltips={this.props.RebindTooltips} />;
+    } else if (type === 'strikes') {
+      return <Strikes mode={mode} RebindTooltips={this.props.RebindTooltips} />;
     } else {
-      return <Root />;
+      return <Root RebindTooltips={this.props.RebindTooltips} />;
     }
   }
 }

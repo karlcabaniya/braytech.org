@@ -56,7 +56,7 @@ class Crucible extends React.Component {
       }
     },
     quickplay: {
-      modes: [71, 73, 43, 48, 60, 65],
+      modes: [71, 73, 43, 48, 60, 65, 59],
       stats: {
         clashQuickplay: {
           mode: 71
@@ -75,6 +75,9 @@ class Crucible extends React.Component {
         },
         breakthrough: {
           mode: 65
+        },
+        showdown: {
+          mode: 59
         }
       }
     }
@@ -211,116 +214,35 @@ class Crucible extends React.Component {
               </div>
             </div>
           </div>
-        </div>
-        <div className='module-l1'>
-          <div className='content views'>
-            <div className='sub-header'>
-              <div>Views</div>
-            </div>
-            <ul className='list'>
-              <li className='linked'>
-                <ProfileNavLink to='/pgcrs' exact>{t('Summary')}</ProfileNavLink>
-              </li>
-              <li className='linked'>
-                <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
-              </li>
-              <li className='linked'>
-                <ProfileNavLink to='/pgcrs/gambit'>{t('Gambit')}</ProfileNavLink>
-              </li>
-              {/* <li className='linked'>
-                <ProfileNavLink to='/pgcrs/raids'>{t('Raids')}</ProfileNavLink>
-              </li>
-              <li className='linked'>
-                <ProfileNavLink to='/pgcrs/all'>{t('All')}</ProfileNavLink>
-              </li> */}
-            </ul>
-          </div>
-          <div className='content career'>
-            <div className='sub-header'>
-              <div>Career</div>
-            </div>
-            <div className='doms'>
-              <div className='subs'>
-                <h4>Glory modes</h4>
-                <div className='highlight'>
-                <div className='value'>{this.crucible.all.stats.pvpCompetitive.secondsPlayed ? Math.floor(this.crucible.all.stats.pvpCompetitive.secondsPlayed.basic.value / 60 / 60) : 0} hours</div>
-                  <div className='name'>Time played</div>
-                </div>
-                <div className='highlight'>
-                  <div className='value progress competitive'>
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: glory.defs.rank.displayProperties.name,
-                        completionValue: glory.progression.total
-                      }}
-                      playerProgress={{
-                        progress: glory.progression.data.currentProgress,
-                        objectiveHash: 'glory'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
-                        completionValue: glory.progression.data.nextLevelAt
-                      }}
-                      playerProgress={{
-                        progress: glory.progression.data.progressToNextLevel,
-                        objectiveHash: 'valor'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                  </div>
-                  <div className='name'>Progress</div>
-                </div>
-              </div>
-              <div className='subs'>
-                <h4>Valor modes</h4>
-                <div className='highlight'>
-                  <div className='value'>{this.crucible.all.stats.pvpQuickplay.secondsPlayed ? Math.floor(this.crucible.all.stats.pvpQuickplay.secondsPlayed.basic.value / 60 / 60) : 0} hours</div>
-                  <div className='name'>Time played</div>
-                </div>
-                <div className='highlight'>
-                  <div className='value progress quickplay'>
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: valor.defs.rank.displayProperties.name,
-                        completionValue: valor.progression.total
-                      }}
-                      playerProgress={{
-                        progress: valor.progression.data.currentProgress,
-                        objectiveHash: 'valor'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
-                        completionValue: valor.progression.data.nextLevelAt
-                      }}
-                      playerProgress={{
-                        progress: valor.progression.data.progressToNextLevel,
-                        objectiveHash: 'valor'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                  </div>
-                  <div className='name'>Progress</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='module-l1'>
           <div className='module-l2'>
+            <div className='sub-header'>
+              <div>Activities</div>
+            </div>
+            <div className='content views'>
+              <ul className='list'>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs' exact>{t('All')}</ProfileNavLink>
+                </li>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
+                </li>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs/gambit'>{t('Gambit')}</ProfileNavLink>
+                </li>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs/raids'>{t('Raids')}</ProfileNavLink>
+                </li>
+                <li className='linked'>
+                  <ProfileNavLink to='/pgcrs/strikes'>{t('Strikes')}</ProfileNavLink>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className='module-l2'>
+            <div className='sub-header'>
+              <div>Summative modes</div>
+            </div>
             <div className='content'>
-              <div className='sub-header'>
-                <div>Summative modes</div>
-              </div>
               {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
                 <ul className='list modes'>
                   {Object.values(this.crucible.all.stats).map(m => {
@@ -340,10 +262,10 @@ class Crucible extends React.Component {
                 <Spinner mini />
               )}
             </div>
+            <div className='sub-header'>
+              <div>Glory modes</div>
+            </div>
             <div className='content'>
-              <div className='sub-header'>
-                <div>Glory modes</div>
-              </div>
               {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
                 <ul className='list modes'>
                   {Object.values(this.crucible.competitive.stats).map(m => {
@@ -363,10 +285,10 @@ class Crucible extends React.Component {
                 <Spinner mini />
               )}
             </div>
+            <div className='sub-header'>
+              <div>Valor modes</div>
+            </div>
             <div className='content'>
-              <div className='sub-header'>
-                <div>Valor modes</div>
-              </div>
               {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
                 <ul className='list modes'>
                   {Object.values(this.crucible.quickplay.stats).map(m => {
@@ -389,10 +311,10 @@ class Crucible extends React.Component {
           </div>
         </div>
         <div className='module-l1' id='matches'>
-          <div className='content'>
             <div className='sub-header'>
               <div>Recent matches</div>
             </div>
+          <div className='content'>
             <Matches modes={[this.props.mode ? parseInt(this.props.mode) : 5]} characterId={member.characterId} RebindTooltips={this.props.RebindTooltips} />
           </div>
         </div>

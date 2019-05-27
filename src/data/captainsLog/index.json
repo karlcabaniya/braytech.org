@@ -283,5 +283,10 @@
     "date": "2019-05-25T12:53:09.136Z",
     "version": "2.5.1",
     "content": "- Leaderboards BETA release\n- Improvements to MemberLink"
+  },
+  {
+    "date": "2019-05-27T04:55:45.232Z",
+    "version": "2.5.2",
+    "content": "- PGCRs edition"
   }
 ]
