@@ -120,7 +120,7 @@ class Header extends React.Component {
       },
       {
         name: t('Checklists'),
-        desc: t('Complete lists of collecibles, scannables, etc.'),
+        desc: t('Complete lists of collectibles, scannables, etc.'),
         slug: '/checklists',
         exact: true,
         profile: true,
