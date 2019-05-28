@@ -29,13 +29,19 @@ class ThisWeek extends React.Component {
         // start of cycle in UTC
         ascendant: new Date(`2018-09-04T${resetTime}`).getTime(),
         curse: new Date(`2018-09-11T${resetTime}`).getTime(),
-        ep: new Date(`2018-05-08T${resetTime}`).getTime()
+        ep: new Date(`2018-05-08T${resetTime}`).getTime(),
+        reckoning: new Date(`2018-03-05T${resetTime}`).getTime(),
+        whisper: new Date(`2018-05-21T${resetTime}`).getTime(),
+        zerohour: new Date(`2018-05-21T${resetTime}`).getTime()
       },
       cycle: {
         // how many week cycle
         ascendant: 6,
         curse: 3,
-        ep: 5
+        ep: 5,
+        reckoning: 2,
+        whisper: 3,
+        zerohour: 3
       },
       elapsed: {}, // elapsed time since cycle started
       week: {} // current week in cycle
@@ -230,6 +236,44 @@ class ThisWeek extends React.Component {
             2998976141, // IKELOS_SMG
             1203091693 // IKELOS_SR
           ]
+        }
+      },
+      reckoning: {
+        1: {
+          boss: t('Likeness of Oryx'),
+          triumphs: [],
+          collectibles: [
+            
+          ]
+        },
+        2: {
+          boss: t('The Swords'),
+          triumphs: [],
+          collectibles: [
+            
+          ]
+        }
+      },
+      whisper: {
+        1: {
+          modifiers: [3362074814]
+        },
+        2: {
+          modifiers: [3215384520]
+        },
+        3: {
+          modifiers: [2558957669]
+        }
+      },
+      zerohour: {
+        1: {
+          modifiers: [3362074814]
+        },
+        2: {
+          modifiers: [3215384520]
+        },
+        3: {
+          modifiers: [2558957669]
         }
       },
       nightfall: {
@@ -495,6 +539,9 @@ class ThisWeek extends React.Component {
     //   return m;
     // }));
 
+    const levAcitivty = milestones[3660836525].activities.find(a => a.activityHash === 2693136600);
+    const eowAcitivty = milestones[2986584050].activities.find(a => a.activityHash === 809170886);
+    
     const reckoningModifiers = milestones[601087286].activities[0].modifierHashes;
     const strikesModifiers = milestones[1437935813].activities[0].modifierHashes;
 
@@ -512,12 +559,12 @@ class ThisWeek extends React.Component {
             </ul>
           </div>
           <div className='content'>
-            <h4>Active Modifiers: The Reckoning</h4>
+            <h4>Active Modifiers</h4>
             <ul className='list modifiers'>
-              {reckoningModifiers.map(m => {
+              {strikesModifiers.map((m, i) => {
                 let modDef = manifest.DestinyActivityModifierDefinition[m];
                 return (
-                  <li>
+                  <li key={i}>
                     <div className='icon'>
                       <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
                     </div>
@@ -531,12 +578,154 @@ class ThisWeek extends React.Component {
             </ul>
           </div>
           <div className='content'>
-            <h4>Active Modifiers: Heroic Activities</h4>
+            <div className='module-header'>
+              <div className='sub-title'>{t('The Reckoning')}</div>
+              <div className='name'>{consolidatedInfo.reckoning[cycleInfo.week.reckoning].boss}</div>
+            </div>
+            <h4>Active Modifiers</h4>
             <ul className='list modifiers'>
-              {strikesModifiers.map(m => {
+              {reckoningModifiers.map((m, i) => {
                 let modDef = manifest.DestinyActivityModifierDefinition[m];
                 return (
-                  <li>
+                  <li key={i}>
+                    <div className='icon'>
+                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                    </div>
+                    <div className='text'>
+                      <div className='name'>{modDef.displayProperties.name}</div>
+                      <div className='description'>{modDef.displayProperties.description}</div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div className='content'>
+            <div className='module-header'>
+              <div className='sub-title'>{t('Heroic Mission')}</div>
+              <div className='name'>{t('Zero Hour')}</div>
+            </div>
+            <h4>Active Modifier</h4>
+            <ul className='list modifiers'>
+              {consolidatedInfo.zerohour[cycleInfo.week.zerohour].modifiers.map((m, i) => {
+                let modDef = manifest.DestinyActivityModifierDefinition[m];
+                return (
+                  <li key={i}>
+                    <div className='icon'>
+                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                    </div>
+                    <div className='text'>
+                      <div className='name'>{modDef.displayProperties.name}</div>
+                      <div className='description'>{modDef.displayProperties.description}</div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div className='content'>
+            <div className='module-header'>
+              <div className='sub-title'>{t('Heroic Mission')}</div>
+              <div className='name'>{t('Whisper of the Worm')}</div>
+            </div>
+            <h4>Active Modifier</h4>
+            <ul className='list modifiers'>
+              {consolidatedInfo.whisper[cycleInfo.week.whisper].modifiers.map((m, i) => {
+                let modDef = manifest.DestinyActivityModifierDefinition[m];
+                return (
+                  <li key={i}>
+                    <div className='icon'>
+                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                    </div>
+                    <div className='text'>
+                      <div className='name'>{modDef.displayProperties.name}</div>
+                      <div className='description'>{modDef.displayProperties.description}</div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </div>
+        <div className='module'>
+          <div className='content'>
+            <div className='module-header'>
+              <div className='sub-title'>{t('Ascendant Challenge')}</div>
+              <div className='name'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
+            </div>
+            <h4>Triumphs</h4>
+            <ul className='list record-items'>
+              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
+            </ul>
+          </div>
+          <div className='content'>
+            <div className='module-header'>
+              <div className='sub-title'>Savathûn's Curse</div>
+              <div className='name'>{cycleInfo.week.curse}/3</div>
+            </div>
+            <h4>Triumphs</h4>
+            <ul className='list record-items'>
+              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
+            </ul>
+          </div>
+        </div>
+        <div className='module'>
+          <div className='content'>
+            <div className='module-header'>
+              <div className='sub-title'>{t('Raid')}</div>
+              <div className='name'>{t('Leviathan')}</div>
+            </div>
+            <h4>Active Rotation</h4>
+            <ul className='list modifiers'>
+              {levAcitivty.phaseHashes.map((p, i) => {
+                let phases = {
+                  3847906370: {
+                    name: t('The Pleasure Gardens'),
+                    description: t('Smell the roses, Guardian... Feed my hungry pets'),
+                    icon: manifest.DestinyActivityModifierDefinition[871205855].displayProperties.icon
+                  },
+                  2188993306: {
+                    name: t('The Royal Pools'),
+                    description: t("Bathe with my loyalists in their pools"),
+                    icon: manifest.DestinyActivityModifierDefinition[3296085675].displayProperties.icon
+                  },
+                  1431486395: {
+                    name: t('The Gauntlet'),
+                    description: t('Demonstrate your tenacity for the game, my champion'),
+                    icon: manifest.DestinyActivityModifierDefinition[2863316929].displayProperties.icon
+                  },
+                  4231923662: {
+                    name: t('The Throne'),
+                    description: t('COME– I must congratulate you in person! [maniacal laughter]'),
+                    icon: manifest.DestinyActivityModifierDefinition[2770077977].displayProperties.icon
+                  }
+                }
+
+                return (
+                  <li key={i}>
+                    <div className='icon'>
+                      <ObservedImage className='image' src={`https://www.bungie.net${phases[p].icon}`} />
+                    </div>
+                    <div className='text'>
+                      <div className='name'>{phases[p].name}</div>
+                      <div className='description'>{phases[p].description}</div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div className='content'>
+            <div className='module-header'>
+              <div className='sub-title'>{t('Raid')}</div>
+              <div className='name'>{t('Leviathan Lairs')}</div>
+            </div>
+            <h4>Active Modifiers</h4>
+            <ul className='list modifiers'>
+              {eowAcitivty.modifierHashes.map((m, i) => {
+                let modDef = manifest.DestinyActivityModifierDefinition[m];
+                return (
+                  <li key={i}>
                     <div className='icon'>
                       <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
                     </div>
@@ -562,30 +751,6 @@ class ThisWeek extends React.Component {
         </div>
         <div className='module'>
           {nightfalls}
-        </div>
-        <div className='module'>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-title'>Savathûn's Curse</div>
-              <div className='name'>{cycleInfo.week.curse}/3</div>
-            </div>
-            <h4>Triumphs</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
-            </ul>
-          </div>
-        </div>
-        <div className='module'>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-title'>{t('Ascendant Challenge')}</div>
-              <div className='name'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
-            </div>
-            <h4>Triumphs</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
-            </ul>
-          </div>
         </div>
       </div>
     );

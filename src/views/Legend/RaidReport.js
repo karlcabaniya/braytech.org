@@ -4,11 +4,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
-import moment from 'moment';
 import Moment from 'react-moment';
-import { orderBy, minBy } from 'lodash';
+import { orderBy, flattenDepth } from 'lodash';
 
-import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
 import Spinner from '../../components/UI/Spinner';
 
@@ -160,9 +158,7 @@ class RaidReport extends React.Component {
       const getAgg = raid => {
         return raidReports
           .filter(pgcr =>
-            raid.versions
-              .map(v => v.activityHashes)
-              .flat()
+            flattenDepth(raid.versions.map(v => v.activityHashes), 1)
               .includes(pgcr.activityDetails.directorActivityHash)
           )
           .filter(pgcr => {
@@ -180,9 +176,9 @@ class RaidReport extends React.Component {
       const getAggCleared = () => {
         return raidReports
           .filter(pgcr =>
-            [LEVIATHAN, EATER_OF_WORLDS, SPIRE_OF_STARS, LAST_WISH, SCOURGE_OF_THE_PAST]
-              .map(raid => raid.versions).flat()
-              .map(raid => raid.activityHashes).flat()
+            flattenDepth(flattenDepth([LEVIATHAN, EATER_OF_WORLDS, SPIRE_OF_STARS, LAST_WISH, SCOURGE_OF_THE_PAST]
+              .map(raid => raid.versions), 1)
+              .map(raid => raid.activityHashes), 1)
               .includes(pgcr.activityDetails.directorActivityHash)
           )
           .filter(pgcr => {
@@ -232,9 +228,8 @@ class RaidReport extends React.Component {
       const getFlawless = raid => {
         return raidReports
           .filter(pgcr =>
-            raid.versions
-              .map(v => v.activityHashes)
-              .flat()
+            flattenDepth(raid.versions
+              .map(v => v.activityHashes), 1)
               .includes(pgcr.activityDetails.directorActivityHash)
           )
           .filter(pgcr => raid.fullClearPhases.includes(pgcr.startingPhaseIndex))

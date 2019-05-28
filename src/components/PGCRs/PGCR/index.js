@@ -53,30 +53,50 @@ class PGCR extends React.Component {
 
     if (pgcr) {
       pgcr.entries.forEach(async e => {
-        let points = await this.getProgression(e.player.destinyUserInfo.membershipType, e.player.destinyUserInfo.membershipId);
+        let progression = await this.getProgression(e.player.destinyUserInfo.membershipType, e.player.destinyUserInfo.membershipId);
 
         this.setState((state, props) => ({
-          playerCache: state.playerCache.concat({ id: e.player.destinyUserInfo.membershipType + e.player.destinyUserInfo.membershipId, ...points })
+          playerCache: state.playerCache.concat({
+            id: e.player.destinyUserInfo.membershipType + e.player.destinyUserInfo.membershipId,
+            ...progression.points,
+            ...progression.resets
+          })
         }));
       });
     }
   };
 
   getProgression = async (membershipType, membershipId) => {
-    let response = await bungie.memberProfile(membershipType, membershipId, '202');
+    let response = await bungie.memberProfile(membershipType, membershipId, '202,900');
 
     if (!response.characterProgressions.data) {
-      return;
+      return {
+        points: {
+          
+        },
+        resets: {
+          
+        }
+      };
     }
 
     let gloryPoints = Object.values(response.characterProgressions.data)[0].progressions[2000925172].currentProgress.toLocaleString('en-us');
     let valorPoints = Object.values(response.characterProgressions.data)[0].progressions[2626549951].currentProgress.toLocaleString('en-us');
     let infamyPoints = Object.values(response.characterProgressions.data)[0].progressions[2772425241].currentProgress.toLocaleString('en-us');
 
+    let valorResets = response.profileRecords.data.records[559943871] ? response.profileRecords.data.records[559943871].objectives[0].progress.toLocaleString('en-us') : '0';
+    let infamyResets = response.profileRecords.data.records[3901785488] ? response.profileRecords.data.records[3901785488].objectives[0].progress.toLocaleString('en-us') : '0';
+
     return {
-      gloryPoints,
-      valorPoints,
-      infamyPoints
+      points: {
+        gloryPoints,
+        valorPoints,
+        infamyPoints
+      },
+      resets: {
+        valorResets,
+        infamyResets
+      }
     };
   };
 
@@ -329,8 +349,8 @@ class PGCR extends React.Component {
                 async: true
               },
               {
-                key: 'valorPoints',
-                name: 'Valor points',
+                key: 'valorResets',
+                name: 'Valor resets',
                 type: 'value',
                 async: true
               },
@@ -454,6 +474,12 @@ class PGCR extends React.Component {
                 async: true
               },
               {
+                key: 'infamyResets',
+                name: 'Infamy resets',
+                type: 'value',
+                async: true
+              },
+              {
                 key: 'weapons',
                 name: 'Weapons used'
               }
@@ -527,14 +553,8 @@ class PGCR extends React.Component {
             name: 'Invasion',
             fields: [
               {
-                key: 'invaderKills',
-                name: 'Invader Kills',
-                type: 'value',
-                extended: true
-              },
-              {
-                key: 'invaderDeaths',
-                name: 'Invader Deaths',
+                key: 'invasions',
+                name: 'Invasions',
                 type: 'value',
                 extended: true
               },
@@ -547,6 +567,18 @@ class PGCR extends React.Component {
               {
                 key: 'invasionDeaths',
                 name: 'Invasion Deaths',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'invaderKills',
+                name: 'Invader Kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'invaderDeaths',
+                name: 'Invader Deaths',
                 type: 'value',
                 extended: true
               }
@@ -584,10 +616,8 @@ class PGCR extends React.Component {
                   if (s.extended) {
                     value = s.round ? Number.parseFloat(entry.extended.values[s.key].basic[s.type]).toFixed(2) : entry.extended.values[s.key].basic[s.type];
                   } else if (s.async) {
-                    if (s.key === 'gloryPoints') {
-                      let playerCache = this.state.playerCache.find(c => c.id === entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId);
-                      value = playerCache && playerCache.gloryPoints ? playerCache.gloryPoints : '–';
-                    }
+                    let playerCache = this.state.playerCache.find(c => c.id === entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId);
+                    value = playerCache && playerCache[s.key] ? playerCache[s.key] : '–';
                   } else {
                     value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
                   }

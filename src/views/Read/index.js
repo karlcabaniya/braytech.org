@@ -139,7 +139,9 @@ class Read extends React.Component {
           <div className='flair left' />
           <div className='flair right' />
           <div className={cx('page-name', { null: !pageName })}>
-            <div className='quotes'>{pageName}</div>
+            <span className='quote-l' />
+            <span>{pageName}</span>
+            <span className='quote-r' />
           </div>
           <div className='pair'>
             <div className='nav'>
@@ -157,7 +159,7 @@ class Read extends React.Component {
                       <li className='linked'>
                         <a href={`https://www.ishtar-collective.net/entries/${recordDefinition ? recordDefinition.loreHash : ''}`} target='_blank' rel='noopener noreferrer'>
                           <span className='destiny-ishtar' />
-                          View at Ishtar
+                          Go to Ishtar
                         </a>
                       </li>
                     </ul>
@@ -169,16 +171,26 @@ class Read extends React.Component {
             <div className='content'>{content}</div>
           </div>
         </div>
-        {backLinkPath ? (
+        {kind === 'record' || backLinkPath ? (
           <div className='sticky-nav'>
             <div />
             <ul>
-              <li>
-                <Link className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Dismiss')}
-                </Link>
-              </li>
+              {kind === 'record' ? (
+                <li>
+                  <Link className='button' to={`/read/book/${parentDefinition.hash}`}>
+                    <i className='destiny-Y_Button' />
+                    {t('All pages')}
+                  </Link>
+                </li>
+              ) : null}
+              {backLinkPath ? (
+                <li>
+                  <Link className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Dismiss')}
+                  </Link>
+                </li>
+              ) : null}
             </ul>
           </div>
         ) : null}

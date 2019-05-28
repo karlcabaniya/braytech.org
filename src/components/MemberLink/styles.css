@@ -342,12 +342,17 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+#member-overlay .wrapper-inner .ranks.loading,
+#member-overlay .wrapper-inner .ranks.error {
+  grid-template-columns: 1fr;
+}
+
 #member-overlay .wrapper-inner .ranks.error {
   margin: 2rem 0 3rem;
-  grid-template-columns: 1fr;
   font-style: italic;
   letter-spacing: 1px;
   font-size: 14px;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.4);
   display: grid;
   justify-items: center;
@@ -384,6 +389,7 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   display: grid;
   align-items: center;
   justify-content: center;
+  font-size: 18px;
   color: #fff;
   background-color: rgb(75, 127, 149);
 }
@@ -553,6 +559,7 @@ html.backdropfilter .wrapper.dark-mode #member-overlay.error .background .border
   position: relative;
   height: 120px;
   width: 120px;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 #member-overlay.error .wrapper-inner .text .name {

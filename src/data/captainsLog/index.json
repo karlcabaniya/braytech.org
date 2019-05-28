@@ -290,8 +290,13 @@
     "content": "- PGCRs edition"
   },
   {
-    "date": "2019-05-27T04:55:45.232Z",
+    "date": "2019-05-27T08:55:45.232Z",
     "version": "2.5.3",
     "content": "- PGCR bugs squashed\n- MemberLink Characters list now links to characters properly\n- Added active seal titles to MemberLink Characters\n- Told Leaderboards root view to check for and load if available the current user's clan"
+  },
+  {
+    "date": "2019-05-28T09:20:53.123Z",
+    "version": "2.5.4",
+    "content": "- Updated Legend view to remove dependency on `.flat()` support\n- Decoupled MemberLink data requests for a shorter time til data for the end users as well as general clean up/refactoring\n- Added Lore Book index link to sticky nav and cleaned up some mobile stylings for the Read component generally\n- Added more async stats to PGCRs including valor, infamy, and resets\n- Added various rotations to _This Week_ view\n- Consequently rearranged the aforementioned\n- Dark mode now _even_ darker than before"
   }
 ]

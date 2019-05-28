@@ -21,8 +21,18 @@
 }
 
 #multiplayer .content.head .page-header {
-  margin-bottom: 1rem;
   max-width: 500px;
+}
+
+#multiplayer .content.head .text p {
+  max-width: 500px;
+  font-size: 16px;
+}
+
+#multiplayer .content.head .text p:last-child {
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.5px;
 }
 
 #multiplayer .content.views {
@@ -236,6 +246,14 @@
 }
 
 @media screen and (max-width: 600px) {
+
+  #multiplayer .content.head .text p {
+    font-size: 14px;
+  }
+  
+  #multiplayer .content.head .text p:last-child {
+    font-size: 12px;
+  }
 
   #multiplayer .content .modes li .icon .image {
     position: relative;

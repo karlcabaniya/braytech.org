@@ -83,12 +83,12 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-#read .wrap .page-name .quotes {
+#read .wrap .page-name .quote-l,
+#read .wrap .page-name .quote-r {
   position: relative;
-  display: inline-block;
 }
 
-#read .wrap .page-name .quotes::before {
+#read .wrap .page-name .quote-l::before {
   content: '\201C';
   color: rgba(255, 255, 255, 0.3);
   position: absolute;
@@ -97,7 +97,7 @@
   line-height: 38px;
 }
 
-#read .wrap .page-name .quotes::after {
+#read .wrap .page-name .quote-r::after {
   content: '\201D';
   color: rgba(255, 255, 255, 0.3);
   position: absolute;
@@ -273,8 +273,10 @@
 
   #read .wrap .page-name {
     font-size: 30px;
-    height: 60px;
-    margin: 0 0 28px;
+    line-height: 33px;
+    margin: 0 0 28px;    
+    padding: 0 0 9px;
+    height: min-content;
   }
 
   #read .wrap .page-name::after {
@@ -283,16 +285,16 @@
     height: 3px;
   }
 
-  #read .wrap .page-name .quotes::before {
+  #read .wrap .page-name .quote-l::before {
     left: -22px;
     font-size: 32px;
-    line-height: 52px;
+    line-height: 33px;
   }
 
-  #read .wrap .page-name .quotes::after {
+  #read .wrap .page-name .quote-r::after {
     right: -22px;
     font-size: 32px;
-    line-height: 52px;
+    line-height: 33px;
   }
 
   #read .wrap .pair {

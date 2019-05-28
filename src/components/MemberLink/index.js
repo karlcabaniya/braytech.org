@@ -25,9 +25,21 @@ class MemberLink extends React.Component {
     super(props);
 
     this.state = {
-      loadingBasic: true,
-      loadingAll: true,
-      loadingAllError: false,
+      basic: {
+        loading: true,
+        data: false,
+        error: false
+      },
+      all: {
+        loading: false,
+        data: false,
+        error: false
+      },
+      voluspa: {
+        loading: true,
+        data: false,
+        error: false
+      },
       overlay: false
     };
     this.mounted = false;
@@ -41,41 +53,34 @@ class MemberLink extends React.Component {
     this.mounted = false;
   }
 
-  activateOverlay = async e => {
-    e.stopPropagation();
-
+  getFullProfileData = async () => {
     const { type, id } = this.props;
 
     if (this.mounted) {
       try {
-        this.setState((prevState, props) => {
-          prevState.overlay = true;
-          return prevState;
-        });
+        let requests = [bungie.memberProfile(type, id, '100,200,202,204,800,900'), bungie.memberGroups(type, id)];
 
-        let requests = [bungie.memberProfile(type, id, '100,200,202,204,800,900'), voluspa.leaderboardPosition(type, id), bungie.memberGroups(type, id)];
-
-        let [profile, leaderboardPosition, group] = await Promise.all(requests);
+        let [profile, group] = await Promise.all(requests);
 
         profile = responseUtils.profileScrubber(profile, 'activity');
 
         if (!profile.profileRecords.data) {
           this.setState((prevState, props) => {
-            prevState.loadingAllError = true;
+            prevState.all.error = true;
             return prevState;
           });
         } else {
-          this.dataAll = {
+          let data = {
             ...profile,
-            ranks: leaderboardPosition ? leaderboardPosition : false,
             group: group && group.results.length ? group.results[0].group : false
           };
 
-          console.log(this.dataAll);
+          // console.log(data);
 
           this.setState((prevState, props) => {
-            prevState.loadingAllError = false;
-            prevState.loadingAll = false;
+            prevState.all.error = false;
+            prevState.all.data = data;
+            prevState.all.loading = false;
             return prevState;
           });
         }
@@ -83,6 +88,42 @@ class MemberLink extends React.Component {
         console.log(e);
       }
     }
+  };
+
+  getVoluspaData = async () => {
+    const { type, id } = this.props;
+
+    if (this.mounted) {
+      try {
+        let data = await voluspa.leaderboardPosition(type, id);
+
+        this.setState((prevState, props) => {
+          prevState.voluspa.error = data ? false : true;
+          prevState.voluspa.data = data ? data : false;
+          prevState.voluspa.loading = false;
+          return prevState;
+        });
+      } catch (e) {
+        this.setState((prevState, props) => {
+          prevState.voluspa.error = true;
+          prevState.voluspa.data = false;
+          prevState.voluspa.loading = false;
+          return prevState;
+        });
+      }
+    }
+  };
+
+  activateOverlay = async e => {
+    e.stopPropagation();
+
+    this.setState((prevState, props) => {
+      prevState.overlay = true;
+      return prevState;
+    });
+
+    this.getFullProfileData();
+    this.getVoluspaData();
   };
 
   deactivateOverlay = e => {
@@ -101,9 +142,10 @@ class MemberLink extends React.Component {
     if (this.mounted) {
       try {
         let response = await bungie.memberProfile(type, id, '200');
-        this.dataBasic = responseUtils.profileScrubber(response, 'activity');
+        let data = responseUtils.profileScrubber(response, 'activity');
         this.setState((prevState, props) => {
-          prevState.loadingBasic = false;
+          prevState.basic.data = data;
+          prevState.basic.loading = false;
           return prevState;
         });
       } catch (e) {}
@@ -114,20 +156,20 @@ class MemberLink extends React.Component {
     const { t, member, type, id, displayName, characterId } = this.props;
 
     let characterBasic;
-    if (this.dataBasic) {
+    if (this.state.basic.data) {
       if (characterId) {
-        characterBasic = this.dataBasic.characters.data.find(c => c.characterId === characterId);
-        if (!characterBasic) characterBasic = this.dataBasic.characters.data[0];
+        characterBasic = this.state.basic.data.characters.data.find(c => c.characterId === characterId);
+        if (!characterBasic) characterBasic = this.state.basic.data.characters.data[0];
       } else {
-        characterBasic = this.dataBasic.characters.data[0];
+        characterBasic = this.state.basic.data.characters.data[0];
       }
     }
 
     let timePlayed;
-    if (this.dataAll) {
+    if (this.state.all.data) {
       timePlayed = Math.floor(
-        Object.keys(this.dataAll.characters.data).reduce((sum, key) => {
-          return sum + parseInt(this.dataAll.characters.data[key].minutesPlayedTotal);
+        Object.keys(this.state.all.data.characters.data).reduce((sum, key) => {
+          return sum + parseInt(this.state.all.data.characters.data[key].minutesPlayedTotal);
         }, 0) / 1440
       );
     }
@@ -146,23 +188,23 @@ class MemberLink extends React.Component {
               <i className={primaryFlair.icon} />
             </div>
           ) : null}
-          <div className='emblem'>{!this.state.loadingBasic && this.dataBasic ? <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} /> : null}</div>
+          <div className='emblem'>{!this.state.basic.loading && this.state.basic.data ? <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} /> : null}</div>
           <div className='displayName'>{displayName}</div>
         </div>
         {this.state.overlay ? (
-          <div id='member-overlay' className={cx({ error: this.state.loadingAllError })}>
+          <div id='member-overlay' className={cx({ error: this.state.all.error })}>
             <div className='wrapper-outer'>
               <div className='background'>
                 <div className='border-top' />
                 <div className='acrylic' />
               </div>
               <div className={cx('wrapper-inner')}>
-                {!this.state.loadingAll && this.dataAll && !this.state.loadingAllError ? (
+                {!this.state.all.loading && this.state.all.data && !this.state.all.error ? (
                   <>
                     <div className='module'>
                       <div className='head'>
                         <div className='displayName'>{displayName}</div>
-                        <div className='groupName'>{this.dataAll.group ? this.dataAll.group.name : null}</div>
+                        <div className='groupName'>{this.state.all.data.group ? this.state.all.data.group.name : null}</div>
                         <div className='stamps'>
                           <div>
                             <i className={`destiny-platform_${destinyEnums.PLATFORMS[type].toLowerCase()}`} />
@@ -189,11 +231,11 @@ class MemberLink extends React.Component {
                           <div className='name'>Time played accross characters</div>
                         </div>
                         <div>
-                          <div className='value'>{this.dataAll.profileRecords.data.score.toLocaleString('en-us')}</div>
+                          <div className='value'>{this.state.all.data.profileRecords.data.score.toLocaleString('en-us')}</div>
                           <div className='name'>Triumph score</div>
                         </div>
                         <div>
-                          <div className='value'>{destinyUtils.collectionTotal(this.dataAll).toLocaleString('en-us')}</div>
+                          <div className='value'>{destinyUtils.collectionTotal(this.state.all.data).toLocaleString('en-us')}</div>
                           <div className='name'>Collection total</div>
                         </div>
                       </div>
@@ -202,24 +244,28 @@ class MemberLink extends React.Component {
                       <div className='sub-header'>
                         <div>Leaderboards</div>
                       </div>
-                      {this.dataAll.ranks && this.dataAll.ranks.data ? (
+                      {this.state.voluspa.data && this.state.voluspa.data.data ? (
                         <div className='ranks'>
                           <div>
-                            <div className='value'>{this.dataAll.ranks.data.ranks.triumphScore.toLocaleString('en-us')}</div>
+                            <div className='value'>{this.state.voluspa.data.data.ranks.triumphScore.toLocaleString('en-us')}</div>
                             <div className='name'>Triumph score rank</div>
                           </div>
                           <div>
-                            <div className='value'>{this.dataAll.ranks.data.ranks.collectionTotal.toLocaleString('en-us')}</div>
+                            <div className='value'>{this.state.voluspa.data.data.ranks.collectionTotal.toLocaleString('en-us')}</div>
                             <div className='name'>Collections rank</div>
                           </div>
                           <div>
-                            <div className='value'>{this.dataAll.ranks.data.ranks.timePlayed.toLocaleString('en-us')}</div>
+                            <div className='value'>{this.state.voluspa.data.data.ranks.timePlayed.toLocaleString('en-us')}</div>
                             <div className='name'>Time played rank</div>
                           </div>
                         </div>
+                      ) : this.state.voluspa.loading ? (
+                        <div className='ranks loading'>
+                          <Spinner mini />
+                        </div>
                       ) : (
                         <div className='ranks error'>
-                          <div>{this.dataAll.ranks && this.dataAll.ranks.status ? this.dataAll.ranks.status : `VOLUSPA is currently unavailable`}</div>
+                          <div>{this.state.voluspa.data && this.state.voluspa.data.status ? this.state.voluspa.data.status : `VOLUSPA is currently unavailable`}</div>
                         </div>
                       )}
                       <div className='sub-header'>
@@ -227,22 +273,22 @@ class MemberLink extends React.Component {
                       </div>
                       <div className='characters'>
                         <div>
-                          {this.dataAll.characters.data.map(c => {
+                          {this.state.all.data.characters.data.map(c => {
                             let state = null;
-                            if (this.dataAll.characterActivities.data[c.characterId].currentActivityHash === 0 || this.dataAll.characterActivities.data[c.characterId].currentActivityHash === 82913930) {
+                            if (this.state.all.data.characterActivities.data[c.characterId].currentActivityHash === 0 || this.state.all.data.characterActivities.data[c.characterId].currentActivityHash === 82913930) {
                               state = (
                                 <>
                                   <div className='time-before'>{t('Last played')}</div>
-                                  <Moment fromNow>{this.dataAll.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
+                                  <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
                                 </>
                               );
                             } else {
                               state = (
                                 <>
                                   <div className='activity'>
-                                    {manifest.DestinyActivityModeDefinition[this.dataAll.characterActivities.data[c.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[this.dataAll.characterActivities.data[c.characterId].currentActivityHash].displayProperties.name}
+                                    {manifest.DestinyActivityModeDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].displayProperties.name}
                                   </div>
-                                  <Moment fromNow>{this.dataAll.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
+                                  <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
                                 </>
                               );
                             }
@@ -298,8 +344,8 @@ class MemberLink extends React.Component {
                               completionValue: destinyUtils.totalValor()
                             }}
                             playerProgress={{
-                              progress: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2626549951].currentProgress,
-                              complete: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2626549951].currentProgress === destinyUtils.totalValor(),
+                              progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2626549951].currentProgress,
+                              complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2626549951].currentProgress === destinyUtils.totalValor(),
                               objectiveHash: 2626549951
                             }}
                             hideCheck
@@ -314,8 +360,8 @@ class MemberLink extends React.Component {
                               completionValue: destinyUtils.totalGlory()
                             }}
                             playerProgress={{
-                              progress: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2000925172].currentProgress,
-                              complete: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2000925172].currentProgress === destinyUtils.totalGlory(),
+                              progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2000925172].currentProgress,
+                              complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2000925172].currentProgress === destinyUtils.totalGlory(),
                               objectiveHash: 2000925172
                             }}
                             hideCheck
@@ -330,8 +376,8 @@ class MemberLink extends React.Component {
                               completionValue: destinyUtils.totalInfamy()
                             }}
                             playerProgress={{
-                              progress: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2772425241].currentProgress,
-                              complete: this.dataAll.characterProgressions.data[this.dataAll.characters.data[0].characterId].progressions[2772425241].currentProgress === destinyUtils.totalInfamy(),
+                              progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2772425241].currentProgress,
+                              complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2772425241].currentProgress === destinyUtils.totalInfamy(),
                               objectiveHash: 2772425241
                             }}
                             hideCheck
@@ -356,8 +402,8 @@ class MemberLink extends React.Component {
                           //   2039028930: '0560-000000EB.png',
                           //   991908404: '0560-0000107E.png'
                           // };
-                          let completionValue = this.dataAll.profileRecords.data.records[node.completionRecordHash].objectives[0].completionValue;
-                          let progress = this.dataAll.profileRecords.data.records[node.completionRecordHash].objectives[0].progress;
+                          let completionValue = this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].completionValue;
+                          let progress = this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].progress;
 
                           return (
                             <li key={i}>
@@ -380,7 +426,7 @@ class MemberLink extends React.Component {
                       </ul>
                     </div>
                   </>
-                ) : this.state.loadingAllError ? (
+                ) : this.state.all.error ? (
                   <>
                     <div>
                       <div className='icon'>

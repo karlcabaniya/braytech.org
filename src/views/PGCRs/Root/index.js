@@ -35,7 +35,10 @@ class All extends React.Component {
             <div className='content head'>
               <div className='page-header'>
                 <div className='name'>{t('Post Game Carnage Reports')}</div>
-                <div className='description'>{t('You know, in case you missed the match summary screen while you were busy being awesome.')}</div>
+              </div>
+              <div className='text'>
+                <p>{t('You know, in case you missed the match summary screen while you were busy being awesome. These views will check for fresh games every 30 seconds.')}</p>
+                <p>{t("Like most aspects of Bungie's API, PGCRs are complicated, and as such it will take some time to work out the kinks and to understand how to best handle different game modes.")}</p>
               </div>
             </div>
           </div>

@@ -44,7 +44,7 @@
 }
 
 #this-week .module .module-header .name {
-  font-size: 36px;
+  font-size: 32px;
   line-height: 1;
   font-weight: 500;
 }
@@ -132,6 +132,7 @@
 }
 
 #this-week .module .list.modifiers li .text .description {
+  white-space: pre-line;
   color: rgba(255, 255, 255, 0.4);
 }
 

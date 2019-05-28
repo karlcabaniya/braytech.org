@@ -16,7 +16,7 @@
 }
 
 #root > .wrapper.dark-mode {
-  background-color: #212121;
+  background-color: #141414;
 }
 
 #root > .wrapper.dark-mode #footer {
@@ -521,7 +521,8 @@ html.backdropfilter .sticky-nav{
   color: #fff;
 }
 
-.sticky-nav i.destiny-B_Button::after {
+.sticky-nav i.destiny-B_Button::after,
+.sticky-nav i.destiny-Y_Button::after {
   content: ' ';
   position: absolute;
   top: 1px;
@@ -533,12 +534,16 @@ html.backdropfilter .sticky-nav{
   z-index: -1;
 }
 
+.sticky-nav i.destiny-Y_Button::after {
+  background-color: #FFC107;
+}
+
 .sticky-nav ul {
   display: flex;
 }
 
 .sticky-nav ul li {
-  margin: 0 0 0 2rem;
+  margin: 0 0 0 1rem;
   font-size: inherit;
   display: inherit;
   color: inherit;
@@ -572,10 +577,14 @@ html.backdropfilter .sticky-nav{
     padding: 0 2rem;
     font-size: 12px;
   }
+
+  .sticky-nav ul li {
+    margin: 0 0 0 0;
+  }
 }
 
 .wrapper.dark-mode .sticky-nav {
-  background-color: hsla(0, 0%, 7%, 0.8);
+  background-color: hsla(0, 0%, 5%, 0.8);
 }
 
 .wrapper.dark-mode .sticky-nav.ultra-black {

@@ -33,7 +33,7 @@ class Root extends React.Component {
             <div className='split'>
               <div className='text'>
                 <p>Braytech leaderboards use a dense rank and are sorted by rank in ascending order, followed by display name in ascending order.</p>
-              </div>{' '}
+              </div>
               <div className='stats'>
                 <div>
                   <div className='value'>

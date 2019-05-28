@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
+import { flattenDepth } from 'lodash';
 import cx from 'classnames';
 
 import * as bungie from '../../utils/bungie';
@@ -36,7 +37,7 @@ class Legend extends React.Component {
     });
 
     let activities = await Promise.all(requests);
-    activities = activities.flat();
+    activities = flattenDepth(activities, 1);
 
     this.setState(p => {
       p.cacheState[mode] = activities.length;
