@@ -557,14 +557,15 @@ html.backdropfilter .wrapper.dark-mode #member-overlay.error .background .border
 
 #member-overlay.error .wrapper-inner div .icon {
   position: relative;
-  height: 120px;
-  width: 120px;
+  height: 100px;
+  width: 100px;
   background-color: rgba(255, 255, 255, 0);
 }
 
 #member-overlay.error .wrapper-inner .text .name {
   font-size: 24px;
-  margin: 0 0 10px;
+  line-height: 19px;
+  margin: 0 0 21px;
 }
 
 #member-overlay.error .wrapper-inner .text .description {
@@ -612,13 +613,14 @@ html.backdropfilter .wrapper.dark-mode #member-overlay.error .background .border
 
   #member-overlay.error .wrapper-inner div .icon {
     position: relative;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
   }
 
   #member-overlay.error .wrapper-inner .text .name {
     font-size: 18px;
-    margin: 0 0 10px;
+    line-height: 14px;
+    margin: 0 0 20px;
   }
   
   #member-overlay.error .wrapper-inner .text .description {

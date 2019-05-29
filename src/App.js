@@ -22,7 +22,7 @@ import Header from './components/UI/Header';
 import Tooltip from './components/Tooltip';
 import Footer from './components/UI/Footer';
 import NotificationBar from './components/Notifications/NotificationBar';
-import NotificationOverlay from './components/Notifications/NotificationOverlay';
+import NotificationLink from './components/Notifications/NotificationLink';
 import NotificationProgress from './components/Notifications/NotificationProgress';
 import RefreshService from './components/RefreshService';
 
@@ -65,8 +65,7 @@ class App extends React.Component {
     this.currentLanguage = props.i18n.getCurrentLanguage();
 
     // We do these as early as possible - we don't want to wait
-    // for the component to mount before starting the web
-    // requests
+    // for the component to mount before starting the web requests
     this.startupRequests = {
       storedManifest: timed(
         'storedManifest',
@@ -101,8 +100,14 @@ class App extends React.Component {
     try {
       await timed('setUpManifest', this.setUpManifest());
     } catch (error) {
-      console.log(error);
-      this.setState({ status: { code: 'error_setUpManifest', detail: error } });
+      //console.log(error);
+      if (error.message === 'Failed to fetch') {
+        this.setState({ status: { code: 'error_fetchingManifest', detail: error } });
+      } else if (error.message === 'maintenance') {
+        this.setState({ status: { code: 'error_maintenance', detail: error } });
+      } else {
+        this.setState({ status: { code: 'error_setUpManifest', detail: error } });
+      }
     }
   }
 
@@ -123,9 +128,14 @@ class App extends React.Component {
     }
 
     tmpManifest.settings = await this.startupRequests.bungieSettings;
+
+    if (tmpManifest.settings && tmpManifest.settings.systems && !tmpManifest.settings.systems.D2Profiles.enabled) {
+      throw new Error('maintenance');
+    }
+
     this.availableLanguages = Object.keys(manifestIndex.jsonWorldContentPaths);
 
-    tmpManifest.statistics = await this.startupRequests.voluspaStatistics || {};
+    tmpManifest.statistics = (await this.startupRequests.voluspaStatistics) || {};
 
     manifest.set(tmpManifest);
 
@@ -153,7 +163,7 @@ class App extends React.Component {
 
   RebindTooltips = () => {
     this.TooltipComponent.target_bindings();
-  }
+  };
 
   render() {
     if (!window.ga) {
@@ -161,7 +171,13 @@ class App extends React.Component {
     }
 
     if (this.state.status.code !== 'ready') {
-      return <Loading state={this.state.status} theme={this.props.theme} />;
+    // if (this.state.status.code !== 'ready' || this.state.status.code === 'ready') {
+      return (
+        <div className={cx('wrapper', this.props.theme.selected)}>
+          <Loading state={this.state.status} />
+          <NotificationLink />
+        </div>
+      );
     }
 
     return (
@@ -170,7 +186,7 @@ class App extends React.Component {
           render={route => (
             <div className={cx('wrapper', this.props.theme.selected)}>
               <NotificationBar updateAvailable={this.props.updateAvailable} />
-              {/* <NotificationOverlay /> */}
+              <NotificationLink />
               <NotificationProgress />
 
               {/* Don't run the refresh service if we're currently selecting

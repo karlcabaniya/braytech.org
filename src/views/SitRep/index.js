@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import Moment from 'react-moment';
 import cx from 'classnames';
-import orderBy from 'lodash/orderBy';
+import { orderBy, flattenDepth } from 'lodash';
 
 import manifest from '../../utils/manifest';
 import { ProfileLink } from '../../components/ProfileLink';
@@ -109,8 +109,8 @@ class SitRep extends React.Component {
           state.redeemed = milestone.rewards[0].entries[0].redeemed;
         }
         
-        let rewardEntryHashes = milestone.rewards.map(r => r.entries).flat().map(r => r.rewardEntryHash);
-        let mappedRewards = rewardEntryHashes.map(r => Object.values(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards[r].rewardEntries).find(e => e.rewardEntryHash === r).items).flat().map(i => i.itemHash)
+        let rewardEntryHashes = flattenDepth(milestone.rewards.map(r => r.entries), 1).map(r => r.rewardEntryHash);
+        let mappedRewards = flattenDepth(rewardEntryHashes.map(r => Object.values(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards[r].rewardEntries).find(e => e.rewardEntryHash === r).items), 1).map(i => i.itemHash)
 
         state.rewards.push(...mappedRewards);
       } else {

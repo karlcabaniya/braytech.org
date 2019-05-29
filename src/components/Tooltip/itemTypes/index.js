@@ -20,13 +20,11 @@ import sandboxPerk from './sandboxPerk';
 class ItemTypes extends React.Component {
 
   render() {
-    const { member, dossierMembers, hash, itemInstanceId, tooltipType, rollNote = false } = this.props;
+    const { member, hash, itemInstanceId, tooltipType, rollNote = false } = this.props;
 
     let itemComponents;
     if (member.data && member.data.profile.itemComponents.instances.data[itemInstanceId]) {
       itemComponents = member.data.profile.itemComponents;
-    } else if (dossierMembers.responses && dossierMembers.responses.find(d => d.profile.itemComponents.instances.data[itemInstanceId])) {
-      itemComponents = dossierMembers.responses.find(d => d.profile.itemComponents.instances.data[itemInstanceId]).profile.itemComponents;
     } else {
       itemComponents = false;
     }
@@ -190,8 +188,7 @@ class ItemTypes extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    viewport: state.viewport,
-    dossierMembers: state.dossierMembers
+    viewport: state.viewport
   };
 }
 

@@ -30,9 +30,9 @@ class ThisWeek extends React.Component {
         ascendant: new Date(`2018-09-04T${resetTime}`).getTime(),
         curse: new Date(`2018-09-11T${resetTime}`).getTime(),
         ep: new Date(`2018-05-08T${resetTime}`).getTime(),
-        reckoning: new Date(`2018-03-05T${resetTime}`).getTime(),
-        whisper: new Date(`2018-05-21T${resetTime}`).getTime(),
-        zerohour: new Date(`2018-05-21T${resetTime}`).getTime()
+        reckoning: new Date(`2018-03-12T${resetTime}`).getTime(),
+        whisper: new Date(`2018-05-28T${resetTime}`).getTime(),
+        zerohour: new Date(`2018-05-28T${resetTime}`).getTime()
       },
       cycle: {
         // how many week cycle
@@ -255,10 +255,10 @@ class ThisWeek extends React.Component {
         }
       },
       whisper: {
-        1: {
+        2: {
           modifiers: [3362074814]
         },
-        2: {
+        1: {
           modifiers: [3215384520]
         },
         3: {
@@ -266,10 +266,10 @@ class ThisWeek extends React.Component {
         }
       },
       zerohour: {
-        1: {
+        2: {
           modifiers: [3362074814]
         },
-        2: {
+        1: {
           modifiers: [3215384520]
         },
         3: {
@@ -537,11 +537,11 @@ class ThisWeek extends React.Component {
     // console.log(Object.values(milestones).map(m => {
     //   m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
     //   return m;
-    // }));
+    // })); 2693136600
 
-    const levAcitivty = milestones[3660836525].activities.find(a => a.activityHash === 2693136600);
-    const eowAcitivty = milestones[2986584050].activities.find(a => a.activityHash === 809170886);
-    
+    const levAcitivty = milestones[3660836525] ? milestones[3660836525].activities[0] : false;
+    const eowAcitivty = milestones[2986584050] ? milestones[2986584050].activities.find(a => a.activityHash === 809170886) : false;
+
     const reckoningModifiers = milestones[601087286].activities[0].modifierHashes;
     const strikesModifiers = milestones[1437935813].activities[0].modifierHashes;
 
@@ -677,7 +677,7 @@ class ThisWeek extends React.Component {
             </div>
             <h4>Active Rotation</h4>
             <ul className='list modifiers'>
-              {levAcitivty.phaseHashes.map((p, i) => {
+              {levAcitivty ? levAcitivty.phaseHashes.map((p, i) => {
                 let phases = {
                   3847906370: {
                     name: t('The Pleasure Gardens'),
@@ -712,7 +712,7 @@ class ThisWeek extends React.Component {
                     </div>
                   </li>
                 )
-              })}
+              }) : null}
             </ul>
           </div>
           <div className='content'>
@@ -722,7 +722,7 @@ class ThisWeek extends React.Component {
             </div>
             <h4>Active Modifiers</h4>
             <ul className='list modifiers'>
-              {eowAcitivty.modifierHashes.map((m, i) => {
+              {eowAcitivty ? eowAcitivty.modifierHashes.map((m, i) => {
                 let modDef = manifest.DestinyActivityModifierDefinition[m];
                 return (
                   <li key={i}>
@@ -735,7 +735,7 @@ class ThisWeek extends React.Component {
                     </div>
                   </li>
                 )
-              })}
+              }) : null}
             </ul>
           </div>
           <div className='content'>
