@@ -61,8 +61,6 @@ class NotificationLink extends React.Component {
       }
     }) : false;
 
-    console.log(this.active);
-
     if (this.active && this.active.length ? this.active[0] : false) {
       const state = this.active[0];
 

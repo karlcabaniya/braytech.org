@@ -313,5 +313,10 @@
     "date": "2019-05-29T12:31:52.863Z",
     "version": "2.5.7",
     "content": "- Minor works\n- Updated Credits page to use new MemberLink component"
+  },
+  {
+    "date": "2019-05-29T21:50:33.916Z",
+    "version": "2.5.8",
+    "content": "- Fix for provate profiles on Leaderboards"
   }
 ]

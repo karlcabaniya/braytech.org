@@ -169,7 +169,11 @@ class Board extends React.Component {
             });
           });
         } else {
-          this.state.response.data.slice(displayOffset % this.limit, (displayOffset % this.limit) + displayLimit).forEach((m, i) => {
+          this.state.response.data
+            .filter(m => !m.destinyUserInfo.wasPrivate)
+            .slice(displayOffset % this.limit, (displayOffset % this.limit) + displayLimit)
+            .forEach((m, i) => {
+
             let timePlayed = Math.floor(m.destinyUserInfo.timePlayed / 1440);
 
             rows.push({
