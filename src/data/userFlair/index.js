@@ -18,6 +18,56 @@ const userFlair = [
         classnames: 'me'
       }
     ]
+  },
+  {
+    user: '24611686018455756917',
+    trophies: [
+      {
+        primary: true,
+        icon: 'destiny-clovis_bray_device',
+        classnames: 'patron'
+      }
+    ]
+  },
+  {
+    user: '24611686018469271298',
+    trophies: [
+      {
+        primary: true,
+        icon: 'destiny-clovis_bray_device',
+        classnames: 'patron'
+      }
+    ]
+  },
+  {
+    user: '14611686018436742706',
+    trophies: [
+      {
+        primary: true,
+        icon: 'destiny-clovis_bray_device',
+        classnames: 'patron'
+      }
+    ]
+  },
+  {
+    user: '44611686018467367772',
+    trophies: [
+      {
+        primary: true,
+        icon: 'destiny-clovis_bray_device',
+        classnames: 'patron'
+      }
+    ]
+  },
+  {
+    user: '14611686018469277478',
+    trophies: [
+      {
+        primary: true,
+        icon: 'destiny-clovis_bray_device',
+        classnames: 'patron'
+      }
+    ]
   }
 ];
 

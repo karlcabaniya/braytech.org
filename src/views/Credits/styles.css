@@ -52,31 +52,30 @@
 
 #credits .module.thanks .person .text strong {
   font-weight: 500;
+  display: block;
+  margin: 0 0 8px;
 }
 
-#credits .module.thanks .tags ul {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 3px;
-}
-
-#credits .module.thanks .tags ul .linked {
-  margin: 0;
-}
-
-#credits .module.thanks .tags ul .linked .icon {
-  position: relative;
-  width: 38px;
-  height: 38px;
-}
-
-#credits .module.thanks .tags ul .linked .displayName {
-  padding: 0 16px;
-  font-size: 16px;
+#credits .module.thanks > .tags {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 3px;
 }
 
 
 
+
+@media screen and (max-width: 1500px) {
+  #credits .module.thanks > .tags {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  #credits .module.thanks > .tags {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 @media screen and (max-width: 1200px) {
   #credits {
@@ -87,7 +86,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  #credits .module.thanks .tags ul {
+  #credits .module.thanks > .tags {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -97,16 +96,16 @@
   #credits .module.thanks .persons {
     grid-template-columns: 1fr;
   }
-
-  #credits .module.thanks .tags ul {
-    grid-template-columns: repeat(1, 1fr);
-  }
 }
 
 @media screen and (max-width: 600px) {
   #credits {
     padding: 2rem;
     grid-template-columns: 1fr;
+  }
+
+  #credits .module.thanks > .tags {
+    grid-template-columns: repeat(1, 1fr);
   }
   
 }

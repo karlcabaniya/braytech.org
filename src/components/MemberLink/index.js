@@ -137,11 +137,11 @@ class MemberLink extends React.Component {
   };
 
   async componentDidMount() {
-    const { type, id } = this.props;
+    const { type, id, displayName = false } = this.props;
 
     if (this.mounted) {
       try {
-        let response = await bungie.memberProfile(type, id, '200');
+        let response = await bungie.memberProfile(type, id, displayName ? '200' : '100,200');
         let data = responseUtils.profileScrubber(response, 'activity');
         this.setState((prevState, props) => {
           prevState.basic.data = data;
@@ -153,7 +153,7 @@ class MemberLink extends React.Component {
   }
 
   render() {
-    const { t, member, type, id, displayName, characterId } = this.props;
+    const { t, member, type, id, displayName = false, characterId, hideFlair = false } = this.props;
 
     let characterBasic;
     if (this.state.basic.data) {
@@ -183,13 +183,13 @@ class MemberLink extends React.Component {
     return (
       <>
         <div className='member-link' onClick={this.activateOverlay}>
-          {primaryFlair ? (
+          {!hideFlair && primaryFlair ? (
             <div className={cx('user-flair', primaryFlair.classnames)}>
               <i className={primaryFlair.icon} />
             </div>
           ) : null}
           <div className='emblem'>{!this.state.basic.loading && this.state.basic.data ? <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} /> : null}</div>
-          <div className='displayName'>{displayName}</div>
+          <div className='displayName'>{displayName ? displayName : !this.state.basic.loading && this.state.basic.data ? this.state.basic.data.profile.data.userInfo.displayName : null}</div>
         </div>
         {this.state.overlay ? (
           <div id='member-overlay' className={cx({ error: this.state.all.error })}>
@@ -203,7 +203,7 @@ class MemberLink extends React.Component {
                   <>
                     <div className='module'>
                       <div className='head'>
-                        <div className='displayName'>{displayName}</div>
+                        <div className='displayName'>{this.state.all.data.profile.data && this.state.all.data.profile.data.userInfo.displayName}</div>
                         <div className='groupName'>{this.state.all.data.group ? this.state.all.data.group.name : null}</div>
                         <div className='stamps'>
                           <div>

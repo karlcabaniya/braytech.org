@@ -59,11 +59,9 @@
   margin: 20px 0 14px;
 }
 
-#this-week .module .record-items {
-  grid-template-columns: 1fr;
-}
-
-#this-week .module .collection-items {
+#this-week .module .record-items,
+#this-week .module .collection-items,
+#this-week .module .inventory-items {
   grid-template-columns: 1fr;
 }
 
@@ -93,7 +91,8 @@
   opacity: 1;
 }
 
-#this-week .module .collection-items li:hover {
+#this-week .module .collection-items li:hover,
+#this-week .module .inventory-items li:hover {
   background-color: rgba(255, 255, 255, 0.4);
   color: rgba(255, 255, 255, 1);
 }

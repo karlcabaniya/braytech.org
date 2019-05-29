@@ -308,5 +308,10 @@
     "date": "2019-05-29T04:40:31.482Z",
     "version": "2.5.6",
     "content": "- New loading screen style and code\n- New NotificationLink component to deliver error and informational messages"
+  },
+  {
+    "date": "2019-05-29T12:31:52.863Z",
+    "version": "2.5.7",
+    "content": "- Minor works\n- Updated Credits page to use new MemberLink component"
   }
 ]

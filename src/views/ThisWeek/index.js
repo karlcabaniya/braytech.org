@@ -6,6 +6,7 @@ import cx from 'classnames';
 
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
+import Items from '../../components/Items';
 import ObservedImage from '../../components/ObservedImage';
 import manifest from '../../utils/manifest';
 
@@ -177,7 +178,6 @@ class ThisWeek extends React.Component {
           boss: t('Nur Abath, Crest of Xol'),
           items: [
             // https://github.com/Bungie-net/api/issues/732
-            1887808042, // IKELOS_SG
             3243866699 // Worldline Ideasthesia: Torsion
           ],
           collectibles: [
@@ -188,7 +188,6 @@ class ThisWeek extends React.Component {
           boss: t('Kathok, Roar of Xol'),
           triumphs: [],
           items: [
-            1723472487, // IKELOS_SMG
             3243866698 // Worldline Ideasthesia: Anarkhiia
           ],
           collectibles: [
@@ -200,7 +199,6 @@ class ThisWeek extends React.Component {
           triumphs: [],
           items: [
             // https://youtu.be/lrPf16ZHevU?t=104
-            847450546, // IKELOS_SR
             3243866697 //Worldline Ideasthesia: Cavalry
           ],
           collectibles: [
@@ -211,9 +209,6 @@ class ThisWeek extends React.Component {
           boss: t('Naksud, the Famine'),
           triumphs: [],
           items: [
-            1887808042, // IKELOS_SG
-            1723472487, // IKELOS_SMG
-            847450546, // IKELOS_SR
             3243866696 //  Worldline Ideasthesia: Faktura
           ],
           collectibles: [
@@ -226,9 +221,6 @@ class ThisWeek extends React.Component {
           boss: t('Bok Litur, Hunger of Xol'),
           triumphs: [],
           items: [
-            1887808042, // IKELOS_SG
-            1723472487, // IKELOS_SMG
-            847450546, // IKELOS_SR
             3243866703 // Worldline Ideasthesia: Black Square
           ],
           collectibles: [
@@ -746,6 +738,10 @@ class ThisWeek extends React.Component {
             <h4>Collectibles</h4>
             <ul className='list collection-items'>
               <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
+            </ul>
+            <h4>Catalyst Items: Worldline Zero</h4>
+            <ul className='list inventory-items'>
+              <Items hashes={consolidatedInfo.ep[cycleInfo.week.ep].items} disableTooltip />
             </ul>
           </div>
         </div>
