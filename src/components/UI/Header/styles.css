@@ -396,6 +396,9 @@ html.backdropfilter #header .nav {
 }
 
 #header .nav .wrap {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
   min-height: 100%;
   display: grid;
   align-content: space-between;
@@ -404,7 +407,7 @@ html.backdropfilter #header .nav {
 #header .nav .wrap .types {
   padding: 3rem 3rem 3rem 3rem;
   display: grid;
-  grid-template-columns: repeat(2, 24rem);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 3rem;
 }
 
@@ -549,6 +552,22 @@ html.backdropfilter #header .nav {
 
   #header.profile-header .views ul {
     margin: 0;
+  }
+
+  #header .nav .wrap .types {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #header .nav .wrap .types {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #header .nav .wrap .types {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 

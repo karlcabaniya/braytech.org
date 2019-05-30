@@ -739,10 +739,10 @@ class ThisWeek extends React.Component {
             <ul className='list collection-items'>
               <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
             </ul>
-            <h4>Catalyst Items: Worldline Zero</h4>
+            {/* <h4>Catalyst Items: Worldline Zero</h4>
             <ul className='list inventory-items'>
               <Items hashes={consolidatedInfo.ep[cycleInfo.week.ep].items} disableTooltip />
-            </ul>
+            </ul> */}
           </div>
         </div>
         <div className='module'>

@@ -249,7 +249,7 @@
 
 #index .module .content.change-log .log-content ul li {
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 2;
 }
 
 #index .modules > .description {
@@ -367,7 +367,7 @@
 
   #index .module:last-child .width-wrap {
     padding: 5rem 2rem 2rem;
-    grid-gap: 2rem;
+    grid-gap: 6rem;
     grid-template-columns: 1fr;
   }
 

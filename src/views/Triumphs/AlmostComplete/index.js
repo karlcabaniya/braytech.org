@@ -24,8 +24,7 @@ class Root extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member,
-    theme: state.theme
+    member: state.member
   };
 }
 

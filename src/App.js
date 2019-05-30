@@ -35,10 +35,11 @@ import Inspect from './views/Inspect';
 import Read from './views/Read';
 import Settings from './views/Settings';
 import Credits from './views/Credits';
-import Resources from './views/Resources';
+import Experiments from './views/Experiments';
 import Leaderboards from './views/Leaderboards';
 import FAQ from './views/FAQ';
-import ClanBannerBuilder from './views/Resources/ClanBannerBuilder';
+import ClanBannerBuilder from './views/Experiments/ClanBannerBuilder';
+import DataInspector from './views/Experiments/DataInspector';
 import OOB from './views/OOB';
 
 const RedirectRoute = props => <Route {...props} render={({ location }) => <Redirect to={{ pathname: '/character-select', state: { from: location } }} />} />;
@@ -221,8 +222,9 @@ class App extends React.Component {
                           <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
                           <Route path='/leaderboards/:view?/:dom?/:sub?' render={route => <Leaderboards {...route} />} />
-                          <Route path='/resources' exact component={Resources} />
-                          <Route path='/resources/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
+                          <Route path='/experiments' exact component={Experiments} />
+                          <Route path='/experiments/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
+                          <Route path='/experiments/data-inspector' exact component={DataInspector} />
                           <Route path='/oob' component={OOB} />
                           <Route path='/' component={Index} />
                         </Switch>

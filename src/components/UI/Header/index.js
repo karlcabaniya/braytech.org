@@ -84,7 +84,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { t, route, viewport, member, theme } = this.props;
+    const { t, route, viewport, member } = this.props;
     let views = [
       {
         name: t('Clan'),
@@ -166,26 +166,19 @@ class Header extends React.Component {
         profile: false
       },
       {
-        name: t('Legend'),
-        desc: t("A high-level and more graphical overview of your achievements"),
-        slug: '/legend',
-        exact: true,
-        profile: true
-      },
-      {
-        name: t('Resources'),
+        name: t('Experiments'),
         desc: t("justrealmilk's curated list of tools and artists"),
-        slug: '/resources',
+        slug: '/experiments',
         exact: false,
         profile: false
       },
-      {
-        name: t('FAQ'),
-        desc: t('Answers to common queries in a mostly well-written and organised format'),
-        slug: '/faq',
-        exact: false,
-        profile: false
-      },
+      // {
+      //   name: t('FAQ'),
+      //   desc: t('Answers to common queries in a mostly well-written and organised format'),
+      //   slug: '/faq',
+      //   exact: false,
+      //   profile: false
+      // },
       {
         name: t('Credits'),
         desc: t('The Architects and Guardians that make Braytech possible'),

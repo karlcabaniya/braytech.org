@@ -13,7 +13,12 @@
 #credits .module.intro {
 }
 
-#credits .module.intro .text {
+#credits .module.intro .text p {
+  font-size: 14px;
+  max-width: 500px;
+}
+
+#credits .module.intro .text p:first-child {
   font-size: 16px;
 }
 
