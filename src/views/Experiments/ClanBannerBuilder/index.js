@@ -70,7 +70,7 @@ class ClanBannerBuilder extends React.Component {
 
     const buildLink = object => {
       let potentialData = assign({}, bannerData, object);
-      return `/resources/clan-banner-builder/${Object.values(potentialData).join('/')}/`;
+      return `/experiments/clan-banner-builder/${Object.values(potentialData).join('/')}/`;
     };
 
     let configOptions = [];

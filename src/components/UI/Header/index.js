@@ -167,7 +167,7 @@ class Header extends React.Component {
       },
       {
         name: t('Experiments'),
-        desc: t("justrealmilk's curated list of tools and artists"),
+        desc: t("Where I keep all of my crazy ideas"),
         slug: '/experiments',
         exact: false,
         profile: false

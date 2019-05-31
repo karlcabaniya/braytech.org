@@ -2,11 +2,11 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import cx from 'classnames';
 
 import Checkbox from '../../components/UI/Checkbox';
 import Button from '../../components/UI/Button';
 import { getLanguageInfo } from '../../utils/languageInfo';
+import * as ls from '../../utils/localStorage';
 
 import './styles.css';
 
@@ -115,51 +115,59 @@ class Settings extends React.Component {
     );
 
     return (
-      <div className={cx('view', this.props.theme.selected)} id='settings'>
+      <div className='view' id='settings'>
         <div className='module head'>
           <div className='page-header'>
             <div className='name'>{t('Settings')}</div>
-            <div className='description'>{t('Configure Braytech to your liking')}</div>
           </div>
         </div>
-        <div className='module theme'>
-          <div className='sub-header sub'>
-            <div>{t('Theme')}</div>
+        <div className='padder'>
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Theme')}</div>
+            </div>
+            <ul className='list settings'>
+              <li
+                key='light'
+                onClick={() => {
+                  this.props.setTheme('light-mode');
+                }}
+              >
+                <Checkbox linked checked={this.props.theme.selected === 'light-mode'} text={t('Lights on')} />
+              </li>
+              <li
+                key='dark'
+                onClick={() => {
+                  this.props.setTheme('dark-mode');
+                }}
+              >
+                <Checkbox linked checked={this.props.theme.selected === 'dark-mode'} text={t('Lights off')} />
+              </li>
+            </ul>
           </div>
-          <div className='description'>{t('Set the theme')}</div>
-          <ul className='list settings'>
-            <li
-              key='light'
-              onClick={() => {
-                this.props.setTheme('light-mode');
-              }}
-            >
-              <Checkbox linked checked={this.props.theme.selected === 'light-mode'} text={t('Lights on')} />
-            </li>
-            <li
-              key='dark'
-              onClick={() => {
-                this.props.setTheme('dark-mode');
-              }}
-            >
-              <Checkbox linked checked={this.props.theme.selected === 'dark-mode'} text={t('Lights off')} />
-            </li>
-          </ul>
-        </div>
-        <div className='module collectibles'>
-          <div className='sub-header sub'>
-            <div>{t('Collectibles')}</div>
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Collectibles')}</div>
+            </div>
+            <ul className='list settings'>{collectiblesButtons}</ul>
           </div>
-          <div className='description'>{t('Choose to hide redeemed triumph records or completed checklist items. This setting applies site-wide.')}</div>
-          <ul className='list settings'>{collectiblesButtons}</ul>
-        </div>
-        <div className='module language'>
-          <div className='sub-header sub'>
-            <div>{t('Language')}</div>
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Language')}</div>
+            </div>
+            <ul className='list settings'>{languageButtons}</ul>
+            <Button text={t('Save and restart')} invisible={this.state.language.current === this.state.language.selected} action={this.saveAndRestart} />
           </div>
-          <div className='description'>{t('Set manifest language')}</div>
-          <ul className='list settings'>{languageButtons}</ul>
-          <Button text={t('Save and restart')} invisible={this.state.language.current === this.state.language.selected} action={this.saveAndRestart} />
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Local saved data')}</div>
+            </div>
+            <div className='buttons'>
+              <Button text={t('Clear profile history')} action={() => { ls.set('history.profiles', []) }} />
+              <Button text={t('Clear tracked triumphs')} action={() => { this.props.setTrackedTriumphs([]) }} />
+              <Button text={t('Reset notifications')} action={() => { ls.set('history.notifications', []) }} />
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -181,6 +189,9 @@ function mapDispatchToProps(dispatch) {
     },
     setCollectibleDisplayState: value => {
       dispatch({ type: 'SET_COLLECTIBLES', payload: value });
+    },
+    setTrackedTriumphs: value => {
+      dispatch({ type: 'SET_TRACKED_TRIUMPHS', payload: value });
     }
   };
 }
