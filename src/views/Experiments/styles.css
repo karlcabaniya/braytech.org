@@ -81,6 +81,12 @@
 }
 
 @media screen and (max-width: 600px) {
-  
+  #experiments > .module.head {
+    padding: calc(3rem + 40px) 2rem 2rem;
+  }
+
+  #experiments .module .tools {
+    padding: 1rem;
+  }
   
 }

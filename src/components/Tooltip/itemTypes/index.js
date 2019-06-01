@@ -20,7 +20,7 @@ import sandboxPerk from './sandboxPerk';
 class ItemTypes extends React.Component {
 
   render() {
-    const { member, hash, itemInstanceId, tooltipType, rollNote = false } = this.props;
+    const { member, hash, itemInstanceId, tooltipType, rollNote = false, tooltips } = this.props;
 
     let itemComponents;
     if (member.data && member.data.profile.itemComponents.instances.data[itemInstanceId]) {
@@ -67,11 +67,11 @@ class ItemTypes extends React.Component {
           break;
         case 3:
           kind = 'weapon';
-          black = weapon(item);
+          black = weapon(item, member, tooltips.detailedMode);
           break;
         case 2:
           kind = 'armour';
-          black = armour(item);
+          black = armour(item, member, tooltips.detailedMode);
           break;
         case 14:
           kind = 'emblem';
@@ -91,11 +91,11 @@ class ItemTypes extends React.Component {
           break;
         case 22:
           kind = 'sparrow';
-          black = sparrow(item);
+          black = sparrow(item, tooltips.detailedMode);
           break;
         case 24:
           kind = 'ghost';
-          black = ghost(item);
+          black = ghost(item, tooltips.detailedMode);
           break;
         case 26:
           kind = 'bounty';
@@ -188,7 +188,8 @@ class ItemTypes extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    viewport: state.viewport
+    viewport: state.viewport,
+    tooltips: state.tooltips
   };
 }
 

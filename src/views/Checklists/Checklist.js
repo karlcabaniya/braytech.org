@@ -30,7 +30,7 @@ const Checklist = props => {
         <ul className='list no-interaction'>{children}</ul>
       ) : (
         <div className='info'>
-          <div className='text'>{t("You've completed this list.")}</div>
+          <div className='text'>{t("All complete")}</div>
         </div>
       )}
     </>

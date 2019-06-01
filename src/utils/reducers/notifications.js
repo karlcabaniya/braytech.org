@@ -2,9 +2,16 @@ import * as ls from '../localStorage';
 import notifications from '../../data/notifications';
 
 const history = ls.get('history.notifications') ? ls.get('history.notifications') : [];
-
+const timeAtInit = new Date().getTime();
 const defaultState = {
-  objects: (notifications && notifications.filter(n => !history.includes(n.id))) || [],
+  objects: (notifications && notifications.filter(n => {
+    let t = new Date(n.date).getTime();
+    if (t < timeAtInit) {
+      return true;
+    } else {
+      return false;
+    }
+  }).filter(n => !history.includes(n.id))) || [],
   trash: history || []
 };
 

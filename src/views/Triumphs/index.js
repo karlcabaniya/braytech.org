@@ -105,7 +105,7 @@ class Triumphs extends React.Component {
             <div />
             <ul>
               <li>
-                <ProfileLink to={backLinkPath}>
+                <ProfileLink className='button' to={backLinkPath}>
                   <i className='destiny-B_Button' />
                   {t('Back')}
                 </ProfileLink>
@@ -124,7 +124,7 @@ class Triumphs extends React.Component {
             <div />
             <ul>
               <li>
-                <ProfileLink to={backLinkPath}>
+                <ProfileLink className='button' to={backLinkPath}>
                   <i className='destiny-B_Button' />
                   {t('Back')}
                 </ProfileLink>

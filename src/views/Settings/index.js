@@ -147,6 +147,29 @@ class Settings extends React.Component {
           </div>
           <div className='module'>
             <div className='sub-header sub'>
+              <div>{t('Tooltips')}</div>
+            </div>
+            <ul className='list settings'>
+              <li
+                key='simple'
+                onClick={() => {
+                  this.props.setTooltipDetailMode(false);
+                }}
+              >
+                <Checkbox linked checked={!this.props.tooltips.detailedMode} text={t('Simple')} />
+              </li>
+              <li
+                key='detailed'
+                onClick={() => {
+                  this.props.setTooltipDetailMode(true);
+                }}
+              >
+                <Checkbox linked checked={this.props.tooltips.detailedMode} text={t('Detailed')} />
+              </li>
+            </ul>
+          </div>
+          <div className='module'>
+            <div className='sub-header sub'>
               <div>{t('Collectibles')}</div>
             </div>
             <ul className='list settings'>{collectiblesButtons}</ul>
@@ -178,6 +201,7 @@ function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
     theme: state.theme,
+    tooltips: state.tooltips,
     collectibles: state.collectibles
   };
 }
@@ -186,6 +210,9 @@ function mapDispatchToProps(dispatch) {
   return {
     setTheme: value => {
       dispatch({ type: 'SET_THEME', payload: value });
+    },
+    setTooltipDetailMode: value => {
+      dispatch({ type: 'SET_TOOLTIPS', payload: { detailedMode: value } });
     },
     setCollectibleDisplayState: value => {
       dispatch({ type: 'SET_COLLECTIBLES', payload: value });

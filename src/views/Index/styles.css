@@ -121,19 +121,18 @@
 }
 
 #index .module.stats .content ul li .name {
-  margin: 7px 0 0;
-  font-size: 14px;
+  margin: 4px 0 0;
+  font-size: 16px;
   line-height: 1;
-  text-transform: uppercase;
   color: rgba(255, 255, 255, 0.6);
 }
 
 #index .module.stats .content ul li .description {
-  margin: 1rem 0 0;
+  margin: 18px 0 0;
   font-size: 14px;
   font-style: italic;
   letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 
@@ -249,7 +248,8 @@
 
 #index .module .content.change-log .log-content ul li {
   font-size: 14px;
-  line-height: 2;
+  line-height: 1.6;
+  margin: 0 0 6px;
 }
 
 #index .modules > .description {

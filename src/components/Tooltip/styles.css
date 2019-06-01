@@ -325,6 +325,15 @@
 #tooltip .plug {
   padding: 12px 16px 0;
   display: flex;
+  opacity: 0.4;
+}
+
+#tooltip .plug.is-active {
+  opacity: 1;
+}
+
+#tooltip .plug.ellipsis {
+  opacity: 1;
 }
 
 #tooltip .plug .icon {
@@ -353,6 +362,30 @@
   font-size: 14px;
   line-height: 1.4;
   white-space: pre-wrap;
+}
+
+#tooltip .sockets.detailed-mode .group {
+  padding: 0 0 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#tooltip .sockets.detailed-mode .group:last-child {
+  padding: 0;
+  border-bottom: none;
+}
+
+#tooltip .sockets.detailed-mode .plug .icon {
+  width: 20px;
+  height: 20px;
+  flex-basis: 20px;
+}
+
+#tooltip .sockets.detailed-mode .plug .text .name {
+  margin: 0;
+}
+
+#tooltip .sockets.detailed-mode .plug .text .description {
+  display: none;
 }
 
 #tooltip .intrinsic {

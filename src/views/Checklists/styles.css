@@ -75,14 +75,14 @@
 }
 
 #checklists .lists .col .info {
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  padding: 1rem 0 0;
+  
 }
 
 #checklists .lists .col .info .text {
+  font-style: italic;
+  letter-spacing: 1px;
   font-size: 14px;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.4);
 }
 

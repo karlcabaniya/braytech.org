@@ -1,6 +1,8 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 import orderBy from 'lodash/orderBy';
 import cx from 'classnames';
 
@@ -42,7 +44,7 @@ class Records extends React.Component {
   };
 
   render() {
-    const { hashes, member, triumphs, collectibles, ordered, limit, selfLinkFrom, readLink } = this.props;
+    const { t, hashes, member, triumphs, collectibles, ordered, limit, selfLinkFrom, readLink, forceDisplay = false } = this.props;
     const highlight = parseInt(this.props.highlight, 10) || false;
     const recordsRequested = hashes;
     const characterRecords = member.data.profile.characterRecords.data;
@@ -139,7 +141,7 @@ class Records extends React.Component {
         return;
       }
 
-      if (enumerateRecordState(state).recordRedeemed && collectibles && collectibles.hideTriumphRecords) {
+      if (enumerateRecordState(state).recordRedeemed && collectibles && collectibles.hideTriumphRecords && !forceDisplay) {
         return;
       }
 
@@ -239,15 +241,12 @@ class Records extends React.Component {
       }
     });
 
-    if (recordsRequested.length > 0 && recordsOutput.length === 0 && collectibles.hideTriumphRecords) {
+    if (recordsRequested.length > 0 && recordsOutput.length === 0 && collectibles && collectibles.hideTriumphRecords && !forceDisplay) {
       recordsOutput.push({
         element: (
           <li key='lol' className='all-completed'>
             <div className='properties'>
-              <div className='text'>
-                <div className='name'>When all is said and done</div>
-                <div className='description'>You've completed these records</div>
-              </div>
+              <div className='text'>{t('All completed')}</div>
             </div>
           </li>
         )
@@ -283,7 +282,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  withNamespaces()
 )(Records);

@@ -50,11 +50,12 @@ class NotificationLink extends React.Component {
 
   render() {
     const { t } = this.props;
+    
+    const timeNow = new Date().getTime();
 
     this.active = this.props.notifications && this.props.notifications.objects.length ? this.props.notifications.objects.filter(o => {
-      let now = new Date().getTime();
       let objDate = new Date(o.date).getTime();
-      if (objDate + o.expiry > now) {
+      if (objDate + o.expiry > timeNow) {
         return true;
       } else {
         return false;
@@ -70,6 +71,8 @@ class NotificationLink extends React.Component {
       } else if (state && state.error) {
         isError = true;
         image = '/static/images/extracts/ui/010A-00000552.PNG';
+      } else if (state.displayProperties && state.displayProperties.image) {
+        image = state.displayProperties.image;
       } else {
         image = '/static/images/extracts/ui/010A-00000554.PNG';
       }
@@ -81,7 +84,7 @@ class NotificationLink extends React.Component {
               <div className='border-top' />
               <div className='acrylic' />
             </div>
-            <div className={cx('wrapper-inner')}>
+            <div className={cx('wrapper-inner', { 'has-image': state.displayProperties && state.displayProperties.image })}>
               <div>
                 <div className='icon'>
                   <ObservedImage className='image' src={image} />

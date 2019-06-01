@@ -5,8 +5,8 @@ import ObservedImage from '../../ObservedImage';
 import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
 
-const ghost = item => {
-  let { sockets } = getSockets(item, false, false, true);
+const ghost = (item, detailedMode) => {
+  let { sockets } = getSockets(item, false, detailedMode ? true : false, detailedMode ? false : true);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
@@ -22,9 +22,9 @@ const ghost = item => {
           <pre>{description}</pre>
         </div>
       ) : null}
-      <div className={cx('sockets', { 'has-sockets': sockets.length > 0 })}>
+      <div className={cx('sockets', { 'has-sockets': sockets.length > 0, 'detailed-mode': detailedMode })}>
         {intrinsic ? (
-          <div className='plug intrinsic'>
+          <div className='plug is-active intrinsic'>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${intrinsic.displayProperties.icon}`} />
             <div className='text'>
               <div className='name'>{intrinsic.displayProperties.name}</div>
@@ -32,7 +32,27 @@ const ghost = item => {
             </div>
           </div>
         ) : null}
-        {sockets.length > 0 ? sockets.map(socket => socket.plugs.filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328)).map(plug => plug.element)) : null}
+        {sockets.length > 0
+          ? sockets.map((socket, i) => {
+            let group = socket.plugs
+              .filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328))
+
+            if (group.length > 0) {
+              return (
+                <div key={i} className='group'>
+                  {group.length > 4 ? (
+                      <>
+                        {group.slice(0,3).map(plug => plug.element)}
+                        <div className='plug ellipsis'>+ {group.length - 3} more</div>
+                      </>
+                    ) : group.map(plug => plug.element)}
+                </div>
+              )
+            } else {
+              return null;
+            }
+          })
+          : null}
       </div>
       {item.itemSubType === 21 ? (
         <div className='description'>

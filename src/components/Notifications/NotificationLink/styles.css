@@ -80,7 +80,7 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay .background .acryli
 }
 
 #notification-overlay .wrapper-inner > div {
-  padding: 2rem;
+
 }
 
 #notification-overlay .wrapper-inner > div:first-child {
@@ -97,19 +97,39 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay .background .acryli
   position: relative;
   height: 100px;
   width: 100px;
+  margin: 2rem;
   background-color: rgba(255, 255, 255, 0);
 }
 
 #notification-overlay .wrapper-inner .text .name {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1rem 2rem;
   font-size: 24px;
-  line-height: 19px;
-  margin: 0 0 21px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  line-height: 1.6;
 }
 
 #notification-overlay .wrapper-inner .text .description {
+  padding: 1rem 2rem;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.6);
   max-width: 500px;
+}
+
+#notification-overlay .wrapper-inner.has-image > div:first-child {
+  justify-content: unset;
+}
+
+#notification-overlay .wrapper-inner.has-image div .icon {
+  margin: 0;
+  width: 100%;
+  height: unset;
+  padding-bottom: 56%;
+}
+
+#notification-overlay .wrapper-inner.has-image div .icon .image {
+  background-size: cover;
 }
 
 .wrapper.dark-mode #notification-overlay.error .background .border-top,
@@ -142,10 +162,6 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay.error .background .
     grid-template-columns: min-content auto;
     padding: 1rem 0 0;
   }
-  
-  #notification-overlay .wrapper-inner > div {
-    padding: 1rem;
-  }
 
   #notification-overlay .wrapper-inner div .icon {
     position: relative;
@@ -154,14 +170,17 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay.error .background .
   }
 
   #notification-overlay .wrapper-inner .text .name {
+    padding: 1.4rem 2rem 1rem;
     font-size: 18px;
-    line-height: 14px;
-    margin: 0 0 20px;
   }
   
   #notification-overlay .wrapper-inner .text .description {
     font-size: 14px;
-  } 
+  }
+
+  #notification-overlay .wrapper-inner.has-image {
+    grid-template-columns: 1fr;
+  }
 
   #notification-overlay .sticky-nav-inner {
     padding: unset;

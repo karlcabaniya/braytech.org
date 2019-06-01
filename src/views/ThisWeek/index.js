@@ -20,8 +20,9 @@ class ThisWeek extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
-    const milestones = this.props.member.data.milestones;
+    const { t, member } = this.props;
+    const { characterId } = member;
+    const { profile, milestones } = member.data;
 
     const resetTime = '17:00:00Z';
 
@@ -520,7 +521,7 @@ class ThisWeek extends React.Component {
             </ul>
             <h4>Triumphs</h4>
             <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
+              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered forceDisplay />
             </ul>
           </div>
         );
@@ -529,7 +530,7 @@ class ThisWeek extends React.Component {
     // console.log(Object.values(milestones).map(m => {
     //   m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
     //   return m;
-    // })); 2693136600
+    // }));
 
     const levAcitivty = milestones[3660836525] ? milestones[3660836525].activities[0] : false;
     const eowAcitivty = milestones[2986584050] ? milestones[2986584050].activities.find(a => a.activityHash === 809170886) : false;
@@ -547,7 +548,7 @@ class ThisWeek extends React.Component {
             </div>
             <h4>Triumphs</h4>
             <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered />
+              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered forceDisplay />
             </ul>
           </div>
           <div className='content'>
@@ -647,7 +648,7 @@ class ThisWeek extends React.Component {
             </div>
             <h4>Triumphs</h4>
             <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
+              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered forceDisplay />
             </ul>
           </div>
           <div className='content'>
@@ -657,7 +658,7 @@ class ThisWeek extends React.Component {
             </div>
             <h4>Triumphs</h4>
             <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
+              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered forceDisplay />
             </ul>
           </div>
         </div>
@@ -707,7 +708,7 @@ class ThisWeek extends React.Component {
               }) : null}
             </ul>
           </div>
-          <div className='content'>
+          {/* <div className='content'>
             <div className='module-header'>
               <div className='sub-title'>{t('Raid')}</div>
               <div className='name'>{t('Leviathan Lairs')}</div>
@@ -729,7 +730,7 @@ class ThisWeek extends React.Component {
                 )
               }) : null}
             </ul>
-          </div>
+          </div> */}
           <div className='content'>
             <div className='module-header'>
               <div className='sub-title'>{t('Escalation Protocol')}</div>

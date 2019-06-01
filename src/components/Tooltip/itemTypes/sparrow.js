@@ -4,16 +4,12 @@ import cx from 'classnames';
 import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
 
-const sparrow = item => {
-  let sockets = [];
-
+const sparrow = (item, detailedMode) => {
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
   let description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
 
-  if (item.sockets) {
-    sockets = getSockets(item, false, true, [1608119540]).sockets;
-  }
+  const { sockets } = getSockets(item, false, true, detailedMode ? false : true, [1608119540]);
 
   return (
     <>
@@ -22,7 +18,28 @@ const sparrow = item => {
           <pre>{description}</pre>
         </div>
       ) : null}
-      <div className={cx('sockets', { 'has-sockets': sockets.length > 0 })}>{sockets.length > 0 ? sockets.map(socket => socket.plugs.map(plug => plug.element)) : null}</div>
+      <div className={cx('sockets', { 'has-sockets': sockets.length > 0, 'detailed-mode': detailedMode })}>
+        {sockets.length > 0
+          ? sockets.map((socket, i) => {
+              let group = socket.plugs;
+
+              if (group.length > 0) {
+                return (
+                  <div key={i} className='group'>
+                    {group.length > 4 ? (
+                        <>
+                          {group.slice(0,3).map(plug => plug.element)}
+                          <div className='plug ellipsis'>+ {group.length - 3} more</div>
+                        </>
+                      ) : group.map(plug => plug.element)}
+                  </div>
+                )
+              } else {
+                return null;
+              }
+            })
+          : null}
+      </div>
       {sourceString ? (
         <div className={cx('source', { 'no-border': !description })}>
           <p>{sourceString}</p>

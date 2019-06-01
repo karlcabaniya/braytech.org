@@ -7,6 +7,7 @@ import notifications from './reducers/notifications.js';
 import refreshService from './reducers/refreshService.js';
 import PGCRcache from './reducers/PGCRcache.js';
 import triumphs from './reducers/triumphs.js';
+import tooltips from './reducers/tooltips.js';
 import collectibles from './reducers/collectibles.js';
 import viewport from './reducers/viewport.js';
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   refreshService,
   PGCRcache,
   triumphs,
+  tooltips,
   collectibles,
   viewport
 });

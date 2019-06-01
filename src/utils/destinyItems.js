@@ -33,7 +33,7 @@ const interpolate = (investmentValue, displayInterpolation) => {
   return Math.round(displayValue);
 };
 
-export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, socketExclusions = [], uiStyleTooltips = false) => {
+export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, socketExclusions = [], uiStyleTooltips = false, showHiddenStats = false) => {
   let statGroup = item.stats ? manifest.DestinyStatGroupDefinition[item.stats.statGroupHash] : false;
 
   let statModifiers = [];
@@ -156,9 +156,9 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           definition: plug,
           element: (
             <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
-              <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon}`} />
+              <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon ? plug.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
               <div className='text'>
-                <div className='name'>{plug.displayProperties.name}</div>
+                <div className='name'>{plug.displayProperties.name ? plug.displayProperties.name : `Unknown`}</div>
                 <div className='description'>{plug.itemTypeDisplayName}</div>
               </div>
             </div>
@@ -234,6 +234,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
 
         statsOutput.push({
           displayAsNumeric: stat.displayAsNumeric,
+          statHash: stat.statHash,
           element: (
             <div key={stat.statHash} className='stat'>
               <div className='name'>{statDef.displayProperties.name}</div>
@@ -252,6 +253,40 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         });
       }
     });
+
+    if (showHiddenStats) {
+      Object.values(item.stats.stats).forEach(stat => {
+        if (!statsOutput.find(s => s.statHash === stat.statHash)) {
+  
+          let statDef = manifest.DestinyStatDefinition[stat.statHash];
+  
+          let value;
+  
+          // let instanceStat = item.itemComponents && item.itemComponents.stats ? Object.values(item.itemComponents.stats).find(s => s.statHash === stat.statHash) : false;
+  
+          let investmentStat = item.investmentStats.find(investment => investment.statTypeHash === stat.statHash);
+  
+          value = investmentStat ? investmentStat.value : 0;
+  
+          if (value < 1) {
+            return;
+          }
+  
+          statsOutput.push({
+            statHash: stat.statHash,
+            displayAsNumeric: false,
+            element: (
+              <div key={stat.statHash} className='stat'>
+                <div className='name'>{statDef.displayProperties.name}</div>
+                <div className={cx('value', { bar: true })}>
+                  <div className='bar' data-value={value} style={{ width: `${value}%` }} />
+                </div>
+              </div>
+            )
+          });
+        }
+      });
+    }
   }
   if (item.itemType === 2) {
     statGroup.scaledStats.forEach(stat => {
