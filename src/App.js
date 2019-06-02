@@ -40,7 +40,7 @@ import Leaderboards from './views/Leaderboards';
 import FAQ from './views/FAQ';
 import ClanBannerBuilder from './views/Experiments/ClanBannerBuilder';
 import DataInspector from './views/Experiments/DataInspector';
-import ZeroHour from './views/Experiments/ZeroHour';
+import OAuthTest from './views/Experiments/OAuthTest';
 import OOB from './views/OOB';
 
 const RedirectRoute = props => <Route {...props} render={({ location }) => <Redirect to={{ pathname: '/character-select', state: { from: location } }} />} />;
@@ -226,7 +226,7 @@ class App extends React.Component {
                           <Route path='/experiments' exact component={Experiments} />
                           <Route path='/experiments/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
                           <Route path='/experiments/data-inspector' exact component={DataInspector} />
-                          <Route path='/experiments/zero-hour' exact component={ZeroHour} />
+                          <Route path='/experiments/oauth-test' exact component={OAuthTest} />
                           <Route path='/oob' component={OOB} />
                           <Route path='/' component={Index} />
                         </Switch>

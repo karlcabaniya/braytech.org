@@ -114,7 +114,18 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay .background .acryli
   padding: 1rem 2rem;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.6);
-  max-width: 500px;
+  max-width: calc(600px + 4rem);
+}
+
+#notification-overlay .wrapper-inner .text .description ul {
+  list-style-type: disc;
+  padding: 0 0 0 2rem;  
+  margin: 0 0 1rem;
+}
+
+#notification-overlay .wrapper-inner .text .description ul li {
+  line-height: 1.6;
+  margin: 0 0 6px;
 }
 
 #notification-overlay .wrapper-inner.has-image > div:first-child {
@@ -130,6 +141,7 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay .background .acryli
 
 #notification-overlay .wrapper-inner.has-image div .icon .image {
   background-size: cover;
+  background-position-x: right;
 }
 
 .wrapper.dark-mode #notification-overlay.error .background .border-top,

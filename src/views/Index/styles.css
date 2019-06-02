@@ -22,7 +22,7 @@
 
 #index .module.intro {
   background-color: rgba(255, 255, 255, 0.1);
-  background-color: #b58f24;
+  background-color: rgba(191, 150, 68, 0.75);
   overflow-x: hidden;
   position: relative;
 }

@@ -7,7 +7,7 @@ import manifest from '../../../utils/manifest';
 
 import './styles.css';
 
-class ZeroHour extends React.Component {
+class OAuthTest extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,7 +20,7 @@ class ZeroHour extends React.Component {
 
   render() {
     return (
-      <div className='view' id='zero-hour'>
+      <div className='view' id='oauth-test'>
         
       </div>
     );
@@ -36,4 +36,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(ZeroHour);
+)(OAuthTest);

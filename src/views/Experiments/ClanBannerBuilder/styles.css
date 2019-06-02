@@ -14,8 +14,9 @@
   position: absolute;
 }
 
-#banner-builder .options .page-header {
-  max-width: 30rem;
+#banner-builder .options .text {
+  max-width: 500px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 #banner-builder .options .config .spinner {

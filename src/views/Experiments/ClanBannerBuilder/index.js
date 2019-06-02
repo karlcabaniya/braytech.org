@@ -244,15 +244,15 @@ class ClanBannerBuilder extends React.Component {
     }
 
     return (
-      <div className={cx('view', this.props.theme.selected)} id='banner-builder'>
+      <div className='view' id='banner-builder'>
         <div className='banner'>
           <ClanBanner bannerData={bannerData} dark />
         </div>
         <div className='options'>
           <div className='page-header'>
             <div className='name'>{t('Clan Banner Builder')}</div>
-            <div className='description'>{t("Collaborate with clan members on a new clan banner. Selecting different options instantly updates the page's URL, which allows you to easily share your customisations.")}</div>
           </div>
+          <div className='text'>{t("Collaborate with clan members on a new clan banner. Selecting different options instantly updates the page's URL, which allows you to easily share your customisations.")}</div>
           <div className='config'>{this.state.clanBannerManifest ? configOptions : <Spinner dark />}</div>
         </div>
       </div>
@@ -262,7 +262,7 @@ class ClanBannerBuilder extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    theme: state.theme
+    
   };
 }
 
