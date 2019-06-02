@@ -1,6 +1,7 @@
 #index {
   padding: 0;
   margin: -40px 0 0;
+  max-width: unset;
   display: grid;
   grid-template-columns: 1fr;
   overflow: hidden;
