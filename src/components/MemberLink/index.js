@@ -64,7 +64,7 @@ class MemberLink extends React.Component {
 
         profile = responseUtils.profileScrubber(profile, 'activity');
 
-        if (!profile.profileRecords.data) {
+        if (!profile.profileRecords.data || (profile.profileRecords.data && Object.entries(profile.profileRecords.data.records).length === 0)) {
           this.setState((prevState, props) => {
             prevState.all.error = true;
             return prevState;
@@ -142,18 +142,25 @@ class MemberLink extends React.Component {
     if (this.mounted) {
       try {
         let response = await bungie.memberProfile(type, id, displayName ? '200' : '100,200');
-        let data = responseUtils.profileScrubber(response, 'activity');
-        this.setState((prevState, props) => {
-          prevState.basic.data = data;
-          prevState.basic.loading = false;
-          return prevState;
-        });
+        let profile = responseUtils.profileScrubber(response, 'activity');
+        if (!profile.characters.data || (profile.characters.data && profile.characters.data.length === 0)) {
+          this.setState((prevState, props) => {
+            prevState.all.error = true;
+            return prevState;
+          });
+        } else {
+          this.setState((prevState, props) => {
+            prevState.basic.data = profile;
+            prevState.basic.loading = false;
+            return prevState;
+          });
+        }
       } catch (e) {}
     }
   }
 
   render() {
-    const { t, member, type, id, displayName = false, characterId, hideFlair = false } = this.props;
+    const { t, member, type, id, displayName = false, characterId, hideFlair = false, showClassIcon = false, hideEmblemIcon = false } = this.props;
 
     let characterBasic;
     if (this.state.basic.data) {
@@ -188,7 +195,22 @@ class MemberLink extends React.Component {
               <i className={primaryFlair.icon} />
             </div>
           ) : null}
-          <div className='emblem'>{!this.state.basic.loading && this.state.basic.data ? <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} /> : null}</div>
+          <div className='emblem'>
+            {!this.state.basic.loading && this.state.basic.data ? (
+              showClassIcon ? (
+                <div className='icon'>
+                  <i
+                    className={`destiny-class_${destinyUtils
+                      .classTypeToString(characterBasic.classType)
+                      .toString()
+                      .toLowerCase()}`}
+                  />
+                </div>
+              ) : !hideEmblemIcon ? (
+                <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} />
+              ) : null
+            ) : null}
+          </div>
           <div className='displayName'>{displayName ? displayName : !this.state.basic.loading && this.state.basic.data ? this.state.basic.data.profile.data.userInfo.displayName : null}</div>
         </div>
         {this.state.overlay ? (
@@ -392,16 +414,11 @@ class MemberLink extends React.Component {
                         {manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode].children.presentationNodes.map((s, i) => {
                           let node = manifest.DestinyPresentationNodeDefinition[s.presentationNodeHash];
                           let record = manifest.DestinyRecordDefinition[node.completionRecordHash];
-                          // let images = {
-                          //   2588182977: '037E-00001367.png',
-                          //   3481101973: '037E-00001343.png',
-                          //   147928983: '037E-0000134A.png',
-                          //   2693736750: '037E-0000133C.png',
-                          //   2516503814: '037E-00001351.png',
-                          //   1162218545: '037E-00001358.png',
-                          //   2039028930: '0560-000000EB.png',
-                          //   991908404: '0560-0000107E.png'
-                          // };
+
+                          if (node.redacted) {
+                            return null;
+                          }
+
                           let completionValue = this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].completionValue;
                           let progress = this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].progress;
 

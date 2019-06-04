@@ -155,7 +155,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           active: plug.hash === socket.singleInitialItemHash,
           definition: plug,
           element: (
-            <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
+            <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes && plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
               <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon ? plug.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
               <div className='text'>
                 <div className='name'>{plug.displayProperties.name ? plug.displayProperties.name : `Unknown`}</div>

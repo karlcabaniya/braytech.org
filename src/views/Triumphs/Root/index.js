@@ -87,6 +87,22 @@ class Root extends React.Component {
         recordHash: 1313291220,
         total: profileRecords[1313291220].objectives[0].completionValue,
         completed: profileRecords[1313291220].objectives[0].progress
+      },
+      3170835069: {
+        text: manifest.DestinyRecordDefinition[1883929036].titleInfo.titlesByGenderHash[genderHash],
+        image: '',
+        nodeHash: 3170835069,
+        recordHash: 1883929036,
+        total: profileRecords[1883929036].objectives[0].completionValue,
+        completed: profileRecords[1883929036].objectives[0].progress
+      },
+      3170835069: {
+        text: manifest.DestinyRecordDefinition[1883929036].titleInfo.titlesByGenderHash[genderHash],
+        image: '',
+        nodeHash: 3170835069,
+        recordHash: 1883929036,
+        total: profileRecords[1883929036].objectives[0].completionValue,
+        completed: profileRecords[1883929036].objectives[0].progress
       }
     };
 
@@ -163,6 +179,10 @@ class Root extends React.Component {
     sealsParent.children.presentationNodes.forEach(child => {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
       let states = [];
+
+      if (node.redacted) {
+        return;
+      }
 
       node.children.records.forEach(record => {
         let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];

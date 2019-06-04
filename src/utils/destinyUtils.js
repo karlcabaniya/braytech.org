@@ -549,6 +549,11 @@ function xpRequiredForLevel(level, progressDef) {
 }
 
 export function lastPlayerActivity(member) {
+
+  if (!member.profile || (!member.profile.characterActivities.data || !member.profile.characters.data.length)) {
+    return {};
+  }
+
   let lastActivity = false;
   let lastCharacter = false;
   let lastMode = false;

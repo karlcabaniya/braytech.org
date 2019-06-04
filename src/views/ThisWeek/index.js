@@ -32,7 +32,7 @@ class ThisWeek extends React.Component {
         ascendant: new Date(`2018-09-04T${resetTime}`).getTime(),
         curse: new Date(`2018-09-11T${resetTime}`).getTime(),
         ep: new Date(`2018-05-08T${resetTime}`).getTime(),
-        reckoning: new Date(`2018-03-12T${resetTime}`).getTime(),
+        reckoning: new Date(`2018-05-28T${resetTime}`).getTime(),
         whisper: new Date(`2018-03-12T${resetTime}`).getTime(),
         zerohour: new Date(`2018-03-12T${resetTime}`).getTime()
       },

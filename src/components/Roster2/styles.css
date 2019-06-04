@@ -1,0 +1,174 @@
+.list.roster2 {
+  
+}
+
+.list.roster2 .row,
+.list.roster2 .row ul .col {
+  /* height: unset; */
+}
+
+.list.roster2 .row::after {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  top: unset;
+  bottom: -1px;
+  height: 1px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.list.roster2 .row.header ul .col {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.list.roster2 .row > ul {
+  width: 100%;
+  display: grid;
+  grid-gap: 32px;
+  grid-template-columns: 270px calc(38px * 3) minmax(min-content, 400px) 100px 100px 100px  100px;
+}
+
+.list.roster2 .row.error {
+  height: unset;
+}
+
+.list.roster2 .row.error > ul {
+  grid-template-columns: 1fr;
+}
+
+.list.roster2 .row.error > ul .col {
+  padding: 1rem 0;
+  height: unset;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+/* .list.roster2 .row ul .row {
+  font-size: 14px;
+  margin: 0;
+} */
+
+.list.roster2 .row > ul .col {
+  font-size: 14px;
+}
+
+.list.roster2 .row:not(.header) > ul .col.focus {
+  font-size: 18px;
+}
+
+.list.roster2 .row > ul .col.member {
+
+}
+
+.list.roster2 .row > ul .col .abbr {
+  display: none;
+}
+
+
+
+
+
+
+
+.list.roster2 .row > ul .col.lastCharacter .icon i,
+.list.roster2 .row > ul .col.lastCharacter .icon div {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #fff;
+  background-color: rgb(75, 127, 149);
+}
+
+.list.roster2 .row > ul .col.lastCharacter .icon .destiny-class_hunter {
+  background-color: rgb(127, 98, 76);
+}
+
+.list.roster2 .row > ul .col.lastCharacter .icon .destiny-class_warlock {
+  background-color: rgb(42, 120, 99);
+}
+
+.list.roster2 .row > ul .col.lastCharacter .icon:nth-child(2) div {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.list.roster2 .row > ul .col.lastCharacter .icon:nth-child(3) div {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.list.roster2 .row > ul .col.lastCharacter .icon:nth-child(3) div.max-ish {
+  color: hsl(177, 64%, 70%);
+  background-color: rgba(46, 209, 201, 0.2);
+}
+
+.list.roster2 .row > ul .col.lastCharacter .icon:nth-child(3) div.max {
+  background-color: rgba(46, 209, 201, 0.4);
+}
+
+.list.roster2 .row > ul .col.lastActivity time {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.list.roster2 .row > ul .col.lastActivity.display time {
+  margin: 0 0 0 16px;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+
+  .list.roster2 .row > ul {
+    grid-template-columns: 60px auto 70px;
+  }
+
+  .list.roster2 .row > ul li {
+    font-size: 14px;
+  }
+
+  .list.roster2 .row > ul .col.rank {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .list.roster2 .row:not(.header) > ul .col.focus {
+    font-size: 14px;
+  }
+
+  .list.roster2 .row > ul .col > .abbr {
+    display: unset;
+  }
+
+  .list.roster2 .row > ul .col > .full {
+    display: none;
+  }
+
+  .list.roster2 .row > ul .col:not(.rank):not(.member):not(.focus) {
+    display: none;
+  }
+
+  .list.roster2 .pages {
+    grid-template-columns: 1fr 1fr;
+    margin: 1rem 0 0;
+  }
+
+  .list.roster2 .pages .total {
+    margin: 1rem 0 0;
+    grid-column: 1/3;
+    justify-content: center;
+  }
+
+}

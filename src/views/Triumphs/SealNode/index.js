@@ -81,6 +81,14 @@ class SealNode extends React.Component {
         recordHash: 1313291220,
         total: profileRecords[1313291220].objectives[0].completionValue,
         completed: profileRecords[1313291220].objectives[0].progress
+      },
+      3170835069: {
+        text: manifest.DestinyRecordDefinition[1883929036].titleInfo.titlesByGenderHash[genderHash],
+        image: '',
+        nodeHash: 3170835069,
+        recordHash: 1883929036,
+        total: profileRecords[1883929036].objectives[0].completionValue,
+        completed: profileRecords[1883929036].objectives[0].progress
       }
     };
 

@@ -35,7 +35,7 @@ const ghost = (item, detailedMode) => {
         {sockets.length > 0
           ? sockets.map((socket, i) => {
             let group = socket.plugs
-              .filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328))
+              .filter(plug => plug.definition.itemCategoryHashes && !plug.definition.itemCategoryHashes.includes(2237038328))
 
             if (group.length > 0) {
               return (

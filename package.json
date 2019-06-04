@@ -1,6 +1,6 @@
 {
   "name": "braytech.org",
-  "version": "2.5.14",
+  "version": "2.5.15",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",

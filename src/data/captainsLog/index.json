@@ -348,5 +348,10 @@
     "date": "2019-06-04T01:08:08.337Z",
     "version": "2.5.14",
     "content": "- _Settings_ view update\n- _This Week_ got confused about the date"
+  },
+  {
+    "date": "2019-06-04T18:09:51.895Z",
+    "version": "2.5.15",
+    "content": "- SoO patches"
   }
 ]
