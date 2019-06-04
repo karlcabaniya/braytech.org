@@ -1,6 +1,7 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
 
@@ -17,6 +18,7 @@ class RecordsAlmost extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     const profileRecords = this.props.member.data.profile.profileRecords.data.records;
 
     let almost = [];
@@ -118,22 +120,19 @@ class RecordsAlmost extends React.Component {
 
     almost = this.props.limit ? almost.slice(0, this.props.limit) : almost;
 
-    if (this.props.pageLink) {
-      almost.push({
-        element: (
-          <li key='pageLink' className='linked'>
-            <ProfileLink to={{ pathname: '/triumphs/almost-complete', state: { from: '/triumphs' } }}>See next 100</ProfileLink>
-          </li>
-        )
-      });
-    }
-
     return (
-      <ul className={cx('list record-items almost')}>
-        {almost.map(r => {
-          return r.element;
-        })}
-      </ul>
+      <>
+        <ul className={cx('list record-items almost')}>
+          {almost.map(r => {
+            return r.element;
+          })}
+        </ul>
+        {this.props.pageLink ? (
+          <ProfileLink className='button' to={{ pathname: '/triumphs/almost-complete', state: { from: '/triumphs' } }}>
+            <div className='text'>{t('See next 100')}</div>
+          </ProfileLink>
+        ) : null}
+      </>
     );
   }
 }
@@ -144,4 +143,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(RecordsAlmost);
+export default compose(
+  connect(mapStateToProps),
+  withNamespaces()
+)(RecordsAlmost);

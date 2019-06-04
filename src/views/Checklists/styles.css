@@ -70,8 +70,10 @@
 
 #checklists .lists .col .head .binding {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
-  height: 3rem;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+  min-height: 60px;
 }
 
 #checklists .lists .col .info {

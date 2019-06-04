@@ -10,6 +10,49 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+#settings .module .list.settings li {
+  height: unset;
+  display: block;
+  padding: 5px 0;
+  margin: 0 0 7px;
+}
+
+#settings .module .list.settings li:last-child {
+  margin: 0;
+}
+
+#settings .module .list.settings li .check-box {
+  width: 100%;
+}
+
+#settings .info {
+  margin: 10px 0 0;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#settings .info p {
+  line-height: 1.4;
+}
+
+#settings .module .sub-header:not(:first-child) {
+  margin: 3rem 0 1rem;
+}
+
+#settings .module .list ~ .button {
+  margin: 1rem 0 0;
+}
+
+#settings .info ~ .button {
+  margin: 1rem 0 0;
+}
+
+#settings .check-box .check.ed::before {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
 #settings > .padder {
   width: 100%;
   padding: 3rem;
@@ -35,6 +78,10 @@
     padding: calc(3rem + 40px) 2rem 2rem;
   }
 
+  #settings .module .sub-header:not(:first-child) {
+    margin: 2rem 0 1rem;
+  }
+
   #settings > .padder {
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 2rem;
@@ -43,14 +90,4 @@
 }
 
 
-
-#settings .module .list.settings li {
-  height: unset;
-  padding: 5px 0;
-  margin: 0 0 7px;
-}
-
-#settings .module .list.settings li .check-box {
-  width: 100%;
-}
 

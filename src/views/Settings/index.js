@@ -30,18 +30,11 @@ class Settings extends React.Component {
     let currentState = this.props.collectibles;
     let newState = currentState;
 
-    // if (state === 'showAll') {
-    //   newState = {
-    //     hideTriumphRecords: false,
-    //     hideChecklistItems: false
-    //   };
-    // } else {
     newState = {
       hideTriumphRecords: state === 'hideTriumphRecords' ? !currentState.hideTriumphRecords : currentState.hideTriumphRecords,
       hideChecklistItems: state === 'hideChecklistItems' ? !currentState.hideChecklistItems : currentState.hideChecklistItems,
       hideInvisibleCollectibles: state === 'hideInvisibleCollectibles' ? !currentState.hideInvisibleCollectibles : currentState.hideInvisibleCollectibles
     };
-    // }
 
     this.props.setCollectibleDisplayState(newState);
   }
@@ -85,35 +78,6 @@ class Settings extends React.Component {
       );
     });
 
-    let collectiblesButtons = (
-      <>
-        <li
-          key='hideTriumphRecords'
-          onClick={() => {
-            this.selectCollectibleDisplayState('hideTriumphRecords');
-          }}
-        >
-          <Checkbox linked checked={this.props.collectibles.hideTriumphRecords} text={t('Hide completed triumphs')} />
-        </li>
-        <li
-          key='hideChecklistItems'
-          onClick={() => {
-            this.selectCollectibleDisplayState('hideChecklistItems');
-          }}
-        >
-          <Checkbox linked checked={this.props.collectibles.hideChecklistItems} text={t('Hide completed checklist items')} />
-        </li>
-        <li
-          key='hideInvisibleCollectibles'
-          onClick={() => {
-            this.selectCollectibleDisplayState('hideInvisibleCollectibles');
-          }}
-        >
-          <Checkbox linked checked={this.props.collectibles.hideInvisibleCollectibles} text={t('Hide invisible Collection items')} />
-        </li>
-      </>
-    );
-
     return (
       <div className='view' id='settings'>
         <div className='module head'>
@@ -133,7 +97,7 @@ class Settings extends React.Component {
                   this.props.setTheme('light-mode');
                 }}
               >
-                <Checkbox linked checked={this.props.theme.selected === 'light-mode'} text={t('Lights on')} />
+                <Checkbox linked checked={this.props.theme.selected === 'light-mode'} text={t('Light mode')} />
               </li>
               <li
                 key='dark'
@@ -141,11 +105,9 @@ class Settings extends React.Component {
                   this.props.setTheme('dark-mode');
                 }}
               >
-                <Checkbox linked checked={this.props.theme.selected === 'dark-mode'} text={t('Lights off')} />
+                <Checkbox linked checked={this.props.theme.selected === 'dark-mode'} text={t('Dark mode')} />
               </li>
             </ul>
-          </div>
-          <div className='module'>
             <div className='sub-header sub'>
               <div>{t('Tooltips')}</div>
             </div>
@@ -157,6 +119,9 @@ class Settings extends React.Component {
                 }}
               >
                 <Checkbox linked checked={!this.props.tooltips.detailedMode} text={t('Simple')} />
+                <div className='info'>
+                  <p>{t('Simple tooltips are displayed as per the game, displaying the same stats and socket plugs (perks and mods).')}</p>
+                </div>
               </li>
               <li
                 key='detailed'
@@ -165,14 +130,51 @@ class Settings extends React.Component {
                 }}
               >
                 <Checkbox linked checked={this.props.tooltips.detailedMode} text={t('Detailed')} />
+                <div className='info'>
+                  <p>{t('Detailed tooltips are an alternate design that display hidden stats and list socket plugs (perks and mods) exhaustively.')}</p>
+                </div>
               </li>
             </ul>
           </div>
           <div className='module'>
             <div className='sub-header sub'>
-              <div>{t('Collectibles')}</div>
+              <div>{t('Visibility')}</div>
             </div>
-            <ul className='list settings'>{collectiblesButtons}</ul>
+            <ul className='list settings'>
+              <li
+                key='hideTriumphRecords'
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideTriumphRecords');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideTriumphRecords} text={t('Hide completed triumphs')} />
+                <div className='info'>
+                  <p>{t('If a triumph record is completed and redeemed, it will be hidden under Triumphs views.')}</p>
+                </div>
+              </li>
+              <li
+                key='hideChecklistItems'
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideChecklistItems');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideChecklistItems} text={t('Hide completed checklist items')} />
+                <div className='info'>
+                  <p>{t('If a checklist item is completed, it will be hidden under Checklist view.')}</p>
+                </div>
+              </li>
+              <li
+                key='hideInvisibleCollectibles'
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideInvisibleCollectibles');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideInvisibleCollectibles} text={t('Hide invisible Collection items')} />
+                <div className='info'>
+                  <p>{t('If the game specifies that you are unable to see a particular collectible, it will be hidden under Collections views.')}</p>
+                </div>
+              </li>
+            </ul>
           </div>
           <div className='module'>
             <div className='sub-header sub'>
@@ -187,8 +189,17 @@ class Settings extends React.Component {
             </div>
             <div className='buttons'>
               <Button text={t('Clear profile history')} action={() => { ls.set('history.profiles', []) }} />
+              <div className='info'>
+                <p>{t('Deletes the stored list of previously loaded member profiles (character select).')}</p>
+              </div>
               <Button text={t('Clear tracked triumphs')} action={() => { this.props.setTrackedTriumphs([]) }} />
+              <div className='info'>
+                <p>{t('Clears tracked triumphs permanently.')}</p>
+              </div>
               <Button text={t('Reset notifications')} action={() => { ls.set('history.notifications', []) }} />
+              <div className='info'>
+                <p>{t("Reset data pertaining to whether or not you've seen any active notifcation items.")}</p>
+              </div>
             </div>
           </div>
         </div>

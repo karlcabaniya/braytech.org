@@ -33,8 +33,8 @@ class ThisWeek extends React.Component {
         curse: new Date(`2018-09-11T${resetTime}`).getTime(),
         ep: new Date(`2018-05-08T${resetTime}`).getTime(),
         reckoning: new Date(`2018-03-12T${resetTime}`).getTime(),
-        whisper: new Date(`2018-05-28T${resetTime}`).getTime(),
-        zerohour: new Date(`2018-05-28T${resetTime}`).getTime()
+        whisper: new Date(`2018-03-12T${resetTime}`).getTime(),
+        zerohour: new Date(`2018-03-12T${resetTime}`).getTime()
       },
       cycle: {
         // how many week cycle
@@ -234,14 +234,18 @@ class ThisWeek extends React.Component {
       reckoning: {
         1: {
           boss: t('Likeness of Oryx'),
-          triumphs: [],
+          triumphs: [
+            2653311362
+          ],
           collectibles: [
             
           ]
         },
         2: {
           boss: t('The Swords'),
-          triumphs: [],
+          triumphs: [
+            2653311362
+          ],
           collectibles: [
             
           ]
@@ -591,6 +595,10 @@ class ThisWeek extends React.Component {
                   </li>
                 )
               })}
+            </ul>
+            <h4>Triumphs</h4>
+            <ul className='list record-items'>
+              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.reckoning[cycleInfo.week.reckoning].triumphs} ordered forceDisplay />
             </ul>
           </div>
           <div className='content'>

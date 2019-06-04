@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import Records from '../Records';
@@ -10,13 +10,12 @@ import { enumerateRecordState } from '../../utils/destinyEnums';
 
 class RecordsTracked extends React.Component {
   render() {
-    const { member, triumphs, limit, pageLink } = this.props;
+    const { t, member, triumphs, limit, pageLink } = this.props;
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterId = member.characterId;
-    let hashes = triumphs.tracked;
 
-    
+    let hashes = triumphs.tracked;
 
     hashes = hashes.filter(hash => {
 
@@ -34,29 +33,21 @@ class RecordsTracked extends React.Component {
     });
 
     return (
-      <ul className={cx('list record-items tracked')}>
-        <Records selfLink {...this.props} hashes={hashes} ordered='progress' limit={limit} />
+      <>
+        <ul className={cx('list record-items tracked')}>
+          <Records selfLink {...this.props} hashes={hashes} ordered='progress' limit={limit} />
+          {hashes.length < 1 ? (
+            <li key='none-tracked' className='none-tracked'>
+              <div className='text'>You aren't tracking any records yet!</div>
+            </li>
+          ) : null}
+        </ul>
         {pageLink && hashes.length > 0 ? (
-          <li key='pageLink' className='linked'>
-            <ProfileLink to={{ pathname: '/triumphs/tracked', state: { from: '/triumphs' } }}>See all tracked</ProfileLink>
-          </li>
+          <ProfileLink className='button' to={{ pathname: '/triumphs/tracked', state: { from: '/triumphs' } }}>
+            <div className='text'>{t('See all tracked')}</div>
+          </ProfileLink>
         ) : null}
-        {hashes.length < 1 ? (
-          <li key='none-tracked' className='none-tracked'>
-            <div className='properties'>
-              <div className='text'>
-                <div className='name'>Nothing tracked</div>
-                <div className='description'>You aren't tracking any records yet!</div>
-              </div>
-            </div>
-          </li>
-        ) : null}
-        {/* {pageLink && (this.props.location && this.props.location.pathname !== '/triumphs') && hashes.length < 1 ? (
-          <li key='pageLink' className='linked'>
-            <ProfileLink to={{ pathname: '/triumphs', state: { from: '/triumphs' } }}>See all triumphs</ProfileLink>
-          </li>
-        ) : null} */}
-      </ul>
+      </>
     );
   }
 }
@@ -67,4 +58,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default compose(connect(mapStateToProps))(RecordsTracked);
+export default compose(
+  connect(mapStateToProps),
+  withNamespaces()
+)(RecordsTracked);

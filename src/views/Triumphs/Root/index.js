@@ -176,24 +176,27 @@ class Root extends React.Component {
       let sealCompleted = sealBars[node.hash].completed;
       let sealToal = sealBars[node.hash].total;
 
-      sealNodes.push(
-        <li
-          key={node.hash}
-          className={cx('linked', {
-            completed: sealBars[node.hash].completed === sealBars[node.hash].total
-          })}
-        >
-          <div className='progress-bar-background' style={{ width: `${(sealCompleted / sealToal) * 100}%` }} />
-          <ObservedImage className={cx('image', 'icon')} src={`/static/images/extracts/badges/${sealBars[node.hash].image}`} />
-          <div className='displayProperties'>
-            <div className='name'>{node.displayProperties.name}</div>
-            <div className='value'>
-              <span>{sealCompleted}</span> / {sealToal}
+      sealNodes.push({
+        completed: sealBars[node.hash].completed === sealBars[node.hash].total,
+        element: (
+          <li
+            key={node.hash}
+            className={cx('linked', {
+              completed: sealBars[node.hash].completed === sealBars[node.hash].total
+            })}
+          >
+            <div className='progress-bar-background' style={{ width: `${(sealCompleted / sealToal) * 100}%` }} />
+            <ObservedImage className={cx('image', 'icon')} src={`/static/images/extracts/badges/${sealBars[node.hash].image}`} />
+            <div className='displayProperties'>
+              <div className='name'>{node.displayProperties.name}</div>
+              <div className='value'>
+                <span>{sealCompleted}</span> / {sealToal}
+              </div>
             </div>
-          </div>
-          <ProfileLink to={`/triumphs/seal/${node.hash}`} />
-        </li>
-      );
+            <ProfileLink to={`/triumphs/seal/${node.hash}`} />
+          </li>
+        )
+      });
     });
 
     let unredeemedTriumphCount = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).length;
@@ -219,8 +222,9 @@ class Root extends React.Component {
           <ul className='list parents'>{nodes}</ul>
           <div className='sub-header sub'>
             <div>{t('Seals')}</div>
+            <div>{sealNodes.filter(n => n.completed).length}/{sealNodes.length}</div>
           </div>
-          <ul className='list parents seals'>{sealNodes}</ul>
+          <ul className='list parents seals'>{sealNodes.map(n => n.element)}</ul>
         </div>
         <div className='module'>
           <div className='sub-header sub'>
