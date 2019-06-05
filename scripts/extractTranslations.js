@@ -5,7 +5,7 @@ const translationsPath = "./public/static/locales";
 
 
 async function findStrings(){
-  let results = await finder.find(/\st\(\s*?["'](.*?)["'].*?[;,]/, './src/', '.js$');
+  let results = await finder.find(/\Wt\(\s*?["'](.*?)["'].*?[;,)]/, './src/', '.js$');
   return parseResults(results);
 }
 
@@ -22,8 +22,13 @@ function parseResult(key, result, foundStrings) {
   for (let i in result.matches) {
     if(!result.matches[i]) continue;
     let match = result.matches[i];
-    let regexp = /t\(\s*?["'](.*?)["']/s;
-    let regMatch = regexp.exec(match);
+    let regexpSingleQuote = /\Wt\(.*?['](.*?)[']/s;
+    let regexpDoubleQuote = /\Wt\(.*?["](.*?)["]/s;
+    let regMatch = regexpSingleQuote.exec(match) || regexpDoubleQuote.exec(match);
+    if(!regMatch){
+      console.log(match);
+      return;
+    }
     let matchResult = regMatch[1];
     foundStrings.push(matchResult);
   }
