@@ -101,6 +101,11 @@ class Roster extends React.Component {
       let gloryPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2000925172].currentProgress : 0;
       let infamyPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2772425241].currentProgress : 0;
       let infamyResets = !isPrivate ? (m.profile.profileRecords.data.records[3901785488] ? m.profile.profileRecords.data.records[3901785488].objectives[0].progress : 0) : 0;
+      let characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
+      let weeklyXp = !isPrivate ? characterIds.reduce((currentValue, characterId) => {
+        let characterProgress = m.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;
+        return characterProgress + currentValue;
+      }, 0) : 0;
 
       /*
 
@@ -126,7 +131,8 @@ class Roster extends React.Component {
           triumphScore,
           valorPoints,
           gloryPoints,
-          infamyPoints
+          infamyPoints,
+          weeklyXp: weeklyXp / characterIds.length * 5000
         },
         el: {
           full: (
@@ -174,6 +180,7 @@ class Roster extends React.Component {
                     <li className='col progression infamy'>
                       {infamyPoints} {infamyResets ? <div className='resets'>({infamyResets})</div> : null}
                     </li>
+                    <li className='col weeklyXp'>{weeklyXp} / {characterIds.length * 5000}</li>
                   </>
                 ) : (
                   <>
@@ -183,6 +190,7 @@ class Roster extends React.Component {
                     <li className='col valor'>–</li>
                     <li className='col glory'>–</li>
                     <li className='col infamy'>–</li>
+                    <li className='col weeklyXp'>–</li>
                   </>
                 )}
               </ul>
@@ -213,6 +221,8 @@ class Roster extends React.Component {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.gloryPoints, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
     } else if (order.sort === 'infamy') {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.infamyPoints, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+    } else if (order.sort === 'weeklyXp') {
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.weeklyXp, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
     } else {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.lastActivity, m => m.sorts.lastPlayed, m => m.sorts.lastCharacter.light], ['asc', 'desc', 'desc', 'desc', 'desc']);
     }
@@ -278,6 +288,15 @@ class Roster extends React.Component {
                 >
                   <div className='full'>Infamy (Resets)</div>
                   <div className='abbr'>Inf (R)</div>
+                </li>
+                <li
+                  className={cx('col', 'weeklyXp', { sort: this.state.order.sort === 'weeklyXp', asc: this.state.order.dir === 'asc' })}
+                  onClick={() => {
+                    this.changeSortTo('weeklyXp');
+                  }}
+                >
+                  <div className='full'>Weekly Clan XP</div>
+                  <div className='abbr'>Clan XP</div>
                 </li>
               </ul>
             </li>

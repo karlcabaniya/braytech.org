@@ -52,7 +52,7 @@
   width: 100%;
   display: grid;
   grid-gap: 32px;
-  grid-template-columns: minmax(180px, 270px) calc(38px * 3) minmax(120px, 400px) minmax(80px, 110px) minmax(80px, 110px) minmax(80px, 110px) minmax(80px, 110px);
+  grid-template-columns: minmax(180px, 270px) calc(38px * 3) minmax(120px, 400px) minmax(80px, 110px) minmax(80px, 110px) minmax(80px, 110px) minmax(80px, 110px) minmax(80px, 110px);
 }
 
 .list.roster.mini .row > ul {
@@ -173,6 +173,16 @@
 }
 
 
+
+@media screen and (max-width: 1280px) {
+  .list.roster .row > ul {
+    grid-template-columns: minmax(180px, 270px) calc(38px * 3) minmax(120px, 400px) minmax(80px, 110px) minmax(80px, 110px) minmax(80px, 110px) minmax(80px, 110px);
+  }
+
+  .list.roster .row > ul .col.weeklyXp {
+    display: none;
+  }
+}
 
 @media screen and (max-width: 768px) {
   .list.roster .row > ul {

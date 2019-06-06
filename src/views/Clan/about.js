@@ -30,7 +30,7 @@ class AboutView extends React.Component {
   }
 
   render() {
-    const { t, member, group, groupMembers, theme } = this.props;
+    const { t, member, group, groupMembers } = this.props;
     const characters = member.data.profile.characters.data;
     const characterIds = characters.map(c => c.characterId);
 
@@ -51,7 +51,7 @@ class AboutView extends React.Component {
 
     return (
       <div className='view about' id='clan'>
-        <div className='module overview'>
+        <div className='module'>
           <div className='page-header'>
             <div className='sub-name'>{t('Clan')}</div>
             <div className='name'>
@@ -63,6 +63,8 @@ class AboutView extends React.Component {
               // {group.memberCount} {t('members')} / {groupMembers.responses.filter(member => member.isOnline).length} {t('online')}
             </div>
           </div>
+        </div>
+        <div className='module overview'>
           <div className='banner'>
             <ClanBanner bannerData={group.clanInfo.clanBannerData} />
           </div>

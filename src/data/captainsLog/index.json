@@ -358,5 +358,10 @@
     "date": "2019-06-06T06:16:34.126Z",
     "version": "2.5.16",
     "content": "- Rewrote a bunch of stuff to make Braytech more resilient to new content drops\n- A brand new _Clan Roster_\n- Added hi-res images for new badges, sealsm, and lore books\n- Adjusted ClanBanner component alignment and added a new minimalist banner stand"
+  },
+  {
+    "date": "2019-06-06T08:09:40.921Z",
+    "version": "2.5.17",
+    "content": "- Added weekly clan xp to new _Clan Roster_"
   }
 ]
