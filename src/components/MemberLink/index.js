@@ -16,7 +16,7 @@ import * as responseUtils from '../../utils/responseUtils';
 import * as destinyUtils from '../../utils/destinyUtils';
 import * as destinyEnums from '../../utils/destinyEnums';
 import userFlair from '../../data/userFlair';
-// import store from '../../utils/reduxStore';
+import store from '../../utils/reduxStore';
 
 import './styles.css';
 
@@ -322,7 +322,7 @@ class MemberLink extends React.Component {
                                   anchor
                                   to={`/${type}/${id}/${c.characterId}`}
                                   action={() => {
-                                    /* store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: type, membershipId: id } }); */
+                                    store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: type, membershipId: id } });
                                   }}
                                 >
                                   <div className='icon'>

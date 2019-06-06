@@ -50,8 +50,6 @@ class ClanBanner extends React.Component {
     };
 
     this.clanBannerManifest = clanBannerManifestJson._embedded;
-    this.clanBannerManifestFetch = this.clanBannerManifestFetch.bind(this);
-    this.buildBannerConfig = this.buildBannerConfig.bind(this);
   }
 
   clanBannerManifestFetch = async () => {

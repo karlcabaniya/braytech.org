@@ -123,7 +123,7 @@ class AboutView extends React.Component {
           <div className='sub-header'>
             <div>{t('Clan roster')}</div>
           </div>
-          {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner mini /> : <Roster mini showOnline />}
+          {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner mini /> : <Roster mini limit='10' />}
         </div>
       </div>
     );

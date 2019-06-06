@@ -363,5 +363,10 @@
     "date": "2019-06-06T08:09:40.921Z",
     "version": "2.5.17",
     "content": "- Added weekly clan xp to new _Clan Roster_"
+  },
+  {
+    "date": "2019-06-06T13:45:04.549Z",
+    "version": "2.5.18",
+    "content": "- Bunch of changes, small, medium, and large\n- Added hide acquired collectibles settings"
   }
 ]

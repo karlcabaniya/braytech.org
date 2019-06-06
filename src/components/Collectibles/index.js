@@ -1,6 +1,8 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
@@ -26,6 +28,7 @@ class Collectibles extends React.Component {
   }
 
   render() {
+    const { t, forceDisplay } = this.props;
     const inspect = this.props.inspect ? true : false;
     const highlight = parseInt(this.props.highlight, 10) || false;
 
@@ -104,6 +107,10 @@ class Collectibles extends React.Component {
             }
 
             if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
+              return;
+            }
+
+            if (this.props.collectibles.hideAcquiredCollectibles && !enumerateCollectibleState(state).notAcquired) {
               return;
             }
           }
@@ -220,6 +227,10 @@ class Collectibles extends React.Component {
             return;
           }
 
+          if (this.props.collectibles.hideAcquiredCollectibles && !enumerateCollectibleState(state).notAcquired) {
+            return;
+          }
+
         }
 
         collectibles.push(
@@ -245,6 +256,16 @@ class Collectibles extends React.Component {
       });
     }
 
+    if (collectibles.length === 0 && this.props.collectibles && this.props.collectibles.hideAcquiredCollectibles && !forceDisplay) {
+      collectibles.push(
+          <li key='lol' className='all-completed'>
+            <div className='properties'>
+              <div className='text'>{t('All completed')}</div>
+            </div>
+          </li>
+        );
+    }
+
     return collectibles;
   }
 }
@@ -256,4 +277,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(Collectibles);
+export default compose(
+  connect(
+    mapStateToProps
+  ),
+  withNamespaces()
+)(Collectibles);

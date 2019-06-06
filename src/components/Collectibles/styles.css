@@ -65,6 +65,33 @@
   animation: animation-backround-highlight 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
 }
 
+.list.collection-items .all-completed {
+  grid-column: 1/-1;
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.list.collection-items .all-completed:hover {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.list.collection-items .all-completed::before {
+  box-shadow: none;
+}
+
+.list.collection-items .all-completed .properties {
+  grid-template-columns: 1fr;
+  padding: 0;
+}
+
+.list.collection-items .all-completed .properties .text {
+  margin: 0;
+  font-style: italic;
+  letter-spacing: 1px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 @media screen and (max-width: 1200px) {
   .list.collection-items {
     grid-template-columns: 1fr 1fr;

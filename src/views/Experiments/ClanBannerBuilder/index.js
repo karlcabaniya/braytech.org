@@ -33,7 +33,6 @@ class ClanBannerBuilder extends React.Component {
       gonfalonDetailId: 1681253713,
       gonfalonId: 1473910866
     };
-    this.clanBannerManifestFetch = this.clanBannerManifestFetch.bind(this);
   }
 
   clanBannerManifestFetch = async () => {

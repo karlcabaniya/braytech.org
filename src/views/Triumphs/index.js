@@ -20,8 +20,6 @@ class Triumphs extends React.Component {
     super(props);
 
     this.state = {};
-
-    this.toggleCompleted = this.toggleCompleted.bind(this);
   }
 
   toggleCompleted = () => {

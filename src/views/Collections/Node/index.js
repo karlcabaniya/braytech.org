@@ -17,8 +17,6 @@ class PresentationNode extends React.Component {
     this.state = {
       hideCompleted: ls.get('setting.hideCompletedRecords') ? ls.get('setting.hideCompletedRecords') : false
     };
-
-    this.toggleCompleted = this.toggleCompleted.bind(this);
   }
 
   toggleCompleted = () => {

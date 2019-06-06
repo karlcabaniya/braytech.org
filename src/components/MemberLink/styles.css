@@ -200,6 +200,7 @@ html.backdropfilter .wrapper.dark-mode #member-overlay {
 #member-overlay .wrapper-outer {
   position: relative;
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 #member-overlay .background .border-top {

@@ -1,13 +1,13 @@
 #banner-builder {
   padding: 4rem 3rem 3rem;
   display: grid;
-  grid-template-columns: 1.2fr 3fr;
+  grid-template-columns: 1fr 3fr;
   grid-gap: 3rem;
 }
 
 #banner-builder .banner .canvas canvas {
   width: 100%;
-  max-width: 496px;
+  max-width: 410px;
 }
 
 #banner-builder .banner .canvas .spinner {

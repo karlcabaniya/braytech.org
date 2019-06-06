@@ -26,11 +26,37 @@ class Collections extends React.Component {
     }
   }
 
+  toggleCompleted = () => {
+    let currentState = this.props.collectibles;
+    let newState = {
+      hideAcquiredCollectibles: !currentState.hideAcquiredCollectibles
+    };
+
+    this.props.setCollectibleDisplayState(newState);
+  };
+
   render() {
     const { t } = this.props;
     let primaryHash = this.props.match.params.primary ? this.props.match.params.primary : false;
 
     let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/collections';
+
+    let toggleCompletedLink = (
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a className='button' onClick={this.toggleCompleted}>
+        {this.props.collectibles.hideAcquiredCollectibles ? (
+          <>
+            <i className='uniF16E' />
+            {t('Show all')}
+          </>
+        ) : (
+          <>
+            <i className='uniF16B' />
+            {t('Hide acquired')}
+          </>
+        )}
+      </a>
+    );
 
     if (!primaryHash) {
       return (
@@ -47,6 +73,7 @@ class Collections extends React.Component {
           <div className='sticky-nav'>
             <div />
             <ul>
+              <li>{toggleCompletedLink}</li>
               <li>
                 <ProfileLink className='button' to={backLinkPath}>
                   <i className='destiny-B_Button' />
@@ -66,6 +93,7 @@ class Collections extends React.Component {
           <div className='sticky-nav'>
             <div />
             <ul>
+              <li>{toggleCompletedLink}</li>
               <li>
                 <ProfileLink className='button' to={backLinkPath}>
                   <i className='destiny-B_Button' />
@@ -82,11 +110,23 @@ class Collections extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    collectibles: state.collectibles
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setCollectibleDisplayState: value => {
+      dispatch({ type: 'SET_COLLECTIBLES', payload: value });
+    }
   };
 }
 
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withNamespaces()
 )(Collections);

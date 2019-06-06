@@ -6,7 +6,7 @@ import cx from 'classnames';
 
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
-import Items from '../../components/Items';
+// import Items from '../../components/Items';
 import ObservedImage from '../../components/ObservedImage';
 import manifest from '../../utils/manifest';
 
@@ -33,8 +33,8 @@ class ThisWeek extends React.Component {
         curse: new Date(`2018-09-11T${resetTime}`).getTime(),
         ep: new Date(`2018-05-08T${resetTime}`).getTime(),
         reckoning: new Date(`2018-05-28T${resetTime}`).getTime(),
-        whisper: new Date(`2018-03-12T${resetTime}`).getTime(),
-        zerohour: new Date(`2018-03-12T${resetTime}`).getTime()
+        whisper: new Date(`2018-03-05T${resetTime}`).getTime(),
+        zerohour: new Date(`2018-03-05T${resetTime}`).getTime()
       },
       cycle: {
         // how many week cycle

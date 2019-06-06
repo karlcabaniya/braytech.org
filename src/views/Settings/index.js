@@ -22,8 +22,6 @@ class Settings extends React.Component {
         selected: initLanguage
       }
     };
-
-    this.saveAndRestart = this.saveAndRestart.bind(this);
   }
 
   selectCollectibleDisplayState(state) {
@@ -33,7 +31,8 @@ class Settings extends React.Component {
     newState = {
       hideTriumphRecords: state === 'hideTriumphRecords' ? !currentState.hideTriumphRecords : currentState.hideTriumphRecords,
       hideChecklistItems: state === 'hideChecklistItems' ? !currentState.hideChecklistItems : currentState.hideChecklistItems,
-      hideInvisibleCollectibles: state === 'hideInvisibleCollectibles' ? !currentState.hideInvisibleCollectibles : currentState.hideInvisibleCollectibles
+      hideInvisibleCollectibles: state === 'hideInvisibleCollectibles' ? !currentState.hideInvisibleCollectibles : currentState.hideInvisibleCollectibles,
+      hideAcquiredCollectibles: state === 'hideAcquiredCollectibles' ? !currentState.hideAcquiredCollectibles : currentState.hideAcquiredCollectibles
     };
 
     this.props.setCollectibleDisplayState(newState);
@@ -164,12 +163,23 @@ class Settings extends React.Component {
                 </div>
               </li>
               <li
+                key='hideAcquiredCollectibles'
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideAcquiredCollectibles');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideAcquiredCollectibles} text={t('Hide acquired collection items')} />
+                <div className='info'>
+                  <p>{t('If a collectible has been acquired, it will be hidden under Collections views.')}</p>
+                </div>
+              </li>
+              <li
                 key='hideInvisibleCollectibles'
                 onClick={() => {
                   this.selectCollectibleDisplayState('hideInvisibleCollectibles');
                 }}
               >
-                <Checkbox linked checked={this.props.collectibles.hideInvisibleCollectibles} text={t('Hide invisible Collection items')} />
+                <Checkbox linked checked={this.props.collectibles.hideInvisibleCollectibles} text={t('Hide invisible collection items')} />
                 <div className='info'>
                   <p>{t('If the game specifies that you are unable to see a particular collectible, it will be hidden under Collections views.')}</p>
                 </div>

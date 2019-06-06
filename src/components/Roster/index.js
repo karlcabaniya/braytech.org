@@ -24,7 +24,7 @@ class Roster extends React.Component {
       }
     };
 
-    moment.locale('en', {
+    moment.updateLocale('en', {
       relativeTime: {
         future: 'in %s',
         past: '%s ago',
@@ -307,7 +307,7 @@ class Roster extends React.Component {
 
     return (
       <>
-        <ul className={cx('list', 'roster', { mini: mini })}>{mini ? members.map(m => m.el.mini) : members.map(m => m.el.full)}</ul>
+        <ul className={cx('list', 'roster', { mini: mini })}>{mini ? this.props.limit ? members.slice(0, this.props.limit).map(m => m.el.mini) : members.map(m => m.el.mini) : members.map(m => m.el.full)}</ul>
         {mini ? (
           <ProfileLink className='button' to='/clan/roster'>
             <div className='text'>{t('See full roster')}</div>

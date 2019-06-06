@@ -575,9 +575,14 @@ export function lastPlayerActivity(member) {
     if (lastActivity && member.isOnline !== false) {
       let activity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
       let mode = activity ? (activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
+      let place = activity.placeHash ? manifest.DestinyPlaceDefinition[activity.placeHash] : false;
 
       if (mode) {
-        display = `${mode.displayProperties.name}: ${activity.displayProperties.name}`;
+        if (place && activity.placeHash === 2096719558) {
+          display = `${activity.displayProperties.name}`;
+        } else {
+          display = `${mode.displayProperties.name}: ${activity.displayProperties.name}`;
+        }
       } else if (activity) {
         if (activity.placeHash === 2961497387) {
           display = `Orbit`;
@@ -600,8 +605,6 @@ export function lastPlayerActivity(member) {
       }
     }
   }
-
-  
 
   return {
     lastPlayed: lastActivity ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed,

@@ -5,6 +5,7 @@ const defaultState = {
   hideTriumphRecords: false,
   hideChecklistItems: false,
   hideInvisibleCollectibles: true,
+  hideAcquiredCollectibles: false,
   ...savedState
 };
 
