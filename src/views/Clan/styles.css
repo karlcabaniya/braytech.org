@@ -37,31 +37,7 @@
   color: #fff;
 }
 
-#clan .clan-properties {
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 2rem;
-}
-
-#clan .clan-properties .name {
-  position: relative;
-  font-size: 38px;
-  line-height: 1;
-  font-weight: 600;
-  margin: 3px 0 7px;
-  color: rgba(255, 255, 255, 1);
-}
-
-#clan .clan-properties .name::before {
-  content: ' ';
-  position: absolute;
-  top: -9px;
-  left: 0;
-  width: 1.3rem;
-  height: 5px;
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-#clan .clan-properties .name .tag {
+#clan .page-header .name .tag {
   font-size: 25px;
   font-weight: 400;
   display: inline-block;
@@ -70,42 +46,14 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-#clan .clan-properties .memberCount {
+#clan .page-header .memberCount {
   position: relative;
+  margin: 10px 0 0;
   text-transform: uppercase;
-  margin: 0 0 32px;
-  font-size: 18px;
-}
-
-#clan .clan-properties .memberCount::before {
-  content: ' ';
-  position: absolute;
-  bottom: -17px;
-  left: 0;
-  width: 0.5rem;
-  height: 3px;
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-#clan .clan-properties .motto {
-  font-style: italic;
-  font-size: 18px;
-  letter-spacing: 1px;
-  margin: 0 0 21px;
-}
-
-#clan .clan-properties .bio {
-  font-size: 16px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-#clan .summary .info {
+  letter-spacing: 2px;
   font-size: 14px;
-  font-style: italic;
-  letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0 0 1rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 @media screen and (max-width: 1200px) {

@@ -420,7 +420,7 @@ class SitRep extends React.Component {
               <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
             </div>
             <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
-            {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini linked isOnline />}
+            {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini showOnline />}
           </div> : null}
         </div>
       </div>

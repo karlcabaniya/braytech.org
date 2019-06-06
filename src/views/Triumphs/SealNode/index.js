@@ -19,109 +19,67 @@ class SealNode extends React.Component {
 
     const sealBars = {
       2588182977: {
-        text: manifest.DestinyRecordDefinition[2757681677].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-00001367.png',
-        nodeHash: 2588182977,
-        recordHash: 2757681677,
-        total: profileRecords[2757681677].objectives[0].completionValue,
-        completed: profileRecords[2757681677].objectives[0].progress
+        image: '037E-00001367.png'
       },
       3481101973: {
-        text: manifest.DestinyRecordDefinition[3798931976].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-00001343.png',
-        nodeHash: 3481101973,
-        recordHash: 3798931976,
-        total: profileRecords[3798931976].objectives[0].completionValue,
-        completed: profileRecords[3798931976].objectives[0].progress
+        image: '037E-00001343.png'
       },
       147928983: {
-        text: manifest.DestinyRecordDefinition[3369119720].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-0000134A.png',
-        nodeHash: 147928983,
-        recordHash: 3369119720,
-        total: profileRecords[3369119720].objectives[0].completionValue,
-        completed: profileRecords[3369119720].objectives[0].progress
+        image: '037E-0000134A.png'
       },
       2693736750: {
-        text: manifest.DestinyRecordDefinition[1754983323].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-0000133C.png',
-        nodeHash: 2693736750,
-        recordHash: 1754983323,
-        total: profileRecords[1754983323].objectives[0].completionValue,
-        completed: profileRecords[1754983323].objectives[0].progress
+        image: '037E-0000133C.png'
       },
       2516503814: {
-        text: manifest.DestinyRecordDefinition[1693645129].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-00001351.png',
-        nodeHash: 2516503814,
-        recordHash: 1693645129,
-        total: profileRecords[1693645129].objectives[0].completionValue,
-        completed: profileRecords[1693645129].objectives[0].progress
+        image: '037E-00001351.png'
       },
       1162218545: {
-        text: manifest.DestinyRecordDefinition[2182090828].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-00001358.png',
-        nodeHash: 1162218545,
-        recordHash: 2182090828,
-        total: profileRecords[2182090828].objectives[0].completionValue,
-        completed: profileRecords[2182090828].objectives[0].progress
+        image: '037E-00001358.png'
       },
       2039028930: {
-        text: manifest.DestinyRecordDefinition[2053985130].titleInfo.titlesByGenderHash[genderHash],
-        image: '0560-000000EB.png',
-        nodeHash: 2039028930,
-        recordHash: 2053985130,
-        total: profileRecords[2053985130].objectives[0].completionValue,
-        completed: profileRecords[2053985130].objectives[0].progress
+        image: '0560-000000EB.png'
       },
       991908404: {
-        text: manifest.DestinyRecordDefinition[1313291220].titleInfo.titlesByGenderHash[genderHash],
-        image: '0560-0000107E.png',
-        nodeHash: 991908404,
-        recordHash: 1313291220,
-        total: profileRecords[1313291220].objectives[0].completionValue,
-        completed: profileRecords[1313291220].objectives[0].progress
+        image: '0560-0000107E.png'
       },
       3170835069: {
-        text: manifest.DestinyRecordDefinition[1883929036].titleInfo.titlesByGenderHash[genderHash],
-        image: '',
-        nodeHash: 3170835069,
-        recordHash: 1883929036,
-        total: profileRecords[1883929036].objectives[0].completionValue,
-        completed: profileRecords[1883929036].objectives[0].progress
+        image: '0560-00006583.png'
       }
     };
 
-    let sealDefinition = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
+    let definitionSeal = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
 
-    let completed = sealBars[sealDefinition.hash].completed === sealBars[sealDefinition.hash].total ? true : false;
+    let progress = profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
+    let total = profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
+    let isComplete = progress === total ? true : false;
+    let title = manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[genderHash];
 
     return (
       <div className='node seal'>
         <div className='children'>
           <div className='icon'>
             <div className='corners t' />
-            <ObservedImage className={cx('image')} src={`/static/images/extracts/badges/${sealBars[sealDefinition.hash].image}`} />
+            <ObservedImage className='image' src={sealBars[definitionSeal.hash] ? `/static/images/extracts/badges/${sealBars[definitionSeal.hash].image}` : `https://www.bungie.net${definitionSeal.displayProperties.originalIcon}`} />
             <div className='corners b' />
           </div>
           <div className='text'>
-            <div className='name'>{sealDefinition.displayProperties.name}</div>
-            <div className='description'>{sealDefinition.displayProperties.description}</div>
+            <div className='name'>{definitionSeal.displayProperties.name}</div>
+            <div className='description'>{definitionSeal.displayProperties.description}</div>
           </div>
           <div className='until'>
-            {completed ? <h4 className='completed'>{t('Seal completed')}</h4> : <h4>{t('Seal progress')}</h4>}
+            {isComplete ? <h4 className='completed'>{t('Seal completed')}</h4> : <h4>{t('Seal progress')}</h4>}
             <div className='progress'>
               <div className='text'>
-                <div className='title'>{sealBars[sealDefinition.hash].text}</div>
+                <div className='title'>{title}</div>
                 <div className='fraction'>
-                  {sealBars[sealDefinition.hash].completed}/{sealBars[sealDefinition.hash].total}
+                  {progress}/{total}
                 </div>
               </div>
-              <div className={cx('bar', { completed: completed })}>
+              <div className={cx('bar', { completed: isComplete })}>
                 <div
                   className='fill'
                   style={{
-                    width: `${(sealBars[sealDefinition.hash].completed / sealBars[sealDefinition.hash].total) * 100}%`
+                    width: `${(progress / total) * 100}%`
                   }}
                 />
               </div>
@@ -130,7 +88,7 @@ class SealNode extends React.Component {
         </div>
         <div className='records'>
           <ul className='list no-interaction tertiary record-items'>
-            <Records {...this.props} hashes={sealDefinition.children.records.map(child => child.recordHash)} />
+            <Records {...this.props} hashes={definitionSeal.children.records.map(child => child.recordHash)} />
           </ul>
         </div>
       </div>

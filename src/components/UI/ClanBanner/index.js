@@ -99,7 +99,7 @@ class ClanBanner extends React.Component {
           loaded: state
         });
       };
-      cache.src = 'https://www.bungie.net' + image.src;
+      cache.src = key === 'StandImage' ? '/static/images/extracts/flair/FlagStand01.png' : 'https://www.bungie.net' + image.src;
     });
   };
 
@@ -137,8 +137,8 @@ class ClanBanner extends React.Component {
   render() {
     // console.log('render', this.props.bannerData)
 
-    let canvasWidth = 496;
-    let canvasHeight = 1034;
+    let canvasWidth = 410;
+    let canvasHeight = 700;
 
     if (this.state.loaded === 6) {
       let canvasFinal = this.refs.canvas;
@@ -176,22 +176,22 @@ class ClanBanner extends React.Component {
 
       ctxFinal.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      ctxGonfalon.drawImage(this.bannerConfig.GonfalonImage.el, canvasWidth / 2 - this.bannerConfig.GonfalonImage.el.naturalWidth / 2, 47, this.bannerConfig.GonfalonImage.el.naturalWidth, this.bannerConfig.GonfalonImage.el.naturalHeight);
+      ctxGonfalon.drawImage(this.bannerConfig.GonfalonImage.el, canvasWidth / 2 - this.bannerConfig.GonfalonImage.el.naturalWidth / 2, 21, this.bannerConfig.GonfalonImage.el.naturalWidth, this.bannerConfig.GonfalonImage.el.naturalHeight);
       ctxGonfalon.globalCompositeOperation = 'source-in';
       ctxGonfalon.fillStyle = 'rgba(' + this.bannerConfig.GonfalonImage.color + ')';
       ctxGonfalon.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      ctxGonfalonDetail.drawImage(this.bannerConfig.GonfalonDetailImage.el, canvasWidth / 2 - this.bannerConfig.GonfalonDetailImage.el.naturalWidth / 2, 47, this.bannerConfig.GonfalonDetailImage.el.naturalWidth, this.bannerConfig.GonfalonDetailImage.el.naturalHeight);
+      ctxGonfalonDetail.drawImage(this.bannerConfig.GonfalonDetailImage.el, canvasWidth / 2 - this.bannerConfig.GonfalonDetailImage.el.naturalWidth / 2, 21, this.bannerConfig.GonfalonDetailImage.el.naturalWidth, this.bannerConfig.GonfalonDetailImage.el.naturalHeight);
       ctxGonfalonDetail.globalCompositeOperation = 'source-in';
       ctxGonfalonDetail.fillStyle = 'rgba(' + this.bannerConfig.GonfalonDetailImage.color + ')';
       ctxGonfalonDetail.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      ctxDecalBg.drawImage(this.bannerConfig.DecalBgImage.el, canvasWidth / 2 - this.bannerConfig.DecalBgImage.el.naturalWidth / 2, 47, this.bannerConfig.DecalBgImage.el.naturalWidth, this.bannerConfig.DecalBgImage.el.naturalHeight);
+      ctxDecalBg.drawImage(this.bannerConfig.DecalBgImage.el, canvasWidth / 2 - this.bannerConfig.DecalBgImage.el.naturalWidth / 2, 21, this.bannerConfig.DecalBgImage.el.naturalWidth, this.bannerConfig.DecalBgImage.el.naturalHeight);
       ctxDecalBg.globalCompositeOperation = 'source-in';
       ctxDecalBg.fillStyle = 'rgba(' + this.bannerConfig.DecalBgImage.color + ')';
       ctxDecalBg.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      ctxDecalFg.drawImage(this.bannerConfig.DecalFgImage.el, canvasWidth / 2 - this.bannerConfig.DecalFgImage.el.naturalWidth / 2, 47, this.bannerConfig.DecalFgImage.el.naturalWidth, this.bannerConfig.DecalFgImage.el.naturalHeight);
+      ctxDecalFg.drawImage(this.bannerConfig.DecalFgImage.el, canvasWidth / 2 - this.bannerConfig.DecalFgImage.el.naturalWidth / 2, 21, this.bannerConfig.DecalFgImage.el.naturalWidth, this.bannerConfig.DecalFgImage.el.naturalHeight);
       ctxDecalFg.globalCompositeOperation = 'source-in';
       ctxDecalFg.fillStyle = 'rgba(' + this.bannerConfig.DecalFgImage.color + ')';
       ctxDecalFg.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -205,16 +205,17 @@ class ClanBanner extends React.Component {
       ctxMasked.drawImage(canvasCombined, 0, 0, canvasWidth, canvasHeight);
 
       ctxMasked.globalCompositeOperation = 'source-atop';
-      ctxMasked.drawImage(this.bannerConfig.FlagOverlay.el, canvasWidth / 2 - this.bannerConfig.FlagOverlay.el.naturalWidth / 2, 47, this.bannerConfig.FlagOverlay.el.naturalWidth, this.bannerConfig.FlagOverlay.el.naturalHeight);
+      ctxMasked.drawImage(this.bannerConfig.FlagOverlay.el, canvasWidth / 2 - this.bannerConfig.FlagOverlay.el.naturalWidth / 2, 21, this.bannerConfig.FlagOverlay.el.naturalWidth, this.bannerConfig.FlagOverlay.el.naturalHeight);
 
       ctxFinal.drawImage(canvasMasked, 0, 0, canvasWidth, canvasHeight);
-      ctxFinal.drawImage(this.bannerConfig.StandImage.el, canvasWidth / 2 - this.bannerConfig.GonfalonImage.el.naturalWidth / 2 - 10, 6, canvasWidth * 0.85, canvasHeight * 0.85);
+      // ctxFinal.drawImage(this.bannerConfig.StandImage.el, canvasWidth / 2 - this.bannerConfig.GonfalonImage.el.naturalWidth / 2 - 10, 6, canvasWidth * 0.85, canvasHeight * 0.85);
+      ctxFinal.drawImage(this.bannerConfig.StandImage.el, -1, 1);
     }
 
     return (
       <div className='canvas'>
         {this.state.loaded !== 6 ? <Spinner /> : null}
-        <canvas ref='canvas' width={canvasWidth} height='900' />
+        <canvas ref='canvas' width={canvasWidth} height={canvasHeight} />
       </div>
     );
   }

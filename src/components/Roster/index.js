@@ -1,18 +1,15 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
-import Moment from 'react-moment';
+import moment from 'moment';
 import orderBy from 'lodash/orderBy';
 
-import Globals from '../../utils/globals';
+import * as destinyUtils from '../../utils/destinyUtils';
 import { ProfileLink } from '../../components/ProfileLink';
-import manifest from '../../utils/manifest';
-import ObservedImage from '../../components/ObservedImage';
-import * as utils from '../../utils/destinyUtils';
 import getGroupMembers from '../../utils/getGroupMembers';
+import MemberLink from '../MemberLink';
 
 import './styles.css';
 
@@ -21,8 +18,30 @@ class Roster extends React.Component {
     super(props);
 
     this.state = {
-      expanded: []
+      order: {
+        sort: false,
+        dir: 'desc'
+      }
     };
+
+    moment.locale('en', {
+      relativeTime: {
+        future: 'in %s',
+        past: '%s ago',
+        s: 'now',
+        ss: '%ss',
+        m: '<1m',
+        mm: '%dm',
+        h: '1h',
+        hh: '%dh',
+        d: '1d',
+        dd: '%dd',
+        M: '1m',
+        MM: '%dm',
+        y: '1y',
+        yy: '%dy'
+      }
+    });
   }
 
   componentDidMount() {
@@ -59,258 +78,224 @@ class Roster extends React.Component {
     this.clearInterval();
   }
 
-  expandHandler = (membershipId, mini) => {
-    if (mini) {
-      return false;
-    } else {
-      this.setState((prevState, props) => {
-        let index = prevState.expanded.indexOf(membershipId);
-        if (index > -1) {
-          let expanded = prevState.expanded.filter(id => id !== membershipId);
-          return { expanded: expanded };
-        } else {
-          let expanded = prevState.expanded.concat(membershipId);
-          return { expanded: expanded };
-        }
-      });
-    }
+  changeSortTo = to => {
+    this.setState((prevState, props) => {
+      prevState.order.dir = prevState.order.sort === to && prevState.order.dir === 'desc' ? 'asc' : 'desc';
+      prevState.order.sort = to;
+      return prevState;
+    });
   };
 
   render() {
-    const { t, groupMembers, mini, linked, isOnline } = this.props;
+    const { t, groupMembers, mini, showOnline = false } = this.props;
 
-    let list = [];
-    let results = isOnline ? groupMembers.responses.filter(response => response.isOnline) : groupMembers.responses;
+    let members = [];
+    let results = showOnline ? groupMembers.responses.filter(r => r.isOnline) : groupMembers.responses;
 
-    results.forEach(member => {
-      let blueberry = new Date().getTime() - new Date(member.joinDate).getTime() < 1209600000 ? true : false;
+    results.forEach(m => {
+      let isPrivate = !m.profile || (!m.profile.characterActivities.data || !m.profile.characters.data.length);
+      let { lastPlayed, lastActivity, lastCharacter, lastMode, display } = destinyUtils.lastPlayerActivity(m);
+      let triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
+      let valorPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2626549951].currentProgress : 0;
+      let valorResets = !isPrivate ? (m.profile.profileRecords.data.records[559943871] ? m.profile.profileRecords.data.records[559943871].objectives[0].progress : 0) : 0;
+      let gloryPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2000925172].currentProgress : 0;
+      let infamyPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2772425241].currentProgress : 0;
+      let infamyResets = !isPrivate ? (m.profile.profileRecords.data.records[3901785488] ? m.profile.profileRecords.data.records[3901785488].objectives[0].progress : 0) : 0;
 
-      if (!member.profile) {
-        if (!mini) {
-          list.push({
-            membershipId: member.destinyUserInfo.membershipId,
-            isOnline: member.isOnline,
-            lastPlayed: new Date(member.joinDate).getTime(),
-            lastActivity: 0,
-            element: (
-              <li key={member.destinyUserInfo.membershipId} className={cx({ isOnline: member.isOnline }, 'no-character', 'error')}>
-                <div className='basic'>
-                  <div className='icon'>
-                    <div className='emblem' />
-                  </div>
-                  <div className='displayName'>{member.destinyUserInfo.displayName}</div>
-                  <div className='error'>{t("Couldn't retrieve this profile")}</div>
-                  <div className='activity'>
-                    <Moment fromNow ago>
-                      {member.joinDate}
-                    </Moment>
-                  </div>
-                </div>
-              </li>
-            )
-          });
-        }
-        return;
-      }
+      /*
 
-      if (!member.profile.characterActivities.data || !member.profile.characters.data.length) {
-        if (!mini) {
-          list.push({
-            membershipId: member.destinyUserInfo.membershipId,
-            isOnline: member.isOnline,
-            lastPlayed: new Date(member.profile.profile.data.dateLastPlayed).getTime(),
-            lastActivity: 0,
-            element: (
-              <li key={member.destinyUserInfo.membershipId} className={cx({ isOnline: member.isOnline }, 'no-character', 'error')}>
-                <div className='basic'>
-                  <div className='icon'>
-                    <div className='emblem' />
-                  </div>
-                  <div className='displayName'>{member.destinyUserInfo.displayName}</div>
-                  <div className='error'>{t('Private profile')}</div>
-                  <div className='activity'>
-                    <Moment fromNow ago>
-                      {member.profile.profile.data.dateLastPlayed}
-                    </Moment>
-                  </div>
-                </div>
-              </li>
-            )
-          });
-        }
-        return;
-      }
+        lastPlayed:     Date
+        lastActivity:   Object
+        lastCharacter:  Object
+        lastMode:       Object
+        display:        String
 
-      const { lastPlayed, lastActivity, lastCharacter, lastMode, display } = utils.lastPlayerActivity(member);
+      */
 
-      // if (member.destinyUserInfo.membershipId === this.props.member.membershipId.toString()) {
-      //   console.log(member, lastMode);
+      // if (m.isOnline) {
+      //   console.log(lastPlayed);
       // }
 
-      if (mini) {
-        list.push({
-          membershipId: member.destinyUserInfo.membershipId,
-          isOnline: member.isOnline,
-          lastPlayed: new Date(lastPlayed).getTime(),
-          lastActivity: lastActivity && member.isOnline ? lastActivity.currentActivityHash : 0,
-          element: (
-            <li key={member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.isOnline, thisIsYou: member.destinyUserInfo.membershipId === this.props.member.membershipId.toString() })}>
-              <div className='basic'>
-                <div className='icon'>
-                  <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${lastCharacter.emblemPath}`} />
-                </div>
-                <div className='displayName'>{member.destinyUserInfo.displayName}</div>
-              </div>
-            </li>
-          )
-        });
-      } else {
-        let displayName = (
-          <>
-            <div className='icon'>{member.isOnline ? <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${lastCharacter.emblemPath}`} /> : <div className='emblem' />}</div>
-            <div className='displayName'>{member.destinyUserInfo.displayName}{member.memberType > 2 ? <>{member.memberType > 3 ? <span className={cx('stamp', 'founder')}>Founder</span> : <span className={cx('stamp', 'admin')}>Admin</span>}</> : null}</div>
-          </>
-        );
-
-        const characterStamps = character => (
-          <>
-            <span className={cx('stamp', 'light', { max: character.light === 700 })}>{character.light}</span>
-            <span className={cx('stamp', 'level')}>{character.baseCharacterLevel}</span>
-            <span className={cx('stamp', 'class', utils.classTypeToString(character.classType).toLowerCase())}>{utils.classTypeToString(character.classType)}</span>
-            <span className={cx('stamp', 'clan-xp', { complete: member.profile.characterProgressions.data[character.characterId].progressions[540048094].weeklyProgress === 5000 })}>{member.profile.characterProgressions.data[character.characterId].progressions[540048094].weeklyProgress} XP</span>
-          </>
-        );
-
-        const timePlayedTotalCharacters = Math.floor(
-          Object.keys(member.profile.characters.data).reduce((sum, key) => {
-            return sum + parseInt(member.profile.characters.data[key].minutesPlayedTotal);
-          }, 0) / 1440
-        );
-
-        let playerTypeStamps = [];
-        for (const [modeName, modeObject] of Object.entries(member.historicalStats)) {
-          if (modeObject.allTime) {
-            let modeNamePretty = '';
-            if (modeName === 'allPvP') {
-              modeNamePretty = 'crucible';
-            } else if (modeName === 'raid') {
-              modeNamePretty = 'raids';
-            } else if (modeName === 'allPvECompetitive') {
-              modeNamePretty = 'gambit';
-            } else {
-              modeNamePretty = 'vanguard';
-            }
-
-            playerTypeStamps.push({
-              secondsPlayed: modeObject.allTime.secondsPlayed.basic.value,
-              element: (
-                <>
-                  <span className={cx('stamp', 'mode-stamp', modeNamePretty)}>{modeNamePretty}</span> {Math.floor(modeObject.allTime.secondsPlayed.basic.value / 60 / 60)} hours
-                </>
-              )
-            });
-          }
-        }
-
-        playerTypeStamps = orderBy(playerTypeStamps, [stamp => stamp.secondsPlayed], ['desc']);
-        let playerTypeStampsPrimary = playerTypeStamps.length ? playerTypeStamps[0] : false;
-
-        let isExpanded = this.state.expanded.includes(member.destinyUserInfo.membershipId);
-        let expanded = (
-          <div className='detail'>
-            <ul className='times'>
-              <li className='joinDate'>
-                <>Joined </>
-                <Moment fromNow>{member.joinDate}</Moment>
-              </li>
-              <li className='timePlayed'>
-                {timePlayedTotalCharacters} {timePlayedTotalCharacters === 1 ? t('day played') : t('days played')}
-              </li>
-            </ul>
-            <ul className='characters'>
-              {member.profile.characters.data.map(character => (
-                <li key={character.characterId} className={cx({ isLast: character.characterId === lastCharacter.characterId })}>
-                  {characterStamps(character)}
+      members.push({
+        sorts: {
+          private: isPrivate,
+          isOnline: m.isOnline,
+          lastPlayed,
+          lastActivity,
+          lastCharacter: !isPrivate ? lastCharacter : false,
+          triumphScore,
+          valorPoints,
+          gloryPoints,
+          infamyPoints
+        },
+        el: {
+          full: (
+            <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className='row'>
+              <ul>
+                <li className='col member'>
+                  <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} hideEmblemIcon={!m.isOnline} />
                 </li>
-              ))}
-            </ul>
-            <ul className='activity' />
-            <ul className='triumphScore' />
-            <ul className='timeStamps'>
-              {playerTypeStamps.map((stamp, k) => {
-                return <li key={k}>{stamp.element}</li>;
-              })}
-            </ul>
-          </div>
-        );
-
-        // <div className='rank'>{utils.groupMemberTypeToString(member.memberType)}</div>
-
-        list.push({
-          membershipId: member.destinyUserInfo.membershipId,
-          isOnline: member.isOnline,
-          lastPlayed: new Date(lastPlayed).getTime(),
-          lastActivity: lastActivity && member.isOnline ? lastActivity.currentActivityHash : 0,
-          element: (
-            <li key={member.destinyUserInfo.membershipId} className={cx('linked', { isOnline: member.isOnline, isExpanded: isExpanded, thisIsYou: member.destinyUserInfo.membershipId === this.props.member.membershipId.toString(), isAdmin: member.memberType === 3, isFounder: member.memberType > 3 })} onClick={() => this.expandHandler(member.destinyUserInfo.membershipId, mini)}>
-              <div className='basic'>
-                {displayName}
-                <div className='character'>{characterStamps(lastCharacter)}</div>
-                <div className='activity'>
-                  {lastMode ? <div className='mode'>{lastMode.displayProperties.name}</div> : null}
-                  {display ? <div className='name'>{display}</div> : null}
-                  <Moment fromNow ago>
-                    {lastPlayed}
-                  </Moment>
-                </div>
-                <div className='triumphScore'>{member.profile.profileRecords.data.score}</div>
-                <div className='timeStamps'>{playerTypeStampsPrimary ? playerTypeStampsPrimary.element : null}</div>
-              </div>
-              {isExpanded ? expanded : null}
+                {!isPrivate ? (
+                  <>
+                    <li className='col lastCharacter'>
+                      <div className='icon'>
+                        <i
+                          className={`destiny-class_${destinyUtils
+                            .classTypeToString(lastCharacter.classType)
+                            .toString()
+                            .toLowerCase()}`}
+                        />
+                      </div>
+                      <div className='icon'>
+                        <div>{lastCharacter.baseCharacterLevel}</div>
+                      </div>
+                      <div className='icon'>
+                        <div className={cx({ 'max-ish': lastCharacter.light >= 720, max: lastCharacter.light === 750 })}>
+                          <span>{lastCharacter.light}</span>
+                        </div>
+                      </div>
+                    </li>
+                    <li className={cx('col', 'lastActivity', { display: m.isOnline && display })}>
+                      <div>
+                        {m.isOnline && display ? (
+                          <>
+                            {display} <span>{moment(lastPlayed).fromNow(true)}</span>
+                          </>
+                        ) : (
+                          moment(lastPlayed).fromNow()
+                        )}
+                      </div>
+                    </li>
+                    <li className='col triumphScore'>{triumphScore.toLocaleString('en-us')}</li>
+                    <li className='col progression valor'>
+                      {valorPoints} {valorResets ? <div className='resets'>({valorResets})</div> : null}
+                    </li>
+                    <li className='col progression glory'>{gloryPoints}</li>
+                    <li className='col progression infamy'>
+                      {infamyPoints} {infamyResets ? <div className='resets'>({infamyResets})</div> : null}
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className='col lastCharacter'>–</li>
+                    <li className='col lastActivity'>–</li>
+                    <li className='col triumphScore'>–</li>
+                    <li className='col valor'>–</li>
+                    <li className='col glory'>–</li>
+                    <li className='col infamy'>–</li>
+                  </>
+                )}
+              </ul>
+            </li>
+          ),
+          mini: (
+            <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className='row'>
+              <ul>
+                <li className='col member'>
+                  <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} hideEmblemIcon={!m.isOnline} />
+                </li>
+              </ul>
             </li>
           )
-        });
-      }
+        }
+      });
     });
 
-    list = orderBy(list, [member => member.isOnline, member => member.lastActivity, member => member.lastPlayed], ['desc', 'desc', 'desc']);
+    let order = this.state.order;
 
-    if (this.props.mini) {
-      list.push({
-        membershipId: 0,
-        isOnline: false,
-        lastActive: 0,
-        lastActivity: 0,
-        element: (
-          <li key='i_am_unqiue' className='linked view-all'>
-            <ProfileLink to='/clan/roster'>{t('View full roster')}</ProfileLink>
-          </li>
-        )
-      });
+    if (order.sort === 'lastCharacter') {
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.lastCharacter.baseCharacterLevel, m => m.sorts.lastCharacter.light, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, order.dir, 'desc']);
+    } else if (order.sort === 'triumphScore') {
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.triumphScore, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+    } else if (order.sort === 'valor') {
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.valorPoints, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+    } else if (order.sort === 'glory') {
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.gloryPoints, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+    } else if (order.sort === 'infamy') {
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.infamyPoints, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
     } else {
-      list.unshift({
-        membershipId: 0,
-        isOnline: false,
-        lastActive: 0,
-        lastActivity: 0,
-        element: (
-          <li key='i_am_unqiue' className='grid-header'>
-            <div className='basic'>
-              <div className='icon'>
-                <div className='emblem' />
-              </div>
-              <div className='displayName' />
-              <div className='character'>{t('Last character')}</div>
-              <div className='activity'>{t('Last activity')}</div>
-              <div className='triumphScore'>{t('Triumph score')}</div>
-              <div className='timeStamps'>{t('Time played')}</div>
-            </div>
-          </li>
-        )
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.lastActivity, m => m.sorts.lastPlayed, m => m.sorts.lastCharacter.light], ['asc', 'desc', 'desc', 'desc', 'desc']);
+    }
+
+    if (!mini) {
+      members.unshift({
+        sorts: {},
+        el: {
+          full: (
+            <li key='header-row' className='row header'>
+              <ul>
+                <li className='col member' />
+                <li
+                  className={cx('col', 'lastCharacter', { sort: this.state.order.sort === 'lastCharacter', asc: this.state.order.dir === 'asc' })}
+                  onClick={() => {
+                    this.changeSortTo('lastCharacter');
+                  }}
+                >
+                  <div className='full'>Last character</div>
+                  <div className='abbr'>Char</div>
+                </li>
+                <li
+                  className={cx('col', 'lastActivity', { sort: !this.state.order.sort })}
+                  onClick={() => {
+                    this.changeSortTo(false);
+                  }}
+                >
+                  <div className='full'>Last activity</div>
+                  <div className='abbr'>Activity</div>
+                </li>
+                <li
+                  className={cx('col', 'triumphScore', { sort: this.state.order.sort === 'triumphScore', asc: this.state.order.dir === 'asc' })}
+                  onClick={() => {
+                    this.changeSortTo('triumphScore');
+                  }}
+                >
+                  <div className='full'>Triumph score</div>
+                  <div className='abbr'>T. Scr</div>
+                </li>
+                <li
+                  className={cx('col', 'valor', { sort: this.state.order.sort === 'valor', asc: this.state.order.dir === 'asc' })}
+                  onClick={() => {
+                    this.changeSortTo('valor');
+                  }}
+                >
+                  <div className='full'>Valor (Resets)</div>
+                  <div className='abbr'>Vlr (R)</div>
+                </li>
+                <li
+                  className={cx('col', 'glory', { sort: this.state.order.sort === 'glory', asc: this.state.order.dir === 'asc' })}
+                  onClick={() => {
+                    this.changeSortTo('glory');
+                  }}
+                >
+                  <div className='full'>Glory</div>
+                  <div className='abbr'>Gly</div>
+                </li>
+                <li
+                  className={cx('col', 'infamy', { sort: this.state.order.sort === 'infamy', asc: this.state.order.dir === 'asc' })}
+                  onClick={() => {
+                    this.changeSortTo('infamy');
+                  }}
+                >
+                  <div className='full'>Infamy (Resets)</div>
+                  <div className='abbr'>Inf (R)</div>
+                </li>
+              </ul>
+            </li>
+          )
+        }
       });
     }
 
-    return <ul className={cx('list', 'roster', { mini: mini })}>{list.map(member => member.element)}</ul>;
+    return (
+      <>
+        <ul className={cx('list', 'roster', { mini: mini })}>{mini ? members.map(m => m.el.mini) : members.map(m => m.el.full)}</ul>
+        {mini ? (
+          <ProfileLink className='button' to='/clan/roster'>
+            <div className='text'>{t('See full roster')}</div>
+          </ProfileLink>
+        ) : null}
+      </>
+    );
   }
 }
 

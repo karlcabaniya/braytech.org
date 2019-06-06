@@ -207,7 +207,6 @@ class App extends React.Component {
                         <Route render={route => <Header route={route} {...this.state} {...this.props} />} />
                         <Switch>
                           <RedirectRoute path='/clan' />
-                          <RedirectRoute path='/clan-beta' />
                           <RedirectRoute path='/legend' exact />
                           <RedirectRoute path='/sit-rep' exact />
                           <RedirectRoute path='/checklists' exact />

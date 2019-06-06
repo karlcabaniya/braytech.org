@@ -353,5 +353,10 @@
     "date": "2019-06-04T18:09:51.895Z",
     "version": "2.5.15",
     "content": "- SoO patches"
+  },
+  {
+    "date": "2019-06-06T06:16:34.126Z",
+    "version": "2.5.16",
+    "content": "- Rewrote a bunch of stuff to make Braytech more resilient to new content drops\n- A brand new _Clan Roster_\n- Added hi-res images for new badges, sealsm, and lore books\n- Adjusted ClanBanner component alignment and added a new minimalist banner stand"
   }
 ]

@@ -5,7 +5,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import store from './utils/reduxStore';
 
 import Clan from './views/Clan';
-import ClanBeta from './views/Clan-beta';
 import Legend from './views/Legend';
 import PGCRs from './views/PGCRs';
 import Collections from './views/Collections';
@@ -52,7 +51,6 @@ class ProfileRoutes extends React.Component {
         <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} />} />
         <Switch>
           <Route path={`${match.url}/clan/:view?/:subView?`} exact render={route => <Clan view={route.match.params.view} subView={route.match.params.subView} />} />
-          <Route path={`${match.url}/clan-beta/:view?/:subView?`} exact render={route => <ClanBeta view={route.match.params.view} subView={route.match.params.subView} />} />
           <Route path={`${match.url}/legend`} exact render={route => <Legend />} />
           <Route path={`${match.url}/checklists`} exact component={Checklists} />
           <Route path={`${match.url}/collections/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Collections {...route} />} />

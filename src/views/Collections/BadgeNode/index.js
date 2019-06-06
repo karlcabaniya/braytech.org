@@ -98,7 +98,8 @@ class BadgeNode extends React.Component {
       701100740: '01A3-0000189C.png',
       1420354007: '01E3-0000032C.png',
       1086048586: '01E3-00000377.png',
-      2503214417: '0560-00000D7D.png'
+      2503214417: '0560-00000D7D.png',
+      2759158924: '0560-00006562.png'
     };
 
     //`https://www.bungie.net${badgeDefinition.displayProperties.icon}`
@@ -107,7 +108,7 @@ class BadgeNode extends React.Component {
       <div className='node badge'>
         <div className='children'>
           <div className='icon'>
-            <ObservedImage className={cx('image')} src={`/static/images/extracts/badges/${hires[badgeDefinition.hash]}`} />
+            <ObservedImage className={cx('image')} src={hires[badgeDefinition.hash] ? `/static/images/extracts/badges/${hires[badgeDefinition.hash]}` : `https://www.bungie.net${badgeDefinition.displayProperties.icon}`} />
           </div>
           <div className='text'>
             <div className='name'>{badgeDefinition.displayProperties.name}</div>

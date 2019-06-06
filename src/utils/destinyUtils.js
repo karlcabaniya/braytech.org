@@ -599,8 +599,9 @@ export function lastPlayerActivity(member) {
             : manifest.DestinyActivityModeDefinition[mode.parentHashes[0]];
       }
     }
-  } else {
   }
+
+  
 
   return {
     lastPlayed: lastActivity ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed,

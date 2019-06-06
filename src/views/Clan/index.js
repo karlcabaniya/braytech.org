@@ -2,9 +2,9 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import cx from 'classnames';
 
 import './styles.css';
+
 import AboutView from './about.js';
 import RosterView from './roster.js';
 
@@ -16,7 +16,7 @@ class Clan extends React.Component {
   }
 
   render() {
-    const { t, member, theme } = this.props;
+    const { t, member } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
 
     if (group) {
@@ -27,7 +27,7 @@ class Clan extends React.Component {
       }
     } else {
       return (
-        <div className={cx('view', theme.selected)} id='clan'>
+        <div className='view no-clan' id='clan'>
           <div className='no-clan'>
             <div className='properties'>
               <div className='name'>{t('No clan affiliation')}</div>
@@ -46,8 +46,7 @@ class Clan extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    groupMembers: state.groupMembers,
-    theme: state.theme
+    groupMembers: state.groupMembers
   };
 }
 

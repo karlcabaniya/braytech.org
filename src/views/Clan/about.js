@@ -50,97 +50,78 @@ class AboutView extends React.Component {
     }
 
     return (
-      <div className={cx('view', theme.selected)} id='clan'>
-        <div className='about'>
+      <div className='view about' id='clan'>
+        <div className='module overview'>
+          <div className='page-header'>
+            <div className='sub-name'>{t('Clan')}</div>
+            <div className='name'>
+              {group.name}
+              <div className='tag'>[{group.clanInfo.clanCallsign}]</div>
+            </div>
+            {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
+            <div className='memberCount'>
+              // {group.memberCount} {t('members')} / {groupMembers.responses.filter(member => member.isOnline).length} {t('online')}
+            </div>
+          </div>
           <div className='banner'>
             <ClanBanner bannerData={group.clanInfo.clanBannerData} />
           </div>
-          <div className='overview'>
-            <div className='clan-properties'>
-              <div className='name'>
-                {group.name}
-                <div className='tag'>[{group.clanInfo.clanCallsign}]</div>
-              </div>
-              {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-              <div className='memberCount'>
-                // {group.memberCount} {t('members')} / {groupMembers.responses.filter(member => member.isOnline).length} {t('online')}
-              </div>
-              <div className='motto'>{group.motto}</div>
-              <ReactMarkdown className='bio' escapeHtml disallowedTypes={['image', 'imageReference']} source={group.about} />
-            </div>
-            <div className='sub-header sub'>
-              <div>{t('Season')} 6</div>
-            </div>
-            <div className='progression'>
-              <div className='clanLevel'>
-                <div className='text'>{t('Clan level')}</div>
-                <ProgressBar
-                  objectiveDefinition={{
-                    progressDescription: `${t('Level')} ${clanLevel.level}`,
-                    completionValue: clanLevel.nextLevelAt
-                  }}
-                  playerProgress={{
-                    progress: clanLevel.progressToNextLevel,
-                    objectiveHash: 'clanLevel'
-                  }}
-                  hideCheck
-                  chunky
-                />
-              </div>
-            </div>
-            <div className='sub-header sub'>
-              <div>{t('Clan details')}</div>
-            </div>
-            <div className='progression details'>
-              <div className='weeklyRewardState'>
-                <div className='text'>{t('Weekly Clan Engrams')}</div>
-                <ul>
-                  {rewardState ? (
-                    rewardState.map(reward => (
-                      <li key={reward.rewardEntryHash}>
-                        <Checkbox completed={reward.earned} text={weeklyClanEngramsDefinition[reward.rewardEntryHash].displayProperties.name} />
-                      </li>
-                    ))
-                  ) : (
-                    <Spinner />
-                  )}
-                </ul>
-              </div>
-              <div className='personalContribution'>
-                <div className='text'>{t('Weekly Personal XP Contribution')}</div>
-                <Checkbox
-                  completed={weeklyPersonalContribution === (characterIds.length * 5000)}
-                  text={
-                    <>
-                      <span>{weeklyPersonalContribution}</span> / {characterIds.length * 5000}
-                    </>
-                  }
-                />
-              </div>
-            </div>
+          <ReactMarkdown className={cx('bio', { 'includes-motto': group.motto !== '' })} escapeHtml disallowedTypes={['image', 'imageReference']} source={group.motto !== '' ? `_${group.motto}_\n\n${group.about}` : group.about} />
+        </div>
+        <div className='module progression'>
+          <div className='sub-header sub'>
+            <div>{t('Season 7')}</div>
           </div>
-          <div className='roster'>
-            <div className='sub-header sub'>
-              <div>{t('Views')}</div>
-            </div>
-            <div className='views'>
-              <ul className='list'>
-                <li className='linked'>
-                  <ProfileNavLink to='/clan' exact>
-                    {t('About')}
-                  </ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/clan/roster'>{t('Roster')}</ProfileNavLink>
-                </li>
-              </ul>
-            </div>
-            <div className='sub-header sub'>
-              <div>{t('Clan roster')}</div>
-              <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
-            </div>
-            {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini linked isOnline />}
+          <div className='clanLevel'>
+            <div className='text'>{t('Clan level')}</div>
+            <ProgressBar
+              objectiveDefinition={{
+                progressDescription: `${t('Level')} ${clanLevel.level}`,
+                completionValue: clanLevel.nextLevelAt
+              }}
+              playerProgress={{
+                progress: clanLevel.progressToNextLevel,
+                objectiveHash: 'clanLevel'
+              }}
+              hideCheck
+              chunky
+            />
           </div>
+          <div className='sub-header'>
+            <div>{t('Clan engrams')}</div>
+          </div>
+          <div className='weeklyRewardState'>
+            <ul>
+              {rewardState ? (
+                rewardState.map(reward => (
+                  <li key={reward.rewardEntryHash}>
+                    <Checkbox completed={reward.earned} text={weeklyClanEngramsDefinition[reward.rewardEntryHash].displayProperties.name} />
+                  </li>
+                ))
+              ) : (
+                <Spinner mini />
+              )}
+            </ul>
+          </div>
+          <div className='sub-header'>
+            <div>{t('Weekly XP')}</div>
+          </div>
+          <div>
+            <Checkbox
+              completed={weeklyPersonalContribution === characterIds.length * 5000}
+              text={
+                <>
+                  <span>{weeklyPersonalContribution}</span> / {characterIds.length * 5000}
+                </>
+              }
+            />
+          </div>
+        </div>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>{t('Clan roster')}</div>
+          </div>
+          {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner mini /> : <Roster mini showOnline />}
         </div>
       </div>
     );

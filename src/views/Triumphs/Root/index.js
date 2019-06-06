@@ -25,84 +25,31 @@ class Root extends React.Component {
 
     const sealBars = {
       2588182977: {
-        text: manifest.DestinyRecordDefinition[2757681677].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-00001367.png',
-        nodeHash: 2588182977,
-        recordHash: 2757681677,
-        total: profileRecords[2757681677].objectives[0].completionValue,
-        completed: profileRecords[2757681677].objectives[0].progress
+        image: '037E-00001367.png'
       },
       3481101973: {
-        text: manifest.DestinyRecordDefinition[3798931976].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-00001343.png',
-        nodeHash: 3481101973,
-        recordHash: 3798931976,
-        total: profileRecords[3798931976].objectives[0].completionValue,
-        completed: profileRecords[3798931976].objectives[0].progress
+        image: '037E-00001343.png'
       },
       147928983: {
-        text: manifest.DestinyRecordDefinition[3369119720].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-0000134A.png',
-        nodeHash: 147928983,
-        recordHash: 3369119720,
-        total: profileRecords[3369119720].objectives[0].completionValue,
-        completed: profileRecords[3369119720].objectives[0].progress
+        image: '037E-0000134A.png'
       },
       2693736750: {
-        text: manifest.DestinyRecordDefinition[1754983323].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-0000133C.png',
-        nodeHash: 2693736750,
-        recordHash: 1754983323,
-        total: profileRecords[1754983323].objectives[0].completionValue,
-        completed: profileRecords[1754983323].objectives[0].progress
+        image: '037E-0000133C.png'
       },
       2516503814: {
-        text: manifest.DestinyRecordDefinition[1693645129].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-00001351.png',
-        nodeHash: 2516503814,
-        recordHash: 1693645129,
-        total: profileRecords[1693645129].objectives[0].completionValue,
-        completed: profileRecords[1693645129].objectives[0].progress
+        image: '037E-00001351.png'
       },
       1162218545: {
-        text: manifest.DestinyRecordDefinition[2182090828].titleInfo.titlesByGenderHash[genderHash],
-        image: '037E-00001358.png',
-        nodeHash: 1162218545,
-        recordHash: 2182090828,
-        total: profileRecords[2182090828].objectives[0].completionValue,
-        completed: profileRecords[2182090828].objectives[0].progress
+        image: '037E-00001358.png'
       },
       2039028930: {
-        text: manifest.DestinyRecordDefinition[2053985130].titleInfo.titlesByGenderHash[genderHash],
-        image: '0560-000000EB.png',
-        nodeHash: 2039028930,
-        recordHash: 2053985130,
-        total: profileRecords[2053985130].objectives[0].completionValue,
-        completed: profileRecords[2053985130].objectives[0].progress
+        image: '0560-000000EB.png'
       },
       991908404: {
-        text: manifest.DestinyRecordDefinition[1313291220].titleInfo.titlesByGenderHash[genderHash],
-        image: '0560-0000107E.png',
-        nodeHash: 991908404,
-        recordHash: 1313291220,
-        total: profileRecords[1313291220].objectives[0].completionValue,
-        completed: profileRecords[1313291220].objectives[0].progress
+        image: '0560-0000107E.png'
       },
       3170835069: {
-        text: manifest.DestinyRecordDefinition[1883929036].titleInfo.titlesByGenderHash[genderHash],
-        image: '',
-        nodeHash: 3170835069,
-        recordHash: 1883929036,
-        total: profileRecords[1883929036].objectives[0].completionValue,
-        completed: profileRecords[1883929036].objectives[0].progress
-      },
-      3170835069: {
-        text: manifest.DestinyRecordDefinition[1883929036].titleInfo.titlesByGenderHash[genderHash],
-        image: '',
-        nodeHash: 3170835069,
-        recordHash: 1883929036,
-        total: profileRecords[1883929036].objectives[0].completionValue,
-        completed: profileRecords[1883929036].objectives[0].progress
+        image: '0560-00006583.png'
       }
     };
 
@@ -177,14 +124,14 @@ class Root extends React.Component {
     });
 
     sealsParent.children.presentationNodes.forEach(child => {
-      let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
+      let definitionSeal = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
       let states = [];
 
-      if (node.redacted) {
+      if (definitionSeal.redacted) {
         return;
       }
 
-      node.children.records.forEach(record => {
+      definitionSeal.children.records.forEach(record => {
         let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];
         if (scope) {
           states.push(scope);
@@ -193,27 +140,28 @@ class Root extends React.Component {
         }
       });
 
-      let sealCompleted = sealBars[node.hash].completed;
-      let sealToal = sealBars[node.hash].total;
+      let progress = profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
+      let total = profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
+      let isComplete = progress === total ? true : false;
 
       sealNodes.push({
-        completed: sealBars[node.hash].completed === sealBars[node.hash].total,
+        completed: isComplete,
         element: (
           <li
-            key={node.hash}
+            key={definitionSeal.hash}
             className={cx('linked', {
-              completed: sealBars[node.hash].completed === sealBars[node.hash].total
+              completed: isComplete
             })}
           >
-            <div className='progress-bar-background' style={{ width: `${(sealCompleted / sealToal) * 100}%` }} />
-            <ObservedImage className={cx('image', 'icon')} src={`/static/images/extracts/badges/${sealBars[node.hash].image}`} />
+            <div className='progress-bar-background' style={{ width: `${(progress / total) * 100}%` }} />
+            <ObservedImage className={cx('image', 'icon')} src={sealBars[definitionSeal.hash] ? `/static/images/extracts/badges/${sealBars[definitionSeal.hash].image}` : `https://www.bungie.net${definitionSeal.displayProperties.icon}`} />
             <div className='displayProperties'>
-              <div className='name'>{node.displayProperties.name}</div>
+              <div className='name'>{definitionSeal.displayProperties.name}</div>
               <div className='value'>
-                <span>{sealCompleted}</span> / {sealToal}
+                <span>{progress}</span> / {total}
               </div>
             </div>
-            <ProfileLink to={`/triumphs/seal/${node.hash}`} />
+            <ProfileLink to={`/triumphs/seal/${definitionSeal.hash}`} />
           </li>
         )
       });
