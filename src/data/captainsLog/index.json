@@ -378,5 +378,10 @@
     "date": "2019-06-07T11:11:27.595Z",
     "version": "2.5.20",
     "content": "- Improved _Sit Rep_ view"
+  },
+  {
+    "date": "2019-06-07T12:26:53.105Z",
+    "version": "2.5.21",
+    "content": "- I made an important change behind the scenes and I hope it doesn't ruin my world."
   }
 ]
