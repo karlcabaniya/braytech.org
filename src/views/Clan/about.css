@@ -182,6 +182,19 @@
     grid-template-columns: 1fr;
   }
 
+  #clan .page-header .memberCount {
+    letter-spacing: 2px;
+    font-size: 12px;
+  }
+
+  #clan.about > .module.overview .bio.includes-motto p:first-child {
+    font-size: 16px;
+  }
+
+  #clan.about > .module.overview .bio p {
+    font-size: 14px;
+  }
+
   #clan.about > .module:first-child {
     grid-column: unset;
   }

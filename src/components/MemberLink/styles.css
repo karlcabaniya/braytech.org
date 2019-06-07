@@ -200,7 +200,6 @@ html.backdropfilter .wrapper.dark-mode #member-overlay {
 #member-overlay .wrapper-outer {
   position: relative;
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
-  overflow: hidden;
 }
 
 #member-overlay .background .border-top {
@@ -282,6 +281,7 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   left: 0;  
   width: 100%;
   white-space: nowrap;
+  overflow: hidden;
   mask: linear-gradient(to right, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 0));
 }
 
