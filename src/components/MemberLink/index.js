@@ -322,7 +322,7 @@ class MemberLink extends React.Component {
                                   anchor
                                   to={`/${type}/${id}/${c.characterId}`}
                                   action={() => {
-                                    store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: type, membershipId: id } });
+                                    store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: type, membershipId: id, characterId: c.characterId } });
                                   }}
                                 >
                                   <div className='icon'>
