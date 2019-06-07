@@ -37,11 +37,7 @@ class Board extends React.Component {
         requests.push(voluspa.leaderboard(metric, offset, limit));
       }
 
-      if (this.props.member.membershipId) {
-        requests.push(voluspa.leaderboardPosition(this.props.member.membershipType, this.props.member.membershipId));
-      }
-
-      let [leaderboard, leaderboardPosition] = await Promise.all(requests);
+      let [leaderboard] = await Promise.all(requests);
 
       if (!leaderboard) {
         throw Error;
@@ -50,8 +46,7 @@ class Board extends React.Component {
         prevState.loading = false;
         // prevState.response = prevState.response.concat(response.data);
         prevState.response = {
-          ...leaderboard,
-          leaderboardPosition: leaderboardPosition ? leaderboardPosition.data : false
+          ...leaderboard
         };
         //console.log(prevState.response);
         return prevState;
@@ -225,8 +220,8 @@ class Board extends React.Component {
         });
       }
 
-      if (type !== 'group' && this.state.response.leaderboardPosition) {
-        let m = this.state.response.leaderboardPosition;
+      if (type !== 'group' && this.props.member && this.props.member.data.leaderboardPosition && this.props.member.data.leaderboardPosition.data) {
+        let m = this.props.member.data.leaderboardPosition.data;
         let timePlayed = Math.floor(m.destinyUserInfo.timePlayed / 1440);
 
         if (!rows.find(r => r.type === m.destinyUserInfo.membershipType && r.id === m.destinyUserInfo.membershipId)) {

@@ -36,8 +36,8 @@ class Roster extends React.Component {
         hh: '%dh',
         d: '1d',
         dd: '%dd',
-        M: '1m',
-        MM: '%dm',
+        M: '1M',
+        MM: '%dM',
         y: '1y',
         yy: '%dy'
       }
@@ -87,13 +87,14 @@ class Roster extends React.Component {
   };
 
   render() {
-    const { t, groupMembers, mini, showOnline = false } = this.props;
+    const { t, member, groupMembers, mini, showOnline = false } = this.props;
 
     let members = [];
     let results = showOnline ? groupMembers.responses.filter(r => r.isOnline) : groupMembers.responses;
 
     results.forEach(m => {
       let isPrivate = !m.profile || (!m.profile.characterActivities.data || !m.profile.characters.data.length);
+      let isSelf = !isPrivate ? m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId : false;
       let { lastPlayed, lastActivity, lastCharacter, lastMode, display } = destinyUtils.lastPlayerActivity(m);
       let triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
       let valorPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2626549951].currentProgress : 0;
@@ -136,7 +137,7 @@ class Roster extends React.Component {
         },
         el: {
           full: (
-            <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className='row'>
+            <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className={cx('row', { self: isSelf })}>
               <ul>
                 <li className='col member'>
                   <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} hideEmblemIcon={!m.isOnline} />
@@ -180,7 +181,7 @@ class Roster extends React.Component {
                     <li className='col progression infamy'>
                       {infamyPoints} {infamyResets ? <div className='resets'>({infamyResets})</div> : null}
                     </li>
-                    <li className='col weeklyXp'>{weeklyXp} / {characterIds.length * 5000}</li>
+                    <li className='col weeklyXp'><span>{weeklyXp}</span> / {characterIds.length * 5000}</li>
                   </>
                 ) : (
                   <>
@@ -212,17 +213,17 @@ class Roster extends React.Component {
     let order = this.state.order;
 
     if (order.sort === 'lastCharacter') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.lastCharacter.baseCharacterLevel, m => m.sorts.lastCharacter.light, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, order.dir, 'desc']);
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.lastCharacter.baseCharacterLevel, m => m.sorts.lastCharacter.light, m => m.sorts.lastPlayed], ['asc', order.dir, order.dir, 'desc']);
     } else if (order.sort === 'triumphScore') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.triumphScore, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.triumphScore, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else if (order.sort === 'valor') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.valorPoints, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.valorPoints, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else if (order.sort === 'glory') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.gloryPoints, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.gloryPoints, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else if (order.sort === 'infamy') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.infamyPoints, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.infamyPoints, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else if (order.sort === 'weeklyXp') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.weeklyXp, m => m.sorts.lastPlayed], ['asc', 'desc', order.dir, 'desc']);
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.weeklyXp, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.isOnline, m => m.sorts.lastActivity, m => m.sorts.lastPlayed, m => m.sorts.lastCharacter.light], ['asc', 'desc', 'desc', 'desc', 'desc']);
     }

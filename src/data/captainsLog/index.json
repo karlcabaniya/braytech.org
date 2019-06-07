@@ -368,5 +368,15 @@
     "date": "2019-06-06T13:45:04.549Z",
     "version": "2.5.18",
     "content": "- Bunch of changes, small, medium, and large\n- Added hide acquired collectibles settings"
+  },
+  {
+    "date": "2019-06-07T05:11:27.595Z",
+    "version": "2.5.19",
+    "content": "- Bunch of changes, small, medium, and large\n- Supposed improvements to the _Armor_ node of _Collections_ view"
+  },
+  {
+    "date": "2019-06-07T11:11:27.595Z",
+    "version": "2.5.20",
+    "content": "- Improved _Sit Rep_ view"
   }
 ]

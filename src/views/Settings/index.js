@@ -24,7 +24,7 @@ class Settings extends React.Component {
     };
   }
 
-  selectCollectibleDisplayState(state) {
+  selectCollectibleDisplayState = (state) => {
     let currentState = this.props.collectibles;
     let newState = currentState;
 
@@ -38,13 +38,13 @@ class Settings extends React.Component {
     this.props.setCollectibleDisplayState(newState);
   }
 
-  selectLanguage(lang) {
+  selectLanguage = lang => {
     let temp = this.state.language;
     temp.selected = lang;
     this.setState(temp);
   }
 
-  saveAndRestart() {
+  saveAndRestart = () => {
     console.log(this);
     const { i18n } = this.props;
     i18n.setCurrentLanguage(this.state.language.selected);

@@ -109,7 +109,23 @@
 
 
 
-
+.list.roster .row.self > ul .col.member::before {
+  content: '\e9e0';
+  position: absolute;
+  top: 12px;
+  left: -18px;
+  font-family: 'destiny' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  font-size: 14px;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  z-index: 2;
+  pointer-events: none;
+}
 
 .list.roster .row > ul .col.lastCharacter .icon i,
 .list.roster .row > ul .col.lastCharacter .icon div {
@@ -172,6 +188,14 @@
   white-space: pre-wrap;
 }
 
+.list.roster .row:not(.header) > ul .col.weeklyXp {
+  color: rgba(255, 255, 255, 0.4);
+  white-space: pre-wrap;
+}
+
+.list.roster .row > ul .col.weeklyXp span {
+  color: rgba(255, 255, 255, 0.8);
+}
 
 
 @media screen and (max-width: 1280px) {

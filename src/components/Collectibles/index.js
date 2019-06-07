@@ -60,6 +60,14 @@ class Collectibles extends React.Component {
 
             rowState.push(state);
 
+            if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
+              return;
+            }
+
+            if (this.props.collectibles.hideAcquiredCollectibles && !enumerateCollectibleState(state).notAcquired) {
+              return;
+            }
+
             row.push(
               <li
                 key={collectibleDefinition.hash}
@@ -76,6 +84,10 @@ class Collectibles extends React.Component {
             );
           });
 
+          if (row.length === 0) {
+            return;
+          }
+
           collectibles.push(
             <li
               key={nodeDefinition.hash}
@@ -83,11 +95,11 @@ class Collectibles extends React.Component {
                 completed: rowState.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === rowState.length
               })}
             >
-              <div className='set'>
-                <ul className='list'>{row}</ul>
-              </div>
               <div className='text'>
                 <div className='name'>{nodeDefinition.displayProperties.name}</div>
+              </div>
+              <div className='set'>
+                <ul className='list collection-items'>{row}</ul>
               </div>
             </li>
           );

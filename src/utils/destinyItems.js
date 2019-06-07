@@ -74,19 +74,15 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
       let categoryHash = item.sockets.socketCategories.find(category => category.socketIndexes.includes(parseInt(key, 10))) ? item.sockets.socketCategories.find(category => category.socketIndexes.includes(parseInt(key, 10))).socketCategoryHash : false;
 
       let modCategoryHash = [3379164649, 590099826, 2685412949, 4243480345, 590099826];
-      // 11855950: exotic mw?
-      // 2218962841: legendary hammerhead mw
-      // 2440389816: legendary mida mini tool vanguard mw
-      // 2440389816: ???
-      // 3013937058: sunshot
-      // 3969713706: tractor cannon
-      // 2071818427: whisper
-      // 3906162408: colony
-      // 2361479437: legendary uriels
-      let masterworkSocketHash = [11855950, 2218962841, 1666149691, 2440389816, 3013937058, 3969713706, 2071818427, 3906162408, 2361479437];
 
       if (socketExclusions.includes(socket.singleInitialItemHash) || (!mods && modCategoryHash.includes(categoryHash))) {
         return;
+      }
+
+      let catalysts = [2603105938];
+
+      if (catalysts.indexOf(socket.singleInitialItemHash) > -1) {
+        console.log(socket)
       }
 
       socket.reusablePlugItems.forEach(reusablePlug => {
@@ -104,34 +100,6 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
                 statHash: modifier.statTypeHash,
                 value: modifier.value
               });
-            }
-
-            if (masterworkSocketHash.includes(socket.socketTypeHash)) {
-              // console.log(item, reusablePlug, plug, socket);
-
-              let index = statModifiersMasterworks.findIndex(stat => stat.statHash === modifier.statTypeHash);
-              if (index > -1) {
-                statModifiersMasterworks[index].value = statModifiersMasterworks[index].value + modifier.value;
-              } else {
-                statModifiersMasterworks.push({
-                  statHash: modifier.statTypeHash,
-                  value: modifier.value
-                });
-              }
-
-              const killTracker = socketEntries.find(socket => socket.plugObjectives && socket.plugObjectives.length);
-
-              // console.log(killTracker, socketEntries);
-
-              if (killTracker && killTracker.plugObjectives && killTracker.plugObjectives.length) {
-                const plugObjective = killTracker.plugObjectives[0];
-
-                masterworkKillTracker = {
-                  plugHash: plug.hash,
-                  progress: plugObjective,
-                  objectiveDefinition: manifest.DestinyObjectiveDefinition[plugObjective.objectiveHash]
-                };
-              }
             }
           });
         }

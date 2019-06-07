@@ -2,14 +2,11 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import ReactMarkdown from 'react-markdown';
-import Moment from 'react-moment';
 import cx from 'classnames';
 import { orderBy, flattenDepth } from 'lodash';
 
 import manifest from '../../utils/manifest';
-import { ProfileLink } from '../../components/ProfileLink';
-import Collectibles from '../../components/Collectibles';
+import Button from '../../components/UI/Button';
 import Spinner from '../../components/UI/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/UI/ProgressBar';
@@ -19,8 +16,9 @@ import * as utils from '../../utils/destinyUtils';
 import './styles.css';
 
 class SitRep extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {};
   }
 
@@ -63,7 +61,7 @@ class SitRep extends React.Component {
       let displayProperties = {
         name: def.displayProperties.name,
         description: def.displayProperties.description
-      }
+      };
 
       // console.log(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards)
 
@@ -74,7 +72,7 @@ class SitRep extends React.Component {
       // if (manifest.DestinyMilestoneDefinition[milestone.milestoneHash].quests) {
       //   console.log(manifest.DestinyMilestoneDefinition[milestone.milestoneHash], milestone)
       // }
-      
+
       if (milestone.availableQuests) {
         let availableQuest = milestone.availableQuests[0];
 
@@ -108,9 +106,9 @@ class SitRep extends React.Component {
           state.earned = milestone.rewards[0].entries[0].earned;
           state.redeemed = milestone.rewards[0].entries[0].redeemed;
         }
-        
+
         let rewardEntryHashes = flattenDepth(milestone.rewards.map(r => r.entries), 1).map(r => r.rewardEntryHash);
-        let mappedRewards = flattenDepth(rewardEntryHashes.map(r => Object.values(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards[r].rewardEntries).find(e => e.rewardEntryHash === r).items), 1).map(i => i.itemHash)
+        let mappedRewards = flattenDepth(rewardEntryHashes.map(r => Object.values(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards[r].rewardEntries).find(e => e.rewardEntryHash === r).items), 1).map(i => i.itemHash);
 
         state.rewards.push(...mappedRewards);
       } else {
@@ -142,7 +140,7 @@ class SitRep extends React.Component {
                   <ObservedImage className='image' src={`https://www.bungie.net${def.displayProperties.icon}`} />
                   <div className='name'>{def.displayProperties.name}</div>
                 </div>
-              )
+              );
             })}
           </li>
         )
@@ -174,7 +172,7 @@ class SitRep extends React.Component {
         )
       });
     }
-    
+
     const valor = {
       defs: {
         rank: manifest.DestinyProgressionDefinition[2626549951],
@@ -182,14 +180,10 @@ class SitRep extends React.Component {
       },
       progression: {
         data: characterProgressions[characterId].progressions[2626549951],
-        total: 0,
+        total: utils.totalValor(),
         resets: profileRecords[559943871] ? profileRecords[559943871].objectives[0].progress : 0
       }
     };
-
-    valor.progression.total = Object.keys(valor.defs.rank.steps).reduce((sum, key) => {
-      return sum + valor.defs.rank.steps[key].progressTotal;
-    }, 0);
 
     const glory = {
       defs: {
@@ -198,13 +192,9 @@ class SitRep extends React.Component {
       },
       progression: {
         data: characterProgressions[characterId].progressions[2000925172],
-        total: 0
+        total: utils.totalGlory()
       }
     };
-
-    glory.progression.total = Object.keys(glory.defs.rank.steps).reduce((sum, key) => {
-      return sum + glory.defs.rank.steps[key].progressTotal;
-    }, 0);
 
     const infamy = {
       defs: {
@@ -213,196 +203,148 @@ class SitRep extends React.Component {
       },
       progression: {
         data: characterProgressions[characterId].progressions[2772425241],
-        total: 0,
+        total: utils.totalInfamy(),
         resets: profileRecords[3901785488] ? profileRecords[3901785488].objectives[0].progress : 0
       }
     };
 
-    infamy.progression.total = Object.keys(infamy.defs.rank.steps).reduce((sum, key) => {
-      return sum + infamy.defs.rank.steps[key].progressTotal;
-    }, 0);
-
-    const rareCollectibles = () => {
-      let checks = [
-        4274523516, // Redrix's Claymore
-        1111219481, // Redrix's Broadsword
-        3260604718, // Luna's Howl
-        3260604717, // Not Forgotten
-        4047371119, // The Mountaintop
-        2335550020, // The Recluse
-
-        3810740723, // Loaded Question
-        4037097478, // Nightshade
-        543982652, // Oxygen SR3
-
-        1666039008, // Breakneck
-        1639266456, // 21% Delirium
-        1660030045, // Malfeasance
-        3074058273, // The Last Word
-
-        1660030044, // Wish-Ender
-
-        199171386, // Sleeper Simulant
-        199171387, // Worldline Zero
-
-        3875807583, // Whisper of the Worm
-        3142437750, // A Thousand Wings
-
-        1469913803 // Harbinger's Echo
-      ];
-
-      return (
-        <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/sit-rep' hashes={checks} />
-        </ul>
-      );
-    };
-
+    console.log(member);
     return (
       <div className='view' id='sit-rep'>
         <div className='head'>
           <div className='col'>
             <div className='page-header'>
               <div className='name'>{t('Welcome back, ') + (character.titleRecordHash ? manifest.DestinyRecordDefinition[character.titleRecordHash].titleInfo.titlesByGenderHash[character.genderHash] : t('Guardian'))}</div>
-              <div className='description'>{t("Be more aware of your surroundings, Guardian.")}</div>
             </div>
-            {/* <div className='text'>
-              <p>The bottom line is, I've been building Braytech for over a year now and I'm <em>still</em> discovering amazing community projects. This is an effort to chronicle the best and brightest.</p>
-              <p>Additionally, who doesn't love the artists of Destiny? I'm curating hyperlinks to their portfolios.</p>
-            </div> */}
+            <div className='text'>
+              <p>{t('Be more aware of your surroundings, Guardian.')}</p>
+            </div>
           </div>
-          {/* <div className='col'></div> */}
         </div>
         <div className='col'>
-          <div className='module ranks'>
+          {member.data.leaderboardPosition && member.data.leaderboardPosition.data ? (
+            <div className='module'>
+              <div className='sub-header sub'>
+                <div>{t('Ranks')}</div>
+              </div>
+              <div className='ranks'>
+                <div>
+                  <div className='value'>{member.data.leaderboardPosition.data.ranks.triumphScore.toLocaleString('en-us')}</div>
+                  <div className='name'>Triumph score rank</div>
+                </div>
+                <div>
+                  <div className='value'>{member.data.leaderboardPosition.data.ranks.collectionTotal.toLocaleString('en-us')}</div>
+                  <div className='name'>Collections rank</div>
+                </div>
+                <div>
+                  <div className='value'>{member.data.leaderboardPosition.data.ranks.timePlayed.toLocaleString('en-us')}</div>
+                  <div className='name'>Time played rank</div>
+                </div>
+              </div>
+              <Button anchor to='/leaderboards' text={t('View leaderboards')} />
+            </div>
+          ) : null}
+          <div className='module'>
             <div className='sub-header sub'>
-              <div>{t('Ranks')}</div>
+              <div>{t('Progression')}</div>
             </div>
-            <div className='modes'>
-              <div className='mode gambit'>
-                <div className='rank-image-set'>
-                  <ObservedImage className='image ui' src='/static/images/extracts/ui/01E3-00000EAC.PNG' />
-                  <ObservedImage className='image rank' src={`https://www.bungie.net${infamy.defs.rank.steps[infamy.progression.data.stepIndex].icon}`} />
+            <div>
+              <div className='prog'>
+                <div className='text'>
+                  <div className='name'>{infamy.defs.activity.displayProperties.name}</div>
+                  <div className='resets'>{infamy.progression.resets} resets</div>
                 </div>
-                <div className='properties'>
-                  <div className='text'>
-                    <div className='name'>{infamy.defs.activity.displayProperties.name}</div>
-                    <div className='resets'>{infamy.progression.resets} resets</div>
-                  </div>
-                  <div className='progress'>
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: `Next rank: ${infamy.defs.rank.currentProgress === infamy.progression.total && infamy.progression.data.stepIndex === infamy.defs.rank.steps.length ? infamy.defs.rank.steps[0].stepName : infamy.defs.rank.steps[(infamy.progression.data.stepIndex + 1) % infamy.defs.rank.steps.length].stepName}`,
-                        completionValue: infamy.progression.data.nextLevelAt
-                      }}
-                      playerProgress={{
-                        progress: infamy.progression.data.progressToNextLevel,
-                        objectiveHash: 'infamy'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: infamy.defs.rank.displayProperties.name,
-                        completionValue: infamy.progression.total
-                      }}
-                      playerProgress={{
-                        progress: infamy.progression.data.currentProgress,
-                        objectiveHash: 'infamy'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                  </div>
+                <div className='progress'>
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: `Next rank: ${infamy.defs.rank.currentProgress === infamy.progression.total && infamy.progression.data.stepIndex === infamy.defs.rank.steps.length ? infamy.defs.rank.steps[0].stepName : infamy.defs.rank.steps[(infamy.progression.data.stepIndex + 1) % infamy.defs.rank.steps.length].stepName}`,
+                      completionValue: infamy.progression.data.nextLevelAt
+                    }}
+                    playerProgress={{
+                      progress: infamy.progression.data.progressToNextLevel,
+                      objectiveHash: 'infamy'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: infamy.defs.rank.displayProperties.name,
+                      completionValue: infamy.progression.total
+                    }}
+                    playerProgress={{
+                      progress: infamy.progression.data.currentProgress,
+                      objectiveHash: 'infamy'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                </div>
+              </div>
+              <div className='prog'>
+                <div className='text'>
+                  <div className='name'>{valor.defs.activity.displayProperties.name}</div>
+                  <div className='resets'>{valor.progression.resets} resets</div>
+                </div>
+                <div className='progress'>
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
+                      completionValue: valor.progression.data.nextLevelAt
+                    }}
+                    playerProgress={{
+                      progress: valor.progression.data.progressToNextLevel,
+                      objectiveHash: 'valor'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: valor.defs.rank.displayProperties.name,
+                      completionValue: valor.progression.total
+                    }}
+                    playerProgress={{
+                      progress: valor.progression.data.currentProgress,
+                      objectiveHash: 'valor'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                </div>
+              </div>
+              <div className='prog'>
+                <div className='text'>
+                  <div className='name'>{glory.defs.activity.displayProperties.name}</div>
+                </div>
+                <div className='progress'>
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? glory.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
+                      completionValue: glory.progression.data.nextLevelAt
+                    }}
+                    playerProgress={{
+                      progress: glory.progression.data.progressToNextLevel,
+                      objectiveHash: 'glory'
+                    }}
+                    hideCheck
+                    chunky
+                  />
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: glory.defs.rank.displayProperties.name,
+                      completionValue: glory.progression.total
+                    }}
+                    playerProgress={{
+                      progress: glory.progression.data.currentProgress,
+                      objectiveHash: 'glory'
+                    }}
+                    hideCheck
+                    chunky
+                  />
                 </div>
               </div>
             </div>
-            <div className='modes'>
-              <div className='mode quickplay'>
-                <div className='rank-image-set'>
-                  <ObservedImage className='image ui' src='/static/images/extracts/ui/01E3-00000EAC.PNG' />
-                  <ObservedImage className='image rank' src={`https://www.bungie.net${valor.defs.rank.steps[valor.progression.data.stepIndex].icon}`} />
-                </div>
-                <div className='properties'>
-                  <div className='text'>
-                    <div className='name'>{valor.defs.activity.displayProperties.name}</div>
-                    <div className='resets'>{valor.progression.resets} resets</div>
-                  </div>
-                  <div className='progress'>
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
-                        completionValue: valor.progression.data.nextLevelAt
-                      }}
-                      playerProgress={{
-                        progress: valor.progression.data.progressToNextLevel,
-                        objectiveHash: 'valor'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: valor.defs.rank.displayProperties.name,
-                        completionValue: valor.progression.total
-                      }}
-                      playerProgress={{
-                        progress: valor.progression.data.currentProgress,
-                        objectiveHash: 'valor'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='modes'>
-              <div className='mode competitive'>
-                <div className='rank-image-set'>
-                  <ObservedImage className='image ui' src='/static/images/extracts/ui/01E3-00000EAC.PNG' />
-                  <ObservedImage className='image rank' src={`https://www.bungie.net${glory.defs.rank.steps[glory.progression.data.stepIndex].icon}`} />
-                </div>
-                <div className='properties'>
-                  <div className='text'>
-                    <div className='name'>{glory.defs.activity.displayProperties.name}</div>
-                  </div>
-                  <div className='progress'>
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? glory.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
-                        completionValue: glory.progression.data.nextLevelAt
-                      }}
-                      playerProgress={{
-                        progress: glory.progression.data.progressToNextLevel,
-                        objectiveHash: 'glory'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                    <ProgressBar
-                      objectiveDefinition={{
-                        progressDescription: glory.defs.rank.displayProperties.name,
-                        completionValue: glory.progression.total
-                      }}
-                      playerProgress={{
-                        progress: glory.progression.data.currentProgress,
-                        objectiveHash: 'glory'
-                      }}
-                      hideCheck
-                      chunky
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='module rare-gear'>
-            <div className='sub-header sub'>
-              <div>{t('Rare gear')}</div>
-            </div>
-            {rareCollectibles()}
           </div>
         </div>
         <div className='col'>
@@ -410,18 +352,20 @@ class SitRep extends React.Component {
             <div className='sub-header sub'>
               <div>{t('Milestones')}</div>
             </div>
-            <ul className='list'>{milestones.map(m => m.element)}</ul>
+            {milestones.length ? <ul className='list'>{milestones.map(m => m.element)}</ul> : <div className='milestones-completed'>{t("You've completed all of your milestones for this character.")}</div>}
           </div>
         </div>
         <div className='col'>
-          {group ? <div className='module clan-roster'>
-            <div className='sub-header sub'>
-              <div>{t('Clan roster')}</div>
-              <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
+          {group ? (
+            <div className='module clan-roster'>
+              <div className='sub-header sub'>
+                <div>{t('Clan roster')}</div>
+                <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
+              </div>
+              <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
+              {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini showOnline />}
             </div>
-            <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
-            {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini showOnline />}
-          </div> : null}
+          ) : null}
         </div>
       </div>
     );

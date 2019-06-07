@@ -575,10 +575,12 @@ export function lastPlayerActivity(member) {
     if (lastActivity && member.isOnline !== false) {
       let activity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
       let mode = activity ? (activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
-      let place = activity.placeHash ? manifest.DestinyPlaceDefinition[activity.placeHash] : false;
+      let place = activity ? activity.placeHash ? manifest.DestinyPlaceDefinition[activity.placeHash] : false : false;
 
       if (mode) {
         if (place && activity.placeHash === 2096719558) {
+          display = `${activity.displayProperties.name}`;
+        } else if (place && activity.placeHash === 4148998934) {
           display = `${activity.displayProperties.name}`;
         } else {
           display = `${mode.displayProperties.name}: ${activity.displayProperties.name}`;

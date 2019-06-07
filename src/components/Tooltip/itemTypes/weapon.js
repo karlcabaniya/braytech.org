@@ -18,12 +18,12 @@ const weapon = (item, member, detailedMode) => {
   let powerLevel;
   if (member && member.data) {
     let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
-    powerLevel = Math.floor(680 / 700 * character.light);
+    powerLevel = Math.floor((680 / 700) * character.light);
   } else if (item.itemComponents && item.itemComponents.instance) {
-    powerLevel = item.itemComponents.instance.primaryStat.value;    
+    powerLevel = item.itemComponents.instance.primaryStat.value;
   } else {
     powerLevel = '680';
-  }  
+  }
 
   let damageTypeHash = item.damageTypeHashes[0];
   damageTypeHash = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.damageTypeHash : damageTypeHash;
@@ -67,25 +67,42 @@ const weapon = (item, member, detailedMode) => {
         ) : null}
         {sockets.length > 0
           ? sockets.map((socket, i) => {
-            let group = socket.plugs
-              .filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328))
-              .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142)
+              let group = socket.plugs
+                .filter(plug => {
+                  if (plug.definition.redacted) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                })
+                .filter(plug => {
+                  if (!plug.definition.itemCategoryHashes || !plug.definition.plug) {
+                    console.log(socket, plug);
+                    return false;
+                  } else {
+                    return true;
+                  }
+                })
+                .filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328))
+                .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142);
 
-            if (group.length > 0) {
-              return (
-                <div key={i} className='group'>
-                  {group.length > 4 ? (
+              if (group.length > 0) {
+                return (
+                  <div key={i} className='group'>
+                    {group.length > 4 ? (
                       <>
-                        {group.slice(0,3).map(plug => plug.element)}
+                        {group.slice(0, 3).map(plug => plug.element)}
                         <div className='plug ellipsis'>+ {group.length - 3} more</div>
                       </>
-                    ) : group.map(plug => plug.element)}
-                </div>
-              )
-            } else {
-              return null;
-            }
-          })
+                    ) : (
+                      group.map(plug => plug.element)
+                    )}
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })
           : null}
       </div>
     </>
