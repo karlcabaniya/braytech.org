@@ -23,7 +23,7 @@
 }
 
 #sit-rep .module .ranks ~ .button {
-  margin: 1rem 0 2rem;
+  margin: 1rem 0 3rem;
 }
 
 #sit-rep .module .ranks > div {
@@ -166,5 +166,9 @@
     grid-column: 1/2;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
+  }
+
+  #sit-rep .module .ranks ~ .button {
+    margin: 1rem 0 2rem;
   }
 }
