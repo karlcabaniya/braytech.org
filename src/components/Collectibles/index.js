@@ -64,7 +64,7 @@ class Collectibles extends React.Component {
               return;
             }
 
-            if (this.props.collectibles.hideAcquiredCollectibles && !enumerateCollectibleState(state).notAcquired) {
+            if (this.props.collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired) {
               return;
             }
 
@@ -122,7 +122,7 @@ class Collectibles extends React.Component {
               return;
             }
 
-            if (this.props.collectibles.hideAcquiredCollectibles && !enumerateCollectibleState(state).notAcquired) {
+            if (this.props.collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired) {
               return;
             }
           }
@@ -239,7 +239,7 @@ class Collectibles extends React.Component {
             return;
           }
 
-          if (this.props.collectibles.hideAcquiredCollectibles && !enumerateCollectibleState(state).notAcquired) {
+          if (this.props.collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired) {
             return;
           }
 
@@ -268,7 +268,7 @@ class Collectibles extends React.Component {
       });
     }
 
-    if (collectibles.length === 0 && this.props.collectibles && this.props.collectibles.hideAcquiredCollectibles && !forceDisplay) {
+    if (collectibles.length === 0 && this.props.collectibles && this.props.collectibles.hideCompletedCollectibles && !forceDisplay) {
       collectibles.push(
           <li key='lol' className='all-completed'>
             <div className='properties'>

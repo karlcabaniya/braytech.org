@@ -29,11 +29,11 @@ class Settings extends React.Component {
     let newState = currentState;
 
     newState = {
-      hideTriumphRecords: state === 'hideTriumphRecords' ? !currentState.hideTriumphRecords : currentState.hideTriumphRecords,
-      hideChecklistItems: state === 'hideChecklistItems' ? !currentState.hideChecklistItems : currentState.hideChecklistItems,
+      hideCompletedRecords: state === 'hideCompletedRecords' ? !currentState.hideCompletedRecords : currentState.hideCompletedRecords,
+      hideCompletedChecklistItems: state === 'hideCompletedChecklistItems' ? !currentState.hideCompletedChecklistItems : currentState.hideCompletedChecklistItems,
       hideInvisibleCollectibles: state === 'hideInvisibleCollectibles' ? !currentState.hideInvisibleCollectibles : currentState.hideInvisibleCollectibles,
-      hideInvisibleTriumphRecords: state === 'hideInvisibleTriumphRecords' ? !currentState.hideInvisibleTriumphRecords : currentState.hideInvisibleTriumphRecords,
-      hideAcquiredCollectibles: state === 'hideAcquiredCollectibles' ? !currentState.hideAcquiredCollectibles : currentState.hideAcquiredCollectibles
+      hideInvisibleRecords: state === 'hideInvisibleRecords' ? !currentState.hideInvisibleRecords : currentState.hideInvisibleRecords,
+      hideCompletedCollectibles: state === 'hideCompletedCollectibles' ? !currentState.hideCompletedCollectibles : currentState.hideCompletedCollectibles
     };
 
     this.props.setCollectibleDisplayState(newState);
@@ -142,45 +142,45 @@ class Settings extends React.Component {
             </div>
             <ul className='list settings'>
               <li
-                key='hideChecklistItems'
+                key='hideCompletedChecklistItems'
                 onClick={() => {
-                  this.selectCollectibleDisplayState('hideChecklistItems');
+                  this.selectCollectibleDisplayState('hideCompletedChecklistItems');
                 }}
               >
-                <Checkbox linked checked={this.props.collectibles.hideChecklistItems} text={t('Hide completed checklist items')} />
+                <Checkbox linked checked={this.props.collectibles.hideCompletedChecklistItems} text={t('Hide completed checklist items')} />
                 <div className='info'>
                   <p>{t('If a checklist item is completed, it will be hidden under Checklist view.')}</p>
                 </div>
               </li>
               <li
-                key='hideTriumphRecords'
+                key='hideCompletedRecords'
                 onClick={() => {
-                  this.selectCollectibleDisplayState('hideTriumphRecords');
+                  this.selectCollectibleDisplayState('hideCompletedRecords');
                 }}
               >
-                <Checkbox linked checked={this.props.collectibles.hideTriumphRecords} text={t('Hide completed triumphs')} />
+                <Checkbox linked checked={this.props.collectibles.hideCompletedRecords} text={t('Hide completed triumphs')} />
                 <div className='info'>
                   <p>{t('If a triumph record is completed and redeemed, it will be hidden under Triumphs views.')}</p>
                 </div>
               </li>
               <li
-                key='hideInvisibleTriumphRecords'
+                key='hideInvisibleRecords'
                 onClick={() => {
-                  this.selectCollectibleDisplayState('hideInvisibleTriumphRecords');
+                  this.selectCollectibleDisplayState('hideInvisibleRecords');
                 }}
               >
-                <Checkbox linked checked={this.props.collectibles.hideInvisibleTriumphRecords} text={t('Hide invisible triumph records')} />
+                <Checkbox linked checked={this.props.collectibles.hideInvisibleRecords} text={t('Hide invisible triumph records')} />
                 <div className='info'>
                   <p>{t('If the game specifies that you are unable to see a particular triumph record, it will be hidden under Triumphs views.')}</p>
                 </div>
               </li>
               <li
-                key='hideAcquiredCollectibles'
+                key='hideCompletedCollectibles'
                 onClick={() => {
-                  this.selectCollectibleDisplayState('hideAcquiredCollectibles');
+                  this.selectCollectibleDisplayState('hideCompletedCollectibles');
                 }}
               >
-                <Checkbox linked checked={this.props.collectibles.hideAcquiredCollectibles} text={t('Hide acquired collection items')} />
+                <Checkbox linked checked={this.props.collectibles.hideCompletedCollectibles} text={t('Hide acquired collection items')} />
                 <div className='info'>
                   <p>{t('If a collectible has been acquired, it will be hidden under Collections views.')}</p>
                 </div>

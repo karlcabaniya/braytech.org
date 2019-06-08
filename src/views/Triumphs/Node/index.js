@@ -79,7 +79,7 @@ class PresentationNode extends React.Component {
       };
 
       let secondaryProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length
-      let secondaryTotal = (collectibles && collectibles.hideInvisibleTriumphRecords) ? states.filter(record => !enumerateRecordState(record.state).invisible).length : states.length;
+      let secondaryTotal = (collectibles && collectibles.hideInvisibleRecords) ? states.filter(record => !enumerateRecordState(record.state).invisible).length : states.length;
 
       if (secondaryTotal === 0) {
         return;

@@ -29,7 +29,7 @@ class Collections extends React.Component {
   toggleCompleted = () => {
     let currentState = this.props.collectibles;
     let newState = {
-      hideAcquiredCollectibles: !currentState.hideAcquiredCollectibles
+      hideCompletedCollectibles: !currentState.hideCompletedCollectibles
     };
 
     this.props.setCollectibleDisplayState(newState);
@@ -44,7 +44,7 @@ class Collections extends React.Component {
     let toggleCompletedLink = (
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <a className='button' onClick={this.toggleCompleted}>
-        {this.props.collectibles.hideAcquiredCollectibles ? (
+        {this.props.collectibles.hideCompletedCollectibles ? (
           <>
             <i className='uniF16E' />
             {t('Show all')}

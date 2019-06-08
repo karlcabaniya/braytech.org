@@ -137,11 +137,11 @@ class Records extends React.Component {
 
       let state = recordData.state || 0;
 
-      if (enumerateRecordState(state).invisible && (collectibles && collectibles.hideInvisibleTriumphRecords)) {
+      if (enumerateRecordState(state).invisible && (collectibles && collectibles.hideInvisibleRecords)) {
         return;
       }
 
-      if (enumerateRecordState(state).recordRedeemed && (collectibles && collectibles.hideTriumphRecords) && !forceDisplay) {
+      if (enumerateRecordState(state).recordRedeemed && (collectibles && collectibles.hideCompletedRecords) && !forceDisplay) {
         return;
       }
 
@@ -241,7 +241,7 @@ class Records extends React.Component {
       }
     });
 
-    if (recordsRequested.length > 0 && recordsOutput.length === 0 && collectibles && collectibles.hideTriumphRecords && !forceDisplay) {
+    if (recordsRequested.length > 0 && recordsOutput.length === 0 && collectibles && collectibles.hideCompletedRecords && !forceDisplay) {
       recordsOutput.push({
         element: (
           <li key='lol' className='all-completed'>

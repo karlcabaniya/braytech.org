@@ -66,7 +66,7 @@ export class Checklists extends React.Component {
     const { t, member, collectibles, theme } = this.props;
     const { page, itemsPerPage } = this.state;
 
-    const f = new ChecklistFactory(t, member.data.profile, member.characterId, collectibles.hideChecklistItems);
+    const f = new ChecklistFactory(t, member.data.profile, member.characterId, collectibles.hideCompletedChecklistItems);
 
     const lists = [
       f.regionChests(), //

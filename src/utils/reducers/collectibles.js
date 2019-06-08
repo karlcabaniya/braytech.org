@@ -2,11 +2,11 @@ import * as ls from '../localStorage';
 
 const savedState = ls.get('setting.collectibleDisplayState') ? ls.get('setting.collectibleDisplayState') : {};
 const defaultState = {
-  hideTriumphRecords: false,
-  hideChecklistItems: false,
+  hideCompletedRecords: false,
+  hideCompletedChecklistItems: false,
   hideInvisibleCollectibles: true,
-  hideInvisibleTriumphRecords: true,
-  hideAcquiredCollectibles: false,
+  hideInvisibleRecords: true,
+  hideCompletedCollectibles: false,
   ...savedState
 };
 

@@ -383,5 +383,10 @@
     "date": "2019-06-07T12:26:53.105Z",
     "version": "2.5.21",
     "content": "- I made an important change behind the scenes and I hope it doesn't ruin my world."
+  },
+  {
+    "date": "2019-06-08T00:10:06.232Z",
+    "version": "2.5.22",
+    "content": "- Bunch of changes, small, medium, and large\n- Added new setting for displaying invisible triumph records"
   }
 ]
