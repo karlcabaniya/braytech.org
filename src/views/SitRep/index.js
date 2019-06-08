@@ -12,6 +12,7 @@ import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/UI/ProgressBar';
 import Roster from '../../components/Roster';
 import * as utils from '../../utils/destinyUtils';
+import quotes from '../../utils/quotes';
 
 import './styles.css';
 
@@ -21,6 +22,8 @@ class SitRep extends React.Component {
 
     this.state = {};
   }
+
+  quote = quotes[Math.floor(Math.random() * (quotes.length)) + 0];
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -218,7 +221,7 @@ class SitRep extends React.Component {
               <div className='name'>{t('Welcome back, ') + (character.titleRecordHash ? manifest.DestinyRecordDefinition[character.titleRecordHash].titleInfo.titlesByGenderHash[character.genderHash] : t('Guardian'))}</div>
             </div>
             <div className='text'>
-              <p>{t('Be more aware of your surroundings, Guardian.')}</p>
+              <p>{this.quote}</p>
             </div>
           </div>
         </div>

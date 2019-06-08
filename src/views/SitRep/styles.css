@@ -16,6 +16,11 @@
   margin-bottom: 1rem;
 }
 
+#sit-rep > .head .text {
+  font-size: 16px;
+  max-width: 600px;
+}
+
 #sit-rep .module .ranks {
   display: grid;
   grid-gap: 1rem;
@@ -129,6 +134,16 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+#sit-rep .module.milestones .milestones-completed {
+  font-style: italic;
+  letter-spacing: 1px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 2rem 0;
+  text-align: center;
+}
+
 #sit-rep .module.clan-roster {
   position: relative;
 }
@@ -170,5 +185,10 @@
 
   #sit-rep .module .ranks ~ .button {
     margin: 1rem 0 2rem;
+  }
+
+  #sit-rep .module.milestones .milestones-completed {
+    padding: 0;
+    text-align: left;
   }
 }

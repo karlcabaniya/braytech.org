@@ -388,5 +388,10 @@
     "date": "2019-06-08T00:10:06.232Z",
     "version": "2.5.22",
     "content": "- Bunch of changes, small, medium, and large\n- Added new setting for displaying invisible triumph records"
+  },
+  {
+    "date": "2019-06-08T11:03:10.912Z",
+    "version": "2.5.23",
+    "content": "- Something special for the _Sit Rep_ view header"
   }
 ]
