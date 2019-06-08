@@ -208,7 +208,8 @@ class SitRep extends React.Component {
       }
     };
 
-    console.log(member);
+    // console.log(member);
+    
     return (
       <div className='view' id='sit-rep'>
         <div className='head'>

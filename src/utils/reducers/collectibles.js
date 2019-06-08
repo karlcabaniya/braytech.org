@@ -5,6 +5,7 @@ const defaultState = {
   hideTriumphRecords: false,
   hideChecklistItems: false,
   hideInvisibleCollectibles: true,
+  hideInvisibleTriumphRecords: true,
   hideAcquiredCollectibles: false,
   ...savedState
 };
@@ -12,8 +13,13 @@ const defaultState = {
 export default function collectiblesReducer(state = defaultState, action) {
   switch (action.type) {
     case 'SET_COLLECTIBLES':
-      ls.set('setting.collectibleDisplayState', action.payload);
-      return action.payload;
+      let newState = {
+        ...state,
+        ...action.payload
+      }
+
+      ls.set('setting.collectibleDisplayState', newState);
+      return newState;
     default:
       return state;
   }

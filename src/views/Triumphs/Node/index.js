@@ -12,7 +12,7 @@ import { enumerateRecordState } from '../../../utils/destinyEnums';
 
 class PresentationNode extends React.Component {
   render() {
-    const { member, primaryHash } = this.props;
+    const { member, collectibles, primaryHash } = this.props;
     const characterId = member.characterId;
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
@@ -78,11 +78,18 @@ class PresentationNode extends React.Component {
         }
       };
 
+      let secondaryProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length
+      let secondaryTotal = (collectibles && collectibles.hideInvisibleTriumphRecords) ? states.filter(record => !enumerateRecordState(record.state).invisible).length : states.length;
+
+      if (secondaryTotal === 0) {
+        return;
+      }
+
       secondaryChildren.push(
         <li key={node.hash} className='linked'>
           <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${secondaryHash}/${node.hash}`}>
             <div className='name'>{node.displayProperties.name.length > 24 ? node.displayProperties.name.slice(0, 24) + '...' : node.displayProperties.name}</div>
-            <div className='progress'>{states.filter(record => enumerateRecordState(record.state).recordRedeemed).length}/{states.filter(record => !enumerateRecordState(record.state).invisible).length}</div>
+            <div className='progress'>{secondaryProgress}/{secondaryTotal}</div>
           </ProfileNavLink>
         </li>
       );
@@ -119,7 +126,7 @@ class PresentationNode extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    theme: state.theme
+    collectibles: state.collectibles
   };
 }
 

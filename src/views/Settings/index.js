@@ -32,6 +32,7 @@ class Settings extends React.Component {
       hideTriumphRecords: state === 'hideTriumphRecords' ? !currentState.hideTriumphRecords : currentState.hideTriumphRecords,
       hideChecklistItems: state === 'hideChecklistItems' ? !currentState.hideChecklistItems : currentState.hideChecklistItems,
       hideInvisibleCollectibles: state === 'hideInvisibleCollectibles' ? !currentState.hideInvisibleCollectibles : currentState.hideInvisibleCollectibles,
+      hideInvisibleTriumphRecords: state === 'hideInvisibleTriumphRecords' ? !currentState.hideInvisibleTriumphRecords : currentState.hideInvisibleTriumphRecords,
       hideAcquiredCollectibles: state === 'hideAcquiredCollectibles' ? !currentState.hideAcquiredCollectibles : currentState.hideAcquiredCollectibles
     };
 
@@ -141,6 +142,17 @@ class Settings extends React.Component {
             </div>
             <ul className='list settings'>
               <li
+                key='hideChecklistItems'
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideChecklistItems');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideChecklistItems} text={t('Hide completed checklist items')} />
+                <div className='info'>
+                  <p>{t('If a checklist item is completed, it will be hidden under Checklist view.')}</p>
+                </div>
+              </li>
+              <li
                 key='hideTriumphRecords'
                 onClick={() => {
                   this.selectCollectibleDisplayState('hideTriumphRecords');
@@ -152,14 +164,14 @@ class Settings extends React.Component {
                 </div>
               </li>
               <li
-                key='hideChecklistItems'
+                key='hideInvisibleTriumphRecords'
                 onClick={() => {
-                  this.selectCollectibleDisplayState('hideChecklistItems');
+                  this.selectCollectibleDisplayState('hideInvisibleTriumphRecords');
                 }}
               >
-                <Checkbox linked checked={this.props.collectibles.hideChecklistItems} text={t('Hide completed checklist items')} />
+                <Checkbox linked checked={this.props.collectibles.hideInvisibleTriumphRecords} text={t('Hide invisible triumph records')} />
                 <div className='info'>
-                  <p>{t('If a checklist item is completed, it will be hidden under Checklist view.')}</p>
+                  <p>{t('If the game specifies that you are unable to see a particular triumph record, it will be hidden under Triumphs views.')}</p>
                 </div>
               </li>
               <li

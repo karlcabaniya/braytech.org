@@ -25,8 +25,7 @@ class Triumphs extends React.Component {
   toggleCompleted = () => {
     let currentState = this.props.collectibles;
     let newState = {
-      hideTriumphRecords: !currentState.hideTriumphRecords,
-      hideChecklistItems: currentState.hideChecklistItems
+      hideTriumphRecords: !currentState.hideTriumphRecords
     };
 
     this.props.setCollectibleDisplayState(newState);

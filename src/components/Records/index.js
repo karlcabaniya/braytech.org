@@ -137,11 +137,11 @@ class Records extends React.Component {
 
       let state = recordData.state || 0;
 
-      if (enumerateRecordState(state).invisible) {
+      if (enumerateRecordState(state).invisible && (collectibles && collectibles.hideInvisibleTriumphRecords)) {
         return;
       }
 
-      if (enumerateRecordState(state).recordRedeemed && collectibles && collectibles.hideTriumphRecords && !forceDisplay) {
+      if (enumerateRecordState(state).recordRedeemed && (collectibles && collectibles.hideTriumphRecords) && !forceDisplay) {
         return;
       }
 
