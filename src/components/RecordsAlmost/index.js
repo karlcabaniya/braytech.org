@@ -18,7 +18,7 @@ class RecordsAlmost extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, sort } = this.props;
     const profileRecords = this.props.member.data.profile.profileRecords.data.records;
 
     let almost = [];
@@ -73,50 +73,30 @@ class RecordsAlmost extends React.Component {
         return;
       }
 
-      let objectives = [];
-
-      record.objectives.forEach(obj => {
-        let objDef = manifest.DestinyObjectiveDefinition[obj.objectiveHash];
-
-        objectives.push(
-          <li key={objDef.hash}>
-            <div
-              className={cx('progress', {
-                complete: obj.progress >= obj.completionValue ? true : false
-              })}
-            >
-              <div className='title'>{objDef.progressDescription}</div>
-              <div className='fraction'>
-                {obj.progress}/{obj.completionValue}
-              </div>
-              <div
-                className='bar'
-                style={{
-                  width: `${(obj.progress / obj.completionValue) * 100}%`
-                }}
-              />
-            </div>
-          </li>
-        );
-      });
-
       let selfLinkFrom = this.props.selfLinkFrom || false;
 
-      let recordDef = manifest.DestinyRecordDefinition[key] || false;
+      let definitionRecord = manifest.DestinyRecordDefinition[key] || false;
       let score = 0;
 
-      if (recordDef && recordDef.completionInfo) {
-        score = recordDef.completionInfo.ScoreValue;
+      if (definitionRecord && definitionRecord.completionInfo) {
+        score = definitionRecord.completionInfo.ScoreValue;
       }
 
       almost.push({
         distance,
         score,
+        commonality: manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : 0,
         element: <Records key={key} {...this.props} selfLink selfLinkFrom={selfLinkFrom} hashes={[key]} />
       });
     });
 
-    almost = orderBy(almost, [record => record.distance, record => record.score], ['desc', 'desc']);
+    if (sort === 1) {
+      almost = orderBy(almost, [record => record.score, record => record.distance], ['desc', 'desc']);
+    } else if (sort === 2) {
+      almost = orderBy(almost, [record => record.commonality, record => record.distance], ['asc', 'desc']);
+    } else {
+      almost = orderBy(almost, [record => record.distance, record => record.score], ['desc', 'desc']);
+    }
 
     almost = this.props.limit ? almost.slice(0, this.props.limit) : almost;
 

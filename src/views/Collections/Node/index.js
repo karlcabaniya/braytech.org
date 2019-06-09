@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../components/ObservedImage';

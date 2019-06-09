@@ -8,8 +8,10 @@ import cx from 'classnames';
 
 import ObservedImage from '../ObservedImage';
 import { ProfileLink } from '../../components/ProfileLink';
+import Collectibles from '../../components/Collectibles';
 import ProgressBar from '../UI/ProgressBar';
 import manifest from '../../utils/manifest';
+import * as paths from '../../utils/paths';
 import { enumerateRecordState } from '../../utils/destinyEnums';
 
 import './styles.css';
@@ -54,9 +56,9 @@ class Records extends React.Component {
 
     let recordsOutput = [];
     recordsRequested.forEach(hash => {
-      const recordDefinition = manifest.DestinyRecordDefinition[hash];
-      const recordScope = recordDefinition.scope || 0;
-      const recordData = recordScope === 1 ? characterRecords[characterId].records[recordDefinition.hash] : profileRecords[recordDefinition.hash];
+      const definitionRecord = manifest.DestinyRecordDefinition[hash];
+      const recordScope = definitionRecord.scope || 0;
+      const recordData = recordScope === 1 ? characterRecords[characterId].records[definitionRecord.hash] : profileRecords[definitionRecord.hash];
 
       let objectives = [];
       let completionValueTotal = 0;
@@ -99,13 +101,13 @@ class Records extends React.Component {
       }
 
       // readLink
-      if (recordDefinition.loreHash && !selfLinkFrom && readLink) {
-        link = `/read/record/${recordDefinition.hash}`;
+      if (definitionRecord.loreHash && !selfLinkFrom && readLink) {
+        link = `/read/record/${definitionRecord.hash}`;
       }
 
-      if (recordDefinition.objectiveHashes) {
-        recordDefinition.objectiveHashes.forEach((hash, index) => {
-          let objectiveDefinition = manifest.DestinyObjectiveDefinition[hash];
+      if (definitionRecord.objectiveHashes) {
+        definitionRecord.objectiveHashes.forEach((hash, index) => {
+          let definitionObjective = manifest.DestinyObjectiveDefinition[hash];
 
           let playerProgress = null;
 
@@ -120,7 +122,7 @@ class Records extends React.Component {
             playerProgress.progress = 16;
           }
 
-          objectives.push(<ProgressBar key={`${hash}${index}`} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />);
+          objectives.push(<ProgressBar key={`${hash}${index}`} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
 
           if (playerProgress) {
             let v = parseInt(playerProgress.completionValue, 10);
@@ -145,20 +147,20 @@ class Records extends React.Component {
         return;
       }
 
-      let ref = highlight === recordDefinition.hash ? this.scrollToRecordRef : null;
+      let ref = highlight === definitionRecord.hash ? this.scrollToRecordRef : null;
 
-      if (recordDefinition.redacted) {
+      if (definitionRecord.redacted) {
         recordsOutput.push({
           completed: enumerateRecordState(state).recordRedeemed,
           progressDistance,
-          hash: recordDefinition.hash,
+          hash: definitionRecord.hash,
           element: (
             <li
-              key={recordDefinition.hash}
+              key={definitionRecord.hash}
               ref={ref}
               className={cx('redacted', {
                 // eslint-disable-next-line eqeqeq
-                highlight: highlight && highlight == recordDefinition.hash
+                highlight: highlight && highlight == definitionRecord.hash
               })}
             >
               <div className='properties'>
@@ -174,8 +176,8 @@ class Records extends React.Component {
           )
         });
       } else {
-        let description = recordDefinition.displayProperties.description !== '' ? recordDefinition.displayProperties.description : false;
-        description = !description && recordDefinition.loreHash ? manifest.DestinyLoreDefinition[recordDefinition.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
+        let description = definitionRecord.displayProperties.description !== '' ? definitionRecord.displayProperties.description : false;
+        description = !description && definitionRecord.loreHash ? manifest.DestinyLoreDefinition[definitionRecord.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
         // if (recordDefinition.hash === 2367932631) { ????
         //   console.log(enumerateRecordState(state));
         // }
@@ -201,39 +203,53 @@ class Records extends React.Component {
         recordsOutput.push({
           completed: enumerateRecordState(state).recordRedeemed,
           progressDistance,
-          hash: recordDefinition.hash,
+          hash: definitionRecord.hash,
           element: (
             <li
-              key={recordDefinition.hash}
+              key={definitionRecord.hash}
               ref={ref}
               className={cx({
                 linked: link && linkTo,
-                highlight: highlight && highlight === recordDefinition.hash,
+                highlight: highlight && highlight === definitionRecord.hash,
                 completed: enumerateRecordState(state).recordRedeemed,
                 unRedeemed: !enumerateRecordState(state).recordRedeemed && !enumerateRecordState(state).objectiveNotCompleted,
-                tracked: tracked.includes(recordDefinition.hash) && !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted,
+                tracked: tracked.includes(definitionRecord.hash) && !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted,
                 'no-description': !description
               })}
             >
               {!enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted ? (
-                <div className='track-this' onClick={this.trackThisClick} data-hash={recordDefinition.hash}>
+                <div className='track-this' onClick={this.trackThisClick} data-hash={definitionRecord.hash}>
                   <div />
                 </div>
               ) : null}
               <div className='properties'>
                 <div className='icon'>
-                  <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${recordDefinition.displayProperties.icon}`} />
+                  <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionRecord.displayProperties.icon}`} />
                 </div>
                 <div className='text'>
-                  <div className='name'>{recordDefinition.displayProperties.name}</div>
+                  <div className='name'>{definitionRecord.displayProperties.name}</div>
                   <div className='meta'>
-                    <div className='commonality'>{manifest.statistics.triumphs && manifest.statistics.triumphs[recordDefinition.hash] ? manifest.statistics.triumphs[recordDefinition.hash] : `0.00`}%</div>
-                    {recordDefinition.completionInfo && recordDefinition.completionInfo.ScoreValue !== 0 ? <div className='score'>{recordDefinition.completionInfo.ScoreValue}</div> : null}
+                    <div className='commonality'>{manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%</div>
+                    {definitionRecord.completionInfo && definitionRecord.completionInfo.ScoreValue !== 0 ? <div className='score'>{definitionRecord.completionInfo.ScoreValue}</div> : null}
                   </div>
                   <div className='description'>{description}</div>
                 </div>
               </div>
               <div className='objectives'>{objectives}</div>
+              {definitionRecord.rewardItems && definitionRecord.rewardItems.length ? (
+                <ul className='list rewards collection-items'>
+                  <Collectibles selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={definitionRecord.rewardItems.map(r => {
+                    let definitionItem = manifest.DestinyInventoryItemDefinition[r.itemHash];
+                    let definitionCollectible = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] : false;
+
+                    if (definitionCollectible && !definitionCollectible.redacted) {
+                      return definitionCollectible.hash;
+                    } else {
+                      return false;
+                    }
+                  })} />
+                </ul>
+              ) : null}
               {link && linkTo ? !selfLinkFrom && readLink ? <Link to={linkTo} /> : <ProfileLink to={linkTo} /> : null}
             </li>
           )

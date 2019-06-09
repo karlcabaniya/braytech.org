@@ -176,7 +176,7 @@ class Collectibles extends React.Component {
         });
       }
     } else {
-      let collectiblesRequested = this.props.hashes;
+      let collectiblesRequested = this.props.hashes.filter(h => h);
 
       collectiblesRequested.forEach(hash => {
         let collectibleDefinition = manifest.DestinyCollectibleDefinition[hash];

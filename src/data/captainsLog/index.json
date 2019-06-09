@@ -398,5 +398,10 @@
     "date": "2019-06-09T04:24:16.466Z",
     "version": "2.5.24",
     "content": "- Added search to _Triumphs_ and _Collections_ views"
+  },
+  {
+    "date": "2019-06-09T14:23:12.088Z",
+    "version": "2.5.25",
+    "content": "- Added filter to _Collections_ view search (enter \"type:exotic scout rifle\" for example)\n- Experimental sort options for _Almost Complete Triumphs_ view"
   }
 ]

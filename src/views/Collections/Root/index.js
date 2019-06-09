@@ -177,15 +177,15 @@ class Root extends React.Component {
         </div>
         <div className='sidebar'>
           <div className='sub-header'>
+            <div>{t('Search')}</div>
+          </div>
+          <CollectiblesSearch />
+          <div className='sub-header'>
             <div>{t('Recently discovered')}</div>
           </div>
           <div className='recently-discovered'>
             <ul className='list'>{recentlyDiscovered.reverse()}</ul>
           </div>
-          <div className='sub-header'>
-            <div>{t('Search')}</div>
-          </div>
-          <CollectiblesSearch />
           <div className='sub-header'>
             <div>{t('Badges')}</div>
             <div>

@@ -35,25 +35,32 @@ class CollectiblesSearch extends React.Component {
   // Debounced so that we don't make an API request for every single
   // keypress - only when they stop typing.
   searchForCollectibles = debounce(async (term = this.state.search) => {
-    if (!term || term.length < 2) {
+    term = term.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
+
+    if (!term || term === 'type:' || term.length < 2) {
       this.setState({ results: [] });
       return;
     };
-
-    console.log(term);
 
     let results = this.collectibles.filter(r => {
 
       let name = r[1].displayProperties && r[1].displayProperties.name;
       let description = r[1].displayProperties && r[1].displayProperties.description;
 
+      let definitionItem = r[1].itemHash ? manifest.DestinyInventoryItemDefinition[r[1].itemHash] : false;
+
       name = name.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
       description = description.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+      let type = definitionItem && definitionItem.itemTypeAndTierDisplayName ? definitionItem.itemTypeAndTierDisplayName.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : false;
 
       let conjoinedString = `${name} ${description}`;
-      let regex = RegExp(term,'gi');
+      let regex = RegExp(term, 'gi');
+      let regexType = RegExp(term.replace('type:','').trim(), 'gi');
+      let typeMatch = /type:(.+)/gi.exec(term)
 
-      if (regex.test(conjoinedString)) {
+      if (typeMatch && regexType.test(type)) {
+        return true;
+      } else if (regex.test(conjoinedString)) {
         return true;
       } else {
         return false;

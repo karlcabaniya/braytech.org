@@ -2,10 +2,10 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
+import Button from '../../components/UI/Button';
 
 import './styles.css';
 
@@ -19,7 +19,9 @@ class Triumphs extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      almostCompleteSort: 0
+    };
   }
 
   toggleCompleted = () => {
@@ -29,6 +31,13 @@ class Triumphs extends React.Component {
     };
 
     this.props.setCollectibleDisplayState(newState);
+  };
+
+  toggleAlmostCompleteSort = () => {
+    this.setState((prevState, props) => {
+      prevState.almostCompleteSort = prevState.almostCompleteSort < 2 ? prevState.almostCompleteSort + 1 : 0;
+      return prevState;
+    });
   };
 
   componentDidMount() {
@@ -48,8 +57,7 @@ class Triumphs extends React.Component {
     let primaryHash = this.props.match.params.primary ? this.props.match.params.primary : false;
 
     let toggleCompletedLink = (
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a className='button' onClick={this.toggleCompleted}>
+      <Button action={this.toggleCompleted}>
         {this.props.collectibles.hideCompletedRecords ? (
           <>
             <i className='uniF16E' />
@@ -61,7 +69,38 @@ class Triumphs extends React.Component {
             {t('Hide redeemed')}
           </>
         )}
-      </a>
+      </Button>
+    );
+
+
+    let almostCompleteSortText;
+    if (this.state.almostCompleteSort === 1) {
+      almostCompleteSortText = (
+        <>
+          <i className='uniE17D' />
+          {t('Sorted by score')}
+        </>
+      )
+    } else if (this.state.almostCompleteSort === 2) {
+      almostCompleteSortText = (
+        <>
+          <i className='uniE17D' />
+          {t('Sorted by rarity')}
+        </>
+      )
+    } else {
+      almostCompleteSortText = (
+        <>
+          <i className='uniE17D' />
+          {t('Sorted by completion')}
+        </>
+      )
+    }
+
+    let toggleAlmostCompleteSortLink = (
+      <Button action={this.toggleAlmostCompleteSort}>
+        {almostCompleteSortText}
+      </Button>
     );
 
     let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/triumphs';
@@ -96,11 +135,12 @@ class Triumphs extends React.Component {
       return (
         <>
           <div className={cx('view')} id='triumphs'>
-            <AlmostComplete {...this.props} />
+            <AlmostComplete {...this.props} sort={this.state.almostCompleteSort} />
           </div>
           <div className='sticky-nav'>
             <div />
             <ul>
+              <li>{toggleAlmostCompleteSortLink}</li>
               <li>
                 <ProfileLink className='button' to={backLinkPath}>
                   <i className='destiny-B_Button' />
