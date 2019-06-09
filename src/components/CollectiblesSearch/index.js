@@ -76,7 +76,7 @@ class CollectiblesSearch extends React.Component {
           </div>
         </div>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/triumphs' {...this.props} hashes={results.map(r => r[0])} ordered />
+          <Collectibles selfLinkFrom='/collections' {...this.props} hashes={results.map(r => r[0])} />
         </ul>
       </div>
     );
