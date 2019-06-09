@@ -1,9 +1,9 @@
 .collectibles-search {
-  margin: 0 0 1rem;
+  padding: 0 0 1rem;
 }
 
 .collectibles-search.has-results {
-  margin: 0 0 2rem;
+  padding: 0 0 2rem;
 }
 
 .collectibles-search .list.collection-items {

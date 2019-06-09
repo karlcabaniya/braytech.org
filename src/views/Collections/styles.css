@@ -45,7 +45,7 @@
 
 #collections .sidebar .recently-discovered .list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(6, 1fr);
   grid-gap: 7px;
   justify-items: stretch;
   align-items: stretch;
@@ -566,10 +566,6 @@
     grid-gap: 2rem;
   }
 
-  #collections .sidebar .recently-discovered .list {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
   #collections .header .name {
     font-size: 24px;
   }
@@ -580,6 +576,7 @@
 
   #collections .parent .list {
     grid-template-columns: 1fr 1fr;
+    margin: 0;
   }
 
   #collections .parent .list .node::before {
