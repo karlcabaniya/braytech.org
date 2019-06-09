@@ -196,6 +196,7 @@ input {
 input::placeholder {
   color: inherit;
   opacity: 0.4;
+  transition: opacity 0.25s;
 }
 
 :focus {
@@ -285,6 +286,12 @@ button.square.active {
 
 .form .field:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
+}
+
+.form .field:hover input::placeholder,
+.form .field:hover input:focus::placeholder,
+.form .field input:focus::placeholder {
+  opacity: 0.6;
 }
 
 .form .field input:focus,
