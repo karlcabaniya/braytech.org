@@ -32,7 +32,7 @@ class ThisWeek extends React.Component {
         ascendant: new Date(`2018-09-04T${resetTime}`).getTime(),
         curse: new Date(`2018-09-11T${resetTime}`).getTime(),
         ep: new Date(`2018-05-08T${resetTime}`).getTime(),
-        reckoning: new Date(`2018-05-28T${resetTime}`).getTime(),
+        reckoning: new Date(`2018-06-04T${resetTime}`).getTime(),
         whisper: new Date(`2018-05-14T${resetTime}`).getTime(),
         zerohour: new Date(`2018-05-14T${resetTime}`).getTime()
       },
@@ -252,10 +252,10 @@ class ThisWeek extends React.Component {
         }
       },
       whisper: {
-        2: {
+        1: {
           modifiers: [3362074814]
         },
-        1: {
+        2: {
           modifiers: [3215384520]
         },
         3: {
@@ -263,10 +263,10 @@ class ThisWeek extends React.Component {
         }
       },
       zerohour: {
-        2: {
+        1: {
           modifiers: [3362074814]
         },
-        1: {
+        2: {
           modifiers: [3215384520]
         },
         3: {
