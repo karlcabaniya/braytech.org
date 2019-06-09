@@ -1,0 +1,11 @@
+.records-search {
+  margin: 0 0 1rem;
+}
+
+.records-search.has-results {
+  margin: 0 0 2rem;
+}
+
+.records-search .list.record-items {
+  grid-template-columns: 1fr;
+}

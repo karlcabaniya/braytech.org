@@ -2,7 +2,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -11,15 +10,13 @@ import ObservedImage from '../../../components/ObservedImage';
 import { enumerateRecordState } from '../../../utils/destinyEnums';
 import RecordsAlmost from '../../../components/RecordsAlmost';
 import RecordsTracked from '../../../components/RecordsTracked';
+import RecordsSearch from '../../../components/RecordsSearch';
 import NotificationInline from '../../../components/Notifications/NotificationInline';
 
 class Root extends React.Component {
   render() {
     const { t } = this.props;
     const characterId = this.props.member.characterId;
-
-    const characters = this.props.member.data.profile.characters.data;
-    const genderHash = characters.find(character => character.characterId === characterId).genderHash;
     const profileRecords = this.props.member.data.profile.profileRecords.data.records;
     const characterRecords = this.props.member.data.profile.characterRecords.data;
 
@@ -88,22 +85,6 @@ class Root extends React.Component {
           });
         });
       });
-
-      // console.log(
-      //   node.displayProperties.name,
-      //   states.length,
-      //   states.filter(record => enumerateRecordState(record.state).canEquipTitle).length,
-      //   states.filter(record => enumerateRecordState(record.state).entitlementUnowned).length,
-      //   states.filter(record => enumerateRecordState(record.state).invisible).length,
-      //   states.filter(record => enumerateRecordState(record.state).objectiveNotCompleted).length,
-      //   states.filter(record => enumerateRecordState(record.state).obscured).length,
-      //   states.filter(record => enumerateRecordState(record.state).recordRedeemed).length,
-      //   states.filter(record => enumerateRecordState(record.state).rewardUnavailable).length
-      // );
-      // console.log(
-      //   node.displayProperties.name,
-      //   states.length - states.filter(record => enumerateRecordState(record.state).invisible).length - states.filter(record => enumerateRecordState(record.state).obscured).length
-      // )
 
       let nodeCompleted = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length;
       let nodeTotal = states.filter(record => !enumerateRecordState(record.state).invisible).length;
@@ -176,26 +157,30 @@ class Root extends React.Component {
     return (
       <>
         <div className='module'>
-          <div className='sub-header sub'>
+          <div className='sub-header'>
             <div>{t('Total score')}</div>
           </div>
           <div className='total-score'>{this.props.member.data.profile.profileRecords.data.score}</div>
           {unredeemedTriumphCount > 0 ? <NotificationInline name='Unredeemed triumphs' description={potentialScoreGain > 0 ? `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} worth ${potentialScoreGain} score to redeem` : `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} to redeem`} /> : null}
-          <div className='sub-header sub'>
+          <div className='sub-header'>
+            <div>{t('Search')}</div>
+          </div>
+          <RecordsSearch />
+          <div className='sub-header'>
             <div>{t('Triumphs')}</div>
             <div>
               {recordsStates.filter(record => enumerateRecordState(record.state).recordRedeemed).length}/{recordsStates.filter(record => !enumerateRecordState(record.state).invisible).length}
             </div>
           </div>
           <ul className='list parents'>{nodes}</ul>
-          <div className='sub-header sub'>
+          <div className='sub-header'>
             <div>{t('Seals')}</div>
             <div>{sealNodes.filter(n => n.completed).length}/{sealNodes.length}</div>
           </div>
           <ul className='list parents seals'>{sealNodes.map(n => n.element)}</ul>
         </div>
         <div className='module'>
-          <div className='sub-header sub'>
+          <div className='sub-header'>
             <div>{t('Almost complete')}</div>
           </div>
           <div className='almost-complete'>
@@ -203,7 +188,7 @@ class Root extends React.Component {
           </div>
         </div>
         <div className='module'>
-          <div className='sub-header sub'>
+          <div className='sub-header'>
             <div>{t('Tracked records')}</div>
           </div>
           <div className='tracked'>

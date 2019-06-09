@@ -393,5 +393,10 @@
     "date": "2019-06-08T11:03:10.912Z",
     "version": "2.5.23",
     "content": "- Something special for the _Sit Rep_ view header"
+  },
+  {
+    "date": "2019-06-09T04:24:16.466Z",
+    "version": "2.5.24",
+    "content": "- Added search to _Triumphs_ and _Collections_ views"
   }
 ]

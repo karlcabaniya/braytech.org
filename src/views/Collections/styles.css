@@ -46,9 +46,7 @@
 #collections .sidebar .recently-discovered .list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 7px;
-  grid-row-gap: 0;
+  grid-gap: 7px;
   justify-items: stretch;
   align-items: stretch;
 }
@@ -56,6 +54,7 @@
 #collections .sidebar .recently-discovered .list .item {
   padding-bottom: 100%;
   height: unset;
+  margin: 0;
 }
 
 #collections .sidebar .recently-discovered .list .item::before {
@@ -64,6 +63,10 @@
 
 #collections .sidebar .recently-discovered .list .item:hover::before {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+#collections .sidebar .collectibles-search {
+  flex-basis: 100%;
 }
 
 #collections .sidebar .badges {
@@ -546,6 +549,11 @@
   #collections .list.tertiary.sets {
     grid-template-columns: repeat(1, 1fr);
   }
+
+  #collections.root {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -556,6 +564,10 @@
   #collections.root {
     grid-template-columns: 1fr;
     grid-gap: 2rem;
+  }
+
+  #collections .sidebar .recently-discovered .list {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
   #collections .header .name {
