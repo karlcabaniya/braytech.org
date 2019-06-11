@@ -74,7 +74,7 @@ class Collectibles extends React.Component {
                 className={cx('item', 'tooltip', {
                   completed: !enumerateCollectibleState(state).notAcquired && !enumerateCollectibleState(state).invisible
                 })}
-                data-itemhash={collectibleDefinition.itemHash}
+                data-hash={collectibleDefinition.itemHash}
               >
                 <div className='icon'>
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
@@ -139,7 +139,7 @@ class Collectibles extends React.Component {
                   // eslint-disable-next-line eqeqeq
                   highlight: highlight && highlight == collectibleDefinition.hash
                 })}
-                data-itemhash='343'
+                data-hash='343'
               >
                 <div className='icon'>
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${manifest.settings.destiny2CoreSettings.undiscoveredCollectibleImage}`} />
@@ -160,7 +160,7 @@ class Collectibles extends React.Component {
                   // eslint-disable-next-line eqeqeq
                   highlight: highlight && highlight == collectibleDefinition.hash
                 })}
-                data-itemhash={collectibleDefinition.itemHash}
+                data-hash={collectibleDefinition.itemHash}
               >
                 <div className='icon'>
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
@@ -252,7 +252,7 @@ class Collectibles extends React.Component {
               linked: link && this.props.selfLinkFrom,
               completed: !enumerateCollectibleState(state).notAcquired
             })}
-            data-itemhash={collectibleDefinition.itemHash}
+            data-hash={collectibleDefinition.itemHash}
           >
             <div className='icon'>
               <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />

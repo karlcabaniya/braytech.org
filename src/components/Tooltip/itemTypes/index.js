@@ -19,17 +19,14 @@ import sandboxPerk from './sandboxPerk';
 
 class ItemTypes extends React.Component {
   render() {
-    const { member, hash, itemInstanceId, tooltipType, rollNote = false, tooltips } = this.props;
+    let { member, hash, instanceId, state, rollNote, table, tooltipType, settingsTooltips } = this.props;
 
     let itemComponents;
-    if (member.data && member.data.profile.itemComponents.instances.data[itemInstanceId]) {
+    if (member.data && member.data.profile.itemComponents.instances.data[instanceId]) {
       itemComponents = member.data.profile.itemComponents;
     } else {
       itemComponents = false;
     }
-
-    let itemState = this.props.itemState;
-    let table = this.props.table;
 
     if (!table) {
       table = 'DestinyInventoryItemDefinition';
@@ -44,13 +41,13 @@ class ItemTypes extends React.Component {
       item = manifest[table][hash];
     }
 
-    if (itemComponents && itemInstanceId) {
+    if (itemComponents && instanceId) {
       item.itemComponents = {
-        state: itemState ? parseInt(itemState, 10) : false,
-        instance: itemComponents.instances.data[itemInstanceId] ? itemComponents.instances.data[itemInstanceId] : false,
-        sockets: itemComponents.sockets.data[itemInstanceId] ? itemComponents.sockets.data[itemInstanceId].sockets : false,
-        perks: itemComponents.perks.data[itemInstanceId] ? itemComponents.perks.data[itemInstanceId].perks : false,
-        stats: itemComponents.stats.data[itemInstanceId] ? itemComponents.stats.data[itemInstanceId].stats : false
+        state: state ? parseInt(state, 10) : false,
+        instance: itemComponents.instances.data[instanceId] ? itemComponents.instances.data[instanceId] : false,
+        sockets: itemComponents.sockets.data[instanceId] ? itemComponents.sockets.data[instanceId].sockets : false,
+        perks: itemComponents.perks.data[instanceId] ? itemComponents.perks.data[instanceId].perks : false,
+        stats: itemComponents.stats.data[instanceId] ? itemComponents.stats.data[instanceId].stats : false
       };
     }
 
@@ -62,12 +59,12 @@ class ItemTypes extends React.Component {
         black = ui(item);
       } else if (item.itemType === 3) {
         kind = 'weapon';
-        let type = weapon(item, member, tooltips.detailedMode);
+        let type = weapon(item, member, settingsTooltips.detailedMode);
         black = type.el;
         masterwork = type.masterwork;
       } else if (item.itemType === 2) {
         kind = 'armour';
-        let type = armour(item, member, tooltips.detailedMode);
+        let type = armour(item, member, settingsTooltips.detailedMode);
         black = type.el;
         masterwork = type.masterwork;
       } else if (item.itemType === 14) {
@@ -87,10 +84,10 @@ class ItemTypes extends React.Component {
         black = fallback(item);
       } else if (item.itemType === 22) {
         kind = 'sparrow';
-        black = sparrow(item, tooltips.detailedMode);
+        black = sparrow(item, settingsTooltips.detailedMode);
       } else if (item.itemType === 24) {
         kind = 'ghost';
-        black = ghost(item, tooltips.detailedMode);
+        black = ghost(item, settingsTooltips.detailedMode);
       } else if (item.itemType === 26) {
         kind = 'bounty';
         black = bounty(item);
@@ -152,7 +149,7 @@ class ItemTypes extends React.Component {
         </>
       );
     } else {
-      itemState = enumerateItemState(parseInt(itemState, 10));
+      state = enumerateItemState(parseInt(state, 10));
       return (
         <>
           <div className='acrylic' />
@@ -181,7 +178,7 @@ function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
     viewport: state.viewport,
-    tooltips: state.tooltips
+    settingsTooltips: state.tooltips
   };
 }
 

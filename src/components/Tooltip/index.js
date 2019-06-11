@@ -10,8 +10,8 @@ class Tooltip extends React.Component {
 
     this.state = {
       hash: false,
-      itemInstanceId: false,
-      itemState: false,
+      instanceId: false,
+      state: false,
       rollNote: false,
       table: false,
       tooltipType: false
@@ -59,11 +59,11 @@ class Tooltip extends React.Component {
   };
 
   target_mouseEnter = e => {
-    if (e.currentTarget.dataset.itemhash) {
+    if (e.currentTarget.dataset.hash) {
       this.setState({
-        hash: e.currentTarget.dataset.itemhash,
-        itemInstanceId: e.currentTarget.dataset.iteminstanceid,
-        itemState: e.currentTarget.dataset.itemstate,
+        hash: e.currentTarget.dataset.hash,
+        instanceId: e.currentTarget.dataset.instanceid,
+        state: e.currentTarget.dataset.state,
         rollNote: e.currentTarget.dataset.rollnote ? true : false,
         table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false,
         tooltipType: e.currentTarget.dataset.tooltiptype && e.currentTarget.dataset.tooltiptype !== '' ? e.currentTarget.dataset.tooltiptype : false
@@ -74,8 +74,8 @@ class Tooltip extends React.Component {
   target_mouseLeave = e => {
     this.setState({
       hash: false,
-      itemInstanceId: false,
-      itemState: false,
+      instanceId: false,
+      state: false,
       rollNote: false,
       table: false,
       tooltipType: false
@@ -92,11 +92,11 @@ class Tooltip extends React.Component {
 
   target_touchEnd = e => {
     if (!this.touchMovement) {
-      if (e.currentTarget.dataset.itemhash) {
+      if (e.currentTarget.dataset.hash) {
         this.setState({
-          hash: e.currentTarget.dataset.itemhash,
-          itemInstanceId: e.currentTarget.dataset.iteminstanceid,
-          itemState: e.currentTarget.dataset.itemstate,
+          hash: e.currentTarget.dataset.hash,
+          instanceId: e.currentTarget.dataset.instanceid,
+          state: e.currentTarget.dataset.state,
           rollNote: e.currentTarget.dataset.rollnote ? true : false,
           table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false,
           tooltipType: e.currentTarget.dataset.tooltiptype && e.currentTarget.dataset.tooltiptype !== '' ? e.currentTarget.dataset.tooltiptype : false
@@ -129,8 +129,8 @@ class Tooltip extends React.Component {
     if (!this.touchMovement) {
       this.setState({
         hash: false,
-        itemInstanceId: false,
-        itemState: false,
+        instanceId: false,
+        state: false,
         rollNote: false,
         table: false,
         tooltipType: false
@@ -148,8 +148,8 @@ class Tooltip extends React.Component {
     if (this.props.location && prevProps.location.pathname !== this.props.location.pathname) {
       this.setState({
         hash: false,
-        itemInstanceId: false,
-        itemState: false,
+        instanceId: false,
+        state: false,
         rollNote: false,
         table: false,
         tooltipType: false
@@ -181,14 +181,7 @@ class Tooltip extends React.Component {
     if (this.state.hash) {
       return (
         <div id='tooltip' ref={this.tooltip} style={{ top: `${this.mouseMoveXY.y}px`, left: `${this.mouseMoveXY.x}px` }}>
-          <ItemTypes 
-            hash={this.state.hash} 
-            itemInstanceId={this.state.itemInstanceId} 
-            itemState={this.state.itemState} 
-            rollNote={this.state.rollNote} 
-            table={this.state.table} 
-            tooltipType={this.state.tooltipType} 
-            />
+          <ItemTypes {...this.state} />
         </div>
       );
     } else {

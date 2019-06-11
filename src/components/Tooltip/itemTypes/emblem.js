@@ -25,7 +25,7 @@ const emblem = item => {
           let def = manifest.DestinyInventoryItemDefinition[plug.plugItemHash];
           plugs.push({
             element: (
-              <div key={def.hash} className={cx('plug', 'tooltip')} data-itemhash={def.hash}>
+              <div key={def.hash} className={cx('plug', 'tooltip')} data-hash={def.hash}>
                 <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${def.displayProperties.icon}`} />
                 <div className='text'>
                   <div className='name'>{def.displayProperties.name}</div>

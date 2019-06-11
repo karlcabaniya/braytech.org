@@ -95,7 +95,7 @@ class GodRolls extends React.Component {
             active: plug.hash === socket.active,
             definition: plug,
             element: (
-              <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.active })} data-itemhash={plug.hash}>
+              <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.active })} data-hash={plug.hash}>
                 <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon}`} />
                 <div className='text'>
                   <div className='name'>{plug.displayProperties.name}</div>

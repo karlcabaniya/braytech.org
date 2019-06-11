@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import { ProfileLink } from '../../components/ProfileLink';
 import ObservedImage from '../../components/ObservedImage';
-import { enumerateItemState } from '../../utils/destinyEnums';
 
 import './styles.css';
 
@@ -26,57 +24,37 @@ class Items extends React.Component {
   }
 
   render() {
-    const inspect = this.props.inspect ? true : false;
+    const { t, member, items, inspect } = this.props;
 
-    let items = [];
+    let output = [];
 
-    let itemsRequested = this.props.hashes;
+    items.forEach((item, i) => {
+      let definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
-    itemsRequested.forEach(hash => {
-      let itemDefinition = manifest.DestinyInventoryItemDefinition[hash];
-
-      let state = 0;
-      // if (this.props.member.data) {
-        
-      //   const characterId = this.props.member.characterId;
-
-      //   const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
-      //   const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
-      
-      //   let scope = profileCollectibles.collectibles[hash] ? profileCollectibles.collectibles[hash] : characterCollectibles[characterId].collectibles[hash];
-      //   if (scope) {
-      //     state = scope.state;
-      //   }
-
-      //   if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
-      //     return;
-      //   }
-
-      // }
-
-      items.push(
+      output.push(
         <li
-          key={itemDefinition.hash}
+          key={i}
           className={cx({
             tooltip: !this.props.disableTooltip,
             linked: true
-            // completed: !enumerateItemState(state).
           })}
-          data-itemhash={itemDefinition.hash}
+          data-hash={item.itemHash}
+          data-instanceid={item.itemInstanceId}
+          data-state={item.state}
         >
           <div className='icon'>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${itemDefinition.displayProperties.icon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
           </div>
           <div className='text'>
-            <div className='name'>{itemDefinition.displayProperties.name}</div>
+            <div className='name'>{definitionItem.displayProperties.name}</div>
           </div>
-          {inspect && itemDefinition.itemHash ? <Link to={{ pathname: `/inspect/${itemDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+          {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
         </li>
       );
     });
     
 
-    return items;
+    return output;
   }
 }
 

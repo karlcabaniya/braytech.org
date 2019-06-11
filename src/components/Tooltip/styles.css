@@ -282,6 +282,10 @@
   align-items: center;
 }
 
+#tooltip .stats .stat .value.mod {
+  color: #ddcd8c;
+}
+
 #tooltip .stats .stat .value.masterwork {
   color: #c6ab3c;
 }
@@ -309,6 +313,10 @@
 
 #tooltip .stats .stat .value .tip {
   height: 100%;
+  background-color: #ddcd8c;
+}
+
+#tooltip .stats .stat .value .tip.masterwork {
   background-color: #c6ab3c;
 }
 
