@@ -585,14 +585,14 @@
   position: absolute;
   left: 0;
   width: 100%;
-  animation: animation-masterwork-header 5s linear infinite;
+  animation: animation-masterwork-header 2s linear infinite;
 }
 
 @keyframes animation-masterwork-header {
   0% {
     background-position-x: 200%;
   }
-  20% {
+  40% {
     background-position-x: -200%;
   }
   100% {

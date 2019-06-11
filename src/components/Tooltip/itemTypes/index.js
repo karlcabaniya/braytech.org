@@ -18,7 +18,6 @@ import ui from './ui';
 import sandboxPerk from './sandboxPerk';
 
 class ItemTypes extends React.Component {
-
   render() {
     const { member, hash, itemInstanceId, tooltipType, rollNote = false, tooltips } = this.props;
 
@@ -35,7 +34,7 @@ class ItemTypes extends React.Component {
     if (!table) {
       table = 'DestinyInventoryItemDefinition';
     }
-  
+
     let item;
     if (hash === '343') {
       item = {
@@ -44,7 +43,7 @@ class ItemTypes extends React.Component {
     } else {
       item = manifest[table][hash];
     }
-  
+
     if (itemComponents && itemInstanceId) {
       item.itemComponents = {
         state: itemState ? parseInt(itemState, 10) : false,
@@ -54,59 +53,51 @@ class ItemTypes extends React.Component {
         stats: itemComponents.stats.data[itemInstanceId] ? itemComponents.stats.data[itemInstanceId].stats : false
       };
     }
-  
-    let kind = 'ui';
-    let tier = 'basic';
-    let black;
-  
+
+    let kind, tier, black, masterwork;
+
     if (item.itemType) {
-      switch (item.itemType) {
-        case 1:
-          kind = 'ui';
-          black = ui(item);
-          break;
-        case 3:
-          kind = 'weapon';
-          black = weapon(item, member, tooltips.detailedMode);
-          break;
-        case 2:
-          kind = 'armour';
-          black = armour(item, member, tooltips.detailedMode);
-          break;
-        case 14:
-          kind = 'emblem';
-          black = emblem(item);
-          break;
-        case 16:
-          kind = 'ui sandbox-perk';
-          black = subclass(item);
-          break;
-        case 19:
-          kind = 'mod';
-          black = mod(item);
-          break;
-        case 20:
-          kind = 'bounty';
-          black = ui(item);
-          break;
-        case 22:
-          kind = 'sparrow';
-          black = sparrow(item, tooltips.detailedMode);
-          break;
-        case 24:
-          kind = 'ghost';
-          black = ghost(item, tooltips.detailedMode);
-          break;
-        case 26:
-          kind = 'bounty';
-          black = bounty(item);
-          break;
-        default:
-          kind = '';
-          black = fallback(item);
+      if (item.itemType === 1) {
+        kind = 'ui';
+        black = ui(item);
+      } else if (item.itemType === 3) {
+        kind = 'weapon';
+        let type = weapon(item, member, tooltips.detailedMode);
+        black = type.el;
+        masterwork = type.masterwork;
+      } else if (item.itemType === 2) {
+        kind = 'armour';
+        let type = armour(item, member, tooltips.detailedMode);
+        black = type.el;
+        masterwork = type.masterwork;
+      } else if (item.itemType === 14) {
+        kind = 'emblem';
+        black = emblem(item);
+      } else if (item.itemType === 16) {
+        kind = 'ui sandbox-perk';
+        black = subclass(item);
+      } else if (item.itemType === 19) {
+        kind = 'mod';
+        black = mod(item);
+      } else if (item.itemType === 20) {
+        kind = 'bounty';
+        black = ui(item);
+      } else if (item.itemType === 22) {
+        kind = 'sparrow';
+        black = sparrow(item, tooltips.detailedMode);
+      } else if (item.itemType === 24) {
+        kind = 'ghost';
+        black = ghost(item, tooltips.detailedMode);
+      } else if (item.itemType === 26) {
+        kind = 'bounty';
+        black = bounty(item);
+      } else {
+        kind = 'ui';
+        tier = 'basic';
+        black = fallback(item);
       }
     }
-  
+
     if (table === 'DestinySandboxPerkDefinition') {
       kind = 'ui name-only sandbox-perk';
       black = sandboxPerk(item);
@@ -115,7 +106,7 @@ class ItemTypes extends React.Component {
     if (tooltipType) {
       kind = tooltipType;
     }
-  
+
     if (item.inventory) {
       switch (item.inventory.tierType) {
         case 6:
@@ -137,7 +128,7 @@ class ItemTypes extends React.Component {
           tier = 'common';
       }
     }
-  
+
     if (item.redacted) {
       return (
         <>
@@ -162,9 +153,9 @@ class ItemTypes extends React.Component {
       return (
         <>
           <div className='acrylic' />
-          <div className={cx('frame', kind, tier, { 'is-masterworked': itemState.masterworked })}>
+          <div className={cx('frame', kind, tier, { 'is-masterworked': masterwork })}>
             <div className='header'>
-              {itemState.masterworked ? <ObservedImage className={cx('image', 'bg')} src={tier === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
+              {masterwork ? <ObservedImage className={cx('image', 'bg')} src={tier === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
               <div className='name'>{item.displayProperties.name}</div>
               <div>
                 <div className='kind'>{item.itemTypeDisplayName}</div>
@@ -182,8 +173,6 @@ class ItemTypes extends React.Component {
     }
   }
 }
-
-
 
 function mapStateToProps(state, ownProps) {
   return {
