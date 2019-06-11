@@ -7,7 +7,7 @@ import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
 
 const weapon = (item, member, detailedMode) => {
-  let { stats, sockets, killTracker } = getSockets(item, false, detailedMode ? true : false, detailedMode ? false : true, [], false, detailedMode ? true : false);
+  let { stats, sockets } = getSockets(item, false, detailedMode ? true : false, detailedMode ? false : true, false, [], false, detailedMode ? true : false);
   // let ornaments = getOrnaments(manifest, item.hash);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
@@ -40,18 +40,9 @@ const weapon = (item, member, detailedMode) => {
           <div className='text'>{ammoTypeToString(item.equippingBlock.ammoType)}</div>
         </div>
       </div>
-      {sourceString && !item.itemComponents && !killTracker ? (
+      {sourceString && !item.itemComponents ? (
         <div className='source'>
           <p>{sourceString}</p>
-        </div>
-      ) : null}
-      {killTracker ? (
-        <div className='kill-tracker'>
-          <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${killTracker.objectiveDefinition.displayProperties.icon}`} />
-          <div className='text'>
-            <div className='description'>{killTracker.objectiveDefinition.progressDescription}</div>
-            <div className='value'>{killTracker.progress.progress}</div>
-          </div>
         </div>
       ) : null}
       <div className='stats'>{stats.map(stat => stat.element)}</div>

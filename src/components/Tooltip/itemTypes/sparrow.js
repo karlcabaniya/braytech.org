@@ -9,7 +9,7 @@ const sparrow = (item, detailedMode) => {
 
   let description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
 
-  const { sockets } = getSockets(item, false, true, detailedMode ? false : true, [1608119540]);
+  const { sockets } = getSockets(item, false, true, detailedMode ? false : true, false, [1608119540]);
 
   return (
     <>

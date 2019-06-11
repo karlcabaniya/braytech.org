@@ -2,7 +2,6 @@ import React from 'react';
 import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
 
-import Globals from './globals';
 import ObservedImage from '../components/ObservedImage';
 import manifest from './manifest';
 
@@ -33,19 +32,18 @@ const interpolate = (investmentValue, displayInterpolation) => {
   return Math.round(displayValue);
 };
 
-export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, socketExclusions = [], uiStyleTooltips = false, showHiddenStats = false) => {
+export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, randomizedPlugItems = false, socketExclusions = [], uiStyleTooltips = false, showHiddenStats = false) => {
+
   let statGroup = item.stats ? manifest.DestinyStatGroupDefinition[item.stats.statGroupHash] : false;
 
   let statModifiers = [];
-  let statModifiersMasterworks = [];
-  let masterworkKillTracker = false;
 
   let socketsOutput = [];
-
-  // console.log(item);
+  let masterwork = false;
 
   if (item.sockets) {
     let socketEntries = item.sockets.socketEntries;
+
     if (item.itemComponents && item.itemComponents.sockets) {
       mods = true;
       Object.keys(socketEntries).forEach(key => {
@@ -66,8 +64,6 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
       });
     }
 
-    // console.log(item.itemComponents.sockets);
-
     Object.keys(socketEntries).forEach(key => {
       let socket = socketEntries[key];
 
@@ -75,44 +71,68 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
 
       let modCategoryHash = [3379164649, 590099826, 2685412949, 4243480345, 590099826];
 
+      let plugItems = randomizedPlugItems ? socket.reusablePlugItems.concat(socket.randomizedPlugItems).filter((p, i, self) =>
+        i === self.findIndex((t) => (
+          t.plugItemHash === p.plugItemHash
+        ))
+      ) : socket.reusablePlugItems;
+
+      // plugItems.forEach(p => {
+      //   let plug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
+
+      //   if (plug.hash === socket.singleInitialItemHash) {
+      //     console.log(plug)
+      //     plug.investmentStats.forEach(modifier => {
+      //       let index = statModifiers.findIndex(stat => stat.statHash === modifier.statTypeHash);
+      //       if (index > -1) {
+      //         statModifiers[index].value = statModifiers[index].value + modifier.value;
+      //         statModifiers[index].mod = modCategoryHash.includes(categoryHash) ? statModifiers[index].mod + modifier.value : statModifiers[index].mod
+      //       } else {
+      //         statModifiers.push({
+      //           statHash: modifier.statTypeHash,
+      //           value: modifier.value,
+      //           mod: modCategoryHash.includes(categoryHash) ? modifier.value : 0
+      //         });
+      //       }
+      //     });
+      //   }
+      // });
+
+      let plugActive = manifest.DestinyInventoryItemDefinition[socket.singleInitialItemHash];
+
+      if (plugActive && plugActive.investmentStats) {
+
+        if (plugActive.plug && plugActive.plug.uiPlugLabel === 'masterwork') {
+          masterwork = true;
+        }
+
+        plugActive.investmentStats.forEach(modifier => {
+          let index = statModifiers.findIndex(stat => stat.statHash === modifier.statTypeHash);
+          if (index > -1) {
+            statModifiers[index].value = statModifiers[index].value + modifier.value;
+            statModifiers[index].mod = modCategoryHash.includes(categoryHash) ? statModifiers[index].mod + modifier.value : statModifiers[index].mod
+          } else {
+            statModifiers.push({
+              statHash: modifier.statTypeHash,
+              value: modifier.value,
+              mod: modCategoryHash.includes(categoryHash) ? modifier.value : 0
+            });
+          }
+        });
+
+      }
+
       if (socketExclusions.includes(socket.singleInitialItemHash) || (!mods && modCategoryHash.includes(categoryHash))) {
         return;
       }
 
-      let catalysts = [2603105938];
-
-      if (catalysts.indexOf(socket.singleInitialItemHash) > -1) {
-        console.log(socket)
-      }
-
-      socket.reusablePlugItems.forEach(reusablePlug => {
-        let plug = manifest.DestinyInventoryItemDefinition[reusablePlug.plugItemHash];
-
-        // console.log(reusablePlug, plug, socket);
-
-        if (plug.hash === socket.singleInitialItemHash) {
-          plug.investmentStats.forEach(modifier => {
-            let index = statModifiers.findIndex(stat => stat.statHash === modifier.statTypeHash);
-            if (index > -1) {
-              statModifiers[index].value = statModifiers[index].value + modifier.value;
-            } else {
-              statModifiers.push({
-                statHash: modifier.statTypeHash,
-                value: modifier.value
-              });
-            }
-          });
-        }
-      });
-
-      // console.log(masterworkKillTracker)
-
       let socketPlugs = [];
 
-      socket.reusablePlugItems.forEach(reusablePlug => {
-        let plug = manifest.DestinyInventoryItemDefinition[reusablePlug.plugItemHash];
-        // console.log(plug, traitsOnly)
+      plugItems.forEach(p => {
+        let plug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
+
         if (traitsOnly && !plug.itemCategoryHashes.includes(3708671066)) {
+          console.log(item)
           return;
         }
         if (initialOnly && plug.hash !== socket.singleInitialItemHash) {
@@ -124,7 +144,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           definition: plug,
           element: (
             <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes && plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
-              <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon ? plug.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
+              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${plug.displayProperties.icon ? plug.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
               <div className='text'>
                 <div className='name'>{plug.displayProperties.name ? plug.displayProperties.name : `Unknown`}</div>
                 <div className='description'>{plug.itemTypeDisplayName}</div>
@@ -141,7 +161,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           definition: plug,
           element: (
             <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-itemhash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
-              <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon}`} />
+              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
               <div className='text'>
                 <div className='name'>{plug.displayProperties.name}</div>
                 <div className='description'>{plug.itemTypeDisplayName}</div>
@@ -160,6 +180,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
       }
 
       if (singleInitialItem && traitsOnly && !singleInitialItem.definition.itemCategoryHashes.includes(3708671066)) {
+        console.log('wtf is this');
         return;
       }
 
@@ -172,14 +193,13 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
     });
   }
 
-  let statsOutput = [];
+  console.log(socketsOutput, statModifiers)
 
-  // console.log(socketsOutput, statModifiersMasterworks)
+  let statsOutput = [];
 
   if (item.itemType === 3) {
     statGroup.scaledStats.forEach(stat => {
       let statModifier = statModifiers.find(modifier => modifier.statHash === stat.statHash);
-      let statModifierMasterwork = statModifiersMasterworks.find(modifier => modifier.statHash === stat.statHash);
       let statDef = manifest.DestinyStatDefinition[stat.statHash];
 
       if (Object.keys(item.stats.stats).includes(stat.statHash.toString())) {
@@ -196,9 +216,11 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         if (stat.hash === 3871231066) {
           value = value < 1 ? 1 : value;
         }
+
+        let modValue = statModifier ? statModifier.mod : 0;
         
         value = instanceStat ? instanceStat.value : value;
-        value = statModifierMasterwork ? value - statModifierMasterwork.value : value;
+        value = modValue > 0 ? value - modValue : value;
 
         statsOutput.push({
           displayAsNumeric: stat.displayAsNumeric,
@@ -206,11 +228,11 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           element: (
             <div key={stat.statHash} className='stat'>
               <div className='name'>{statDef.displayProperties.name}</div>
-              <div className={cx('value', { bar: !stat.displayAsNumeric, int: stat.displayAsNumeric, masterwork: statModifierMasterwork })}>
+              <div className={cx('value', { bar: !stat.displayAsNumeric, int: stat.displayAsNumeric, masterwork: modValue > 0 })}>
                 {!stat.displayAsNumeric ? (
                   <>
                     <div className='bar' data-value={value} style={{ width: `${value}%` }} />
-                    {statModifierMasterwork ? <div className='tip' style={{ width: `${statModifierMasterwork.value}%` }} /> : null}
+                    {modValue > 0 ? <div className='tip' style={{ width: `${modValue}%` }} /> : null}
                   </>
                 ) : (
                   value
@@ -288,7 +310,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
   return {
     stats: statsOutput,
     sockets: socketsOutput,
-    killTracker: masterworkKillTracker || false
+    masterwork
   };
 };
 
@@ -308,7 +330,7 @@ export const getOrnaments = hash => {
             ornaments.push({
               element: (
                 <div key={def.hash} className={cx('plug', 'tooltip')} data-itemhash={def.hash}>
-                  <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${def.displayProperties.icon}`} />
+                  <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${def.displayProperties.icon}`} />
                   <div className='text'>
                     <div className='name'>{def.displayProperties.name}</div>
                     <div className='description'>Ornament</div>

@@ -1,6 +1,6 @@
 #inspect {
   position: relative;
-  display: block;
+  display: grid;
   margin: -40px auto 0;
   padding: 0;
   color: rgba(255, 255, 255, 0.8);
@@ -16,19 +16,17 @@
   --commonDark: 0, 0%, 7%;
 }
 
-#inspect .grid {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: 27rem auto;
-  align-items: stretch;
-  min-height: calc(100vh - 66px);
-  min-height: 100vh;
+#inspect .row {
+  padding: 3rem;
 }
 
-#inspect .col {
+#inspect .displayProperties {
+  padding-top: 5rem;
+  padding-bottom: 0;
   position: relative;
-  padding: 40px 0 0;
+  display: grid;
+  grid-template-columns: 96px auto;
+  grid-gap: 2rem;
 }
 
 #inspect .displayProperties .rarity {
@@ -36,7 +34,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 6.5rem;
 }
 
 #inspect .displayProperties .rarity.exotic {
@@ -59,37 +57,46 @@
   background-color: hsla(var(--common), 0.8);
 }
 
-#inspect .displayProperties .text {
-  margin: 4rem 0 0 3rem;
+#inspect .displayProperties .icon {
   position: relative;
-  font-family: 'nhg text';
+  width: 96px;
+  height: 96px;
+}
+
+#inspect .displayProperties .icon .image {
+  box-shadow: inset 0 0 0 3px rgb(204, 204, 204);
+}
+
+#inspect .displayProperties .text {
+  position: relative;
   overflow: hidden;
 }
 
 #inspect .displayProperties .text .name {
   font-family: 'nhg text';
-  font-size: 56px;
+  font-size: 64px;
   text-transform: uppercase;
   font-weight: 500;
-  line-height: 1;
-  color: rgba(255, 255, 255, 1);
-  margin: 0 0 1rem;
+  line-height: 50px;
+  color: rgb(238, 238, 238);
+  margin: 0 0 22px -2px;
 }
 
 #inspect .displayProperties .text .type {
-  font-size: 24px;
+  font-family: 'nhg text';
+  font-size: 28px;
   text-transform: uppercase;
-  line-height: 22px;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0 0 3rem;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 2rem;
 }
 
 #inspect .displayProperties .text .description {
-  font-size: 18px;
+  font-size: 16px;
   font-style: italic;
+  letter-spacing: 0.5px;
   color: rgba(255, 255, 255, 0.6);
-  padding: 0 3rem 0 0;
-  margin: 0 0 3rem;
+  max-width: 600px;
 }
 
 #inspect .displayProperties .text .primary-stat {
@@ -156,42 +163,36 @@
   text-transform: uppercase;
 }
 
-#inspect .details {
-  padding: calc(40px + 4rem) 3rem 3rem;
-  width: calc((85px * 6) - 20px + 6rem);
-  background-color: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7px);
+#inspect .row.sockets {
+  display: grid;
+  grid-template-columns: calc(84px * 5 - 20px) auto;
+  grid-gap: 3rem;
 }
 
-#inspect .details .socket-bros {
-  
-}
-
-#inspect .details .sockets {
+#inspect .sockets {
   display: flex;
   flex-flow: row wrap;
-  margin: 0 0 2rem;
 }
 
-#inspect .details .sockets.is-perks {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19' viewBox='0 0 19 19'><rect fill='white' fill-opacity='0.1' width='19' height='1' y='9'/><rect fill='white' fill-opacity='0.1' width='1' height='19' x='9'/></svg>");
+#inspect .sockets.perks {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='19' height='19' viewBox='0 0 19 19'><rect fill='white' fill-opacity='0.1' width='19' height='1' y='10'/><rect fill='white' fill-opacity='0.1' width='1' height='19' x='8'/></svg>");
 }
 
-#inspect .details .sockets .socket {
+#inspect .sockets .socket {
   position: relative;
   flex-basis: 64px;
   margin: 0 10px;
 }
 
-#inspect .details .sockets .socket:first-child {
+#inspect .sockets .socket:first-child {
   margin-left: 0;
 }
 
-#inspect .details .sockets .socket:last-child {
+#inspect .sockets .socket:last-child {
   margin-right: 0;
 }
 
-#inspect .details .sockets .socket .plug {
+#inspect .sockets .socket .plug {
   position: relative;
   height: 64px;
   margin: 0 0 10px;
@@ -200,15 +201,15 @@
   justify-content: center;
 }
 
-#inspect .details .sockets .socket .plug:last-child {
+#inspect .sockets .socket .plug:last-child {
   margin: 0;
 }
 
-#inspect .details .sockets .socket .plug .text {
+#inspect .sockets .socket .plug .text {
   display: none;
 }
 
-#inspect .details .sockets.is-perks .socket::before {
+#inspect .sockets.perks .socket::before {
   content: ' ';
   position: absolute;
   right: -11px;
@@ -218,16 +219,16 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-#inspect .details .sockets.is-perks .socket:last-child::before {
+#inspect .sockets.perks .socket:last-child::before {
   content: none;
 }
 
-#inspect .details .sockets.is-perks .socket .plug:not(.is-intrinsic) {
+#inspect .sockets.perks .socket .plug:not(.is-intrinsic) {
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
   border-radius: 100%;
 }
 
-#inspect .details .sockets.is-perks .socket .plug:not(.is-intrinsic)::before {
+#inspect .sockets.perks .socket .plug:not(.is-intrinsic)::before {
   content: ' ';
   position: absolute;
   top: -4px;
@@ -239,7 +240,7 @@
   transition: box-shadow 0.25s;
 }
 
-#inspect .details .sockets.is-perks .socket .plug:not(.is-intrinsic)::after {
+#inspect .sockets.perks .socket .plug:not(.is-intrinsic)::after {
   content: ' ';
   position: absolute;
   top: 0;
@@ -251,45 +252,45 @@
   transition: background-color 0.25s;
 }
 
-#inspect .details .sockets.is-perks .socket .plug:not(.is-intrinsic):hover::before {
+#inspect .sockets.perks .socket .plug:not(.is-intrinsic):hover::before {
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
 }
 
-#inspect .details .sockets.is-perks .socket .plug:not(.is-intrinsic):hover::after {
+#inspect .sockets.perks .socket .plug:not(.is-intrinsic):hover::after {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-#inspect .details .sockets.is-perks .socket .plug:not(.is-intrinsic).is-active {
+#inspect .sockets.perks .socket .plug:not(.is-intrinsic).is-active {
   background-color: #518dba;
 }
 
-#inspect .details .sockets.is-perks .socket .plug:not(.is-intrinsic) .icon {
+#inspect .sockets.perks .socket .plug:not(.is-intrinsic) .icon {
   position: relative;
   width: 48px;
   height: 48px;
 }
 
-#inspect .details .sockets .socket .plug.is-intrinsic {
+#inspect .sockets .socket .plug.is-intrinsic {
   transition: transform 0.25s;
 }
 
-#inspect .details .sockets .socket .plug.is-intrinsic:hover {
+#inspect .sockets .socket .plug.is-intrinsic:hover {
   transform: scale(1.1);
 }
 
-#inspect .details .sockets.is-mods .socket {
+#inspect .sockets.mods .socket {
   margin: 0 4px;
 }
 
-#inspect .details .sockets.is-mods .socket:first-child {
+#inspect .sockets.mods .socket:first-child {
   margin-left: 0;
 }
 
-#inspect .details .sockets.is-mods .socket .plug:not(.is-active) {
+#inspect .sockets.mods .socket .plug:not(.is-active):not(:first-child) {
   display: none;
 }
 
-#inspect .details .sockets.is-mods .socket .plug:not(.is-intrinsic)::before {
+#inspect .sockets.mods .socket .plug:not(.is-intrinsic)::before {
   content: ' ';
   position: absolute;
   top: -4px;
@@ -300,7 +301,7 @@
   transition: box-shadow 0.25s;
 }
 
-#inspect .details .sockets.is-mods .socket .plug:not(.is-intrinsic)::after {
+#inspect .sockets.mods .socket .plug:not(.is-intrinsic)::after {
   content: ' ';
   position: absolute;
   top: 0;
@@ -312,11 +313,11 @@
   transition: box-shadow 0.25s, background-color 0.25s;
 }
 
-#inspect .details .sockets.is-mods .socket .plug:not(.is-intrinsic):hover::before {
+#inspect .sockets.mods .socket .plug:not(.is-intrinsic):hover::before {
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
 }
 
-#inspect .details .sockets.is-mods .socket .plug:not(.is-intrinsic):hover::after {
+#inspect .sockets.mods .socket .plug:not(.is-intrinsic):hover::after {
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
 }

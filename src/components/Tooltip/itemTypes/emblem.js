@@ -14,7 +14,7 @@ const emblem = item => {
   let description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
 
   if (item.sockets) {
-    sockets = getSockets(manifest, item, false, true, [1608119540]).sockets;
+    sockets = getSockets(manifest, item, false, true, false, [1608119540]).sockets;
 
     let variants = item.sockets.socketEntries.find(socket => socket.singleInitialItemHash === 1608119540);
     if (variants) {

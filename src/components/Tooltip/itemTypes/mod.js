@@ -6,10 +6,10 @@ import manifest from '../../../utils/manifest';
 const mod = item => {
 
   let stats = [];
-  item.investmentStats.forEach(stat => {
+  item.investmentStats.forEach((stat, i) => {
     let definition = manifest.DestinyStatDefinition[stat.statTypeHash];
     stats.push(
-      <div key={stat.hash} className='stat'>
+      <div key={i} className='stat'>
         <div className='name'>{definition.displayProperties.name}</div>
         <div className='value int'>+{stat.value}</div>
       </div>

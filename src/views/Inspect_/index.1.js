@@ -46,7 +46,8 @@ class Inspect extends React.Component {
     const hash = this.props.match.params.hash ? this.props.match.params.hash : false;
     const item = manifest.DestinyInventoryItemDefinition[hash];
 
-    let { stats, sockets, masterwork } = getSockets(item, false, true, false, false, [], true);
+    let { stats, sockets } = getSockets(item, false, true, false, false, [], true);
+    console.log(sockets);
 
     let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/collections';
 
