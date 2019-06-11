@@ -82,6 +82,9 @@ class ItemTypes extends React.Component {
       } else if (item.itemType === 20) {
         kind = 'bounty';
         black = ui(item);
+      } else if (item.itemType === 21) {
+        kind = 'ship';
+        black = fallback(item);
       } else if (item.itemType === 22) {
         kind = 'sparrow';
         black = sparrow(item, tooltips.detailedMode);

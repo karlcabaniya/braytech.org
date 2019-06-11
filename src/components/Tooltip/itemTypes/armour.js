@@ -16,11 +16,11 @@ const armour = (item, member, detailedMode) => {
   let powerLevel;
   if (member && member.data) {
     let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
-    powerLevel = Math.floor((680 / 700) * character.light);
+    powerLevel = Math.floor((733 / 750) * character.light);
   } else if (item.itemComponents && item.itemComponents.instance) {
     powerLevel = item.itemComponents.instance.primaryStat.value;
   } else {
-    powerLevel = '680';
+    powerLevel = '700';
   }
 
   return {

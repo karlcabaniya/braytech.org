@@ -5,6 +5,7 @@ import { withNamespaces } from 'react-i18next';
 import manifest from '../../../utils/manifest';
 
 import ObservedImage from '../../../components/ObservedImage';
+import Collectibles from '../../../components/Collectibles';
 import CollectiblesSearch from '../../../components/CollectiblesSearch';
 import { ProfileLink } from '../../../components/ProfileLink';
 import { enumerateCollectibleState } from '../../../utils/destinyEnums';
@@ -21,37 +22,9 @@ class Root extends React.Component {
     const parentBadges = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.badgesRootNode];
 
     let nodes = [];
-    let recentlyDiscovered = [];
     let badges = [];
     let collectionsStates = [];
     let badgesStates = [];
-
-    // recently discovered
-    if (profileCollectibles.recentCollectibleHashes) {
-      profileCollectibles.recentCollectibleHashes.forEach(child => {
-        let collectibleDefinition = manifest.DestinyCollectibleDefinition[child];
-
-        if (collectibleDefinition.redacted || collectibleDefinition.itemHash === 0) {
-          recentlyDiscovered.push(
-            <li key={collectibleDefinition.hash} className={cx('item', 'redacted', 'tooltip')} data-itemhash='343'>
-              <div className='icon'>
-                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${manifest.settings.destiny2CoreSettings.undiscoveredCollectibleImage}`} />
-              </div>
-            </li>
-          );
-        } else {
-          recentlyDiscovered.push(
-            <li key={collectibleDefinition.hash} className={cx('item', 'tooltip')} data-itemhash={collectibleDefinition.itemHash}>
-              <div className='icon'>
-                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
-              </div>
-              {collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: '/collections' } }} /> : null}
-            </li>
-          );
-        }
-        
-      });
-    }
 
     // items nodes
     parent.children.presentationNodes.forEach(child => {
@@ -180,12 +153,14 @@ class Root extends React.Component {
             <div>{t('Search')}</div>
           </div>
           <CollectiblesSearch />
-          <div className='sub-header'>
+          {profileCollectibles.recentCollectibleHashes ? <><div className='sub-header'>
             <div>{t('Recently discovered')}</div>
           </div>
           <div className='recently-discovered'>
-            <ul className='list'>{recentlyDiscovered.reverse()}</ul>
-          </div>
+            <ul className='list collection-items'>
+              <Collectibles selfLinkFrom='/collections' hashes={profileCollectibles.recentCollectibleHashes.slice().reverse()} />
+            </ul>
+          </div></> : null}
           <div className='sub-header'>
             <div>{t('Badges')}</div>
             <div>
