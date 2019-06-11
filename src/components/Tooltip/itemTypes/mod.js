@@ -15,12 +15,18 @@ const mod = item => {
       </div>
     );
   });
+
+  let description = item.displayProperties.description;
+  if (description === '' && item.perks && item.perks.length === 1) {
+    let definitionPerk = manifest.DestinySandboxPerkDefinition[item.perks[0].perkHash]
+    description = definitionPerk.displayProperties.description
+  }
   
   return (
     <>
       {stats.length > 0 ? <div className='stats'>{stats}</div> : null}
       <div className={cx('description', { 'has-stats': stats.length })}>
-        <pre>{item.displayProperties.description}</pre>
+        <pre>{description}</pre>
       </div>
     </>
   );

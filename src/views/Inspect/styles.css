@@ -388,6 +388,10 @@
 
 #inspect .details .stats .stat .value .tip {
   height: 100%;
+  background-color: #512f64;
+}
+
+#inspect .details .stats .stat .value .tip.masterwork {
   background-color: #c6ab3c;
 }
 

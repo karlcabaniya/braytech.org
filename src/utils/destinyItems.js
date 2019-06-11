@@ -109,13 +109,21 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         plugActive.investmentStats.forEach(modifier => {
           let index = statModifiers.findIndex(stat => stat.statHash === modifier.statTypeHash);
           if (index > -1) {
-            statModifiers[index].value = statModifiers[index].value + modifier.value;
-            statModifiers[index].mod = modCategoryHash.includes(categoryHash) ? statModifiers[index].mod + modifier.value : statModifiers[index].mod
+            if (modCategoryHash.includes(categoryHash)) {
+              if (plugActive.plug.uiPlugLabel === 'masterwork') {
+                statModifiers[index].mod = statModifiers[index].mod + modifier.value
+              } else {
+                statModifiers[index].masterwork = statModifiers[index].mod + modifier.value
+              }
+            } else {
+              statModifiers[index].value = statModifiers[index].value + modifier.value;
+            }
           } else {
             statModifiers.push({
               statHash: modifier.statTypeHash,
               value: modifier.value,
-              mod: modCategoryHash.includes(categoryHash) ? modifier.value : 0
+              mod: modCategoryHash.includes(categoryHash) && !plugActive.plug.uiPlugLabel === 'masterwork' ? modifier.value : 0,
+              masterwork: modCategoryHash.includes(categoryHash) && plugActive.plug.uiPlugLabel === 'masterwork' ? modifier.value : 0
             });
           }
         });
@@ -218,9 +226,11 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         }
 
         let modValue = statModifier ? statModifier.mod : 0;
+        let masterworkValue = statModifier ? statModifier.masterwork : 0;
         
         value = instanceStat ? instanceStat.value : value;
         value = modValue > 0 ? value - modValue : value;
+        value = masterworkValue > 0 ? value - masterworkValue : value;
 
         statsOutput.push({
           displayAsNumeric: stat.displayAsNumeric,
@@ -228,11 +238,12 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           element: (
             <div key={stat.statHash} className='stat'>
               <div className='name'>{statDef.displayProperties.name}</div>
-              <div className={cx('value', { bar: !stat.displayAsNumeric, int: stat.displayAsNumeric, masterwork: modValue > 0 })}>
+              <div className={cx('value', { bar: !stat.displayAsNumeric, int: stat.displayAsNumeric, masterwork: masterworkValue > 0 })}>
                 {!stat.displayAsNumeric ? (
                   <>
                     <div className='bar' data-value={value} style={{ width: `${value}%` }} />
                     {modValue > 0 ? <div className='tip' style={{ width: `${modValue}%` }} /> : null}
+                    {masterworkValue > 0 ? <div className='tip masterwork' style={{ width: `${masterworkValue}%` }} /> : null}
                   </>
                 ) : (
                   value
