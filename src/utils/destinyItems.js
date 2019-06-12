@@ -33,7 +33,7 @@ const interpolate = (investmentValue, displayInterpolation) => {
 };
 
 export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, randomizedPlugItems = false, socketExclusions = [], uiStyleTooltips = false, showHiddenStats = false) => {
-console.log(item.itemComponents)
+
   let statGroup = item.stats ? manifest.DestinyStatGroupDefinition[item.stats.statGroupHash] : false;
 
   let statModifiers = [];
@@ -45,7 +45,6 @@ console.log(item.itemComponents)
     let socketEntries = item.sockets.socketEntries;
 
     if (item.itemComponents && item.itemComponents.sockets) {
-      console.log(item.itemComponents.sockets)
       Object.keys(socketEntries).forEach(key => {
         socketEntries[key].singleInitialItemHash = item.itemComponents.sockets[key].plugHash || 0;
         socketEntries[key].reusablePlugItems = item.itemComponents.sockets[key].reusablePlugs || [];
@@ -105,10 +104,6 @@ console.log(item.itemComponents)
 
         if (plugActive.plug && plugActive.plug.uiPlugLabel === 'masterwork') {
           masterwork = true;
-        }
-
-        if (plugActive.hash === 3228611386) {
-          console.log(socket, socketCategoryHash)
         }
 
         plugActive.investmentStats.forEach(modifier => {
@@ -192,10 +187,7 @@ console.log(item.itemComponents)
         return;
       }
 
-      if (singleInitialItem && traitsOnly && !singleInitialItem.definition.itemCategoryHashes.includes(3708671066)) {
-        console.log('wtf is this');
-        return;
-      }
+      // socketPlugs = orderBy(socketPlugs, [plug => plug.active], ['desc']);
 
       socketsOutput.push({
         categoryHash: socketCategoryHash,
@@ -205,8 +197,6 @@ console.log(item.itemComponents)
       });
     });
   }
-
-  console.log(socketsOutput, statModifiers)
 
   let statsOutput = [];
 
@@ -234,6 +224,7 @@ console.log(item.itemComponents)
         let masterworkValue = statModifier ? statModifier.masterwork : 0;
         
         value = instanceStat ? instanceStat.value : value;
+        let total = value;
         value = modValue > 0 ? value - modValue : value;
         value = masterworkValue > 0 ? value - masterworkValue : value;
 
@@ -249,6 +240,7 @@ console.log(item.itemComponents)
                     <div className='bar' data-value={value} style={{ width: `${value}%` }} />
                     {modValue > 0 ? <div className='tip' style={{ width: `${modValue}%` }} /> : null}
                     {masterworkValue > 0 ? <div className='tip masterwork' style={{ width: `${masterworkValue}%` }} /> : null}
+                    <div className='int'>{total}</div>
                   </>
                 ) : (
                   value
@@ -262,6 +254,11 @@ console.log(item.itemComponents)
 
     if (showHiddenStats) {
       Object.values(item.stats.stats).forEach(stat => {
+
+        if (stat.statHash === 1931675084) {
+          return;
+        }
+
         if (!statsOutput.find(s => s.statHash === stat.statHash)) {
           let statModifier = statModifiers.find(modifier => modifier.statHash === stat.statHash);
           let statDef = manifest.DestinyStatDefinition[stat.statHash];
@@ -276,6 +273,7 @@ console.log(item.itemComponents)
           let masterworkValue = statModifier ? statModifier.masterwork : 0;
           
           value = instanceStat ? instanceStat.value : value;
+          let total = value;
           value = modValue > 0 ? value - modValue : value;
           value = masterworkValue > 0 ? value - masterworkValue : value;
   
@@ -295,6 +293,7 @@ console.log(item.itemComponents)
                       <div className='bar' data-value={value} style={{ width: `${value}%` }} />
                       {modValue > 0 ? <div className='tip' style={{ width: `${modValue}%` }} /> : null}
                       {masterworkValue > 0 ? <div className='tip masterwork' style={{ width: `${masterworkValue}%` }} /> : null}
+                      <div className='int'>{total}</div>
                     </>
                   ) : (
                     value
@@ -307,6 +306,7 @@ console.log(item.itemComponents)
       });
     }
   }
+
   if (item.itemType === 2) {
     statGroup.scaledStats.forEach(stat => {
       let statModifier = statModifiers.find(modifier => modifier.statHash === stat.statHash);
@@ -318,12 +318,16 @@ console.log(item.itemComponents)
       let scaledStats = statGroup.scaledStats.find(scale => scale.statHash === stat.statHash);
 
       let value = Math.min((investmentStat ? investmentStat.value : 0) + modifier, scaledStats.maximumValue);
+      let total = value;
 
       statsOutput.push({
         element: (
           <div key={stat.statHash} className='stat'>
             <div className='name'>{statDef.displayProperties.name}</div>
-            <div className={cx('value', { bar: !stat.displayAsNumeric, int: stat.displayAsNumeric })}>{!stat.displayAsNumeric ? <div className='bar' data-value={value} style={{ width: `${(value / 3) * 100}%` }} /> : value}</div>
+            <div className={cx('value', { bar: !stat.displayAsNumeric, int: stat.displayAsNumeric })}>
+              {!stat.displayAsNumeric ? <div className='bar' data-value={value} style={{ width: `${(value / 3) * 100}%` }} /> : value}
+              <div className='int'>{total}</div>
+            </div>
           </div>
         )
       });

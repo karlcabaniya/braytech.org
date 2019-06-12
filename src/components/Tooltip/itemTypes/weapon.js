@@ -8,7 +8,6 @@ import manifest from '../../../utils/manifest';
 
 const weapon = (item, member, detailedMode) => {
   let { stats, sockets, masterwork } = getSockets(item, false, detailedMode ? true : false, detailedMode ? false : true, false, [], false, detailedMode ? true : false);
-  // let ornaments = getOrnaments(manifest, item.hash);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
@@ -16,11 +15,11 @@ const weapon = (item, member, detailedMode) => {
   intrinsic = intrinsic ? manifest.DestinySandboxPerkDefinition[intrinsic.singleInitialItem.definition.perks[0].perkHash] : false;
 
   let powerLevel;
-  if (member && member.data) {
+  if (item.itemComponents && item.itemComponents.instance) {
+    powerLevel = item.itemComponents.instance.primaryStat.value;
+  } else if (member && member.data) {
     let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
     powerLevel = Math.floor((733 / 750) * character.light);
-  } else if (item.itemComponents && item.itemComponents.instance) {
-    powerLevel = item.itemComponents.instance.primaryStat.value;
   } else {
     powerLevel = '700';
   }
@@ -46,7 +45,7 @@ const weapon = (item, member, detailedMode) => {
             <p>{sourceString}</p>
           </div>
         ) : null}
-        <div className='stats'>{stats.map(stat => stat.element)}</div>
+        <div className={cx('stats', { 'detailed-mode': detailedMode })}>{stats.map(stat => stat.element)}</div>
         <div className={cx('sockets', { 'has-sockets': sockets.length > 0, 'detailed-mode': detailedMode })}>
           {intrinsic ? (
             <div className='plug is-active intrinsic'>

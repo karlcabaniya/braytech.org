@@ -403,5 +403,10 @@
     "date": "2019-06-09T14:23:12.088Z",
     "version": "2.5.25",
     "content": "- Added rewards for records that have them to records\n- Added filter to _Collections_ view search (enter \"type:exotic scout rifle\" for example)\n- Experimental sort options for _Almost Complete Triumphs_ view"
+  },
+  {
+    "date": "2019-06-12T07:47:58.979Z",
+    "version": "2.5.26",
+    "content": "- A ridiculous number of changes to tooltips and how item stats are calculated. If you notice anything askew, let me know."
   }
 ]

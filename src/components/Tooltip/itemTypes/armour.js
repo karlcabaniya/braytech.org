@@ -37,7 +37,7 @@ const armour = (item, member, detailedMode) => {
             <p>{sourceString}</p>
           </div>
         ) : null}
-        {stats.length > 0 ? <div className='stats'>{stats.map(stat => stat.element)}</div> : null}
+        {stats.length > 0 ? <div className={cx('stats', { 'detailed-mode': detailedMode })}>{stats.map(stat => stat.element)}</div> : null}
         <div className={cx('sockets', { 'has-sockets': sockets.length > 0, 'detailed-mode': detailedMode })}>
           {intrinsic ? (
             <div className='plug is-active intrinsic'>
