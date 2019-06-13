@@ -21,7 +21,18 @@ const sparrow = (item, detailedMode) => {
       <div className={cx('sockets', { 'has-sockets': sockets.length > 0, 'detailed-mode': detailedMode })}>
         {sockets.length > 0
           ? sockets.map((socket, i) => {
-              let group = socket.plugs;
+              let group = socket.plugs
+                .filter(plug => {
+                  if (item.itemComponents && item.itemComponents.instance && socket.mod) {
+                    if (plug.active) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  } else {
+                    return true;
+                  }
+                });
 
               if (group.length > 0) {
                 return (

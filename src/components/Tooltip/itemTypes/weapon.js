@@ -7,7 +7,7 @@ import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
 
 const weapon = (item, member, detailedMode) => {
-  let { stats, sockets, masterwork } = getSockets(item, false, detailedMode ? true : false, detailedMode ? false : true, false, [], false, detailedMode ? true : false);
+  let { stats, sockets, masterwork } = getSockets(item, false, (detailedMode || (item.itemComponents && item.itemComponents.instance)) ? true : false, detailedMode ? false : true, false, [], false, detailedMode ? true : false);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
@@ -27,6 +27,17 @@ const weapon = (item, member, detailedMode) => {
   let damageTypeHash = item.damageTypeHashes[0];
   damageTypeHash = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.damageTypeHash : damageTypeHash;
 
+  let socketMasterworkTracker = sockets && sockets.find(plug => plug.plugObjectives && plug.plugObjectives.length > 0);
+  let killTracker;
+  if (socketMasterworkTracker) {
+    let definitionObjective = manifest.DestinyObjectiveDefinition[socketMasterworkTracker.plugObjectives[0].objectiveHash];
+    killTracker = {
+      icon: definitionObjective.displayProperties.icon,
+      description: definitionObjective.progressDescription,
+      progress: socketMasterworkTracker.plugObjectives[0].progress
+    }
+  }
+  
   return {
     el: (
       <>
@@ -43,6 +54,15 @@ const weapon = (item, member, detailedMode) => {
         {sourceString && !item.itemComponents ? (
           <div className='source'>
             <p>{sourceString}</p>
+          </div>
+        ) : null}
+        {killTracker ? (
+          <div className='kill-tracker'>
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${killTracker.icon}`} />
+            <div className='text'>
+              <div className='description'>{killTracker.description}</div>
+              <div className='value'>{killTracker.progress}</div>
+            </div>
           </div>
         ) : null}
         <div className={cx('stats', { 'detailed-mode': detailedMode })}>{stats.map(stat => stat.element)}</div>
@@ -75,7 +95,18 @@ const weapon = (item, member, detailedMode) => {
                     }
                   })
                   .filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328))
-                  .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142);
+                  .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142) // wtf is this
+                  .filter(plug => {
+                    if (item.itemComponents && item.itemComponents.instance && socket.mod) {
+                      if (plug.active) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    } else {
+                      return true;
+                    }
+                  });
   
                 if (group.length > 0) {
                   return (

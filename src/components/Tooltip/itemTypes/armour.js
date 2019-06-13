@@ -6,7 +6,7 @@ import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
 
 const armour = (item, member, detailedMode) => {
-  let { stats, sockets, masterwork } = getSockets(item, false, detailedMode ? true : false, detailedMode ? false : true);
+  let { stats, sockets, masterwork } = getSockets(item, false, (detailedMode || (item.itemComponents && item.itemComponents.instance)) ? true : false, detailedMode ? false : true);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
@@ -66,7 +66,18 @@ const armour = (item, member, detailedMode) => {
                       return true;
                     }
                   })
-                  .filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328));
+                  .filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328))
+                  .filter(plug => {
+                    if (item.itemComponents && item.itemComponents.instance && socket.mod) {
+                      if (plug.active) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    } else {
+                      return true;
+                    }
+                  });
 
                 if (group.length > 0) {
                   return (

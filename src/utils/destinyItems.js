@@ -69,34 +69,13 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
       let socketCategory = item.sockets.socketCategories.find(category => category.socketIndexes.includes(parseInt(key, 10)));
       let socketCategoryHash =  socketCategory && socketCategory.socketCategoryHash;
 
-      let modCategoryHash = [3379164649, 590099826, 2685412949, 4243480345, 590099826, 2218810001];
+      let modCategoryHash = [3379164649, 590099826, 2685412949, 4243480345, 590099826, 2218810001, 4265082475, 3379164649];
 
       let plugItems = randomizedPlugItems ? socket.reusablePlugItems.concat(socket.randomizedPlugItems).filter((p, i, self) =>
         i === self.findIndex((t) => (
           t.plugItemHash === p.plugItemHash
         ))
       ) : socket.reusablePlugItems;
-
-      // plugItems.forEach(p => {
-      //   let plug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
-
-      //   if (plug.hash === socket.singleInitialItemHash) {
-      //     console.log(plug)
-      //     plug.investmentStats.forEach(modifier => {
-      //       let index = statModifiers.findIndex(stat => stat.statHash === modifier.statTypeHash);
-      //       if (index > -1) {
-      //         statModifiers[index].value = statModifiers[index].value + modifier.value;
-      //         statModifiers[index].mod = modCategoryHash.includes(categoryHash) ? statModifiers[index].mod + modifier.value : statModifiers[index].mod
-      //       } else {
-      //         statModifiers.push({
-      //           statHash: modifier.statTypeHash,
-      //           value: modifier.value,
-      //           mod: modCategoryHash.includes(categoryHash) ? modifier.value : 0
-      //         });
-      //       }
-      //     });
-      //   }
-      // });
 
       let plugActive = manifest.DestinyInventoryItemDefinition[socket.singleInitialItemHash];
 
@@ -189,14 +168,20 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
 
       // socketPlugs = orderBy(socketPlugs, [plug => plug.active], ['desc']);
 
+      // console.log(modCategoryHash.includes(socketCategoryHash), singleInitialItem.definition.displayProperties.name)
+
       socketsOutput.push({
-        categoryHash: socketCategoryHash,
+        socketCategoryHash: socketCategoryHash,
         socketTypeHash: socket.socketTypeHash,
+        mod: modCategoryHash.includes(socketCategoryHash),
         singleInitialItem,
-        plugs: socketPlugs
+        plugs: socketPlugs,
+        plugObjectives: socket.plugObjectives || []
       });
     });
   }
+
+  console.log(socketsOutput)
 
   let statsOutput = [];
 
@@ -338,7 +323,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
   statsOutput = orderBy(statsOutput, [stat => stat.displayAsNumeric], ['asc']);
 
   // push mods to the bottom
-  socketsOutput = orderBy(socketsOutput, [socket => socket.categoryHash], ['desc']);
+  socketsOutput = orderBy(socketsOutput, [socket => socket.mod], ['asc']);
 
   return {
     stats: statsOutput,

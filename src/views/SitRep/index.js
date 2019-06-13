@@ -10,6 +10,7 @@ import Button from '../../components/UI/Button';
 import Spinner from '../../components/UI/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/UI/ProgressBar';
+import Items from '../../components/Items';
 import Roster from '../../components/Roster';
 import * as utils from '../../utils/destinyUtils';
 import quotes from '../../utils/quotes';
@@ -248,6 +249,14 @@ class SitRep extends React.Component {
               <Button anchor to='/leaderboards' text={t('View leaderboards')} />
             </div>
           ) : null}
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Equipment')}</div>
+            </div>
+            <ul className='list inventory-items'>
+              <Items items={orderBy(member.data.profile.characterEquipment.data[member.characterId].items.filter(i => ![4292445962, 4274335291, 1107761855].includes(i.bucketHash)), [i => i.bucketHash === 3284755031], ['desc'])} />
+            </ul>
+          </div>
           <div className='module'>
             <div className='sub-header sub'>
               <div>{t('Progression')}</div>

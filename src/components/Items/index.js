@@ -5,6 +5,7 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
+import * as enums from '../../utils/destinyEnums';
 
 import './styles.css';
 
@@ -30,23 +31,28 @@ class Items extends React.Component {
 
     items.forEach((item, i) => {
       let definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
+      let definitionBucket = manifest.DestinyInventoryBucketDefinition[item.bucketHash];
+
+      let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
 
       output.push(
         <li
           key={i}
-          className={cx({
-            tooltip: !this.props.disableTooltip,
-            linked: true
-          })}
+          className={cx(
+            {
+              tooltip: !this.props.disableTooltip,
+              linked: true,
+              masterworked: enums.enumerateItemState(item.state).masterworked,
+              exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
+            },
+            bucketName,
+          )}
           data-hash={item.itemHash}
           data-instanceid={item.itemInstanceId}
           data-state={item.state}
         >
           <div className='icon'>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
-          </div>
-          <div className='text'>
-            <div className='name'>{definitionItem.displayProperties.name}</div>
+            <ObservedImage className='image' src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
           </div>
           {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
         </li>

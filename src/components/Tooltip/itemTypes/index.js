@@ -21,13 +21,6 @@ class ItemTypes extends React.Component {
   render() {
     let { member, hash, instanceId, state, rollNote, table, tooltipType, settingsTooltips } = this.props;
 
-    let itemComponents;
-    if (member.data && member.data.profile.itemComponents.instances.data[instanceId]) {
-      itemComponents = member.data.profile.itemComponents;
-    } else {
-      itemComponents = false;
-    }
-
     if (!table) {
       table = 'DestinyInventoryItemDefinition';
     }
@@ -39,6 +32,13 @@ class ItemTypes extends React.Component {
       };
     } else {
       item = manifest[table][hash];
+    }
+
+    let itemComponents;
+    if (instanceId && member.data && member.data.profile.itemComponents.instances.data[instanceId]) {
+      itemComponents = member.data.profile.itemComponents;
+    } else {
+      itemComponents = false;
     }
 
     if (itemComponents && instanceId) {
@@ -71,8 +71,8 @@ class ItemTypes extends React.Component {
         kind = 'emblem';
         black = emblem(item);
       } else if (item.itemType === 16) {
-        kind = 'ui sandbox-perk';
-        black = subclass(item);
+        kind = 'ui subclass';
+        black = subclass(item, member);
       } else if (item.itemType === 19) {
         kind = 'mod';
         black = mod(item);
@@ -81,7 +81,7 @@ class ItemTypes extends React.Component {
         black = ui(item);
       } else if (item.itemType === 21) {
         kind = 'ship';
-        black = fallback(item);
+        black = sparrow(item, settingsTooltips.detailedMode);
       } else if (item.itemType === 22) {
         kind = 'sparrow';
         black = sparrow(item, settingsTooltips.detailedMode);
@@ -159,7 +159,7 @@ class ItemTypes extends React.Component {
               <div className='name'>{item.displayProperties.name}</div>
               <div>
                 <div className='kind'>{item.itemTypeDisplayName}</div>
-                {kind !== 'ui' && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
+                {kind !== 'ui' && kind !== 'ui subclass' && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
               </div>
             </div>
             {!item.itemComponents && rollNote ? <div className='note'>Non-instanced item (displaying collections roll)</div> : null}
