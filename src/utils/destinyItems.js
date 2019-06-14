@@ -72,7 +72,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         // if plugItems is empty add initial plug
         if (socketEntries[key].reusablePlugItems.length === 0 && socketEntries[key].singleInitialItemHash !== 0) {
           socketEntries[key].reusablePlugItems.push({
-            enabled: true,
+            active: true,
             plugItemHash: socketEntries[key].singleInitialItemHash,
             plugObjectives: item.itemComponents.sockets[key].plugObjectives || []
           });
@@ -81,7 +81,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         // add initial plug to plugItems if it isn't there
         if (socketEntries[key].singleInitialItemHash && !socketEntries[key].reusablePlugItems.find(plug => socketEntries[key].singleInitialItemHash === plug.plugItemHash)) {
           socketEntries[key].reusablePlugItems.push({
-            enabled: true,
+            active: true,
             plugItemHash: socketEntries[key].singleInitialItemHash,
             plugObjectives: item.itemComponents.sockets[key].plugObjectives || []
           });
@@ -108,13 +108,16 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         ))
       ) : socket.reusablePlugItems;
 
+      if (socket.singleInitialItemHash !== 0 && !plugItems.find(p => p.plugItemHash === socket.singleInitialItemHash)) {
+        plugItems.unshift({plugItemHash: socket.singleInitialItemHash});
+      }
 
       plugItems.forEach(p => {
         if (plugMasterworkCatalyst && plugMasterworkCatalyst.plugItemHash === p.plugItemHash) {
           plugMasterworkCatalyst.plugObjectives.forEach(o => {
             if (!o.complete) {
               socketMasterworkCatalyst.reusablePlugItems.forEach(r => {
-                r.enabled = false;
+                r.disabled = true;
               });
             }
           })
@@ -130,17 +133,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
 
       if (definitionInitialPlug && definitionInitialPlug.investmentStats) {
 
-        // if (socketMasterworkCatalyst) {
-        //   if (plugMasterworkCatalyst && plugMasterworkCatalyst.plugObjectives.length) {
-        //     if (plugMasterworkCatalyst.complete) {
-        //       masterwork = true;
-        //     }
-        //   } else {
-        //     masterwork = true;
-        //   }
-        // }
-
-        if (initialPlug.enabled) {
+        if (!initialPlug.disabled) {
 
           if (definitionInitialPlug.plug.uiPlugLabel === 'masterwork') {
             masterwork = true;
@@ -189,7 +182,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
 
         socketPlugs.push({
           active: p.plugItemHash === socket.singleInitialItemHash,
-          enabled: p.enabled,
+          enabled: !p.disabled,
           objectives: p.plugObjectives || [],
           definition: definitionPlug,
           element: (
@@ -219,6 +212,9 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
       if (socket.singleInitialItemHash !== 0) {
         let plug = manifest.DestinyInventoryItemDefinition[socket.singleInitialItemHash];
         singleInitialItem = {
+          active: true,
+          enabled: true,
+          objectives: socket.plugObjectives || [],
           definition: plug,
           element: (
             <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-hash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
@@ -314,7 +310,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
     if (showHiddenStats) {
       Object.values(item.stats.stats).forEach(stat => {
 
-        if (stat.statHash === 1931675084) {
+        if ([1931675084, 3291498656].includes(stat.statHash)) {
           return;
         }
 
@@ -339,7 +335,11 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           if (value < 1) {
             return;
           }
-  
+
+          // if (statDef.displayProperties.name === '') {
+          //   console.log(statDef);
+          // }
+
           statsOutput.push({
             displayAsNumeric: false,
             statHash: stat.statHash,
