@@ -242,7 +242,6 @@
 }
 
 #tooltip .kill-tracker .text .value {
-  color: #c6ab3c;
   text-align: right;
 }
 
@@ -370,8 +369,8 @@
   background-size: contain;
 }
 
-#tooltip .plug .text {
-  flex-basis: calc(100% - 56px);
+#tooltip .plug > .text {
+  flex-basis: calc(100% - 38px);
   padding: 0 0 0 16px;
   display: flex;
   flex-flow: row wrap;
@@ -383,11 +382,23 @@
   flex-basis: 100%;
 }
 
-#tooltip .plug .text .description {
+#tooltip .plug > .text > .description {
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   line-height: 1.4;
   white-space: pre-wrap;
+}
+
+#tooltip .plug .text .objectives {
+  flex-basis: 100%;
+  padding: 10px 0 0;
+  border: unset;
+}
+
+
+
+#tooltip .sockets.detailed-mode .plug > .text {
+  flex-basis: calc(100% - 16px);
 }
 
 #tooltip .sockets.detailed-mode .group {
@@ -410,7 +421,7 @@
   margin: 0;
 }
 
-#tooltip .sockets.detailed-mode .plug .text .description {
+#tooltip .sockets.detailed-mode .plug > .text > .description {
   display: none;
 }
 

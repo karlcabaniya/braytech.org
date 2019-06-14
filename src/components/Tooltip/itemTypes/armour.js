@@ -14,11 +14,11 @@ const armour = (item, member, detailedMode) => {
   intrinsic = intrinsic ? manifest.DestinySandboxPerkDefinition[intrinsic.singleInitialItem.definition.perks[0].perkHash] : false;
 
   let powerLevel;
-  if (member && member.data) {
+  if (item.itemComponents && item.itemComponents.instance) {
+    powerLevel = item.itemComponents.instance.primaryStat.value;
+  } else if (member && member.data) {
     let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
     powerLevel = Math.floor((733 / 750) * character.light);
-  } else if (item.itemComponents && item.itemComponents.instance) {
-    powerLevel = item.itemComponents.instance.primaryStat.value;
   } else {
     powerLevel = '700';
   }
@@ -32,7 +32,7 @@ const armour = (item, member, detailedMode) => {
             <div className='text'>{manifest.DestinyStatDefinition[3897883278].displayProperties.name}</div>
           </div>
         </div>
-        {sourceString ? (
+        {sourceString && !item.itemComponents ? (
           <div className='source'>
             <p>{sourceString}</p>
           </div>

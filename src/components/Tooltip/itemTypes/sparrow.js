@@ -51,7 +51,7 @@ const sparrow = (item, detailedMode) => {
             })
           : null}
       </div>
-      {sourceString ? (
+      {sourceString && !item.itemComponents ? (
         <div className={cx('source', { 'no-border': !description })}>
           <p>{sourceString}</p>
         </div>

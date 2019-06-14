@@ -5,6 +5,7 @@ import ObservedImage from '../../ObservedImage';
 import { damageTypeToString, ammoTypeToString } from '../../../utils/destinyUtils';
 import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
+import { orderBy } from 'lodash';
 
 const weapon = (item, member, detailedMode) => {
   let { stats, sockets, masterwork } = getSockets(item, false, (detailedMode || (item.itemComponents && item.itemComponents.instance)) ? true : false, detailedMode ? false : true, false, [], false, detailedMode ? true : false);
@@ -27,14 +28,24 @@ const weapon = (item, member, detailedMode) => {
   let damageTypeHash = item.damageTypeHashes[0];
   damageTypeHash = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.damageTypeHash : damageTypeHash;
 
-  let socketMasterworkTracker = sockets && sockets.find(plug => plug.plugObjectives && plug.plugObjectives.length > 0);
-  let killTracker;
-  if (socketMasterworkTracker) {
-    let definitionObjective = manifest.DestinyObjectiveDefinition[socketMasterworkTracker.plugObjectives[0].objectiveHash];
-    killTracker = {
-      icon: definitionObjective.displayProperties.icon,
-      description: definitionObjective.progressDescription,
-      progress: socketMasterworkTracker.plugObjectives[0].progress
+  let socketMasterwork = sockets && sockets.find(s => s.plugs.find(p => p.objectives && p.objectives.length > 0));
+
+  let masterworkKillTracker;
+  if (socketMasterwork) {
+
+    let socketMasterworkKillTracker = socketMasterwork.plugs.filter(p => p.active && p.objectives && p.objectives.length > 0 && p.definition.plug.uiPlugLabel !== 'masterwork_interactable');
+
+    if (socketMasterworkKillTracker && socketMasterworkKillTracker.length > 0) {
+      let trackers = orderBy(socketMasterworkKillTracker, [p => p.objectives[0].progress], ['desc']);
+      let killTracker = trackers && trackers[0];
+
+      let definitionObjective = manifest.DestinyObjectiveDefinition[killTracker.objectives[0].objectiveHash];
+
+      masterworkKillTracker = {
+        icon: definitionObjective && definitionObjective.displayProperties.icon,
+        description: definitionObjective && definitionObjective.progressDescription,
+        progress: killTracker.objectives[0].progress
+      }
     }
   }
   
@@ -56,12 +67,12 @@ const weapon = (item, member, detailedMode) => {
             <p>{sourceString}</p>
           </div>
         ) : null}
-        {killTracker ? (
+        {masterworkKillTracker ? (
           <div className='kill-tracker'>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${killTracker.icon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${masterworkKillTracker.icon}`} />
             <div className='text'>
-              <div className='description'>{killTracker.description}</div>
-              <div className='value'>{killTracker.progress}</div>
+              <div className='description'>{masterworkKillTracker.description}</div>
+              <div className='value'>{masterworkKillTracker.progress}</div>
             </div>
           </div>
         ) : null}

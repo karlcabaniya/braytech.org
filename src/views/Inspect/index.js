@@ -133,7 +133,7 @@ class Inspect extends React.Component {
               {socketsPerks ? (
                 <>
                   <div className='sub-header sub'>
-                    <div>{manifest.DestinySocketCategoryDefinition[socketsPerks[0].categoryHash].displayProperties.name}</div>
+                    <div>{manifest.DestinySocketCategoryDefinition[socketsPerks[0].socketCategoryHash].displayProperties.name}</div>
                   </div>
                   <div className='sockets is-perks'>
                     {socketsPerks.map((socket, index) => {
@@ -149,7 +149,7 @@ class Inspect extends React.Component {
               {socketsMods ? (
                 <>
                   <div className='sub-header sub'>
-                    <div>{manifest.DestinySocketCategoryDefinition[socketsMods[0].categoryHash].displayProperties.name}</div>
+                    <div>{manifest.DestinySocketCategoryDefinition[socketsMods[0].socketCategoryHash].displayProperties.name}</div>
                   </div>
                   <div className='sockets is-mods'>
                     {socketsMods.map((socket, index) => {

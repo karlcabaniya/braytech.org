@@ -3,6 +3,7 @@ import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
 
 import ObservedImage from '../components/ObservedImage';
+import ProgressBar from '../components/UI/ProgressBar';
 import manifest from './manifest';
 
 const interpolate = (investmentValue, displayInterpolation) => {
@@ -44,24 +45,54 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
   if (item.sockets) {
     let socketEntries = item.sockets.socketEntries;
 
+    let socketMasterworkCatalyst;
+    let plugMasterworkCatalyst;
+
     if (item.itemComponents && item.itemComponents.sockets) {
       Object.keys(socketEntries).forEach(key => {
+
         socketEntries[key].singleInitialItemHash = item.itemComponents.sockets[key].plugHash || 0;
         socketEntries[key].reusablePlugItems = item.itemComponents.sockets[key].reusablePlugs || [];
         socketEntries[key].plugObjectives = item.itemComponents.sockets[key].plugObjectives;
+
+        // check for a masterwork catalyst with progress
+        if (socketEntries[key].reusablePlugItems.find(p => {
+          let definitionPlug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
+
+          if (definitionPlug && definitionPlug.plug.uiPlugLabel === 'masterwork_interactable' && p.plugObjectives && p.plugObjectives.length > 0) {
+            plugMasterworkCatalyst = p;
+            return true;
+          } else {
+            return false
+          }
+        })) {
+          socketMasterworkCatalyst = socketEntries[key];
+        }
+
+        // if plugItems is empty add initial plug
         if (socketEntries[key].reusablePlugItems.length === 0 && socketEntries[key].singleInitialItemHash !== 0) {
           socketEntries[key].reusablePlugItems.push({
-            plugItemHash: socketEntries[key].singleInitialItemHash
+            enabled: true,
+            plugItemHash: socketEntries[key].singleInitialItemHash,
+            plugObjectives: item.itemComponents.sockets[key].plugObjectives || []
           });
         }
-        // sometimes items don't include their initial plug in their plugItems array. this seems to be true for year 1 masterworks
+
+        // add initial plug to plugItems if it isn't there
         if (socketEntries[key].singleInitialItemHash && !socketEntries[key].reusablePlugItems.find(plug => socketEntries[key].singleInitialItemHash === plug.plugItemHash)) {
           socketEntries[key].reusablePlugItems.push({
-            plugItemHash: socketEntries[key].singleInitialItemHash
+            enabled: true,
+            plugItemHash: socketEntries[key].singleInitialItemHash,
+            plugObjectives: item.itemComponents.sockets[key].plugObjectives || []
           });
         }
+
       });
     }
+
+    
+
+    console.log(socketMasterworkCatalyst, plugMasterworkCatalyst)
 
     Object.keys(socketEntries).forEach(key => {
       let socket = socketEntries[key];
@@ -77,35 +108,69 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         ))
       ) : socket.reusablePlugItems;
 
-      let plugActive = manifest.DestinyInventoryItemDefinition[socket.singleInitialItemHash];
 
-      if (plugActive && plugActive.investmentStats) {
-
-        if (plugActive.plug && plugActive.plug.uiPlugLabel === 'masterwork') {
-          masterwork = true;
+      plugItems.forEach(p => {
+        if (plugMasterworkCatalyst && plugMasterworkCatalyst.plugItemHash === p.plugItemHash) {
+          plugMasterworkCatalyst.plugObjectives.forEach(o => {
+            if (!o.complete) {
+              socketMasterworkCatalyst.reusablePlugItems.forEach(r => {
+                r.enabled = false;
+              });
+            }
+          })
         }
+      });
 
-        plugActive.investmentStats.forEach(modifier => {
-          let index = statModifiers.findIndex(stat => stat.statHash === modifier.statTypeHash);
-          if (index > -1) {
-            if (modCategoryHash.includes(socketCategoryHash)) {
-              if (plugActive.plug.uiPlugLabel === 'masterwork') {
-                statModifiers[index].masterwork = statModifiers[index].masterwork + modifier.value
+      let initialPlug = plugItems.find(p => p.plugItemHash === socket.singleInitialItemHash);
+      let definitionInitialPlug = initialPlug && initialPlug.plugItemHash ? manifest.DestinyInventoryItemDefinition[initialPlug.plugItemHash] : false;
+
+      if (!initialPlug) {
+        console.log(socket)
+      }
+
+      if (definitionInitialPlug && definitionInitialPlug.investmentStats) {
+
+        // if (socketMasterworkCatalyst) {
+        //   if (plugMasterworkCatalyst && plugMasterworkCatalyst.plugObjectives.length) {
+        //     if (plugMasterworkCatalyst.complete) {
+        //       masterwork = true;
+        //     }
+        //   } else {
+        //     masterwork = true;
+        //   }
+        // }
+
+        if (initialPlug.enabled) {
+
+          if (definitionInitialPlug.plug.uiPlugLabel === 'masterwork') {
+            masterwork = true;
+          }
+
+          definitionInitialPlug.investmentStats.forEach(modifier => {
+            let index = statModifiers.findIndex(stat => stat.statHash === modifier.statTypeHash);
+            if (index > -1) {
+              if (modCategoryHash.includes(socketCategoryHash)) {
+                if (definitionInitialPlug.plug.uiPlugLabel === 'masterwork') {
+                  statModifiers[index].masterwork = statModifiers[index].masterwork + modifier.value
+                } else {
+                  statModifiers[index].mod = statModifiers[index].mod + modifier.value;
+                }
               } else {
-                statModifiers[index].mod = statModifiers[index].mod + modifier.value;
+                statModifiers[index].value = statModifiers[index].value + modifier.value;
               }
             } else {
-              statModifiers[index].value = statModifiers[index].value + modifier.value;
+              statModifiers.push({
+                statHash: modifier.statTypeHash,
+                value: !modCategoryHash.includes(socketCategoryHash) ? modifier.value : 0,
+                mod: modCategoryHash.includes(socketCategoryHash) && definitionInitialPlug.plug.uiPlugLabel !== 'masterwork' ? modifier.value : 0,
+                masterwork: modCategoryHash.includes(socketCategoryHash) && definitionInitialPlug.plug.uiPlugLabel === 'masterwork' ? modifier.value : 0
+              });
             }
-          } else {
-            statModifiers.push({
-              statHash: modifier.statTypeHash,
-              value: !modCategoryHash.includes(socketCategoryHash) ? modifier.value : 0,
-              mod: modCategoryHash.includes(socketCategoryHash) && plugActive.plug.uiPlugLabel !== 'masterwork' ? modifier.value : 0,
-              masterwork: modCategoryHash.includes(socketCategoryHash) && plugActive.plug.uiPlugLabel === 'masterwork' ? modifier.value : 0
-            });
-          }
-        });
+          });
+
+        } else {
+          console.log('skipping disabled plug');
+        }
 
       }
 
@@ -116,25 +181,34 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
       let socketPlugs = [];
 
       plugItems.forEach(p => {
-        let plug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
+        let definitionPlug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
 
-        if (traitsOnly && !plug.itemCategoryHashes.includes(3708671066)) {
-          console.log(item)
-          return;
-        }
-        if (initialOnly && plug.hash !== socket.singleInitialItemHash) {
+        if (traitsOnly && !definitionPlug.itemCategoryHashes.includes(3708671066)) {
           return;
         }
 
         socketPlugs.push({
-          active: plug.hash === socket.singleInitialItemHash,
-          definition: plug,
+          active: p.plugItemHash === socket.singleInitialItemHash,
+          enabled: p.enabled,
+          objectives: p.plugObjectives || [],
+          definition: definitionPlug,
           element: (
-            <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes && plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-hash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
-              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${plug.displayProperties.icon ? plug.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
+            <div key={definitionPlug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': definitionPlug.itemCategoryHashes && definitionPlug.itemCategoryHashes.includes(2237038328), 'is-active': definitionPlug.hash === socket.singleInitialItemHash })} data-hash={definitionPlug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
+              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionPlug.displayProperties.icon ? definitionPlug.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
               <div className='text'>
-                <div className='name'>{plug.displayProperties.name ? plug.displayProperties.name : `Unknown`}</div>
-                <div className='description'>{plug.itemTypeDisplayName}</div>
+                <div className='name'>{definitionPlug.displayProperties.name ? definitionPlug.displayProperties.name : `Unknown`}</div>
+                <div className='description'>{definitionPlug.itemTypeDisplayName}</div>
+                {plugMasterworkCatalyst && plugItems.find(p => p.plugItemHash === plugMasterworkCatalyst.plugItemHash) && !p.enabled ? (
+                  <div className='objectives'>
+                    {plugMasterworkCatalyst.plugObjectives.map(o => {
+                      let definitionObjective = manifest.DestinyObjectiveDefinition[o.objectiveHash];
+                      return <ProgressBar
+                        objectiveDefinition={definitionObjective}
+                        playerProgress={o}
+                      />
+                    })}
+                  </div>
+                ) : null}
               </div>
             </div>
           )

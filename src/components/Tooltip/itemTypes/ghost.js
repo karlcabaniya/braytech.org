@@ -70,7 +70,7 @@ const ghost = (item, detailedMode) => {
           <pre>{item.displayProperties.description}</pre>
         </div>
       ) : null}
-      {sourceString ? (
+      {sourceString && !item.itemComponents ? (
         <div className='source'>
           <p>{sourceString}</p>
         </div>
