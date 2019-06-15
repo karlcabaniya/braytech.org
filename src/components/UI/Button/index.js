@@ -14,13 +14,12 @@ class Button extends React.Component {
   }
 
   render() {
-    const { classNames, text, children, action, invisible, disabled, lined, anchor } = this.props;
-    const theme = this.props.themeOverride || this.props.theme.selected;
+    const { className, text, children, action, invisible, disabled, lined, anchor } = this.props;
 
     if (anchor) {
       return (
         <Link
-          className={cx('button', classNames, { lined: lined, disabled: disabled, invisible: invisible }, theme)}
+          className={cx('button', className, { lined: lined, disabled: disabled, invisible: invisible })}
           onClick={e => {
             if (action) {
               action(e);
@@ -34,7 +33,7 @@ class Button extends React.Component {
     } else {
       return (
         <button
-          className={cx('button', classNames, { lined: lined, disabled: disabled, invisible: invisible }, theme)}
+          className={cx('button', className, { lined: lined, disabled: disabled, invisible: invisible })}
           onClick={e => {
             if (action) {
               action(e);
@@ -51,7 +50,7 @@ class Button extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    theme: state.theme
+    
   };
 }
 

@@ -38,6 +38,13 @@ class Resources extends React.Component {
         description: "A simple tree view approach to browsing through Destiny's manifest. Like data.destinysets.com, but less useful. I should probably at least add a filter input.",
         author: 'Braytech',
         link: '/experiments/data-inspector'
+      },
+      {
+        name: 'Chalice Recipes',
+        icon: 'destiny-road_kill',
+        description: "",
+        author: 'Braytech',
+        link: '/experiments/chalice-recipes'
       }
     ];
 

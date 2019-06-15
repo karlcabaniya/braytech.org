@@ -13,25 +13,21 @@ class Items extends React.Component {
   constructor(props) {
     super(props);
 
-    this.scrollToRecordRef = React.createRef();
+
   }
 
   componentDidMount() {
-    if (this.props.highlight && this.scrollToRecordRef.current !== null) {
-      window.scrollTo({
-        top: this.scrollToRecordRef.current.offsetTop + this.scrollToRecordRef.current.offsetHeight / 2 - window.innerHeight / 2
-      });
-    }
+    
   }
 
   render() {
-    const { t, member, items, inspect } = this.props;
+    const { t, member, items, inspect, action } = this.props;
 
     let output = [];
 
     items.forEach((item, i) => {
       let definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
-      let definitionBucket = manifest.DestinyInventoryBucketDefinition[item.bucketHash];
+      let definitionBucket = item.bucketHash ? manifest.DestinyInventoryBucketDefinition[item.bucketHash] : false;
 
       let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
 
@@ -50,6 +46,11 @@ class Items extends React.Component {
           data-hash={item.itemHash}
           data-instanceid={item.itemInstanceId}
           data-state={item.state}
+          onClick={e => {
+            if (action) {
+              action(e, item);
+            }
+          }}
         >
           <div className='icon'>
             <ObservedImage className='image' src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />

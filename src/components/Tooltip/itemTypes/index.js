@@ -77,7 +77,7 @@ class ItemTypes extends React.Component {
         kind = 'mod';
         black = mod(item);
       } else if (item.itemType === 20) {
-        kind = 'bounty';
+        kind = 'material';
         black = ui(item);
       } else if (item.itemType === 21) {
         kind = 'ship';

@@ -1,0 +1,142 @@
+#chalice-recipes {
+  padding: 4rem 3rem 3rem;
+  display: grid;
+}
+
+#chalice-recipes .frame {
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+#chalice-recipes .frame .image.corner {
+  padding-bottom: 99.7059%;
+}
+
+#chalice-recipes .frame .image.leviathan {
+  background-size: 94%;
+  /* animation: rotate-logo-feature 90s linear infinite; */
+}
+
+#chalice-recipes .frame .image.ring-inner {
+  background-size: 69%;
+  /* animation: rotate-logo-feature 90s linear infinite reverse; */
+}
+
+#chalice-recipes .frame .image.ring-outer {
+  background-size: 75%;
+  /* animation: rotate-logo-feature 90s linear infinite; */
+}
+
+#chalice-recipes .frame .ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#chalice-recipes .frame .image.chalice {
+  background-size: 47.5%;
+  background-position-y: 51%;
+}
+
+#chalice-recipes .frame .ui .sockets {
+  display: grid;
+  grid-template: 1fr 1fr 1fr/1fr 1fr 1fr;
+  height: 100%;
+}
+
+#chalice-recipes .frame .ui .sockets > [class^="socket"] {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+#chalice-recipes .frame .ui .sockets [class^="socket"] .socket-inner {
+  position: relative;
+  max-width: 72px;
+  max-height: 72px;
+  width: 100%;
+}
+
+#chalice-recipes .frame .ui .sockets [class^="socket"] .socket-inner .active-plug .list.inventory-items {
+  grid-template-columns: 1fr;
+}
+
+#chalice-recipes .frame .ui .sockets .button.socket {
+  height: unset;
+  max-width: 72px;
+  max-height: 72px;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#chalice-recipes .frame .ui .sockets .button.socket::before {
+  box-shadow: inset 0 0 0 2px rgba(214, 214, 214, 0.8);
+}
+
+#chalice-recipes .frame .ui .sockets .button.socket .image {
+  position: relative;
+  width: 100%;
+  height: unset;
+  max-width: 72px;
+  padding-bottom: 100%;
+}
+
+#chalice-recipes .frame .ui .sockets .button.socket .image::before {
+  content: 'I';
+  position: absolute;
+  top: -24px;
+  left: 0;
+  width: calc(100% - 32px);
+  padding: 0 16px;
+  font-family: serif;
+  color: #dabd9a;
+  color: #fff;
+  text-align: center;
+  opacity: 0.8;
+}
+
+#chalice-recipes .frame .ui .sockets .socket1 {
+  grid-column: 2/3;
+}
+
+#chalice-recipes .frame .ui .sockets .socket2 {
+  grid-row: 2/3;
+}
+
+#chalice-recipes .frame .ui .sockets .socket2 .button.socket .image::before {
+  content: 'II';
+  text-align: left;
+}
+
+#chalice-recipes .frame .ui .sockets .socket3 {
+  grid-row: 2/3;
+  grid-column: 3/4;
+}
+
+#chalice-recipes .frame .ui .sockets .socket3 .button.socket .image::before {
+  content: 'III';
+  text-align: right;
+}
+
+#chalice-recipes .frame .ui .sockets .socket4 {
+  grid-row: 3/4;
+  grid-column: 2/3;
+}
+
+#chalice-recipes .frame .ui .sockets .socket4 .button.socket .image::before {
+  content: 'IV';
+  display: none;
+}
+
+#chalice-recipes .overlay {
+  position: absolute;
+  width: 467px;  
+  top: 0;
+  left: 79px;
+  z-index: 2;
+}
+

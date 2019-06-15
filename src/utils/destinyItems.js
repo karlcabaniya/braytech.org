@@ -193,9 +193,10 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
                 <div className='description'>{definitionPlug.itemTypeDisplayName}</div>
                 {plugMasterworkCatalyst && plugItems.find(p => p.plugItemHash === plugMasterworkCatalyst.plugItemHash) && !p.enabled ? (
                   <div className='objectives'>
-                    {plugMasterworkCatalyst.plugObjectives.map(o => {
+                    {plugMasterworkCatalyst.plugObjectives.map((o, i) => {
                       let definitionObjective = manifest.DestinyObjectiveDefinition[o.objectiveHash];
                       return <ProgressBar
+                        key={i}
                         objectiveDefinition={definitionObjective}
                         playerProgress={o}
                       />
