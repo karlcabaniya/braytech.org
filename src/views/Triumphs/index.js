@@ -44,6 +44,8 @@ class Triumphs extends React.Component {
     if (!this.props.match.params.quaternary) {
       window.scrollTo(0, 0);
     }
+
+    this.props.rebindTooltips();
   }
 
   componentDidUpdate(prevProps) {
@@ -205,6 +207,9 @@ function mapDispatchToProps(dispatch) {
   return {
     setCollectibleDisplayState: value => {
       dispatch({ type: 'SET_COLLECTIBLES', payload: value });
+    },
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
     }
   };
 }

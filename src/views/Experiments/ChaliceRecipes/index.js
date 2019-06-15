@@ -59,6 +59,8 @@ class ChaliceRecipes extends React.Component {
       prevState.sockets[socket].panelOpen = !prevState.sockets[socket].panelOpen ? true : false;
       return prevState;
     });
+
+    this.props.rebindTooltips();
   }
 
   itemClickHandler = (e, item) => {
@@ -72,10 +74,14 @@ class ChaliceRecipes extends React.Component {
       prevState.sockets[item.socket].panelOpen = false;
       return prevState;
     });
+
+    this.props.rebindTooltips();
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.props.rebindTooltips();
   }
 
   render() {
@@ -180,7 +186,18 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
+  };
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withNamespaces()
 )(ChaliceRecipes);

@@ -28,6 +28,8 @@ class SitRep extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.props.rebindTooltips();
   }
 
   render() {
@@ -393,7 +395,18 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
+  };
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withNamespaces()
 )(SitRep);

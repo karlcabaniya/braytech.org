@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import './styles.css';
+
 import ItemTypes from './itemTypes';
 
 class Tooltip extends React.Component {
@@ -72,14 +73,7 @@ class Tooltip extends React.Component {
   };
 
   target_mouseLeave = e => {
-    this.setState({
-      hash: false,
-      instanceId: false,
-      state: false,
-      rollNote: false,
-      table: false,
-      tooltipType: false
-    });
+    this.resetState();
   };
 
   target_touchStart = e => {
@@ -105,7 +99,22 @@ class Tooltip extends React.Component {
     }
   };
 
-  target_bindings = () => {
+  resetState = () => {
+    this.setState({
+      hash: false,
+      instanceId: false,
+      state: false,
+      rollNote: false,
+      table: false,
+      tooltipType: false
+    });
+  }
+
+  performBind = reset => {
+    if (reset) {
+      this.resetState();
+    }
+
     let targets = document.querySelectorAll('.tooltip');
     targets.forEach(target => {
       target.addEventListener('mouseenter', this.target_mouseEnter);
@@ -114,7 +123,7 @@ class Tooltip extends React.Component {
       target.addEventListener('touchmove', this.target_touchMove);
       target.addEventListener('touchend', this.target_touchEnd);
     });
-  };
+  }
 
   tooltip_touchStart = e => {
     this.touchMovement = false;
@@ -127,14 +136,7 @@ class Tooltip extends React.Component {
   tooltip_touchEnd = e => {
     e.preventDefault();
     if (!this.touchMovement) {
-      this.setState({
-        hash: false,
-        instanceId: false,
-        state: false,
-        rollNote: false,
-        table: false,
-        tooltipType: false
-      });
+      this.resetState();
     }
   };
 
@@ -145,31 +147,30 @@ class Tooltip extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
+    if (this.props.tooltips.bindTime !== prevProps.tooltips.bindTime) {
+      console.log('bindTime change');
+      this.performBind(true);
+    }
+
     if (this.props.location && prevProps.location.pathname !== this.props.location.pathname) {
-      this.setState({
-        hash: false,
-        instanceId: false,
-        state: false,
-        rollNote: false,
-        table: false,
-        tooltipType: false
-      });
-      this.target_bindings();
+      console.log('location change');
+      this.performBind(true);
     }
 
-    if (this.props.member.data !== prevProps.member.data) {
-      this.target_bindings();
-    }
+    // if (this.props.member.data !== prevProps.member.data) {
+    //   this.performBind();
+    // }
 
-    if (this.state.hash) {
-      this.tooltip_bindings();
-    }
+    // if (this.state.hash) {
+    //   this.performBind();
+    //   console.log('this.state.hash???')
+    // }
   }
 
   componentDidMount() {
     window.addEventListener('mousemove', this.mouseMove);
     this.props.onRef(this);
-    this.target_bindings();
+    // this.performBind();
   }
 
   componentWillUnmount() {
@@ -192,8 +193,20 @@ class Tooltip extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    tooltips: state.tooltips
   };
 }
 
-export default connect(mapStateToProps)(Tooltip);
+function mapDispatchToProps(dispatch) {
+  return {
+    setTooltipDetailMode: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: {  } });
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tooltip);

@@ -118,7 +118,7 @@ class Settings extends React.Component {
                   this.props.setTooltipDetailMode(false);
                 }}
               >
-                <Checkbox linked checked={!this.props.tooltips.detailedMode} text={t('Simple')} />
+                <Checkbox linked checked={!this.props.tooltips.settings.detailedMode} text={t('Simple')} />
                 <div className='info'>
                   <p>{t('Simple tooltips are displayed as per the game, displaying the same stats and socket plugs (perks and mods).')}</p>
                 </div>
@@ -129,7 +129,7 @@ class Settings extends React.Component {
                   this.props.setTooltipDetailMode(true);
                 }}
               >
-                <Checkbox linked checked={this.props.tooltips.detailedMode} text={t('Detailed')} />
+                <Checkbox linked checked={this.props.tooltips.settings.detailedMode} text={t('Detailed')} />
                 <div className='info'>
                   <p>{t('Detailed tooltips are an alternate design that display hidden stats and list socket plugs (perks and mods) exhaustively.')}</p>
                 </div>
@@ -245,7 +245,7 @@ function mapDispatchToProps(dispatch) {
       dispatch({ type: 'SET_THEME', payload: value });
     },
     setTooltipDetailMode: value => {
-      dispatch({ type: 'SET_TOOLTIPS', payload: { detailedMode: value } });
+      dispatch({ type: 'SET_TOOLTIPS_DESIGN', payload: { detailedMode: value } });
     },
     setCollectibleDisplayState: value => {
       dispatch({ type: 'SET_COLLECTIBLES', payload: value });

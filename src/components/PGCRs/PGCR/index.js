@@ -123,7 +123,7 @@ class PGCR extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.expanded !== this.state.expanded) {
-      this.props.RebindTooltips();
+      this.props.rebindTooltips();
     }
   }
 
@@ -810,7 +810,18 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
+  };
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withNamespaces()
 )(PGCR);

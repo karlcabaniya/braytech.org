@@ -19,7 +19,7 @@ import sandboxPerk from './sandboxPerk';
 
 class ItemTypes extends React.Component {
   render() {
-    let { member, hash, instanceId, state, rollNote, table, tooltipType, settingsTooltips } = this.props;
+    let { member, hash, instanceId, state, rollNote, table, tooltipType, tooltips } = this.props;
 
     if (!table) {
       table = 'DestinyInventoryItemDefinition';
@@ -59,12 +59,12 @@ class ItemTypes extends React.Component {
         black = ui(item);
       } else if (item.itemType === 3) {
         kind = 'weapon';
-        let type = weapon(item, member, settingsTooltips.detailedMode);
+        let type = weapon(item, member, tooltips.settings.detailedMode);
         black = type.el;
         masterwork = type.masterwork;
       } else if (item.itemType === 2) {
         kind = 'armour';
-        let type = armour(item, member, settingsTooltips.detailedMode);
+        let type = armour(item, member, tooltips.settings.detailedMode);
         black = type.el;
         masterwork = type.masterwork;
       } else if (item.itemType === 14) {
@@ -81,13 +81,13 @@ class ItemTypes extends React.Component {
         black = ui(item);
       } else if (item.itemType === 21) {
         kind = 'ship';
-        black = sparrow(item, settingsTooltips.detailedMode);
+        black = sparrow(item, tooltips.settings.detailedMode);
       } else if (item.itemType === 22) {
         kind = 'sparrow';
-        black = sparrow(item, settingsTooltips.detailedMode);
+        black = sparrow(item, tooltips.settings.detailedMode);
       } else if (item.itemType === 24) {
         kind = 'ghost';
-        black = ghost(item, settingsTooltips.detailedMode);
+        black = ghost(item, tooltips.settings.detailedMode);
       } else if (item.itemType === 26) {
         kind = 'bounty';
         black = bounty(item);
@@ -178,7 +178,7 @@ function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
     viewport: state.viewport,
-    settingsTooltips: state.tooltips
+    tooltips: state.tooltips
   };
 }
 
