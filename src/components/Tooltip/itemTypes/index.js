@@ -49,6 +49,8 @@ class ItemTypes extends React.Component {
         perks: itemComponents.perks.data[instanceId] ? itemComponents.perks.data[instanceId].perks : false,
         stats: itemComponents.stats.data[instanceId] ? itemComponents.stats.data[instanceId].stats : false
       };
+    } else {
+      item.itemComponents = false;
     }
 
     let kind, tier, black, masterwork;
