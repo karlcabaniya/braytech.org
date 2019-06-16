@@ -153,14 +153,18 @@ class Root extends React.Component {
             <div>{t('Search')}</div>
           </div>
           <CollectiblesSearch />
-          {profileCollectibles.recentCollectibleHashes ? <><div className='sub-header'>
-            <div>{t('Recently discovered')}</div>
-          </div>
-          <div className='recently-discovered'>
-            <ul className='list collection-items'>
-              <Collectibles selfLinkFrom='/collections' hashes={profileCollectibles.recentCollectibleHashes.slice().reverse()} />
-            </ul>
-          </div></> : null}
+          {profileCollectibles.recentCollectibleHashes ? (
+            <>
+              <div className='sub-header'>
+                <div>{t('Recently discovered')}</div>
+              </div>
+              <div className='recently-discovered'>
+                <ul className='list collection-items'>
+                  <Collectibles selfLinkFrom='/collections' forceDisplay hashes={profileCollectibles.recentCollectibleHashes.slice().reverse()} />
+                </ul>
+              </div>
+            </>
+          ) : null}
           <div className='sub-header'>
             <div>{t('Badges')}</div>
             <div>

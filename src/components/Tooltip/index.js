@@ -59,7 +59,7 @@ class Tooltip extends React.Component {
     }
   };
 
-  target_mouseEnter = e => {
+  helper_targetMouseEnter = e => {
     if (e.currentTarget.dataset.hash) {
       this.setState({
         hash: e.currentTarget.dataset.hash,
@@ -72,19 +72,19 @@ class Tooltip extends React.Component {
     }
   };
 
-  target_mouseLeave = e => {
+  helper_targetMouseLeave = e => {
     this.resetState();
   };
 
-  target_touchStart = e => {
+  helper_targetTouchStart = e => {
     this.touchMovement = false;
   };
 
-  target_touchMove = e => {
+  helper_targetTouchMove = e => {
     this.touchMovement = true;
   };
 
-  target_touchEnd = e => {
+  helper_targetTouchEnd = e => {
     if (!this.touchMovement) {
       if (e.currentTarget.dataset.hash) {
         this.setState({
@@ -110,61 +110,60 @@ class Tooltip extends React.Component {
     });
   }
 
-  performBind = reset => {
+  performBindTooltipItem = reset => {
     if (reset) {
       this.resetState();
     }
 
     let targets = document.querySelectorAll('.tooltip');
     targets.forEach(target => {
-      target.addEventListener('mouseenter', this.target_mouseEnter);
-      target.addEventListener('mouseleave', this.target_mouseLeave);
-      target.addEventListener('touchstart', this.target_touchStart);
-      target.addEventListener('touchmove', this.target_touchMove);
-      target.addEventListener('touchend', this.target_touchEnd);
+      target.addEventListener('mouseenter', this.helper_targetMouseEnter);
+      target.addEventListener('mouseleave', this.helper_targetMouseLeave);
+      target.addEventListener('touchstart', this.helper_targetTouchStart);
+      target.addEventListener('touchmove', this.helper_targetTouchMove);
+      target.addEventListener('touchend', this.helper_targetTouchEnd);
     });
   }
 
-  tooltip_touchStart = e => {
+  helper_tooltipTouchStart = e => {
     this.touchMovement = false;
   };
 
-  tooltip_touchMove = e => {
+  helper_tooltipTouchMove = e => {
     this.touchMovement = true;
   };
 
-  tooltip_touchEnd = e => {
+  helper_tooltipTouchEnd = e => {
     e.preventDefault();
     if (!this.touchMovement) {
       this.resetState();
     }
   };
 
-  tooltip_bindings = () => {
-    this.tooltip.current.addEventListener('touchstart', this.tooltip_touchStart);
-    this.tooltip.current.addEventListener('touchmove', this.tooltip_touchMove);
-    this.tooltip.current.addEventListener('touchend', this.tooltip_touchEnd);
+  performBindTooltip = () => {
+    this.tooltip.current.addEventListener('touchstart', this.helper_tooltipTouchStart);
+    this.tooltip.current.addEventListener('touchmove', this.helper_tooltipTouchMove);
+    this.tooltip.current.addEventListener('touchend', this.helper_tooltipTouchEnd);
   };
 
   componentDidUpdate(prevProps) {
     if (this.props.tooltips.bindTime !== prevProps.tooltips.bindTime) {
       console.log('bindTime change');
-      this.performBind(true);
+      this.performBindTooltipItem(true);
     }
 
     if (this.props.location && prevProps.location.pathname !== this.props.location.pathname) {
       console.log('location change');
-      this.performBind(true);
+      this.performBindTooltipItem(true);
     }
 
     // if (this.props.member.data !== prevProps.member.data) {
     //   this.performBind();
     // }
 
-    // if (this.state.hash) {
-    //   this.performBind();
-    //   console.log('this.state.hash???')
-    // }
+    if (this.state.hash) {
+      this.performBindTooltip();
+    }
   }
 
   componentDidMount() {

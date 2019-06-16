@@ -28,11 +28,11 @@ class Collectibles extends React.Component {
   }
 
   render() {
-    const { t, forceDisplay } = this.props;
+    const { t, forceDisplay, collectibles } = this.props;
     const inspect = this.props.inspect ? true : false;
     const highlight = parseInt(this.props.highlight, 10) || false;
 
-    let collectibles = [];
+    let output = [];
 
     if (this.props.node) {
       const tertiaryDefinition = manifest.DestinyPresentationNodeDefinition[this.props.node];
@@ -60,11 +60,11 @@ class Collectibles extends React.Component {
 
             rowState.push(state);
 
-            if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
+            if (collectibles && collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible && !forceDisplay) {
               return;
             }
 
-            if (this.props.collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired) {
+            if (collectibles && collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired && !forceDisplay) {
               return;
             }
 
@@ -88,7 +88,7 @@ class Collectibles extends React.Component {
             return;
           }
 
-          collectibles.push(
+          output.push(
             <li
               key={nodeDefinition.hash}
               className={cx('is-set', {
@@ -118,11 +118,11 @@ class Collectibles extends React.Component {
               state = scope.state;
             }
 
-            if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
+            if (collectibles && collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible && !forceDisplay) {
               return;
             }
 
-            if (this.props.collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired) {
+            if (collectibles && collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired && !forceDisplay) {
               return;
             }
           }
@@ -131,7 +131,7 @@ class Collectibles extends React.Component {
           let ref = highlight == collectibleDefinition.hash ? this.scrollToRecordRef : null;
 
           if (collectibleDefinition.redacted || collectibleDefinition.itemHash === 0) {
-            collectibles.push(
+            output.push(
               <li
                 key={collectibleDefinition.hash}
                 ref={ref}
@@ -151,7 +151,7 @@ class Collectibles extends React.Component {
               </li>
             );
           } else {
-            collectibles.push(
+            output.push(
               <li
                 key={collectibleDefinition.hash}
                 ref={ref}
@@ -235,17 +235,17 @@ class Collectibles extends React.Component {
             state = scope.state;
           }
 
-          if (this.props.collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible) {
+          if (collectibles && collectibles.hideInvisibleCollectibles && enumerateCollectibleState(state).invisible && !forceDisplay) {
             return;
           }
 
-          if (this.props.collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired) {
+          if (collectibles && collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired && !forceDisplay) {
             return;
           }
 
         }
 
-        collectibles.push(
+        output.push(
           <li
             key={collectibleDefinition.hash}
             className={cx('tooltip', {
@@ -268,8 +268,8 @@ class Collectibles extends React.Component {
       });
     }
 
-    if (collectibles.length === 0 && this.props.collectibles && this.props.collectibles.hideCompletedCollectibles && !forceDisplay) {
-      collectibles.push(
+    if (output.length === 0 && collectibles && collectibles.hideCompletedCollectibles && !forceDisplay) {
+      output.push(
           <li key='lol' className='all-completed'>
             <div className='properties'>
               <div className='text'>{t('All completed')}</div>
@@ -278,7 +278,7 @@ class Collectibles extends React.Component {
         );
     }
 
-    return collectibles;
+    return output;
   }
 }
 

@@ -18,7 +18,7 @@ class ChaliceRecipes extends React.Component {
     this.state = {
       sockets: {
         socket1: {
-          panelOpen: true,
+          panelOpen: false,
           activePlug: false
         },
         socket2: {
@@ -50,6 +50,37 @@ class ChaliceRecipes extends React.Component {
         4201087756, // Rune of Excess
         4201087757, // Rune of Wealth
         2149082460, // Rune of Pleasure
+      ],
+      socket2: [
+        2149082453, // Rune of Joy
+        2149082452, // Rune of the Beast
+        2149082455, // Rune of Jubilation
+        2149082448, // Rune of Ambition
+        2149082449, // Rune of Gluttony
+        2149082454, // Rune of Cunning
+        2149082451, // Rune of War
+        2149082461, // Rune of Pride
+        2149082450, // Rune of Desire
+        4201087756, // Rune of Excess
+        4201087757, // Rune of Wealth
+        2149082460, // Rune of Pleasure
+      ],
+      socket3: [
+        2149082453, // Rune of Joy
+        2149082452, // Rune of the Beast
+        2149082455, // Rune of Jubilation
+        2149082448, // Rune of Ambition
+        2149082449, // Rune of Gluttony
+        2149082454, // Rune of Cunning
+        2149082451, // Rune of War
+        2149082461, // Rune of Pride
+        2149082450, // Rune of Desire
+        4201087756, // Rune of Excess
+        4201087757, // Rune of Wealth
+        2149082460, // Rune of Pleasure
+      ],
+      socket4: [
+        
       ]
     }
   }
@@ -146,7 +177,7 @@ class ChaliceRecipes extends React.Component {
                 }
 
                 return (
-                  <div className={cx(key)}>
+                  <div key={key} className={cx(key)}>
                     <div className='socket-inner'>
                       <div className='active-plug'>
                         <ul className='list inventory-items'>
