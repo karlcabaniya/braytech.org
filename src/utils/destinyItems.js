@@ -92,7 +92,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
 
     
 
-    console.log(socketMasterworkCatalyst, plugMasterworkCatalyst)
+    // console.log(socketMasterworkCatalyst, plugMasterworkCatalyst)
 
     Object.keys(socketEntries).forEach(key => {
       let socket = socketEntries[key];
@@ -128,7 +128,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
       let definitionInitialPlug = initialPlug && initialPlug.plugItemHash ? manifest.DestinyInventoryItemDefinition[initialPlug.plugItemHash] : false;
 
       if (!initialPlug) {
-        console.log(socket)
+        // console.log(socket)
       }
 
       if (definitionInitialPlug && definitionInitialPlug.investmentStats) {
@@ -252,7 +252,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
     });
   }
 
-  console.log(socketsOutput)
+  // console.log(socketsOutput)
 
   let statsOutput = [];
 

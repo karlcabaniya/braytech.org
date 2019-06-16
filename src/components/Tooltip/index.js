@@ -18,8 +18,6 @@ class Tooltip extends React.Component {
       tooltipType: false
     };
 
-    this.props.onRef(this);
-
     this.tooltip = React.createRef();
     this.touchMovement = false;
     this.mouseMoveXY = {
@@ -157,9 +155,9 @@ class Tooltip extends React.Component {
       this.performBindTooltipItem(true);
     }
 
-    // if (this.props.member.data !== prevProps.member.data) {
-    //   this.performBind();
-    // }
+    if (this.props.member.data !== prevProps.member.data) {
+      this.performBindTooltipItem();
+    }
 
     if (this.state.hash) {
       this.performBindTooltip();
@@ -168,13 +166,10 @@ class Tooltip extends React.Component {
 
   componentDidMount() {
     window.addEventListener('mousemove', this.mouseMove);
-    this.props.onRef(this);
-    // this.performBind();
   }
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', this.mouseMove);
-    this.props.onRef(undefined);
   }
 
   render() {

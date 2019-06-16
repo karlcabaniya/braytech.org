@@ -29,6 +29,11 @@ class Items extends React.Component {
       let definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
       let definitionBucket = item.bucketHash ? manifest.DestinyInventoryBucketDefinition[item.bucketHash] : false;
 
+      if (!definitionItem) {
+        console.log(`Items: Couldn't find item definition for ${item.itemHash}`);
+        return;
+      }
+
       let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
 
       output.push(

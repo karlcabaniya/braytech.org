@@ -1,0 +1,98 @@
+let purples = [{"slot1":"Rune of Joy","slot2":"-","slot3":"-","result":"Random Class Item Armor Piece (see Chart)","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Purple","slot3":"-","result":"Tangled Web Class Item","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Red","slot3":"-","result":"Exodus Down Class Item","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Green","slot3":"-","result":"Reverie Dawn Class Item","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Blue","slot3":"-","result":"Opulent Class Item","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Purple","slot3":"Any Purple","result":"Tangled Web Class Item","masterwork":"Arc Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Purple","slot3":"Any Red","result":"Tangled Web Class Item","masterwork":"Solar Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Purple","slot3":"Any Green","result":"Tangled Web Class Item","masterwork":"Void Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Purple","slot3":"Any Blue","result":"Tangled Web Class Item","masterwork":"Solar Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Red","slot3":"Any Purple","result":"Exodus Down Class Item","masterwork":"Arc Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Red","slot3":"Any Red","result":"Exodus Down Class Item","masterwork":"Solar Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Red","slot3":"Any Green","result":"Exodus Down Class Item","masterwork":"Void Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Red","slot3":"Any Blue","result":"Exodus Down Class Item","masterwork":"Solar Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Green","slot3":"Any Purple","result":"Reverie Dawn Class Item","masterwork":"Arc Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Green","slot3":"Any Red","result":"Reverie Dawn Class Item","masterwork":"Solar Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Green","slot3":"Any Green","result":"Reverie Dawn Class Item","masterwork":"Void Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Green","slot3":"Any Blue","result":"Reverie Dawn Class Item","masterwork":"Solar Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Blue","slot3":"Any Purple","result":"Opulent Class Item","masterwork":"Arc Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Blue","slot3":"Any Red","result":"Opulent Class Item","masterwork":"Solar Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Blue","slot3":"Any Green","result":"Opulent Class Item","masterwork":"Void Resist","armorType":"-"},{"slot1":"Rune of Joy","slot2":"Any Blue","slot3":"Any Blue","result":"Opulent Class Item","masterwork":"Solar Resist","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"-","slot3":"-","result":"Random SMG (see Chart)","masterwork":"-","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Purple","slot3":"-","result":"Calus MINI Tool","masterwork":"Random","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Red","slot3":"-","result":"Trackless Waste","masterwork":"Random","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Green","slot3":"-","result":"Hard Truths","masterwork":"Random","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Blue","slot3":"-","result":"Bad Reputation","masterwork":"Random","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Purple","slot3":"Any Purple","result":"Calus MINI Tool","masterwork":"Handling Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Purple","slot3":"Any Red","result":"Calus MINI Tool","masterwork":"Reload Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Purple","slot3":"Any Green","result":"Calus MINI Tool","masterwork":"Range Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Purple","slot3":"Any Blue","result":"Calus MINI Tool","masterwork":"Stability Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Red","slot3":"Any Purple","result":"Trackless Waste","masterwork":"Handling Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Red","slot3":"Any Red","result":"Trackless Waste","masterwork":"Reload Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Red","slot3":"Any Green","result":"Trackless Waste","masterwork":"Range Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Red","slot3":"Any Blue","result":"Trackless Waste","masterwork":"Stability Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Green","slot3":"Any Purple","result":"Hard Truths","masterwork":"Handling Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Green","slot3":"Any Red","result":"Hard Truths","masterwork":"Reload Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Green","slot3":"Any Green","result":"Hard Truths","masterwork":"Range Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Green","slot3":"Any Blue","result":"Hard Truths","masterwork":"Stability Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Blue","slot3":"Any Purple","result":"Bad Reputation","masterwork":"Handling Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Blue","slot3":"Any Red","result":"Bad Reputation","masterwork":"Reload Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Blue","slot3":"Any Green","result":"Bad Reputation","masterwork":"Range Masterwork","armorType":"-"},{"slot1":"Rune of the Beast","slot2":"Any Blue","slot3":"Any Blue","result":"Bad Reputation","masterwork":"Stability Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"-","slot3":"-","result":"Random Sniper (see Chart)","masterwork":"-","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Purple","slot3":"-","result":"Twilight Oath","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Red","slot3":"-","result":"Beloved","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Green","slot3":"-","result":"Fate Cries Foul","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Blue","slot3":"-","result":"Dreaded Venture","masterwork":"Random","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Purple","slot3":"Any Purple","result":"Twilight Oath","masterwork":"Handling Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Purple","slot3":"Any Red","result":"Twilight Oath","masterwork":"Reload Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Purple","slot3":"Any Green","result":"Twilight Oath","masterwork":"Range Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Purple","slot3":"Any Blue","result":"Twilight Oath","masterwork":"Stability Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Red","slot3":"Any Purple","result":"Beloved","masterwork":"Handling Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Red","slot3":"Any Red","result":"Beloved","masterwork":"Reload Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Red","slot3":"Any Green","result":"Beloved","masterwork":"Range Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Red","slot3":"Any Blue","result":"Beloved","masterwork":"Stability Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Green","slot3":"Any Purple","result":"Fate Cries Foul","masterwork":"Handling Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Green","slot3":"Any Red","result":"Fate Cries Foul","masterwork":"Reload Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Green","slot3":"Any Green","result":"Fate Cries Foul","masterwork":"Range Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Green","slot3":"Any Blue","result":"Fate Cries Foul","masterwork":"Stability Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Blue","slot3":"Any Purple","result":"Dreaded Venture","masterwork":"Handling Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Blue","slot3":"Any Red","result":"Dreaded Venture","masterwork":"Reload Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Blue","slot3":"Any Green","result":"Dreaded Venture","masterwork":"Range Masterwork","armorType":"-"},{"slot1":"Rune of Jubilation","slot2":"Any Blue","slot3":"Any Blue","result":"Dreaded Venture","masterwork":"Stability Masterwork","armorType":"-"}];
+
+    console.log(purples);
+
+    let temp = [];
+    purples.forEach(r => {
+
+      let t0 = [];
+      let t1 = [];
+      let t2 = [];
+      let t3 = [];
+
+      Object.values(manifest.DestinyInventoryItemDefinition).forEach(i => {
+        let i1 = r.result.toLowerCase();
+        let i2 = i.displayProperties ? i.displayProperties.name.toLowerCase() : 'nah';
+
+        if (i1 === i2) {
+          t0 = [i.hash];
+        }
+      });
+
+      
+      let r1 = r.slot1.toLowerCase();
+
+      if (r1 === 'any purple') {
+        t1.push('braytech_purple_rune');
+      } else if (r1 === 'any red') {
+        t1.push('braytech_red_rune');
+      } else if (r1 === 'any green') {
+        t1.push('braytech_green_rune');
+      } else if (r1 === 'any blue') {
+        t1.push('braytech_blue_rune');
+      } else {
+        this.runes.slot1.forEach(b => {
+          let def = manifest.DestinyInventoryItemDefinition[b];
+          let r2 = def.displayProperties.name.toLowerCase();
+
+          if (r1 === r2) {
+            t1.push(b);
+            return;
+          }
+        });
+      }
+
+      let r2 = r.slot2.toLowerCase();
+
+      if (r2 === 'any purple') {
+        t2.push('braytech_purple_rune');
+      } else if (r2 === 'any red') {
+        t2.push('braytech_red_rune');
+      } else if (r2 === 'any green') {
+        t2.push('braytech_green_rune');
+      } else if (r2 === 'any blue') {
+        t2.push('braytech_blue_rune');
+      } else {
+        this.runes.slot1.forEach(b => {
+          let def = manifest.DestinyInventoryItemDefinition[b];
+          let d1 = def.displayProperties.name.toLowerCase();
+
+          if (r2 === d1) {
+            t2.push(b);
+            return;
+          }
+        });
+      }
+
+      let r3 = r.slot3.toLowerCase();
+
+      if (r3 === 'any purple') {
+        t3.push('braytech_purple_rune');
+      } else if (r3 === 'any red') {
+        t3.push('braytech_red_rune');
+      } else if (r3 === 'any green') {
+        t3.push('braytech_green_rune');
+      } else if (r3 === 'any blue') {
+        t3.push('braytech_blue_rune');
+      } else {
+        this.runes.slot1.forEach(b => {
+          let def = manifest.DestinyInventoryItemDefinition[b];
+          let d1 = def.displayProperties.name.toLowerCase();
+
+          if (r3 === d1) {
+            t3.push(b);
+            return;
+          }
+        });
+      }
+
+      temp.push({
+        items: t0,
+        runes: [t1, t2, t3],
+        csvName: r.result,
+        csvMw: r.masterwork
+      })
+
+    });
+
+    console.log(temp)

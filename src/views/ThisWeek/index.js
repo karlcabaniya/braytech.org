@@ -19,6 +19,12 @@ class ThisWeek extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+
+    this.props.rebindTooltips();
+  }
+
   render() {
     const { t, member } = this.props;
     const { characterId } = member;
@@ -521,7 +527,7 @@ class ThisWeek extends React.Component {
             </div>
             <h4>Collectibles</h4>
             <ul className='list collection-items'>
-              <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
+              <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
             </ul>
             <h4>Triumphs</h4>
             <ul className='list record-items'>
@@ -746,7 +752,7 @@ class ThisWeek extends React.Component {
             </div>
             <h4>Collectibles</h4>
             <ul className='list collection-items'>
-              <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
+              <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
             </ul>
             {/* <h4>Catalyst Items: Worldline Zero</h4>
             <ul className='list inventory-items'>
@@ -770,7 +776,18 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
+  };
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withNamespaces()
 )(ThisWeek);

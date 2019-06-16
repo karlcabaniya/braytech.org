@@ -23,6 +23,17 @@ const sparrow = (item, detailedMode) => {
           ? sockets.map((socket, i) => {
               let group = socket.plugs
                 .filter(plug => {
+                  if (!item.itemComponents && !detailedMode) {
+                    if (plug.active) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  } else {
+                    return true;
+                  }
+                })
+                .filter(plug => {
                   if (item.itemComponents && item.itemComponents.instance && socket.mod) {
                     if (plug.active) {
                       return true;

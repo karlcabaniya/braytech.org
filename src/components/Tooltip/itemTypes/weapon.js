@@ -108,6 +108,17 @@ const weapon = (item, member, detailedMode) => {
                   .filter(plug => !plug.definition.itemCategoryHashes.includes(2237038328))
                   .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142) // wtf is this
                   .filter(plug => {
+                    if (!item.itemComponents && !detailedMode) {
+                      if (plug.active) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    } else {
+                      return true;
+                    }
+                  })
+                  .filter(plug => {
                     if (item.itemComponents && item.itemComponents.instance && socket.mod) {
                       if (plug.active) {
                         return true;

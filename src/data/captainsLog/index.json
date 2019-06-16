@@ -418,5 +418,10 @@
     "date": "2019-06-14T15:58:59.362Z",
     "version": "2.5.28",
     "content": "- Continued work on tooltips and how item stats are calculated. If you notice anything askew, let me know."
+  },
+  {
+    "date": "2019-06-16T16:19:11.373Z",
+    "version": "2.5.29",
+    "content": "- Continued work on tooltips and how item stats are calculated.\n- Other stuff 😟"
   }
 ]
