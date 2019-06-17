@@ -58,7 +58,7 @@ class Items extends React.Component {
           }}
         >
           <div className='icon'>
-            <ObservedImage className='image' src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
+            <ObservedImage className='image' src={definitionItem.displayProperties.localIcon ? `${definitionItem.displayProperties.icon}` : `https://www.bungie.net${definitionItem.displayProperties.icon}`} />
           </div>
           {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
         </li>

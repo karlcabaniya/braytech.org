@@ -158,13 +158,17 @@
 
 #chalice-recipes .overlay {
   position: absolute;
-  width: 467px;  
+  width: 467px;
+  /* width: 309px; */
   top: 0;
   left: 79px;
   z-index: 3;
   backdrop-filter: blur(17px) saturate(1.2);
 }
 
+/* #chalice-recipes .overlay .list.inventory-items {
+  grid-template-columns: repeat(4, 1fr);
+} */
 
 
 

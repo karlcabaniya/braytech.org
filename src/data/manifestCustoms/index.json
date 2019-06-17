@@ -39,7 +39,7 @@
       },
       "plug": {
         "insertionRules": [],
-        "plugCategoryIdentifier": "penumbra.runes.legendary.rune1",
+        "plugCategoryIdentifier": "penumbra.runes.legendary.rune0",
         "plugCategoryHash": 415109986,
         "onActionRecreateSelf": false,
         "actionRewardSiteHash": 0,
@@ -123,7 +123,7 @@
       },
       "plug": {
         "insertionRules": [],
-        "plugCategoryIdentifier": "penumbra.runes.legendary.rune1",
+        "plugCategoryIdentifier": "penumbra.runes.legendary.rune3",
         "plugCategoryHash": 415109986,
         "onActionRecreateSelf": false,
         "actionRewardSiteHash": 0,
@@ -207,7 +207,7 @@
       },
       "plug": {
         "insertionRules": [],
-        "plugCategoryIdentifier": "penumbra.runes.legendary.rune1",
+        "plugCategoryIdentifier": "penumbra.runes.legendary.rune6",
         "plugCategoryHash": 415109986,
         "onActionRecreateSelf": false,
         "actionRewardSiteHash": 0,
@@ -291,7 +291,7 @@
       },
       "plug": {
         "insertionRules": [],
-        "plugCategoryIdentifier": "penumbra.runes.legendary.rune1",
+        "plugCategoryIdentifier": "penumbra.runes.legendary.rune9",
         "plugCategoryHash": 415109986,
         "onActionRecreateSelf": false,
         "actionRewardSiteHash": 0,

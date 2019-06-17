@@ -48,6 +48,11 @@ class ChaliceRecipes extends React.Component {
       })
       .filter(f => f);
 
+    // this.runes = {
+    //   slot1: ['braytech_purple_rune', 'braytech_red_rune', 'braytech_green_rune', 'braytech_blue_rune', ...this.chalice.slots[0].reusablePlugItems.map(p => p.plugItemHash)],
+    //   slot2: ['braytech_purple_rune', 'braytech_red_rune', 'braytech_green_rune', 'braytech_blue_rune', ...this.chalice.slots[1].reusablePlugItems.map(p => p.plugItemHash)],
+    //   slot3: ['braytech_purple_rune', 'braytech_red_rune', 'braytech_green_rune', 'braytech_blue_rune', ...this.chalice.slots[2].reusablePlugItems.map(p => p.plugItemHash)]
+    // };
     this.runes = {
       slot1: this.chalice.slots[0].reusablePlugItems.map(p => p.plugItemHash),
       slot2: this.chalice.slots[1].reusablePlugItems.map(p => p.plugItemHash),
@@ -94,7 +99,7 @@ class ChaliceRecipes extends React.Component {
       }
     });
 
-    this.combos = combos.slice().filter(c => !c.random);
+    this.combos = combos.slice();
     this.combosAvailable = this.combos.filter(c => {
       if (c.combo[0].length === 1 && c.combo[1].length === 1 && c.combo[2].length === 0) {
         return true;
@@ -195,15 +200,15 @@ class ChaliceRecipes extends React.Component {
       }
     });
 
-    // console.log(matches);
-    // matches.forEach(m => {
-    //   if (m.items.length) {
-    //     let definitionItem = manifest.DestinyInventoryItemDefinition[m.items[0]];
-    //     console.log(definitionItem.displayProperties.name);
-    //   } else {
-    //     console.log(':(');
-    //   }
-    // });
+    console.log(matches);
+    matches.forEach(m => {
+      if (m.items.length) {
+        let definitionItem = manifest.DestinyInventoryItemDefinition[m.items[0]];
+        console.log(definitionItem.displayProperties.name);
+      } else {
+        console.log(':(');
+      }
+    });
 
     this.setState((prevState, props) => {
       prevState.matches = matches;
