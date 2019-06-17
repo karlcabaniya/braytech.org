@@ -30,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "translations": "node ./scripts/extractTranslations.js"
+    "translations": "node ./scripts/extractTranslations.js",
+    "prepareChaliceData": "node ./scripts/prepareChaliceData.js"
   },
   "eslintConfig": {
     "extends": "react-app"
