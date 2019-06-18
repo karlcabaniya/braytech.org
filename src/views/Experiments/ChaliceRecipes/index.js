@@ -7,7 +7,8 @@ import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../../components/ObservedImage';
-import Items from '../../../components/Items';
+
+import Items from './Items';
 import Rewards from './Rewards';
 
 import combos from '../../../data/chaliceData';
@@ -36,6 +37,8 @@ class ChaliceRecipes extends React.Component {
       matches: []
     };
 
+    this.scrollToChalice = React.createRef();
+
     this.chalice = manifest.DestinyInventoryItemDefinition[1115550924];
     this.chalice.slots = Object.entries(this.chalice.sockets.socketEntries)
       .map(([key, value]) => {
@@ -54,9 +57,9 @@ class ChaliceRecipes extends React.Component {
     //   slot3: ['braytech_purple_rune', 'braytech_red_rune', 'braytech_green_rune', 'braytech_blue_rune', ...this.chalice.slots[2].reusablePlugItems.map(p => p.plugItemHash)]
     // };
     this.runes = {
-      slot1: this.chalice.slots[0].reusablePlugItems.map(p => p.plugItemHash),
-      slot2: this.chalice.slots[1].reusablePlugItems.map(p => p.plugItemHash),
-      slot3: this.chalice.slots[2].reusablePlugItems.map(p => p.plugItemHash)
+      slot1: ['braytech_clear_rune', ...this.chalice.slots[0].reusablePlugItems.map(p => p.plugItemHash)],
+      slot2: ['braytech_clear_rune', ...this.chalice.slots[1].reusablePlugItems.map(p => p.plugItemHash)],
+      slot3: ['braytech_clear_rune', ...this.chalice.slots[2].reusablePlugItems.map(p => p.plugItemHash)]
     };
     this.runes.purple = [...this.runes.slot1, ...this.runes.slot2, ...this.runes.slot3].filter(r => {
       let definitionPlug = manifest.DestinyInventoryItemDefinition[r];
@@ -132,7 +135,7 @@ class ChaliceRecipes extends React.Component {
       this.setState((prevState, props) => {
         let change = {};
         if (item.itemHash) {
-          change.activePlug = item.itemHash;
+          change.activePlug = item.itemHash === 'braytech_clear_rune' ? false : item.itemHash;
         }
         change.panelOpen = false;
         return { slots: { ...prevState.slots, [item.slot]: change } };
@@ -156,6 +159,10 @@ class ChaliceRecipes extends React.Component {
         return { slots: { ...prevState.slots, ...change } };
       });
     }
+
+    window.scrollTo({
+      top: this.scrollToChalice.current.offsetTop + this.scrollToChalice.current.offsetHeight / 2 - window.innerHeight / 2
+    });
   };
 
   breakUpRuneAbbreviations = combo => {
@@ -227,6 +234,8 @@ class ChaliceRecipes extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.slots.slot1.activePlug !== this.state.slots.slot1.activePlug || prevState.slots.slot2.activePlug !== this.state.slots.slot2.activePlug || prevState.slots.slot3.activePlug !== this.state.slots.slot3.activePlug) {
       this.checkForCombo();
+    } else if (prevState.slots.slot1.panelOpen !== this.state.slots.slot1.panelOpen || prevState.slots.slot2.panelOpen !== this.state.slots.slot2.panelOpen || prevState.slots.slot3.panelOpen !== this.state.slots.slot3.panelOpen) {
+      this.props.rebindTooltips();
     }
   }
 
@@ -250,7 +259,7 @@ class ChaliceRecipes extends React.Component {
           </div>
         </div>
         <div className='module'>
-          <div className='frame'>
+          <div className='frame' ref={this.scrollToChalice}>
             <div className='flair'>
               <ObservedImage className='image padding corner' src='/static/images/extracts/ui/01E3-00000700.PNG' />
               <ObservedImage className='image leviathan' src='/static/images/extracts/ui/01E3-00000702.PNG' />
@@ -267,10 +276,11 @@ class ChaliceRecipes extends React.Component {
                     if (!definitionActivePlug) {
                       console.log(this.state.slots[key]);
                     }
+
                     activePlug = (
                       <li
                         className={cx({
-                          tooltip: true,
+                          tooltip: false,
                           linked: true
                         })}
                         data-hash={this.state.slots[key].activePlug}
@@ -307,11 +317,11 @@ class ChaliceRecipes extends React.Component {
                     <div key={key} className={cx(key, { slotZ: this.state.slots[key].panelOpen } )}>
                       <div className='slot-inner'>
                         <div className='active-plug'>
-                          <ul className='list inventory-items'>{activePlug}</ul>
+                          <ul className='list chalice-items'>{activePlug}</ul>
                         </div>
                         {this.state.slots[key].panelOpen ? (
                           <div className='overlay'>
-                            <ul className='list inventory-items'>
+                            <ul className='list chalice-items'>
                               <Items
                                 items={this.runes[key].map(s => {
                                   return {

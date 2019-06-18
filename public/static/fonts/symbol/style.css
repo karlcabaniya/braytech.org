@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'symbols';
-  src: url('symbols.woff?3f0sdg') format('woff');
+  src: url('symbols.woff?epvwj3') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -145,6 +145,9 @@ i {
 }
 .uniE16E:before {
   content: "\e16e";
+}
+.uniE176:before {
+  content: "\e176";
 }
 .uniE179:before {
   content: "\e179";

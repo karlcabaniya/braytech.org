@@ -29,7 +29,6 @@ class Collectibles extends React.Component {
     }
 
     combos.forEach((c, i) => {
-
       if (!c.items.length) {
         return null;
       }
@@ -39,7 +38,6 @@ class Collectibles extends React.Component {
       // }
 
       c.items.forEach(hash => {
-
         // if (output.find(o => o.itemHash === hash)) {
         //   return;
         // }
@@ -101,46 +99,56 @@ class Collectibles extends React.Component {
 
         let state = 0;
         if (this.props.member.data) {
-          
           const characterId = this.props.member.characterId;
 
           const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
           const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
-        
+
           let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[characterId].collectibles[definitionCollectible.hash];
           if (scope) {
             state = scope.state;
           }
-
         }
 
         output.push({
           itemHash: hash,
           itemType: definitionItem.itemType,
           el: (
-            <li
-              key={`${hash}-${i}`}
-              className={cx('tooltip', {
-                linked: link && this.props.selfLinkFrom,
-                completed: !enumerateCollectibleState(state).notAcquired
-              })}
-              data-hash={definitionCollectible.itemHash}
-              onClick={e => { this.props.onClick(e, c) }}
-            >
-              <div className='icon'>
-                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionCollectible.displayProperties.icon}`} />
-              </div>
-              <div className='text'>
-                <div className='name'>{definitionCollectible.displayProperties.name}</div>
-                <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[definitionCollectible.hash] ? manifest.statistics.collections[definitionCollectible.hash] : `0.00`}%</div>
-              </div>
-              {link && this.props.selfLinkFrom && !inspect ? <ProfileLink to={{ pathname: link, state: { from: this.props.selfLinkFrom } }} /> : null}
-              {inspect && definitionCollectible.itemHash ? <Link to={{ pathname: `/inspect/${definitionCollectible.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
-            </li>
+            <ul className='list' key={`${hash}-${i}`}>
+              <li
+                className={cx('tooltip', {
+                  linked: link && this.props.selfLinkFrom,
+                  undiscovered: enumerateCollectibleState(state).notAcquired
+                })}
+                data-hash={definitionCollectible.itemHash}
+                onClick={e => {
+                  this.props.onClick(e, c);
+                }}
+              >
+                <div className='icon'>
+                  <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionCollectible.displayProperties.icon}`} />
+                </div>
+                <div className='text'>
+                  <div className='name'>{definitionCollectible.displayProperties.name}</div>
+                  <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[definitionCollectible.hash] ? manifest.statistics.collections[definitionCollectible.hash] : `0.00`}%</div>
+                </div>
+                {link && this.props.selfLinkFrom && !inspect ? <ProfileLink to={{ pathname: link, state: { from: this.props.selfLinkFrom } }} /> : null}
+                {inspect && definitionCollectible.itemHash ? <Link to={{ pathname: `/inspect/${definitionCollectible.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+              </li>
+              <li
+                className={cx('apply', {
+                  linked: true
+                })}
+                onClick={e => {
+                  this.props.onClick(e, c);
+                }}
+              >
+                <i className='uniE176' />
+              </li>
+            </ul>
           )
         });
       });
-
     });
 
     return orderBy(output, [e => e.itemType], ['desc']).map(e => e.el);
@@ -155,8 +163,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default compose(
-  connect(
-    mapStateToProps
-  ),
+  connect(mapStateToProps),
   withNamespaces()
 )(Collectibles);

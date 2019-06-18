@@ -701,7 +701,6 @@
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     backdrop-filter: brightness(1.2) blur(2px);
-    box-shadow: none;
   }
 
   #tooltip .acrylic {
