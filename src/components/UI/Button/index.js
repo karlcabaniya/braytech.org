@@ -39,7 +39,6 @@ class Button extends React.Component {
               action(e);
             }
           }}
-          to={this.props.to}
         >
           {text ? <div className='text'>{text}</div> : children}
         </button>
