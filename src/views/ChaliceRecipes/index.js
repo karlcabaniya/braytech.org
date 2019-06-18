@@ -287,16 +287,16 @@ class ChaliceRecipes extends React.Component {
             <div className='module'>
               <div className='frame' ref={this.scrollToChalice}>
                 <div className={cx('flair', { 'active': this.state.matches.length > 0 })}>
-                  <ObservedImage className='image padding corner' src='/static/images/extracts/ui/01E3-00000700.PNG' />
-                  <ObservedImage className='image padding corner active' src='/static/images/extracts/ui/01E3-00000700-A.PNG' />
-                  <ObservedImage className='image leviathan' src='/static/images/extracts/ui/01E3-00000702.PNG' />
-                  <ObservedImage className='image leviathan active' src='/static/images/extracts/ui/01E3-00000702-A.PNG' />
-                  <ObservedImage className='image ring-outer' src='/static/images/extracts/ui/01E3-00000777.PNG' />
-                  <ObservedImage className='image ring-outer active' src='/static/images/extracts/ui/01E3-00000777-A.PNG' />
-                  <ObservedImage className='image ring-inner' src='/static/images/extracts/ui/01E3-00000709.PNG' />
-                  <ObservedImage className='image ring-inner active' src='/static/images/extracts/ui/01E3-00000709-A.PNG' />
-                  <ObservedImage className='image chalice' src='/static/images/extracts/ui/01A3-00006414.PNG' />
-                  <ObservedImage className='image chalice active' src='/static/images/extracts/ui/01A3-00006414-A.PNG' />
+                  <ObservedImage className='image padding corner' src='/static/images/extracts/ui/01E3-00000700.png' />
+                  <ObservedImage className='image padding corner active' src='/static/images/extracts/ui/01E3-00000700-A.png' />
+                  <ObservedImage className='image leviathan' src='/static/images/extracts/ui/01E3-00000702.png' />
+                  <ObservedImage className='image leviathan active' src='/static/images/extracts/ui/01E3-00000702-A.png' />
+                  <ObservedImage className='image ring-outer' src='/static/images/extracts/ui/01E3-00000777.png' />
+                  <ObservedImage className='image ring-outer active' src='/static/images/extracts/ui/01E3-00000777-A.png' />
+                  <ObservedImage className='image ring-inner' src='/static/images/extracts/ui/01E3-00000709.png' />
+                  <ObservedImage className='image ring-inner active' src='/static/images/extracts/ui/01E3-00000709-A.png' />
+                  <ObservedImage className='image chalice' src='/static/images/extracts/ui/01A3-00006414.png' />
+                  <ObservedImage className='image chalice active' src='/static/images/extracts/ui/01A3-00006414-A.png' />
                 </div>
                 <div className='ui'>
                   <div className='slots'>
