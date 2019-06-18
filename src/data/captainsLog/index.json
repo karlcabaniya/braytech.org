@@ -423,5 +423,10 @@
     "date": "2019-06-16T16:19:11.373Z",
     "version": "2.5.29",
     "content": "- Continued work on tooltips and how item stats are calculated.\n- Other stuff 😟"
+  },
+  {
+    "date": "2019-06-18T17:00:55.676Z",
+    "version": "2.5.31",
+    "content": "- Chalice of Opulence tool BETA"
   }
 ]

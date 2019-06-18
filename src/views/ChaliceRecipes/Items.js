@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
-import manifest from '../../../utils/manifest';
-import ObservedImage from '../../../components/ObservedImage';
-import * as enums from '../../../utils/destinyEnums';
+import manifest from '../../utils/manifest';
+import ObservedImage from '../../components/ObservedImage';
+import * as enums from '../../utils/destinyEnums';
 
 class Items extends React.Component {
   constructor(props) {

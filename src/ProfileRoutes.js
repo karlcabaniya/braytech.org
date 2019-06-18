@@ -13,7 +13,6 @@ import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
 import SitRep from './views/SitRep';
 import ThisWeek from './views/ThisWeek';
-import ChaliceRecipes from './views/Experiments/ChaliceRecipes';
 
 import Header from './components/UI/Header';
 import Spinner from './components/UI/Spinner';
@@ -61,7 +60,6 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/this-week`} exact render={() => <ThisWeek />} />
           <Route path={`${match.url}/sit-rep`} exact render={route => <SitRep />} />
           <Route path={`${match.url}/pgcrs/:type?/:mode?`} render={route => <PGCRs {...route} />} />
-          <Route path={`${match.url}/experiments/chalice-recipes`} exact render={route => <ChaliceRecipes />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/sit-rep` }} />} />
         </Switch>
       </>

@@ -5,14 +5,14 @@ import { withNamespaces } from 'react-i18next';
 import { flattenDepth } from 'lodash';
 import cx from 'classnames';
 
-import manifest from '../../../utils/manifest';
-import ObservedImage from '../../../components/ObservedImage';
-import Button from '../../../components/UI/Button';
+import manifest from '../../utils/manifest';
+import ObservedImage from '../../components/ObservedImage';
+import Button from '../../components/UI/Button';
 
 import Items from './Items';
 import Rewards from './Rewards';
 
-import combos from '../../../data/chaliceData';
+import combos from '../../data/chaliceData';
 
 import './styles.css';
 
@@ -262,9 +262,12 @@ class ChaliceRecipes extends React.Component {
 
   render() {
     const { t, member, viewport } = this.props;
-    const characterId = member.characterId;
-    const characters = member.data.profile.characters.data;
-    const character = characters.find(c => c.characterId === characterId);
+    let characterId, characters, character;
+    if (member.data.profile) {
+      characterId = member.characterId;
+      characters = member.data.profile.characters.data;
+      character = characters.find(c => c.characterId === characterId);
+    }
 
     return (
       <>
@@ -276,96 +279,98 @@ class ChaliceRecipes extends React.Component {
             </div>
             <div className='text'>
               <p>{this.chalice.displayProperties.description}</p>
-              <p>As your currently selected character's class is {manifest.DestinyClassDefinition[character.classHash].displayProperties.name}, only items relevant to them will be displayed.</p>
+              {character ? <p>As your currently selected character's class is {manifest.DestinyClassDefinition[character.classHash].displayProperties.name}, only items relevant to them will be displayed.</p> : null}
               <p>This is a pre-release version of this software. I'm testing UI and data integrity before focusing too much effort into the finer details. If you have questions or corrections, tweet me or find Discord below. 🪁</p>
             </div>
           </div>
-          <div className='module'>
-            <div className='frame' ref={this.scrollToChalice}>
-              <div className={cx('flair', { 'active': this.state.matches.length > 0 })}>
-                <ObservedImage className='image padding corner' src='/static/images/extracts/ui/01E3-00000700.PNG' />
-                <ObservedImage className='image padding corner active' src='/static/images/extracts/ui/01E3-00000700-A.PNG' />
-                <ObservedImage className='image leviathan' src='/static/images/extracts/ui/01E3-00000702.PNG' />
-                <ObservedImage className='image leviathan active' src='/static/images/extracts/ui/01E3-00000702-A.PNG' />
-                <ObservedImage className='image ring-outer' src='/static/images/extracts/ui/01E3-00000777.PNG' />
-                <ObservedImage className='image ring-outer active' src='/static/images/extracts/ui/01E3-00000777-A.PNG' />
-                <ObservedImage className='image ring-inner' src='/static/images/extracts/ui/01E3-00000709.PNG' />
-                <ObservedImage className='image ring-inner active' src='/static/images/extracts/ui/01E3-00000709-A.PNG' />
-                <ObservedImage className='image chalice' src='/static/images/extracts/ui/01A3-00006414.PNG' />
-                <ObservedImage className='image chalice active' src='/static/images/extracts/ui/01A3-00006414-A.PNG' />
-              </div>
-              <div className='ui'>
-                <div className='slots'>
-                  {Object.entries(this.state.slots).map(([key, value]) => {
-                    let activePlug;
-                    let definitionActivePlug = manifest.DestinyInventoryItemDefinition[this.state.slots[key].activePlug ? this.state.slots[key].activePlug : 'braytech_no_rune'];
-                    if (!definitionActivePlug) {
-                      console.log(this.state.slots[key]);
-                    }
+          <div className='padder'>
+            <div className='module'>
+              <div className='frame' ref={this.scrollToChalice}>
+                <div className={cx('flair', { 'active': this.state.matches.length > 0 })}>
+                  <ObservedImage className='image padding corner' src='/static/images/extracts/ui/01E3-00000700.PNG' />
+                  <ObservedImage className='image padding corner active' src='/static/images/extracts/ui/01E3-00000700-A.PNG' />
+                  <ObservedImage className='image leviathan' src='/static/images/extracts/ui/01E3-00000702.PNG' />
+                  <ObservedImage className='image leviathan active' src='/static/images/extracts/ui/01E3-00000702-A.PNG' />
+                  <ObservedImage className='image ring-outer' src='/static/images/extracts/ui/01E3-00000777.PNG' />
+                  <ObservedImage className='image ring-outer active' src='/static/images/extracts/ui/01E3-00000777-A.PNG' />
+                  <ObservedImage className='image ring-inner' src='/static/images/extracts/ui/01E3-00000709.PNG' />
+                  <ObservedImage className='image ring-inner active' src='/static/images/extracts/ui/01E3-00000709-A.PNG' />
+                  <ObservedImage className='image chalice' src='/static/images/extracts/ui/01A3-00006414.PNG' />
+                  <ObservedImage className='image chalice active' src='/static/images/extracts/ui/01A3-00006414-A.PNG' />
+                </div>
+                <div className='ui'>
+                  <div className='slots'>
+                    {Object.entries(this.state.slots).map(([key, value]) => {
+                      let activePlug;
+                      let definitionActivePlug = manifest.DestinyInventoryItemDefinition[this.state.slots[key].activePlug ? this.state.slots[key].activePlug : 'braytech_no_rune'];
+                      if (!definitionActivePlug) {
+                        console.log(this.state.slots[key]);
+                      }
 
-                    activePlug = (
-                      <li
-                        className={cx({
-                          tooltip: viewport.width > 1024 ? true : false,
-                          linked: true
-                        })}
-                        data-hash={this.state.slots[key].activePlug ? this.state.slots[key].activePlug : 'braytech_no_rune'}
-                        onClick={e => {
-                          this.togglePanel(key);
-                        }}
-                      >
-                        <div className='icon'>
-                          <ObservedImage className='image' src={definitionActivePlug.displayProperties.localIcon ? `${definitionActivePlug.displayProperties.icon}` : `https://www.bungie.net${definitionActivePlug.displayProperties.icon}`} />
-                        </div>
-                      </li>
-                    );
-
-                    return (
-                      <div key={key} className={cx(key, { slotZ: this.state.slots[key].panelOpen })}>
-                        <div className='slot-inner'>
-                          <div className='active-plug'>
-                            <ul className='list chalice-items'>{activePlug}</ul>
+                      activePlug = (
+                        <li
+                          className={cx({
+                            tooltip: viewport.width > 1024 ? true : false,
+                            linked: true
+                          })}
+                          data-hash={this.state.slots[key].activePlug ? this.state.slots[key].activePlug : 'braytech_no_rune'}
+                          onClick={e => {
+                            this.togglePanel(key);
+                          }}
+                        >
+                          <div className='icon'>
+                            <ObservedImage className='image' src={definitionActivePlug.displayProperties.localIcon ? `${definitionActivePlug.displayProperties.icon}` : `https://www.bungie.net${definitionActivePlug.displayProperties.icon}`} />
                           </div>
-                          {this.state.slots[key].panelOpen ? (
-                            <div className='overlay'>
-                              <ul className='list chalice-items'>
-                                <Items
-                                  items={this.runes[key].map(s => {
-                                    return {
-                                      itemHash: s,
-                                      slot: key
-                                    };
-                                  })}
-                                  action={this.itemClickHandler}
-                                />
-                              </ul>
+                        </li>
+                      );
+
+                      return (
+                        <div key={key} className={cx(key, { slotZ: this.state.slots[key].panelOpen })}>
+                          <div className='slot-inner'>
+                            <div className='active-plug'>
+                              <ul className='list chalice-items'>{activePlug}</ul>
                             </div>
-                          ) : null}
+                            {this.state.slots[key].panelOpen ? (
+                              <div className='overlay'>
+                                <ul className='list chalice-items'>
+                                  <Items
+                                    items={this.runes[key].map(s => {
+                                      return {
+                                        itemHash: s,
+                                        slot: key
+                                      };
+                                    })}
+                                    action={this.itemClickHandler}
+                                  />
+                                </ul>
+                              </div>
+                            ) : null}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className='module'>
-            {this.state.matches.length > 0 ? (
-              <>
-                <div className='sub-header'>
-                  <div>Selected runes</div>
-                </div>
-                <ul className='list reward-items'>
-                  <Rewards items={this.state.matches} onClick={this.itemClickHandler} matches />
-                </ul>
-              </>
-            ) : null}
-            <div className='sub-header'>
-              <div>Available rewards</div>
+            <div className='module'>
+              {this.state.matches.length > 0 ? (
+                <>
+                  <div className='sub-header'>
+                    <div>Selected runes</div>
+                  </div>
+                  <ul className='list reward-items'>
+                    <Rewards items={this.state.matches} onClick={this.itemClickHandler} matches />
+                  </ul>
+                </>
+              ) : null}
+              <div className='sub-header'>
+                <div>Available rewards</div>
+              </div>
+              <ul className='list reward-items'>
+                <Rewards items={this.combosAvailable} onClick={this.itemClickHandler} />
+              </ul>
             </div>
-            <ul className='list reward-items'>
-              <Rewards items={this.combosAvailable} onClick={this.itemClickHandler} />
-            </ul>
           </div>
         </div>
         <div className='sticky-nav'>

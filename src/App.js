@@ -38,9 +38,12 @@ import Credits from './views/Credits';
 import Experiments from './views/Experiments';
 import Leaderboards from './views/Leaderboards';
 import FAQ from './views/FAQ';
+import ChaliceRecipes from './views/ChaliceRecipes';
+
 import ClanBannerBuilder from './views/Experiments/ClanBannerBuilder';
 import DataInspector from './views/Experiments/DataInspector';
 import OAuthTest from './views/Experiments/OAuthTest';
+
 import OOB from './views/OOB';
 
 const RedirectRoute = props => <Route {...props} render={({ location }) => <Redirect to={{ pathname: '/character-select', state: { from: location } }} />} />;
@@ -212,7 +215,6 @@ class App extends React.Component {
                           <RedirectRoute path='/this-week' exact />
                           <RedirectRoute path='/dossier' />
                           <RedirectRoute path='/pgcrs' />
-                          <RedirectRoute path='/experiments/chalice-recipes' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />
@@ -221,6 +223,7 @@ class App extends React.Component {
                           <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
                           <Route path='/leaderboards/:view?/:dom?/:sub?' render={route => <Leaderboards {...route} />} />
+                          <Route path='/chalice-tool/:rune?/:rune?/:rune?' render={route => <ChaliceRecipes {...route} />} />
                           <Route path='/experiments' exact component={Experiments} />
                           <Route path='/experiments/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
                           <Route path='/experiments/data-inspector' exact component={DataInspector} />

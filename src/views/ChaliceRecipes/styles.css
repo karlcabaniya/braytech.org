@@ -1,16 +1,31 @@
 #chalice-recipes {
-  padding: 4rem 3rem 3rem;
   display: grid;
-  grid-gap: 3rem;
+  padding: 0;
+  margin: -40px auto 0;
+  width: 100%;
+}
+
+#chalice-recipes .module.head {
+  padding: calc(4rem + 40px) 3rem 3rem;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+#chalice-recipes .page-header .name::after {
+  content: 'BETA';
+  position: absolute;
+  font-size: 14px;
+}
+
+#chalice-recipes > .padder {
+  width: 100%;
+  padding: 3rem;
+  display: grid;
   grid-template-columns: minmax(auto, 680px) minmax(200px, auto);
+  grid-gap: 3rem;
 }
 
 #chalice-recipes .module .sub-header ~ .sub-header {
   margin: 3rem 0 1rem;
-}
-
-#chalice-recipes .module.head {
-  grid-column: 1/3;
 }
 
 #chalice-recipes .module.head .text {
@@ -72,7 +87,7 @@
   opacity: 0;
 }
 
-#chalice-recipes .frame .flair .image.dl.corner.active {
+#chalice-recipes .frame .image.corner.active {
   position: absolute;
   top: 0;
 }
@@ -219,12 +234,12 @@ html.backdropfilter #chalice-recipes .overlay {
 
 
 @media screen and (max-width: 1024px) {
-  #chalice-recipes {
+  #chalice-recipes > .padder {
     grid-template-columns: 1fr;
   }
 
   #chalice-recipes .module.head {
-    grid-column: 1/2;
+    padding: calc(3rem + 40px) 2rem 2rem;
   }
 
   #chalice-recipes .overlay {
@@ -234,7 +249,7 @@ html.backdropfilter #chalice-recipes .overlay {
     top: 0;
     left: 0;
     z-index: 20;
-    padding: 3rem 3rem calc(3rem + 60px);
+    padding: calc(3rem + 40px) 3rem calc(3rem + 60px);
     box-shadow: none;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
@@ -252,13 +267,13 @@ html.backdropfilter #chalice-recipes .overlay {
 }
 
 @media screen and (max-width: 600px) {
-  #chalice-recipes {
-    padding: 3rem 2rem 2rem;
+  #chalice-recipes > .padder {
+    padding: 2rem;
     grid-gap: 2rem;
   }
 
   #chalice-recipes .overlay {
-    padding: 2rem 2rem calc(2rem + 60px);
+    padding: calc(2rem + 40px) 2rem calc(2rem + 60px);
   }
 
   #chalice-recipes .module .sub-header ~ .sub-header {

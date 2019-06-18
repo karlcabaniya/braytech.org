@@ -6,19 +6,22 @@ import { withNamespaces } from 'react-i18next';
 import { orderBy } from 'lodash';
 import cx from 'classnames';
 
-import manifest from '../../../utils/manifest';
-import { ProfileLink } from '../../../components/ProfileLink';
-import ObservedImage from '../../../components/ObservedImage';
-import { enumerateCollectibleState } from '../../../utils/destinyEnums';
+import manifest from '../../utils/manifest';
+import { ProfileLink } from '../../components/ProfileLink';
+import ObservedImage from '../../components/ObservedImage';
+import { enumerateCollectibleState } from '../../utils/destinyEnums';
 
 class Collectibles extends React.Component {
   render() {
     const { t, member, matches } = this.props;
     const inspect = this.props.inspect ? true : false;
 
-    const characterId = member.characterId;
-    const characters = member.data.profile.characters.data;
-    const character = characters.find(c => c.characterId === characterId);
+    let characterId, characters, character;
+    if (member.data.profile) {
+      characterId = member.characterId;
+      characters = member.data.profile.characters.data;
+      character = characters.find(c => c.characterId === characterId);
+    }
 
     let output = [];
 
@@ -49,9 +52,9 @@ class Collectibles extends React.Component {
         }
 
         if (definitionItem.itemType === 2) {
-          if (definitionItem.classType !== character.classType) {
-            return;
-          }
+          // if (character && definitionItem.classType !== character.classType) {
+          //   return;
+          // }
         }
 
         let definitionCollectible = manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash];
