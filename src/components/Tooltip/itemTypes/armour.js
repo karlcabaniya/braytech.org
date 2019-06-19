@@ -6,7 +6,7 @@ import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
 
 const armour = (item, member, detailedMode) => {
-  let { stats, sockets, masterwork } = getSockets(item, false, (detailedMode || (item.itemComponents && item.itemComponents.instance)) ? true : false, detailedMode ? false : true);
+  let { stats, sockets, masterwork } = getSockets(item, false, (detailedMode || item.itemComponents) ? true : false, detailedMode ? false : true);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
@@ -79,7 +79,7 @@ const armour = (item, member, detailedMode) => {
                     }
                   })
                   .filter(plug => {
-                    if (item.itemComponents && item.itemComponents.instance && socket.mod) {
+                    if (item.itemComponents && socket.mod) {
                       if (plug.active) {
                         return true;
                       } else {

@@ -34,14 +34,9 @@ class ItemTypes extends React.Component {
       item = manifest[table][hash];
     }
 
-    let itemComponents;
     if (instanceId && member.data && member.data.profile.itemComponents.instances.data[instanceId]) {
-      itemComponents = member.data.profile.itemComponents;
-    } else {
-      itemComponents = false;
-    }
+      let itemComponents = member.data.profile.itemComponents.instances.data[instanceId];
 
-    if (itemComponents && instanceId) {
       item.itemComponents = {
         state: state ? parseInt(state, 10) : false,
         instance: itemComponents.instances.data[instanceId] ? itemComponents.instances.data[instanceId] : false,
@@ -49,6 +44,9 @@ class ItemTypes extends React.Component {
         perks: itemComponents.perks.data[instanceId] ? itemComponents.perks.data[instanceId].perks : false,
         stats: itemComponents.stats.data[instanceId] ? itemComponents.stats.data[instanceId].stats : false
       };
+
+    } else if (instanceId && tooltips.itemComponents[instanceId]) {
+      item.itemComponents = tooltips.itemComponents[instanceId];
     } else {
       item.itemComponents = false;
     }

@@ -3,6 +3,7 @@ import * as ls from '../localStorage';
 let lsState = ls.get('setting.tooltips') ? ls.get('setting.tooltips') : { detailedMode: false };
 let defState = {
   settings: lsState,
+  itemComponents: [],
   bindTime: new Date().getTime()
 };
 
@@ -13,6 +14,15 @@ export default function themeReducer(state = defState, action) {
       return {
         ...state,
         settings: action.payload
+      };
+    case 'PUSH_INSTANCE':
+      let itemComponents = {
+        ...state.itemComponents,
+        ...action.payload
+      };
+      return {
+        ...state,
+        itemComponents
       };
     case 'REBIND_TOOLTIPS':
       return {

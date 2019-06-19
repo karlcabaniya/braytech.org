@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import orderBy from 'lodash/orderBy';
+import { orderBy, cloneDeep } from 'lodash';
 
 import ObservedImage from '../components/ObservedImage';
 import ProgressBar from '../components/UI/ProgressBar';
@@ -43,7 +43,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
   let masterwork = false;
 
   if (item.sockets) {
-    let socketEntries = item.sockets.socketEntries;
+    let socketEntries = cloneDeep(item.sockets.socketEntries);
 
     let socketMasterworkCatalyst;
     let plugMasterworkCatalyst;
@@ -88,6 +88,37 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
         }
 
       });
+    } else if (item.itemComponents && item.itemComponents.custom) {
+      if (item.itemComponents.plugs) {
+        item.itemComponents.plugs.forEach(customPlug => {
+          Object.keys(socketEntries).forEach(key => {
+            let socket = socketEntries[key];
+    
+            console.log(socket);
+            
+            let emptyHim = false;
+
+            socket.reusablePlugItems.concat(socket.randomizedPlugItems).forEach(p => {
+              let definitionPlug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
+              
+              if (definitionPlug && definitionPlug.plug.plugCategoryIdentifier === customPlug.plugCategoryIdentifier && definitionPlug.plug.uiPlugLabel === customPlug.uiPlugLabel) {
+                socket.singleInitialItemHash = definitionPlug.hash;
+                emptyHim = true;
+              } else if (definitionPlug && definitionPlug.plug.plugCategoryIdentifier === customPlug.plugCategoryIdentifier && definitionPlug.hash === customPlug.hash) {
+                socket.singleInitialItemHash = definitionPlug.hash;
+                emptyHim = true;
+              }
+    
+            });
+
+            if (emptyHim) {
+              socket.randomizedPlugItems = [];
+              socket.reusablePlugItems = [];
+            }
+    
+          });
+        });
+      }
     }
 
     

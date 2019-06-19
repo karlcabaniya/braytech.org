@@ -22,9 +22,9 @@ class ChaliceRecipes extends React.Component {
 
     this.state = {
       slots: {
-        slot1: false,
-        slot2: false,
-        slot3: false
+        slot1: parseInt(this.props.match.params.rune1, 10) || false,
+        slot2: parseInt(this.props.match.params.rune2, 10) || false,
+        slot3: parseInt(this.props.match.params.rune3, 10) || false
       },
       slotsPanelOpen: false,
       matches: []
@@ -141,7 +141,7 @@ class ChaliceRecipes extends React.Component {
       this.setState((prevState, props) => {
         let change = { ...prevState };
         if (item.itemHash) {
-          change.slots[item.slot] = item.itemHash === 'braytech_no_rune' ? false : item.itemHash;
+          change.slots[item.slot] = item.itemHash === 'braytech_remove_rune' ? false : item.itemHash;
         }
         change.slotsPanelOpen = false;
         return change;
@@ -228,14 +228,67 @@ class ChaliceRecipes extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
 
-    this.props.rebindTooltips();
+    this.checkForCombo();
+
+    this.combos.forEach((c, i) => {
+      if (!c.items.length) {
+        return null;
+      }
+
+      c.items.forEach(hash => {
+
+        let definitionItem = manifest.DestinyInventoryItemDefinition[hash];
+
+        if (!definitionItem) {
+          return;
+        }
+
+        let itemInstanceId = null;
+
+        if (c.masterwork || c.intrinsic) {
+          itemInstanceId = `${hash}.${c.masterwork || ''}${c.intrinsic || ''}`;
+
+          let existing = this.props.tooltips.itemComponents[itemInstanceId];
+
+          if (existing) {
+            // console.log(`found an instance for ${itemInstanceId}`);
+          } else {
+            // console.log(`couldn't find an instance for ${itemInstanceId}`);
+
+            let plugs = [];
+
+            if (c.masterwork) {
+              plugs.push({
+                plugCategoryIdentifier: c.masterwork,
+                uiPlugLabel: 'masterwork'
+              });
+            }
+
+            if (c.intrinsic) {
+              plugs.push({
+                plugCategoryIdentifier: 'intrinsics',
+                hash: c.intrinsic
+              });
+            }
+
+            this.props.pushInstance({
+              [itemInstanceId]: {
+                custom: true,
+                state: c.masterwork ? 4 : 0,
+                plugs
+              }
+            })
+          }
+          
+        }
+
+      });
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.slots.slot1 !== this.state.slots.slot1 || prevState.slots.slot2 !== this.state.slots.slot2 || prevState.slots.slot3 !== this.state.slots.slot3) {
+    if (prevState.slots.slot1 !== this.state.slots.slot1 || prevState.slots.slot2 !== this.state.slots.slot2 || prevState.slots.slot3 !== this.state.slots.slot3 || prevState.slotsPanelOpen !== this.state.slotsPanelOpen) {
       this.checkForCombo();
-    } else if (prevState.slotsPanelOpen !== this.state.slotsPanelOpen) {
-      this.props.rebindTooltips();
     }
   }
 
@@ -252,7 +305,7 @@ class ChaliceRecipes extends React.Component {
             </div>
             <div className='text'>
               <p>{this.chalice.displayProperties.description}</p>
-              <p><ObservedImage className='image' src='/static/images/extracts/ui/010A-00000554.PNG' /> Does not yet display rune slot 3 interactions. Coming soon, maybe.</p>
+              <p>Does not yet display rune slot 3 interactions. Coming soon, maybe.</p>
             </div>
           </div>
           <div className='padder'>
@@ -390,7 +443,8 @@ class ChaliceRecipes extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    viewport: state.viewport
+    viewport: state.viewport,
+    tooltips: state.tooltips
   };
 }
 
@@ -398,6 +452,9 @@ function mapDispatchToProps(dispatch) {
   return {
     rebindTooltips: value => {
       dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    },
+    pushInstance: value => {
+      dispatch({ type: 'PUSH_INSTANCE', payload: value });
     }
   };
 }

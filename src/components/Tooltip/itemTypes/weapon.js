@@ -8,7 +8,7 @@ import manifest from '../../../utils/manifest';
 import { orderBy } from 'lodash';
 
 const weapon = (item, member, detailedMode) => {
-  let { stats, sockets, masterwork } = getSockets(item, false, (detailedMode || (item.itemComponents && item.itemComponents.instance)) ? true : false, detailedMode ? false : true, false, [], false, detailedMode ? true : false);
+  let { stats, sockets, masterwork } = getSockets(item, false, (detailedMode || item.itemComponents) ? true : false, detailedMode ? false : true, false, [], false, detailedMode ? true : false);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
@@ -119,7 +119,7 @@ const weapon = (item, member, detailedMode) => {
                     }
                   })
                   .filter(plug => {
-                    if (item.itemComponents && item.itemComponents.instance && socket.mod) {
+                    if (item.itemComponents && socket.mod) {
                       if (plug.active) {
                         return true;
                       } else {

@@ -9,12 +9,19 @@ import cx from 'classnames';
 import manifest from '../../utils/manifest';
 import { ProfileLink } from '../../components/ProfileLink';
 import ObservedImage from '../../components/ObservedImage';
-import { enumerateCollectibleState } from '../../utils/destinyEnums';
+import * as enums from '../../utils/destinyEnums';
 
 class Collectibles extends React.Component {
+  componentDidMount() {
+    const { t, member, tooltips, matches } = this.props;
+
+    let combos = this.props.items;
+
+    
+  }
+
   render() {
-    const { t, member, matches } = this.props;
-    const inspect = this.props.inspect ? true : false;
+    const { t, member, tooltips, matches } = this.props;
 
     let characterId, characters, character;
     if (member.data.profile) {
@@ -31,19 +38,14 @@ class Collectibles extends React.Component {
       return null;
     }
 
+    console.log(tooltips)
+
     combos.forEach((c, i) => {
       if (!c.items.length) {
         return null;
       }
 
-      // if (!this.props.matches && c.items.length > 1) {
-      //   return null;
-      // }
-
       c.items.forEach(hash => {
-        // if (output.find(o => o.itemHash === hash)) {
-        //   return;
-        // }
 
         let definitionItem = manifest.DestinyInventoryItemDefinition[hash];
 
@@ -51,54 +53,18 @@ class Collectibles extends React.Component {
           return;
         }
 
-        if (definitionItem.itemType === 2) {
-          // if (character && definitionItem.classType !== character.classType) {
-          //   return;
-          // }
+        let itemInstanceId = null;
+        let itemState = null;
+
+        if (c.masterwork || c.intrinsic) {
+          itemInstanceId = `${hash}.${c.masterwork || ''}${c.intrinsic || ''}`;
+        }
+
+        if (c.masterwork) {
+          itemState = 4;
         }
 
         let definitionCollectible = manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash];
-
-        let link = false;
-
-        // selfLinkFrom
-
-        try {
-          let reverse1;
-          let reverse2;
-          let reverse3;
-
-          manifest.DestinyCollectibleDefinition[definitionCollectible.hash].presentationInfo.parentPresentationNodeHashes.forEach(element => {
-            let skip = false;
-            manifest.DestinyPresentationNodeDefinition[498211331].children.presentationNodes.forEach(parentsChild => {
-              if (manifest.DestinyPresentationNodeDefinition[parentsChild.presentationNodeHash].children.presentationNodes.filter(el => el.presentationNodeHash === element).length > 0) {
-                skip = true;
-                return; // if hash is a child of badges, skip it
-              }
-            });
-
-            if (reverse1 || skip) {
-              return;
-            }
-            reverse1 = manifest.DestinyPresentationNodeDefinition[element];
-          });
-
-          let iteratees = reverse1.presentationInfo ? reverse1.presentationInfo.parentPresentationNodeHashes : reverse1.parentNodeHashes;
-          iteratees.forEach(element => {
-            if (reverse2) {
-              return;
-            }
-            reverse2 = manifest.DestinyPresentationNodeDefinition[element];
-          });
-
-          if (reverse2 && reverse2.parentNodeHashes) {
-            reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
-          }
-
-          link = `/collections/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${definitionCollectible.hash}`;
-        } catch (e) {
-          console.log(e);
-        }
 
         let state = 0;
         if (this.props.member.data) {
@@ -121,10 +87,13 @@ class Collectibles extends React.Component {
             <ul className='list' key={`${hash}-${i}`}>
               <li
                 className={cx('tooltip', {
-                  linked: link && this.props.selfLinkFrom,
-                  undiscovered: enumerateCollectibleState(state).notAcquired
+                  linked: true,
+                  undiscovered: enums.enumerateCollectibleState(state).notAcquired,
+                  masterworked: enums.enumerateItemState(itemState).masterworked
                 })}
-                data-hash={definitionCollectible.itemHash}
+                data-hash={definitionItem.hash}
+                data-instanceid={itemInstanceId}
+                data-state={itemState}
                 onClick={e => {
                   this.props.onClick(e, c);
                 }}
@@ -133,11 +102,9 @@ class Collectibles extends React.Component {
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionCollectible.displayProperties.icon}`} />
                 </div>
                 <div className='text'>
-                  <div className='name'>{definitionCollectible.displayProperties.name}</div>
+                  <div className='name'>{definitionItem.displayProperties.name}</div>
                   <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[definitionCollectible.hash] ? manifest.statistics.collections[definitionCollectible.hash] : `0.00`}%</div>
                 </div>
-                {link && this.props.selfLinkFrom && !inspect ? <ProfileLink to={{ pathname: link, state: { from: this.props.selfLinkFrom } }} /> : null}
-                {inspect && definitionCollectible.itemHash ? <Link to={{ pathname: `/inspect/${definitionCollectible.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
               </li>
               <li
                 className={cx('apply', {
@@ -162,11 +129,23 @@ class Collectibles extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    collectibles: state.collectibles
+    collectibles: state.collectibles,
+    tooltips: state.tooltips
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    pushInstance: value => {
+      dispatch({ type: 'PUSH_INSTANCE', payload: value });
+    }
   };
 }
 
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withNamespaces()
 )(Collectibles);

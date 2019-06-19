@@ -126,16 +126,16 @@ let weapons = {
 }
 
 let masterworks = {
-  "Handling Masterwork": "v400.plugs.weapons.masterworks.stat.hndling",
+  "Handling Masterwork": "v400.plugs.weapons.masterworks.stat.handling",
   "Stability Masterwork": "v400.plugs.weapons.masterworks.stat.stability",
   "Range Masterwork": "v400.plugs.weapons.masterworks.stat.range",
   "Reload Masterwork": "v400.plugs.weapons.masterworks.stat.reload",
-  "Arc Resist": 3130025796,
-  "Void Resist": 1576279482,
-  "Solar Resist": 3789923095,
-  "Arc": 3130025796,
-  "Void": 1576279482,
-  "Solar": 3789923095
+  "Arc Resist": "v400.plugs.armor.masterworks.stat.resistance_2",
+  "Void Resist": "v400.plugs.armor.masterworks.stat.resistance_4",
+  "Solar Resist": "v400.plugs.armor.masterworks.stat.resistance_3",
+  "Arc": "v400.plugs.armor.masterworks.stat.resistance_2",
+  "Void": "v400.plugs.armor.masterworks.stat.resistance_4",
+  "Solar": "v400.plugs.armor.masterworks.stat.resistance_3"
 }
 
 let armorTypes = {
