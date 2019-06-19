@@ -116,6 +116,7 @@ class Collectibles extends React.Component {
         output.push({
           itemHash: hash,
           itemType: definitionItem.itemType,
+          name: definitionItem.displayProperties.name,
           el: (
             <ul className='list' key={`${hash}-${i}`}>
               <li
@@ -154,7 +155,7 @@ class Collectibles extends React.Component {
       });
     });
 
-    return orderBy(output, [e => e.itemType], ['desc']).map(e => e.el);
+    return orderBy(output, [e => e.itemType, e => e.name], ['desc', 'asc']).map(e => e.el);
   }
 }
 

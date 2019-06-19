@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import { flattenDepth } from 'lodash';
+import { flattenDepth, groupBy, orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
@@ -22,19 +22,11 @@ class ChaliceRecipes extends React.Component {
 
     this.state = {
       slots: {
-        slot1: {
-          panelOpen: false,
-          activePlug: false
-        },
-        slot2: {
-          panelOpen: false,
-          activePlug: false
-        },
-        slot3: {
-          panelOpen: false,
-          activePlug: false
-        }
+        slot1: false,
+        slot2: false,
+        slot3: false
       },
+      slotsPanelOpen: false,
       matches: []
     };
 
@@ -52,15 +44,10 @@ class ChaliceRecipes extends React.Component {
       })
       .filter(f => f);
 
-    // this.runes = {
-    //   slot1: ['braytech_purple_rune', 'braytech_red_rune', 'braytech_green_rune', 'braytech_blue_rune', ...this.chalice.slots[0].reusablePlugItems.map(p => p.plugItemHash)],
-    //   slot2: ['braytech_purple_rune', 'braytech_red_rune', 'braytech_green_rune', 'braytech_blue_rune', ...this.chalice.slots[1].reusablePlugItems.map(p => p.plugItemHash)],
-    //   slot3: ['braytech_purple_rune', 'braytech_red_rune', 'braytech_green_rune', 'braytech_blue_rune', ...this.chalice.slots[2].reusablePlugItems.map(p => p.plugItemHash)]
-    // };
     this.runes = {
-      slot1: ['braytech_no_rune', ...this.chalice.slots[0].reusablePlugItems.map(p => p.plugItemHash)],
-      slot2: ['braytech_no_rune', ...this.chalice.slots[1].reusablePlugItems.map(p => p.plugItemHash)],
-      slot3: ['braytech_no_rune', ...this.chalice.slots[2].reusablePlugItems.map(p => p.plugItemHash)]
+      slot1: ['braytech_remove_rune', ...this.chalice.slots[0].reusablePlugItems.map(p => p.plugItemHash)],
+      slot2: ['braytech_remove_rune', ...this.chalice.slots[1].reusablePlugItems.map(p => p.plugItemHash)],
+      slot3: ['braytech_remove_rune', ...this.chalice.slots[2].reusablePlugItems.map(p => p.plugItemHash)]
     };
     this.runes.purple = [...this.runes.slot1, ...this.runes.slot2, ...this.runes.slot3].filter(r => {
       let definitionPlug = manifest.DestinyInventoryItemDefinition[r];
@@ -105,22 +92,26 @@ class ChaliceRecipes extends React.Component {
 
     this.combos = combos.slice();
     this.combosAvailable = this.combos.filter(c => {
-      if (c.combo[0].length === 1 && c.combo[1].length === 1 && c.combo[2].length === 0) {
+      if (c.combo[0].length === 1 && (c.combo[1].length === 1 && ['braytech_purple_rune', 'braytech_red_rune', 'braytech_green_rune', 'braytech_blue_rune'].includes(c.combo[1][0])) && c.combo[2].length === 0) {
         return true;
       } else {
         return false;
       }
     });
-
-    console.log(combos);
-    console.log(this.runes);
   }
 
-  togglePanel = slot => {
-    this.setState((prevState, props) => {
-      prevState.slots[slot].panelOpen = !prevState.slots[slot].panelOpen ? true : false;
-      return prevState;
-    });
+  toggleSlotsPanelHandler = slot => {
+    if (this.state.slotsPanelOpen === slot) {
+      this.setState((prevState, props) => {
+        prevState.slotsPanelOpen = false;
+        return prevState;
+      });
+    } else {
+      this.setState((prevState, props) => {
+        prevState.slotsPanelOpen = slot;
+        return prevState;
+      });
+    }
 
     this.props.rebindTooltips();
   };
@@ -128,22 +119,16 @@ class ChaliceRecipes extends React.Component {
   resetHandler = e => {
     this.setState((prevState, props) => {
       let change = {
-        slot1: {
-          panelOpen: false,
-          activePlug: false
+        slots: {
+          slot1: false,
+          slot2: false,
+          slot3: false
         },
-        slot2: {
-          panelOpen: false,
-          activePlug: false
-        },
-        slot3: {
-          panelOpen: false,
-          activePlug: false
-        }
+        slotsPanelOpen: false
       };
-      return { slots: { ...prevState.slots, ...change } };
+      return { ...prevState, ...change };
     });
-  }
+  };
 
   itemClickHandler = (e, item) => {
     console.log(item);
@@ -154,30 +139,24 @@ class ChaliceRecipes extends React.Component {
 
     if (item.slot) {
       this.setState((prevState, props) => {
-        let change = {};
+        let change = { ...prevState };
         if (item.itemHash) {
-          change.activePlug = item.itemHash === 'braytech_no_rune' ? false : item.itemHash;
+          change.slots[item.slot] = item.itemHash === 'braytech_no_rune' ? false : item.itemHash;
         }
-        change.panelOpen = false;
-        return { slots: { ...prevState.slots, [item.slot]: change } };
+        change.slotsPanelOpen = false;
+        return change;
       });
     } else if (item.combo) {
       this.setState((prevState, props) => {
         let change = {
-          slot1: {
-            panelOpen: false,
-            activePlug: item.combo[0].length ? item.combo[0][0] : false
+          slots: {
+            slot1: item.combo[0].length ? item.combo[0][0] : false,
+            slot2: item.combo[1].length ? item.combo[1][0] : false,
+            slot3: item.combo[2].length ? item.combo[2][0] : false
           },
-          slot2: {
-            panelOpen: false,
-            activePlug: item.combo[1].length ? item.combo[1][0] : false
-          },
-          slot3: {
-            panelOpen: false,
-            activePlug: item.combo[2].length ? item.combo[2][0] : false
-          }
+          slotsPanelOpen: false
         };
-        return { slots: { ...prevState.slots, ...change } };
+        return { ...prevState, ...change };
       });
     }
 
@@ -206,9 +185,9 @@ class ChaliceRecipes extends React.Component {
 
   checkForCombo = () => {
     let matches = this.combos;
-    let slot1 = this.state.slots.slot1.activePlug;
-    let slot2 = this.state.slots.slot2.activePlug;
-    let slot3 = this.state.slots.slot3.activePlug;
+    let slot1 = this.state.slots.slot1;
+    let slot2 = this.state.slots.slot2;
+    let slot3 = this.state.slots.slot3;
 
     matches = matches.filter(m => {
       let combo1 = this.breakUpRuneAbbreviations(m.combo[0]);
@@ -253,21 +232,15 @@ class ChaliceRecipes extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.slots.slot1.activePlug !== this.state.slots.slot1.activePlug || prevState.slots.slot2.activePlug !== this.state.slots.slot2.activePlug || prevState.slots.slot3.activePlug !== this.state.slots.slot3.activePlug) {
+    if (prevState.slots.slot1 !== this.state.slots.slot1 || prevState.slots.slot2 !== this.state.slots.slot2 || prevState.slots.slot3 !== this.state.slots.slot3) {
       this.checkForCombo();
-    } else if (prevState.slots.slot1.panelOpen !== this.state.slots.slot1.panelOpen || prevState.slots.slot2.panelOpen !== this.state.slots.slot2.panelOpen || prevState.slots.slot3.panelOpen !== this.state.slots.slot3.panelOpen) {
+    } else if (prevState.slotsPanelOpen !== this.state.slotsPanelOpen) {
       this.props.rebindTooltips();
     }
   }
 
   render() {
-    const { t, member, viewport } = this.props;
-    let characterId, characters, character;
-    if (member.data.profile) {
-      characterId = member.characterId;
-      characters = member.data.profile.characters.data;
-      character = characters.find(c => c.characterId === characterId);
-    }
+    const { t, viewport } = this.props;
 
     return (
       <>
@@ -279,14 +252,13 @@ class ChaliceRecipes extends React.Component {
             </div>
             <div className='text'>
               <p>{this.chalice.displayProperties.description}</p>
-              {character ? <p>As your currently selected character's class is {manifest.DestinyClassDefinition[character.classHash].displayProperties.name}, only items relevant to them will be displayed.</p> : null}
-              <p>This is a pre-release version of this software. I'm testing UI and data integrity before focusing too much effort into the finer details. If you have questions or corrections, tweet me or find Discord below. 🪁</p>
+              <p><ObservedImage className='image' src='/static/images/extracts/ui/010A-00000554.PNG' /> Does not yet display rune slot 3 interactions. Coming soon, maybe.</p>
             </div>
           </div>
           <div className='padder'>
             <div className='module'>
               <div className='frame' ref={this.scrollToChalice}>
-                <div className={cx('flair', { 'active': this.state.matches.length > 0 })}>
+                <div className={cx('flair', { active: this.state.matches.length > 0 })}>
                   <ObservedImage className='image padding corner' src='/static/images/extracts/ui/01E3-00000700.png' />
                   <ObservedImage className='image padding corner active' src='/static/images/extracts/ui/01E3-00000700-A.png' />
                   <ObservedImage className='image leviathan' src='/static/images/extracts/ui/01E3-00000702.png' />
@@ -302,7 +274,7 @@ class ChaliceRecipes extends React.Component {
                   <div className='slots'>
                     {Object.entries(this.state.slots).map(([key, value]) => {
                       let activePlug;
-                      let definitionActivePlug = manifest.DestinyInventoryItemDefinition[this.state.slots[key].activePlug ? this.state.slots[key].activePlug : 'braytech_no_rune'];
+                      let definitionActivePlug = manifest.DestinyInventoryItemDefinition[this.state.slots[key] ? this.state.slots[key] : 'braytech_no_rune'];
                       if (!definitionActivePlug) {
                         console.log(this.state.slots[key]);
                       }
@@ -313,9 +285,9 @@ class ChaliceRecipes extends React.Component {
                             tooltip: viewport.width > 1024 ? true : false,
                             linked: true
                           })}
-                          data-hash={this.state.slots[key].activePlug ? this.state.slots[key].activePlug : 'braytech_no_rune'}
+                          data-hash={this.state.slots[key] ? this.state.slots[key] : 'braytech_no_rune'}
                           onClick={e => {
-                            this.togglePanel(key);
+                            this.toggleSlotsPanelHandler(key);
                           }}
                         >
                           <div className='icon'>
@@ -325,19 +297,20 @@ class ChaliceRecipes extends React.Component {
                       );
 
                       return (
-                        <div key={key} className={cx(key, { slotZ: this.state.slots[key].panelOpen })}>
+                        <div key={key} className={cx(key, { slotZ: this.state.slotsPanelOpen === key })}>
                           <div className='slot-inner'>
                             <div className='active-plug'>
                               <ul className='list chalice-items'>{activePlug}</ul>
                             </div>
-                            {this.state.slots[key].panelOpen ? (
+                            {this.state.slotsPanelOpen === key ? (
                               <div className='overlay'>
                                 <ul className='list chalice-items'>
                                   <Items
                                     items={this.runes[key].map(s => {
                                       return {
                                         itemHash: s,
-                                        slot: key
+                                        slot: key,
+                                        active: this.state.slots[key] === s
                                       };
                                     })}
                                     action={this.itemClickHandler}
@@ -364,12 +337,27 @@ class ChaliceRecipes extends React.Component {
                   </ul>
                 </>
               ) : null}
-              <div className='sub-header'>
-                <div>Available rewards</div>
-              </div>
-              <ul className='list reward-items'>
-                <Rewards items={this.combosAvailable} onClick={this.itemClickHandler} />
-              </ul>
+              {orderBy(
+                Object.entries(groupBy(this.combosAvailable, g => g.parentPresentationNodeHash)).map(([key, value]) => {
+                  let definitionPresentationNode = manifest.DestinyPresentationNodeDefinition[key];
+
+                  return {
+                    itemType: value[0].itemType,
+                    el: (
+                      <React.Fragment key={key}>
+                        <div className='sub-header'>
+                          <div>{definitionPresentationNode ? definitionPresentationNode.displayProperties.name : 'uh oh'}</div>
+                        </div>
+                        <ul className='list reward-items'>
+                          <Rewards items={value} onClick={this.itemClickHandler} />
+                        </ul>
+                      </React.Fragment>
+                    )
+                  };
+                }),
+                [r => r.itemType],
+                ['desc']
+              ).map(e => e.el)}
             </div>
           </div>
         </div>
@@ -377,10 +365,20 @@ class ChaliceRecipes extends React.Component {
           <div />
           <ul>
             <li>
-              <Button action={this.resetHandler}>
-                <i className='uniE777' />
-                {t('Reset')}
-              </Button>
+              {viewport.width <= 1024 && this.state.slotsPanelOpen ? (
+                <Button
+                  action={e => {
+                    this.toggleSlotsPanelHandler(this.state.slotsPanelOpen);
+                  }}
+                >
+                  <i className='destiny-B_Button' /> {t('Dismiss')}
+                </Button>
+              ) : (
+                <Button action={this.resetHandler}>
+                  <i className='uniE777' />
+                  {t('Reset')}
+                </Button>
+              )}
             </li>
           </ul>
         </div>

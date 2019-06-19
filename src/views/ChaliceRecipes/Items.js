@@ -8,12 +8,6 @@ import ObservedImage from '../../components/ObservedImage';
 import * as enums from '../../utils/destinyEnums';
 
 class Items extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {}
-
   render() {
     const { t, member, items, action } = this.props;
 
@@ -33,8 +27,7 @@ class Items extends React.Component {
             className={cx({
               tooltip: !this.props.disableTooltip,
               linked: true,
-              masterworked: enums.enumerateItemState(item.state).masterworked,
-              exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
+              active: item.active
             })}
             data-hash={item.itemHash}
             data-instanceid={item.itemInstanceId}
@@ -54,7 +47,8 @@ class Items extends React.Component {
           </li>
           <li
             className={cx('apply', {
-              linked: true
+              linked: true,
+              active: item.active
             })}
             onClick={e => {
               if (action) {

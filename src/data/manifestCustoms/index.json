@@ -338,7 +338,7 @@
     },
     "braytech_no_rune": {
       "displayProperties": {
-        "description": "Remove any runes in this slot",
+        "description": "Insert a rune into this slot",
         "name": "Empty slot",
         "icon": "/static/images/extracts/ui/0560-00006055.png",
         "localIcon": true,
@@ -351,7 +351,7 @@
         "blue": 0,
         "alpha": 0
       },
-      "itemTypeDisplayName": "Material",
+      "itemTypeDisplayName": "Action",
       "uiItemDisplayStyle": "",
       "itemTypeAndTierDisplayName": "Legendary Material",
       "displaySource": "",
@@ -362,8 +362,8 @@
         "tierTypeHash": 4008398120,
         "isInstanceItem": false,
         "nonTransferrableOriginal": false,
-        "tierTypeName": "Legendary",
-        "tierType": 5,
+        "tierTypeName": "Common",
+        "tierType": 1,
         "expirationTooltip": "",
         "expiredInActivityMessage": "",
         "expiredInOrbitMessage": "",
@@ -376,6 +376,90 @@
       "plug": {
         "insertionRules": [],
         "plugCategoryIdentifier": "penumbra.runes.legendary.rune20",
+        "plugCategoryHash": 415109986,
+        "onActionRecreateSelf": false,
+        "actionRewardSiteHash": 0,
+        "actionRewardItemOverrideHash": 0,
+        "insertionMaterialRequirementHash": 0,
+        "previewItemOverrideHash": 0,
+        "enabledMaterialRequirementHash": 0,
+        "enabledRules": [],
+        "uiPlugLabel": "",
+        "plugStyle": 0,
+        "isPseudoPlug": false,
+        "plugAvailability": 0,
+        "alternateUiPlugLabel": "",
+        "alternatePlugStyle": 0,
+        "isDummyPlug": false
+      },
+      "acquireRewardSiteHash": 0,
+      "acquireUnlockHash": 0,
+      "investmentStats": [],
+      "perks": [
+        {
+          "requirementDisplayString": "",
+          "perkHash": 2458424464,
+          "perkVisibility": 0
+        }
+      ],
+      "allowActions": true,
+      "doesPostmasterPullHaveSideEffects": true,
+      "nonTransferrable": true,
+      "itemCategoryHashes": [
+        3109687656
+      ],
+      "specialItemType": 0,
+      "itemType": 20,
+      "itemSubType": 0,
+      "classType": 3,
+      "equippable": false,
+      "defaultDamageType": 0,
+      "isWrapper": false,
+      "hash": 2149082452,
+      "index": 7779,
+      "redacted": false,
+      "blacklisted": false
+    },
+    "braytech_remove_rune": {
+      "displayProperties": {
+        "description": "Remove any runes from this slot",
+        "name": "Empty slot",
+        "icon": "/static/images/extracts/ui/0560-00006055.png",
+        "localIcon": true,
+        "hasIcon": true
+      },
+      "backgroundColor": {
+        "colorHash": 0,
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 0
+      },
+      "itemTypeDisplayName": "Action",
+      "uiItemDisplayStyle": "",
+      "itemTypeAndTierDisplayName": "Legendary Material",
+      "displaySource": "",
+      "inventory": {
+        "maxStackSize": 1,
+        "bucketTypeHash": 2422292810,
+        "recoveryBucketTypeHash": 0,
+        "tierTypeHash": 4008398120,
+        "isInstanceItem": false,
+        "nonTransferrableOriginal": false,
+        "tierTypeName": "Common",
+        "tierType": 1,
+        "expirationTooltip": "",
+        "expiredInActivityMessage": "",
+        "expiredInOrbitMessage": "",
+        "suppressExpirationWhenObjectivesComplete": true
+      },
+      "sourceData": {
+        "exclusive": 0,
+        "vendorSources": []
+      },
+      "plug": {
+        "insertionRules": [],
+        "plugCategoryIdentifier": "penumbra.runes.legendary.rune21",
         "plugCategoryHash": 415109986,
         "onActionRecreateSelf": false,
         "actionRewardSiteHash": 0,

@@ -145,6 +145,72 @@ let armorTypes = {
   "Resilience": 2287852220
 }
 
+function findNode(itemHash) {
+
+  let reverse1;
+  let reverse2;
+  let reverse3;
+
+  let defItem = manifest.DestinyInventoryItemDefinition[itemHash];
+  let collectibleHash = defItem.collectibleHash;
+
+  if (defItem.itemType === 2) {
+    try {
+      //manifest.DestinyCollectibleDefinition[collectibleHash].presentationInfo.parentPresentationNodeHashes.forEach(element => {
+        // let skip = false;
+        // manifest.DestinyPresentationNodeDefinition[498211331].children.presentationNodes.forEach(parentsChild => {
+        //   if (manifest.DestinyPresentationNodeDefinition[parentsChild.presentationNodeHash].children.presentationNodes.filter(el => el.presentationNodeHash === element).length > 0) {
+        //     skip = true;
+        //     return; // if hash is a child of badges, skip it
+        //   }
+        // });
+    
+        // if (reverse1 || skip) {
+        //   return;
+        // }
+        //reverse1 = manifest.DestinyPresentationNodeDefinition[element];
+        reverse1 = manifest.DestinyPresentationNodeDefinition[1605042242]
+      //});
+    } catch (e) {
+  
+    }
+  } else {
+    try {
+      manifest.DestinyCollectibleDefinition[collectibleHash].presentationInfo.parentPresentationNodeHashes.forEach(element => {
+        let skip = false;
+        manifest.DestinyPresentationNodeDefinition[498211331].children.presentationNodes.forEach(parentsChild => {
+          if (manifest.DestinyPresentationNodeDefinition[parentsChild.presentationNodeHash].children.presentationNodes.filter(el => el.presentationNodeHash === element).length > 0) {
+            skip = true;
+            return; // if hash is a child of badges, skip it
+          }
+        });
+    
+        if (reverse1 || skip) {
+          return;
+        }
+        reverse1 = manifest.DestinyPresentationNodeDefinition[element];
+      });
+    
+      let iteratees = reverse1.presentationInfo ? reverse1.presentationInfo.parentPresentationNodeHashes : reverse1.parentNodeHashes;
+      iteratees.forEach(element => {
+        if (reverse2) {
+          return;
+        }
+        reverse2 = manifest.DestinyPresentationNodeDefinition[element];
+      });
+    
+      if (reverse2 && reverse2.parentNodeHashes) {
+        reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
+      }
+    } catch (e) {
+  
+    }
+  }
+
+  return reverse1 && reverse1.hash;
+
+}
+
 input.forEach(r => {
 
   let t0 = [];
@@ -154,6 +220,8 @@ input.forEach(r => {
   let t4 = false;
   let t5 = false;
   let t6 = false;
+  let t7 = false;
+  let t8 = false;
 
   Object.values(manifest.DestinyInventoryItemDefinition).forEach(i => {
     let i1 = r.result.toLowerCase();
@@ -168,11 +236,17 @@ input.forEach(r => {
       if (/Random/i.test(r.result)) {
         t6 = true;
       }
+      t7 = findNode(armors[r.result][0]);
+      t8 = 2;
     } else if (weapons[r.result]) {
       t0 = weapons[r.result];
       t6 = true;
+      t7 = findNode(weapons[r.result][0]);
+      t8 = 3;
     } else if (i1 === i2) {
       t0 = [i.hash];
+      t7 = findNode(i.hash);
+      t8 = i.itemType;
     }
 
     if (masterworks[r.masterwork]) {
@@ -218,7 +292,7 @@ input.forEach(r => {
   } else if (r2 === 'any blue') {
     t2.push('braytech_blue_rune');
   } else {
-    runes.slot1.forEach(b => {
+    runes.slot2.forEach(b => {
       let def = manifest.DestinyInventoryItemDefinition[b];
       let d1 = def.displayProperties.name.toLowerCase();
 
@@ -240,7 +314,7 @@ input.forEach(r => {
   } else if (r3 === 'any blue') {
     t3.push('braytech_blue_rune');
   } else {
-    runes.slot1.forEach(b => {
+    runes.slot3.forEach(b => {
       let def = manifest.DestinyInventoryItemDefinition[b];
       let d1 = def.displayProperties.name.toLowerCase();
 
@@ -254,6 +328,7 @@ input.forEach(r => {
   let ttt = {
     items: t0,
     combo: [t1, t2, t3],
+    itemType: t8,
     csv: r
   }
 
@@ -267,6 +342,10 @@ input.forEach(r => {
 
   if (t6) {
     ttt.random = t6;
+  }
+
+  if (t7) {
+    ttt.parentPresentationNodeHash = t7;
   }
 
   output.push(ttt);
