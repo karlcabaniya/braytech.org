@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
+import { cloneDeep } from 'lodash';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
@@ -31,11 +32,11 @@ class ItemTypes extends React.Component {
         redacted: true
       };
     } else {
-      item = manifest[table][hash];
+      item = cloneDeep(manifest[table][hash]);
     }
 
     if (instanceId && member.data && member.data.profile.itemComponents.instances.data[instanceId]) {
-      let itemComponents = member.data.profile.itemComponents.instances.data[instanceId];
+      let itemComponents = member.data.profile.itemComponents;
 
       item.itemComponents = {
         state: state ? parseInt(state, 10) : false,

@@ -139,10 +139,9 @@ let masterworks = {
 }
 
 let armorTypes = {
-  "Mobility": 2951930089,
-  "Recovery": 270846462,
-  "Resilient": 2287852220,
-  "Resilience": 2287852220
+  "Mobility": 1633794450,
+  "Recovery": 2032054360,
+  "Resilience": 3530997750
 }
 
 function findNode(itemHash) {

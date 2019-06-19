@@ -167,7 +167,7 @@ class Header extends React.Component {
       },
       {
         name: t('Chalice of Opulence'),
-        desc: t('An auspicious gift from Emperor Calus to you, his favorite Guardian. May you drink deep from your chalice and grow fat with strength.'),
+        desc: t('A recipe tool for Emperor Calus\' auspicious gift'),
         slug: '/chalice-tool',
         exact: false,
         profile: false

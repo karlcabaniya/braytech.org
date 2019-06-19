@@ -43,7 +43,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
   let masterwork = false;
 
   if (item.sockets) {
-    let socketEntries = cloneDeep(item.sockets.socketEntries);
+    let socketEntries = item.sockets.socketEntries;
 
     let socketMasterworkCatalyst;
     let plugMasterworkCatalyst;
@@ -94,7 +94,7 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           Object.keys(socketEntries).forEach(key => {
             let socket = socketEntries[key];
     
-            console.log(socket);
+            //console.log(socket);
             
             let emptyHim = false;
 
@@ -102,10 +102,17 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
               let definitionPlug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
               
               if (definitionPlug && definitionPlug.plug.plugCategoryIdentifier === customPlug.plugCategoryIdentifier && definitionPlug.plug.uiPlugLabel === customPlug.uiPlugLabel) {
-                socket.singleInitialItemHash = definitionPlug.hash;
+                if (customPlug.disable) {
+                  socket.singleInitialItemHash = 0;
+                } else {
+                  socket.singleInitialItemHash = definitionPlug.hash;
+                }
                 emptyHim = true;
               } else if (definitionPlug && definitionPlug.plug.plugCategoryIdentifier === customPlug.plugCategoryIdentifier && definitionPlug.hash === customPlug.hash) {
                 socket.singleInitialItemHash = definitionPlug.hash;
+                emptyHim = true;
+              } else if (definitionPlug.plug.plugCategoryHash === 3313201758 && customPlug.hash) {
+                socket.singleInitialItemHash = customPlug.hash;
                 emptyHim = true;
               }
     
@@ -284,6 +291,8 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
   }
 
   // console.log(socketsOutput)
+
+  // console.log(item)
 
   let statsOutput = [];
 

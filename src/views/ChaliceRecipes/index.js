@@ -190,9 +190,12 @@ class ChaliceRecipes extends React.Component {
     let slot3 = this.state.slots.slot3;
 
     matches = matches.filter(m => {
-      let combo1 = this.breakUpRuneAbbreviations(m.combo[0]);
+      // let combo1 = this.breakUpRuneAbbreviations(m.combo[0]);
+      let combo1 = m.combo[0];
       let combo2 = this.breakUpRuneAbbreviations(m.combo[1]);
+      // let combo2 = m.combo[1];
       let combo3 = this.breakUpRuneAbbreviations(m.combo[2]);
+      // let combo3 = m.combo[2];
 
       // console.log(combo1, combo2, combo3)
 
@@ -243,43 +246,36 @@ class ChaliceRecipes extends React.Component {
           return;
         }
 
-        let itemInstanceId = null;
+        let itemInstanceId = `${hash}_${c.masterwork || ''}${c.intrinsic || ''}`;
+        let existing = this.props.tooltips.itemComponents[itemInstanceId];
 
-        if (c.masterwork || c.intrinsic) {
-          itemInstanceId = `${hash}.${c.masterwork || ''}${c.intrinsic || ''}`;
+        if (existing) {
+          // console.log(`found an instance for ${itemInstanceId}`);
+        } else {
+          // console.log(`couldn't find an instance for ${itemInstanceId}`);
 
-          let existing = this.props.tooltips.itemComponents[itemInstanceId];
+          let plugs = [];
 
-          if (existing) {
-            // console.log(`found an instance for ${itemInstanceId}`);
-          } else {
-            // console.log(`couldn't find an instance for ${itemInstanceId}`);
+          plugs.push({
+            plugCategoryIdentifier: !c.masterwork ? 'v400.plugs.weapons.masterworks.stat.handling' : c.masterwork,
+            disable: !c.masterwork ? true : false,
+            uiPlugLabel: 'masterwork'
+          });
 
-            let plugs = [];
-
-            if (c.masterwork) {
-              plugs.push({
-                plugCategoryIdentifier: c.masterwork,
-                uiPlugLabel: 'masterwork'
-              });
-            }
-
-            if (c.intrinsic) {
-              plugs.push({
-                plugCategoryIdentifier: 'intrinsics',
-                hash: c.intrinsic
-              });
-            }
-
-            this.props.pushInstance({
-              [itemInstanceId]: {
-                custom: true,
-                state: c.masterwork ? 4 : 0,
-                plugs
-              }
-            })
+          if (c.intrinsic) {
+            plugs.push({
+              plugCategoryIdentifier: 'intrinsics',
+              hash: c.intrinsic
+            });
           }
-          
+
+          this.props.pushInstance({
+            [itemInstanceId]: {
+              custom: true,
+              state: c.masterwork ? 4 : 0,
+              plugs
+            }
+          })
         }
 
       });
@@ -305,7 +301,6 @@ class ChaliceRecipes extends React.Component {
             </div>
             <div className='text'>
               <p>{this.chalice.displayProperties.description}</p>
-              <p>Does not yet display rune slot 3 interactions. Coming soon, maybe.</p>
             </div>
           </div>
           <div className='padder'>

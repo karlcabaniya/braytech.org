@@ -12,14 +12,6 @@ import ObservedImage from '../../components/ObservedImage';
 import * as enums from '../../utils/destinyEnums';
 
 class Collectibles extends React.Component {
-  componentDidMount() {
-    const { t, member, tooltips, matches } = this.props;
-
-    let combos = this.props.items;
-
-    
-  }
-
   render() {
     const { t, member, tooltips, matches } = this.props;
 
@@ -38,8 +30,6 @@ class Collectibles extends React.Component {
       return null;
     }
 
-    console.log(tooltips)
-
     combos.forEach((c, i) => {
       if (!c.items.length) {
         return null;
@@ -53,12 +43,8 @@ class Collectibles extends React.Component {
           return;
         }
 
-        let itemInstanceId = null;
+        let itemInstanceId = `${hash}_${c.masterwork || ''}${c.intrinsic || ''}`;
         let itemState = null;
-
-        if (c.masterwork || c.intrinsic) {
-          itemInstanceId = `${hash}.${c.masterwork || ''}${c.intrinsic || ''}`;
-        }
 
         if (c.masterwork) {
           itemState = 4;
