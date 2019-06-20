@@ -64,6 +64,12 @@ class RecordsSearch extends React.Component {
     
   }, 500);
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.results !== this.state.results) {
+      this.props.rebindTooltips();
+    }
+  }
+
   render() {
     const { t } = this.props;
     const { results, search } = this.state;
@@ -85,11 +91,23 @@ class RecordsSearch extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    tooltips: state.tooltips
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
   };
 }
 
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withNamespaces()
 )(RecordsSearch);

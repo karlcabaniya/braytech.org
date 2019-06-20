@@ -301,6 +301,11 @@ class ChaliceRecipes extends React.Component {
             </div>
             <div className='text'>
               <p>{this.chalice.displayProperties.description}</p>
+              <p>This <em>Chalice of Opulence</em> recipe tool is experimental. I've never attempted anything like this before, especially with the added complexity and challenges that come with simulating item tooltips.</p>
+              <ul>
+                <li>Clicking an item will auto-fill the Chalice's slots</li>
+                <li>The effects of the Masterwork slot are simulated. Items may or may not drop fully masterworked—this is for representation purposes only</li>
+              </ul>
             </div>
           </div>
           <div className='padder'>
@@ -344,10 +349,22 @@ class ChaliceRecipes extends React.Component {
                         </li>
                       );
 
+                      let nextPlug;
+                      if (this.state.slots.slot1 === false && key === 'slot1') {
+                        nextPlug = true;
+                      } else if (this.state.slots.slot2 === false && this.state.slots.slot1 && key === 'slot2') {
+                        nextPlug = true;
+                      } else if (this.state.slots.slot3 === false && this.state.slots.slot1 && this.state.slots.slot2 && key === 'slot3') {
+                        nextPlug = true;
+                      } else {
+                        nextPlug = false;
+                      }
+
                       return (
                         <div key={key} className={cx(key, { slotZ: this.state.slotsPanelOpen === key })}>
                           <div className='slot-inner'>
                             <div className='active-plug'>
+                              {nextPlug ? <ObservedImage className='image next-plug' src='/static/images/extracts/ui/01A3-00004579.png' /> : null}
                               <ul className='list chalice-items'>{activePlug}</ul>
                             </div>
                             {this.state.slotsPanelOpen === key ? (

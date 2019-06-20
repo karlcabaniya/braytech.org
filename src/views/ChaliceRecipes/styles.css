@@ -11,12 +11,6 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-#chalice-recipes .page-header .name::after {
-  content: 'BETA';
-  position: absolute;
-  font-size: 14px;
-}
-
 #chalice-recipes > .padder {
   width: 100%;
   padding: 3rem;
@@ -35,6 +29,22 @@
 
 #chalice-recipes .module.head .text p:first-child {
   font-size: 16px;
+}
+
+#chalice-recipes .module.head .text ul {
+  list-style-type: disc;
+  padding: 0 0 0 2rem;
+  margin: 0 0 1rem;
+}
+
+#chalice-recipes .module.head .text ul:last-child {
+  margin: 0;
+}
+
+#chalice-recipes .module.head .text ul li {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 6px;
 }
 
 #chalice-recipes .module.head .text .image {
@@ -151,6 +161,15 @@ html.backdropfilter #chalice-recipes .frame .ui .slots [class^="slot"] .slot-inn
   grid-template-columns: 1fr;
 }
 
+#chalice-recipes .frame .ui .slots [class^="slot"] .slot-inner .active-plug .image.dl.next-plug {
+  top: -26px;
+  left: -26px;
+  width: 124px;
+  height: 124px;
+  animation: rotate-logo-feature 90s linear infinite;
+  opacity: 0.5;
+}
+
 #chalice-recipes .frame .ui .slots .button.slot {
   height: unset;
   max-width: 72px;
@@ -237,10 +256,22 @@ html.backdropfilter #chalice-recipes .frame .ui .slots [class^="slot"] .slot-inn
 
 html.backdropfilter #chalice-recipes .overlay {
   background-color: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(17px) saturate(1.2);
+  backdrop-filter: blur(7px) brightness(0.9) saturate(1.2);
+}
+
+html.backdropfilter .wrapper.dark-mode #chalice-recipes .overlay {
+  backdrop-filter: blur(7px) brightness(0.7) saturate(1.2);
 }
 
 #chalice-recipes .overlay .list.chalice-items li.active {
+  background-color: rgba(218, 189, 154, 0.6);
+}
+
+html.backdropfilter #chalice-recipes .overlay .list.chalice-items li {
+  background-color: rgba(146, 146, 146, 0.2);
+}
+
+html.backdropfilter #chalice-recipes .overlay .list.chalice-items li.active {
   background-color: rgba(218, 189, 154, 0.6);
 }
 
@@ -308,6 +339,13 @@ html.backdropfilter #chalice-recipes .overlay .list.chalice-items li.active::bef
   #chalice-recipes .frame .ui .slots [class^="slot"] .slot-inner {
     max-width: 48px;
     max-height: 48px;
+  }
+
+  #chalice-recipes .frame .ui .slots [class^="slot"] .slot-inner .active-plug .image.dl.next-plug {
+    top: -17px;
+    left: -17px;
+    width: 82px;
+    height: 82px;
   }
 
   #chalice-recipes .frame .ui .slots .button.slot {

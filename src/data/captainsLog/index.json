@@ -443,5 +443,10 @@
     "date": "2019-06-19T10:15:26.200Z",
     "version": "2.5.33",
     "content": "- Chalice of Opulence tool updates... maybe the last one for a while"
+  },
+  {
+    "date": "2019-06-20T05:13:54.202Z",
+    "version": "2.5.35",
+    "content": "- General bug fixes\n- Minor Chalice of Opulence tool updates"
   }
 ]

@@ -165,7 +165,7 @@ class Root extends React.Component {
           <div className='sub-header'>
             <div>{t('Search')}</div>
           </div>
-          <RecordsSearch />
+          <RecordsSearch {...this.props} />
           <div className='sub-header'>
             <div>{t('Triumphs')}</div>
             <div>
