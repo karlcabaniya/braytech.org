@@ -20,10 +20,11 @@
   padding: 3rem;
 }
 
-#inspect .displayProperties {
+#inspect .row.displayProperties {
   padding-top: 5rem;
   padding-bottom: 0;
   position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 96px auto;
   grid-gap: 2rem;
@@ -74,12 +75,12 @@
 
 #inspect .displayProperties .text .name {
   font-family: 'nhg text';
-  font-size: 64px;
+  font-size: 66px;
   text-transform: uppercase;
   font-weight: 500;
-  line-height: 50px;
+  line-height: 1;
   color: rgb(238, 238, 238);
-  margin: 0 0 22px -2px;
+  margin: -6px 0 14px -2px;
 }
 
 #inspect .displayProperties .text .type {
@@ -88,7 +89,7 @@
   text-transform: uppercase;
   line-height: 24px;
   color: rgba(255, 255, 255, 0.6);
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
 }
 
 #inspect .displayProperties .text .description {
@@ -163,7 +164,21 @@
   text-transform: uppercase;
 }
 
+#inspect .row.screenshot {
+  padding: 0;
+}
+
+#inspect .row.screenshot .image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  filter: sepia(1) hue-rotate(0deg) saturate(0.1);
+  opacity: 0.3;
+}
+
 #inspect .row.sockets {
+  position: relative;
   display: grid;
   grid-template-columns: calc(84px * 5 - 20px) auto;
   grid-gap: 3rem;
@@ -286,7 +301,7 @@
   margin-left: 0;
 }
 
-#inspect .sockets.mods .socket .plug:not(.is-active):not(:first-child) {
+#inspect .sockets.mods .socket .plug:not(.is-active) {
   display: none;
 }
 
@@ -315,6 +330,7 @@
 
 #inspect .sockets.mods .socket .plug:not(.is-intrinsic):hover::before {
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #inspect .sockets.mods .socket .plug:not(.is-intrinsic):hover::after {

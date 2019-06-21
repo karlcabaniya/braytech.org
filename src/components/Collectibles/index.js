@@ -217,6 +217,12 @@ class Collectibles extends React.Component {
             reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
           }
 
+          if (reverse3 && reverse3.parentNodeHashes && !reverse3.parentNodeHashes.includes(manifest.settings.destiny2CoreSettings.collectionRootNode)) {
+            reverse1 = reverse2;
+            reverse2 = reverse3;
+            reverse3 = manifest.DestinyPresentationNodeDefinition[reverse3.parentNodeHashes[0]];
+          }
+
           link = `/collections/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${hash}`;
         } catch (e) {
           console.log(e);

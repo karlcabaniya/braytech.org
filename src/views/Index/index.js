@@ -3,10 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import Moment from 'react-moment';
-import cx from 'classnames';
 
-import { ProfileLink } from '../../components/ProfileLink';
-import ObservedImage from '../../components/ObservedImage';
 import Button from '../../components/UI/Button';
 import captainsLog from '../../data/captainsLog';
 import { ReactComponent as Logo } from '../../components/BraytechDevice.svg';
@@ -114,7 +111,6 @@ class Index extends React.Component {
                   <p>By supporting me, you can help ensure that I can keep these projects online, as well as help enable me to continue adding cool new features.</p>
                 </div>
                 <Button
-                  lined
                   text='Become a Patron'
                   action={() => {
                     window.open('https://www.patreon.com/braytech', '_blank');

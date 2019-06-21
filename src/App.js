@@ -31,7 +31,7 @@ import ProfileRoutes from './ProfileRoutes';
 import Loading from './views/Loading';
 import Index from './views/Index';
 import CharacterSelect from './views/CharacterSelect';
-import Inspect from './views/Inspect';
+import Inspect from './views/Inspect_';
 import Read from './views/Read';
 import Settings from './views/Settings';
 import Credits from './views/Credits';

@@ -200,6 +200,20 @@ class Records extends React.Component {
           };
         }
 
+        let rewards;
+        if (definitionRecord.rewardItems && definitionRecord.rewardItems.length) {
+          rewards = definitionRecord.rewardItems.map(r => {
+            let definitionItem = manifest.DestinyInventoryItemDefinition[r.itemHash];
+            let definitionCollectible = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] : false;
+
+            if (definitionCollectible && !definitionCollectible.redacted) {
+              return definitionCollectible.hash;
+            } else {
+              return false;
+            }
+          }).filter(r => r);
+        }
+
         recordsOutput.push({
           completed: enumerateRecordState(state).recordRedeemed,
           progressDistance,
@@ -236,18 +250,9 @@ class Records extends React.Component {
                 </div>
               </div>
               <div className='objectives'>{objectives}</div>
-              {definitionRecord.rewardItems && definitionRecord.rewardItems.length ? (
+              {rewards && rewards.length ? (
                 <ul className='list rewards collection-items'>
-                  <Collectibles selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={definitionRecord.rewardItems.map(r => {
-                    let definitionItem = manifest.DestinyInventoryItemDefinition[r.itemHash];
-                    let definitionCollectible = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] : false;
-
-                    if (definitionCollectible && !definitionCollectible.redacted) {
-                      return definitionCollectible.hash;
-                    } else {
-                      return false;
-                    }
-                  })} />
+                  <Collectibles forceDisplay selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={rewards} />
                 </ul>
               ) : null}
               {link && linkTo ? !selfLinkFrom && readLink ? <Link to={linkTo} /> : <ProfileLink to={linkTo} /> : null}

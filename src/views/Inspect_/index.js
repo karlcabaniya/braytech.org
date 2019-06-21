@@ -50,8 +50,8 @@ class Inspect extends React.Component {
     console.log(sockets);
 
     const modCategoryHashes = [2685412949, 590099826, 3379164649, 4265082475, 4243480345];
-    const socketsPerks = sockets.filter(socket => !modCategoryHashes.includes(socket.categoryHash)).length ? sockets.filter(socket => !modCategoryHashes.includes(socket.categoryHash)).filter(socket => socket.socketTypeHash !== 1282012138) : false;
-    const socketsMods = sockets.filter(socket => modCategoryHashes.includes(socket.categoryHash)).length ? sockets.filter(socket => modCategoryHashes.includes(socket.categoryHash)) : false;
+    const socketsPerks = sockets.filter(socket => !modCategoryHashes.includes(socket.socketCategoryHash)).length ? sockets.filter(socket => !modCategoryHashes.includes(socket.socketCategoryHash)).filter(socket => socket.socketTypeHash !== 1282012138) : false;
+    const socketsMods = sockets.filter(socket => modCategoryHashes.includes(socket.socketCategoryHash)).length ? sockets.filter(socket => modCategoryHashes.includes(socket.socketCategoryHash)) : false;
 
     let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/collections';
 
@@ -101,6 +101,9 @@ class Inspect extends React.Component {
             <div className='description'>{item.displayProperties.description}</div>
           </div>
         </div>
+        {item.screenshot ? <div className='row screenshot'>
+          <ObservedImage className='image' src={`https://www.bungie.net${item.screenshot}`} />
+        </div> : null}
         <div className='row sockets'>
           {socketsPerks.length > 0 ? (
             <div className='module'>
