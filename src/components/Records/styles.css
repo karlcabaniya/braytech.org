@@ -289,7 +289,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  animation: animation-backround-highlight 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+  animation: animation-background-highlight 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
 }
 
 .list.record-items .all-completed {

@@ -2,7 +2,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
@@ -39,14 +38,20 @@ class Inspect extends React.Component {
     } else {
       this.setState({ loreOpen: false });
     }
-  }
+  };
 
   render() {
-    const { t } = this.props;
+    const { t, member } = this.props;
     const hash = this.props.match.params.hash ? this.props.match.params.hash : false;
     const item = manifest.DestinyInventoryItemDefinition[hash];
 
-    let { stats, sockets, masterwork } = getSockets(item, false, true, false, false, [], true);
+    let { stats, sockets } = getSockets(item, false, true, false, true, [], true, true);
+
+    console.log(sockets);
+
+    const modCategoryHashes = [2685412949, 590099826, 3379164649, 4265082475, 4243480345];
+    const socketsPerks = sockets.filter(socket => !modCategoryHashes.includes(socket.socketCategoryHash)).length ? sockets.filter(socket => !modCategoryHashes.includes(socket.socketCategoryHash)).filter(socket => socket.socketTypeHash !== 1282012138) : false;
+    const socketsMods = sockets.filter(socket => modCategoryHashes.includes(socket.socketCategoryHash)).length ? sockets.filter(socket => modCategoryHashes.includes(socket.socketCategoryHash)) : false;
 
     let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/collections';
 
@@ -73,119 +78,130 @@ class Inspect extends React.Component {
       }
     }
 
-    const isArmour = item.itemType === 2 ? true : false;
-    const isWeapon = item.itemType === 3 ? true : false;
-
-    const perkCategoryHashes = [4241085061];
-    const modCategoryHashes = [2685412949, 590099826, 3379164649, 4265082475, 4243480345];
-
     const hasBaseStat = item.stats && manifest.DestinyStatDefinition[item.stats.primaryBaseStatHash] ? manifest.DestinyStatDefinition[item.stats.primaryBaseStatHash] : false;
 
-    const socketsPerks = sockets.filter(socket => !modCategoryHashes.includes(socket.categoryHash)).length ? sockets.filter(socket => !modCategoryHashes.includes(socket.categoryHash)).filter(socket => socket.socketTypeHash !== 1282012138) : false;
-    const socketsMods = sockets.filter(socket => modCategoryHashes.includes(socket.categoryHash)).length ? sockets.filter(socket => modCategoryHashes.includes(socket.categoryHash)) : false;
+    let powerLevel;
+    if (member && member.data) {
+      let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
+      powerLevel = Math.floor((680 / 700) * character.light);
+    } else if (item.itemComponents && item.itemComponents.instance) {
+      powerLevel = item.itemComponents.instance.primaryStat.value;
+    } else {
+      powerLevel = '730';
+    }
 
-    const toggleLoreLink = (
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a className='button' onClick={this.toggleLore}>
-        {this.state.loreOpen ? (
-          <>
-            <i className='uniF16E' />
-            {t('Hide Lore')}
-          </>
-        ) : (
-          <>
-            <i className='uniF16B' />
-            {t('Show Lore')}
-          </>
-        )}
-      </a>
-    );
+    const isArmour = item.itemType === 2;
+    const isWeapon = item.itemType === 3;
 
     return (
-      <div className={cx('view', { 'lore-open': this.state.loreOpen })} id='inspect'>
-        <div className='grid'>
-          <div className='col displayProperties'>
-            <div className={cx('rarity', tier)} />
-            <div className='text'>
-              <div className='name'>{item.displayProperties.name}</div>
-              <div className='type'>{item.itemTypeDisplayName}</div>
-              <div className='description'>{item.displayProperties.description}</div>
-              <div className={cx('primary-stat', { isWeapon, isArmour })}>
-                {isWeapon ? (
-                  <div className={cx('damageType', damageTypeToString(item.damageTypeHashes[0]).toLowerCase())}>
-                    <div className={cx('icon', damageTypeToString(item.damageTypeHashes[0]).toLowerCase())} />
-                  </div>
-                ) : null}
-                {hasBaseStat ? (
-                  <div className='text'>
-                    <div className='power'>630</div>
-                    <div className='primaryBaseStat'>{hasBaseStat.displayProperties.name}</div>
-                  </div>
-                ) : null}
+      <div className='view' id='inspect'>
+        <div className='row displayProperties'>
+          <div className={cx('rarity', tier)} />
+          <div className='icon'>{item.displayProperties.icon ? <ObservedImage className='image' src={`https://www.bungie.net${item.displayProperties.icon}`} /> : null}</div>
+          <div className='text'>
+            <div className='name'>{item.displayProperties.name}</div>
+            <div className='type'>{item.itemTypeDisplayName}</div>
+            <div className='description'>{item.displayProperties.description}</div>
+          </div>
+        </div>
+        {(isWeapon || isArmour) && stats.length ? (
+          <div className='row stats'>
+            <div className='module'>
+              <div className='sub-header'>
+                <div>{t('Stats')}</div>
               </div>
+              {(isWeapon || isArmour) && stats.length ? (
+                <div className='values'>{stats.map(stat => stat.element)}</div>
+              ) : null}
             </div>
           </div>
-          <div className='col details'>
-            {item.loreHash ? <div className='lore'>
-              <pre>{manifest.DestinyLoreDefinition[item.loreHash].displayProperties.description}</pre>
-            </div> : null}
-            <div className='socket-bros'>
-              {socketsPerks ? (
-                <>
-                  <div className='sub-header sub'>
-                    <div>{manifest.DestinySocketCategoryDefinition[socketsPerks[0].socketCategoryHash].displayProperties.name}</div>
-                  </div>
-                  <div className='sockets is-perks'>
-                    {socketsPerks.map((socket, index) => {
-                      return (
-                        <div key={index} className='socket'>
-                          {socket.plugs.map(plug => plug.element)}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </>
-              ) : null}
-              {socketsMods ? (
-                <>
-                  <div className='sub-header sub'>
-                    <div>{manifest.DestinySocketCategoryDefinition[socketsMods[0].socketCategoryHash].displayProperties.name}</div>
-                  </div>
-                  <div className='sockets is-mods'>
-                    {socketsMods.map((socket, index) => {
-                      return (
-                        <div key={index} className='socket'>
-                          {socket.plugs.map(plug => plug.element)}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </>
-              ) : null}
-            </div>
-            {(isWeapon || isArmour) && stats.length ? (
-              <div className='stats'>
-                <div className='sub-header sub'>
-                  <div>{isWeapon ? `Weapon` : `Armour`} stats</div>
+        ) : null}
+          {socketsPerks.length > 0 ? (
+          <div className='row sockets'>
+            {socketsPerks.length > 0 ? (
+              <div className='module perks'>
+                <div className='sub-header'>
+                  <div>Perks</div>
                 </div>
-                <div className='values'>{stats.map(stat => stat.element)}</div>
+                <div className='sockets'>
+                  {socketsPerks.map((socket, i) => {
+                    let group = socket.plugs
+                      .filter(plug => {
+                        if (plug.definition.redacted) {
+                          return false;
+                        } else {
+                          return true;
+                        }
+                      })
+                      .filter(plug => {
+                        if (!plug.definition.itemCategoryHashes || !plug.definition.plug) {
+                          console.log(socket, plug);
+                          return false;
+                        } else {
+                          return true;
+                        }
+                      })
+                      .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142);
+
+                    if (group.length > 0) {
+                      return (
+                        <div key={i} className='socket'>
+                          {group.map(plug => plug.element)}
+                        </div>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+                </div>
+              </div>
+            ) : null}
+            {socketsMods.length > 0 ? (
+              <div className='module mods'>
+                <div className='sub-header'>
+                  <div>Mods</div>
+                </div>
+                <div className='sockets'>
+                  {socketsMods.map((socket, i) => {
+                    let group = socket.plugs
+                      .filter(plug => {
+                        if (plug.definition.redacted) {
+                          return false;
+                        } else {
+                          return true;
+                        }
+                      })
+                      .filter(plug => {
+                        if (!plug.definition.itemCategoryHashes || !plug.definition.plug) {
+                          console.log(socket, plug);
+                          return false;
+                        } else {
+                          return true;
+                        }
+                      })
+                      .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142);
+
+                    if (group.length > 0) {
+                      return (
+                        <div key={i} className='socket'>
+                          {group.map(plug => plug.element)}
+                        </div>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+                </div>
               </div>
             ) : null}
           </div>
-        </div>
-        {item.screenshot ? <ObservedImage className='image screenshot' src={`${Globals.url.bungie}${item.screenshot}`} /> : null}
-        <div className='sticky-nav'>
-          <div />
-          <ul>
-            {item.loreHash ? <li>{toggleLoreLink}</li> : null}
-            <li>
-              <ProfileLink className='button' to={backLinkPath}>
-                <i className='destiny-B_Button' />
-                {t('Dismiss')}
-              </ProfileLink>
-            </li>
-          </ul>
-        </div>
+        ) : null}
+        {item.screenshot ? <div className='row screenshot'>
+          <div className='sub-header'>
+            <div>Screenshot</div>
+          </div>
+          <ObservedImage className='image' src={`https://www.bungie.net${item.screenshot}`} />
+        </div> : null}
       </div>
     );
   }
@@ -193,7 +209,6 @@ class Inspect extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    theme: state.theme,
     member: state.member
   };
 }

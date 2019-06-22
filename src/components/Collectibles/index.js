@@ -27,10 +27,49 @@ class Collectibles extends React.Component {
     }
   }
 
+  selfLink = hash => {
+    let link = ['/collections'];
+    let root = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.collectionRootNode];
+
+    root.children.presentationNodes.forEach(nP => {
+      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+
+      nodePrimary.children.presentationNodes.forEach(nS => {
+        let nodeSecondary = manifest.DestinyPresentationNodeDefinition[nS.presentationNodeHash];
+
+        nodeSecondary.children.presentationNodes.forEach(nT => {
+          let nodeTertiary = manifest.DestinyPresentationNodeDefinition[nT.presentationNodeHash];
+
+          if (nodeTertiary.children.collectibles.length) {
+            let found = nodeTertiary.children.collectibles.find(c => c.collectibleHash === hash);
+            if (found) {
+              link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.collectibleHash)
+            }
+          } else {
+            nodeTertiary.children.presentationNodes.forEach(nQ => {
+              let nodeQuaternary = manifest.DestinyPresentationNodeDefinition[nQ.presentationNodeHash];
+
+              if (nodeQuaternary.children.collectibles.length) {
+                let found = nodeQuaternary.children.collectibles.find(c => c.collectibleHash === hash);
+                if (found) {
+                  link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.collectibleHash)
+                }
+              }      
+            });
+          }
+
+        });
+      });
+    });
+
+    link = link.join('/');
+    return link;
+  }
+
   render() {
     const { t, forceDisplay, collectibles } = this.props;
     const inspect = this.props.inspect ? true : false;
-    const highlight = parseInt(this.props.highlight, 10) || false;
+    const highlight = parseInt(this.props.match && this.props.match.params.quinary ? this.props.match.params.quinary : this.props.highlight, 10) || false;
 
     let output = [];
 
@@ -68,11 +107,19 @@ class Collectibles extends React.Component {
               return;
             }
 
+            // eslint-disable-next-line eqeqeq
+            let ref = highlight == collectibleDefinition.hash ? this.scrollToRecordRef : null;
+
+            console.log(ref)
+
             row.push(
               <li
                 key={collectibleDefinition.hash}
+                ref={ref}
                 className={cx('item', 'tooltip', {
-                  completed: !enumerateCollectibleState(state).notAcquired && !enumerateCollectibleState(state).invisible
+                  completed: !enumerateCollectibleState(state).notAcquired && !enumerateCollectibleState(state).invisible,
+                  // eslint-disable-next-line eqeqeq
+                  highlight: highlight && highlight == collectibleDefinition.hash
                 })}
                 data-hash={collectibleDefinition.itemHash}
               >
@@ -180,53 +227,8 @@ class Collectibles extends React.Component {
 
       collectiblesRequested.forEach(hash => {
         let collectibleDefinition = manifest.DestinyCollectibleDefinition[hash];
-
-        let link = false;
-
-        // selfLinkFrom
-
-        try {
-          let reverse1;
-          let reverse2;
-          let reverse3;
-
-          manifest.DestinyCollectibleDefinition[hash].presentationInfo.parentPresentationNodeHashes.forEach(element => {
-            let skip = false;
-            manifest.DestinyPresentationNodeDefinition[498211331].children.presentationNodes.forEach(parentsChild => {
-              if (manifest.DestinyPresentationNodeDefinition[parentsChild.presentationNodeHash].children.presentationNodes.filter(el => el.presentationNodeHash === element).length > 0) {
-                skip = true;
-                return; // if hash is a child of badges, skip it
-              }
-            });
-
-            if (reverse1 || skip) {
-              return;
-            }
-            reverse1 = manifest.DestinyPresentationNodeDefinition[element];
-          });
-
-          let iteratees = reverse1.presentationInfo ? reverse1.presentationInfo.parentPresentationNodeHashes : reverse1.parentNodeHashes;
-          iteratees.forEach(element => {
-            if (reverse2) {
-              return;
-            }
-            reverse2 = manifest.DestinyPresentationNodeDefinition[element];
-          });
-
-          if (reverse2 && reverse2.parentNodeHashes) {
-            reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
-          }
-
-          if (reverse3 && reverse3.parentNodeHashes && !reverse3.parentNodeHashes.includes(manifest.settings.destiny2CoreSettings.collectionRootNode)) {
-            reverse1 = reverse2;
-            reverse2 = reverse3;
-            reverse3 = manifest.DestinyPresentationNodeDefinition[reverse3.parentNodeHashes[0]];
-          }
-
-          link = `/collections/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${hash}`;
-        } catch (e) {
-          console.log(e);
-        }
+        
+        let link = this.selfLink(hash);
 
         let state = 0;
         if (this.props.member.data) {

@@ -57,12 +57,8 @@
   margin: 0;
 }
 
-.list.collection-items li.highlight::after {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  animation: animation-backround-highlight 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+.list.collection-items li.highlight::before {
+  animation: animation-background-highlight 1s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
 }
 
 .list.collection-items .all-completed {

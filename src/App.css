@@ -606,15 +606,15 @@ html.backdropfilter .wrapper.dark-mode .sticky-nav {
   color: #333;
 }
 
-@keyframes animation-backround-highlight {
+@keyframes animation-background-highlight {
   0% {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.1);
   }
   50% {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.4);
   }
   100% {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
 

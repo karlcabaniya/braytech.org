@@ -448,5 +448,10 @@
     "date": "2019-06-20T05:13:54.202Z",
     "version": "2.5.35",
     "content": "- General bug fixes\n- Minor Chalice of Opulence tool updates"
+  },
+  {
+    "date": "2019-06-20T05:13:54.202Z",
+    "version": "2.5.36",
+    "content": "- Updated _Inspect_ view for items\n- Completely rewrote the magic that creates the deep links for collectibles and triumphs"
   }
 ]
