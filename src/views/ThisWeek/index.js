@@ -54,14 +54,16 @@ class ThisWeek extends React.Component {
         menagerie: 3
       },
       elapsed: {}, // elapsed time since cycle started
-      week: {} // current week in cycle
+      week: {}, // current week in cycle
+      temp: {}
     };
 
-    const time = new Date().getTime() + 86400000;
+    const time = new Date().getTime() + 0;
     const msPerWk = 604800000;
 
     for (var cycle in cycleInfo.cycle) {
       cycleInfo.elapsed[cycle] = time - cycleInfo.epoch[cycle];
+      cycleInfo.temp[cycle] = cycleInfo.elapsed[cycle] / msPerWk;
       cycleInfo.week[cycle] = Math.floor((cycleInfo.elapsed[cycle] / msPerWk) % cycleInfo.cycle[cycle]) + 1;
     }
 
