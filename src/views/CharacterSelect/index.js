@@ -36,11 +36,11 @@ class CharacterSelect extends React.Component {
   };
 
   render() {
-    const { member, theme, viewport } = this.props;
+    const { member, viewport } = this.props;
     const { error, loading } = member;
 
     const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const reverse = viewport.width <= 500;
+    const reverseUI = viewport.width <= 500;
 
     const profileCharacterSelect = (
       <div className='profile'>
@@ -50,15 +50,15 @@ class CharacterSelect extends React.Component {
     );
 
     return (
-      <div className={cx('view', theme.selected, { loading })} id='get-profile'>
-        {reverse && profileCharacterSelect}
+      <div className={cx('view', { loading })} id='get-profile'>
+        {reverseUI && profileCharacterSelect}
 
         <div className='search'>
           {error && <ProfileError error={error} />}
           <ProfileSearch onProfileClick={this.profileClick} />
         </div>
 
-        {!reverse && profileCharacterSelect}
+        {!reverseUI && profileCharacterSelect}
       </div>
     );
   }
@@ -67,7 +67,6 @@ class CharacterSelect extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    theme: state.theme,
     viewport: state.viewport
   };
 }

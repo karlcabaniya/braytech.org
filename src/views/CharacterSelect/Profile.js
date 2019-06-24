@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
@@ -24,7 +23,7 @@ class Profile extends React.Component {
           {groups.length === 1 && <div className='clan'>{groups[0].group.name}</div>}
           <div className='timePlayed'>
             {timePlayed} {timePlayed === 1 ? t('day played') : t('days played')}
-          </div>{' '}
+          </div>
         </div>
         <Characters data={member.data} location={{ ...from }} characterClick={this.props.onCharacterClick} />
       </div>
