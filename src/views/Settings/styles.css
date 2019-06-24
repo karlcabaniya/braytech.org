@@ -10,6 +10,10 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+#settings > .module.head .page-header {
+  margin-bottom: 0rem;
+}
+
 #settings .module .list.settings li {
   height: unset;
   display: block;

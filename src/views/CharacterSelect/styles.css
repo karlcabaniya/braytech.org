@@ -263,17 +263,21 @@
   #get-profile .profile .user {
     grid-gap: 2rem;
   }
+
+  #get-profile .profile .info .displayName {
+    font-size: 32px;
+  }
+
+  #get-profile .profile .info .clan {
+    font-size: 16px;
+  }
+
+  #get-profile .profile .info .basics {
+    display: none;
+  }
+
+  #get-profile .profile .info .stamps {
+    margin: 0;
+  }
 }
-
-
-
-
-
-/* #get-profile.dark-mode .results .list li.no-profiles {
-  color: rgb(160, 160, 160);
-}
-
-#get-profile.dark-mode .characters-list .list li {
-  background-color: rgba(255, 255, 255, 0.1);
-} */
 

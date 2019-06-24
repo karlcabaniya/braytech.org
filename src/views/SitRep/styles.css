@@ -27,11 +27,11 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-#sit-rep .module .ranks ~ .button {
+#sit-rep > .col > .module .ranks ~ .button {
   margin: 1rem 0 0;
 }
 
-#sit-rep .module ~ .module {
+#sit-rep > .col > .module ~ .module {
   margin: 3rem 0 0;
 }
 
