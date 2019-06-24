@@ -63,10 +63,6 @@ class CharacterSelect extends React.Component {
           <div className='page-header'>
             <div className='name'>{t('Character Select')}</div>
           </div>
-          <div className='text'>
-            <p>{t("Search for and select your character here")}</p>
-            <p>Some Braytech views, such as <em>Sit Rep</em>, display information related to your selected character. If you're a PC player, please ensure that you include the pound symbol and subsequent numbers (#117) when searching for your profile.</p>
-          </div>
         </div>
         <div className='padder'>
           {reverseUI && profileCharacterSelect && !error ? (

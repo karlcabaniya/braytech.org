@@ -24,6 +24,10 @@
   margin: 3rem 0 1rem;
 }
 
+#get-profile .module.head .page-header {
+  margin-bottom: 0rem;
+}
+
 #get-profile .module.head .text {
   max-width: 680px;
 }
