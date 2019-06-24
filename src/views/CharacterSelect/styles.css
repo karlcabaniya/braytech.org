@@ -1,21 +1,35 @@
 
-
-
 #get-profile {
-  margin: 0 auto;
-  padding: 3rem;
   display: grid;
-  grid-gap: 3rem;
-  grid-template-rows: 1fr;
-  grid-template-columns: 2fr 6fr;
+  padding: 0;
+  margin: -40px auto 0;
+  width: 100%;
+  overflow: hidden;
 }
 
-#get-profile .three {
-  position: fixed;
-  left: 0;
-  top: 0;
+#get-profile .module.head {
+  padding: calc(4rem + 40px) 3rem 3rem;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+#get-profile > .padder {
   width: 100%;
-  height: 100%;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: minmax(auto, 360px) minmax(200px, auto);
+  grid-gap: 3rem;
+}
+
+#get-profile .module .sub-header ~ .sub-header {
+  margin: 3rem 0 1rem;
+}
+
+#get-profile .module.head .text {
+  max-width: 680px;
+}
+
+#get-profile .module.head .text p:first-child {
+  font-size: 16px;
 }
 
 #get-profile .error {
@@ -23,10 +37,9 @@
   font-size: 14px;
 }
 
-/* #get-profile .error .sub-header {
-  border-bottom: 2px solid #F44336;
-  color: #F44336;
-} */
+#get-profile .error button {
+  margin: 1rem 0 0;
+}
 
 #get-profile .search {
   position: relative;
@@ -84,23 +97,14 @@
   background-color: #3F51B5;
 }
 
-#get-profile .profile {
-  position: relative;
-  min-height: 4rem;
-}
-
-#get-profile .profile .spinner {
-  position: absolute;
-}
-
 #get-profile .profile .user {
-  transition: opacity 0.25s;
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-columns: minmax(200px, 360px) 474px;
 }
 
 #get-profile .profile .info {
-  position: relative;
-  flex-basis: 100%;
-  margin: 0 0 3rem;
+  
 }
 
 #get-profile .profile .info .displayName {
@@ -111,8 +115,9 @@
 }
 
 #get-profile .profile .info .clan {
-  font-size: 16px;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 1.5rem;
 }
 
 #get-profile .profile .info .clan::before {
@@ -120,8 +125,69 @@
   white-space: pre-line;
 }
 
-#get-profile .profile .info .timePlayed {
-  display: none;
+#get-profile .profile .info .stamps {
+  margin: 0 0 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 38px);
+  grid-gap: 3px;
+}
+
+#get-profile .profile .info .stamps div i {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem 0 0;
+  color: #fff;
+  font-size: 18px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#get-profile .profile .info .stamps div i.destiny-platform_xbox {
+  background-color: #4CAF50;
+}
+
+#get-profile .profile .info .stamps div i.destiny-platform_pc {
+  background-color: #2196F3;
+}
+
+#get-profile .profile .info .stamps div i.destiny-platform_playstation {
+  background-color: #3F51B5;
+}
+
+#get-profile .profile .info .stamps div i.destiny-clovis_bray_device {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#get-profile .profile .info .stamps div i.destiny-clovis_bray_device.one-hundo {
+  background-color: rgb(241, 40, 24);
+}
+
+#get-profile .profile .info .basics {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+#get-profile .profile .info .basics > div {
+  position: relative;
+  font-size: 14px;
+  line-height: 10px;
+}
+
+#get-profile .profile .info .basics > div:last-child {
+  margin: 0;
+}
+
+#get-profile .profile .info .basics div .name {
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.4;
+}
+
+#get-profile .profile .info .basics div .value {
+  font-size: 18px;
+  margin: 0 0 8px;
 }
 
 #get-profile .characters-list {
@@ -149,46 +215,49 @@
   color: transparent !important;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
 
-  #get-profile {
-    grid-template-columns: 1fr 474px;
+  #get-profile .profile .user {
+    grid-template-columns: 1fr;
   }
+
+}
+
+@media screen and (max-width: 1024px) {
+
+  
 
 }
 
 @media screen and (max-width: 768px) {
 
-  #get-profile {
-    grid-template-columns: 1fr 1fr;
+  #get-profile > .padder {
+    grid-template-columns: minmax(200px, auto) minmax(300px, auto);
   }
 
 }
 
 @media screen and (max-width: 600px) {
-  #get-profile {
-    grid-gap: 2rem;
+  #get-profile > .padder {
     padding: 2rem;
-    width: 100%;
+    grid-gap: 2rem;
     grid-template-columns: 1fr;
+  }
+
+  #get-profile .module.head {
+    padding: calc(3rem + 40px) 2rem 2rem;
+  }
+
+  #get-profile .module .sub-header ~ .sub-header {
+    margin: 2rem 0 1rem;
   }
 
   #get-profile .error {
     margin: 0 0 2rem;
   }
 
-  #get-profile .profile .info {
-    margin: 0 0 2rem;
-  }
-
-  #get-profile .profile .info .displayName {
-    font-size: 38px;
-    line-height: 30px;
-    letter-spacing: 3px;
-  }
-
-  #get-profile .characters-list {
-    width: 100%;
+  #get-profile .profile .user {
+    grid-gap: 2rem;
   }
 }
 

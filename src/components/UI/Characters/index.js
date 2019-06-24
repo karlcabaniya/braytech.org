@@ -22,7 +22,7 @@ class Characters extends React.Component {
     let characterActivities = member.data.profile.characterActivities.data;
 
     return (
-      <div className={cx('characters-list', { responsive: viewport.width < 769 })}>
+      <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
         {characters.map(character => {
           
           let capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;

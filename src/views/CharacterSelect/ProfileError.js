@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Button from '../../components/UI/Button';
+
 // This was moved from utils/errorHandler as it was specific to the profile
 // picker, but these error components could easily be made re-usable.
 
@@ -8,8 +10,8 @@ const BungieError = props => {
 
   return (
     <div className='error'>
-      <div className='sub-header sub'>
-        <div>Error from Bungie</div>
+      <div className='sub-header'>
+        <div>Bungie error</div>
       </div>
       <p>
         Error {code}: {status}
@@ -23,7 +25,7 @@ const BungieError = props => {
 // old Playstation account that has now moved to PC for Destiny 2.
 const NoDestinyAccountError = () => (
   <div className='error'>
-    <div className='sub-header sub'>
+    <div className='sub-header'>
       <div>No Destiny Account Found</div>
     </div>
     <p>This Bungie account doesn't have any Destiny 2 characters</p>
@@ -32,24 +34,22 @@ const NoDestinyAccountError = () => (
 
 const PrivateProfileError = () => (
   <div className='error'>
-    <div className='sub-header sub'>
+    <div className='sub-header'>
       <div>Profile privacy</div>
     </div>
-    <p>Your profile data may be set to private on Bungie.net.</p>
-    <p>
-      You can check here{' '}
-      <a href='https://www.bungie.net/en/Profile/Settings?category=Privacy' target='_blank' rel='noopener noreferrer'>
-        https://www.bungie.net&hellip;
-      </a>{' '}
-      Look for <em>Show my Progression (what I've completed in Destiny, and my current status)</em>.
-    </p>
-    <p>If I'm mistaken, I apologise. This error is generated when character progression data is unavailable, and this is the most likely cause.</p>
+    <p>Your profile data may be set to private on Bungie.net. If I'm mistaken, I apologise. This error is generated when character progression data is unavailable, and is the most likely cause.</p>
+    <Button
+      text='Go to Bungie.net'
+      action={() => {
+        window.open('https://www.bungie.net/en/Profile/Settings?category=Privacy', '_blank');
+      }}
+    />
   </div>
 );
 
 const GenericError = () => (
   <div className='error'>
-    <div className='sub-header sub'>
+    <div className='sub-header'>
       <div>Don't touch my stuff</div>
     </div>
     <p>There was an unspecified error. It's pretty rude to break someone else's stuff like this...</p>

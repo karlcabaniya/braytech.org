@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { withNamespaces } from 'react-i18next';
+import { withNamespaces, Trans } from 'react-i18next';
 
 import store from '../../utils/reduxStore';
 import * as ls from '../../utils/localStorage';
@@ -36,29 +36,54 @@ class CharacterSelect extends React.Component {
   };
 
   render() {
-    const { member, viewport } = this.props;
+    const { t, member, viewport } = this.props;
     const { error, loading } = member;
 
     const { from } = this.props.location.state || { from: { pathname: '/' } };
-    const reverseUI = viewport.width <= 500;
+    const reverseUI = viewport.width <= 600;
+
+    const savedProfile = ls.get('setting.profile') || {};
 
     const profileCharacterSelect = (
-      <div className='profile'>
-        {loading && <Spinner />}
-        {member.data && <Profile member={member} onCharacterClick={this.characterClick} from={from} />}
-      </div>
+      <>
+        {loading ? <Spinner /> : member.data ? (
+          <>
+            <div className='sub-header'>
+              <div>{t(member && member.membershipId === savedProfile.membershipId ? 'Saved profile' : 'Active profile')}</div>
+            </div>
+            {member.data && <Profile member={member} onCharacterClick={this.characterClick} from={from} />}
+          </>
+        ) : null}
+      </>
     );
 
     return (
       <div className={cx('view', { loading })} id='get-profile'>
-        {reverseUI && profileCharacterSelect}
-
-        <div className='search'>
-          {error && <ProfileError error={error} />}
-          <ProfileSearch onProfileClick={this.profileClick} />
+        <div className='module head'>
+          <div className='page-header'>
+            <div className='name'>{t('Character Select')}</div>
+          </div>
+          <div className='text'>
+            <p>{t("Search for and select your character here")}</p>
+            <p>Some Braytech views, such as <em>Sit Rep</em>, display information related to your selected character. If you're a PC player, please ensure that you include the pound symbol and subsequent numbers (#117) when searching for your profile.</p>
+          </div>
         </div>
-
-        {!reverseUI && profileCharacterSelect}
+        <div className='padder'>
+          {reverseUI && profileCharacterSelect && !error ? (
+            <div className='module profile'>
+              {profileCharacterSelect}
+            </div>
+          ) : null}
+          <div className='module search'>
+            {error && <ProfileError error={error} />}
+            <ProfileSearch onProfileClick={this.profileClick} />
+          </div>
+          {!reverseUI && profileCharacterSelect && !error ? (
+            <div className='module profile'>
+              {profileCharacterSelect}
+            </div>
+          ) : null}
+        </div>
       </div>
     );
   }

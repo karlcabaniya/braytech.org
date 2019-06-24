@@ -146,12 +146,12 @@ class Tooltip extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.tooltips.bindTime !== prevProps.tooltips.bindTime) {
-      console.log('bindTime change');
+      // console.log('bindTime change');
       this.performBindTooltipItem(true);
     }
 
     if (this.props.location && prevProps.location.pathname !== this.props.location.pathname) {
-      console.log('location change');
+      // console.log('location change');
       this.performBindTooltipItem(true);
     }
 

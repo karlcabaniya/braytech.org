@@ -101,7 +101,7 @@ class ProfileSearch extends React.Component {
 
     return (
       <>
-        <div className='sub-header sub'>
+        <div className='sub-header'>
           <div>{t('Search for player')}</div>
         </div>
         <div className='form'>
@@ -116,8 +116,8 @@ class ProfileSearch extends React.Component {
 
         {history.length > 0 && (
           <>
-            <div className='sub-header sub'>
-              <div>{t('Previous')}</div>
+            <div className='sub-header'>
+              <div>{t('Previous searches')}</div>
             </div>
             <div className='results'>
               <ul className='list'>{this.profileList(history)}</ul>

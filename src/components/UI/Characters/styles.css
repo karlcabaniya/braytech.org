@@ -10,20 +10,6 @@
   color: #fff;
 }
 
-.characters-list .char .button::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
-  background-color: initial;
-  margin: initial;
-  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0);
-  transition: background-color 0.25s, box-shadow 0.25s;
-}
-
 .characters-list .char .button .image.emblem {
   background-size: cover;
 }
@@ -184,7 +170,7 @@
 
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
 
   .characters-list.responsive {
     width: 100%;

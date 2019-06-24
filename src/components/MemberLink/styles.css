@@ -275,8 +275,9 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 #member-overlay .wrapper-inner .head .displayName {
   position: absolute;
   font-size: 48px;
-  line-height: 60px;
-  margin: 0 0 14px;
+  line-height: 1;
+  font-weight: 500;
+  margin: 0 0 10px;
   top: -9px;
   left: 0;  
   width: 100%;
@@ -286,9 +287,14 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 }
 
 #member-overlay .wrapper-inner .head .groupName {
-  font-size: 16px;
-  line-height: 14px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
   margin: 0 0 1.5rem;
+}
+
+#member-overlay .wrapper-inner .head .groupName::before {
+  content: '// ';
+  white-space: pre-line;
 }
 
 #member-overlay .wrapper-inner .stamps {
