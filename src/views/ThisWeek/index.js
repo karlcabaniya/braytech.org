@@ -58,7 +58,7 @@ class ThisWeek extends React.Component {
       temp: {}
     };
 
-    const time = new Date().getTime() + 0;
+    const time = new Date().getTime();
     const msPerWk = 604800000;
 
     for (var cycle in cycleInfo.cycle) {
