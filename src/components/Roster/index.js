@@ -23,25 +23,6 @@ class Roster extends React.Component {
         dir: 'desc'
       }
     };
-
-    moment.updateLocale('en', {
-      relativeTime: {
-        future: 'in %s',
-        past: '%s ago',
-        s: 'now',
-        ss: '%ss',
-        m: '<1m',
-        mm: '%dm',
-        h: '1h',
-        hh: '%dh',
-        d: '1d',
-        dd: '%dd',
-        M: '1M',
-        MM: '%dM',
-        y: '1y',
-        yy: '%dy'
-      }
-    });
   }
 
   componentDidMount() {
@@ -166,10 +147,10 @@ class Roster extends React.Component {
                       <div>
                         {m.isOnline && display ? (
                           <>
-                            {display} <span>{moment(lastPlayed).fromNow(true)}</span>
+                            {display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span>
                           </>
                         ) : (
-                          moment(lastPlayed).fromNow()
+                          moment(lastPlayed).locale('en-sml').fromNow()
                         )}
                       </div>
                     </li>

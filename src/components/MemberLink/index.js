@@ -307,26 +307,28 @@ class MemberLink extends React.Component {
                         <div>
                           {this.state.all.data.characters.data.map(c => {
                             let state = null;
-                            if (this.state.all.data.characterActivities.data[c.characterId].currentActivityHash === 0 || c.characterId !== lastCharacterPlayed) {
+                            if (c.characterId === lastCharacterPlayed) {
+                              if (manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].placeHash === 2961497387) {
+                                state = (
+                                  <>
+                                    <div className='activity'>Orbit</div>
+                                    <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
+                                  </>
+                                );
+                              } else {
+                                state = (
+                                  <>
+                                    <div className='activity'>
+                                      {manifest.DestinyActivityModeDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].displayProperties.name}
+                                    </div>
+                                    <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
+                                  </>
+                                );
+                              }
+                            } else {
                               state = (
                                 <>
                                   <div className='time-before'>{t('Last played')}</div>
-                                  <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
-                                </>
-                              );
-                            } else if (manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].placeHash === 2961497387) {
-                              state = (
-                                <>
-                                  <div className='activity'>Orbit</div>
-                                  <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
-                                </>
-                              );
-                              } else {
-                              state = (
-                                <>
-                                  <div className='activity'>
-                                    {manifest.DestinyActivityModeDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].displayProperties.name}
-                                  </div>
                                   <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
                                 </>
                               );

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
+import moment from 'moment';
 
 import './Core.css';
 import './App.css';
@@ -90,6 +91,27 @@ class App extends React.Component {
       type: 'MEMBER_SET_BY_PROFILE_ROUTE',
       payload: profile
     });
+
+    moment.defineLocale('en-sml', {
+      parentLocale: 'en',
+      relativeTime: {
+        future: 'in %s',
+        past: '%s ago',
+        s: 'now',
+        ss: '%ss',
+        m: '<1m',
+        mm: '%dm',
+        h: '1h',
+        hh: '%dh',
+        d: '1d',
+        dd: '%dd',
+        M: '1M',
+        MM: '%dM',
+        y: '1y',
+        yy: '%dy'
+      }
+    });
+    moment.locale('en');
   }
 
   updateViewport = () => {

@@ -18,8 +18,16 @@ class Characters extends React.Component {
   render() {
     const { t, member, viewport } = this.props;
     let characters = member.data.profile.characters.data;
+    let charactersByLastPlayed = Object.entries(member.data.profile.characterActivities.data).sort((a, b) => {
+      let x = new Date(a[1].dateActivityStarted).getTime();
+      let y = new Date(b[1].dateActivityStarted).getTime();
+      
+      return y - x;
+    });
     let characterProgressions = member.data.profile.characterProgressions.data;
     let characterActivities = member.data.profile.characterActivities.data;
+
+    let charactersIdLastPlayed = charactersByLastPlayed.length ? charactersByLastPlayed[0][0] : false;
 
     return (
       <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
@@ -30,26 +38,28 @@ class Characters extends React.Component {
           let progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
 
           let state = null;
-          if (characterActivities[character.characterId].currentActivityHash === 0 || character.characterId !== characters[0].characterId) {
+          if (character.characterId === charactersIdLastPlayed) {
+            if (manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].placeHash === 2961497387) {
+              state = (
+                <>
+                  <div className='activity'>Orbit</div>
+                  <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
+                </>
+              );
+            } else {
+              state = (
+                <>
+                  <div className='activity'>
+                    {manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].displayProperties.name}
+                  </div>
+                  <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
+                </>
+              );
+            }
+          } else {
             state = (
               <>
                 <div className='time-before'>{t('Last played')}</div>
-                <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
-              </>
-            );
-          } else if (manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].placeHash === 2961497387) {
-            state = (
-              <>
-                <div className='activity'>Orbit</div>
-                <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
-              </>
-            );
-            } else {
-            state = (
-              <>
-                <div className='activity'>
-                  {manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].displayProperties.name}
-                </div>
                 <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
               </>
             );

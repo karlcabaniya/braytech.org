@@ -38,9 +38,10 @@ class ThisWeek extends React.Component {
         ascendant: new Date(`2018-09-04T${resetTime}`).getTime(),
         curse: new Date(`2018-09-11T${resetTime}`).getTime(),
         ep: new Date(`2018-05-08T${resetTime}`).getTime(),
-        reckoning: new Date(`2018-06-04T${resetTime}`).getTime(),
-        whisper: new Date(`2018-05-14T${resetTime}`).getTime(),
-        zerohour: new Date(`2018-05-14T${resetTime}`).getTime()
+        reckoning: new Date(`2018-05-14T${resetTime}`).getTime(),
+        whisper: new Date(`2018-05-21T${resetTime}`).getTime(),
+        zerohour: new Date(`2018-05-21T${resetTime}`).getTime(),
+        menagerie: new Date(`2018-05-28T${resetTime}`).getTime()
       },
       cycle: {
         // how many week cycle
@@ -49,19 +50,22 @@ class ThisWeek extends React.Component {
         ep: 5,
         reckoning: 2,
         whisper: 3,
-        zerohour: 3
+        zerohour: 3,
+        menagerie: 3
       },
       elapsed: {}, // elapsed time since cycle started
       week: {} // current week in cycle
     };
 
-    const time = new Date().getTime();
+    const time = new Date().getTime() + 86400000;
     const msPerWk = 604800000;
 
     for (var cycle in cycleInfo.cycle) {
       cycleInfo.elapsed[cycle] = time - cycleInfo.epoch[cycle];
       cycleInfo.week[cycle] = Math.floor((cycleInfo.elapsed[cycle] / msPerWk) % cycleInfo.cycle[cycle]) + 1;
     }
+
+    console.log(cycleInfo)
 
     const consolidatedInfo = {
       curse: {
@@ -504,6 +508,38 @@ class ThisWeek extends React.Component {
             1417930213 // Heroically Adventurous
           ]
         }
+      },
+      menagerie: {
+        1: {
+          boss: t('Hasapiko, Beloved by Calus'),
+          triumphs: [
+            3141945846,
+            2422246606,
+            2422246593
+          ],
+          items: [],
+          collectibles: []
+        },
+        2: {
+          boss: t('Arunak, Beloved by Calus'),
+          triumphs: [
+            1959753477,
+            2422246607,
+            2472579457
+          ],
+          items: [],
+          collectibles: []
+        },
+        3: {
+          boss: t('Pagouri, Beloved by Calus'),
+          triumphs: [
+            2351146132,
+            2422246605,
+            2422246592
+          ],
+          items: [],
+          collectibles: []
+        }
       }
     };
 
@@ -529,7 +565,7 @@ class ThisWeek extends React.Component {
             <ul className='list collection-items'>
               <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
             </ul>
-            <h4>Triumphs</h4>
+            <h4>{t('Triumphs')}</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered forceDisplay />
             </ul>
@@ -556,7 +592,7 @@ class ThisWeek extends React.Component {
               <div className='sub-title'>{manifest.DestinyMilestoneDefinition[463010297].displayProperties.name}</div>
               <div className='name'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
             </div>
-            <h4>Triumphs</h4>
+            <h4>{t('Triumphs')}</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered forceDisplay />
             </ul>
@@ -602,7 +638,7 @@ class ThisWeek extends React.Component {
                 )
               })}
             </ul>
-            <h4>Triumphs</h4>
+            <h4>{t('Triumphs')}</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.reckoning[cycleInfo.week.reckoning].triumphs} ordered forceDisplay />
             </ul>
@@ -660,7 +696,7 @@ class ThisWeek extends React.Component {
               <div className='sub-title'>{t('Ascendant Challenge')}</div>
               <div className='name'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
             </div>
-            <h4>Triumphs</h4>
+            <h4>{t('Triumphs')}</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered forceDisplay />
             </ul>
@@ -670,7 +706,7 @@ class ThisWeek extends React.Component {
               <div className='sub-title'>Savathûn's Curse</div>
               <div className='name'>{cycleInfo.week.curse}/3</div>
             </div>
-            <h4>Triumphs</h4>
+            <h4>{t('Triumphs')}</h4>
             <ul className='list record-items'>
               <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered forceDisplay />
             </ul>
@@ -747,6 +783,19 @@ class ThisWeek extends React.Component {
           </div> */}
           <div className='content'>
             <div className='module-header'>
+              <div className='sub-title'>{t('The Menagerie')}</div>
+              <div className='name'>{consolidatedInfo.menagerie[cycleInfo.week.menagerie].boss}</div>
+            </div>
+            <h4>{t('Triumphs')}</h4>
+            <ul className='list record-items'>
+              <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.menagerie[cycleInfo.week.menagerie].triumphs} />
+            </ul>
+          </div>
+        </div>
+        <div className='module'>
+          {nightfalls}
+          <div className='content'>
+            <div className='module-header'>
               <div className='sub-title'>{t('Escalation Protocol')}</div>
               <div className='name'>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</div>
             </div>
@@ -754,14 +803,7 @@ class ThisWeek extends React.Component {
             <ul className='list collection-items'>
               <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
             </ul>
-            {/* <h4>Catalyst Items: Worldline Zero</h4>
-            <ul className='list inventory-items'>
-              <Items hashes={consolidatedInfo.ep[cycleInfo.week.ep].items} disableTooltip />
-            </ul> */}
           </div>
-        </div>
-        <div className='module'>
-          {nightfalls}
         </div>
       </div>
     );
