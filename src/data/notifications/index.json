@@ -40,5 +40,15 @@
       "name": "New Clan Roster",
       "description": "New and improved _Clan Roster_ now available. You can sort by different columns by tapping the column header names. Let me know what you think/if it explodes."
     }
+  },
+  {
+    "id": "dh61ymecq1w0zpumu9it59k",
+    "date": "2019-06-24T18:34:57.705Z",
+    "expiry": 604800000,
+    "showOnce": true,
+    "displayProperties": {
+      "name": "New Chalice Recipes Tool",
+      "description": "Did you know Braytech has a new tool for decrypting the Menagerie rolls? No? Find it under the menu—click _More_ if you're a desktop user!"
+    }
   }
 ]
