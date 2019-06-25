@@ -38,10 +38,10 @@ class ThisWeek extends React.Component {
         ascendant: new Date(`2018-09-04T${resetTime}`).getTime(),
         curse: new Date(`2018-09-11T${resetTime}`).getTime(),
         ep: new Date(`2018-05-08T${resetTime}`).getTime(),
-        reckoning: new Date(`2018-05-14T${resetTime}`).getTime(),
-        whisper: new Date(`2018-05-21T${resetTime}`).getTime(),
-        zerohour: new Date(`2018-05-21T${resetTime}`).getTime(),
-        menagerie: new Date(`2018-05-28T${resetTime}`).getTime()
+        reckoning: new Date(`2019-05-14T${resetTime}`).getTime(),
+        whisper: new Date(`2019-05-28T${resetTime}`).getTime(),
+        zerohour: new Date(`2019-05-28T${resetTime}`).getTime(),
+        menagerie: new Date(`2019-06-04T${resetTime}`).getTime()
       },
       cycle: {
         // how many week cycle
@@ -55,7 +55,6 @@ class ThisWeek extends React.Component {
       },
       elapsed: {}, // elapsed time since cycle started
       week: {}, // current week in cycle
-      temp: {}
     };
 
     const time = new Date().getTime();
@@ -63,11 +62,8 @@ class ThisWeek extends React.Component {
 
     for (var cycle in cycleInfo.cycle) {
       cycleInfo.elapsed[cycle] = time - cycleInfo.epoch[cycle];
-      cycleInfo.temp[cycle] = cycleInfo.elapsed[cycle] / msPerWk;
       cycleInfo.week[cycle] = Math.floor((cycleInfo.elapsed[cycle] / msPerWk) % cycleInfo.cycle[cycle]) + 1;
     }
-
-    console.log(cycleInfo)
 
     const consolidatedInfo = {
       curse: {

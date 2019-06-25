@@ -307,7 +307,7 @@ class MemberLink extends React.Component {
                         <div>
                           {this.state.all.data.characters.data.map(c => {
                             let state = null;
-                            if (c.characterId === lastCharacterPlayed) {
+                            if (c.characterId === lastCharacterPlayed && this.state.all.data.characterActivities.data[c.characterId].currentActivityHash !== 0) {
                               if (manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].placeHash === 2961497387) {
                                 state = (
                                   <>

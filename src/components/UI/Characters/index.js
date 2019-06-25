@@ -38,7 +38,7 @@ class Characters extends React.Component {
           let progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
 
           let state = null;
-          if (character.characterId === charactersIdLastPlayed) {
+          if (character.characterId === charactersIdLastPlayed && characterActivities[character.characterId].currentActivityHash !== 0) {
             if (manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].placeHash === 2961497387) {
               state = (
                 <>
