@@ -453,5 +453,10 @@
     "date": "2019-06-24T03:59:15.843Z",
     "version": "2.5.36",
     "content": "- Updated _Inspect_ view for items\n- Completely rewrote the magic that creates the deep links for collectibles and triumphs\n- Refreshed _Character Select_ design\n- Assorted minor design changes"
+  },
+  {
+    "date": "2019-06-26T03:14:01.551Z",
+    "version": "2.5.37",
+    "content": "- _This Week_ beta"
   }
 ]

@@ -114,7 +114,7 @@ class Header extends React.Component {
         name: t('This Week'),
         desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/this-week',
-        exact: true,
+        exact: false,
         profile: true,
         primary: true
       },

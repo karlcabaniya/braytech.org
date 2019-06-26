@@ -4,11 +4,7 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import * as bungie from '../../../utils/bungie';
-
 import { ProfileNavLink } from '../../../components/ProfileLink';
-import Spinner from '../../../components/UI/Spinner';
-import Mode from '../../../components/PGCRs/Mode';
 import Matches from '../../../components/PGCRs/Matches';
 
 class All extends React.Component {

@@ -58,10 +58,6 @@
   background-color: rgba(255, 255, 255, 0);
 }
 
-.list li.linked:hover::before, .list li.tooltip:hover::before {
-  box-shadow: inset 0 0 0 1px #d6d6d6;
-}
-
 .list.reports li > .head {
   position: relative;
   width: 100%;
