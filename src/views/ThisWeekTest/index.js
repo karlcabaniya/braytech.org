@@ -93,7 +93,7 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         3: {
-          strength: t('Full effect'),
+          strength: t('Full strength'),
           triumphs: [
             2144075645, // The Taken Champion (Heroic Blind Well)
             3675740698, // War Chests (Ascendant Chests)
@@ -549,26 +549,15 @@ class ThisWeek extends React.Component {
       }
     };
 
-    const views = {
-      vanguard: {
-        name: t('Vanguard'),
-        icon: '/static/images/extracts/ui/02af-00000187.png',
-        modules: []
-      },
-      'dreaming-city': {
-        name: t('The Dreaming City'),
-        icon: '/static/images/extracts/ui/43541be45952e7eec59b7b57a0bf15a3.png',
-        modules: []
-      },
-      raids: {
-        name: t('Raids'),
-        icon: '/static/images/extracts/ui/DestinyActivityModeDefinition_bfe80e3dafe6686a9dc42df0606bdc9b.png',
-        modules: []
-      }
-    }
+    // console.log(Object.values(profile.characterProgressions.data['2305843009260574394'].milestones).map(m => {
+    //   m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
+    //   return m;
+    // }));
+
+    const modules = [];
 
     // flashpoint
-    const flashpoint = manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
+    const definitionFlashpoint = manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     let nightfalls = [];
 
     // scored nightfall strikes
@@ -615,80 +604,235 @@ class ThisWeek extends React.Component {
         icon: 'destiny-damage_arc',
         def: manifest.DestinyDamageTypeDefinition[2303181850]
       }
-    }
+    };
 
-    views.vanguard.modules.push({
-      el: (
-        <div className='module'>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{manifest.DestinyMilestoneDefinition[463010297].displayProperties.name}</div>
-              <div className='name'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
-            </div>
-            <h4>{t('Triumphs')}</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered forceDisplay />
-            </ul>
-          </div>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Heroic Mission')}</div>
-              <div className='name'>{t('Zero Hour')}</div>
-            </div>
-            <h4>Active Modifier</h4>
-            <ul className='list modifiers'>
-              {consolidatedInfo.zerohour[cycleInfo.week.zerohour].modifiers.map((m, i) => {
-                let modDef = manifest.DestinyActivityModifierDefinition[m];
-                return (
-                  <li key={i}>
-                    <div className='icon'>
-                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                    </div>
-                    <div className='text'>
-                      <div className='name'>{modDef.displayProperties.name}</div>
-                      <div className='description'>{modDef.displayProperties.description}</div>
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Heroic Mission')}</div>
-              <div className='name'>{t('Whisper of the Worm')}</div>
-            </div>
-            <h4>Active Modifier</h4>
-            <ul className='list modifiers'>
-              {consolidatedInfo.whisper[cycleInfo.week.whisper].modifiers.map((m, i) => {
-                let modDef = manifest.DestinyActivityModifierDefinition[m];
-                return (
-                  <li key={i}>
-                    <div className='icon'>
-                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                    </div>
-                    <div className='text'>
-                      <div className='name'>{modDef.displayProperties.name}</div>
-                      <div className='description'>{modDef.displayProperties.description}</div>
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
+    const availableHeroicMenagerie = profile.characterActivities.data[characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)) && manifest.DestinyActivityDefinition[profile.characterActivities.data[characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)).activityHash];
+
+    const moduleFlashpoint = (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{manifest.DestinyMilestoneDefinition[463010297].displayProperties.name}</div>
+          <div className='name'>{manifest.DestinyDestinationDefinition[definitionFlashpoint.destinationHash].displayProperties.name}</div>
         </div>
-      )
-    });
+        <h4>{t('Triumphs')}</h4>
+        <ul className='list record-items'>
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.flashpoint[definitionFlashpoint.questItemHash].triumphs} ordered forceDisplay />
+        </ul>
+      </div>
+    );
 
-    views.vanguard.modules.push({
-      el: (
-        <div className='module'>
+    const moduleHeroicMissionZeroHour = (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{t('Heroic Mission')}</div>
+          <div className='name'>{t('Zero Hour')}</div>
+        </div>
+        <h4>Active Modifier</h4>
+        <ul className='list modifiers'>
+          {consolidatedInfo.zerohour[cycleInfo.week.zerohour].modifiers.map((m, i) => {
+            let modDef = manifest.DestinyActivityModifierDefinition[m];
+            return (
+              <li key={i}>
+                <div className='icon'>
+                  <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                </div>
+                <div className='text'>
+                  <div className='name'>{modDef.displayProperties.name}</div>
+                  <div className='description'>{modDef.displayProperties.description}</div>
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    );
+
+    const moduleHeroicMissionWhisper = (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{t('Heroic Mission')}</div>
+          <div className='name'>{t('Whisper of the Worm')}</div>
+        </div>
+        <h4>Active Modifier</h4>
+        <ul className='list modifiers'>
+          {consolidatedInfo.whisper[cycleInfo.week.whisper].modifiers.map((m, i) => {
+            let modDef = manifest.DestinyActivityModifierDefinition[m];
+            return (
+              <li key={i}>
+                <div className='icon'>
+                  <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                </div>
+                <div className='text'>
+                  <div className='name'>{modDef.displayProperties.name}</div>
+                  <div className='description'>{modDef.displayProperties.description}</div>
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    );
+
+    const moduleReckoning = (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{t('The Reckoning')}</div>
+          <div className='name'>{consolidatedInfo.reckoning[cycleInfo.week.reckoning].boss}</div>
+        </div>
+        <h4>{t('Active Modifiers')}</h4>
+        <ul className='list modifiers'>
+          {reckoningModifiers.map((m, i) => {
+            let modDef = manifest.DestinyActivityModifierDefinition[m];
+            return (
+              <li key={i}>
+                <div className='icon'>
+                  <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                </div>
+                <div className='text'>
+                  <div className='name'>{modDef.displayProperties.name}</div>
+                  <div className='description'>{modDef.displayProperties.description}</div>
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+        <h4>{t('Triumphs')}</h4>
+        <ul className='list record-items'>
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.reckoning[cycleInfo.week.reckoning].triumphs} ordered forceDisplay />
+        </ul>
+      </div>
+    );
+
+    const moduleEscalationProtocol = (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{t('Escalation Protocol')}</div>
+          <div className='name'>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</div>
+        </div>
+        <h4>Collectibles</h4>
+        <ul className='list collection-items'>
+          <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
+        </ul>
+      </div>
+    );
+
+    const moduleNightfalls = nightfalls;
+
+    const moduleAscendantChallenge = (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{t('Ascendant Challenge')}</div>
+          <div className='name'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
+        </div>
+        <h4>{t('Triumphs')}</h4>
+        <ul className='list record-items'>
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered forceDisplay />
+        </ul>
+      </div>
+    );
+
+    const moduleDreamingCityCycle = (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{t("Savathûn's Curse")}</div>
+          <div className='name'>{t('Week')} {cycleInfo.week.curse}: {consolidatedInfo.curse[cycleInfo.week.curse].strength}</div>
+        </div>
+        <h4>{t('Triumphs')}</h4>
+        <ul className='list record-items'>
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered forceDisplay />
+        </ul>
+      </div>
+    );
+
+    const moduleShatteredThrone = cycleInfo.week.curse === 3 ? (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{t("Savathûn's Curse")}</div>
+          <div className='name'>{t('The Shattered Throne')}</div>
+        </div>
+        <h4>{t('Triumphs')}</h4>
+        <ul className='list record-items'>
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.shatteredThrone.triumphs} ordered forceDisplay />
+        </ul>
+      </div>
+    ) : null;
+
+    const moduleMenagerie = (
+      <div className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{t('The Menagerie')}</div>
+          <div className='name'>{consolidatedInfo.menagerie[cycleInfo.week.menagerie].boss}</div>
+        </div>
+        <h4>{t('Triumphs')}</h4>
+        <ul className='list record-items'>
+          <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.menagerie[cycleInfo.week.menagerie].triumphs} />
+        </ul>
+      </div>
+    );
+
+    modules.push(
+      [
+        moduleNightfalls[0]
+      ],
+      [
+        moduleNightfalls[1]
+      ],
+      [
+        moduleNightfalls[2]
+      ],
+      [
+        moduleMenagerie
+      ],
+      [
+        moduleAscendantChallenge
+      ],
+      [
+        moduleDreamingCityCycle
+      ],
+      [
+        moduleShatteredThrone
+      ],
+      [
+        
+      ]
+    );
+
+    return (
+      <div className='view' id='this-week-test'>
+        <div className='module head'>
           <div className='content'>
+            <div className='page-header'>
+              <div className='sub-name'>{t('This Week')}</div>
+              <div className='name'>{manifest.DestinyDestinationDefinition[definitionFlashpoint.destinationHash].displayProperties.name}</div>
+            </div>
+          </div>
+          <div className='content highlight'>
+            <div className='module-header'>
+              <div className='sub-name'>{t('Vanguard')}</div>
+            </div>
+            <h4>{t('Active Modifiers')}</h4>
+            <ul className='list modifiers'>
+              {strikesModifiers.map((m, i) => {
+                let modDef = manifest.DestinyActivityModifierDefinition[m];
+                return (
+                  <li key={i}>
+                    <div className='icon'>
+                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                    </div>
+                    <div className='text'>
+                      <div className='name'>{modDef.displayProperties.name}</div>
+                      <div className='description'>{modDef.displayProperties.description}</div>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+          <div className='content highlight'>
             <div className='module-header'>
               <div className='sub-name'>{t('The Reckoning')}</div>
-              <div className='name'>{consolidatedInfo.reckoning[cycleInfo.week.reckoning].boss}</div>
             </div>
-            <h4>Active Modifiers</h4>
+            <h4>{t('Active Modifiers')}</h4>
             <ul className='list modifiers'>
               {reckoningModifiers.map((m, i) => {
                 let modDef = manifest.DestinyActivityModifierDefinition[m];
@@ -705,153 +849,40 @@ class ThisWeek extends React.Component {
                 )
               })}
             </ul>
-            <h4>{t('Triumphs')}</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.reckoning[cycleInfo.week.reckoning].triumphs} ordered forceDisplay />
-            </ul>
           </div>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Escalation Protocol')}</div>
-              <div className='name'>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</div>
-            </div>
-            <h4>Collectibles</h4>
-            <ul className='list collection-items'>
-              <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
-            </ul>
-          </div>
-        </div>
-      )
-    });
-
-    views.vanguard.modules.push({
-      el: (
-        <div className='module'>
-          {nightfalls}
-        </div>
-      )
-    });
-
-    views['dreaming-city'].modules.push({
-      el: (
-        <div className='module'>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Ascendant Challenge')}</div>
-              <div className='name'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
-            </div>
-            <h4>{t('Triumphs')}</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered forceDisplay />
-            </ul>
-          </div>
-        </div>
-      )
-    });
-
-    views['dreaming-city'].modules.push({
-      el: (
-        <div className='module'>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t("Savathûn's Curse")}</div>
-              <div className='name'>{cycleInfo.week.curse}/3</div>
-            </div>
-            <h4>{t('Triumphs')}</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered forceDisplay />
-            </ul>
-          </div>
-        </div>
-      )
-    });
-
-    if (cycleInfo.week.curse === 3) {
-      views['dreaming-city'].modules.push({
-        el: (
-          <div className='module'>
-            <div className='content'>
+          {availableHeroicMenagerie ? (
+            <div className='content highlight'>
               <div className='module-header'>
-                <div className='sub-name'>{t("Savathûn's Curse")}</div>
-                <div className='name'>{t('The Shattered Throne')}</div>
+                <div className='sub-name'>{t('The Menagerie')}</div>
               </div>
-              <h4>{t('Triumphs')}</h4>
-              <ul className='list record-items'>
-                <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.shatteredThrone.triumphs} ordered forceDisplay />
+              <h4>{t('Active Heroic Modifiers')}</h4>
+              <ul className='list modifiers'>
+                {availableHeroicMenagerie.modifiers.map((m, i) => {
+                  let modDef = manifest.DestinyActivityModifierDefinition[m.activityModifierHash];
+                  return (
+                    <li key={i}>
+                      <div className='icon'>
+                        <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
+                      </div>
+                      <div className='text'>
+                        <div className='name'>{modDef.displayProperties.name}</div>
+                        <div className='description'>{modDef.displayProperties.description}</div>
+                      </div>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
-          </div>
-        )
-      });
-    }
-
-    views.raids.modules.push({
-      el: (
-        <div className='module'>
-          <div className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('The Menagerie')}</div>
-              <div className='name'>{consolidatedInfo.menagerie[cycleInfo.week.menagerie].boss}</div>
-            </div>
-            <h4>{t('Triumphs')}</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.menagerie[cycleInfo.week.menagerie].triumphs} />
-            </ul>
-          </div>
-        </div>
-      )
-    });
-
-    return (
-      <div className='view' id='this-week-test'>
-        <div className='module head'>
-          <div className='content'>
-            <div className='page-header'>
-              <div className='sub-name'>{t('This Week')}</div>
-              <div className='name'>{views[current].name}</div>
-            </div>
-            <div className='views'>
-              <ul className='list'>
-                <li className='linked'>
-                  <ProfileNavLink to='/this-week-test' exact>
-                    <ObservedImage className='image' src={views['vanguard'].icon} />
-                  </ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/this-week-test/dreaming-city'>
-                    <ObservedImage className='image' src={views['dreaming-city'].icon} />
-                  </ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/this-week-test/raids'>
-                    <ObservedImage className='image' src={views['raids'].icon} />
-                  </ProfileNavLink>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className='content highlight'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Weekly Singe')}</div>
-            </div>
-            <div className='weekly-burn'>
-              <i className={weeklySingeIcons[weeklySingeModifierHash].icon} /> <div>{weeklySingeIcons[weeklySingeModifierHash].def.displayProperties.name}</div>
-            </div>
-          </div>
-          <div className='content highlight'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('City Curse')}</div>
-            </div>
-            <div>
-              {consolidatedInfo.curse[cycleInfo.week.curse].strength}
-            </div>
-          </div>
-          <div className='content highlight'>
-            
-          </div>
+          ) : null}
         </div>
         <div className='padder'>
-          {views[current].modules.map(e => e.el)}
+          {modules.map((m, i) => {
+            return (
+              <div key={i} className='module'>
+                {m}
+              </div>
+            )
+          })}
         </div>
       </div>
     );
