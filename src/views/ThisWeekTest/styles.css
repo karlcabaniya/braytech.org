@@ -19,95 +19,20 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-#this-week-test > .module.head .page-header {
+/* #this-week-test > .module.head .page-header {
   margin-bottom: 0rem;
-}
+} */
 
-#this-week-test > .module.head .views {
-  margin: 2rem 0 0;
-}
-
-#this-week-test > .module.head .views .list {
-  display: grid;
-  grid-gap: 3px;
-  grid-template-columns: repeat(5, 1fr);
-}
-
-#this-week-test > .module.head .views .list li {
-  height: 48px;
-  margin: 0;
-  font-size: 14px;
-  background-color: rgba(255, 255, 255, 0);
-}
-
-#this-week-test > .module.head .views .list li::before {
-  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.4);
-}
-
-#this-week-test > .module.head .views .list li a.active {
-  background-color: rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 1);
-  color: #fff;
-}
-
-#this-week-test > .module.head .views .list li:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 1);
-}
-
-#this-week-test > .module.head .views .list li:hover::before {
-  box-shadow: inset 0 0 0 1px #d6d6d6;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-#this-week-test > .module.head .views .list li .image.dl {
-  top: 15%;
-  height: 70%;
-  opacity: 0.4;
-}
-
-#this-week-test > .module.head .views .list li .active .image.dl {
-  opacity: 1;
+#this-week-test > .module.head .text p {
+  font-size: 16px;
 }
 
 #this-week-test .module .content.highlight .module-header {
   margin: 24px 0 0;
 }
 
-#this-week-test > .module.head .highlight > div:last-child {
-  margin: 10px 0 0;
-  font-size: 38px;
-  line-height: 35px;
-  font-weight: 500;
-}
 
-#this-week-test > .module.head .highlight .weekly-burn {
-  margin: 10px 0 0;
-  display: grid;
-  grid-template-columns: auto auto;
-  justify-content: left;
-  align-items: center;
-  grid-gap: 10px;
-  font-size: 38px;
-  line-height: 35px;
-}
 
-#this-week-test > .module.head .highlight .weekly-burn i {
-  font-size: 34px;
-  font-weight: 400;
-}
-
-#this-week-test > .module.head .highlight .weekly-burn .destiny-damage_void {
-  color: #8b4cb2;
-}
-
-#this-week-test > .module.head .highlight .weekly-burn .destiny-damage_solar {
-  color: #ef641f;
-}
-
-#this-week-test > .module.head .highlight .weekly-burn .destiny-damage_arc {
-  color: #79bbe7;
-}
 
 #this-week-test .module .sub-header ~ .sub-header {
   margin: 3rem 0 1rem;

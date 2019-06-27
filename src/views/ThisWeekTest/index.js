@@ -558,6 +558,9 @@ class ThisWeek extends React.Component {
 
     // flashpoint
     const definitionFlashpoint = manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
+    const definitionFlashpointVendor = definitionFlashpoint && Object.values(manifest.DestinyVendorDefinition).find(v => v.locations && v.locations.find(l => l.destinationHash === definitionFlashpoint.destinationHash));
+    const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
+
     let nightfalls = [];
 
     // scored nightfall strikes
@@ -572,7 +575,7 @@ class ThisWeek extends React.Component {
               <div className='sub-name'>{t('Nightfall')}</div>
               <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
             </div>
-            <h4>Collectibles</h4>
+            <h4>{t('Collectibles')}</h4>
             <ul className='list collection-items'>
               <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
             </ul>
@@ -608,8 +611,21 @@ class ThisWeek extends React.Component {
 
     const availableHeroicMenagerie = profile.characterActivities.data[characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)) && manifest.DestinyActivityDefinition[profile.characterActivities.data[characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)).activityHash];
 
+    const menagerieHeroicCollectibles = {
+      0: [
+        1692129580,
+
+      ],
+      1: [
+        3376099856
+      ],
+      2: [
+        1572606157
+      ]
+    }
+
     const moduleFlashpoint = (
-      <div className='content'>
+      <div key='moduleFlashpoint' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{manifest.DestinyMilestoneDefinition[463010297].displayProperties.name}</div>
           <div className='name'>{manifest.DestinyDestinationDefinition[definitionFlashpoint.destinationHash].displayProperties.name}</div>
@@ -622,7 +638,7 @@ class ThisWeek extends React.Component {
     );
 
     const moduleHeroicMissionZeroHour = (
-      <div className='content'>
+      <div key='moduleHeroicMissionZeroHour' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Heroic Mission')}</div>
           <div className='name'>{t('Zero Hour')}</div>
@@ -648,7 +664,7 @@ class ThisWeek extends React.Component {
     );
 
     const moduleHeroicMissionWhisper = (
-      <div className='content'>
+      <div key='moduleHeroicMissionWhisper' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Heroic Mission')}</div>
           <div className='name'>{t('Whisper of the Worm')}</div>
@@ -674,7 +690,7 @@ class ThisWeek extends React.Component {
     );
 
     const moduleReckoning = (
-      <div className='content'>
+      <div key='moduleReckoning' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('The Reckoning')}</div>
           <div className='name'>{consolidatedInfo.reckoning[cycleInfo.week.reckoning].boss}</div>
@@ -704,12 +720,12 @@ class ThisWeek extends React.Component {
     );
 
     const moduleEscalationProtocol = (
-      <div className='content'>
+      <div key='moduleEscalationProtocol' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Escalation Protocol')}</div>
           <div className='name'>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</div>
         </div>
-        <h4>Collectibles</h4>
+        <h4>{t('Collectibles')}</h4>
         <ul className='list collection-items'>
           <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
         </ul>
@@ -719,7 +735,7 @@ class ThisWeek extends React.Component {
     const moduleNightfalls = nightfalls;
 
     const moduleAscendantChallenge = (
-      <div className='content'>
+      <div key='moduleAscendantChallenge' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Ascendant Challenge')}</div>
           <div className='name'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
@@ -732,7 +748,7 @@ class ThisWeek extends React.Component {
     );
 
     const moduleDreamingCityCycle = (
-      <div className='content'>
+      <div key='moduleDreamingCityCycle' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t("Savathûn's Curse")}</div>
           <div className='name'>{t('Week')} {cycleInfo.week.curse}: {consolidatedInfo.curse[cycleInfo.week.curse].strength}</div>
@@ -745,7 +761,7 @@ class ThisWeek extends React.Component {
     );
 
     const moduleShatteredThrone = cycleInfo.week.curse === 3 ? (
-      <div className='content'>
+      <div key='moduleShatteredThrone' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t("Savathûn's Curse")}</div>
           <div className='name'>{t('The Shattered Throne')}</div>
@@ -758,11 +774,15 @@ class ThisWeek extends React.Component {
     ) : null;
 
     const moduleMenagerie = (
-      <div className='content'>
+      <div key='moduleMenagerie' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('The Menagerie')}</div>
           <div className='name'>{consolidatedInfo.menagerie[cycleInfo.week.menagerie].boss}</div>
         </div>
+        <h4>{t('Heroic Collectibles')}</h4>
+        <ul className='list collection-items'>
+          <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={menagerieHeroicCollectibles[profile.characters.data.find(c => c.characterId === characterId).classType]} />
+        </ul>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
           <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.menagerie[cycleInfo.week.menagerie].triumphs} />
@@ -805,6 +825,9 @@ class ThisWeek extends React.Component {
               <div className='sub-name'>{t('This Week')}</div>
               <div className='name'>{manifest.DestinyDestinationDefinition[definitionFlashpoint.destinationHash].displayProperties.name}</div>
             </div>
+            {definitionFlashpointFaction.displayProperties ? <div className='text'>
+              <p>{t('Contact in the field')}: {definitionFlashpointFaction.displayProperties.description}</p>
+            </div> : null}
           </div>
           <div className='content highlight'>
             <div className='module-header'>
