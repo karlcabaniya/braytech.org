@@ -34,7 +34,7 @@ export const memberProfile = async (membershipType, membershipId, components) =>
 
 export const memberGroups = async (membershipType, membershipId) => apiRequest(`/Platform/GroupV2/User/${membershipType}/${membershipId}/0/1/`);
 
-export const GetGroupByName = async (groupName, groupType = 1) => apiRequest(`/Platform/GroupV2/Name/${groupName}/${groupType}/`);
+export const GetGroupByName = async (groupName, groupType = 1) => apiRequest(`/Platform/GroupV2/Name/${encodeURIComponent(groupName)}/${groupType}/`);
 
 export const groupMembers = async groupId => apiRequest(`/Platform/GroupV2/${groupId}/Members/`);
 

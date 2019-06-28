@@ -21,7 +21,7 @@ class Items extends React.Component {
   }
 
   render() {
-    const { t, member, items, inspect, action } = this.props;
+    const { t, member, items, asTab, inspect, action } = this.props;
 
     let output = [];
 
@@ -60,6 +60,9 @@ class Items extends React.Component {
           <div className='icon'>
             <ObservedImage className='image' src={definitionItem.displayProperties.localIcon ? `${definitionItem.displayProperties.icon}` : `https://www.bungie.net${definitionItem.displayProperties.icon}`} />
           </div>
+          {asTab ? <div className='text'>
+            <div className='name'>{definitionItem.displayProperties.name}</div>
+          </div> : null}
           {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
         </li>
       );

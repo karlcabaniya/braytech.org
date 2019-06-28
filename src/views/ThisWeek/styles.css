@@ -1,21 +1,41 @@
 #this-week {
-  padding: 4rem 3rem 3rem;
+  padding: 0;
+  display: grid;
+  margin: 0 auto;
+  width: 100%;
+}
+
+#this-week > .padder,
+#this-week > .module.head {
+  width: 100%;
+  padding: 3rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 3rem;
 }
 
+#this-week > .module.head {
+  padding: 4rem 3rem 3rem;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* #this-week > .module.head .page-header {
+  margin-bottom: 0rem;
+} */
+
+#this-week > .module.head .text p {
+  font-size: 16px;
+}
+
+#this-week .module .content.highlight .module-header {
+  margin: 24px 0 0;
+}
+
+
+
+
 #this-week .module .sub-header ~ .sub-header {
   margin: 3rem 0 1rem;
-}
-
-#this-week .module .sub-title,
-#this-week .module h3 {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-#this-week .module .sub-title {
-  font-size: 18px;
 }
 
 #this-week .module .module-header {
@@ -23,8 +43,13 @@
   margin: 48px 0 0;
 }
 
-#this-week .module .page-header {
-  margin: 24px 0 2rem;
+#this-week .module .module-header .sub-name,
+#this-week .module h3 {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#this-week .module .module-header .sub-name {
+  font-size: 18px;
 }
 
 #this-week .module .module-header::after {
@@ -65,7 +90,7 @@
   grid-template-columns: 1fr;
 }
 
-#this-week .module .content + .content {
+#this-week .module:not(.head) .content + .content {
   margin: 2rem 0 0;
 }
 
@@ -135,15 +160,40 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-@media screen and (max-width: 1200px) {
-  #this-week {
+#this-week .module .raid-challenge {
+  display: grid;
+  grid-template-columns: 48px auto;
+  grid-gap: 1rem;
+  align-items: flex-start;
+}
+
+#this-week .module .raid-challenge .name {
+  margin: 0 0 3px;
+}
+
+#this-week .module .raid-challenge .description {
+  white-space: pre-line;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media screen and (max-width: 1440px) {
+  #this-week > .padder,
+  #this-week > .module.head {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #this-week > .padder,
+  #this-week > .module.head {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media screen and (max-width: 600px) {
-  #this-week {
-    padding: 3rem 2rem 2rem;
+  #this-week > .padder,
+  #this-week > .module.head {
+    padding: 2rem;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
   }
@@ -160,3 +210,9 @@
     font-size: 27px;
   }
 }
+
+
+
+
+
+

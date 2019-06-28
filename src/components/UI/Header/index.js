@@ -114,7 +114,7 @@ class Header extends React.Component {
         name: t('This Week'),
         desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/this-week',
-        exact: false,
+        exact: true,
         profile: true,
         primary: true
       },
@@ -314,48 +314,50 @@ class Header extends React.Component {
     return (
       <div id='header' className={cx(this.props.theme.selected, { 'profile-header': profileEl, navOpen: this.state.mobileNavOpen })}>
         <div className='braytech'>
-          <div className='logo'>
-            <Link to='/' onClick={this.closeNav}>
-              <span className='destiny-clovis_bray_device' />
-              Braytech
-            </Link>
-          </div>
-          {!viewsInline || this.state.navOpen ? this.navOverlayLink(this.state.navOpen) : null}
-          {!profileEl && viewsInline && !this.state.navOpen ? (
-            <div className='ui'>
-              <div className='views'>
-                <ul>
-                  {views.filter(v => v.primary).map(view => {
-                    if (view.profile && !view.secondary) {
-                      return (
-                        <li key={view.slug}>
-                          <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
-                            {view.name}
-                          </ProfileNavLink>
-                        </li>
-                      );
-                    } else if (view.hidden) {
-                      return (
-                        <li key='more'>
-                          <Link to={view.slug} onClick={e => { e.preventDefault(); this.openNav(); }}>
-                            {view.name}
-                          </Link>
-                        </li>
-                      );
-                    } else {
-                      return (
-                        <li key={view.slug}>
-                          <NavLink to={view.slug} exact={view.exact}>
-                            {view.name}
-                          </NavLink>
-                        </li>
-                      );
-                    }
-                  })}
-                </ul>
-              </div>
+          <div className='wrapper'>
+            <div className='logo'>
+              <Link to='/' onClick={this.closeNav}>
+                <span className='destiny-clovis_bray_device' />
+                Braytech
+              </Link>
             </div>
-          ) : null}
+            {!viewsInline || this.state.navOpen ? this.navOverlayLink(this.state.navOpen) : null}
+            {!profileEl && viewsInline && !this.state.navOpen ? (
+              <div className='ui'>
+                <div className='views'>
+                  <ul>
+                    {views.filter(v => v.primary).map(view => {
+                      if (view.profile && !view.secondary) {
+                        return (
+                          <li key={view.slug}>
+                            <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
+                              {view.name}
+                            </ProfileNavLink>
+                          </li>
+                        );
+                      } else if (view.hidden) {
+                        return (
+                          <li key='more'>
+                            <Link to={view.slug} onClick={e => { e.preventDefault(); this.openNav(); }}>
+                              {view.name}
+                            </Link>
+                          </li>
+                        );
+                      } else {
+                        return (
+                          <li key={view.slug}>
+                            <NavLink to={view.slug} exact={view.exact}>
+                              {view.name}
+                            </NavLink>
+                          </li>
+                        );
+                      }
+                    })}
+                  </ul>
+                </div>
+              </div>
+            ) : null}
+          </div>
         </div>
         {profileEl}
         {this.state.navOpen ? (

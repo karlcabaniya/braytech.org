@@ -458,5 +458,15 @@
     "date": "2019-06-26T03:14:01.551Z",
     "version": "2.5.37",
     "content": "- _This Week_ beta"
+  },
+  {
+    "date": "2019-06-27T21:29:34.770Z",
+    "version": "2.6.0",
+    "content": "- New _This Week_ view"
+  },
+  {
+    "date": "2019-06-28T01:17:43.277Z",
+    "version": "2.6.1",
+    "content": "- Added raids to _This Week_ view\n- Fixed a clan search bug"
   }
 ]
