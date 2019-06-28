@@ -221,6 +221,7 @@ class SitRep extends React.Component {
         <div className='head'>
           <div className='col'>
             <div className='page-header'>
+              <div className='sub-name'>{t('Sit Rep')}</div>
               <div className='name'>{t('Welcome back, ') + (character.titleRecordHash ? manifest.DestinyRecordDefinition[character.titleRecordHash].titleInfo.titlesByGenderHash[character.genderHash] : t('Guardian'))}</div>
             </div>
             <div className='text'>
@@ -228,159 +229,161 @@ class SitRep extends React.Component {
             </div>
           </div>
         </div>
-        <div className='col'>
-          {member.data.leaderboardPosition && member.data.leaderboardPosition.data ? (
+        <div className='padder'>
+          <div className='col'>
+            {member.data.leaderboardPosition && member.data.leaderboardPosition.data ? (
+              <div className='module'>
+                <div className='sub-header sub'>
+                  <div>{t('Ranks')}</div>
+                </div>
+                <div className='ranks'>
+                  <div>
+                    <div className='value'>{member.data.leaderboardPosition.data.ranks.triumphScore.toLocaleString('en-us')}</div>
+                    <div className='name'>Triumph score rank</div>
+                  </div>
+                  <div>
+                    <div className='value'>{member.data.leaderboardPosition.data.ranks.collectionTotal.toLocaleString('en-us')}</div>
+                    <div className='name'>Collections rank</div>
+                  </div>
+                  <div>
+                    <div className='value'>{member.data.leaderboardPosition.data.ranks.timePlayed.toLocaleString('en-us')}</div>
+                    <div className='name'>Time played rank</div>
+                  </div>
+                </div>
+                <Button anchor to='/leaderboards' text={t('View leaderboards')} />
+              </div>
+            ) : null}
             <div className='module'>
               <div className='sub-header sub'>
-                <div>{t('Ranks')}</div>
+                <div>{t('Equipment')}</div>
               </div>
-              <div className='ranks'>
-                <div>
-                  <div className='value'>{member.data.leaderboardPosition.data.ranks.triumphScore.toLocaleString('en-us')}</div>
-                  <div className='name'>Triumph score rank</div>
-                </div>
-                <div>
-                  <div className='value'>{member.data.leaderboardPosition.data.ranks.collectionTotal.toLocaleString('en-us')}</div>
-                  <div className='name'>Collections rank</div>
-                </div>
-                <div>
-                  <div className='value'>{member.data.leaderboardPosition.data.ranks.timePlayed.toLocaleString('en-us')}</div>
-                  <div className='name'>Time played rank</div>
-                </div>
-              </div>
-              <Button anchor to='/leaderboards' text={t('View leaderboards')} />
+              <ul className='list inventory-items'>
+                <Items items={orderBy(member.data.profile.characterEquipment.data[member.characterId].items.filter(i => ![4292445962, 4274335291, 1107761855].includes(i.bucketHash)), [i => i.bucketHash === 3284755031], ['desc'])} />
+              </ul>
             </div>
-          ) : null}
-          <div className='module'>
-            <div className='sub-header sub'>
-              <div>{t('Equipment')}</div>
-            </div>
-            <ul className='list inventory-items'>
-              <Items items={orderBy(member.data.profile.characterEquipment.data[member.characterId].items.filter(i => ![4292445962, 4274335291, 1107761855].includes(i.bucketHash)), [i => i.bucketHash === 3284755031], ['desc'])} />
-            </ul>
-          </div>
-          <div className='module'>
-            <div className='sub-header sub'>
-              <div>{t('Progression')}</div>
-            </div>
-            <div>
-              <div className='prog'>
-                <div className='text'>
-                  <div className='name'>{infamy.defs.activity.displayProperties.name}</div>
-                  <div className='resets'>{infamy.progression.resets} resets</div>
-                </div>
-                <div className='progress'>
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: `Next rank: ${infamy.defs.rank.currentProgress === infamy.progression.total && infamy.progression.data.stepIndex === infamy.defs.rank.steps.length ? infamy.defs.rank.steps[0].stepName : infamy.defs.rank.steps[(infamy.progression.data.stepIndex + 1) % infamy.defs.rank.steps.length].stepName}`,
-                      completionValue: infamy.progression.data.nextLevelAt
-                    }}
-                    playerProgress={{
-                      progress: infamy.progression.data.progressToNextLevel,
-                      objectiveHash: 'infamy'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: infamy.defs.rank.displayProperties.name,
-                      completionValue: infamy.progression.total
-                    }}
-                    playerProgress={{
-                      progress: infamy.progression.data.currentProgress,
-                      objectiveHash: 'infamy'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                </div>
-              </div>
-              <div className='prog'>
-                <div className='text'>
-                  <div className='name'>{valor.defs.activity.displayProperties.name}</div>
-                  <div className='resets'>{valor.progression.resets} resets</div>
-                </div>
-                <div className='progress'>
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
-                      completionValue: valor.progression.data.nextLevelAt
-                    }}
-                    playerProgress={{
-                      progress: valor.progression.data.progressToNextLevel,
-                      objectiveHash: 'valor'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: valor.defs.rank.displayProperties.name,
-                      completionValue: valor.progression.total
-                    }}
-                    playerProgress={{
-                      progress: valor.progression.data.currentProgress,
-                      objectiveHash: 'valor'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                </div>
-              </div>
-              <div className='prog'>
-                <div className='text'>
-                  <div className='name'>{glory.defs.activity.displayProperties.name}</div>
-                </div>
-                <div className='progress'>
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? glory.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
-                      completionValue: glory.progression.data.nextLevelAt
-                    }}
-                    playerProgress={{
-                      progress: glory.progression.data.progressToNextLevel,
-                      objectiveHash: 'glory'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                  <ProgressBar
-                    objectiveDefinition={{
-                      progressDescription: glory.defs.rank.displayProperties.name,
-                      completionValue: glory.progression.total
-                    }}
-                    playerProgress={{
-                      progress: glory.progression.data.currentProgress,
-                      objectiveHash: 'glory'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='col'>
-          <div className='module milestones'>
-            <div className='sub-header sub'>
-              <div>{t('Milestones')}</div>
-            </div>
-            {milestones.length ? <ul className='list'>{milestones.map(m => m.element)}</ul> : <div className='milestones-completed'>{t("You've completed all of your milestones for this character.")}</div>}
-          </div>
-        </div>
-        <div className='col'>
-          {group ? (
-            <div className='module clan-roster'>
+            <div className='module'>
               <div className='sub-header sub'>
-                <div>{t('Clan roster')}</div>
-                <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
+                <div>{t('Progression')}</div>
               </div>
-              <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
-              {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini showOnline />}
+              <div>
+                <div className='prog'>
+                  <div className='text'>
+                    <div className='name'>{infamy.defs.activity.displayProperties.name}</div>
+                    <div className='resets'>{infamy.progression.resets} resets</div>
+                  </div>
+                  <div className='progress'>
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: `Next rank: ${infamy.defs.rank.currentProgress === infamy.progression.total && infamy.progression.data.stepIndex === infamy.defs.rank.steps.length ? infamy.defs.rank.steps[0].stepName : infamy.defs.rank.steps[(infamy.progression.data.stepIndex + 1) % infamy.defs.rank.steps.length].stepName}`,
+                        completionValue: infamy.progression.data.nextLevelAt
+                      }}
+                      playerProgress={{
+                        progress: infamy.progression.data.progressToNextLevel,
+                        objectiveHash: 'infamy'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: infamy.defs.rank.displayProperties.name,
+                        completionValue: infamy.progression.total
+                      }}
+                      playerProgress={{
+                        progress: infamy.progression.data.currentProgress,
+                        objectiveHash: 'infamy'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                  </div>
+                </div>
+                <div className='prog'>
+                  <div className='text'>
+                    <div className='name'>{valor.defs.activity.displayProperties.name}</div>
+                    <div className='resets'>{valor.progression.resets} resets</div>
+                  </div>
+                  <div className='progress'>
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
+                        completionValue: valor.progression.data.nextLevelAt
+                      }}
+                      playerProgress={{
+                        progress: valor.progression.data.progressToNextLevel,
+                        objectiveHash: 'valor'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: valor.defs.rank.displayProperties.name,
+                        completionValue: valor.progression.total
+                      }}
+                      playerProgress={{
+                        progress: valor.progression.data.currentProgress,
+                        objectiveHash: 'valor'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                  </div>
+                </div>
+                <div className='prog'>
+                  <div className='text'>
+                    <div className='name'>{glory.defs.activity.displayProperties.name}</div>
+                  </div>
+                  <div className='progress'>
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? glory.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
+                        completionValue: glory.progression.data.nextLevelAt
+                      }}
+                      playerProgress={{
+                        progress: glory.progression.data.progressToNextLevel,
+                        objectiveHash: 'glory'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                    <ProgressBar
+                      objectiveDefinition={{
+                        progressDescription: glory.defs.rank.displayProperties.name,
+                        completionValue: glory.progression.total
+                      }}
+                      playerProgress={{
+                        progress: glory.progression.data.currentProgress,
+                        objectiveHash: 'glory'
+                      }}
+                      hideCheck
+                      chunky
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-          ) : null}
+          </div>
+          <div className='col'>
+            <div className='module milestones'>
+              <div className='sub-header sub'>
+                <div>{t('Milestones')}</div>
+              </div>
+              {milestones.length ? <ul className='list'>{milestones.map(m => m.element)}</ul> : <div className='milestones-completed'>{t("You've completed all of your milestones for this character.")}</div>}
+            </div>
+          </div>
+          <div className='col'>
+            {group ? (
+              <div className='module clan-roster'>
+                <div className='sub-header sub'>
+                  <div>{t('Clan roster')}</div>
+                  <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
+                </div>
+                <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
+                {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini showOnline />}
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     );

@@ -512,6 +512,14 @@
   color: #fff;
 }
 
+#tooltip .frame.no-name .header {
+  padding: 0;
+}
+
+#tooltip .frame.no-name .header .name {
+  display: none;
+}
+
 #tooltip .frame.ui .header {
   background-color: hsla(0, 0%, 0%, 0.9);
   border-top: 5px solid rgba(214, 214, 214, 0.8);

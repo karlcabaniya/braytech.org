@@ -733,8 +733,6 @@ class ThisWeek extends React.Component {
 
     // console.log(consolidatedInfo) 
 
-    // console.log(milestones[3660836525])
-
     // console.log(Object.values(profile.characterProgressions.data['2305843009260574394'].milestones).map(m => {
     //   m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
     //   return m;

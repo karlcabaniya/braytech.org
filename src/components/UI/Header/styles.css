@@ -27,7 +27,13 @@
   font-family: 'nhg text';
 }
 
-html.backdropfilter #header .braytech {
+.wrapper.dark-mode #header .braytech {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+html.backdropfilter #header .braytech,
+html.backdropfilter .wrapper.dark-mode #header .braytech {
+  /* background-color: rgba(255, 255, 255, 0); */
   backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
 }
 

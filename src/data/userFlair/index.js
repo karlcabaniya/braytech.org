@@ -3,6 +3,7 @@ const userFlair = [
     user: '44611686018467516892',
     trophies: [
       {
+        hash: 'patron-vip',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron one-hundo'
@@ -13,6 +14,7 @@ const userFlair = [
     user: '14611686018449662397',
     trophies: [
       {
+        hash: 'warmind',
         primary: true,
         icon: 'destiny-warmind',
         classnames: 'me'
@@ -23,6 +25,7 @@ const userFlair = [
     user: '24611686018455756917',
     trophies: [
       {
+        hash: 'patron',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron'
@@ -33,6 +36,7 @@ const userFlair = [
     user: '24611686018469271298',
     trophies: [
       {
+        hash: 'patron',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron'
@@ -43,6 +47,7 @@ const userFlair = [
     user: '14611686018436742706',
     trophies: [
       {
+        hash: 'patron',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron'
@@ -53,6 +58,7 @@ const userFlair = [
     user: '44611686018467367772',
     trophies: [
       {
+        hash: 'patron',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron'
@@ -63,6 +69,7 @@ const userFlair = [
     user: '14611686018469277478',
     trophies: [
       {
+        hash: 'patron',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron'
@@ -73,6 +80,7 @@ const userFlair = [
     user: '44611686018467293140',
     trophies: [
       {
+        hash: 'patron',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron'
@@ -83,6 +91,7 @@ const userFlair = [
     user: '44611686018468077675',
     trophies: [
       {
+        hash: 'patron',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron'
@@ -93,6 +102,7 @@ const userFlair = [
     user: '44611686018468058152',
     trophies: [
       {
+        hash: 'patron',
         primary: true,
         icon: 'destiny-clovis_bray_device',
         classnames: 'patron'

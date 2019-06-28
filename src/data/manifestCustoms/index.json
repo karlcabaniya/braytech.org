@@ -504,5 +504,43 @@
       "redacted": false,
       "blacklisted": false
     }
+  },
+  "BraytechFlairDefinition": {
+    "platform_xbox": {
+      "displayProperties": {
+        "description": "Xbox player"
+      },
+      "itemType": 50
+    },
+    "platform_playstation": {
+      "displayProperties": {
+        "description": "Playstation player"
+      },
+      "itemType": 50
+    },
+    "platform_pc": {
+      "displayProperties": {
+        "description": "PC player"
+      },
+      "itemType": 50
+    },
+    "warmind": {
+      "displayProperties": {
+        "description": "Tom Chapman, creator and engineer of Braytech"
+      },
+      "itemType": 50
+    },
+    "patron-vip": {
+      "displayProperties": {
+        "description": "A very generous and valued patron of Braytech"
+      },
+      "itemType": 50
+    },
+    "patron": {
+      "displayProperties": {
+        "description": "A generous patron of Braytech"
+      },
+      "itemType": 50
+    }
   }
 }

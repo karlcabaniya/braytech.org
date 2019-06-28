@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 import Moment from 'react-moment';
+import entities from 'entities';
 
 import ObservedImage from '../ObservedImage';
 import Spinner from '../UI/Spinner';
 import Button from '../UI/Button';
 import ProgressBar from '../UI/ProgressBar';
+import Flair from '../UI/Flair';
 import manifest from '../../utils/manifest';
 import * as bungie from '../../utils/bungie';
 import * as voluspa from '../../utils/voluspa';
@@ -160,7 +162,7 @@ class MemberLink extends React.Component {
   }
 
   render() {
-    const { t, member, type, id, displayName = false, characterId, hideFlair = false, showClassIcon = false, hideEmblemIcon = false } = this.props;
+    const { t, type, id, displayName = false, characterId, hideFlair = false, showClassIcon = false, hideEmblemIcon = false } = this.props;
 
     let characterBasic;
     if (this.state.basic.data) {
@@ -236,21 +238,8 @@ class MemberLink extends React.Component {
                     <div className='module'>
                       <div className='head'>
                         <div className='displayName'>{this.state.all.data.profile.data && this.state.all.data.profile.data.userInfo.displayName}</div>
-                        <div className='groupName'>{this.state.all.data.group ? this.state.all.data.group.name : null}</div>
-                        <div className='stamps'>
-                          <div>
-                            <i className={`destiny-platform_${destinyEnums.PLATFORMS[type].toLowerCase()}`} />
-                          </div>
-                          {flair
-                            ? flair.trophies.map((s, i) => {
-                                return (
-                                  <div key={i}>
-                                    <i className={cx(s.icon, s.classnames)} />
-                                  </div>
-                                );
-                              })
-                            : null}
-                        </div>
+                        <div className='groupName'>{this.state.all.data.group ? entities.decodeHTML(this.state.all.data.group.name) : null}</div>
+                        <Flair type={type} id={id} />
                       </div>
                       <div className='sub-header'>
                         <div>Basics</div>
@@ -500,11 +489,6 @@ class MemberLink extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {};
-}
-
 export default compose(
-  connect(mapStateToProps),
   withNamespaces()
 )(MemberLink);

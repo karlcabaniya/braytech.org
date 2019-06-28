@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
-import cx from 'classnames';
 
-import Characters from '../../components/UI/Characters';
 import * as destinyUtils from '../../utils/destinyUtils';
 import * as destinyEnums from '../../utils/destinyEnums';
-import userFlair from '../../data/userFlair';
+import Characters from '../../components/UI/Characters';
+import Flair from '../../components/UI/Flair';
 
 class Profile extends React.Component {
   render() {
@@ -20,31 +19,12 @@ class Profile extends React.Component {
       }, 0) / 1440
     );
 
-    let flair = userFlair.find(f => f.user === member.membershipType + member.membershipId);
-    let primaryFlair = false;
-    if (flair) {
-      primaryFlair = flair.trophies.find(t => t.primary);
-    }
-
     return (
       <div className='user'>
         <div className='info'>
           <div className='displayName'>{member.data.profile.profile.data.userInfo.displayName}</div>
           {groups.length === 1 && <div className='clan'>{groups[0].group.name}</div>}
-          <div className='stamps'>
-            <div>
-              <i className={`destiny-platform_${destinyEnums.PLATFORMS[member.membershipType].toLowerCase()}`} />
-            </div>
-            {flair
-              ? flair.trophies.map((s, i) => {
-                  return (
-                    <div key={i}>
-                      <i className={cx(s.icon, s.classnames)} />
-                    </div>
-                  );
-                })
-              : null}
-          </div>
+          <Flair type={member.membershipType} id={member.membershipId} />
           <div className='basics'>
             <div>
               <div className='value'>

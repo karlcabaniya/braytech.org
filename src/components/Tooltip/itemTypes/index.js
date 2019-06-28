@@ -35,6 +35,11 @@ class ItemTypes extends React.Component {
       item = cloneDeep(manifest[table][hash]);
     }
 
+    if (!item) {
+      console.warn('Hash not found');
+      return null;
+    }
+
     if (instanceId && member.data && member.data.profile.itemComponents.instances.data[instanceId]) {
       let itemComponents = member.data.profile.itemComponents;
 
@@ -92,6 +97,10 @@ class ItemTypes extends React.Component {
       } else if (item.itemType === 26) {
         kind = 'bounty';
         black = bounty(item);
+      } else if (item.itemType === 50) {
+        kind = 'ui no-name';
+        tier = 'basic';
+        black = fallback(item);
       } else {
         kind = 'ui';
         tier = 'basic';
