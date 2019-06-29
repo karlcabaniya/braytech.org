@@ -468,5 +468,10 @@
     "date": "2019-06-28T01:17:43.277Z",
     "version": "2.6.1",
     "content": "- Added raids to _This Week_ view\n- Fixed a clan search bug"
+  },
+  {
+    "date": "2019-06-29T07:08:05.943Z",
+    "version": "2.6.2",
+    "content": "- Component-ised Flair\n- Enabled and added custom tooltips\n- Rearranged _Sit Rep_ a little\n- Added ability to filter by class type to Chalice tool"
   }
 ]

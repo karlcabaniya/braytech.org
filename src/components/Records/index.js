@@ -243,8 +243,8 @@ class Records extends React.Component {
                 <div className='text'>
                   <div className='name'>{definitionRecord.displayProperties.name}</div>
                   <div className='meta'>
-                    <div className='commonality'>{manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%</div>
-                    {definitionRecord.completionInfo && definitionRecord.completionInfo.ScoreValue !== 0 ? <div className='score'>{definitionRecord.completionInfo.ScoreValue}</div> : null}
+                    <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>{manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%</div>
+                    {definitionRecord.completionInfo && definitionRecord.completionInfo.ScoreValue !== 0 ? <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>{definitionRecord.completionInfo.ScoreValue}</div> : null}
                   </div>
                   <div className='description'>{description}</div>
                 </div>

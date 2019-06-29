@@ -1,6 +1,8 @@
 {
   "name": "braytech.org",
-  "version": "2.6.1",
+  "author": "Tom Chapman <askMeOnTwitter@justrealmilk> (https://thomchap.com.au)",
+  "bugs": "https://github.com/justrealmilk/braytech.org/issues",
+  "version": "2.6.2",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",

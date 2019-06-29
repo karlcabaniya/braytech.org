@@ -57,12 +57,16 @@
 
 .list.record-items li .properties .text .meta .score::before {
   content: '  /  ';
+  position: absolute;
+  left: -1rem;
   white-space: pre-wrap;
   color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
 }
 
 .list.record-items li .properties .text .meta .score {
-  
+  position: relative;
+  margin: 0 0 0 1rem;
 }
 
 .list.record-items li .properties .text .description {

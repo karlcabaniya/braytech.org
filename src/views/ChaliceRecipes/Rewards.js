@@ -13,7 +13,7 @@ import * as enums from '../../utils/destinyEnums';
 
 class Collectibles extends React.Component {
   render() {
-    const { t, member, tooltips, matches } = this.props;
+    const { t, member, tooltips, matches, armorClassType } = this.props;
 
     let characterId, characters, character;
     if (member.data.profile) {
@@ -40,6 +40,10 @@ class Collectibles extends React.Component {
         let definitionItem = manifest.DestinyInventoryItemDefinition[hash];
 
         if (!definitionItem) {
+          return;
+        }
+
+        if (armorClassType > -1 && definitionItem.classType < 3 && definitionItem.classType !== armorClassType) {
           return;
         }
 

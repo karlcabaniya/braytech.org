@@ -27,7 +27,8 @@ class ChaliceRecipes extends React.Component {
         slot3: parseInt(this.props.match.params.rune3, 10) || false
       },
       slotsPanelOpen: false,
-      matches: []
+      matches: [],
+      armorClassType: -1
     };
 
     this.scrollToChalice = React.createRef();
@@ -114,6 +115,17 @@ class ChaliceRecipes extends React.Component {
     }
 
     this.props.rebindTooltips();
+  };
+
+  armorClassTypeHandler = e => {
+
+    this.setState((prevState, props) => {
+      let change = {
+        armorClassType: prevState.armorClassType < 2 ? prevState.armorClassType + 1 : -1
+      };
+      return { ...prevState, ...change };
+    });
+
   };
 
   resetHandler = e => {
@@ -398,7 +410,7 @@ class ChaliceRecipes extends React.Component {
                     <div>Selected runes</div>
                   </div>
                   <ul className='list reward-items'>
-                    <Rewards items={this.state.matches} onClick={this.itemClickHandler} matches />
+                    <Rewards items={this.state.matches} onClick={this.itemClickHandler} matches armorClassType={this.state.armorClassType} />
                   </ul>
                 </>
               ) : null}
@@ -414,7 +426,7 @@ class ChaliceRecipes extends React.Component {
                           <div>{definitionPresentationNode ? definitionPresentationNode.displayProperties.name : 'uh oh'}</div>
                         </div>
                         <ul className='list reward-items'>
-                          <Rewards items={value} onClick={this.itemClickHandler} />
+                          <Rewards items={value} onClick={this.itemClickHandler} armorClassType={this.state.armorClassType} />
                         </ul>
                       </React.Fragment>
                     )
@@ -439,10 +451,25 @@ class ChaliceRecipes extends React.Component {
                   <i className='destiny-B_Button' /> {t('Dismiss')}
                 </Button>
               ) : (
-                <Button action={this.resetHandler}>
-                  <i className='uniE777' />
-                  {t('Reset')}
-                </Button>
+                <>
+                  <Button action={this.armorClassTypeHandler}>
+                    {this.state.armorClassType === -1 ? (
+                      <>
+                        <i className='uniE16E' />
+                        {t('All class types')}
+                      </>
+                    ) : (
+                      <>
+                        <i className='uniE16E' />
+                        {Object.values(manifest.DestinyClassDefinition).find(i => i.classType === this.state.armorClassType).displayProperties.name}
+                      </>
+                    )}
+                  </Button>
+                  <Button action={this.resetHandler}>
+                    <i className='uniE777' />
+                    {t('Reset')}
+                  </Button>
+                </>
               )}
             </li>
           </ul>

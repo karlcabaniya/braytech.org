@@ -2,7 +2,7 @@ import customs from '../data/manifestCustoms';
 
 const manifest = {
   set: newManifest => {
-    newManifest.BraytechFlairDefinition = customs.BraytechFlairDefinition;
+    newManifest.BraytechDefinition = customs.BraytechDefinition;
     Object.assign(newManifest.DestinyInventoryItemDefinition, customs.DestinyInventoryItemDefinition);
     Object.assign(manifest, newManifest);
   }
