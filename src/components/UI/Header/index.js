@@ -129,7 +129,7 @@ class Header extends React.Component {
       {
         name: t('PGCRs'),
         desc: t('Explore your Post Game Carnage Reports'),
-        slug: '/pgcrs/all',
+        slug: '/pgcrs',
         exact: false,
         profile: true,
         primary: true

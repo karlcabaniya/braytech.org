@@ -7,8 +7,8 @@ import cx from 'classnames';
 import * as bungie from '../../../utils/bungie';
 
 import manifest from '../../../utils/manifest';
+import { removeMemberIds } from '../../../utils/paths';
 import { ProfileNavLink } from '../../../components/ProfileLink';
-import ProgressBar from '../../../components/UI/ProgressBar';
 import Spinner from '../../../components/UI/Spinner';
 import Mode from '../../../components/PGCRs/Mode';
 import Matches from '../../../components/PGCRs/Matches';
@@ -142,7 +142,13 @@ class Gambit extends React.Component {
             <div className='content views'>
               <ul className='list'>
                 <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/all'>{t('All')}</ProfileNavLink>
+                  <ProfileNavLink to='/pgcrs' isActive={(match, location) => {
+                      if (['/pgcrs', '/pgcrs/all'].includes(removeMemberIds(location.pathname))) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    }}>{t('All')}</ProfileNavLink>
                 </li>
                 <li className='linked'>
                   <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>

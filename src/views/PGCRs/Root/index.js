@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
+import { removeMemberIds } from '../../../utils/paths';
 import { ProfileNavLink } from '../../../components/ProfileLink';
 import Matches from '../../../components/PGCRs/Matches';
 
@@ -48,7 +49,14 @@ class All extends React.Component {
             <div className='content views'>
               <ul className='list'>
                 <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/all'>{t('All')}</ProfileNavLink>
+                  <ProfileNavLink to='/pgcrs' isActive={(match, location) => {
+                    console.log(removeMemberIds(location.pathname))
+                      if (['/pgcrs', '/pgcrs/all'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/pgcrs/all')) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    }}>{t('All')}</ProfileNavLink>
                 </li>
                 <li className='linked'>
                   <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>

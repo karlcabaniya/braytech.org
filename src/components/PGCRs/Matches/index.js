@@ -63,11 +63,16 @@ class Matches extends React.Component {
     return await Promise.all(PGCRs);
   };
 
-  run = async () => {
+  run = async force => {
     const { mode, characterId = false } = this.props;
 
-    if (!this.state.loading) {
-      //console.log('matches refresh start');
+    let run = !this.state.loading;
+    if (force) {
+      run = true;
+    }
+
+    if (run) {
+      // console.log('matches refresh start');
 
       this.running = true;
       this.setState(p => {
@@ -89,10 +94,15 @@ class Matches extends React.Component {
       });
       this.running = false;
 
-      //console.log('matches refresh end');
+      // console.log('matches refresh end');
     } else {
-      //console.log('matches refresh skipped');
+      // console.log('matches refresh skipped');
     }
+  }
+
+  scrollToMatchesHandler = e => {
+    let element = document.getElementById('matches');
+    element.scrollIntoView({behavior: "smooth"});
   }
 
   componentDidMount() {
@@ -104,11 +114,11 @@ class Matches extends React.Component {
     const { mode, offset } = this.props;
 
     if (!isEqual(prev.mode, mode)) {
-      this.run();
+      this.run(true);
     }
 
     if (!isEqual(prev.offset, offset)) {
-      this.run();
+      this.run(true);
     }
   }
 
@@ -167,8 +177,8 @@ class Matches extends React.Component {
       <div className='matches'>
         <PGCR data={PGCRs} limit={limit} />
         <div className='pages'>
-          <Button classNames='previous' text={t('Previous page')} disabled={this.state.loading ? true : offset > 0 ? false : true} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset - 1}`} />
-          <Button classNames='next' text={t('Next page')} disabled={this.state.loading} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset + 1}`} />
+          <Button classNames='previous' text={t('Previous page')} disabled={this.state.loading ? true : offset > 0 ? false : true} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset - 1}`} action={this.scrollToMatchesHandler} />
+          <Button classNames='next' text={t('Next page')} disabled={this.state.loading} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset + 1}`} action={this.scrollToMatchesHandler} />
         </div>
       </div>
     ) : <Spinner />;

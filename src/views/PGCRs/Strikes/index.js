@@ -8,7 +8,7 @@ import * as bungie from '../../../utils/bungie';
 
 import { ProfileNavLink } from '../../../components/ProfileLink';
 import Spinner from '../../../components/UI/Spinner';
-import Button from '../../../components/UI/Button';
+import { removeMemberIds } from '../../../utils/paths';
 import Mode from '../../../components/PGCRs/Mode';
 import Matches from '../../../components/PGCRs/Matches';
 
@@ -116,7 +116,13 @@ class Strikes extends React.Component {
             <div className='content views'>
               <ul className='list'>
                 <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/all'>{t('All')}</ProfileNavLink>
+                  <ProfileNavLink to='/pgcrs' isActive={(match, location) => {
+                      if (['/pgcrs', '/pgcrs/all'].includes(removeMemberIds(location.pathname))) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    }}>{t('All')}</ProfileNavLink>
                 </li>
                 <li className='linked'>
                   <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
