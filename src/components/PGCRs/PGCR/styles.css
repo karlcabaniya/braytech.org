@@ -125,15 +125,26 @@
 
 .list.reports li > .head .score {
   position: absolute;
-  top: 70%;
+  top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
+  justify-content: center;
+  align-content: center;
   grid-gap: 3px;
+  font-size: 2.4vw;
+  font-weight: 500;
 }
 
-.list.reports li > .head .score .value {
+.list.reports li > .head .score.teams {
+  top: 70%;
+  height: unset;
+  grid-template-columns: auto auto;
+}
+
+.list.reports li > .head .score.teams .value {
   position: relative;
   font-size: 1.4vw;
   font-weight: 500;
@@ -145,15 +156,15 @@
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
-.list.reports li > .head .score .value:first-child {
+.list.reports li > .head .score.teams .value:first-child {
   justify-self: right;
 }
 
-.list.reports li > .head .score .value.bravo.victory {
+.list.reports li > .head .score.teams .value.bravo.victory {
   background-color: #60779a;
 }
 
-.list.reports li > .head .score .value.alpha.victory {
+.list.reports li > .head .score.teams .value.alpha.victory {
   background-color: #973835;
 }
 
@@ -468,9 +479,10 @@
   
   .list.reports li > .head .score {
     width: 100%;
+    font-size: 4vh;
   }
   
-  .list.reports li > .head .score .value {
+  .list.reports li > .head .score.teams .value {
     width: 12vh;
     font-size: 3vh;
   }

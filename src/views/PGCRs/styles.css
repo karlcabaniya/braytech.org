@@ -24,6 +24,10 @@
   max-width: 500px;
 }
 
+#multiplayer:not(.root) .content.head .page-header {
+  margin-bottom: 0;
+}
+
 #multiplayer .content.head .text p {
   max-width: 500px;
   font-size: 16px;
@@ -238,14 +242,17 @@
 @media screen and (max-width: 1024px) {
 
   #multiplayer {
-    padding: 3rem 2rem 2rem;
     grid-template-columns: 1fr;
-    grid-gap: 2rem;
   }
 
 }
 
 @media screen and (max-width: 600px) {
+
+  #multiplayer {
+    padding: 3rem 2rem 2rem;
+    grid-gap: 2rem;
+  }
 
   #multiplayer .content.head .text p {
     font-size: 14px;

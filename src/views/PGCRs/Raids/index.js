@@ -91,6 +91,9 @@ class Raids extends React.Component {
 
   render() {
     const { t, member } = this.props;
+
+    const offset = parseInt(this.props.offset);
+
     const characterId = member.characterId;
 
     return (
@@ -102,10 +105,6 @@ class Raids extends React.Component {
                 <div className='sub-name'>{t('Post Game Carnage Reports')}</div>
                 <div className='name'>{t('Raids')}</div>
               </div>
-              <div className='text'>
-                <p>{t('You know, in case you missed the match summary screen while you were busy being awesome. These views will check for fresh games every 30 seconds.')}</p>
-                <p>{t("Like most aspects of Bungie's API, PGCRs are complicated, and as such it will take some time to work out the kinks and to understand how to best handle different game modes.")}</p>
-              </div>
             </div>
           </div>
           <div className='module-l2'>
@@ -115,7 +114,7 @@ class Raids extends React.Component {
             <div className='content views'>
               <ul className='list'>
                 <li className='linked'>
-                  <ProfileNavLink to='/pgcrs' exact>{t('All')}</ProfileNavLink>
+                  <ProfileNavLink to='/pgcrs/all'>{t('All')}</ProfileNavLink>
                 </li>
                 <li className='linked'>
                   <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
@@ -163,7 +162,7 @@ class Raids extends React.Component {
             <div className='sub-header'>
               <div>Recent raids</div>
             </div>
-            <Matches modes={[this.props.mode ? parseInt(this.props.mode) : 4]} characterId={member.characterId} RebindTooltips={this.props.RebindTooltips} />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 4} characterId={member.characterId} limit='20' offset={offset} root='/pgcrs/raids' />
           </div>
         </div>
       </div>

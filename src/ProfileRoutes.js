@@ -59,7 +59,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Triumphs {...route} />} />
           <Route path={`${match.url}/this-week`} exact render={route => <ThisWeek />} />
           <Route path={`${match.url}/sit-rep`} exact render={route => <SitRep />} />
-          <Route path={`${match.url}/pgcrs/:type?/:mode?`} render={route => <PGCRs {...route} />} />
+          <Route path={`${match.url}/pgcrs/:type?/:mode?/:offset?`} render={route => <PGCRs {...route} />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/sit-rep` }} />} />
         </Switch>
       </>

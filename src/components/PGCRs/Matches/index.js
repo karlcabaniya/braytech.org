@@ -7,6 +7,7 @@ import { orderBy, isEqual, flattenDepth } from 'lodash';
 import * as bungie from '../../../utils/bungie';
 import getPGCR from '../../../utils/getPGCR';
 import Spinner from '../../UI/Spinner';
+import Button from '../../UI/Button';
 
 import PGCR from '../PGCR';
 
@@ -18,32 +19,34 @@ class Matches extends React.Component {
 
     this.state = {
       loading: false,
-      cacheState: {}
+      cacheState: {},
+      instances: []
     };
 
     this.running = false;
   }
 
   cacheMachine = async (mode, characterId) => {
-    const { member, PGCRcache } = this.props;
+    const { member, PGCRcache, limit = 15, offset = 0 } = this.props;
 
     let charactersIds = characterId ? [characterId] : member.data.profile.characters.data.map(c => c.characterId);
 
     // console.log(charactersIds)
 
     let requests = charactersIds.map(async c => {
-      let response = await bungie.activityHistory(member.membershipType, member.membershipId, c, 30, mode, 0);
+      let response = await bungie.activityHistory(member.membershipType, member.membershipId, c, limit, mode, offset);
       return response.activities || [];
     });
 
     let activities = await Promise.all(requests);
     activities = flattenDepth(activities, 1);
     activities = orderBy(activities, [pgcr => pgcr.period], ['desc']);
-    activities = activities.slice(0, 30);
+    activities = activities.slice();
 
     this.setState(p => {
       let identifier = mode ? mode : 'all';
       p.cacheState[identifier] = activities.length;
+      p.instances = activities.map(a => a.activityDetails.instanceId)
       return p;
     });
 
@@ -61,14 +64,18 @@ class Matches extends React.Component {
   };
 
   run = async () => {
-    const { modes, characterId = false } = this.props;
+    const { mode, characterId = false } = this.props;
 
     if (!this.state.loading) {
       //console.log('matches refresh start');
 
       this.running = true;
+      this.setState(p => {
+        p.loading = true;
+        return p;
+      });
 
-      let ignition = modes ? await modes.map(m => {
+      let ignition = mode ? await [mode].map(m => {
         return this.cacheMachine(m, characterId);
       }) : [await this.cacheMachine(false, characterId)];
   
@@ -94,9 +101,13 @@ class Matches extends React.Component {
   }
 
   componentDidUpdate(prev) {
-    const { modes } = this.props;
+    const { mode, offset } = this.props;
 
-    if (!isEqual(prev.modes, modes)) {
+    if (!isEqual(prev.mode, mode)) {
+      this.run();
+    }
+
+    if (!isEqual(prev.offset, offset)) {
       this.run();
     }
   }
@@ -114,17 +125,53 @@ class Matches extends React.Component {
   }
 
   render() {
-    const { t, member, PGCRcache, modes } = this.props;
+    const { t, member, PGCRcache, mode, limit = 15, offset, root } = this.props;
 
-    let PGCRs = [];
+    let PGCRs = PGCRcache[member.membershipId] || [];
+
+    // console.log(this.state)
     
-    if (modes && PGCRcache[member.membershipId]) {
-      PGCRs = orderBy(PGCRcache[member.membershipId].filter(pgcr => modes.some(m => pgcr.activityDetails.modes.includes(m))), [pgcr => pgcr.period], ['desc']);
-    } else if (PGCRcache[member.membershipId]) {
-      PGCRs = orderBy(PGCRcache[member.membershipId], [pgcr => pgcr.period], ['desc']);
-    }
+    // if (mode && PGCRcache[member.membershipId]) {
 
-    return PGCRs.length ? <PGCR data={PGCRs} limit='30' RebindTooltips={this.props.RebindTooltips} /> : <Spinner />;
+    //   // PGCRs = orderBy(
+    //   //   PGCRcache[member.membershipId]
+    //   //     .filter(pgcr => mode.some(m => pgcr.activityDetails.mode.includes(m))),
+    //   //     [pgcr => pgcr.period], ['desc']
+    //   // );
+
+    //   PGCRs = orderBy(
+    //     PGCRcache[member.membershipId]
+    //       .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId)),
+    //     [pgcr => pgcr.period], ['desc']
+    //   );
+
+    // } else if (PGCRcache[member.membershipId]) {
+
+    //   PGCRs = orderBy(
+    //     PGCRcache[member.membershipId]
+    //       .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId)), 
+    //     [pgcr => pgcr.period], ['desc']
+    //   );
+
+    // }
+
+    PGCRs = PGCRs
+              .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId));
+
+    PGCRs = orderBy(
+      PGCRs, 
+      [pgcr => pgcr.period], ['desc']
+    );
+
+    return PGCRs.length ? (
+      <div className='matches'>
+        <PGCR data={PGCRs} limit={limit} />
+        <div className='pages'>
+          <Button classNames='previous' text={t('Previous page')} disabled={this.state.loading ? true : offset > 0 ? false : true} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset - 1}`} />
+          <Button classNames='next' text={t('Next page')} disabled={this.state.loading} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset + 1}`} />
+        </div>
+      </div>
+    ) : <Spinner />;
   }
 }
 

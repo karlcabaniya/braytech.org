@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withNamespaces } from 'react-i18next';
 
 import * as destinyUtils from '../../utils/destinyUtils';
-import * as destinyEnums from '../../utils/destinyEnums';
 import Characters from '../../components/UI/Characters';
 import Flair from '../../components/UI/Flair';
 
@@ -30,15 +29,15 @@ class Profile extends React.Component {
               <div className='value'>
                 {timePlayed} {timePlayed === 1 ? t('day played') : t('days played')}
               </div>
-              <div className='name'>Time played accross characters</div>
+              <div className='name'>{t('Time played across characters')}</div>
             </div>
             <div>
               <div className='value'>{member.data.profile.profileRecords.data.score.toLocaleString('en-us')}</div>
-              <div className='name'>Triumph score</div>
+              <div className='name'>{t('Triumph score')}</div>
             </div>
             <div>
               <div className='value'>{destinyUtils.collectionTotal(member.data.profile).toLocaleString('en-us')}</div>
-              <div className='name'>Collection total</div>
+              <div className='name'>{t('Collection total')}</div>
             </div>
           </div>
         </div>

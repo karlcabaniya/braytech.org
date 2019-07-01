@@ -38,7 +38,7 @@ class RefreshService extends React.Component {
   }
 
   init() {
-    if (this.props.refreshService.config.enabled) {
+    if (this.props.member.membershipId && this.props.refreshService.config.enabled) {
       console.log('RefreshService: init');
       this.track();
       document.addEventListener('click', this.clickHandler);

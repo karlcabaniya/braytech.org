@@ -142,13 +142,14 @@ class PGCR extends React.Component {
       supremacy: [31],
       survival: [37],
       countdown: [38],
-      gambit: [63, 75]
+      gambit: [63, 75],
+      scoredNightfalls: [46]
     };
 
     data.forEach(pgcr => {
       let isExpanded = this.state.expanded.find(e => e.instanceId === pgcr.activityDetails.instanceId);
 
-       if (isExpanded) console.log(pgcr);
+      if (isExpanded) console.log(pgcr);
 
       let definitionMode = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === pgcr.activityDetails.mode);
 
@@ -167,6 +168,8 @@ class PGCR extends React.Component {
       let entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
 
       let standing = entry.values.standing && entry.values.standing.basic.value !== undefined ? entry.values.standing.basic.value : -1;
+
+      let scoreTotal = entry.values.score ? pgcr.entries.reduce((v, e) => v + e.values.score.basic.value, 0) : false;
 
       let standingImage, alphaVictory, bravoVictory;
 
@@ -261,6 +264,123 @@ class PGCR extends React.Component {
                 name: 'K/D',
                 type: 'value',
                 round: true
+              }
+            ]
+          },
+          {
+            name: 'Extra',
+            fields: [
+              {
+                key: 'precisionKills',
+                name: 'Precision kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'weaponKillsSuper',
+                name: 'Super kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'weaponKillsGrenade',
+                name: 'Grenade kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'weaponKillsMelee',
+                name: 'Melee kills',
+                type: 'value',
+                extended: true
+              },
+              {
+                key: 'weaponKillsAbility',
+                name: 'Ability kills',
+                type: 'value',
+                extended: true
+              }
+            ]
+          }
+        ]
+      };
+
+      let displayStatsScoredNightfallStrikes = {
+        header: [
+          {
+            key: 'opponentsDefeated',
+            name: 'Kills + assists',
+            abbr: 'KA',
+            type: 'value'
+          },
+          {
+            key: 'kills',
+            name: 'Kills',
+            abbr: 'K',
+            type: 'value'
+          },
+          {
+            key: 'deaths',
+            name: 'Deaths',
+            abbr: 'D',
+            type: 'value'
+          },
+          {
+            key: 'killsDeathsRatio',
+            name: 'K/D',
+            abbr: 'KD',
+            type: 'value',
+            round: true
+          },
+          {
+            key: 'score',
+            name: 'Score',
+            abbr: 'S',
+            type: 'displayValue',
+            root: true
+          }
+        ],
+        expanded: [
+          {
+            name: 'Common',
+            fields: [
+              {
+                key: 'weapons',
+                name: 'Weapons used'
+              }
+            ]
+          },
+          {
+            name: 'Basic',
+            fields: [
+              {
+                key: 'kills',
+                name: 'Kills',
+                type: 'value'
+              },
+              {
+                key: 'assists',
+                name: 'Assists',
+                type: 'value'
+              },
+              {
+                key: 'deaths',
+                name: 'Deaths',
+                abbr: 'D',
+                type: 'value'
+              },
+              {
+                key: 'killsDeathsRatio',
+                name: 'K/D',
+                type: 'value',
+                round: true
+              },
+              {
+                key: 'score',
+                name: 'Score',
+                abbr: 'S',
+                type: 'displayValue',
+                root: true
               }
             ]
           },
@@ -592,6 +712,8 @@ class PGCR extends React.Component {
         displayStats = displayStatsGambit;
       } else if (modes.crucible.includes(pgcr.activityDetails.mode)) {
         displayStats = displayStatsCrucible;
+      } else if (modes.scoredNightfalls.includes(pgcr.activityDetails.mode)) {
+        displayStats = displayStatsScoredNightfallStrikes;
       } else {
         displayStats = displayStatsDefault;
       }
@@ -618,6 +740,8 @@ class PGCR extends React.Component {
                   } else if (s.async) {
                     let playerCache = this.state.playerCache.find(c => c.id === entry.player.destinyUserInfo.membershipType + entry.player.destinyUserInfo.membershipId);
                     value = playerCache && playerCache[s.key] ? playerCache[s.key] : '–';
+                  } else if (s.root) {
+                    value = s.round ? Number.parseFloat(entry[s.key].basic[s.type]).toFixed(2) : entry[s.key].basic[s.type];
                   } else {
                     value = s.round ? Number.parseFloat(entry.values[s.key].basic[s.type]).toFixed(2) : entry.values[s.key].basic[s.type];
                   }
@@ -719,7 +843,12 @@ class PGCR extends React.Component {
                   {standingImage ? <ObservedImage className='image' src={standingImage} /> : null}
                   <div className='text'>{standing === 0 ? `VICTORY` : `DEFEAT`}</div>
                 </div>
-                <div className='score'>{score}</div>
+                <div className='score teams'>{score}</div>
+              </>
+            ) : null}
+            {scoreTotal && standing < 0 ? (
+              <>
+                <div className='score'>{scoreTotal.toLocaleString('en-us')}</div>
               </>
             ) : null}
           </div>
@@ -799,7 +928,7 @@ class PGCR extends React.Component {
       });
     });
 
-    return <ul className='list reports'>{reports.slice(0, limit).map(r => r.element)}</ul>;
+    return <ul className='list reports'>{reports.slice().map(r => r.element)}</ul>;
   }
 }
 

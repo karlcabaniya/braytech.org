@@ -22,6 +22,9 @@ class All extends React.Component {
 
   render() {
     const { t, member } = this.props;
+
+    const offset = parseInt(this.props.offset);
+
     const characterId = member.characterId;
 
     return (
@@ -45,7 +48,7 @@ class All extends React.Component {
             <div className='content views'>
               <ul className='list'>
                 <li className='linked'>
-                  <ProfileNavLink to='/pgcrs' exact>{t('All')}</ProfileNavLink>
+                  <ProfileNavLink to='/pgcrs/all'>{t('All')}</ProfileNavLink>
                 </li>
                 <li className='linked'>
                   <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
@@ -68,7 +71,7 @@ class All extends React.Component {
             <div className='sub-header'>
               <div>Recent activities</div>
             </div>
-            <Matches modes={false} characterId={member.characterId} RebindTooltips={this.props.RebindTooltips} />
+            <Matches mode={false} characterId={member.characterId} limit='20' offset={offset} root='/pgcrs/all' />
           </div>
         </div>
       </div>

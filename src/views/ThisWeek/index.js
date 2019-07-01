@@ -452,8 +452,8 @@ class ThisWeek extends React.Component {
         1034003646: {
           // The Insight Terminus
           triumphs: [
-            3399168111, // The Insight Terminus
-            599303591 // Capture Completionist
+            599303591, // Capture Completionist
+            3399168111 // The Insight Terminus
           ],
           items: [],
           collectibles: [

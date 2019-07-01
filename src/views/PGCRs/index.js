@@ -27,17 +27,18 @@ class PGCRs extends React.Component {
     const { t, member } = this.props;
     const type = this.props.match.params.type || false;
     const mode = this.props.match.params.mode || false;
+    const offset = this.props.match.params.offset || 0;
 
     if (type === 'crucible') {
-      return <Crucible mode={mode} RebindTooltips={this.props.RebindTooltips} />;
+      return <Crucible mode={mode} offset={offset} />;
     } else if (type === 'gambit') {
-      return <Gambit mode={mode} RebindTooltips={this.props.RebindTooltips} />;
+      return <Gambit mode={mode} offset={offset} />;
     } else if (type === 'raids') {
-      return <Raids mode={mode} RebindTooltips={this.props.RebindTooltips} />;
+      return <Raids mode={mode} offset={offset} />;
     } else if (type === 'strikes') {
-      return <Strikes mode={mode} RebindTooltips={this.props.RebindTooltips} />;
+      return <Strikes mode={mode} offset={offset} />;
     } else {
-      return <Root RebindTooltips={this.props.RebindTooltips} />;
+      return <Root offset={offset} />;
     }
   }
 }

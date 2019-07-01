@@ -133,7 +133,7 @@ class Board extends React.Component {
           rowsTemp = orderBy(rowsTemp, [row => (row.triumphScore ? row.triumphScore : 0), row => row.destinyUserInfo.displayName.toString().toLowerCase()], ['desc', 'asc']);
 
           rowsTemp.forEach((m, i) => {
-            let timePlayed = Math.floor(m.destinyUserInfo.timePlayed / 1440);
+            let timePlayed = Math.floor(m.timePlayed / 1440);
 
             rows.push({
               el: (
@@ -143,7 +143,7 @@ class Board extends React.Component {
                     <li className='col member'>
                       <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
                     </li>
-                    {!m.destinyUserInfo.wasPrivate && m.destinyUserInfo.lastScraped ? (
+                    {m.destinyUserInfo.errorCode === 1 ? (
                       <>
                         <li className='col triumphScore focus'>{m.triumphScore.toLocaleString('en-us')}</li>
                         <li className='col collectionTotal'>{m.collectionTotal.toLocaleString('en-us')}</li>
@@ -165,11 +165,11 @@ class Board extends React.Component {
           });
         } else {
           this.state.response.data
-            .filter(m => !m.destinyUserInfo.wasPrivate)
+            .filter(m => m.destinyUserInfo.errorCode === 1)
             .slice(displayOffset % this.limit, (displayOffset % this.limit) + displayLimit)
             .forEach((m, i) => {
 
-            let timePlayed = Math.floor(m.destinyUserInfo.timePlayed / 1440);
+            let timePlayed = Math.floor(m.timePlayed / 1440);
 
             rows.push({
               rank: m.rank,
@@ -222,7 +222,7 @@ class Board extends React.Component {
 
       if (type !== 'group' && this.props.member && this.props.member.data.leaderboardPosition && this.props.member.data.leaderboardPosition.data) {
         let m = this.props.member.data.leaderboardPosition.data;
-        let timePlayed = Math.floor(m.destinyUserInfo.timePlayed / 1440);
+        let timePlayed = Math.floor(m.timePlayed / 1440);
 
         if (!rows.find(r => r.type === m.destinyUserInfo.membershipType && r.id === m.destinyUserInfo.membershipId)) {
           rows.unshift({
