@@ -473,5 +473,10 @@
     "date": "2019-06-29T07:08:05.943Z",
     "version": "2.6.2",
     "content": "- Component-ised Flair\n- Enabled and added custom tooltips\n- Rearranged _Sit Rep_ a little\n- Added ability to filter by class type to Chalice tool"
+  },
+  {
+    "date": "2019-07-02T02:13:17.419Z",
+    "version": "2.6.3",
+    "content": "- Added pagination to PGCRs\n- UI improvements for PGCRs"
   }
 ]
