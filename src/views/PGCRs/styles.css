@@ -40,15 +40,26 @@
 }
 
 #multiplayer .content.views {
-  max-width: 350px;
+  
+}
+
+#multiplayer .content.views .list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 3px;
 }
 
 #multiplayer .content.views .list li {
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.4);
-  background-color: rgba(255, 255, 255, 0);
+  display: grid;
+  margin: 0;
+  height: unset;
+}
+
+#multiplayer .content.views .list li .image {
+  position: relative;
+  height: unset;
+  padding-bottom: 66%;
+  background-size: 120%;
 }
 
 #multiplayer .content.views .list li::before {
@@ -260,6 +271,10 @@
   
   #multiplayer .content.head .text p:last-child {
     font-size: 12px;
+  }
+
+  #multiplayer .content.views .list {
+    grid-template-columns: repeat(4, 1fr);
   }
 
   #multiplayer .content .modes li .icon .image {

@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import { removeMemberIds } from '../../../utils/paths';
-import { ProfileNavLink } from '../../../components/ProfileLink';
 import Matches from '../../../components/PGCRs/Matches';
+import ParentModeLinks from '../ParentModeLinks';
 
 class All extends React.Component {
   constructor(props) {
@@ -23,10 +22,7 @@ class All extends React.Component {
 
   render() {
     const { t, member } = this.props;
-
     const offset = parseInt(this.props.offset);
-
-    const characterId = member.characterId;
 
     return (
       <div className={cx('view', 'root')} id='multiplayer'>
@@ -44,34 +40,9 @@ class All extends React.Component {
           </div>
           <div className='module-l2'>
             <div className='sub-header'>
-              <div>Activities</div>
+              <div>{t('Activities')}</div>
             </div>
-            <div className='content views'>
-              <ul className='list'>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs' isActive={(match, location) => {
-                    console.log(removeMemberIds(location.pathname))
-                      if (['/pgcrs', '/pgcrs/all'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/pgcrs/all')) {
-                        return true;
-                      } else {
-                        return false;
-                      }
-                    }}>{t('All')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/gambit'>{t('Gambit')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/raids'>{t('Raids')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/strikes'>{t('Strikes')}</ProfileNavLink>
-                </li>
-              </ul>
-            </div>
+            <ParentModeLinks />
           </div>
         </div>
         <div className='module-l1' id='matches'>

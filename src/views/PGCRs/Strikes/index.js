@@ -6,11 +6,10 @@ import cx from 'classnames';
 
 import * as bungie from '../../../utils/bungie';
 
-import { ProfileNavLink } from '../../../components/ProfileLink';
 import Spinner from '../../../components/UI/Spinner';
-import { removeMemberIds } from '../../../utils/paths';
 import Mode from '../../../components/PGCRs/Mode';
 import Matches from '../../../components/PGCRs/Matches';
+import ParentModeLinks from '../ParentModeLinks';
 
 class Strikes extends React.Component {
   constructor(props) {
@@ -111,38 +110,14 @@ class Strikes extends React.Component {
           </div>
           <div className='module-l2'>
             <div className='sub-header'>
-              <div>Activities</div>
+              <div>{t('Activities')}</div>
             </div>
-            <div className='content views'>
-              <ul className='list'>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs' isActive={(match, location) => {
-                      if (['/pgcrs', '/pgcrs/all'].includes(removeMemberIds(location.pathname))) {
-                        return true;
-                      } else {
-                        return false;
-                      }
-                    }}>{t('All')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/gambit'>{t('Gambit')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/raids'>{t('Raids')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/strikes'>{t('Strikes')}</ProfileNavLink>
-                </li>
-              </ul>
-            </div>
+            <ParentModeLinks />
           </div>
           <div className='module-l2'>
             <div className='content'>
               <div className='sub-header'>
-                <div>Modes</div>
+                <div>{t('Modes')}</div>
               </div>
               {Object.values(this.strikes.all.stats.allStrikes).length > 1 ? (
                 <ul className='list modes'>

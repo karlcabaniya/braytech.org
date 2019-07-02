@@ -11,6 +11,7 @@ import { ProfileNavLink } from '../../../components/ProfileLink';
 import Spinner from '../../../components/UI/Spinner';
 import Mode from '../../../components/PGCRs/Mode';
 import Matches from '../../../components/PGCRs/Matches';
+import ParentModeLinks from '../ParentModeLinks';
 
 class Crucible extends React.Component {
   constructor(props) {
@@ -217,37 +218,13 @@ class Crucible extends React.Component {
           </div>
           <div className='module-l2'>
             <div className='sub-header'>
-              <div>Activities</div>
+              <div>{t('Activities')}</div>
             </div>
-            <div className='content views'>
-              <ul className='list'>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs' isActive={(match, location) => {
-                      if (['/pgcrs', '/pgcrs/all'].includes(removeMemberIds(location.pathname))) {
-                        return true;
-                      } else {
-                        return false;
-                      }
-                    }}>{t('All')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/crucible'>{t('Crucible')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/gambit'>{t('Gambit')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/raids'>{t('Raids')}</ProfileNavLink>
-                </li>
-                <li className='linked'>
-                  <ProfileNavLink to='/pgcrs/strikes'>{t('Strikes')}</ProfileNavLink>
-                </li>
-              </ul>
-            </div>
+            <ParentModeLinks />
           </div>
           <div className='module-l2'>
             <div className='sub-header'>
-              <div>Summative modes</div>
+              <div>{t('Summative modes')}</div>
             </div>
             <div className='content'>
               {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
@@ -270,7 +247,7 @@ class Crucible extends React.Component {
               )}
             </div>
             <div className='sub-header'>
-              <div>Glory modes</div>
+              <div>{t('Glory modes')}</div>
             </div>
             <div className='content'>
               {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
@@ -293,7 +270,7 @@ class Crucible extends React.Component {
               )}
             </div>
             <div className='sub-header'>
-              <div>Valor modes</div>
+              <div>{t('Valor modes')}</div>
             </div>
             <div className='content'>
               {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
@@ -318,9 +295,9 @@ class Crucible extends React.Component {
           </div>
         </div>
         <div className='module-l1' id='matches'>
-            <div className='sub-header'>
-              <div>Recent matches</div>
-            </div>
+          <div className='sub-header'>
+            <div>{t('Recent matches')}</div>
+          </div>
           <div className='content'>
             <Matches mode={this.props.mode ? parseInt(this.props.mode) : 5} characterId={member.characterId} limit='20' offset={offset} root='/pgcrs/crucible' />
           </div>

@@ -133,7 +133,7 @@ class Board extends React.Component {
           rowsTemp = orderBy(rowsTemp, [row => (row.triumphScore ? row.triumphScore : 0), row => row.destinyUserInfo.displayName.toString().toLowerCase()], ['desc', 'asc']);
 
           rowsTemp.forEach((m, i) => {
-            let timePlayed = Math.floor(m.timePlayed / 1440);
+            let timePlayed = Math.floor(m.destinyUserInfo.timePlayed / 1440);
 
             rows.push({
               el: (
@@ -143,10 +143,10 @@ class Board extends React.Component {
                     <li className='col member'>
                       <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
                     </li>
-                    {m.destinyUserInfo.errorCode === 1 ? (
+                    {m.destinyUserInfo.triumphScore ? (
                       <>
-                        <li className='col triumphScore focus'>{m.triumphScore.toLocaleString('en-us')}</li>
-                        <li className='col collectionTotal'>{m.collectionTotal.toLocaleString('en-us')}</li>
+                        <li className='col triumphScore focus'>{m.destinyUserInfo.triumphScore.toLocaleString('en-us')}</li>
+                        <li className='col collectionTotal'>{m.destinyUserInfo.collectionTotal.toLocaleString('en-us')}</li>
                         <li className='col timePlayed'>
                           {timePlayed} {timePlayed === 1 ? t('day') : t('days')}
                         </li>
@@ -165,20 +165,19 @@ class Board extends React.Component {
           });
         } else {
           this.state.response.data
-            .filter(m => m.destinyUserInfo.errorCode === 1)
             .slice(displayOffset % this.limit, (displayOffset % this.limit) + displayLimit)
             .forEach((m, i) => {
 
             let timePlayed = Math.floor(m.timePlayed / 1440);
 
             rows.push({
-              rank: m.rank,
+              rank: m.ranks[metric],
               type: m.destinyUserInfo.membershipType,
               id: m.destinyUserInfo.membershipId,
               el: (
                 <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className='row'>
                   <ul>
-                    <li className='col rank'>{m.rank.toLocaleString('en-us')}</li>
+                    <li className='col rank'>{m.ranks[metric].toLocaleString('en-us')}</li>
                     <li className='col member'>
                       <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
                     </li>
@@ -222,7 +221,7 @@ class Board extends React.Component {
 
       if (type !== 'group' && this.props.member && this.props.member.data.leaderboardPosition && this.props.member.data.leaderboardPosition.data) {
         let m = this.props.member.data.leaderboardPosition.data;
-        let timePlayed = Math.floor(m.timePlayed / 1440);
+        let timePlayed = Math.floor(m.destinyUserInfo.timePlayed / 1440);
 
         if (!rows.find(r => r.type === m.destinyUserInfo.membershipType && r.id === m.destinyUserInfo.membershipId)) {
           rows.unshift({
@@ -244,11 +243,11 @@ class Board extends React.Component {
 
                     let value;
                     if (c.class === 'collectionTotal') {
-                      value = m.collectionTotal.toLocaleString('en-us');
+                      value = m.destinyUserInfo.collectionTotal.toLocaleString('en-us');
                     } else if (c.class === 'timePlayed') {
                       value = `${timePlayed} ${timePlayed === 1 ? t('day') : t('days')}`;
                     } else {
-                      value = m.triumphScore.toLocaleString('en-us');
+                      value = m.destinyUserInfo.triumphScore.toLocaleString('en-us');
                     }
 
                     return (
