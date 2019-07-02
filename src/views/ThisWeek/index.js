@@ -1139,7 +1139,7 @@ class ThisWeek extends React.Component {
         moduleShatteredThrone
       ],
       [
-        
+        moduleEscalationProtocol
       ]
     );
 
