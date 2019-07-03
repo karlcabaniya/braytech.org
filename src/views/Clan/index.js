@@ -2,43 +2,81 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
+import cx from 'classnames';
 
 import './styles.css';
 
-import AboutView from './about.js';
-import RosterView from './roster.js';
+import About from './About';
+import Roster from './Roster';
+import NoClan from './NoClan';
 
 class Clan extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      
+    };
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);   
+
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t, member, groupMembers, view = 'about' } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
 
     if (group) {
-      if (this.props.view === 'roster') {
-        return <RosterView {...this.props} group={group} />;
-      } else {
-        return <AboutView {...this.props} group={group} />;
-      }
-    } else {
+
+      let views = {
+        'about': {
+          'name': 'about',
+          'component': About
+        },
+        'roster': {
+          'name': 'roster',
+          'component': Roster
+        }
+      };
+
+      let ViewComponent = views[view].component;
+
+      const clanLevel = group.clanInfo.d2ClanProgressions[584850370];
+
       return (
-        <div className='view no-clan' id='clan'>
-          <div className='no-clan'>
-            <div className='properties'>
-              <div className='name'>{t('No clan affiliation')}</div>
-              <div className='description'>
-                <p>{t('Clans are optional groups of friends that enhance your online gaming experience. Coordinate with your clanmates to take on co-op challenges or just simply represent them in your solo play to earn extra rewards.')}</p>
-                <p>{t("Join your friend's clan, meet some new friends, or create your own on the companion app or at bungie.net.")}</p>
+        <div className={cx('view', views[view].name)} id='clan'>
+          <div className='module head'>
+            <div className='content'>
+              <div className='page-header'>
+                <div className='sub-name'>{t('Clan')}</div>
+                <div className='name'>
+                  {group.name}
+                  <div className='tag'>[{group.clanInfo.clanCallsign}]</div>
+                </div>
               </div>
             </div>
+            <div className='content highlight'>
+              <div className='value'>{group.memberCount}</div>
+              <div className='name'>{t('Members')}</div>
+            </div>
+            <div className='content highlight'>
+              <div className='value'>{groupMembers.responses.filter(member => member.isOnline).length}</div>
+              <div className='name'>{t('Online')}</div>
+            </div>
+            <div className='content highlight'>
+              <div className='value'>{clanLevel.level}</div>
+              <div className='name'>{t('Clan level')}</div>
+            </div>
+          </div>
+          <div className='padder'>
+            <ViewComponent {...this.props} group={group} />
           </div>
         </div>
-      );
+      )
+    } else {
+      return <NoClan />
     }
   }
 }

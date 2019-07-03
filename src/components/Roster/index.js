@@ -138,7 +138,7 @@ class Roster extends React.Component {
                         <div>{lastCharacter.baseCharacterLevel}</div>
                       </div>
                       <div className='icon'>
-                        <div className={cx({ 'max-ish': lastCharacter.light >= 720, max: lastCharacter.light === 750 })}>
+                        <div className={cx({ 'max-ish': lastCharacter.light >= 740, max: lastCharacter.light === 750 })}>
                           <span>{lastCharacter.light}</span>
                         </div>
                       </div>

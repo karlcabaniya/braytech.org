@@ -121,7 +121,6 @@
 #get-profile .profile .info .clan {
   font-size: 18px;
   color: rgba(255, 255, 255, 0.6);
-  margin: 0 0 1.5rem;
 }
 
 #get-profile .profile .info .clan::before {
@@ -130,7 +129,7 @@
 }
 
 #get-profile .profile .info .stamps {
-  margin: 0 0 2.5rem;
+  margin: 1.5rem 0 2.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, 38px);
   grid-gap: 3px;
