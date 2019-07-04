@@ -24,7 +24,7 @@ class Leaderboard extends React.Component {
 
   callVoluspa = async (groupId) => {
     try {
-      let response = await bungie.group(groupId);
+      let response = await bungie.GetGroup(groupId);
       if (!response) {
         throw Error;
       }

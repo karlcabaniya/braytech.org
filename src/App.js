@@ -80,9 +80,9 @@ class App extends React.Component {
           .toCollection()
           .first()
       ),
-      manifestIndex: timed('getManifestIndex', bungie.manifestIndex()),
-      bungieSettings: timed('getSettings', bungie.settings()),
-      voluspaStatistics: timed('getStatistics', voluspa.statistics())
+      manifestIndex: timed('GetDestinyManifest', bungie.GetDestinyManifest()),
+      bungieSettings: timed('GetCommonSettings', bungie.GetCommonSettings()),
+      voluspaStatistics: timed('statistics', voluspa.statistics())
     };
 
     const profile = ls.get('setting.profile');

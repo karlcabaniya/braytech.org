@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
 import manifest from '../../../utils/manifest';
+import * as bungie from '../../../utils/bungie';
 
 import './styles.css';
 
@@ -19,6 +20,8 @@ class OAuthTest extends React.Component {
   }
 
   render() {
+    const { t, member } = this.props;
+
     return (
       <div className='view' id='oauth-test'>
         
@@ -29,7 +32,7 @@ class OAuthTest extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    
+    member: state.member
   };
 }
 

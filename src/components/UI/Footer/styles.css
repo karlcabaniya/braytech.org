@@ -17,36 +17,37 @@
   max-width: calc(1920px - 6rem);
   margin: 0 auto;  
   display: flex;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
 }
 
-#footer div {
+#footer .wrapper div {
   position: relative;
   padding: 18px 0;
   line-height: 18px;
 }
 
-#footer div span {
+#footer .wrapper div span {
   opacity: 0.6;
 }
 
-#footer ul {
+#footer .wrapper ul {
   display: flex;
   flex-flow: row wrap;
 }
 
-#footer ul li {
+#footer .wrapper ul li {
   padding: 18px 0;
   margin: 0 0 0 16px;
   line-height: 18px;
 }
 
-#footer ul li:last-child a {
+#footer .wrapper ul li:last-child a {
   color: rgba(255, 255, 255, 0.8);
 }
 
-#footer ul li:last-child a svg {
+#footer .wrapper ul li:last-child a svg {
   position: relative;
   top: 3px;
   margin: 0 0 0 5px;
@@ -57,16 +58,16 @@
     padding: 1rem 2rem;
   }
 
-  #footer div {
+  #footer .wrapper div {
     padding: 0;
     flex-basis: 100%;
   }
 
-  #footer div:first-child {
+  #footer .wrapper div:first-child {
     padding: 10px 0 18px;
   }
 
-  #footer ul li {
+  #footer .wrapper ul li {
     padding: 0 0 7px;
     margin: 0 16px 0 0;
   }

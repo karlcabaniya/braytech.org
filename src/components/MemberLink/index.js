@@ -60,7 +60,7 @@ class MemberLink extends React.Component {
 
     if (this.mounted) {
       try {
-        let requests = [bungie.memberProfile(type, id, '100,200,202,204,800,900'), bungie.memberGroups(type, id)];
+        let requests = [bungie.GetProfile(type, id, '100,200,202,204,800,900'), bungie.GetGroupsForMember(type, id)];
 
         let [profile, group] = await Promise.all(requests);
 
@@ -143,7 +143,7 @@ class MemberLink extends React.Component {
 
     if (this.mounted) {
       try {
-        let response = await bungie.memberProfile(type, id, displayName ? '200' : '100,200');
+        let response = await bungie.GetProfile(type, id, displayName ? '200' : '100,200');
         let profile = responseUtils.profileScrubber(response, 'activity');
         if (!profile.characters.data || (profile.characters.data && profile.characters.data.length === 0)) {
           this.setState((prevState, props) => {

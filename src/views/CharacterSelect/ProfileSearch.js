@@ -64,7 +64,7 @@ class ProfileSearch extends React.Component {
 
     this.setState({ searching: true });
     try {
-      const results = await bungie.playerSearch('-1', displayName);
+      const results = await bungie.SearchDestinyPlayer('-1', displayName);
       if (this.mounted) this.setState({ results: results, searching: false });
     } catch (e) {
       // If we get an error here it's usually because somebody is being cheeky

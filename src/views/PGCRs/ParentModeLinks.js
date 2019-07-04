@@ -28,7 +28,7 @@ class ParentModeLinks extends React.Component {
         <ul className='list'>
           <li className='linked'>
             <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01E3-00000104.PNG' />
+              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000400.png' />
             </div>
             <ProfileNavLink to='/pgcrs' isActive={(match, location) => {
                 if (['/pgcrs', '/pgcrs/all'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/pgcrs/all')) {
@@ -40,25 +40,25 @@ class ParentModeLinks extends React.Component {
           </li>
           <li className='linked'>
             <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01E3-00000102.PNG' />
+              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000403.png' />
             </div>
             <ProfileNavLink to='/pgcrs/crucible' />
           </li>
           <li className='linked'>
             <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01E3-00000101.PNG' />
+              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000404.png' />
             </div>
             <ProfileNavLink to='/pgcrs/gambit' />
           </li>
           <li className='linked'>
             <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01E3-00000103.PNG' />
+              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000402.png' />
             </div>
             <ProfileNavLink to='/pgcrs/raids' />
           </li>
           <li className='linked'>
             <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01E3-00000105.PNG' />
+              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000401.png' />
             </div>
             <ProfileNavLink to='/pgcrs/strikes' />
           </li>

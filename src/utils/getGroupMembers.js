@@ -7,12 +7,12 @@ export async function getGroupMembers(group) {
     type: 'GROUP_MEMBERS_LOADING'
   });
 
-  const groupMembersResponse = await bungie.groupMembers(group.groupId);
+  const groupMembersResponse = await bungie.GetMembersOfGroup(group.groupId);
 
   let memberResponses = await Promise.all(
     groupMembersResponse.results.map(async member => {
       try {
-        const [profile, historicalStats] = await Promise.all([bungie.memberProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900'), bungie.getHistoricalStats(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '0', '1', '4,5,7,64', '0')]);
+        const [profile, historicalStats] = await Promise.all([bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900'), bungie.GetHistoricalStats(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '0', '1', '4,5,7,64', '0')]);
         member.profile = profile;
         member.historicalStats = historicalStats;
         

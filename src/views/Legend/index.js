@@ -32,7 +32,7 @@ class Legend extends React.Component {
     // console.log(charactersIds)
 
     let requests = charactersIds.map(async c => {
-      let response = await bungie.activityHistory(member.membershipType, member.membershipId, c, 250, mode, 0);
+      let response = await bungie.GetActivityHistory(member.membershipType, member.membershipId, c, 250, mode, 0);
       return response.activities || [];
     });
 

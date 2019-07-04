@@ -4,9 +4,9 @@ import * as voluspa from './voluspa';
 
 async function getMember(membershipType, membershipId, withLeaderboardPositions) {
   let requests = [
-    bungie.memberProfile(membershipType, membershipId, '100,104,200,202,204,205,300,301,302,303,304,305,306,800,900'), 
-    bungie.memberGroups(membershipType, membershipId), 
-    bungie.milestones()
+    bungie.GetProfile(membershipType, membershipId, '100,104,200,202,204,205,300,301,302,303,304,305,306,800,900'), 
+    bungie.GetGroupsForMember(membershipType, membershipId), 
+    bungie.GetPublicMilestones()
   ];
 
   if (withLeaderboardPositions) {

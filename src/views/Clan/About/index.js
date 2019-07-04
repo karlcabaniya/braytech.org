@@ -27,7 +27,7 @@ class AboutView extends React.Component {
     window.scrollTo(0, 0);   
 
     const groupId = this.props.group.groupId;
-    const groupWeeklyRewardState = await bungie.groupWeeklyRewardState(groupId);
+    const groupWeeklyRewardState = await bungie.GetClanWeeklyRewardState(groupId);
 
     this.setState({ weeklyRewardState: groupWeeklyRewardState });
   }

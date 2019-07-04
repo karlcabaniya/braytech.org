@@ -34,7 +34,7 @@ class Matches extends React.Component {
     // console.log(charactersIds)
 
     let requests = charactersIds.map(async c => {
-      let response = await bungie.activityHistory(member.membershipType, member.membershipId, c, limit, mode, offset);
+      let response = await bungie.GetActivityHistory(member.membershipType, member.membershipId, c, limit, mode, offset);
       return response.activities || [];
     });
 

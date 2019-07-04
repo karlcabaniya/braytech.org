@@ -1085,7 +1085,7 @@ class ThisWeek extends React.Component {
           <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.shatteredThrone.triumphs} ordered forceDisplay />
         </ul>
       </div>
-    ) : null;
+    ) : false;
 
     const moduleMenagerie = (
       <div key='moduleMenagerie' className='content'>
@@ -1142,6 +1142,8 @@ class ThisWeek extends React.Component {
         moduleEscalationProtocol
       ]
     );
+
+    console.log(modules)
 
     return (
       <div className='view' id='this-week'>
@@ -1225,7 +1227,7 @@ class ThisWeek extends React.Component {
           ) : null}
         </div>
         <div className='padder'>
-          {modules.map((m, i) => {
+          {modules.filter(m => m.filter(c => c).length).map((m, i) => {
             return (
               <div key={i} className='module'>
                 {m}

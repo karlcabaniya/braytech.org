@@ -39,7 +39,7 @@ class Raids extends React.Component {
       return p;
     });
 
-    let stats = await bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.raids.all.modes, '0');
+    let stats = await bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.raids.all.modes, '0');
 
     for (const mode in stats) {
       if (stats.hasOwnProperty(mode)) {
@@ -106,9 +106,6 @@ class Raids extends React.Component {
             </div>
           </div>
           <div className='module-l2'>
-            <div className='sub-header'>
-              <div>{t('Activities')}</div>
-            </div>
             <ParentModeLinks />
           </div>
           <div className='module-l2'>

@@ -21,22 +21,7 @@
 }
 
 #multiplayer .content.head .page-header {
-  max-width: 500px;
-}
-
-#multiplayer:not(.root) .content.head .page-header {
   margin-bottom: 0;
-}
-
-#multiplayer .content.head .text p {
-  max-width: 500px;
-  font-size: 16px;
-}
-
-#multiplayer .content.head .text p:last-child {
-  font-size: 14px;
-  font-style: italic;
-  letter-spacing: 0.5px;
 }
 
 #multiplayer .content.views {
@@ -45,7 +30,7 @@
 
 #multiplayer .content.views .list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, 60px);
   grid-gap: 3px;
 }
 
@@ -58,8 +43,8 @@
 #multiplayer .content.views .list li .image {
   position: relative;
   height: unset;
-  padding-bottom: 66%;
-  background-size: 120%;
+  padding-bottom: 100%;
+  background-size: 80%;
 }
 
 #multiplayer .content.views .list li::before {
@@ -263,18 +248,6 @@
   #multiplayer {
     padding: 3rem 2rem 2rem;
     grid-gap: 2rem;
-  }
-
-  #multiplayer .content.head .text p {
-    font-size: 14px;
-  }
-  
-  #multiplayer .content.head .text p:last-child {
-    font-size: 12px;
-  }
-
-  #multiplayer .content.views .list {
-    grid-template-columns: repeat(4, 1fr);
   }
 
   #multiplayer .content .modes li .icon .image {

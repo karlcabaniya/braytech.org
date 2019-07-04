@@ -91,9 +91,9 @@ class Crucible extends React.Component {
     });
 
     let [stats_allPvP, stats_competitive, stats_quickplay] = await Promise.all([
-      bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.all.modes, '0'),
-      bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.competitive.modes, '0'),
-      bungie.getHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.quickplay.modes, '0')
+      bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.all.modes, '0'),
+      bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.competitive.modes, '0'),
+      bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.quickplay.modes, '0')
     ]);
 
     for (const mode in stats_allPvP) {
@@ -217,9 +217,6 @@ class Crucible extends React.Component {
             </div>
           </div>
           <div className='module-l2'>
-            <div className='sub-header'>
-              <div>{t('Activities')}</div>
-            </div>
             <ParentModeLinks />
           </div>
           <div className='module-l2'>
