@@ -5,6 +5,7 @@ import { withNamespaces } from 'react-i18next';
 import queryString from 'query-string'
 
 import manifest from '../../../utils/manifest';
+import * as ls from '../../../utils/localStorage';
 import * as bungie from '../../../utils/bungie';
 import Button from '../../../components/UI/Button';
 
@@ -21,15 +22,12 @@ class OAuthTest extends React.Component {
     window.scrollTo(0, 0);
 
     const { t, member, location } = this.props;
+    
 
     const code = queryString.parse(location.search) && queryString.parse(location.search).code;
 
     if (code) {
-      let response = await bungie.GetOAuthAccessToken({
-        client_id: process.env.REACT_APP_BUNGIE_CLIENT_ID,
-        grant_type: 'authorization_code',
-        code,
-      });
+      let response = await bungie.GetOAuthAccessToken(`client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&grant_type=authorization_code&code=${code}`);
 
       console.log(response)
     }
@@ -37,6 +35,13 @@ class OAuthTest extends React.Component {
 
   render() {
     const { t, member, location } = this.props;
+
+    const tokens = ls.get('setting.auth');
+
+    console.log(tokens);
+
+    let now = new Date().getTime() + 10000;
+    let then = new Date(tokens && tokens.access.expires);
 
     return (
       <div className='view' id='oauth-test'>
@@ -46,6 +51,7 @@ class OAuthTest extends React.Component {
             window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
           }}
         />
+        {now > then ? 'has expired' : 'still valid'}
       </div>
     );
   }

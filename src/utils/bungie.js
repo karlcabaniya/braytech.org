@@ -1,3 +1,5 @@
+import * as ls from './localStorage';
+
 // Bungie API access convenience methods
 
 class BungieError extends Error {
@@ -12,23 +14,48 @@ class BungieError extends Error {
 async function apiRequest(path, options = {}) {
   const defaults = {
     headers: {},
-    stats: false
+    stats: false,
+    auth: false
   };
   const stats = options.stats || false;
   options = { ...defaults, ...options };
+
   options.headers['X-API-Key'] = process.env.REACT_APP_BUNGIE_API_KEY;
-  if (options.method === 'post') {
+
+  if (typeof options.body === 'string') {
+    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+  } else {
     options.headers['Content-Type'] = 'application/json';
     options.body = JSON.stringify(options.body);
   }
 
-  const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options).then(r => r.json());
+  const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options);
+  const response = await request.json();
 
-  if (request.ErrorCode !== 1) {
-    throw new BungieError(request);
+  if (request.ok && response.ErrorCode && response.ErrorCode !== 1) {
+    throw new BungieError(response);
+  } else if (request.ok) {
+    if (path === '/Platform/App/OAuth/Token/') {
+      let now = new Date().getTime();
+      const tokens = { 
+        access: {
+          value: response.access_token,
+          expires: now + (response.expires_in * 1000)
+        },
+        refresh: {
+          value: response.refresh_token,
+          expires: now + (response.refresh_expires_in * 1000)
+        },
+        bnetMembershipId: response.membership_id
+      };
+      ls.set('setting.auth', tokens);
+      return response;
+    } else {
+      return response.Response;
+    }    
+  } else {
+    console.log(request);
   }
-
-  return request.Response;
 }
 
 export const GetDestinyManifest = async () => apiRequest('/Platform/Destiny2/Manifest/');
@@ -40,6 +67,9 @@ export const GetPublicMilestones = async () => apiRequest('/Platform/Destiny2/Mi
 export const GetOAuthAccessToken = async body =>
   apiRequest('/Platform/App/OAuth/Token/', {
     method: 'post',
+    headers: {
+      Authorization: `Basic ${window.btoa(`${process.env.REACT_APP_BUNGIE_CLIENT_ID}:${process.env.REACT_APP_BUNGIE_CLIENT_SECRET}`)}`
+    },
     body
   });
 
