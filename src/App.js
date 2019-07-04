@@ -248,7 +248,7 @@ class App extends React.Component {
                           <Route path='/experiments' exact component={Experiments} />
                           <Route path='/experiments/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
                           <Route path='/experiments/data-inspector' exact component={DataInspector} />
-                          <Route path='/experiments/oauth-test' exact component={OAuthTest} />
+                          <Route path='/experiments/oauth-test' exact render={route => <OAuthTest {...route} />} />
                           <Route path='/oob' component={OOB} />
                           <Route path='/' component={Index} />
                         </Switch>

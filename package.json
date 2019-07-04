@@ -2,7 +2,7 @@
   "name": "braytech.org",
   "author": "Tom Chapman <askMeOnTwitter@justrealmilk> (https://thomchap.com.au)",
   "bugs": "https://github.com/justrealmilk/braytech.org/issues",
-  "version": "2.6.5",
+  "version": "2.6.6",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
@@ -14,6 +14,7 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.25",
     "prop-types": "^15.7.2",
+    "query-string": "^6.8.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-ga": "^2.5.7",

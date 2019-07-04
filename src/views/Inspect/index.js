@@ -5,7 +5,6 @@ import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import Globals from '../../utils/globals';
 import ObservedImage from '../../components/ObservedImage';
 import { damageTypeToString } from '../../utils/destinyUtils';
 import { getSockets } from '../../utils/destinyItems';

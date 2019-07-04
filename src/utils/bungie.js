@@ -1,5 +1,4 @@
 // Bungie API access convenience methods
-import { Globals } from './globals';
 
 class BungieError extends Error {
   constructor(request) {
@@ -10,8 +9,18 @@ class BungieError extends Error {
   }
 }
 
-async function apiRequest(path, stats = false) {
-  const options = { headers: { 'X-API-Key': Globals.key.bungie } };
+async function apiRequest(path, options = {}) {
+  const defaults = {
+    headers: {},
+    stats: false
+  };
+  const stats = options.stats || false;
+  options = { ...defaults, ...options };
+  options.headers['X-API-Key'] = process.env.REACT_APP_BUNGIE_API_KEY;
+  if (options.method === 'post') {
+    options.headers['Content-Type'] = 'application/json';
+    options.body = JSON.stringify(options.body);
+  }
 
   const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options).then(r => r.json());
 
@@ -27,6 +36,12 @@ export const GetDestinyManifest = async () => apiRequest('/Platform/Destiny2/Man
 export const GetCommonSettings = async () => apiRequest(`/Platform/Settings/`);
 
 export const GetPublicMilestones = async () => apiRequest('/Platform/Destiny2/Milestones/');
+
+export const GetOAuthAccessToken = async body =>
+  apiRequest('/Platform/App/OAuth/Token/', {
+    method: 'post',
+    body
+  });
 
 export const manifest = async version => fetch(`https://www.bungie.net${version}`).then(a => a.json());
 
@@ -48,4 +63,4 @@ export const SearchDestinyPlayer = async (membershipType, displayName) => apiReq
 
 export const GetActivityHistory = async (membershipType, membershipId, characterId, count, mode = false, page) => apiRequest(`/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/${characterId}/Stats/Activities/?page=${page}${mode ? `&mode=${mode}` : ''}&count=${count}`);
 
-export const PGCR = async id => apiRequest(`/Platform/Destiny2/Stats/PostGameCarnageReport/${id}/`, true);
+export const PGCR = async id => apiRequest(`/Platform/Destiny2/Stats/PostGameCarnageReport/${id}/`, { stats: true });

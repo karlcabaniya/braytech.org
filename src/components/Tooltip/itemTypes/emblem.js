@@ -1,7 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
 
-import Globals from '../../../utils/globals';
 import ObservedImage from '../../ObservedImage';
 import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
@@ -26,7 +25,7 @@ const emblem = item => {
           plugs.push({
             element: (
               <div key={def.hash} className={cx('plug', 'tooltip')} data-hash={def.hash}>
-                <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${def.displayProperties.icon}`} />
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${def.displayProperties.icon}`} />
                 <div className='text'>
                   <div className='name'>{def.displayProperties.name}</div>
                   <div className='description'>Emblem variant</div>

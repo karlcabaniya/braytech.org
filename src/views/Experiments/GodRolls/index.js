@@ -5,7 +5,6 @@ import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 import manifest from '../../../utils/manifest';
 
-import Globals from '../../../utils/globals';
 import ObservedImage from '../../../components/ObservedImage';
 
 import godRolls from '../../../data/godRolls';
@@ -96,7 +95,7 @@ class GodRolls extends React.Component {
             definition: plug,
             element: (
               <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.active })} data-hash={plug.hash}>
-                <ObservedImage className={cx('image', 'icon')} src={`${Globals.url.bungie}${plug.displayProperties.icon}`} />
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
                 <div className='text'>
                   <div className='name'>{plug.displayProperties.name}</div>
                   <div className='description'>{plug.itemTypeDisplayName}</div>
@@ -119,7 +118,7 @@ class GodRolls extends React.Component {
           <div key={item.hash} className='item'>
             <div className='properties'>
               <div className='display'>
-                <ObservedImage className='image icon' src={`${Globals.url.bungie}${definition.displayProperties.icon}`} />
+                <ObservedImage className='image icon' src={`https://www.bungie.net${definition.displayProperties.icon}`} />
                 <div className='group'>
                   <div className='name'>{definition.displayProperties.name}</div>
                   <div className='itemTypeDisplayName'>{definition.itemTypeDisplayName}</div>
