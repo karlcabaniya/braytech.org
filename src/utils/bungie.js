@@ -55,6 +55,7 @@ async function apiRequest(path, options = {}) {
     }    
   } else {
     console.log(request);
+    throw new BungieError(response);
   }
 }
 

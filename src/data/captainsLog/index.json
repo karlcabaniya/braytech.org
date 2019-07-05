@@ -488,5 +488,10 @@
     "date": "2019-07-03T13:49:54.064Z",
     "version": "2.6.5",
     "content": "- _Clans_ view... I dunno"
+  },
+  {
+    "date": "2019-07-05T05:12:53.556Z",
+    "version": "2.6.7",
+    "content": "- Made significant changes to networking code to enable OAuth"
   }
 ]
