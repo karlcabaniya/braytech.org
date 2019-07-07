@@ -556,15 +556,24 @@
     },
     "commonality": {
       "displayProperties": {
+        "name": "Commonality",
         "description": "A representation of the number of players who've acquired or redeemed this entry."
       },
-      "itemType": 50
+      "itemType": 1
     },
     "score": {
       "displayProperties": {
+        "name": "Score value",
         "description": "This record's score value."
       },
-      "itemType": 50
+      "itemType": 1
+    },
+    "character_bound": {
+      "displayProperties": {
+        "name": "Character bound",
+        "description": "These items are character-bound. This means that each character discovers them uniquely."
+      },
+      "itemType": 1
     }
   }
 }

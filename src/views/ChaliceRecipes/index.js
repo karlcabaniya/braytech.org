@@ -455,18 +455,18 @@ class ChaliceRecipes extends React.Component {
                   <Button action={this.armorClassTypeHandler}>
                     {this.state.armorClassType === -1 ? (
                       <>
-                        <i className='uniE16E' />
+                        <i className='segoe-uniE16E' />
                         {t('All class types')}
                       </>
                     ) : (
                       <>
-                        <i className='uniE16E' />
+                        <i className='segoe-uniE16E' />
                         {Object.values(manifest.DestinyClassDefinition).find(i => i.classType === this.state.armorClassType).displayProperties.name}
                       </>
                     )}
                   </Button>
                   <Button action={this.resetHandler}>
-                    <i className='uniE777' />
+                    <i className='segoe-uniE777' />
                     {t('Reset')}
                   </Button>
                 </>

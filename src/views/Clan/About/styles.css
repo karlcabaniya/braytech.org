@@ -69,6 +69,7 @@
   color: rgba(255, 255, 255, 1);
 }
 
+#clan.about .module.roster .spinner,
 #clan.about .module.roster .list.roster {
   margin: 20px 0 0;
 }

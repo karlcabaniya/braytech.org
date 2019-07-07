@@ -493,5 +493,10 @@
     "date": "2019-07-05T05:12:53.556Z",
     "version": "2.6.7",
     "content": "- Made significant changes to networking code to enable OAuth"
+  },
+  {
+    "date": "2019-07-07T04:09:50.291Z",
+    "version": "2.6.8",
+    "content": "- Minor style changes\n- _Checklists_ view design refresh"
   }
 ]

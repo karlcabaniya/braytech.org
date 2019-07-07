@@ -5,27 +5,25 @@ import { withNamespaces } from 'react-i18next';
 import ProgressBar from '../../components/UI/ProgressBar';
 
 const Checklist = props => {
-  const { t, name, binding, totalItems, progressDescription, completedItems, children } = props;
+  const { t, name, characterBound, totalItems, progressDescription, completedItems, children } = props;
 
   return (
     <>
-      <div className='head'>
-        <h4>{name}</h4>
-        <div className='binding'>
-          <p>{binding}</p>
-        </div>
-        <ProgressBar
-          objectiveDefinition={{
-            progressDescription,
-            completionValue: totalItems
-          }}
-          playerProgress={{
-            progress: completedItems
-          }}
-          hideCheck
-          chunky
-        />
+      <div className='module-header'>
+        <div className='sub-name'>{name}</div>
+        {characterBound ? <div className='tooltip' data-hash='character_bound' data-table='BraytechDefinition'><i className='segoe-uniE902' /></div> : null}
       </div>
+      <ProgressBar
+        objectiveDefinition={{
+          progressDescription,
+          completionValue: totalItems
+        }}
+        playerProgress={{
+          progress: completedItems
+        }}
+        hideCheck
+        chunky
+      />
       {children.length > 0 ? (
         <ul className='list no-interaction'>{children}</ul>
       ) : (
@@ -39,7 +37,7 @@ const Checklist = props => {
 
 Checklist.propTypes = {
   name: PropTypes.node.isRequired,
-  binding: PropTypes.node.isRequired,
+  characterBound: PropTypes.bool.isRequired,
   progressDescription: PropTypes.string.isRequired,
   totalItems: PropTypes.number.isRequired,
   completedItems: PropTypes.number.isRequired

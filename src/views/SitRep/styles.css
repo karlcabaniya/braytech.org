@@ -25,6 +25,10 @@
   max-width: 600px;
 }
 
+#sit-rep > .head .page-header {
+  margin-bottom: 0;
+}
+
 #sit-rep .module .ranks {
   display: grid;
   grid-gap: 1rem;

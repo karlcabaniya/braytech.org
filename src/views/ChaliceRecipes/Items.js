@@ -54,7 +54,7 @@ class Items extends React.Component {
               }
             }}
           >
-            <i className='uniE176' />
+            <i className='segoe-uniE176' />
           </li>
         </ul>
       );

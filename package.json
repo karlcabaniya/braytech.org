@@ -2,7 +2,7 @@
   "name": "braytech.org",
   "author": "Tom Chapman <askMeOnTwitter@justrealmilk> (https://thomchap.com.au)",
   "bugs": "https://github.com/justrealmilk/braytech.org/issues",
-  "version": "2.6.7",
+  "version": "2.6.8",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
@@ -34,6 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "translations": "node ./scripts/extractTranslations.js",
+    "prepareMappingData": "node ./scripts/prepareMappingData.js",
     "prepareChaliceData": "node ./scripts/prepareChaliceData.js"
   },
   "eslintConfig": {
@@ -47,6 +48,7 @@
   ],
   "devDependencies": {
     "find-in-files": "^0.5.0",
-    "fs-extra": "^7.0.1"
+    "fs-extra": "^7.0.1",
+    "node-fetch": "^2.6.0"
   }
 }

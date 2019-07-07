@@ -48,12 +48,12 @@ class Collections extends React.Component {
       <a className='button' onClick={this.toggleCompleted}>
         {this.props.collectibles.hideCompletedCollectibles ? (
           <>
-            <i className='uniF16E' />
+            <i className='segoe-uniF16E' />
             {t('Show all')}
           </>
         ) : (
           <>
-            <i className='uniF16B' />
+            <i className='segoe-uniF16B' />
             {t('Hide acquired')}
           </>
         )}

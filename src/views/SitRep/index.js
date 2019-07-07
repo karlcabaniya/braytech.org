@@ -224,9 +224,9 @@ class SitRep extends React.Component {
               <div className='sub-name'>{t('Sit Rep')}</div>
               <div className='name'>{t('Welcome back, ') + (character.titleRecordHash ? manifest.DestinyRecordDefinition[character.titleRecordHash].titleInfo.titlesByGenderHash[character.genderHash] : t('Guardian'))}</div>
             </div>
-            <div className='text'>
+            {/* <div className='text'>
               <p>{this.quote}</p>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className='padder'>

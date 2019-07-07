@@ -62,12 +62,12 @@ class Triumphs extends React.Component {
       <Button action={this.toggleCompleted}>
         {this.props.collectibles.hideCompletedRecords ? (
           <>
-            <i className='uniF16E' />
+            <i className='segoe-uniF16E' />
             {t('Show all')}
           </>
         ) : (
           <>
-            <i className='uniF16B' />
+            <i className='segoe-uniF16B' />
             {t('Hide redeemed')}
           </>
         )}
@@ -79,21 +79,21 @@ class Triumphs extends React.Component {
     if (this.state.almostCompleteSort === 1) {
       almostCompleteSortText = (
         <>
-          <i className='uniE17D' />
+          <i className='segoe-uniE17D' />
           {t('Sorted by score')}
         </>
       )
     } else if (this.state.almostCompleteSort === 2) {
       almostCompleteSortText = (
         <>
-          <i className='uniE17D' />
+          <i className='segoe-uniE17D' />
           {t('Sorted by rarity')}
         </>
       )
     } else {
       almostCompleteSortText = (
         <>
-          <i className='uniE17D' />
+          <i className='segoe-uniE17D' />
           {t('Sorted by completion')}
         </>
       )

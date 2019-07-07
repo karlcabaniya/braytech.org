@@ -1,11 +1,11 @@
-import sortBy from 'lodash/sortBy';
 import React from 'react';
+import sortBy from 'lodash/sortBy';
+import ReactMarkdown from 'react-markdown';
 
 import Checklist from './Checklist';
 import ChecklistItem from './ChecklistItem';
 import ChecklistFactoryHelpers from './ChecklistFactoryHelpers';
 
-import ReactMarkdown from 'react-markdown';
 
 class ChecklistFactory {
   constructor(t, profile, characterId, hideCompletedItems) {
@@ -20,7 +20,7 @@ class ChecklistFactory {
       icon: 'destiny-adventure',
       progressDescription: this.t('Adventures undertaken'),
       items: this.m.checklistItems(4178338182, true),
-      binding: this.t('Character bound'),
+      characterBound: true,
       sortBy: ['completed', 'place', 'bubble', 'activity'],
       itemTitle: i => i.activity,
       itemSubtitle: i => `${i.bubble}, ${i.place}`
@@ -34,11 +34,7 @@ class ChecklistFactory {
       progressDescription: this.t('Region chests opened'),
       items: this.m.checklistItems(1697465175, true),
       sortBy: ['completed', 'place', 'bubble'],
-      binding: (
-        <>
-          Profile bound with the exception of <em>Curse of Osiris</em> and <em>Warmind</em> chests
-        </>
-      )
+      characterBound: true
     });
   }
 
@@ -47,19 +43,19 @@ class ChecklistFactory {
       name: this.t('Lost Sectors'),
       icon: 'destiny-lost_sectors',
       progressDescription: this.t('Lost Sectors discovered'),
-      binding: this.t('Character bound'),
+      characterBound: true,
       items: this.m.checklistItems(3142056444, true),
       sortBy: ['completed', 'place', 'bubble']
     });
   }
 
-  amkaharaBones() {
+  ahamkaraBones() {
     return this.m.checklist({
       name: this.t('Ahamkara Bones'),
       icon: 'destiny-ahamkara_bones',
       progressDescription: this.t('Bones found'),
       itemTitle: i => i.lore,
-      itemSubtitle: i => i.bubble,
+      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`,
       sortBy: ['itemNumber'],
       items: this.m.checklistItems(1297424116)
     });
@@ -70,7 +66,7 @@ class ChecklistFactory {
       name: this.t('Corrupted Eggs'),
       icon: 'destiny-corrupted_eggs',
       progressDescription: this.t('Eggs destroyed'),
-      itemSubtitle: i => i.bubble || false,
+      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`,
       items: this.m.checklistItems(2609997025)
     });
   }
@@ -81,7 +77,7 @@ class ChecklistFactory {
       icon: 'destiny-cat_statues',
       progressDescription: this.t('Feline friends satisfied'),
       items: this.m.checklistItems(2726513366),
-      itemSubtitle: i => i.bubble || false
+      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`
     });
   }
 
@@ -92,7 +88,7 @@ class ChecklistFactory {
       items: this.m.checklistItems(365218222),
       progressDescription: this.t('Sleeper nodes hacked'),
       itemTitle: i => i.inventoryItem.replace('CB.NAV/RUN.()', ''),
-      itemSubtitle: i => i.bubble || false,
+      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`,
       sortBy: ['inventoryItem']
     });
   }
@@ -113,7 +109,7 @@ class ChecklistFactory {
       icon: 'destiny-lost_memory_fragments',
       items: this.m.checklistItems(2955980198),
       progressDescription: this.t('Memories destroyed'),
-      itemSubtitle: i => i.bubble || false
+      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`
     });
   }
 
@@ -124,7 +120,7 @@ class ChecklistFactory {
     items = sortBy(items, i => [i.hash]);
 
     const checklist = (
-      <Checklist name={this.t("Cayde's Journals")} binding={this.t('Profile bound')} progressDescription={this.t('Journals recovered')} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
+      <Checklist name={this.t("Cayde's Journals")} characterBound={this.t('Profile bound')} progressDescription={this.t('Journals recovered')} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
         {items.map(i => (
           <ChecklistItem key={i.hash} completed={i.completed}>
             <ReactMarkdown className='text' source={i.item.displayProperties.description} />
@@ -143,7 +139,7 @@ class ChecklistFactory {
   ghostStories() {
     return this.m.recordChecklist({
       name: this.t('Lore: Ghost Stories'),
-      icon: 'destiny-ghost',
+      image: '/static/images/extracts/ui/checklists/037e-00004869.png',
       items: this.m.presentationItems(1420597821),
       progressDescription: this.t('Stories found')
     });
@@ -152,7 +148,7 @@ class ChecklistFactory {
   awokenOfTheReef() {
     return this.m.recordChecklist({
       name: this.t('Lore: Awoken of the Reef'),
-      icon: 'destiny-trapped_in_amber',
+      image: '/static/images/extracts/ui/checklists/037e-00004874.png',
       items: this.m.presentationItems(3305936921),
       progressDescription: this.t('Crystals resolved')
     });
@@ -161,7 +157,7 @@ class ChecklistFactory {
   forsakenPrince() {
     return this.m.recordChecklist({
       name: this.t('Lore: Forsaken Prince'),
-      icon: 'destiny-forsaken_prince',
+      image: '/static/images/extracts/ui/checklists/037e-00004886.png',
       items: this.m.presentationItems(655926402),
       progressDescription: this.t('Data caches decrypted')
     });

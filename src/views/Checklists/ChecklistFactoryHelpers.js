@@ -154,7 +154,7 @@ class ChecklistFactoryHelpers {
 
   checklist(options = {}) {
     const defaultOptions = {
-      binding: this.t('Profile bound'),
+      characterBound: false,
       itemTitle: i => i.bubble || '???',
       itemSubtitle: i => i.place,
       mapPath: i => i.destinationHash && `destiny/maps/${i.destinationHash}/${i.hash}`
@@ -166,7 +166,7 @@ class ChecklistFactoryHelpers {
     const visible = this.hideCompletedItems ? items.filter(i => !i.completed) : items;
 
     const checklist = (
-      <Checklist name={options.name} binding={options.binding} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
+      <Checklist name={options.name} characterBound={options.characterBound} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
         {visible.map(i => (
           <ChecklistItem key={i.hash} completed={i.completed} mapPath={options.mapPath(i)}>
             <div className='text'>
@@ -181,6 +181,7 @@ class ChecklistFactoryHelpers {
     return {
       name: options.name,
       icon: options.icon,
+      image: options.image,
       checklist: checklist
     };
   }

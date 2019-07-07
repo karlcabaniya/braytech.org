@@ -12,7 +12,7 @@ const ChecklistItem = props => {
       {mapPath && (
         <div className='lowlines'>
           <a href={`https://lowlidev.com.au/${mapPath}?origin=BRAYTECH`} target='_blank' rel='noopener noreferrer'>
-            <i className='uniE1C4' />
+            <i className='segoe-uniE1C4' />
           </a>
         </div>
       )}

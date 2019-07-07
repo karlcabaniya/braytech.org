@@ -76,6 +76,19 @@
 #clan .module .content.highlight {
   display: grid;
   align-content: center;
+  position: relative;
+  padding: 0 0 0 2rem;
+}
+
+#clan .module .content.highlight::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0.2;
 }
 
 #clan .module .content.highlight .value {
@@ -188,6 +201,10 @@
   #clan > .module.head {
     padding: 3rem 2rem 2rem;
     grid-gap: 3rem;
+  }
+
+  #clan .module .content.highlight {
+    padding: 0 0 0 1rem;
   }
   
   #clan > .padder {

@@ -1259,7 +1259,7 @@ Array [
 ]
 `;
 
-exports[`Checklist amkaharaBones matches snapshot 1`] = `
+exports[`Checklist ahamkaraBones matches snapshot 1`] = `
 Array [
   <div
     className="head"

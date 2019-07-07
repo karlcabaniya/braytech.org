@@ -104,7 +104,7 @@ class Collectibles extends React.Component {
                   this.props.onClick(e, c);
                 }}
               >
-                <i className='uniE176' />
+                <i className='segoe-uniE176' />
               </li>
             </ul>
           )

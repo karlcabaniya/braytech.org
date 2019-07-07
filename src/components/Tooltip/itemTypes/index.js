@@ -168,7 +168,7 @@ class ItemTypes extends React.Component {
               {masterwork ? <ObservedImage className={cx('image', 'bg')} src={tier === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
               <div className='name'>{item.displayProperties.name}</div>
               <div>
-                <div className='kind'>{item.itemTypeDisplayName}</div>
+                {item.itemTypeDisplayName && item.itemTypeDisplayName !== '' ? <div className='kind'>{item.itemTypeDisplayName}</div> : null}
                 {kind !== 'ui' && kind !== 'ui subclass' && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
               </div>
             </div>

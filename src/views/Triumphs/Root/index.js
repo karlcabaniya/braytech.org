@@ -161,7 +161,7 @@ class Root extends React.Component {
             <div>{t('Total score')}</div>
           </div>
           <div className='total-score'>{this.props.member.data.profile.profileRecords.data.score}</div>
-          {unredeemedTriumphCount > 0 ? <NotificationInline name='Unredeemed triumphs' description={potentialScoreGain > 0 ? `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} worth ${potentialScoreGain} score to redeem` : `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} to redeem`} /> : null}
+          {unredeemedTriumphCount > 0 ? <NotificationInline name={`${unredeemedTriumphCount} ${t('unredeemed triumphs')}`} description={potentialScoreGain > 0 ? `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} worth ${potentialScoreGain} score to redeem` : `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} to redeem`} /> : null}
           <div className='sub-header'>
             <div>{t('Search')}</div>
           </div>

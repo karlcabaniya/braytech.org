@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?pmi42h') format('woff');
+  src: url('destiny.woff?fkyah2') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -8,7 +8,6 @@
 [class^="destiny-"], [class*=" destiny-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'destiny' !important;
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -20,6 +19,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.destiny-chalice:before {
+  content: "\e9f2";
+}
 .destiny-recovery:before {
   content: "\e9e3";
 }
@@ -680,6 +682,9 @@
 .destiny-raid_alt:before {
   content: "\e95f";
 }
+.destiny-raid1:before {
+  content: "\e996";
+}
 .destiny-the_dawning:before {
   content: "\e902";
 }
@@ -687,10 +692,10 @@
   content: "\e903";
 }
 .destiny-strike:before {
-  content: "\e996";
+  content: "\e9a2";
 }
 .destiny-patrol:before {
-  content: "\e9a2";
+  content: "\e9ed";
 }
 .destiny-ishtar:before {
   content: "\e90d";
@@ -705,13 +710,13 @@
   content: "\e972";
 }
 .destiny-team_alpha_alt:before {
-  content: "\e9ed";
+  content: "\e9ee";
 }
 .destiny-team_alpha:before {
   content: "\e916";
 }
 .destiny-team_bravo_alt:before {
-  content: "\e9ee";
+  content: "\e9f1";
 }
 .destiny-team_bravo:before {
   content: "\e917";

@@ -1143,8 +1143,6 @@ class ThisWeek extends React.Component {
       ]
     );
 
-    console.log(modules)
-
     return (
       <div className='view' id='this-week'>
         <div className='module head'>
