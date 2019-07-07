@@ -230,17 +230,18 @@ class App extends React.Component {
                           <RedirectRoute path='/clan' />
                           <RedirectRoute path='/character' exact />
                           <RedirectRoute path='/legend' exact />
-                          <RedirectRoute path='/sit-rep' exact />
                           <RedirectRoute path='/checklists' exact />
                           <RedirectRoute path='/collections/' />
                           <RedirectRoute path='/triumphs' />
                           <RedirectRoute path='/this-week' exact />
                           <RedirectRoute path='/pgcrs' />
+                          <RedirectRoute path='/sit-rep' exact />
+                          <RedirectRoute path='/inventory' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />
                           <Route path='/read/:kind?/:hash?' exact component={Read} />
-                          <Route path='/settings' exact render={() => <Settings availableLanguages={this.availableLanguages} />} />
+                          <Route path='/settings' exact render={route => <Settings {...route} availableLanguages={this.availableLanguages} />} />
                           <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
                           <Route path='/leaderboards/:view?/:dom?/:sub?' render={route => <Leaderboards {...route} />} />

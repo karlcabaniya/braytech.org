@@ -10,11 +10,9 @@ import * as bungie from '../../utils/bungie';
 import Spinner from '../../components/UI/Spinner';
 
 const SearchResult = p => (
-  <li className='linked'>
-    <a onClick={() => p.onProfileClick(p.profile.membershipType, p.profile.membershipId, p.profile.displayName)}>
-      <span className={`destiny-platform_${destinyEnums.PLATFORMS[p.profile.membershipType].toLowerCase()}`} />
-      {p.profile.displayName}
-    </a>
+  <li className='linked' onClick={() => p.onProfileClick(p.profile.membershipType, p.profile.membershipId, p.profile.displayName)}>
+    <div className='icon'><span className={`destiny-platform_${destinyEnums.PLATFORMS[p.profile.membershipType].toLowerCase()}`} /></div>
+    <div className='displayName'>{p.profile.displayName}</div>
   </li>
 );
 
@@ -32,7 +30,6 @@ class ProfileSearch extends React.Component {
       search: '',
       searching: false
     };
-    this.mounted = false;
   }
 
   componentWillMount() {

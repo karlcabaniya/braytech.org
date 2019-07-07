@@ -17,6 +17,9 @@ async function apiRequest(path, options = {}) {
     stats: false,
     auth: false
   };
+  
+  let tokens = ls.get('setting.auth');
+
   const stats = options.stats || false;
   options = { ...defaults, ...options };
 
@@ -29,6 +32,21 @@ async function apiRequest(path, options = {}) {
     options.body = JSON.stringify(options.body);
   }
 
+  if (options.auth && !options.headers.Authorization) {
+    let now = new Date().getTime() + 10000;
+    let then = new Date(tokens.access.expires);
+
+    if (now > then) {
+      await GetOAuthAccessToken(`grant_type=refresh_token&refresh_token=${tokens.refresh.value}`);
+
+      tokens = ls.get('setting.auth');
+
+      options.headers.Authorization = `Bearer ${tokens.access.value}`;
+    } else {
+      options.headers.Authorization = `Bearer ${tokens.access.value}`;
+    }
+  }
+
   const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options);
   const response = await request.json();
 
@@ -37,6 +55,9 @@ async function apiRequest(path, options = {}) {
   } else if (request.ok) {
     if (path === '/Platform/App/OAuth/Token/') {
       let now = new Date().getTime();
+
+      let memberships = await GetMembershipDataForCurrentUser(response.access_token);
+
       const tokens = { 
         access: {
           value: response.access_token,
@@ -46,7 +67,8 @@ async function apiRequest(path, options = {}) {
           value: response.refresh_token,
           expires: now + (response.refresh_expires_in * 1000)
         },
-        bnetMembershipId: response.membership_id
+        bnetMembershipId: response.membership_id,
+        destinyMemberships: memberships.destinyMemberships
       };
       ls.set('setting.auth', tokens);
       return response;
@@ -72,6 +94,13 @@ export const GetOAuthAccessToken = async body =>
       Authorization: `Basic ${window.btoa(`${process.env.REACT_APP_BUNGIE_CLIENT_ID}:${process.env.REACT_APP_BUNGIE_CLIENT_SECRET}`)}`
     },
     body
+  });
+
+export const GetMembershipDataForCurrentUser = async (access = false) => apiRequest('/Platform/User/GetMembershipsForCurrentUser/', {
+    auth: true,
+    headers: {
+      Authorization: access && `Bearer ${access}`
+    }
   });
 
 export const manifest = async version => fetch(`https://www.bungie.net${version}`).then(a => a.json());

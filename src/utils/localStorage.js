@@ -10,6 +10,14 @@ export function set(key, value) {
   }
 }
 
+export function del(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export function get(key) {
   try {
     return JSON.parse(localStorage.getItem(key));

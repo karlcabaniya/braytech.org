@@ -70,18 +70,20 @@
 }
 
 #get-profile .results .list li {
-  padding: 0 1rem;
+  padding: 0 1rem 0 0;
+  cursor: pointer;
+}
+
+#get-profile.loading .list li .icon,
+#get-profile.loading .list li .displayName {
+  transition: opacity 0.25ms;
 }
 
 #get-profile .results .list li.linked:hover {
   z-index: 3;
 }
 
-#get-profile .results .list li.linked a {
-  padding: 0 1rem 0 0;
-}
-
-#get-profile .results .list li.linked a span {
+#get-profile .results .list li.linked span {
   width: 38px;
   height: 38px;
   display: grid;
@@ -93,11 +95,11 @@
   background-color: #4CAF50;
 }
 
-#get-profile .results .list li.linked a span.destiny-platform_pc {
+#get-profile .results .list li.linked span.destiny-platform_pc {
   background-color: #2196F3;
 }
 
-#get-profile .results .list li.linked a span.destiny-platform_playstation {
+#get-profile .results .list li.linked span.destiny-platform_playstation {
   background-color: #3F51B5;
 }
 
@@ -209,7 +211,8 @@
   pointer-events: none;
 }
 
-#get-profile.loading .list li a,
+#get-profile.loading .list li .icon,
+#get-profile.loading .list li .displayName,
 #get-profile.loading .profile .user {
   opacity: 0;
 }

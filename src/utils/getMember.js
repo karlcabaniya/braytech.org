@@ -1,10 +1,18 @@
 import * as responseUtils from './responseUtils';
 import * as bungie from './bungie';
 import * as voluspa from './voluspa';
+import * as ls from './localStorage';
 
 async function getMember(membershipType, membershipId, withLeaderboardPositions) {
+  const auth = ls.get('setting.auth');
+
+  let components = [100,104,200,202,204,205,300,301,302,303,304,305,306,800,900];
+  if (auth.destinyMemberships.find(m => m.membershipId === membershipId)) {
+    components.push(201);
+  }
+
   let requests = [
-    bungie.GetProfile(membershipType, membershipId, '100,104,200,202,204,205,300,301,302,303,304,305,306,800,900'), 
+    bungie.GetProfile(membershipType, membershipId, components.join(',')), 
     bungie.GetGroupsForMember(membershipType, membershipId), 
     bungie.GetPublicMilestones()
   ];

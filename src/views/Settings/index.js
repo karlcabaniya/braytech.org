@@ -3,10 +3,12 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
-import Checkbox from '../../components/UI/Checkbox';
-import Button from '../../components/UI/Button';
+
 import { getLanguageInfo } from '../../utils/languageInfo';
 import * as ls from '../../utils/localStorage';
+import BungieAuth from '../../components/BungieAuth';
+import Checkbox from '../../components/UI/Checkbox';
+import Button from '../../components/UI/Button';
 
 import './styles.css';
 
@@ -61,7 +63,7 @@ class Settings extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    const { t, availableLanguages } = this.props;
+    const { t, availableLanguages, location } = this.props;
 
     const complete = ['en', 'de', 'pt-br'];
     let languageButtons = availableLanguages.map(code => {
@@ -86,6 +88,12 @@ class Settings extends React.Component {
           </div>
         </div>
         <div className='padder'>
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Bungie.net profile')}</div>
+            </div>
+            <BungieAuth location={location} />
+          </div>
           <div className='module'>
             <div className='sub-header sub'>
               <div>{t('Theme')}</div>

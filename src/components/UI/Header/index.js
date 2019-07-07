@@ -143,6 +143,14 @@ class Header extends React.Component {
         primary: true
       },
       {
+        name: t('Inventory'),
+        desc: t('Check your pursuits, consumables, mods, and shaders'),
+        slug: '/inventory',
+        exact: false,
+        profile: true,
+        primary: true
+      },
+      {
         name: t('More'),
         desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/',
@@ -196,7 +204,7 @@ class Header extends React.Component {
     ];
 
     let viewsInline = false;
-    if (viewport.width >= 1360) {
+    if (viewport.width >= 1440) {
       viewsInline = true;
     }
 
