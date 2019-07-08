@@ -391,7 +391,7 @@
 
 #tooltip .plug .text .objectives {
   flex-basis: 100%;
-  padding: 10px 0 0;
+  padding: 4px 0 0;
   border: unset;
 }
 
@@ -546,12 +546,24 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+#tooltip .frame .objectives:last-child {
+  border-bottom: none;
+}
+
 #tooltip .frame .objectives .progress {
   margin: 0 0 3px;
 }
 
 #tooltip .frame .objectives .progress:last-child {
   margin: 0;
+}
+
+#tooltip .frame .objectives .progress-bar.complete {
+  opacity: 0.8;
+}
+
+#tooltip .frame .objectives .progress-bar.complete .bar .fill {
+  background-color: rgba(90, 163, 102, 0);
 }
 
 #tooltip .frame .rewards {
@@ -605,10 +617,6 @@
   color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   line-height: 1.4;
-}
-
-#tooltip .frame.ui.subclass .black {
-  
 }
 
 #tooltip .frame.ui.subclass .black .image.screenshot {

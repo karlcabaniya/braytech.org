@@ -59,8 +59,6 @@ class ItemTypes extends React.Component {
       item.itemComponents = false;
     }
 
-    console.log(member.data.profile.characterUninstancedItemComponents,member.data.profile.characterUninstancedItemComponents[member.characterId].objectives, member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[hash])
-
     if (member.data.profile && member.data.profile.characterUninstancedItemComponents && member.data.profile.characterUninstancedItemComponents[member.characterId].objectives && member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[hash]) {
       if (item.itemComponents) {
         item.itemComponents.objectives = member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[hash].objectives;
@@ -71,7 +69,7 @@ class ItemTypes extends React.Component {
       }
     }
 
-    let kind, tier, black, masterwork;
+    let kind, tier, black, hideRarity, masterwork;
 
     if (item.itemType !== undefined) {
       if (item.itemType === 1) {
@@ -92,10 +90,14 @@ class ItemTypes extends React.Component {
         black = emblem(item);
       } else if (item.itemType === 16) {
         kind = 'ui subclass';
+        hideRarity = true;
         black = subclass(item, member);
       } else if (item.itemType === 19) {
         kind = 'mod';
         black = mod(item);
+      } else if (item.itemType === 9) {
+        kind = 'cosumable';
+        black = ui(item);
       } else if (item.itemType === 20) {
         kind = 'material';
         black = ui(item);
@@ -109,14 +111,16 @@ class ItemTypes extends React.Component {
         kind = 'ghost';
         black = ghost(item, tooltips.settings.detailedMode);
       } else if (item.itemType === 12) {
-        kind = 'bounty';
+        kind = 'quest';
         black = quest(item);
       } else if (item.itemType === 26) {
         kind = 'bounty';
+        hideRarity = true;
         black = bounty(item);
       } else if (item.itemType === 50) {
         kind = 'ui no-name';
         tier = 'basic';
+        hideRarity = true;
         black = fallback(item);
       } else if (item.itemType === 0) {
         kind = 'no-type';
@@ -124,6 +128,7 @@ class ItemTypes extends React.Component {
       } else {
         kind = 'ui';
         tier = 'basic';
+        hideRarity = true;
         black = fallback(item);
       }
     }
@@ -189,7 +194,7 @@ class ItemTypes extends React.Component {
               <div className='name'>{item.displayProperties.name}</div>
               <div>
                 {item.itemTypeDisplayName && item.itemTypeDisplayName !== '' ? <div className='kind'>{item.itemTypeDisplayName}</div> : null}
-                {kind !== 'ui' && kind !== 'ui subclass' && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
+                {!hideRarity && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
               </div>
             </div>
             {!item.itemComponents && rollNote ? <div className='note'>Non-instanced item (displaying collections roll)</div> : null}

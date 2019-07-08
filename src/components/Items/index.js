@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
@@ -10,18 +11,8 @@ import * as enums from '../../utils/destinyEnums';
 import './styles.css';
 
 class Items extends React.Component {
-  constructor(props) {
-    super(props);
-
-
-  }
-
-  componentDidMount() {
-    
-  }
-
   render() {
-    const { t, member, items, asTab, inspect, action } = this.props;
+    const { t, member, items, order, asTab, inspect, action } = this.props;
 
     let output = [];
 
@@ -36,41 +27,46 @@ class Items extends React.Component {
 
       let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
 
-      output.push(
-        <li
-          key={i}
-          className={cx(
-            {
-              tooltip: !this.props.disableTooltip,
-              linked: true,
-              masterworked: enums.enumerateItemState(item.state).masterworked,
-              exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
-            },
-            bucketName,
-          )}
-          data-hash={item.itemHash}
-          data-instanceid={item.itemInstanceId}
-          data-state={item.state}
-          onClick={e => {
-            if (action) {
-              action(e, item);
-            }
-          }}
-        >
-          <div className='icon'>
-            <ObservedImage className='image' src={definitionItem.displayProperties.localIcon ? `${definitionItem.displayProperties.icon}` : `https://www.bungie.net${definitionItem.displayProperties.icon}`} />
-          </div>
-          {asTab ? <div className='text'>
-            <div className='name'>{definitionItem.displayProperties.name}</div>
-          </div> : null}
-          {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
-          {item.quantity && item.quantity > 1 ? <div className='quantity'>{item.quantity}</div> : null}
-        </li>
-      );
+      output.push({
+        name: definitionItem.displayProperties && definitionItem.displayProperties.name,
+        rarity: definitionItem.inventory && definitionItem.inventory.tierType,
+        el: (
+          <li
+            key={i}
+            className={cx(
+              {
+                tooltip: !this.props.disableTooltip,
+                linked: true,
+                masterworked: enums.enumerateItemState(item.state).masterworked,
+                exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
+              },
+              bucketName,
+            )}
+            data-hash={item.itemHash}
+            data-instanceid={item.itemInstanceId}
+            data-state={item.state}
+            onClick={e => {
+              if (action) {
+                action(e, item);
+              }
+            }}
+          >
+            <div className='icon'>
+              <ObservedImage className='image' src={definitionItem.displayProperties.localIcon ? `${definitionItem.displayProperties.icon}` : `https://www.bungie.net${definitionItem.displayProperties.icon}`} />
+            </div>
+            {asTab ? <div className='text'>
+              <div className='name'>{definitionItem.displayProperties.name}</div>
+            </div> : null}
+            {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+            {item.quantity && item.quantity > 1 ? <div className='quantity'>{item.quantity}</div> : null}
+          </li>
+        )
+      });
     });
     
+    output = order ? orderBy(output, [i => i[order], i => i.name], ['desc', 'asc']) : output;
 
-    return output;
+    return output.map(i => i.el);
   }
 }
 

@@ -1,0 +1,7 @@
+#inventory.pursuits {
+  
+}
+
+#inventory.pursuits .module:nth-child(3) {
+  grid-column: 3/5;
+}

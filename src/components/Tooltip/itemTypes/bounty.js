@@ -1,14 +1,14 @@
 import React from 'react';
 import cx from 'classnames';
 
+import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
 import ProgressBar from '../../UI/ProgressBar';
-import manifest from '../../../utils/manifest';
 
 const bounty = item => {
-  let description = item.displaySource !== '' ? item.displaySource : false;
-console.log(item)
-  let objective = item.displayProperties.description;
+
+  let description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
+
   let objectives = [];
   let rewards = [];
 
@@ -28,7 +28,7 @@ console.log(item)
     objectives.push(<ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />);
   });
 
-  item.value.itemValue.forEach(value => {
+  item.value && item.value.itemValue.forEach(value => {
     if (value.itemHash !== 0) {
       let definition = manifest.DestinyInventoryItemDefinition[value.itemHash];
       rewards.push(
@@ -45,13 +45,12 @@ console.log(item)
 
   return (
     <>
-      <div className='objective'>{objective}</div>
-      {objectives ? <div className='objectives'>{objectives}</div> : null}
       {description ? (
         <div className='description'>
           <pre>{description}</pre>
         </div>
       ) : null}
+      {objectives.length ? <div className='objectives'>{objectives}</div> : null}
       {rewards.length ? (
         <div className='rewards'>
           <ul>{rewards}</ul>

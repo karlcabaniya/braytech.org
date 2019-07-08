@@ -33,7 +33,7 @@ const fallback = item => {
           <pre>{description}</pre>
         </div>
       ) : null}
-      {objectives ? <div className='objectives'>{objectives}</div> : null}
+      {objectives.length ? <div className='objectives'>{objectives}</div> : null}
       {sourceString ? (
         <div className='source'>
           <p>{sourceString}</p>
