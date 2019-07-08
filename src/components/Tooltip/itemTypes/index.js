@@ -11,6 +11,7 @@ import weapon from './weapon';
 import armour from './armour';
 import emblem from './emblem';
 import bounty from './bounty';
+import quest from './quest';
 import mod from './mod';
 import ghost from './ghost';
 import sparrow from './sparrow';
@@ -48,7 +49,8 @@ class ItemTypes extends React.Component {
         instance: itemComponents.instances.data[instanceId] ? itemComponents.instances.data[instanceId] : false,
         sockets: itemComponents.sockets.data[instanceId] ? itemComponents.sockets.data[instanceId].sockets : false,
         perks: itemComponents.perks.data[instanceId] ? itemComponents.perks.data[instanceId].perks : false,
-        stats: itemComponents.stats.data[instanceId] ? itemComponents.stats.data[instanceId].stats : false
+        stats: itemComponents.stats.data[instanceId] ? itemComponents.stats.data[instanceId].stats : false,
+        objectives: itemComponents.objectives.data[instanceId] ? itemComponents.objectives.data[instanceId].objectives : false
       };
 
     } else if (instanceId && tooltips.itemComponents[instanceId]) {
@@ -57,9 +59,21 @@ class ItemTypes extends React.Component {
       item.itemComponents = false;
     }
 
+    console.log(member.data.profile.characterUninstancedItemComponents,member.data.profile.characterUninstancedItemComponents[member.characterId].objectives, member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[hash])
+
+    if (member.data.profile && member.data.profile.characterUninstancedItemComponents && member.data.profile.characterUninstancedItemComponents[member.characterId].objectives && member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[hash]) {
+      if (item.itemComponents) {
+        item.itemComponents.objectives = member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[hash].objectives;
+      } else {
+        item.itemComponents = {
+          objectives: member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[hash].objectives
+        }
+      }
+    }
+
     let kind, tier, black, masterwork;
 
-    if (item.itemType) {
+    if (item.itemType !== undefined) {
       if (item.itemType === 1) {
         kind = 'ui';
         black = ui(item);
@@ -94,12 +108,18 @@ class ItemTypes extends React.Component {
       } else if (item.itemType === 24) {
         kind = 'ghost';
         black = ghost(item, tooltips.settings.detailedMode);
+      } else if (item.itemType === 12) {
+        kind = 'bounty';
+        black = quest(item);
       } else if (item.itemType === 26) {
         kind = 'bounty';
         black = bounty(item);
       } else if (item.itemType === 50) {
         kind = 'ui no-name';
         tier = 'basic';
+        black = fallback(item);
+      } else if (item.itemType === 0) {
+        kind = 'no-type';
         black = fallback(item);
       } else {
         kind = 'ui';

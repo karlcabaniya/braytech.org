@@ -3,14 +3,14 @@ import React from 'react';
 import manifest from '../../../utils/manifest';
 import ProgressBar from '../../UI/ProgressBar';
 
-const fallback = item => {
-  let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
+const quest = item => {
+  let description = item.displaySource !== '' ? item.displaySource : false;
 
-  let description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
+  let objective = item.displayProperties.description;
 
   let objectives = [];
-
-  item.objectives && item.objectives.objectiveHashes.forEach(element => {
+console.log(item)
+  item.objectives.objectiveHashes.forEach(element => {
     let objectiveDefinition = manifest.DestinyObjectiveDefinition[element];
 
     let playerProgress = {
@@ -28,19 +28,15 @@ const fallback = item => {
 
   return (
     <>
+      <div className='objective'>{objective}</div>
+      {objectives ? <div className='objectives'>{objectives}</div> : null}
       {description ? (
         <div className='description'>
           <pre>{description}</pre>
-        </div>
-      ) : null}
-      {objectives ? <div className='objectives'>{objectives}</div> : null}
-      {sourceString ? (
-        <div className='source'>
-          <p>{sourceString}</p>
         </div>
       ) : null}
     </>
   );
 };
 
-export default fallback;
+export default quest;

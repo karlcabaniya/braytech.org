@@ -7,6 +7,7 @@ import manifest from '../../utils/manifest';
 import * as ls from '../../utils/localStorage';
 import * as bungie from '../../utils/bungie';
 import Spinner from '../../components/UI/Spinner';
+import Items from '../../components/Items';
 
 import './styles.css';
 
@@ -14,55 +15,62 @@ class Inventory extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: true,
-      memberships: false
-    };
-  }
-
-  getMemberships = async () => {
-    let response = await bungie.GetMembershipDataForCurrentUser();
-
-    console.log(response);
-
-    if (this.mounted) {
-      this.setState((prevState, props) => {
-        return { ...prevState, memberships: response };
-      });
-    }
+    this.state = {};
   }
 
   componentDidMount() {
-    const { t, member } = this.props;
-    const tokens = ls.get('setting.auth');
-
-    this.mounted = true;
-    
-    if (tokens) {
-      this.getMemberships();
-    } else if (this.mounted) {
-      this.setState((prevState, props) => {
-        return { ...prevState, loading: false };
-      });
-    }
-
     window.scrollTo(0, 0);
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
   }
 
   render() {
     const { t, member } = this.props;
     const { loading, memberships } = this.state;
-    
 
-    if (loading) {
-      return <Spinner />;
-    } else {
-      return null;
-    }
+    console.log(member.data.profile)
+
+    const inventory = member.data.profile.profileInventory.data.items.slice().concat(member.data.profile.characterInventories.data[member.characterId].items);
+
+    const pursuits = inventory.filter(i => i.bucketHash === 1345459588);
+    const consumables = inventory.filter(i => i.bucketHash === 1469714392);
+    const modifications = inventory.filter(i => i.bucketHash === 3313201758);
+    const shaders = inventory.filter(i => i.bucketHash === 2973005342);
+    
+    return (
+      <div className='view' id='inventory'>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>Pursuits</div>
+          </div>
+          <ul className='list inventory-items'>
+            <Items items={pursuits} />
+          </ul>
+        </div>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>Consumables</div>
+          </div>
+          <ul className='list inventory-items'>
+            <Items items={consumables} />
+          </ul>
+        </div>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>Modifications</div>
+          </div>
+          <ul className='list inventory-items'>
+            <Items items={modifications} />
+          </ul>
+        </div>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>Shaders</div>
+          </div>
+          <ul className='list inventory-items'>
+            <Items items={shaders} />
+          </ul>
+        </div>
+      </div>
+    );
     
   }
 }

@@ -34,7 +34,7 @@ class Items extends React.Component {
         return;
       }
 
-      let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
+      let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
 
       output.push(
         <li
@@ -64,6 +64,7 @@ class Items extends React.Component {
             <div className='name'>{definitionItem.displayProperties.name}</div>
           </div> : null}
           {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+          {item.quantity && item.quantity > 1 ? <div className='quantity'>{item.quantity}</div> : null}
         </li>
       );
     });

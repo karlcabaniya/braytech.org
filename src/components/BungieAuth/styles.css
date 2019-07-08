@@ -37,13 +37,15 @@
 }
 
 .bungie-auth .member .displayName {
-  font-size: 18px;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  font-weight: 500;
   color: rgba(255, 255, 255, 1);
 }
 
 .bungie-auth .member .firstAccess {
   font-size: 12px;
-  margin: 2px 0 0;
+  margin: 1px 0 1px;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -65,11 +67,6 @@
 .bungie-auth .memberships .list li {
   padding: 0 1rem 0 0;
   cursor: pointer;
-}
-
-#get-profile.loading .list li .icon,
-#get-profile.loading .list li .displayName {
-  transition: opacity 0.25ms;
 }
 
 .bungie-auth .memberships .list li.linked:hover {
@@ -94,4 +91,16 @@
 
 .bungie-auth .memberships .list li.linked span.destiny-platform_playstation {
   background-color: #3F51B5;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .bungie-auth .member .details {
+    bottom: 1rem;
+  }
+
+  .bungie-auth .memberships {
+    max-width: unset;
+  }
 }

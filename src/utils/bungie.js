@@ -17,7 +17,7 @@ async function apiRequest(path, options = {}) {
     stats: false,
     auth: false
   };
-  
+
   let tokens = ls.get('setting.auth');
 
   const stats = options.stats || false;
@@ -58,14 +58,14 @@ async function apiRequest(path, options = {}) {
 
       let memberships = await GetMembershipDataForCurrentUser(response.access_token);
 
-      const tokens = { 
+      const tokens = {
         access: {
           value: response.access_token,
-          expires: now + (response.expires_in * 1000)
+          expires: now + response.expires_in * 1000
         },
         refresh: {
           value: response.refresh_token,
-          expires: now + (response.refresh_expires_in * 1000)
+          expires: now + response.refresh_expires_in * 1000
         },
         bnetMembershipId: response.membership_id,
         destinyMemberships: memberships.destinyMemberships
@@ -74,7 +74,7 @@ async function apiRequest(path, options = {}) {
       return response;
     } else {
       return response.Response;
-    }    
+    }
   } else {
     console.log(request);
     throw new BungieError(response);
@@ -96,7 +96,8 @@ export const GetOAuthAccessToken = async body =>
     body
   });
 
-export const GetMembershipDataForCurrentUser = async (access = false) => apiRequest('/Platform/User/GetMembershipsForCurrentUser/', {
+export const GetMembershipDataForCurrentUser = async (access = false) =>
+  apiRequest('/Platform/User/GetMembershipsForCurrentUser/', {
     auth: true,
     headers: {
       Authorization: access && `Bearer ${access}`
@@ -105,7 +106,10 @@ export const GetMembershipDataForCurrentUser = async (access = false) => apiRequ
 
 export const manifest = async version => fetch(`https://www.bungie.net${version}`).then(a => a.json());
 
-export const GetProfile = async (membershipType, membershipId, components) => apiRequest(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=${components}`);
+export const GetProfile = async (membershipType, membershipId, components, auth = false) =>
+  apiRequest(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=${components}`, {
+    auth
+  });
 
 export const GetGroupsForMember = async (membershipType, membershipId) => apiRequest(`/Platform/GroupV2/User/${membershipType}/${membershipId}/0/1/`);
 

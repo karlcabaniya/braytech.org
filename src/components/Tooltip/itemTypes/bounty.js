@@ -7,7 +7,7 @@ import manifest from '../../../utils/manifest';
 
 const bounty = item => {
   let description = item.displaySource !== '' ? item.displaySource : false;
-
+console.log(item)
   let objective = item.displayProperties.description;
   let objectives = [];
   let rewards = [];
@@ -20,6 +20,10 @@ const bounty = item => {
       progress: 0,
       objectiveHash: objectiveDefinition.hash
     };
+
+    let instanceProgress = item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.find(o => o.objectiveHash === element);
+
+    playerProgress = { ...playerProgress, ...instanceProgress };
 
     objectives.push(<ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />);
   });
