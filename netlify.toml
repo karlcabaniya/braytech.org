@@ -1,6 +1,6 @@
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/"
 
 [build.environment]
   REACT_APP_BUNGIE_CLIENT_ID = "28861"
