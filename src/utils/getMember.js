@@ -9,7 +9,7 @@ async function getMember(membershipType, membershipId, withLeaderboardPositions)
   let components = [100,104,200,202,204,205,300,301,302,303,304,305,306,800,900];
 
   let useAuth = false;
-  if (auth.destinyMemberships.find(m => m.membershipId === membershipId)) {
+  if (auth && auth.destinyMemberships.find(m => m.membershipId === membershipId)) {
     useAuth = true;
     components.push(102,201);
   }

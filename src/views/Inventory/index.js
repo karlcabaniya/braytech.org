@@ -3,6 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
+import * as ls from '../../utils/localStorage';
+import Spinner from '../../components/UI/Spinner';
+
 import './styles.css';
 
 import Consumables from './Consumables';
@@ -23,6 +26,24 @@ class Inventory extends React.Component {
     const { t, member } = this.props;
     const view = this.props.match.params.view;
     const { loading, memberships } = this.state;
+
+    const auth = ls.get('setting.auth');
+
+    if (!auth) {
+      return null;
+    }
+
+    if (auth && !auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) {
+      return null;
+    }
+
+    if (auth && auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.profile.profileInventory) {
+      return (
+        <div className='view' id='inventory'>
+          <Spinner />
+        </div>
+      )
+    }
     
     if (view === 'consumables') {
       return <Consumables />;
