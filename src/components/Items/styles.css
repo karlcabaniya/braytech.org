@@ -67,6 +67,10 @@
   background-color: rgb(185, 185, 185);
 }
 
+.list.inventory-items li .quantity.max-stack {
+  color: #856621;
+}
+
 .list.inventory-items.as-tab li .text {
   flex-basis: calc(100% - 48px - 1rem);
   margin: 0 0 0 1rem;

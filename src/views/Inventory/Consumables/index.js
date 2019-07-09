@@ -28,7 +28,7 @@ class Consumables extends React.Component {
     const consumables = inventory.filter(i => i.bucketHash === 1469714392);
     const modifications = inventory.filter(i => i.bucketHash === 3313201758);
     const shaders = inventory.filter(i => i.bucketHash === 2973005342);
-    
+
     return (
       <div className='view consumables' id='inventory'>
         <InventoryViewsLinks />

@@ -8,7 +8,6 @@ import cx from 'classnames';
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../../components/ObservedImage';
 import { ProfileLink } from '../../../components/ProfileLink';
-import Items from '../../../components/Items';
 import QuestLine from '../../../components/QuestLine';
 
 import InventoryViewsLinks from '../InventoryViewsLinks';
@@ -33,8 +32,6 @@ class Pursuits extends React.Component {
     const inventory = member.data.profile.profileInventory.data.items.slice().concat(member.data.profile.characterInventories.data[member.characterId].items);
     const pursuits = inventory.filter(i => i.bucketHash === 1345459588);
 
-    const selected = hash ? pursuits.find(p => p.itemHash.toString() === hash) : false;
-
     let items = [];
 
     pursuits.forEach((item, i) => {
@@ -49,6 +46,7 @@ class Pursuits extends React.Component {
       let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
 
       items.push({
+        ...item,
         name: definitionItem.displayProperties && definitionItem.displayProperties.name,
         rarity: definitionItem.inventory && definitionItem.inventory.tierType,
         itemType: definitionItem.itemType,
@@ -69,7 +67,7 @@ class Pursuits extends React.Component {
             <div className='icon'>
               <ObservedImage className='image' src={definitionItem.displayProperties.localIcon ? `${definitionItem.displayProperties.icon}` : `https://www.bungie.net${definitionItem.displayProperties.icon}`} />
             </div>
-            {item.quantity && item.quantity > 1 ? <div className='quantity'>{item.quantity}</div> : null}
+            {item.quantity && item.quantity > 1 ? <div className={cx('quantity', { 'max-stack': definitionItem.inventory && definitionItem.inventory.maxStackSize === item.quantity })}>{item.quantity}</div> : null}
             {definitionItem.itemType === 12 ? <ProfileLink to={`/inventory/pursuits/${item.itemHash}`} /> : null}
           </li>
         )
@@ -83,6 +81,8 @@ class Pursuits extends React.Component {
     quests = order ? orderBy(quests, [i => i[order], i => i.name], ['desc', 'asc']) : items;
     bounties = order ? orderBy(bounties, [i => i[order], i => i.name], ['desc', 'asc']) : items;
     miscellaneous = order ? orderBy(miscellaneous, [i => i[order], i => i.name], ['desc', 'asc']) : items;
+
+    let selected = hash ? pursuits.find(p => p.itemHash.toString() === hash) : quests[0];
     
     return (
       <div className='view pursuits' id='inventory'>
