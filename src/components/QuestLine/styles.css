@@ -1,0 +1,47 @@
+.quest-line {
+  
+}
+
+.quest-line > .header {
+  margin: 0 0 10px;
+}
+
+.quest-line > .header .name {
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 500;
+  max-width: 600px;
+}
+
+.quest-line .displaySource {
+  font-size: 16px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.quest-line h4 {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  margin: 20px 0 14px;
+}
+
+.quest-line .steps {
+  display: grid;
+  grid-gap: 18px;
+}
+
+
+.quest-line .steps .step .header {
+  margin-bottom: 1rem;
+}
+
+.quest-line .steps .step .header .name {
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.quest-line .steps .step .header .description {
+  
+}

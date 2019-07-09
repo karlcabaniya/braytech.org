@@ -42,10 +42,10 @@ class Pursuits extends React.Component {
           </ul>
         </div>
         <div className='module'>
-          <div className='sub-header'>
-            <div>Breakdown</div>
-          </div>
-          <QuestLine hash='2976515489' />
+          <QuestLine item={{
+            itemHash: '2713477421',
+            itemInstanceId: null
+          }} />
         </div>
       </div>
     );
