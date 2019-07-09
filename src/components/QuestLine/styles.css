@@ -12,7 +12,6 @@
   font-size: 64px;
   line-height: 1;
   font-weight: 500;
-  max-width: 600px;
 }
 
 .quest-line .displaySource {
@@ -54,6 +53,14 @@
 .quest-line .steps {
   display: grid;
   grid-gap: 18px;
+  counter-reset: step;  
+}
+
+.quest-line .steps .step .header .name::before {
+  counter-increment: step;
+  content: counter(step);
+  min-width: 28px;
+  display: inline-block;
 }
 
 
