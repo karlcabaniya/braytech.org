@@ -79,8 +79,6 @@ class QuestLine extends React.Component {
 
       const rewards = (questLine.value && questLine.value.itemValue.length && questLine.value.itemValue.filter(v => v.itemHash !== 0 && v.quantity > 0)) || [];
 
-      console.log(rewards)
-
       return (
         <div className='quest-line'>
           <div className='module header'>
@@ -88,26 +86,26 @@ class QuestLine extends React.Component {
           </div>
           <div className='module'>
             <ReactMarkdown className='displaySource' source={descriptionQuestLine} />
-          </div>
-          {rewards.length ? (
-            <div className='module'>
-              <h4>{t('Rewards')}</h4>
-              <ul className='list inventory-items'>
-                <Items items={rewards} />
-              </ul>
-            </div>
-          ) : null}
-          <div className='module'>
+            {rewards.length ? (
+              <>
+                <h4>{t('Rewards')}</h4>
+                <ul className='list inventory-items'>
+                  <Items items={rewards} />
+                </ul>
+              </>
+            ) : null}
             {questLineSource ? (
               <>
                 <h4>{t('Source')}</h4>
                 {questLineSource.map(s => {
                   if (s.vendorHash) {
                     let definitionVendor = manifest.DestinyVendorDefinition[s.vendorHash];
+                    let definitionFaction = definitionVendor && definitionVendor.factionHash ? manifest.DestinyFactionDefinition[definitionVendor.factionHash] : false;
 
                     return (
                       <div key={s.vendorHash} className='vendor'>
                         <div className='name'>{definitionVendor.displayProperties.name}</div>
+                        {definitionFaction ? <div className='faction'>{definitionFaction.displayProperties.name}</div> : null}
                       </div>
                     );
                   } else {

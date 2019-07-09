@@ -70,7 +70,7 @@ class Pursuits extends React.Component {
               <ObservedImage className='image' src={definitionItem.displayProperties.localIcon ? `${definitionItem.displayProperties.icon}` : `https://www.bungie.net${definitionItem.displayProperties.icon}`} />
             </div>
             {item.quantity && item.quantity > 1 ? <div className='quantity'>{item.quantity}</div> : null}
-            <ProfileLink to={`/inventory/pursuits/${item.itemHash}`} />
+            {definitionItem.itemType === 12 ? <ProfileLink to={`/inventory/pursuits/${item.itemHash}`} /> : null}
           </li>
         )
       });
