@@ -5,6 +5,10 @@
   grid-gap: 3rem;
 }
 
+#inventory .module .sub-header ~ .sub-header {
+  margin-top: 3rem;
+}
+
 #inventory .module.views .list {
   display: grid;
   grid-template-columns: 1fr;

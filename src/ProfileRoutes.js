@@ -61,7 +61,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/this-week`} exact render={route => <ThisWeek />} />
           <Route path={`${match.url}/pgcrs/:type?/:mode?/:offset?`} render={route => <PGCRs {...route} />} />
           <Route path={`${match.url}/sit-rep`} exact render={route => <SitRep />} />
-          <Route path={`${match.url}/inventory/:view?`} render={route => <Inventory {...route} />} />
+          <Route path={`${match.url}/inventory/:view?/:hash?`} render={route => <Inventory {...route} />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/sit-rep` }} />} />
         </Switch>
       </>

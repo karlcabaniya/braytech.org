@@ -27,6 +27,10 @@
   margin: 20px 0 14px;
 }
 
+.quest-line .list.inventory-items.as-tab {
+  grid-template-columns: 1fr;
+}
+
 .quest-line .steps {
   display: grid;
   grid-gap: 18px;

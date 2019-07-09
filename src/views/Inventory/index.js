@@ -25,6 +25,7 @@ class Inventory extends React.Component {
   render() {
     const { t, member } = this.props;
     const view = this.props.match.params.view;
+    const hash = this.props.match.params.hash;
     const { loading, memberships } = this.state;
 
     const auth = ls.get('setting.auth');
@@ -46,9 +47,11 @@ class Inventory extends React.Component {
     }
     
     if (view === 'consumables') {
-      return <Consumables />;
+      return <Consumables order='rarity' />;
+    } else if (view === 'pursuits') {
+      return <Pursuits hash={hash} order='rarity' />;
     } else {
-      return <Pursuits />;
+      return <Pursuits order='rarity' />;
     }
     
   }
