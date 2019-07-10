@@ -135,6 +135,7 @@ p:last-child {
 .list li.linked:hover::after,
 .list li.tooltip:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
+  z-index: 4;
 }
 
 .list li > a {

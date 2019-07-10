@@ -169,7 +169,7 @@ class QuestLine extends React.Component {
                 const descriptionStep = s.definitionStep.displayProperties.description && s.definitionStep.displayProperties.description !== '' ? s.definitionStep.displayProperties.description : false;
 
                 return (
-                  <div key={s.itemHash} className='step'>
+                  <div key={s.itemHash} className={cx('step', { completed: s.completed })}>
                     <div className='header'>
                       <div className='number'>{s.i}</div>
                       <div className='name'>{s.definitionStep.displayProperties.name}</div>

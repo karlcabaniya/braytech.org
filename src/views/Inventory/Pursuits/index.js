@@ -28,28 +28,39 @@ class Pursuits extends React.Component {
 
   render() {
     const { t, member, hash, order } = this.props;
+    const itemComponents = member.data.profile.itemComponents;
+    const characterUninstancedItemComponents = member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data;
 
     const inventory = member.data.profile.profileInventory.data.items.slice().concat(member.data.profile.characterInventories.data[member.characterId].items);
     const pursuits = inventory.filter(i => i.bucketHash === 1345459588);
 
+    const nowMs = new Date().getTime();
+    
     let items = [];
 
     pursuits.forEach((item, i) => {
-      let definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
-      let definitionBucket = item.bucketHash ? manifest.DestinyInventoryBucketDefinition[item.bucketHash] : false;
+      const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
+      const definitionBucket = item.bucketHash ? manifest.DestinyInventoryBucketDefinition[item.bucketHash] : false;
 
       if (!definitionItem) {
         console.log(`Items: Couldn't find item definition for ${item.itemHash}`);
         return;
       }
 
-      let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
+      const expiryMs = item.expirationDate && new Date(item.expirationDate).getTime();
+
+      const progressData = item.itemInstanceId && itemComponents.objectives.data[item.itemInstanceId] ? itemComponents.objectives.data[item.itemInstanceId].objectives : characterUninstancedItemComponents && characterUninstancedItemComponents[item.itemHash] ? characterUninstancedItemComponents[item.itemHash].objectives : false;
+
+      const bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ','-').toLowerCase();
+
+      const vendorSource = definitionItem.sourceData && definitionItem.sourceData.vendorSources && definitionItem.sourceData.vendorSources.length && definitionItem.sourceData.vendorSources[0] && definitionItem.sourceData.vendorSources[0].vendorHash ? definitionItem.sourceData.vendorSources[0].vendorHash : false;
 
       items.push({
         ...item,
         name: definitionItem.displayProperties && definitionItem.displayProperties.name,
         rarity: definitionItem.inventory && definitionItem.inventory.tierType,
         itemType: definitionItem.itemType,
+        vendorSource,
         el: (
           <li
             key={i}
@@ -59,7 +70,7 @@ class Pursuits extends React.Component {
                 tooltip: true,
                 exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
               },
-              bucketName,
+              bucketName
             )}
             data-hash={item.itemHash}
             data-instanceid={item.itemInstanceId}
@@ -69,6 +80,8 @@ class Pursuits extends React.Component {
               <ObservedImage className='image' src={definitionItem.displayProperties.localIcon ? `${definitionItem.displayProperties.icon}` : `https://www.bungie.net${definitionItem.displayProperties.icon}`} />
             </div>
             {item.quantity && item.quantity > 1 ? <div className={cx('quantity', { 'max-stack': definitionItem.inventory && definitionItem.inventory.maxStackSize === item.quantity })}>{item.quantity}</div> : null}
+            {progressData && progressData.filter(o => !o.complete).length === 0 ? <div className='completed' /> : null}
+            {progressData && progressData.filter(o => !o.complete).length > 0 && (nowMs + 7200 * 1000 > expiryMs) ? <div className='expires-soon' /> : null}
             {definitionItem.itemType === 12 ? <ProfileLink to={`/inventory/pursuits/${item.itemHash}`} /> : null}
           </li>
         )
@@ -78,9 +91,9 @@ class Pursuits extends React.Component {
     let quests = items.filter(i => i.itemType === 12);
     let bounties = items.filter(i => i.itemType === 26);
     let miscellaneous = items.filter(i => i.itemType !== 12 && i.itemType !== 26);
-    
+
     quests = order ? orderBy(quests, [i => i[order], i => i.name], ['desc', 'asc']) : items;
-    bounties = order ? orderBy(bounties, [i => i[order], i => i.name], ['desc', 'asc']) : items;
+    bounties = order ? orderBy(bounties, [i => i.vendorSource, i => i[order], i => i.name], ['desc', 'desc', 'asc']) : items;
     miscellaneous = order ? orderBy(miscellaneous, [i => i[order], i => i.name], ['desc', 'asc']) : items;
 
     let selected = hash ? pursuits.find(p => p.itemHash.toString() === hash) : quests.length && quests[0] && quests[0].itemHash ? quests[0] : false;

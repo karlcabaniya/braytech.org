@@ -69,6 +69,17 @@ class ItemTypes extends React.Component {
       }
     }
 
+
+    if (instanceId && member.data.profile && member.data.profile.characterInventories.data && member.data.profile.characterInventories.data[member.characterId] && member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceId)) {
+      if (item.itemComponents) {
+        item.itemComponents.item = member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceId);
+      } else {
+        item.itemComponents = {
+          item: member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceId)
+        }
+      }
+    }
+
     item.quantity = quantity || 1;
 
     let kind, tier, black, hideRarity, masterwork;

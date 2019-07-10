@@ -6,7 +6,7 @@ import * as ls from './localStorage';
 async function getMember(membershipType, membershipId, withLeaderboardPositions) {
   const auth = ls.get('setting.auth');
 
-  let components = [100,104,200,202,204,205,300,301,302,303,304,305,306,800,900];
+  let components = [100,104,200,202,204,205,300,301,302,303,304,305,306,307,800,900];
 
   let useAuth = false;
   if (auth && auth.destinyMemberships.find(m => m.membershipId === membershipId)) {

@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'react-moment';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -6,8 +7,10 @@ import ObservedImage from '../../ObservedImage';
 import ProgressBar from '../../UI/ProgressBar';
 
 const bounty = item => {
-
   let description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
+  let displaySource = item.displaySource && item.displaySource !== '' ? item.displaySource : false;
+
+  const instanceProgress = item.itemComponents && item.itemComponents.objectives;
 
   let objectives = [];
   let rewards = [];
@@ -15,33 +18,38 @@ const bounty = item => {
   item.objectives.objectiveHashes.forEach(element => {
     let objectiveDefinition = manifest.DestinyObjectiveDefinition[element];
 
-    let playerProgress = {
+    let defaults = {
       complete: false,
       progress: 0,
       objectiveHash: objectiveDefinition.hash
     };
 
-    let instanceProgress = item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.find(o => o.objectiveHash === element);
+    let progress = (instanceProgress && instanceProgress.find(o => o.objectiveHash === element)) || {};
 
-    playerProgress = { ...playerProgress, ...instanceProgress };
+    defaults = { ...defaults, ...progress };
 
-    objectives.push(<ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />);
+    objectives.push(<ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={defaults} />);
   });
 
-  item.value && item.value.itemValue.forEach(value => {
-    if (value.itemHash !== 0) {
-      let definition = manifest.DestinyInventoryItemDefinition[value.itemHash];
-      rewards.push(
-        <li key={value.itemHash}>
-          <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definition.displayProperties.icon}`} />
-          <div className='text'>
-            {definition.displayProperties.name}
-            {value.quantity > 1 ? <> +{value.quantity}</> : null}
-          </div>
-        </li>
-      );
-    }
-  });
+  item.value &&
+    item.value.itemValue.forEach(value => {
+      if (value.itemHash !== 0) {
+        let definition = manifest.DestinyInventoryItemDefinition[value.itemHash];
+        rewards.push(
+          <li key={value.itemHash}>
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definition.displayProperties.icon}`} />
+            <div className='text'>
+              {definition.displayProperties.name}
+              {value.quantity > 1 ? <> +{value.quantity}</> : null}
+            </div>
+          </li>
+        );
+      }
+    });
+
+  const nowMs = new Date().getTime();
+  const expiry = item.itemComponents && item.itemComponents.item && item.itemComponents.item.expirationDate;
+  const expiryMs = expiry && new Date(expiry).getTime();
 
   return (
     <>
@@ -51,9 +59,25 @@ const bounty = item => {
         </div>
       ) : null}
       {objectives.length ? <div className='objectives'>{objectives}</div> : null}
+      {displaySource ? (
+        <div className='description'>
+          <pre>{displaySource}</pre>
+        </div>
+      ) : null}
       {rewards.length ? (
         <div className='rewards'>
           <ul>{rewards}</ul>
+        </div>
+      ) : null}
+      {instanceProgress && instanceProgress.filter(o => !o.complete).length > 0 && expiry ? (
+        <div className='expiry'>
+          {expiryMs > nowMs ? (
+            <>
+              Expires <Moment fromNow>{expiry}</Moment>.
+            </>
+          ) : (
+            <>Expired.</>
+          )}
         </div>
       ) : null}
     </>

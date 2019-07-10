@@ -36,7 +36,7 @@ const fallback = item => {
         </div>
       ) : null}
       {objectives.length ? <div className='objectives'>{objectives}</div> : null}
-      {quanityMax ? (
+      {quanityMax && quanityMax > 1 ? (
         <div className='quantity'>Quantity: <span>{item.inventory.maxStackSize}</span> (MAX)</div>
       ) : null}
       {sourceString ? (
