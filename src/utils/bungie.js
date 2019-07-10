@@ -34,7 +34,7 @@ async function apiRequest(path, options = {}) {
 
   if (options.auth && !options.headers.Authorization) {
     let now = new Date().getTime() + 10000;
-    let then = new Date(tokens.access.expires);
+    let then = new Date(tokens.access.expires).getTime();
 
     if (now > then) {
       await GetOAuthAccessToken(`grant_type=refresh_token&refresh_token=${tokens.refresh.value}`);

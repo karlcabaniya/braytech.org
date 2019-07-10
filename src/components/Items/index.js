@@ -45,6 +45,7 @@ class Items extends React.Component {
             data-hash={item.itemHash}
             data-instanceid={item.itemInstanceId}
             data-state={item.state}
+            data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
             onClick={e => {
               if (action) {
                 action(e, item);

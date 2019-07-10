@@ -8,6 +8,8 @@ const fallback = item => {
 
   let description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
 
+  let quanityMax = item.inventory && item.inventory.maxStackSize === parseInt(item.quantity, 10);
+
   let objectives = [];
 
   item.objectives && item.objectives.objectiveHashes.forEach(element => {
@@ -34,6 +36,9 @@ const fallback = item => {
         </div>
       ) : null}
       {objectives.length ? <div className='objectives'>{objectives}</div> : null}
+      {quanityMax ? (
+        <div className='quantity'>Quantity: <span>{item.inventory.maxStackSize}</span> (MAX)</div>
+      ) : null}
       {sourceString ? (
         <div className='source'>
           <p>{sourceString}</p>

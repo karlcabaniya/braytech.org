@@ -13,6 +13,7 @@ class Tooltip extends React.Component {
       hash: false,
       instanceId: false,
       state: false,
+      quantity: false,
       rollNote: false,
       table: false,
       tooltipType: false
@@ -63,6 +64,7 @@ class Tooltip extends React.Component {
         hash: e.currentTarget.dataset.hash,
         instanceId: e.currentTarget.dataset.instanceid,
         state: e.currentTarget.dataset.state,
+        quantity: e.currentTarget.dataset.quantity,
         rollNote: e.currentTarget.dataset.rollnote ? true : false,
         table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false,
         tooltipType: e.currentTarget.dataset.tooltiptype && e.currentTarget.dataset.tooltiptype !== '' ? e.currentTarget.dataset.tooltiptype : false
@@ -89,6 +91,7 @@ class Tooltip extends React.Component {
           hash: e.currentTarget.dataset.hash,
           instanceId: e.currentTarget.dataset.instanceid,
           state: e.currentTarget.dataset.state,
+          quantity: e.currentTarget.dataset.quantity,
           rollNote: e.currentTarget.dataset.rollnote ? true : false,
           table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false,
           tooltipType: e.currentTarget.dataset.tooltiptype && e.currentTarget.dataset.tooltiptype !== '' ? e.currentTarget.dataset.tooltiptype : false
@@ -102,6 +105,7 @@ class Tooltip extends React.Component {
       hash: false,
       instanceId: false,
       state: false,
+      quantity: false,
       rollNote: false,
       table: false,
       tooltipType: false

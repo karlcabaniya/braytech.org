@@ -21,7 +21,7 @@ import sandboxPerk from './sandboxPerk';
 
 class ItemTypes extends React.Component {
   render() {
-    let { member, hash, instanceId, state, rollNote, table, tooltipType, tooltips } = this.props;
+    let { member, hash, instanceId, state, quantity, rollNote, table, tooltipType, tooltips } = this.props;
 
     if (!table) {
       table = 'DestinyInventoryItemDefinition';
@@ -68,6 +68,8 @@ class ItemTypes extends React.Component {
         }
       }
     }
+
+    item.quantity = quantity || 1;
 
     let kind, tier, black, hideRarity, masterwork;
 

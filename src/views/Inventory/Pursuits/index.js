@@ -63,6 +63,7 @@ class Pursuits extends React.Component {
             )}
             data-hash={item.itemHash}
             data-instanceid={item.itemInstanceId}
+            data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
           >
             <div className='icon'>
               <ObservedImage className='image' src={definitionItem.displayProperties.localIcon ? `${definitionItem.displayProperties.icon}` : `https://www.bungie.net${definitionItem.displayProperties.icon}`} />
