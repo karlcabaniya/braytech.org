@@ -83,7 +83,7 @@ class Pursuits extends React.Component {
     bounties = order ? orderBy(bounties, [i => i[order], i => i.name], ['desc', 'asc']) : items;
     miscellaneous = order ? orderBy(miscellaneous, [i => i[order], i => i.name], ['desc', 'asc']) : items;
 
-    let selected = hash ? pursuits.find(p => p.itemHash.toString() === hash) : quests[0];
+    let selected = hash ? pursuits.find(p => p.itemHash.toString() === hash) : quests.length && quests[0] && quests[0].itemHash ? quests[0] : false;
     
     return (
       <div className='view pursuits' id='inventory'>

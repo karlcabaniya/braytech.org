@@ -8,6 +8,8 @@ import Items from '../../../components/Items';
 
 import InventoryViewsLinks from '../InventoryViewsLinks';
 
+import './styles.css';
+
 class Consumables extends React.Component {
   constructor(props) {
     super(props);

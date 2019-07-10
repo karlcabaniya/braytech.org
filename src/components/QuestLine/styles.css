@@ -52,27 +52,82 @@
 
 .quest-line .steps {
   display: grid;
-  grid-gap: 18px;
-  counter-reset: step;  
+  grid-gap: 2rem;
 }
-
-.quest-line .steps .step .header .name::before {
-  counter-increment: step;
-  content: counter(step);
-  min-width: 28px;
-  display: inline-block;
-}
-
 
 .quest-line .steps .step .header {
-  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: minmax(28px, min-content) auto;
+  background-color: rgba(255, 255, 255, 0.05);
+  grid-gap: 16px;
+  margin-bottom: 10px;
+}
+
+.quest-line .steps .step .header .number {
+  height: 28px;
+  font-size: 16px;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .quest-line .steps .step .header .name {
-  font-size: 20px;
-  margin: 0 0 10px;
+  height: 28px;
+  font-size: 16px;
+  display: grid;
+  align-content: center;
 }
 
-.quest-line .steps .step .header .description {
-  
+.quest-line .steps .step .description {
+
+}
+
+.quest-line .steps .step .objectives {
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 1280px) {
+
+  .quest-line {
+    grid-gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  .quest-line > .header {
+    grid-column: unset;
+  }
+
+}
+
+@media screen and (max-width: 1280px) {
+
+  .quest-line {
+    grid-template-columns: 1fr;
+  }
+
+  .quest-line > .header {
+    grid-column: unset;
+  }
+
+}
+
+@media screen and (max-width: 1024px) {
+
+  .quest-line > .header .name {
+    font-size: 48px;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .quest-line {
+    grid-gap: 1rem;
+  }
+
+  .quest-line > .header .name {
+    font-size: 32px;
+  }
+
 }

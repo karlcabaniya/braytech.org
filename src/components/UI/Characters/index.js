@@ -21,7 +21,7 @@ class Characters extends React.Component {
     let charactersByLastPlayed = Object.entries(member.data.profile.characterActivities.data).sort((a, b) => {
       let x = new Date(a[1].dateActivityStarted).getTime();
       let y = new Date(b[1].dateActivityStarted).getTime();
-      
+
       return y - x;
     });
     let characterProgressions = member.data.profile.characterProgressions.data;
@@ -32,7 +32,6 @@ class Characters extends React.Component {
     return (
       <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
         {characters.map(character => {
-          
           let capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
 
           let progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
@@ -49,9 +48,13 @@ class Characters extends React.Component {
             } else {
               state = (
                 <>
-                  <div className='activity'>
-                    {manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].displayProperties.name}
-                  </div>
+                  {!manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash] || !manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash].displayProperties || !manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash] || !manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].displayProperties ? (
+                    <div className='activity'>Classified</div>
+                  ) : (
+                    <div className='activity'>
+                      {manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].displayProperties.name}
+                    </div>
+                  )}
                   <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
                 </>
               );

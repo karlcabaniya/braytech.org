@@ -29,24 +29,25 @@ class QuestLine extends React.Component {
       const questLine = definitionItem;
 
       let assumeCompleted = true;
-      const steps = questLine.setData.itemList.map(i => {
+      const steps = questLine.setData.itemList.map((s, i) => {
 
-        i.definitionStep = manifest.DestinyInventoryItemDefinition[i.itemHash];
-        i.completed = assumeCompleted;
+        s.i = i + 1;
+        s.definitionStep = manifest.DestinyInventoryItemDefinition[s.itemHash];
+        s.completed = assumeCompleted;
 
-        if (i.itemHash === item.itemHash) {
+        if (s.itemHash === item.itemHash) {
           assumeCompleted = false;
-          i.completed = false;
-          i.active = true;
-          i.itemInstanceId = item.itemInstanceId || null;
+          s.completed = false;
+          s.active = true;
+          s.itemInstanceId = item.itemInstanceId || null;
         }
 
         let progressData = item.itemInstanceId && itemComponents.objectives.data[item.itemInstanceId] ? itemComponents.objectives.data[item.itemInstanceId].objectives : characterUninstancedItemComponents && characterUninstancedItemComponents[item.itemHash] ? characterUninstancedItemComponents[item.itemHash].objectives : false;
 
         let stepMatch = false;
-        if (progressData && i.definitionStep.objectives && i.definitionStep.objectives.objectiveHashes.length === progressData.length) {
+        if (progressData && s.definitionStep.objectives && s.definitionStep.objectives.objectiveHashes.length === progressData.length) {
           progressData.forEach(o => {
-            if (i.definitionStep.objectives.objectiveHashes.includes(o.objectiveHash)) {
+            if (s.definitionStep.objectives.objectiveHashes.includes(o.objectiveHash)) {
               stepMatch = true;
             } else {
               stepMatch = false;
@@ -55,9 +56,9 @@ class QuestLine extends React.Component {
         }
 
         if (stepMatch) {
-          i.progress = progressData;
-        } else if (assumeCompleted && i.definitionStep.objectives && i.definitionStep.objectives.objectiveHashes.length) {
-          i.progress = i.definitionStep.objectives.objectiveHashes.map(o => {
+          s.progress = progressData;
+        } else if (assumeCompleted && s.definitionStep.objectives && s.definitionStep.objectives.objectiveHashes.length) {
+          s.progress = s.definitionStep.objectives.objectiveHashes.map(o => {
             let definitionObjective = manifest.DestinyObjectiveDefinition[o];
 
             return {
@@ -67,10 +68,10 @@ class QuestLine extends React.Component {
             }
           });
         } else {
-          i.progress = [];
+          s.progress = [];
         }
 
-        return i;
+        return s;
       });
 
       const questLineSource = questLine.sourceData && questLine.sourceData.vendorSources && questLine.sourceData.vendorSources.length ? questLine.sourceData.vendorSources : steps[0].definitionStep.sourceData && steps[0].definitionStep.sourceData.vendorSources && steps[0].definitionStep.sourceData.vendorSources.length ? steps[0].definitionStep.sourceData.vendorSources : false;
@@ -114,6 +115,38 @@ class QuestLine extends React.Component {
                 })}
               </>
             ) : null}
+            <h4>{t('Current step')}</h4>
+            <div className='steps'>
+              {steps.filter(s => s.active).map(s => {
+
+                let objectives = [];
+                s.definitionStep && s.definitionStep.objectives && s.definitionStep.objectives.objectiveHashes.forEach(element => {
+                  let definitionObjective = manifest.DestinyObjectiveDefinition[element];
+              
+                  let playerProgress = { ...{
+                    complete: false,
+                    progress: 0,
+                    objectiveHash: definitionObjective.hash
+                  }, ...s.progress.find(o => o.objectiveHash === definitionObjective.hash) };
+              
+                  objectives.push(<ProgressBar key={definitionObjective.hash} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
+                });
+
+                const descriptionStep = s.definitionStep.displayProperties.description && s.definitionStep.displayProperties.description !== '' ? s.definitionStep.displayProperties.description : false;
+
+                return (
+                  <div key={s.itemHash} className='step'>
+                    <div className='header'>
+                      <div className='number'>{s.i}</div>
+                      <div className='name'>{s.definitionStep.displayProperties.name}</div>
+                    </div>
+                    {descriptionStep ? <ReactMarkdown className='description' source={descriptionStep} /> : null}
+                    {objectives.length ? <div className='objectives'>{objectives}</div> : null}
+                  </div>
+                )
+
+              })}
+            </div>
           </div>
           <div className='module'>
             <h4>{t('Steps')}</h4>
@@ -138,9 +171,10 @@ class QuestLine extends React.Component {
                 return (
                   <div key={s.itemHash} className='step'>
                     <div className='header'>
+                      <div className='number'>{s.i}</div>
                       <div className='name'>{s.definitionStep.displayProperties.name}</div>
-                      {descriptionStep ? <ReactMarkdown className='description' source={descriptionStep} /> : null}
                     </div>
+                    {descriptionStep ? <ReactMarkdown className='description' source={descriptionStep} /> : null}
                     {objectives.length ? <div className='objectives'>{objectives}</div> : null}
                   </div>
                 )
