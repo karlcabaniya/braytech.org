@@ -1,9 +1,9 @@
 import React from 'react';
 import { compose } from 'redux';
 import { withNamespaces } from 'react-i18next';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import queryString from 'query-string'
+import queryString from 'query-string';
 
 import * as ls from '../../utils/localStorage';
 import * as bungie from '../../utils/bungie';
@@ -11,6 +11,7 @@ import * as destinyEnums from '../../utils/destinyEnums';
 import Button from '../UI/Button';
 import Spinner from '../UI/Spinner';
 import ObservedImage from '../ObservedImage';
+import store from '../../utils/reduxStore';
 
 import './styles.css';
 
@@ -24,7 +25,7 @@ class BungieAuth extends React.Component {
     };
   }
 
-  getAccessTokens = async code => {   
+  getAccessTokens = async code => {
     let response = await bungie.GetOAuthAccessToken(`client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&grant_type=authorization_code&code=${code}`);
 
     console.log(response);
@@ -32,7 +33,7 @@ class BungieAuth extends React.Component {
     if (this.mounted) {
       this.getMemberships();
     }
-  }
+  };
 
   getMemberships = async () => {
     let response = await bungie.GetMembershipDataForCurrentUser();
@@ -46,7 +47,7 @@ class BungieAuth extends React.Component {
         return prevState;
       });
     }
-  }
+  };
 
   componentDidMount() {
     this.mounted = true;
@@ -77,7 +78,7 @@ class BungieAuth extends React.Component {
   render() {
     const { t, location } = this.props;
     const { loading, memberships } = this.state;
-    
+
     const code = queryString.parse(location.search) && queryString.parse(location.search).code;
 
     if (code) {
@@ -98,7 +99,9 @@ class BungieAuth extends React.Component {
                 </div>
                 <div className='text'>
                   <div className='displayName'>{memberships.bungieNetUser.displayName}</div>
-                  <div className='firstAccess'><Moment format='DD/MM/YYYY'>{memberships.bungieNetUser.firstAccess}</Moment></div>
+                  <div className='firstAccess'>
+                    <Moment format='DD/MM/YYYY'>{memberships.bungieNetUser.firstAccess}</Moment>
+                  </div>
                 </div>
               </div>
             </div>
@@ -106,29 +109,39 @@ class BungieAuth extends React.Component {
               <h4>{t('Associated memberships')}</h4>
               <ul className='list'>
                 {memberships.destinyMemberships.map(m => {
-
                   return (
                     <li key={m.membershipId} className='linked'>
-                      <div className='icon'><span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType].toLowerCase()}`} /></div>
+                      <div className='icon'>
+                        <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType].toLowerCase()}`} />
+                      </div>
                       <div className='displayName'>{memberships.bungieNetUser.blizzardDisplayName && m.membershipType === 4 ? memberships.bungieNetUser.blizzardDisplayName : m.displayName}</div>
+                      <Link
+                        to='/character-select'
+                        onClick={e => {
+                          store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: m.membershipType, membershipId: m.membershipId } });
+                        }}
+                      />
                     </li>
                   );
                 })}
               </ul>
               <div className='info'>
-                <p>{t("These are the memberships that are currenty associated with your Bungie.net profile.")}</p>
+                <p>{t('These are the memberships that are currenty associated with your Bungie.net profile.')}</p>
               </div>
             </div>
             <h4>{t('Authentication data')}</h4>
-            <Button text={t('Forget me')} action={() => {
-              ls.del('setting.auth');
-              this.setState((prevState, props) => {
-                prevState.memberships = false;
-                return prevState;
-              });
-            }} />
+            <Button
+              text={t('Forget me')}
+              action={() => {
+                ls.del('setting.auth');
+                this.setState((prevState, props) => {
+                  prevState.memberships = false;
+                  return prevState;
+                });
+              }}
+            />
             <div className='info'>
-              <p>{t("Delete the authentication data stored on your device. While unnecessary, this function is provided for your peace of mind.")}</p>
+              <p>{t('Delete the authentication data stored on your device. While unnecessary, this function is provided for your peace of mind.')}</p>
             </div>
           </div>
         );
@@ -148,6 +161,118 @@ class BungieAuth extends React.Component {
   }
 }
 
-export default compose(
-  withNamespaces()
-)(BungieAuth);
+class NoAuth extends React.Component {
+  render() {
+    const { t } = this.props;
+
+    return (
+      <div className='bungie-auth no-auth'>
+        <div className='module'>
+          <div className='properties'>
+            <div className='name'>{t('Authorization required')}</div>
+            <div className='description'>
+              <p>{t('Some features of Braytech require your written permission to activate, generally to protect your privacy.')}</p>
+              <p>{t('To use this feature, please tell Bungie that you approve. No personal information is shared by doing so—only an an authentication code with which you may interact with more API endpoints.')}</p>
+            </div>
+            <Button
+              text='Authorize'
+              action={() => {
+                window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class DiffProfile extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+      memberships: false
+    };
+  }
+
+  getMemberships = async () => {
+    let response = await bungie.GetMembershipDataForCurrentUser();
+
+    console.log(response);
+
+    if (this.mounted) {
+      this.setState((prevState, props) => {
+        prevState.loading = false;
+        prevState.memberships = response;
+        return prevState;
+      });
+    }
+  };
+
+  componentDidMount() {
+    this.mounted = true;
+
+    const tokens = ls.get('setting.auth');
+
+    if (tokens) {
+      console.log(tokens);
+
+      this.getMemberships();
+    }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+  render() {
+    const { t } = this.props;
+    const { loading, memberships } = this.state;
+
+    return (
+      <div className='bungie-auth no-auth'>
+        <div className='module'>
+          <div className='properties'>
+            <div className='name'>{t('Oh, honey')}</div>
+            <div className='description'>
+              <p>{t("You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.")}</p>
+            </div>
+            {loading ? (
+              <Spinner mini />
+            ) : (
+              <div className='memberships'>
+                <ul className='list'>
+                  {memberships.destinyMemberships.map(m => {
+                    return (
+                      <li key={m.membershipId} className='linked'>
+                        <div className='icon'>
+                          <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType].toLowerCase()}`} />
+                        </div>
+                        <div className='displayName'>{memberships.bungieNetUser.blizzardDisplayName && m.membershipType === 4 ? memberships.bungieNetUser.blizzardDisplayName : m.displayName}</div>
+                        <Link
+                          to='/character-select'
+                          onClick={e => {
+                            store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: m.membershipType, membershipId: m.membershipId } });
+                          }}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+BungieAuth = compose(withNamespaces())(BungieAuth);
+
+NoAuth = compose(withNamespaces())(NoAuth);
+
+DiffProfile = compose(withNamespaces())(DiffProfile);
+
+export { BungieAuth, NoAuth, DiffProfile };

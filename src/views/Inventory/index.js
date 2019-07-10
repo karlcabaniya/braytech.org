@@ -5,6 +5,7 @@ import { withNamespaces } from 'react-i18next';
 
 import * as ls from '../../utils/localStorage';
 import Spinner from '../../components/UI/Spinner';
+import { NoAuth, DiffProfile } from '../../components/BungieAuth';
 
 import './styles.css';
 
@@ -31,11 +32,11 @@ class Inventory extends React.Component {
     const auth = ls.get('setting.auth');
 
     if (!auth) {
-      return null;
+      return <NoAuth />;
     }
 
     if (auth && !auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) {
-      return null;
+      return <DiffProfile />;
     }
 
     if (auth && auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.profile.profileInventory) {

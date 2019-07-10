@@ -6,7 +6,7 @@ import { withNamespaces } from 'react-i18next';
 
 import { getLanguageInfo } from '../../utils/languageInfo';
 import * as ls from '../../utils/localStorage';
-import BungieAuth from '../../components/BungieAuth';
+import { BungieAuth } from '../../components/BungieAuth';
 import Checkbox from '../../components/UI/Checkbox';
 import Button from '../../components/UI/Button';
 
