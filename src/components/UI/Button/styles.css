@@ -51,7 +51,8 @@
   z-index: 3;
   pointer-events: none;
   box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
-  transition: box-shadow 0.25s;
+  transform: scale(1.021) translateZ(0);
+  transition: box-shadow 0.25s, transform 0.25s;
 }
 
 .button:hover {
@@ -67,6 +68,7 @@
 
 .button:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
+  transform: scale(1) translateZ(0);
 }
 
 .button .text {

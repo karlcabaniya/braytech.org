@@ -31,11 +31,13 @@
   width: calc(100% + 4px);
   height: calc(100% + 4px);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0);
-  transition: 0.25s box-shadow;
+  transform: scale(1.07) translateZ(0);
+  transition: box-shadow 0.25s, transform 0.25s;
 }
 
 .check-box:hover .check::after {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+  transform: scale(1) translateZ(0);
 }
 
 .check-box .text {

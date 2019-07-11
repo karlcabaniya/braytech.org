@@ -325,6 +325,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
 
 #header.profile-header .characters .list li:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
+  transform: scale(1) translateZ(0);
 }
 
 #header.profile-header .views {

@@ -6,7 +6,7 @@
 }
 
 #inventory .module .sub-header ~ .sub-header {
-  margin-top: 3rem;
+  margin-top: calc(3rem - 7px);
 }
 
 #inventory .module.views .sticker {
