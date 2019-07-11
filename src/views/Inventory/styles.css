@@ -72,7 +72,7 @@
   box-shadow: none;
 }
 
-#inventory .module.views .list.currencies li .icon {
+#inventory .module.views .list.currencies li > div {
   display: grid;
   justify-content: center;
 }
