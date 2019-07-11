@@ -7,15 +7,15 @@ import ObservedImage from '../../ObservedImage';
 import ProgressBar from '../../UI/ProgressBar';
 
 const bounty = item => {
-  let description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
-  let displaySource = item.displaySource && item.displaySource !== '' ? item.displaySource : false;
+  const description = item.displayProperties.description !== '' ? item.displayProperties.description : false;
+  const displaySource = item.displaySource && item.displaySource !== '' ? item.displaySource : false;
 
   const instanceProgress = item.itemComponents && item.itemComponents.objectives;
 
   let objectives = [];
   let rewards = [];
 
-  item.objectives.objectiveHashes.forEach(element => {
+  item.objectives && item.objectives.objectiveHashes.forEach(element => {
     let objectiveDefinition = manifest.DestinyObjectiveDefinition[element];
 
     let defaults = {

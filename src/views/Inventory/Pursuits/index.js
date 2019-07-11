@@ -61,6 +61,7 @@ class Pursuits extends React.Component {
         rarity: definitionItem.inventory && definitionItem.inventory.tierType,
         itemType: definitionItem.itemType,
         vendorSource,
+        expiryMs: expiryMs || false,
         el: (
           <li
             key={i}
@@ -89,11 +90,25 @@ class Pursuits extends React.Component {
     });
 
     let quests = items.filter(i => i.itemType === 12);
-    let bounties = items.filter(i => i.itemType === 26);
-    let miscellaneous = items.filter(i => i.itemType !== 12 && i.itemType !== 26);
+    let bounties = items.filter(i => {
+      if (i.itemType === 26) {
+        return true;
+      } else if (i.vendorSource === 3347378076) { // hawthorne weekly clan bounties
+        return true;
+      } else {
+        return false;
+      }      
+    });
+    let miscellaneous = items.filter(i => {
+      if (i.itemType !== 12 && i.itemType !== 26 && i.vendorSource !== 3347378076) {
+        return true;
+      } else {
+        return false;
+      }
+    });
 
     quests = order ? orderBy(quests, [i => i[order], i => i.name], ['desc', 'asc']) : items;
-    bounties = order ? orderBy(bounties, [i => i.vendorSource, i => i[order], i => i.name], ['desc', 'desc', 'asc']) : items;
+    bounties = order ? orderBy(bounties, [i => i.vendorSource, i => i.expiryMs, i => i[order], i => i.name], ['desc', 'asc', 'desc', 'asc']) : items;
     miscellaneous = order ? orderBy(miscellaneous, [i => i[order], i => i.name], ['desc', 'asc']) : items;
 
     let selected = hash ? pursuits.find(p => p.itemHash.toString() === hash) : quests.length && quests[0] && quests[0].itemHash ? quests[0] : false;
