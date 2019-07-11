@@ -9,9 +9,12 @@
   margin-top: 3rem;
 }
 
-#inventory .module.views .list {
+#inventory .module.views .sticker {
   position: sticky;
   top: 3rem;
+}
+
+#inventory .module.views .list {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 3px;
@@ -54,6 +57,38 @@
   color: #fff;
 }
 
+#inventory .module.views .list.currencies {
+  margin: 3rem 0 0;
+  grid-gap: 1rem;
+}
+
+#inventory .module.views .list.currencies li {
+  grid-gap: 4px;
+  justify-content: center;
+  background-color: transparent;
+}
+
+#inventory .module.views .list.currencies li::before {
+  box-shadow: none;
+}
+
+#inventory .module.views .list.currencies li .icon {
+  display: grid;
+  justify-content: center;
+}
+
+#inventory .module.views .list.currencies li .icon .image {
+  background-size: contain;
+  width: 32px;
+  height: 32px;
+  padding-bottom: unset;
+}
+
+#inventory .module.views .list.currencies li .quantity {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 #inventory .list.inventory-items {
   grid-template-columns: repeat(auto-fill, 64px);
   grid-gap: 3px;
@@ -82,9 +117,29 @@
     grid-template-columns: repeat(auto-fill, 56px);
   }
 
-  #inventory .module.views .list {
+  #inventory .module.views .sticker {
     top: 2rem;
+  }
+
+  #inventory .module.views .list {
     grid-template-columns: 1fr;
     width: 40px;
+  }
+
+  #inventory .module.views .list.currencies {
+    margin: 2rem 0 0;
+  }
+
+  #inventory .module.views .list.currencies li {
+    grid-gap: 2px;
+  }
+
+  #inventory .module.views .list.currencies li .icon .image {
+    width: 24px;
+    height: 24px;
+  }
+
+  #inventory .module.views .list.currencies li .quantity {
+    font-size: 12px;
   }
 }

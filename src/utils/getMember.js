@@ -11,7 +11,7 @@ async function getMember(membershipType, membershipId, withLeaderboardPositions)
   let useAuth = false;
   if (auth && auth.destinyMemberships.find(m => m.membershipId === membershipId)) {
     useAuth = true;
-    components.push(102,201);
+    components.push(102,103,201);
   }
 
   let requests = [
