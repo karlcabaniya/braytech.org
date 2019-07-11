@@ -85,8 +85,8 @@ class Tooltip extends React.Component {
   };
 
   helper_targetTouchEnd = e => {
-    console.log(e)
     if (!this.touchMovement) {
+      if (e.currentTarget.dataset.ignoretouch) console.warn(`Ignoring touch by target request`)
       if (e.currentTarget.dataset.hash && !e.currentTarget.dataset.ignoretouch) {
         this.setState({
           hash: e.currentTarget.dataset.hash,
