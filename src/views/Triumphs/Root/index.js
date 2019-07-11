@@ -47,6 +47,9 @@ class Root extends React.Component {
       },
       3170835069: {
         image: '0560-00006583.png'
+      },
+      1002334440: {
+        image: '0560-00007495.png'
       }
     };
 
@@ -121,8 +124,8 @@ class Root extends React.Component {
         }
       });
 
-      let progress = profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
-      let total = profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
+      let progress = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
+      let total = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
       let isComplete = progress === total ? true : false;
 
       sealNodes.push({

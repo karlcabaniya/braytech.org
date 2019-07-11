@@ -255,7 +255,14 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
           enabled: true,
           objectives: socket.plugObjectives || [],
           definition: plug,
-          element: (
+          element: plug.redacted ? (
+            <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-active': plug.hash === socket.singleInitialItemHash })} data-hash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
+              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${manifest.settings.destiny2CoreSettings.undiscoveredCollectibleImage}`} />
+              <div className='text'>
+                <div className='name'>Classified</div>
+              </div>
+            </div>
+          ) : (
             <div key={plug.hash} className={cx('plug', 'tooltip', { 'is-intrinsic': plug.itemCategoryHashes.includes(2237038328), 'is-active': plug.hash === socket.singleInitialItemHash })} data-hash={plug.hash} data-tooltiptype={ uiStyleTooltips ? 'ui' : '' }>
               <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
               <div className='text'>

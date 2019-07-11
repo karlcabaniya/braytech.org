@@ -503,5 +503,10 @@
     "date": "2019-07-10T07:04:04.855Z",
     "version": "2.7.0",
     "content": "- Fixes for classified location data\n- Implementation of OAuth\n- New _Inventory_ view - still a WIP"
+  },
+  {
+    "date": "2019-07-11T07:26:04.255Z",
+    "version": "2.7.1",
+    "content": "- Bungie fixes\n- _Inventory_ improvements"
   }
 ]
