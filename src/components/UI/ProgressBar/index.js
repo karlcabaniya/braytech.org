@@ -26,18 +26,18 @@ class ProgressBar extends React.Component {
     let completeText = complete ? 'Complete' : 'Incomplete';
 
     return (
-      <div key={objectiveHash} className={cx('progress-bar', classNames, { complete: complete, chunky: chunky })}>
-        {!hideCheck ? <div className={cx('check', { ed: complete })} /> : null}
+      <div key={objectiveHash} className={cx('progress-bar', classNames, { complete: completionValue && complete, chunky: chunky })}>
+        {!hideCheck ? <div className={cx('check', { ed: completionValue && complete })} /> : null}
         <div className={cx('bar', { full: hideCheck })}>
           <div className='text'>
             <div className='description'>{progressDescription !== '' ? progressDescription : completeText}</div>
-            {!wholeFraction ? (
+            {completionValue && !wholeFraction ? (
               <div className='fraction'>
                 {progress}/{completionValue}
               </div>
             ) : null}
           </div>
-          <div className='fill' style={{ width: `${(progress / completionValue) * 100}%` }} />
+          {completionValue ? <div className='fill' style={{ width: `${(progress / completionValue) * 100}%` }} /> : null}
         </div>
       </div>
     );

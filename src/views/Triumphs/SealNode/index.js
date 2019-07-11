@@ -70,21 +70,25 @@ class SealNode extends React.Component {
             <div className='description'>{definitionSeal.displayProperties.description}</div>
           </div>
           <div className='until'>
-            {isComplete ? <h4 className='completed'>{t('Seal completed')}</h4> : <h4>{t('Seal progress')}</h4>}
+            {total && isComplete ? <h4 className='completed'>{t('Seal completed')}</h4> : <h4>{t('Seal progress')}</h4>}
             <div className='progress'>
               <div className='text'>
                 <div className='title'>{title}</div>
-                <div className='fraction'>
-                  {progress}/{total}
-                </div>
+                {total ? (
+                  <div className='fraction'>
+                    {progress}/{total}
+                  </div>
+                ) : null}
               </div>
-              <div className={cx('bar', { completed: isComplete })}>
-                <div
-                  className='fill'
-                  style={{
-                    width: `${(progress / total) * 100}%`
-                  }}
-                />
+              <div className={cx('bar', { completed: total && isComplete })}>
+                {total ? (
+                  <div
+                    className='fill'
+                    style={{
+                      width: `${(progress / total) * 100}%`
+                    }}
+                  />
+                ) : null}
               </div>
             </div>
           </div>

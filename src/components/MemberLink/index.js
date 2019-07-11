@@ -431,8 +431,8 @@ class MemberLink extends React.Component {
                             return null;
                           }
 
-                          let completionValue = this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].completionValue;
-                          let progress = this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].progress;
+                          let completionValue = this.state.all.data.profileRecords.data.records[node.completionRecordHash] && this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].completionValue;
+                          let progress = this.state.all.data.profileRecords.data.records[node.completionRecordHash] && this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].progress;
 
                           return (
                             <li key={i}>

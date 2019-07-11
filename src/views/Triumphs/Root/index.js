@@ -134,16 +134,18 @@ class Root extends React.Component {
           <li
             key={definitionSeal.hash}
             className={cx('linked', {
-              completed: isComplete
+              completed: total && isComplete
             })}
           >
-            <div className='progress-bar-background' style={{ width: `${(progress / total) * 100}%` }} />
+            {total ? <div className='progress-bar-background' style={{ width: `${(progress / total) * 100}%` }} /> : null}
             <ObservedImage className={cx('image', 'icon')} src={sealBars[definitionSeal.hash] ? `/static/images/extracts/badges/${sealBars[definitionSeal.hash].image}` : `https://www.bungie.net${definitionSeal.displayProperties.icon}`} />
             <div className='displayProperties'>
               <div className='name'>{definitionSeal.displayProperties.name}</div>
-              <div className='value'>
-                <span>{progress}</span> / {total}
-              </div>
+              {total ? (
+                <div className='value'>
+                  <span>{progress}</span> / {total}
+                </div>
+              ) : null}
             </div>
             <ProfileLink to={`/triumphs/seal/${definitionSeal.hash}`} />
           </li>
@@ -153,9 +155,11 @@ class Root extends React.Component {
 
     let unredeemedTriumphCount = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).length;
 
-    let potentialScoreGain = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).reduce((currentValue, unredeemedTriumph) => {
-      return unredeemedTriumph.scoreValue + currentValue;
-    }, 0);
+    let potentialScoreGain = recordsStates
+      .filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted)
+      .reduce((currentValue, unredeemedTriumph) => {
+        return unredeemedTriumph.scoreValue + currentValue;
+      }, 0);
 
     return (
       <>
@@ -178,7 +182,9 @@ class Root extends React.Component {
           <ul className='list parents'>{nodes}</ul>
           <div className='sub-header'>
             <div>{t('Seals')}</div>
-            <div>{sealNodes.filter(n => n.completed).length}/{sealNodes.length}</div>
+            <div>
+              {sealNodes.filter(n => n.completed).length}/{sealNodes.length}
+            </div>
           </div>
           <ul className='list parents seals'>{sealNodes.map(n => n.element)}</ul>
         </div>
