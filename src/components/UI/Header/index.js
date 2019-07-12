@@ -132,7 +132,7 @@ class Header extends React.Component {
         slug: '/pgcrs',
         exact: false,
         profile: true,
-        primary: true
+        primary: viewport.width >= 1450
       },
       {
         name: t('Sit Rep'),
@@ -148,7 +148,7 @@ class Header extends React.Component {
         slug: '/inventory',
         exact: false,
         profile: true,
-        primary: true
+        primary: viewport.width >= 1360
       },
       {
         name: t('More'),
@@ -204,7 +204,7 @@ class Header extends React.Component {
     ];
 
     let viewsInline = false;
-    if (viewport.width >= 1440) {
+    if (viewport.width >= 1280) {
       viewsInline = true;
     }
 

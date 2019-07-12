@@ -116,7 +116,7 @@
   grid-gap: 3px;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
   #inventory .list.inventory-items {
     grid-template-columns: repeat(auto-fill, 48px);
   }
