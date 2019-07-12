@@ -1,32 +1,8 @@
 #sit-rep {
-  padding: 0;
-  display: grid;
-  margin: 0 auto;
-  width: 100%;
-}
-
-#sit-rep > .padder,
-#sit-rep > .head {
-  width: 100%;
-  padding: 3rem;
+  padding: 4rem 3rem 3rem;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-gap: 3rem;
-}
-
-#sit-rep > .head {
-  padding: 4rem 3rem 3rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  grid-template-columns: 1fr 1fr;
-}
-
-#sit-rep > .head .text {
-  font-size: 16px;
-  max-width: 600px;
-}
-
-#sit-rep > .head .page-header {
-  margin-bottom: 0;
 }
 
 #sit-rep .module .ranks {
@@ -172,30 +148,20 @@
 }
 
 @media screen and (max-width: 1280px) {
-  #sit-rep > .padder,
-  #sit-rep > .head {
+  #sit-rep {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-
-@media screen and (max-width: 1024px) {
-  #sit-rep > .head {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media screen and (max-width: 768px) {
-  #sit-rep > .padder,
-  #sit-rep > .head {
+  #sit-rep {
     grid-template-columns: 1fr;
   }
 }
 
 @media screen and (max-width: 600px) {
-  #sit-rep > .padder,
-  #sit-rep > .head {
-    padding: 2rem;
+  #sit-rep {
+    padding: 3rem 2rem 2rem;
     grid-gap: 2rem;
   }
 
