@@ -150,15 +150,15 @@ class Pursuits extends React.Component {
           <InventoryViewsLinks />
           <div className='module'>
             <div className='sub-header'>
-              <div>Quests</div>
+              <div>{t('Quests')}</div>
             </div>
             <ul className='list inventory-items'>{quests.map(i => i.el)}</ul>
             <div className='sub-header'>
-              <div>Bounties</div>
+              <div>{t('Bounties')}</div>
             </div>
             <ul className='list inventory-items'>{bounties.map(i => i.el)}</ul>
             <div className='sub-header'>
-              <div>Miscellaneous</div>
+              <div>{t('Miscellaneous')}</div>
             </div>
             <ul className='list inventory-items'>{miscellaneous.map(i => i.el)}</ul>
           </div>

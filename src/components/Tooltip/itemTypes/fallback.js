@@ -67,7 +67,7 @@ const fallback = item => {
           <pre>{displaySource}</pre>
         </div>
       ) : null}
-      {quanityMax && quanityMax > 1 ? (
+      {quanityMax && item.inventory.maxStackSize > 1 ? (
         <div className='quantity'>Quantity: <span>{item.inventory.maxStackSize}</span> (MAX)</div>
       ) : null}
       {sourceString ? (

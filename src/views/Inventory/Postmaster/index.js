@@ -34,7 +34,8 @@ class Postmaster extends React.Component {
         <InventoryViewsLinks />
         <div className='module'>
           <div className='sub-header'>
-            <div>Postmaster</div>
+            <div>{t('Postmaster')}</div>
+            <div>{postmaster.length}/21</div>
           </div>
           <ul className='list inventory-items'>
             <Items items={postmaster} />

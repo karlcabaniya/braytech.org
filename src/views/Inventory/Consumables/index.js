@@ -36,7 +36,8 @@ class Consumables extends React.Component {
         <InventoryViewsLinks />
         <div className='module'>
           <div className='sub-header'>
-            <div>Consumables</div>
+            <div>{t('Consumables')}</div>
+            <div>{consumables.length}/50</div>
           </div>
           <ul className='list inventory-items'>
             <Items items={consumables} order='rarity' />
@@ -44,7 +45,8 @@ class Consumables extends React.Component {
         </div>
         <div className='module'>
           <div className='sub-header'>
-            <div>Modifications</div>
+            <div>{t('Modifications')}</div>
+            <div>{modifications.length}/50</div>
           </div>
           <ul className='list inventory-items'>
             <Items items={modifications} order='rarity' />
@@ -52,7 +54,8 @@ class Consumables extends React.Component {
         </div>
         <div className='module'>
           <div className='sub-header'>
-            <div>Shaders</div>
+            <div>{t('Shaders')}</div>
+            <div>{shaders.length}/50</div>
           </div>
           <ul className='list inventory-items'>
             <Items items={shaders} order='rarity' />
