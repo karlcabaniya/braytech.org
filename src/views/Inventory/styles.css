@@ -135,6 +135,10 @@
     grid-gap: 2rem;
   }
 
+  #inventory .module .sub-header ~ .sub-header {
+    margin-top: calc(2rem - 7px);
+  }
+
   #inventory .list.inventory-items {
     grid-template-columns: repeat(auto-fill, 56px);
   }
