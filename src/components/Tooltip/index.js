@@ -59,6 +59,7 @@ class Tooltip extends React.Component {
   };
 
   helper_targetMouseEnter = e => {
+    // if (e.currentTarget.dataset.ignoretouch) console.warn(`helper_targetMouseEnter: Ignoring touch by target request`);
     if (e.currentTarget.dataset.hash) {
       this.setState({
         hash: e.currentTarget.dataset.hash,
@@ -86,8 +87,8 @@ class Tooltip extends React.Component {
 
   helper_targetTouchEnd = e => {
     if (!this.touchMovement) {
-      if (e.currentTarget.dataset.ignoretouch) console.warn(`Ignoring touch by target request`)
-      if (e.currentTarget.dataset.hash && !e.currentTarget.dataset.ignoretouch) {
+      // if (e.currentTarget.dataset.ignoretouch) console.warn(`helper_targetTouchEnd: Ignoring touch by target request`);
+      if (e.currentTarget.dataset.hash) { // && !e.currentTarget.dataset.ignoretouch
         this.setState({
           hash: e.currentTarget.dataset.hash,
           instanceId: e.currentTarget.dataset.instanceid,
@@ -120,11 +121,11 @@ class Tooltip extends React.Component {
 
     let targets = document.querySelectorAll('.tooltip');
     targets.forEach(target => {
-      target.addEventListener('mouseenter', this.helper_targetMouseEnter);
-      target.addEventListener('mouseleave', this.helper_targetMouseLeave);
       target.addEventListener('touchstart', this.helper_targetTouchStart);
       target.addEventListener('touchmove', this.helper_targetTouchMove);
       target.addEventListener('touchend', this.helper_targetTouchEnd);
+      target.addEventListener('mouseenter', this.helper_targetMouseEnter);
+      target.addEventListener('mouseleave', this.helper_targetMouseLeave);
     });
   }
 
