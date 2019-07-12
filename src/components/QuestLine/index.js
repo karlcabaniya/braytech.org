@@ -21,16 +21,14 @@ class QuestLine extends React.Component {
     let definitionItem = item && item.itemHash && manifest.DestinyInventoryItemDefinition[item.itemHash];
 
     if (definitionItem && definitionItem.objectives && definitionItem.objectives.questlineItemHash) {
-      definitionItem = manifest.DestinyInventoryItemDefinition[definitionItem.objectives.questlineItemHash]
+      definitionItem = manifest.DestinyInventoryItemDefinition[definitionItem.objectives.questlineItemHash];
     }
-    
-    if (definitionItem && definitionItem.setData && definitionItem.setData.itemList && definitionItem.setData.itemList.length) {
 
+    if (definitionItem && definitionItem.setData && definitionItem.setData.itemList && definitionItem.setData.itemList.length) {
       const questLine = definitionItem;
 
       let assumeCompleted = true;
       const steps = questLine.setData.itemList.map((s, i) => {
-
         s.i = i + 1;
         s.definitionStep = manifest.DestinyInventoryItemDefinition[s.itemHash];
         s.completed = assumeCompleted;
@@ -65,7 +63,7 @@ class QuestLine extends React.Component {
               complete: true,
               progress: definitionObjective.completionValue,
               objectiveHash: definitionObjective.hash
-            }
+            };
           });
         } else {
           s.progress = [];
@@ -115,56 +113,69 @@ class QuestLine extends React.Component {
                 })}
               </>
             ) : null}
-            <h4>{t('Current step')}</h4>
-            <div className='steps'>
-              {steps.filter(s => s.active).map(s => {
+            {steps.length > 3 ? (
+              <>
+                <h4>{t('Current step')}</h4>
+                <div className='steps'>
+                  {steps
+                    .filter(s => s.active)
+                    .map(s => {
+                      let objectives = [];
+                      s.definitionStep &&
+                        s.definitionStep.objectives &&
+                        s.definitionStep.objectives.objectiveHashes.forEach(element => {
+                          let definitionObjective = manifest.DestinyObjectiveDefinition[element];
 
-                let objectives = [];
-                s.definitionStep && s.definitionStep.objectives && s.definitionStep.objectives.objectiveHashes.forEach(element => {
-                  let definitionObjective = manifest.DestinyObjectiveDefinition[element];
-              
-                  let playerProgress = { ...{
-                    complete: false,
-                    progress: 0,
-                    objectiveHash: definitionObjective.hash
-                  }, ...s.progress.find(o => o.objectiveHash === definitionObjective.hash) };
-              
-                  objectives.push(<ProgressBar key={definitionObjective.hash} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
-                });
+                          let playerProgress = {
+                            ...{
+                              complete: false,
+                              progress: 0,
+                              objectiveHash: definitionObjective.hash
+                            },
+                            ...s.progress.find(o => o.objectiveHash === definitionObjective.hash)
+                          };
 
-                const descriptionStep = s.definitionStep.displayProperties.description && s.definitionStep.displayProperties.description !== '' ? s.definitionStep.displayProperties.description : false;
+                          objectives.push(<ProgressBar key={definitionObjective.hash} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
+                        });
 
-                return (
-                  <div key={s.itemHash} className='step'>
-                    <div className='header'>
-                      <div className='number'>{s.i}</div>
-                      <div className='name'>{s.definitionStep.displayProperties.name}</div>
-                    </div>
-                    {descriptionStep ? <ReactMarkdown className='description' source={descriptionStep} /> : null}
-                    {objectives.length ? <div className='objectives'>{objectives}</div> : null}
-                  </div>
-                )
+                      const descriptionStep = s.definitionStep.displayProperties.description && s.definitionStep.displayProperties.description !== '' ? s.definitionStep.displayProperties.description : false;
 
-              })}
-            </div>
+                      return (
+                        <div key={s.itemHash} className='step'>
+                          <div className='header'>
+                            <div className='number'>{s.i}</div>
+                            <div className='name'>{s.definitionStep.displayProperties.name}</div>
+                          </div>
+                          {descriptionStep ? <ReactMarkdown className='description' source={descriptionStep} /> : null}
+                          {objectives.length ? <div className='objectives'>{objectives}</div> : null}
+                        </div>
+                      );
+                    })}
+                </div>
+              </>
+            ) : null}
           </div>
           <div className='module'>
             <h4>{t('Steps')}</h4>
             <div className='steps'>
               {steps.map(s => {
-
                 let objectives = [];
-                s.definitionStep && s.definitionStep.objectives && s.definitionStep.objectives.objectiveHashes.forEach(element => {
-                  let definitionObjective = manifest.DestinyObjectiveDefinition[element];
-              
-                  let playerProgress = { ...{
-                    complete: false,
-                    progress: 0,
-                    objectiveHash: definitionObjective.hash
-                  }, ...s.progress.find(o => o.objectiveHash === definitionObjective.hash) };
-              
-                  objectives.push(<ProgressBar key={definitionObjective.hash} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
-                });
+                s.definitionStep &&
+                  s.definitionStep.objectives &&
+                  s.definitionStep.objectives.objectiveHashes.forEach(element => {
+                    let definitionObjective = manifest.DestinyObjectiveDefinition[element];
+
+                    let playerProgress = {
+                      ...{
+                        complete: false,
+                        progress: 0,
+                        objectiveHash: definitionObjective.hash
+                      },
+                      ...s.progress.find(o => o.objectiveHash === definitionObjective.hash)
+                    };
+
+                    objectives.push(<ProgressBar key={definitionObjective.hash} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
+                  });
 
                 const descriptionStep = s.definitionStep.displayProperties.description && s.definitionStep.displayProperties.description !== '' ? s.definitionStep.displayProperties.description : false;
 
@@ -177,13 +188,12 @@ class QuestLine extends React.Component {
                     {descriptionStep ? <ReactMarkdown className='description' source={descriptionStep} /> : null}
                     {objectives.length ? <div className='objectives'>{objectives}</div> : null}
                   </div>
-                )
-
+                );
               })}
             </div>
           </div>
         </div>
-      )
+      );
     }
 
     return null;

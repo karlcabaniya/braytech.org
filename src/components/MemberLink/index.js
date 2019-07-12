@@ -92,30 +92,6 @@ class MemberLink extends React.Component {
     }
   };
 
-  getVoluspaData = async () => {
-    const { type, id } = this.props;
-
-    if (this.mounted) {
-      try {
-        let data = await voluspa.leaderboardPosition(type, id);
-
-        this.setState((prevState, props) => {
-          prevState.voluspa.error = data ? false : true;
-          prevState.voluspa.data = data ? data : false;
-          prevState.voluspa.loading = false;
-          return prevState;
-        });
-      } catch (e) {
-        this.setState((prevState, props) => {
-          prevState.voluspa.error = true;
-          prevState.voluspa.data = false;
-          prevState.voluspa.loading = false;
-          return prevState;
-        });
-      }
-    }
-  };
-
   activateOverlay = async e => {
     e.stopPropagation();
 
@@ -125,7 +101,6 @@ class MemberLink extends React.Component {
     });
 
     this.getFullProfileData();
-    this.getVoluspaData();
   };
 
   deactivateOverlay = e => {
@@ -262,33 +237,6 @@ class MemberLink extends React.Component {
                       </div>
                     </div>
                     <div className='module'>
-                      <div className='sub-header'>
-                        <div>Leaderboards</div>
-                      </div>
-                      {this.state.voluspa.data && this.state.voluspa.data.data ? (
-                        <div className='ranks'>
-                          <div>
-                            <div className='value'>{this.state.voluspa.data.data.ranks.triumphScore.toLocaleString('en-us')}</div>
-                            <div className='name'>Triumph score rank</div>
-                          </div>
-                          <div>
-                            <div className='value'>{this.state.voluspa.data.data.ranks.collectionTotal.toLocaleString('en-us')}</div>
-                            <div className='name'>Collections rank</div>
-                          </div>
-                          <div>
-                            <div className='value'>{this.state.voluspa.data.data.ranks.timePlayed.toLocaleString('en-us')}</div>
-                            <div className='name'>Time played rank</div>
-                          </div>
-                        </div>
-                      ) : this.state.voluspa.loading ? (
-                        <div className='ranks loading'>
-                          <Spinner mini />
-                        </div>
-                      ) : (
-                        <div className='ranks error'>
-                          <div>{this.state.voluspa.data && this.state.voluspa.data.status ? this.state.voluspa.data.status : `VOLUSPA is currently unavailable`}</div>
-                        </div>
-                      )}
                       <div className='sub-header'>
                         <div>Characters</div>
                       </div>

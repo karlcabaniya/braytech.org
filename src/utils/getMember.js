@@ -3,7 +3,7 @@ import * as bungie from './bungie';
 import * as voluspa from './voluspa';
 import * as ls from './localStorage';
 
-async function getMember(membershipType, membershipId, withLeaderboardPositions) {
+async function getMember(membershipType, membershipId) {
   const auth = ls.get('setting.auth');
 
   let components = [100,104,200,202,204,205,300,301,302,303,304,305,306,307,800,900];
@@ -19,10 +19,6 @@ async function getMember(membershipType, membershipId, withLeaderboardPositions)
     bungie.GetGroupsForMember(membershipType, membershipId), 
     bungie.GetPublicMilestones()
   ];
-
-  if (withLeaderboardPositions) {
-    requests.push(voluspa.leaderboardPosition(membershipType, membershipId));
-  }
 
   let [profile, groups, milestones, leaderboardPosition] = await Promise.all(requests);
 

@@ -176,13 +176,6 @@ class Header extends React.Component {
         primary: true
       },
       {
-        name: t('Leaderboards'),
-        desc: t('How committed are you to protecting your legacy'),
-        slug: '/leaderboards',
-        exact: false,
-        profile: false
-      },
-      {
         name: t('Chalice of Opulence'),
         desc: t('A recipe tool for Emperor Calus\' auspicious gift'),
         slug: '/chalice-tool',
@@ -406,7 +399,7 @@ class Header extends React.Component {
                 </div>
                 <div className='type ancillary'>
                   <ul>
-                    {views.filter(v => !v.primary).map(view => {
+                    {views.filter(v => !v.primary && !v.hidden).map(view => {
                       if (view.profile) {
                         return (
                           <li key={view.slug}>

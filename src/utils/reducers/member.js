@@ -31,7 +31,7 @@ async function loadMember(membershipType, membershipId, characterId) {
   // Note: while calling store.dispatch from within a reducer is an anti-pattern,
   // calling one asynchronously (eg as a result of a fetch) is just fine.
   try {
-    const data = await getMember(membershipType, membershipId, true);
+    const data = await getMember(membershipType, membershipId);
 
     if (!data.profile.characterProgressions.data) {
       store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error: { message: 'private' } } });
