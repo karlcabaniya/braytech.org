@@ -1,0 +1,11 @@
+@media screen and (max-width: 1023px) {
+
+  #inventory.consumables > .module.views {
+    grid-row: 1/4;
+  }
+  
+  #inventory.consumables > .module:not(.views) {
+    grid-column: 2/3;
+  }
+
+}
