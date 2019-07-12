@@ -200,7 +200,17 @@
   }
 
   #clan .module .content.highlight {
-    padding: 0 0 0 1rem;
+    padding: 0 0 0 12px;
+  }
+
+  #clan .module .content.highlight .value {
+    font-size: 22px;
+    line-height: 17px;
+  }
+  
+  #clan .module .content.highlight .name {
+    font-size: 14px;
+    line-height: 1.4;
   }
   
   #clan > .padder {

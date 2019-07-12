@@ -26,6 +26,13 @@ class Pursuits extends React.Component {
     this.props.rebindTooltips();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.hash !== this.props.hash) {
+      window.scrollTo(0, 0);
+      this.props.rebindTooltips();
+    }
+  }
+
   render() {
     const { t, member, viewport, hash, order } = this.props;
     const itemComponents = member.data.profile.itemComponents;
