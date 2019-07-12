@@ -92,6 +92,7 @@ class Header extends React.Component {
         slug: '/clan',
         exact: false,
         profile: true,
+        inline: true,
         primary: true
       },
       {
@@ -100,6 +101,7 @@ class Header extends React.Component {
         slug: '/collections',
         exact: false,
         profile: true,
+        inline: true,
         primary: true
       },
       {
@@ -108,6 +110,7 @@ class Header extends React.Component {
         slug: '/triumphs',
         exact: false,
         profile: true,
+        inline: true,
         primary: true
       },
       {
@@ -116,6 +119,7 @@ class Header extends React.Component {
         slug: '/this-week',
         exact: true,
         profile: true,
+        inline: true,
         primary: true
       },
       {
@@ -124,6 +128,7 @@ class Header extends React.Component {
         slug: '/checklists',
         exact: true,
         profile: true,
+        inline: true,
         primary: true
       },
       {
@@ -132,7 +137,8 @@ class Header extends React.Component {
         slug: '/pgcrs',
         exact: false,
         profile: true,
-        primary: viewport.width >= 1450
+        inline: viewport.width >= 1450,
+        primary: true
       },
       {
         name: t('Sit Rep'),
@@ -140,6 +146,7 @@ class Header extends React.Component {
         slug: '/sit-rep',
         exact: true,
         profile: true,
+        inline: true,
         primary: true
       },
       {
@@ -148,7 +155,8 @@ class Header extends React.Component {
         slug: '/inventory',
         exact: false,
         profile: true,
-        primary: viewport.width >= 1360
+        inline: viewport.width >= 1360,
+        primary: true
       },
       {
         name: t('More'),
@@ -156,7 +164,7 @@ class Header extends React.Component {
         slug: '/',
         exact: true,
         profile: false,
-        primary: true,
+        inline: true,
         hidden: true
       },
       {
@@ -164,6 +172,7 @@ class Header extends React.Component {
         desc: 'Theme, tooltips, visibility, language, and saved data',
         slug: '/settings',
         exact: true,
+        inline: true,
         primary: true
       },
       {
@@ -284,7 +293,7 @@ class Header extends React.Component {
             {viewsInline ? (
               <div className='views'>
                 <ul>
-                  {views.filter(v => v.primary).map(view => {
+                  {views.filter(v => v.inline).map(view => {
                     if (view.profile) {
                       return (
                         <li key={view.slug}>
@@ -334,7 +343,7 @@ class Header extends React.Component {
               <div className='ui'>
                 <div className='views'>
                   <ul>
-                    {views.filter(v => v.primary).map(view => {
+                    {views.filter(v => v.inline).map(view => {
                       if (view.profile && !view.secondary) {
                         return (
                           <li key={view.slug}>

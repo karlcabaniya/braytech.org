@@ -124,11 +124,9 @@
 
 
 
-#clan .content.views {
-  
-}
-
 #clan .module.views .list {
+  position: sticky;
+  top: 3rem;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 3px;
@@ -215,13 +213,14 @@
   
   #clan > .padder {
     padding: 2rem;
-    grid-template-columns: 1fr;
+    grid-template-columns: 40px 1fr;
     grid-gap: 2rem;
   }
 
   #clan .module.views .list {
-    grid-template-columns: repeat(auto-fill, 60px);
-    width: unset;
+    top: 2rem;
+    grid-template-columns: 1fr;
+    width: 40px;
   }
 
 }
