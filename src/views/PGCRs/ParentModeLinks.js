@@ -30,8 +30,8 @@ class ParentModeLinks extends React.Component {
             <div className='icon'>
               <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000400.png' />
             </div>
-            <ProfileNavLink to='/pgcrs' isActive={(match, location) => {
-                if (['/pgcrs', '/pgcrs/all'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/pgcrs/all')) {
+            <ProfileNavLink to='/reports' isActive={(match, location) => {
+                if (['/reports', '/reports/all'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/reports/all')) {
                   return true;
                 } else {
                   return false;
@@ -42,25 +42,25 @@ class ParentModeLinks extends React.Component {
             <div className='icon'>
               <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000403.png' />
             </div>
-            <ProfileNavLink to='/pgcrs/crucible' />
+            <ProfileNavLink to='/reports/crucible' />
           </li>
           <li className='linked'>
             <div className='icon'>
               <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000404.png' />
             </div>
-            <ProfileNavLink to='/pgcrs/gambit' />
+            <ProfileNavLink to='/reports/gambit' />
           </li>
           <li className='linked'>
             <div className='icon'>
               <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000402.png' />
             </div>
-            <ProfileNavLink to='/pgcrs/raids' />
+            <ProfileNavLink to='/reports/raids' />
           </li>
           <li className='linked'>
             <div className='icon'>
               <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000401.png' />
             </div>
-            <ProfileNavLink to='/pgcrs/strikes' />
+            <ProfileNavLink to='/reports/strikes' />
           </li>
         </ul>
       </div>

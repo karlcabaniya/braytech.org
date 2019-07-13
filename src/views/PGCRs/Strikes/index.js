@@ -128,7 +128,7 @@ class Strikes extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/strikes' defaultMode='18' />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/strikes' defaultMode='18' />;
                   })}
                 </ul>
               ) : (
@@ -142,7 +142,7 @@ class Strikes extends React.Component {
             <div className='sub-header'>
               <div>Recent strikes</div>
             </div>
-            <Matches mode={mode} characterId={member.characterId} limit='20' offset={offset} root='/pgcrs/strikes' />
+            <Matches mode={mode} characterId={member.characterId} limit='20' offset={offset} root='/reports/strikes' />
           </div>
         </div>
       </div>

@@ -172,7 +172,7 @@ class NoAuth extends React.Component {
             <div className='name'>{t('Authorization required')}</div>
             <div className='description'>
               <p>{t('Some features of Braytech require your written permission to activate, generally to protect your privacy.')}</p>
-              <p>{t('To use this feature, please tell Bungie that you approve. No personal information is shared by doing so—only an an authentication code with which you may interact with more API endpoints.')}</p>
+              <p>{t('To use this feature, please tell Bungie that you approve. No personal information is shared by doing so—only an authentication code with which you may interact with more API endpoints.')}</p>
             </div>
             <Button
               text='Authorize'

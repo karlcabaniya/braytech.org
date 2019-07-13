@@ -125,7 +125,7 @@ class Raids extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/raids' defaultMode='4' />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/raids' defaultMode='4' />;
                   })}
                 </ul>
               ) : (
@@ -139,7 +139,7 @@ class Raids extends React.Component {
             <div className='sub-header'>
               <div>Recent raids</div>
             </div>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 4} characterId={member.characterId} limit='20' offset={offset} root='/pgcrs/raids' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 4} characterId={member.characterId} limit='20' offset={offset} root='/reports/raids' />
           </div>
         </div>
       </div>

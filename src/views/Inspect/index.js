@@ -8,7 +8,6 @@ import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
 import { damageTypeToString } from '../../utils/destinyUtils';
 import { getSockets } from '../../utils/destinyItems';
-import { ProfileLink } from '../../components/ProfileLink';
 
 import './styles.css';
 
@@ -16,9 +15,7 @@ class Inspect extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loreOpen: false
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -94,6 +91,8 @@ class Inspect extends React.Component {
 
     return (
       <div className='view' id='inspect'>
+        {item.screenshot && item.screenshot !== '' ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${item.screenshot}`} /> : null}
+        {item.secondaryIcon && item.secondaryIcon !== '' ? <ObservedImage className='image foundry' src={`https://www.bungie.net${item.secondaryIcon}`} /> : null}
         <div className='row displayProperties'>
           <div className={cx('rarity', tier)} />
           <div className='icon'>{item.displayProperties.icon ? <ObservedImage className='image' src={`https://www.bungie.net${item.displayProperties.icon}`} /> : null}</div>
@@ -195,12 +194,6 @@ class Inspect extends React.Component {
             ) : null}
           </div>
         ) : null}
-        {item.screenshot ? <div className='row screenshot'>
-          <div className='sub-header'>
-            <div>Screenshot</div>
-          </div>
-          <ObservedImage className='image' src={`https://www.bungie.net${item.screenshot}`} />
-        </div> : null}
       </div>
     );
   }

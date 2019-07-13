@@ -43,7 +43,7 @@ class All extends React.Component {
             <div className='sub-header'>
               <div>Recent activities</div>
             </div>
-            <Matches mode={false} characterId={member.characterId} limit='20' offset={offset} root='/pgcrs/all' />
+            <Matches mode={false} characterId={member.characterId} limit='20' offset={offset} root='/reports/all' />
           </div>
         </div>
       </div>

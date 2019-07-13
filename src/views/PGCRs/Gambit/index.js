@@ -153,7 +153,7 @@ class Gambit extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/gambit' defaultMode='63' />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/gambit' defaultMode='63' />;
                   })}
                 </ul>
               ) : (
@@ -167,7 +167,7 @@ class Gambit extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent matches')}</div>
             </div>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 63} characterId={member.characterId} limit='20' offset={offset} root='/pgcrs/gambit' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 63} characterId={member.characterId} limit='20' offset={offset} root='/reports/gambit' />
           </div>
         </div>
       </div>

@@ -132,18 +132,18 @@ class Header extends React.Component {
         primary: true
       },
       {
-        name: t('PGCRs'),
+        name: t('Reports'),
         desc: t('Explore your Post Game Carnage Reports'),
-        slug: '/pgcrs',
+        slug: '/reports',
         exact: false,
         profile: true,
         inline: viewport.width >= 1450,
         primary: true
       },
       {
-        name: t('Sit Rep'),
+        name: t('Now'),
         desc: t('Be more aware of your surroundings, Guardian'),
-        slug: '/sit-rep',
+        slug: '/now',
         exact: true,
         profile: true,
         inline: true,

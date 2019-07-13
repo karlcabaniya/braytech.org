@@ -234,8 +234,8 @@ class App extends React.Component {
                           <RedirectRoute path='/collections/' />
                           <RedirectRoute path='/triumphs' />
                           <RedirectRoute path='/this-week' exact />
-                          <RedirectRoute path='/pgcrs' />
-                          <RedirectRoute path='/sit-rep' exact />
+                          <RedirectRoute path='/reports' />
+                          <RedirectRoute path='/now' exact />
                           <RedirectRoute path='/inventory' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />

@@ -236,7 +236,7 @@ class Crucible extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/crucible' />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/crucible' />;
                   })}
                 </ul>
               ) : (
@@ -259,7 +259,7 @@ class Crucible extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/crucible' />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/crucible' />;
                   })}
                 </ul>
               ) : (
@@ -282,7 +282,7 @@ class Crucible extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/pgcrs/crucible' />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/crucible' />;
                   })}
                 </ul>
               ) : (
@@ -296,7 +296,7 @@ class Crucible extends React.Component {
             <div>{t('Recent matches')}</div>
           </div>
           <div className='content'>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 5} characterId={member.characterId} limit='20' offset={offset} root='/pgcrs/crucible' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 5} characterId={member.characterId} limit='20' offset={offset} root='/reports/crucible' />
           </div>
         </div>
       </div>
