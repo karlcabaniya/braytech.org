@@ -51,6 +51,10 @@
   margin: 0 0 6px;
 }
 
+#clan.about .module.progression .progress-bar.level-6 .bar.full .fill {
+  background-color: rgba(198, 160, 6, 0.8);
+}
+
 #clan.about .module.progression .clan-rewards li {
   display: flex;
   position: relative;

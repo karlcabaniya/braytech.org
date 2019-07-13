@@ -24,7 +24,7 @@ class AboutView extends React.Component {
   }
 
   async componentDidMount() {
-    window.scrollTo(0, 0);   
+    window.scrollTo(0, 0);
 
     const groupId = this.props.group.groupId;
     const groupWeeklyRewardState = await bungie.GetClanWeeklyRewardState(groupId);
@@ -62,18 +62,34 @@ class AboutView extends React.Component {
             <div className='sub-name'>{t('Progression')}</div>
           </div>
           <h4>{t('Level')}</h4>
-          <ProgressBar
-            objectiveDefinition={{
-              progressDescription: `${t('Level')} ${clanLevel.level}`,
-              completionValue: clanLevel.nextLevelAt
-            }}
-            playerProgress={{
-              progress: clanLevel.progressToNextLevel,
-              objectiveHash: 'clanLevel'
-            }}
-            hideCheck
-            chunky
-          />
+          {clanLevel.level === clanLevel.levelCap ? (
+            <ProgressBar
+              classNames='level-6'
+              objectiveDefinition={{
+                progressDescription: `${t('Level')} ${clanLevel.level}`,
+                completionValue: 1
+              }}
+              playerProgress={{
+                progress: 1,
+                objectiveHash: 'clanLevel'
+              }}
+              hideCheck
+              chunky
+            />
+          ) : (
+            <ProgressBar
+              objectiveDefinition={{
+                progressDescription: `${t('Level')} ${clanLevel.level}`,
+                completionValue: clanLevel.nextLevelAt
+              }}
+              playerProgress={{
+                progress: clanLevel.progressToNextLevel,
+                objectiveHash: 'clanLevel'
+              }}
+              hideCheck
+              chunky
+            />
+          )}
           <h4>{t('Engrams')}</h4>
           <ul className='clan-rewards'>
             {rewardState ? (

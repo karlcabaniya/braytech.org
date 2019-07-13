@@ -513,5 +513,10 @@
     "date": "2019-07-12T08:19:08.250Z",
     "version": "2.7.4",
     "content": "- _Inventory_ improvements"
+  },
+  {
+    "date": "2019-07-13T06:38:45.236Z",
+    "version": "2.7.5",
+    "content": "- _Inventory_ improvements\n- Header UI improvements\n- _Leaderboards_ have left us"
   }
 ]

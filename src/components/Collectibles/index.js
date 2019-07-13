@@ -110,8 +110,6 @@ class Collectibles extends React.Component {
             // eslint-disable-next-line eqeqeq
             let ref = highlight == collectibleDefinition.hash ? this.scrollToRecordRef : null;
 
-            console.log(ref)
-
             row.push(
               <li
                 key={collectibleDefinition.hash}
@@ -278,12 +276,12 @@ class Collectibles extends React.Component {
 
     if (output.length === 0 && collectibles && collectibles.hideCompletedCollectibles && !forceDisplay) {
       output.push(
-          <li key='lol' className='all-completed'>
-            <div className='properties'>
-              <div className='text'>{t('All completed')}</div>
-            </div>
-          </li>
-        );
+        <li key='lol' className='all-completed'>
+          <div className='properties'>
+            <div className='text'>{t('All completed')}</div>
+          </div>
+        </li>
+      );
     }
 
     return output;

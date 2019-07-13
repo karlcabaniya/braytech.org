@@ -45,6 +45,60 @@ class Records extends React.Component {
     this.props.setTrackedTriumphs(tracked);
   };
 
+  selfLink = hash => {
+    let link = ['/triumphs'];
+    let root = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.recordsRootNode];
+    let seals = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
+
+    root.children.presentationNodes.forEach(nP => {
+      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+
+      nodePrimary.children.presentationNodes.forEach(nS => {
+        let nodeSecondary = manifest.DestinyPresentationNodeDefinition[nS.presentationNodeHash];
+
+        nodeSecondary.children.presentationNodes.forEach(nT => {
+          let nodeTertiary = manifest.DestinyPresentationNodeDefinition[nT.presentationNodeHash];
+
+          if (nodeTertiary.children.records.length) {
+            let found = nodeTertiary.children.records.find(c => c.recordHash === parseInt(hash, 10));
+            if (found) {
+              link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.recordHash)
+            }
+          } else {
+            nodeTertiary.children.presentationNodes.forEach(nQ => {
+              let nodeQuaternary = manifest.DestinyPresentationNodeDefinition[nQ.presentationNodeHash];
+
+              if (nodeQuaternary.children.records.length) {
+                let found = nodeQuaternary.children.records.find(c => c.recordHash === hash);
+                if (found) {
+                  link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.recordHash)
+                }
+              }      
+            });
+          }
+
+        });
+      });
+    });
+
+    if (link.length === 1) {
+      seals.children.presentationNodes.forEach(nP => {
+        let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+
+        if (nodePrimary.children.records.length) {
+          let found = nodePrimary.children.records.find(c => c.recordHash === parseInt(hash, 10));
+          if (found) {
+            link.push('seal', nodePrimary.hash, found.recordHash)
+          }
+        }
+
+      });
+    }
+
+    link = link.join('/');
+    return link;
+  }
+
   render() {
     const { t, hashes, member, triumphs, collectibles, ordered, limit, selfLinkFrom, readLink, forceDisplay = false } = this.props;
     const highlight = parseInt(this.props.highlight, 10) || false;
@@ -63,42 +117,8 @@ class Records extends React.Component {
       let objectives = [];
       let completionValueTotal = 0;
       let progressValueTotal = 0;
-      let link = false;
-
-      // selfLink
-      if (selfLinkFrom) {
-        try {
-          let reverse1;
-          let reverse2;
-          let reverse3;
-
-          manifest.DestinyRecordDefinition[hash].presentationInfo.parentPresentationNodeHashes.forEach(element => {
-            if (manifest.DestinyPresentationNodeDefinition[1652422747].children.presentationNodes.filter(el => el.presentationNodeHash === element).length > 0) {
-              return; // if hash is a child of seals, skip it
-            }
-            if (reverse1) {
-              return;
-            }
-            reverse1 = manifest.DestinyPresentationNodeDefinition[element];
-          });
-
-          let iteratees = reverse1.presentationInfo ? reverse1.presentationInfo.parentPresentationNodeHashes : reverse1.parentNodeHashes;
-          iteratees.forEach(element => {
-            if (reverse2) {
-              return;
-            }
-            reverse2 = manifest.DestinyPresentationNodeDefinition[element];
-          });
-
-          if (reverse2 && reverse2.parentNodeHashes) {
-            reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
-          }
-
-          link = `/triumphs/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${hash}`;
-        } catch (e) {
-          // console.log(e);
-        }
-      }
+      
+      let link = this.selfLink(hash);
 
       // readLink
       if (definitionRecord.loreHash && !selfLinkFrom && readLink) {

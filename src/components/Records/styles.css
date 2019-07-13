@@ -288,7 +288,7 @@
   }
 }
 
-.list.record-items li.highlight::after {
+.list.record-items li.highlight::before {
   top: 0;
   left: 0;
   width: 100%;
