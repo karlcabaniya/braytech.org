@@ -142,7 +142,7 @@ class Header extends React.Component {
       },
       {
         name: t('Now'),
-        desc: t('Be more aware of your surroundings, Guardian'),
+        desc: t('View the state of your Guardian, their ranks, equipment, current milestones'),
         slug: '/now',
         exact: true,
         profile: true,
