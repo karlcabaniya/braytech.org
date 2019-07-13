@@ -34,6 +34,7 @@ class Vault extends React.Component {
         <div className='module'>
           <div className='sub-header'>
             <div>{t('Vault')}</div>
+            <div>{vault.length}/500</div>
           </div>
           <ul className='list inventory-items'>
             <Items items={vault} />
