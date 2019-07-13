@@ -9,7 +9,7 @@ import InventoryViewsLinks from '../InventoryViewsLinks';
 
 import './styles.css';
 
-class Postmaster extends React.Component {
+class Vault extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,18 +26,17 @@ class Postmaster extends React.Component {
 
     const inventory = member.data.profile.profileInventory.data.items.slice().concat(member.data.profile.characterInventories.data[member.characterId].items);
 
-    const postmaster = inventory.filter(i => i.bucketHash === 215593132);
+    const vault = inventory.filter(i => i.bucketHash === 138197802);
 
     return (
-      <div className='view postmaster' id='inventory'>
+      <div className='view vault' id='inventory'>
         <InventoryViewsLinks />
         <div className='module'>
           <div className='sub-header'>
-            <div>{t('Postmaster')}</div>
-            <div>{postmaster.length}/21</div>
+            <div>{t('Vault')}</div>
           </div>
           <ul className='list inventory-items'>
-            <Items items={postmaster} />
+            <Items items={vault} />
           </ul>
         </div>
       </div>
@@ -66,4 +65,4 @@ export default compose(
     mapDispatchToProps
   ),
   withNamespaces()
-)(Postmaster);
+)(Vault);

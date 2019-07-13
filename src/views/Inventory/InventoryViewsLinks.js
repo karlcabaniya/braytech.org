@@ -48,6 +48,12 @@ class InventoryViewsLinks extends React.Component {
               </div>
               <ProfileNavLink to='/inventory/postmaster' />
             </li>
+            <li className='linked'>
+              <div className='icon'>
+                <ObservedImage className='image' src='/static/images/extracts/ui/01E3-00001095.PNG' />
+              </div>
+              <ProfileNavLink to='/inventory/vault' />
+            </li>
           </ul>
           <ul className='list currencies'>
             {currencies.map((c, i) => {

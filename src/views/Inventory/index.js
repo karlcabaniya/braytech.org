@@ -12,6 +12,7 @@ import './styles.css';
 import Consumables from './Consumables';
 import Pursuits from './Pursuits';
 import Postmaster from './Postmaster';
+import Vault from './Vault';
 
 class Inventory extends React.Component {
   constructor(props) {
@@ -54,6 +55,8 @@ class Inventory extends React.Component {
       return <Pursuits hash={hash} order='rarity' />;
     } else if (view === 'postmaster') {
       return <Postmaster />;
+    } else if (view === 'vault') {
+      return <Vault />;
     } else {
       return <Pursuits order='rarity' />;
     }
