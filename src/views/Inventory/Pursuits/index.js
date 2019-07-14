@@ -109,13 +109,7 @@ class Pursuits extends React.Component {
         return false;
       }
     });
-    let miscellaneous = items.filter(i => {
-      if ((i.itemType !== 12 && i.itemType !== 26 && (i.itemType === 0 && !exceptionsVendor.includes(i.vendorSource))) || (i.itemType === 0 && exceptionsVendor.includes(i.vendorSource) && exceptionsItems.includes(i.itemHash))) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    let miscellaneous = items.filter(i => !quests.find(q => i.itemHash === q.itemHash) && !bounties.find(q => i.itemHash === q.itemHash));
 
     quests = order ? orderBy(quests, [i => i[order], i => i.name], ['desc', 'asc']) : items;
     bounties = order ? orderBy(bounties, [i => i.vendorSource, i => i.expiryMs, i => i[order], i => i.name], ['desc', 'asc', 'desc', 'asc']) : items;
