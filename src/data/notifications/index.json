@@ -50,5 +50,15 @@
       "name": "New Chalice Recipes Tool",
       "description": "Did you know Braytech has a new tool for decrypting the Menagerie rolls? No? Find it under the menu—click _More_ if you're a desktop user!"
     }
+  },
+  {
+    "id": "3en4i3fyevqpzkki5wdh1i",
+    "date": "2019-07-14T22:52:19.573Z",
+    "expiry": 604800000,
+    "showOnce": true,
+    "displayProperties": {
+      "name": "Leaderboards",
+      "description": "Bad news, everyone—I'm retiring Leaderboards.\n\nLeaderboards require a lot of data, time, and focus. Scraping that data in a time efficient manner was not something that I was able to do, ... not something that I'm terribly interested in working on anyway (ew server side code gross).\n\nA good alternative is Charlemagne's recent release: https://warmind.io/global/lb"
+    }
   }
 ]
