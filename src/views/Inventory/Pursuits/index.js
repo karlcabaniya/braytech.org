@@ -96,7 +96,7 @@ class Pursuits extends React.Component {
       });
     });
 
-    const exceptionsVendor = [3347378076, 248695599];
+    const exceptionsVendor = [3347378076, 248695599, 2917531897];
     const exceptionsItems = [1160544509, 1160544508, 1160544511];
 
     let quests = items.filter(i => i.itemType === 12);

@@ -93,7 +93,7 @@ class Header extends React.Component {
         exact: false,
         profile: true,
         inline: true,
-        primary: true
+        group: 0
       },
       {
         name: t('Collections'),
@@ -102,7 +102,7 @@ class Header extends React.Component {
         exact: false,
         profile: true,
         inline: true,
-        primary: true
+        group: 0
       },
       {
         name: t('Triumphs'),
@@ -111,7 +111,7 @@ class Header extends React.Component {
         exact: false,
         profile: true,
         inline: true,
-        primary: true
+        group: 0
       },
       {
         name: t('This Week'),
@@ -120,7 +120,7 @@ class Header extends React.Component {
         exact: true,
         profile: true,
         inline: true,
-        primary: true
+        group: 0
       },
       {
         name: t('Checklists'),
@@ -129,7 +129,7 @@ class Header extends React.Component {
         exact: true,
         profile: true,
         inline: true,
-        primary: true
+        group: 0
       },
       {
         name: t('Reports'),
@@ -138,7 +138,7 @@ class Header extends React.Component {
         exact: false,
         profile: true,
         inline: viewport.width >= 1450,
-        primary: true
+        group: 0
       },
       {
         name: t('Now'),
@@ -147,7 +147,7 @@ class Header extends React.Component {
         exact: true,
         profile: true,
         inline: true,
-        primary: true
+        group: 0
       },
       {
         name: t('Inventory'),
@@ -156,7 +156,7 @@ class Header extends React.Component {
         exact: false,
         profile: true,
         inline: viewport.width >= 1360,
-        primary: true
+        group: 0
       },
       {
         name: t('More'),
@@ -173,35 +173,39 @@ class Header extends React.Component {
         slug: '/settings',
         exact: true,
         inline: true,
-        primary: true
+        group: 0
       },
       {
         name: t('Chalice of Opulence'),
         desc: t("A recipe tool for Emperor Calus' auspicious gift"),
         slug: '/chalice-tool',
         exact: false,
-        profile: false
+        profile: false,
+        group: 1
       },
       {
         name: t('Experiments'),
         desc: t('Where I keep all of my crazy ideas'),
         slug: '/experiments',
         exact: false,
-        profile: false
+        profile: false,
+        group: 1
       },
-      // {
-      //   name: t('FAQ'),
-      //   desc: t('Answers to common queries in a mostly well-written and organised format'),
-      //   slug: '/faq',
-      //   exact: false,
-      //   profile: false
-      // },
+      {
+        name: t('FAQ'),
+        desc: t('Answers to common queries in a mostly well-written and organised format'),
+        slug: '/faq',
+        exact: false,
+        profile: false,
+        group: 2
+      },
       {
         name: t('Credits'),
         desc: t('The Architects and Guardians that make Braytech possible'),
         slug: '/credits',
         exact: false,
-        profile: false
+        profile: false,
+        group: 2
       }
     ];
 
@@ -350,7 +354,7 @@ class Header extends React.Component {
                     {views
                       .filter(v => v.inline)
                       .map(view => {
-                        if (view.profile && !view.secondary) {
+                        if (view.profile) {
                           return (
                             <li key={view.slug}>
                               <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
@@ -396,7 +400,7 @@ class Header extends React.Component {
                 <div className='type progression'>
                   <ul>
                     {views
-                      .filter(v => v.primary && !v.hidden)
+                      .filter(v => v.group === 0 && !v.hidden)
                       .map(view => {
                         if (view.profile) {
                           return (
@@ -421,7 +425,32 @@ class Header extends React.Component {
                 <div className='type ancillary'>
                   <ul>
                     {views
-                      .filter(v => !v.primary && !v.hidden)
+                      .filter(v => v.group === 1 && !v.hidden)
+                      .map(view => {
+                        if (view.profile) {
+                          return (
+                            <li key={view.slug}>
+                              <div className='name'>{view.name}</div>
+                              <div className='description'>{view.desc}</div>
+                              <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
+                            </li>
+                          );
+                        } else {
+                          return (
+                            <li key={view.slug}>
+                              <div className='name'>{view.name}</div>
+                              <div className='description'>{view.desc}</div>
+                              <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
+                            </li>
+                          );
+                        }
+                      })}
+                  </ul>
+                </div>
+                <div className='type ancillary'>
+                  <ul>
+                    {views
+                      .filter(v => v.group === 2 && !v.hidden)
                       .map(view => {
                         if (view.profile) {
                           return (
