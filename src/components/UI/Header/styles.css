@@ -214,6 +214,10 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   background-position: center bottom;
 }
 
+#header.profile-header .background .image.very-light {
+  filter: brightness(0.8);
+}
+
 #header.profile-header .background .image.missing.dl {
   opacity: 0;
 }

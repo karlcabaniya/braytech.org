@@ -106,7 +106,7 @@ class Header extends React.Component {
       },
       {
         name: t('Triumphs'),
-        desc: t("Records your Guardian has achieved"),
+        desc: t('Records your Guardian has achieved'),
         slug: '/triumphs',
         exact: false,
         profile: true,
@@ -142,7 +142,7 @@ class Header extends React.Component {
       },
       {
         name: t('Now'),
-        desc: t('View the state of your Guardian, their ranks, equipment, current milestones'),
+        desc: t('View the state of your Guardian, ranks, equipment, milestones'),
         slug: '/now',
         exact: true,
         profile: true,
@@ -177,14 +177,14 @@ class Header extends React.Component {
       },
       {
         name: t('Chalice of Opulence'),
-        desc: t('A recipe tool for Emperor Calus\' auspicious gift'),
+        desc: t("A recipe tool for Emperor Calus' auspicious gift"),
         slug: '/chalice-tool',
         exact: false,
         profile: false
       },
       {
         name: t('Experiments'),
-        desc: t("Where I keep all of my crazy ideas"),
+        desc: t('Where I keep all of my crazy ideas'),
         slug: '/experiments',
         exact: false,
         profile: false
@@ -234,18 +234,21 @@ class Header extends React.Component {
 
       const capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
 
-      const emblemDefinition = manifest.DestinyInventoryItemDefinition[character.emblemHash];
+      const definitionEmblem = manifest.DestinyInventoryItemDefinition[character.emblemHash];
 
       const progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
+
+      const veryLightEmblems = [4182480236];
 
       profileEl = (
         <div className='profile'>
           <div className={cx('background', { 'update-flash': this.state.updateFlash })}>
             <ObservedImage
               className={cx('image', 'emblem', {
-                missing: emblemDefinition.redacted
+                missing: definitionEmblem.redacted,
+                'very-light': veryLightEmblems.includes(definitionEmblem.hash)
               })}
-              src={`https://www.bungie.net${emblemDefinition.secondarySpecial ? emblemDefinition.secondarySpecial : `/img/misc/missing_icon_d2.png`}`}
+              src={`https://www.bungie.net${definitionEmblem.secondarySpecial ? definitionEmblem.secondarySpecial : `/img/misc/missing_icon_d2.png`}`}
             />
           </div>
           <div className='ui'>
@@ -254,9 +257,9 @@ class Header extends React.Component {
                 <li>
                   <ObservedImage
                     className={cx('image', 'secondaryOverlay', {
-                      missing: emblemDefinition.redacted
+                      missing: definitionEmblem.redacted
                     })}
-                    src={`https://www.bungie.net${!emblemDefinition.redacted ? emblemDefinition.secondaryOverlay : `/img/misc/missing_icon_d2.png`}`}
+                    src={`https://www.bungie.net${!definitionEmblem.redacted ? definitionEmblem.secondaryOverlay : `/img/misc/missing_icon_d2.png`}`}
                   />
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
@@ -286,33 +289,41 @@ class Header extends React.Component {
             {viewsInline ? (
               <div className='views'>
                 <ul>
-                  {views.filter(v => v.inline).map(view => {
-                    if (view.profile) {
-                      return (
-                        <li key={view.slug}>
-                          <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
-                            {view.name}
-                          </ProfileNavLink>
-                        </li>
-                      );
-                    } else if (view.hidden) {
-                      return (
-                        <li key='more'>
-                          <Link to={view.slug} onClick={e => { e.preventDefault(); this.openNav(); }}>
-                            {view.name}
-                          </Link>
-                        </li>
-                      );
-                    } else {
-                      return (
-                        <li key={view.slug}>
-                          <NavLink to={view.slug} exact={view.exact}>
-                            {view.name}
-                          </NavLink>
-                        </li>
-                      );
-                    }
-                  })}
+                  {views
+                    .filter(v => v.inline)
+                    .map(view => {
+                      if (view.profile) {
+                        return (
+                          <li key={view.slug}>
+                            <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
+                              {view.name}
+                            </ProfileNavLink>
+                          </li>
+                        );
+                      } else if (view.hidden) {
+                        return (
+                          <li key='more'>
+                            <Link
+                              to={view.slug}
+                              onClick={e => {
+                                e.preventDefault();
+                                this.openNav();
+                              }}
+                            >
+                              {view.name}
+                            </Link>
+                          </li>
+                        );
+                      } else {
+                        return (
+                          <li key={view.slug}>
+                            <NavLink to={view.slug} exact={view.exact}>
+                              {view.name}
+                            </NavLink>
+                          </li>
+                        );
+                      }
+                    })}
                 </ul>
               </div>
             ) : null}
@@ -336,33 +347,41 @@ class Header extends React.Component {
               <div className='ui'>
                 <div className='views'>
                   <ul>
-                    {views.filter(v => v.inline).map(view => {
-                      if (view.profile && !view.secondary) {
-                        return (
-                          <li key={view.slug}>
-                            <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
-                              {view.name}
-                            </ProfileNavLink>
-                          </li>
-                        );
-                      } else if (view.hidden) {
-                        return (
-                          <li key='more'>
-                            <Link to={view.slug} onClick={e => { e.preventDefault(); this.openNav(); }}>
-                              {view.name}
-                            </Link>
-                          </li>
-                        );
-                      } else {
-                        return (
-                          <li key={view.slug}>
-                            <NavLink to={view.slug} exact={view.exact}>
-                              {view.name}
-                            </NavLink>
-                          </li>
-                        );
-                      }
-                    })}
+                    {views
+                      .filter(v => v.inline)
+                      .map(view => {
+                        if (view.profile && !view.secondary) {
+                          return (
+                            <li key={view.slug}>
+                              <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact}>
+                                {view.name}
+                              </ProfileNavLink>
+                            </li>
+                          );
+                        } else if (view.hidden) {
+                          return (
+                            <li key='more'>
+                              <Link
+                                to={view.slug}
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.openNav();
+                                }}
+                              >
+                                {view.name}
+                              </Link>
+                            </li>
+                          );
+                        } else {
+                          return (
+                            <li key={view.slug}>
+                              <NavLink to={view.slug} exact={view.exact}>
+                                {view.name}
+                              </NavLink>
+                            </li>
+                          );
+                        }
+                      })}
                   </ul>
                 </div>
               </div>
@@ -376,48 +395,52 @@ class Header extends React.Component {
               <div className='types'>
                 <div className='type progression'>
                   <ul>
-                    {views.filter(v => v.primary && !v.hidden).map(view => {
-                      if (view.profile) {
-                        return (
-                          <li key={view.slug}>
-                            <div className='name'>{view.name}</div>
-                            <div className='description'>{view.desc}</div>
-                            <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
-                          </li>
-                        );
-                      } else {
-                        return (
-                          <li key={view.slug}>
-                            <div className='name'>{view.name}</div>
-                            <div className='description'>{view.desc}</div>
-                            <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
-                          </li>
-                        );
-                      }
-                    })}
+                    {views
+                      .filter(v => v.primary && !v.hidden)
+                      .map(view => {
+                        if (view.profile) {
+                          return (
+                            <li key={view.slug}>
+                              <div className='name'>{view.name}</div>
+                              <div className='description'>{view.desc}</div>
+                              <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
+                            </li>
+                          );
+                        } else {
+                          return (
+                            <li key={view.slug}>
+                              <div className='name'>{view.name}</div>
+                              <div className='description'>{view.desc}</div>
+                              <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
+                            </li>
+                          );
+                        }
+                      })}
                   </ul>
                 </div>
                 <div className='type ancillary'>
                   <ul>
-                    {views.filter(v => !v.primary && !v.hidden).map(view => {
-                      if (view.profile) {
-                        return (
-                          <li key={view.slug}>
-                            <div className='name'>{view.name}</div>
-                            <div className='description'>{view.desc}</div>
-                            <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
-                          </li>
-                        );
-                      } else {
-                        return (
-                          <li key={view.slug}>
-                            <div className='name'>{view.name}</div>
-                            <div className='description'>{view.desc}</div>
-                            <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
-                          </li>
-                        );
-                      }
-                    })}
+                    {views
+                      .filter(v => !v.primary && !v.hidden)
+                      .map(view => {
+                        if (view.profile) {
+                          return (
+                            <li key={view.slug}>
+                              <div className='name'>{view.name}</div>
+                              <div className='description'>{view.desc}</div>
+                              <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
+                            </li>
+                          );
+                        } else {
+                          return (
+                            <li key={view.slug}>
+                              <div className='name'>{view.name}</div>
+                              <div className='description'>{view.desc}</div>
+                              <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
+                            </li>
+                          );
+                        }
+                      })}
                   </ul>
                 </div>
               </div>
