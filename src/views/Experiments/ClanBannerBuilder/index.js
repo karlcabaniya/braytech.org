@@ -7,11 +7,10 @@ import assign from 'lodash/assign';
 import cx from 'classnames';
 import mapValues from 'lodash/mapValues';
 
+import manifest from '../../../utils/manifest';
 import ObservedImage from '../../../components/ObservedImage';
 import Spinner from '../../../components/UI/Spinner';
 import ClanBanner from '../../../components/UI/ClanBanner';
-
-import clanBannerManifestJson from '../../../data/clanBannerManifest';
 
 import './styles.css';
 
@@ -20,10 +19,9 @@ class ClanBannerBuilder extends React.Component {
     super(props);
 
     this.state = {
-      clanBannerManifest: false
+      clanBannerManifest: true
     };
 
-    this.clanBannerManifest = clanBannerManifestJson._embedded;
     this.clanBannerDefault = {
       decalBackgroundColorId: 3568748755,
       decalColorId: 3379387794,
@@ -35,26 +33,9 @@ class ClanBannerBuilder extends React.Component {
     };
   }
 
-  clanBannerManifestFetch = async () => {
-    const request = await fetch('https://api.tyra-karn.com/DestinyManifest/mobileClanBannerDatabasePath', {
-      headers: {
-        accept: 'application/json'
-      }
-    });
-    const response = await request.json();
-    return response._embedded;
-  };
-
   componentDidMount() {
     window.scrollTo(0, 0);
-
-    this.clanBannerManifestFetch().then(clanBannerManifest => {
-      //console.log('componentDidMount');
-      this.clanBannerManifest = clanBannerManifest;
-      this.setState({
-        clanBannerManifest: true
-      });
-    });
+    console.log(manifest.DestinyClanBannerDefinition)
   }
 
   componentWillUnmount() {}
@@ -73,8 +54,8 @@ class ClanBannerBuilder extends React.Component {
     };
 
     let configOptions = [];
-    if (this.clanBannerManifest) {
-      let clanBannerManifest = this.clanBannerManifest;
+    if (manifest.DestinyClanBannerDefinition) {
+      let clanBannerManifest = manifest.DestinyClanBannerDefinition;
 
       let decals = [];
 

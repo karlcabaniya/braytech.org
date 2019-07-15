@@ -180,8 +180,11 @@
 }
 
 #this-week .module .raid-challenge .description {
-  white-space: pre-line;
+}
+
+#this-week .module .raid-challenge .description p {
   color: rgba(255, 255, 255, 0.4);
+  line-height: normal;
 }
 
 @media screen and (max-width: 1440px) {

@@ -3,12 +3,17 @@
   "name": "Braytech",
   "icons": [
     {
-      "src": "/static/images/apple-touch.png",
+      "src": "/static/images/braytech-96png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/static/images/apple-touch.png",
+      "src": "/static/images/braytech-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/static/images/braytech-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

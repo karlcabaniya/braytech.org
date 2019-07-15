@@ -103,16 +103,16 @@ class Records extends React.Component {
     const { t, hashes, member, triumphs, collectibles, ordered, limit, selfLinkFrom, readLink, forceDisplay = false } = this.props;
     const highlight = parseInt(this.props.highlight, 10) || false;
     const recordsRequested = hashes;
-    const characterRecords = member.data.profile.characterRecords.data;
-    const profileRecords = member.data.profile.profileRecords.data.records;
-    const characterId = member.characterId;
+    const characterRecords = member && member.data.profile.characterRecords.data;
+    const profileRecords = member && member.data.profile.profileRecords.data.records;
+    const characterId = member && member.characterId;
     const tracked = triumphs.tracked;
 
     let recordsOutput = [];
     recordsRequested.forEach(hash => {
       const definitionRecord = manifest.DestinyRecordDefinition[hash];
       const recordScope = definitionRecord.scope || 0;
-      const recordData = recordScope === 1 ? characterRecords[characterId].records[definitionRecord.hash] : profileRecords[definitionRecord.hash];
+      const recordData = recordScope === 1 ? characterRecords && characterRecords[characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
 
       let objectives = [];
       let completionValueTotal = 0;
@@ -129,13 +129,12 @@ class Records extends React.Component {
         definitionRecord.objectiveHashes.forEach((hash, index) => {
           let definitionObjective = manifest.DestinyObjectiveDefinition[hash];
 
-          let playerProgress = null;
-
-          recordData.objectives.forEach(objective => {
-            if (objective.objectiveHash === hash) {
-              playerProgress = objective;
-            }
-          });
+          let playerProgress = recordData && recordData.objectives.find(o => o.objectiveHash === hash);
+          playerProgress = playerProgress ? playerProgress : {
+            complete: false,
+            progress: 0,
+            objectiveHash: definitionObjective.hash
+          };
 
           // override
           if (hash === 1278866930 && playerProgress.complete) {
@@ -157,7 +156,7 @@ class Records extends React.Component {
       let progressDistance = progressValueTotal / completionValueTotal;
       progressDistance = Number.isNaN(progressDistance) ? 0 : progressDistance;
 
-      let state = recordData.state || 0;
+      let state = (recordData && recordData.state) || 4;
 
       if (enumerateRecordState(state).invisible && (collectibles && collectibles.hideInvisibleRecords)) {
         return;

@@ -827,7 +827,7 @@ class ThisWeek extends React.Component {
           </ul>
           <div className='text'>
             <div className='name'>{consolidatedInfo.raids.sotp.challenges[consolidatedInfo.raids.sotp.challenge[0]].name}</div>
-            <div className='description'>{consolidatedInfo.raids.sotp.challenges[consolidatedInfo.raids.sotp.challenge[0]].description}</div>
+            <ReactMarkdown className='description' source={consolidatedInfo.raids.sotp.challenges[consolidatedInfo.raids.sotp.challenge[0]].description} />
           </div>
         </div>
         <h4>{t('Collectibles')}</h4>
@@ -860,7 +860,7 @@ class ThisWeek extends React.Component {
           </ul>
           <div className='text'>
             <div className='name'>{consolidatedInfo.raids.lw.challenges[consolidatedInfo.raids.lw.challenge[0]].name}</div>
-            <div className='description'>{consolidatedInfo.raids.lw.challenges[consolidatedInfo.raids.lw.challenge[0]].description}</div>
+            <ReactMarkdown className='description' source={consolidatedInfo.raids.lw.challenges[consolidatedInfo.raids.lw.challenge[0]].description} />
           </div>
         </div>
         <h4>{t('Collectibles')}</h4>
@@ -890,7 +890,9 @@ class ThisWeek extends React.Component {
                 </div>
                 <div className='text'>
                   <div className='name'>{consolidatedInfo.raids.lev.challenges[p].name}</div>
-                  <div className='description'>{consolidatedInfo.raids.lev.challenges[p].description}</div>
+                  <div className='description'>
+                    <p>{consolidatedInfo.raids.lev.challenges[p].description}</p>
+                  </div>
                 </div>
               </li>
             )

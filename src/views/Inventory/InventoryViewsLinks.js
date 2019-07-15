@@ -44,7 +44,7 @@ class InventoryViewsLinks extends React.Component {
             </li>
             <li className='linked'>
               <div className='icon'>
-                <ObservedImage className='image' src='/static/images/extracts/ui/01E3-00001090.PNG' />
+                <ObservedImage className='image' src='/static/images/extracts/ui/01e3-00000246.png' />
               </div>
               <ProfileNavLink to='/inventory/postmaster' />
             </li>

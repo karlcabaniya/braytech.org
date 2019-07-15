@@ -5,7 +5,7 @@ import cx from 'classnames';
 import rgbToHsl from '../../../utils/rgbToHsl';
 import Spinner from '../../UI/Spinner';
 
-import clanBannerManifestJson from '../../../data/clanBannerManifest';
+import manifest from '../../../utils/manifest';
 
 import './styles.css';
 
@@ -47,40 +47,28 @@ class ClanBanner extends React.Component {
         el: false
       }
     };
-
-    this.clanBannerManifest = clanBannerManifestJson._embedded;
   }
-
-  clanBannerManifestFetch = async () => {
-    const request = await fetch('https://api.tyra-karn.com/DestinyManifest/mobileClanBannerDatabasePath', {
-      headers: {
-        accept: 'application/json'
-      }
-    });
-    const response = await request.json();
-    return response._embedded;
-  };
 
   buildBannerConfig = clanBannerData => {
     this.setState({
       loaded: 0
     });
 
-    let decals = this.clanBannerManifest.Decals.find(decal => decal.imageHash === clanBannerData.decalId);
-    let decalPrimaryColor = this.clanBannerManifest.DecalPrimaryColors.find(color => color.colorHash === clanBannerData.decalColorId);
-    let decalSecondaryColor = this.clanBannerManifest.DecalSecondaryColors.find(color => color.colorHash === clanBannerData.decalBackgroundColorId);
+    let decals = manifest.DestinyClanBannerDefinition.Decals.find(decal => decal.imageHash === clanBannerData.decalId);
+    let decalPrimaryColor = manifest.DestinyClanBannerDefinition.DecalPrimaryColors.find(color => color.colorHash === clanBannerData.decalColorId);
+    let decalSecondaryColor = manifest.DestinyClanBannerDefinition.DecalSecondaryColors.find(color => color.colorHash === clanBannerData.decalBackgroundColorId);
     this.bannerConfig.DecalFgImage.src = decals.foregroundImagePath;
     this.bannerConfig.DecalFgImage.color = `${decalPrimaryColor.red}, ${decalPrimaryColor.green}, ${decalPrimaryColor.blue}, ${Math.min(decalPrimaryColor.alpha, 1)}`;
     this.bannerConfig.DecalBgImage.src = decals.backgroundImagePath;
     this.bannerConfig.DecalBgImage.color = `${decalSecondaryColor.red}, ${decalSecondaryColor.green}, ${decalSecondaryColor.blue}, ${Math.min(decalSecondaryColor.alpha, 1)}`;
 
-    let gonfalon = this.clanBannerManifest.Gonfalons.find(gonfalon => gonfalon.imageHash === clanBannerData.gonfalonId);
-    let gonfalonColor = this.clanBannerManifest.GonfalonColors.find(color => color.colorHash === clanBannerData.gonfalonColorId);
+    let gonfalon = manifest.DestinyClanBannerDefinition.Gonfalons.find(gonfalon => gonfalon.imageHash === clanBannerData.gonfalonId);
+    let gonfalonColor = manifest.DestinyClanBannerDefinition.GonfalonColors.find(color => color.colorHash === clanBannerData.gonfalonColorId);
     this.bannerConfig.GonfalonImage.src = gonfalon.foregroundImagePath;
     this.bannerConfig.GonfalonImage.color = `${gonfalonColor.red}, ${gonfalonColor.green}, ${gonfalonColor.blue}, ${Math.min(gonfalonColor.alpha, 1)}`;
 
-    let gonfalonDetail = this.clanBannerManifest.GonfalonDetails.find(gonfalon => gonfalon.imageHash === clanBannerData.gonfalonDetailId);
-    let gonfalonDetailColor = this.clanBannerManifest.GonfalonDetailColors.find(color => color.colorHash === clanBannerData.gonfalonDetailColorId);
+    let gonfalonDetail = manifest.DestinyClanBannerDefinition.GonfalonDetails.find(gonfalon => gonfalon.imageHash === clanBannerData.gonfalonDetailId);
+    let gonfalonDetailColor = manifest.DestinyClanBannerDefinition.GonfalonDetailColors.find(color => color.colorHash === clanBannerData.gonfalonDetailColorId);
     this.bannerConfig.GonfalonDetailImage.src = gonfalonDetail.foregroundImagePath;
     this.bannerConfig.GonfalonDetailImage.color = `${gonfalonDetailColor.red}, ${gonfalonDetailColor.green}, ${gonfalonDetailColor.blue}, ${Math.min(gonfalonDetailColor.alpha, 1)}`;
 
@@ -105,9 +93,9 @@ class ClanBanner extends React.Component {
   }
 
   componentDidMount() {
-    // this.clanBannerManifestFetch().then(clanBannerManifest => {
+    // manifest.DestinyClanBannerDefinitionFetch().then(clanBannerManifest => {
     //   // console.log(clanBannerManifest);
-    //   this.clanBannerManifest = clanBannerManifest;
+    //   manifest.DestinyClanBannerDefinition = clanBannerManifest;
 
     //   this.buildBannerConfig(this.props.bannerData);
     // });
@@ -118,10 +106,10 @@ class ClanBanner extends React.Component {
     if (prevProps.bannerData !== this.props.bannerData) {
       // console.log('componentDidUpdate', this.props.bannerData);
 
-      if (!this.clanBannerManifest) {
-        this.clanBannerManifestFetch().then(clanBannerManifest => {
+      if (!manifest.DestinyClanBannerDefinition) {
+        manifest.DestinyClanBannerDefinitionFetch().then(clanBannerManifest => {
           // console.log(clanBannerManifest);
-          this.clanBannerManifest = clanBannerManifest;
+          manifest.DestinyClanBannerDefinition = clanBannerManifest;
 
           this.buildBannerConfig(this.props.bannerData);
         });

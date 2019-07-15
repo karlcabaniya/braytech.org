@@ -143,11 +143,15 @@
   position: relative;
   height: unset;
   padding-bottom: 100%;
+  background-size: 90%;
+}
+
+#clan .module.views .list li:nth-child(1) .image {
   background-size: 70%;
 }
 
 #clan .module.views .list li:nth-child(2) .image {
-  background-size: 80%;
+  background-size: 90%;
 }
 
 #clan .module.views .list li::before {

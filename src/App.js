@@ -164,7 +164,7 @@ class App extends React.Component {
 
     tmpManifest.statistics = (await this.startupRequests.voluspaStatistics) || {};
 
-    manifest.set(tmpManifest);
+    manifest.set(tmpManifest, this.currentLanguage);
 
     this.setState({ status: { code: 'ready' } });
   }

@@ -71,20 +71,6 @@ class Index extends React.Component {
                   </div>
                 </li>
                 <li>
-                  <div className='value'>{manifest.statistics.general.groups.toLocaleString('en-us')}</div>
-                  <div className='name'>Tracked clans</div>
-                  <div className='description'>
-                    <p>Number of clans that tracked players identify with</p>
-                  </div>
-                </li>
-                {/* <li>
-                  <div className='value'>{manifest.statistics.general.playedReset.toLocaleString('en-us')}</div>
-                  <div className='name'>Played reset</div>
-                  <div className='description'>
-                    <p>Number of tracked players who've played this week</p>
-                  </div>
-                </li> */}
-                <li>
                   <div className='value'>{manifest.statistics.general.playedSeason.toLocaleString('en-us')}</div>
                   <div className='name'>Played season</div>
                   <div className='description'>
