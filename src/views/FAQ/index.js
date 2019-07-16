@@ -101,7 +101,6 @@ class FAQ extends React.Component {
               })}
           </div>
         </div>
-        <div className='module' />
       </div>
     );
   }

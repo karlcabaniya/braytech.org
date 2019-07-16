@@ -1163,9 +1163,11 @@ class ThisWeek extends React.Component {
               <div className='sub-name'>{t('This Week')}</div>
               <div className='name'>{manifest.DestinyDestinationDefinition[definitionFlashpoint.destinationHash].displayProperties.name}</div>
             </div>
-            {definitionFlashpointFaction.displayProperties ? <div className='text'>
+            {definitionFlashpointFaction && definitionFlashpointFaction.displayProperties ? <div className='text'>
               <p>{t('Contact in the field')}: {definitionFlashpointFaction.displayProperties.description}</p>
-            </div> : null}
+            </div> : <div className='text'>
+              <p>Turns out Brother Vance doesn't have his own factionHash. What a loser.</p>
+            </div>}
           </div>
           <div className='content highlight'>
             <div className='module-header'>

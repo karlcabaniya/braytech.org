@@ -193,7 +193,7 @@ class Header extends React.Component {
       },
       {
         name: t('FAQ'),
-        desc: t('Answers to common queries in a mostly well-written and organised format'),
+        desc: t("Some of Tom's favourite frequently asked questions"),
         slug: '/faq',
         exact: false,
         profile: false,

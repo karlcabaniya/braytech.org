@@ -31,12 +31,12 @@ class ClanViewsLinks extends React.Component {
             </div>
             <ProfileNavLink to='/clan/roster' />
           </li>
-          <li className='linked'>
+          {/* <li className='linked'>
             <div className='icon'>
               <ObservedImage className='image' src='/static/images/extracts/ui/01e3-00001924.png' />
             </div>
             <ProfileNavLink to='/clan/stats' />
-          </li>
+          </li> */}
         </ul>
       </div>
     );
