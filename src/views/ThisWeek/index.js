@@ -54,7 +54,7 @@ class ThisWeek extends React.Component {
         menagerie: 3
       },
       elapsed: {}, // elapsed time since cycle started
-      week: {}, // current week in cycle
+      week: {} // current week in cycle
     };
 
     const time = new Date().getTime();
@@ -118,7 +118,7 @@ class ThisWeek extends React.Component {
           1842255612, // Fideicide I (Bones in Shattered Throne)
           1859033175, // Cosmogyre II (Bones in Shattered Throne)
           1859033168, // Archiloquy (Bones in Shattered Throne)
-          1859033171, // Brephos I (Bones in Shattered Throne)
+          1859033171 // Brephos I (Bones in Shattered Throne)
         ]
       },
       ascendant: {
@@ -249,21 +249,13 @@ class ThisWeek extends React.Component {
       reckoning: {
         1: {
           boss: t('Likeness of Oryx'),
-          triumphs: [
-            2653311362
-          ],
-          collectibles: [
-            
-          ]
+          triumphs: [2653311362],
+          collectibles: []
         },
         2: {
           boss: t('The Swords'),
-          triumphs: [
-            2653311362
-          ],
-          collectibles: [
-            
-          ]
+          triumphs: [2653311362],
+          collectibles: []
         }
       },
       whisper: {
@@ -517,31 +509,19 @@ class ThisWeek extends React.Component {
       menagerie: {
         1: {
           boss: t('Hasapiko, Beloved by Calus'),
-          triumphs: [
-            3141945846,
-            2422246606,
-            2422246593
-          ],
+          triumphs: [3141945846, 2422246606, 2422246593],
           items: [],
           collectibles: []
         },
         2: {
           boss: t('Arunak, Beloved by Calus'),
-          triumphs: [
-            1959753477,
-            2422246607,
-            2472579457
-          ],
+          triumphs: [1959753477, 2422246607, 2472579457],
           items: [],
           collectibles: []
         },
         3: {
           boss: t('Pagouri, Beloved by Calus'),
-          triumphs: [
-            2351146132,
-            2422246605,
-            2422246592
-          ],
+          triumphs: [2351146132, 2422246605, 2422246592],
           items: [],
           collectibles: []
         }
@@ -550,128 +530,106 @@ class ThisWeek extends React.Component {
         cos: {
           name: manifest.DestinyMilestoneDefinition[2590427074].displayProperties.name,
           description: manifest.DestinyActivityDefinition[960175301].displayProperties.description,
-          challenge: manifest.DestinyVendorDefinition[3347378076].itemList.map(item => {
-            if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty_eclipse').vendorItemIndexes.includes(item.vendorItemIndex)) {
-              return item.itemHash;
-            } else {
-              return false
-            }
-          }).filter(t => manifest.statistics.bounties.hawthorne.includes(t)),
-          collectibles: [
-            2329697053
-          ],
+          challenge: manifest.DestinyVendorDefinition[3347378076].itemList
+            .map(item => {
+              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty_eclipse').vendorItemIndexes.includes(item.vendorItemIndex)) {
+                return item.itemHash;
+              } else {
+                return false;
+              }
+            })
+            .filter(t => manifest.statistics.bounties.hawthorne.includes(t)),
+          collectibles: [2329697053],
           triumphs: [],
           challenges: {
             2459033425: {
               name: manifest.DestinyInventoryItemDefinition[2459033425].displayProperties.name,
               description: t("Ritual encounter: no more than two Guardians may have the Witch's Blessing buff at one time during The Hive Ritual."),
-              triumphs: [
-                1575460004
-              ]
+              triumphs: [1575460004]
             },
             2459033426: {
               name: manifest.DestinyInventoryItemDefinition[2459033426].displayProperties.name,
               description: t("Deception encounter: break the Deception's shield 5 times during phase in which he is defeated i.e. a single phase."),
-              triumphs: [
-                1575460003
-              ]
+              triumphs: [1575460003]
             },
             2459033427: {
               name: manifest.DestinyInventoryItemDefinition[2459033427].displayProperties.name,
               description: t("Gahlran encounter: each Guardian may only shoot one of _the real_ Gahlran's hands once during only one of his hand raises."),
-              triumphs: [
-                1575460002
-              ]
+              triumphs: [1575460002]
             }
           }
         },
         sotp: {
           name: manifest.DestinyActivityDefinition[548750096].displayProperties.name,
           description: manifest.DestinyActivityDefinition[548750096].displayProperties.description,
-          challenge: manifest.DestinyVendorDefinition[3347378076].itemList.map(item => {
-            if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty_sunset').vendorItemIndexes.includes(item.vendorItemIndex)) {
-              return item.itemHash;
-            } else {
-              return false
-            }
-          }).filter(t => manifest.statistics.bounties.hawthorne.includes(t)),
-          collectibles: [
-            2220014607
-          ],
+          challenge: manifest.DestinyVendorDefinition[3347378076].itemList
+            .map(item => {
+              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty_sunset').vendorItemIndexes.includes(item.vendorItemIndex)) {
+                return item.itemHash;
+              } else {
+                return false;
+              }
+            })
+            .filter(t => manifest.statistics.bounties.hawthorne.includes(t)),
+          collectibles: [2220014607],
           triumphs: [],
           challenges: {
             1381881897: {
               name: manifest.DestinyInventoryItemDefinition[1381881897].displayProperties.name,
-              description: t("Insurrection Prime encounter: A Guardian may not shoot and break more than one shield generator per phase."),
-              triumphs: [
-                4162926221
-              ]
+              description: t('Insurrection Prime encounter: A Guardian may not shoot and break more than one shield generator per phase.'),
+              triumphs: [4162926221]
             },
             1348944144: {
               name: manifest.DestinyInventoryItemDefinition[1348944144].displayProperties.name,
-              description: t("Botza District encounter: the map generator must not fall below half charge."),
-              triumphs: [
-                1804999028
-              ]
+              description: t('Botza District encounter: the map generator must not fall below half charge.'),
+              triumphs: [1804999028]
             },
             3415614992: {
               name: manifest.DestinyInventoryItemDefinition[3415614992].displayProperties.name,
-              description: t("Vault Access encounter: Each Guardian must grab and deposit each Phase Radiance buff once (boss must be killed in 3 damage phases)."),
-              triumphs: [
-                1428463716
-              ]
+              description: t('Vault Access encounter: Each Guardian must grab and deposit each Phase Radiance buff once (boss must be killed in 3 damage phases).'),
+              triumphs: [1428463716]
             }
           }
         },
         lw: {
           name: manifest.DestinyPresentationNodeDefinition[1500485992].displayProperties.name,
           description: manifest.DestinyActivityDefinition[1661734046].displayProperties.description,
-          challenge: manifest.DestinyVendorDefinition[3347378076].itemList.map(item => {
-            if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty').vendorItemIndexes.includes(item.vendorItemIndex)) {
-              return item.itemHash;
-            } else {
-              return false
-            }
-          }).filter(t => manifest.statistics.bounties.hawthorne.includes(t)),
-          collectibles: [
-            199171385
-          ],
+          challenge: manifest.DestinyVendorDefinition[3347378076].itemList
+            .map(item => {
+              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty').vendorItemIndexes.includes(item.vendorItemIndex)) {
+                return item.itemHash;
+              } else {
+                return false;
+              }
+            })
+            .filter(t => manifest.statistics.bounties.hawthorne.includes(t)),
+          collectibles: [199171385],
           triumphs: [],
           challenges: {
             1250327262: {
               name: manifest.DestinyInventoryItemDefinition[1250327262].displayProperties.name,
               description: t("Shuro Chi chase encounter: Guardians must not take damage from Shuro Chi's Arc Blast."),
-              triumphs: [
-                2196415799
-              ]
+              triumphs: [2196415799]
             },
             3871581136: {
               name: manifest.DestinyInventoryItemDefinition[3871581136].displayProperties.name,
               description: t("Morgeth encounter: don't kill smol ogres, only kill big boi."),
-              triumphs: [
-                1672792871
-              ]
+              triumphs: [1672792871]
             },
             1568895666: {
               name: manifest.DestinyInventoryItemDefinition[1568895666].displayProperties.name,
-              description: t("Vault encounter: knights must be killed in the rooms they spawn in."),
-              triumphs: [
-                149192209
-              ]
+              description: t('Vault encounter: knights must be killed in the rooms they spawn in.'),
+              triumphs: [149192209]
             },
             4007940282: {
               name: manifest.DestinyInventoryItemDefinition[4007940282].displayProperties.name,
-              description: t("Riven encounter: Guardians must not shoot the same eye twice."),
-              triumphs: [
-                3899933775
-              ]
+              description: t('Riven encounter: Guardians must not shoot the same eye twice.'),
+              triumphs: [3899933775]
             },
             2836954349: {
               name: manifest.DestinyInventoryItemDefinition[2836954349].displayProperties.name,
-              description: t("Kalli encounter: Cleanse all nine plates, kill all nine Knights, and kill all Ogres before damaging Kalli."),
-              triumphs: [
-                2822000740
-              ]
+              description: t('Kalli encounter: Cleanse all nine plates, kill all nine Knights, and kill all Ogres before damaging Kalli.'),
+              triumphs: [2822000740]
             }
           }
         },
@@ -688,7 +646,7 @@ class ThisWeek extends React.Component {
             },
             2188993306: {
               name: t('The Royal Pools'),
-              description: t("Bathe with my loyalists in their pools"),
+              description: t('Bathe with my loyalists in their pools'),
               icon: manifest.DestinyActivityModifierDefinition[3296085675].displayProperties.icon
             },
             1431486395: {
@@ -710,7 +668,7 @@ class ThisWeek extends React.Component {
             },
             3296085675: {
               name: t('The Royal Pools'),
-              description: t("One Guardian must remain in the middle with their feet in the water during the entire encounter."),
+              description: t('One Guardian must remain in the middle with their feet in the water during the entire encounter.'),
               icon: manifest.DestinyActivityModifierDefinition[3296085675].displayProperties.icon
             },
             2863316929: {
@@ -724,15 +682,13 @@ class ThisWeek extends React.Component {
               icon: manifest.DestinyActivityModifierDefinition[2770077977].displayProperties.icon
             }
           },
-          collectibles: [
-            199171389
-          ],
+          collectibles: [199171389],
           triumphs: []
         }
       }
     };
 
-    // console.log(consolidatedInfo) 
+    // console.log(consolidatedInfo)
 
     // console.log(Object.values(profile.characterProgressions.data['2305843009260574394'].milestones).map(m => {
     //   m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
@@ -742,8 +698,16 @@ class ThisWeek extends React.Component {
     const modules = [];
 
     // flashpoint
-    const definitionFlashpoint = milestones[463010297].availableQuests && milestones[463010297].availableQuests.length && manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
-    const definitionFlashpointVendor = definitionFlashpoint && Object.values(manifest.DestinyVendorDefinition).find(v => v.locations && v.locations.find(l => l.destinationHash === definitionFlashpoint.destinationHash));
+    const milestoneFlashpoint = milestones[463010297].availableQuests && milestones[463010297].availableQuests.length && manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
+    const definitionFlashpointVendor =
+      milestoneFlashpoint &&
+      Object.values(manifest.DestinyVendorDefinition).find(v => {
+        if (milestoneFlashpoint.destinationHash === 1993421442) {
+          return v.locations && v.locations.find(l => l.destinationHash === 3669933163);
+        } else {
+          return v.locations && v.locations.find(l => l.destinationHash === milestoneFlashpoint.destinationHash);
+        }
+      });
     const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
 
     // scored nightfall strikes
@@ -771,7 +735,7 @@ class ThisWeek extends React.Component {
           </div>
         );
       });
-    
+
     // raids
     let raids = [];
 
@@ -895,7 +859,7 @@ class ThisWeek extends React.Component {
                   </div>
                 </div>
               </li>
-            )
+            );
           })}
         </ul>
         <h4>{t('Rotation')}</h4>
@@ -911,7 +875,7 @@ class ThisWeek extends React.Component {
                   <div className='description'>{consolidatedInfo.raids.lev.phases[p].description}</div>
                 </div>
               </li>
-            )
+            );
           })}
         </ul>
         <h4>{t('Collectibles')}</h4>
@@ -927,114 +891,10 @@ class ThisWeek extends React.Component {
     const availableHeroicMenagerie = profile.characterActivities.data[characterId].availableActivities && profile.characterActivities.data[characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)) && manifest.DestinyActivityDefinition[profile.characterActivities.data[characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)).activityHash];
 
     const menagerieHeroicCollectibles = {
-      0: [
-        1692129580,
-        2678796997
-      ],
-      1: [
-        3376099856,
-        2678796997
-      ],
-      2: [
-        1572606157,
-        2678796997
-      ]
-    }
-
-    const moduleFlashpoint = (
-      <div key='moduleFlashpoint' className='content'>
-        <div className='module-header'>
-          <div className='sub-name'>{manifest.DestinyMilestoneDefinition[463010297].displayProperties.name}</div>
-          <div className='name'>{manifest.DestinyDestinationDefinition[definitionFlashpoint.destinationHash].displayProperties.name}</div>
-        </div>
-        <h4>{t('Triumphs')}</h4>
-        <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.flashpoint[definitionFlashpoint.questItemHash].triumphs} ordered forceDisplay />
-        </ul>
-      </div>
-    );
-
-    const moduleHeroicMissionZeroHour = (
-      <div key='moduleHeroicMissionZeroHour' className='content'>
-        <div className='module-header'>
-          <div className='sub-name'>{t('Heroic Mission')}</div>
-          <div className='name'>{t('Zero Hour')}</div>
-        </div>
-        <h4>{t('Active Modifier')}</h4>
-        <ul className='list modifiers'>
-          {consolidatedInfo.zerohour[cycleInfo.week.zerohour].modifiers.map((m, i) => {
-            let modDef = manifest.DestinyActivityModifierDefinition[m];
-            return (
-              <li key={i}>
-                <div className='icon'>
-                  <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                </div>
-                <div className='text'>
-                  <div className='name'>{modDef.displayProperties.name}</div>
-                  <div className='description'>{modDef.displayProperties.description}</div>
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    );
-
-    const moduleHeroicMissionWhisper = (
-      <div key='moduleHeroicMissionWhisper' className='content'>
-        <div className='module-header'>
-          <div className='sub-name'>{t('Heroic Mission')}</div>
-          <div className='name'>{t('Whisper of the Worm')}</div>
-        </div>
-        <h4>{t('Active Modifier')}</h4>
-        <ul className='list modifiers'>
-          {consolidatedInfo.whisper[cycleInfo.week.whisper].modifiers.map((m, i) => {
-            let modDef = manifest.DestinyActivityModifierDefinition[m];
-            return (
-              <li key={i}>
-                <div className='icon'>
-                  <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                </div>
-                <div className='text'>
-                  <div className='name'>{modDef.displayProperties.name}</div>
-                  <div className='description'>{modDef.displayProperties.description}</div>
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    );
-
-    const moduleReckoning = (
-      <div key='moduleReckoning' className='content'>
-        <div className='module-header'>
-          <div className='sub-name'>{manifest.DestinyPlaceDefinition[4148998934].displayProperties.name}</div>
-          <div className='name'>{consolidatedInfo.reckoning[cycleInfo.week.reckoning].boss}</div>
-        </div>
-        <h4>{t('Active Modifiers')}</h4>
-        <ul className='list modifiers'>
-          {reckoningModifiers.map((m, i) => {
-            let modDef = manifest.DestinyActivityModifierDefinition[m];
-            return (
-              <li key={i}>
-                <div className='icon'>
-                  <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                </div>
-                <div className='text'>
-                  <div className='name'>{modDef.displayProperties.name}</div>
-                  <div className='description'>{modDef.displayProperties.description}</div>
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-        <h4>{t('Triumphs')}</h4>
-        <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.reckoning[cycleInfo.week.reckoning].triumphs} ordered forceDisplay />
-        </ul>
-      </div>
-    );
+      0: [1692129580, 2678796997],
+      1: [3376099856, 2678796997],
+      2: [1572606157, 2678796997]
+    };
 
     const moduleEscalationProtocol = (
       <div key='moduleEscalationProtocol' className='content'>
@@ -1048,11 +908,14 @@ class ThisWeek extends React.Component {
         </ul>
         <h4>{t('Catalyst item')}</h4>
         <ul className='list inventory-items as-tab'>
-          <Items items={consolidatedInfo.ep[cycleInfo.week.ep].items.map(i => {
-            return {
-              itemHash: i
-            }
-          })} asTab />
+          <Items
+            items={consolidatedInfo.ep[cycleInfo.week.ep].items.map(i => {
+              return {
+                itemHash: i
+              };
+            })}
+            asTab
+          />
         </ul>
         <div className='aside'>{t('Braytech can not determine which Wordline Zero catalyst components you have attained, but it can tell you which bosses drop which items in case you happened to be keeping a list.')}</div>
       </div>
@@ -1064,7 +927,9 @@ class ThisWeek extends React.Component {
       <div key='moduleAscendantChallenge' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Ascendant Challenge')}</div>
-          <div className='name'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
+          <div className='name'>
+            {consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}, {consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}
+          </div>
         </div>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
@@ -1077,7 +942,9 @@ class ThisWeek extends React.Component {
       <div key='moduleDreamingCityCycle' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t("Savathûn's Curse")}</div>
-          <div className='name'>{t('Week')} {cycleInfo.week.curse}: {consolidatedInfo.curse[cycleInfo.week.curse].strength}</div>
+          <div className='name'>
+            {t('Week')} {cycleInfo.week.curse}: {consolidatedInfo.curse[cycleInfo.week.curse].strength}
+          </div>
         </div>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
@@ -1086,18 +953,21 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    const moduleShatteredThrone = cycleInfo.week.curse === 3 ? (
-      <div key='moduleShatteredThrone' className='content'>
-        <div className='module-header'>
-          <div className='sub-name'>{t("Savathûn's Curse")}</div>
-          <div className='name'>{t('The Shattered Throne')}</div>
+    const moduleShatteredThrone =
+      cycleInfo.week.curse === 3 ? (
+        <div key='moduleShatteredThrone' className='content'>
+          <div className='module-header'>
+            <div className='sub-name'>{t("Savathûn's Curse")}</div>
+            <div className='name'>{t('The Shattered Throne')}</div>
+          </div>
+          <h4>{t('Triumphs')}</h4>
+          <ul className='list record-items'>
+            <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.shatteredThrone.triumphs} ordered forceDisplay />
+          </ul>
         </div>
-        <h4>{t('Triumphs')}</h4>
-        <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.shatteredThrone.triumphs} ordered forceDisplay />
-        </ul>
-      </div>
-    ) : false;
+      ) : (
+        false
+      );
 
     const moduleMenagerie = (
       <div key='moduleMenagerie' className='content'>
@@ -1161,13 +1031,19 @@ class ThisWeek extends React.Component {
           <div className='content'>
             <div className='page-header'>
               <div className='sub-name'>{t('This Week')}</div>
-              <div className='name'>{manifest.DestinyDestinationDefinition[definitionFlashpoint.destinationHash].displayProperties.name}</div>
+              <div className='name'>{manifest.DestinyDestinationDefinition[milestoneFlashpoint.destinationHash].displayProperties.name}</div>
             </div>
-            {definitionFlashpointFaction && definitionFlashpointFaction.displayProperties ? <div className='text'>
-              <p>{t('Contact in the field')}: {definitionFlashpointFaction.displayProperties.description}</p>
-            </div> : <div className='text'>
-              <p>Turns out Brother Vance doesn't have his own factionHash. What a loser.</p>
-            </div>}
+            {definitionFlashpointFaction && definitionFlashpointFaction.displayProperties ? (
+              <div className='text'>
+                <p>
+                  {t('Contact in the field')}: {definitionFlashpointFaction.displayProperties.description}
+                </p>
+              </div>
+            ) : (
+              <div className='text'>
+                <p>{t('Beep-boop?')}</p>
+              </div>
+            )}
           </div>
           <div className='content highlight'>
             <div className='module-header'>
@@ -1187,7 +1063,7 @@ class ThisWeek extends React.Component {
                       <div className='description'>{modDef.displayProperties.description}</div>
                     </div>
                   </li>
-                )
+                );
               })}
             </ul>
           </div>
@@ -1209,7 +1085,7 @@ class ThisWeek extends React.Component {
                       <div className='description'>{modDef.displayProperties.description}</div>
                     </div>
                   </li>
-                )
+                );
               })}
             </ul>
           </div>
@@ -1232,20 +1108,22 @@ class ThisWeek extends React.Component {
                         <div className='description'>{modDef.displayProperties.description}</div>
                       </div>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </div>
           ) : null}
         </div>
         <div className='padder'>
-          {modules.filter(m => m.filter(c => c).length).map((m, i) => {
-            return (
-              <div key={i} className='module'>
-                {m}
-              </div>
-            )
-          })}
+          {modules
+            .filter(m => m.filter(c => c).length)
+            .map((m, i) => {
+              return (
+                <div key={i} className='module'>
+                  {m}
+                </div>
+              );
+            })}
         </div>
       </div>
     );
