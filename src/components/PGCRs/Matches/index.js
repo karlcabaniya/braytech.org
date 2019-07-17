@@ -86,7 +86,9 @@ class Matches extends React.Component {
   
       try {
         await Promise.all(ignition);
-      } catch (e) {}
+      } catch (e) {
+        
+      }
   
       this.setState(p => {
         p.loading = false;
@@ -175,6 +177,7 @@ class Matches extends React.Component {
 
     return PGCRs.length ? (
       <div className='matches'>
+        {this.state.loading ? <Spinner mini /> : null}
         <PGCR data={PGCRs} limit={limit} />
         <div className='pages'>
           <Button classNames='previous' text={t('Previous page')} disabled={this.state.loading ? true : offset > 0 ? false : true} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset - 1}`} action={this.scrollToMatchesHandler} />

@@ -3,7 +3,7 @@
   z-index: unset;
 }
 
-.list.reports li .basic {
+.list.reports li > .basic {
   display: grid;
   width: 100%;
   height: 38px;
@@ -28,16 +28,16 @@
   background-color: rgba(255, 255, 255, 0);
 }
 
-.list.reports li .basic .mode {
+.list.reports li > .basic .mode {
   font-size: 16px;
   min-width: 10rem;
 }
 
-.list.reports li .basic .map {
+.list.reports li > .basic .map {
   min-width: 10rem;
 }
 
-.list.reports li .basic .ago {
+.list.reports li > .basic .ago {
   text-align: right;
 }
 
@@ -389,18 +389,21 @@
   line-height: 1;
 }
 
-.list.reports li .entries .list .isExpandedPlayer .expanded .stat.weapons .value ul {
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.weapons .value ul,
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.medals .value ul {
   display: grid;
   grid-gap: 3px;
   grid-template-columns: repeat(auto-fill, 48px);
 }
 
-.list.reports li .entries .list .isExpandedPlayer .expanded .stat.weapons .value ul li {
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.weapons .value ul li,
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.medals .value ul li {
   height: 48px;
   position: relative;
 }
 
-.list.reports li .entries .list .isExpandedPlayer .expanded .stat.weapons .value ul li .kills {
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.weapons .value ul li .value,
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.medals .value ul li .value {
   content: attr(data-kills);
   position: absolute;
   right: 0;
@@ -411,10 +414,20 @@
   font-size: 11px;
 }
 
-.list.reports li .entries .list .isExpandedPlayer .expanded .stat.weapons .value ul li .icon {
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.weapons .value ul li .icon,
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.medals .value ul li .icon {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.medals .value ul li,
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.medals .value ul li .icon {
+  background-color: transparent;
+}
+
+.list.reports li .entries .list .isExpandedPlayer .expanded .stat.medals .value ul li::before {
+  box-shadow: none;
 }
 
 
@@ -433,20 +446,20 @@
 
 @media screen and (max-width: 768px) {
 
-  .list.reports li .basic {
+  .list.reports li > .basic {
     grid-template-columns: 1fr 1fr;
   }
 
-  .list.reports li .basic > div {
+  .list.reports li > .basic > div {
     display: none;
   }
 
-  .list.reports li .basic .mode,
-  .list.reports li .basic .map {
+  .list.reports li > .basic .mode,
+  .list.reports li > .basic .map {
     display: inherit;
   }
 
-  .list.reports li .basic .map {
+  .list.reports li > .basic .map {
     text-align: right;
     min-width: unset;
   }
@@ -537,12 +550,12 @@
     padding-left: 0;
   }
 
-  .list.reports li .entries .list .isExpandedPlayer .expanded .group:not(:first-child) {
+  .list.reports li .entries .list .isExpandedPlayer .expanded .group:not(.common):not(.medals) {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
-  .list.reports li .entries .list .isExpandedPlayer .expanded .group:not(:first-child) .sub-header {
+  .list.reports li .entries .list .isExpandedPlayer .expanded .group:not(.common):not(.medals) .sub-header {
     grid-column: 1/3;
   }
   

@@ -232,6 +232,7 @@ class PGCR extends React.Component {
         ],
         expanded: [
           {
+            key: 'common',
             name: 'Common',
             fields: [
               {
@@ -241,6 +242,7 @@ class PGCR extends React.Component {
             ]
           },
           {
+            key: 'basic',
             name: 'Basic',
             fields: [
               {
@@ -268,6 +270,7 @@ class PGCR extends React.Component {
             ]
           },
           {
+            key: 'extra',
             name: 'Extra',
             fields: [
               {
@@ -342,6 +345,7 @@ class PGCR extends React.Component {
         ],
         expanded: [
           {
+            key: 'common',
             name: 'Common',
             fields: [
               {
@@ -351,6 +355,7 @@ class PGCR extends React.Component {
             ]
           },
           {
+            key: 'basic',
             name: 'Basic',
             fields: [
               {
@@ -385,6 +390,7 @@ class PGCR extends React.Component {
             ]
           },
           {
+            key: 'extra',
             name: 'Extra',
             fields: [
               {
@@ -460,6 +466,7 @@ class PGCR extends React.Component {
         ],
         expanded: [
           {
+            key: 'common',
             name: 'Common',
             fields: [
               {
@@ -482,6 +489,7 @@ class PGCR extends React.Component {
           },
           {
             name: 'Basic',
+            key: 'basic',
             fields: [
               {
                 key: 'kills',
@@ -504,10 +512,17 @@ class PGCR extends React.Component {
                 name: 'K/D',
                 type: 'value',
                 round: true
+              },
+              {
+                key: 'allMedalsEarned',
+                name: 'Medals earned',
+                type: 'value',
+                extended: true
               }
             ]
           },
           {
+            key: 'extra',
             name: 'Extra',
             fields: [
               {
@@ -539,6 +554,15 @@ class PGCR extends React.Component {
                 name: 'Ability kills',
                 type: 'value',
                 extended: true
+              }
+            ]
+          },
+          {
+            key: 'medals',
+            name: 'Medals',
+            fields: [
+              {
+                key: 'medals'
               }
             ]
           }
@@ -585,6 +609,7 @@ class PGCR extends React.Component {
         ],
         expanded: [
           {
+            key: 'common',
             name: 'Common',
             fields: [
               {
@@ -606,6 +631,7 @@ class PGCR extends React.Component {
             ]
           },
           {
+            key: 'mobs',
             name: 'Mobs',
             fields: [
               {
@@ -647,6 +673,7 @@ class PGCR extends React.Component {
             ]
           },
           {
+            key: 'motes',
             name: 'Motes',
             fields: [
               {
@@ -670,6 +697,7 @@ class PGCR extends React.Component {
             ]
           },
           {
+            key: 'invasion',
             name: 'Invasion',
             fields: [
               {
@@ -757,7 +785,7 @@ class PGCR extends React.Component {
               <div className='expanded'>
                 {displayStats.expanded.map((g, h) => {
                   return (
-                    <div key={h} className='group'>
+                    <div key={h} className={cx('group', g.key)}>
                       {g.name ? (
                         <div className='sub-header alt'>
                           <div>{g.name}</div>
@@ -780,9 +808,37 @@ class PGCR extends React.Component {
                                   return (
                                     <li key={p} className={cx('item', 'tooltip')} data-hash={definitionItem.hash} data-rollnote='yes'>
                                       <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
-                                      <div className='kills'>{kills}</div>
+                                      <div className='value'>{kills}</div>
                                     </li>
                                   );
+                                })}
+                              </ul>
+                            );
+                          } else {
+                            return null;
+                          }
+                        } else if (s.key === 'medals') {
+                          if (entry.extended && entry.extended.values) {
+                            value = (
+                              <ul>
+                                {Object.keys(entry.extended.values).filter(j => displayStats.expanded.filter(l => l.fields.find(h => h.key === j)).length === 0).map((m) => {
+                                  let medal = entry.extended.values[m];
+                                  let definitionMedal = manifest.DestinyHistoricalStatsDefinition[m];
+
+                                  if (definitionMedal) {
+                                    let value = medal.basic ? medal.basic.value : '0';
+                                    let icon = definitionMedal.iconImage && definitionMedal.iconImage !== '' ? definitionMedal.iconImage : manifest.settings.destiny2CoreSettings.undiscoveredCollectibleImage;
+
+                                    return (
+                                      <li key={m} className={cx('item', 'tooltip')} data-hash={m} data-table='DestinyHistoricalStatsDefinition'>
+                                        <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${icon}`} />
+                                        <div className='value'>{value}</div>
+                                      </li>
+                                    );
+
+                                  } else {
+                                    return null;
+                                  }
                                 })}
                               </ul>
                             );

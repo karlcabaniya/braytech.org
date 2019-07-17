@@ -76,7 +76,7 @@ async function apiRequest(path, options = {}) {
       return response.Response;
     }
   } else {
-    console.log(request);
+    console.log('bungie.js 79', request);
     throw new BungieError(response);
   }
 }

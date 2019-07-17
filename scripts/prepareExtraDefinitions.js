@@ -20,7 +20,11 @@ function historicalStats() {
         .then(res => res.json())
         .catch(e => console.warn(`${lang}: ${e}`))
         .then(json => {
-          fs.writeFileSync(outputPath(lang), JSON.stringify(json), { flag: 'w' });
+          let rewire = {};
+          json._embedded.results.forEach(m => {
+            rewire[m.statId] = m;
+          });
+          fs.writeFileSync(outputPath(lang), JSON.stringify(rewire), { flag: 'w' });
         });
     } catch (e) {
       console.warn(`${lang}: ${e}`);

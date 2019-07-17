@@ -13,6 +13,7 @@ import emblem from './emblem';
 import bounty from './bounty';
 import quest from './quest';
 import mod from './mod';
+import medal from './medal';
 import ghost from './ghost';
 import sparrow from './sparrow';
 import subclass from './subclass';
@@ -151,6 +152,11 @@ class ItemTypes extends React.Component {
       black = sandboxPerk(item);
     }
 
+    if (table === 'DestinyHistoricalStatsDefinition') {
+      kind = 'ui name-only';
+      black = medal(item);
+    }
+
     if (tooltipType) {
       kind = tooltipType;
     }
@@ -198,13 +204,16 @@ class ItemTypes extends React.Component {
       );
     } else {
       state = enumerateItemState(parseInt(state, 10));
+      let name = item.displayProperties && item.displayProperties.name;
+      name = table === 'DestinyHistoricalStatsDefinition' ? item.statName : name;
+      
       return (
         <>
           <div className='acrylic' />
           <div className={cx('frame', kind, tier, { 'is-masterworked': masterwork })}>
             <div className='header'>
               {masterwork ? <ObservedImage className={cx('image', 'bg')} src={tier === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
-              <div className='name'>{item.displayProperties.name}</div>
+              <div className='name'>{name}</div>
               <div>
                 {item.itemTypeDisplayName && item.itemTypeDisplayName !== '' ? <div className='kind'>{item.itemTypeDisplayName}</div> : null}
                 {!hideRarity && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
