@@ -523,5 +523,10 @@
     "date": "2019-07-14T22:55:53.288Z",
     "version": "2.7.6",
     "content": "- Some views have new names"
+  },
+  {
+    "date": "2019-07-17T09:01:50.405Z",
+    "version": "2.7.8",
+    "content": "- issue where you could no longer paginate PGCRs if a report failed to load fixed\n- medals added to PGCRs\n- mini loading indicator added to top-right of PGCRs to indicate previously silent loading activity"
   }
 ]
