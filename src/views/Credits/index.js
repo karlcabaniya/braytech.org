@@ -45,7 +45,7 @@ class Credits extends React.Component {
     {
       name: 'João Paulo Marquesini',
       icon: 'ghost',
-      description: 'The very handsome developer of the Light Light app laid the foundations for a multilingual Braytech.'
+      description: 'The very handsome developer of the Little Light app laid the foundations for a multilingual Braytech.'
     }
   ];
 

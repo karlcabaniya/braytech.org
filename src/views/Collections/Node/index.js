@@ -6,6 +6,7 @@ import { ProfileNavLink } from '../../../components/ProfileLink';
 import * as ls from '../../../utils/localStorage';
 import * as paths from '../../../utils/paths';
 import manifest from '../../../utils/manifest';
+import { enumerateCollectibleState } from '../../../utils/destinyEnums';
 
 import Collectibles from '../../../components/Collectibles';
 
@@ -29,8 +30,10 @@ class PresentationNode extends React.Component {
   };
 
   render() {
-    const { member } = this.props;
+    const { member, collectibles } = this.props;
     const characterId = member.characterId;
+    const characterCollectibles = member.data.profile.characterCollectibles.data;
+    const profileCollectibles = member.data.profile.profileCollectibles.data;
     const characters = member.data.profile.characters.data;
     const character = characters.find(c => c.characterId === characterId);
 
@@ -91,6 +94,24 @@ class PresentationNode extends React.Component {
     secondaryDefinition.children.presentationNodes.forEach(child => {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
+      if (node.redacted) {
+        return;
+      }
+
+      let states = [];
+    
+      let state = 0;
+      node.children.collectibles.forEach(c => {
+        const definitionCollectible = manifest.DestinyCollectibleDefinition[c.collectibleHash];
+
+        let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[characterId].collectibles[definitionCollectible.hash];
+        if (scope) {
+          state = scope.state;
+        }
+
+        states.push(state)
+      });
+
       let isActive = (match, location) => {
         if (tertiaryHash === child.presentationNodeHash) {
           return true;
@@ -99,8 +120,11 @@ class PresentationNode extends React.Component {
         }
       };
 
+      let secondaryProgress = states.filter(state => !enumerateCollectibleState(state).notAcquired).length;
+      let secondaryTotal = (collectibles && collectibles.hideInvisibleCollectibles) ? states.filter(state => !enumerateCollectibleState(state).invisible).length : states.length;
+console.log(states, secondaryProgress, secondaryTotal)
       secondaryChildren.push(
-        <li key={node.hash} className='linked'>
+        <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0 })}>
           <ProfileNavLink isActive={isActive} to={`/collections/${primaryHash}/${secondaryHash}/${node.hash}`}>
             {node.displayProperties.name}
           </ProfileNavLink>

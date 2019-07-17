@@ -61,11 +61,11 @@ class PresentationNode extends React.Component {
       let states = [];
 
       node.children.records.forEach(r => {
-        const recordDefinition = manifest.DestinyRecordDefinition[r.recordHash];
-        const recordScope = recordDefinition.scope || 0;
-        const recordData = recordScope === 1 ? characterRecords[characterId].records[recordDefinition.hash] : profileRecords[recordDefinition.hash];
+        const definitionRecord = manifest.DestinyRecordDefinition[r.recordHash];
+        const scopeRecord = definitionRecord.scope || 0;
+        const dataRecord = scopeRecord === 1 ? characterRecords[characterId].records[definitionRecord.hash] : profileRecords[definitionRecord.hash];
 
-        states.push(recordData)
+        states.push(dataRecord)
       });
 
       let isActive = (match, location) => {
@@ -86,7 +86,7 @@ class PresentationNode extends React.Component {
       }
 
       secondaryChildren.push(
-        <li key={node.hash} className='linked'>
+        <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal })}>
           <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${secondaryHash}/${node.hash}`}>
             <div className='name'>{node.displayProperties.name.length > 24 ? node.displayProperties.name.slice(0, 24) + '...' : node.displayProperties.name}</div>
             <div className='progress'>{secondaryProgress}/{secondaryTotal}</div>
@@ -123,11 +123,4 @@ class PresentationNode extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    member: state.member,
-    collectibles: state.collectibles
-  };
-}
-
-export default compose(connect(mapStateToProps))(PresentationNode);
+export default PresentationNode;
