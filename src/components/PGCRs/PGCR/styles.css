@@ -346,11 +346,8 @@
   background-color: rgba(255, 255, 255, 0);
 }
 
-.list.reports li .entries .list .isExpandedPlayer {
-  /* grid-column: 1/9;
-  display: grid;
-  grid-template-columns: calc(38px + 16px) 2fr 1fr 1fr 1fr 1fr 1fr 1fr; */
-  /* margin: 16px 0 10px; */
+.list.reports li .entries .list .isExpandedPlayer:hover::before {
+  background-color: transparent;
 }
 
 .list.reports li .entries .list .isExpandedPlayer .expanded {
