@@ -122,7 +122,7 @@ class PresentationNode extends React.Component {
 
       let secondaryProgress = states.filter(state => !enumerateCollectibleState(state).notAcquired).length;
       let secondaryTotal = (collectibles && collectibles.hideInvisibleCollectibles) ? states.filter(state => !enumerateCollectibleState(state).invisible).length : states.length;
-console.log(states, secondaryProgress, secondaryTotal)
+
       secondaryChildren.push(
         <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0 })}>
           <ProfileNavLink isActive={isActive} to={`/collections/${primaryHash}/${secondaryHash}/${node.hash}`}>

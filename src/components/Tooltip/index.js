@@ -36,18 +36,18 @@ class Tooltip extends React.Component {
     let scrollbarAllowance = 24;
 
     x = e.clientX;
-    y = e.clientY + offset;
+    y = e.clientY - (tooltipHeight > 200 ? 140 : 0);
 
-    if (x + tooltipWidth + scrollbarAllowance > window.innerWidth) {
-      x = x - tooltipWidth - offset;
+    if (x + tooltipWidth + scrollbarAllowance > window.innerWidth / 2 + tooltipWidth) {
+      x = x - tooltipWidth - scrollbarAllowance - offset;
     } else {
-      x = x + offset;
+      x = x + scrollbarAllowance + offset;
     }
 
     if (y + tooltipHeight + scrollbarAllowance > window.innerHeight) {
       y = window.innerHeight - tooltipHeight - scrollbarAllowance;
     }
-    y = y < 0 ? 0 : y;
+    y = y < scrollbarAllowance ? scrollbarAllowance : y;
 
     if (this.state.hash) {
       this.mouseMoveXY = {
@@ -88,7 +88,8 @@ class Tooltip extends React.Component {
   helper_targetTouchEnd = e => {
     if (!this.touchMovement) {
       // if (e.currentTarget.dataset.ignoretouch) console.warn(`helper_targetTouchEnd: Ignoring touch by target request`);
-      if (e.currentTarget.dataset.hash) { // && !e.currentTarget.dataset.ignoretouch
+      if (e.currentTarget.dataset.hash) {
+        // && !e.currentTarget.dataset.ignoretouch
         this.setState({
           hash: e.currentTarget.dataset.hash,
           instanceId: e.currentTarget.dataset.instanceid,
@@ -112,7 +113,7 @@ class Tooltip extends React.Component {
       table: false,
       tooltipType: false
     });
-  }
+  };
 
   performBindTooltipItem = reset => {
     if (reset) {
@@ -127,7 +128,7 @@ class Tooltip extends React.Component {
       target.addEventListener('mouseenter', this.helper_targetMouseEnter);
       target.addEventListener('mouseleave', this.helper_targetMouseLeave);
     });
-  }
+  };
 
   helper_tooltipTouchStart = e => {
     this.touchMovement = false;
@@ -201,7 +202,7 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     setTooltipDetailMode: value => {
-      dispatch({ type: 'REBIND_TOOLTIPS', payload: {  } });
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: {} });
     }
   };
 }
