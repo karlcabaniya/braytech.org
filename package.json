@@ -2,7 +2,7 @@
   "name": "braytech.org",
   "author": "Tom Chapman <askMeOnTwitter@justrealmilk> (https://thomchap.com.au)",
   "bugs": "https://github.com/justrealmilk/braytech.org/issues",
-  "version": "2.7.8",
+  "version": "2.7.9",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",

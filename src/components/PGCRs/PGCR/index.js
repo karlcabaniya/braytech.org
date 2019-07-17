@@ -731,9 +731,20 @@ class PGCR extends React.Component {
                 extended: true
               }
             ]
+          },
+          {
+            key: 'medals',
+            name: 'Medals',
+            fields: [
+              {
+                key: 'medals'
+              }
+            ]
           }
         ]
       };
+
+      const medalExclusions = ['precisionKills', 'weaponKillsAbility', 'weaponKillsGrenade', 'weaponKillsMelee', 'weaponKillsSuper', 'primevalHealing', 'primevalDamage', 'primevalKills', 'motesPickedUp', 'motesLost', 'motesDeposited', 'motesDenied'];
 
       let displayStats;
       if (modes.gambit.includes(pgcr.activityDetails.mode)) {
@@ -821,7 +832,7 @@ class PGCR extends React.Component {
                           if (entry.extended && entry.extended.values) {
                             value = (
                               <ul>
-                                {Object.keys(entry.extended.values).filter(j => displayStats.expanded.filter(l => l.fields.find(h => h.key === j)).length === 0).map((m) => {
+                                {Object.keys(entry.extended.values).filter(j => !medalExclusions.includes(j)).filter(j => displayStats.expanded.filter(l => l.fields.find(h => h.key === j)).length === 0).map((m) => {
                                   let medal = entry.extended.values[m];
                                   let definitionMedal = manifest.DestinyHistoricalStatsDefinition[m];
 
