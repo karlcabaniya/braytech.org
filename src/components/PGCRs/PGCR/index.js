@@ -842,7 +842,7 @@ class PGCR extends React.Component {
 
                                     return (
                                       <li key={m} className={cx('item', 'tooltip')} data-hash={m} data-table='DestinyHistoricalStatsDefinition'>
-                                        <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${icon}`} />
+                                        <ObservedImage className={cx('image', 'icon')} src={`${!definitionMedal.localIcon ? 'https://www.bungie.net' : ''}${icon}`} />
                                         <div className='value'>{value}</div>
                                       </li>
                                     );

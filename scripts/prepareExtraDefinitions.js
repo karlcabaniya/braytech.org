@@ -7,6 +7,8 @@ const fetch = require('node-fetch');
 
 const outputPath = lang => `src/data/manifest/${lang}/DestinyHistoricalStatsDefinition/index.json`;
 
+const historicalStatsGambit = JSON.parse(fs.readFileSync('./src/data/historicalStatsGambit/index.json'));
+
 let langs = [];
 
 function historicalStats() {
@@ -22,6 +24,10 @@ function historicalStats() {
         .then(json => {
           let rewire = {};
           json._embedded.results.forEach(m => {
+            if ((!m.iconImage || m.iconImage === '') && historicalStatsGambit[m.statId] && historicalStatsGambit[m.statId].iconImage) {
+              m.iconImage = `/static/images/extracts/medals/gambit/${historicalStatsGambit[m.statId].iconImage}`;
+              m.localIcon = true;
+            }
             rewire[m.statId] = m;
           });
           fs.writeFileSync(outputPath(lang), JSON.stringify(rewire), { flag: 'w' });
