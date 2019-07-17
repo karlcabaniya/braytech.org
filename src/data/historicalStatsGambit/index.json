@@ -1,5 +1,14 @@
 {
   "medals_pvecomp_medal_killmonger": {
     "iconImage": "01a3-00007770.png"
+  },
+  "medals_pvecomp_medal_locksmith": {
+    "iconImage": "01a3-00007798.png"
+  },
+  "medals_pvecomp_medal_massacre": {
+    "iconImage": "01a3-00007809.png"
+  },
+  "medals_pvecomp_medal_invader_kill_four": {
+    "iconImage": "01a3-00007660.png"
   }
 }
