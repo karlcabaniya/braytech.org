@@ -22,7 +22,6 @@ import * as ls from './utils/localStorage';
 import Header from './components/UI/Header';
 import Tooltip from './components/Tooltip';
 import Footer from './components/UI/Footer';
-import NotificationBar from './components/Notifications/NotificationBar';
 import NotificationLink from './components/Notifications/NotificationLink';
 import NotificationProgress from './components/Notifications/NotificationProgress';
 import RefreshService from './components/RefreshService';
@@ -208,7 +207,6 @@ class App extends React.Component {
         <Route
           render={route => (
             <div className={cx('wrapper', this.props.theme.selected)}>
-              <NotificationBar updateAvailable={this.props.updateAvailable} />
               <NotificationLink />
               <NotificationProgress />
 

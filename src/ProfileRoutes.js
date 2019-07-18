@@ -15,6 +15,7 @@ import ThisWeek from './views/ThisWeek';
 import SitRep from './views/SitRep';
 import Inventory from './views/Inventory';
 
+import PostmasterCapacity from './components/Notifications/PostmasterCapacity';
 import Header from './components/UI/Header';
 import Spinner from './components/UI/Spinner';
 
@@ -50,6 +51,7 @@ class ProfileRoutes extends React.Component {
 
     return (
       <>
+        <PostmasterCapacity />
         <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} />} />
         <Switch>
           <Route path={`${match.url}/clan/:view?/:subView?`} exact render={route => <Clan view={route.match.params.view} subView={route.match.params.subView} />} />
