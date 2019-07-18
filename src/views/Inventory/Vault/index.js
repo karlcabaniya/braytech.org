@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
+import manifest from '../../../utils/manifest';
 import Items from '../../../components/Items';
 
 import InventoryViewsLinks from '../InventoryViewsLinks';
@@ -28,16 +29,66 @@ class Vault extends React.Component {
 
     const vault = inventory.filter(i => i.bucketHash === 138197802);
 
+    const weapons = vault.filter(i => {
+      const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
+
+      if (definitionItem.itemType === 3) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    const armour = vault.filter(i => {
+      const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
+
+      if (definitionItem.itemType === 2) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    const misc = vault.filter(i => {
+      const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
+
+      if (definitionItem.itemType !== 2 && definitionItem.itemType !== 3) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    
+
     return (
       <div className='view vault' id='inventory'>
         <InventoryViewsLinks />
         <div className='module'>
           <div className='sub-header'>
-            <div>{t('Vault')}</div>
+            <div>{t('Vault: weapons')}</div>
             <div>{vault.length}/500</div>
           </div>
           <ul className='list inventory-items'>
-            <Items items={vault} />
+            <Items items={weapons} order='tierType' />
+          </ul>
+        </div>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>{t('Vault: armour')}</div>
+            <div>{vault.length}/500</div>
+          </div>
+          <ul className='list inventory-items'>
+            <Items items={armour} order='tierType' />
+          </ul>
+        </div>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>{t('Vault: miscellaneous')}</div>
+            <div>{vault.length}/500</div>
+          </div>
+          <ul className='list inventory-items'>
+            <Items items={misc} order='tierType' />
           </ul>
         </div>
       </div>

@@ -665,7 +665,7 @@ html.backdropfilter #header .nav {
   }
   
   #header.profile-header .background .image {
-    background-position: -45px bottom;
+    background-position: center bottom;
   }
 
   #header.profile-header .characters {

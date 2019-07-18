@@ -26,6 +26,7 @@ class Emblem_1409726988 extends React.Component {
   render() {
     return (
       <div className='emblem-ani-1409726988'>
+        <div className='bowl-0' />
         <div className='bowl-1' />
         <div className='bowl-2' />
         <div className='bowl-3' />

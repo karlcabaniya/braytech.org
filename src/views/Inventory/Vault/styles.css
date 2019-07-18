@@ -1,9 +1,11 @@
-#inventory.vault > .module:not(.views) {
-  grid-column: 2/5;
-}
-
 @media screen and (max-width: 1023px) {
+
+  #inventory.vault > .module.views {
+    grid-row: 1/4;
+  }
+  
   #inventory.vault > .module:not(.views) {
     grid-column: 2/3;
   }
+
 }

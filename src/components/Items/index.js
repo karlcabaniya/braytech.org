@@ -29,7 +29,7 @@ class Items extends React.Component {
 
       output.push({
         name: definitionItem.displayProperties && definitionItem.displayProperties.name,
-        rarity: definitionItem.inventory && definitionItem.inventory.tierType,
+        tierType: definitionItem.inventory && definitionItem.inventory.tierType,
         el: (
           <li
             key={i}

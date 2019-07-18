@@ -39,7 +39,7 @@ class Consumables extends React.Component {
             <div>{consumables.length}/50</div>
           </div>
           <ul className='list inventory-items'>
-            <Items items={consumables} order='rarity' />
+            <Items items={consumables} order='tierType' />
           </ul>
         </div>
         <div className='module'>
@@ -48,7 +48,7 @@ class Consumables extends React.Component {
             <div>{modifications.length}/50</div>
           </div>
           <ul className='list inventory-items'>
-            <Items items={modifications} order='rarity' />
+            <Items items={modifications} order='tierType' />
           </ul>
         </div>
         <div className='module'>
@@ -57,7 +57,7 @@ class Consumables extends React.Component {
             <div>{shaders.length}/50</div>
           </div>
           <ul className='list inventory-items'>
-            <Items items={shaders} order='rarity' />
+            <Items items={shaders} order='tierType' />
           </ul>
         </div>
       </div>
