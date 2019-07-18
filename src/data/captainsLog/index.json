@@ -528,5 +528,10 @@
     "date": "2019-07-17T09:01:50.405Z",
     "version": "2.7.8",
     "content": "- issue where you could no longer paginate PGCRs if a report failed to load fixed\n- medals added to PGCRs\n- mini loading indicator added to top-right of PGCRs to indicate previously silent loading activity"
+  },
+  {
+    "date": "2019-07-18T04:25:17.684Z",
+    "version": "2.7.9",
+    "content": "- added gambit medals to PGCRs but icons require manual association\n- added completed presentation node highlighting to secondary navigation for triumphs and collections\n- updated tooltip positioning logic\n- added ability to facilitate animated emblem icons\n- adjusted styling for emblem background positioning\n- added postmaster capacity warning notification bar"
   }
 ]
