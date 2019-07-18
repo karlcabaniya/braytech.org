@@ -11,6 +11,7 @@ import ProgressBar from '../../UI/ProgressBar';
 import { classHashToString } from '../../../utils/destinyUtils';
 import { ProfileNavLink } from '../../ProfileLink';
 import Footer from '../Footer';
+import EmblemSecondaryOverlay from '../EmblemSecondaryOverlay/';
 
 import './styles.css';
 
@@ -41,11 +42,6 @@ class Header extends React.Component {
       this.navEl.current.addEventListener('touchmove', this.nav_touchMove, true);
     }
   }
-
-  nav_touchMove = e => {
-    //e.preventDefault();
-    //e.stopPropagation()
-  };
 
   toggleNav = () => {
     if (!this.state.navOpen) {
@@ -259,12 +255,7 @@ class Header extends React.Component {
             <div className='characters'>
               <ul className='list'>
                 <li>
-                  <ObservedImage
-                    className={cx('image', 'secondaryOverlay', {
-                      missing: definitionEmblem.redacted
-                    })}
-                    src={`https://www.bungie.net${!definitionEmblem.redacted ? definitionEmblem.secondaryOverlay : `/img/misc/missing_icon_d2.png`}`}
-                  />
+                  <EmblemSecondaryOverlay hash={character.emblemHash} />
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
                     {character.baseCharacterLevel} / {classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>
