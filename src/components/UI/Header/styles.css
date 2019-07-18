@@ -216,7 +216,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
 
 #header.profile-header .background .image {
   background-size: cover;
-  background-position: center bottom;
+  background-position: -53px bottom;
 }
 
 #header.profile-header .background .image.very-light {
@@ -662,6 +662,10 @@ html.backdropfilter #header .nav {
   #header.profile-header .profile {
     padding: 0;
     height: 112px;
+  }
+  
+  #header.profile-header .background .image {
+    background-position: -45px bottom;
   }
 
   #header.profile-header .characters {
