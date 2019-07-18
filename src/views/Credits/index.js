@@ -90,6 +90,7 @@ class Credits extends React.Component {
             <p>The Architects and Guardians that make Braytech possible.</p>
             <p>Braytech's history spans the life of Destiny 2's release. There's been many changes in its trajectory, and it continues to soar. I, justrealmilk, have been aided in my journey by a handful of generous developers, designers, and friendly blueberries, to build this passion project out of the ground from rudimentary HTML and jQuery.</p>
             <p>Love for this game is as undying as the Light itself.</p>
+            <p>© Bungie, Inc. All rights reserved. Destiny, the Destiny Logo, Bungie and the Bungie logo are among the trademarks of Bungie, Inc.</p>
           </div>
         </div>
         <div className='module thanks'>

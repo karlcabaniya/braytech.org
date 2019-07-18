@@ -6,6 +6,8 @@ import ObservedImage from '../../ObservedImage';
 
 import './styles.css';
 
+// Planet of Peace
+
 class Emblem_4182480233 extends React.Component {
   render() {
     return (
@@ -18,12 +20,28 @@ class Emblem_4182480233 extends React.Component {
   }
 }
 
+// Spicey Ramen
+
+class Emblem_1409726988 extends React.Component {
+  render() {
+    return (
+      <div className='emblem-ani-1409726988'>
+        <div className='bowl-1' />
+        <div className='bowl-2' />
+        <div className='bowl-3' />
+        <div className='outline' />
+      </div>
+    );
+  }
+}
+
 class EmblemSecondaryOverlay extends React.Component {
   render() {
     const { hash } = this.props;
 
     const custom = {
-      4182480233: Emblem_4182480233
+      4182480233: Emblem_4182480233,
+      1409726988: Emblem_1409726988
     };
 
     if (custom[hash]) {

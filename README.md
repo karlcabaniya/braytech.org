@@ -20,3 +20,8 @@ To start the app running on the default port of 3000 run:
 
 
 The `npm run` command will list all of the scripts available to run for this project.
+
+
+
+
+© Bungie, Inc. All rights reserved. Destiny, the Destiny Logo, Bungie and the Bungie logo are among the trademarks of Bungie, Inc.
