@@ -1,32 +1,68 @@
 #animated-emblem-icons {
-  padding: 4rem 3rem 3rem;
+  padding: 0;
   display: grid;
-  grid-gap: 3rem;
+  margin: -40px auto 0;
+  width: 100%;
+}
+
+#animated-emblem-icons > .module.head {
+  padding: calc(4rem + 40px) 3rem 3rem;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+#animated-emblem-icons > .module.head .page-header {
+  margin-bottom: 0rem;
+}
+
+#animated-emblem-icons > .padder {
+  width: 100%;
+  padding: 3rem;
+  display: grid;
   grid-template-columns: 1fr;
+  grid-gap: 3rem;
 }
 
 #animated-emblem-icons .row {
   display: grid;
   grid-gap: 3rem;
-  grid-template-columns: 600px auto;
+  grid-template-columns: 300px auto;
+}
+
+#animated-emblem-icons .row .description {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 56px auto;
+}
+
+#animated-emblem-icons .row .description .item .list.inventory-items {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+#animated-emblem-icons .row .description .name {
+  font-size: 16px;
+  margin: 0 0 4px;
+}
+
+#animated-emblem-icons .row .description .animator {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 #animated-emblem-icons .emblem {
   position: relative;
-  margin: 0 0 4rem;
 }
 
 #animated-emblem-icons .emblem .text {
   position: absolute;
-  left: 11%;
+  left: 10%;
   top: 50%;
 }
 
 #animated-emblem-icons .emblem .displayName {
   position: relative;
   flex-basis: 100%;
-  font-size: 0.9vw;
-  letter-spacing: 0.08vw;
+  font-size: 1.4vw;
+  letter-spacing: 0.1vw;
   line-height: 1;
   font-weight: 500;
   margin: 0.3vw 0 0.2vw;
@@ -46,8 +82,8 @@
   display: flex;
   flex-flow: row wrap;
   text-transform: uppercase;
-  letter-spacing: 0.08vw;
-  font-size: 0.6vw;
+  letter-spacing: 0.1vw;
+  font-size: 0.7vw;
   line-height: 1;
   color: rgba(255, 255, 255, 0.6);
 }
@@ -58,7 +94,7 @@
 
 #animated-emblem-icons .emblem .basics .light {
   position: relative;
-  margin: 0 0 0 14px;
+  margin: 0 0 0 0.6vw;
   font-weight: 500;
   color: #2ed1c9;
 }
@@ -66,10 +102,10 @@
 #animated-emblem-icons .emblem .basics .light::before {
   content: 'l';
   position: absolute;
-  top: 2px;
-  left: -10px;
+  top: 0.1vw;
+  left: -0.5vw;
   font-family: 'destiny' !important;
-  font-size: 8px;
+  font-size: 0.4vw;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -84,6 +120,7 @@
   width: 100%;
   height: unset;
   padding-bottom: calc(100% * 146 / 1958);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 #animated-emblem-icons .emblem .background .image {
@@ -94,7 +131,7 @@
 #animated-emblem-icons .emblem .icon {
   position: absolute;
   top: 50%;
-  left: 5%;
+  left: 4%;
   width: 5%;
   padding-bottom: 5%;
 }
@@ -102,4 +139,88 @@
 #animated-emblem-icons .emblem .icon .emblem-ani-1409726988 {
   width: 100%;
   height: 100%;
+}
+
+
+
+
+@media screen and (max-width: 1440px) {
+  #animated-emblem-icons .emblem .text {
+    top: 40%;
+  }
+
+  #animated-emblem-icons .emblem .icon {
+    top: 40%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #animated-emblem-icons .emblem .text {
+    top: 30%;
+  }
+
+  #animated-emblem-icons .emblem .icon {
+    top: 30%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #animated-emblem-icons .row {
+    grid-template-columns: 1fr;
+    grid-gap: 16px;
+  }
+
+  #animated-emblem-icons .emblem .background {
+    padding-bottom: calc(175% * 146 / 1958);
+  }
+
+  #animated-emblem-icons .emblem .text {
+    top: 40%;
+    left: 16%;
+  }
+
+  #animated-emblem-icons .emblem .displayName {
+    font-size: 3.4vw;
+    letter-spacing: 0.1vw;
+    margin: 0.3vw 0 0.4vw;
+  }
+  
+  #animated-emblem-icons .emblem .displayName::before {
+    top: -0.4vw;
+    left: 0;
+    width: 2vw;
+    height: 0.3vw;
+  }
+  
+  #animated-emblem-icons .emblem .basics {
+    letter-spacing: 0.2vw;
+    font-size: 1.5vw;
+  }
+  
+  #animated-emblem-icons .emblem .basics .light {
+    margin: 0 0 0 1.6vw;
+  }
+  
+  #animated-emblem-icons .emblem .basics .light::before {
+    top: 0.25vw;
+    left: -1.2vw;
+    font-size: 1vw;
+  }
+
+  #animated-emblem-icons .emblem .icon {
+    top: 40%;
+    width: 10%;
+    padding-bottom: 10%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #animated-emblem-icons > .module.head {
+    padding: calc(3rem + 40px) 2rem 2rem;
+  }
+
+  #animated-emblem-icons > .padder {
+    grid-gap: 2rem;
+    padding: 2rem;
+  }
 }
