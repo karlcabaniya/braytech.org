@@ -494,7 +494,9 @@ export function stringToIcons(string) {
     '[Machine Gun]': 'machinegun',
     '[Solar Kill]': 'damage_solar',
     '[Void Kill]': 'damage_void',
-    '[Arc Kill]': 'damage_arc'
+    '[Arc Kill]': 'damage_arc',
+    '[Melee Kill]': 'melee',
+    '[Grenade Kill]': 'grenade'
   };
 
   array = string.split(/(\[.*?\])/g);

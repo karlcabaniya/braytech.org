@@ -117,6 +117,17 @@
   margin-top: 1rem;
 }
 
+.quest-line .steps .step .objectives .list.record-items {
+  grid-template-columns: 1fr;
+  margin: 1rem 0 2rem;
+}
+
+.quest-line .steps .step .objectives .list.record-items:last-child {
+  margin-bottom: 0;
+}
+
+
+
 @media screen and (max-width: 1280px) {
 
   .quest-line {

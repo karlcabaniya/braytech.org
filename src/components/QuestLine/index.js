@@ -6,13 +6,26 @@ import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import ObservedImage from '../ObservedImage';
+import Records from '../Records/';
 import Items from '../Items';
 import ProgressBar from '../UI/ProgressBar';
 
 import './styles.css';
 
 class QuestLine extends React.Component {
+  stepsWithRecords = [
+    // From the Mouths of Babes
+    {
+      objectiveHash: 4280752187,
+      recordHash: 1396554507
+    },
+    // The Ascent
+    {
+      objectiveHash: 3837519245,
+      recordHash: 3026670632
+    }
+  ];
+
   render() {
     const { t, member, item } = this.props;
     const itemComponents = member.data.profile.itemComponents;
@@ -135,7 +148,18 @@ class QuestLine extends React.Component {
                             ...s.progress.find(o => o.objectiveHash === definitionObjective.hash)
                           };
 
-                          objectives.push(<ProgressBar key={definitionObjective.hash} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
+                          let relatedRecords = this.stepsWithRecords.filter(r => r.objectiveHash === definitionObjective.hash).map(r => r.recordHash);
+                          
+                          objectives.push(
+                            <React.Fragment key={definitionObjective.hash}>
+                              <ProgressBar objectiveDefinition={definitionObjective} playerProgress={playerProgress} />
+                              {relatedRecords && relatedRecords.length ? (
+                                <ul className='list record-items'>
+                                  <Records selfLinkFrom={`/inventory/pursuits/${item.itemHash}`} forceDisplay {...this.props} hashes={relatedRecords} />
+                                </ul>
+                              ) : null}
+                            </React.Fragment>
+                          );
                         });
 
                       const descriptionStep = s.definitionStep.displayProperties.description && s.definitionStep.displayProperties.description !== '' ? s.definitionStep.displayProperties.description : false;
@@ -174,7 +198,18 @@ class QuestLine extends React.Component {
                       ...s.progress.find(o => o.objectiveHash === definitionObjective.hash)
                     };
 
-                    objectives.push(<ProgressBar key={definitionObjective.hash} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
+                    let relatedRecords = this.stepsWithRecords.filter(r => r.objectiveHash === definitionObjective.hash).map(r => r.recordHash);
+
+                    objectives.push(
+                      <React.Fragment key={definitionObjective.hash}>
+                        <ProgressBar objectiveDefinition={definitionObjective} playerProgress={playerProgress} />
+                        {relatedRecords && relatedRecords.length ? (
+                          <ul className='list record-items'>
+                            <Records selfLinkFrom={`/inventory/pursuits/${item.itemHash}`} forceDisplay {...this.props} hashes={relatedRecords} />
+                          </ul>
+                        ) : null}
+                      </React.Fragment>
+                    );
                   });
 
                 const descriptionStep = s.definitionStep.displayProperties.description && s.definitionStep.displayProperties.description !== '' ? s.definitionStep.displayProperties.description : false;
