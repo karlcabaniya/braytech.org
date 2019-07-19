@@ -538,5 +538,10 @@
     "date": "2019-07-19T07:52:57.397Z",
     "version": "2.7.10",
     "content": "- added records to some quest item steps for display under _Inventory_ pursuits"
+  },
+  {
+    "date": "2019-07-19T12:19:19.223Z",
+    "version": "2.7.11",
+    "content": "- updated emblem animation component and added _Sign of Our City_ by @InexorableAce"
   }
 ]
