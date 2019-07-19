@@ -11,7 +11,7 @@ import ProgressBar from '../../UI/ProgressBar';
 import { classHashToString } from '../../../utils/destinyUtils';
 import { ProfileNavLink } from '../../ProfileLink';
 import Footer from '../Footer';
-import EmblemSecondaryOverlay from '../EmblemSecondaryOverlay/';
+import { EmblemAnimatedIcon, EmblemAnimatedBackground } from '../EmblemAnimated/';
 
 import './styles.css';
 
@@ -238,24 +238,16 @@ class Header extends React.Component {
 
       const progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
 
-      const veryLightEmblems = [4182480236];
-
       profileEl = (
         <div className='profile'>
           <div className={cx('background', { 'update-flash': this.state.updateFlash })}>
-            <ObservedImage
-              className={cx('image', 'emblem', {
-                missing: definitionEmblem.redacted,
-                'very-light': veryLightEmblems.includes(definitionEmblem.hash)
-              })}
-              src={`https://www.bungie.net${definitionEmblem.secondarySpecial ? definitionEmblem.secondarySpecial : `/img/misc/missing_icon_d2.png`}`}
-            />
+            <EmblemAnimatedBackground hash={character.emblemHash} />
           </div>
           <div className='ui'>
             <div className='characters'>
               <ul className='list'>
                 <li>
-                  <EmblemSecondaryOverlay hash={character.emblemHash} />
+                  <EmblemAnimatedIcon hash={character.emblemHash} />
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
                     {character.baseCharacterLevel} / {classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>

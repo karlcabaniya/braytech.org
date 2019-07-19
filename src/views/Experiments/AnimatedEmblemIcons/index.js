@@ -7,7 +7,7 @@ import manifest from '../../../utils/manifest';
 import { classHashToString } from '../../../utils/destinyUtils';
 import ObservedImage from '../../../components/ObservedImage';
 import Items from '../../../components/Items';
-import EmblemSecondaryOverlay from '../../../components/UI/EmblemSecondaryOverlay';
+import { EmblemAnimatedIcon, EmblemAnimatedBackground } from '../../../components/UI/EmblemAnimated/';
 
 import './styles.css';
 
@@ -73,7 +73,7 @@ class AnimatedEmblemIcons extends React.Component {
                     <ObservedImage className='image' src={`https://www.bungie.net${definitionEmblem.secondarySpecial}`} />
                   </div>
                   <div className='icon'>
-                    <EmblemSecondaryOverlay hash={custom.emblemHash} />
+                    <EmblemAnimatedIcon hash={custom.emblemHash} />
                   </div>
                   <div className='text'>
                     <div className='displayName'>{profile ? profile.userInfo.displayName : 'Deej'}</div>
