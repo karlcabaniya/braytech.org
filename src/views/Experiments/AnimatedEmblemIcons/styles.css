@@ -1,0 +1,105 @@
+#animated-emblem-icons {
+  padding: 4rem 3rem 3rem;
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-columns: 1fr;
+}
+
+#animated-emblem-icons .row {
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-columns: 600px auto;
+}
+
+#animated-emblem-icons .emblem {
+  position: relative;
+  margin: 0 0 4rem;
+}
+
+#animated-emblem-icons .emblem .text {
+  position: absolute;
+  left: 11%;
+  top: 50%;
+}
+
+#animated-emblem-icons .emblem .displayName {
+  position: relative;
+  flex-basis: 100%;
+  font-size: 0.9vw;
+  letter-spacing: 0.08vw;
+  line-height: 1;
+  font-weight: 500;
+  margin: 0.3vw 0 0.2vw;
+}
+
+#animated-emblem-icons .emblem .displayName::before {
+  content: ' ';
+  position: absolute;
+  top: -0.2vw;
+  left: 0;
+  width: 0.6vw;
+  height: 0.1vw;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#animated-emblem-icons .emblem .basics {
+  display: flex;
+  flex-flow: row wrap;
+  text-transform: uppercase;
+  letter-spacing: 0.08vw;
+  font-size: 0.6vw;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#animated-emblem-icons .emblem .basics::before {
+  content: '//\00A0';
+}
+
+#animated-emblem-icons .emblem .basics .light {
+  position: relative;
+  margin: 0 0 0 14px;
+  font-weight: 500;
+  color: #2ed1c9;
+}
+
+#animated-emblem-icons .emblem .basics .light::before {
+  content: 'l';
+  position: absolute;
+  top: 2px;
+  left: -10px;
+  font-family: 'destiny' !important;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#animated-emblem-icons .emblem .background {
+  position: relative;
+  width: 100%;
+  height: unset;
+  padding-bottom: calc(100% * 146 / 1958);
+}
+
+#animated-emblem-icons .emblem .background .image {
+  background-position: center bottom;
+  background-size: cover;
+}
+
+#animated-emblem-icons .emblem .icon {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 5%;
+  padding-bottom: 5%;
+}
+
+#animated-emblem-icons .emblem .icon .emblem-ani-1409726988 {
+  width: 100%;
+  height: 100%;
+}

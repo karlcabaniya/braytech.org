@@ -5,8 +5,6 @@ import { withNamespaces } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
-import ObservedImage from '../../components/ObservedImage';
-
 import './styles.css';
 
 class Resources extends React.Component {
@@ -38,6 +36,13 @@ class Resources extends React.Component {
         description: "A simple tree view approach to browsing through Destiny's manifest. Like data.destinysets.com, but less useful. I should probably at least add a filter input.",
         author: 'Braytech',
         link: '/experiments/data-inspector'
+      },
+      {
+        name: 'Animated Emblem Icons',
+        icon: 'destiny-road_kill',
+        description: "...",
+        author: 'Braytech',
+        link: '/experiments/animated-emblem-icons'
       }
     ];
 
