@@ -533,5 +533,10 @@
     "date": "2019-07-18T04:25:17.684Z",
     "version": "2.7.9",
     "content": "- added gambit medals to PGCRs but icons require manual association\n- added completed presentation node highlighting to secondary navigation for triumphs and collections\n- updated tooltip positioning logic\n- added ability to facilitate animated emblem icons\n- adjusted styling for emblem background positioning\n- added postmaster capacity warning notification bar"
+  },
+  {
+    "date": "2019-07-19T07:52:57.397Z",
+    "version": "2.7.10",
+    "content": "- added records to some quest item steps for display under _Inventory_ pursuits"
   }
 ]
