@@ -227,6 +227,20 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   opacity: 0;
 }
 
+#header.profile-header .background .animator {
+  position: absolute;
+  top: 56px;
+  right: calc(3rem + 10px);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.1);
+}
+
+#header.profile-header .background .animator span {
+  color: rgba(255, 255, 255, 0.2);
+}
+
 #header.profile-header .characters {
   position: relative;
   margin: 38px 0 0;
@@ -245,7 +259,9 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   user-select: none;
 }
 
-#header.profile-header .characters .list li .image.secondaryOverlay {
+#header.profile-header .characters .list li .icon {
+  position: absolute;
+  left: 0;
   width: 96px;
   height: 96px;
 }
@@ -348,6 +364,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
 }
 
 #header.profile-header .views {
+  margin: 32px 0 0;
 }
 
 #header.profile-header .views ul {
@@ -367,8 +384,8 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
 
 #header.profile-header .views ul li a {
   position: relative;
-  padding: 32px 4px 0;
-  height: 112px;
+  padding: 32px 4px;
+  height: 80px;
   display: flex;
   align-items: center;
   color: rgba(255, 255, 255, 0.4);
@@ -619,6 +636,8 @@ html.backdropfilter #header .nav {
   }
 }
 
+
+
 @media screen and (max-width: 600px) {
   #header .braytech {
     padding: 0 2rem;
@@ -668,6 +687,13 @@ html.backdropfilter #header .nav {
     background-position: center bottom;
   }
 
+  #header.profile-header .background .animator {
+    top: 48px;
+    right: 2rem;
+    font-size: 10px;
+    display: none;
+  }
+
   #header.profile-header .characters {
     margin: 64px 0 0;
   }
@@ -677,7 +703,7 @@ html.backdropfilter #header .nav {
     height: 64px;
   }
 
-  #header.profile-header .characters .list li .image.secondaryOverlay {
+  #header.profile-header .characters .list li .icon {
     width: 64px;
     height: 64px;
   }

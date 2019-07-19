@@ -247,7 +247,9 @@ class Header extends React.Component {
             <div className='characters'>
               <ul className='list'>
                 <li>
-                  <EmblemAnimatedIcon hash={character.emblemHash} />
+                  <div className='icon'>
+                    <EmblemAnimatedIcon hash={character.emblemHash} />
+                  </div>
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
                     {character.baseCharacterLevel} / {classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>

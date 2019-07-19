@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -54,9 +55,18 @@ class Emblem_2133500855_icon extends React.Component {
 
 class Emblem_2133500855_background extends React.Component {
   render() {
+    const { hideCredit } = this.props;
+
     return (
       <div className='emblem-ani-2133500855-background'>
         <div className='bars' />
+        {!hideCredit ? (
+          <div className='animator'>
+            <Link to='/experiments/animated-emblems'>
+              Animated by <span>InexorableAce</span>
+            </Link>
+          </div>
+        ) : null}
       </div>
     );
   }
@@ -73,7 +83,7 @@ const emblemsCustom = {
     icon: Emblem_2133500855_icon,
     background: Emblem_2133500855_background
   }
-}
+};
 
 export class EmblemAnimatedIcon extends React.Component {
   render() {
@@ -100,15 +110,15 @@ export class EmblemAnimatedIcon extends React.Component {
 
 export class EmblemAnimatedBackground extends React.Component {
   render() {
-    const { hash } = this.props;
+    const { hash, hideCredit } = this.props;
 
     if (emblemsCustom[hash] && emblemsCustom[hash].background) {
       const Element = emblemsCustom[hash].background;
 
-      return <Element />;
+      return <Element {...this.props} />;
     } else {
       const definitionEmblem = manifest.DestinyInventoryItemDefinition[hash];
-      
+
       const veryLightEmblems = [4182480236];
 
       return (

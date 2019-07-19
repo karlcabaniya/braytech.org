@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
@@ -39,6 +40,11 @@ class AnimatedEmblemIcons extends React.Component {
       {
         emblemHash: 1409726988,
         animator: 'Tom Chapman'
+      },
+      {
+        emblemHash: 2133500855,
+        animator: 'InexorableAce',
+        animator_url: 'https://twitter.com/InexorableAce'
       }
     ];
 
@@ -64,13 +70,23 @@ class AnimatedEmblemIcons extends React.Component {
                   <div className='text'>
                     <div className='name'>{definitionEmblem.displayProperties.name}</div>
                     <div className='animator'>
-                      {t('Animator')}: {custom.animator}
+                      {custom.animator_url ? (
+                        <>
+                          {t('Animator')}: <a href={custom.animator_url} target='_blank' rel='noopener noreferrer'>
+                            {custom.animator} <i className='segoe-uniE143' />
+                          </a>
+                        </>
+                      ) : (
+                        <>
+                          {t('Animator')}: {custom.animator}
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className='emblem'>
                   <div className='background'>
-                    <ObservedImage className='image' src={`https://www.bungie.net${definitionEmblem.secondarySpecial}`} />
+                    <EmblemAnimatedBackground hash={custom.emblemHash} hideCredit />
                   </div>
                   <div className='icon'>
                     <EmblemAnimatedIcon hash={custom.emblemHash} />

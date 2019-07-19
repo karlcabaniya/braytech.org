@@ -55,15 +55,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 96px;
-  height: 96px;
-}
-
-@media screen and (max-width: 600px) {
-  .emblem-ani-1409726988-icon {
-    width: 64px;
-    height: 64px;
-  }
+  width: 100%;
+  height: 100%;
 }
 
 .emblem-ani-1409726988-icon .bowl-0 {
@@ -112,8 +105,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 96px;
-  height: 96px;
+  width: 100%;
+  height: 100%;
 }
 
 @keyframes emblem-ani-2133500855-ball {
@@ -155,13 +148,6 @@
   }
   100% {
     transform: translate(0, 0);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .emblem-ani-2133500855-icon {
-    width: 64px;
-    height: 64px;
   }
 }
 
