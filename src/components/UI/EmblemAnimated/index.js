@@ -72,6 +72,38 @@ class Emblem_2133500855_background extends React.Component {
   }
 }
 
+// Grizzled Wolf
+
+class Emblem_1661191199_icon extends React.Component {
+  render() {
+    return (
+      <div className='emblem-ani-1661191199-icon'>
+        <div className='wolf' />
+      </div>
+    );
+  }
+}
+
+class Emblem_1661191199_background extends React.Component {
+  render() {
+    const { hideCredit } = this.props;
+
+    return (
+      <div className='emblem-ani-1661191199-background'>
+        <div className='thickets' />
+        <div className='extra-thickets' />
+        {!hideCredit ? (
+          <div className='animator'>
+            <Link to='/experiments/animated-emblems'>
+              Animated by <span>InexorableAce</span>
+            </Link>
+          </div>
+        ) : null}
+      </div>
+    );
+  }
+}
+
 const emblemsCustom = {
   4182480233: {
     icon: Emblem_4182480233_icon
@@ -82,6 +114,10 @@ const emblemsCustom = {
   2133500855: {
     icon: Emblem_2133500855_icon,
     background: Emblem_2133500855_background
+  },
+  1661191199: {
+    icon: Emblem_1661191199_icon,
+    background: Emblem_1661191199_background
   }
 };
 
@@ -110,7 +146,7 @@ export class EmblemAnimatedIcon extends React.Component {
 
 export class EmblemAnimatedBackground extends React.Component {
   render() {
-    const { hash, hideCredit } = this.props;
+    const { hash } = this.props;
 
     if (emblemsCustom[hash] && emblemsCustom[hash].background) {
       const Element = emblemsCustom[hash].background;

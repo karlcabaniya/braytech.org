@@ -34,25 +34,30 @@ class AnimatedEmblemIcons extends React.Component {
 
     const custom = [
       {
+        emblemHash: 1661191199,
+        animator: 'InexorableAce',
+        animator_url: 'https://twitter.com/InexorableAce'
+      },
+      {
+        emblemHash: 2133500855,
+        animator: 'InexorableAce',
+        animator_url: 'https://twitter.com/InexorableAce'
+      },
+      {
         emblemHash: 4182480233,
         animator: 'Tom Chapman'
       },
       {
         emblemHash: 1409726988,
         animator: 'Tom Chapman'
-      },
-      {
-        emblemHash: 2133500855,
-        animator: 'InexorableAce',
-        animator_url: 'https://twitter.com/InexorableAce'
       }
     ];
 
     return (
-      <div className='view' id='animated-emblem-icons'>
+      <div className='view' id='animated-emblems'>
         <div className='module head'>
           <div className='page-header'>
-            <div className='name'>{t('Animated Emblem Icons')}</div>
+            <div className='name'>{t('Animated Emblems')}</div>
           </div>
         </div>
         <div className='padder'>

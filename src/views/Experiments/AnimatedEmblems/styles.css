@@ -1,20 +1,20 @@
-#animated-emblem-icons {
+#animated-emblems {
   padding: 0;
   display: grid;
   margin: -40px auto 0;
   width: 100%;
 }
 
-#animated-emblem-icons > .module.head {
+#animated-emblems > .module.head {
   padding: calc(4rem + 40px) 3rem 3rem;
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-#animated-emblem-icons > .module.head .page-header {
+#animated-emblems > .module.head .page-header {
   margin-bottom: 0rem;
 }
 
-#animated-emblem-icons > .padder {
+#animated-emblems > .padder {
   width: 100%;
   padding: 3rem;
   display: grid;
@@ -22,48 +22,48 @@
   grid-gap: 3rem;
 }
 
-#animated-emblem-icons .row {
+#animated-emblems .row {
   display: grid;
   grid-gap: 3rem;
   grid-template-columns: 300px auto;
 }
 
-#animated-emblem-icons .row .description {
+#animated-emblems .row .description {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 56px auto;
 }
 
-#animated-emblem-icons .row .description .item .list.inventory-items {
+#animated-emblems .row .description .item .list.inventory-items {
   grid-template-columns: repeat(1, 1fr);
 }
 
-#animated-emblem-icons .row .description .name {
+#animated-emblems .row .description .name {
   font-size: 16px;
   margin: 0 0 4px;
 }
 
-#animated-emblem-icons .row .description .animator {
+#animated-emblems .row .description .animator {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
 }
 
-#animated-emblem-icons .row .description .animator a i {
+#animated-emblems .row .description .animator a i {
   font-size: 10px;
   margin: 0 0 0 4px;
 }
 
-#animated-emblem-icons .row > .emblem {
+#animated-emblems .row > .emblem {
   position: relative;
 }
 
-#animated-emblem-icons .emblem .text {
+#animated-emblems .emblem .text {
   position: absolute;
   left: 10%;
   top: 50%;
 }
 
-#animated-emblem-icons .emblem .displayName {
+#animated-emblems .emblem .displayName {
   position: relative;
   flex-basis: 100%;
   font-size: 1.4vw;
@@ -73,7 +73,7 @@
   margin: 0.3vw 0 0.2vw;
 }
 
-#animated-emblem-icons .emblem .displayName::before {
+#animated-emblems .emblem .displayName::before {
   content: ' ';
   position: absolute;
   top: -0.2vw;
@@ -83,7 +83,7 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-#animated-emblem-icons .emblem .basics {
+#animated-emblems .emblem .basics {
   display: flex;
   flex-flow: row wrap;
   text-transform: uppercase;
@@ -93,18 +93,18 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-#animated-emblem-icons .emblem .basics::before {
+#animated-emblems .emblem .basics::before {
   content: '//\00A0';
 }
 
-#animated-emblem-icons .emblem .basics .light {
+#animated-emblems .emblem .basics .light {
   position: relative;
   margin: 0 0 0 0.6vw;
   font-weight: 500;
   color: #2ed1c9;
 }
 
-#animated-emblem-icons .emblem .basics .light::before {
+#animated-emblems .emblem .basics .light::before {
   content: 'l';
   position: absolute;
   top: 0.1vw;
@@ -120,7 +120,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-#animated-emblem-icons .emblem .background {
+#animated-emblems .emblem .background {
   position: relative;
   width: 100%;
   height: unset;
@@ -128,12 +128,12 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-#animated-emblem-icons .emblem .background .image {
+#animated-emblems .emblem .background .image {
   background-position: center bottom;
   background-size: cover;
 }
 
-#animated-emblem-icons .emblem .icon {
+#animated-emblems .emblem .icon {
   position: absolute;
   top: 50%;
   left: 4%;
@@ -145,69 +145,69 @@
 
 
 @media screen and (max-width: 1440px) {
-  #animated-emblem-icons .emblem .text {
+  #animated-emblems .emblem .text {
     top: 40%;
   }
 
-  #animated-emblem-icons .emblem .icon {
+  #animated-emblems .emblem .icon {
     top: 40%;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  #animated-emblem-icons .emblem .text {
+  #animated-emblems .emblem .text {
     top: 30%;
   }
 
-  #animated-emblem-icons .emblem .icon {
+  #animated-emblems .emblem .icon {
     top: 30%;
   }
 }
 
 @media screen and (max-width: 768px) {
-  #animated-emblem-icons .row {
+  #animated-emblems .row {
     grid-template-columns: 1fr;
     grid-gap: 16px;
   }
 
-  #animated-emblem-icons .emblem .background {
+  #animated-emblems .emblem .background {
     padding-bottom: calc(175% * 146 / 1958);
   }
 
-  #animated-emblem-icons .emblem .text {
+  #animated-emblems .emblem .text {
     top: 40%;
     left: 16%;
   }
 
-  #animated-emblem-icons .emblem .displayName {
+  #animated-emblems .emblem .displayName {
     font-size: 3.4vw;
     letter-spacing: 0.1vw;
     margin: 0.3vw 0 0.4vw;
   }
   
-  #animated-emblem-icons .emblem .displayName::before {
+  #animated-emblems .emblem .displayName::before {
     top: -0.4vw;
     left: 0;
     width: 2vw;
     height: 0.3vw;
   }
   
-  #animated-emblem-icons .emblem .basics {
+  #animated-emblems .emblem .basics {
     letter-spacing: 0.2vw;
     font-size: 1.5vw;
   }
   
-  #animated-emblem-icons .emblem .basics .light {
+  #animated-emblems .emblem .basics .light {
     margin: 0 0 0 1.6vw;
   }
   
-  #animated-emblem-icons .emblem .basics .light::before {
+  #animated-emblems .emblem .basics .light::before {
     top: 0.25vw;
     left: -1.2vw;
     font-size: 1vw;
   }
 
-  #animated-emblem-icons .emblem .icon {
+  #animated-emblems .emblem .icon {
     top: 40%;
     width: 10%;
     padding-bottom: 10%;
@@ -215,11 +215,11 @@
 }
 
 @media screen and (max-width: 600px) {
-  #animated-emblem-icons > .module.head {
+  #animated-emblems > .module.head {
     padding: calc(3rem + 40px) 2rem 2rem;
   }
 
-  #animated-emblem-icons > .padder {
+  #animated-emblems > .padder {
     grid-gap: 2rem;
     padding: 2rem;
   }

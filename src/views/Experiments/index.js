@@ -38,11 +38,11 @@ class Resources extends React.Component {
         link: '/experiments/data-inspector'
       },
       {
-        name: 'Animated Emblem Icons',
+        name: 'Animated Emblems',
         icon: 'destiny-road_kill',
         description: "...",
         author: 'Braytech',
-        link: '/experiments/animated-emblem-icons'
+        link: '/experiments/animated-emblems'
       }
     ];
 
