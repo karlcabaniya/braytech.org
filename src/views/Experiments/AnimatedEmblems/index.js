@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
 import manifest from '../../../utils/manifest';
 import { classHashToString } from '../../../utils/destinyUtils';
-import ObservedImage from '../../../components/ObservedImage';
 import Items from '../../../components/Items';
 import { EmblemAnimatedIcon, EmblemAnimatedBackground } from '../../../components/UI/EmblemAnimated/';
 
