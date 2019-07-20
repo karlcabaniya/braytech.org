@@ -156,7 +156,8 @@ const NodesLogic = {
     await FilesLogic.scrapeStrings(file, sourceStrings);
   }
 
-  await FilesLogic.write('tmp.dbg.json', JSON.stringify(Array.from(sourceStrings), null, 1));
+  // if you want to see current status activate following line:
+  // await FilesLogic.write('tmp.dbg.json', JSON.stringify(Array.from(sourceStrings), null, 1));
 
   const jsonFiles = await FilesLogic.getJSONFileList();
   count = 0;
