@@ -36,7 +36,7 @@ class Header extends React.Component {
     if (this.state.updateFlash) {
       window.setTimeout(() => {
         this.setState({ updateFlash: false });
-      }, 1000);
+      }, 2000);
     }
     if (this.state.navOpen) {
       this.navEl.current.addEventListener('touchmove', this.nav_touchMove, true);
@@ -233,8 +233,6 @@ class Header extends React.Component {
       const character = characters.find(character => character.characterId === characterId);
 
       const capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
-
-      const definitionEmblem = manifest.DestinyInventoryItemDefinition[character.emblemHash];
 
       const progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
 
