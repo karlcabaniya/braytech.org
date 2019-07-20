@@ -14,14 +14,18 @@ const { default: traverse } = babelTraverse;
 const regUnplaceholdify = /^#####/;
 const placeholdify = (key) => `#####${key}`;
 const unplaceholdify = (key) => key.replace(regUnplaceholdify, '');
+const stableCompare = (a, b) => (a === b ? 0 : unplaceholdify(a.toLowerCase()) > unplaceholdify(b.toLowerCase()) ? 1 : -1);
 const MISSING_TRANSLATION = 'missing_translation';
 const INDENT = '    ';
+const isVerbose = process.argv.includes('--verbose');
+const skipSort = process.argv.includes('--skip-sort');
 const FilesLogic = {
+    glob: promisify(glob),
     read: promisify(fs.readFile),
     readJson: async (filename) => JSON.parse(await FilesLogic.read(filename, { encoding: 'utf8' })),
     write: promisify(fs.writeFile),
-    getJSFileList: async () => promisify(glob)(resolve(__dirname, '../src/**/*.js')),
-    getJSONFileList: async () => promisify(glob)(resolve(__dirname, '../public/static/locales/**/translation.json')),
+    getJSFileList: () => FilesLogic.glob(resolve(__dirname, '../src/**/*.js')),
+    getJSONFileList: () => FilesLogic.glob(resolve(__dirname, '../public/static/locales/**/translation.json')),
     scrapeStrings: async (filename, sourceStrings) => {
         try {
             const code = (await FilesLogic.read(filename)).toString('utf8');
@@ -45,13 +49,27 @@ const FilesLogic = {
             console.error('ScrapeStrings Failed: ' + e.message);
         }
     },
+    sortSourceStrings(sourceStrings) {
+        const keys = Array.from(sourceStrings);
+        keys.sort(stableCompare);
+        sourceStrings.clear();
+        keys.forEach(sourceStrings.add.bind(sourceStrings));
+    },
+    sortTranslatedStrings(translatedStrings) {
+        const entries = Object.entries(translatedStrings);
+        entries.sort(([a], [b]) => stableCompare(a, b));
+        entries.forEach(([key]) => delete translatedStrings[key]);
+        entries.forEach(([key, value]) => (translatedStrings[key] = value));
+    },
     addStrings(translatedStrings, sourceStrings) {
         const result = [];
         sourceStrings.forEach(key => {
             if (!translatedStrings[key]) {
                 const placeholderKey = placeholdify(key);
-                translatedStrings[placeholderKey] = MISSING_TRANSLATION;
-                result.push(key);
+                if (!translatedStrings[placeholderKey]) {
+                    translatedStrings[placeholderKey] = MISSING_TRANSLATION;
+                    result.push(key);
+                }
             }
         });
         return result;
@@ -94,19 +112,16 @@ const NodesLogic = {
     },
     getArgumentText(node) {
         const { arguments: args } = node;
-        if (args.length === 1) {
-            const arg = args[0];
-            if (arg.type === 'StringLiteral' || arg.type === 'Literal') {
-                return new Set([arg.value]);
-            }
-            const storage = new Set();
-            NodesLogic.digNode(args[0], storage);
-            return storage;
-        }
-        else {
+        if (args.length !== 1) {
             throw new Error(`Argument count was not 1. Found: ${args.length}`);
         }
-        return false;
+        const arg = args[0];
+        if (arg.type === 'StringLiteral' || arg.type === 'Literal') {
+            return new Set([arg.value]);
+        }
+        const storage = new Set();
+        NodesLogic.digNode(args[0], storage);
+        return storage;
     },
     digNode(node, storage) {
         //complex argument scrapper
@@ -152,27 +167,32 @@ const NodesLogic = {
     }
     // if you want to see current status activate following line:
     // await FilesLogic.write('tmp.dbg.json', JSON.stringify(Array.from(sourceStrings), null, 1));
+    if (!skipSort)
+        FilesLogic.sortSourceStrings(sourceStrings);
     const jsonFiles = await FilesLogic.getJSONFileList();
     count = 0;
     for (let jsonFile of jsonFiles) {
         count++;
         const locale = jsonFile.match(/\/([^/]+)\/translation.json$/)[1];
-        console.log(` Merging [${count}/${jsonFiles.length}] ${locale}`);
+        console.log(`Merging [${count}/${jsonFiles.length}] ${locale}`);
         const translatedStrings = await FilesLogic.readJson(jsonFile);
         if (!translatedStrings)
             throw new Error(`Failed to parse ${jsonFile}.`);
         const addResult = await FilesLogic.addStrings(translatedStrings, sourceStrings);
         const deprecateResult = await FilesLogic.deprecateStrings(translatedStrings, sourceStrings);
+        if (!skipSort)
+            FilesLogic.sortTranslatedStrings(translatedStrings);
         if (addResult.length) {
             console.log(` > Added ${addResult.length} strings`);
-            console.log(INDENT + addResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
+            if (isVerbose)
+                console.log(INDENT + addResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
         }
         if (deprecateResult.length) {
             console.log(` > Removed ${deprecateResult.length} untranslated dead strings`);
-            console.log(INDENT + deprecateResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
+            if (isVerbose)
+                console.log(INDENT + deprecateResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
         }
         await FilesLogic.write(jsonFile, JSON.stringify(translatedStrings, null, 2), { encoding: 'utf-8' });
     }
     console.log('done.');
-    //   console.dir(sourceStrings);
 })();
