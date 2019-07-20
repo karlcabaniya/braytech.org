@@ -13,14 +13,40 @@ const { default: traverse } = babelTraverse;
 
 type SourceStrings = Set<string>;
 type TranslatedStrings = Record<string, string>;
+type StatsResult = Record<string, { translated: number; notTranslated: number; added?: string[]; removed?: string[] }>;
+type ASTPath = { node: ASTNode };
+type ASTNode = {
+  type: string;
+  name?: string;
+  value?: string;
+  callee?: ASTNode;
+  arguments?: ASTNode[];
+  property?: ASTNode;
+  consequent?: ASTNode;
+  alternate?: ASTNode;
+  loc: {
+    start: { line: number; column: number };
+    end: { line: number; column: number };
+  };
+};
+
 const regUnplaceholdify = /^#####/;
 const placeholdify = (key: string) => `#####${key}`;
 const unplaceholdify = (key: string) => key.replace(regUnplaceholdify, '');
-const stableCompare = (a: string, b: string) => (a === b ? 0 : unplaceholdify(a.toLowerCase()) > unplaceholdify(b.toLowerCase()) ? 1 : -1);
-const MISSING_TRANSLATION = 'missing_translation';
+const stableCompare = (a: string, b: string) => {
+  if (a === b) return 0; // hello = hello
+  const la = a.toLowerCase();
+  const lb = b.toLowerCase();
+  if (a === b) return a > b ? 1 : -1; // hello <> Hello
+  return unplaceholdify(la) > unplaceholdify(lb) ? 1 : -1;
+};
+const MISSING_TRANSLATION = '🌐';
 const INDENT = '    ';
-const isVerbose = process.argv.includes('--verbose');
-const skipSort = process.argv.includes('--skip-sort');
+const SOURCE_LOCALE = 'en-AU'; // oy!
+
+const ARG_VERBOSE = process.argv.includes('--verbose');
+const ARG_SKIP_SORT = process.argv.includes('--skip-sort');
+const ARG_STATS = process.argv.includes('--stats');
 
 const FilesLogic = {
   glob: promisify(glob),
@@ -39,7 +65,7 @@ const FilesLogic = {
       });
 
       traverse(ast, {
-        CallExpression: function(astPath) {
+        CallExpression: function(astPath: ASTPath) {
           const node = astPath.node;
           if (node && NodesLogic.isTFunction(node)) {
             const keys = NodesLogic.getArgumentText(node);
@@ -69,10 +95,14 @@ const FilesLogic = {
     entries.forEach(([key, value]) => (translatedStrings[key] = value));
   },
 
-  addStrings(translatedStrings: TranslatedStrings, sourceStrings: SourceStrings): string[] {
+  addStrings(translatedStrings: TranslatedStrings, sourceStrings: SourceStrings, isSourceLocale: boolean): string[] {
     const result: string[] = [];
     sourceStrings.forEach(key => {
       if (!translatedStrings[key]) {
+        if (isSourceLocale) {
+          translatedStrings[key] = key;
+          return;
+        }
         const placeholderKey = placeholdify(key);
         if (!translatedStrings[placeholderKey]) {
           translatedStrings[placeholderKey] = MISSING_TRANSLATION;
@@ -94,11 +124,19 @@ const FilesLogic = {
       }
     });
     return result;
+  },
+
+  countStrings(translatedStrings: TranslatedStrings) {
+    const keys = Object.keys(translatedStrings);
+    const totalCount = keys.length;
+    const notTranslated = keys.filter(key => regUnplaceholdify.test(key)).length;
+    const translated = totalCount - notTranslated;
+    return { translated, notTranslated };
   }
 };
 
 const NodesLogic = {
-  isTFunction(node) {
+  isTFunction(node: ASTNode) {
     const { callee, arguments: args } = node;
     if (!(callee && args)) return false;
     switch (callee.type) {
@@ -108,8 +146,8 @@ const NodesLogic = {
       }
       case 'MemberExpression': {
         if (callee.property) {
-          const storage = new Set<string>();
-          NodesLogic.digNode(callee.property, storage);
+          const storage: SourceStrings = new Set();
+          NodesLogic.diveNode(callee.property, storage);
           if (storage.has('t')) return true;
         }
       }
@@ -117,44 +155,50 @@ const NodesLogic = {
     return false;
   },
 
-  getArgumentText(node): Set<string> | false {
-    const { arguments: args } = node;
+  getArgumentText(node: ASTNode): SourceStrings | false {
+    const { arguments: args = [] } = node;
     if (args.length !== 1) {
       throw new Error(`Argument count was not 1. Found: ${args.length}`);
     }
     const arg = args[0];
-    if (arg.type === 'StringLiteral' || arg.type === 'Literal') {
-      return new Set([arg.value]);
-    }
-
-    const storage = new Set<string>();
-    NodesLogic.digNode(args[0], storage);
+    const storage: SourceStrings = new Set();
+    NodesLogic.diveNode(arg, storage);
     return storage;
   },
-  digNode(node, storage: SourceStrings) {
+  diveNode(node: ASTNode, storage: SourceStrings) {
     //complex argument scrapper
     switch (node.type) {
       case 'ConditionalExpression': {
-        NodesLogic.digNode(node.consequent, storage);
-        NodesLogic.digNode(node.alternate, storage);
-        break;
+        if (node.consequent && node.alternate) {
+          NodesLogic.diveNode(node.consequent, storage);
+          NodesLogic.diveNode(node.alternate, storage);
+          break;
+        }
+        throw new Error('ConditionalExpression missing consequent & alternate');
       }
       case 'Identifier': {
-        storage.add(node.name);
-        break;
+        if (node.name) {
+          storage.add(node.name);
+          break;
+        }
+        throw new Error('Identifier missing name');
       }
       case 'StringLiteral':
       case 'Literal': {
-        storage.add(node.value);
-        break;
+        if (node.value) {
+          storage.add(node.value);
+          break;
+        }
+        throw new Error('Literal missing value');
       }
 
       default:
         console.log(node);
-        throw new Error(`Unsupported t() usage found: ${node.type}\n ${NodesLogic.serializeLoc(node)}`);
+        throw new Error(`Unsupported t() usage found: ${node.type}\n ${NodesLogic.serializeDbgLocInfo(node)}`);
     }
   },
-  serializeLoc(node) {
+
+  serializeDbgLocInfo(node: ASTNode) {
     const { loc } = node;
     if (!loc) return '@(unknown position)';
     return `@line ${loc.start.line}:${loc.start.column}`;
@@ -177,31 +221,47 @@ const NodesLogic = {
 
   // if you want to see current status activate following line:
   // await FilesLogic.write('tmp.dbg.json', JSON.stringify(Array.from(sourceStrings), null, 1));
-  if (!skipSort) FilesLogic.sortSourceStrings(sourceStrings);
+  if (!ARG_SKIP_SORT) FilesLogic.sortSourceStrings(sourceStrings);
 
   const jsonFiles = await FilesLogic.getJSONFileList();
   count = 0;
+  const result: StatsResult = {};
   for (let jsonFile of jsonFiles) {
     count++;
-    const locale = jsonFile.match(/\/([^/]+)\/translation.json$/)[1];
+    const localeMatch = jsonFile.match(/\/([^/]+)\/translation.json$/);
+    if (!localeMatch) throw new Error(`"${jsonFile}" did not match locale path signature`);
+    const locale = localeMatch[1];
     console.log(`Merging [${count}/${jsonFiles.length}] ${locale}`);
     const translatedStrings = await FilesLogic.readJson(jsonFile);
     if (!translatedStrings) throw new Error(`Failed to parse ${jsonFile}.`);
-    const addResult = await FilesLogic.addStrings(translatedStrings, sourceStrings);
+    const addResult = await FilesLogic.addStrings(translatedStrings, sourceStrings, locale === SOURCE_LOCALE);
     const deprecateResult = await FilesLogic.deprecateStrings(translatedStrings, sourceStrings);
-    if (!skipSort) FilesLogic.sortTranslatedStrings(translatedStrings);
+    if (!ARG_SKIP_SORT) FilesLogic.sortTranslatedStrings(translatedStrings);
 
     if (addResult.length) {
       console.log(` > Added ${addResult.length} strings`);
-      if (isVerbose) console.log(INDENT + addResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
+      if (ARG_VERBOSE) console.log(INDENT + addResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
     }
 
     if (deprecateResult.length) {
       console.log(` > Removed ${deprecateResult.length} untranslated dead strings`);
-      if (isVerbose) console.log(INDENT + deprecateResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
+      if (ARG_VERBOSE) console.log(INDENT + deprecateResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
     }
     await FilesLogic.write(jsonFile, JSON.stringify(translatedStrings, null, 2), { encoding: 'utf-8' });
-  }
 
+    if (ARG_STATS) {
+      const { translated, notTranslated } = FilesLogic.countStrings(translatedStrings);
+      result[locale] = {
+        translated,
+        notTranslated,
+        added: addResult,
+        removed: deprecateResult
+      };
+    }
+  }
+  if (ARG_STATS) {
+    console.log('Exporting result as translation.stats.json');
+    await FilesLogic.write('translation.stats.json', JSON.stringify(result, null, 2));
+  }
   console.log('done.');
 })();
