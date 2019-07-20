@@ -543,5 +543,10 @@
     "date": "2019-07-19T12:19:19.223Z",
     "version": "2.7.11",
     "content": "- updated emblem animation component and added _Sign of Our City_ by @InexorableAce"
+  },
+  {
+    "date": "2019-07-20T06:25:30.546Z",
+    "version": "2.7.12",
+    "content": "- added animated emblem _Sign of Our City_ by @InexorableAce\n- language updates for Français and Português Brasileiro"
   }
 ]
