@@ -5,6 +5,8 @@ import cx from 'classnames';
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
 
+import { ReactComponent as Wolfhead } from './wolfhead.svg';
+
 import './styles.css';
 
 // Planet of Peace
@@ -78,7 +80,7 @@ class Emblem_1661191199_icon extends React.Component {
   render() {
     return (
       <div className='emblem-ani-1661191199-icon'>
-        <div className='wolf' />
+        <div className='svg'><Wolfhead /></div>
       </div>
     );
   }
