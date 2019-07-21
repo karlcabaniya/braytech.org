@@ -25,33 +25,28 @@ class InventoryViewsLinks extends React.Component {
         <div className='sticker'>
           <ul className='list'>
             <li className='linked'>
-              <div className='icon'>
-                <ObservedImage className='image' src='/static/images/extracts/ui/01A3-00001DB5.PNG' />
-              </div>
-              <ProfileNavLink to='/inventory' isActive={(match, location) => {
-                if (['/inventory', '/inventory/pursuits'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/inventory/pursuits')) {
-                  return true;
-                } else {
-                  return false;
-                }
-              }} />
+              <div className='icon pursuits' />
+              <ProfileNavLink
+                to='/inventory'
+                isActive={(match, location) => {
+                  if (['/inventory', '/inventory/pursuits'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/inventory/pursuits')) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }}
+              />
             </li>
             <li className='linked'>
-              <div className='icon'>
-                <ObservedImage className='image' src='/static/images/extracts/ui/01E3-00001080.PNG' />
-              </div>
+              <div className='icon consumables' />
               <ProfileNavLink to='/inventory/consumables' />
             </li>
             <li className='linked'>
-              <div className='icon'>
-                <ObservedImage className='image' src='/static/images/extracts/ui/01e3-00000246.png' />
-              </div>
+              <div className='icon postmaster' />
               <ProfileNavLink to='/inventory/postmaster' />
             </li>
             <li className='linked'>
-              <div className='icon'>
-                <ObservedImage className='image' src='/static/images/extracts/ui/01E3-00001095.PNG' />
-              </div>
+              <div className='icon vault' />
               <ProfileNavLink to='/inventory/vault' />
             </li>
           </ul>

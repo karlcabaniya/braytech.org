@@ -20,21 +20,15 @@ class ClanViewsLinks extends React.Component {
       <div className='module views'>
         <ul className='list'>
           <li className='linked'>
-            <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/01e3-00000143.png' />
-            </div>
+            <div className='icon about' />
             <ProfileNavLink to='/clan' exact />
           </li>
           <li className='linked'>
-            <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/02af-00000497.png' />
-            </div>
+            <div className='icon roster' />
             <ProfileNavLink to='/clan/roster' />
           </li>
           {/* <li className='linked'>
-            <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/01e3-00001924.png' />
-            </div>
+            <div className='icon stats' />
             <ProfileNavLink to='/clan/stats' />
           </li> */}
         </ul>
