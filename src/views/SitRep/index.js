@@ -13,9 +13,9 @@ import ProgressBar from '../../components/UI/ProgressBar';
 import Items from '../../components/Items';
 import Roster from '../../components/Roster';
 import * as utils from '../../utils/destinyUtils';
-import quotes from '../../utils/quotes';
 
 import './styles.css';
+import Ranks from '../../components/Ranks';
 
 class SitRep extends React.Component {
   constructor(props) {
@@ -24,11 +24,8 @@ class SitRep extends React.Component {
     this.state = {};
   }
 
-  quote = quotes[Math.floor(Math.random() * (quotes.length)) + 0];
-
   componentDidMount() {
     window.scrollTo(0, 0);
-
     this.props.rebindTooltips();
   }
 
@@ -179,43 +176,8 @@ class SitRep extends React.Component {
       });
     }
 
-    const valor = {
-      defs: {
-        rank: manifest.DestinyProgressionDefinition[2626549951],
-        activity: manifest.DestinyActivityDefinition[2274172949]
-      },
-      progression: {
-        data: characterProgressions[characterId].progressions[2626549951],
-        total: utils.totalValor(),
-        resets: profileRecords[559943871] ? profileRecords[559943871].objectives[0].progress : 0
-      }
-    };
-
-    const glory = {
-      defs: {
-        rank: manifest.DestinyProgressionDefinition[2000925172],
-        activity: manifest.DestinyActivityDefinition[2947109551]
-      },
-      progression: {
-        data: characterProgressions[characterId].progressions[2000925172],
-        total: utils.totalGlory()
-      }
-    };
-
-    const infamy = {
-      defs: {
-        rank: manifest.DestinyProgressionDefinition[2772425241],
-        activity: manifest.DestinyActivityDefinition[3577607128]
-      },
-      progression: {
-        data: characterProgressions[characterId].progressions[2772425241],
-        total: utils.totalInfamy(),
-        resets: profileRecords[3901785488] ? profileRecords[3901785488].objectives[0].progress : 0
-      }
-    };
-
     // console.log(member);
-    
+
     return (
       <div className='view' id='sit-rep'>
         <div className='col'>
@@ -231,103 +193,11 @@ class SitRep extends React.Component {
             <div className='sub-header sub'>
               <div>{t('Progression')}</div>
             </div>
-            <div>
-              <div className='prog'>
-                <div className='text'>
-                  <div className='name'>{infamy.defs.activity.displayProperties.name}</div>
-                  <div className='resets'>{infamy.progression.resets} resets</div>
-                </div>
-                <div className='progress'>
-                  <ProgressBar
-                    objective={{
-                      progressDescription: `Next rank: ${infamy.defs.rank.currentProgress === infamy.progression.total && infamy.progression.data.stepIndex === infamy.defs.rank.steps.length ? infamy.defs.rank.steps[0].stepName : infamy.defs.rank.steps[(infamy.progression.data.stepIndex + 1) % infamy.defs.rank.steps.length].stepName}`,
-                      completionValue: infamy.progression.data.nextLevelAt
-                    }}
-                    progress={{
-                      progress: infamy.progression.data.progressToNextLevel,
-                      objectiveHash: 'infamy'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                  <ProgressBar
-                    objective={{
-                      progressDescription: infamy.defs.rank.displayProperties.name,
-                      completionValue: infamy.progression.total
-                    }}
-                    progress={{
-                      progress: infamy.progression.data.currentProgress,
-                      objectiveHash: 'infamy'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                </div>
-              </div>
-              <div className='prog'>
-                <div className='text'>
-                  <div className='name'>{valor.defs.activity.displayProperties.name}</div>
-                  <div className='resets'>{valor.progression.resets} resets</div>
-                </div>
-                <div className='progress'>
-                  <ProgressBar
-                    objective={{
-                      progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
-                      completionValue: valor.progression.data.nextLevelAt
-                    }}
-                    progress={{
-                      progress: valor.progression.data.progressToNextLevel,
-                      objectiveHash: 'valor'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                  <ProgressBar
-                    objective={{
-                      progressDescription: valor.defs.rank.displayProperties.name,
-                      completionValue: valor.progression.total
-                    }}
-                    progress={{
-                      progress: valor.progression.data.currentProgress,
-                      objectiveHash: 'valor'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                </div>
-              </div>
-              <div className='prog'>
-                <div className='text'>
-                  <div className='name'>{glory.defs.activity.displayProperties.name}</div>
-                </div>
-                <div className='progress'>
-                  <ProgressBar
-                    objective={{
-                      progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? glory.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
-                      completionValue: glory.progression.data.nextLevelAt
-                    }}
-                    progress={{
-                      progress: glory.progression.data.progressToNextLevel,
-                      objectiveHash: 'glory'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                  <ProgressBar
-                    objective={{
-                      progressDescription: glory.defs.rank.displayProperties.name,
-                      completionValue: glory.progression.total
-                    }}
-                    progress={{
-                      progress: glory.progression.data.currentProgress,
-                      objectiveHash: 'glory'
-                    }}
-                    hideCheck
-                    chunky
-                  />
-                </div>
-              </div>
-            </div>
+            <ul className='list progression'>
+              {[2772425241, 2626549951, 2679551909].map(hash => {
+                return <Ranks key={hash} hash={hash} />
+              })}
+            </ul>
           </div>
         </div>
         <div className='col'>

@@ -62,10 +62,6 @@ class Pursuits extends React.Component {
 
       const progressData = item.itemInstanceId && itemComponents.objectives.data[item.itemInstanceId] ? itemComponents.objectives.data[item.itemInstanceId].objectives : characterUninstancedItemComponents && characterUninstancedItemComponents[item.itemHash] ? characterUninstancedItemComponents[item.itemHash].objectives : false;
 
-      //if (progressData && progressData.length) console.log(progressData.reduce((acc, curr) => { return acc + curr.progress }, 0))
-
-      //<ProgressBar progress={{ progress: progressData.reduce((acc, curr) => { return acc + curr.progress }, 0), objectiveHash: progressData[0].objectiveHash }} objective={{ completionValue: progressData.reduce((acc, curr) => { return acc + curr.completionValue }, 0) }} hideCheck />
-
       const bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ', '-').toLowerCase();
 
       const vendorSource = definitionItem.sourceData && definitionItem.sourceData.vendorSources && definitionItem.sourceData.vendorSources.length && definitionItem.sourceData.vendorSources[0] && definitionItem.sourceData.vendorSources[0].vendorHash ? definitionItem.sourceData.vendorSources[0].vendorHash : false;

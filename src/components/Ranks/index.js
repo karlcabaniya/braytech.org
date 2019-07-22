@@ -1,126 +1,122 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
-import cx from 'classnames';
-import Moment from 'react-moment';
-import orderBy from 'lodash/orderBy';
 
-import { ProfileLink } from '../../components/ProfileLink';
 import manifest from '../../utils/manifest';
-import ObservedImage from '../../components/ObservedImage';
-import MemberLink from '../../components/MemberLink';
-import Spinner from '../../components/UI/Spinner';
+import ObservedImage from '../ObservedImage';
+import ProgressBar from '../UI/ProgressBar';
 import * as utils from '../../utils/destinyUtils';
-import * as destinyEnums from '../../utils/destinyEnums';
-import * as voluspa from '../../utils/voluspa';
 
 import './styles.css';
 
-class Ranks extends React.Component {
+class Mode extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: true,
-      response: false,
-      offset: this.props.offset || 0,
-      limit: this.props.includeMember && this.props.member.membershipId ? 9 : this.props.limit || 0,
-      sort: this.props.sort || 'triumphScore'
-    };
-  }
-  
-  callVoulspa = async () => {
-    this.setState((prevState, props) => {
-      prevState.loading = true;
-      return prevState;
-    });
-
-    let [leaderboard, memberRank] = await Promise.all([voluspa.leaderboard(this.state.offset, this.state.limit), voluspa.memberRank(this.props.member.membershipType, this.props.member.membershipId)]);
-
-    let response = {
-      leaderboard: leaderboard ? leaderboard : false,
-      memberRank: memberRank ? memberRank : false
-    };
-
-    this.setState((prevState, props) => {
-      prevState.loading = false;
-      prevState.response = response;
-      return prevState;
-    });
-  }
-
-  async componentDidMount() {
-    window.scrollTo(0, 0);
-
-    this.callVoulspa();
+    this.state = {};
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t, member, hash } = this.props;
+    const characterId = member.characterId;
+    const characters = member.data.profile.characters.data;
+    const character = characters.find(c => c.characterId === characterId);
+    const profileRecords = member.data.profile.profileRecords.data.records;
+    const characterProgressions = member.data.profile.characterProgressions.data;
 
-    let ranks = [];
-
-    if (this.state.response) {
-
-      let response = this.state.response;
-
-      console.log(response);
-
-      response.leaderboard.data.forEach((member, index) => {
-
-        let characters = Object.values(member.characters).sort(function(a, b) {
-          return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal);
-        });
-        let lastCharacter = characters[0];
-
-        ranks.push({
-          membershipId: member.destinyUserInfo.membershipId,
-          rank: member.rank,
-          element: (
-            <li key={member.destinyUserInfo.membershipId}>
-              <div className='col'>
-                <div className='rank'>{member.rank}</div>
-              </div>
-              <div className='col'>
-                <MemberLink {...member.destinyUserInfo} displayClan />
-              </div>
-              <div className='col'>
-                <div className='triumphScore'>{member.triumphScore.toLocaleString()}</div>
-              </div>
-            </li>
-          )
-        });
-      });
-
-      let memberRank = response.memberRank;
-      if (memberRank.destinyUserInfo) {
-        ranks.push({
-          membershipId: memberRank.destinyUserInfo.membershipId,
-          rank: memberRank.rank,
-          element: (
-            <li key={memberRank.destinyUserInfo.membershipId}>
-              <div className='col'>
-                <div className='rank'>{memberRank.rank}</div>
-              </div>
-              <div className='col'>
-                <MemberLink {...memberRank.destinyUserInfo} displayClan />
-              </div>
-              <div className='col'>
-                <div className='triumphScore'>{memberRank.triumphScore.toLocaleString()}</div>
-              </div>
-            </li>
-          )
-        });
+    const data = {
+      2772425241: {
+        hash: 2772425241, // infamy
+        activityHash: 3577607128,
+        icon: '/static/images/extracts/ui/modes/01E3-00000051.PNG',
+        currentResetCount: characterProgressions[characterId].progressions[2772425241].currentResetCount,
+        totalResetCount: characterProgressions[characterId].progressions[2772425241].seasonResets.reduce((acc, curr) => {
+          if (curr.season > 3) {
+            return acc + curr.resets;
+          } else {
+            return acc;
+          }
+        }, 0),
+        totalPoints: utils.totalInfamy()
+      },
+      2626549951: {
+        hash: 2626549951, // valor
+        activityHash: 2274172949,
+        icon: '/static/images/extracts/ui/modes/01E3-00000190.PNG',
+        currentResetCount: characterProgressions[characterId].progressions[2679551909] && characterProgressions[characterId].progressions[2679551909].currentResetCount ? characterProgressions[characterId].progressions[2679551909].currentResetCount : '?',
+        totalResetCount:
+          characterProgressions[characterId].progressions[2679551909] && characterProgressions[characterId].progressions[2679551909].seasonResets
+            ? characterProgressions[characterId].progressions[2679551909].seasonResets.reduce((acc, curr) => {
+                if (curr.season > 3) {
+                  return acc + curr.resets;
+                } else {
+                  return acc;
+                }
+              }, 0)
+            : '?',
+        totalPoints: utils.totalValor()
+      },
+      2679551909: {
+        hash: 2679551909, // glory
+        activityHash: 2947109551,
+        icon: '/static/images/extracts/ui/modes/01E3-00000181.PNG',
+        totalPoints: utils.totalGlory()
       }
+    };
 
-      ranks = orderBy(ranks, [member => member.rank], ['asc']);
-
-      return <ul className={cx('list', 'ranks')}>{ranks.map(member => member.element)}</ul>;
-    } else {
-      return <Spinner mini />
-    }
+    return (
+      <li>
+        <div className='icon'>
+          <ObservedImage className='image' src={data[hash].icon} />
+        </div>
+        <div className='text'>
+          <div className='name'>{manifest.DestinyActivityDefinition[data[hash].activityHash].displayProperties.name}</div>
+          <div className='data'>
+            <div>
+              <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString()}</div>
+              <div className='name'>{t('Points')}</div>
+            </div>
+            {data[hash].totalResetCount ? (
+              <>
+                <div>
+                  <div className='value'>{data[hash].totalResetCount}</div>
+                  <div className='name'>{t('Total resets')}</div>
+                </div>
+                <div>
+                  <div className='value'>{data[hash].currentResetCount}</div>
+                  <div className='name'>{t('Season resets')}</div>
+                </div>
+              </>
+            ) : null}
+          </div>
+        </div>
+        <div className='progress'>
+          <ProgressBar
+            classNames='step'
+            objective={{
+              completionValue: characterProgressions[characterId].progressions[hash].nextLevelAt
+            }}
+            progress={{
+              progress: characterProgressions[characterId].progressions[hash].progressToNextLevel,
+              objectiveHash: hash
+            }}
+            hideCheck
+          />
+          <ProgressBar
+            classNames='total'
+            objective={{
+              completionValue: data[hash].totalPoints
+            }}
+            progress={{
+              progress: characterProgressions[characterId].progressions[hash].currentProgress,
+              objectiveHash: hash
+            }}
+            hideCheck
+          />
+        </div>
+      </li>
+    );
   }
 }
 
@@ -133,4 +129,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(Ranks);
+)(Mode);
