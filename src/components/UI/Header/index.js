@@ -36,7 +36,7 @@ class Header extends React.Component {
     if (this.state.updateFlash) {
       window.setTimeout(() => {
         this.setState({ updateFlash: false });
-      }, 2000);
+      }, 2700);
     }
     if (this.state.navOpen) {
       this.navEl.current.addEventListener('touchmove', this.nav_touchMove, true);
