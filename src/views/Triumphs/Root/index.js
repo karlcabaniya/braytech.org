@@ -119,6 +119,7 @@ class Root extends React.Component {
         let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];
         if (scope) {
           states.push(scope);
+          recordsStates.push({...scope, seal: true});
         } else {
           // console.log(`138 Undefined state for ${record.recordHash}`);
         }
@@ -126,7 +127,7 @@ class Root extends React.Component {
 
       let progress = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
       let total = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
-      let isComplete = progress === total ? true : false;
+      let isComplete = total && progress === total ? true : false;
 
       sealNodes.push({
         completed: isComplete,
@@ -176,7 +177,7 @@ class Root extends React.Component {
           <div className='sub-header'>
             <div>{t('Triumphs')}</div>
             <div>
-              {recordsStates.filter(record => enumerateRecordState(record.state).recordRedeemed).length}/{recordsStates.filter(record => !enumerateRecordState(record.state).invisible).length}
+              {recordsStates.filter(state => !state.seal).filter(state => enumerateRecordState(state.state).recordRedeemed).length}/{recordsStates.filter(state => !state.seal).filter(state => !enumerateRecordState(state.state).invisible).length}
             </div>
           </div>
           <ul className='list parents'>{nodes}</ul>

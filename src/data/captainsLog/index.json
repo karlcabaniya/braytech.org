@@ -548,5 +548,10 @@
     "date": "2019-07-20T06:25:30.546Z",
     "version": "2.7.12",
     "content": "- added animated emblem _Grizzled Wolf_ by @InexorableAce\n- language updates for Français and Português Brasileiro"
+  },
+  {
+    "date": "2019-07-22T04:14:56.263Z",
+    "version": "2.7.14",
+    "content": "- minor fixes to _Triumphs_ view root\n- increased _Almost Complete_ triumphs limit from 100 to 200\n- minor changes toheader refresh notification animation\n- changes to what triumphs are included in ranking for _Almost Complete_ triumphs\n- changed order of commonality sort for _Almost Complete_ triumphs from 'asc' to 'desc' to show most common unobtained records first\n- Français translation update fix"
   }
 ]

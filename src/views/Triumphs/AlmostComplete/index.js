@@ -15,7 +15,7 @@ class Root extends React.Component {
           <div className='sub-header sub'>
             <div>{t('Almost complete')}</div>
           </div>
-          <RecordsAlmost {...this.props} limit='100' selfLinkFrom='/triumphs/almost-complete' />
+          <RecordsAlmost {...this.props} limit='200' selfLinkFrom='/triumphs/almost-complete' />
         </div>
       </>
     );

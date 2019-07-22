@@ -103,9 +103,9 @@ class Records extends React.Component {
     const { t, hashes, member, triumphs, collectibles, ordered, limit, selfLinkFrom, readLink, forceDisplay = false } = this.props;
     const highlight = parseInt(this.props.highlight, 10) || false;
     const recordsRequested = hashes;
+    const characterId = member && member.characterId;
     const characterRecords = member && member.data.profile.characterRecords.data;
     const profileRecords = member && member.data.profile.profileRecords.data.records;
-    const characterId = member && member.characterId;
     const tracked = triumphs.tracked;
 
     let recordsOutput = [];

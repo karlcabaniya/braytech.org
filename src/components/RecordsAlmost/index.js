@@ -18,14 +18,16 @@ class RecordsAlmost extends React.Component {
   }
 
   render() {
-    const { t, sort } = this.props;
-    const profileRecords = this.props.member.data.profile.profileRecords.data.records;
+    const { t, member, sort } = this.props;
+    const characterId = member && member.characterId;
+    const characterRecords = member && member.data.profile.characterRecords.data;
+    const profileRecords = member && member.data.profile.profileRecords.data.records;
 
     let almost = [];
     let ignores = [];
 
     // ignore collections badges
-    manifest.DestinyPresentationNodeDefinition[498211331].children.presentationNodes.forEach(child => {
+    manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.badgesRootNode].children.presentationNodes.forEach(child => {
       ignores.push(manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash].completionRecordHash);
       manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash].children.presentationNodes.forEach(subchild => {
         ignores.push(manifest.DestinyPresentationNodeDefinition[subchild.presentationNodeHash].completionRecordHash);
@@ -33,11 +35,16 @@ class RecordsAlmost extends React.Component {
     });
 
     // ignore triumph seals
-    manifest.DestinyPresentationNodeDefinition[1652422747].children.presentationNodes.forEach(child => {
-      ignores.push(manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash].completionRecordHash);
-    });
+    // manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode].children.presentationNodes.forEach(child => {
+    //   ignores.push(manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash].completionRecordHash);
+    // });
 
-    Object.entries(profileRecords).forEach(([key, record]) => {
+    let records = {
+      ...profileRecords,
+      ...characterRecords[characterId].records
+    }
+
+    Object.entries(records).forEach(([key, record]) => {
       if (manifest.DestinyRecordDefinition[key].redacted) {
         return;
       }
@@ -93,7 +100,7 @@ class RecordsAlmost extends React.Component {
     if (sort === 1) {
       almost = orderBy(almost, [record => record.score, record => record.distance], ['desc', 'desc']);
     } else if (sort === 2) {
-      almost = orderBy(almost, [record => record.commonality, record => record.distance], ['asc', 'desc']);
+      almost = orderBy(almost, [record => record.commonality, record => record.distance], ['desc', 'desc']);
     } else {
       almost = orderBy(almost, [record => record.distance, record => record.score], ['desc', 'desc']);
     }

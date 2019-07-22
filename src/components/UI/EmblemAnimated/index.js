@@ -155,7 +155,7 @@ export class EmblemAnimatedBackground extends React.Component {
     } else {
       const definitionEmblem = manifest.DestinyInventoryItemDefinition[hash];
 
-      const veryLightEmblems = [4182480236];
+      const veryLightEmblems = [4182480236, 3961503937];
 
       return (
         <ObservedImage
