@@ -41,7 +41,7 @@ class QuestLine extends React.Component {
       const questLine = definitionItem;
 
       let assumeCompleted = true;
-      const steps = questLine.setData.itemList.map((s, i) => {
+      const steps = {...questLine.setData}.itemList.map((s, i) => {
         s.i = i + 1;
         s.definitionStep = manifest.DestinyInventoryItemDefinition[s.itemHash];
         s.completed = assumeCompleted;
