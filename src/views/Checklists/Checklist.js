@@ -14,11 +14,11 @@ const Checklist = props => {
         {characterBound ? <div className='tooltip' data-hash='character_bound' data-table='BraytechDefinition'><i className='segoe-uniE902' /></div> : null}
       </div>
       <ProgressBar
-        objectiveDefinition={{
+        objective={{
           progressDescription,
           completionValue: totalItems
         }}
-        playerProgress={{
+        progress={{
           progress: completedItems
         }}
         hideCheck

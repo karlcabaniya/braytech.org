@@ -321,11 +321,11 @@ class MemberLink extends React.Component {
                         <li>
                           <ProgressBar
                             classNames='valor'
-                            objectiveDefinition={{
+                            objective={{
                               progressDescription: manifest.DestinyProgressionDefinition[2626549951].displayProperties.name,
                               completionValue: destinyUtils.totalValor()
                             }}
-                            playerProgress={{
+                            progress={{
                               progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2626549951].currentProgress,
                               complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2626549951].currentProgress === destinyUtils.totalValor(),
                               objectiveHash: 2626549951
@@ -337,11 +337,11 @@ class MemberLink extends React.Component {
                         <li>
                           <ProgressBar
                             classNames='glory'
-                            objectiveDefinition={{
+                            objective={{
                               progressDescription: manifest.DestinyProgressionDefinition[2000925172].displayProperties.name,
                               completionValue: destinyUtils.totalGlory()
                             }}
-                            playerProgress={{
+                            progress={{
                               progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2000925172].currentProgress,
                               complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2000925172].currentProgress === destinyUtils.totalGlory(),
                               objectiveHash: 2000925172
@@ -353,11 +353,11 @@ class MemberLink extends React.Component {
                         <li>
                           <ProgressBar
                             classNames='infamy'
-                            objectiveDefinition={{
+                            objective={{
                               progressDescription: manifest.DestinyProgressionDefinition[2772425241].displayProperties.name,
                               completionValue: destinyUtils.totalInfamy()
                             }}
-                            playerProgress={{
+                            progress={{
                               progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2772425241].currentProgress,
                               complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2772425241].currentProgress === destinyUtils.totalInfamy(),
                               objectiveHash: 2772425241
@@ -385,11 +385,11 @@ class MemberLink extends React.Component {
                           return (
                             <li key={i}>
                               <ProgressBar
-                                objectiveDefinition={{
+                                objective={{
                                   progressDescription: record.titleInfo.titlesByGenderHash[2204441813],
                                   completionValue
                                 }}
-                                playerProgress={{
+                                progress={{
                                   progress,
                                   complete: progress === completionValue,
                                   objectiveHash: node.completionRecordHash

@@ -128,11 +128,11 @@ class SitRep extends React.Component {
         element: (
           <li key={milestone.milestoneHash} className={cx({ earned: state.earned, redeemed: state.redeemed })}>
             <ProgressBar
-              objectiveDefinition={{
+              objective={{
                 progressDescription: displayProperties.name,
                 completionValue: state.objective.completionValue
               }}
-              playerProgress={{
+              progress={{
                 progress: state.objective.progress,
                 objectiveHash: milestone.milestoneHash
               }}
@@ -163,11 +163,11 @@ class SitRep extends React.Component {
         element: (
           <li key='rest' className='well-rested'>
             <ProgressBar
-              objectiveDefinition={{
+              objective={{
                 progressDescription: 'Well rested',
                 completionValue: wellRestedState.requiredXP
               }}
-              playerProgress={{
+              progress={{
                 progress: wellRestedState.progress,
                 objectiveHash: 'rest'
               }}
@@ -239,11 +239,11 @@ class SitRep extends React.Component {
                 </div>
                 <div className='progress'>
                   <ProgressBar
-                    objectiveDefinition={{
+                    objective={{
                       progressDescription: `Next rank: ${infamy.defs.rank.currentProgress === infamy.progression.total && infamy.progression.data.stepIndex === infamy.defs.rank.steps.length ? infamy.defs.rank.steps[0].stepName : infamy.defs.rank.steps[(infamy.progression.data.stepIndex + 1) % infamy.defs.rank.steps.length].stepName}`,
                       completionValue: infamy.progression.data.nextLevelAt
                     }}
-                    playerProgress={{
+                    progress={{
                       progress: infamy.progression.data.progressToNextLevel,
                       objectiveHash: 'infamy'
                     }}
@@ -251,11 +251,11 @@ class SitRep extends React.Component {
                     chunky
                   />
                   <ProgressBar
-                    objectiveDefinition={{
+                    objective={{
                       progressDescription: infamy.defs.rank.displayProperties.name,
                       completionValue: infamy.progression.total
                     }}
-                    playerProgress={{
+                    progress={{
                       progress: infamy.progression.data.currentProgress,
                       objectiveHash: 'infamy'
                     }}
@@ -271,11 +271,11 @@ class SitRep extends React.Component {
                 </div>
                 <div className='progress'>
                   <ProgressBar
-                    objectiveDefinition={{
+                    objective={{
                       progressDescription: `Next rank: ${valor.defs.rank.currentProgress === valor.progression.total && valor.progression.data.stepIndex === valor.defs.rank.steps.length ? valor.defs.rank.steps[0].stepName : valor.defs.rank.steps[(valor.progression.data.stepIndex + 1) % valor.defs.rank.steps.length].stepName}`,
                       completionValue: valor.progression.data.nextLevelAt
                     }}
-                    playerProgress={{
+                    progress={{
                       progress: valor.progression.data.progressToNextLevel,
                       objectiveHash: 'valor'
                     }}
@@ -283,11 +283,11 @@ class SitRep extends React.Component {
                     chunky
                   />
                   <ProgressBar
-                    objectiveDefinition={{
+                    objective={{
                       progressDescription: valor.defs.rank.displayProperties.name,
                       completionValue: valor.progression.total
                     }}
-                    playerProgress={{
+                    progress={{
                       progress: valor.progression.data.currentProgress,
                       objectiveHash: 'valor'
                     }}
@@ -302,11 +302,11 @@ class SitRep extends React.Component {
                 </div>
                 <div className='progress'>
                   <ProgressBar
-                    objectiveDefinition={{
+                    objective={{
                       progressDescription: `Next rank: ${glory.defs.rank.currentProgress === glory.progression.total && glory.progression.data.stepIndex === glory.defs.rank.steps.length ? glory.defs.rank.steps[0].stepName : glory.defs.rank.steps[(glory.progression.data.stepIndex + 1) % glory.defs.rank.steps.length].stepName}`,
                       completionValue: glory.progression.data.nextLevelAt
                     }}
-                    playerProgress={{
+                    progress={{
                       progress: glory.progression.data.progressToNextLevel,
                       objectiveHash: 'glory'
                     }}
@@ -314,11 +314,11 @@ class SitRep extends React.Component {
                     chunky
                   />
                   <ProgressBar
-                    objectiveDefinition={{
+                    objective={{
                       progressDescription: glory.defs.rank.displayProperties.name,
                       completionValue: glory.progression.total
                     }}
-                    playerProgress={{
+                    progress={{
                       progress: glory.progression.data.currentProgress,
                       objectiveHash: 'glory'
                     }}

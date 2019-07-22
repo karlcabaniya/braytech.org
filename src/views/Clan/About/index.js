@@ -65,11 +65,11 @@ class AboutView extends React.Component {
           {clanLevel.level === clanLevel.levelCap ? (
             <ProgressBar
               classNames='level-6'
-              objectiveDefinition={{
+              objective={{
                 progressDescription: `${t('Level')} ${clanLevel.level}`,
                 completionValue: 1
               }}
-              playerProgress={{
+              progress={{
                 progress: 1,
                 objectiveHash: 'clanLevel'
               }}
@@ -78,11 +78,11 @@ class AboutView extends React.Component {
             />
           ) : (
             <ProgressBar
-              objectiveDefinition={{
+              objective={{
                 progressDescription: `${t('Level')} ${clanLevel.level}`,
                 completionValue: clanLevel.nextLevelAt
               }}
-              playerProgress={{
+              progress={{
                 progress: clanLevel.progressToNextLevel,
                 objectiveHash: 'clanLevel'
               }}

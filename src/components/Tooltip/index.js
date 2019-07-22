@@ -36,7 +36,7 @@ class Tooltip extends React.Component {
     let scrollbarAllowance = 24;
 
     x = e.clientX;
-    y = e.clientY - (tooltipHeight > 200 ? 140 : 0);
+    y = e.clientY - (tooltipHeight >= 320 ? 140 : 0);
 
     if (x + tooltipWidth + scrollbarAllowance > window.innerWidth / 2 + tooltipWidth) {
       x = x - tooltipWidth - scrollbarAllowance - offset;

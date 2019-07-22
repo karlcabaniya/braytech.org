@@ -31,7 +31,7 @@ const fallback = item => {
 
     playerProgress = { ...playerProgress, ...instanceProgress };
 
-    objectives.push(<ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />);
+    objectives.push(<ProgressBar key={objectiveDefinition.hash} objective={objectiveDefinition} progress={playerProgress} />);
   });
 
   item.value &&

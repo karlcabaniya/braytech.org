@@ -141,7 +141,7 @@ class Records extends React.Component {
             playerProgress.progress = 16;
           }
 
-          objectives.push(<ProgressBar key={`${hash}${index}`} objectiveDefinition={definitionObjective} playerProgress={playerProgress} />);
+          objectives.push(<ProgressBar key={`${hash}${index}`} objective={definitionObjective} progress={playerProgress} />);
 
           if (playerProgress) {
             let v = parseInt(playerProgress.completionValue, 10);

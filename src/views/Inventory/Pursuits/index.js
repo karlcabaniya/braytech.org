@@ -9,6 +9,7 @@ import manifest from '../../../utils/manifest';
 import ObservedImage from '../../../components/ObservedImage';
 import { ProfileLink } from '../../../components/ProfileLink';
 import QuestLine from '../../../components/QuestLine';
+import ProgressBar from '../../../components/UI/ProgressBar';
 
 import InventoryViewsLinks from '../InventoryViewsLinks';
 
@@ -43,6 +44,9 @@ class Pursuits extends React.Component {
 
     const nowMs = new Date().getTime();
 
+    const exceptionsVendor = [3347378076, 248695599, 2917531897];
+    const exceptionsItems = [1160544509, 1160544508, 1160544511];
+
     let items = [];
 
     pursuits.forEach((item, i) => {
@@ -58,15 +62,21 @@ class Pursuits extends React.Component {
 
       const progressData = item.itemInstanceId && itemComponents.objectives.data[item.itemInstanceId] ? itemComponents.objectives.data[item.itemInstanceId].objectives : characterUninstancedItemComponents && characterUninstancedItemComponents[item.itemHash] ? characterUninstancedItemComponents[item.itemHash].objectives : false;
 
+      //if (progressData && progressData.length) console.log(progressData.reduce((acc, curr) => { return acc + curr.progress }, 0))
+
+      //<ProgressBar progress={{ progress: progressData.reduce((acc, curr) => { return acc + curr.progress }, 0), objectiveHash: progressData[0].objectiveHash }} objective={{ completionValue: progressData.reduce((acc, curr) => { return acc + curr.completionValue }, 0) }} hideCheck />
+
       const bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ', '-').toLowerCase();
 
       const vendorSource = definitionItem.sourceData && definitionItem.sourceData.vendorSources && definitionItem.sourceData.vendorSources.length && definitionItem.sourceData.vendorSources[0] && definitionItem.sourceData.vendorSources[0].vendorHash ? definitionItem.sourceData.vendorSources[0].vendorHash : false;
+
+      const itemType = definitionItem.itemType === 0 && exceptionsVendor.includes(vendorSource) && !exceptionsItems.includes(item.itemHash) ? 26 : definitionItem.itemType;
 
       items.push({
         ...item,
         name: definitionItem.displayProperties && definitionItem.displayProperties.name,
         rarity: definitionItem.inventory && definitionItem.inventory.tierType,
-        itemType: definitionItem.itemType,
+        itemType,
         vendorSource,
         expiryMs: expiryMs || false,
         el: (
@@ -90,32 +100,37 @@ class Pursuits extends React.Component {
             {item.quantity && item.quantity > 1 ? <div className={cx('quantity', { 'max-stack': definitionItem.inventory && definitionItem.inventory.maxStackSize === item.quantity })}>{item.quantity}</div> : null}
             {progressData && progressData.filter(o => !o.complete).length === 0 ? <div className='completed' /> : null}
             {progressData && progressData.filter(o => !o.complete).length > 0 && nowMs + 7200 * 1000 > expiryMs ? <div className='expires-soon' /> : null}
+            {progressData && progressData.filter(o => !o.complete).length > 0 ? (
+              <ProgressBar
+                progress={{
+                  progress: progressData.reduce((acc, curr) => {
+                    return acc + curr.progress;
+                  }, 0),
+                  objectiveHash: progressData[0].objectiveHash
+                }}
+                objective={{
+                  completionValue: progressData.reduce((acc, curr) => {
+                    return acc + curr.completionValue;
+                  }, 0)
+                }}
+                hideCheck
+              />
+            ) : null}
             {definitionItem.itemType === 12 ? <ProfileLink to={`/inventory/pursuits/${item.itemHash}`} /> : null}
           </li>
         )
       });
     });
 
-    const exceptionsVendor = [3347378076, 248695599, 2917531897];
-    const exceptionsItems = [1160544509, 1160544508, 1160544511];
-
     let quests = items.filter(i => i.itemType === 12);
-    let bounties = items.filter(i => {
-      if (i.itemType === 26) {
-        return true;
-      } else if (i.itemType === 0 && exceptionsVendor.includes(i.vendorSource) && !exceptionsItems.includes(i.itemHash)) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    let bounties = items.filter(i => i.itemType === 26);
     let miscellaneous = items.filter(i => !quests.find(q => i.itemHash === q.itemHash) && !bounties.find(q => i.itemHash === q.itemHash));
 
     quests = order ? orderBy(quests, [i => i[order], i => i.name], ['desc', 'asc']) : items;
     bounties = order ? orderBy(bounties, [i => i.vendorSource, i => i.expiryMs, i => i[order], i => i.name], ['desc', 'asc', 'desc', 'asc']) : items;
     miscellaneous = order ? orderBy(miscellaneous, [i => i[order], i => i.name], ['desc', 'asc']) : items;
 
-    let selected = hash ? pursuits.find(p => p.itemHash.toString() === hash) ? pursuits.find(p => p.itemHash.toString() === hash) : quests[0] : quests.length && quests[0] && quests[0].itemHash ? quests[0] : false;
+    let selected = hash ? (pursuits.find(p => p.itemHash.toString() === hash) ? pursuits.find(p => p.itemHash.toString() === hash) : quests[0]) : quests.length && quests[0] && quests[0].itemHash ? quests[0] : false;
 
     if (viewport.width < 1024 && hash) {
       return (

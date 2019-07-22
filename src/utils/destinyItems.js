@@ -235,8 +235,8 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
                       let definitionObjective = manifest.DestinyObjectiveDefinition[o.objectiveHash];
                       return <ProgressBar
                         key={i}
-                        objectiveDefinition={definitionObjective}
-                        playerProgress={o}
+                        objective={definitionObjective}
+                        progress={o}
                       />
                     })}
                   </div>

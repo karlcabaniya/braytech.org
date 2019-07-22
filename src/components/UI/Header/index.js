@@ -256,10 +256,10 @@ class Header extends React.Component {
                     classNames={{
                       capped: capped
                     }}
-                    objectiveDefinition={{
+                    objective={{
                       completionValue: 1
                     }}
-                    playerProgress={{
+                    progress={{
                       progress: progress
                     }}
                     hideCheck

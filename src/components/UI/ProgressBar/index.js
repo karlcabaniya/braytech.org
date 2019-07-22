@@ -13,15 +13,18 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    let { progressDescription = '', completionValue, allowOvercompletion = true } = this.props.objectiveDefinition;
-    let { complete = false, progress, objectiveHash } = this.props.playerProgress;
-    let classNames = this.props.classNames;
-    let hideCheck = this.props.hideCheck;
-    let chunky = this.props.chunky;
+    const { classNames, hideCheck, chunky, progress, objective } = this.props;
+
+    if (!progress || !objective) {
+      return null;
+    }
+
+    let { complete = false, progress: value, objectiveHash } = progress;
+    let { progressDescription = '', completionValue, allowOvercompletion = true } = objective;
 
     progressDescription = stringToIcons(progressDescription);
 
-    progress = allowOvercompletion ? progress : Math.min(progress, completionValue);
+    value = allowOvercompletion ? value : Math.min(value, completionValue);
     let wholeFraction = completionValue === 1 ? true : false;
     let completeText = complete ? 'Complete' : 'Incomplete';
 
@@ -33,11 +36,11 @@ class ProgressBar extends React.Component {
             <div className='description'>{progressDescription !== '' ? progressDescription : completeText}</div>
             {completionValue && !wholeFraction ? (
               <div className='fraction'>
-                {progress}/{completionValue}
+                {value}/{completionValue}
               </div>
             ) : null}
           </div>
-          {completionValue ? <div className='fill' style={{ width: `${(progress / completionValue) * 100}%` }} /> : null}
+          {completionValue ? <div className='fill' style={{ width: `${(value / completionValue) * 100}%` }} /> : null}
         </div>
       </div>
     );
