@@ -24,7 +24,11 @@ class Mode extends React.Component {
     };
   }
 
-  winsRequired = (data, characterId, characterProgressions) => {
+  winsRequired = data => {
+    const { characterId, characterProgressions } = this.props.data;
+
+    const debug = false;
+
     let stepsData = data[2000925172].definition.steps;
     let { stepIndex: currentStepIndex, stepIndex: workingStepIndex, progressToNextLevel: initialProgress, currentProgress } = characterProgressions[characterId].progressions[2000925172];
     let targetStepIndex = currentStepIndex < 9 ? 9 : 15;
@@ -34,15 +38,15 @@ class Mode extends React.Component {
     let totalProgress = currentProgress;
     let progress = initialProgress;
 
-    console.warn(`starting rank: ${stepsData[workingStepIndex].stepName} - ${currentProgress}`)
+    if (debug) console.warn(`starting rank: ${stepsData[workingStepIndex].stepName} - ${currentProgress}`)
 
     // just to Fabled I or go all the way to Legend+
     while (targetStepIndex === 9 ? workingStepIndex < targetStepIndex : workingStepIndex <= targetStepIndex) {
       const currentStep = stepsData[workingStepIndex];
 
-      console.log(`stepIndex: ${workingStepIndex}, name: ${currentStep.stepName}`)
+      if (debug) console.log(`stepIndex: ${workingStepIndex}, name: ${currentStep.stepName}`)
 
-      console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
+      if (debug) console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
       while (progress < currentStep.progressTotal) {
 
         progress = progress + data[2000925172].gains[workingStepIndex].progressGain[Math.min(winsStreak, 5)];
@@ -50,7 +54,7 @@ class Mode extends React.Component {
 
         winsRequired++;
         
-        console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
+        if (debug) console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
       }
 
       progress = Math.max(progress - currentStep.progressTotal, 0);
@@ -58,18 +62,19 @@ class Mode extends React.Component {
       workingStepIndex++;
     }
 
-    console.warn(`finishing rank: ${stepsData[Math.min(workingStepIndex, stepsData.length - 1)].stepName} - ${totalProgress}`)
+    if (debug) console.warn(`finishing rank: ${stepsData[Math.min(workingStepIndex, stepsData.length - 1)].stepName} - ${totalProgress}`)
 
-    console.log(winsRequired)
+    if (debug) console.log(winsRequired)
 
     return winsRequired;
   }
 
   async componentDidMount() {
-    const { member, hash } = this.props;
+    const { hash, data } = this.props;
+    const { membershipType, membershipId, characterId } = data;
 
     if (hash === 2000925172) {
-      let history = await bungie.GetActivityHistory(member.membershipType, member.membershipId, member.characterId, 5, 69, 0);
+      let history = await bungie.GetActivityHistory(membershipType, membershipId, characterId, 5, 69, 0);
 
       let streakCount = 0;
       let streakBroken = false;
@@ -89,12 +94,8 @@ class Mode extends React.Component {
   }
 
   render() {
-    const { t, member, hash } = this.props;
-    const characterId = member.characterId;
-    const characters = member.data.profile.characters.data;
-    const character = characters.find(c => c.characterId === characterId);
-    const profileRecords = member.data.profile.profileRecords.data.records;
-    const characterProgressions = member.data.profile.characterProgressions.data;
+    const { t, hash } = this.props;
+    const { characterId, characterProgressions } = this.props.data;
 
     let data = {
       2772425241: {
@@ -302,7 +303,7 @@ class Mode extends React.Component {
 
     let winsRequired = 0;
     if (hash === 2000925172) {
-      winsRequired = this.winsRequired(data, characterId, characterProgressions);
+      winsRequired = this.winsRequired(data);
     }
     
     // console.log(data[2000925172].gains)
@@ -318,7 +319,7 @@ class Mode extends React.Component {
             <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString()}</div>
             <div className='name'>{t('Points')}</div>
           </div>
-          {data[hash].totalResetCount ? (
+          {hash !== 2000925172 ? (
             <>
               <div>
                 <div className='value'>{data[hash].totalResetCount}</div>
@@ -337,7 +338,7 @@ class Mode extends React.Component {
                 <div className='name'>{t('Win streak')}</div>
               </div>
               <div>
-                <div className='value'>{winsRequired} {t('wins')}</div>
+                <div className='value'>{winsRequired} {winsRequired === 1 ? t('win') : t('wins')}</div>
                 <div className='name'>{characterProgressions[characterId].progressions[2000925172].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
               </div>
             </>
@@ -372,13 +373,7 @@ class Mode extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    member: state.member
-  };
-}
-
 export default compose(
-  connect(mapStateToProps),
+  connect(),
   withNamespaces()
 )(Mode);

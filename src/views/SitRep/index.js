@@ -10,12 +10,11 @@ import Button from '../../components/UI/Button';
 import Spinner from '../../components/UI/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/UI/ProgressBar';
-import Items from '../../components/Items';
 import Roster from '../../components/Roster';
 import * as utils from '../../utils/destinyUtils';
+import Ranks from '../../components/Ranks';
 
 import './styles.css';
-import Ranks from '../../components/Ranks';
 
 class SitRep extends React.Component {
   constructor(props) {
@@ -32,9 +31,8 @@ class SitRep extends React.Component {
   render() {
     const { t, member, groupMembers } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
-    const characterId = member.characterId;
     const characters = member.data.profile.characters.data;
-    const character = characters.find(c => c.characterId === characterId);
+    const character = characters.find(c => c.characterId === member.characterId);
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterProgressions = member.data.profile.characterProgressions.data;
 
@@ -42,7 +40,7 @@ class SitRep extends React.Component {
     // console.log(milestonesData);
 
     let milestones = [];
-    Object.values(member.data.profile.characterProgressions.data[characterId].milestones).forEach(milestone => {
+    Object.values(characterProgressions[member.characterId].milestones).forEach(milestone => {
       let def = manifest.DestinyMilestoneDefinition[milestone.milestoneHash];
 
       if (milestone.milestoneHash === 4253138191) {
@@ -152,7 +150,7 @@ class SitRep extends React.Component {
 
     milestones = orderBy(milestones, [m => m.order], ['asc']);
 
-    const wellRestedState = utils.isWellRested(this.props.member.data.profile.characterProgressions.data[character.characterId]);
+    const wellRestedState = utils.isWellRested(characterProgressions[character.characterId]);
 
     if (wellRestedState.wellRested) {
       milestones.unshift({
@@ -195,7 +193,7 @@ class SitRep extends React.Component {
             </div>
             <ul className='list ranks'>
               {[2772425241, 2626549951, 2000925172].map(hash => {
-                return <Ranks key={hash} hash={hash} />
+                return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characterProgressions }} />
               })}
             </ul>
           </div>

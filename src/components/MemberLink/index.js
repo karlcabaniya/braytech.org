@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 import Moment from 'react-moment';
+import { orderBy } from 'lodash';
 import entities from 'entities';
 
 import ObservedImage from '../ObservedImage';
@@ -11,6 +12,8 @@ import Spinner from '../UI/Spinner';
 import Button from '../UI/Button';
 import ProgressBar from '../UI/ProgressBar';
 import Flair from '../UI/Flair';
+import Ranks from '../Ranks';
+import Items from '../Items';
 import manifest from '../../utils/manifest';
 import * as bungie from '../../utils/bungie';
 import * as voluspa from '../../utils/voluspa';
@@ -60,7 +63,7 @@ class MemberLink extends React.Component {
 
     if (this.mounted) {
       try {
-        let requests = [bungie.GetProfile(type, id, '100,200,202,204,800,900'), bungie.GetGroupsForMember(type, id)];
+        let requests = [bungie.GetProfile(type, id, '100,200,202,204,205,800,900'), bungie.GetGroupsForMember(type, id)];
 
         let [profile, group] = await Promise.all(requests);
 
@@ -216,9 +219,6 @@ class MemberLink extends React.Component {
                         <div className='groupName'>{this.state.all.data.group ? entities.decodeHTML(this.state.all.data.group.name) : null}</div>
                         <Flair type={type} id={id} />
                       </div>
-                      <div className='sub-header'>
-                        <div>Basics</div>
-                      </div>
                       <div className='basics'>
                         <div>
                           <div className='value'>
@@ -238,7 +238,7 @@ class MemberLink extends React.Component {
                     </div>
                     <div className='module'>
                       <div className='sub-header'>
-                        <div>Characters</div>
+                        <div>{t('Characters')}</div>
                       </div>
                       <div className='characters'>
                         <div>
@@ -315,90 +315,11 @@ class MemberLink extends React.Component {
                     </div>
                     <div className='module'>
                       <div className='sub-header'>
-                        <div>Progression</div>
+                        <div>{t('Ranks')}</div>
                       </div>
-                      <ul className='list progress-bars progression'>
-                        <li>
-                          <ProgressBar
-                            classNames='valor'
-                            objective={{
-                              progressDescription: manifest.DestinyProgressionDefinition[2626549951].displayProperties.name,
-                              completionValue: destinyUtils.totalValor()
-                            }}
-                            progress={{
-                              progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2626549951].currentProgress,
-                              complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2626549951].currentProgress === destinyUtils.totalValor(),
-                              objectiveHash: 2626549951
-                            }}
-                            hideCheck
-                            chunky
-                          />
-                        </li>
-                        <li>
-                          <ProgressBar
-                            classNames='glory'
-                            objective={{
-                              progressDescription: manifest.DestinyProgressionDefinition[2000925172].displayProperties.name,
-                              completionValue: destinyUtils.totalGlory()
-                            }}
-                            progress={{
-                              progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2000925172].currentProgress,
-                              complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2000925172].currentProgress === destinyUtils.totalGlory(),
-                              objectiveHash: 2000925172
-                            }}
-                            hideCheck
-                            chunky
-                          />
-                        </li>
-                        <li>
-                          <ProgressBar
-                            classNames='infamy'
-                            objective={{
-                              progressDescription: manifest.DestinyProgressionDefinition[2772425241].displayProperties.name,
-                              completionValue: destinyUtils.totalInfamy()
-                            }}
-                            progress={{
-                              progress: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2772425241].currentProgress,
-                              complete: this.state.all.data.characterProgressions.data[this.state.all.data.characters.data[0].characterId].progressions[2772425241].currentProgress === destinyUtils.totalInfamy(),
-                              objectiveHash: 2772425241
-                            }}
-                            hideCheck
-                            chunky
-                          />
-                        </li>
-                      </ul>
-                      <div className='sub-header'>
-                        <div>Seals</div>
-                      </div>
-                      <ul className='list progress-bars seals'>
-                        {manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode].children.presentationNodes.map((s, i) => {
-                          let node = manifest.DestinyPresentationNodeDefinition[s.presentationNodeHash];
-                          let record = manifest.DestinyRecordDefinition[node.completionRecordHash];
-
-                          if (node.redacted) {
-                            return null;
-                          }
-
-                          let completionValue = this.state.all.data.profileRecords.data.records[node.completionRecordHash] && this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].completionValue;
-                          let progress = this.state.all.data.profileRecords.data.records[node.completionRecordHash] && this.state.all.data.profileRecords.data.records[node.completionRecordHash].objectives[0].progress;
-
-                          return (
-                            <li key={i}>
-                              <ProgressBar
-                                objective={{
-                                  progressDescription: record.titleInfo.titlesByGenderHash[2204441813],
-                                  completionValue
-                                }}
-                                progress={{
-                                  progress,
-                                  complete: progress === completionValue,
-                                  objectiveHash: node.completionRecordHash
-                                }}
-                                hideCheck
-                                chunky
-                              />
-                            </li>
-                          );
+                      <ul className='list ranks'>
+                        {[2772425241, 2626549951, 2000925172].map(hash => {
+                          return <Ranks key={hash} data={{ membershipType: type, membershipId: id, characterId: lastCharacterPlayed, characterProgressions: this.state.all.data.characterProgressions.data }} hash={hash} />
                         })}
                       </ul>
                     </div>
@@ -412,8 +333,8 @@ class MemberLink extends React.Component {
                     </div>
                     <div>
                       <div className='text'>
-                        <div className='name'>Private profile</div>
-                        <div className='description'>This user has their profile privacy set to private</div>
+                        <div className='name'>{t('Private profile')}</div>
+                        <div className='description'>{t('This user has their profile privacy set to private')}</div>
                       </div>
                     </div>
                   </>

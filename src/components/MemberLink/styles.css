@@ -250,7 +250,7 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   max-width: 1280px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 474px 1fr;
+  grid-template-columns: 1.4fr 2fr 2fr;
   grid-gap: 3rem;
   font-size: 14px;
 }
@@ -362,46 +362,6 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   margin: 0 0 8px;
 }
 
-#member-overlay .wrapper-inner .ranks {
-  margin: 0 0 1rem;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-#member-overlay .wrapper-inner .ranks.loading,
-#member-overlay .wrapper-inner .ranks.error {
-  grid-template-columns: 1fr;
-}
-
-#member-overlay .wrapper-inner .ranks.error {
-  margin: 2rem 0 3rem;
-  font-style: italic;
-  letter-spacing: 1px;
-  font-size: 14px;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.4);
-  display: grid;
-  justify-items: center;
-}
-
-#member-overlay .wrapper-inner .ranks > div {
-  position: relative;
-  font-size: 14px;
-  line-height: 10px;
-}
-
-#member-overlay .wrapper-inner .ranks div .name {
-  color: rgba(255, 255, 255, 0.4);
-  line-height: 1.4;
-}
-
-#member-overlay .wrapper-inner .ranks div .value {
-  font-size: 38px;
-  line-height: 34px;
-  margin: 0 0 8px;
-}
-
 #member-overlay .wrapper-inner .characters .char {
   position: relative;
 }
@@ -500,14 +460,19 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 }
 
 #member-overlay .wrapper-inner .characters .char .state {
-  margin: 10px 0 20px;
+  margin: 6px 0 14px;
 }
 
 #member-overlay .wrapper-inner .characters .char .title ~ .state {
-  margin: 15px 0 20px;
+  margin: 11px 0 14px;
 }
 
-#member-overlay .wrapper-inner .characters .char:last-child .state {
+#member-overlay .wrapper-inner .characters .char .list.inventory-items {
+  grid-template-columns: repeat(9, 1fr);
+  margin: 0 0 26px; 
+}
+
+#member-overlay .wrapper-inner .characters .char:last-child .list.inventory-items {
   margin-bottom:  0;
 }
 
@@ -529,8 +494,6 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   color: rgba(255, 255, 255, 0.4);
 }
 
-
-
 #member-overlay .wrapper-inner .list.progress-bars > li {
   height: unset;
 }
@@ -545,18 +508,6 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 
 #member-overlay .wrapper-inner .list.progress-bars.seals .progress-bar.complete .bar .fill {
   background-color: #7b3274;
-}
-
-#member-overlay .wrapper-inner .list.progress-bars .progress-bar.valor .bar .fill {
-  background-color: #d08039;
-}
-
-#member-overlay .wrapper-inner .list.progress-bars .progress-bar.glory .bar .fill {
-  background-color: #bd2f28;
-}
-
-#member-overlay .wrapper-inner .list.progress-bars .progress-bar.infamy .bar .fill {
-  background-color: #269676;
 }
 
 .wrapper.dark-mode #member-overlay.error .background .border-top,
