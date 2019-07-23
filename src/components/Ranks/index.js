@@ -36,7 +36,8 @@ class Mode extends React.Component {
 
     console.warn(`starting rank: ${stepsData[workingStepIndex].stepName} - ${currentProgress}`)
 
-    while (workingStepIndex <= targetStepIndex) {
+    // just to Fabled I or go all the way to Legend+
+    while (targetStepIndex === 9 ? workingStepIndex < targetStepIndex : workingStepIndex <= targetStepIndex) {
       const currentStep = stepsData[workingStepIndex];
 
       console.log(`stepIndex: ${workingStepIndex}, name: ${currentStep.stepName}`)
