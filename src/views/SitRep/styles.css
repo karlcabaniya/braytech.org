@@ -1,18 +1,8 @@
 #sit-rep {
   padding: 4rem 3rem 3rem;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   grid-gap: 3rem;
-}
-
-#sit-rep .module .ranks {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-#sit-rep .col > .module .ranks ~ .button {
-  margin: 1rem 0 0;
 }
 
 #sit-rep .col > .module ~ .module {
@@ -23,17 +13,6 @@
   position: relative;
   font-size: 14px;
   line-height: 10px;
-}
-
-#sit-rep .module .ranks div .name {
-  color: rgba(255, 255, 255, 0.4);
-  line-height: 1.4;
-}
-
-#sit-rep .module .ranks div .value {
-  font-size: 38px;
-  line-height: 34px;
-  margin: 0 0 8px;
 }
 
 #sit-rep .module .prog ~ .prog {

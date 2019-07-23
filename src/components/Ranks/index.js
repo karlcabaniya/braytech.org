@@ -6,7 +6,9 @@ import { withNamespaces } from 'react-i18next';
 import manifest from '../../utils/manifest';
 import ObservedImage from '../ObservedImage';
 import ProgressBar from '../UI/ProgressBar';
+import Spinner from '../UI/Spinner';
 import * as utils from '../../utils/destinyUtils';
+import * as bungie from '../../utils/bungie';
 
 import './styles.css';
 
@@ -14,7 +16,75 @@ class Mode extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      glory: {
+        streak: 0,
+        loading: true
+      }
+    };
+  }
+
+  winsRequired = (data, characterId, characterProgressions) => {
+    let stepsData = data[2000925172].definition.steps;
+    let { stepIndex: currentStepIndex, stepIndex: workingStepIndex, progressToNextLevel: initialProgress, currentProgress } = characterProgressions[characterId].progressions[2000925172];
+    let targetStepIndex = currentStepIndex < 9 ? 9 : 15;
+
+    let winsRequired = 0;
+    let winsStreak = Math.max(data[2000925172].streak, 1);
+    let totalProgress = currentProgress;
+    let progress = initialProgress;
+
+    console.warn(`starting rank: ${stepsData[workingStepIndex].stepName} - ${currentProgress}`)
+
+    while (workingStepIndex <= targetStepIndex) {
+      const currentStep = stepsData[workingStepIndex];
+
+      console.log(`stepIndex: ${workingStepIndex}, name: ${currentStep.stepName}`)
+
+      console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
+      while (progress < currentStep.progressTotal) {
+
+        progress = progress + data[2000925172].gains[workingStepIndex].progressGain[Math.min(winsStreak, 5)];
+        totalProgress = totalProgress + data[2000925172].gains[workingStepIndex].progressGain[Math.min(winsStreak, 5)];
+
+        winsRequired++;
+        
+        console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
+      }
+
+      progress = Math.max(progress - currentStep.progressTotal, 0);
+
+      workingStepIndex++;
+    }
+
+    console.warn(`finishing rank: ${stepsData[Math.min(workingStepIndex, stepsData.length - 1)].stepName} - ${totalProgress}`)
+
+    console.log(winsRequired)
+
+    return winsRequired;
+  }
+
+  async componentDidMount() {
+    const { member, hash } = this.props;
+
+    if (hash === 2000925172) {
+      let history = await bungie.GetActivityHistory(member.membershipType, member.membershipId, member.characterId, 5, 69, 0);
+
+      let streakCount = 0;
+      let streakBroken = false;
+      history.activities && history.activities.forEach((match, i) => {
+        if (match.values.standing.basic.value !== 0) {
+          streakBroken = true;
+        }
+
+        if (!streakBroken && match.values.standing.basic.value === 0) {
+          streakCount++;
+        }
+
+      });
+
+      this.setState({ glory: { streak: streakCount, loading: false } })
+    }
   }
 
   render() {
@@ -25,11 +95,11 @@ class Mode extends React.Component {
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterProgressions = member.data.profile.characterProgressions.data;
 
-    const data = {
+    let data = {
       2772425241: {
         hash: 2772425241, // infamy
         activityHash: 3577607128,
-        icon: '/static/images/extracts/ui/modes/01E3-00000051.PNG',
+        icon: '/static/images/extracts/ui/modes/01a3-00007365.png',
         currentResetCount: characterProgressions[characterId].progressions[2772425241].currentResetCount,
         totalResetCount: characterProgressions[characterId].progressions[2772425241].seasonResets.reduce((acc, curr) => {
           if (curr.season > 3) {
@@ -43,7 +113,7 @@ class Mode extends React.Component {
       2626549951: {
         hash: 2626549951, // valor
         activityHash: 2274172949,
-        icon: '/static/images/extracts/ui/modes/01E3-00000190.PNG',
+        icon: '/static/images/extracts/ui/modes/037E-000013D9.PNG',
         currentResetCount: characterProgressions[characterId].progressions[2679551909] && characterProgressions[characterId].progressions[2679551909].currentResetCount ? characterProgressions[characterId].progressions[2679551909].currentResetCount : '?',
         totalResetCount:
           characterProgressions[characterId].progressions[2679551909] && characterProgressions[characterId].progressions[2679551909].seasonResets
@@ -57,39 +127,220 @@ class Mode extends React.Component {
             : '?',
         totalPoints: utils.totalValor()
       },
-      2679551909: {
-        hash: 2679551909, // glory
+      2000925172: {
+        hash: 2000925172, // glory
+        definition: manifest.DestinyProgressionDefinition[2000925172],
         activityHash: 2947109551,
-        icon: '/static/images/extracts/ui/modes/01E3-00000181.PNG',
-        totalPoints: utils.totalGlory()
+        icon: '/static/images/extracts/ui/modes/037E-000013EB.PNG',
+        totalPoints: utils.totalGlory(),
+        streak: this.state.glory.streak,
+        gains: {
+          '0': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 80,
+              '2': 100,
+              '3': 120,
+              '4': 140,
+              '5': 160
+            }
+          },
+          '1': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 80,
+              '2': 100,
+              '3': 120,
+              '4': 140,
+              '5': 160
+            }
+          },
+          '2': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 80,
+              '2': 100,
+              '3': 120,
+              '4': 140,
+              '5': 160
+            }
+          },
+          '3': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 68,
+              '2': 88,
+              '3': 108,
+              '4': 136,
+              '5': 148
+            }
+          },
+          '4': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 68,
+              '2': 88,
+              '3': 108,
+              '4': 136,
+              '5': 148
+            }
+          },
+          '5': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 68,
+              '2': 88,
+              '3': 108,
+              '4': 136,
+              '5': 148
+            }
+          },
+          '6': {
+            progressLoss: -52,
+            progressGain: {
+              '1': 60,
+              '2': 80,
+              '3': 100,
+              '4': 128,
+              '5': 140
+            }
+          },
+          '7': {
+            progressLoss: -52,
+            progressGain: {
+              '1': 60,
+              '2': 80,
+              '3': 100,
+              '4': 128,
+              '5': 140
+            }
+          },
+          '8': {
+            progressLoss: -52,
+            progressGain: {
+              '1': 60,
+              '2': 80,
+              '3': 100,
+              '4': 128,
+              '5': 140
+            }
+          },
+          '9': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 40,
+              '2': 60,
+              '3': 80,
+              '4': 108,
+              '5': 120
+            }
+          },
+          '10': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 40,
+              '2': 60,
+              '3': 80,
+              '4': 108,
+              '5': 120
+            }
+          },
+          '11': {
+            progressLoss: -60,
+            progressGain: {
+              '1': 40,
+              '2': 60,
+              '3': 80,
+              '4': 108,
+              '5': 120
+            }
+          },
+          '12': {
+            progressLoss: -68,
+            progressGain: {
+              '1': 40,
+              '2': 60,
+              '3': 80,
+              '4': 108,
+              '5': 120
+            }
+          },
+          '13': {
+            progressLoss: -68,
+            progressGain: {
+              '1': 40,
+              '2': 60,
+              '3': 80,
+              '4': 108,
+              '5': 120
+            }
+          },
+          '14': {
+            progressLoss: -68,
+            progressGain: {
+              '1': 40,
+              '2': 60,
+              '3': 80,
+              '4': 108,
+              '5': 120
+            }
+          },
+          '15': {
+            progressLoss: -68,
+            progressGain: {
+              '1': 40,
+              '2': 60,
+              '3': 80,
+              '4': 108,
+              '5': 120
+            }
+          }
+        }
       }
     };
+
+    let winsRequired = 0;
+    if (hash === 2000925172) {
+      winsRequired = this.winsRequired(data, characterId, characterProgressions);
+    }
+    
+    // console.log(data[2000925172].gains)
+    // console.log(characterProgressions[characterId].progressions[2000925172])
 
     return (
       <li>
         <div className='icon'>
           <ObservedImage className='image' src={data[hash].icon} />
         </div>
-        <div className='text'>
-          <div className='name'>{manifest.DestinyActivityDefinition[data[hash].activityHash].displayProperties.name}</div>
-          <div className='data'>
-            <div>
-              <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString()}</div>
-              <div className='name'>{t('Points')}</div>
-            </div>
-            {data[hash].totalResetCount ? (
-              <>
-                <div>
-                  <div className='value'>{data[hash].totalResetCount}</div>
-                  <div className='name'>{t('Total resets')}</div>
-                </div>
-                <div>
-                  <div className='value'>{data[hash].currentResetCount}</div>
-                  <div className='name'>{t('Season resets')}</div>
-                </div>
-              </>
-            ) : null}
+        <div className='data'>
+          <div>
+            <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString()}</div>
+            <div className='name'>{t('Points')}</div>
           </div>
+          {data[hash].totalResetCount ? (
+            <>
+              <div>
+                <div className='value'>{data[hash].totalResetCount}</div>
+                <div className='name'>{t('Total resets')}</div>
+              </div>
+              <div>
+                <div className='value'>{data[hash].currentResetCount}</div>
+                <div className='name'>{t('Season resets')}</div>
+              </div>
+            </>
+          ) : null}
+          {hash === 2000925172 ? (
+            <>
+              <div>
+                <div className='value'>{!this.state.glory.loading ? Math.max(data[2000925172].streak, 1) : <Spinner mini />}</div>
+                <div className='name'>{t('Win streak')}</div>
+              </div>
+              <div>
+                <div className='value'>{winsRequired} {t('wins')}</div>
+                <div className='name'>{characterProgressions[characterId].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
+              </div>
+            </>
+          ) : null}
         </div>
         <div className='progress'>
           <ProgressBar

@@ -181,31 +181,23 @@ class SitRep extends React.Component {
     return (
       <div className='view' id='sit-rep'>
         <div className='col'>
-          <div className='module'>
-            <div className='sub-header sub'>
-              <div>{t('Equipment')}</div>
-            </div>
-            <ul className='list inventory-items'>
-              <Items items={orderBy(member.data.profile.characterEquipment.data[member.characterId].items.filter(i => ![4292445962, 4274335291, 1107761855].includes(i.bucketHash)), [i => i.bucketHash === 3284755031], ['desc'])} />
-            </ul>
-          </div>
-          <div className='module'>
-            <div className='sub-header sub'>
-              <div>{t('Progression')}</div>
-            </div>
-            <ul className='list progression'>
-              {[2772425241, 2626549951, 2679551909].map(hash => {
-                return <Ranks key={hash} hash={hash} />
-              })}
-            </ul>
-          </div>
-        </div>
-        <div className='col'>
           <div className='module milestones'>
             <div className='sub-header sub'>
               <div>{t('Milestones')}</div>
             </div>
             {milestones.length ? <ul className='list'>{milestones.map(m => m.element)}</ul> : <div className='milestones-completed'>{t("You've completed all of your milestones for this character.")}</div>}
+          </div>
+        </div>
+        <div className='col'>
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Ranks')}</div>
+            </div>
+            <ul className='list ranks'>
+              {[2772425241, 2626549951, 2000925172].map(hash => {
+                return <Ranks key={hash} hash={hash} />
+              })}
+            </ul>
           </div>
         </div>
         <div className='col'>
