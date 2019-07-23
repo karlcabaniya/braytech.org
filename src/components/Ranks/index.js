@@ -337,7 +337,7 @@ class Mode extends React.Component {
               </div>
               <div>
                 <div className='value'>{winsRequired} {t('wins')}</div>
-                <div className='name'>{characterProgressions[characterId].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
+                <div className='name'>{characterProgressions[characterId].progressions[2000925172].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
               </div>
             </>
           ) : null}
