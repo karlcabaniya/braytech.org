@@ -190,9 +190,14 @@
   font-size: 256px;
 }
 
-#sit-rep .module.milestones .list li.milestone-3082135827::before {
+#sit-rep .module.milestones .list li.milestone-1300394968::before {
   content: "\e992";
   font-size: 200px;
+}
+
+#sit-rep .module.milestones .list li.milestone-3082135827::before {
+  content: "\e97d";
+  font-size: 256px;
 }
 
 
@@ -248,7 +253,7 @@
     font-size: 128px;
   }
 
-  #sit-rep .module.milestones .list li.milestone-3082135827::before {
+  #sit-rep .module.milestones .list li.milestone-1300394968::before {
     font-size: 100px;
   }
 }

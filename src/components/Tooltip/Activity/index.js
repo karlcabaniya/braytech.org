@@ -54,7 +54,16 @@ class Activity extends React.Component {
                 place: manifest.DestinyDestinationDefinition[definitionActivity.destinationHash].placeHash && manifest.DestinyPlaceDefinition[manifest.DestinyDestinationDefinition[definitionActivity.destinationHash].placeHash].displayProperties && manifest.DestinyPlaceDefinition[manifest.DestinyDestinationDefinition[definitionActivity.destinationHash].placeHash].displayProperties.name
               }
             : false,
-        icon: <span className='destiny-adventure' />
+        icon: (
+          <span className='destiny-adventure2'>
+            <span className='path1' />
+            <span className='path2' />
+            <span className='path3' />
+            <span className='path4' />
+            <span className='path5' />
+            <span className='path6' />
+          </span>
+        )
       };
       if (definitionActivity.activityModeHashes && definitionActivity.activityModeHashes.includes(2394616003))
         activityType = {

@@ -47,7 +47,7 @@ class SitRep extends React.Component {
 
       // console.log(def.displayProperties.name, milestone);
 
-      if (milestone.milestoneHash === 2171429505) console.log(def.displayProperties.name, milestone);
+      if (milestone.milestoneHash === 1300394968) console.log(def.displayProperties.name, milestone);
 
       let state = {
         earned: false,
@@ -107,8 +107,10 @@ class SitRep extends React.Component {
         return;
       }
 
-      if ([3082135827, 2171429505].includes(milestone.milestoneHash)) {
-        const activities = milestone.milestoneHash === 2171429505 ? milestone.activities.filter(nf => nf.modifierHashes) : milestone.activities;
+      if ([3082135827, 2171429505, 1300394968].includes(milestone.milestoneHash)) {
+        let activities = milestone.activities;
+        if (milestone.milestoneHash === 2171429505) activities = milestone.activities.filter(nf => nf.modifierHashes);
+        if (milestone.milestoneHash === 1300394968) activities = milestone.activities.filter(ad => ad.challenges.length);
 
         state.supps = (
           <>
@@ -142,9 +144,8 @@ class SitRep extends React.Component {
 
       milestones.push({
         order: milestone.order,
-        // 1300394968
         element: (
-          <li key={milestone.milestoneHash} className={cx(`milestone-${milestone.milestoneHash}`, { 'has-icon': [3082135827, 2171429505].includes(milestone.milestoneHash), 'full-width': [3082135827, 2171429505].includes(milestone.milestoneHash), supps: state.supps, earned: state.earned })}>
+          <li key={milestone.milestoneHash} className={cx(`milestone-${milestone.milestoneHash}`, { 'has-icon': [3082135827, 2171429505, 1300394968].includes(milestone.milestoneHash), 'full-width': [3082135827, 2171429505, 1300394968].includes(milestone.milestoneHash), supps: state.supps, earned: state.earned })}>
             <ProgressBar
               objective={{
                 progressDescription: displayProperties.name,
