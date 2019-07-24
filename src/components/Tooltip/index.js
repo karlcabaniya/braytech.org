@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import './styles.css';
 
-import ItemTypes from './itemTypes';
+import Item from './Item';
+import Activity from './Activity';
 
 class Tooltip extends React.Component {
   constructor(props) {
@@ -181,9 +182,14 @@ class Tooltip extends React.Component {
 
   render() {
     if (this.state.hash) {
+
+      let Type = Item;
+
+      if (this.state.table === 'DestinyActivityDefinition') Type = Activity;
+
       return (
         <div id='tooltip' ref={this.tooltip} style={{ top: `${this.mouseMoveXY.y}px`, left: `${this.mouseMoveXY.x}px` }}>
-          <ItemTypes {...this.state} />
+          <Type {...this.state} />
         </div>
       );
     } else {

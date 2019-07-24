@@ -2,17 +2,16 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import cx from 'classnames';
 import { orderBy, flattenDepth } from 'lodash';
+import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import Button from '../../components/UI/Button';
-import Spinner from '../../components/UI/Spinner';
-import ObservedImage from '../../components/ObservedImage';
-import ProgressBar from '../../components/UI/ProgressBar';
-import Roster from '../../components/Roster';
 import * as utils from '../../utils/destinyUtils';
+import ObservedImage from '../../components/ObservedImage';
+import Spinner from '../../components/UI/Spinner';
+import ProgressBar from '../../components/UI/ProgressBar';
 import Ranks from '../../components/Ranks';
+import Roster from '../../components/Roster';
 
 import './styles.css';
 
@@ -33,7 +32,6 @@ class SitRep extends React.Component {
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     const characters = member.data.profile.characters.data;
     const character = characters.find(c => c.characterId === member.characterId);
-    const profileRecords = member.data.profile.profileRecords.data.records;
     const characterProgressions = member.data.profile.characterProgressions.data;
 
     // const milestonesData = Object.values(member.data.milestones).map(m => manifest.DestinyMilestoneDefinition[m.milestoneHash]);
@@ -49,6 +47,8 @@ class SitRep extends React.Component {
 
       // console.log(def.displayProperties.name, milestone);
 
+      if (milestone.milestoneHash === 2171429505) console.log(def.displayProperties.name, milestone);
+
       let state = {
         earned: false,
         redeemed: false,
@@ -56,23 +56,14 @@ class SitRep extends React.Component {
           progress: 0,
           completionValue: 1
         },
-        rewards: []
+        rewards: [],
+        supps: false
       };
 
       let displayProperties = {
         name: def.displayProperties.name,
         description: def.displayProperties.description
       };
-
-      // console.log(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards)
-
-      // if (manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards) {
-      //   state.reward = true;
-      // }
-
-      // if (manifest.DestinyMilestoneDefinition[milestone.milestoneHash].quests) {
-      //   console.log(manifest.DestinyMilestoneDefinition[milestone.milestoneHash], milestone)
-      // }
 
       if (milestone.availableQuests) {
         let availableQuest = milestone.availableQuests[0];
@@ -116,12 +107,44 @@ class SitRep extends React.Component {
         return;
       }
 
+      if ([3082135827, 2171429505].includes(milestone.milestoneHash)) {
+        const activities = milestone.milestoneHash === 2171429505 ? milestone.activities.filter(nf => nf.modifierHashes) : milestone.activities;
+
+        state.supps = (
+          <>
+            <h4>{t('Activities available')}</h4>
+            <ul className='list activities'>
+              {orderBy(
+                activities.map((ac, i) => {
+                  const definitionActivity = manifest.DestinyActivityDefinition[ac.activityHash];
+
+                  return {
+                    light: definitionActivity.activityLightLevel,
+                    el: (
+                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={ac.activityHash}>
+                        <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
+                        <div className='light'>
+                          <span>{definitionActivity.activityLightLevel}</span>
+                        </div>
+                      </li>
+                    )
+                  };
+                }),
+                [m => m.light],
+                ['asc']
+              ).map(e => e.el)}
+            </ul>
+          </>
+        );
+      }
+
       // console.log(state.rewards)
 
       milestones.push({
         order: milestone.order,
+        // 1300394968
         element: (
-          <li key={milestone.milestoneHash} className={cx({ earned: state.earned, redeemed: state.redeemed })}>
+          <li key={milestone.milestoneHash} className={cx(`milestone-${milestone.milestoneHash}`, { 'has-icon': [3082135827, 2171429505].includes(milestone.milestoneHash), 'full-width': [3082135827, 2171429505].includes(milestone.milestoneHash), supps: state.supps, earned: state.earned })}>
             <ProgressBar
               objective={{
                 progressDescription: displayProperties.name,
@@ -133,16 +156,19 @@ class SitRep extends React.Component {
               }}
               hideCheck
             />
-            <div className='text'>{displayProperties.description}</div>
-            {state.rewards.map((r, i) => {
-              const def = manifest.DestinyInventoryItemDefinition[r];
-              return (
-                <div key={i} className='reward'>
-                  <ObservedImage className='image' src={`https://www.bungie.net${def.displayProperties.icon}`} />
-                  <div className='name'>{def.displayProperties.name}</div>
-                </div>
-              );
-            })}
+            <div className='basic'>
+              <div className='text'>{displayProperties.description}</div>
+              {state.rewards.map((r, i) => {
+                const def = manifest.DestinyInventoryItemDefinition[r];
+                return (
+                  <div key={i} className='reward'>
+                    <ObservedImage className='image' src={`https://www.bungie.net${def.displayProperties.icon}`} />
+                    <div className='name'>{def.displayProperties.name}</div>
+                  </div>
+                );
+              })}
+            </div>
+            {state.supps ? <div className='supps'>{state.supps}</div> : null}
           </li>
         )
       });
@@ -153,13 +179,15 @@ class SitRep extends React.Component {
     const wellRestedState = utils.isWellRested(characterProgressions[character.characterId]);
 
     if (wellRestedState.wellRested) {
+      const definitionSandboxPerk = manifest.DestinySandboxPerkDefinition[1519921522];
+
       milestones.unshift({
         order: 0,
         element: (
           <li key='rest' className='well-rested'>
             <ProgressBar
               objective={{
-                progressDescription: 'Well rested',
+                progressDescription: definitionSandboxPerk.displayProperties && definitionSandboxPerk.displayProperties.name,
                 completionValue: wellRestedState.requiredXP
               }}
               progress={{
@@ -168,7 +196,9 @@ class SitRep extends React.Component {
               }}
               hideCheck
             />
-            <div className='text'>XP gains increased by 3x for your first 3 Levels this week.</div>
+            <div className='basic'>
+              <div className='text'>{definitionSandboxPerk.displayProperties && definitionSandboxPerk.displayProperties.description}</div>
+            </div>
           </li>
         )
       });
@@ -193,7 +223,7 @@ class SitRep extends React.Component {
             </div>
             <ul className='list ranks'>
               {[2772425241, 2626549951, 2000925172].map(hash => {
-                return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characterProgressions }} />
+                return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characterProgressions }} />;
               })}
             </ul>
           </div>

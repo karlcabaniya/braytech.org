@@ -20,7 +20,7 @@ import subclass from './subclass';
 import ui from './ui';
 import sandboxPerk from './sandboxPerk';
 
-class ItemTypes extends React.Component {
+class Item extends React.Component {
   render() {
     let { member, hash, instanceId, state, quantity, rollNote, table, tooltipType, tooltips } = this.props;
 
@@ -239,4 +239,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(ItemTypes);
+export default connect(mapStateToProps)(Item);

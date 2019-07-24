@@ -36,12 +36,29 @@
   grid-gap: 3px;
 }
 
-#sit-rep .module.milestones .list li {
-  display: block;
+#sit-rep .module.milestones > .list > li {
+  display: grid;
   height: unset;
   padding: 1rem;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   margin: 0;
+  align-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+#sit-rep .module.milestones .list li h4 {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  margin: 0 calc(8px + 1rem) 12px;
+}
+
+#sit-rep .module.milestones .list li.full-width {
+  grid-column: 1/3;
+}
+
+#sit-rep .module.milestones .list li.full-width.supps {
+  grid-template-columns: 1fr 1fr;
 }
 
 #sit-rep .module.milestones .list li.well-rested {
@@ -54,11 +71,15 @@
   background-color: rgba(123, 220, 193, 0.2);
 }
 
-#sit-rep .module.milestones .list li > .text {
+#sit-rep .module.milestones .list li > .basic > .text {
   position: relative;
   font-size: 14px;
-  margin: 6px 8px 0 8px;
+  margin: 0 8px;
   color: rgba(255, 255, 255, 0.6);
+}
+
+#sit-rep .module.milestones .list li.full-width .progress-bar {
+  grid-column: 1/3;
 }
 
 #sit-rep .module.milestones .list li .progress-bar .bar {
@@ -101,6 +122,80 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+#sit-rep .module.milestones .list li .list.activities {
+  padding: 0 8px 0 calc(8px + 1rem);
+  grid-template-columns: 1fr;
+}
+
+#sit-rep .module.milestones .list li .list.activities li {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px 1rem;
+}
+
+#sit-rep .module.milestones .list li .list.activities li .light {
+  color: #2ed1c9;
+}
+
+#sit-rep .module.milestones .list li .list.activities li .light span {
+  position: relative;
+  margin: 0 0 0 10px;
+}
+
+#sit-rep .module.milestones .list li .list.activities li .light span::before {
+  content: 'l';
+  position: absolute;
+  top: 4px;
+  left: -9px;
+  font-family: 'destiny' !important;
+  font-size: 7px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#sit-rep .module.milestones .list li.has-icon::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  font-family: 'destiny' !important;
+  font-size: 256px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+#sit-rep .module.milestones .list li.milestone-2171429505::before {
+  content: "\e9a2";
+  font-size: 256px;
+}
+
+#sit-rep .module.milestones .list li.milestone-3082135827::before {
+  content: "\e992";
+  font-size: 200px;
+}
+
+
 #sit-rep .module.milestones .milestones-completed {
   font-style: italic;
   letter-spacing: 1px;
@@ -123,6 +218,38 @@
 @media screen and (max-width: 1440px) {
   #sit-rep .module.milestones .list {
     grid-template-columns: 1fr;
+  }
+
+  #sit-rep .module.milestones .list li h4 {
+    margin: 16px 8px 0;
+  }
+
+  #sit-rep .module.milestones .list li.full-width {
+    grid-column: unset;
+  }
+
+  #sit-rep .module.milestones .list li.full-width .progress-bar {
+    grid-column: unset;
+  }
+
+  #sit-rep .module.milestones .list li.full-width.supps {
+    grid-template-columns: 1fr;
+  }
+
+  #sit-rep .module.milestones .list li .list.activities {
+    padding: 1rem 8px 0;
+  }
+
+  #sit-rep .module.milestones .list li.has-icon::before {
+    left: unset;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    font-size: 128px;
+  }
+
+  #sit-rep .module.milestones .list li.milestone-3082135827::before {
+    font-size: 100px;
   }
 }
 
