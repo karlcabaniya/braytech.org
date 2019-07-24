@@ -114,10 +114,10 @@ class Records extends React.Component {
       const recordScope = definitionRecord.scope || 0;
       const recordData = recordScope === 1 ? characterRecords && characterRecords[characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
 
-      console.log(definitionRecord.displayProperties.name)
-      console.log(recordData)
-      console.log(enumerateRecordState(recordData.state))
-      console.log('---')
+      // console.log(definitionRecord.displayProperties.name)
+      // console.log(recordData)
+      // console.log(enumerateRecordState(recordData.state))
+      // console.log('---')
       // const recordData = {
       //   ...characterRecords && characterRecords[characterId].records[definitionRecord.hash],
       //   ...profileRecords && profileRecords[definitionRecord.hash]

@@ -47,7 +47,7 @@ class SitRep extends React.Component {
 
       // console.log(def.displayProperties.name, milestone);
 
-      if (milestone.milestoneHash === 1300394968) console.log(def.displayProperties.name, milestone);
+      // if (milestone.milestoneHash === 1300394968) console.log(def.displayProperties.name, milestone);
 
       let state = {
         earned: false,
