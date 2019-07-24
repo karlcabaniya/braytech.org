@@ -105,7 +105,11 @@ class Activity extends React.Component {
               </div>
             </div>
             <div className='black'>
-              {definitionActivity.pgcrImage && definitionActivity.pgcrImage !== '/img/theme/destiny/bgs/pgcrs/placeholder.jpg' ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${definitionActivity.pgcrImage}`} /> : null}
+              {definitionActivity.pgcrImage && definitionActivity.pgcrImage !== '/img/theme/destiny/bgs/pgcrs/placeholder.jpg' ? (
+                <div className='screenshot'>
+                  <ObservedImage className='image' src={`https://www.bungie.net${definitionActivity.pgcrImage}`} />
+                </div>
+              ) : null}
               <div className='description'>
                 {activityType.destination ? (
                   <div className='destination'>

@@ -209,38 +209,32 @@ class SitRep extends React.Component {
 
     return (
       <div className='view' id='sit-rep'>
-        <div className='col'>
-          <div className='module milestones'>
-            <div className='sub-header sub'>
-              <div>{t('Milestones')}</div>
-            </div>
-            {milestones.length ? <ul className='list'>{milestones.map(m => m.element)}</ul> : <div className='milestones-completed'>{t("You've completed all of your milestones for this character.")}</div>}
+        <div className='module milestones'>
+          <div className='sub-header sub'>
+            <div>{t('Milestones')}</div>
           </div>
+          {milestones.length ? <ul className='list'>{milestones.map(m => m.element)}</ul> : <div className='milestones-completed'>{t("You've completed all of your milestones for this character.")}</div>}
         </div>
-        <div className='col'>
-          <div className='module'>
-            <div className='sub-header sub'>
-              <div>{t('Ranks')}</div>
-            </div>
-            <ul className='list ranks'>
-              {[2772425241, 2626549951, 2000925172].map(hash => {
-                return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characterProgressions }} />;
-              })}
-            </ul>
+        <div className='module'>
+          <div className='sub-header sub'>
+            <div>{t('Ranks')}</div>
           </div>
+          <ul className='list ranks'>
+            {[2772425241, 2626549951, 2000925172].map(hash => {
+              return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characterProgressions }} />;
+            })}
+          </ul>
         </div>
-        <div className='col'>
-          {group ? (
-            <div className='module clan-roster'>
-              <div className='sub-header sub'>
-                <div>{t('Clan roster')}</div>
-                <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
-              </div>
-              <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
-              {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini showOnline />}
+        {group ? (
+          <div className='module clan-roster'>
+            <div className='sub-header sub'>
+              <div>{t('Clan roster')}</div>
+              <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
             </div>
-          ) : null}
-        </div>
+            <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
+            {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini showOnline />}
+          </div>
+        ) : null}
       </div>
     );
   }

@@ -86,10 +86,14 @@
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-#tooltip .black .image.screenshot {
+#tooltip .black .screenshot {
   position: relative;
   height: unset;
   padding-bottom: 56%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#tooltip .black .screenshot .image {
   background-size: cover;
 }
 

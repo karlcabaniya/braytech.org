@@ -5,10 +5,6 @@
   grid-gap: 3rem;
 }
 
-#sit-rep .col > .module ~ .module {
-  margin: 3rem 0 0;
-}
-
 #sit-rep .module .ranks > div {
   position: relative;
   font-size: 14px;
@@ -261,12 +257,18 @@
 @media screen and (max-width: 1280px) {
   #sit-rep {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content 1fr;
+  }
+
+  #sit-rep .module.milestones {
+    grid-row: 1/3;
   }
 }
 
 @media screen and (max-width: 768px) {
   #sit-rep {
     grid-template-columns: 1fr;
+    grid-template-rows: unset;
   }
 }
 
@@ -278,6 +280,10 @@
 
   #sit-rep .module ~ .module {
     margin: 2rem 0 0;
+  }
+
+  #sit-rep .module.milestones {
+    grid-row: unset;
   }
 
   #sit-rep .module.milestones .list li .list.activities li .light span::before {

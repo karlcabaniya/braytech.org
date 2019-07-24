@@ -53,7 +53,6 @@ class Item extends React.Component {
         stats: itemComponents.stats.data[instanceId] ? itemComponents.stats.data[instanceId].stats : false,
         objectives: itemComponents.objectives.data[instanceId] ? itemComponents.objectives.data[instanceId].objectives : false
       };
-
     } else if (instanceId && tooltips.itemComponents[instanceId]) {
       item.itemComponents = tooltips.itemComponents[instanceId];
     } else {
@@ -66,10 +65,9 @@ class Item extends React.Component {
       } else {
         item.itemComponents = {
           objectives: member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[hash].objectives
-        }
+        };
       }
     }
-
 
     if (instanceId && member.data.profile && member.data.profile.characterInventories && member.data.profile.characterInventories.data && member.data.profile.characterInventories.data[member.characterId] && member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceId)) {
       if (item.itemComponents) {
@@ -77,7 +75,7 @@ class Item extends React.Component {
       } else {
         item.itemComponents = {
           item: member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceId)
-        }
+        };
       }
     }
 
@@ -206,7 +204,7 @@ class Item extends React.Component {
       state = enumerateItemState(parseInt(state, 10));
       let name = item.displayProperties && item.displayProperties.name;
       name = table === 'DestinyHistoricalStatsDefinition' ? item.statName : name;
-      
+
       return (
         <>
           <div className='acrylic' />
@@ -221,7 +219,11 @@ class Item extends React.Component {
             </div>
             {!item.itemComponents && rollNote ? <div className='note'>Non-instanced item (displaying collections roll)</div> : null}
             <div className='black'>
-              {this.props.viewport.width <= 600 && item.screenshot ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${item.screenshot}`} /> : null}
+              {this.props.viewport.width <= 600 && item.screenshot ? (
+                <div className='screenshot'>
+                  <ObservedImage className='image' src={`https://www.bungie.net${item.screenshot}`} />
+                </div>
+              ) : null}
               {black}
             </div>
           </div>
