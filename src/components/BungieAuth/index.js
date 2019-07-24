@@ -146,7 +146,7 @@ class BungieAuth extends React.Component {
         return (
           <div className='bungie-auth'>
             <Button
-              text='Authorize'
+              text={t('Authorize')}
               action={() => {
                 window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
               }}
@@ -172,7 +172,7 @@ class NoAuth extends React.Component {
               <p>{t('To use this feature, please tell Bungie that you approve. No personal information is shared by doing so—only an authentication code with which you may interact with more API endpoints.')}</p>
             </div>
             <Button
-              text='Authorize'
+              text={t('Authorize')}
               action={() => {
                 window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
               }}

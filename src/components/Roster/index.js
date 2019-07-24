@@ -223,8 +223,8 @@ class Roster extends React.Component {
                     this.changeSortTo('lastCharacter');
                   }}
                 >
-                  <div className='full'>Last character</div>
-                  <div className='abbr'>Char</div>
+                  <div className='full'>{t('Last character')}</div>
+                  <div className='abbr'>{t('Char')}</div>
                 </li>
                 <li
                   className={cx('col', 'lastActivity', { sort: !this.state.order.sort })}
@@ -232,8 +232,8 @@ class Roster extends React.Component {
                     this.changeSortTo(false);
                   }}
                 >
-                  <div className='full'>Last activity</div>
-                  <div className='abbr'>Activity</div>
+                  <div className='full'>{t('Last activity')}</div>
+                  <div className='abbr'>{t('Activity')}</div>
                 </li>
                 <li
                   className={cx('col', 'triumphScore', { sort: this.state.order.sort === 'triumphScore', asc: this.state.order.dir === 'asc' })}
@@ -241,8 +241,8 @@ class Roster extends React.Component {
                     this.changeSortTo('triumphScore');
                   }}
                 >
-                  <div className='full'>Triumph score</div>
-                  <div className='abbr'>T. Scr</div>
+                  <div className='full'>{t('Triumph score')}</div>
+                  <div className='abbr'>{t('T. Scr')}</div>
                 </li>
                 <li
                   className={cx('col', 'valor', { sort: this.state.order.sort === 'valor', asc: this.state.order.dir === 'asc' })}
@@ -250,8 +250,8 @@ class Roster extends React.Component {
                     this.changeSortTo('valor');
                   }}
                 >
-                  <div className='full'>Valor (Resets)</div>
-                  <div className='abbr'>Vlr (R)</div>
+                  <div className='full'>{t('Valor (Resets)')}</div>
+                  <div className='abbr'>{t('Vlr (R)')}</div>
                 </li>
                 <li
                   className={cx('col', 'glory', { sort: this.state.order.sort === 'glory', asc: this.state.order.dir === 'asc' })}
@@ -259,8 +259,8 @@ class Roster extends React.Component {
                     this.changeSortTo('glory');
                   }}
                 >
-                  <div className='full'>Glory</div>
-                  <div className='abbr'>Gly</div>
+                  <div className='full'>{t('Glory')}</div>
+                  <div className='abbr'>{t('Gly')}</div>
                 </li>
                 <li
                   className={cx('col', 'infamy', { sort: this.state.order.sort === 'infamy', asc: this.state.order.dir === 'asc' })}
@@ -268,8 +268,8 @@ class Roster extends React.Component {
                     this.changeSortTo('infamy');
                   }}
                 >
-                  <div className='full'>Infamy (Resets)</div>
-                  <div className='abbr'>Inf (R)</div>
+                  <div className='full'>{t('Infamy (Resets)')}</div>
+                  <div className='abbr'>{t('Inf (R)')}</div>
                 </li>
                 <li
                   className={cx('col', 'weeklyXp', { sort: this.state.order.sort === 'weeklyXp', asc: this.state.order.dir === 'asc' })}
@@ -277,8 +277,8 @@ class Roster extends React.Component {
                     this.changeSortTo('weeklyXp');
                   }}
                 >
-                  <div className='full'>Weekly Clan XP</div>
-                  <div className='abbr'>Clan XP</div>
+                  <div className='full'>{t('Weekly Clan XP')}</div>
+                  <div className='abbr'>{t('Clan XP')}</div>
                 </li>
               </ul>
             </li>
