@@ -41,6 +41,14 @@
   background-color: hsla(202, 60%, 10%, 0.8);
 }
 
+#tooltip .frame.activity.story .header .icon {
+  background-color: hsla(233, 84%, 11%, 0.8);
+}
+
+#tooltip .frame.activity.story .header .text {
+  background-color: hsla(233, 54%, 21%, 0.8);
+}
+
 #tooltip .frame.activity.adventure .header .icon {
   background-color: hsla(19, 100%, 15%, 0.8);
 }

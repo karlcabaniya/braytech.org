@@ -65,12 +65,30 @@ class Activity extends React.Component {
           </span>
         )
       };
+
       if (definitionActivity.activityModeHashes && definitionActivity.activityModeHashes.includes(2394616003))
         activityType = {
           ...activityType,
           name: manifest.DestinyActivityTypeDefinition[2884569138].displayProperties.name,
           className: 'strike',
           icon: <span className='destiny-strike' />
+        };
+
+      if (definitionActivity.activityTypeHash === 1686739444)
+        activityType = {
+          ...activityType,
+          name: manifest.DestinyActivityTypeDefinition[1686739444].displayProperties.name,
+          className: 'story',
+          icon: (
+            <span className='destiny-quest2'>
+              <span className='path1' />
+              <span className='path2' />
+              <span className='path3' />
+              <span className='path4' />
+              <span className='path5' />
+              <span className='path6' />
+            </span>
+          )
         };
 
       return (
