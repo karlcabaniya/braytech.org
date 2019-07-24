@@ -63,34 +63,35 @@
 
 #tooltip .frame.activity .description .destination {
   padding: 6px 0 10px;
-  font-size: 18px;
+  font-size: 16px;
   color: #f5eac4;
 }
 
 #tooltip .frame.activity .description pre {
   padding: 0;
   font-style: normal;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: unset;
 }
 
 #tooltip .frame.activity .recommended-light {
   padding: 12px 16px 16px;
+  font-size: 14px;
   color: #2ed1c9;
 }
 
 #tooltip .frame.activity .recommended-light span {
   position: relative;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 8px;
 }
 
 #tooltip .frame.activity .recommended-light span::before {
   content: 'l';
   position: absolute;
   top: 4px;
-  left: -9px;
+  left: -7px;
   font-family: 'destiny' !important;
-  font-size: 7px;
+  font-size: 6px;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -98,4 +99,12 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  #tooltip .frame.activity .recommended-light span::before {
+    top: 5px;
+  }
 }
