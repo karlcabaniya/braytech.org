@@ -114,6 +114,17 @@ class Records extends React.Component {
       const recordScope = definitionRecord.scope || 0;
       const recordData = recordScope === 1 ? characterRecords && characterRecords[characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
 
+      console.log(definitionRecord.displayProperties.name)
+      console.log(recordData)
+      console.log(enumerateRecordState(recordData.state))
+      console.log('---')
+      // const recordData = {
+      //   ...characterRecords && characterRecords[characterId].records[definitionRecord.hash],
+      //   ...profileRecords && profileRecords[definitionRecord.hash]
+      // };
+
+      //console.log(enumerateRecordState(characterRecords[characterId].records[definitionRecord.hash] && characterRecords[characterId].records[definitionRecord.hash].state), enumerateRecordState(profileRecords[definitionRecord.hash] && profileRecords[definitionRecord.hash].state))
+
       let objectives = [];
       let completionValueTotal = 0;
       let progressValueTotal = 0;
@@ -156,7 +167,7 @@ class Records extends React.Component {
       let progressDistance = progressValueTotal / completionValueTotal;
       progressDistance = Number.isNaN(progressDistance) ? 0 : progressDistance;
 
-      let state = (recordData && recordData.state) || 4;
+      let state = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
 
       if (enumerateRecordState(state).invisible && (collectibles && collectibles.hideInvisibleRecords)) {
         return;
@@ -245,7 +256,7 @@ class Records extends React.Component {
                 linked: link && linkTo,
                 highlight: highlight && highlight === definitionRecord.hash,
                 completed: enumerateRecordState(state).recordRedeemed,
-                unRedeemed: !enumerateRecordState(state).recordRedeemed && !enumerateRecordState(state).objectiveNotCompleted,
+                unredeemed: !enumerateRecordState(state).recordRedeemed && !enumerateRecordState(state).objectiveNotCompleted,
                 tracked: tracked.includes(definitionRecord.hash) && !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted,
                 'no-description': !description
               })}

@@ -2,13 +2,13 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
-import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
+import cx from 'classnames';
 
-import Records from '../Records';
-import { ProfileLink } from '../../components/ProfileLink';
 import manifest from '../../utils/manifest';
 import { enumerateRecordState } from '../../utils/destinyEnums';
+import { ProfileLink } from '../../components/ProfileLink';
+import Records from '../Records';
 
 class RecordsAlmost extends React.Component {
   constructor(props) {
@@ -19,7 +19,6 @@ class RecordsAlmost extends React.Component {
 
   render() {
     const { t, member, sort } = this.props;
-    const characterId = member && member.characterId;
     const characterRecords = member && member.data.profile.characterRecords.data;
     const profileRecords = member && member.data.profile.profileRecords.data.records;
 
@@ -41,7 +40,7 @@ class RecordsAlmost extends React.Component {
 
     let records = {
       ...profileRecords,
-      ...characterRecords[characterId].records
+      ...characterRecords[member.characterId].records
     }
 
     Object.entries(records).forEach(([key, record]) => {
@@ -109,7 +108,7 @@ class RecordsAlmost extends React.Component {
 
     return (
       <>
-        <ul className={cx('list record-items almost')}>
+        <ul className={cx('list record-items')}>
           {almost.map(r => {
             return r.element;
           })}

@@ -34,7 +34,7 @@ class RecordsTracked extends React.Component {
 
     return (
       <>
-        <ul className={cx('list record-items tracked')}>
+        <ul className={cx('list record-items')}>
           <Records selfLink {...this.props} hashes={hashes} ordered='progress' limit={limit} />
           {hashes.length < 1 ? (
             <li key='none-tracked' className='none-tracked'>

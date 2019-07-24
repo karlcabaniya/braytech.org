@@ -14,6 +14,7 @@ import Node from './Node/';
 import SealNode from './SealNode/';
 import AlmostComplete from './AlmostComplete/';
 import Tracked from './Tracked/';
+import Unredeemed from './Unredeemed/';
 
 class Triumphs extends React.Component {
   constructor(props) {
@@ -158,6 +159,25 @@ class Triumphs extends React.Component {
         <>
           <div className={cx('view')} id='triumphs'>
             <Tracked {...this.props} />
+          </div>
+          <div className='sticky-nav'>
+            <div />
+            <ul>
+              <li>
+                <ProfileLink className='button' to={backLinkPath}>
+                  <i className='destiny-B_Button' />
+                  {t('Back')}
+                </ProfileLink>
+              </li>
+            </ul>
+          </div>
+        </>
+      );
+    } else if (primaryHash === 'unredeemed') {
+      return (
+        <>
+          <div className={cx('view')} id='triumphs'>
+            <Unredeemed {...this.props} />
           </div>
           <div className='sticky-nav'>
             <div />

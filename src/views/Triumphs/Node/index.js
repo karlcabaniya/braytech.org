@@ -19,6 +19,10 @@ class PresentationNode extends React.Component {
 
     let primaryDefinition = manifest.DestinyPresentationNodeDefinition[primaryHash];
 
+    if (!primaryDefinition) {
+      return null;
+    }
+
     let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash;
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 

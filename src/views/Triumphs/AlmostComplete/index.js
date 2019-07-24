@@ -5,7 +5,7 @@ import { withNamespaces } from 'react-i18next';
 
 import RecordsAlmost from '../../../components/RecordsAlmost';
 
-class Root extends React.Component {
+class AlmostComplete extends React.Component {
   render() {
     const { t } = this.props;
 
@@ -31,4 +31,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(Root);
+)(AlmostComplete);
