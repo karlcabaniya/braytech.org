@@ -8,9 +8,9 @@ import moment from 'moment';
 import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
 
-import manifest from '../../utils/manifest';
-import ObservedImage from '../../components/ObservedImage';
-import Spinner from '../../components/UI/Spinner';
+import manifest from '../../../utils/manifest';
+import ObservedImage from '../../../components/ObservedImage';
+import Spinner from '../../../components/UI/Spinner';
 
 class NightfallHighScores extends React.Component {
   constructor(props) {

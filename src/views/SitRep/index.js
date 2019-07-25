@@ -221,7 +221,7 @@ class SitRep extends React.Component {
           </div>
           <ul className='list ranks'>
             {[2772425241, 2626549951, 2000925172].map(hash => {
-              return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characterProgressions }} />;
+              return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characters: member.data.profile.characters.data, characterProgressions }} />;
             })}
           </ul>
         </div>

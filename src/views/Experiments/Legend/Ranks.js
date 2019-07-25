@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import manifest from '../../utils/manifest';
-import ProgressBar from '../../components/UI/ProgressBar';
+import manifest from '../../../utils/manifest';
+import ProgressBar from '../../../components/UI/ProgressBar';
 
 class Ranks extends React.Component {
   constructor(props) {

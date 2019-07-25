@@ -7,8 +7,8 @@ import cx from 'classnames';
 import Moment from 'react-moment';
 import { orderBy, flattenDepth } from 'lodash';
 
-import ObservedImage from '../../components/ObservedImage';
-import Spinner from '../../components/UI/Spinner';
+import ObservedImage from '../../../components/ObservedImage';
+import Spinner from '../../../components/UI/Spinner';
 
 class RaidReport extends React.Component {
   constructor(props) {
@@ -147,7 +147,7 @@ class RaidReport extends React.Component {
     };
 
     
-
+    let firstLevClear = false;
     let firstSotpClear = false;
     let raids = [];
     let raidReports = [];
@@ -296,6 +296,7 @@ class RaidReport extends React.Component {
       let levNormal = getNormal(LEVIATHAN);
       let levPrestige = getPrestige(LEVIATHAN);
       let levFastest = orderBy(levAgg.filter(p => p.startingPhaseIndex === 0), [p => p.entries[0].values.activityDurationSeconds.basic.value], ['asc'])[0];
+      firstLevClear = orderBy(levAgg, [pgcr => pgcr.period], ['asc'])[0];
 
       let eowAgg = getAgg(EATER_OF_WORLDS);
       let eowNormal = getNormal(EATER_OF_WORLDS);
@@ -385,31 +386,31 @@ class RaidReport extends React.Component {
       <>
         <div className='bg' />
         <div className='first'>
-          <ObservedImage className='image pgcrImage' src={SCOURGE_OF_THE_PAST.image} />
+          <ObservedImage className='image pgcrImage' src={LEVIATHAN.image} />
           <div className='head'>
             <div className='page-header'>
               <div className='name'>{t('Raids')}</div>
               <div className='description'>{t('Form a fireteam of six and brave the strange and powerful realms of our enemies')}</div>
             </div>
           </div>
-          {firstSotpClear ? (
+          {firstLevClear ? (
             <>
               <div className='properties'>
                 <div className='desc'>First clear</div>
-                <div className='name'>{SCOURGE_OF_THE_PAST.displayValue}</div>
+                <div className='name'>{LEVIATHAN.displayValue}</div>
                 <div className='score'>
-                  <Moment format='D/M/YYYY'>{firstSotpClear.period}</Moment>
+                  <Moment format='D/M/YYYY'>{firstLevClear.period}</Moment>
                 </div>
               </div>
               <div className='fireteam'>
                 <div className='sub-header sub'>
                   <div>Fireteam</div>
                   <div>
-                    <Moment format='D/M/YYYY'>{firstSotpClear.period}</Moment>
+                    <Moment format='D/M/YYYY'>{firstLevClear.period}</Moment>
                   </div>
                 </div>
                 <ul className='list'>
-                  {firstSotpClear.entries.map(entry => {
+                  {firstLevClear.entries.map(entry => {
                     if (entry.values.completed.basic.value !== 1 || entry.values.completionReason.basic.value !== 0) {
                       return null;
                     }

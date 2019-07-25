@@ -319,7 +319,7 @@ class MemberLink extends React.Component {
                       </div>
                       <ul className='list ranks'>
                         {[2772425241, 2626549951, 2000925172].map(hash => {
-                          return <Ranks key={hash} data={{ membershipType: type, membershipId: id, characterId: lastCharacterPlayed, characterProgressions: this.state.all.data.characterProgressions.data }} hash={hash} />
+                          return <Ranks key={hash} data={{ membershipType: type, membershipId: id, characterId: lastCharacterPlayed, characters: this.state.all.data.characters.data, characterProgressions: this.state.all.data.characterProgressions.data }} hash={hash} />
                         })}
                       </ul>
                     </div>

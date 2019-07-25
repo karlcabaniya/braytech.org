@@ -5,8 +5,8 @@ import { withNamespaces } from 'react-i18next';
 import { flattenDepth } from 'lodash';
 import cx from 'classnames';
 
-import * as bungie from '../../utils/bungie';
-import getPGCR from '../../utils/getPGCR';
+import * as bungie from '../../../utils/bungie';
+import getPGCR from '../../../utils/getPGCR';
 
 import Characters from './Characters';
 import NightfallHighScores from './NightfallHighScores';

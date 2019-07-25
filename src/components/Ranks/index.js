@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
+import { flattenDepth, orderBy } from 'lodash';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../ObservedImage';
@@ -71,14 +72,23 @@ class Mode extends React.Component {
 
   async componentDidMount() {
     const { hash, data } = this.props;
-    const { membershipType, membershipId, characterId } = data;
+    const { membershipType, membershipId, characters } = data;
 
     if (hash === 2000925172) {
-      let history = await bungie.GetActivityHistory(membershipType, membershipId, characterId, 5, 69, 0);
+      const charactersIds = characters.map(c => c.characterId);
+
+      let requests = charactersIds.map(async c => {
+        let response = await bungie.GetActivityHistory(membershipType, membershipId, c, 5, 69, 0);
+        return response.activities || [];
+      });
+
+      let activities = await Promise.all(requests);
+      activities = flattenDepth(activities, 1);
+      activities = orderBy(activities, [ac => ac.period], ['desc']);
 
       let streakCount = 0;
       let streakBroken = false;
-      history.activities && history.activities.forEach((match, i) => {
+      activities.forEach((match, i) => {
         if (match.values.standing.basic.value !== 0) {
           streakBroken = true;
         }

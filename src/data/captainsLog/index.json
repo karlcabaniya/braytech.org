@@ -558,5 +558,10 @@
     "date": "2019-07-24T12:44:29.498Z",
     "version": "2.7.15",
     "content": "- triumph record state fix\n- improved _Now_ view with renewed focus on milestones\n- tooltips work\n- translation work\n- new ranks component"
+  },
+  {
+    "date": "2019-07-25T05:09:00.088Z",
+    "version": "2.7.16",
+    "content": "- ranks component comp streak improvment"
   }
 ]

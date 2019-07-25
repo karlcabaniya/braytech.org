@@ -3,12 +3,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
-import Moment from 'react-moment';
-import orderBy from 'lodash/orderBy';
 
-import manifest from '../../utils/manifest';
-import * as utils from '../../utils/destinyUtils';
-import ObservedImage from '../../components/ObservedImage';
+import manifest from '../../../utils/manifest';
+import * as utils from '../../../utils/destinyUtils';
+import ObservedImage from '../../../components/ObservedImage';
 
 class Characters extends React.Component {
   constructor(props) {

@@ -5,7 +5,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import store from './utils/reduxStore';
 
 import Clan from './views/Clan';
-import Legend from './views/Legend';
 import Character from './views/Character';
 import PGCRs from './views/PGCRs';
 import Collections from './views/Collections';
@@ -15,9 +14,11 @@ import ThisWeek from './views/ThisWeek';
 import SitRep from './views/SitRep';
 import Inventory from './views/Inventory';
 
-import PostmasterCapacity from './components/Notifications/PostmasterCapacity';
+import Legend from './views/Experiments/Legend';
+
 import Header from './components/UI/Header';
 import Spinner from './components/UI/Spinner';
+import PostmasterCapacity from './components/Notifications/PostmasterCapacity';
 
 class ProfileRoutes extends React.Component {
   componentDidMount() {
