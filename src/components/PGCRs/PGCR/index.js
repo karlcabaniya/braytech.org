@@ -147,7 +147,9 @@ class PGCR extends React.Component {
     };
 
     data.forEach(pgcr => {
-      let isExpanded = this.state.expanded.find(e => e.instanceId === pgcr.activityDetails.instanceId);
+      if (reports.find(r => r.instanceId === pgcr.instanceId)) return
+
+      const isExpanded = this.state.expanded.find(e => e.instanceId === pgcr.activityDetails.instanceId);
 
       if (isExpanded) console.log(pgcr);
 
@@ -987,6 +989,7 @@ class PGCR extends React.Component {
       );
 
       reports.push({
+        instanceId: pgcr.instanceId,
         element: (
           <li key={pgcr.activityDetails.instanceId} className={cx('linked', { isExpanded: isExpanded, standing: standing > -1, victory: standing === 0 })} onClick={() => (!isExpanded ? this.expandHandler(pgcr.activityDetails.instanceId) : false)}>
             {!isExpanded ? row : detail}
