@@ -23,6 +23,16 @@ class QuestLine extends React.Component {
     {
       objectiveHash: 3837519245,
       recordHash: 3026670632
+    },
+    // Notorious Hustle
+    {
+      objectiveHash: 1449268997,
+      recordHash: 1745790710
+    },
+    // The Best Offense
+    {
+      objectiveHash: 858053549,
+      recordHash: 1827105928
     }
   ];
 
