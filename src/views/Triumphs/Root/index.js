@@ -5,13 +5,12 @@ import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import { enumerateRecordState } from '../../../utils/destinyEnums';
 import { ProfileLink } from '../../../components/ProfileLink';
 import ObservedImage from '../../../components/ObservedImage';
-import { enumerateRecordState } from '../../../utils/destinyEnums';
 import RecordsAlmost from '../../../components/RecordsAlmost';
 import RecordsTracked from '../../../components/RecordsTracked';
 import RecordsSearch from '../../../components/RecordsSearch';
-import NotificationInline from '../../../components/Notifications/NotificationInline';
 
 class Root extends React.Component {
   render() {
@@ -169,7 +168,15 @@ class Root extends React.Component {
             <div>{t('Total score')}</div>
           </div>
           <div className='total-score'>{this.props.member.data.profile.profileRecords.data.score}</div>
-          {unredeemedTriumphCount > 0 ? <NotificationInline name={`${unredeemedTriumphCount} ${t('unredeemed triumphs')}`} description={potentialScoreGain > 0 ? `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} worth ${potentialScoreGain} score to redeem` : `You have ${unredeemedTriumphCount} triumph ${unredeemedTriumphCount === 1 ? `record` : `records`} to redeem`} /> : null}
+          {unredeemedTriumphCount > 0 ? (
+            <ul className='list record-items notification-unredeemed'>
+              <li className='linked unredeemed'>
+                <div className='text'>{unredeemedTriumphCount} {t('unredeemed triumphs')}</div>
+                <i className='segoe-uniE0AB' />
+                <ProfileLink to={{ pathname: '/triumphs/unredeemed', state: { from: '/triumphs' } }} />
+              </li>
+            </ul>
+          ) : null}
           <div className='sub-header'>
             <div>{t('Search')}</div>
           </div>
