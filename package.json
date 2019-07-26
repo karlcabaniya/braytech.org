@@ -2,7 +2,7 @@
   "name": "braytech.org",
   "author": "Tom Chapman <askMeOnTwitter@justrealmilk> (https://thomchap.com.au)",
   "bugs": "https://github.com/justrealmilk/braytech.org/issues",
-  "version": "2.7.16",
+  "version": "2.7.17",
   "private": true,
   "dependencies": {
     "braytech_react-scripts": "^3.0.1",

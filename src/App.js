@@ -164,7 +164,6 @@ class App extends React.Component {
 
     this.availableLanguages = Object.keys(manifestIndex.jsonWorldContentPaths);
     this.availableLanguages.splice(1, 0, 'en-au')
-    console.log(this.availableLanguages)
 
     tmpManifest.statistics = (await this.startupRequests.voluspaStatistics) || {};
 

@@ -9,7 +9,7 @@ import manifest from '../../../utils/manifest';
 import { enumerateCollectibleState } from '../../../utils/destinyEnums';
 
 import Collectibles from '../../../components/Collectibles';
-import Items from '../../../components/Items';
+import PlugSet from '../../../components/PlugSet';
 
 class PresentationNode extends React.Component {
   constructor(props) {
@@ -132,7 +132,7 @@ console.log(definitionTertiary)
         </li>
       );
     });
-
+    
     
     return (
       <div className='node'>
@@ -155,16 +155,7 @@ console.log(definitionTertiary)
         <div className='collectibles'>
           {definitionTertiary.children.items && definitionTertiary.children.items.length ? (
             <ul className={cx('list', 'tertiary', 'inventory-items', 'as-tab')}>
-              <Items
-                {...this.props}
-                {...this.state}
-                items={definitionTertiary.children.items.map(i => {
-                  return { itemHash: i };
-                })}
-                highlight={quaternaryHash}
-                asTab
-                showHash
-              />
+              <PlugSet set={3224618006} plugs={definitionTertiary.children.items} />
             </ul>
           ) : (
             <ul className={cx('list', 'tertiary', 'collection-items', { sets: primaryHash === '1605042242' })}>

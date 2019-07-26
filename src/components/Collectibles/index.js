@@ -278,7 +278,7 @@ class Collectibles extends React.Component {
       output.push(
         <li key='lol' className='all-completed'>
           <div className='properties'>
-            <div className='text'>{t('All completed')}</div>
+            <div className='text'>{t('All discovered')}</div>
           </div>
         </li>
       );
