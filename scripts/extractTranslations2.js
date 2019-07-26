@@ -25,7 +25,7 @@ const stableCompare = (a, b) => {
 };
 const MISSING_TRANSLATION = '🌐';
 const INDENT = '    ';
-const SOURCE_LOCALE = 'en-AU'; // oy!
+const SOURCE_LOCALE = 'en'; // oy!
 const ARG_VERBOSE = process.argv.includes('--verbose');
 const ARG_SKIP_SORT = process.argv.includes('--skip-sort');
 const ARG_STATS = process.argv.includes('--stats');
@@ -75,10 +75,10 @@ const FilesLogic = {
         const result = [];
         sourceStrings.forEach(key => {
             if (!translatedStrings[key]) {
-                // if (isSourceLocale) {
-                //     translatedStrings[key] = key;
-                //     return;
-                // }
+                if (isSourceLocale) {
+                    translatedStrings[key] = key;
+                    return;
+                }
                 const placeholderKey = placeholdify(key);
                 if (!translatedStrings[placeholderKey]) {
                     translatedStrings[placeholderKey] = MISSING_TRANSLATION;

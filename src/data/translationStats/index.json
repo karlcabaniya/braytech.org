@@ -12,8 +12,8 @@
     "removed": []
   },
   "en": {
-    "translated": 184,
-    "notTranslated": 235,
+    "translated": 328,
+    "notTranslated": 0,
     "added": [],
     "removed": []
   },
@@ -32,6 +32,12 @@
   "fr": {
     "translated": 421,
     "notTranslated": 32,
+    "added": [],
+    "removed": []
+  },
+  "internal": {
+    "translated": 0,
+    "notTranslated": 328,
     "added": [],
     "removed": []
   },

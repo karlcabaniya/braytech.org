@@ -3,12 +3,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
-
 import { getLanguageInfo } from '../../utils/languageInfo';
 import * as ls from '../../utils/localStorage';
 import { BungieAuth } from '../../components/BungieAuth';
 import Checkbox from '../../components/UI/Checkbox';
 import Button from '../../components/UI/Button';
+
+import translationStats from '../../data/translationStats';
 
 import './styles.css';
 
@@ -26,7 +27,7 @@ class Settings extends React.Component {
     };
   }
 
-  selectCollectibleDisplayState = (state) => {
+  selectCollectibleDisplayState = state => {
     let currentState = this.props.collectibles;
     let newState = currentState;
 
@@ -39,13 +40,13 @@ class Settings extends React.Component {
     };
 
     this.props.setCollectibleDisplayState(newState);
-  }
+  };
 
   selectLanguage = lang => {
     let temp = this.state.language;
     temp.selected = lang;
     this.setState(temp);
-  }
+  };
 
   saveAndRestart = () => {
     console.log(this);
@@ -54,7 +55,7 @@ class Settings extends React.Component {
     setTimeout(() => {
       window.location.reload();
     }, 50);
-  }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -65,9 +66,11 @@ class Settings extends React.Component {
   render() {
     const { t, availableLanguages, location } = this.props;
 
-    const complete = ['en', 'de', 'pt-br'];
+    console.log(translationStats)
+
     let languageButtons = availableLanguages.map(code => {
       let langInfo = getLanguageInfo(code);
+
       return (
         <li
           key={code}
@@ -75,7 +78,10 @@ class Settings extends React.Component {
             this.selectLanguage(code);
           }}
         >
-          <Checkbox linked checked={this.state.language.selected === code} text={langInfo.name || langInfo.code} />
+          <Checkbox linked checked={this.state.language.selected === code}>
+            <div className='name'>{langInfo.name || langInfo.code}</div>
+            <div className='coverage tooltip'>{translationStats[langInfo.code] && Math.floor((translationStats['internal'].notTranslated - translationStats[langInfo.code].notTranslated) / translationStats['internal'].notTranslated * 100)}%</div>
+          </Checkbox>
         </li>
       );
     });
@@ -218,15 +224,30 @@ class Settings extends React.Component {
               <div>{t('Local saved data')}</div>
             </div>
             <div className='buttons'>
-              <Button text={t('Clear profile history')} action={() => { ls.set('history.profiles', []) }} />
+              <Button
+                text={t('Clear profile history')}
+                action={() => {
+                  ls.set('history.profiles', []);
+                }}
+              />
               <div className='info'>
                 <p>{t('Deletes the stored list of previously loaded member profiles (character select).')}</p>
               </div>
-              <Button text={t('Clear tracked triumphs')} action={() => { this.props.setTrackedTriumphs([]) }} />
+              <Button
+                text={t('Clear tracked triumphs')}
+                action={() => {
+                  this.props.setTrackedTriumphs([]);
+                }}
+              />
               <div className='info'>
                 <p>{t('Clears tracked triumphs permanently.')}</p>
               </div>
-              <Button text={t('Reset notifications')} action={() => { ls.set('history.notifications', []) }} />
+              <Button
+                text={t('Reset notifications')}
+                action={() => {
+                  ls.set('history.notifications', []);
+                }}
+              />
               <div className='info'>
                 <p>{t("Reset data pertaining to whether or not you've seen any active notifcation items.")}</p>
               </div>

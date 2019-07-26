@@ -13,15 +13,13 @@ class Checkbox extends React.Component {
   }
 
   render() {
-    let classNames = this.props.classNames;
-    let checked = this.props.completed || this.props.checked;
-    let text = this.props.text;
-    let linked = this.props.linked;
+    const { classNames, text, children, linked } = this.props;
+    const checked = this.props.completed || this.props.checked;
 
     return (
       <div className={cx('check-box', classNames, { checked: checked, linked: linked }, this.props.theme.selected)}>
         <div className={cx('check', { ed: checked })} />
-        <div className='text'>{text}</div>
+        <div className='text'>{text || children}</div>
       </div>
     );
   }
