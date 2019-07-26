@@ -75,10 +75,10 @@ const FilesLogic = {
         const result = [];
         sourceStrings.forEach(key => {
             if (!translatedStrings[key]) {
-                if (isSourceLocale) {
-                    translatedStrings[key] = key;
-                    return;
-                }
+                // if (isSourceLocale) {
+                //     translatedStrings[key] = key;
+                //     return;
+                // }
                 const placeholderKey = placeholdify(key);
                 if (!translatedStrings[placeholderKey]) {
                     translatedStrings[placeholderKey] = MISSING_TRANSLATION;

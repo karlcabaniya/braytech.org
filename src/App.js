@@ -142,7 +142,10 @@ class App extends React.Component {
     const storedManifest = await this.startupRequests.storedManifest;
     const manifestIndex = await this.startupRequests.manifestIndex;
 
-    const currentVersion = manifestIndex.jsonWorldContentPaths[this.currentLanguage];
+    let manifestLanuage = this.currentLanguage;
+    if (/^en/.test(manifestLanuage)) manifestLanuage = 'en';
+
+    const currentVersion = manifestIndex.jsonWorldContentPaths[manifestLanuage];
     let tmpManifest = null;
 
     if (!storedManifest || currentVersion !== storedManifest.version) {
@@ -160,10 +163,12 @@ class App extends React.Component {
     }
 
     this.availableLanguages = Object.keys(manifestIndex.jsonWorldContentPaths);
+    this.availableLanguages.splice(1, 0, 'en-au')
+    console.log(this.availableLanguages)
 
     tmpManifest.statistics = (await this.startupRequests.voluspaStatistics) || {};
 
-    manifest.set(tmpManifest, this.currentLanguage);
+    manifest.set(tmpManifest, manifestLanuage);
 
     this.setState({ status: { code: 'ready' } });
   }
