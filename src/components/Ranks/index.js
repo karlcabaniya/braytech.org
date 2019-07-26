@@ -276,7 +276,7 @@ class Mode extends React.Component {
     return winsRequired;
   }
 
-  async componentDidMount() {
+  getRecentActivity = async () => {
     const { hash, data } = this.props;
     const { membershipType, membershipId, characters } = data;
 
@@ -322,9 +322,17 @@ class Mode extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.member.data !== this.props.member.data) {
+  async componentDidMount() {
+    this.getRecentActivity();
+  }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.member.data !== this.props.member.data && !this.state.glory.loading) {
+      this.setState((prevState, props) => {
+        prevState.glory.loading = true;
+        return prevState;
+      });
+      this.getRecentActivity();
     }
   }
 
