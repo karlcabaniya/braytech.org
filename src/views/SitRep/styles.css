@@ -282,10 +282,6 @@
     grid-gap: 2rem;
   }
 
-  #sit-rep .module ~ .module {
-    margin: 2rem 0 0;
-  }
-
   #sit-rep .module.milestones {
     grid-row: unset;
   }
