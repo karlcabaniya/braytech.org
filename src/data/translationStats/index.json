@@ -1,340 +1,201 @@
 {
   "de": {
     "translated": 184,
-    "notTranslated": 249,
+    "notTranslated": 257,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "en-au": {
     "translated": 6,
-    "notTranslated": 336,
+    "notTranslated": 345,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "en": {
-    "translated": 343,
+    "translated": 352,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 342,
+    "notTranslated": 351,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "es": {
     "translated": 288,
-    "notTranslated": 217,
+    "notTranslated": 223,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may."
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "fr": {
     "translated": 421,
-    "notTranslated": 47,
+    "notTranslated": 55,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 342,
+    "notTranslated": 351,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "it": {
     "translated": 328,
-    "notTranslated": 15,
+    "notTranslated": 24,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 342,
+    "notTranslated": 351,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "ko": {
     "translated": 184,
-    "notTranslated": 249,
+    "notTranslated": 257,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 342,
+    "notTranslated": 351,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "pt-br": {
     "translated": 466,
-    "notTranslated": 147,
+    "notTranslated": 152,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may."
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 342,
+    "notTranslated": 351,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 342,
+    "notTranslated": 351,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 342,
+    "notTranslated": 351,
     "added": [
-      "Bungie Maintenance",
-      "Downloading data from Bungie",
-      "Fatal error",
-      "Loading member",
-      "Loading previous member",
-      "Manifest download failed",
-      "Manifest error",
-      "Saving manifest data",
-      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
-      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
-      "Starting Windows 95",
-      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
-      "Unknown error",
-      "Verifying manifest data"
+      "Braytech won't update to the newest version",
+      "Clan stats don't match [other thing]",
+      "Erroneous triumph records",
+      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
+      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
+      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
+      "You aren't tracking any records yet!"
     ],
-    "removed": [
-      "status"
-    ]
+    "removed": []
   }
 }

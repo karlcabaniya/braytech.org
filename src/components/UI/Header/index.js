@@ -66,14 +66,14 @@ class Header extends React.Component {
       return (
         <div className='trigger' onClick={this.toggleNav}>
           <i className='segoe-uniE106' />
-          Exit
+          {this.props.t('Exit')}
         </div>
       );
     } else {
       return (
         <div className='trigger' onClick={this.toggleNav}>
           <i className='segoe-uniEA55' />
-          Views
+          {this.props.t('Views')}
         </div>
       );
     }

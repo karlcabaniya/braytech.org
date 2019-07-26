@@ -38,7 +38,7 @@ class RecordsTracked extends React.Component {
           <Records selfLink {...this.props} hashes={hashes} ordered='progress' limit={limit} />
           {hashes.length < 1 ? (
             <li key='none-tracked' className='none-tracked'>
-              <div className='text'>You aren't tracking any records yet!</div>
+              <div className='text'>{t("You aren't tracking any records yet!")}</div>
             </li>
           ) : null}
         </ul>

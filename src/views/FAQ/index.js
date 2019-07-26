@@ -19,18 +19,18 @@ class FAQ extends React.Component {
     const qa = [
       {
         k: 'braytech',
-        q: "Braytech won't update to the newest version",
-        a: "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab"
+        q: t("Braytech won't update to the newest version"),
+        a: t("Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab")
       },
       {
         k: 'api',
-        q: "Clan stats don't match [other thing]",
-        a: 'There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.'
+        q: t("Clan stats don't match [other thing]"),
+        a: t('There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.')
       },
       {
         k: 'api',
-        q: 'Erroneous triumph records',
-        a: 'Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.',
+        q: t('Erroneous triumph records'),
+        a: t('Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.'),
         r: [4182231867]
       }
     ];
@@ -106,13 +106,7 @@ class FAQ extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    theme: state.theme
-  };
-}
-
 export default compose(
-  connect(mapStateToProps),
+  connect(),
   withNamespaces()
 )(FAQ);
