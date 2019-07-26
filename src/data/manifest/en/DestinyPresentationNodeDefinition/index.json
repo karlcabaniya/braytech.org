@@ -1,0 +1,53 @@
+{
+  "emotes": {
+    "displayProperties": {
+      "description": "",
+      "name": "Emotes",
+      "icon": "/static/images/extracts/ui/037e-00004631.png",
+      "localIcon": true,
+      "hasIcon": true
+    },
+    "nodeType": 1,
+    "scope": 1,
+    "children": {
+      "presentationNodes": [
+        {
+          "presentationNodeHash": 2662026545
+        },
+        {
+          "presentationNodeHash": 2662026546
+        },
+        {
+          "presentationNodeHash": 2662026547
+        },
+        {
+          "presentationNodeHash": 2662026548
+        },
+        {
+          "presentationNodeHash": 2662026549
+        },
+        {
+          "presentationNodeHash": 2662026550
+        },
+        {
+          "presentationNodeHash": 2662026551
+        }
+      ],
+      "collectibles": [],
+      "records": []
+    },
+    "displayStyle": 0,
+    "screenStyle": 0,
+    "requirements": {
+      "entitlementUnavailableMessage": ""
+    },
+    "disableChildSubscreenNavigation": false,
+    "parentNodeHashes": [
+      3066887728
+    ],
+    "hash": "emotes",
+    "index": 433,
+    "redacted": false,
+    "blacklisted": false
+  }
+}

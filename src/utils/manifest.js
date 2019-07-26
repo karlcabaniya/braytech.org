@@ -2,6 +2,7 @@ import braytech_EN from '../data/manifest/en/braytech/';
 import DestinyInventoryItemDefinition_EN from '../data/manifest/en/DestinyInventoryItemDefinition/';
 import DestinyHistoricalStatsDefinition_EN from '../data/manifest/en/DestinyHistoricalStatsDefinition/';
 import DestinyClanBannerDefinition from '../data/manifest/en/DestinyClanBannerDefinition/';
+import DestinyPresentationNodeDefinition_EN from '../data/manifest/en/DestinyPresentationNodeDefinition/';
 
 import DestinyHistoricalStatsDefinition_DE from '../data/manifest/de/DestinyHistoricalStatsDefinition/';
 import DestinyHistoricalStatsDefinition_ES from '../data/manifest/es/DestinyHistoricalStatsDefinition/';
@@ -25,7 +26,8 @@ const customs = {
     braytech: braytech_EN,
     DestinyClanBannerDefinition,
     DestinyInventoryItemDefinition: DestinyInventoryItemDefinition_EN,
-    DestinyHistoricalStatsDefinition: DestinyHistoricalStatsDefinition_EN
+    DestinyHistoricalStatsDefinition: DestinyHistoricalStatsDefinition_EN,
+    DestinyPresentationNodeDefinition: DestinyPresentationNodeDefinition_EN
   },
   'en-au': {
     braytech: braytech_EN,
@@ -88,14 +90,25 @@ const customs = {
     DestinyInventoryItemDefinition: DestinyInventoryItemDefinition_EN,
     DestinyHistoricalStatsDefinition: DestinyHistoricalStatsDefinition_ZHCHT
   }
-}
+};
 
 const manifest = {
   set: (newManifest, lang) => {
     newManifest.BraytechDefinition = customs[lang].braytech;
     newManifest.DestinyHistoricalStatsDefinition = customs[lang].DestinyHistoricalStatsDefinition;
     newManifest.DestinyClanBannerDefinition = customs.en.DestinyClanBannerDefinition;
+
+    Object.assign(newManifest.DestinyPresentationNodeDefinition, customs.en.DestinyPresentationNodeDefinition);
     Object.assign(newManifest.DestinyInventoryItemDefinition, customs[lang].DestinyInventoryItemDefinition);
+
+    // extras
+
+    // add emotes to flair presentation node
+    if (newManifest.DestinyPresentationNodeDefinition[3066887728] && newManifest.DestinyPresentationNodeDefinition[3066887728].children && newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes)
+      newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes.push({
+        presentationNodeHash: 'emotes'
+      });
+
     Object.assign(manifest, newManifest);
   }
 };

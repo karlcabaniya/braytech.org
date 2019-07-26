@@ -41,7 +41,7 @@ class PresentationNode extends React.Component {
       0: [811225638, 2598675734],
       1: [3745240322, 2765771634],
       2: [1269917845, 1573256543]
-    }
+    };
 
     let primaryHash = this.props.primaryHash;
     let primaryDefinition = manifest.DestinyPresentationNodeDefinition[primaryHash];
@@ -52,13 +52,12 @@ class PresentationNode extends React.Component {
       secondaryHash = secondaryChildNodeFind.presentationNodeHash;
     } else if (!secondaryHash) {
       secondaryHash = primaryDefinition.children.presentationNodes[0].presentationNodeHash;
-    } else {
-      secondaryHash = parseInt(secondaryHash, 10);
     }
+    
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 
     let tertiaryHash = this.props.match.params.tertiary || false;
-    let tertiaryChildNodeFind = secondaryDefinition.children.presentationNodes.find(child => classNodes[character.classType].includes(child.presentationNodeHash));
+    const tertiaryChildNodeFind = secondaryDefinition.children.presentationNodes.find(child => classNodes[character.classType].includes(child.presentationNodeHash));
     if (!tertiaryHash && tertiaryChildNodeFind) {
       tertiaryHash = tertiaryChildNodeFind.presentationNodeHash;
     } else if (!tertiaryHash) {
@@ -67,14 +66,14 @@ class PresentationNode extends React.Component {
       tertiaryHash = parseInt(tertiaryHash, 10);
     }
 
-    let quaternaryHash = this.props.match.params.quaternary ? this.props.match.params.quaternary : false;
+    const quaternaryHash = this.props.match.params.quaternary ? this.props.match.params.quaternary : false;
 
     let primaryChildren = [];
     primaryDefinition.children.presentationNodes.forEach(child => {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
       let isActive = (match, location) => {
-        if (secondaryHash === child.presentationNodeHash) {
+        if (secondaryDefinition.hash === child.presentationNodeHash) {
           return true;
         } else {
           return false;
@@ -84,7 +83,7 @@ class PresentationNode extends React.Component {
       primaryChildren.push(
         <li key={node.hash} className='linked'>
           <ProfileNavLink isActive={isActive} to={`/collections/${primaryHash}/${node.hash}`}>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.displayProperties.icon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={`${!node.displayProperties.localIcon ? 'https://www.bungie.net' : ''}${node.displayProperties.icon}`} />
           </ProfileNavLink>
         </li>
       );
@@ -99,7 +98,7 @@ class PresentationNode extends React.Component {
       }
 
       let states = [];
-    
+
       let state = 0;
       node.children.collectibles.forEach(c => {
         const definitionCollectible = manifest.DestinyCollectibleDefinition[c.collectibleHash];
@@ -109,7 +108,7 @@ class PresentationNode extends React.Component {
           state = scope.state;
         }
 
-        states.push(state)
+        states.push(state);
       });
 
       let isActive = (match, location) => {
@@ -121,7 +120,7 @@ class PresentationNode extends React.Component {
       };
 
       let secondaryProgress = states.filter(state => !enumerateCollectibleState(state).notAcquired).length;
-      let secondaryTotal = (collectibles && collectibles.hideInvisibleCollectibles) ? states.filter(state => !enumerateCollectibleState(state).invisible).length : states.length;
+      let secondaryTotal = collectibles && collectibles.hideInvisibleCollectibles ? states.filter(state => !enumerateCollectibleState(state).invisible).length : states.length;
 
       secondaryChildren.push(
         <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0 })}>
@@ -151,7 +150,7 @@ class PresentationNode extends React.Component {
           <ul className='list secondary'>{secondaryChildren}</ul>
         </div>
         <div className='collectibles'>
-          <ul className={cx('list', 'tertiary', 'collection-items', { 'sets': primaryHash === '1605042242' })}>
+          <ul className={cx('list', 'tertiary', 'collection-items', { sets: primaryHash === '1605042242' })}>
             <Collectibles {...this.props} {...this.state} node={tertiaryHash} highlight={quaternaryHash} inspect selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} />
           </ul>
         </div>
