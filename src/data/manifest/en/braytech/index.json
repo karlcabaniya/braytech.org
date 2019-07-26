@@ -67,5 +67,12 @@
       "description": "These items are character-bound. This means that each character discovers them uniquely."
     },
     "itemType": 1
+  },
+  "coverage": {
+    "displayProperties": {
+      "name": "Coverage",
+      "description": "This translation's coverage represented by percentage."
+    },
+    "itemType": 1
   }
 }

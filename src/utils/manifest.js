@@ -27,6 +27,12 @@ const customs = {
     DestinyInventoryItemDefinition: DestinyInventoryItemDefinition_EN,
     DestinyHistoricalStatsDefinition: DestinyHistoricalStatsDefinition_EN
   },
+  'en-au': {
+    braytech: braytech_EN,
+    DestinyClanBannerDefinition,
+    DestinyInventoryItemDefinition: DestinyInventoryItemDefinition_EN,
+    DestinyHistoricalStatsDefinition: DestinyHistoricalStatsDefinition_EN
+  },
   es: {
     braytech: braytech_EN,
     DestinyInventoryItemDefinition: DestinyInventoryItemDefinition_EN,
