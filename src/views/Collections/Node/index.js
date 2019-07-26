@@ -163,6 +163,7 @@ console.log(definitionTertiary)
                 })}
                 highlight={quaternaryHash}
                 asTab
+                showHash
               />
             </ul>
           ) : (
