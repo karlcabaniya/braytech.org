@@ -20,14 +20,6 @@ class Collections extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    if (!this.props.match.params.quaternary) {
-      window.scrollTo(0, 0);
-    }
-
-    this.props.rebindTooltips();
-  }
-
   toggleCompleted = () => {
     let currentState = this.props.collectibles;
     let newState = {
@@ -36,6 +28,20 @@ class Collections extends React.Component {
 
     this.props.setCollectibleDisplayState(newState);
   };
+
+  componentDidMount() {
+    if (!this.props.match.params.quaternary) {
+      window.scrollTo(0, 0);
+    }
+
+    this.props.rebindTooltips();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!this.props.match.params.quaternary && prevProps.location.pathname !== this.props.location.pathname) {
+      window.scrollTo(0, 0);
+    }
+  }
 
   render() {
     const { t } = this.props;

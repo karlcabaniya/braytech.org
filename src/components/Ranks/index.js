@@ -17,97 +17,17 @@ class Mode extends React.Component {
   constructor(props) {
     super(props);
 
+    const { characterId, characterProgressions } = this.props.data;
+
     this.state = {
       glory: {
         streak: 0,
+        wins: false,
         loading: true
       }
     };
-  }
 
-  winsRequired = data => {
-    const { characterId, characterProgressions } = this.props.data;
-
-    const debug = false;
-
-    let stepsData = data[2000925172].definition.steps;
-    let { stepIndex: currentStepIndex, stepIndex: workingStepIndex, progressToNextLevel: initialProgress, currentProgress } = characterProgressions[characterId].progressions[2000925172];
-    let targetStepIndex = currentStepIndex < 9 ? 9 : 15;
-
-    let winsRequired = 0;
-    let winsStreak = Math.max(data[2000925172].streak, 1);
-    let totalProgress = currentProgress;
-    let progress = initialProgress;
-
-    if (debug) console.warn(`starting rank: ${stepsData[workingStepIndex].stepName} - ${currentProgress}`)
-
-    // just to Fabled I or go all the way to Legend+
-    while (targetStepIndex === 9 ? workingStepIndex < targetStepIndex : workingStepIndex <= targetStepIndex) {
-      const currentStep = stepsData[workingStepIndex];
-
-      if (debug) console.log(`stepIndex: ${workingStepIndex}, name: ${currentStep.stepName}`)
-
-      if (debug) console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
-      while (progress < currentStep.progressTotal) {
-
-        progress = progress + data[2000925172].gains[workingStepIndex].progressGain[Math.min(winsStreak, 5)];
-        totalProgress = totalProgress + data[2000925172].gains[workingStepIndex].progressGain[Math.min(winsStreak, 5)];
-
-        winsRequired++;
-        
-        if (debug) console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
-      }
-
-      progress = Math.max(progress - currentStep.progressTotal, 0);
-
-      workingStepIndex++;
-    }
-
-    if (debug) console.warn(`finishing rank: ${stepsData[Math.min(workingStepIndex, stepsData.length - 1)].stepName} - ${totalProgress}`)
-
-    if (debug) console.log(winsRequired)
-
-    return winsRequired;
-  }
-
-  async componentDidMount() {
-    const { hash, data } = this.props;
-    const { membershipType, membershipId, characters } = data;
-
-    if (hash === 2000925172) {
-      const charactersIds = characters.map(c => c.characterId);
-
-      let requests = charactersIds.map(async c => {
-        let response = await bungie.GetActivityHistory(membershipType, membershipId, c, 5, 69, 0);
-        return response.activities || [];
-      });
-
-      let activities = await Promise.all(requests);
-      activities = flattenDepth(activities, 1);
-      activities = orderBy(activities, [ac => ac.period], ['desc']);
-
-      let streakCount = 0;
-      let streakBroken = false;
-      activities.forEach((match, i) => {
-        if (match.values.standing.basic.value !== 0) {
-          streakBroken = true;
-        }
-
-        if (!streakBroken && match.values.standing.basic.value === 0) {
-          streakCount++;
-        }
-
-      });
-
-      this.setState({ glory: { streak: streakCount, loading: false } })
-    }
-  }
-
-  render() {
-    const { t, hash } = this.props;
-    const { characterId, characterProgressions } = this.props.data;
-
-    let data = {
+    this.data = {
       2772425241: {
         hash: 2772425241, // infamy
         activityHash: 3577607128,
@@ -145,7 +65,6 @@ class Mode extends React.Component {
         activityHash: 2947109551,
         icon: '/static/images/extracts/ui/modes/037E-000013EB.PNG',
         totalPoints: utils.totalGlory(),
-        streak: this.state.glory.streak,
         gains: {
           '0': {
             progressLoss: -60,
@@ -310,11 +229,108 @@ class Mode extends React.Component {
         }
       }
     };
+  }
+
+  winsRequired = streakCount => {
+    const { characterId, characterProgressions } = this.props.data;
+
+    const debug = false;
+
+    let stepsData = this.data[2000925172].definition.steps;
+    let { stepIndex: currentStepIndex, stepIndex: workingStepIndex, progressToNextLevel: initialProgress, currentProgress } = characterProgressions[characterId].progressions[2000925172];
+    let targetStepIndex = currentStepIndex < 9 ? 9 : 15;
 
     let winsRequired = 0;
-    if (hash === 2000925172) {
-      winsRequired = this.winsRequired(data);
+    let winsStreak = Math.max(streakCount, 1);
+    let totalProgress = currentProgress;
+    let progress = initialProgress;
+
+    if (debug) console.warn(`starting rank: ${stepsData[workingStepIndex].stepName} - ${currentProgress}`)
+
+    // just to Fabled I or go all the way to Legend+
+    while (targetStepIndex === 9 ? workingStepIndex < targetStepIndex : workingStepIndex <= targetStepIndex) {
+      const currentStep = stepsData[workingStepIndex];
+
+      if (debug) console.log(`stepIndex: ${workingStepIndex}, name: ${currentStep.stepName}`)
+
+      if (debug) console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
+      while (progress < currentStep.progressTotal) {
+
+        progress = progress + this.data[2000925172].gains[workingStepIndex].progressGain[Math.min(winsStreak, 5)];
+        totalProgress = totalProgress + this.data[2000925172].gains[workingStepIndex].progressGain[Math.min(winsStreak, 5)];
+
+        winsRequired++;
+        
+        if (debug) console.log(`win: streak ${winsStreak}, progress ${progress}/${currentStep.progressTotal}`)
+      }
+
+      progress = Math.max(progress - currentStep.progressTotal, 0);
+
+      workingStepIndex++;
     }
+
+    if (debug) console.warn(`finishing rank: ${stepsData[Math.min(workingStepIndex, stepsData.length - 1)].stepName} - ${totalProgress}`)
+
+    if (debug) console.log(winsRequired)
+
+    return winsRequired;
+  }
+
+  async componentDidMount() {
+    const { hash, data } = this.props;
+    const { membershipType, membershipId, characters } = data;
+
+    if (hash === 2000925172) {
+      const charactersIds = characters.map(c => c.characterId);
+
+      let activities;
+
+      try {
+        let requests = charactersIds.map(async c => {
+          let response = await bungie.GetActivityHistory(membershipType, membershipId, c, 5, 69, 0);
+          return response.activities || [];
+        });
+  
+        activities = await Promise.all(requests);
+      } catch (e) {
+        console.log(e);
+
+        this.setState({ glory: { streak: false, wins: false, loading: false } });
+
+        return;
+      }
+
+      activities = flattenDepth(activities, 1);
+      activities = orderBy(activities, [ac => ac.period], ['desc']);
+
+      let streakCount = 0;
+      let streakBroken = false;
+      activities.forEach((match, i) => {
+        if (match.values.standing.basic.value !== 0) {
+          streakBroken = true;
+        }
+
+        if (!streakBroken && match.values.standing.basic.value === 0) {
+          streakCount++;
+        }
+
+      });
+
+      let winsRequired = this.winsRequired(streakCount);
+
+      this.setState({ glory: { streak: streakCount, wins: winsRequired, loading: false } });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.member.data !== this.props.member.data) {
+
+    }
+  }
+
+  render() {
+    const { t, hash } = this.props;
+    const { characterId, characterProgressions } = this.props.data;
     
     // console.log(data[2000925172].gains)
     // console.log(characterProgressions[characterId].progressions[2000925172])
@@ -322,7 +338,7 @@ class Mode extends React.Component {
     return (
       <li>
         <div className='icon'>
-          <ObservedImage className='image' src={data[hash].icon} />
+          <ObservedImage className='image' src={this.data[hash].icon} />
         </div>
         <div className='data'>
           <div>
@@ -332,11 +348,11 @@ class Mode extends React.Component {
           {hash !== 2000925172 ? (
             <>
               <div>
-                <div className='value'>{data[hash].totalResetCount}</div>
+                <div className='value'>{this.data[hash].totalResetCount}</div>
                 <div className='name'>{t('Total resets')}</div>
               </div>
               <div>
-                <div className='value'>{data[hash].currentResetCount}</div>
+                <div className='value'>{this.data[hash].currentResetCount}</div>
                 <div className='name'>{t('Season resets')}</div>
               </div>
             </>
@@ -344,11 +360,11 @@ class Mode extends React.Component {
           {hash === 2000925172 ? (
             <>
               <div>
-                <div className='value'>{!this.state.glory.loading ? Math.max(data[2000925172].streak, 1) : <Spinner mini />}</div>
+                <div className='value'>{!this.state.glory.loading ? Number.isInteger(this.state.glory.streak) ? Math.max(this.state.glory.streak, 1) : '-' : <Spinner mini />}</div>
                 <div className='name'>{t('Win streak')}</div>
               </div>
               <div>
-                <div className='value'>{winsRequired} {winsRequired === 1 ? t('win') : t('wins')}</div>
+                <div className='value'>{this.state.glory.wins} {this.state.glory.wins ? this.state.glory.wins === 1 ? t('win') : t('wins') : '-'}</div>
                 <div className='name'>{characterProgressions[characterId].progressions[2000925172].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
               </div>
             </>
@@ -369,7 +385,7 @@ class Mode extends React.Component {
           <ProgressBar
             classNames='total'
             objective={{
-              completionValue: data[hash].totalPoints
+              completionValue: this.data[hash].totalPoints
             }}
             progress={{
               progress: characterProgressions[characterId].progressions[hash].currentProgress,
@@ -383,7 +399,15 @@ class Mode extends React.Component {
   }
 }
 
+function mapStateToProps(state, ownProps) {
+  return {
+    member: state.member
+  };
+}
+
 export default compose(
-  connect(),
+  connect(
+    mapStateToProps
+  ),
   withNamespaces()
 )(Mode);
