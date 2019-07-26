@@ -9,6 +9,7 @@ import manifest from '../../../utils/manifest';
 import { enumerateCollectibleState } from '../../../utils/destinyEnums';
 
 import Collectibles from '../../../components/Collectibles';
+import Items from '../../../components/Items';
 
 class PresentationNode extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class PresentationNode extends React.Component {
     } else if (!secondaryHash) {
       secondaryHash = primaryDefinition.children.presentationNodes[0].presentationNodeHash;
     }
-    
+
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 
     let tertiaryHash = this.props.match.params.tertiary || false;
@@ -62,9 +63,10 @@ class PresentationNode extends React.Component {
       tertiaryHash = tertiaryChildNodeFind.presentationNodeHash;
     } else if (!tertiaryHash) {
       tertiaryHash = secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
-    } else {
-      tertiaryHash = parseInt(tertiaryHash, 10);
     }
+
+    const definitionTertiary = manifest.DestinyPresentationNodeDefinition[tertiaryHash];
+console.log(definitionTertiary)
 
     const quaternaryHash = this.props.match.params.quaternary ? this.props.match.params.quaternary : false;
 
@@ -112,7 +114,7 @@ class PresentationNode extends React.Component {
       });
 
       let isActive = (match, location) => {
-        if (tertiaryHash === child.presentationNodeHash) {
+        if (definitionTertiary.hash === child.presentationNodeHash) {
           return true;
         } else {
           return false;
@@ -131,6 +133,7 @@ class PresentationNode extends React.Component {
       );
     });
 
+    
     return (
       <div className='node'>
         <div className='header'>
@@ -150,9 +153,23 @@ class PresentationNode extends React.Component {
           <ul className='list secondary'>{secondaryChildren}</ul>
         </div>
         <div className='collectibles'>
-          <ul className={cx('list', 'tertiary', 'collection-items', { sets: primaryHash === '1605042242' })}>
-            <Collectibles {...this.props} {...this.state} node={tertiaryHash} highlight={quaternaryHash} inspect selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} />
-          </ul>
+          {definitionTertiary.children.items && definitionTertiary.children.items.length ? (
+            <ul className={cx('list', 'tertiary', 'inventory-items', 'as-tab')}>
+              <Items
+                {...this.props}
+                {...this.state}
+                items={definitionTertiary.children.items.map(i => {
+                  return { itemHash: i };
+                })}
+                highlight={quaternaryHash}
+                asTab
+              />
+            </ul>
+          ) : (
+            <ul className={cx('list', 'tertiary', 'collection-items', { sets: primaryHash === '1605042242' })}>
+              <Collectibles {...this.props} {...this.state} node={definitionTertiary.hash} highlight={quaternaryHash} inspect selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} />
+            </ul>
+          )}
         </div>
       </div>
     );

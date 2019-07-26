@@ -253,6 +253,12 @@
   margin: 0 0 0 calc(3rem - 3px);
 }
 
+#collections .list.inventory-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 7px;
+}
+
 #collections .list.tertiary li {
   background-color: rgba(0, 0, 0, 0.1);
   color: rgba(255, 255, 255, 0.4);
@@ -525,6 +531,10 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  #collections .list.inventory-items {
+    grid-template-columns: 1fr 1fr;
+  }
+
   #collections .list.tertiary.sets {
 
   }
@@ -615,9 +625,12 @@
     margin: 0;
   }
 
+  #collections .list.inventory-items {
+    grid-template-columns: 1fr;
+  }
+
   #collections .list.tertiary li {
     flex-basis: 100%;
-    margin: 0 0 3px;
   }
 
   #collections .node.badge .children .text .name {
