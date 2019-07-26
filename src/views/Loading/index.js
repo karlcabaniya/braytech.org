@@ -15,63 +15,63 @@ class Loading extends React.Component {
   constructor(props) {
     super(props);
 
+    const { t } = this.props;
+
     this.state = {};
+
+    this.loadingStates = {
+      error: {
+        isError: true,
+        status: t('Fatal error'),
+        displayProperties: {
+          name: t('Unknown error'),
+          description: t('Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.')
+        }
+      },
+      error_setUpManifest: {
+        isError: true,
+        status: t('Fatal error'),
+        displayProperties: {
+          name: t('Manifest error'),
+          description: t('Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.')
+        }
+      },
+      error_fetchingManifest: {
+        isError: true,
+        status: t('Fatal error'),
+        displayProperties: {
+          name: t('Manifest download failed'),
+          description: t('Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.')
+        }
+      },
+      error_maintenance: {
+        shh: true,
+        status: ' ',
+        displayProperties: {
+          name: t('Bungie Maintenance'),
+          description: t('The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.')
+        }
+      },
+      checkManifest: {
+        status: t('Verifying manifest data')
+      },
+      fetchManifest: {
+        status: t('Downloading data from Bungie')
+      },
+      setManifest: {
+        status: t('Saving manifest data')
+      },
+      loadingPreviousProfile: {
+        status: t('Loading previous member')
+      },
+      loadingProfile: {
+        status: t('Loading member')
+      },
+      else: {
+        status: t('Starting Windows 95')
+      }
+    };
   }
-
-  loadingStates = {
-    error: {
-      isError: true,
-      status: 'Fatal error',
-      displayProperties: {
-        name: 'Unknown error',
-        description: 'Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.'
-      }
-    },
-    error_setUpManifest: {
-      isError: true,
-      status: 'Fatal error',
-      displayProperties: {
-        name: 'Manifest error',
-        description: 'Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.'
-      }
-    },
-    error_fetchingManifest: {
-      isError: true,
-      status: 'Fatal error',
-      displayProperties: {
-        name: 'Manifest download failed',
-        description: 'Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.'
-      }
-    },
-    error_maintenance: {
-      shh: true,
-      status: ' ',
-      displayProperties: {
-        name: 'Bungie Maintenance',
-        description: 'The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.'
-      }
-    },
-    checkManifest: {
-      status: 'Verifying data'
-    },
-    fetchManifest: {
-      status: 'Downloading from Bungie'
-    },
-    setManifest: {
-      status: 'Saving'
-    },
-    loadingPreviousProfile: {
-      status: 'Loading previous member'
-    },
-    loadingProfile: {
-      status: 'Loading member'
-    },
-    else: {
-      status: 'Starting Windows 95'
-    }
-  };
-
-  componentDidMount() {}
 
   componentDidUpdate(prevProps) {
     if (prevProps.state !== this.props.state) {
@@ -90,7 +90,7 @@ class Loading extends React.Component {
   }
 
   render() {
-    const { t, state } = this.props;
+    const { state } = this.props;
 
     if (state.code) {
       const status = (this.loadingStates[state.code] && this.loadingStates[state.code].status) || this.loadingStates.else.status;
@@ -116,7 +116,7 @@ class Loading extends React.Component {
                   <Spinner mini dark />
                 </div>
               ) : null}
-              <div>{t(status)}</div>
+              <div>{status}</div>
             </div>
           </div>
         </div>

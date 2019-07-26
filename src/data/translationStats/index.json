@@ -1,92 +1,340 @@
 {
   "de": {
     "translated": 184,
-    "notTranslated": 235,
-    "added": [],
-    "removed": []
+    "notTranslated": 249,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "en-au": {
     "translated": 6,
-    "notTranslated": 322,
-    "added": [],
-    "removed": []
+    "notTranslated": 336,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "en": {
-    "translated": 328,
+    "translated": 343,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 328,
-    "added": [],
-    "removed": []
+    "notTranslated": 342,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "es": {
     "translated": 288,
-    "notTranslated": 203,
-    "added": [],
-    "removed": []
+    "notTranslated": 217,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "fr": {
     "translated": 421,
-    "notTranslated": 32,
-    "added": [],
+    "notTranslated": 47,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 328,
-    "added": [],
-    "removed": []
+    "notTranslated": 342,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "it": {
     "translated": 328,
-    "notTranslated": 0,
-    "added": [],
+    "notTranslated": 15,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 328,
-    "added": [],
-    "removed": []
+    "notTranslated": 342,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "ko": {
     "translated": 184,
-    "notTranslated": 235,
-    "added": [],
-    "removed": []
+    "notTranslated": 249,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 328,
-    "added": [],
-    "removed": []
+    "notTranslated": 342,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "pt-br": {
     "translated": 466,
-    "notTranslated": 133,
-    "added": [],
-    "removed": []
+    "notTranslated": 147,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 328,
-    "added": [],
-    "removed": []
+    "notTranslated": 342,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 328,
-    "added": [],
-    "removed": []
+    "notTranslated": 342,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 328,
-    "added": [],
-    "removed": []
+    "notTranslated": 342,
+    "added": [
+      "Bungie Maintenance",
+      "Downloading data from Bungie",
+      "Fatal error",
+      "Loading member",
+      "Loading previous member",
+      "Manifest download failed",
+      "Manifest error",
+      "Saving manifest data",
+      "Something very unexpected and unrecoravable occurred.\n\nPlease help @justrealmilk resolve this issue by messaging him.",
+      "Something went wrong while trying to download the item manifest from Bungie.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Something went wrong while trying to update the item manifest.\n\nPlease refresh the app and try again. If this issue persists, please contact @justrealmilk.",
+      "Starting Windows 95",
+      "The Bungie API is currently down for maintenance.\n\nTune into @BungieHelp on Twitter for more information.",
+      "Unknown error",
+      "Verifying manifest data"
+    ],
+    "removed": [
+      "status"
+    ]
   }
 }
