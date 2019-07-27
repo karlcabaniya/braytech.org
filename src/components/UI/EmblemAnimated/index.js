@@ -104,6 +104,16 @@ class Emblem_1661191199_background extends React.Component {
   }
 }
 
+class Emblem_1291068173_background extends React.Component {
+  render() {
+    return (
+      <div className='emblem-ani-1291068173-background'>
+        <div className='warmind' />
+      </div>
+    );
+  }
+}
+
 const emblemsCustom = {
   4182480233: {
     icon: Emblem_4182480233_icon
@@ -118,6 +128,9 @@ const emblemsCustom = {
   1661191199: {
     icon: Emblem_1661191199_icon,
     background: Emblem_1661191199_background
+  },
+  1291068173: {
+    background: Emblem_1291068173_background
   }
 };
 

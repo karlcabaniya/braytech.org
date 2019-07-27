@@ -48,6 +48,10 @@ class AnimatedEmblemIcons extends React.Component {
       {
         emblemHash: 1409726988,
         animator: 'Tom Chapman'
+      },
+      {
+        emblemHash: 1291068173,
+        animator: 'Tom Chapman'
       }
     ];
 
