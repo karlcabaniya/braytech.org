@@ -27,11 +27,13 @@ class PlugSet extends React.Component {
   render() {
     const { t, member, set, plugs, forceDisplay, collectibles } = this.props;
 
+    const data = member.data.profile.profilePlugSets && member.data.profile.profilePlugSets.data && member.data.profile.profilePlugSets.data.plugs[set];
+    //const definitionPlugSet = manifest.DestinyCollectibleDefinition[set];
+
+    if (!data) return null;
+
     let output = [];
 
-    const data = member.data.profile.profilePlugSets.data.plugs[set];
-    const definitionPlugSet = manifest.DestinyCollectibleDefinition[set];
-console.log(data)
     plugs.forEach(hash => {
       const definitionItem = manifest.DestinyInventoryItemDefinition[hash];
 
@@ -48,6 +50,7 @@ console.log(data)
           </div>
           <div className='text'>
             <div className='name'>{definitionItem.displayProperties.name}</div>
+            <div className='gfg'>{definitionItem.hash}</div>
           </div>
         </li>
       );
