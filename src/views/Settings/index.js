@@ -66,8 +66,6 @@ class Settings extends React.Component {
   render() {
     const { t, availableLanguages, location } = this.props;
 
-    console.log(translationStats)
-
     let languageButtons = availableLanguages.map(code => {
       let langInfo = getLanguageInfo(code);
 

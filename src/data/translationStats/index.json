@@ -1,200 +1,119 @@
 {
   "de": {
-    "translated": 184,
-    "notTranslated": 257,
+    "translated": 251,
+    "notTranslated": 191,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "en-au": {
     "translated": 6,
-    "notTranslated": 345,
+    "notTranslated": 346,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "en": {
-    "translated": 352,
+    "translated": 353,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 351,
+    "notTranslated": 352,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "es": {
     "translated": 288,
-    "notTranslated": 223,
+    "notTranslated": 224,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may."
+      "All discovered"
     ],
     "removed": []
   },
   "fr": {
     "translated": 421,
-    "notTranslated": 55,
+    "notTranslated": 56,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 351,
+    "notTranslated": 352,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "it": {
-    "translated": 328,
-    "notTranslated": 24,
+    "translated": 352,
+    "notTranslated": 1,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 351,
+    "notTranslated": 352,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "ko": {
     "translated": 184,
-    "notTranslated": 257,
+    "notTranslated": 258,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 351,
+    "notTranslated": 352,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "pt-br": {
     "translated": 466,
-    "notTranslated": 152,
+    "notTranslated": 153,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may."
+      "All discovered"
     ],
     "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 351,
+    "notTranslated": 352,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 351,
+    "notTranslated": 352,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 351,
+    "notTranslated": 352,
     "added": [
-      "Braytech won't update to the newest version",
-      "Clan stats don't match [other thing]",
-      "Erroneous triumph records",
-      "Follow these steps carefully for Google Chrome desktop (other browsers idk I'm one guy give me a break... Tweet me if you have to)\n\n1. Press F12 to open Chrome DevTools\n2. Select the Application tab in DevTools\n3. On the right side of the panel, click Unregister to unregister Braytech's Service Worker\n4. Close all Braytech tabs\n5. Open a Braytech tab",
-      "Sometimes in computing, things go wrong. At current, there are some strange-looking records under the _Triumphs_ view. They are API errors which will eventually be resolved by Bungie.",
-      "There are multiple sources for stats in Destiny. Clan stats relies on the less intensive HistoricalStats API endpoint. The stats it returns are collated server-side by Bungie and sometimes differ ever so slightly from summing PGCRs (post game carnage reports) one by one as other tools may.",
-      "You aren't tracking any records yet!"
+      "All discovered"
     ],
     "removed": []
   }

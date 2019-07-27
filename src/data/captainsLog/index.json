@@ -563,5 +563,10 @@
     "date": "2019-07-25T05:09:00.088Z",
     "version": "2.7.16",
     "content": "- ranks component comp streak improvment"
+  },
+  {
+    "date": "2019-07-27T08:34:07.644Z",
+    "version": "2.7.17",
+    "content": "- many, many language updates\n- beta emotes collection added"
   }
 ]
