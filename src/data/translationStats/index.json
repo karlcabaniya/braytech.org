@@ -2,17 +2,13 @@
   "de": {
     "translated": 251,
     "notTranslated": 191,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "en-au": {
-    "translated": 6,
-    "notTranslated": 346,
-    "added": [
-      "All discovered"
-    ],
+    "translated": 12,
+    "notTranslated": 340,
+    "added": [],
     "removed": []
   },
   "en": {
@@ -24,97 +20,73 @@
   "es-mx": {
     "translated": 0,
     "notTranslated": 352,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "es": {
     "translated": 288,
     "notTranslated": 224,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "fr": {
     "translated": 421,
     "notTranslated": 56,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "internal": {
     "translated": 0,
     "notTranslated": 352,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "it": {
     "translated": 352,
     "notTranslated": 1,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "ja": {
     "translated": 0,
     "notTranslated": 352,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "ko": {
     "translated": 184,
     "notTranslated": 258,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "pl": {
     "translated": 0,
     "notTranslated": 352,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "pt-br": {
-    "translated": 466,
-    "notTranslated": 153,
-    "added": [
-      "All discovered"
-    ],
+    "translated": 627,
+    "notTranslated": 5,
+    "added": [],
     "removed": []
   },
   "ru": {
     "translated": 0,
     "notTranslated": 352,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "zh-chs": {
     "translated": 0,
     "notTranslated": 352,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
     "notTranslated": 352,
-    "added": [
-      "All discovered"
-    ],
+    "added": [],
     "removed": []
   }
 }
