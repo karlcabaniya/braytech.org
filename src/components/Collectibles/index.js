@@ -19,14 +19,6 @@ class Collectibles extends React.Component {
     this.scrollToRecordRef = React.createRef();
   }
 
-  componentDidMount() {
-    if (this.props.highlight && this.scrollToRecordRef.current !== null) {
-      window.scrollTo({
-        top: this.scrollToRecordRef.current.offsetTop + this.scrollToRecordRef.current.offsetHeight / 2 - window.innerHeight / 2
-      });
-    }
-  }
-
   selfLink = hash => {
     let link = ['/collections'];
     let root = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.collectionRootNode];
@@ -64,6 +56,20 @@ class Collectibles extends React.Component {
 
     link = link.join('/');
     return link;
+  }
+
+  componentDidMount() {
+    if (this.props.highlight && this.scrollToRecordRef.current !== null) {
+      window.scrollTo({
+        top: this.scrollToRecordRef.current.offsetTop + this.scrollToRecordRef.current.offsetHeight / 2 - window.innerHeight / 2
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.collectibles !== this.props.collectibles) {
+      this.props.rebindTooltips();
+    }
   }
 
   render() {
@@ -295,9 +301,18 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
+  };
+}
+
 export default compose(
   connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
   ),
   withNamespaces()
 )(Collectibles);
