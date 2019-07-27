@@ -33,7 +33,10 @@ class PlugSet extends React.Component {
   render() {
     const { t, member, set, plugs, forceDisplay, collectibles } = this.props;
 
-    const data = member.data.profile.profilePlugSets && member.data.profile.profilePlugSets.data && member.data.profile.profilePlugSets.data.plugs[set];
+    let hashSet = set;
+    if (/^emotes_/.test(set)) hashSet = '3224618006';
+
+    const data = member.data.profile.profilePlugSets && member.data.profile.profilePlugSets.data && member.data.profile.profilePlugSets.data.plugs[hashSet];
 
     if (!data) return null;
 
