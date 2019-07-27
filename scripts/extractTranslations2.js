@@ -19,7 +19,7 @@ const stableCompare = (a, b) => {
         return 0; // hello = hello
     const la = a.toLowerCase();
     const lb = b.toLowerCase();
-    if (a === b)
+    if (la === lb)
         return a > b ? 1 : -1; // hello <> Hello
     return unplaceholdify(la) > unplaceholdify(lb) ? 1 : -1;
 };

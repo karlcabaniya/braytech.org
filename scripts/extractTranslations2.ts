@@ -37,7 +37,7 @@ const stableCompare = (a: string, b: string) => {
   if (a === b) return 0; // hello = hello
   const la = a.toLowerCase();
   const lb = b.toLowerCase();
-  if (a === b) return a > b ? 1 : -1; // hello <> Hello
+  if (la === lb) return a > b ? 1 : -1; // hello <> Hello
   return unplaceholdify(la) > unplaceholdify(lb) ? 1 : -1;
 };
 const MISSING_TRANSLATION = '🌐';
