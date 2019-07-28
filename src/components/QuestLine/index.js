@@ -99,7 +99,8 @@ class QuestLine extends React.Component {
 
       const descriptionQuestLine = questLine.displaySource && questLine.displaySource !== '' ? questLine.displaySource : questLine.displayProperties.description && questLine.displayProperties.description !== '' ? questLine.displayProperties.description : steps[0].definitionStep.displayProperties.description;
 
-      const rewards = (questLine.value && questLine.value.itemValue.length && questLine.value.itemValue.filter(v => v.itemHash !== 0 && v.quantity > 0)) || [];
+      const rewardsQuestLine = (questLine.value && questLine.value.itemValue && questLine.value.itemValue.length && questLine.value.itemValue.filter(v => v.itemHash !== 0)) || [];
+      const rewardsQuestStep = (steps.filter(s => s.active) && steps.filter(s => s.active)[0].definitionStep && steps.filter(s => s.active)[0].definitionStep.value && steps.filter(s => s.active)[0].definitionStep.value.itemValue && steps.filter(s => s.active)[0].definitionStep.value.itemValue.length && steps.filter(s => s.active)[0].definitionStep.value.itemValue.filter(v => v.itemHash !== 0)) || [];
 
       return (
         <div className='quest-line'>
@@ -108,11 +109,11 @@ class QuestLine extends React.Component {
           </div>
           <div className='module'>
             <ReactMarkdown className='displaySource' source={descriptionQuestLine} />
-            {rewards.length ? (
+            {rewardsQuestLine.length ? (
               <>
                 <h4>{t('Rewards')}</h4>
                 <ul className='list inventory-items'>
-                  <Items items={rewards} />
+                  <Items items={rewardsQuestLine} />
                 </ul>
               </>
             ) : null}
@@ -186,6 +187,14 @@ class QuestLine extends React.Component {
                       );
                     })}
                 </div>
+                {rewardsQuestStep.length ? (
+                  <>
+                    <h4>{t('Rewards')}</h4>
+                    <ul className='list inventory-items'>
+                      <Items items={rewardsQuestStep} />
+                    </ul>
+                  </>
+                ) : null}
               </>
             ) : null}
           </div>
