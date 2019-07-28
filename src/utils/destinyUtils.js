@@ -1,5 +1,5 @@
 import React from 'react';
-import orderBy from 'lodash/orderBy';
+import { once, orderBy } from 'lodash';
 
 import manifest from './manifest';
 import * as destinyEnums from './destinyEnums';
@@ -467,54 +467,142 @@ export function ammoTypeToString(type) {
   return string;
 }
 
-function stringToIconsWrapper(string) {
+function stringToIconWrapper(string) {
   return <span key={`icon-${string}`} className={`destiny-${string}`} />;
 }
 
-export function stringToIcons(string) {
-  let array = [];
+// matches first bracketed thing in the string, or certain private unicode characters
+const hashExtract = /^([^[\]]*)(\[[^[\]]+?\]|[\uE099-\uE154])(.*)$/u;
 
-  let equivalents = {
-    '[Sniper Rifle]': 'sniper_rifle',
-    '[Headshot]': 'headshot',
-    '[Auto Rifle]': 'auto_rifle',
-    '[Pulse Rifle]': 'pulse_rifle',
-    '[Scout Rifle]': 'scout_rifle',
-    '[Hand Cannon]': 'hand_cannon',
-    '[Sidearm]': 'sidearm',
-    '[SMG]': 'smg',
-    '[Shotgun]': 'shotgun',
-    '[Fusion Rifle]': 'fusion_rifle',
-    '[Linear Fusion Rifle]': 'wire_rifle',
-    '[Trace Rifle]': 'beam_weapon',
-    '[Rocker Launcher]': 'rocket_launcher',
-    '[Sword]': 'sword_heavy',
-    '[Grenade Launcher]': 'grenade_launcher',
-    '[Bow]': 'bow',
-    '[Machine Gun]': 'machinegun',
-    '[Solar Kill]': 'damage_solar',
-    '[Void Kill]': 'damage_void',
-    '[Arc Kill]': 'damage_arc',
-    '[Melee Kill]': 'melee',
-    '[Grenade Kill]': 'grenade'
-  };
+function supplementedConversionTable() {
+  // conversionTable holds input & output rules for icon replacement. baseConversionTable is used to build it.
+  const baseConversionTable = [
+    { icon: 'damage_kinetic', objectiveHash: 3924246227, substring: '' },
+    { icon: 'damage_solar', objectiveHash: 2994623161, substring: '' },
+    { icon: 'damage_arc', objectiveHash: 2178780271, substring: '' },
+    { icon: 'damage_void', objectiveHash: 695106797, substring: '' },
+    { icon: 'melee', objectiveHash: 3951261483, substring: '' },
+    { icon: 'grenade', objectiveHash: 3711356257, substring: '' },
+    { icon: 'headshot', objectiveHash: 3287913530, substring: '' },
+    { icon: 'bow', objectiveHash: 1242546978, substring: '' },
+    { icon: 'auto_rifle', objectiveHash: 532914921, substring: '' },
+    { icon: 'pulse_rifle', objectiveHash: 2161000034, substring: '' },
+    { icon: 'scout_rifle', objectiveHash: 2062881933, substring: '' },
+    { icon: 'hand_cannon', objectiveHash: 53304862, substring: '' },
+    { icon: 'shotgun', objectiveHash: 635284441, substring: '' },
+    { icon: 'sniper_rifle', objectiveHash: 3527067345, substring: '' },
+    { icon: 'fusion_rifle', objectiveHash: 3296270292, substring: '' },
+    { icon: 'smg', objectiveHash: 2722409947, substring: '' },
+    { icon: 'rocket_launcher', objectiveHash: 2203404732, substring: '' },
+    { icon: 'sidearm', objectiveHash: 299893109, substring: '' },
+    { icon: 'grenade_launcher', objectiveHash: 2152699013, substring: '' },
+    { icon: 'beam_weapon', objectiveHash: 3080184954, substring: '' },
+    { icon: 'wire_rifle', objectiveHash: 2923868331, substring: '' },
+    { icon: 'sword_heavy', objectiveHash: 989767424, substring: '' },
+    { icon: 'machinegun', objectiveHash: 1788114534, substring: '' }
+  ];
 
-  array = string.split(/(\[.*?\])/g);
-
-  array.forEach((part, index) => {
-    let matches = part.match(/\[(.*?)\]/g);
-    if (matches) {
-      matches.forEach(match => {
-        if (!equivalents[match]) {
-          return;
-        }
-        array[index] = stringToIconsWrapper(equivalents[match]);
-      });
+  // loop through conversionTable entries to update them with manifest string info
+  baseConversionTable.forEach((iconEntry, index) => {
+    const objectiveDef = manifest.DestinyObjectiveDefinition[iconEntry.objectiveHash];
+    if (!objectiveDef) {
+      return;
     }
+    delete baseConversionTable[index].objectiveHash;
+
+    // lookup this lang's string for the objective
+    const progressDescription = objectiveDef.progressDescription;
+
+    // match the first bracketed item, or the first zh character, plus beforestuff and afterstuff
+    const iconString = progressDescription.match(hashExtract)[2];
+
+    // the identified iconString is the manifest's replacement marker for this icon. put back into table
+    baseConversionTable[index].substring = iconString;
   });
 
-  return array;
+  return baseConversionTable;
 }
+
+// returns the string-to-svg conversion table
+const conversionTable = once(supplementedConversionTable);
+
+// recurses progressDescription, looking for sequences to replace with icons
+function replaceWithIcons(conversionRules, remainingObjectiveString, alreadyProcessed = []) {
+  // check remainingObjectiveString for replaceable strings
+  const matchResults = remainingObjectiveString.match(hashExtract);
+
+  // return immediately if there's nothing to try and replace
+  if (!matchResults) {
+    return alreadyProcessed.concat([remainingObjectiveString]);
+  }
+
+  // set variables to do replacement
+  const [, beforeMatch, iconString, afterMatch] = matchResults;
+
+  // look through conversionRules, find corresponding icon, group with processed material
+  const replacementIndex = conversionRules.find(iconEntry => iconEntry.substring === iconString);
+  const replacement = replacementIndex ? stringToIconWrapper(replacementIndex.icon) : iconString;
+
+  if (replacement === iconString) console.log(iconString)
+
+  const nowProcessed = alreadyProcessed.concat([beforeMatch, replacement]);
+
+  // send the rest to recurse and check for more brackets
+  return replaceWithIcons(conversionRules, afterMatch, nowProcessed);
+}
+
+export function stringToIcons(string) {
+  // powered by DIM brilliance: @delphiactual, @sundevour, @bhollis
+  // https://github.com/DestinyItemManager/DIM/blob/master/src/app/progress/ObjectiveDescription.tsx
+
+  return replaceWithIcons(conversionTable(), string);
+}
+
+
+// export function stringToIcons(string) {
+//   let array = [];
+
+//   let equivalents = {
+//     '[Sniper Rifle]': 'sniper_rifle',
+//     '[Headshot]': 'headshot',
+//     '[Auto Rifle]': 'auto_rifle',
+//     '[Pulse Rifle]': 'pulse_rifle',
+//     '[Scout Rifle]': 'scout_rifle',
+//     '[Hand Cannon]': 'hand_cannon',
+//     '[Sidearm]': 'sidearm',
+//     '[SMG]': 'smg',
+//     '[Shotgun]': 'shotgun',
+//     '[Fusion Rifle]': 'fusion_rifle',
+//     '[Linear Fusion Rifle]': 'wire_rifle',
+//     '[Trace Rifle]': 'beam_weapon',
+//     '[Rocker Launcher]': 'rocket_launcher',
+//     '[Sword]': 'sword_heavy',
+//     '[Grenade Launcher]': 'grenade_launcher',
+//     '[Bow]': 'bow',
+//     '[Machine Gun]': 'machinegun',
+//     '[Solar Kill]': 'damage_solar',
+//     '[Void Kill]': 'damage_void',
+//     '[Arc Kill]': 'damage_arc',
+//     '[Melee Kill]': 'melee',
+//     '[Grenade Kill]': 'grenade'
+//   };
+
+//   array = string.split(/(\[.*?\])/g);
+
+//   array.forEach((part, index) => {
+//     let matches = part.match(/\[(.*?)\]/g);
+//     if (matches) {
+//       matches.forEach(match => {
+//         if (!equivalents[match]) {
+//           return;
+//         }
+//         array[index] = stringToIconsWrapper(equivalents[match]);
+//       });
+//     }
+//   });
+
+//   return array;
+// }
 
 // thank you DIM (https://github.com/DestinyItemManager/DIM/blob/master/src/app/inventory/store/well-rested.ts)
 export function isWellRested(characterProgression) {
