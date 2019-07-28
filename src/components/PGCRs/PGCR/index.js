@@ -910,7 +910,7 @@ class PGCR extends React.Component {
               <>
                 <div className='standing'>
                   {standingImage ? <ObservedImage className='image' src={standingImage} /> : null}
-                  <div className='text'>{standing === 0 ? t('VICTORY') : t('DEFEAST')}</div>
+                  <div className='text'>{standing === 0 ? t('VICTORY') : t('DEFEAT')}</div>
                 </div>
                 <div className='score teams'>{score}</div>
               </>
