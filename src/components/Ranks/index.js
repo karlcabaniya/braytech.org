@@ -17,8 +17,6 @@ class Mode extends React.Component {
   constructor(props) {
     super(props);
 
-    const { characterId, characterProgressions } = this.props.data;
-
     this.state = {
       glory: {
         streak: 0,
@@ -32,34 +30,16 @@ class Mode extends React.Component {
         hash: 2772425241, // infamy
         activityHash: 3577607128,
         icon: '/static/images/extracts/ui/modes/01a3-00007365.png',
-        currentResetCount: characterProgressions[characterId].progressions[2772425241] && Number.isInteger(characterProgressions[characterId].progressions[2772425241].currentResetCount) ? characterProgressions[characterId].progressions[2772425241].currentResetCount : '?',
-        totalResetCount:
-          characterProgressions[characterId].progressions[2772425241] && characterProgressions[characterId].progressions[2772425241].seasonResets
-            ? characterProgressions[characterId].progressions[2772425241].seasonResets.reduce((acc, curr) => {
-                if (curr.season > 3) {
-                  return acc + curr.resets;
-                } else {
-                  return acc;
-                }
-              }, 0)
-            : '?',
+        currentResetCount: this.calculateResets(2772425241).current,
+        totalResetCount: this.calculateResets(2772425241).total,
         totalPoints: utils.totalInfamy()
       },
       2626549951: {
         hash: 2626549951, // valor
         activityHash: 2274172949,
         icon: '/static/images/extracts/ui/modes/037E-000013D9.PNG',
-        currentResetCount: characterProgressions[characterId].progressions[2679551909] && Number.isInteger(characterProgressions[characterId].progressions[2679551909].currentResetCount) ? characterProgressions[characterId].progressions[2679551909].currentResetCount : '?',
-        totalResetCount:
-          characterProgressions[characterId].progressions[2679551909] && characterProgressions[characterId].progressions[2679551909].seasonResets
-            ? characterProgressions[characterId].progressions[2679551909].seasonResets.reduce((acc, curr) => {
-                if (curr.season > 3) {
-                  return acc + curr.resets;
-                } else {
-                  return acc;
-                }
-              }, 0)
-            : '?',
+        currentResetCount: this.calculateResets(2679551909).current,
+        totalResetCount: this.calculateResets(2679551909).total,
         totalPoints: utils.totalValor()
       },
       2000925172: {
@@ -232,6 +212,23 @@ class Mode extends React.Component {
         }
       }
     };
+  }
+
+  calculateResets = progressionHash => {
+    const { characterId, characterProgressions } = this.props.data;
+
+    return {
+      current: characterProgressions[characterId].progressions[progressionHash] && Number.isInteger(characterProgressions[characterId].progressions[progressionHash].currentResetCount) ? characterProgressions[characterId].progressions[progressionHash].currentResetCount : '?',
+      total: characterProgressions[characterId].progressions[progressionHash] && characterProgressions[characterId].progressions[progressionHash].seasonResets
+      ? characterProgressions[characterId].progressions[progressionHash].seasonResets.reduce((acc, curr) => {
+          if (curr.season > 3) {
+            return acc + curr.resets;
+          } else {
+            return acc;
+          }
+        }, 0)
+      : '?'
+    }
   }
 
   winsRequired = streakCount => {
