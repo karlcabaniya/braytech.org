@@ -157,15 +157,33 @@ class Pursuits extends React.Component {
             <div className='sub-header'>
               <div>{t('Quests')}</div>
             </div>
-            <ul className='list inventory-items'>{quests.map(i => i.el)}</ul>
+            {quests.length ? (
+              <ul className='list inventory-items'>{quests.map(i => i.el)}</ul>
+            ) : (
+              <div>
+                <p>{t('No quests. Speak to Zavala, maybe?')}</p>
+              </div>
+            )}
             <div className='sub-header'>
               <div>{t('Bounties')}</div>
             </div>
-            <ul className='list inventory-items'>{bounties.map(i => i.el)}</ul>
+            {bounties.length ? (
+              <ul className='list inventory-items'>{bounties.map(i => i.el)}</ul>
+            ) : (
+              <div>
+                <p>{t("No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...")}</p>
+              </div>
+            )}
             <div className='sub-header'>
               <div>{t('Miscellaneous')}</div>
             </div>
-            <ul className='list inventory-items'>{miscellaneous.map(i => i.el)}</ul>
+            {miscellaneous.length ? (
+              <ul className='list inventory-items'>{miscellaneous.map(i => i.el)}</ul>
+            ) : (
+              <div>
+                <p>{t('Nothing amiss.')}</p>
+              </div>
+            )}
           </div>
           <div className='module'>{selected && viewport.width >= 1024 ? <QuestLine item={selected} /> : null}</div>
         </div>

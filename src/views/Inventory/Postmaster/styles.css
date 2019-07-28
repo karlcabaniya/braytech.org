@@ -2,6 +2,44 @@
   grid-column: 2/5;
 }
 
+#inventory.postmaster > .module:not(.views) {
+  display: grid;
+  justify-content: center;
+}
+
+#inventory.postmaster > .module:not(.views) .properties {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#inventory.postmaster > .module:not(.views) .properties .name {
+  font-size: 38px;
+  font-weight: 600;
+  margin: 0 0 7px;
+  color: rgba(255, 255, 255, 1);
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 7px;
+  margin-bottom: 1rem;
+}
+
+#inventory.postmaster > .module:not(.views) .properties .description {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+}
+
+@media screen and (max-width: 600px) {
+
+  #inventory.postmaster > .module:not(.views) .properties .name {
+    font-size: 24px;
+  }
+  
+  #inventory.postmaster > .module:not(.views) .properties .description {
+    font-size: 14px;
+  }  
+
+}
+
 @media screen and (max-width: 1023px) {
   #inventory.postmaster > .module:not(.views) {
     grid-column: 2/3;

@@ -1,148 +1,190 @@
 {
   "de": {
-    "translated": 302,
-    "notTranslated": 180,
+    "translated": 426,
+    "notTranslated": 62,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "en-au": {
-    "translated": 12,
-    "notTranslated": 382,
+    "translated": 17,
+    "notTranslated": 383,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "en": {
-    "translated": 396,
+    "translated": 402,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 394,
+    "notTranslated": 400,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "es": {
     "translated": 288,
-    "notTranslated": 264,
+    "notTranslated": 270,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "fr": {
     "translated": 421,
-    "notTranslated": 96,
+    "notTranslated": 102,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 394,
+    "notTranslated": 400,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "it": {
-    "translated": 352,
-    "notTranslated": 43,
+    "translated": 395,
+    "notTranslated": 6,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 394,
+    "notTranslated": 400,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "ko": {
-    "translated": 442,
-    "notTranslated": 40,
+    "translated": 482,
+    "notTranslated": 6,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 394,
+    "notTranslated": 400,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "pt-br": {
     "translated": 627,
-    "notTranslated": 44,
+    "notTranslated": 50,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 394,
+    "notTranslated": 400,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 394,
+    "notTranslated": 400,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 394,
+    "notTranslated": 400,
     "added": [
-      "DEFEAT"
+      "All collectibles",
+      "Check check check",
+      "No bounties. Go and see if there's anything you can do for Failsafe. If nothing else, keep her company...",
+      "No quests. Speak to Zavala, maybe?",
+      "Nothing amiss.",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
     ],
-    "removed": [
-      "DEFEAST"
-    ]
+    "removed": []
   }
 }

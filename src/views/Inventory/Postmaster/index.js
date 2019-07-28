@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
+import manifest from '../../../utils/manifest';
 import Items from '../../../components/Items';
 
 import InventoryViewsLinks from '../InventoryViewsLinks';
@@ -31,18 +32,29 @@ class Postmaster extends React.Component {
     return (
       <div className='view postmaster' id='inventory'>
         <InventoryViewsLinks />
-        <div className='module'>
-          <div className='sub-header'>
-            <div>{t('Postmaster')}</div>
-            <div>{postmaster.length}/21</div>
+        {postmaster.length ? (
+          <div className='module'>
+            <div className='sub-header'>
+              <div>{t('Postmaster')}</div>
+              <div>{postmaster.length}/21</div>
+            </div>
+            <ul className='list inventory-items'>
+              <Items items={postmaster} />
+            </ul>
           </div>
-          <ul className='list inventory-items'>
-            <Items items={postmaster} />
-          </ul>
-        </div>
+        ) : (
+          <div className='module'>
+            <div className='properties'>
+              <div className='name'>{t('Check check check')}</div>
+              <div className='description'>
+                <p>{manifest.DestinyFactionDefinition[1838583129] && manifest.DestinyFactionDefinition[1838583129].displayProperties && manifest.DestinyFactionDefinition[1838583129].displayProperties.description}</p>
+                <p>{t("You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here.")}</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
-    
   }
 }
 
