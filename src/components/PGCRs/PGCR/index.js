@@ -160,7 +160,7 @@ class PGCR extends React.Component {
       let definitionStrikes = manifest.DestinyActivityModeDefinition[2394616003];
 
       let modeName = definitionMode.displayProperties.name;
-      modeName = definitionMode.hash === 2096553452 ? 'Lockdown' : modeName;
+      modeName = definitionMode.hash === 2096553452 ? manifest.DestinyActivityDefinition[3243244011] && manifest.DestinyActivityDefinition[3243244011].displayProperties && manifest.DestinyActivityDefinition[3243244011].displayProperties.name : modeName;
       modeName = modeName.replace(': ' + definitionCompetitive.displayProperties.name, '');
       modeName = modeName.replace(': ' + definitionQuickplay.displayProperties.name, '');
       modeName = modeName.replace(definitionStrikes.displayProperties.name, '').trim();
@@ -208,25 +208,25 @@ class PGCR extends React.Component {
         header: [
           {
             key: 'opponentsDefeated',
-            name: 'Kills + assists',
+            name: t('Kills + assists'),
             abbr: 'KA',
             type: 'value'
           },
           {
             key: 'kills',
-            name: 'Kills',
+            name: t('Kills'),
             abbr: 'K',
             type: 'value'
           },
           {
             key: 'deaths',
-            name: 'Deaths',
+            name: t('Deaths'),
             abbr: 'D',
             type: 'value'
           },
           {
             key: 'killsDeathsRatio',
-            name: 'K/D',
+            name: t('K/D'),
             abbr: 'KD',
             type: 'value',
             round: true
@@ -235,7 +235,7 @@ class PGCR extends React.Component {
         expanded: [
           {
             key: 'common',
-            name: 'Common',
+            name: t('Common'),
             fields: [
               {
                 key: 'weapons',
@@ -245,27 +245,27 @@ class PGCR extends React.Component {
           },
           {
             key: 'basic',
-            name: 'Basic',
+            name: t('Basic'),
             fields: [
               {
                 key: 'kills',
-                name: 'Kills',
+                name: t('Kills'),
                 type: 'value'
               },
               {
                 key: 'assists',
-                name: 'Assists',
+                name: t('Assists'),
                 type: 'value'
               },
               {
                 key: 'deaths',
-                name: 'Deaths',
+                name: t('Deaths'),
                 abbr: 'D',
                 type: 'value'
               },
               {
                 key: 'killsDeathsRatio',
-                name: 'K/D',
+                name: t('K/D'),
                 type: 'value',
                 round: true
               }
@@ -273,35 +273,35 @@ class PGCR extends React.Component {
           },
           {
             key: 'extra',
-            name: 'Extra',
+            name: t('Extra'),
             fields: [
               {
                 key: 'precisionKills',
-                name: 'Precision kills',
+                name: t('Precision kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsSuper',
-                name: 'Super kills',
+                name: t('Super kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsGrenade',
-                name: 'Grenade kills',
+                name: t('Grenade kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsMelee',
-                name: 'Melee kills',
+                name: t('Melee kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsAbility',
-                name: 'Ability kills',
+                name: t('Ability kills'),
                 type: 'value',
                 extended: true
               }
@@ -314,32 +314,32 @@ class PGCR extends React.Component {
         header: [
           {
             key: 'opponentsDefeated',
-            name: 'Kills + assists',
+            name: t('Kills + assists'),
             abbr: 'KA',
             type: 'value'
           },
           {
             key: 'kills',
-            name: 'Kills',
+            name: t('Kills'),
             abbr: 'K',
             type: 'value'
           },
           {
             key: 'deaths',
-            name: 'Deaths',
+            name: t('Deaths'),
             abbr: 'D',
             type: 'value'
           },
           {
             key: 'killsDeathsRatio',
-            name: 'K/D',
+            name: t('K/D'),
             abbr: 'KD',
             type: 'value',
             round: true
           },
           {
             key: 'score',
-            name: 'Score',
+            name: t('Score'),
             abbr: 'S',
             type: 'displayValue',
             root: true
@@ -348,7 +348,7 @@ class PGCR extends React.Component {
         expanded: [
           {
             key: 'common',
-            name: 'Common',
+            name: t('Common'),
             fields: [
               {
                 key: 'weapons',
@@ -358,33 +358,33 @@ class PGCR extends React.Component {
           },
           {
             key: 'basic',
-            name: 'Basic',
+            name: t('Basic'),
             fields: [
               {
                 key: 'kills',
-                name: 'Kills',
+                name: t('Kills'),
                 type: 'value'
               },
               {
                 key: 'assists',
-                name: 'Assists',
+                name: t('Assists'),
                 type: 'value'
               },
               {
                 key: 'deaths',
-                name: 'Deaths',
+                name: t('Deaths'),
                 abbr: 'D',
                 type: 'value'
               },
               {
                 key: 'killsDeathsRatio',
-                name: 'K/D',
+                name: t('K/D'),
                 type: 'value',
                 round: true
               },
               {
                 key: 'score',
-                name: 'Score',
+                name: t('Score'),
                 abbr: 'S',
                 type: 'displayValue',
                 root: true
@@ -393,35 +393,35 @@ class PGCR extends React.Component {
           },
           {
             key: 'extra',
-            name: 'Extra',
+            name: t('Extra'),
             fields: [
               {
                 key: 'precisionKills',
-                name: 'Precision kills',
+                name: t('Precision kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsSuper',
-                name: 'Super kills',
+                name: t('Super kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsGrenade',
-                name: 'Grenade kills',
+                name: t('Grenade kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsMelee',
-                name: 'Melee kills',
+                name: t('Melee kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsAbility',
-                name: 'Ability kills',
+                name: t('Ability kills'),
                 type: 'value',
                 extended: true
               }
@@ -434,32 +434,32 @@ class PGCR extends React.Component {
         header: [
           {
             key: 'opponentsDefeated',
-            name: 'Kills + assists',
+            name: t('Kills + assists'),
             abbr: 'KA',
             type: 'value'
           },
           {
             key: 'kills',
-            name: 'Kills',
+            name: t('Kills'),
             abbr: 'K',
             type: 'value'
           },
           {
             key: 'deaths',
-            name: 'Deaths',
+            name: t('Deaths'),
             abbr: 'D',
             type: 'value'
           },
           {
             key: 'killsDeathsRatio',
-            name: 'K/D',
+            name: t('K/D'),
             abbr: 'KD',
             type: 'value',
             round: true
           },
           {
             key: 'gloryPoints',
-            name: 'Glory points',
+            name: t('Glory points'),
             abbr: 'G',
             type: 'value',
             async: true,
@@ -469,17 +469,17 @@ class PGCR extends React.Component {
         expanded: [
           {
             key: 'common',
-            name: 'Common',
+            name: t('Common'),
             fields: [
               {
                 key: 'gloryPoints',
-                name: 'Glory points',
+                name: t('Glory points'),
                 type: 'value',
                 async: true
               },
               {
                 key: 'valorResets',
-                name: 'Valor resets',
+                name: t('Valor resets'),
                 type: 'value',
                 async: true
               },
@@ -490,34 +490,34 @@ class PGCR extends React.Component {
             ]
           },
           {
-            name: 'Basic',
+            name: t('Basic'),
             key: 'basic',
             fields: [
               {
                 key: 'kills',
-                name: 'Kills',
+                name: t('Kills'),
                 type: 'value'
               },
               {
                 key: 'assists',
-                name: 'Assists',
+                name: t('Assists'),
                 type: 'value'
               },
               {
                 key: 'deaths',
-                name: 'Deaths',
+                name: t('Deaths'),
                 abbr: 'D',
                 type: 'value'
               },
               {
                 key: 'killsDeathsRatio',
-                name: 'K/D',
+                name: t('K/D'),
                 type: 'value',
                 round: true
               },
               {
                 key: 'allMedalsEarned',
-                name: 'Medals earned',
+                name: t('Medals earned'),
                 type: 'value',
                 extended: true
               }
@@ -525,35 +525,35 @@ class PGCR extends React.Component {
           },
           {
             key: 'extra',
-            name: 'Extra',
+            name: t('Extra'),
             fields: [
               {
                 key: 'precisionKills',
-                name: 'Precision kills',
+                name: t('Precision kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsSuper',
-                name: 'Super kills',
+                name: t('Super kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsGrenade',
-                name: 'Grenade kills',
+                name: t('Grenade kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsMelee',
-                name: 'Melee kills',
+                name: t('Melee kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'weaponKillsAbility',
-                name: 'Ability kills',
+                name: t('Ability kills'),
                 type: 'value',
                 extended: true
               }
@@ -561,7 +561,7 @@ class PGCR extends React.Component {
           },
           {
             key: 'medals',
-            name: 'Medals',
+            name: t('Medals'),
             fields: [
               {
                 key: 'medals'
@@ -575,35 +575,35 @@ class PGCR extends React.Component {
         header: [
           {
             key: 'mobKills',
-            name: 'Mob Kills',
+            name: t('Mob Kills'),
             abbr: 'MK',
             type: 'value',
             extended: true
           },
           {
             key: 'motesDeposited',
-            name: 'Motes Deposited',
+            name: t('Motes Deposited'),
             abbr: 'MD',
             type: 'value',
             extended: true
           },
           {
             key: 'motesLost',
-            name: 'Motes Lost',
+            name: t('Motes Lost'),
             abbr: 'ML',
             type: 'value',
             extended: true
           },
           {
             key: 'invasionKills',
-            name: 'Invasion Kills',
+            name: t('Invasion Kills'),
             abbr: 'IK',
             type: 'value',
             extended: true
           },
           {
             key: 'blockerKills',
-            name: 'Blocker Kills',
+            name: t('Blocker Kills'),
             type: 'value',
             extended: true,
             hideInline: true
@@ -612,17 +612,17 @@ class PGCR extends React.Component {
         expanded: [
           {
             key: 'common',
-            name: 'Common',
+            name: t('Common'),
             fields: [
               {
                 key: 'infamyPoints',
-                name: 'Infamy points',
+                name: t('Infamy points'),
                 type: 'value',
                 async: true
               },
               {
                 key: 'infamyResets',
-                name: 'Infamy resets',
+                name: t('Infamy resets'),
                 type: 'value',
                 async: true
               },
@@ -634,41 +634,41 @@ class PGCR extends React.Component {
           },
           {
             key: 'mobs',
-            name: 'Mobs',
+            name: t('Mobs'),
             fields: [
               {
                 key: 'mobKills',
-                name: 'Mob Kills',
+                name: t('Mob Kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'highValueKills',
-                name: 'High Value Killed',
+                name: t('High Value Killed'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'blockerKills',
-                name: 'Blocker Kills',
+                name: t('Blocker Kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'smallBlockersSent',
-                name: 'Small Blockers Sent',
+                name: t('Small Blockers Sent'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'mediumBlockersSent',
-                name: 'Medium Blockers Sent',
+                name: t('Medium Blockers Sent'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'largeBlockersSent',
-                name: 'Large Blockers Sent',
+                name: t('Large Blockers Sent'),
                 type: 'value',
                 extended: true
               }
@@ -676,23 +676,23 @@ class PGCR extends React.Component {
           },
           {
             key: 'motes',
-            name: 'Motes',
+            name: t('Motes'),
             fields: [
               {
                 key: 'motesDeposited',
-                name: 'Motes Deposited',
+                name: t('Motes Deposited'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'motesLost',
-                name: 'Motes Lost',
+                name: t('Motes Lost'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'motesDenied',
-                name: 'Motes Denied',
+                name: t('Motes Denied'),
                 type: 'value',
                 extended: true
               }
@@ -700,35 +700,35 @@ class PGCR extends React.Component {
           },
           {
             key: 'invasion',
-            name: 'Invasion',
+            name: t('Invasion'),
             fields: [
               {
                 key: 'invasions',
-                name: 'Invasions',
+                name: t('Invasions'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'invasionKills',
-                name: 'Invasion Kills',
+                name: t('Invasion Kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'invasionDeaths',
-                name: 'Invasion Deaths',
+                name: t('Invasion Deaths'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'invaderKills',
-                name: 'Invader Kills',
+                name: t('Invader Kills'),
                 type: 'value',
                 extended: true
               },
               {
                 key: 'invaderDeaths',
-                name: 'Invader Deaths',
+                name: t('Invader Deaths'),
                 type: 'value',
                 extended: true
               }
@@ -736,7 +736,7 @@ class PGCR extends React.Component {
           },
           {
             key: 'medals',
-            name: 'Medals',
+            name: t('Medals'),
             fields: [
               {
                 key: 'medals'
@@ -910,7 +910,7 @@ class PGCR extends React.Component {
               <>
                 <div className='standing'>
                   {standingImage ? <ObservedImage className='image' src={standingImage} /> : null}
-                  <div className='text'>{standing === 0 ? `VICTORY` : `DEFEAT`}</div>
+                  <div className='text'>{standing === 0 ? t('VICTORY') : t('DEFEAST')}</div>
                 </div>
                 <div className='score teams'>{score}</div>
               </>
@@ -923,13 +923,13 @@ class PGCR extends React.Component {
           </div>
           <div className='entries'>
             {pgcr.teams && pgcr.teams.length ? (
-              orderBy(pgcr.teams, [t => t.score.basic.value], ['desc']).map(t => {
-                let fireteams = Object.values(groupBy(entries.filter(e => e.teamId === t.teamId), 'fireteamId'));
+              orderBy(pgcr.teams, [t => t.score.basic.value], ['desc']).map(team => {
+                let fireteams = Object.values(groupBy(entries.filter(e => e.teamId === team.teamId), 'fireteamId'));
 
                 return (
-                  <ul key={t.teamId} className='team'>
-                    <li className={cx('team-head', (t.teamId === 17 ? 'Alpha' : 'Bravo').toLowerCase())}>
-                      <div className='team name'>{t.teamId === 17 ? 'Alpha' : 'Bravo'} team</div>
+                  <ul key={team.teamId} className='team'>
+                    <li className={cx('team-head', (team.teamId === 17 ? t('Alpha') : t('Bravo')).toLowerCase())}>
+                      <div className='team name'>{team.teamId === 17 ? t('Alpha') : t('Bravo')} team</div>
                       {displayStats.header.map((s, i) => {
                         return (
                           <div key={i} className={cx(s.key, { hideInline: s.hideInline })}>
@@ -938,7 +938,7 @@ class PGCR extends React.Component {
                           </div>
                         );
                       })}
-                      <div className='team score hideInline'>{t.score.basic.displayValue}</div>
+                      <div className='team score hideInline'>{team.score.basic.displayValue}</div>
                     </li>
                     {fireteams.map((f, i) => {
                       return (
@@ -951,7 +951,7 @@ class PGCR extends React.Component {
                 );
               })
             ) : (
-              <ul key={t.teamId} className='team'>
+              <ul className='team'>
                 <li className={cx('team-head')}>
                   <div className='team name' />
                   {displayStats.header.map((s, i) => {

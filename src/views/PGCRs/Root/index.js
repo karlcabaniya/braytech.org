@@ -41,7 +41,7 @@ class All extends React.Component {
         <div className='module-l1' id='matches'>
           <div className='content'>
             <div className='sub-header'>
-              <div>Recent activities</div>
+              <div>{t('Recent activities')}</div>
             </div>
             <Matches mode={false} characterId={member.characterId} limit='20' offset={offset} root='/reports/all' />
           </div>
