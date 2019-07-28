@@ -32,7 +32,15 @@ const ARG_STATS = process.argv.includes('--stats');
 const FilesLogic = {
     glob: promisify(glob),
     read: promisify(fs.readFile),
-    readJson: async (filename) => JSON.parse(await FilesLogic.read(filename, { encoding: 'utf8' })),
+    readJson: async (filename) => {
+        try {
+            return JSON.parse(await FilesLogic.read(filename, { encoding: 'utf8' }));
+        }
+        catch (e) {
+            console.log('FilesLogic.readJson: failed to parse:', filename);
+            throw new Error(e);
+        }
+    },
     write: promisify(fs.writeFile),
     getJSFileList: () => FilesLogic.glob(resolve(__dirname, '../src/**/*.js')),
     getJSONFileList: () => FilesLogic.glob(resolve(__dirname, '../public/static/locales/**/translation.json')),
@@ -180,62 +188,69 @@ const NodesLogic = {
     }
 };
 (async () => {
-    const sourcefiles = await FilesLogic.getJSFileList();
-    let sourceStrings = new Set();
-    let lastT = 0;
-    let count = 0;
-    for (let file of sourcefiles) {
-        count++;
-        if (Date.now() - lastT > 200 || count === sourcefiles.length) {
-            lastT = Date.now();
-            console.log(` Processing [${count}/${sourcefiles.length}]`, relative(resolve(__dirname, '..'), file));
+    try {
+        const sourcefiles = await FilesLogic.getJSFileList();
+        let sourceStrings = new Set();
+        let lastT = 0;
+        let count = 0;
+        for (let file of sourcefiles) {
+            count++;
+            if (Date.now() - lastT > 200 || count === sourcefiles.length) {
+                lastT = Date.now();
+                console.log(` Processing [${count}/${sourcefiles.length}]`, relative(resolve(__dirname, '..'), file));
+            }
+            await FilesLogic.scrapeStrings(file, sourceStrings);
         }
-        await FilesLogic.scrapeStrings(file, sourceStrings);
-    }
-    // if you want to see current status activate following line:
-    // await FilesLogic.write('tmp.dbg.json', JSON.stringify(Array.from(sourceStrings), null, 1));
-    if (!ARG_SKIP_SORT)
-        FilesLogic.sortSourceStrings(sourceStrings);
-    const jsonFiles = await FilesLogic.getJSONFileList();
-    count = 0;
-    const result = {};
-    for (let jsonFile of jsonFiles) {
-        count++;
-        const localeMatch = jsonFile.match(/\/([^/]+)\/translation.json$/);
-        if (!localeMatch)
-            throw new Error(`"${jsonFile}" did not match locale path signature`);
-        const locale = localeMatch[1];
-        console.log(`Merging [${count}/${jsonFiles.length}] ${locale}`);
-        const translatedStrings = await FilesLogic.readJson(jsonFile);
-        if (!translatedStrings)
-            throw new Error(`Failed to parse ${jsonFile}.`);
-        const addResult = await FilesLogic.addStrings(translatedStrings, sourceStrings, locale === SOURCE_LOCALE);
-        const deprecateResult = await FilesLogic.deprecateStrings(translatedStrings, sourceStrings);
+        // if you want to see current status activate following line:
+        // await FilesLogic.write('tmp.dbg.json', JSON.stringify(Array.from(sourceStrings), null, 1));
         if (!ARG_SKIP_SORT)
-            FilesLogic.sortTranslatedStrings(translatedStrings);
-        if (addResult.length) {
-            console.log(` > Added ${addResult.length} strings`);
-            if (ARG_VERBOSE)
-                console.log(INDENT + addResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
+            FilesLogic.sortSourceStrings(sourceStrings);
+        const jsonFiles = await FilesLogic.getJSONFileList();
+        count = 0;
+        const result = {};
+        for (let jsonFile of jsonFiles) {
+            count++;
+            const localeMatch = jsonFile.match(/\/([^/]+)\/translation.json$/);
+            if (!localeMatch)
+                throw new Error(`"${jsonFile}" did not match locale path signature`);
+            const locale = localeMatch[1];
+            console.log(`Merging [${count}/${jsonFiles.length}] ${locale}`);
+            const translatedStrings = await FilesLogic.readJson(jsonFile);
+            if (!translatedStrings)
+                throw new Error(`Failed to parse ${jsonFile}.`);
+            const addResult = await FilesLogic.addStrings(translatedStrings, sourceStrings, locale === SOURCE_LOCALE);
+            const deprecateResult = await FilesLogic.deprecateStrings(translatedStrings, sourceStrings);
+            if (!ARG_SKIP_SORT)
+                FilesLogic.sortTranslatedStrings(translatedStrings);
+            if (addResult.length) {
+                console.log(` > Added ${addResult.length} strings`);
+                if (ARG_VERBOSE)
+                    console.log(INDENT + addResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
+            }
+            if (deprecateResult.length) {
+                console.log(` > Removed ${deprecateResult.length} untranslated dead strings`);
+                if (ARG_VERBOSE)
+                    console.log(INDENT + deprecateResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
+            }
+            await FilesLogic.write(jsonFile, JSON.stringify(translatedStrings, null, 2), { encoding: 'utf-8' });
+            if (ARG_STATS) {
+                const { translated, notTranslated } = FilesLogic.countStrings(translatedStrings);
+                result[locale] = {
+                    translated,
+                    notTranslated,
+                    added: addResult,
+                    removed: deprecateResult
+                };
+            }
         }
-        if (deprecateResult.length) {
-            console.log(` > Removed ${deprecateResult.length} untranslated dead strings`);
-            if (ARG_VERBOSE)
-                console.log(INDENT + deprecateResult.map(str => JSON.stringify(str)).join('\n' + INDENT));
-        }
-        await FilesLogic.write(jsonFile, JSON.stringify(translatedStrings, null, 2), { encoding: 'utf-8' });
         if (ARG_STATS) {
-            const { translated, notTranslated } = FilesLogic.countStrings(translatedStrings);
-            result[locale] = {
-                translated,
-                notTranslated,
-                added: addResult,
-                removed: deprecateResult
-            };
+            await FilesLogic.write('./src/data/translationStats/index.json', JSON.stringify(result, null, 2), { flag: 'w' });
         }
+        console.log('done.');
+        process.exit(0);
     }
-    if (ARG_STATS) {
-        await FilesLogic.write('./src/data/translationStats/index.json', JSON.stringify(result, null, 2), { flag: 'w' });
+    catch (error) {
+        console.error('Failed: ', error.message);
+        process.exit(1);
     }
-    console.log('done.');
 })();
