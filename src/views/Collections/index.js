@@ -12,6 +12,7 @@ import './styles.css';
 import Root from './Root/';
 import Node from './Node/';
 import BadgeNode from './BadgeNode/';
+import AllRankedByRarity from './AllRankedByRarity/';
 
 class Collections extends React.Component {
   constructor(props) {
@@ -77,6 +78,26 @@ class Collections extends React.Component {
         <>
           <div className={cx('view', 'presentation-node')} id='collections'>
             <BadgeNode {...this.props} />
+          </div>
+          <div className='sticky-nav'>
+            <div />
+            <ul>
+              <li>{toggleCompletedLink}</li>
+              <li>
+                <ProfileLink className='button' to={backLinkPath}>
+                  <i className='destiny-B_Button' />
+                  {t('Back')}
+                </ProfileLink>
+              </li>
+            </ul>
+          </div>
+        </>
+      );
+    } else if (primaryHash === 'all-ranked-by-rarity') {
+      return (
+        <>
+          <div className={cx('view')} id='collections'>
+            <AllRankedByRarity {...this.props} />
           </div>
           <div className='sticky-nav'>
             <div />
