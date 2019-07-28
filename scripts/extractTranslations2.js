@@ -16,12 +16,14 @@ const placeholdify = (key) => `#####${key}`;
 const unplaceholdify = (key) => key.replace(regUnplaceholdify, '');
 const stableCompare = (a, b) => {
     if (a === b)
-        return 0; // hello = hello
-    const la = a.toLowerCase();
-    const lb = b.toLowerCase();
+        return 0; // hello == hello
+    const ua = unplaceholdify(a);
+    const ub = unplaceholdify(b);
+    const la = ua.toLowerCase();
+    const lb = ub.toLowerCase();
     if (la === lb)
-        return a > b ? 1 : -1; // hello <> Hello
-    return unplaceholdify(la) > unplaceholdify(lb) ? 1 : -1;
+        return ua > ub ? 1 : -1; // Hello -> hello, #Hello -> hello
+    return la > lb ? 1 : -1;
 };
 const MISSING_TRANSLATION = '🌐';
 const INDENT = '    ';
