@@ -18,7 +18,41 @@ class InventoryViewsLinks extends React.Component {
   render() {
     const { t, member } = this.props;
 
+    const inventory = member.data.profile.profileInventory.data.items.slice().concat(member.data.profile.characterInventories.data[member.characterId].items);
     const currencies = member.data.profile.profileCurrencies && member.data.profile.profileCurrencies.data.items;
+
+    let outputCurrencies = currencies.map((c, i) => {
+      const definitionCurrency = manifest.DestinyInventoryItemDefinition[c.itemHash];
+
+      return {
+        hash: c.itemHash,
+        el: (
+          <li key={i} className='tooltip' data-hash={c.itemHash}>
+            <div className='icon'>
+              <ObservedImage className='image' src={`https://www.bungie.net${definitionCurrency.displayProperties.icon}`} />
+            </div>
+            <div className='quantity'>{c.quantity}</div>
+          </li>
+        )
+      };
+    });
+
+    const enhancementCores = inventory.find(i => i.itemHash === 3853748946);
+    if (enhancementCores) {
+      const definitionCurrency = manifest.DestinyInventoryItemDefinition[enhancementCores.itemHash];
+
+      outputCurrencies.splice(2, 0, {
+        hash: enhancementCores.itemHash,
+        el: (
+          <li key={enhancementCores.itemHash} className='tooltip' data-hash={enhancementCores.itemHash}>
+            <div className='icon'>
+              <ObservedImage className='image' src={`/static/images/extracts/ui/01e3-00005388.png`} />
+            </div>
+            <div className='quantity'>{enhancementCores.quantity}</div>
+          </li>
+        )
+      });
+    }
 
     return (
       <div className='module views'>
@@ -50,20 +84,7 @@ class InventoryViewsLinks extends React.Component {
               <ProfileNavLink to='/inventory/vault' />
             </li>
           </ul>
-          <ul className='list currencies'>
-            {currencies.map((c, i) => {
-              const definitionCurrency = manifest.DestinyInventoryItemDefinition[c.itemHash];
-
-              return (
-                <li key={i} className='tooltip' data-hash={c.itemHash}>
-                  <div className='icon'>
-                    <ObservedImage className='image' src={`https://www.bungie.net${definitionCurrency.displayProperties.icon}`} />
-                  </div>
-                  <div className='quantity'>{c.quantity}</div>
-                </li>
-              );
-            })}
-          </ul>
+          <ul className='list currencies'>{outputCurrencies.map(e => e.el)}</ul>
         </div>
       </div>
     );
