@@ -558,52 +558,6 @@ export function stringToIcons(string) {
   return replaceWithIcons(conversionTable(), string);
 }
 
-
-// export function stringToIcons(string) {
-//   let array = [];
-
-//   let equivalents = {
-//     '[Sniper Rifle]': 'sniper_rifle',
-//     '[Headshot]': 'headshot',
-//     '[Auto Rifle]': 'auto_rifle',
-//     '[Pulse Rifle]': 'pulse_rifle',
-//     '[Scout Rifle]': 'scout_rifle',
-//     '[Hand Cannon]': 'hand_cannon',
-//     '[Sidearm]': 'sidearm',
-//     '[SMG]': 'smg',
-//     '[Shotgun]': 'shotgun',
-//     '[Fusion Rifle]': 'fusion_rifle',
-//     '[Linear Fusion Rifle]': 'wire_rifle',
-//     '[Trace Rifle]': 'beam_weapon',
-//     '[Rocker Launcher]': 'rocket_launcher',
-//     '[Sword]': 'sword_heavy',
-//     '[Grenade Launcher]': 'grenade_launcher',
-//     '[Bow]': 'bow',
-//     '[Machine Gun]': 'machinegun',
-//     '[Solar Kill]': 'damage_solar',
-//     '[Void Kill]': 'damage_void',
-//     '[Arc Kill]': 'damage_arc',
-//     '[Melee Kill]': 'melee',
-//     '[Grenade Kill]': 'grenade'
-//   };
-
-//   array = string.split(/(\[.*?\])/g);
-
-//   array.forEach((part, index) => {
-//     let matches = part.match(/\[(.*?)\]/g);
-//     if (matches) {
-//       matches.forEach(match => {
-//         if (!equivalents[match]) {
-//           return;
-//         }
-//         array[index] = stringToIconsWrapper(equivalents[match]);
-//       });
-//     }
-//   });
-
-//   return array;
-// }
-
 // thank you DIM (https://github.com/DestinyItemManager/DIM/blob/master/src/app/inventory/store/well-rested.ts)
 export function isWellRested(characterProgression) {
   // We have to look at both the regular progress and the "legend" levels you gain after hitting the cap.
