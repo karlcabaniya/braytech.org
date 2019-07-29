@@ -11,10 +11,9 @@
 #tooltip .frame.activity .header .icon {
   background-color: hsla(var(--commonDark), 0.9);
   min-height: 72px;
-  padding: 20px 0 26px;
+  padding: 24px 0 26px;
   display: grid;
   justify-content: center;
-  align-content: center;
   font-size: 42px;
 }
 
