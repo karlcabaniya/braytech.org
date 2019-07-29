@@ -136,6 +136,10 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+#inventory .module:nth-child(2) .sub-header ~ div p {
+  max-width: 300px;
+}
+
 #inventory .list.inventory-items {
   grid-template-columns: repeat(auto-fill, 64px);
   grid-gap: 3px;
@@ -192,5 +196,9 @@
 
   #inventory .module.views .list.currencies li .quantity {
     font-size: 12px;
+  }
+
+  #inventory .module:nth-child(2) .sub-header ~ div p {
+    max-width: unset;
   }
 }
