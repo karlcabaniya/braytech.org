@@ -5,6 +5,7 @@ import './styles.css';
 
 import Item from './Item';
 import Activity from './Activity';
+import Vendor from './Vendor';
 
 class Tooltip extends React.Component {
   constructor(props) {
@@ -186,6 +187,7 @@ class Tooltip extends React.Component {
       let Type = Item;
 
       if (this.state.table === 'DestinyActivityDefinition') Type = Activity;
+      if (this.state.table === 'DestinyVendorDefinition') Type = Vendor;
 
       return (
         <div id='tooltip' ref={this.tooltip} style={{ top: `${this.mouseMoveXY.y}px`, left: `${this.mouseMoveXY.x}px` }}>

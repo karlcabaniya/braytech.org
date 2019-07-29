@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?l886gb') format('woff');
+  src: url('destiny.woff?1qpbgt') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -8,6 +8,7 @@
 [class^="destiny-"], [class*=" destiny-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'destiny' !important;
+  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -475,6 +476,30 @@
 }
 .destiny-gunsmith_materials:before {
   content: "\e9a1";
+}
+.destiny-faction_fella .path1:before {
+  content: "\e9e5";
+  color: rgb(245, 246, 245);
+}
+.destiny-faction_fella .path2:before {
+  content: "\e9ef";
+  margin-left: -0.6953125em;
+  color: rgb(57, 96, 70);
+}
+.destiny-faction_fella .path3:before {
+  content: "\e9f3";
+  margin-left: -0.6953125em;
+  color: rgb(245, 246, 245);
+}
+.destiny-faction_fella .path4:before {
+  content: "\e9f4";
+  margin-left: -0.6953125em;
+  color: rgb(245, 246, 245);
+}
+.destiny-faction_fella .path5:before {
+  content: "\e9f5";
+  margin-left: -0.6953125em;
+  color: rgb(245, 246, 245);
 }
 .destiny-quest2 .path1:before {
   content: "\e983";

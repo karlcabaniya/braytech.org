@@ -11,6 +11,7 @@
 #tooltip .frame.activity .header .icon {
   background-color: hsla(var(--commonDark), 0.9);
   min-height: 72px;
+  padding: 20px 0 26px;
   display: grid;
   justify-content: center;
   align-content: center;
@@ -21,7 +22,7 @@
   background-color: hsla(var(--commonDark), 0.8);
   display: grid;
   align-content: center;
-  padding: 12px 16px 10px;
+  padding: 20px 16px 26px;
 }
 
 #tooltip .frame.activity .header .text .kind {
