@@ -2,17 +2,17 @@
   grid-column: 2/5;
 }
 
-#inventory.postmaster > .module:not(.views) {
+#inventory.postmaster > .module.empty {
   display: grid;
   justify-content: center;
 }
 
-#inventory.postmaster > .module:not(.views) .properties {
+#inventory.postmaster > .module.empty .properties {
   max-width: 800px;
   margin: 0 auto;
 }
 
-#inventory.postmaster > .module:not(.views) .properties .name {
+#inventory.postmaster > .module.empty .properties .name {
   font-size: 38px;
   font-weight: 600;
   margin: 0 0 7px;
@@ -23,18 +23,18 @@
   margin-bottom: 1rem;
 }
 
-#inventory.postmaster > .module:not(.views) .properties .description {
+#inventory.postmaster > .module.empty .properties .description {
   color: rgba(255, 255, 255, 0.6);
   font-size: 16px;
 }
 
 @media screen and (max-width: 600px) {
 
-  #inventory.postmaster > .module:not(.views) .properties .name {
+  #inventory.postmaster > .module.empty .properties .name {
     font-size: 24px;
   }
   
-  #inventory.postmaster > .module:not(.views) .properties .description {
+  #inventory.postmaster > .module.empty .properties .description {
     font-size: 14px;
   }  
 

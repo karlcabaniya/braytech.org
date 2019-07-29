@@ -43,7 +43,7 @@ class Postmaster extends React.Component {
             </ul>
           </div>
         ) : (
-          <div className='module'>
+          <div className='module empty'>
             <div className='properties'>
               <div className='name'>{t('Check check check')}</div>
               <div className='description'>
