@@ -2,10 +2,12 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
+import { cloneDeep } from 'lodash';
 import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
+import ObservedImage from '../ObservedImage';
 import Records from '../Records/';
 import Items from '../Items';
 import ProgressBar from '../UI/ProgressBar';
@@ -48,10 +50,10 @@ class QuestLine extends React.Component {
     }
 
     if (definitionItem && definitionItem.setData && definitionItem.setData.itemList && definitionItem.setData.itemList.length) {
-      const questLine = definitionItem;
+      const questLine = cloneDeep(definitionItem);
 
       let assumeCompleted = true;
-      const steps = {...questLine.setData}.itemList.map((s, i) => {
+      const steps = questLine.setData.itemList.map((s, i) => {
         s.i = i + 1;
         s.definitionStep = manifest.DestinyInventoryItemDefinition[s.itemHash];
         s.completed = assumeCompleted;
@@ -160,7 +162,7 @@ class QuestLine extends React.Component {
                           };
 
                           let relatedRecords = this.stepsWithRecords.filter(r => r.objectiveHash === definitionObjective.hash).map(r => r.recordHash);
-                          
+
                           objectives.push(
                             <React.Fragment key={definitionObjective.hash}>
                               <ProgressBar objective={definitionObjective} progress={progress} />
@@ -190,9 +192,22 @@ class QuestLine extends React.Component {
                 {rewardsQuestStep.length ? (
                   <>
                     <h4>{t('Rewards')}</h4>
-                    <ul className='list inventory-items'>
-                      <Items items={rewardsQuestStep} />
-                    </ul>
+                    <div className='rewards'>
+                      <ul>
+                        {rewardsQuestStep.map(r => {
+                          const definitionItem = manifest.DestinyInventoryItemDefinition[r.itemHash];
+                          return (
+                            <li key={definitionItem.hash} className={cx({ tooltip: definitionItem.hash !== 2127149322 })} data-hash={definitionItem.hash}>
+                              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
+                              <div className='text'>
+                                {definitionItem.displayProperties.name}
+                                {r.quantity > 1 ? <> +{r.quantity}</> : null}
+                              </div>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
                   </>
                 ) : null}
               </>

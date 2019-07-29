@@ -38,7 +38,8 @@ class Items extends React.Component {
                 tooltip: !this.props.disableTooltip,
                 linked: true,
                 masterworked: enums.enumerateItemState(item.state).masterworked,
-                exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
+                exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6,
+                'no-border': definitionItem.uiItemDisplayStyle === 'ui_display_style_engram' || definitionItem.hash === 3159615086
               },
               bucketName
             )}

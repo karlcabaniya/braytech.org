@@ -76,6 +76,23 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.quest-line .rewards ul li {
+  display: flex;
+  align-items: center;
+  margin: 0 0 8px;
+}
+
+.quest-line .rewards ul li:last-child {
+  margin: 0;
+}
+
+.quest-line .rewards ul li .icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin: 0 10px 0 0;
+}
+
 .quest-line .steps {
   display: grid;
   grid-gap: 2rem;
