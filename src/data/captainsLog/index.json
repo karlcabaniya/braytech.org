@@ -568,5 +568,10 @@
     "date": "2019-07-27T08:34:07.644Z",
     "version": "2.7.17",
     "content": "- many, many language updates\n- beta emotes collection added"
+  },
+  {
+    "date": "2019-07-29T17:31:29.033Z",
+    "version": "2.7.18",
+    "content": "- language updates\n- tooltip updates"
   }
 ]

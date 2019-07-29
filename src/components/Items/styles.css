@@ -92,6 +92,14 @@
   font-size: 14px;
 }
 
+.list.inventory-items li.linked.no-border {
+  background-color: transparent;
+}
+
+.list.inventory-items li.linked.no-border::before {
+  box-shadow: inset 0 0 0 2px rgba(185, 185, 185, 0);
+}
+
 @media screen and (max-width: 1280px) {
   .list.inventory-items {
     grid-template-columns: repeat(8, 1fr);

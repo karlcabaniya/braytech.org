@@ -39,8 +39,6 @@ class InventoryViewsLinks extends React.Component {
 
     const enhancementCores = inventory.find(i => i.itemHash === 3853748946);
     if (enhancementCores) {
-      const definitionCurrency = manifest.DestinyInventoryItemDefinition[enhancementCores.itemHash];
-
       outputCurrencies.splice(2, 0, {
         hash: enhancementCores.itemHash,
         el: (
