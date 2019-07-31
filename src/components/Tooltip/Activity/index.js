@@ -113,7 +113,13 @@ class Activity extends React.Component {
               <div className='description'>
                 {activityType.destination ? (
                   <div className='destination'>
-                    {activityType.destination.name}, {activityType.destination.place}
+                    {activityType.destination.name !== activityType.destination.place && !activityType.destination.name.includes(activityType.destination.place) ? (
+                      <>
+                        {activityType.destination.name}, {activityType.destination.place}
+                      </>
+                    ) : (
+                      activityType.destination.name
+                    )}
                   </div>
                 ) : null}
                 <pre>{activityType.description}</pre>
