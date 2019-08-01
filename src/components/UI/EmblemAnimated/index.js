@@ -114,6 +114,30 @@ class Emblem_1291068173_background extends React.Component {
   }
 }
 
+// Prismatic Inferno
+
+class Emblem_4159550313_icon extends React.Component {
+  render() {
+    return (
+      <div className='emblem-ani-4159550313-icon'>
+        <div className='image dl skull' />
+      </div>
+    );
+  }
+}
+
+class Emblem_4159550313_background extends React.Component {
+  render() {
+    return (
+      <div className='emblem-ani-4159550313-background'>
+        <div className='inferno' />
+        <div className='laser' />
+        <div className='inferno' />
+      </div>
+    );
+  }
+}
+
 const emblemsCustom = {
   4182480233: {
     icon: Emblem_4182480233_icon
@@ -131,6 +155,10 @@ const emblemsCustom = {
   },
   1291068173: {
     background: Emblem_1291068173_background
+  },
+  4159550313: {
+    icon: Emblem_4159550313_icon,
+    background: Emblem_4159550313_background
   }
 };
 
