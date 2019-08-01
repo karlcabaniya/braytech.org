@@ -126,6 +126,13 @@ class Root extends React.Component {
 
       let progress = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
       let total = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
+
+      // MOMENTS OF TRIUMPH: MMXIX does not have the above ^
+      if (definitionSeal.hash === 1002334440) {
+        progress = states.filter(s => !enumerateRecordState(s.state).objectiveNotCompleted && enumerateRecordState(s.state).recordRedeemed).length;
+        total = states.length;
+      }
+
       let isComplete = total && progress === total ? true : false;
 
       sealNodes.push({
@@ -154,12 +161,6 @@ class Root extends React.Component {
     });
 
     let unredeemedTriumphCount = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).length;
-
-    let potentialScoreGain = recordsStates
-      .filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted)
-      .reduce((currentValue, unredeemedTriumph) => {
-        return unredeemedTriumph.scoreValue + currentValue;
-      }, 0);
 
     return (
       <>

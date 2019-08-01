@@ -5,6 +5,7 @@ import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import { enumerateRecordState } from '../../../utils/destinyEnums';
 import ObservedImage from '../../../components/ObservedImage';
 import Records from '../../../components/Records';
 
@@ -16,6 +17,9 @@ class SealNode extends React.Component {
     const characters = this.props.member.data.profile.characters.data;
     const genderHash = characters.find(character => character.characterId === characterId).genderHash;
     const profileRecords = this.props.member.data.profile.profileRecords.data.records;
+
+    // for MOMENTS OF TRIUMPH: MMXIX
+    const characterRecords = this.props.member.data.profile.characterRecords.data;
 
     const sealBars = {
       2588182977: {
@@ -52,9 +56,27 @@ class SealNode extends React.Component {
 
     let definitionSeal = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
 
+    // for MOMENTS OF TRIUMPH: MMXIX
+    let states = [];
+    definitionSeal.children.records.forEach(record => {
+      let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];
+      if (scope) {
+        states.push(scope);
+      }
+    });
+    // --
+
     let progress = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
     let total = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
+    
+    // MOMENTS OF TRIUMPH: MMXIX does not have the above ^
+    if (definitionSeal.hash === 1002334440) {
+      progress = states.filter(s => !enumerateRecordState(s.state).objectiveNotCompleted && enumerateRecordState(s.state).recordRedeemed).length;
+      total = states.length;
+    }
+
     let isComplete = progress === total ? true : false;
+
     let title = manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[genderHash];
 
     return (
