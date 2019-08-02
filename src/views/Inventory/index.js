@@ -11,7 +11,7 @@ import './styles.css';
 
 import Consumables from './Consumables';
 import Pursuits from './Pursuits';
-import Postmaster from './Postmaster';
+import { Characters } from './Characters';
 import Vault from './Vault';
 
 class Inventory extends React.Component {
@@ -53,12 +53,12 @@ class Inventory extends React.Component {
       return <Consumables order='rarity' />;
     } else if (view === 'pursuits') {
       return <Pursuits hash={hash} order='rarity' />;
-    } else if (view === 'postmaster') {
-      return <Postmaster />;
+    } else if (view === 'characters') {
+      return <Characters />;
     } else if (view === 'vault') {
       return <Vault />;
     } else {
-      return <Pursuits order='rarity' />;
+      return <Characters />;
     }
     
   }

@@ -1,0 +1,33 @@
+#inventory.characters {
+
+}
+
+#inventory.characters .module.buckets {
+  grid-column: 2/5;
+}
+
+#inventory.characters .module.buckets .bucket {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+}
+
+#inventory.characters .module.buckets .bucket .character {
+  display: grid;
+  grid-template-columns: 64px auto;
+  grid-gap: 1rem;
+  align-items: start;
+  margin: 0 0 1rem;
+}
+
+#inventory.characters .module.buckets .bucket .character .list.inventory-items.equipped {
+  grid-template-columns: auto;
+}
+
+#inventory.characters .module.buckets .bucket .character .list.inventory-items {
+  grid-template-columns: repeat(auto-fill, 48px);
+}
+
+@media screen and (max-width: 600px) {
+  
+}

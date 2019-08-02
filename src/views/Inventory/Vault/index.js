@@ -27,8 +27,9 @@ class Vault extends React.Component {
 
     const inventory = member.data.profile.profileInventory.data.items.slice().concat(member.data.profile.characterInventories.data[member.characterId].items);
 
-    const vault = inventory.filter(i => i.bucketHash === 138197802);
+    const postmaster = inventory.filter(i => i.bucketHash === 215593132);
 
+    const vault = inventory.filter(i => i.bucketHash === 138197802);
     const weapons = vault.filter(i => {
       const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
 
@@ -38,7 +39,6 @@ class Vault extends React.Component {
         return false;
       }
     });
-
     const armour = vault.filter(i => {
       const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
 
@@ -48,7 +48,6 @@ class Vault extends React.Component {
         return false;
       }
     });
-
     const misc = vault.filter(i => {
       const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
 
@@ -59,15 +58,24 @@ class Vault extends React.Component {
       }
     });
 
-    
-
     return (
       <div className='view vault' id='inventory'>
         <InventoryViewsLinks />
+        {postmaster.length ? (
+          <div className='module'>
+            <div className='sub-header'>
+              <div>{t('Postmaster')}</div>
+              <div>{postmaster.length}/21</div>
+            </div>
+            <ul className='list inventory-items'>
+              <Items items={postmaster} />
+            </ul>
+          </div>
+        ) : null}
         <div className='module'>
           <div className='sub-header'>
-            <div>{t('Vault: weapons')}</div>
-            <div>{vault.length}/500</div>
+            <div>{t('Weapons')}</div>
+            <div>{weapons.length}/500</div>
           </div>
           <ul className='list inventory-items'>
             <Items items={weapons} order='tierType' />
@@ -75,8 +83,8 @@ class Vault extends React.Component {
         </div>
         <div className='module'>
           <div className='sub-header'>
-            <div>{t('Vault: armour')}</div>
-            <div>{vault.length}/500</div>
+            <div>{t('Armour')}</div>
+            <div>{armour.length}/500</div>
           </div>
           <ul className='list inventory-items'>
             <Items items={armour} order='tierType' />
@@ -84,8 +92,8 @@ class Vault extends React.Component {
         </div>
         <div className='module'>
           <div className='sub-header'>
-            <div>{t('Vault: miscellaneous')}</div>
-            <div>{vault.length}/500</div>
+            <div>{t('Miscellaneous')}</div>
+            <div>{misc.length}/500</div>
           </div>
           <ul className='list inventory-items'>
             <Items items={misc} order='tierType' />
@@ -93,7 +101,6 @@ class Vault extends React.Component {
         </div>
       </div>
     );
-    
   }
 }
 

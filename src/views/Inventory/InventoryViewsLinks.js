@@ -57,25 +57,25 @@ class InventoryViewsLinks extends React.Component {
         <div className='sticker'>
           <ul className='list'>
             <li className='linked'>
-              <div className='icon pursuits' />
-              <ProfileNavLink
-                to='/inventory'
-                isActive={(match, location) => {
-                  if (['/inventory', '/inventory/pursuits'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/inventory/pursuits')) {
+              <div className='icon characters' />
+              <ProfileNavLink to='/inventory' isActive={(match, location) => {
+                  // if (['/inventory'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/inventory')) {
+                  if (['/inventory'].includes(removeMemberIds(location.pathname))) {
                     return true;
                   } else {
                     return false;
                   }
-                }}
+                }} />
+            </li>
+            <li className='linked'>
+              <div className='icon pursuits' />
+              <ProfileNavLink
+                to='/inventory/pursuits'
               />
             </li>
             <li className='linked'>
               <div className='icon consumables' />
               <ProfileNavLink to='/inventory/consumables' />
-            </li>
-            <li className='linked'>
-              <div className='icon postmaster' />
-              <ProfileNavLink to='/inventory/postmaster' />
             </li>
             <li className='linked'>
               <div className='icon vault' />

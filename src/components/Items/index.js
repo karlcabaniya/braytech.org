@@ -5,16 +5,24 @@ import { orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import ObservedImage from '../../components/ObservedImage';
 import * as enums from '../../utils/destinyEnums';
+import ObservedImage from '../../components/ObservedImage';
+import ProgressBar from '../../components/UI/ProgressBar';
 
 import './styles.css';
 
 class Items extends React.Component {
   render() {
     const { t, member, items, order, asTab, showHash, inspect, action } = this.props;
+    const itemComponents = member.data.profile.itemComponents;
+    const characterUninstancedItemComponents = false //member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data;
 
     let output = [];
+
+    if (!items || !items.length) {
+      console.warn('No items specified');
+      return null;
+    }
 
     items.forEach((item, i) => {
       let definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
@@ -22,8 +30,16 @@ class Items extends React.Component {
 
       if (!definitionItem) {
         console.log(`Items: Couldn't find item definition for ${item.itemHash}`);
-        return;
+        return null;
       }
+
+      const progressData = item.itemInstanceId && itemComponents.objectives.data[item.itemInstanceId] ? itemComponents.objectives.data[item.itemInstanceId].objectives : characterUninstancedItemComponents && characterUninstancedItemComponents[item.itemHash] ? characterUninstancedItemComponents[item.itemHash].objectives : false;
+
+      // if (progressData) console.log(definitionItem.displayProperties.name, progressData, definitionItem)
+
+      const bucketsToExcludeFromProgressDataDisplay = [
+        4274335291 // Emblems
+      ];
 
       let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ', '-').toLowerCase();
 
@@ -62,8 +78,24 @@ class Items extends React.Component {
                 {showHash ? <div className='hash'>{definitionItem.hash}</div> : null}
               </div>
             ) : null}
-            {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+            {progressData && progressData.filter(o => !o.complete).length > 0 && !bucketsToExcludeFromProgressDataDisplay.includes(item.bucketHash) ? (
+              <ProgressBar
+                progress={{
+                  progress: progressData.reduce((acc, curr) => {
+                    return acc + curr.progress;
+                  }, 0),
+                  objectiveHash: progressData[0].objectiveHash
+                }}
+                objective={{
+                  completionValue: progressData.reduce((acc, curr) => {
+                    return acc + curr.completionValue;
+                  }, 0)
+                }}
+                hideCheck
+              />
+            ) : null}
             {item.quantity && item.quantity > 1 ? <div className={cx('quantity', { 'max-stack': definitionItem.inventory && definitionItem.inventory.maxStackSize === item.quantity })}>{item.quantity}</div> : null}
+            {inspect && definitionItem.itemHash ? <Link to={{ pathname: `/inspect/${definitionItem.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
           </li>
         )
       });
