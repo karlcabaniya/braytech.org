@@ -42,6 +42,10 @@ class AnimatedEmblemIcons extends React.Component {
         animator_url: 'https://twitter.com/InexorableAce'
       },
       {
+        emblemHash: 4159550313,
+        animator: 'Tom Chapman'
+      },
+      {
         emblemHash: 4182480233,
         animator: 'Tom Chapman'
       },
