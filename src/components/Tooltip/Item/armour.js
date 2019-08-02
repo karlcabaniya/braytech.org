@@ -1,12 +1,13 @@
 import React from 'react';
 import cx from 'classnames';
 
-import ObservedImage from '../../ObservedImage';
-import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
+import { getSockets } from '../../../utils/destinyItems';
+import ObservedImage from '../../ObservedImage';
+import ProgressBar from '../../UI/ProgressBar';
 
 const armour = (item, member, detailedMode) => {
-  let { stats, sockets, masterwork } = getSockets(item, false, (detailedMode || item.itemComponents) ? true : false, detailedMode ? false : true);
+  let { stats, sockets, masterwork } = getSockets(item, false, detailedMode || item.itemComponents ? true : false, detailedMode ? false : true);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
@@ -32,6 +33,25 @@ const armour = (item, member, detailedMode) => {
             <div className='text'>{manifest.DestinyStatDefinition[3897883278].displayProperties.name}</div>
           </div>
         </div>
+        {item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.length ? (
+          <div className='objectives'>
+            {item.itemComponents.objectives.map(o => {
+              return (
+                <ProgressBar
+                  key={o.objectiveHash}
+                  progress={{
+                    complete: o.complete,
+                    progress: o.progress,
+                    objectiveHash: o.objectiveHash
+                  }}
+                  objective={{
+                    completionValue: o.completionValue
+                  }}
+                />
+              );
+            })}
+          </div>
+        ) : null}
         {sourceString && !item.itemComponents ? (
           <div className='source'>
             <p>{sourceString}</p>

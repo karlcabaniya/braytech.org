@@ -227,20 +227,20 @@
 
 #tooltip .kill-tracker .icon {
   position: relative;
-  width: 18px;
-  height: 18px;
-  flex-basis: 18px;
+  width: 16px;
+  height: 16px;
+  flex-basis: 16px;
   background-size: contain;
 }
 
 #tooltip .kill-tracker .text {
-  flex-basis: calc(100% - 18px);
+  flex-basis: calc(100% - 16px);
   padding: 0 0 0 10px;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
@@ -370,15 +370,15 @@
 
 #tooltip .plug .icon {
   position: relative;
-  width: 40px;
-  height: 40px;
-  flex-basis: 40px;
+  width: 32px;
+  height: 32px;
+  flex-basis: 32px;
   background-size: contain;
 }
 
 #tooltip .plug > .text {
-  flex-basis: calc(100% - 38px);
-  padding: 0 0 0 16px;
+  flex-basis: calc(100% - 32px);
+  padding: 0 0 0 20px;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -401,8 +401,6 @@
   padding: 4px 0 0;
   border: unset;
 }
-
-
 
 #tooltip .sockets.detailed-mode .plug > .text {
   flex-basis: calc(100% - 16px);
@@ -430,6 +428,10 @@
 
 #tooltip .sockets.detailed-mode .plug > .text > .description {
   display: none;
+}
+
+#tooltip .sockets.detailed-mode .plug .text .objectives {
+  margin-top: 3px;
 }
 
 #tooltip .intrinsic {
@@ -563,7 +565,6 @@
   font-style: italic;
   font-size: 14px;
   letter-spacing: 0.8px;
-  color: rgba(255, 255, 255, 0.8);
 }
 
 #tooltip .frame .objectives {
@@ -571,6 +572,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+#tooltip .frame .damage ~ .objectives,
 #tooltip .frame .objectives:last-child {
   border-bottom: none;
 }

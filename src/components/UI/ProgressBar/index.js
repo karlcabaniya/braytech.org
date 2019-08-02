@@ -4,6 +4,7 @@ import cx from 'classnames';
 import { stringToIcons } from '../../../utils/destinyUtils';
 
 import './styles.css';
+import manifest from '../../../utils/manifest';
 
 class ProgressBar extends React.Component {
   constructor(props) {
@@ -21,6 +22,8 @@ class ProgressBar extends React.Component {
 
     let { complete = false, progress: value, objectiveHash } = progress;
     let { progressDescription = '', completionValue, allowOvercompletion = true } = objective;
+
+    if (progressDescription === '' && objectiveHash && manifest.DestinyObjectiveDefinition[objectiveHash] && manifest.DestinyObjectiveDefinition[objectiveHash].progressDescription) progressDescription = manifest.DestinyObjectiveDefinition[objectiveHash].progressDescription;
 
     progressDescription = stringToIcons(progressDescription);
 
