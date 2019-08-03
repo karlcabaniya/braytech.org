@@ -82,7 +82,10 @@ class Loading extends React.Component {
           error: true,
           date: new Date().toISOString(),
           expiry: 86400000,
-          displayProperties: this.loadingStates[state.code] && this.loadingStates[state.code].displayProperties,
+          displayProperties: {
+            ...this.loadingStates[state.code] && this.loadingStates[state.code].displayProperties,
+            prompt: true
+          },
           javascript: state.detail
         });
       }

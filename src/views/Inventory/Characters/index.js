@@ -24,29 +24,44 @@ class Characters extends React.Component {
 
     const characterInventories = member.data.profile.characterInventories.data;
 
-    const characterId = Object.entries(characterInventories).find(([key, value]) => {
-      if (value.items.find(i => i.itemInstanceId === item.itemInstanceId)) {
-        return true;
-      } else {
-        return false;
-      }
-    }) && Object.entries(characterInventories).find(([key, value]) => {
-      if (value.items.find(i => i.itemInstanceId === item.itemInstanceId)) {
-        return true;
-      } else {
-        return false;
-      }
-    })[0];
+    const characterId =
+      Object.entries(characterInventories).find(([key, value]) => {
+        if (value.items.find(i => i.itemInstanceId === item.itemInstanceId)) {
+          return true;
+        } else {
+          return false;
+        }
+      }) &&
+      Object.entries(characterInventories).find(([key, value]) => {
+        if (value.items.find(i => i.itemInstanceId === item.itemInstanceId)) {
+          return true;
+        } else {
+          return false;
+        }
+      })[0];
 
-    await bungie.EquipItem({
-      itemId: item.itemInstanceId,
-      characterId,
-      membershipType: member.membershipType
-    });
+    try {
+      await bungie.EquipItem({
+        itemId: item.itemInstanceId,
+        characterId,
+        membershipType: member.membershipType
+      });
 
-    this.props.markStale({ membershipType: member.membershipType, membershipId: member.membershipId });
-
-  }
+      this.props.markStale({ membershipType: member.membershipType, membershipId: member.membershipId });
+    } catch (e) {
+      this.props.pushNotification({
+        error: true,
+        date: new Date().toISOString(),
+        expiry: 86400000,
+        displayProperties: {
+          name: e.errorStatus,
+          description: e.message,
+          timeout: 60
+        },
+        javascript: e
+      });
+    }
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -70,40 +85,52 @@ class Characters extends React.Component {
       // { // Class
       //   bucketHash: 3284755031
       // },
-      { // Kinetic
+      {
+        // Kinetic
         bucketHash: 1498876634
       },
-      { // Energy
+      {
+        // Energy
         bucketHash: 2465295065
       },
-      { // Power
+      {
+        // Power
         bucketHash: 953998645
       },
-      { // Helmet
+      {
+        // Helmet
         bucketHash: 3448274439
       },
-      { // Gloves
+      {
+        // Gloves
         bucketHash: 3551918588
       },
-      { // Chest
+      {
+        // Chest
         bucketHash: 14239492
       },
-      { // Boots
+      {
+        // Boots
         bucketHash: 20886954
       },
-      { // Class item
+      {
+        // Class item
         bucketHash: 1585787867
       },
-      { // Ghost
+      {
+        // Ghost
         bucketHash: 4023194814
       },
-      { // Sparrow
+      {
+        // Sparrow
         bucketHash: 2025709351
       },
-      { // Ship
+      {
+        // Ship
         bucketHash: 284967655
       },
-      { // Emblem
+      {
+        // Emblem
         bucketHash: 4274335291
       }
     ];
@@ -113,25 +140,24 @@ class Characters extends React.Component {
         <InventoryViewsLinks />
 
         <div className='module buckets'>
-        {buckets.map(b => {
-
-          return (
-            <div key={b.bucketHash} className='bucket'>
-              {characterIds.map(characterId => {
-                return (
-                  <div key={characterId} className='character'>
-                    <ul className='list inventory-items equipped'>
-                      <Items items={characterEquipment[characterId].items.filter(i => i.bucketHash === b.bucketHash)} />
-                    </ul>
-                    <ul className='list inventory-items'>
-                      <Items items={characterInventories[characterId].items.filter(i => i.bucketHash === b.bucketHash)} action={this.equipItem} />
-                    </ul>
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })}
+          {buckets.map(b => {
+            return (
+              <div key={b.bucketHash} className='bucket'>
+                {characterIds.map(characterId => {
+                  return (
+                    <div key={characterId} className='character'>
+                      <ul className='list inventory-items equipped'>
+                        <Items items={characterEquipment[characterId].items.filter(i => i.bucketHash === b.bucketHash)} />
+                      </ul>
+                      <ul className='list inventory-items'>
+                        <Items items={characterInventories[characterId].items.filter(i => i.bucketHash === b.bucketHash)} action={this.equipItem} />
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
@@ -146,6 +172,9 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    pushNotification: value => {
+      dispatch({ type: 'PUSH_NOTIFICATION', payload: value });
+    },
     rebindTooltips: value => {
       dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
     },
