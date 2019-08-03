@@ -58,7 +58,7 @@ class Inventory extends React.Component {
     } else if (view === 'vault') {
       return <Vault />;
     } else {
-      return <Characters />;
+      return <Pursuits order='rarity' />;
     }
     
   }

@@ -67,10 +67,15 @@ export function collectionTotal(data) {
   return collectionTotal;
 }
 
-export function genderTypeToString(str) {
+/**
+ * Convert a gender type to english string
+ * @param type Destiny gender type
+ * @return english string representation of type
+ */
+export function genderTypeToString(type) {
   let string;
 
-  switch (str) {
+  switch (type) {
     case 0:
       string = 'Male';
       break;
