@@ -557,7 +557,7 @@
   background-color: hsla(0, 0%, 10%, 0.9);
 }
 
-#tooltip .frame .objective {
+/* #tooltip .frame .objective {
   padding: 16px 16px 12px;
   white-space: pre-wrap;
   color: rgba(255, 255, 255, 0.8);
@@ -565,16 +565,11 @@
   font-style: italic;
   font-size: 14px;
   letter-spacing: 0.8px;
-}
+} */
 
 #tooltip .frame .objectives {
   padding: 0 16px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-#tooltip .frame .damage ~ .objectives,
-#tooltip .frame .objectives:last-child {
-  border-bottom: none;
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
 }
 
 #tooltip .frame .objectives .progress {
@@ -591,6 +586,19 @@
 
 #tooltip .frame .objectives .progress-bar.complete .bar .fill {
   background-color: rgba(90, 163, 102, 0);
+}
+
+#tooltip .frame .objectives > .text {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+  font-size: 14px;
+  margin: 0 0 4px 24px;
+}
+
+#tooltip .frame .objectives > .text:last-child {
+  margin: 0 0 0 24px;
 }
 
 #tooltip .frame .rewards {
@@ -646,29 +654,13 @@
   line-height: 1.4;
 }
 
+#tooltip .frame.ui.subclass .header {
+  background-color: hsla(0, 0%, 17%, 0.9);
+  border-top: none;
+}
+
 #tooltip .frame.ui.subclass .black .image.screenshot {
   display: none;
-}
-
-#tooltip .frame.ui.subclass .black .image {
-  background-position-x: right;
-  height: 120%;
-  top: -20%;
-}
-
-#tooltip .frame.ui.subclass .black .text {
-  padding: 16px 16px 12px;
-  position: relative;
-}
-
-#tooltip .frame.ui.subclass .black .text .name {
-  margin: 0 0 6px;
-}
-
-#tooltip .frame.ui.subclass .black .text .description {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-  line-height: 1.4;
 }
 
 #tooltip .header::before {
@@ -760,10 +752,5 @@
     padding: initial;
     width: 100%;
     box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
-  }
-
-  #tooltip .frame.ui.subclass .black .image {
-    height: 100%;
-    top: 0;
   }
 }

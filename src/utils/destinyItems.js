@@ -33,6 +33,18 @@ const interpolate = (investmentValue, displayInterpolation) => {
   return Math.round(displayValue);
 };
 
+/**
+ * Get and process an item's sockets and stats
+ * @param item item definition with itemComponents embedded
+ * @param traitsOnly exclude plugs such as intrinsic perks
+ * @param mods whether to include mod sockets
+ * @param initialOnly display active plug only
+ * @param randomizedPlugItems display all possible plug items available
+ * @param socketExclusions sockets to exclude
+ * @param uiStyleTooltips whether plugs should identify themselves as UI type tooltips
+ * @param showHiddenStats whether hidden stats such as aim assistance should be displayed
+ * @return an object containing arrays of sockets and stats
+ */
 export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, randomizedPlugItems = false, socketExclusions = [], uiStyleTooltips = false, showHiddenStats = false) => {
 
   let statGroup = item.stats ? manifest.DestinyStatGroupDefinition[item.stats.statGroupHash] : false;

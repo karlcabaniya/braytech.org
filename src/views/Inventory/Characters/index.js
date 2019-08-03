@@ -82,9 +82,9 @@ class Characters extends React.Component {
     }
 
     const buckets = [
-      // { // Class
-      //   bucketHash: 3284755031
-      // },
+      { // Class
+        bucketHash: 3284755031
+      },
       {
         // Kinetic
         bucketHash: 1498876634

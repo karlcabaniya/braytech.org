@@ -18,16 +18,21 @@ const emblem = item => {
     let variants = item.sockets.socketEntries.find(socket => socket.singleInitialItemHash === 1608119540);
     if (variants) {
       let plugs = [];
+
+      const emblemVariants = item.itemComponents && item.itemComponents.sockets && item.itemComponents.sockets.find(s => s.reusablePlugs && s.reusablePlugs.filter(p => p.plugItemHash === 1608119540).length);
+      const emblemVariantsAvailable = emblemVariants && emblemVariants.reusablePlugs.filter(r => r.enabled && r.canInsert);
+
       variants.reusablePlugItems
         .filter(plug => plug.plugItemHash !== 1608119540)
         .forEach(plug => {
-          let def = manifest.DestinyInventoryItemDefinition[plug.plugItemHash];
+          const definitionPlug = manifest.DestinyInventoryItemDefinition[plug.plugItemHash];
+
           plugs.push({
             element: (
-              <div key={def.hash} className={cx('plug', 'tooltip')} data-hash={def.hash}>
-                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${def.displayProperties.icon}`} />
+              <div key={definitionPlug.hash} className={cx('plug', { 'is-active': emblemVariantsAvailable && emblemVariantsAvailable.find(v => v.plugItemHash === plug.plugItemHash) })}>
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionPlug.displayProperties.icon}`} />
                 <div className='text'>
-                  <div className='name'>{def.displayProperties.name}</div>
+                  <div className='name'>{definitionPlug.displayProperties.name}</div>
                   <div className='description'>Emblem variant</div>
                 </div>
               </div>
@@ -48,6 +53,22 @@ const emblem = item => {
       {description ? (
         <div className='description'>
           <pre>{description}</pre>
+        </div>
+      ) : null}
+      {item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.length ? (
+        <div className='objectives'>
+          {item.itemComponents.objectives.map(o => {
+            if (o.objectiveHash === 2361405504) return null; // exclude "clan best" objective
+            
+            const definitionObjective = manifest.DestinyObjectiveDefinition[o.objectiveHash];
+
+            return (
+              <div key={o.objectiveHash} className='text'>
+                <div className='name'>{definitionObjective.progressDescription}</div>
+                <div className='value'>{o.progress}</div>
+              </div>
+            );
+          })}
         </div>
       ) : null}
       <div className={cx('sockets', { 'has-sockets': sockets.length > 0 })}>{sockets.length > 0 ? sockets.map(socket => socket.plugs.map(plug => plug.element)) : null}</div>
