@@ -56,7 +56,7 @@ class Characters extends React.Component {
         displayProperties: {
           name: e.errorStatus,
           description: e.message,
-          timeout: 60
+          timeout: 10
         },
         javascript: e
       });
