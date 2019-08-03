@@ -81,12 +81,6 @@ async function apiRequest(path, options = {}) {
   }
 }
 
-export const GetDestinyManifest = async () => apiRequest('/Platform/Destiny2/Manifest/');
-
-export const GetCommonSettings = async () => apiRequest(`/Platform/Settings/`);
-
-export const GetPublicMilestones = async () => apiRequest('/Platform/Destiny2/Milestones/');
-
 export const GetOAuthAccessToken = async body =>
   apiRequest('/Platform/App/OAuth/Token/', {
     method: 'post',
@@ -110,6 +104,19 @@ export const GetProfile = async (membershipType, membershipId, components, auth 
   apiRequest(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=${components}`, {
     auth
   });
+
+export const EquipItem = async body =>
+  apiRequest(`/Platform/Destiny2/Actions/Items/EquipItem/`, {
+    auth: true,
+    method: 'post',
+    body
+  });
+
+export const GetDestinyManifest = async () => apiRequest('/Platform/Destiny2/Manifest/');
+
+export const GetCommonSettings = async () => apiRequest(`/Platform/Settings/`);
+
+export const GetPublicMilestones = async () => apiRequest('/Platform/Destiny2/Milestones/');
 
 export const GetGroupsForMember = async (membershipType, membershipId) => apiRequest(`/Platform/GroupV2/User/${membershipType}/${membershipId}/0/1/`);
 

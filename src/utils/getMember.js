@@ -1,6 +1,5 @@
 import * as responseUtils from './responseUtils';
 import * as bungie from './bungie';
-import * as voluspa from './voluspa';
 import * as ls from './localStorage';
 
 async function getMember(membershipType, membershipId) {
@@ -20,7 +19,7 @@ async function getMember(membershipType, membershipId) {
     bungie.GetPublicMilestones()
   ];
 
-  let [profile, groups, milestones, leaderboardPosition] = await Promise.all(requests);
+  let [profile, groups, milestones] = await Promise.all(requests);
 
   try {
     profile = responseUtils.profileScrubber(profile);
@@ -33,10 +32,6 @@ async function getMember(membershipType, membershipId) {
     profile,
     groups,
     milestones
-  }
-
-  if (leaderboardPosition) {
-    data.leaderboardPosition = leaderboardPosition;
   }
 
   return data;

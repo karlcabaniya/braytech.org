@@ -11,17 +11,29 @@ class RefreshService extends React.Component {
   running = false;
 
   componentDidMount() {
+
+    // start the countdown
     this.init();
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.member.data !== this.props.member.data || prevProps.refreshService.config.enabled !== this.props.refreshService.config.enabled) {
+    // if previous member prop data doesn't equal current member prop data, if config service was turned off/on
+    if (prevProps.member.data !== this.props.member.data || this.props.member.stale || prevProps.refreshService.config.enabled !== this.props.refreshService.config.enabled) {
+
+      // if config service was turned off/on
       if (prevProps.refreshService.config.enabled !== this.props.refreshService.config.enabled) {
         if (this.props.refreshService.config.enabled) {
           this.init();
         } else {
           this.quit();
         }
+
+      // member data is stale -> go now
+      } else if (this.props.member.stale) {
+        this.track();
+        this.service();
+      
+      // restart the countdown
       } else {
         this.clearInterval();
         this.startInterval();
@@ -40,6 +52,7 @@ class RefreshService extends React.Component {
   init() {
     if (this.props.member.membershipId && this.props.refreshService.config.enabled) {
       console.log('RefreshService: init');
+
       this.track();
       document.addEventListener('click', this.clickHandler);
       document.addEventListener('visibilitychange', this.visibilityHandler);
@@ -50,8 +63,10 @@ class RefreshService extends React.Component {
 
   quit() {
     console.log('RefreshService: quit');
+
     document.removeEventListener('click', this.clickHandler);
     document.removeEventListener('visibilitychange', this.visibilityHandler);
+
     this.clearInterval();
   }
 
@@ -64,7 +79,6 @@ class RefreshService extends React.Component {
   }
 
   startInterval() {
-    // console.log('starting a timer');
     this.refreshAccountDataInterval = window.setInterval(this.service, AUTO_REFRESH_INTERVAL);
   }
 
@@ -90,6 +104,7 @@ class RefreshService extends React.Component {
 
     const member = this.props.member;
     const { membershipType, membershipId, characterId } = member;
+
     try {
       const data = await getMember(membershipType, membershipId);
       store.dispatch({

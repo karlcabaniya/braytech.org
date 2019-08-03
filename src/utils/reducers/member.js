@@ -9,6 +9,7 @@ const defaultState = {
   data: false,
   prevData: false,
   loading: false,
+  stale: false,
   error: false
 };
 
@@ -23,6 +24,7 @@ function loadMemberAndReset(membershipType, membershipId, characterId) {
     data: false,
     prevData: false,
     error: false,
+    stale: false,
     loading: true
   };
 }
@@ -49,6 +51,7 @@ async function loadMember(membershipType, membershipId, characterId) {
 
 export default function memberReducer(state = defaultState, action) {
   if (!action.payload) return state;
+
   const { membershipId, characterId, data, error } = action.payload;
 
   // Sometimes a number - let's just make it a string all the time
@@ -102,7 +105,13 @@ export default function memberReducer(state = defaultState, action) {
         data: {...state.data, ...data},
         prevData: state.data,
         loading: false,
+        stale: false,
         error: false
+      };
+    case 'MEMBER_IS_STALE':
+      return {
+        ...state,
+        stale: true
       };
     default:
       return state;

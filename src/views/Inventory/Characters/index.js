@@ -5,18 +5,47 @@ import { withNamespaces } from 'react-i18next';
 import { orderBy } from 'lodash';
 
 import manifest from '../../../utils/manifest';
+import * as bungie from '../../../utils/bungie';
 import Items from '../../../components/Items';
 
 import InventoryViewsLinks from '../InventoryViewsLinks';
 
 import './styles.css';
-import { Module } from 'module';
 
 class Characters extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+  }
+
+  equipItem = async (e, item) => {
+    const { member } = this.props;
+
+    const characterInventories = member.data.profile.characterInventories.data;
+
+    const characterId = Object.entries(characterInventories).find(([key, value]) => {
+      if (value.items.find(i => i.itemInstanceId === item.itemInstanceId)) {
+        return true;
+      } else {
+        return false;
+      }
+    }) && Object.entries(characterInventories).find(([key, value]) => {
+      if (value.items.find(i => i.itemInstanceId === item.itemInstanceId)) {
+        return true;
+      } else {
+        return false;
+      }
+    })[0];
+
+    await bungie.EquipItem({
+      itemId: item.itemInstanceId,
+      characterId,
+      membershipType: member.membershipType
+    });
+
+    this.props.markStale({ membershipType: member.membershipType, membershipId: member.membershipId });
+
   }
 
   componentDidMount() {
@@ -95,7 +124,7 @@ class Characters extends React.Component {
                       <Items items={characterEquipment[characterId].items.filter(i => i.bucketHash === b.bucketHash)} />
                     </ul>
                     <ul className='list inventory-items'>
-                      <Items items={characterInventories[characterId].items.filter(i => i.bucketHash === b.bucketHash)} />
+                      <Items items={characterInventories[characterId].items.filter(i => i.bucketHash === b.bucketHash)} action={this.equipItem} />
                     </ul>
                   </div>
                 )
@@ -119,6 +148,9 @@ function mapDispatchToProps(dispatch) {
   return {
     rebindTooltips: value => {
       dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    },
+    markStale: member => {
+      dispatch({ type: 'MEMBER_IS_STALE', payload: { membershipType: member.membershipType, membershipId: member.membershipId } });
     }
   };
 }

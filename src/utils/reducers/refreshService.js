@@ -1,13 +1,5 @@
 import * as ls from '../localStorage';
 
-// const defaultState = ls.get('setting.refreshService')
-//   ? ls.get('setting.refreshService')
-//   : {
-//       config: {
-//         enabled: true,
-//         frequency: 30
-//       }
-//     };
 const defaultState = {
   config: {
     enabled: true,
