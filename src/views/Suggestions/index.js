@@ -38,7 +38,7 @@ class Suggestions extends React.Component {
 
   init = async () => {
     if (!this.state.data) {
-      let suggestions = await fetch('https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions?fields=*.*.*', {
+      let suggestions = await fetch('https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions?fields=*.*.*&status=published', {
         headers: {
           Authorization: `Bearer braytech`
         }
