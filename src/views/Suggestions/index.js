@@ -51,7 +51,20 @@ class Suggestions extends React.Component {
         this.setState({
           suggestions: {
             loading: false,
-            data: orderBy(suggestions.data, [s => s.created_on, s => s.votes.length], ['desc', 'desc'])
+            data: orderBy(
+              suggestions.data,
+              [
+                s => {
+                  if (s.state) {
+                    return 0;
+                  } else {
+                    return s.votes.length;
+                  }
+                },
+                s => parseInt(s.state, 10)
+              ],
+              ['desc', 'asc']
+            )
           }
         });
       }
@@ -231,7 +244,7 @@ class Suggestions extends React.Component {
                 return (
                   <li key={s.id} className='linked'>
                     <div className='text'>
-                      <div className='votes'>{s.votes && s.votes.length}</div>
+                      <div className='votes'>{s.state !== '3' && s.votes && s.votes.length}</div>
                       <div className='name'>{s.name}</div>
                       <div className='created-on'>
                         <Moment fromNow>{`${s.created_on.replace(' ', 'T')}Z`}</Moment>
@@ -248,6 +261,12 @@ class Suggestions extends React.Component {
 
       const suggestion = match.params.id && this.state.suggestions.data.find(s => s.id === parseInt(match.params.id, 10)) ? this.state.suggestions.data.find(s => s.id === parseInt(match.params.id, 10)) : this.state.suggestions.data[0];
 
+      const states = {
+        '1': t('In development'),
+        '2': t('Delivered'),
+        '3': t('Not planned')
+      };
+
       detail = suggestion ? (
         <>
           <div className='header'>
@@ -258,11 +277,19 @@ class Suggestions extends React.Component {
           </div>
           <div className='meta'>
             <div className='votes'>
-              <div>{suggestion.votes && suggestion.votes.length} {suggestion.votes && suggestion.votes.length === 1 ? t('upvote') : t('upvotes')}</div>
-              {suggestion.votes && suggestion.votes.length && suggestion.votes.find(v => v.braytech_suggestions_votes_id && v.braytech_suggestions_votes_id.membership_type.toString() === member.membershipType && v.braytech_suggestions_votes_id.membership_id === member.membershipId) ? null : (
-                <Button className='upvote' action={this.postUpvote}>
-                  <i className='segoe-uniE1091' />
-                </Button>
+              {suggestion.state === null || parseInt(suggestion.state, 10) < 1 ? (
+                <>
+                  <div>
+                    {suggestion.votes && suggestion.votes.length} {suggestion.votes && suggestion.votes.length === 1 ? t('upvote') : t('upvotes')}
+                  </div>
+                  {suggestion.votes && suggestion.votes.length && suggestion.votes.find(v => v.braytech_suggestions_votes_id && v.braytech_suggestions_votes_id.membership_type.toString() === member.membershipType && v.braytech_suggestions_votes_id.membership_id === member.membershipId) ? null : (
+                    <Button className='upvote' action={this.postUpvote}>
+                      <i className='segoe-uniE1091' />
+                    </Button>
+                  )}
+                </>
+              ) : (
+                <div className='state'>{states[suggestion.state]}</div>
               )}
             </div>
             {!suggestion.anonymous ? <MemberLink key={suggestion.membership_id} type={suggestion.membership_type} id={suggestion.membership_id} /> : null}
