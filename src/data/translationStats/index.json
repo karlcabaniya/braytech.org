@@ -1,92 +1,120 @@
 {
   "de": {
     "translated": 426,
-    "notTranslated": 69,
-    "added": [],
+    "notTranslated": 70,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "en-au": {
     "translated": 17,
-    "notTranslated": 390,
-    "added": [],
+    "notTranslated": 391,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "en": {
-    "translated": 414,
+    "translated": 415,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 407,
-    "added": [],
+    "notTranslated": 408,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "es": {
     "translated": 288,
-    "notTranslated": 277,
-    "added": [],
+    "notTranslated": 278,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "fr": {
     "translated": 521,
-    "notTranslated": 14,
-    "added": [],
+    "notTranslated": 15,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 407,
-    "added": [],
+    "notTranslated": 408,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "it": {
     "translated": 401,
-    "notTranslated": 12,
-    "added": [],
+    "notTranslated": 13,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 407,
-    "added": [],
+    "notTranslated": 408,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "ko": {
     "translated": 482,
-    "notTranslated": 16,
-    "added": [],
+    "notTranslated": 17,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 407,
-    "added": [],
+    "notTranslated": 408,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "pt-br": {
     "translated": 626,
-    "notTranslated": 60,
-    "added": [],
+    "notTranslated": 61,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 407,
-    "added": [],
+    "notTranslated": 408,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 407,
-    "added": [],
+    "notTranslated": 408,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 407,
-    "added": [],
+    "notTranslated": 408,
+    "added": [
+      "upvote"
+    ],
     "removed": []
   }
 }

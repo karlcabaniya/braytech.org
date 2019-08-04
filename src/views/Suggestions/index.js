@@ -258,7 +258,7 @@ class Suggestions extends React.Component {
           </div>
           <div className='meta'>
             <div className='votes'>
-              <div>{suggestion.votes && suggestion.votes.length} {t('upvotes')}</div>
+              <div>{suggestion.votes && suggestion.votes.length} {suggestion.votes && suggestion.votes.length === 1 ? t('upvote') : t('upvotes')}</div>
               {suggestion.votes && suggestion.votes.length && suggestion.votes.find(v => v.braytech_suggestions_votes_id && v.braytech_suggestions_votes_id.membership_type.toString() === member.membershipType && v.braytech_suggestions_votes_id.membership_id === member.membershipId) ? null : (
                 <Button className='upvote' action={this.postUpvote}>
                   <i className='segoe-uniE1091' />
