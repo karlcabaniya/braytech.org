@@ -37,6 +37,7 @@ import Settings from './views/Settings';
 import Credits from './views/Credits';
 import Experiments from './views/Experiments';
 import Leaderboards from './views/Leaderboards';
+import Suggestions from './views/Suggestions';
 import FAQ from './views/FAQ';
 import ChaliceRecipes from './views/ChaliceRecipes';
 
@@ -239,12 +240,12 @@ class App extends React.Component {
                           <RedirectRoute path='/reports' />
                           <RedirectRoute path='/now' exact />
                           <RedirectRoute path='/inventory' />
-                          <RedirectRoute path='/suggestions' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />
                           <Route path='/read/:kind?/:hash?' exact component={Read} />
                           <Route path='/settings' exact render={route => <Settings {...route} availableLanguages={this.availableLanguages} />} />
+                          <Route path='/suggestions/:id?' render={route => <Suggestions {...route} />} />
                           <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
                           <Route path='/leaderboards/:view?/:dom?/:sub?' render={route => <Leaderboards {...route} />} />

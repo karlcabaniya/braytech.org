@@ -1,13 +1,13 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import { orderBy } from 'lodash';
 import Moment from 'react-moment';
 import Markdown from 'react-markdown';
 import cx from 'classnames';
 
-import { ProfileLink } from '../../components/ProfileLink';
 import * as ls from '../../utils/localStorage';
 import { NoAuth } from '../../components/BungieAuth';
 import MemberLink from '../../components/MemberLink';
@@ -262,7 +262,7 @@ class Suggestions extends React.Component {
                         <Moment fromNow>{`${s.created_on.replace(' ', 'T')}Z`}</Moment>
                       </div>
                     </div>
-                    <ProfileLink to={`/suggestions/${s.id}`} />
+                    <Link to={`/suggestions/${s.id}`} />
                   </li>
                 );
               })}
@@ -326,10 +326,10 @@ class Suggestions extends React.Component {
             <div />
             <ul>
               <li>
-                <ProfileLink className='button' to='/suggestions'>
+                <Link className='button' to='/suggestions'>
                   <i className='destiny-B_Button' />
                   {t('Back')}
-                </ProfileLink>
+                </Link>
               </li>
             </ul>
           </div>
