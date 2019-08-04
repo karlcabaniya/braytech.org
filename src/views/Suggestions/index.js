@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import Moment from 'react-moment';
-import Description from 'react-markdown';
+import Markdown from 'react-markdown';
 import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
@@ -265,7 +265,8 @@ class Suggestions extends React.Component {
               </Button>
             )}
           </div>
-          <Description className='description' source={suggestion.description} />
+          <Markdown className='description' source={suggestion.description} />
+          <Markdown className='request' source={suggestion.request} />
         </>
       ) : null;
     } else {
@@ -275,7 +276,7 @@ class Suggestions extends React.Component {
     if (viewport.width < 1024 && match.params.id) {
       return (
         <>
-          <div className='view' id='suggestions'>
+          <div className='view detail' id='suggestions'>
             <div className='padder'>
               <div className='module detail'>{detail}</div>
             </div>

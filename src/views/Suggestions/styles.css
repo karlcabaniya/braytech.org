@@ -105,6 +105,13 @@
   font-size: 16px;
 }
 
+#suggestions .module.detail .request {
+  margin: 0 0 1rem;
+  padding: 0 0 0 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+}
+
 #suggestions .module.detail .upvotes {
   background-color: rgba(255, 255, 255, 0.05);
   padding: 0 0 0 1rem;
@@ -162,8 +169,12 @@
 
   #suggestions > .padder {
     grid-template-columns: repeat(1, 1fr);
-    padding: 3rem 2rem 2rem;
+    padding: 2rem;
     grid-gap: 2rem;
+  }
+
+  #suggestions.detail > .padder {
+    padding: 3rem 2rem 2rem;
   }
 
   #suggestions .module.detail .header .name {
