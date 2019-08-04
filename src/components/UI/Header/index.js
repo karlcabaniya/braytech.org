@@ -188,7 +188,7 @@ class Header extends React.Component {
         group: 1
       },
       {
-        name: t('Suggestions'),
+        name: t('Suggestion box'),
         desc: t("Suggest your ideas for Braytech and impact its future"),
         slug: '/suggestions',
         exact: false,

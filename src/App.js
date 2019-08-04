@@ -223,7 +223,7 @@ class App extends React.Component {
               <Route component={GoogleAnalytics.GoogleAnalytics} />
               <div className='main'>
                 <Switch>
-                  <Route path='/:membershipType([1|2|4])/:membershipId([0-9]+)/:characterId([0-9]+)' render={route => <ProfileRoutes {...route} />} />
+                  <Route path='/:membershipType([1|2|4])/:membershipId([0-9]+)/:characterId([0-9]+)?' render={route => <ProfileRoutes {...route} />} />
                   <Route
                     render={() => (
                       <>

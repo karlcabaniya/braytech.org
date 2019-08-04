@@ -38,7 +38,7 @@ class Suggestions extends React.Component {
 
   init = async () => {
     if (!this.state.data) {
-      let suggestions = await fetch('https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions', {
+      let suggestions = await fetch('https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions?fields=*.*.*', {
         headers: {
           Authorization: `Bearer braytech`
         }
@@ -64,30 +64,80 @@ class Suggestions extends React.Component {
           return p;
         });
 
-        let post = await fetch('https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions', {
-          method: 'post',
-          headers: {
-            Authorization: `Bearer braytech`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            braytech_version: packageJSON.version,
-            membership_type: this.props.member.membershipType,
-            membership_id: this.props.member.membershipId,
-            description: this.state.form.value,
-            anonymous: this.state.form.anon
-          })
-        });
-        post = await post.json();
+        try {
+          let post = await fetch('https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions', {
+            method: 'post',
+            headers: {
+              Authorization: `Bearer braytech`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              braytech_version: packageJSON.version,
+              membership_type: this.props.member.membershipType,
+              membership_id: this.props.member.membershipId,
+              description: this.state.form.value,
+              anonymous: this.state.form.anon
+            })
+          });
+          post = await post.json();
 
-        console.log(post);
+          this.setState(p => {
+            p.form.loading = false;
+            p.form.visible = false;
+            p.form.value = '';
+            return p;
+          });
+        } catch (e) {
+          this.setState(p => {
+            p.form.loading = false;
+            return p;
+          });
+        }
+      }
+    }
+  };
 
-        this.setState(p => {
-          p.form.loading = false;
-          p.form.visible = false;
-          p.form.value = '';
-          return p;
-        });
+  postUpvote = async () => {
+    const { member, match } = this.props;
+
+    if (this.mounted) {
+      const suggestion = match.params.id && this.state.suggestions.data.find(s => s.id === parseInt(match.params.id, 10));
+
+      if (suggestion) {
+        try {
+          let upvote = await fetch(`https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions/${suggestion.id}?fields=*.*.*`, {
+            method: 'PATCH',
+            headers: {
+              Authorization: `Bearer braytech`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              votes: [
+                {
+                  braytech_suggestions_votes_id: {
+                    created_on: null,
+                    membership_id: member.membershipId,
+                    membership_type: member.membershipType,
+                    modified_on: null
+                  }
+                }
+              ]
+            })
+          });
+          upvote = await upvote.json();
+
+          if (upvote && upvote.data) {
+            this.setState(p => {
+              for (const s of p.suggestions.data) {
+                if (s.id === suggestion.id) {
+                  s.votes = upvote.data.votes;
+                }
+              }
+              return p;
+            });
+          }
+
+        } catch (e) {}
       }
     }
   };
@@ -148,7 +198,7 @@ class Suggestions extends React.Component {
   }
 
   render() {
-    const { t, viewport, match } = this.props;
+    const { t, member, viewport, match } = this.props;
 
     if (!this.auth) {
       return <NoAuth />;
@@ -174,13 +224,13 @@ class Suggestions extends React.Component {
       } else {
         suggestions = (
           <>
-            <Button text={t('Make a suggestion')} action={this.toggleForm} />
+            <Button text={t('Make a new suggestion')} action={this.toggleForm} />
             <ul className='list'>
               {this.state.suggestions.data.map(s => {
                 return (
                   <li key={s.id} className='linked'>
                     <div className='text'>
-                      <div className='votes'>0</div>
+                      <div className='votes'>{s.votes && s.votes.length}</div>
                       <div className='name'>{s.name}</div>
                       <div className='created-on'>
                         <Moment fromNow>{`${s.created_on.replace(' ', 'T')}Z`}</Moment>
@@ -204,6 +254,16 @@ class Suggestions extends React.Component {
             <div className='created-on'>
               <Moment fromNow>{`${suggestion.created_on.replace(' ', 'T')}Z`}</Moment>
             </div>
+          </div>
+          <div className='upvotes'>
+            <div className='votes'>
+              {suggestion.votes && suggestion.votes.length} {t('upvotes')}
+            </div>
+            {suggestion.votes && suggestion.votes.length && suggestion.votes.find(v => v.braytech_suggestions_votes_id && v.braytech_suggestions_votes_id.membership_type.toString() === member.membershipType && v.braytech_suggestions_votes_id.membership_id === member.membershipId) ? null : (
+              <Button action={this.postUpvote}>
+                <i className='segoe-uniE1091' />
+              </Button>
+            )}
           </div>
           <Description className='description' source={suggestion.description} />
         </>
@@ -238,15 +298,17 @@ class Suggestions extends React.Component {
         <div className='view' id='suggestions'>
           <div className='module head'>
             <div className='page-header'>
-              <div className='name'>{t('Suggestions')}</div>
+              <div className='name'>{t('Suggestion box')}</div>
             </div>
           </div>
           <div className='padder'>
-            {viewport.width < 1024 && this.state.form.visible ? null : <div className='module'>
-              <p>{t("Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.")}</p>
-              <p>{t('Use this opportunity to go on the record and make your voice heard.')}</p>
-              <p>{t('Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.')}</p>
-            </div>}
+            {viewport.width < 1024 && this.state.form.visible ? null : (
+              <div className='module'>
+                <p>{t("Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.")}</p>
+                <p>{t('Use this opportunity to go on the record and make your voice heard.')}</p>
+                <p>{t('Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.')}</p>
+              </div>
+            )}
             <div className='module suggestions'>{suggestions}</div>
             {viewport.width >= 1024 ? <div className='module detail'>{detail}</div> : null}
           </div>

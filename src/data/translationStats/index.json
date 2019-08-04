@@ -1,92 +1,264 @@
 {
   "de": {
     "translated": 426,
-    "notTranslated": 62,
+    "notTranslated": 69,
     "added": [],
     "removed": []
   },
   "en-au": {
     "translated": 17,
-    "notTranslated": 383,
+    "notTranslated": 390,
     "added": [],
     "removed": []
   },
   "en": {
-    "translated": 402,
+    "translated": 414,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 400,
+    "notTranslated": 407,
     "added": [],
     "removed": []
   },
   "es": {
     "translated": 288,
-    "notTranslated": 270,
+    "notTranslated": 277,
     "added": [],
     "removed": []
   },
   "fr": {
-    "translated": 421,
-    "notTranslated": 102,
-    "added": [],
+    "translated": 521,
+    "notTranslated": 14,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 400,
-    "added": [],
-    "removed": []
+    "notTranslated": 407,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
+    "removed": [
+      "Check check check",
+      "Vault: armour",
+      "Vault: miscellaneous",
+      "Vault: weapons",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
+    ]
   },
   "it": {
-    "translated": 395,
-    "notTranslated": 6,
-    "added": [],
+    "translated": 401,
+    "notTranslated": 12,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 400,
-    "added": [],
-    "removed": []
+    "notTranslated": 407,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
+    "removed": [
+      "Check check check",
+      "Vault: armour",
+      "Vault: miscellaneous",
+      "Vault: weapons",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
+    ]
   },
   "ko": {
     "translated": 482,
-    "notTranslated": 6,
-    "added": [],
-    "removed": []
+    "notTranslated": 16,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
+    "removed": [
+      "Check check check",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
+    ]
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 400,
-    "added": [],
-    "removed": []
+    "notTranslated": 407,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
+    "removed": [
+      "Check check check",
+      "Vault: armour",
+      "Vault: miscellaneous",
+      "Vault: weapons",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
+    ]
   },
   "pt-br": {
     "translated": 627,
-    "notTranslated": 50,
-    "added": [],
-    "removed": []
+    "notTranslated": 60,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
+    "removed": [
+      "Check check check",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
+    ]
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 400,
-    "added": [],
-    "removed": []
+    "notTranslated": 407,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
+    "removed": [
+      "Check check check",
+      "Vault: armour",
+      "Vault: miscellaneous",
+      "Vault: weapons",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
+    ]
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 400,
-    "added": [],
-    "removed": []
+    "notTranslated": 407,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
+    "removed": [
+      "Check check check",
+      "Vault: armour",
+      "Vault: miscellaneous",
+      "Vault: weapons",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
+    ]
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 400,
-    "added": [],
-    "removed": []
+    "notTranslated": 407,
+    "added": [
+      "Armour",
+      "Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.",
+      "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.",
+      "Make a new suggestion",
+      "Remain anonymous",
+      "Scrap it",
+      "Send for review",
+      "Suggest your ideas for Braytech and impact its future",
+      "Suggestion box",
+      "upvotes",
+      "Use this opportunity to go on the record and make your voice heard.",
+      "Weapons"
+    ],
+    "removed": [
+      "Check check check",
+      "Vault: armour",
+      "Vault: miscellaneous",
+      "Vault: weapons",
+      "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here."
+    ]
   }
 }

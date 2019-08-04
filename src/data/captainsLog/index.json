@@ -573,5 +573,10 @@
     "date": "2019-07-29T17:31:29.033Z",
     "version": "2.7.18",
     "content": "- language updates\n- tooltip updates"
+  },
+  {
+    "date": "2019-08-04T06:29:27.580Z",
+    "version": "2.7.20",
+    "content": "- added a new _Suggestion box_ view"
   }
 ]

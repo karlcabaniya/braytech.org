@@ -34,7 +34,7 @@ class ProfileRoutes extends React.Component {
     const { member, location, match } = this.props;
     // console.log(member, location, match);
 
-    if (member.error) {
+    if (member.error || !member.characterId) {
       // Character select will be able to display the error for us & prompt
       // them to pick a new character / member
       return <Redirect to={{ pathname: '/character-select', state: { from: location } }} />;

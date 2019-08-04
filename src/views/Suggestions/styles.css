@@ -30,7 +30,7 @@
   width: 100%;
   padding: 0 1rem;
   display: grid;
-  grid-template-columns: 50px auto 100px;
+  grid-template-columns: 50px auto 117px;
   font-size: 16px;
 }
 
@@ -60,7 +60,6 @@
 }
 
 #suggestions .module.detail .header {  
-  margin: 0 0 2rem;
   padding: 10px 0;
   position: relative;
   display: flex;
@@ -98,11 +97,35 @@
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+#suggestions .module.detail .description {
+  margin: 0 0 1rem;
+}
+
 #suggestions .module.detail .description p {
   font-size: 16px;
 }
 
+#suggestions .module.detail .upvotes {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0 0 0 1rem;
+  display: grid;
+  grid-template-columns: auto min-content;
+  align-items: center;
+  justify-content: space-between;
+  grid-gap: 1rem;
+  margin: 0 0 2rem;
+  height: 38px;
+}
 
+#suggestions .module.detail .upvotes .votes {
+  font-size: 18px;
+}
+
+#suggestions .module.detail .upvotes .button {
+  width: 38px;
+  justify-content: center;
+  margin: 0;
+}
 
 
 
@@ -141,6 +164,14 @@
     grid-template-columns: repeat(1, 1fr);
     padding: 3rem 2rem 2rem;
     grid-gap: 2rem;
+  }
+
+  #suggestions .module.detail .header .name {
+    font-size: 24px;
+  }
+
+  #suggestions .module.detail .upvotes {  
+    margin: 0 0 1rem;
   }
 }
 
