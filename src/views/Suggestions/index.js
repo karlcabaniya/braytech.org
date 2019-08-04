@@ -75,8 +75,8 @@ class Suggestions extends React.Component {
               braytech_version: packageJSON.version,
               membership_type: this.props.member.membershipType,
               membership_id: this.props.member.membershipId,
-              description: this.state.form.value,
-              anonymous: this.state.form.anon
+              anonymous: this.state.form.anon,
+              request: this.state.form.value              
             })
           });
           post = await post.json();
