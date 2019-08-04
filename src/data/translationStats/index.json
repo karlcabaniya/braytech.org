@@ -1,119 +1,147 @@
 {
   "de": {
     "translated": 426,
-    "notTranslated": 70,
+    "notTranslated": 73,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "en-au": {
     "translated": 17,
-    "notTranslated": 391,
+    "notTranslated": 394,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "en": {
-    "translated": 415,
+    "translated": 418,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 408,
+    "notTranslated": 411,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "es": {
     "translated": 288,
-    "notTranslated": 278,
+    "notTranslated": 281,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "fr": {
     "translated": 521,
-    "notTranslated": 15,
+    "notTranslated": 18,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 408,
+    "notTranslated": 411,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "it": {
     "translated": 401,
-    "notTranslated": 13,
+    "notTranslated": 16,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 408,
+    "notTranslated": 411,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "ko": {
     "translated": 482,
-    "notTranslated": 17,
+    "notTranslated": 20,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 408,
+    "notTranslated": 411,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "pt-br": {
     "translated": 626,
-    "notTranslated": 61,
+    "notTranslated": 64,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 408,
+    "notTranslated": 411,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 408,
+    "notTranslated": 411,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 408,
+    "notTranslated": 411,
     "added": [
-      "upvote"
+      "Delivered",
+      "In development",
+      "Not planned"
     ],
     "removed": []
   }
