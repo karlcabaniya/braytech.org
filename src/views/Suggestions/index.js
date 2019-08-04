@@ -264,7 +264,7 @@ class Suggestions extends React.Component {
                 </Button>
               )}
             </div>
-            {!suggestion.anonymous ? <MemberLink type={suggestion.membership_type} id={suggestion.membership_id} /> : null}
+            {!suggestion.anonymous ? <MemberLink key={suggestion.membership_id} type={suggestion.membership_type} id={suggestion.membership_id} /> : null}
           </div>
           <Markdown className='description' source={suggestion.description} />
           <Markdown className='request' source={suggestion.request} />
