@@ -224,7 +224,7 @@ class MemberLink extends React.Component {
                           <div className='value'>
                             {timePlayed} {timePlayed === 1 ? t('day played') : t('days played')}
                           </div>
-                          <div className='name'>Time played accross characters</div>
+                          <div className='name'>Time played across characters</div>
                         </div>
                         <div>
                           <div className='value'>{this.state.all.data.profileRecords.data.score.toLocaleString('en-us')}</div>
