@@ -13,11 +13,18 @@ class Checkbox extends React.Component {
   }
 
   render() {
-    const { classNames, text, children, linked } = this.props;
+    const { classNames, text, children, linked, action } = this.props;
     const checked = this.props.completed || this.props.checked;
 
     return (
-      <div className={cx('check-box', classNames, { checked: checked, linked: linked }, this.props.theme.selected)}>
+      <div
+        className={cx('check-box', classNames, { checked: checked, linked: linked })}
+        onClick={e => {
+          if (action) {
+            action(e);
+          }
+        }}
+      >
         <div className={cx('check', { ed: checked })} />
         <div className='text'>{text || children}</div>
       </div>
@@ -26,9 +33,7 @@ class Checkbox extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return {
-    theme: state.theme
-  };
+  return {};
 }
 
 export default compose(connect(mapStateToProps))(Checkbox);

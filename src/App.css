@@ -177,7 +177,7 @@ p:last-child {
 }
 
 input {
-  -webkit-appearance: none;
+  appearance: none;
   border: none;
   font: inherit;
   font-size: 18px;
@@ -196,7 +196,26 @@ input {
   border-radius: 0;
 }
 
-input::placeholder {
+textarea {
+  appearance: none;
+  border: none;
+  font: inherit;
+  font-size: 18px;
+  line-height: initial;
+  padding: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+  color: inherit;
+  background-color: transparent;
+  outline: none;
+  white-space: normal;
+  box-sizing: inherit;
+  border-radius: 0;
+}
+
+input::placeholder,
+textarea::placeholder {
   color: inherit;
   opacity: 0.4;
   transition: opacity 0.25s;
@@ -271,17 +290,25 @@ button.square.active {
 }
 
 .form .field input,
+.form .field textarea,
 .form .field button {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 0 1rem;
   transition: background-color 0.25s, box-shadow 0.25s;
 }
 
-.form .field input {
+.form .field textarea {
+  resize: none;
+  padding: 1rem;
+}
+
+.form .field input,
+.form .field textarea {
   width: 100%;
 }
 
 .form .field:hover input,
+.form .field:hover textarea,
 .form .field:hover button {
   background-color: rgba(255, 255, 255, 0.3);
   color: #fff;
@@ -296,12 +323,17 @@ button.square.active {
 
 .form .field:hover input::placeholder,
 .form .field:hover input:focus::placeholder,
-.form .field input:focus::placeholder {
+.form .field input:focus::placeholder,
+.form .field:hover textarea::placeholder,
+.form .field:hover textarea:focus::placeholder,
+.form .field textarea:focus::placeholder {
   opacity: 0.6;
 }
 
 .form .field input:focus,
 .form .field:hover input:focus,
+.form .field textarea:focus,
+.form .field:hover textarea:focus,
 .form .field button:focus,
 .form .field:hover button:focus {
   color: #fff;

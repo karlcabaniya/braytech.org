@@ -19,6 +19,8 @@ class Inventory extends React.Component {
     super(props);
 
     this.state = {};
+
+    this.auth = ls.get('setting.auth');
   }
 
   componentDidMount() {
@@ -31,17 +33,15 @@ class Inventory extends React.Component {
     const hash = this.props.match.params.hash;
     const { loading, memberships } = this.state;
 
-    const auth = ls.get('setting.auth');
-
-    if (!auth) {
+    if (!this.auth) {
       return <NoAuth />;
     }
 
-    if (auth && !auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) {
+    if (this.auth && !this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) {
       return <DiffProfile />;
     }
 
-    if (auth && auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.profile.profileInventory) {
+    if (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.profile.profileInventory) {
       return (
         <div className='view' id='inventory'>
           <Spinner />

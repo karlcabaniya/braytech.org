@@ -239,6 +239,7 @@ class App extends React.Component {
                           <RedirectRoute path='/reports' />
                           <RedirectRoute path='/now' exact />
                           <RedirectRoute path='/inventory' />
+                          <RedirectRoute path='/suggestions' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />

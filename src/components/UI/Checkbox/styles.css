@@ -47,6 +47,7 @@
   font-size: 14px;
   color: rgba(255, 255, 255, 0.8);
   white-space: pre-wrap;
+  user-select: none;
 }
 
 .check-box.checked .text {
