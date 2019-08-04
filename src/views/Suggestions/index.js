@@ -61,7 +61,13 @@ class Suggestions extends React.Component {
                     return s.votes.length;
                   }
                 },
-                s => parseInt(s.state, 10)
+                s => {
+                  if (s.state) {
+                    return parseInt(s.state, 10)
+                  } else {
+                    return '0'
+                  }
+                }
               ],
               ['desc', 'asc']
             )
@@ -242,7 +248,7 @@ class Suggestions extends React.Component {
             <ul className='list'>
               {this.state.suggestions.data.map(s => {
                 return (
-                  <li key={s.id} className='linked'>
+                  <li key={s.id} className={cx('linked', { dev: s.state === '1', live: s.state === '2' })}>
                     <div className='text'>
                       <div className='votes'>{s.state !== '3' && s.votes && s.votes.length}</div>
                       <div className='name'>{s.name}</div>

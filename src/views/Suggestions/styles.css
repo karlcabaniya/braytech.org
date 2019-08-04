@@ -26,6 +26,14 @@
   margin: 1rem 0 0;
 }
 
+#suggestions .module.suggestions .list .linked.dev {
+  background-color: rgba(229, 209, 99, 0.4);
+}
+
+#suggestions .module.suggestions .list .linked.live {
+  background-color: rgba(90, 163, 102, 0.6);
+}
+
 #suggestions .module.suggestions .list .linked .text {
   width: 100%;
   padding: 0 1rem;
