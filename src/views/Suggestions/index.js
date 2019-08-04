@@ -9,6 +9,7 @@ import cx from 'classnames';
 import { ProfileLink } from '../../components/ProfileLink';
 import * as ls from '../../utils/localStorage';
 import { NoAuth } from '../../components/BungieAuth';
+import MemberLink from '../../components/MemberLink';
 import Spinner from '../../components/UI/Spinner';
 import Button from '../../components/UI/Button';
 import Checkbox from '../../components/UI/Checkbox';
@@ -76,7 +77,7 @@ class Suggestions extends React.Component {
               membership_type: this.props.member.membershipType,
               membership_id: this.props.member.membershipId,
               anonymous: this.state.form.anon,
-              request: this.state.form.value              
+              request: this.state.form.value
             })
           });
           post = await post.json();
@@ -136,7 +137,6 @@ class Suggestions extends React.Component {
               return p;
             });
           }
-
         } catch (e) {}
       }
     }
@@ -255,15 +255,16 @@ class Suggestions extends React.Component {
               <Moment fromNow>{`${suggestion.created_on.replace(' ', 'T')}Z`}</Moment>
             </div>
           </div>
-          <div className='upvotes'>
+          <div className='meta'>
             <div className='votes'>
-              {suggestion.votes && suggestion.votes.length} {t('upvotes')}
+              <div>{suggestion.votes && suggestion.votes.length} {t('upvotes')}</div>
+              {suggestion.votes && suggestion.votes.length && suggestion.votes.find(v => v.braytech_suggestions_votes_id && v.braytech_suggestions_votes_id.membership_type.toString() === member.membershipType && v.braytech_suggestions_votes_id.membership_id === member.membershipId) ? null : (
+                <Button className='upvote' action={this.postUpvote}>
+                  <i className='segoe-uniE1091' />
+                </Button>
+              )}
             </div>
-            {suggestion.votes && suggestion.votes.length && suggestion.votes.find(v => v.braytech_suggestions_votes_id && v.braytech_suggestions_votes_id.membership_type.toString() === member.membershipType && v.braytech_suggestions_votes_id.membership_id === member.membershipId) ? null : (
-              <Button action={this.postUpvote}>
-                <i className='segoe-uniE1091' />
-              </Button>
-            )}
+            {!suggestion.anonymous ? <MemberLink type={suggestion.membership_type} id={suggestion.membership_id} /> : null}
           </div>
           <Markdown className='description' source={suggestion.description} />
           <Markdown className='request' source={suggestion.request} />

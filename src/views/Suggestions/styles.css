@@ -98,7 +98,7 @@
 }
 
 #suggestions .module.detail .description {
-  margin: 0 0 1rem;
+  margin: 0 0 2rem;
 }
 
 #suggestions .module.detail .description p {
@@ -112,23 +112,25 @@
   border-left: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-#suggestions .module.detail .upvotes {
+#suggestions .module.detail .meta {
   background-color: rgba(255, 255, 255, 0.05);
   padding: 0 0 0 1rem;
   display: grid;
-  grid-template-columns: auto min-content;
-  align-items: center;
+  grid-template-columns: minmax(140px, 170px) minmax(100px, 270px);
   justify-content: space-between;
-  grid-gap: 1rem;
   margin: 0 0 2rem;
   height: 38px;
 }
 
-#suggestions .module.detail .upvotes .votes {
+#suggestions .module.detail .meta .votes {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: auto auto;
+  align-items: center;
   font-size: 18px;
 }
 
-#suggestions .module.detail .upvotes .button {
+#suggestions .module.detail .meta .button.upvote {
   width: 38px;
   justify-content: center;
   margin: 0;
@@ -138,12 +140,6 @@
 
 
 
-
-@media screen and (max-width: 1500px) {
-  #suggestions > .padder {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
 
 @media screen and (max-width: 1024px) {
   #suggestions > .padder {
@@ -181,7 +177,11 @@
     font-size: 24px;
   }
 
-  #suggestions .module.detail .upvotes {  
+  #suggestions .module.detail .meta {  
+    margin: 0 0 1rem;
+  }
+
+  #suggestions .module.detail .description {
     margin: 0 0 1rem;
   }
 }
