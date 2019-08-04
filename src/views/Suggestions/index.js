@@ -217,6 +217,12 @@ class Suggestions extends React.Component {
     this.mounted = false;
   }
 
+  componentDidUpdate(p) {
+    if (p.match.params.id !== this.props.match.params.id) {
+      window.scrollTo(0, 0);
+    }
+  }
+
   render() {
     const { t, member, viewport, match } = this.props;
 

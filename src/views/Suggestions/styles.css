@@ -191,16 +191,36 @@
     padding: 3rem 2rem 2rem;
   }
 
+  
+
+  #suggestions .module.suggestions .list .linked .text {
+    grid-template-columns: 40px auto 90px;
+    font-size: 14px;
+  }
+
   #suggestions .module.detail .header .name {
     font-size: 24px;
   }
 
+  #suggestions .module.detail .header .created-on {
+    font-size: 14px;
+  }
+
   #suggestions .module.detail .meta {  
     margin: 0 0 1rem;
+    grid-template-columns: 140px minmax(100px, 270px);
+  }
+
+  #suggestions .module.detail .meta .votes {
+    font-size: 14px;
   }
 
   #suggestions .module.detail .description {
     margin: 0 0 1rem;
+  }
+
+  #suggestions .module.detail .description p {
+    font-size: 14px;
   }
 }
 
