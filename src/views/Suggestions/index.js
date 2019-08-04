@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
+import { orderBy } from 'lodash';
 import Moment from 'react-moment';
 import Markdown from 'react-markdown';
 import cx from 'classnames';
@@ -50,7 +51,7 @@ class Suggestions extends React.Component {
         this.setState({
           suggestions: {
             loading: false,
-            data: suggestions.data
+            data: orderBy(suggestions.data, [s => s.created_on, s => s.votes.length], ['desc', 'desc'])
           }
         });
       }
