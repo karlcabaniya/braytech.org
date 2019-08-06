@@ -59,7 +59,7 @@ class Collectibles extends React.Component {
 
   componentDidMount() {
     const highlight = parseInt(this.props.match && this.props.match.params.quinary ? this.props.match.params.quinary : this.props.highlight, 10) || false;
-    console.log(highlight, this.scrollToRecordRef.current)
+
     if (highlight && this.scrollToRecordRef.current !== null) {
       window.scrollTo({
         top: this.scrollToRecordRef.current.offsetTop + this.scrollToRecordRef.current.offsetHeight / 2 - window.innerHeight / 2

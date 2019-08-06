@@ -100,17 +100,36 @@ class PresentationNode extends React.Component {
 
       let states = [];
 
-      let state = 0;
-      node.children.collectibles.forEach(c => {
-        const definitionCollectible = manifest.DestinyCollectibleDefinition[c.collectibleHash];
-
-        let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[characterId].collectibles[definitionCollectible.hash];
-        if (scope) {
-          state = scope.state;
-        }
-
-        states.push(state);
-      });
+      // armour sets
+      if (node.children.collectibles.length === 0 && node.children.presentationNodes.length) {
+        node.children.presentationNodes.forEach(n => {
+          const definitionArmourNode = manifest.DestinyPresentationNodeDefinition[n.presentationNodeHash];
+  
+          let state = 0;
+          definitionArmourNode.children.collectibles.forEach(c => {
+            const definitionCollectible = manifest.DestinyCollectibleDefinition[c.collectibleHash];
+    
+            let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[characterId].collectibles[definitionCollectible.hash];
+            if (scope) {
+              state = scope.state;
+            }
+    
+            states.push(state);
+          });
+        });
+      } else {
+        let state = 0;
+        node.children.collectibles.forEach(c => {
+          const definitionCollectible = manifest.DestinyCollectibleDefinition[c.collectibleHash];
+  
+          let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[characterId].collectibles[definitionCollectible.hash];
+          if (scope) {
+            state = scope.state;
+          }
+  
+          states.push(state);
+        });
+      }
 
       let isActive = (match, location) => {
         if (definitionTertiary.hash === child.presentationNodeHash) {
