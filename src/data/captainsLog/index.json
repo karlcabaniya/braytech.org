@@ -578,5 +578,10 @@
     "date": "2019-08-04T06:29:27.580Z",
     "version": "2.7.20",
     "content": "- added a new _Suggestion box_ view"
+  },
+  {
+    "date": "2019-08-06T07:49:52.689Z",
+    "version": "2.7.21",
+    "content": "- changed valor and infamy points columns on Clan Roster to Resets x Total Points + Current Points\n- added commonality percentage to Triumph Seals\n- added _VOLUSPA last indexed ~date~_ to page footer"
   }
 ]

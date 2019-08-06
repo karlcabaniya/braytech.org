@@ -16,6 +16,9 @@
   position: relative;
   height: unset;
   padding-bottom: 100%;
+}
+
+.bungie-auth .member .details .icon.shadow {
   box-shadow: 0 15px 25px 10px rgba(0,0,0,0.4);
 }
 

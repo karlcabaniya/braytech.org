@@ -139,7 +139,7 @@
   margin: 6rem 0 0;
 }
 
-#triumphs .node.seal .children .until h4 {
+#triumphs .node.seal .children h4 {
   margin: 0 0 1rem;
   font-size: 14px;
   text-transform: uppercase;
@@ -147,7 +147,7 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-#triumphs .node.seal .children .until h4.completed {
+#triumphs .node.seal .children h4.completed {
   color: rgb(210, 187, 95);
 }
 
@@ -214,6 +214,28 @@
 #triumphs .node.seal .children .progress .bar.completed .fill {
   background-color: transparent;
 }
+
+#triumphs .node.seal .children .commonality {
+  margin: 2rem 0 0;
+}
+
+#triumphs .node.seal .children .commonality .value {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+#triumphs .node.seal .children .commonality .description {
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+
+
+
+
+
 
 #triumphs > .almost-complete .list.record-items {
   grid-template-columns: 1fr 1fr 1fr 1fr;

@@ -6,7 +6,7 @@ import cx from 'classnames';
 import moment from 'moment';
 import orderBy from 'lodash/orderBy';
 
-import * as destinyUtils from '../../utils/destinyUtils';
+import * as utils from '../../utils/destinyUtils';
 import { ProfileLink } from '../../components/ProfileLink';
 import getGroupMembers from '../../utils/getGroupMembers';
 import MemberLink from '../MemberLink';
@@ -26,7 +26,7 @@ class Roster extends React.Component {
   }
 
   componentDidMount() {
-    const { member, groupMembers } = this.props;
+    const { member } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
 
     if (group) {
@@ -76,7 +76,7 @@ class Roster extends React.Component {
     results.forEach(m => {
       let isPrivate = !m.profile || (!m.profile.characterActivities.data || !m.profile.characters.data.length);
       let isSelf = !isPrivate ? m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId : false;
-      let { lastPlayed, lastActivity, lastCharacter, lastMode, display } = destinyUtils.lastPlayerActivity(m);
+      let { lastPlayed, lastActivity, lastCharacter, lastMode, display } = utils.lastPlayerActivity(m);
       let triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
       let valorPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2626549951].currentProgress : 0;
       let valorResets = !isPrivate ? (m.profile.profileRecords.data.records[559943871] ? m.profile.profileRecords.data.records[559943871].objectives[0].progress : 0) : 0;
@@ -88,6 +88,12 @@ class Roster extends React.Component {
         let characterProgress = m.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;
         return characterProgress + currentValue;
       }, 0) : 0;
+
+      let totalValor = utils.totalValor();
+      let totalInfamy = utils.totalInfamy();
+
+      valorPoints = valorResets * totalValor + valorPoints;
+      infamyPoints = infamyResets * totalInfamy + infamyPoints;
 
       /*
 
@@ -128,7 +134,7 @@ class Roster extends React.Component {
                     <li className='col lastCharacter'>
                       <div className='icon'>
                         <i
-                          className={`destiny-class_${destinyUtils
+                          className={`destiny-class_${utils
                             .classTypeToString(lastCharacter.classType)
                             .toString()
                             .toLowerCase()}`}
@@ -156,13 +162,13 @@ class Roster extends React.Component {
                     </li>
                     <li className='col triumphScore'>{triumphScore.toLocaleString('en-us')}</li>
                     <li className='col progression valor'>
-                      {valorPoints} {valorResets ? <div className='resets'>({valorResets})</div> : null}
+                      {valorPoints.toLocaleString('en-us')} {valorResets ? <div className='resets'>({valorResets})</div> : null}
                     </li>
-                    <li className='col progression glory'>{gloryPoints}</li>
+                    <li className='col progression glory'>{gloryPoints.toLocaleString('en-us')}</li>
                     <li className='col progression infamy'>
-                      {infamyPoints} {infamyResets ? <div className='resets'>({infamyResets})</div> : null}
+                      {infamyPoints.toLocaleString('en-us')} {infamyResets ? <div className='resets'>({infamyResets})</div> : null}
                     </li>
-                    <li className='col weeklyXp'><span>{weeklyXp}</span> / {characterIds.length * 5000}</li>
+                    <li className='col weeklyXp'><span>{weeklyXp.toLocaleString('en-us')}</span> / {(characterIds.length * 5000).toLocaleString('en-us')}</li>
                   </>
                 ) : (
                   <>

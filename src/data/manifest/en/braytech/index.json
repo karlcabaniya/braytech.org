@@ -50,7 +50,7 @@
   "commonality": {
     "displayProperties": {
       "name": "Commonality",
-      "description": "A representation of the number of players who've acquired or redeemed this entry."
+      "description": "Percentage of players who are indexed by VOLUSPA who've acquired or redeemed this entry."
     },
     "itemType": 1
   },

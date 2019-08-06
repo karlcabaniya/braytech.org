@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
+import Moment from 'react-moment';
 
+import manifest from '../../../utils/manifest';
 import packageJSON from '../../../../package.json';
 import { ReactComponent as Patreon } from '../../PatreonDevice.svg';
 
@@ -15,7 +17,8 @@ class Footer extends React.Component {
       <div id='footer'>
         <div className='wrapper'>
           <div>
-            © 2019 Tom Chapman <span>{packageJSON.version}</span>
+            <div>© 2019 Tom Chapman <span>{packageJSON.version}</span></div>
+            <div>{t('VOLUSPA last indexed')} <Moment fromNow>{manifest.statistics.general.status.lastScraped}</Moment></div>
           </div>
           <ul>
             {!minimal ? (
