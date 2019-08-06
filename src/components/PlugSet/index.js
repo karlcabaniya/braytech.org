@@ -64,7 +64,7 @@ class PlugSet extends React.Component {
           </div>
           <div className='text'>
             <div className='name'>{definitionItem.displayProperties.name}</div>
-            <div className='gfg'>{definitionItem.hash}</div>
+            {/* <div className='gfg'>{definitionItem.hash}</div> */}
           </div>
         </li>
       );
