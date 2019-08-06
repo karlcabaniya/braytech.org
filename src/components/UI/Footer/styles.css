@@ -24,7 +24,7 @@
   padding: 2rem 0;
   line-height: 18px;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
   grid-gap: 1rem;
 }
 
@@ -63,7 +63,7 @@
 
 @media screen and (max-width: 600px) {
   #footer {
-    padding: 2rem 2rem 1rem;
+    padding: 2rem;
   }
 
   #footer .wrapper {

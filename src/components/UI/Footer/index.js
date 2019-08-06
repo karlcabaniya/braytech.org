@@ -17,7 +17,8 @@ class Footer extends React.Component {
       <div id='footer'>
         <div className='wrapper'>
           <div>
-            <div>© 2019 Tom Chapman <span>{packageJSON.version}</span></div>
+            <div>© 2019 Tom Chapman</div>
+            <div>{t('Version')} <span>{packageJSON.version}</span></div>
             <div>{t('VOLUSPA last indexed')} <Moment fromNow>{manifest.statistics.general.status.lastScraped}</Moment></div>
           </div>
           <ul>
