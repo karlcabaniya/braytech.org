@@ -36,7 +36,6 @@ import Read from './views/Read';
 import Settings from './views/Settings';
 import Credits from './views/Credits';
 import Experiments from './views/Experiments';
-import Leaderboards from './views/Leaderboards';
 import Suggestions from './views/Suggestions';
 import FAQ from './views/FAQ';
 import ChaliceRecipes from './views/ChaliceRecipes';
@@ -248,7 +247,6 @@ class App extends React.Component {
                           <Route path='/suggestions/:id?' render={route => <Suggestions {...route} />} />
                           <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
-                          <Route path='/leaderboards/:view?/:dom?/:sub?' render={route => <Leaderboards {...route} />} />
                           <Route path='/chalice-tool/:rune1?/:rune2?/:rune3?' render={route => <ChaliceRecipes {...route} />} />
                           <Route path='/experiments' exact component={Experiments} />
                           <Route path='/experiments/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
