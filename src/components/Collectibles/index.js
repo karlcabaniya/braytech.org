@@ -24,7 +24,7 @@ class Collectibles extends React.Component {
     let root = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.collectionRootNode];
 
     root.children.presentationNodes.forEach(nP => {
-      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];
 
       nodePrimary.children.presentationNodes.forEach(nS => {
         let nodeSecondary = manifest.DestinyPresentationNodeDefinition[nS.presentationNodeHash];
@@ -35,7 +35,7 @@ class Collectibles extends React.Component {
           if (nodeTertiary.children.collectibles.length) {
             let found = nodeTertiary.children.collectibles.find(c => c.collectibleHash === hash);
             if (found) {
-              link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.collectibleHash)
+              link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.collectibleHash);
             }
           } else {
             nodeTertiary.children.presentationNodes.forEach(nQ => {
@@ -44,19 +44,18 @@ class Collectibles extends React.Component {
               if (nodeQuaternary.children.collectibles.length) {
                 let found = nodeQuaternary.children.collectibles.find(c => c.collectibleHash === hash);
                 if (found) {
-                  link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.collectibleHash)
+                  link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.collectibleHash);
                 }
-              }      
+              }
             });
           }
-
         });
       });
     });
 
     link = link.join('/');
     return link;
-  }
+  };
 
   componentDidMount() {
     if (this.props.highlight && this.scrollToRecordRef.current !== null) {
@@ -129,6 +128,10 @@ class Collectibles extends React.Component {
               >
                 <div className='icon'>
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
+                </div>
+                <div className='text'>
+                  <div className='name'>{collectibleDefinition.displayProperties.name}</div>
+                  <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
                 </div>
                 {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
               </li>
@@ -231,17 +234,16 @@ class Collectibles extends React.Component {
 
       collectiblesRequested.forEach(hash => {
         let collectibleDefinition = manifest.DestinyCollectibleDefinition[hash];
-        
+
         let link = this.selfLink(hash);
 
         let state = 0;
         if (this.props.member.data) {
-          
           const characterId = this.props.member.characterId;
 
           const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
           const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
-        
+
           let scope = profileCollectibles.collectibles[hash] ? profileCollectibles.collectibles[hash] : characterCollectibles[characterId].collectibles[hash];
           if (scope) {
             state = scope.state;
@@ -254,7 +256,6 @@ class Collectibles extends React.Component {
           if (collectibles && collectibles.hideCompletedCollectibles && !enumerateCollectibleState(state).notAcquired && !forceDisplay) {
             return;
           }
-
         }
 
         output.push(
@@ -271,7 +272,7 @@ class Collectibles extends React.Component {
             </div>
             <div className='text'>
               <div className='name'>{collectibleDefinition.displayProperties.name}</div>
-                  <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
+              <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
             </div>
             {link && this.props.selfLinkFrom && !inspect ? <ProfileLink to={{ pathname: link, state: { from: this.props.selfLinkFrom } }} /> : null}
             {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}

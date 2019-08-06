@@ -283,20 +283,23 @@
 }
 
 #collections .list.tertiary.sets {
-  grid-template-columns: repeat(5, 1fr);
   grid-gap: 2rem;
+}
+
+#collections .list.tertiary.sets .set {
+  width: 100%;
 }
 
 #collections .list.tertiary.sets > li {
   background-color: rgba(36, 12, 12, 0);
-  padding: 0 0 1rem;
+  padding: 0 0 0rem;
 }
 
 #collections .list.tertiary.sets > li::before {
   box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0);
 }
 
-#collections .list.tertiary.sets li.is-set .text {
+#collections .list.tertiary.sets li.is-set > .text {
   flex-basis: 100%;
   margin: 0;
   position: relative;
@@ -308,11 +311,11 @@
   letter-spacing: 1px;
 }
 
-#collections .list.tertiary.sets li.is-set.completed .text {
+#collections .list.tertiary.sets li.is-set.completed > .text {
   color: rgba(255, 255, 255, 0.8);
 }
 
-#collections .list.tertiary.sets li.is-set .text::after {
+#collections .list.tertiary.sets li.is-set > .text::after {
   content: ' ';
   position: absolute;
   bottom: 0;
@@ -323,39 +326,7 @@
 }
 
 #collections .list.tertiary li .set .list {
-  display: flex;
-}
-
-#collections .list.tertiary li.is-set {
-  flex-basis: calc(100% / 2 - 3px);
-}
-
-#collections .list.tertiary li.is-set .set {
-  flex-basis: calc(100% + (3px * 4));
-}
-
-#collections .list.tertiary li.is-set .set .list li {
-  margin: 0 0 0 3px;
-}
-
-#collections .list.tertiary li.is-set .set .list li:first-child {
-  margin: 0;
-}
-
-#collections .list.tertiary li.is-set .set .list li {
-  flex-basis: calc(100% / 5);
-}
-
-#collections .list.tertiary li.is-set .set .list li .icon:not(.image) {
-  width: 100%;
-  height: initial;
-  flex-basis: 100%;
-}
-
-#collections .list.tertiary li.is-set .set .list li .image.icon {
-  width: 100%;
-  height: initial;
-  padding-bottom: 100%;
+  grid-template-columns: 1fr;
 }
 
 #collections .node.badge .children .icon {
@@ -496,12 +467,6 @@
   font-size: 14px;
 }
 
-@media screen and (max-width: 1660px) {
-  #collections .list.tertiary.sets {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 @media screen and (max-width: 1400px) {
   #collections .parent .node {
     flex-basis: 12rem;
@@ -511,15 +476,7 @@
     bottom: 2rem;
   }
 
-  #collections .list.tertiary.sets {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  #collections .list.tertiary.sets {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  
 }
 
 @media screen and (max-width: 1200px) {
@@ -533,10 +490,6 @@
 
   #collections .list.inventory-items {
     grid-template-columns: 1fr 1fr;
-  }
-
-  #collections .list.tertiary.sets {
-
   }
 
   #collections .node .children {
@@ -564,10 +517,6 @@
 }
 
 @media screen and (max-width: 1023px) {
-  #collections .list.tertiary.sets {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
   #collections.root {
     grid-template-columns: 1fr;
     grid-gap: 2rem;
@@ -639,14 +588,5 @@
 
   #collections .node.badge .children .until {
     margin: 3rem 0 2rem;
-  }
-
-  #collections .list.tertiary li.is-set .set {
-    
-  }
-
-  #collections .list.tertiary li.is-set .text {
-    flex-basis: 100%;
-    padding: 0.5rem 0;
   }
 }
