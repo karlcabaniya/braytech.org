@@ -219,6 +219,14 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   background-position: -53px bottom;
 }
 
+@media screen and (min-width: 1921px) {
+
+  #header.profile-header .background .image {
+    background-position: center bottom;
+  }
+
+}
+
 #header.profile-header .background .image.very-light {
   filter: brightness(0.8);
 }
