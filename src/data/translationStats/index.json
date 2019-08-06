@@ -2,147 +2,91 @@
   "de": {
     "translated": 426,
     "notTranslated": 76,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "added": [],
     "removed": []
   },
   "en-au": {
     "translated": 17,
-    "notTranslated": 397,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 394,
+    "added": [],
     "removed": []
   },
   "en": {
-    "translated": 421,
+    "translated": 422,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 414,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 411,
+    "added": [],
     "removed": []
   },
   "es": {
     "translated": 288,
-    "notTranslated": 284,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 281,
+    "added": [],
     "removed": []
   },
   "fr": {
     "translated": 521,
-    "notTranslated": 21,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 22,
+    "added": [],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 414,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 411,
+    "added": [],
     "removed": []
   },
   "it": {
     "translated": 414,
-    "notTranslated": 6,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 7,
+    "added": [],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 414,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 411,
+    "added": [],
     "removed": []
   },
   "ko": {
     "translated": 482,
-    "notTranslated": 23,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 24,
+    "added": [],
     "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 414,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 411,
+    "added": [],
     "removed": []
   },
   "pt-br": {
     "translated": 626,
-    "notTranslated": 67,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 68,
+    "added": [],
     "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 414,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 411,
+    "added": [],
     "removed": []
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 414,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 411,
+    "added": [],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 414,
-    "added": [
-      "Seal commonality",
-      "The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.",
-      "VOLUSPA last indexed"
-    ],
+    "notTranslated": 411,
+    "added": [],
     "removed": []
   }
 }

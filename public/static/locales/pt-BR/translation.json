@@ -633,6 +633,7 @@
   "Vendor data requires OAuth—the process you undergo when a web site requests access to your data and you are requried to approve or deny in order to continue—and I was using some server-side programming to mirror the vendor sales my own character sees on Braytech.\n\nPitfalls include:\n - items disappearing when I collect them\n- Warlock only armour items\n- sometimes frail in reliability\n- overlap with the better functions of other apps such as DIM": "Informações dos vendedores requerem um processo de login OAuth—Um processo que você passa quando um site web requisita acesso a sua informação e você é requerido a aprovar ou negar em ordem para continuar— E eu estava usando uma programação server-side para espelhar no Braytech as vendas dos vendedores que o meu presonagem possuia.\n\nProblemas inclusas:\n - itens desapareciam quando eu os coletava\n- Armadura apenas para arcano\n- algumas vezes frágil na confiabilidade\n- Sobrepõe as funções melhores de outros apps como o DIM",
   "Vendors": "Vendedores",
   "Verifying manifest data": "Verificando dados do manifesto",
+  "#####Version": "🌐",
   "#####VICTORY": "🌐",
   "View at Ishtar": "Ver no Isthar",
   "View clan activity data, compare triumphs between Guardians": "Veja atividade do clã, compare triunfos entre guardiões",
