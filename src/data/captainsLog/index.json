@@ -583,5 +583,10 @@
     "date": "2019-08-06T07:49:52.689Z",
     "version": "2.7.21",
     "content": "- changed valor and infamy points columns on Clan Roster to Resets x Total Points + Current Points\n- added commonality percentage to Triumph Seals\n- added _VOLUSPA last indexed ~date~_ to page footer"
+  },
+  {
+    "date": "2019-08-06T07:49:52.689Z",
+    "version": "2.7.22",
+    "content": "- adjusted Collections armour view style (again)"
   }
 ]
