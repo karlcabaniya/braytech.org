@@ -95,6 +95,13 @@
   z-index: 2;
 }
 
+.presentation-node .list.secondary li .text {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
 .presentation-node .list.secondary li a {
   justify-content: space-between;
 }

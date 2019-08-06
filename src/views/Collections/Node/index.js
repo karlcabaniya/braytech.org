@@ -123,24 +123,27 @@ class PresentationNode extends React.Component {
       let secondaryProgress = states.filter(state => !enumerateCollectibleState(state).notAcquired).length;
       let secondaryTotal = collectibles && collectibles.hideInvisibleCollectibles ? states.filter(state => !enumerateCollectibleState(state).invisible).length : states.length;
 
-      let hashSet = definitionTertiary.hash;
+      let hashSet = node.hash;
       if (/^emotes_/.test(hashSet)) hashSet = '3224618006';
 
-      if (definitionTertiary.children.plugs && definitionTertiary.children.plugs.length && member.data.profile.profilePlugSets && member.data.profile.profilePlugSets.data && member.data.profile.profilePlugSets.data.plugs[hashSet]) {
-        secondaryProgress = definitionTertiary.children.plugs.filter(h => member.data.profile.profilePlugSets.data.plugs[hashSet].find(p => p.plugItemHash === h)).length;
-        secondaryTotal = definitionTertiary.children.plugs.length;
+      if (node.children.plugs && node.children.plugs.length && member.data.profile.profilePlugSets && member.data.profile.profilePlugSets.data && member.data.profile.profilePlugSets.data.plugs[hashSet]) {
+        secondaryProgress = node.children.plugs.filter(h => member.data.profile.profilePlugSets.data.plugs[hashSet].find(p => p.plugItemHash === h)).length;
+        secondaryTotal = node.children.plugs.length;
       }
 
       secondaryChildren.push(
         <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0 })}>
-          <ProfileNavLink isActive={isActive} to={`/collections/${primaryHash}/${secondaryHash}/${node.hash}`}>
-            {node.displayProperties.name}
-          </ProfileNavLink>
+          <div className='text'>
+            <div className='name'>{node.displayProperties.name}</div>
+            <div className='progress'>
+              {secondaryProgress}/{secondaryTotal}
+            </div>
+          </div>
+          <ProfileNavLink isActive={isActive} to={`/collections/${primaryHash}/${secondaryHash}/${node.hash}`} />
         </li>
       );
     });
-    
-    
+
     return (
       <div className='node'>
         <div className='header'>

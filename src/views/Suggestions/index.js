@@ -353,6 +353,7 @@ class Suggestions extends React.Component {
                 <p>{t("Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.")}</p>
                 <p>{t('Use this opportunity to go on the record and make your voice heard.')}</p>
                 <p>{t('Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.')}</p>
+                <p><em>{t("I know reading sucks, but it's really helpful to me if you check first for previous suggestions before sending your own.")}</em></p>
               </div>
             )}
             <div className='module suggestions'>{suggestions}</div>
