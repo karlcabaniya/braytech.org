@@ -58,7 +58,9 @@ class Collectibles extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.highlight && this.scrollToRecordRef.current !== null) {
+    const highlight = parseInt(this.props.match && this.props.match.params.quinary ? this.props.match.params.quinary : this.props.highlight, 10) || false;
+    console.log(highlight, this.scrollToRecordRef.current)
+    if (highlight && this.scrollToRecordRef.current !== null) {
       window.scrollTo({
         top: this.scrollToRecordRef.current.offsetTop + this.scrollToRecordRef.current.offsetHeight / 2 - window.innerHeight / 2
       });
@@ -83,13 +85,13 @@ class Collectibles extends React.Component {
 
       if (tertiaryDefinition.children.presentationNodes.length > 0) {
         tertiaryDefinition.children.presentationNodes.forEach(node => {
-          const nodeDefinition = manifest.DestinyPresentationNodeDefinition[node.presentationNodeHash];
+          const definitionNode = manifest.DestinyPresentationNodeDefinition[node.presentationNodeHash];
 
           let row = [];
           let rowState = [];
 
-          nodeDefinition.children.collectibles.forEach(child => {
-            const collectibleDefinition = manifest.DestinyCollectibleDefinition[child.collectibleHash];
+          definitionNode.children.collectibles.forEach(child => {
+            const definitionCollectible = manifest.DestinyCollectibleDefinition[child.collectibleHash];
 
             let state = 0;
             if (this.props.member.data) {
@@ -112,28 +114,24 @@ class Collectibles extends React.Component {
               return;
             }
 
-            // eslint-disable-next-line eqeqeq
-            let ref = highlight == collectibleDefinition.hash ? this.scrollToRecordRef : null;
-
             row.push(
               <li
-                key={collectibleDefinition.hash}
-                ref={ref}
+                key={definitionCollectible.hash}
                 className={cx('item', 'tooltip', {
                   completed: !enumerateCollectibleState(state).notAcquired && !enumerateCollectibleState(state).invisible,
                   // eslint-disable-next-line eqeqeq
-                  highlight: highlight && highlight == collectibleDefinition.hash
+                  highlight: highlight && highlight == definitionCollectible.hash
                 })}
-                data-hash={collectibleDefinition.itemHash}
+                data-hash={definitionCollectible.itemHash}
               >
                 <div className='icon'>
-                  <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
+                  <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionCollectible.displayProperties.icon}`} />
                 </div>
                 <div className='text'>
-                  <div className='name'>{collectibleDefinition.displayProperties.name}</div>
-                  <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
+                  <div className='name'>{definitionCollectible.displayProperties.name}</div>
+                  <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[definitionCollectible.hash] ? manifest.statistics.collections[definitionCollectible.hash] : `0.00`}%</div>
                 </div>
-                {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+                {inspect && definitionCollectible.itemHash ? <Link to={{ pathname: `/inspect/${definitionCollectible.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
               </li>
             );
           });
@@ -142,15 +140,18 @@ class Collectibles extends React.Component {
             return;
           }
 
+          let ref = definitionNode.children.collectibles.find(c => c.collectibleHash === highlight) ? this.scrollToRecordRef : null;
+
           output.push(
             <li
-              key={nodeDefinition.hash}
+              key={definitionNode.hash}
+              ref={ref}
               className={cx('is-set', {
                 completed: rowState.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === rowState.length
               })}
             >
               <div className='text'>
-                <div className='name'>{nodeDefinition.displayProperties.name}</div>
+                <div className='name'>{definitionNode.displayProperties.name}</div>
               </div>
               <div className='set'>
                 <ul className='list collection-items'>{row}</ul>
@@ -181,8 +182,7 @@ class Collectibles extends React.Component {
             }
           }
 
-          // eslint-disable-next-line eqeqeq
-          let ref = highlight == collectibleDefinition.hash ? this.scrollToRecordRef : null;
+          let ref = highlight === collectibleDefinition.hash ? this.scrollToRecordRef : null;
 
           if (collectibleDefinition.redacted || collectibleDefinition.itemHash === 0) {
             output.push(
