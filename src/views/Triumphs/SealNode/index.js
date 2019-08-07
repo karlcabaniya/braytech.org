@@ -126,7 +126,7 @@ class SealNode extends React.Component {
             </div>
           ) : null}
         </div>
-        <div className='records'>
+        <div className='entries'>
           <ul className='list no-interaction tertiary record-items'>
             <Records {...this.props} hashes={definitionSeal.children.records.map(child => child.recordHash)} highlight={this.props.match.params.tertiary || false} />
           </ul>

@@ -32,11 +32,10 @@ class PresentationNode extends React.Component {
 
   render() {
     const { member, collectibles } = this.props;
-    const characterId = member.characterId;
     const characterCollectibles = member.data.profile.characterCollectibles.data;
     const profileCollectibles = member.data.profile.profileCollectibles.data;
     const characters = member.data.profile.characters.data;
-    const character = characters.find(c => c.characterId === characterId);
+    const character = characters.find(c => c.characterId === member.characterId);
 
     let classNodes = {
       0: [811225638, 2598675734],
@@ -109,7 +108,7 @@ class PresentationNode extends React.Component {
           definitionArmourNode.children.collectibles.forEach(c => {
             const definitionCollectible = manifest.DestinyCollectibleDefinition[c.collectibleHash];
     
-            let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[characterId].collectibles[definitionCollectible.hash];
+            let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[member.characterId].collectibles[definitionCollectible.hash];
             if (scope) {
               state = scope.state;
             }
@@ -122,7 +121,7 @@ class PresentationNode extends React.Component {
         node.children.collectibles.forEach(c => {
           const definitionCollectible = manifest.DestinyCollectibleDefinition[c.collectibleHash];
   
-          let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[characterId].collectibles[definitionCollectible.hash];
+          let scope = profileCollectibles.collectibles[definitionCollectible.hash] ? profileCollectibles.collectibles[definitionCollectible.hash] : characterCollectibles[member.characterId].collectibles[definitionCollectible.hash];
           if (scope) {
             state = scope.state;
           }

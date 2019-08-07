@@ -329,6 +329,11 @@
   grid-template-columns: 1fr;
 }
 
+#collections .node.badge .children {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem 0 0;
+}
+
 #collections .node.badge .children .icon {
   position: relative;
   flex-basis: 100%;
@@ -376,7 +381,8 @@
 }
 
 #collections .node.badge .children .until h4.completed {
-  color: rgb(195, 178, 111);
+  color: rgb(206, 174, 51);
+  font-family: 'nhg text';
 }
 
 #collections .node.badge .children .progress {
