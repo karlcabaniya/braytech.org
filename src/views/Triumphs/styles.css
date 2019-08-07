@@ -148,7 +148,8 @@
 }
 
 #triumphs .node.seal .children h4.completed {
-  color: rgb(210, 187, 95);
+  color: rgb(206, 174, 51);
+  font-family: 'nhg text';
 }
 
 #triumphs .node.seal .children .progress {

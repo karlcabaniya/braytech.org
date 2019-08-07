@@ -179,7 +179,8 @@ class BadgeNode extends React.Component {
       <div className='node badge'>
         <div className='children'>
           <div className='icon'>
-            <ObservedImage className={cx('image')} src={hires[definitionBadge.hash] ? `/static/images/extracts/badges/${hires[definitionBadge.hash]}` : `https://www.bungie.net${definitionBadge.displayProperties.icon}`} />
+            <ObservedImage className='image badge' src={hires[definitionBadge.hash] ? `/static/images/extracts/badges/${hires[definitionBadge.hash]}` : `https://www.bungie.net${definitionBadge.displayProperties.icon}`} />
+            {completed ? <ObservedImage className='image badge-completed' src={`/static/images/extracts/ui/0560-00001498.png`} /> : null}
           </div>
           <div className='text'>
             <div className='name'>{definitionBadge.displayProperties.name}</div>

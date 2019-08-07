@@ -345,10 +345,15 @@
   opacity: 0.2;
 }
 
-#collections .node.badge .children .icon .image {
+#collections .node.badge .children .icon .image.badge {
   position: relative;
   height: initial;
   padding-bottom: calc(126 / 208 * 100%);
+}
+
+#collections .node.badge .children .icon .image.badge-completed {
+  background-size: unset;
+  background-position: left top;
 }
 
 #collections .node.badge .children .options {
