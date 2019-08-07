@@ -1,12 +1,12 @@
 import React from 'react';
 import cx from 'classnames';
 
-import ObservedImage from '../../../components/ObservedImage';
-import { ProfileNavLink } from '../../../components/ProfileLink';
+import manifest from '../../../utils/manifest';
 import * as ls from '../../../utils/localStorage';
 import * as paths from '../../../utils/paths';
-import manifest from '../../../utils/manifest';
-import { enumerateCollectibleState } from '../../../utils/destinyEnums';
+import * as enums from '../../../utils/destinyEnums';
+import ObservedImage from '../../../components/ObservedImage';
+import { ProfileNavLink } from '../../../components/ProfileLink';
 
 import Collectibles from '../../../components/Collectibles';
 import PlugSet from '../../../components/PlugSet';
@@ -138,8 +138,8 @@ class PresentationNode extends React.Component {
         }
       };
 
-      let secondaryProgress = states.filter(state => !enumerateCollectibleState(state).notAcquired).length;
-      let secondaryTotal = collectibles && collectibles.hideInvisibleCollectibles ? states.filter(state => !enumerateCollectibleState(state).invisible).length : states.length;
+      let secondaryProgress = states.filter(state => !enums.enumerateCollectibleState(state).notAcquired).length;
+      let secondaryTotal = collectibles && collectibles.hideInvisibleCollectibles ? states.filter(state => !enums.enumerateCollectibleState(state).invisible).length : states.length;
 
       let hashSet = node.hash;
       if (/^emotes_/.test(hashSet)) hashSet = '3224618006';

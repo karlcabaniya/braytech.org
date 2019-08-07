@@ -458,20 +458,60 @@
   background-color: rgb(206, 174, 51);
 }
 
-#collections .node.badge .records .class {
-  margin: 0 0 3rem;
-  width: 100%;
+#collections .node.badge .entries {
+  padding-top: calc(2rem + 1px);
+  position: relative;
 }
 
-#collections .node.badge .records .class:last-child {
+#collections .node.badge .entries .class-nodes {
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  width: calc(100% - 2rem);
+  display: grid;
+  justify-content: center;
+}
+
+#collections .node.badge .entries .class-nodes::before,
+#collections .node.badge .entries .class-nodes::after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  width: calc(50% - 75px - 2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+#collections .node.badge .entries .class-nodes::after {
+  right: 0;
+}
+
+#collections .node.badge .entries .class-nodes .list {
+  position: absolute;
+  top: -20px;
+  left: calc(50% - 75px);
+  display: grid;
+  grid-template-columns: repeat(3, 40px);
+  grid-gap: 15px;
+}
+
+#collections .node.badge .entries .class-nodes .list .linked,
+#collections .node.badge .entries .class-nodes .list .linked a,
+#collections .node.badge .entries .class-nodes .list .linked::before,
+#collections .node.badge .entries .class-nodes .list .linked::after {
+  border-radius: 100%;
+}
+
+#collections .node.badge .entries .class-nodes .list .linked {
+  display: grid;
+  justify-content: center;
   margin: 0;
-  padding: 0;
-  border-bottom: none;
+  font-size: 20px;
+  height: 40px;
 }
 
-#collections .node.badge .records .class h5 {
-  margin: 0 0 1rem;
-  font-size: 14px;
+#collections .node.badge .entries .class-nodes .list .linked span {
+  margin: 0 1px 0 0;
 }
 
 @media screen and (max-width: 1400px) {
@@ -497,10 +537,6 @@
 
   #collections .list.inventory-items {
     grid-template-columns: 1fr 1fr;
-  }
-
-  #collections .node .children {
-    flex-basis: 30%;
   }
 
   #collections .node .collectibles {
@@ -585,6 +621,11 @@
 
   #collections .list.tertiary li {
     flex-basis: 100%;
+  }
+
+  #collections .node.badge .children {
+    border-top: none;
+    padding: 0;
   }
 
   #collections .node.badge .children .text .name {

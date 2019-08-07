@@ -293,6 +293,16 @@
   }
 }
 
+@media screen and (max-width: 1023px) {
+  #triumphs .node.seal .entries {
+    flex-basis: calc(70% - 2rem);
+  }
+
+  #triumphs .node.seal .entries .list.record-items {
+    grid-template-columns: 1fr;
+  }  
+}
+
 @media screen and (max-width: 768px) {
   #triumphs.root {
     grid-template-columns: 1fr;
@@ -314,6 +324,10 @@
 
   #triumphs .node.seal .children .until {
     margin: 3rem 0 2rem;
+  }
+
+  #triumphs .node.seal .entries {
+    flex-basis: 100%;
   }
 
   #triumphs .header .name {

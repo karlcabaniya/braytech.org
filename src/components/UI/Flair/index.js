@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
-import * as destinyEnums from '../../../utils/destinyEnums';
 import manifest from '../../../utils/manifest';
+import * as enums from '../../../utils/destinyEnums';
 import userFlair from '../../../data/userFlair';
 
 import './styles.css';
@@ -26,8 +26,8 @@ class Flair extends React.Component {
 
     return (
       <div className='stamps'>
-        <div className='tooltip' data-hash={`platform_${destinyEnums.PLATFORMS[type].toLowerCase()}`} data-table='BraytechDefinition'>
-          <i className={`destiny-platform_${destinyEnums.PLATFORMS[type].toLowerCase()}`} />
+        <div className='tooltip' data-hash={`platform_${enums.PLATFORMS[type].toLowerCase()}`} data-table='BraytechDefinition'>
+          <i className={`destiny-platform_${enums.PLATFORMS[type].toLowerCase()}`} />
         </div>
         {flair
           ? flair.trophies.map((s, i) => {
