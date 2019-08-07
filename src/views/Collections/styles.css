@@ -362,21 +362,22 @@
 }
 
 #collections .node.badge .children .text .name {
-  margin: 2rem 0 0.5rem;
+  margin: 2rem 0 1rem;
   font-size: 36px;
   text-transform: uppercase;
   font-weight: 500;
+  line-height: 1.2;
 }
 
 #collections .node.badge .children .text .description {
   font-size: 16px;
   font-style: italic;
   letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 #collections .node.badge .children .until {
-  margin: 6rem 0 0;
+  margin: 3rem 0 0;
 }
 
 #collections .node.badge .children .until h4 {
@@ -638,7 +639,16 @@
     font-size: 24px;
   }
 
+  #collections .node.badge .children .text .description {
+    font-size: 14px;
+  }
+
   #collections .node.badge .children .until {
     margin: 3rem 0 2rem;
+  }
+
+  #collections .node.badge .entries .class-nodes {
+    left: 0;
+    width: 100%;
   }
 }

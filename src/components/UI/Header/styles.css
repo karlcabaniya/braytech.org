@@ -318,7 +318,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
 #header.profile-header .characters .list li .basics .light::before {
   content: 'l';
   position: absolute;
-  top: 2px;
+  top: 1px;
   left: -10px;
   font-family: 'destiny' !important;
   font-size: 8px;

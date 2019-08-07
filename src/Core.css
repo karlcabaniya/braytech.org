@@ -56,8 +56,6 @@ body {
   font-family: "nhg display",sans-serif,"Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
   font-weight: 400;
   font-size: 14px;
-  font-family: "nhg text",sans-serif,"Apple Color Emoji","Segoe UI Emoji","NotoColorEmoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
-  letter-spacing: -0.2px;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
