@@ -115,7 +115,7 @@
   }
 
   .presentation-node .node .entries {
-    flex-basis: calc(70% - 3rem);
+    flex-basis: calc(70% - 4rem);
   }
 }
 

@@ -352,7 +352,8 @@
 }
 
 #collections .node.badge .children .icon .image.badge-completed {
-  background-size: unset;
+  height: 40%;
+  background-size: contain;
   background-position: left top;
 }
 
