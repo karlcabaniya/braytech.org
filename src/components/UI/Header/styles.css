@@ -27,6 +27,22 @@
   font-family: 'nhg text';
 }
 
+.wrapper.standalone #header .braytech .logo {
+  display: none;
+}
+
+.wrapper.standalone #header .braytech,
+.wrapper.standalone.dark-mode #header .braytech,
+html.backdropfilter .wrapper.standalone #header .braytech,
+html.backdropfilter .wrapper.standalone.dark-mode #header .braytech {
+  background-color: rgba(255, 255, 255, 0);
+  backdrop-filter: none;
+}
+
+/* @media screen and (max-width: 600px) {
+
+} */
+
 .wrapper.dark-mode #header .braytech {
   background-color: rgba(0, 0, 0, 0.4);
 }

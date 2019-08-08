@@ -210,7 +210,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Route
           render={route => (
-            <div className={cx('wrapper', this.props.theme.selected)}>
+            <div className={cx('wrapper', this.props.theme.selected, { standalone: window.matchMedia('(display-mode: standalone)').matches })}>
               <NotificationLink />
               <NotificationProgress />
 

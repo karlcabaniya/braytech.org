@@ -33,7 +33,7 @@ class AppEntry extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <App updateAvailable={this.state.updateAvailable} />
+        <App {...this.state} />
       </Provider>
     );
   }
