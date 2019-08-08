@@ -25,7 +25,7 @@ const Checklist = props => {
         chunky
       />
       {children.length > 0 ? (
-        <ul className='list no-interaction'>{children}</ul>
+        <ul className='list'>{children}</ul>
       ) : (
         <div className='info'>
           <div className='text'>{t("All complete")}</div>
