@@ -164,7 +164,7 @@ class App extends React.Component {
     }
 
     this.availableLanguages = Object.keys(manifestIndex.jsonWorldContentPaths);
-    this.availableLanguages.splice(1, 0, 'en-au')
+    this.availableLanguages.splice(1, 0, 'en-au');
 
     tmpManifest.statistics = (await this.startupRequests.voluspaStatistics) || {};
 
@@ -198,17 +198,13 @@ class App extends React.Component {
     }
 
     if (this.state.status.code !== 'ready') {
-    // if (this.state.status.code !== 'ready' || this.state.status.code === 'ready') {
+      // if (this.state.status.code !== 'ready' || this.state.status.code === 'ready') {
       return (
         <div className={cx('wrapper', this.props.theme.selected)}>
           <Loading state={this.state.status} />
           <NotificationLink />
         </div>
       );
-    }
-
-    if (this.props.theme.selected === 'dark-mode') {
-      require('./components/UI/DarkMode.css');
     }
 
     return (
