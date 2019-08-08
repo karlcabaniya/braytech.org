@@ -207,6 +207,10 @@ class App extends React.Component {
       );
     }
 
+    if (this.props.theme.selected === 'dark-mode') {
+      require('./components/UI/DarkMode.css');
+    }
+
     return (
       <BrowserRouter>
         <Route

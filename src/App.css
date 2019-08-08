@@ -15,6 +15,20 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: #a7a7a7;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f1f1f1;
+  border-radius: 0px;
+}
+
 #root > .wrapper.dark-mode {
   background-color: #111111;
 }
@@ -555,7 +569,7 @@ button.square.active {
   height: 40px;
 }
 
-html.backdropfilter .sticky-nav{
+html.backdropfilter .sticky-nav {
   background-color: rgba(255, 255, 255, 0);
   backdrop-filter: blur(7px) brightness(1.2);
 }
@@ -575,13 +589,13 @@ html.backdropfilter .sticky-nav{
   left: 1px;
   width: calc(100% - 2px);
   height: calc(100% - 2px);
-  background-color: #F44336;
+  background-color: #f44336;
   border-radius: 100%;
   z-index: -1;
 }
 
 .sticky-nav i.destiny-Y_Button::after {
-  background-color: #FFC107;
+  background-color: #ffc107;
 }
 
 .sticky-nav ul {
@@ -642,7 +656,7 @@ html.backdropfilter .wrapper.dark-mode .sticky-nav {
   background-color: hsla(0, 0%, 3%, 0.8);
 }
 
-.wrapper.dark-mode .sticky-nav [class^="destiny-"] {
+.wrapper.dark-mode .sticky-nav [class^='destiny-'] {
   color: #333;
 }
 
@@ -663,9 +677,7 @@ html.backdropfilter .wrapper.dark-mode .sticky-nav {
 }
 
 @media screen and (max-width: 600px) {
-
   .profile-route-loading {
     padding: 2rem;
   }
-
 }
