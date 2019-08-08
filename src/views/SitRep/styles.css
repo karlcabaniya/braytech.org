@@ -144,7 +144,7 @@
 #sit-rep .module.milestones .list li .list.activities li .light span::before {
   content: 'l';
   position: absolute;
-  top: 4px;
+  top: 3px;
   left: -7px;
   font-family: 'destiny' !important;
   font-size: 6px;
@@ -287,6 +287,6 @@
   }
 
   #sit-rep .module.milestones .list li .list.activities li .light span::before {
-    top: 5px;
+    top: 4px;
   }
 }

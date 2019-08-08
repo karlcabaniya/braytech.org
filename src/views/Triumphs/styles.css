@@ -139,7 +139,7 @@
   margin: 6rem 0 0;
 }
 
-#triumphs .node.seal .children .until h4 {
+#triumphs .node.seal .children h4 {
   margin: 0 0 1rem;
   font-size: 14px;
   text-transform: uppercase;
@@ -147,8 +147,9 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-#triumphs .node.seal .children .until h4.completed {
-  color: rgb(210, 187, 95);
+#triumphs .node.seal .children h4.completed {
+  color: rgb(206, 174, 51);
+  font-family: 'nhg text';
 }
 
 #triumphs .node.seal .children .progress {
@@ -215,6 +216,28 @@
   background-color: transparent;
 }
 
+#triumphs .node.seal .children .commonality {
+  margin: 2rem 0 0;
+}
+
+#triumphs .node.seal .children .commonality .value {
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+#triumphs .node.seal .children .commonality .description {
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+
+
+
+
+
+
+
 #triumphs > .almost-complete .list.record-items {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
@@ -271,6 +294,16 @@
   }
 }
 
+@media screen and (max-width: 1023px) {
+  #triumphs .node.seal .entries {
+    flex-basis: calc(70% - 2rem);
+  }
+
+  #triumphs .node.seal .entries .list.record-items {
+    grid-template-columns: 1fr;
+  }  
+}
+
 @media screen and (max-width: 768px) {
   #triumphs.root {
     grid-template-columns: 1fr;
@@ -292,6 +325,10 @@
 
   #triumphs .node.seal .children .until {
     margin: 3rem 0 2rem;
+  }
+
+  #triumphs .node.seal .entries {
+    flex-basis: 100%;
   }
 
   #triumphs .header .name {

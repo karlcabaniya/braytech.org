@@ -69,7 +69,7 @@ class PresentationNode extends React.Component {
         const scopeRecord = definitionRecord.scope || 0;
         const dataRecord = scopeRecord === 1 ? characterRecords[characterId].records[definitionRecord.hash] : profileRecords[definitionRecord.hash];
 
-        states.push(dataRecord)
+        states.push(dataRecord);
       });
 
       let isActive = (match, location) => {
@@ -82,8 +82,8 @@ class PresentationNode extends React.Component {
         }
       };
 
-      let secondaryProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length
-      let secondaryTotal = (collectibles && collectibles.hideInvisibleRecords) ? states.filter(record => !enumerateRecordState(record.state).invisible).length : states.length;
+      let secondaryProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length;
+      let secondaryTotal = collectibles && collectibles.hideInvisibleRecords ? states.filter(record => !enumerateRecordState(record.state).invisible).length : states.length;
 
       if (secondaryTotal === 0) {
         return;
@@ -91,10 +91,13 @@ class PresentationNode extends React.Component {
 
       secondaryChildren.push(
         <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal })}>
-          <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${secondaryHash}/${node.hash}`}>
+          <div className='text'>
             <div className='name'>{node.displayProperties.name.length > 24 ? node.displayProperties.name.slice(0, 24) + '...' : node.displayProperties.name}</div>
-            <div className='progress'>{secondaryProgress}/{secondaryTotal}</div>
-          </ProfileNavLink>
+            <div className='progress'>
+              {secondaryProgress}/{secondaryTotal}
+            </div>
+          </div>
+          <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${secondaryHash}/${node.hash}`} />
         </li>
       );
     });
@@ -117,7 +120,7 @@ class PresentationNode extends React.Component {
           </ul>
           <ul className='list secondary'>{secondaryChildren}</ul>
         </div>
-        <div className='records'>
+        <div className='entries'>
           <ul className='list tertiary record-items'>
             <Records {...this.props} hashes={tertiaryDefinition.children.records.map(child => child.recordHash)} highlight={quaternaryHash} readLink={primaryHash === '564676571'} />
           </ul>

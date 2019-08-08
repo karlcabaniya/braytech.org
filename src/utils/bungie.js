@@ -98,8 +98,6 @@ export const GetMembershipDataForCurrentUser = async (access = false) =>
     }
   });
 
-export const manifest = async version => fetch(`https://www.bungie.net${version}`).then(a => a.json());
-
 export const GetProfile = async (membershipType, membershipId, components, auth = false) =>
   apiRequest(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=${components}`, {
     auth
@@ -111,6 +109,32 @@ export const EquipItem = async body =>
     method: 'post',
     body
   });
+
+export const KickMember = async (groupId, membershipType, membershipId) =>
+  apiRequest(`/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Kick/`, {
+    auth: true,
+    method: 'post'
+  });
+
+export const BanMember = async (groupId, membershipType, membershipId) =>
+  apiRequest(`/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Ban/`, {
+    auth: true,
+    method: 'post'
+  });
+
+export const UnbanMember = async (groupId, membershipType, membershipId) =>
+  apiRequest(`/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Unban/`, {
+    auth: true,
+    method: 'post'
+  });
+
+export const ApprovePending = async (groupId, membershipType, membershipId) =>
+  apiRequest(`/Platform/GroupV2/${groupId}/Members/Approve/${membershipType}/${membershipId}/`, {
+    auth: true,
+    method: 'post'
+  });
+
+export const manifest = async version => fetch(`https://www.bungie.net${version}`).then(a => a.json());
 
 export const GetDestinyManifest = async () => apiRequest('/Platform/Destiny2/Manifest/');
 

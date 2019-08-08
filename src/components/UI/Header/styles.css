@@ -219,6 +219,14 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   background-position: -53px bottom;
 }
 
+@media screen and (min-width: 1921px) {
+
+  #header.profile-header .background .image {
+    background-position: center bottom;
+  }
+
+}
+
 #header.profile-header .background .image.very-light {
   filter: brightness(0.8);
 }
@@ -292,6 +300,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 14px;
+  font-family: 'nhg text';
   line-height: 1;
   color: rgba(255, 255, 255, 0.6);
 }
@@ -310,7 +319,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
 #header.profile-header .characters .list li .basics .light::before {
   content: 'l';
   position: absolute;
-  top: 2px;
+  top: 1px;
   left: -10px;
   font-family: 'destiny' !important;
   font-size: 8px;
@@ -729,7 +738,7 @@ html.backdropfilter #header .nav {
   }
 
   #header.profile-header .characters .list li .basics .light::before {
-    top: 2px;
+    top: 0px;
     left: -9px;
     font-size: 7px;
   }

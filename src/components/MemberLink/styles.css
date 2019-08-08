@@ -411,7 +411,7 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
 #member-overlay .wrapper-inner .characters .text div:last-child span:last-child span::before {
   content: 'l';
   position: absolute;
-  top: 5px;
+  top: 4px;
   left: -10px;
   font-family: 'destiny' !important;
   font-size: 9px;

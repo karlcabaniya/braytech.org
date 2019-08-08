@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { withNamespaces } from 'react-i18next';
 import { Redirect, Link } from 'react-router-dom';
+import cx from 'classnames';
 import Moment from 'react-moment';
 import queryString from 'query-string';
 
@@ -92,7 +93,7 @@ class BungieAuth extends React.Component {
               <ObservedImage className='image background' src={`https://www.bungie.net/img/UserThemes/${memberships.bungieNetUser.profileThemeName}/header.jpg`} />
               <div className='details'>
                 <div className='icon'>
-                  <ObservedImage className='image' src={`https://www.bungie.net${memberships.bungieNetUser.profilePicturePath}`} />
+                  <ObservedImage className={cx('image', { shadow: !/.gif/.test(memberships.bungieNetUser.profilePicturePath) })} src={`https://www.bungie.net${memberships.bungieNetUser.profilePicturePath}`} />
                 </div>
                 <div className='text'>
                   <div className='displayName'>{memberships.bungieNetUser.displayName}</div>

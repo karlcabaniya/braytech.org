@@ -1,23 +1,19 @@
 import React from 'react';
 
-import MemberLink from '../../../components/MemberLink';
 import Spinner from '../../../components/UI/Spinner';
+import RosterAdmin from '../../../components/RosterAdmin';
 
 import ClanViewsLinks from '../ClanViewsLinks';
 
 import './styles.css';
 
-class StatsView extends React.Component {
+class AdminView extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);   
   }
 
   render() {
     const { t, group, groupMembers } = this.props;
-
-    console.log(group, groupMembers);
-
-
 
     return (
       <>
@@ -28,11 +24,11 @@ class StatsView extends React.Component {
           ) : (
             <div className='ttl' />
           ) : null}</div>
-          {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : null}
+          {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <RosterAdmin />}
         </div>
       </>
     );
   }
 }
 
-export default StatsView;
+export default AdminView;

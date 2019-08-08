@@ -17,7 +17,7 @@ class RosterView extends React.Component {
 
     return (
       <>
-        <ClanViewsLinks />
+        <ClanViewsLinks {...this.props} />
         <div className='module'>
           <div className='status'>{groupMembers.responses.length > 0 ? groupMembers.loading ? (
             <Spinner mini />

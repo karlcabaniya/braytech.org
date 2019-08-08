@@ -917,7 +917,7 @@ class ThisWeek extends React.Component {
             asTab
           />
         </ul>
-        <div className='aside'>{t('Braytech can not determine which Wordline Zero catalyst components you have attained, but it can tell you which bosses drop which items in case you happened to be keeping a list.')}</div>
+        <div className='aside'>{t('Braytech can not determine which Worldline Zero catalyst components you have attained, but it can tell you which bosses drop which items in case you happened to be keeping a list.')}</div>
       </div>
     );
 

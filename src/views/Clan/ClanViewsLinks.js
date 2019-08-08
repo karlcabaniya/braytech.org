@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withNamespaces } from 'react-i18next';
 
 import { ProfileNavLink } from '../../components/ProfileLink';
-import ObservedImage from '../../components/ObservedImage';
 
 class ClanViewsLinks extends React.Component {
   constructor(props) {
@@ -14,7 +13,9 @@ class ClanViewsLinks extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, member } = this.props;
+
+    const memberGroups = member.data.groups.results.filter(r => r.member.memberType > 2);
 
     return (
       <div className='module views'>
@@ -31,6 +32,12 @@ class ClanViewsLinks extends React.Component {
             <div className='icon stats' />
             <ProfileNavLink to='/clan/stats' />
           </li> */}
+          {memberGroups.length ? (
+            <li className='linked'>
+              <div className='icon admin' />
+              <ProfileNavLink to='/clan/admin' />
+            </li>
+          ) : null}
         </ul>
       </div>
     );

@@ -7,13 +7,13 @@ import moment from 'moment';
 import orderBy from 'lodash/orderBy';
 
 import * as utils from '../../utils/destinyUtils';
-import { ProfileLink } from '../../components/ProfileLink';
+import { ProfileLink } from '../ProfileLink';
 import getGroupMembers from '../../utils/getGroupMembers';
 import MemberLink from '../MemberLink';
 
 import './styles.css';
 
-class Roster extends React.Component {
+class RosterAdmin extends React.Component {
   constructor(props) {
     super(props);
 
@@ -109,10 +109,13 @@ class Roster extends React.Component {
       //   console.log(lastPlayed);
       // }
 
+      // console.log(m)
+
       members.push({
         sorts: {
           private: isPrivate,
           isOnline: m.isOnline,
+          joinDate: m.joinDate,
           lastPlayed,
           lastActivity,
           lastCharacter: !isPrivate ? lastCharacter : false,
@@ -160,25 +163,17 @@ class Roster extends React.Component {
                         )}
                       </div>
                     </li>
-                    <li className='col triumphScore'>{triumphScore.toLocaleString('en-us')}</li>
-                    <li className='col progression glory'>{gloryPoints.toLocaleString('en-us')}</li>
-                    <li className='col progression valor'>
-                      {valorPoints.toLocaleString('en-us')} {valorResets ? <div className='resets'>({valorResets})</div> : null}
-                    </li>
-                    <li className='col progression infamy'>
-                      {infamyPoints.toLocaleString('en-us')} {infamyResets ? <div className='resets'>({infamyResets})</div> : null}
-                    </li>
+                    <li className='col joinDate'>{moment(m.joinDate).locale('en-sml').fromNow()}</li>
                     <li className='col weeklyXp'><span>{weeklyXp.toLocaleString('en-us')}</span> / {(characterIds.length * 5000).toLocaleString('en-us')}</li>
+                    <li className='col actions'></li>
                   </>
                 ) : (
                   <>
                     <li className='col lastCharacter'>–</li>
                     <li className='col lastActivity'>–</li>
-                    <li className='col triumphScore'>–</li>
-                    <li className='col glory'>–</li>
-                    <li className='col valor'>–</li>
-                    <li className='col infamy'>–</li>
+                    <li className='col joinDate'>–</li>
                     <li className='col weeklyXp'>–</li>
+                    <li className='col actions'></li>
                   </>
                 )}
               </ul>
@@ -203,12 +198,6 @@ class Roster extends React.Component {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.lastCharacter.baseCharacterLevel, m => m.sorts.lastCharacter.light, m => m.sorts.lastPlayed], ['asc', order.dir, order.dir, 'desc']);
     } else if (order.sort === 'triumphScore') {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.triumphScore, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
-    } else if (order.sort === 'valor') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.valorPoints, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
-    } else if (order.sort === 'glory') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.gloryPoints, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
-    } else if (order.sort === 'infamy') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.infamyPoints, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else if (order.sort === 'weeklyXp') {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.weeklyXp, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else {
@@ -242,40 +231,13 @@ class Roster extends React.Component {
                   <div className='abbr'>{t('Activity')}</div>
                 </li>
                 <li
-                  className={cx('col', 'triumphScore', { sort: this.state.order.sort === 'triumphScore', asc: this.state.order.dir === 'asc' })}
+                  className={cx('col', 'joinDate', { sort: this.state.order.sort === 'joinDate', asc: this.state.order.dir === 'asc' })}
                   onClick={() => {
-                    this.changeSortTo('triumphScore');
+                    this.changeSortTo('joinDate');
                   }}
                 >
-                  <div className='full'>{t('Triumph score')}</div>
-                  <div className='abbr'>{t('T. Scr')}</div>
-                </li>
-                <li
-                  className={cx('col', 'glory', { sort: this.state.order.sort === 'glory', asc: this.state.order.dir === 'asc' })}
-                  onClick={() => {
-                    this.changeSortTo('glory');
-                  }}
-                >
-                  <div className='full'>{t('Glory')}</div>
-                  <div className='abbr'>{t('Gly')}</div>
-                </li>
-                <li
-                  className={cx('col', 'valor', { sort: this.state.order.sort === 'valor', asc: this.state.order.dir === 'asc' })}
-                  onClick={() => {
-                    this.changeSortTo('valor');
-                  }}
-                >
-                  <div className='full'>{t('Valor (Resets)')}</div>
-                  <div className='abbr'>{t('Vlr (R)')}</div>
-                </li>
-                <li
-                  className={cx('col', 'infamy', { sort: this.state.order.sort === 'infamy', asc: this.state.order.dir === 'asc' })}
-                  onClick={() => {
-                    this.changeSortTo('infamy');
-                  }}
-                >
-                  <div className='full'>{t('Infamy (Resets)')}</div>
-                  <div className='abbr'>{t('Inf (R)')}</div>
+                  <div className='full'>{t('Joined')}</div>
+                  <div className='abbr'>{t('Jind')}</div>
                 </li>
                 <li
                   className={cx('col', 'weeklyXp', { sort: this.state.order.sort === 'weeklyXp', asc: this.state.order.dir === 'asc' })}
@@ -316,4 +278,4 @@ function mapStateToProps(state, ownProps) {
 export default compose(
   connect(mapStateToProps),
   withNamespaces()
-)(Roster);
+)(RosterAdmin);

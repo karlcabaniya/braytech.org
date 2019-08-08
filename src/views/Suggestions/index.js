@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
-import { orderBy } from 'lodash';
+import { orderBy, groupBy } from 'lodash';
 import Moment from 'react-moment';
 import Markdown from 'react-markdown';
 import cx from 'classnames';
@@ -63,9 +63,9 @@ class Suggestions extends React.Component {
                 },
                 s => {
                   if (s.state) {
-                    return parseInt(s.state, 10)
+                    return parseInt(s.state, 10);
                   } else {
-                    return '0'
+                    return '0';
                   }
                 }
               ],
@@ -253,10 +253,12 @@ class Suggestions extends React.Component {
             <Button text={t('Make a new suggestion')} action={this.toggleForm} />
             <ul className='list'>
               {this.state.suggestions.data.map(s => {
+                const votes = s.votes && s.votes.filter((vote, i, self) => i === self.findIndex(v => v.braytech_suggestions_votes_id.membership_id === vote.braytech_suggestions_votes_id.membership_id));
+
                 return (
                   <li key={s.id} className={cx('linked', { dev: s.state === '1', live: s.state === '2' })}>
                     <div className='text'>
-                      <div className='votes'>{s.state !== '3' && s.votes && s.votes.length}</div>
+                      <div className='votes'>{s.state !== '3' && votes && votes.length}</div>
                       <div className='name'>{s.name}</div>
                       <div className='created-on'>
                         <Moment fromNow>{`${s.created_on.replace(' ', 'T')}Z`}</Moment>
@@ -279,6 +281,8 @@ class Suggestions extends React.Component {
         '3': t('Not planned')
       };
 
+      const votes = suggestion.votes && suggestion.votes.filter((vote, i, self) => i === self.findIndex(v => v.braytech_suggestions_votes_id.membership_id === vote.braytech_suggestions_votes_id.membership_id));
+
       detail = suggestion ? (
         <>
           <div className='header'>
@@ -292,9 +296,9 @@ class Suggestions extends React.Component {
               {suggestion.state === null || parseInt(suggestion.state, 10) < 1 ? (
                 <>
                   <div>
-                    {suggestion.votes && suggestion.votes.length} {suggestion.votes && suggestion.votes.length === 1 ? t('upvote') : t('upvotes')}
+                    {votes && votes.length} {votes && votes.length === 1 ? t('upvote') : t('upvotes')}
                   </div>
-                  {suggestion.votes && suggestion.votes.length && suggestion.votes.find(v => v.braytech_suggestions_votes_id && v.braytech_suggestions_votes_id.membership_type.toString() === member.membershipType && v.braytech_suggestions_votes_id.membership_id === member.membershipId) ? null : (
+                  {votes && votes.length && votes.find(v => v.braytech_suggestions_votes_id && v.braytech_suggestions_votes_id.membership_type.toString() === member.membershipType && v.braytech_suggestions_votes_id.membership_id === member.membershipId) ? null : (
                     <Button className='upvote' action={this.postUpvote}>
                       <i className='segoe-uniE1091' />
                     </Button>
@@ -349,6 +353,7 @@ class Suggestions extends React.Component {
                 <p>{t("Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.")}</p>
                 <p>{t('Use this opportunity to go on the record and make your voice heard.')}</p>
                 <p>{t('Each suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.')}</p>
+                <p><em>{t("I know reading sucks, but it's really helpful to me if you check first for previous suggestions before sending your own.")}</em></p>
               </div>
             )}
             <div className='module suggestions'>{suggestions}</div>

@@ -94,8 +94,12 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .list.collection-items {
     grid-template-columns: 1fr;
   }
+}
+
+@media screen and (max-width: 600px) {
+  
 }

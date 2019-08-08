@@ -68,7 +68,7 @@ class SealNode extends React.Component {
 
     let progress = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
     let total = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
-    
+
     // MOMENTS OF TRIUMPH: MMXIX does not have the above ^
     if (definitionSeal.hash === 1002334440) {
       progress = states.filter(s => !enumerateRecordState(s.state).objectiveNotCompleted && enumerateRecordState(s.state).recordRedeemed).length;
@@ -78,6 +78,8 @@ class SealNode extends React.Component {
     let isComplete = progress === total ? true : false;
 
     let title = manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[genderHash];
+
+    let sealCommonality = manifest.statistics.seals && manifest.statistics.seals[definitionSeal.hash];
 
     return (
       <div className='node seal'>
@@ -114,8 +116,17 @@ class SealNode extends React.Component {
               </div>
             </div>
           </div>
+          {sealCommonality ? (
+            <div className='commonality'>
+              <h4>{t('Seal commonality')}</h4>
+              <div className='value'>{sealCommonality}%</div>
+              <div className='description'>
+                {t("The seal's rarity represented as a percentage of players who are indexed by VOLUSPA.")}
+              </div>
+            </div>
+          ) : null}
         </div>
-        <div className='records'>
+        <div className='entries'>
           <ul className='list no-interaction tertiary record-items'>
             <Records {...this.props} hashes={definitionSeal.children.records.map(child => child.recordHash)} highlight={this.props.match.params.tertiary || false} />
           </ul>

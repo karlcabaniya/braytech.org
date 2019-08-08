@@ -88,7 +88,7 @@
 #tooltip .frame.activity .recommended-light span::before {
   content: 'l';
   position: absolute;
-  top: 4px;
+  top: 3px;
   left: -7px;
   font-family: 'destiny' !important;
   font-size: 6px;
@@ -105,6 +105,6 @@
 
 @media screen and (max-width: 600px) {
   #tooltip .frame.activity .recommended-light span::before {
-    top: 5px;
+    top: 4px;
   }
 }

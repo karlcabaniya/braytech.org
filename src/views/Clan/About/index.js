@@ -47,7 +47,7 @@ class AboutView extends React.Component {
 
     return (
       <>
-        <ClanViewsLinks />
+        <ClanViewsLinks {...this.props} />
         <div className='module banner'>
           <ClanBanner bannerData={group.clanInfo.clanBannerData} />
         </div>
