@@ -105,6 +105,6 @@
 
 @media screen and (max-width: 600px) {
   #tooltip .frame.activity .recommended-light span::before {
-    top: 5px;
+    top: 4px;
   }
 }

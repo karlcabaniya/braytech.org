@@ -9,6 +9,7 @@ import './styles.css';
 import About from './About';
 import Roster from './Roster';
 import Stats from './Stats';
+import Admin from './Admin';
 import NoClan from './NoClan';
 
 class Clan extends React.Component {
@@ -43,6 +44,10 @@ class Clan extends React.Component {
         'stats': {
           'name': 'stats',
           'component': Stats
+        },
+        'admin': {
+          'name': 'admin',
+          'component': Admin
         }
       };
 

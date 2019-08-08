@@ -300,6 +300,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 14px;
+  font-family: 'nhg text';
   line-height: 1;
   color: rgba(255, 255, 255, 0.6);
 }
@@ -737,7 +738,7 @@ html.backdropfilter #header .nav {
   }
 
   #header.profile-header .characters .list li .basics .light::before {
-    top: 2px;
+    top: 0px;
     left: -9px;
     font-size: 7px;
   }
