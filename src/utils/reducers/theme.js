@@ -10,7 +10,7 @@ function updateScrollbars(selected) {
     root.style.setProperty('--scrollbar-draggy', '#414141');
   } else {
     root.style.setProperty('--scroolbar-track', '#a7a7a7');
-    root.style.setProperty('--scrollbar-draggy', '#f1f1f1');
+    root.style.setProperty('--scrollbar-draggy', '#cacaca');
   }
 }
 
