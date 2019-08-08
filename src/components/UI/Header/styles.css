@@ -27,7 +27,7 @@
   font-family: 'nhg text';
 }
 
-.wrapper.standalone #header .braytech .logo {
+/* .wrapper.standalone #header .braytech .logo {
   opacity: 0;
   pointer-events: none;
 }
@@ -38,10 +38,6 @@ html.backdropfilter .wrapper.standalone #header.profile-header .braytech,
 html.backdropfilter .wrapper.standalone.dark-mode #header.profile-header .braytech {
   background-color: rgba(255, 255, 255, 0);
   backdrop-filter: none;
-}
-
-/* @media screen and (max-width: 600px) {
-
 } */
 
 .wrapper.dark-mode #header .braytech {
