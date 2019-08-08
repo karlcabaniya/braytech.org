@@ -21,5 +21,5 @@
   "start_url": "/now?utm_source=pwa",
   "display": "standalone",
   "theme_color": "#ccc",
-  "background_color": "#bf9644"
+  "background_color": "#ccc"
 }
