@@ -588,5 +588,10 @@
     "date": "2019-08-08T00:29:57.146Z",
     "version": "2.7.22",
     "content": "- adjusted Collections armour view style (again)\n- refreshed collections badges design with a class-first approach\n- added {{progress}}/{{total}} to collections secondary nav\n- made dark mode 1% darker"
+  },
+  {
+    "date": "2019-08-08T00:29:57.146Z",
+    "version": "2.7.23",
+    "content": "- testing service workers\n- scrollbars to match theme colour"
   }
 ]
