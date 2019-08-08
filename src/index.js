@@ -16,15 +16,18 @@ class AppEntry extends React.Component {
 
   config = {
     onUpdate: registration => {
+      console.log('Update available');
       this.setState({
         updateAvailable: true
       });
     },
-    onSuccess: registration => {}
+    onSuccess: registration => {
+      console.log('Service worker registered');
+    }
   };
 
   componentDidMount() {
-    serviceWorker.unregister(this.config);
+    serviceWorker.register(this.config);
   }
 
   render() {

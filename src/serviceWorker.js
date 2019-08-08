@@ -19,7 +19,7 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  if ((process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) || (process.env.REACT_APP_DEV === 'true' && 'serviceWorker' in navigator)) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
@@ -39,7 +39,7 @@ export function register(config) {
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
-          console.log('This web app is being served cache-first by a service ' + 'worker.');
+          console.log('This web app is being served cache-first by a service worker.');
         });
       } else {
         // Is not localhost. Just register service worker
