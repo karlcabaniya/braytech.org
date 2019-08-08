@@ -24,6 +24,7 @@ import Tooltip from './components/Tooltip';
 import Footer from './components/UI/Footer';
 import NotificationLink from './components/Notifications/NotificationLink';
 import NotificationProgress from './components/Notifications/NotificationProgress';
+import ServiceWorkerUpdate from './components/Notifications/ServiceWorkerUpdate';
 import RefreshService from './components/RefreshService';
 
 import ProfileRoutes from './ProfileRoutes';
@@ -211,6 +212,7 @@ class App extends React.Component {
         <Route
           render={route => (
             <div className={cx('wrapper', this.props.theme.selected, { standalone: window.matchMedia('(display-mode: standalone)').matches })}>
+              <ServiceWorkerUpdate {...this.props} />
               <NotificationLink />
               <NotificationProgress />
 

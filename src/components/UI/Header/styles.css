@@ -9,10 +9,6 @@
   flex-flow: row wrap;
 }
 
-#header.navOpen {
-  position: fixed;
-}
-
 #header .braytech {
   position: absolute;
   top: 0;
@@ -27,18 +23,9 @@
   font-family: 'nhg text';
 }
 
-/* .wrapper.standalone #header .braytech .logo {
-  opacity: 0;
-  pointer-events: none;
+#header.navOpen .braytech {
+  position: fixed;
 }
-
-.wrapper.standalone #header.profile-header .braytech,
-.wrapper.standalone.dark-mode #header.profile-header .braytech,
-html.backdropfilter .wrapper.standalone #header.profile-header .braytech,
-html.backdropfilter .wrapper.standalone.dark-mode #header.profile-header .braytech {
-  background-color: rgba(255, 255, 255, 0);
-  backdrop-filter: none;
-} */
 
 .wrapper.dark-mode #header .braytech {
   background-color: rgba(0, 0, 0, 0.4);
@@ -591,10 +578,6 @@ html.backdropfilter #header .nav {
 
 
 @media screen and (max-width: 1280px) {
-  #header.navOpen {
-    position: fixed !important;
-  }
-
   #header .braytech {
     height: 40px;
     font-size: 12px;

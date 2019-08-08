@@ -81,7 +81,8 @@ class Header extends React.Component {
 
   render() {
     const { t, route, viewport, member } = this.props;
-    let views = [
+    
+    const views = [
       {
         name: t('Clan'),
         desc: t('Check in on your clan'),
@@ -328,7 +329,7 @@ class Header extends React.Component {
     }
 
     return (
-      <div id='header' className={cx(this.props.theme.selected, { 'profile-header': profileEl, navOpen: this.state.mobileNavOpen })}>
+      <div id='header' className={cx(this.props.theme.selected, { 'profile-header': profileEl, navOpen: this.state.navOpen })}>
         <div className='braytech'>
           <div className='wrapper'>
             <div className='logo'>
