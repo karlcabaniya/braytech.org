@@ -21,9 +21,9 @@ class AppEntry extends React.Component {
         updateAvailable: true
       });
 
-      // if (registration.waiting) {
-      //   registration.waiting.postMessage({ type: "SKIP_WAITING" });
-      // }
+      if (registration.waiting) {
+        registration.waiting.postMessage({ type: "SKIP_WAITING" });
+      }
     },
     onSuccess: registration => {
       console.log('Service worker registered');
