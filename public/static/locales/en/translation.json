@@ -241,8 +241,6 @@
   "Memories destroyed": "Memories destroyed",
   "Middling": "Middling",
   "Milestones": "Milestones",
-  "mins": "mins",
-  "minutes": "minutes",
   "Miscellaneous": "Miscellaneous",
   "Mob Kills": "Mob Kills",
   "Mobs": "Mobs",
@@ -429,5 +427,7 @@
   "You've completed all of your milestones for this character.": "You've completed all of your milestones for this character.",
   "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here.": "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here.",
   "Your hard-won high scores from your fight against the most feared minions of the Darkness": "Your hard-won high scores from your fight against the most feared minions of the Darkness",
-  "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
+  "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.",
+  "{{number}} mins": "{{number}} mins",
+  "{{number}} minutes": "{{number}} minutes"
 }

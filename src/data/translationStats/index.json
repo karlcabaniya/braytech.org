@@ -2,25 +2,13 @@
   "de": {
     "translated": 426,
     "notTranslated": 85,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "en-au": {
     "translated": 17,
     "notTranslated": 402,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "en": {
@@ -32,145 +20,73 @@
   "es-mx": {
     "translated": 0,
     "notTranslated": 419,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "es": {
     "translated": 288,
     "notTranslated": 289,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "fr": {
     "translated": 521,
     "notTranslated": 31,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "internal": {
     "translated": 0,
     "notTranslated": 419,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "it": {
     "translated": 414,
     "notTranslated": 16,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "ja": {
     "translated": 0,
     "notTranslated": 419,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "ko": {
     "translated": 482,
     "notTranslated": 33,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "pl": {
     "translated": 0,
     "notTranslated": 419,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "pt-br": {
     "translated": 692,
     "notTranslated": 5,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "ru": {
     "translated": 0,
     "notTranslated": 419,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "zh-chs": {
     "translated": 0,
     "notTranslated": 419,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
     "notTranslated": 419,
-    "added": [
-      "An update for Braytech is available. Please restart the app to start using it immediately.",
-      "mins",
-      "minutes",
-      "Restart Braytech",
-      "Time to complete"
-    ],
+    "added": [],
     "removed": []
   }
 }

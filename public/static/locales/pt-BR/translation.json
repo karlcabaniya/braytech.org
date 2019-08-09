@@ -386,8 +386,6 @@
   "Memory": "Memória",
   "Middling": "Mediana",
   "Milestones": "Marcos",
-  "#####mins": "🌐",
-  "#####minutes": "🌐",
   "Miscellaneous": "Diversos",
   "Mob Kills": "Baixas de combatentes inimigos",
   "Mobs": "Combatentes inimigos",
@@ -695,5 +693,7 @@
   "Your hard-won high scores from your fight against the most feared minions of the Darkness": "Suas pontuações conquistadas a partir de seu árduo esforço contra a Treva",
   "Your profile data may be set to private on Bungie.net.": "Seu perfil deve estar configurado como privado em Bungie.net",
   "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "Seu perfil deve estar definido como privado em Bungie.net. Este erro é gerado quando os dados de progresso do personagem não está disponível, e esta é a causa mais provável.",
-  "Zero Hour": "Zero Hora"
+  "Zero Hour": "Zero Hora",
+  "#####{{number}} mins": "🌐",
+  "#####{{number}} minutes": "🌐"
 }

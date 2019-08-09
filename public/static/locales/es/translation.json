@@ -324,8 +324,6 @@
   "Memory": "Memoria",
   "#####Middling": "🌐",
   "#####Milestones": "🌐",
-  "#####mins": "🌐",
-  "#####minutes": "🌐",
   "#####Miscellaneous": "🌐",
   "#####Mob Kills": "🌐",
   "#####Mobs": "🌐",
@@ -575,5 +573,7 @@
   "#####You've completed all of your milestones for this character.": "🌐",
   "You've completed these records": "Has completado estos triunfos",
   "Your hard-won high scores from your fight against the most feared minions of the Darkness": "Tus puntuaciones altas, ganadas con esfuerzo, de tu lucha contra los súbditos más temidos de la Oscuridad.",
-  "#####Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "🌐"
+  "#####Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "🌐",
+  "#####{{number}} mins": "🌐",
+  "#####{{number}} minutes": "🌐"
 }

@@ -236,8 +236,6 @@
   "#####Memories destroyed": "🌐",
   "Middling": "getting there",
   "Milestones": "shit to do",
-  "#####mins": "🌐",
-  "#####minutes": "🌐",
   "#####Miscellaneous": "🌐",
   "#####Mob Kills": "🌐",
   "#####Mobs": "🌐",
@@ -417,5 +415,7 @@
   "#####You shouldn't be here 👀": "🌐",
   "#####You've completed all of your milestones for this character.": "🌐",
   "#####Your hard-won high scores from your fight against the most feared minions of the Darkness": "🌐",
-  "#####Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "🌐"
+  "#####Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "🌐",
+  "#####{{number}} mins": "🌐",
+  "#####{{number}} minutes": "🌐"
 }

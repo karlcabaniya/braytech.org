@@ -286,8 +286,6 @@
   "Memory": "Erinnerung",
   "Middling": "Mittelmäßig",
   "Milestones": "Meilensteine",
-  "#####mins": "🌐",
-  "#####minutes": "🌐",
   "Miscellaneous": "Verschiedenes",
   "Mob Kills": "Mob Kills",
   "Mobs": "Mobs",
@@ -509,5 +507,7 @@
   "You shouldn't be here 👀": "Du solltest nicht hier sein 👀",
   "You've completed all of your milestones for this character.": "Du hast alle Meilensteine für diesen Charakter abgeschlossen.",
   "#####Your hard-won high scores from your fight against the most feared minions of the Darkness": "🌐",
-  "#####Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "🌐"
+  "#####Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "🌐",
+  "#####{{number}} mins": "🌐",
+  "#####{{number}} minutes": "🌐"
 }

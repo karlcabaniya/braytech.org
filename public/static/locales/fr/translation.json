@@ -308,8 +308,6 @@
   "Memory": "Mémoire",
   "Middling": "Médiocre",
   "Milestones": "Jalons",
-  "#####mins": "🌐",
-  "#####minutes": "🌐",
   "Miscellaneous": "Divers",
   "Mob Kills": "Frags d'ennemis",
   "Mobs": "Ennemis",
@@ -550,5 +548,7 @@
   "You've not yet lost anything. Get back out into the world and seek further enlightenment. Your stuff will be here.": "Tu n'as encore rien perdu. Retournez dans le monde et cherchez plus d'illumination. Vos affaires seront ici.",
   "Your hard-won high scores from your fight against the most feared minions of the Darkness": "Vos scores élevés durement gagnés lors de votre combat contre les sbires les plus redoutés des Ténèbres",
   "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "Vos données de profil peuvent être définies comme privées sur Bungie.net. Cette erreur est générée lorsque les données de progression d'un personnage sont indisponibles et en est la cause la plus probable.",
-  "Zero Hour": "Dernière Heure"
+  "Zero Hour": "Dernière Heure",
+  "#####{{number}} mins": "🌐",
+  "#####{{number}} minutes": "🌐"
 }

@@ -66,6 +66,7 @@ const FilesLogic = {
             });
         }
         catch (e) {
+            console.log(e)
             console.error('ScrapeStrings Failed: ' + e.message);
         }
     },
@@ -144,7 +145,7 @@ const NodesLogic = {
     getArgumentText(node) {
         const { arguments: args = [] } = node;
         if (args.length !== 1) {
-            throw new Error(`Argument count was not 1. Found: ${args.length}`);
+            //throw new Error(`Argument count was not 1. Found: ${args.length}`);
         }
         const arg = args[0];
         const storage = new Set();

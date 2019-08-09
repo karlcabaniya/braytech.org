@@ -286,8 +286,6 @@
   "Memory": "기억",
   "Middling": "보통",
   "Milestones": "마일스톤",
-  "#####mins": "🌐",
-  "#####minutes": "🌐",
   "Miscellaneous": "기타",
   "Mob Kills": "적 처치",
   "Mobs": "적",
@@ -513,5 +511,7 @@
   "You shouldn't be here 👀": "여기 계시면 안되는데요 👀",
   "You've completed all of your milestones for this character.": "이 캐릭터의 모든 마일스톤을 완료했습니다.",
   "Your hard-won high scores from your fight against the most feared minions of the Darkness": "가장 악명높은 어둠의 수하들과 힘겹게 싸워 얻은 득점",
-  "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "당신의 Bungie.net 프로필 정보가 비공개상태인 것 같습니다. 이 오류는 캐릭터 진행도 정보에 접근할 수 없을 때 발생하기 때문에 그럴 가능성이 가낭 높습니다."
+  "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "당신의 Bungie.net 프로필 정보가 비공개상태인 것 같습니다. 이 오류는 캐릭터 진행도 정보에 접근할 수 없을 때 발생하기 때문에 그럴 가능성이 가낭 높습니다.",
+  "#####{{number}} mins": "🌐",
+  "#####{{number}} minutes": "🌐"
 }

@@ -174,7 +174,7 @@ class SitRep extends React.Component {
                           <div className='time'>
                             {definitionActivity.timeToComplete ? (
                               <>
-                                {definitionActivity.timeToComplete} {t('mins')}
+                                {t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}
                               </>
                             ) : null}
                           </div>
