@@ -1,7 +1,11 @@
+import { merge } from 'lodash';
+
 import braytech_EN from '../data/manifest/en/braytech/';
+import DestinyClanBannerDefinition from '../data/manifest/en/DestinyClanBannerDefinition/';
+import DestinyActivityDefinition from '../data/manifest/en/DestinyActivityDefinition/';
+
 import DestinyInventoryItemDefinition_EN from '../data/manifest/en/DestinyInventoryItemDefinition/';
 import DestinyHistoricalStatsDefinition_EN from '../data/manifest/en/DestinyHistoricalStatsDefinition/';
-import DestinyClanBannerDefinition from '../data/manifest/en/DestinyClanBannerDefinition/';
 import DestinyPresentationNodeDefinition_EN from '../data/manifest/en/DestinyPresentationNodeDefinition/';
 
 import DestinyHistoricalStatsDefinition_DE from '../data/manifest/de/DestinyHistoricalStatsDefinition/';
@@ -25,6 +29,7 @@ const customs = {
   en: {
     braytech: braytech_EN,
     DestinyClanBannerDefinition,
+    DestinyActivityDefinition,
     DestinyInventoryItemDefinition: DestinyInventoryItemDefinition_EN,
     DestinyHistoricalStatsDefinition: DestinyHistoricalStatsDefinition_EN,
     DestinyPresentationNodeDefinition: DestinyPresentationNodeDefinition_EN
@@ -92,13 +97,30 @@ const customs = {
   }
 };
 
+const customsMerge = (bungie, customs) => {
+
+  for (const key in customs) {
+    if (customs.hasOwnProperty(key) && bungie.hasOwnProperty(key)) {
+      
+      bungie[key] = merge(bungie[key], customs[key]);
+    }
+  }
+
+  return bungie;
+}
+
 const manifest = {
   set: (newManifest, lang) => {
     newManifest.BraytechDefinition = customs[lang].braytech;
     newManifest.DestinyHistoricalStatsDefinition = customs[lang].DestinyHistoricalStatsDefinition;
     newManifest.DestinyClanBannerDefinition = customs.en.DestinyClanBannerDefinition;
 
+    // Object.assign(newManifest.DestinyActivityDefinition, customs.en.DestinyActivityDefinition);
+
+    customsMerge(newManifest.DestinyActivityDefinition, customs.en.DestinyActivityDefinition);
+
     Object.assign(newManifest.DestinyPresentationNodeDefinition, customs.en.DestinyPresentationNodeDefinition);
+
     Object.assign(newManifest.DestinyInventoryItemDefinition, customs[lang].DestinyInventoryItemDefinition);
 
     // extras

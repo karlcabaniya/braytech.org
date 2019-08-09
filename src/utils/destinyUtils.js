@@ -7,8 +7,6 @@ import * as destinyEnums from './destinyEnums';
 // TODO: we can just use itemCategoryHashes for this now?
 export const isOrnament = item => item.inventory && item.inventory.stackUniqueLabel && item.plug && item.plug.plugCategoryIdentifier && item.plug.plugCategoryIdentifier.includes('skins');
 
-export const flagEnum = (state, value) => !!(state & value);
-
 export function hasCategoryHash(item, categoryHash) {
   return item.itemCategoryHashes && item.itemCategoryHashes.includes(categoryHash);
 }

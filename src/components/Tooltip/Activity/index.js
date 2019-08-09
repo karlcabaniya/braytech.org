@@ -124,6 +124,11 @@ class Activity extends React.Component {
                 ) : null}
                 <pre>{activityType.description}</pre>
               </div>
+              {definitionActivity.timeToComplete ? (
+                <div className='time-to-complete'>
+                  {t('Time to complete')}: {definitionActivity.timeToComplete} {t('mins')}
+                </div>
+              ) : null}
               {definitionActivity.activityLightLevel ? (
                 <div className='recommended-light'>
                   {t('Recommended Power')}: <span>{definitionActivity.activityLightLevel}</span>

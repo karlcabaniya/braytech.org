@@ -132,6 +132,17 @@
   padding: 10px 1rem;
 }
 
+#sit-rep .module.milestones .list li .list.activities li > div:not(.name) {
+  display: grid;
+  grid-template-columns: auto 50px;
+  grid-gap: 6px;
+  text-align: right;
+}
+
+#sit-rep .module.milestones .list li .list.activities li .time {
+  color: rgba(255, 255, 255, 0.6);
+}
+
 #sit-rep .module.milestones .list li .list.activities li .light {
   color: #e5d163;
 }

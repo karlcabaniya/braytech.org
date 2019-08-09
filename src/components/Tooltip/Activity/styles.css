@@ -74,6 +74,12 @@
   letter-spacing: unset;
 }
 
+#tooltip .frame.activity .time-to-complete {
+  padding: 12px 16px 0;
+  font-size: 14px;
+  color: #fff;
+}
+
 #tooltip .frame.activity .recommended-light {
   padding: 12px 16px 16px;
   font-size: 14px;

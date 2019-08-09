@@ -37,6 +37,51 @@ class SitRep extends React.Component {
     // const milestonesData = Object.values(member.data.milestones).map(m => manifest.DestinyMilestoneDefinition[m.milestoneHash]);
     // console.log(milestonesData);
 
+    // const times = [
+    //   { "name": "Ice and Shadow", "mins": 5 },
+    //   { "name": "The Gateway", "mins": 5 },
+    //   { "name": "Riptide", "mins": 5 },
+    //   { "name": "A Deadly Trial", "mins": 5 },
+    //   { "name": "Unbroken", "mins": 5 },
+    //   { "name": "Utopia", "mins": 6 },
+    //   { "name": "Looped", "mins": 6 },
+    //   { "name": "Hope", "mins": 6 },
+    //   { "name": "Hijacked", "mins": 6 },
+    //   { "name": "Deep Storage", "mins": 6 },
+    //   { "name": "Combustion", "mins": 7 },
+    //   { "name": "Payback", "mins": 7 },
+    //   { "name": "Pilgrimage", "mins": 7 },
+    //   { "name": "Larceny", "mins": 7 },
+    //   { "name": "Sacrilege", "mins": 7 },
+    //   { "name": "Homecoming", "mins": 7 },
+    //   { "name": "Six", "mins": 8 },
+    //   { "name": "Chosen", "mins": 9 },
+    //   { "name": "Fury", "mins": 9 },
+    //   { "name": "High Plains Blues", "mins": 9 },
+    //   { "name": "Scorned", "mins": 9 },
+    //   { "name": "Omega", "mins": 11 },
+    //   { "name": "Beyond Infinity", "mins": 11 },
+    //   { "name": "1AU", "mins": 12 },
+    //   { "name": "The Machinist", "mins": 12 },
+    //   { "name": "Last Call", "mins": 13 },
+    //   { "name": "Nothing Left to Say", "mins": 13 },
+    //   { "name": "Off-World Recovery", "mins": 12 }
+    // ];
+
+    // let obj = {};
+
+    // manifest.DestinyMilestoneDefinition[3082135827].activities.forEach(ac => {
+    //   let def = manifest.DestinyActivityDefinition[ac.activityHash];
+
+    //   let time = times.find(t => t.name.toLowerCase().trim() === def.selectionScreenDisplayProperties.name.toLowerCase().trim())
+    //   if (!time) console.log(def)
+    //   obj[def.hash] = {
+    //     timeToComplete: time && time.mins || -1
+    //   }
+    // })
+
+    // console.log(JSON.stringify(obj))
+
     let milestones = [];
     Object.values(characterProgressions[member.characterId].milestones).forEach(milestone => {
       let def = manifest.DestinyMilestoneDefinition[milestone.milestoneHash];
@@ -125,8 +170,17 @@ class SitRep extends React.Component {
                     el: (
                       <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={ac.activityHash}>
                         <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
-                        <div className='light'>
-                          <span>{definitionActivity.activityLightLevel}</span>
+                        <div>
+                          <div className='time'>
+                            {definitionActivity.timeToComplete ? (
+                              <>
+                                {definitionActivity.timeToComplete} {t('mins')}
+                              </>
+                            ) : null}
+                          </div>
+                          <div className='light'>
+                            <span>{definitionActivity.activityLightLevel}</span>
+                          </div>
                         </div>
                       </li>
                     )
