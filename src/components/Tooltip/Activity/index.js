@@ -126,7 +126,7 @@ class Activity extends React.Component {
               </div>
               {definitionActivity.timeToComplete ? (
                 <div className='time-to-complete'>
-                  {t('Time to complete')}: {definitionActivity.timeToComplete} {t('mins')}
+                  {t('Time to complete')}: {definitionActivity.timeToComplete} {t('minutes')}
                 </div>
               ) : null}
               {definitionActivity.activityLightLevel ? (
