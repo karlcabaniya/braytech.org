@@ -7,8 +7,30 @@ export async function getGroupMembers(group, getPending = false) {
     type: 'GROUP_MEMBERS_LOADING'
   });
 
-  const groupMembersResponse = await bungie.GetMembersOfGroup(group.groupId);
-  const groupMembersPendingResponse = getPending ? await bungie.GetPendingMemberships(group.groupId) : false;
+  let groupMembersResponse = await bungie.GetMembersOfGroup(group.groupId);
+  let groupMembersPendingResponse = false;
+
+  if (getPending) {
+    try {
+      groupMembersPendingResponse = await bungie.GetPendingMemberships(group.groupId);
+    } catch (e) {
+
+      store.dispatch({
+        type: 'PUSH_NOTIFICATION',
+        payload: {
+          error: true,
+          date: new Date().toISOString(),
+          expiry: 86400000,
+          displayProperties: {
+            name: e.errorStatus,
+            description: e.message,
+            timeout: 10
+          },
+          javascript: e
+        }
+      });
+    }
+  }
 
   let memberResponses = await Promise.all(
     groupMembersResponse.results.map(async member => {
@@ -52,7 +74,7 @@ export async function getGroupMembers(group, getPending = false) {
             member.historicalStats = false;
 
             member.pending = true;
-            
+
             return member;
           }
         })
