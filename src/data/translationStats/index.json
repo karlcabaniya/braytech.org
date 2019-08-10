@@ -1,92 +1,232 @@
 {
   "de": {
     "translated": 426,
-    "notTranslated": 85,
-    "added": [],
+    "notTranslated": 94,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "en-au": {
     "translated": 17,
-    "notTranslated": 402,
-    "added": [],
+    "notTranslated": 411,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "en": {
-    "translated": 431,
+    "translated": 440,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 419,
-    "added": [],
+    "notTranslated": 428,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "es": {
     "translated": 288,
-    "notTranslated": 289,
-    "added": [],
+    "notTranslated": 298,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "fr": {
     "translated": 521,
-    "notTranslated": 31,
-    "added": [],
+    "notTranslated": 40,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 419,
-    "added": [],
+    "notTranslated": 428,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "it": {
     "translated": 414,
-    "notTranslated": 16,
-    "added": [],
+    "notTranslated": 25,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 419,
-    "added": [],
+    "notTranslated": 428,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "ko": {
     "translated": 482,
-    "notTranslated": 33,
-    "added": [],
+    "notTranslated": 42,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 419,
-    "added": [],
+    "notTranslated": 428,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "pt-br": {
     "translated": 692,
-    "notTranslated": 5,
-    "added": [],
+    "notTranslated": 14,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 419,
-    "added": [],
+    "notTranslated": 428,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 419,
-    "added": [],
+    "notTranslated": 428,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 419,
-    "added": [],
+    "notTranslated": 428,
+    "added": [
+      "Approve",
+      "Ban",
+      "Demote",
+      "Deny",
+      "Kick",
+      "OI, ge'outofit",
+      "Promote",
+      "Rank",
+      "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ],
     "removed": []
   }
 }

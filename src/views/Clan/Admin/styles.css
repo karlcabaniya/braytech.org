@@ -36,7 +36,9 @@
   }
 }
 
-
+#clan.admin .bungie-auth.no-auth {
+  grid-column: 1/end;
+}
 
 
 

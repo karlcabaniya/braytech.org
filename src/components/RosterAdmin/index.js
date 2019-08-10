@@ -483,7 +483,7 @@ class RosterAdmin extends React.Component {
           valorPoints,
           infamyPoints,
           weeklyXp: (weeklyXp / characterIds.length) * 5000,
-          rank: m.member
+          rank: m.memberType
         },
         el: {
           full: (

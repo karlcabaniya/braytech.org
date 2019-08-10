@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { withNamespaces } from 'react-i18next';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, withRouter } from 'react-router-dom';
 import cx from 'classnames';
 import Moment from 'react-moment';
 import queryString from 'query-string';
@@ -9,6 +9,7 @@ import queryString from 'query-string';
 import * as ls from '../../utils/localStorage';
 import * as bungie from '../../utils/bungie';
 import * as destinyEnums from '../../utils/destinyEnums';
+import * as paths from '../../utils/paths';
 import Button from '../UI/Button';
 import Spinner from '../UI/Spinner';
 import ObservedImage from '../ObservedImage';
@@ -59,7 +60,6 @@ class BungieAuth extends React.Component {
     if (!tokens && code) {
       this.getAccessTokens(code);
     } else if (tokens) {
-
       this.getMemberships();
     } else if (this.mounted) {
       this.setState((prevState, props) => {
@@ -224,18 +224,38 @@ class DiffProfile extends React.Component {
   componentWillUnmount() {
     this.mounted = false;
   }
+
   render() {
-    const { t } = this.props;
+    const { t, location } = this.props;
     const { loading, memberships } = this.state;
+    const pathname = paths.removeMemberIds(location.pathname);
+
+    let properties;
+    if (pathname === '/clan/admin') {
+      properties = (
+        <>
+          <div className='name'>{t("OI, ge'outofit")}</div>
+          <div className='description'>
+            <p>{t("This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.")}</p>
+          </div>
+        </>
+      );
+    } else {
+      properties = (
+        <>
+          <div className='name'>{t('Oh, honey')}</div>
+          <div className='description'>
+            <p>{t("You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.")}</p>
+          </div>
+        </>
+      );
+    }
 
     return (
       <div className='bungie-auth no-auth'>
         <div className='module'>
           <div className='properties'>
-            <div className='name'>{t('Oh, honey')}</div>
-            <div className='description'>
-              <p>{t("You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.")}</p>
-            </div>
+            {properties}
             {loading ? (
               <Spinner mini />
             ) : (
@@ -271,6 +291,9 @@ BungieAuth = compose(withNamespaces())(BungieAuth);
 
 NoAuth = compose(withNamespaces())(NoAuth);
 
-DiffProfile = compose(withNamespaces())(DiffProfile);
+DiffProfile = compose(
+  withNamespaces(),
+  withRouter
+)(DiffProfile);
 
 export { BungieAuth, NoAuth, DiffProfile };
