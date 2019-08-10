@@ -516,12 +516,7 @@ class RosterAdmin extends React.Component {
                       <div>
                         {m.isOnline && display ? (
                           <>
-                            {display}
-                            <span>
-                              {moment(lastPlayed)
-                                .locale('en-sml')
-                                .fromNow(true)}
-                            </span>
+                            {display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span>
                           </>
                         ) : (
                           moment(lastPlayed)
