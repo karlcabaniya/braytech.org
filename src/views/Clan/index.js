@@ -72,7 +72,7 @@ class Clan extends React.Component {
               <div className='name'>{t('Members')}</div>
             </div>
             <div className='content highlight'>
-              <div className='value'>{groupMembers.responses.filter(member => member.isOnline).length}</div>
+              <div className='value'>{groupMembers.members.filter(member => member.isOnline).length}</div>
               <div className='name'>{t('Online')}</div>
             </div>
             <div className='content highlight'>

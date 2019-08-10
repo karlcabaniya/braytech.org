@@ -128,8 +128,27 @@ export const UnbanMember = async (groupId, membershipType, membershipId) =>
     method: 'post'
   });
 
-export const ApprovePending = async (groupId, membershipType, membershipId) =>
-  apiRequest(`/Platform/GroupV2/${groupId}/Members/Approve/${membershipType}/${membershipId}/`, {
+export const GetPendingMemberships = async groupId =>
+  apiRequest(`/Platform/GroupV2/${groupId}/Members/Pending/`, {
+    auth: true
+  });
+  
+export const ApprovePendingForList = async (groupId, body) =>
+  apiRequest(`/Platform/GroupV2/${groupId}/Members/ApproveList/`, {
+    auth: true,
+    method: 'post',
+    body
+  });
+
+export const DenyPendingForList = async (groupId, body) =>
+  apiRequest(`/Platform/GroupV2/${groupId}/Members/DenyList/`, {
+    auth: true,
+    method: 'post',
+    body
+  });
+
+export const EditGroupMembership = async (groupId, membershipType, membershipId, memberType) =>
+  apiRequest(`/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/SetMembershipType/${memberType}/`, {
     auth: true,
     method: 'post'
   });

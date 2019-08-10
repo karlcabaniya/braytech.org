@@ -1,6 +1,7 @@
 const defaultState = {
   groupId: false,
-  responses: [],
+  members: [],
+  pending: [],
   loading: false,
   lastUpdated: 0
 };

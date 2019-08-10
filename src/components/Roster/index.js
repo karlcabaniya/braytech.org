@@ -43,7 +43,7 @@ class Roster extends React.Component {
     // console.log(now - groupMembers.lastUpdated);
 
     if (group && (now - groupMembers.lastUpdated > 30000 || group.groupId !== groupMembers.groupId)) {
-      getGroupMembers(group);
+      getGroupMembers(group, true);
     }
   };
 
@@ -71,7 +71,7 @@ class Roster extends React.Component {
     const { t, member, groupMembers, mini, showOnline = false } = this.props;
 
     let members = [];
-    let results = showOnline ? groupMembers.responses.filter(r => r.isOnline) : groupMembers.responses;
+    let results = showOnline ? groupMembers.members.filter(r => r.isOnline) : groupMembers.members;
 
     results.forEach(m => {
       let isPrivate = !m.profile || (!m.profile.characterActivities.data || !m.profile.characters.data.length);

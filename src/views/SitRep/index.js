@@ -283,10 +283,10 @@ class SitRep extends React.Component {
           <div className='module clan-roster'>
             <div className='sub-header sub'>
               <div>{t('Clan roster')}</div>
-              <div>{groupMembers.responses.filter(member => member.isOnline).length} online</div>
+              <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>
             </div>
-            <div className='refresh'>{groupMembers.loading && groupMembers.responses.length !== 0 ? <Spinner mini /> : null}</div>
-            {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner /> : <Roster mini showOnline />}
+            <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
+            {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
           </div>
         ) : null}
       </div>

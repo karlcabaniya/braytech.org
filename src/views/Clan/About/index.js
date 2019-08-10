@@ -107,7 +107,7 @@ class AboutView extends React.Component {
           <div className='module-header'>
             <div className='sub-name'>{t('Roster')}</div>
           </div>
-          {groupMembers.loading && groupMembers.responses.length === 0 ? <Spinner mini /> : <Roster mini limit='10' />}
+          {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner mini /> : <Roster mini limit='10' />}
         </div>
       </>
     );
