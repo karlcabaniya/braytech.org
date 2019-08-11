@@ -166,7 +166,7 @@ class Header extends React.Component {
       },
       {
         name: <span className='destiny-settings' />,
-        desc: 'Theme, tooltips, visibility, language, and saved data',
+        desc: t('Account, theme, tooltips, visibility, language, and saved data'),
         slug: '/settings',
         exact: true,
         inline: true,
