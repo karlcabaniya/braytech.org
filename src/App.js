@@ -4,7 +4,17 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
+
 import moment from 'moment';
+import 'moment/locale/de';
+import 'moment/locale/es';
+import 'moment/locale/fr';
+import 'moment/locale/it';
+// import 'moment/locale/ja';
+import 'moment/locale/ko';
+// import 'moment/locale/pl';
+import 'moment/locale/pt-br';
+// import 'moment/locale/ru';
 
 import './Core.css';
 import './App.css';
@@ -111,7 +121,8 @@ class App extends React.Component {
         yy: '%dy'
       }
     });
-    moment.locale('en');
+
+    moment.locale(this.currentLanguage);
   }
 
   updateViewport = () => {
