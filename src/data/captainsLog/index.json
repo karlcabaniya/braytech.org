@@ -593,5 +593,10 @@
     "date": "2019-08-09T01:37:25.549Z",
     "version": "2.7.23",
     "content": "- testing service workers\n- scrollbars to match theme colour\n- added community-sourced run times to heroic story missions"
+  },
+  {
+    "date": "2019-08-13T03:09:18.798Z",
+    "version": "2.8.0",
+    "content": "- added _Clan Admin_ feature\n- re-added reckoning boss to _This Week_\n- i18n stuff"
   }
 ]

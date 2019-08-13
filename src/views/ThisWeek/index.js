@@ -726,11 +726,11 @@ class ThisWeek extends React.Component {
             </div>
             <h4>{t('Collectibles')}</h4>
             <ul className='list collection-items'>
-              <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
+              <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
             </ul>
             <h4>{t('Triumphs')}</h4>
             <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
+              <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
             </ul>
           </div>
         );
@@ -763,11 +763,11 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.raids.cos.collectibles} />
+          <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.raids.cos.collectibles} />
         </ul>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.raids.cos.challenges[consolidatedInfo.raids.cos.challenge[0]].triumphs.concat(consolidatedInfo.raids.cos.triumphs)} ordered />
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.raids.cos.challenges[consolidatedInfo.raids.cos.challenge[0]].triumphs.concat(consolidatedInfo.raids.cos.triumphs)} ordered />
         </ul>
       </div>
     );
@@ -796,11 +796,11 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.raids.sotp.collectibles} />
+          <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.raids.sotp.collectibles} />
         </ul>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.raids.sotp.challenges[consolidatedInfo.raids.sotp.challenge[0]].triumphs.concat(consolidatedInfo.raids.sotp.triumphs)} ordered />
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.raids.sotp.challenges[consolidatedInfo.raids.sotp.challenge[0]].triumphs.concat(consolidatedInfo.raids.sotp.triumphs)} ordered />
         </ul>
       </div>
     );
@@ -829,11 +829,11 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.raids.lw.collectibles} />
+          <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.raids.lw.collectibles} />
         </ul>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.raids.lw.challenges[consolidatedInfo.raids.lw.challenge[0]].triumphs.concat(consolidatedInfo.raids.lw.triumphs)} ordered />
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.raids.lw.challenges[consolidatedInfo.raids.lw.challenge[0]].triumphs.concat(consolidatedInfo.raids.lw.triumphs)} ordered />
         </ul>
       </div>
     );
@@ -880,7 +880,7 @@ class ThisWeek extends React.Component {
         </ul>
         <h4>{t('Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.raids.lev.collectibles} />
+          <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.raids.lev.collectibles} />
         </ul>
       </div>
     );
@@ -904,7 +904,7 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
+          <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
         </ul>
         <h4>{t('Catalyst item')}</h4>
         <ul className='list inventory-items as-tab'>
@@ -933,7 +933,7 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered forceDisplay />
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
         </ul>
       </div>
     );
@@ -948,7 +948,7 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered forceDisplay />
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
         </ul>
       </div>
     );
@@ -962,7 +962,7 @@ class ThisWeek extends React.Component {
           </div>
           <h4>{t('Triumphs')}</h4>
           <ul className='list record-items'>
-            <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.shatteredThrone.triumphs} ordered forceDisplay />
+            <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.shatteredThrone.triumphs} ordered />
           </ul>
         </div>
       ) : (
@@ -977,11 +977,24 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Heroic Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={menagerieHeroicCollectibles[profile.characters.data.find(c => c.characterId === characterId).classType]} />
+          <Collectibles selfLinkFrom='/this-week' {...this.props} hashes={menagerieHeroicCollectibles[profile.characters.data.find(c => c.characterId === characterId).classType]} />
         </ul>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
-          <Records selfLinkFrom='/this-week' forceDisplay {...this.props} hashes={consolidatedInfo.menagerie[cycleInfo.week.menagerie].triumphs} />
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.menagerie[cycleInfo.week.menagerie].triumphs} />
+        </ul>
+      </div>
+    );
+
+    const moduleReckoning = (
+      <div key='moduleReckoning' className='content'>
+        <div className='module-header'>
+          <div className='sub-name'>{manifest.DestinyPlaceDefinition[4148998934].displayProperties.name}</div>
+          <div className='name'>{consolidatedInfo.reckoning[cycleInfo.week.reckoning].boss}</div>
+        </div>
+        <h4>{t('Triumphs')}</h4>
+        <ul className='list record-items'>
+          <Records selfLinkFrom='/this-week' {...this.props} hashes={consolidatedInfo.reckoning[cycleInfo.week.reckoning].triumphs} ordered />
         </ul>
       </div>
     );
@@ -1021,7 +1034,8 @@ class ThisWeek extends React.Component {
         moduleShatteredThrone
       ],
       [
-        moduleEscalationProtocol
+        moduleEscalationProtocol,
+        moduleReckoning
       ]
     );
 
