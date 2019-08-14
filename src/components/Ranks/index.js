@@ -38,8 +38,8 @@ class Mode extends React.Component {
         hash: 2626549951, // valor
         activityHash: 2274172949,
         icon: '/static/images/extracts/ui/modes/037E-000013D9.PNG',
-        currentResetCount: this.calculateResets(2679551909).current,
-        totalResetCount: this.calculateResets(2679551909).total,
+        currentResetCount: this.calculateResets(3882308435).current,
+        totalResetCount: this.calculateResets(3882308435).total,
         totalPoints: utils.totalValor()
       },
       2000925172: {
