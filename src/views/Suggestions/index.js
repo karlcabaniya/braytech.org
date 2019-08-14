@@ -40,7 +40,7 @@ class Suggestions extends React.Component {
 
   init = async () => {
     if (!this.state.data) {
-      let suggestions = await fetch('https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions?fields=*.*.*&status=published', {
+      let suggestions = await fetch('https://api.upliftnaturereserve.com/tc01/items/braytech_suggestions?fields=*.*.*&status=published', {
         headers: {
           Authorization: `Bearer braytech`
         }
@@ -86,7 +86,7 @@ class Suggestions extends React.Component {
         });
 
         try {
-          let post = await fetch('https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions', {
+          let post = await fetch('https://api.upliftnaturereserve.com/tc01/items/braytech_suggestions', {
             method: 'post',
             headers: {
               Authorization: `Bearer braytech`,
@@ -126,7 +126,7 @@ class Suggestions extends React.Component {
 
       if (suggestion) {
         try {
-          let upvote = await fetch(`https://content.upliftnaturereserve.com/tc01/items/braytech_suggestions/${suggestion.id}?fields=*.*.*`, {
+          let upvote = await fetch(`https://api.upliftnaturereserve.com/tc01/items/braytech_suggestions/${suggestion.id}?fields=*.*.*`, {
             method: 'PATCH',
             headers: {
               Authorization: `Bearer braytech`,
