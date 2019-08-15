@@ -37,13 +37,12 @@ class Roster extends React.Component {
 
   callGetGroupMembers = () => {
     const { member, groupMembers } = this.props;
-    const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
+    const result = member.data.groups.results.length > 0 ? member.data.groups.results[0] : false;
+    
     let now = new Date();
 
-    // console.log(now - groupMembers.lastUpdated);
-
-    if (group && (now - groupMembers.lastUpdated > 30000 || group.groupId !== groupMembers.groupId)) {
-      getGroupMembers(group, true);
+    if (result && (now - groupMembers.lastUpdated > 30000 || result.group.groupId !== groupMembers.groupId)) {
+      getGroupMembers(result.group, result.member.memberType > 2);
     }
   };
 

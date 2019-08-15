@@ -8,18 +8,6 @@
   display: grid;
   align-content: center;
   -webkit-overflow-scrolling: touch;
-  background-color: rgba(122, 122, 122, 0.4);
-}
-
-.wrapper.dark-mode #notification-overlay {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-html.backdropfilter #notification-overlay {
-  background-color: rgba(122, 122, 122, 0.6);
-}
-
-html.backdropfilter .wrapper.dark-mode #notification-overlay {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -44,10 +32,6 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay {
   left: 0;
   width: 100%;
   height: calc(100% - 1rem);
-  background-color: rgba(122, 122, 122, 0.8);
-}
-
-.wrapper.dark-mode #notification-overlay .background .acrylic {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -58,11 +42,6 @@ html.backdropfilter #notification-overlay .background .border-top {
 }
 
 html.backdropfilter #notification-overlay .background .acrylic {
-  background-color: rgba(136, 136, 136, 0.4);
-  backdrop-filter: blur(7px) brightness(1.1) saturate(1.2);
-}
-
-html.backdropfilter .wrapper.dark-mode #notification-overlay .background .acrylic {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
 }
@@ -144,10 +123,8 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay .background .acryli
   background-position-x: right;
 }
 
-.wrapper.dark-mode #notification-overlay.error .background .border-top,
 #notification-overlay.error .background .border-top,
-html.backdropfilter #notification-overlay.error .background .border-top,
-html.backdropfilter .wrapper.dark-mode #notification-overlay.error .background .border-top {
+html.backdropfilter #notification-overlay.error .background .border-top {
   background-color: rgb(220, 81, 59);
 }
 
@@ -172,6 +149,7 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay.error .background .
 
   #notification-overlay .wrapper-inner {
     grid-template-columns: min-content auto;
+    grid-template-columns: auto;
     padding: 1rem 0 0;
   }
 
@@ -179,6 +157,7 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay.error .background .
     position: relative;
     height: 50px;
     width: 50px;
+    display: none;
   }
 
   #notification-overlay .wrapper-inner .text .name {
@@ -213,20 +192,12 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay.error .background .
   z-index: 21;
   display: grid;
   align-content: center;
-  background-color: rgba(122, 122, 122, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   transition: background-color 0.25s;
   cursor: pointer;
 }
 
-.wrapper.dark-mode #notification-bar {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
 #notification-bar:hover {
-  background-color: rgba(182, 182, 182, 0.4);
-}
-
-.wrapper.dark-mode #notification-bar:hover {
   background-color: rgba(17, 17, 17, 0.4);
 }
 
@@ -250,10 +221,6 @@ html.backdropfilter .wrapper.dark-mode #notification-overlay.error .background .
   left: 0;
   width: 100%;
   height: calc(100% - 6px);
-  background-color: rgba(122, 122, 122, 0.8);
-}
-
-.wrapper.dark-mode #notification-bar .background .acrylic {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -263,11 +230,6 @@ html.backdropfilter #notification-bar .background .border-top {
 }
 
 html.backdropfilter #notification-bar .background .acrylic {
-  background-color: rgba(136, 136, 136, 0.4);
-  backdrop-filter: blur(7px) brightness(1.1) saturate(1.2);
-}
-
-html.backdropfilter .wrapper.dark-mode #notification-bar .background .acrylic {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
 }

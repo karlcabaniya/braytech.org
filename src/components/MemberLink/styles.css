@@ -184,18 +184,10 @@
   display: grid;
   align-content: center;
   -webkit-overflow-scrolling: touch;
-  background-color: rgba(122, 122, 122, 0.4);
-}
-
-.wrapper.dark-mode #member-overlay {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 html.backdropfilter #member-overlay {
-  background-color: rgba(122, 122, 122, 0.6);
-}
-
-html.backdropfilter .wrapper.dark-mode #member-overlay {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -220,10 +212,6 @@ html.backdropfilter .wrapper.dark-mode #member-overlay {
   left: 0;
   width: 100%;
   height: calc(100% - 1rem);
-  background-color: rgba(122, 122, 122, 0.8);
-}
-
-.wrapper.dark-mode #member-overlay .background .acrylic {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -234,12 +222,7 @@ html.backdropfilter #member-overlay .background .border-top {
 }
 
 html.backdropfilter #member-overlay .background .acrylic {
-  background-color: rgba(136, 136, 136, 0.4);
-  backdrop-filter: blur(7px) brightness(1.1) saturate(1.2);
-}
-
-html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
 }
 
@@ -510,10 +493,8 @@ html.backdropfilter .wrapper.dark-mode #member-overlay .background .acrylic {
   background-color: #7b3274;
 }
 
-.wrapper.dark-mode #member-overlay.error .background .border-top,
 #member-overlay.error .background .border-top,
-html.backdropfilter #member-overlay.error .background .border-top,
-html.backdropfilter .wrapper.dark-mode #member-overlay.error .background .border-top {
+html.backdropfilter #member-overlay.error .background .border-top {
   background-color: rgb(220, 81, 59);
 }
 
@@ -563,6 +544,17 @@ html.backdropfilter .wrapper.dark-mode #member-overlay.error .background .border
   justify-content: space-between;
 }
 
+.wrapper.light-mode #member-overlay .sticky-nav [class^='destiny-'] {
+  color: #333;
+}
+
+.wrapper.light-mode #member-overlay .sticky-nav.ultra-black {
+  background-color: hsla(0, 0%, 0%, 0.6);
+}
+
+html.backdropfilter .wrapper.light-mode #member-overlay .sticky-nav {
+  background-color: hsla(0, 0%, 3%, 0.8);
+}
 
 
 

@@ -29,6 +29,8 @@ import store from './utils/reduxStore';
 import manifest from './utils/manifest';
 import * as ls from './utils/localStorage';
 
+import runOnceTasks from './utils/runOnceTasks';
+
 import Header from './components/UI/Header';
 import Tooltip from './components/Tooltip';
 import Footer from './components/UI/Footer';
@@ -79,6 +81,8 @@ class App extends React.Component {
     };
 
     this.currentLanguage = props.i18n.getCurrentLanguage();
+
+    runOnceTasks();
 
     // We do these as early as possible - we don't want to wait
     // for the component to mount before starting the web requests
