@@ -6,6 +6,7 @@ import cx from 'classnames';
 import moment from 'moment';
 import orderBy from 'lodash/orderBy';
 
+import * as ls from '../../utils/localStorage';
 import * as utils from '../../utils/destinyUtils';
 import { ProfileLink } from '../../components/ProfileLink';
 import getGroupMembers from '../../utils/getGroupMembers';
@@ -38,11 +39,14 @@ class Roster extends React.Component {
   callGetGroupMembers = () => {
     const { member, groupMembers } = this.props;
     const result = member.data.groups.results.length > 0 ? member.data.groups.results[0] : false;
-    
+
+    const auth = ls.get('setting.auth');
+    const isAuthed = auth && auth.destinyMemberships && auth.destinyMemberships.find(m => m.membershipId === member.membershipId);
+
     let now = new Date();
 
     if (result && (now - groupMembers.lastUpdated > 30000 || result.group.groupId !== groupMembers.groupId)) {
-      getGroupMembers(result.group, result.member.memberType > 2);
+      getGroupMembers(result.group, result.member.memberType > 2 && isAuthed);
     }
   };
 
