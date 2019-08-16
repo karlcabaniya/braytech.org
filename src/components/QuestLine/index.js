@@ -102,7 +102,7 @@ class QuestLine extends React.Component {
       const descriptionQuestLine = questLine.displaySource && questLine.displaySource !== '' ? questLine.displaySource : questLine.displayProperties.description && questLine.displayProperties.description !== '' ? questLine.displayProperties.description : steps[0].definitionStep.displayProperties.description;
 
       const rewardsQuestLine = (questLine.value && questLine.value.itemValue && questLine.value.itemValue.length && questLine.value.itemValue.filter(v => v.itemHash !== 0)) || [];
-      const rewardsQuestStep = (steps.filter(s => s.active) && steps.filter(s => s.active)[0].definitionStep && steps.filter(s => s.active)[0].definitionStep.value && steps.filter(s => s.active)[0].definitionStep.value.itemValue && steps.filter(s => s.active)[0].definitionStep.value.itemValue.length && steps.filter(s => s.active)[0].definitionStep.value.itemValue.filter(v => v.itemHash !== 0)) || [];
+      const rewardsQuestStep = (steps.filter(s => s.active) && steps.filter(s => s.active).length && steps.filter(s => s.active)[0].definitionStep && steps.filter(s => s.active)[0].definitionStep.value && steps.filter(s => s.active)[0].definitionStep.value.itemValue && steps.filter(s => s.active)[0].definitionStep.value.itemValue.length && steps.filter(s => s.active)[0].definitionStep.value.itemValue.filter(v => v.itemHash !== 0)) || [];
 
       return (
         <div className='quest-line'>
