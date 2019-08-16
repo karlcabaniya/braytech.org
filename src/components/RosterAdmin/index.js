@@ -570,8 +570,8 @@ class RosterAdmin extends React.Component {
 
     if (order.sort === 'lastCharacter') {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.lastCharacter.baseCharacterLevel, m => m.sorts.lastCharacter.light, m => m.sorts.lastPlayed], ['asc', order.dir, order.dir, 'desc']);
-    } else if (order.sort === 'triumphScore') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.triumphScore, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
+    } else if (order.sort === 'joinDate') {
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.joinDate, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else if (order.sort === 'weeklyXp') {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.weeklyXp, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else if (order.sort === 'rank') {
