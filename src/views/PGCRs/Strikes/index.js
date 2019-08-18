@@ -92,7 +92,6 @@ class Strikes extends React.Component {
 
   render() {
     const { t, member } = this.props;
-    const characterId = member.characterId;
 
     const mode = this.props.mode ? parseInt(this.props.mode) : 18;
     const offset = parseInt(this.props.offset);

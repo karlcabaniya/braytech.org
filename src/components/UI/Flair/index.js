@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
-import manifest from '../../../utils/manifest';
 import * as enums from '../../../utils/destinyEnums';
 import userFlair from '../../../data/userFlair';
 
@@ -16,13 +15,9 @@ class Flair extends React.Component {
   }
 
   render() {
-    const { t, type, id } = this.props;
+    const { type, id } = this.props;
     
     let flair = userFlair.find(f => f.user === type + id);
-    let primaryFlair = false;
-    if (flair) {
-      primaryFlair = flair.trophies.find(t => t.primary);
-    }
 
     return (
       <div className='stamps'>

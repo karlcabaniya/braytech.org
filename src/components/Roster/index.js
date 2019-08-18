@@ -79,7 +79,7 @@ class Roster extends React.Component {
     results.forEach(m => {
       let isPrivate = !m.profile || (!m.profile.characterActivities.data || !m.profile.characters.data.length);
       let isSelf = !isPrivate ? m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId : false;
-      let { lastPlayed, lastActivity, lastCharacter, lastMode, display } = utils.lastPlayerActivity(m);
+      let { lastPlayed, lastActivity, lastCharacter, display } = utils.lastPlayerActivity(m);
       let triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
       let valorPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2626549951].currentProgress : 0;
       let valorResets = !isPrivate ? (m.profile.profileRecords.data.records[559943871] ? m.profile.profileRecords.data.records[559943871].objectives[0].progress : 0) : 0;

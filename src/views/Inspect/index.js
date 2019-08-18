@@ -6,7 +6,6 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
-import { damageTypeToString } from '../../utils/destinyUtils';
 import { getSockets } from '../../utils/destinyItems';
 
 import './styles.css';

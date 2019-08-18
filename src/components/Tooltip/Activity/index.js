@@ -12,7 +12,7 @@ import './styles.css';
 
 class Activity extends React.Component {
   render() {
-    let { t, member, tooltips, hash, table } = this.props;
+    let { t, hash, table } = this.props;
 
     let definitionActivity = cloneDeep(manifest[table][hash]);
 

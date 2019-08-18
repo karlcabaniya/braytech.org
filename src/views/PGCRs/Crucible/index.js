@@ -6,8 +6,6 @@ import cx from 'classnames';
 
 import * as bungie from '../../../utils/bungie';
 import manifest from '../../../utils/manifest';
-import { removeMemberIds } from '../../../utils/paths';
-import { ProfileNavLink } from '../../../components/ProfileLink';
 import Spinner from '../../../components/UI/Spinner';
 import Mode from '../../../components/PGCRs/Mode';
 import Matches from '../../../components/PGCRs/Matches';

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
 import * as ls from '../../utils/localStorage';
-import { NoAuth, DiffProfile } from '../../components/BungieAuth';
 import { ProfileNavLink } from '../../components/ProfileLink';
 
 class ClanViewsLinks extends React.Component {
@@ -17,7 +16,7 @@ class ClanViewsLinks extends React.Component {
   }
 
   render() {
-    const { t, member } = this.props;
+    const { member } = this.props;
 
     const isAdmin = this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId);
 
@@ -32,10 +31,6 @@ class ClanViewsLinks extends React.Component {
             <div className='icon roster' />
             <ProfileNavLink to='/clan/roster' />
           </li>
-          {/* <li className='linked'>
-            <div className='icon stats' />
-            <ProfileNavLink to='/clan/stats' />
-          </li> */}
           {isAdmin ? (
             <li className='linked'>
               <div className='icon admin' />

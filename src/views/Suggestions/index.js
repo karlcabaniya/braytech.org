@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
-import { orderBy, groupBy } from 'lodash';
+import { orderBy } from 'lodash';
 import Moment from 'react-moment';
 import Markdown from 'react-markdown';
 import cx from 'classnames';
@@ -86,7 +86,7 @@ class Suggestions extends React.Component {
         });
 
         try {
-          let post = await fetch('https://api.upliftnaturereserve.com/tc01/items/braytech_suggestions', {
+          await fetch('https://api.upliftnaturereserve.com/tc01/items/braytech_suggestions', {
             method: 'post',
             headers: {
               Authorization: `Bearer braytech`,
@@ -100,7 +100,6 @@ class Suggestions extends React.Component {
               request: this.state.form.value
             })
           });
-          post = await post.json();
 
           this.setState(p => {
             p.form.loading = false;

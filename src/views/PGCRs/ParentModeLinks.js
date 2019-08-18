@@ -21,8 +21,6 @@ class ParentModeLinks extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
-
     return (
       <div className='content views'>
         <ul className='list'>

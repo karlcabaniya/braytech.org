@@ -23,7 +23,6 @@ class PGCRs extends React.Component {
   }
 
   render() {
-    const { t, member } = this.props;
     const type = this.props.match.params.type || false;
     const mode = this.props.match.params.mode || false;
     const offset = this.props.match.params.offset || 0;

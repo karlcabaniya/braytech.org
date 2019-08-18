@@ -1,11 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import cx from 'classnames';
 
-import manifest from '../../../utils/manifest';
-import ObservedImage from '../../../components/ObservedImage';
 import CollectiblesRarity from '../../../components/CollectiblesRarity';
-import { enumerateCollectibleState } from '../../../utils/destinyEnums';
 
 import './styles.css';
 

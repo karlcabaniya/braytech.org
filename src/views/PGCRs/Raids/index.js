@@ -5,7 +5,6 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import * as bungie from '../../../utils/bungie';
-import manifest from '../../../utils/manifest';
 import Spinner from '../../../components/UI/Spinner';
 import Mode from '../../../components/PGCRs/Mode';
 import Matches from '../../../components/PGCRs/Matches';
@@ -91,8 +90,6 @@ class Raids extends React.Component {
     const { t, member } = this.props;
 
     const offset = parseInt(this.props.offset);
-
-    const characterId = member.characterId;
 
     return (
       <div className={cx('view', 'gambit')} id='multiplayer'>

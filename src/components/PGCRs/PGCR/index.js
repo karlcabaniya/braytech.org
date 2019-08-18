@@ -128,7 +128,7 @@ class PGCR extends React.Component {
   }
 
   render() {
-    const { t, member, data, limit } = this.props;
+    const { t, member, data } = this.props;
     const characters = member.data.profile.characters.data;
     const characterIds = characters.map(c => c.characterId);
 

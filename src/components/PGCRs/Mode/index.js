@@ -2,7 +2,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
@@ -18,7 +17,7 @@ class Mode extends React.Component {
   }
 
   render() {
-    const { t, member, stats, isActive = false, root = '/multiplayer/crucible', defaultMode = 5 } = this.props;
+    const { stats, isActive = false, root = '/multiplayer/crucible', defaultMode = 5 } = this.props;
 
     let definition = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === stats.mode);
 

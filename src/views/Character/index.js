@@ -2,7 +2,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import cx from 'classnames';
 
 import Items from '../../components/Items';
 
@@ -18,14 +17,14 @@ class Character extends React.Component {
   }
 
   componentDidMount() {
-    const { t, member } = this.props;
+    const { member } = this.props;
 
     console.log(member.characterId, member.data.profile.characterEquipment.data[member.characterId])
   }
 
   render() {
 
-    const { t, member } = this.props;
+    const { member } = this.props;
 
     return (
       <div className='view' id='character'>

@@ -10,7 +10,7 @@ import Records from '../Records';
 
 class RecordsUnredeemed extends React.Component {
   render() {
-    const { t, member, triumphs, limit } = this.props;
+    const { member, limit } = this.props;
     const characterRecords = member && member.data.profile.characterRecords.data;
     const profileRecords = member && member.data.profile.profileRecords.data.records;
 

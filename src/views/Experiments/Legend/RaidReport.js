@@ -148,7 +148,6 @@ class RaidReport extends React.Component {
 
     
     let firstLevClear = false;
-    let firstSotpClear = false;
     let raids = [];
     let raidReports = [];
     let aggregates = {};
@@ -317,7 +316,6 @@ class RaidReport extends React.Component {
       let sotpNormal = getNormal(SCOURGE_OF_THE_PAST);
       let sotpFlawless = getFlawless(SCOURGE_OF_THE_PAST);
       let sotpFastest = orderBy(sotpAgg.filter(p => p.startingPhaseIndex === 0), [p => p.entries[0].values.activityDurationSeconds.basic.value], ['asc'])[0];
-      firstSotpClear = orderBy(sotpAgg, [pgcr => pgcr.period], ['asc'])[0];
 
       raids.push({
         element: (

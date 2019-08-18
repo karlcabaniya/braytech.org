@@ -1,26 +1,17 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import { orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import { ProfileLink } from '../../components/ProfileLink';
 import ObservedImage from '../../components/ObservedImage';
 import * as enums from '../../utils/destinyEnums';
 
 class Collectibles extends React.Component {
   render() {
-    const { t, member, tooltips, matches, armorClassType } = this.props;
-
-    let characterId, characters, character;
-    if (member.data.profile) {
-      characterId = member.characterId;
-      characters = member.data.profile.characters.data;
-      character = characters.find(c => c.characterId === characterId);
-    }
+    const { armorClassType } = this.props;
 
     let output = [];
 

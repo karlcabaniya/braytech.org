@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -150,8 +149,6 @@ class NotificationProgress extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
-
     if (this.state.progress.type === 'record') {
       let record = manifest.DestinyRecordDefinition[this.state.progress.hash];
 

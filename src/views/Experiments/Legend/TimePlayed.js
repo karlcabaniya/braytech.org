@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 import Moment from 'react-moment';
-import orderBy from 'lodash/orderBy';
 
-import manifest from '../../../utils/manifest';
 import * as utils from '../../../utils/destinyUtils';
-import ProgressBar from '../../../components/UI/ProgressBar';
 
 class TimePlayed extends React.Component {
   constructor(props) {
