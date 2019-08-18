@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { orderBy, cloneDeep } from 'lodash';
+import { orderBy } from 'lodash';
 
 import ObservedImage from '../components/ObservedImage';
 import ProgressBar from '../components/UI/ProgressBar';

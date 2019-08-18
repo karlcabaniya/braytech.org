@@ -7,7 +7,7 @@ import ObservedImage from '../../components/ObservedImage';
 
 class Items extends React.Component {
   render() {
-    const { t, member, items, action } = this.props;
+    const { items, action } = this.props;
 
     let output = [];
 

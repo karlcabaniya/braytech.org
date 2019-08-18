@@ -33,7 +33,7 @@ class AboutView extends React.Component {
   }
 
   render() {
-    const { t, member, group, groupMembers } = this.props;
+    const { t, group, groupMembers } = this.props;
 
     const weeklyRewardState = this.state.weeklyRewardState;
 

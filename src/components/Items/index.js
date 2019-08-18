@@ -13,7 +13,7 @@ import './styles.css';
 
 class Items extends React.Component {
   render() {
-    const { t, member, items, order, asTab, showHash, inspect, action } = this.props;
+    const { member, items, order, asTab, showHash, inspect, action } = this.props;
     const itemComponents = member.data.profile.itemComponents;
     const characterUninstancedItemComponents = false //member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data;
 

@@ -1,8 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
 
-import manifest from '../../../utils/manifest';
-
 const mod = item => {
 
   let description = item.statDescription;

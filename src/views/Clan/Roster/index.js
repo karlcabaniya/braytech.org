@@ -13,7 +13,7 @@ class RosterView extends React.Component {
   }
 
   render() {
-    const { t, group, groupMembers } = this.props;
+    const { groupMembers } = this.props;
 
     return (
       <>

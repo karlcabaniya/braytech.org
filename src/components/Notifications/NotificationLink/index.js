@@ -10,7 +10,6 @@ import ObservedImage from '../../ObservedImage';
 import Button from '../../UI/Button';
 
 import './styles.css';
-import { timeout } from 'q';
 
 class NotificationLink extends React.Component {
   constructor(props) {

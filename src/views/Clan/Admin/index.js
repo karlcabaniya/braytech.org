@@ -23,7 +23,7 @@ class AdminView extends React.Component {
   }
 
   render() {
-    const { t, group, member, groupMembers } = this.props;
+    const { member, groupMembers } = this.props;
 
     if (!this.auth) {
       return <NoAuth />;

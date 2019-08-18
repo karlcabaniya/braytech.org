@@ -5,8 +5,6 @@ import { Link, NavLink } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
-import manifest from '../../../utils/manifest';
-import ObservedImage from '../../ObservedImage';
 import ProgressBar from '../../UI/ProgressBar';
 import { classHashToString } from '../../../utils/destinyUtils';
 import { ProfileNavLink } from '../../ProfileLink';
@@ -220,8 +218,8 @@ class Header extends React.Component {
     }
 
     let profileRoute = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)/);
-    let profileRouteView = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)\/(\w+)/);
-    let profileView = profileRouteView ? profileRouteView[1] : false;
+    // let profileRouteView = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)\/(\w+)/);
+    // let profileView = profileRouteView ? profileRouteView[1] : false;
 
     let profileEl = null;
 
