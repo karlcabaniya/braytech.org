@@ -46,7 +46,7 @@
 #sit-rep .module.milestones .list li h4 {
   color: rgba(255, 255, 255, 0.6);
   font-size: 16px;
-  margin: 0 calc(8px + 1rem) 12px;
+  margin: 0 calc(8px + 1rem) 8px;
 }
 
 #sit-rep .module.milestones .list li.full-width {
