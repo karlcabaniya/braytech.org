@@ -20,10 +20,6 @@ class NotificationLink extends React.Component {
     this.mounted = false;
   }
 
-  componentWillMount() {
-    this.mounted = true;
-  }
-
   componentWillUnmount() {
     this.mounted = false;
   }
@@ -64,6 +60,10 @@ class NotificationLink extends React.Component {
       }
     }
   };
+
+  componentDidMount() {
+    this.mounted = true;
+  }
 
   componentDidUpdate(prevProps) {
     if (this.active && this.active.length) {

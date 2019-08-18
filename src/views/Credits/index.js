@@ -69,12 +69,10 @@ class Credits extends React.Component {
     return array;
   }
 
-  componentWillMount() {
-    this.supporters = this.shuffle(userFlair.slice().filter(m => m.trophies.find(t => t.classnames.includes('patron'))));
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0);
+    
+    this.supporters = this.shuffle(userFlair.slice().filter(m => m.trophies.find(t => t.classnames.includes('patron'))));
   }
 
   render() {

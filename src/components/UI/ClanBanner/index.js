@@ -88,10 +88,6 @@ class ClanBanner extends React.Component {
     });
   };
 
-  componentWillMount() {
-    //console.log('willMount', this.props.bannerData);
-  }
-
   componentDidMount() {
     // manifest.DestinyClanBannerDefinitionFetch().then(clanBannerManifest => {
     //   // console.log(clanBannerManifest);

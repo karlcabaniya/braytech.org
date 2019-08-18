@@ -24,10 +24,6 @@ class GroupSearch extends React.Component {
     this.mounted = false;
   }
 
-  componentWillMount() {
-    this.mounted = true;
-  }
-
   componentWillUnmount() {
     // If we don't do this, the searchForPlayers may attempt to setState on
     // an unmounted component. We can't cancel it as it's using
@@ -67,6 +63,8 @@ class GroupSearch extends React.Component {
   }, 500);
 
   componentDidMount() {
+    this.mounted = true;
+    
     if (this.props.initial) {
       this.searchForGroups(this.props.initial);
     }

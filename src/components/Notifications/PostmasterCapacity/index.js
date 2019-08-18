@@ -18,10 +18,6 @@ class PostmasterCapacity extends React.Component {
     this.mounted = false;
   }
 
-  componentWillMount() {
-    this.mounted = true;
-  }
-
   componentWillUnmount() {
     this.mounted = false;
   }
@@ -39,7 +35,9 @@ class PostmasterCapacity extends React.Component {
     }
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.mounted = true;
+  }
 
   render() {
     const { t, member } = this.props;

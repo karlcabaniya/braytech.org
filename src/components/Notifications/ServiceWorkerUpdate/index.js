@@ -8,23 +8,6 @@ import Button from '../../UI/Button';
 import './styles.css';
 
 class ServiceWorkerUpdate extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-    this.mounted = false;
-  }
-
-  componentWillMount() {
-    this.mounted = true;
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  componentDidMount() {}
-
   refreshApp = () => {
     window.location.reload();
   }

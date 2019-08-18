@@ -32,7 +32,7 @@ class ProfileSearch extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.mounted = true;
   }
 

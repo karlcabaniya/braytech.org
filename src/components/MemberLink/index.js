@@ -1,25 +1,19 @@
 import React from 'react';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 import Moment from 'react-moment';
-import { orderBy } from 'lodash';
-import entities from 'entities';
+import * as entities from 'entities';
 
 import ObservedImage from '../ObservedImage';
 import Spinner from '../UI/Spinner';
 import Button from '../UI/Button';
-import ProgressBar from '../UI/ProgressBar';
 import Flair from '../UI/Flair';
 import Ranks from '../Ranks';
-import Items from '../Items';
 import manifest from '../../utils/manifest';
 import * as bungie from '../../utils/bungie';
-import * as voluspa from '../../utils/voluspa';
 import * as responseUtils from '../../utils/responseUtils';
 import * as destinyUtils from '../../utils/destinyUtils';
-import * as destinyEnums from '../../utils/destinyEnums';
 import userFlair from '../../data/userFlair';
 import store from '../../utils/reduxStore';
 
@@ -48,10 +42,6 @@ class MemberLink extends React.Component {
       overlay: false
     };
     this.mounted = false;
-  }
-
-  componentWillMount() {
-    this.mounted = true;
   }
 
   componentWillUnmount() {
@@ -117,6 +107,8 @@ class MemberLink extends React.Component {
   };
 
   async componentDidMount() {
+    this.mounted = true;
+    
     const { type, id, displayName = false } = this.props;
 
     if (this.mounted) {
