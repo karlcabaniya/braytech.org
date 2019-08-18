@@ -62,12 +62,10 @@
   grid-template-columns: 1fr;
 }
 
-.quest-line .vendor ~ .vendor {
-  margin-top: 10px;
-}
-
-.quest-line .vendor {
-  display: inline-block;
+.quest-line .sources {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 120px);
 }
 
 .quest-line .vendor .name {

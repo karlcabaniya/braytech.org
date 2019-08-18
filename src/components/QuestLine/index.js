@@ -122,21 +122,23 @@ class QuestLine extends React.Component {
             {questLineSource ? (
               <>
                 <h4>{t('Source')}</h4>
-                {questLineSource.map(s => {
-                  if (s.vendorHash) {
-                    let definitionVendor = manifest.DestinyVendorDefinition[s.vendorHash];
-                    let definitionFaction = definitionVendor && definitionVendor.factionHash ? manifest.DestinyFactionDefinition[definitionVendor.factionHash] : false;
+                <div className='sources'>
+                  {questLineSource.map(s => {
+                    if (s.vendorHash) {
+                      let definitionVendor = manifest.DestinyVendorDefinition[s.vendorHash];
+                      let definitionFaction = definitionVendor && definitionVendor.factionHash ? manifest.DestinyFactionDefinition[definitionVendor.factionHash] : false;
 
-                    return (
-                      <div key={s.vendorHash} className='vendor tooltip' data-hash={s.vendorHash} data-table='DestinyVendorDefinition'>
-                        <div className='name'>{definitionVendor.displayProperties.name}</div>
-                        {definitionFaction ? <div className='faction'>{definitionFaction.displayProperties.name}</div> : null}
-                      </div>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
+                      return (
+                        <div key={s.vendorHash} className='vendor tooltip' data-hash={s.vendorHash} data-table='DestinyVendorDefinition'>
+                          <div className='name'>{definitionVendor.displayProperties.name}</div>
+                          {definitionFaction ? <div className='faction'>{definitionFaction.displayProperties.name}</div> : null}
+                        </div>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+                </div>
               </>
             ) : null}
             {steps && steps.length > 3 ? (

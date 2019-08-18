@@ -345,6 +345,11 @@ html.backdropfilter #member-overlay .background .acrylic {
   margin: 0 0 8px;
 }
 
+#member-overlay .wrapper-inner .characters {
+  display: grid;
+  grid-gap: 1rem;
+}
+
 #member-overlay .wrapper-inner .characters .char {
   position: relative;
 }
@@ -443,11 +448,11 @@ html.backdropfilter #member-overlay .background .acrylic {
 }
 
 #member-overlay .wrapper-inner .characters .char .state {
-  margin: 6px 0 14px;
+  margin: 6px 0 0;
 }
 
 #member-overlay .wrapper-inner .characters .char .title ~ .state {
-  margin: 11px 0 14px;
+  margin: 11px 0 0;
 }
 
 #member-overlay .wrapper-inner .characters .char .list.inventory-items {

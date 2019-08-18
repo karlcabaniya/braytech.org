@@ -233,8 +233,7 @@ class MemberLink extends React.Component {
                         <div>{t('Characters')}</div>
                       </div>
                       <div className='characters'>
-                        <div>
-                          {this.state.all.data.characters.data.map(c => {
+                        {this.state.all.data.characters.data.map(c => {
                             let state = null;
                             if (c.characterId === lastCharacterPlayed && this.state.all.data.characterActivities.data[c.characterId].currentActivityHash !== 0) {
                               if (manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].placeHash === 2961497387) {
@@ -302,7 +301,6 @@ class MemberLink extends React.Component {
                               </div>
                             );
                           })}
-                        </div>
                       </div>
                     </div>
                     <div className='module'>
