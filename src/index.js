@@ -17,7 +17,9 @@ class AppEntry extends React.Component {
 
   config = {
     onUpdate: registration => {
-      console.log('Update available');
+      console.warn('Service worker update available');
+      console.log(registration);
+
       this.setState({
         updateAvailable: true
       });
@@ -27,7 +29,8 @@ class AppEntry extends React.Component {
       }
     },
     onSuccess: registration => {
-      console.log('Service worker registered');
+      console.warn('Service worker registered');
+      console.log(registration);
     }
   };
 
