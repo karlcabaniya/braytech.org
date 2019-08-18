@@ -147,9 +147,9 @@ class Header extends React.Component {
         group: 0
       },
       {
-        name: t('Inventory'),
-        desc: t('Check your pursuits, consumables, mods, and shaders'),
-        slug: '/inventory',
+        name: t('Pursuits'),
+        desc: t('Quests and bounties, step by step, reward by reward'),
+        slug: '/pursuits',
         exact: false,
         profile: true,
         inline: viewport.width >= 1360,

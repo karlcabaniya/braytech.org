@@ -12,7 +12,7 @@ import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
 import ThisWeek from './views/ThisWeek';
 import SitRep from './views/SitRep';
-import Inventory from './views/Inventory';
+import Pursuits from './views/Pursuits';
 
 import Legend from './views/Experiments/Legend';
 
@@ -64,7 +64,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/this-week`} exact render={route => <ThisWeek />} />
           <Route path={`${match.url}/reports/:type?/:mode?/:offset?`} render={route => <PGCRs {...route} />} />
           <Route path={`${match.url}/now`} exact render={route => <SitRep />} />
-          <Route path={`${match.url}/inventory/:view?/:hash?`} render={route => <Inventory {...route} />} />
+          <Route path={`${match.url}/pursuits/:hash?`} render={route => <Pursuits {...route} />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/now` }} />} />
         </Switch>
       </>

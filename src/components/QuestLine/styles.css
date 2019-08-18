@@ -66,6 +66,10 @@
   margin-top: 10px;
 }
 
+.quest-line .vendor {
+  display: inline-block;
+}
+
 .quest-line .vendor .name {
   font-size: 16px;
   margin: 0 0 4px;

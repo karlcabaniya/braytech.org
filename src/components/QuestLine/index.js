@@ -45,15 +45,15 @@ class QuestLine extends React.Component {
 
     let definitionItem = item && item.itemHash && manifest.DestinyInventoryItemDefinition[item.itemHash];
 
-    if (definitionItem && definitionItem.objectives && definitionItem.objectives.questlineItemHash) {
+    if (definitionItem && definitionItem.objectives && definitionItem.objectives.questlineItemHash && definitionItem.objectives.questlineItemHash) {
       definitionItem = manifest.DestinyInventoryItemDefinition[definitionItem.objectives.questlineItemHash];
     }
 
-    if (definitionItem && definitionItem.setData && definitionItem.setData.itemList && definitionItem.setData.itemList.length) {
+    if (definitionItem) {
       const questLine = cloneDeep(definitionItem);
 
       let assumeCompleted = true;
-      const steps = questLine.setData.itemList.map((s, i) => {
+      const steps = questLine.setData && questLine.setData.itemList && questLine.setData.itemList.length && questLine.setData.itemList.map((s, i) => {
         s.i = i + 1;
         s.definitionStep = manifest.DestinyInventoryItemDefinition[s.itemHash];
         s.completed = assumeCompleted;
@@ -97,12 +97,12 @@ class QuestLine extends React.Component {
         return s;
       });
 
-      const questLineSource = questLine.sourceData && questLine.sourceData.vendorSources && questLine.sourceData.vendorSources.length ? questLine.sourceData.vendorSources : steps[0].definitionStep.sourceData && steps[0].definitionStep.sourceData.vendorSources && steps[0].definitionStep.sourceData.vendorSources.length ? steps[0].definitionStep.sourceData.vendorSources : false;
+      const questLineSource = questLine.sourceData && questLine.sourceData.vendorSources && questLine.sourceData.vendorSources.length ? questLine.sourceData.vendorSources : steps && steps.length && steps[0].definitionStep.sourceData && steps[0].definitionStep.sourceData.vendorSources && steps[0].definitionStep.sourceData.vendorSources.length ? steps[0].definitionStep.sourceData.vendorSources : false;
 
       const descriptionQuestLine = questLine.displaySource && questLine.displaySource !== '' ? questLine.displaySource : questLine.displayProperties.description && questLine.displayProperties.description !== '' ? questLine.displayProperties.description : steps[0].definitionStep.displayProperties.description;
 
       const rewardsQuestLine = (questLine.value && questLine.value.itemValue && questLine.value.itemValue.length && questLine.value.itemValue.filter(v => v.itemHash !== 0)) || [];
-      const rewardsQuestStep = (steps.filter(s => s.active) && steps.filter(s => s.active).length && steps.filter(s => s.active)[0].definitionStep && steps.filter(s => s.active)[0].definitionStep.value && steps.filter(s => s.active)[0].definitionStep.value.itemValue && steps.filter(s => s.active)[0].definitionStep.value.itemValue.length && steps.filter(s => s.active)[0].definitionStep.value.itemValue.filter(v => v.itemHash !== 0)) || [];
+      const rewardsQuestStep = (steps && steps.length && steps.filter(s => s.active) && steps.filter(s => s.active).length && steps.filter(s => s.active)[0].definitionStep && steps.filter(s => s.active)[0].definitionStep.value && steps.filter(s => s.active)[0].definitionStep.value.itemValue && steps.filter(s => s.active)[0].definitionStep.value.itemValue.length && steps.filter(s => s.active)[0].definitionStep.value.itemValue.filter(v => v.itemHash !== 0)) || [];
 
       return (
         <div className='quest-line'>
@@ -139,7 +139,7 @@ class QuestLine extends React.Component {
                 })}
               </>
             ) : null}
-            {steps.length > 3 ? (
+            {steps && steps.length > 3 ? (
               <>
                 <h4>{t('Current step')}</h4>
                 <div className='steps'>
@@ -216,7 +216,7 @@ class QuestLine extends React.Component {
           <div className='module'>
             <h4>{t('Steps')}</h4>
             <div className='steps'>
-              {steps.map(s => {
+              {steps && steps.length && steps.map(s => {
                 let objectives = [];
                 s.definitionStep &&
                   s.definitionStep.objectives &&
