@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import manifest from '../../../utils/manifest';
 
 import * as paths from '../../../utils/paths';
@@ -219,4 +219,4 @@ class BadgeNode extends React.Component {
   }
 }
 
-export default withNamespaces()(BadgeNode);
+export default withTranslation()(BadgeNode);

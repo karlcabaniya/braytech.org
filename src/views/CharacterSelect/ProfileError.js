@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose } from 'redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import Button from '../../components/UI/Button';
 
@@ -50,6 +50,6 @@ class ProfileError extends React.Component {
   }
 }
 
-ProfileError = compose(withNamespaces())(ProfileError);
+ProfileError = compose(withTranslation())(ProfileError);
 
 export default ProfileError;

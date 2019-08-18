@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
@@ -36,9 +36,11 @@ class AppEntry extends React.Component {
 
   render() {
     return (
-      <Provider store={store}>
-        <App {...this.state} />
-      </Provider>
+      <Suspense fallback={()=>{}}>
+        <Provider store={store}>
+          <App {...this.state} />
+        </Provider>
+      </Suspense>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import { removeMemberIds } from '../../utils/paths';
 import { ProfileNavLink } from '../../components/ProfileLink';
@@ -70,5 +70,5 @@ class ParentModeLinks extends React.Component {
 
 export default compose(
   connect(),
-  withNamespaces()
+  withTranslation()
 )(ParentModeLinks);

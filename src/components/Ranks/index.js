@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { flattenDepth, orderBy } from 'lodash';
 
 import manifest from '../../utils/manifest';
@@ -415,5 +415,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   connect(mapStateToProps),
-  withNamespaces()
+  withTranslation()
 )(Mode);

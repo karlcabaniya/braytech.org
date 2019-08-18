@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import { getLanguageInfo } from '../../utils/languageInfo';
 import * as ls from '../../utils/localStorage';
@@ -288,5 +288,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withNamespaces()
+  withTranslation()
 )(Settings);

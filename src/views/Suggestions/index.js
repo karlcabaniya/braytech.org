@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { orderBy, groupBy } from 'lodash';
 import Moment from 'react-moment';
 import Markdown from 'react-markdown';
@@ -374,5 +374,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   connect(mapStateToProps),
-  withNamespaces()
+  withTranslation()
 )(Suggestions);

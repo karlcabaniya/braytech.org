@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import JSONTree from 'react-json-tree';
 
 import manifest from '../../../utils/manifest';
@@ -81,5 +81,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   connect(mapStateToProps),
-  withNamespaces()
+  withTranslation()
 )(DataInspector);
