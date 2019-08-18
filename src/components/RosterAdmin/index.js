@@ -128,7 +128,7 @@ class Actions extends React.Component {
   memberApprove = async membershipId => {
     const { groupMembers } = this.props;
     const group = this.props.member.data.groups.results.length > 0 ? this.props.member.data.groups.results[0].group : false;
-    
+
     let member = groupMembers.members.concat(groupMembers.pending).find(r => r.destinyUserInfo.membershipId === membershipId);
 
     if (member) {
@@ -139,11 +139,13 @@ class Actions extends React.Component {
 
       try {
         await bungie.ApprovePendingForList(member.groupId, {
-          memberships: [{
-            membershipType: member.destinyUserInfo.membershipType,
-            membershipId: member.destinyUserInfo.membershipId,
-            displayName: member.destinyUserInfo.displayName
-          }],
+          memberships: [
+            {
+              membershipType: member.destinyUserInfo.membershipType,
+              membershipId: member.destinyUserInfo.membershipId,
+              displayName: member.destinyUserInfo.displayName
+            }
+          ],
           message: 'This is a message'
         });
 
@@ -192,11 +194,13 @@ class Actions extends React.Component {
 
       try {
         await bungie.DenyPendingForList(member.groupId, {
-          memberships: [{
-            membershipType: member.destinyUserInfo.membershipType,
-            membershipId: member.destinyUserInfo.membershipId,
-            displayName: member.destinyUserInfo.displayName
-          }],
+          memberships: [
+            {
+              membershipType: member.destinyUserInfo.membershipType,
+              membershipId: member.destinyUserInfo.membershipId,
+              displayName: member.destinyUserInfo.displayName
+            }
+          ],
           message: 'This is a message'
         });
 
@@ -425,7 +429,6 @@ class RosterAdmin extends React.Component {
     let results = showOnline ? groupMembers.members.filter(r => r.isOnline) : groupMembers.members.concat(groupMembers.pending);
 
     results.forEach(m => {
-
       if (m.ignore) {
         return;
       }
@@ -526,9 +529,11 @@ class RosterAdmin extends React.Component {
                       </div>
                     </li>
                     <li className='col joinDate'>
-                      {moment(m.joinDate)
-                        .locale('en-sml')
-                        .fromNow()}
+                      {!m.pending
+                        ? moment(m.joinDate)
+                            .locale('en-sml')
+                            .fromNow()
+                        : null}
                     </li>
                     <li className='col weeklyXp'>
                       <span>{weeklyXp.toLocaleString('en-us')}</span> / {(characterIds.length * 5000).toLocaleString('en-us')}

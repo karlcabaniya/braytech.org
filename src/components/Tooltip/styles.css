@@ -735,7 +735,7 @@
     box-shadow: none;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    backdrop-filter: brightness(1.2) blur(2px);
+    backdrop-filter: brightness(0.6) blur(4px);
   }
 
   #tooltip .acrylic {
@@ -751,6 +751,6 @@
     position: relative;
     padding: initial;
     width: 100%;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
   }
 }
