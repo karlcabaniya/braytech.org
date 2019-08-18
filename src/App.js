@@ -29,8 +29,6 @@ import store from './utils/reduxStore';
 import manifest from './utils/manifest';
 import * as ls from './utils/localStorage';
 
-import runOnceTasks from './utils/runOnceTasks';
-
 import Header from './components/UI/Header';
 import Tooltip from './components/Tooltip';
 import Footer from './components/UI/Footer';
@@ -81,8 +79,6 @@ class App extends React.Component {
     };
 
     this.currentLanguage = props.i18n.getCurrentLanguage();
-
-    runOnceTasks();
 
     // We do these as early as possible - we don't want to wait
     // for the component to mount before starting the web requests
@@ -141,14 +137,15 @@ class App extends React.Component {
 
     try {
       await timed('setUpManifest', this.setUpManifest());
-    } catch (error) {
-      //console.log(error);
-      if (error.message === 'Failed to fetch') {
-        this.setState({ status: { code: 'error_fetchingManifest', detail: error } });
-      } else if (error.message === 'maintenance') {
-        this.setState({ status: { code: 'error_maintenance', detail: error } });
+    } catch (e) {
+      console.log(e);
+
+      if (e.message === 'Failed to fetch') {
+        this.setState({ status: { code: 'error_fetchingManifest', detail: e } });
+      } else if (e.message === 'maintenance') {
+        this.setState({ status: { code: 'error_maintenance', detail: e } });
       } else {
-        this.setState({ status: { code: 'error_setUpManifest', detail: error } });
+        this.setState({ status: { code: 'error_setUpManifest', detail: e } });
       }
     }
   }
@@ -158,9 +155,7 @@ class App extends React.Component {
     const storedManifest = await this.startupRequests.storedManifest;
     const manifestIndex = await this.startupRequests.manifestIndex;
 
-    let manifestLanuage = this.currentLanguage;
-    if (/^en/.test(manifestLanuage)) manifestLanuage = 'en';
-
+    const manifestLanuage = this.currentLanguage;
     const currentVersion = manifestIndex.jsonWorldContentPaths[manifestLanuage];
     let tmpManifest = null;
 
@@ -179,7 +174,6 @@ class App extends React.Component {
     }
 
     this.availableLanguages = Object.keys(manifestIndex.jsonWorldContentPaths);
-    this.availableLanguages.splice(1, 0, 'en-au');
 
     tmpManifest.statistics = (await this.startupRequests.voluspaStatistics) || {};
 

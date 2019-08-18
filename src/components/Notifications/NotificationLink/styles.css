@@ -138,7 +138,17 @@ html.backdropfilter #notification-overlay.error .background .border-top {
   justify-content: space-between;
 }
 
+.wrapper.light-mode #notification-overlay .sticky-nav [class^='destiny-'] {
+  color: #333;
+}
 
+.wrapper.light-mode #notification-overlay .sticky-nav.ultra-black {
+  background-color: hsla(0, 0%, 0%, 0.6);
+}
+
+html.backdropfilter .wrapper.light-mode #notification-overlay .sticky-nav {
+  background-color: hsla(0, 0%, 3%, 0.8);
+}
 
 
 @media screen and (max-width: 600px) {

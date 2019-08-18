@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './App';
+
 import * as serviceWorker from './serviceWorker';
+import runOnceTasks from './utils/runOnceTasks';
+import App from './App';
 
 import store from './utils/reduxStore';
 
@@ -13,6 +15,8 @@ class AppEntry extends React.Component {
     this.state = {
       updateAvailable: false
     };
+
+    runOnceTasks();
   }
 
   config = {
