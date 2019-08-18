@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -221,5 +221,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   connect(mapStateToProps),
-  withTranslation()
+  withNamespaces()
 )(NotificationProgress);

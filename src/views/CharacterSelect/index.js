@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { withTranslation, Trans } from 'react-i18next';
+import { withNamespaces, Trans } from 'react-i18next';
 
 import store from '../../utils/reduxStore';
 import * as ls from '../../utils/localStorage';
@@ -94,5 +94,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   connect(mapStateToProps),
-  withTranslation()
+  withNamespaces()
 )(CharacterSelect);

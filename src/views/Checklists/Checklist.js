@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 
 import ProgressBar from '../../components/UI/ProgressBar';
 
@@ -43,4 +43,4 @@ Checklist.propTypes = {
   completedItems: PropTypes.number.isRequired
 };
 
-export default withTranslation()(Checklist);
+export default withNamespaces()(Checklist);

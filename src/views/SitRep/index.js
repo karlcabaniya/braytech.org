@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import { orderBy, flattenDepth } from 'lodash';
 import cx from 'classnames';
 
@@ -315,5 +315,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withTranslation()
+  withNamespaces()
 )(SitRep);

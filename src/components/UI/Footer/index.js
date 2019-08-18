@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import Moment from 'react-moment';
 
 import manifest from '../../../utils/manifest';
@@ -58,4 +58,4 @@ class Footer extends React.Component {
   }
 }
 
-export default withTranslation()(Footer);
+export default withNamespaces()(Footer);

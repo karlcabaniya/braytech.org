@@ -1,6 +1,6 @@
 import * as ls from './localStorage';
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import { reactI18nextModule } from 'react-i18next';
 import backend from 'i18next-xhr-backend';
 
 let _defaultLanguage = 'en';
@@ -19,7 +19,7 @@ function setCurrentLanguage(lang) {
 
 i18n
   .use(backend)
-  .use(initReactI18next)
+  .use(reactI18nextModule)
   .init({
     lng: getCurrentLanguage(),
     fallbackLng: _defaultLanguage,

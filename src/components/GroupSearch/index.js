@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import debounce from 'lodash/debounce';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 
 import * as bungie from '../../utils/bungie';
 import * as voluspa from '../../utils/voluspa';
@@ -131,4 +131,4 @@ class GroupSearch extends React.Component {
   }
 }
 
-export default withTranslation()(GroupSearch);
+export default withNamespaces()(GroupSearch);

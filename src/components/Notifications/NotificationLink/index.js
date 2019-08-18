@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
 import ReactGA from 'react-ga';
@@ -196,5 +196,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withTranslation()
+  withNamespaces()
 )(NotificationLink);

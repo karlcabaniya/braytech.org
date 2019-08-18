@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import moment from 'moment';
@@ -295,5 +295,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   connect(mapStateToProps),
-  withTranslation()
+  withNamespaces()
 )(App);

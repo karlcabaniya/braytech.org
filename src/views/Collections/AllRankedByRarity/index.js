@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -38,4 +38,4 @@ class AllRankedByRarity extends React.Component {
   }
 }
 
-export default withTranslation()(AllRankedByRarity);
+export default withNamespaces()(AllRankedByRarity);

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 
 import * as destinyUtils from '../../utils/destinyUtils';
 import Characters from '../../components/UI/Characters';
@@ -53,4 +53,4 @@ Profile.propTypes = {
   member: PropTypes.object.isRequired
 };
 
-export default withTranslation()(Profile);
+export default withNamespaces()(Profile);

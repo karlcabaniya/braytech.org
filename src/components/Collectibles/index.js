@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { withTranslation } from 'react-i18next';
+import { withNamespaces } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
@@ -315,5 +315,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withTranslation()
+  withNamespaces()
 )(Collectibles);
