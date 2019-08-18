@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
@@ -9,6 +9,7 @@ import store from './utils/reduxStore';
 class AppEntry extends React.Component {
   constructor(props) {
     super();
+    
     this.state = {
       updateAvailable: false
     };
@@ -36,11 +37,9 @@ class AppEntry extends React.Component {
 
   render() {
     return (
-      <Suspense fallback={()=>{}}>
-        <Provider store={store}>
-          <App {...this.state} />
-        </Provider>
-      </Suspense>
+      <Provider store={store}>
+        <App {...this.state} />
+      </Provider>
     );
   }
 }
