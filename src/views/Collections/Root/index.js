@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import manifest from '../../../utils/manifest';
 
 import ObservedImage from '../../../components/ObservedImage';
@@ -180,4 +180,4 @@ class Root extends React.Component {
   }
 }
 
-export default withNamespaces()(Root);
+export default withTranslation()(Root);

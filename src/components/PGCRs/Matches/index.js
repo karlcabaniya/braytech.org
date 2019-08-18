@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { orderBy, isEqual, flattenDepth } from 'lodash';
 
 import * as bungie from '../../../utils/bungie';
@@ -197,5 +197,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   connect(mapStateToProps),
-  withNamespaces()
+  withTranslation()
 )(Matches);

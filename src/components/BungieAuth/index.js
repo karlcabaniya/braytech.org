@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose } from 'redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Redirect, Link, withRouter } from 'react-router-dom';
 import cx from 'classnames';
 import Moment from 'react-moment';
@@ -287,12 +287,12 @@ class DiffProfile extends React.Component {
   }
 }
 
-BungieAuth = compose(withNamespaces())(BungieAuth);
+BungieAuth = compose(withTranslation())(BungieAuth);
 
-NoAuth = compose(withNamespaces())(NoAuth);
+NoAuth = compose(withTranslation())(NoAuth);
 
 DiffProfile = compose(
-  withNamespaces(),
+  withTranslation(),
   withRouter
 )(DiffProfile);
 

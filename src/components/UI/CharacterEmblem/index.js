@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import ObservedImage from '../../ObservedImage';
 import * as utils from '../../../utils/destinyUtils';
@@ -71,5 +71,5 @@ function mapStateToProps(state, ownProps) {
 
 export default compose(
   connect(mapStateToProps),
-  withNamespaces()
+  withTranslation()
 )(CharacterEmblem);

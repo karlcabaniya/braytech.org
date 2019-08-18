@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import * as destinyEnums from '../../utils/destinyEnums';
 import * as ls from '../../utils/localStorage';
@@ -130,4 +130,4 @@ ProfileSearch.propTypes = {
   onProfileClick: PropTypes.func.isRequired
 };
 
-export default withNamespaces()(ProfileSearch);
+export default withTranslation()(ProfileSearch);

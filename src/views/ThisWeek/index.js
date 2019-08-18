@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
 import manifest from '../../utils/manifest';
@@ -1164,5 +1164,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withNamespaces()
+  withTranslation()
 )(ThisWeek);

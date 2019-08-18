@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import RecordsUnredeemed from '../../../components/RecordsUnredeemed';
 
@@ -23,5 +23,5 @@ class Unredeemed extends React.Component {
 }
 
 export default compose(
-  withNamespaces()
+  withTranslation()
 )(Unredeemed);

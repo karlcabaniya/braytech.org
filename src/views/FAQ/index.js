@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withNamespaces } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
 import Records from '../../components/Records';
@@ -108,5 +108,5 @@ class FAQ extends React.Component {
 
 export default compose(
   connect(),
-  withNamespaces()
+  withTranslation()
 )(FAQ);

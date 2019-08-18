@@ -29,7 +29,7 @@ ${filename}
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate HoC receive the t function as a prop
-  withNamespaces: () => Component => {
+  withTranslation: () => Component => {
     Component.defaultProps = { ...Component.defaultProps, t: a => a };
     return Component;
   }
