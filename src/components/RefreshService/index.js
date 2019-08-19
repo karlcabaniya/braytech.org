@@ -111,8 +111,8 @@ class RefreshService extends React.Component {
         type: 'MEMBER_LOADED',
         payload: { membershipType, membershipId, characterId, data }
       });
-    } catch (error) {
-      console.warn(`Error while refreshing profile, ignoring: ${error}`);
+    } catch (e) {
+      console.warn(`Error while refreshing profile, ignoring: ${e}`);
     }
   };
 }

@@ -85,7 +85,7 @@ export async function getGroupMembers(group, getPending = false) {
     groupId: group.groupId,
     members: memberResponses,
     pending: pendingResponses,
-    lastUpdated: +new Date()
+    lastUpdated: new Date().getTime()
   };
 
   store.dispatch({
