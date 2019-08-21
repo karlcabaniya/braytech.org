@@ -93,16 +93,28 @@
 }
 
 .presentation-node .list.secondary li .text .name {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.6);
   letter-spacing: 2px;
 }
 
 .presentation-node .list.secondary li .text .progress {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .presentation-node .list.secondary li .text .progress span {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.presentation-node .list.secondary li.active .text .name {
+  color: rgba(255, 255, 255, 1);
+}
+
+.presentation-node .list.secondary li.active .text .progress {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.presentation-node .list.secondary li.active .text .progress span {
+  color: rgba(255, 255, 255, 1);
 }
 
 .presentation-node .list.secondary li a {

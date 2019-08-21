@@ -150,11 +150,11 @@ class PresentationNode extends React.Component {
       }
 
       secondaryChildren.push(
-        <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0 })}>
+        <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0, active: definitionTertiary.hash === child.presentationNodeHash })}>
           <div className='text'>
             <div className='name'>{node.displayProperties.name}</div>
             <div className='progress'>
-              {secondaryProgress}/{secondaryTotal}
+              <span>{secondaryProgress}</span> / {secondaryTotal}
             </div>
           </div>
           <ProfileNavLink isActive={isActive} to={`/collections/${primaryHash}/${secondaryHash}/${node.hash}`} />

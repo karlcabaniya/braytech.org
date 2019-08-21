@@ -13,26 +13,26 @@ class PresentationNode extends React.Component {
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
 
-    let primaryDefinition = manifest.DestinyPresentationNodeDefinition[primaryHash];
+    let definitionPrimary = manifest.DestinyPresentationNodeDefinition[primaryHash];
 
-    if (!primaryDefinition) {
+    if (!definitionPrimary) {
       return null;
     }
 
-    let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash;
-    let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
+    let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : definitionPrimary.children.presentationNodes[0].presentationNodeHash;
+    let definitionSecondary = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 
-    let tertiaryHash = this.props.match.params.tertiary ? this.props.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
-    let tertiaryDefinition = manifest.DestinyPresentationNodeDefinition[tertiaryHash];
+    let tertiaryHash = this.props.match.params.tertiary ? this.props.match.params.tertiary : definitionSecondary.children.presentationNodes[0].presentationNodeHash;
+    let definitionTertiary = manifest.DestinyPresentationNodeDefinition[tertiaryHash];
 
     let quaternaryHash = this.props.match.params.quaternary ? this.props.match.params.quaternary : false;
 
     let primaryChildren = [];
-    primaryDefinition.children.presentationNodes.forEach(child => {
+    definitionPrimary.children.presentationNodes.forEach(child => {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
       let isActive = (match, location) => {
-        if (this.props.match.params.secondary === undefined && primaryDefinition.children.presentationNodes.indexOf(child) === 0) {
+        if (this.props.match.params.secondary === undefined && definitionPrimary.children.presentationNodes.indexOf(child) === 0) {
           return true;
         } else if (match) {
           return true;
@@ -51,7 +51,7 @@ class PresentationNode extends React.Component {
     });
 
     let secondaryChildren = [];
-    secondaryDefinition.children.presentationNodes.forEach(child => {
+    definitionSecondary.children.presentationNodes.forEach(child => {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
       if (node.redacted) {
@@ -69,7 +69,7 @@ class PresentationNode extends React.Component {
       });
 
       let isActive = (match, location) => {
-        if (this.props.match.params.tertiary === undefined && secondaryDefinition.children.presentationNodes.indexOf(child) === 0) {
+        if (this.props.match.params.tertiary === undefined && definitionSecondary.children.presentationNodes.indexOf(child) === 0) {
           return true;
         } else if (match) {
           return true;
@@ -86,7 +86,7 @@ class PresentationNode extends React.Component {
       }
 
       secondaryChildren.push(
-        <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal })}>
+        <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0, active: definitionTertiary.hash === child.presentationNodeHash })}>
           <div className='text'>
             <div className='name'>{node.displayProperties.name.length > 24 ? node.displayProperties.name.slice(0, 24) + '...' : node.displayProperties.name}</div>
             <div className='progress'>
@@ -103,13 +103,13 @@ class PresentationNode extends React.Component {
         <div className='header'>
           <div className='name'>
             {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-            {primaryDefinition.displayProperties.name} <span>{primaryDefinition.children.presentationNodes.length !== 1 ? <>// {secondaryDefinition.displayProperties.name}</> : null}</span>
+            {definitionPrimary.displayProperties.name} <span>{definitionPrimary.children.presentationNodes.length !== 1 ? <>// {definitionSecondary.displayProperties.name}</> : null}</span>
           </div>
         </div>
         <div className='children'>
           <ul
             className={cx('list', 'primary', {
-              'single-primary': primaryDefinition.children.presentationNodes.length === 1
+              'single-primary': definitionPrimary.children.presentationNodes.length === 1
             })}
           >
             {primaryChildren}
@@ -118,7 +118,7 @@ class PresentationNode extends React.Component {
         </div>
         <div className='entries'>
           <ul className='list tertiary record-items'>
-            <Records {...this.props} hashes={tertiaryDefinition.children.records.map(child => child.recordHash)} highlight={quaternaryHash} readLink={primaryHash === '564676571'} />
+            <Records {...this.props} hashes={definitionTertiary.children.records.map(child => child.recordHash)} highlight={quaternaryHash} readLink={primaryHash === '564676571'} />
           </ul>
         </div>
       </div>

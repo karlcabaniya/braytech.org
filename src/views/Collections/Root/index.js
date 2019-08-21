@@ -61,15 +61,18 @@ class Root extends React.Component {
         });
       });
 
+      let nodeProgress = states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length;
+      let nodeTotal = states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length;
+
       nodes.push(
-        <div key={node.hash} className='node'>
+        <div key={node.hash} className={cx('node', { completed: nodeTotal > 0 && nodeProgress === nodeTotal })}>
           <div className='images'>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
           </div>
           <div className='text'>
             <div>{node.displayProperties.name}</div>
             <div className='state'>
-              <span>{states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}</span> / {states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
+              <span>{nodeProgress}</span> / {nodeTotal}
             </div>
           </div>
           <ProfileLink to={`/collections/${node.hash}`} />
@@ -142,9 +145,7 @@ class Root extends React.Component {
             </div>
           </div>
           <div className='node'>
-            <div className='parent'>
-              <ul className='list'>{nodes}</ul>
-            </div>
+            <div className='parent'>{nodes}</div>
           </div>
         </div>
         <div className='sidebar'>
