@@ -58,13 +58,11 @@
 }
 
 #sit-rep .module.milestones .list li.well-rested {
-  background-color: rgba(90, 163, 102, 0.15);
-  box-shadow: inset 0 0 0 2px #5aa366;
+  background-color: rgba(90, 163, 102, 0.3);
 }
 
 #sit-rep .module.milestones .list li.earned {
-  box-shadow: inset 0 0 0 2px #7bdcc1;
-  background-color: rgba(123, 220, 193, 0.2);
+  background-color: rgba(123, 220, 193, 0.3);
 }
 
 #sit-rep .module.milestones .list li > .basic > .text {
@@ -93,8 +91,8 @@
 }
 
 #sit-rep .module.milestones .list li .progress-bar .bar .fill {
-  background-color: rgba(255, 255, 255, 0.8);
-  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 100%;
   top: unset;
   bottom: 0;
 }

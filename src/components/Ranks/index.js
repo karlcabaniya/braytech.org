@@ -212,6 +212,8 @@ class Mode extends React.Component {
         }
       }
     };
+    
+    this.currentLanguage = this.props.i18n.getCurrentLanguage();
   }
 
   calculateResets = progressionHash => {
@@ -340,40 +342,53 @@ class Mode extends React.Component {
 
     // console.log(data[2000925172].gains)
     // console.log(characterProgressions[characterId].progressions[2000925172])
+    
+    let progressStepDescription = characterProgressions[characterId].progressions[hash].currentProgress === this.data[hash].totalPoints && characterProgressions[characterId].progressions[hash].stepIndex === manifest.DestinyProgressionDefinition[hash].steps.length ? manifest.DestinyProgressionDefinition[hash].steps[0].stepName : manifest.DestinyProgressionDefinition[hash].steps[(characterProgressions[characterId].progressions[hash].stepIndex + 1) % manifest.DestinyProgressionDefinition[hash].steps.length].stepName;
+
+    if (this.currentLanguage === 'en') {
+      progressStepDescription = progressStepDescription.toLowerCase()
+        .split(' ')
+        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+        .join(' ');
+      
+      let omega = progressStepDescription.split(' ');
+
+      progressStepDescription = omega[0] + ' ' + omega[1].toUpperCase();
+    }
 
     return (
-      <li>
+      <div className='rank'>
         <div className='icon'>
           <ObservedImage className='image' src={this.data[hash].icon} />
         </div>
         <div className='data'>
           <div>
-            <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString()}</div>
             <div className='name'>{t('Points')}</div>
+            <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString()}</div>
           </div>
           {hash !== 2000925172 ? (
             <>
               <div>
-                <div className='value'>{this.data[hash].totalResetCount}</div>
                 <div className='name'>{t('Total resets')}</div>
+                <div className='value'>{this.data[hash].totalResetCount}</div>
               </div>
               <div>
-                <div className='value'>{this.data[hash].currentResetCount}</div>
                 <div className='name'>{t('Season resets')}</div>
+                <div className='value'>{this.data[hash].currentResetCount}</div>
               </div>
             </>
           ) : null}
           {hash === 2000925172 ? (
             <>
               <div>
-                <div className='value'>{!this.state.glory.loading ? Number.isInteger(this.state.glory.streak) ? Math.max(this.state.glory.streak, 1) : '-' : <Spinner mini />}</div>
                 <div className='name'>{t('Win streak')}</div>
+                <div className='value'>{!this.state.glory.loading ? Number.isInteger(this.state.glory.streak) ? Math.max(this.state.glory.streak, 1) : t('Unknown') : <Spinner mini />}</div>
               </div>
               <div>
+                <div className='name'>{characterProgressions[characterId].progressions[2000925172].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
                 <div className='value'>
                   {this.state.glory.wins} {this.state.glory.wins ? (this.state.glory.wins === 1 ? t('win') : t('wins')) : '-'}
                 </div>
-                <div className='name'>{characterProgressions[characterId].progressions[2000925172].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
               </div>
             </>
           ) : null}
@@ -382,6 +397,7 @@ class Mode extends React.Component {
           <ProgressBar
             classNames='step'
             objective={{
+              progressDescription: progressStepDescription,
               completionValue: characterProgressions[characterId].progressions[hash].nextLevelAt
             }}
             progress={{
@@ -389,10 +405,12 @@ class Mode extends React.Component {
               objectiveHash: hash
             }}
             hideCheck
+            chunky
           />
           <ProgressBar
             classNames='total'
             objective={{
+              progressDescription: t('Total points'),
               completionValue: this.data[hash].totalPoints
             }}
             progress={{
@@ -400,9 +418,10 @@ class Mode extends React.Component {
               objectiveHash: hash
             }}
             hideCheck
+            chunky
           />
         </div>
-      </li>
+      </div>
     );
   }
 }
