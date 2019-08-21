@@ -273,9 +273,11 @@ class SitRep extends React.Component {
           <div className='sub-header sub'>
             <div>{t('Ranks')}</div>
           </div>
-          {[2772425241, 2626549951, 2000925172].map(hash => {
-            return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characters: member.data.profile.characters.data, characterProgressions }} />;
-          })}
+          <div className='ranks'>
+            {[2772425241, 2626549951, 2000925172].map(hash => {
+              return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characters: member.data.profile.characters.data, characterProgressions }} />;
+            })}
+          </div>
         </div>
         {group ? (
           <div className='module clan-roster'>

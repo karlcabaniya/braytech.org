@@ -358,19 +358,20 @@ class Mode extends React.Component {
 
     return (
       <div className='rank'>
-        <div className='icon'>
-          <ObservedImage className='image' src={this.data[hash].icon} />
+        <div className='header'>
+          <div className='icon'>
+            <ObservedImage className='image' src={this.data[hash].icon} />
+          </div>
+          <div className='text'>{manifest.DestinyActivityDefinition[this.data[hash].activityHash].displayProperties.name}</div>
         </div>
         <div className='data'>
-          <div>
-            <div className='name'>{t('Points')}</div>
-            <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString()}</div>
-          </div>
           {hash !== 2000925172 ? (
             <>
               <div>
-                <div className='name'>{t('Total resets')}</div>
-                <div className='value'>{this.data[hash].totalResetCount}</div>
+                <div className='tooltip' data-hash='total_resets' data-table='BraytechDefinition'>
+                  <div className='name'>{t('Total resets')}</div>
+                  <div className='value'>{this.data[hash].totalResetCount}</div>
+                </div>
               </div>
               <div>
                 <div className='name'>{t('Season resets')}</div>
@@ -381,13 +382,17 @@ class Mode extends React.Component {
           {hash === 2000925172 ? (
             <>
               <div>
-                <div className='name'>{t('Win streak')}</div>
-                <div className='value'>{!this.state.glory.loading ? Number.isInteger(this.state.glory.streak) ? Math.max(this.state.glory.streak, 1) : t('Unknown') : <Spinner mini />}</div>
+                <div className='tooltip' data-hash='glory_streak_calc' data-table='BraytechDefinition'>
+                  <div className='name'>{t('Win streak')}</div>
+                  <div className='value'>{!this.state.glory.loading ? Number.isInteger(this.state.glory.streak) ? Math.max(this.state.glory.streak, 1) : t('Unknown') : <Spinner mini />}</div>
+                </div>
               </div>
               <div>
-                <div className='name'>{characterProgressions[characterId].progressions[2000925172].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
-                <div className='value'>
-                  {this.state.glory.wins} {this.state.glory.wins ? (this.state.glory.wins === 1 ? t('win') : t('wins')) : '-'}
+                <div className='tooltip' data-hash='glory_wins_until' data-table='BraytechDefinition'>
+                  <div className='name'>{characterProgressions[characterId].progressions[2000925172].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
+                  <div className='value'>
+                    {this.state.glory.wins} {this.state.glory.wins ? (this.state.glory.wins === 1 ? t('win') : t('wins')) : '-'}
+                  </div>
                 </div>
               </div>
             </>
