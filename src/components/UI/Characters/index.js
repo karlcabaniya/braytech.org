@@ -31,7 +31,7 @@ class Characters extends React.Component {
     return (
       <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
         {characters.map(character => {
-          let capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
+          let capped = characterProgressions[character.characterId].progressions[1716568313].level >= characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
 
           let progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
 

@@ -239,7 +239,7 @@ class Header extends React.Component {
 
       const character = characters.find(character => character.characterId === characterId);
 
-      const capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
+      const capped = characterProgressions[character.characterId].progressions[1716568313].level >= characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
 
       const progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
 
