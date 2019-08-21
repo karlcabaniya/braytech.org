@@ -65,7 +65,7 @@
 .quest-line .sources {
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fill, 120px);
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .quest-line .vendor .name {
@@ -147,15 +147,10 @@
 
 
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1500px) {
 
-  .quest-line {
-    grid-gap: 2rem;
+  .quest-line .sources {
     grid-template-columns: 1fr;
-  }
-
-  .quest-line > .header {
-    grid-column: unset;
   }
 
 }
@@ -164,10 +159,12 @@
 
   .quest-line {
     grid-template-columns: 1fr;
+    grid-gap: 20px;
   }
 
   .quest-line > .header {
     grid-column: unset;
+    margin: 0;
   }
 
   .quest-line .module:last-child {
@@ -184,10 +181,6 @@
 
   .quest-line {
     grid-gap: 20px;
-  }
-
-  .quest-line > .header {
-    margin: 0;
   }
 
   .quest-line > .header .name {
