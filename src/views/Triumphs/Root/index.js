@@ -14,10 +14,11 @@ import RecordsSearch from '../../../components/RecordsSearch';
 
 class Root extends React.Component {
   render() {
-    const { t } = this.props;
-    const characterId = this.props.member.characterId;
-    const profileRecords = this.props.member.data.profile.profileRecords.data.records;
-    const characterRecords = this.props.member.data.profile.characterRecords.data;
+    const { t, member } = this.props;
+    const characters = member.data.profile.characters.data;
+    const character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
+    const profileRecords = member.data.profile.profileRecords.data.records;
+    const characterRecords = member.data.profile.characterRecords.data;
 
     const sealBars = {
       2588182977: {
@@ -72,7 +73,7 @@ class Root extends React.Component {
             return;
           }
           nodeChildNodeChildNode.children.records.forEach(record => {
-            let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];
+            let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[member.characterId].records[record.recordHash];
             let def = manifest.DestinyRecordDefinition[record.recordHash] || false;
             if (scope) {
               scope.hash = record.recordHash;
@@ -115,19 +116,17 @@ class Root extends React.Component {
       }
 
       definitionSeal.children.records.forEach(record => {
-        let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];
+        let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[member.characterId].records[record.recordHash];
         if (scope) {
           states.push(scope);
           recordsStates.push({...scope, seal: true});
-        } else {
-          // console.log(`138 Undefined state for ${record.recordHash}`);
         }
       });
 
       let nodeProgress = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
       let nodeTotal = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
 
-      // MOMENTS OF TRIUMPH: MMXIX does not have the above ^
+      // // MOMENTS OF TRIUMPH: MMXIX does not have the above ^
       if (definitionSeal.hash === 1002334440) {
         nodeProgress = states.filter(s => !enumerateRecordState(s.state).objectiveNotCompleted && enumerateRecordState(s.state).recordRedeemed).length;
         nodeTotal = states.length;
@@ -147,7 +146,7 @@ class Root extends React.Component {
             {nodeTotal && nodeProgress !== nodeTotal ? <div className='progress-bar-background' style={{ width: `${(nodeProgress / nodeTotal) * 100}%` }} /> : null}
             <ObservedImage className={cx('image', 'icon')} src={sealBars[definitionSeal.hash] ? `/static/images/extracts/badges/${sealBars[definitionSeal.hash].image}` : `https://www.bungie.net${definitionSeal.displayProperties.icon}`} />
             <div className='displayProperties'>
-              <div className='name'>{definitionSeal.displayProperties.name}</div>
+              <div className='name'>{manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[character.genderHash]}</div>
               {nodeTotal ? (
                 <div className='progress'>
                   <span>{nodeProgress}</span> / {nodeTotal}

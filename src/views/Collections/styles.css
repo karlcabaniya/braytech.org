@@ -80,6 +80,7 @@
   height: unset;
   margin: 0;
   transition: background-color 0.5s, box-shadow 0.25s;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 #collections .sidebar .badges .list li.badge::before {
@@ -337,6 +338,8 @@
   flex-basis: 100%;
   display: flex;
   justify-content: center;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 #collections .node.badge .children .icon .corners {
@@ -346,6 +349,7 @@
 #collections .node.badge .children .icon .image.badge {
   position: relative;
   height: initial;
+  background-size: cover;
   padding-bottom: calc(126 / 208 * 100%);
 }
 
