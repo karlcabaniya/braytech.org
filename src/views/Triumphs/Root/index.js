@@ -88,18 +88,18 @@ class Root extends React.Component {
         });
       });
 
-      let nodeCompleted = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length;
+      let nodeProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length;
       let nodeTotal = states.filter(record => !enumerateRecordState(record.state).invisible).length;
 
       nodes.push(
-        <li key={node.hash} className='linked'>
-          <div className='progress-bar-background' style={{ width: `${(nodeCompleted / nodeTotal) * 100}%` }} />
+        <li key={node.hash} className={cx('linked', { completed: nodeTotal > 0 && nodeProgress === nodeTotal })}>
+          {nodeTotal && nodeProgress !== nodeTotal ? <div className='progress-bar-background' style={{ width: `${(nodeProgress / nodeTotal) * 100}%` }} /> : null}
           <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
           <div className='displayProperties'>
             <div className='name'>{node.displayProperties.name}</div>
-            <div className='value'>
-              <span>{nodeCompleted}</span> / {nodeTotal}
-            </div>
+            {nodeTotal ? <div className='progress'>
+              <span>{nodeProgress}</span> / {nodeTotal}
+            </div> : null}
           </div>
           <ProfileLink to={`/triumphs/${node.hash}`} />
         </li>
@@ -124,16 +124,16 @@ class Root extends React.Component {
         }
       });
 
-      let progress = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
-      let total = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
+      let nodeProgress = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].progress;
+      let nodeTotal = profileRecords[definitionSeal.completionRecordHash] && profileRecords[definitionSeal.completionRecordHash].objectives[0].completionValue;
 
       // MOMENTS OF TRIUMPH: MMXIX does not have the above ^
       if (definitionSeal.hash === 1002334440) {
-        progress = states.filter(s => !enumerateRecordState(s.state).objectiveNotCompleted && enumerateRecordState(s.state).recordRedeemed).length;
-        total = states.length;
+        nodeProgress = states.filter(s => !enumerateRecordState(s.state).objectiveNotCompleted && enumerateRecordState(s.state).recordRedeemed).length;
+        nodeTotal = states.length;
       }
 
-      let isComplete = total && progress === total ? true : false;
+      let isComplete = nodeTotal && nodeProgress === nodeTotal ? true : false;
 
       sealNodes.push({
         completed: isComplete,
@@ -141,16 +141,16 @@ class Root extends React.Component {
           <li
             key={definitionSeal.hash}
             className={cx('linked', {
-              completed: total && isComplete
+              completed: nodeTotal && isComplete
             })}
           >
-            {total ? <div className='progress-bar-background' style={{ width: `${(progress / total) * 100}%` }} /> : null}
+            {nodeTotal && nodeProgress !== nodeTotal ? <div className='progress-bar-background' style={{ width: `${(nodeProgress / nodeTotal) * 100}%` }} /> : null}
             <ObservedImage className={cx('image', 'icon')} src={sealBars[definitionSeal.hash] ? `/static/images/extracts/badges/${sealBars[definitionSeal.hash].image}` : `https://www.bungie.net${definitionSeal.displayProperties.icon}`} />
             <div className='displayProperties'>
               <div className='name'>{definitionSeal.displayProperties.name}</div>
-              {total ? (
-                <div className='value'>
-                  <span>{progress}</span> / {total}
+              {nodeTotal ? (
+                <div className='progress'>
+                  <span>{nodeProgress}</span> / {nodeTotal}
                 </div>
               ) : null}
             </div>

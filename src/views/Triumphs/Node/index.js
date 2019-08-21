@@ -2,15 +2,14 @@ import React from 'react';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import { enumerateRecordState } from '../../../utils/destinyEnums';
 import { ProfileNavLink } from '../../../components/ProfileLink';
 import ObservedImage from '../../../components/ObservedImage';
 import Records from '../../../components/Records';
-import { enumerateRecordState } from '../../../utils/destinyEnums';
 
 class PresentationNode extends React.Component {
   render() {
     const { member, collectibles, primaryHash } = this.props;
-    const characterId = member.characterId;
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
 
@@ -64,7 +63,7 @@ class PresentationNode extends React.Component {
       node.children.records.forEach(r => {
         const definitionRecord = manifest.DestinyRecordDefinition[r.recordHash];
         const scopeRecord = definitionRecord.scope || 0;
-        const dataRecord = scopeRecord === 1 ? characterRecords[characterId].records[definitionRecord.hash] : profileRecords[definitionRecord.hash];
+        const dataRecord = scopeRecord === 1 ? characterRecords[member.characterId].records[definitionRecord.hash] : profileRecords[definitionRecord.hash];
 
         states.push(dataRecord);
       });
@@ -91,7 +90,7 @@ class PresentationNode extends React.Component {
           <div className='text'>
             <div className='name'>{node.displayProperties.name.length > 24 ? node.displayProperties.name.slice(0, 24) + '...' : node.displayProperties.name}</div>
             <div className='progress'>
-              {secondaryProgress}/{secondaryTotal}
+              <span>{secondaryProgress}</span> / {secondaryTotal}
             </div>
           </div>
           <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${secondaryHash}/${node.hash}`} />

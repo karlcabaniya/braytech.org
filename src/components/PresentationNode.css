@@ -76,7 +76,6 @@
 .presentation-node .list.secondary li {
   text-transform: uppercase;
   font-size: 14px;
-  letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0);
 }
@@ -91,6 +90,19 @@
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
+}
+
+.presentation-node .list.secondary li .text .name {
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 2px;
+}
+
+.presentation-node .list.secondary li .text .progress {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.presentation-node .list.secondary li .text .progress span {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .presentation-node .list.secondary li a {

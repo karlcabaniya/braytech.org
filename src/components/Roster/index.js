@@ -70,6 +70,21 @@ class Roster extends React.Component {
     });
   };
 
+  calculateResets = (progressionHash, characterId, characterProgressions) => {
+    return {
+      current: characterProgressions[characterId].progressions[progressionHash] && Number.isInteger(characterProgressions[characterId].progressions[progressionHash].currentResetCount) ? characterProgressions[characterId].progressions[progressionHash].currentResetCount : '?',
+      total: characterProgressions[characterId].progressions[progressionHash] && characterProgressions[characterId].progressions[progressionHash].seasonResets
+        ? characterProgressions[characterId].progressions[progressionHash].seasonResets.reduce((acc, curr) => {
+          if (curr.season > 3) {
+            return acc + curr.resets;
+          } else {
+            return acc;
+          }
+        }, 0)
+        : '?'
+    }
+  };
+
   render() {
     const { t, member, groupMembers, mini, showOnline = false } = this.props;
 
@@ -82,10 +97,10 @@ class Roster extends React.Component {
       let { lastPlayed, lastActivity, lastCharacter, display } = utils.lastPlayerActivity(m);
       let triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
       let valorPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2626549951].currentProgress : 0;
-      let valorResets = !isPrivate ? (m.profile.profileRecords.data.records[559943871] ? m.profile.profileRecords.data.records[559943871].objectives[0].progress : 0) : 0;
+      let valorResets = !isPrivate ? this.calculateResets(3882308435, m.profile.characters.data[0].characterId, m.profile.characterProgressions.data).total : 0;
       let gloryPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2000925172].currentProgress : 0;
       let infamyPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2772425241].currentProgress : 0;
-      let infamyResets = !isPrivate ? (m.profile.profileRecords.data.records[3901785488] ? m.profile.profileRecords.data.records[3901785488].objectives[0].progress : 0) : 0;
+      let infamyResets = !isPrivate ? this.calculateResets(2772425241, m.profile.characters.data[0].characterId, m.profile.characterProgressions.data).total : 0;
       let characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
       let weeklyXp = !isPrivate ? characterIds.reduce((currentValue, characterId) => {
         let characterProgress = m.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;

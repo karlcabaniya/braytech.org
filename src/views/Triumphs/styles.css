@@ -72,15 +72,20 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-#triumphs .list.parents li .displayProperties .value {
+#triumphs .list.parents li .displayProperties .progress {
   color: rgba(255, 255, 255, 0.5);
 }
 
-#triumphs .list.parents li .displayProperties .value span {
+#triumphs .list.parents li .displayProperties .progress span {
   color: rgba(255, 255, 255, 0.8);
 }
 
-#triumphs .list.parents li.completed .progress-bar-background {
+#triumphs .list.parents:not(.seals) li.completed {
+  background-color: rgba(207, 191, 124, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(207, 191, 124, 1);
+}
+
+#triumphs .list.parents.seals li.completed {
   background-color: #7b3274;
 }
 
