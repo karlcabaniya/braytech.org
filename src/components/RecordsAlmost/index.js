@@ -18,7 +18,7 @@ class RecordsAlmost extends React.Component {
   }
 
   render() {
-    const { t, member, sort } = this.props;
+    const { t, member, sort, limit } = this.props;
     const characterRecords = member && member.data.profile.characterRecords.data;
     const profileRecords = member && member.data.profile.profileRecords.data.records;
 
@@ -104,7 +104,7 @@ class RecordsAlmost extends React.Component {
       almost = orderBy(almost, [record => record.distance, record => record.score], ['desc', 'desc']);
     }
 
-    almost = this.props.limit ? almost.slice(0, this.props.limit) : almost;
+    almost = limit ? almost.slice(0, limit) : almost;
 
     return (
       <>
@@ -115,7 +115,7 @@ class RecordsAlmost extends React.Component {
         </ul>
         {this.props.pageLink ? (
           <ProfileLink className='button' to={{ pathname: '/triumphs/almost-complete', state: { from: '/triumphs' } }}>
-            <div className='text'>{t('See next 100')}</div>
+            <div className='text'>{t('See next {{limit}}', { limit: 200 })}</div>
           </ProfileLink>
         ) : null}
       </>
