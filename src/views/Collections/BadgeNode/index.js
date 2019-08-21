@@ -1,8 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 import { withTranslation } from 'react-i18next';
-import manifest from '../../../utils/manifest';
 
+import manifest from '../../../utils/manifest';
 import * as paths from '../../../utils/paths';
 import * as enums from '../../../utils/destinyEnums';
 import { ProfileNavLink } from '../../../components/ProfileLink';
@@ -10,6 +10,12 @@ import ObservedImage from '../../../components/ObservedImage';
 import Collectibles from '../../../components/Collectibles';
 
 class BadgeNode extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.entries = React.createRef();
+  }
+
   render() {
     const { t, member } = this.props;
     const characterCollectibles = member.data.profile.characterCollectibles.data;
@@ -191,7 +197,7 @@ class BadgeNode extends React.Component {
             {progress}
           </div>
         </div>
-        <div className='entries'>
+        <div className='entries' ref={this.entries}>
           <div className='class-nodes'>
             <ul className='list'>
               {definitionBadge.children.presentationNodes.map(p => {
@@ -206,7 +212,10 @@ class BadgeNode extends React.Component {
                 return (
                   <li key={p.presentationNodeHash} className='linked'>
                     <span className={`destiny-class_${enums.CLASSES[classNodes[p.presentationNodeHash]].toLowerCase()}`} />
-                    <ProfileNavLink isActive={isActive} to={`/collections/badge/${definitionBadge.hash}/${p.presentationNodeHash}`} />
+                    <ProfileNavLink isActive={isActive} to={`/collections/badge/${definitionBadge.hash}/${p.presentationNodeHash}`} onClick={() => {
+                      let element = this.entries.current;
+                      window.scrollTo(0, (element.offsetTop - element.scrollTop + element.clientTop - 34));
+                    }} />
                   </li>
                 )
               })}

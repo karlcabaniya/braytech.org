@@ -38,7 +38,7 @@ class Collections extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.props.match.params.quaternary && prevProps.location.pathname !== this.props.location.pathname) {
+    if (!this.props.match.params.quaternary && prevProps.location.pathname !== this.props.location.pathname && !(prevProps.match.params.primary === this.props.match.params.primary && this.props.match.params.primary === 'badge')) {
       window.scrollTo(0, 0);
     }
   }
