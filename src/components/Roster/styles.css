@@ -7,12 +7,12 @@
   /* height: unset; */
 }
 
-.list.roster .row:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.list.roster:not(.mini) .row:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.wrapper.dark-mode .list.roster .row:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.wrapper.dark-mode .list.roster:not(.mini) .row:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .list.roster .row::after {
