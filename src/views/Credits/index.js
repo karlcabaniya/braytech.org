@@ -14,6 +14,8 @@ class Credits extends React.Component {
     super(props);
 
     this.state = {};
+
+    this.supporters = this.shuffle(userFlair.slice().filter(m => m.trophies.find(t => t.classnames.includes('patron'))));
   }
 
   thanks = [
@@ -71,8 +73,6 @@ class Credits extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    
-    this.supporters = this.shuffle(userFlair.slice().filter(m => m.trophies.find(t => t.classnames.includes('patron'))));
   }
 
   render() {

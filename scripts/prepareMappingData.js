@@ -6,7 +6,7 @@ const fs = require('fs');
 const process = require('process');
 const fetch = require('node-fetch');
 
-const outputPath = 'src/data/mappings/index.json';
+const outputPath = 'src/data/lowlinesMappings/index.json';
 
 // if (process.argv.length !== 3) {
 //   console.log('Syntax: extractLowlinesData.js <lowlines.json>');
@@ -31,7 +31,7 @@ function work(input) {
       destinationHash: item.destinationHash,
       bubbleId: item.bubbleId,
       bubbleHash: item.bubbleHash,
-      recordHash: item.node.recordHash,
+      recordHash: parseInt(item.node.recordHash, 10),
       node: item.node
     };
   });

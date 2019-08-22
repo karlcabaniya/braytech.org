@@ -1,5 +1,5 @@
 import React from 'react';
-import sortBy from 'lodash/sortBy';
+import { sortBy } from 'lodash';
 import ReactMarkdown from 'react-markdown';
 
 import Checklist from './Checklist';
@@ -61,13 +61,15 @@ class ChecklistFactory {
     });
   }
 
-  corruptedEggs() {
+  corruptedEggs(requested = [], headless = false) {
     return this.m.numberedChecklist('Egg', {
       name: this.t('Corrupted Eggs'),
       icon: 'destiny-corrupted_eggs',
       progressDescription: this.t('Eggs destroyed'),
       itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`,
-      items: this.m.checklistItems(2609997025)
+      items: this.m.checklistItems(2609997025, false),
+      requested,
+      headless
     });
   }
 

@@ -1,12 +1,10 @@
-import sortBy from 'lodash/sortBy';
-import find from 'lodash/find';
-
 import React from 'react';
+import { find, sortBy } from 'lodash';
 
+import manifest from '../../utils/manifest';
+import lowlinesMappings from '../../data/lowlinesMappings';
 import Checklist from './Checklist';
 import ChecklistItem from './ChecklistItem';
-import mappings from '../../data/mappings';
-import manifest from '../../utils/manifest';
 
 // For when the mappings generated from lowlines' data don't have a
 // bubbleHash but do have a bubbleId. Inferred by cross-referencing
@@ -60,7 +58,7 @@ class ChecklistFactoryHelpers {
   }
 
   checklistItem(item, completed) {
-    const mapping = mappings.checklists[item.hash] || {};
+    const mapping = lowlinesMappings.checklists[item.hash] || {};
 
     const destinationHash = item.destinationHash || mapping.destinationHash;
     const bubbleHash = item.bubbleHash || mapping.bubbleHash;
@@ -112,7 +110,7 @@ class ChecklistFactoryHelpers {
         if (!profileRecord) return false;
         const completed = profileRecord.objectives[0].complete;
 
-        const mapping = mappings.records[hash];
+        const mapping = lowlinesMappings.records[hash];
         const destinationHash = mapping && mapping.destinationHash;
         const destination = destinationHash && manifest.DestinyDestinationDefinition[destinationHash];
         const place = destination && manifest.DestinyPlaceDefinition[destination.placeHash];
@@ -155,6 +153,7 @@ class ChecklistFactoryHelpers {
   checklist(options = {}) {
     const defaultOptions = {
       characterBound: false,
+      itemHash: i => i.hash,
       itemTitle: i => i.bubble || '???',
       itemSubtitle: i => i.place,
       mapPath: i => i.destinationHash && `destiny/maps/${i.destinationHash}/${i.hash}`
@@ -162,13 +161,17 @@ class ChecklistFactoryHelpers {
 
     options = { ...defaultOptions, ...options };
 
+    console.log(options)
+
     const items = options.sortBy ? sortBy(options.items, options.sortBy) : options.items;
-    const visible = this.hideCompletedItems ? items.filter(i => !i.completed) : items;
+    const requested = options.requested;
+    console.log(requested)
+    const visible = this.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.hash) > -1) : items;
 
     const checklist = (
-      <Checklist name={options.name} characterBound={options.characterBound} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
+      <Checklist name={options.name} characterBound={options.characterBound} headless={options.headless} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
         {visible.map(i => (
-          <ChecklistItem key={i.hash} completed={i.completed} mapPath={options.mapPath(i)}>
+          <ChecklistItem key={i.hash} itemHash={options.itemHash(i)} completed={i.completed} mapPath={options.mapPath(i)}>
             <div className='text'>
               <p>{options.itemTitle(i)}</p>
               {options.itemSubtitle(i) && <p>{options.itemSubtitle(i)}</p>}

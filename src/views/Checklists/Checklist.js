@@ -5,34 +5,52 @@ import { withTranslation } from 'react-i18next';
 import ProgressBar from '../../components/UI/ProgressBar';
 
 const Checklist = props => {
-  const { t, name, characterBound, totalItems, progressDescription, completedItems, children } = props;
+  const { t, name, characterBound, headless, totalItems, progressDescription, completedItems, children } = props;
 
-  return (
-    <>
-      <div className='module-header'>
-        <div className='sub-name'>{name}</div>
-        {characterBound ? <div className='tooltip' data-hash='character_bound' data-table='BraytechDefinition'><i className='segoe-uniE902' /></div> : null}
-      </div>
-      <ProgressBar
-        objective={{
-          progressDescription,
-          completionValue: totalItems
-        }}
-        progress={{
-          progress: completedItems
-        }}
-        hideCheck
-        chunky
-      />
-      {children.length > 0 ? (
-        <ul className='list'>{children}</ul>
-      ) : (
-        <div className='info'>
-          <div className='text'>{t("All complete")}</div>
+  if (headless) {
+    return (
+      <>
+        {children.length > 0 ? (
+          <ul className='list checklist-items'>{children}</ul>
+        ) : (
+          <div className='info'>
+            <div className='text'>{t('All complete')}</div>
+          </div>
+        )}
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div className='module-header'>
+          <div className='sub-name'>{name}</div>
+          {characterBound ? (
+            <div className='tooltip' data-hash='character_bound' data-table='BraytechDefinition'>
+              <i className='segoe-uniE902' />
+            </div>
+          ) : null}
         </div>
-      )}
-    </>
-  );
+        <ProgressBar
+          objective={{
+            progressDescription,
+            completionValue: totalItems
+          }}
+          progress={{
+            progress: completedItems
+          }}
+          hideCheck
+          chunky
+        />
+        {children.length > 0 ? (
+          <ul className='list checklist-items'>{children}</ul>
+        ) : (
+          <div className='info'>
+            <div className='text'>{t('All complete')}</div>
+          </div>
+        )}
+      </>
+    );
+  }
 };
 
 Checklist.propTypes = {
