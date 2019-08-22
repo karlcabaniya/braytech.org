@@ -95,7 +95,7 @@ class AboutView extends React.Component {
             {rewardState ? (
               rewardState.map(reward => (
                 <li key={reward.rewardEntryHash}>
-                  <Checkbox completed={reward.earned} text={weeklyClanEngramsDefinition[reward.rewardEntryHash].displayProperties.name} />
+                  <Checkbox checked={reward.earned} text={weeklyClanEngramsDefinition[reward.rewardEntryHash].displayProperties.name} />
                 </li>
               ))
             ) : (

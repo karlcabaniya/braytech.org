@@ -953,6 +953,7 @@ class ThisWeek extends React.Component {
         </ul>
         <h4>{t('Checklist items')}</h4>
         {this.checklistFactory.corruptedEggs(this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists[0], true).checklist}
+        {this.checklistFactory.ahamkaraBones(this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists[1], true).checklist}
       </div>
     );
 

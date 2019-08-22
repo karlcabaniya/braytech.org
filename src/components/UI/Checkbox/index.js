@@ -13,8 +13,7 @@ class Checkbox extends React.Component {
   }
 
   render() {
-    const { classNames, text, children, linked, action } = this.props;
-    const checked = this.props.completed || this.props.checked;
+    const { classNames, checked, text, children, linked, action } = this.props;
 
     return (
       <div
@@ -26,7 +25,7 @@ class Checkbox extends React.Component {
         }}
       >
         <div className={cx('check', { ed: checked })} />
-        <div className='text'>{text || children}</div>
+        {!children ? <div className='text'>{text}</div> : children}
       </div>
     );
   }

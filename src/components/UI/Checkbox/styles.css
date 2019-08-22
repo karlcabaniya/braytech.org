@@ -35,7 +35,7 @@
   transition: box-shadow 0.25s, transform 0.25s;
 }
 
-.check-box:hover .check::after {
+.check-box.linked:hover .check::after {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
   transform: scale(1) translateZ(0);
 }

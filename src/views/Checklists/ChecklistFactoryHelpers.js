@@ -136,15 +136,15 @@ class ChecklistFactoryHelpers {
   numberedChecklist(name, options = {}) {
     return this.checklist({
       sortBy: ['itemNumber'],
-      itemTitle: i => `${this.t(name)} ${i.itemNumber}`,
+      itemName: i => `${this.t(name)} ${i.itemNumber}`,
       ...options
     });
   }
 
   recordChecklist(options = {}) {
     return this.checklist({
-      itemTitle: i => i.record,
-      itemSubtitle: i => (i.bubble && i.place ? `${i.bubble}, ${i.place}` : <em>Forsaken Campaign</em>),
+      itemName: i => i.record,
+      itemLocation: i => (i.bubble && i.place ? `${i.bubble}, ${i.place}` : <em>Forsaken Campaign</em>),
       mapPath: i => i.destinationHash && `destiny/maps/${i.destinationHash}/record/${i.hash}`,
       ...options
     });
@@ -154,29 +154,21 @@ class ChecklistFactoryHelpers {
     const defaultOptions = {
       characterBound: false,
       itemHash: i => i.hash,
-      itemTitle: i => i.bubble || '???',
-      itemSubtitle: i => i.place,
+      itemName: i => i.bubble || '???',
+      itemLocation: i => i.place,
       mapPath: i => i.destinationHash && `destiny/maps/${i.destinationHash}/${i.hash}`
     };
 
     options = { ...defaultOptions, ...options };
 
-    console.log(options)
-
     const items = options.sortBy ? sortBy(options.items, options.sortBy) : options.items;
     const requested = options.requested;
-    console.log(requested)
     const visible = this.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.hash) > -1) : items;
 
     const checklist = (
       <Checklist name={options.name} characterBound={options.characterBound} headless={options.headless} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
         {visible.map(i => (
-          <ChecklistItem key={i.hash} itemHash={options.itemHash(i)} completed={i.completed} mapPath={options.mapPath(i)}>
-            <div className='text'>
-              <p>{options.itemTitle(i)}</p>
-              {options.itemSubtitle(i) && <p>{options.itemSubtitle(i)}</p>}
-            </div>
-          </ChecklistItem>
+          <ChecklistItem key={i.hash} itemHash={options.itemHash(i)} completed={i.completed} name={options.itemName(i)} location={options.itemLocation(i)} mapPath={options.mapPath(i)} />
         ))}
       </Checklist>
     );

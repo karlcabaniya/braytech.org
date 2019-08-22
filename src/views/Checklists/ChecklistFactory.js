@@ -22,8 +22,8 @@ class ChecklistFactory {
       items: this.m.checklistItems(4178338182, true),
       characterBound: true,
       sortBy: ['completed', 'place', 'bubble', 'activity'],
-      itemTitle: i => i.activity,
-      itemSubtitle: i => `${i.bubble}, ${i.place}`
+      itemName: i => i.activity,
+      itemLocation: i => `${i.bubble}, ${i.place}`
     });
   }
 
@@ -49,15 +49,17 @@ class ChecklistFactory {
     });
   }
 
-  ahamkaraBones() {
+  ahamkaraBones(requested = [], headless = false) {
     return this.m.checklist({
       name: this.t('Ahamkara Bones'),
       icon: 'destiny-ahamkara_bones',
       progressDescription: this.t('Bones found'),
-      itemTitle: i => i.lore,
-      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`,
+      itemName: i => i.lore,
+      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`,
       sortBy: ['itemNumber'],
-      items: this.m.checklistItems(1297424116)
+      items: this.m.checklistItems(1297424116),
+      requested,
+      headless
     });
   }
 
@@ -66,7 +68,7 @@ class ChecklistFactory {
       name: this.t('Corrupted Eggs'),
       icon: 'destiny-corrupted_eggs',
       progressDescription: this.t('Eggs destroyed'),
-      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`,
+      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`,
       items: this.m.checklistItems(2609997025, false),
       requested,
       headless
@@ -79,7 +81,7 @@ class ChecklistFactory {
       icon: 'destiny-cat_statues',
       progressDescription: this.t('Feline friends satisfied'),
       items: this.m.checklistItems(2726513366),
-      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`
+      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`
     });
   }
 
@@ -89,8 +91,8 @@ class ChecklistFactory {
       icon: 'destiny-sleeper_nodes',
       items: this.m.checklistItems(365218222),
       progressDescription: this.t('Sleeper nodes hacked'),
-      itemTitle: i => i.inventoryItem.replace('CB.NAV/RUN.()', ''),
-      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`,
+      itemName: i => i.inventoryItem.replace('CB.NAV/RUN.()', ''),
+      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`,
       sortBy: ['inventoryItem']
     });
   }
@@ -101,7 +103,7 @@ class ChecklistFactory {
       icon: 'destiny-ghost',
       items: this.m.checklistItems(2360931290),
       progressDescription: this.t('Ghost scans performed'),
-      itemSubtitle: i => `${i.bubble}, ${i.place}`
+      itemLocation: i => `${i.bubble}, ${i.place}`
     });
   }
 
@@ -111,7 +113,7 @@ class ChecklistFactory {
       icon: 'destiny-lost_memory_fragments',
       items: this.m.checklistItems(2955980198),
       progressDescription: this.t('Memories destroyed'),
-      itemSubtitle: i => i.bubble && `${i.bubble}, ${i.place}`
+      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`
     });
   }
 
