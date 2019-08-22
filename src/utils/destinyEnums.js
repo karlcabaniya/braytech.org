@@ -23,6 +23,7 @@ export const BUNGIENEXT = 254;
 export const PLATFORMS = {
   [XBOX]: 'Xbox',
   [PLAYSTATION]: 'PlayStation',
+  [PC_STEAM]: 'PC',
   [PC_BLIZZARD]: 'PC',
   [TIGERDEMON]: 'TigerDemon',
   [BUNGIENEXT]: 'BungieNext'

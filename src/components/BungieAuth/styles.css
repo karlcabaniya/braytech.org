@@ -70,6 +70,9 @@
 .bungie-auth .memberships .list li {
   padding: 0 1rem 0 0;
   cursor: pointer;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 56px 1fr 24px;
 }
 
 .bungie-auth .memberships .list li.linked:hover {
@@ -94,6 +97,13 @@
 
 .bungie-auth .memberships .list li.linked span.destiny-platform_playstation {
   background-color: #3F51B5;
+}
+
+.bungie-auth .memberships .list li.linked .crosssave {
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAACFklEQVR4AbXBS2jPcQAA8M9+fswcyCg1RkuEAxHS8rh4nNQsyaOQSJRYXocVB9vBI5xITLhMeURROHDAvCIhopAptZrERqHtZ/VV//2z/1cOPp+iLMv8RTXe4aF8UzAUF0Qk4vpgH+b50xzsR7GIVNx6VGAypmO2oAnjUIH1OKCAVNxYwTCMwk7BdVzEMowRkYhrFZTjk5yZuI4OtIpIxH0VlKBdTooqnEG7iETcQMEXDMBN3BLUYA9KRCTiygQfMATbsF1QinU4KiIRN1nwHE24iyacEqxBpYhEYWUYLbiDx3I2oVlwAnMUkOhZGZYIMlyR7xMWoA19cRmL9SCRrxTHUYENgqt470+PUIV29EYjGjBQN4lgMOrwBv0wESMEhxR2H3PRLFiFt6hDqS6J4Cxq8Rm7US+4h0sK+4rlqMZJwQDU4rwuCaoxC61YiGPojwwbkSksw0ncwDNU4iw6MAvVKWagBudxApMEH7EdLWjAU0zDBIxEORJ04gf24j0OYisWYGaKGjlFcn7iGp5hA6rQX1w55mM/DuiSyrcFD3AMR7ALh+XrxGu04AcGYSgGI8Nm3aTyPcRUVOI2igVf0IgzaEIHlmIQvuEVWjAcj3STytcLa7Fa8B27sQ9t8p3DVtSjGJ04gqvo8FsqpwgNWCF4gkV4qWdt2IFGnMZ4rEMJViHTJZWTYSVW+jcvMEEBif8s8Z/9AlUugh5sm7bEAAAAAElFTkSuQmCC");
+  opacity: 0.4;
 }
 
 
