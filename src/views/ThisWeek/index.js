@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import { flattenDepth } from 'lodash';
 
 import manifest from '../../utils/manifest';
 import lowlinesMappings from '../../data/lowlinesMappings';
@@ -26,6 +25,8 @@ class ThisWeek extends React.Component {
     const { milestones } = member.data;
 
     this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, collectibles.hideCompletedChecklistItems);
+
+    // console.log(Object.values(lowlinesMappings.checklists).filter(i => i.node && i.node.recordHash == 1859033173).map(r => parseInt(r.node.checklistHash, 10)))
 
     this.consolidatedInfo = {
       curse: {
@@ -95,7 +96,14 @@ class ThisWeek extends React.Component {
           items: [],
           collectibles: [],
           checklists: [
-            
+            {
+              name: 'corruptedEggs',
+              items: [1084474576, 1084474577, 1084474591]
+            },
+            {
+              name: 'ahamkaraBones',
+              items: [1387596463]
+            }
           ]
         },
         2: {
@@ -107,7 +115,17 @@ class ThisWeek extends React.Component {
             3422458392 // Never Forfeit (Time Trial)
           ],
           items: [],
-          collectibles: []
+          collectibles: [],
+          checklists: [
+            {
+              name: 'corruptedEggs',
+              items: [1034141726, 1067696996, 1067696997, 1067696998, 1084474590]
+            },
+            {
+              name: 'ahamkaraBones',
+              items: [1387596460]
+            }
+          ]
         },
         3: {
           challenge: t('Shattered Ruins'),
@@ -120,8 +138,14 @@ class ThisWeek extends React.Component {
           items: [],
           collectibles: [],
           checklists: [
-            [1067696992, 1067696993, 1067696999, 1067697005, 1084474583],
-            [1370818879]
+            {
+              name: 'corruptedEggs',
+              items: [1067696992, 1067696993, 1067696999, 1067697005, 1084474583]
+            },
+            {
+              name: 'ahamkaraBones',
+              items: [1370818879]
+            }
           ]
         },
         4: {
@@ -133,7 +157,17 @@ class ThisWeek extends React.Component {
             3578247132 // Honed for Speed (Time Trial)
           ],
           items: [],
-          collectibles: []
+          collectibles: [],
+          checklists: [
+            {
+              name: 'corruptedEggs',
+              items: [2974117605, 2974117605, 2974117605, 2974117605, 2974117605]
+            },
+            {
+              name: 'ahamkaraBones',
+              items: [1842255614]
+            }
+          ]
         },
         5: {
           challenge: t('Agonarch Abyss'),
@@ -144,7 +178,17 @@ class ThisWeek extends React.Component {
             990661957 // Argonach Agony (Time Trial)
           ],
           items: [],
-          collectibles: []
+          collectibles: [],
+          checklists: [
+            {
+              name: 'corruptedEggs',
+              items: [1084474580, 1084474581, 1084474582]
+            },
+            {
+              name: 'ahamkaraBones',
+              items: [1370818878]
+            }
+          ]
         },
         6: {
           challenge: t('Cimmerian Garrison'),
@@ -155,7 +199,17 @@ class ThisWeek extends React.Component {
             147323772 // Run the Gauntlet (Time Trial)
           ],
           items: [],
-          collectibles: []
+          collectibles: [],
+          checklists: [
+            {
+              name: 'corruptedEggs',
+              items: [1067696994, 1067696995, 1067697004]
+            },
+            {
+              name: 'ahamkaraBones',
+              items: [1370818866]
+            }
+          ]
         }
       },
       ep: {
@@ -952,8 +1006,9 @@ class ThisWeek extends React.Component {
           <Records selfLinkFrom='/this-week' {...this.props} hashes={this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
         </ul>
         <h4>{t('Checklist items')}</h4>
-        {this.checklistFactory.corruptedEggs(this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists[0], true).checklist}
-        {this.checklistFactory.ahamkaraBones(this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists[1], true).checklist}
+        {this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists.map(list => {
+          return this.checklistFactory[list.name](list.items, true).checklist;
+        })}
       </div>
     );
 
