@@ -1,5 +1,5 @@
 .ranks .rank {
-  margin: 0 0 2rem;
+  margin: 0 0 22px;
 }
 
 .ranks .rank:last-child {
@@ -36,6 +36,10 @@
   display: grid;
   grid-template-columns: 120px auto;
   grid-gap: 1rem;
+}
+
+.ranks .rank.mini .data {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .ranks .rank .data .name {

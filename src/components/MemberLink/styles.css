@@ -228,7 +228,7 @@ html.backdropfilter #member-overlay .background .acrylic {
 
 #member-overlay .wrapper-inner {
   position: relative;
-  padding: 3rem;
+  padding: 4rem 3rem 3rem;
   margin: 0 auto;
   max-width: 1280px;
   width: 100%;
@@ -238,23 +238,14 @@ html.backdropfilter #member-overlay .background .acrylic {
   font-size: 14px;
 }
 
-#member-overlay .wrapper-inner .sub-header {
-  border-bottom: none;
-  padding: 0;
-}
-
-#member-overlay .wrapper-inner .sub-header::after {
-  content: none;
-}
-
 #member-overlay .wrapper-inner .sub-header ~ .sub-header {
   margin: 2rem 0 1rem;
 }
 
 #member-overlay .wrapper-inner .head {
-  margin: 0 0 2rem;
-  padding: 52px 0 0;
   position: relative;
+  padding: 52px 0 0;
+  margin: 0 0 3rem;
 }
 
 #member-overlay .wrapper-inner .head .displayName {
@@ -273,7 +264,6 @@ html.backdropfilter #member-overlay .background .acrylic {
 #member-overlay .wrapper-inner .head .groupName {
   font-size: 18px;
   color: rgba(255, 255, 255, 0.6);
-  margin: 0 0 1.5rem;
 }
 
 #member-overlay .wrapper-inner .head .groupName::before {
@@ -285,6 +275,7 @@ html.backdropfilter #member-overlay .background .acrylic {
   display: grid;
   grid-template-columns: repeat(auto-fill, 38px);
   grid-gap: 3px;
+  margin: 1rem 0 0;
 }
 
 #member-overlay .wrapper-inner .stamps div i {
@@ -327,8 +318,6 @@ html.backdropfilter #member-overlay .background .acrylic {
 
 #member-overlay .wrapper-inner .basics > div {
   position: relative;
-  font-size: 14px;
-  line-height: 10px;
 }
 
 #member-overlay .wrapper-inner .basics > div:last-child {
@@ -336,18 +325,20 @@ html.backdropfilter #member-overlay .background .acrylic {
 }
 
 #member-overlay .wrapper-inner .basics div .name {
-  color: rgba(255, 255, 255, 0.4);
-  line-height: 1.4;
+  margin: 0 0 7px;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 #member-overlay .wrapper-inner .basics div .value {
   font-size: 18px;
-  margin: 0 0 8px;
+  line-height: 1;
 }
 
 #member-overlay .wrapper-inner .characters {
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 22px;
 }
 
 #member-overlay .wrapper-inner .characters .char {
@@ -413,7 +404,7 @@ html.backdropfilter #member-overlay .background .acrylic {
 
 #member-overlay .wrapper-inner .characters .char .title {
   --titleColor: rgb(228, 144, 220);
-  margin: 10px 0 0 0;
+  margin: 12px 0 0 0;
   position: relative;
   padding: 4px 12px 4px 34px;
   background-color: rgba(228, 144, 220, 0.1);
@@ -448,11 +439,11 @@ html.backdropfilter #member-overlay .background .acrylic {
 }
 
 #member-overlay .wrapper-inner .characters .char .state {
-  margin: 6px 0 0;
+  margin: 10px 0 0;
 }
 
 #member-overlay .wrapper-inner .characters .char .title ~ .state {
-  margin: 11px 0 0;
+  margin: 15px 0 0;
 }
 
 #member-overlay .wrapper-inner .characters .char .list.inventory-items {
@@ -479,23 +470,7 @@ html.backdropfilter #member-overlay .background .acrylic {
 
 #member-overlay .wrapper-inner .characters .char .state .time-before,
 #member-overlay .wrapper-inner .characters .char .state time {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-#member-overlay .wrapper-inner .list.progress-bars > li {
-  height: unset;
-}
-
-#member-overlay .wrapper-inner .list.progress-bars .progress-bar {
-  width: 100%;
-}
-
-#member-overlay .wrapper-inner .list.progress-bars .progress-bar .bar .fill {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-#member-overlay .wrapper-inner .list.progress-bars.seals .progress-bar.complete .bar .fill {
-  background-color: #7b3274;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 #member-overlay.error .background .border-top,
@@ -577,6 +552,7 @@ html.backdropfilter .wrapper.light-mode #member-overlay .sticky-nav {
 
   #member-overlay .wrapper-inner .head {
     padding: 38px 0 0;
+    margin: 0 0 2rem;
   }
 
   #member-overlay .wrapper-inner .head .displayName {

@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { flattenDepth, orderBy } from 'lodash';
+import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../ObservedImage';
@@ -337,7 +338,7 @@ class Mode extends React.Component {
   }
 
   render() {
-    const { t, hash } = this.props;
+    const { t, mini, hash } = this.props;
     const { characterId, characterProgressions } = this.props.data;
 
     // console.log(data[2000925172].gains)
@@ -357,7 +358,7 @@ class Mode extends React.Component {
     }
 
     return (
-      <div className='rank'>
+      <div className={cx('rank', { mini })}>
         <div className='header'>
           <div className='icon'>
             <ObservedImage className='image' src={this.data[hash].icon} />
@@ -365,6 +366,12 @@ class Mode extends React.Component {
           <div className='text'>{manifest.DestinyActivityDefinition[this.data[hash].activityHash].displayProperties.name}</div>
         </div>
         <div className='data'>
+          {mini ? (
+            <div>
+              <div className='name'>{t('Total points')}</div>
+              <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString('en-us')}</div>
+            </div>
+          ) : null}
           {hash !== 2000925172 ? (
             <>
               <div>
@@ -398,34 +405,36 @@ class Mode extends React.Component {
             </>
           ) : null}
         </div>
-        <div className='progress'>
-          <ProgressBar
-            classNames='step'
-            objective={{
-              progressDescription: progressStepDescription,
-              completionValue: characterProgressions[characterId].progressions[hash].nextLevelAt
-            }}
-            progress={{
-              progress: characterProgressions[characterId].progressions[hash].progressToNextLevel,
-              objectiveHash: hash
-            }}
-            hideCheck
-            chunky
-          />
-          <ProgressBar
-            classNames='total'
-            objective={{
-              progressDescription: t('Total points'),
-              completionValue: this.data[hash].totalPoints
-            }}
-            progress={{
-              progress: characterProgressions[characterId].progressions[hash].currentProgress,
-              objectiveHash: hash
-            }}
-            hideCheck
-            chunky
-          />
-        </div>
+        {!mini ? (
+          <div className='progress'>
+            <ProgressBar
+              classNames='step'
+              objective={{
+                progressDescription: progressStepDescription,
+                completionValue: characterProgressions[characterId].progressions[hash].nextLevelAt
+              }}
+              progress={{
+                progress: characterProgressions[characterId].progressions[hash].progressToNextLevel,
+                objectiveHash: hash
+              }}
+              hideCheck
+              chunky
+            />
+            <ProgressBar
+              classNames='total'
+              objective={{
+                progressDescription: t('Total points'),
+                completionValue: this.data[hash].totalPoints
+              }}
+              progress={{
+                progress: characterProgressions[characterId].progressions[hash].currentProgress,
+                objectiveHash: hash
+              }}
+              hideCheck
+              chunky
+            />
+          </div>
+        ) : null}
       </div>
     );
   }
