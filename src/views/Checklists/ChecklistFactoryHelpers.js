@@ -166,7 +166,7 @@ class ChecklistFactoryHelpers {
     const visible = this.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.hash) > -1) : items;
 
     const checklist = (
-      <Checklist name={options.name} characterBound={options.characterBound} headless={options.headless} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
+      <Checklist key={options.name} name={options.name} characterBound={options.characterBound} headless={options.headless} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
         {visible.map(i => (
           <ChecklistItem key={i.hash} itemHash={options.itemHash(i)} completed={i.completed} name={options.itemName(i)} location={options.itemLocation(i)} mapPath={options.mapPath(i)} />
         ))}
