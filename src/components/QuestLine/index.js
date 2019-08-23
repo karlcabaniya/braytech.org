@@ -102,7 +102,7 @@ class QuestLine extends React.Component {
 
       const rewardsQuestLine = this.getRewardsQuestLine(questLine);
       const rewardsQuestStep = (steps && steps.length && steps.filter(s => s.active) && steps.filter(s => s.active).length && steps.filter(s => s.active)[0].definitionStep && steps.filter(s => s.active)[0].definitionStep.value && steps.filter(s => s.active)[0].definitionStep.value.itemValue && steps.filter(s => s.active)[0].definitionStep.value.itemValue.length && steps.filter(s => s.active)[0].definitionStep.value.itemValue.filter(v => v.itemHash !== 0)) || [];
-      console.log(rewardsQuestLine);
+
       return (
         <div className='quest-line'>
           <div className='module header'>

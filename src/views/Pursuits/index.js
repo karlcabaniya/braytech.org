@@ -107,7 +107,7 @@ class Pursuits extends React.Component {
             className={cx(
               {
                 linked: true,
-                tooltip: definitionItem.itemType === 12 && viewport.width <= 600 ? false : true,
+                tooltip: isQuest && viewport.width <= 600 ? false : true,
                 exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
               },
               bucketName
