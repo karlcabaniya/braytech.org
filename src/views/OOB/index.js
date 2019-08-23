@@ -1,8 +1,6 @@
 import React from 'react';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import cx from 'classnames';
 
 import './styles.css';
 
@@ -25,7 +23,7 @@ class OOB extends React.Component {
     const { t } = this.props;
 
     return (
-      <div className={cx('view', this.props.theme.selected)} id='oob'>
+      <div className='view' id='oob'>
         <div className='module intro'>
           <div className='page-header'>
             <div className='name'>{t('Out of bounds')}</div>
@@ -43,13 +41,6 @@ class OOB extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    theme: state.theme
-  };
-}
-
 export default compose(
-  connect(mapStateToProps),
   withTranslation()
 )(OOB);

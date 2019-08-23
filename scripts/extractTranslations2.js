@@ -68,6 +68,7 @@ const FilesLogic = {
         catch (e) {
             console.log(e)
             console.error('ScrapeStrings Failed: ' + e.message);
+            console.log(filename)
         }
     },
     sortSourceStrings(sourceStrings) {
