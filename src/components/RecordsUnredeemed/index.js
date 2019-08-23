@@ -52,6 +52,7 @@ class RecordsUnredeemed extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    member: state.member,
     triumphs: state.triumphs
   };
 }
