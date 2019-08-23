@@ -105,6 +105,13 @@ export const rewardsQuestLineOverrides = {
       itemHash: 3403859120,
       quantity: 1
     }
+  ],
+  // Obsidian Dreams (emblem)
+  109998695: [
+    {
+      itemHash: 2083630698,
+      quantity: 1
+    }
   ]
 };
 
