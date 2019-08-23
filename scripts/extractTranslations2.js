@@ -66,9 +66,9 @@ const FilesLogic = {
             });
         }
         catch (e) {
-            console.log(e)
+            console.log(e);
+            console.log('>> ' + filename + ' <<');
             console.error('ScrapeStrings Failed: ' + e.message);
-            console.log(filename)
         }
     },
     sortSourceStrings(sourceStrings) {
