@@ -14,7 +14,7 @@ class Unredeemed extends React.Component {
           <div className='sub-header sub'>
             <div>{t('Unredeemed triumphs')}</div>
           </div>
-          <RecordsUnredeemed {...this.props} limit='100' selfLinkFrom='/triumphs/unredeemed' />
+          <RecordsUnredeemed limit='200' selfLinkFrom='/triumphs/unredeemed' />
         </div>
       </>
     );

@@ -201,7 +201,7 @@ class Root extends React.Component {
             <div>{t('Almost complete')}</div>
           </div>
           <div className='almost-complete'>
-            <RecordsAlmost {...this.props} limit='5' selfLinkFrom='/triumphs' pageLink />
+            <RecordsAlmost limit='5' selfLinkFrom='/triumphs' pageLink />
           </div>
         </div>
         <div className='module'>
@@ -209,7 +209,7 @@ class Root extends React.Component {
             <div>{t('Tracked records')}</div>
           </div>
           <div className='tracked'>
-            <RecordsTracked {...this.props} limit='5' selfLinkFrom='/triumphs' pageLink />
+            <RecordsTracked limit='5' selfLinkFrom='/triumphs' pageLink />
           </div>
         </div>
       </>

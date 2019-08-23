@@ -189,6 +189,17 @@ class Settings extends React.Component {
                 </div>
               </li>
               <li
+                key='hideDudRecords'
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideDudRecords');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideDudRecords} text={t('Hide dud records')} />
+                <div className='info'>
+                  <p>{t('Hides dud (empty, unused, or unobtainable) records from view')}</p>
+                </div>
+              </li>
+              <li
                 key='hideCompletedCollectibles'
                 onClick={() => {
                   this.selectCollectibleDisplayState('hideCompletedCollectibles');

@@ -92,7 +92,7 @@ class RecordsAlmost extends React.Component {
         distance,
         score,
         commonality: manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : 0,
-        element: <Records key={key} {...this.props} selfLink selfLinkFrom={selfLinkFrom} hashes={[key]} />
+        element: <Records key={key} selfLink selfLinkFrom={selfLinkFrom} hashes={[key]} />
       });
     });
 

@@ -43,7 +43,7 @@ class RecordsUnredeemed extends React.Component {
     return (
       <>
         <ul className={cx('list record-items')}>
-          <Records selfLink {...this.props} hashes={hashes} ordered='rarity' limit={limit} />
+          <Records selfLink hashes={hashes} ordered='rarity' limit={limit} />
         </ul>
       </>
     );

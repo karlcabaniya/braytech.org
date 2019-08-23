@@ -15,7 +15,7 @@ class Tracked extends React.Component {
           <div className='sub-header sub'>
             <div>{t('Tracked triumphs')}</div>
           </div>
-          <RecordsTracked {...this.props} limit='100' selfLinkFrom='/triumphs/tracked' />
+          <RecordsTracked limit='200' selfLinkFrom='/triumphs/tracked' />
         </div>
       </>
     );

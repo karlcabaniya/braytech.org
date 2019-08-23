@@ -1,18 +1,20 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
-import orderBy from 'lodash/orderBy';
+import { orderBy } from 'lodash';
 import cx from 'classnames';
 
+import manifest from '../../utils/manifest';
+import { enumerateRecordState } from '../../utils/destinyEnums';
+import * as paths from '../../utils/paths';
+import dudRecords from '../../data/dudRecords';
 import ObservedImage from '../ObservedImage';
 import { ProfileLink } from '../../components/ProfileLink';
 import Collectibles from '../../components/Collectibles';
 import ProgressBar from '../UI/ProgressBar';
-import manifest from '../../utils/manifest';
-import * as paths from '../../utils/paths';
-import { enumerateRecordState } from '../../utils/destinyEnums';
 
 import './styles.css';
 
@@ -102,7 +104,7 @@ class Records extends React.Component {
   render() {
     const { t, hashes, member, triumphs, collectibles, ordered, limit, selfLinkFrom, readLink, forceDisplay = false } = this.props;
     const highlight = parseInt(this.props.highlight, 10) || false;
-    const recordsRequested = hashes;
+    const recordsRequested = collectibles.hideDudRecords ? hashes.filter(hash => dudRecords.indexOf(hash) === -1) : hashes;
     const characterId = member && member.characterId;
     const characterRecords = member && member.data.profile.characterRecords.data;
     const profileRecords = member && member.data.profile.profileRecords.data.records;
@@ -308,7 +310,9 @@ class Records extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    triumphs: state.triumphs
+    member: state.member,
+    triumphs: state.triumphs,
+    collectibles: state.collectibles
   };
 }
 
@@ -321,6 +325,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
+  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps

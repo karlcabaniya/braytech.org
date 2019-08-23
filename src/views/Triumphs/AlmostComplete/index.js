@@ -15,7 +15,7 @@ class AlmostComplete extends React.Component {
           <div className='sub-header sub'>
             <div>{t('Almost complete')}</div>
           </div>
-          <RecordsAlmost {...this.props} limit='200' selfLinkFrom='/triumphs/almost-complete' />
+          <RecordsAlmost limit='200' selfLinkFrom='/triumphs/almost-complete' />
         </div>
       </>
     );

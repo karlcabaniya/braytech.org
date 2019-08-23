@@ -118,7 +118,7 @@ class PresentationNode extends React.Component {
         </div>
         <div className='entries'>
           <ul className='list tertiary record-items'>
-            <Records {...this.props} hashes={definitionTertiary.children.records.map(child => child.recordHash)} highlight={quaternaryHash} readLink={primaryHash === '564676571'} />
+            <Records hashes={definitionTertiary.children.records.map(child => child.recordHash)} highlight={quaternaryHash} readLink={primaryHash === '564676571'} />
           </ul>
         </div>
       </div>

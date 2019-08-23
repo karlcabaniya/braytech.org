@@ -82,7 +82,7 @@ class RecordsSearch extends React.Component {
           </div>
         </div>
         <ul className='list record-items'>
-          <Records selfLinkFrom='/triumphs' {...this.props} hashes={results.map(r => r[0])} ordered />
+          <Records selfLinkFrom='/triumphs' hashes={results.map(r => r[0])} ordered />
         </ul>
       </div>
     );

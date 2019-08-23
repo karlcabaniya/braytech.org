@@ -6,6 +6,7 @@ const defaultState = {
   hideCompletedChecklistItems: false,
   hideInvisibleCollectibles: true,
   hideInvisibleRecords: true,
+  hideDudRecords: true,
   hideCompletedCollectibles: false,
   ...savedState
 };

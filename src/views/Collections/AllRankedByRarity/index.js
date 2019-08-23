@@ -26,7 +26,7 @@ class AllRankedByRarity extends React.Component {
             <div>{t('All collectibles')}</div>
           </div>
           <ul className='list collection-items'>
-            <CollectiblesRarity {...this.props} {...this.state} hashes={collectibles} selfLinkFrom='/collections/all-ranked-by-rarity' />
+            <CollectiblesRarity hashes={collectibles} selfLinkFrom='/collections/all-ranked-by-rarity' />
           </ul>
         </div>
       </>

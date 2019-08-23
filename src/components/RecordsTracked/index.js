@@ -36,7 +36,7 @@ class RecordsTracked extends React.Component {
     return (
       <>
         <ul className={cx('list record-items')}>
-          <Records selfLink {...this.props} hashes={hashes} ordered='progress' limit={limit} />
+          <Records selfLink hashes={hashes} ordered='progress' limit={limit} />
           {hashes.length < 1 ? (
             <li key='none-tracked' className='none-tracked'>
               <div className='text'>{t("You aren't tracking any records yet!")}</div>
@@ -55,6 +55,7 @@ class RecordsTracked extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    member: state.member,
     triumphs: state.triumphs
   };
 }
