@@ -603,5 +603,10 @@
     "date": "2019-08-15T06:23:12.249Z",
     "version": "2.8.1",
     "content": "- fixed a complete cock up.\n- removed theming from notifications and made them nicer on mobile devices\n- reset saved authorisations\n- fixed a bug caused by the new _Clan Admin_ feature"
+  },
+  {
+    "date": "2019-08-23T18:05:32.271Z",
+    "version": "2.8.5",
+    "content": "- general code clean up\n- bugs, bugs, bugs\n- updated core dependancies\n- updated MemberLink\n- updated icons for new season\n- added completed parent node highlighting for _Triumphs_ and _Collections_\n- changed seals parent nodes display text from node name to node title reward name\n- improved _Collections_ badge mobile UX\n- redesigned Ranks component\n- fixed a cross save bug and added a cross save icon for authenticated accounts\n_Pursuits_ view updates\n  - reconstructed Sturm's quest line\n  - added rewards to a whole bunch of quest lines\n- added currently tracked record to tracked triumphs list (though there's no way to untrack it)\n- lots of performance optimisation\n- new _Hide dud records_ option added to _Settings_ view"
   }
 ]
