@@ -5,7 +5,6 @@ import { withTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
 import manifest from '../../utils/manifest';
-import lowlinesMappings from '../../data/lowlinesMappings';
 import ObservedImage from '../../components/ObservedImage';
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
@@ -25,8 +24,6 @@ class ThisWeek extends React.Component {
     const { milestones } = member.data;
 
     this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, collectibles.hideCompletedChecklistItems);
-
-    // console.log(Object.values(lowlinesMappings.checklists).filter(i => i.node && i.node.recordHash == 1859033173).map(r => parseInt(r.node.checklistHash, 10)))
 
     this.consolidatedInfo = {
       curse: {
