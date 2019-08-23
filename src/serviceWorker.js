@@ -19,8 +19,8 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  // if ((process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) || (process.env.REACT_APP_DEV === 'true' && 'serviceWorker' in navigator)) {
-  if (process.env.NODE_ENV === 'production' && process.env.REACT_APP_DEV === 'true' && 'serviceWorker' in navigator) {
+  // if ((process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) || (process.env.REACT_APP_BETA === 'true' && 'serviceWorker' in navigator)) {
+  if (process.env.NODE_ENV === 'production' && process.env.REACT_APP_BETA === 'true' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {

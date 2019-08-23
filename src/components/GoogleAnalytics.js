@@ -48,11 +48,10 @@ GoogleAnalytics.propTypes = {
 };
 
 const init = (options = {}) => {
-  //const env = window._env_ || {}
   const isGAEnabled = !!process.env.REACT_APP_GA_TRACKING_ID;
 
   if (isGAEnabled) {
-    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID, {
+    ReactGA.initialize(process.env.REACT_APP_BETA ? process.env.REACT_APP_GA_TRACKING_ID_BETA : process.env.REACT_APP_GA_TRACKING_ID, {
       debug: process.env.REACT_APP_GA_DEBUG === 'true',
       ...options
     });
