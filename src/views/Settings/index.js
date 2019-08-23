@@ -36,6 +36,7 @@ class Settings extends React.Component {
       hideCompletedChecklistItems: state === 'hideCompletedChecklistItems' ? !currentState.hideCompletedChecklistItems : currentState.hideCompletedChecklistItems,
       hideInvisibleCollectibles: state === 'hideInvisibleCollectibles' ? !currentState.hideInvisibleCollectibles : currentState.hideInvisibleCollectibles,
       hideInvisibleRecords: state === 'hideInvisibleRecords' ? !currentState.hideInvisibleRecords : currentState.hideInvisibleRecords,
+      hideDudRecords: state === 'hideDudRecords' ? !currentState.hideDudRecords : currentState.hideDudRecords,
       hideCompletedCollectibles: state === 'hideCompletedCollectibles' ? !currentState.hideCompletedCollectibles : currentState.hideCompletedCollectibles
     };
 
