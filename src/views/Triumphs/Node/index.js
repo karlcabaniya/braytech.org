@@ -1,4 +1,7 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -10,16 +13,17 @@ import Records from '../../../components/Records';
 
 class PresentationNode extends React.Component {
   render() {
-    const { member, collectibles, primaryHash } = this.props;
+    const { member, collectibles } = this.props;
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
 
+    let primaryHash = this.props.match.params.primary;
     let definitionPrimary = manifest.DestinyPresentationNodeDefinition[primaryHash];
 
     if (!definitionPrimary) {
       return null;
     }
-
+    
     let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : definitionPrimary.children.presentationNodes[0].presentationNodeHash;
     let definitionSecondary = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 
@@ -129,4 +133,15 @@ class PresentationNode extends React.Component {
   }
 }
 
-export default PresentationNode;
+
+function mapStateToProps(state, ownProps) {
+  return {
+    member: state.member,
+    collectibles: state.collectibles
+  };
+}
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps),
+)(PresentationNode);

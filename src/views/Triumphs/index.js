@@ -110,15 +110,15 @@ class Triumphs extends React.Component {
 
     if (!primaryHash) {
       return (
-        <div className={cx('view', 'presentation-node', 'root')} id='triumphs'>
-          <Root {...this.props} />
+        <div className='view presentation-node root' id='triumphs'>
+          <Root />
         </div>
       );
     } else if (primaryHash === 'seal') {
       return (
         <>
-          <div className={cx('view', 'presentation-node')} id='triumphs'>
-            <SealNode {...this.props} />
+          <div className='view presentation-node' id='triumphs'>
+            <SealNode />
           </div>
           <div className='sticky-nav'>
             <div />
@@ -138,7 +138,7 @@ class Triumphs extends React.Component {
       return (
         <>
           <div className={cx('view')} id='triumphs'>
-            <AlmostComplete {...this.props} sort={this.state.almostCompleteSort} />
+            <AlmostComplete sort={this.state.almostCompleteSort} />
           </div>
           <div className='sticky-nav'>
             <div />
@@ -157,8 +157,8 @@ class Triumphs extends React.Component {
     } else if (primaryHash === 'tracked') {
       return (
         <>
-          <div className={cx('view')} id='triumphs'>
-            <Tracked {...this.props} />
+          <div className='view' id='triumphs'>
+            <Tracked />
           </div>
           <div className='sticky-nav'>
             <div />
@@ -176,8 +176,8 @@ class Triumphs extends React.Component {
     } else if (primaryHash === 'unredeemed') {
       return (
         <>
-          <div className={cx('view')} id='triumphs'>
-            <Unredeemed {...this.props} />
+          <div className='view' id='triumphs'>
+            <Unredeemed />
           </div>
           <div className='sticky-nav'>
             <div />
@@ -195,8 +195,8 @@ class Triumphs extends React.Component {
     } else {
       return (
         <>
-          <div className={cx('view', 'presentation-node', 'parent')} id='triumphs'>
-            <Node {...this.props} primaryHash={primaryHash} />
+          <div className='view presentation-node parent' id='triumphs'>
+            <Node />
           </div>
           <div className='sticky-nav'>
             <div />

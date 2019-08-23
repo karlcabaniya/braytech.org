@@ -1,13 +1,12 @@
 import React from 'react';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
 import RecordsAlmost from '../../../components/RecordsAlmost';
 
 class AlmostComplete extends React.Component {
   render() {
-    const { t } = this.props;
+    const { t, sort } = this.props;
 
     return (
       <>
@@ -15,20 +14,13 @@ class AlmostComplete extends React.Component {
           <div className='sub-header sub'>
             <div>{t('Almost complete')}</div>
           </div>
-          <RecordsAlmost limit='200' selfLinkFrom='/triumphs/almost-complete' />
+          <RecordsAlmost sort={sort} limit='200' selfLinkFrom='/triumphs/almost-complete' />
         </div>
       </>
     );
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    member: state.member
-  };
-}
-
 export default compose(
-  connect(mapStateToProps),
   withTranslation()
 )(AlmostComplete);

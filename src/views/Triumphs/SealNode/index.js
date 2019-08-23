@@ -1,6 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
@@ -139,12 +140,12 @@ class SealNode extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    theme: state.theme,
     collectibles: state.collectibles
   };
 }
 
 export default compose(
+  withRouter,
   connect(mapStateToProps),
   withTranslation()
 )(SealNode);
