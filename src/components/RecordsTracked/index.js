@@ -13,9 +13,10 @@ class RecordsTracked extends React.Component {
     const { t, member, triumphs, limit, pageLink } = this.props;
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
+    const profileRecordsTracked = member && member.data.profile.profileRecords.data.trackedRecordHash ? [member.data.profile.profileRecords.data.trackedRecordHash] : [];
     const characterId = member.characterId;
 
-    let hashes = triumphs.tracked;
+    let hashes = triumphs.tracked.concat(profileRecordsTracked);
 
     hashes = hashes.filter(hash => {
 

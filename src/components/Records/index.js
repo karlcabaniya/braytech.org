@@ -106,6 +106,7 @@ class Records extends React.Component {
     const characterId = member && member.characterId;
     const characterRecords = member && member.data.profile.characterRecords.data;
     const profileRecords = member && member.data.profile.profileRecords.data.records;
+    const profileRecordsTracked = member && member.data.profile.profileRecords.data.trackedRecordHash ? [member.data.profile.profileRecords.data.trackedRecordHash] : [];
     const tracked = triumphs.tracked;
 
     let recordsOutput = [];
@@ -113,17 +114,6 @@ class Records extends React.Component {
       const definitionRecord = manifest.DestinyRecordDefinition[hash];
       const recordScope = definitionRecord.scope || 0;
       const recordData = recordScope === 1 ? characterRecords && characterRecords[characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
-
-      // console.log(definitionRecord.displayProperties.name)
-      // console.log(recordData)
-      // console.log(enumerateRecordState(recordData.state))
-      // console.log('---')
-      // const recordData = {
-      //   ...characterRecords && characterRecords[characterId].records[definitionRecord.hash],
-      //   ...profileRecords && profileRecords[definitionRecord.hash]
-      // };
-
-      //console.log(enumerateRecordState(characterRecords[characterId].records[definitionRecord.hash] && characterRecords[characterId].records[definitionRecord.hash].state), enumerateRecordState(profileRecords[definitionRecord.hash] && profileRecords[definitionRecord.hash].state))
 
       let objectives = [];
       let completionValueTotal = 0;
@@ -159,7 +149,7 @@ class Records extends React.Component {
             let p = parseInt(playerProgress.progress, 10);
 
             completionValueTotal = completionValueTotal + v;
-            progressValueTotal = progressValueTotal + (p > v ? v : p); // prevents progress values that are greater than the completion value from affecting the average
+            progressValueTotal = progressValueTotal + (p > v ? v : p);
           }
         });
       }
@@ -208,9 +198,6 @@ class Records extends React.Component {
       } else {
         let description = definitionRecord.displayProperties.description !== '' ? definitionRecord.displayProperties.description : false;
         description = !description && definitionRecord.loreHash ? manifest.DestinyLoreDefinition[definitionRecord.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
-        // if (recordDefinition.hash === 2367932631) { ????
-        //   console.log(enumerateRecordState(state));
-        // }
 
         let linkTo;
         if (link && selfLinkFrom) {
@@ -257,11 +244,11 @@ class Records extends React.Component {
                 highlight: highlight && highlight === definitionRecord.hash,
                 completed: enumerateRecordState(state).recordRedeemed,
                 unredeemed: !enumerateRecordState(state).recordRedeemed && !enumerateRecordState(state).objectiveNotCompleted,
-                tracked: tracked.includes(definitionRecord.hash) && !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted,
+                tracked: tracked.concat(profileRecordsTracked).includes(definitionRecord.hash) && !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted,
                 'no-description': !description
               })}
             >
-              {!enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted ? (
+              {!enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted && !profileRecordsTracked.includes(definitionRecord.hash) ? (
                 <div className='track-this' onClick={this.trackThisClick} data-hash={definitionRecord.hash}>
                   <div />
                 </div>
