@@ -6,6 +6,7 @@ import { orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
+import { setDataQuestLineOverrides } from '../../data/questLines';
 import * as ls from '../../utils/localStorage';
 import ObservedImage from '../../components/ObservedImage';
 import { NoAuth, DiffProfile } from '../../components/BungieAuth';
@@ -70,9 +71,6 @@ class Pursuits extends React.Component {
     const exceptionsItems = [1160544509, 1160544508, 1160544511];
 
     let items = [];
-    let questOverrides = [
-      2412366792 // Enigmatic Blueprint
-    ];
 
     pursuits.forEach((item, i) => {
       const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
@@ -93,7 +91,7 @@ class Pursuits extends React.Component {
 
       const itemType = definitionItem.itemType === 0 && exceptionsVendor.includes(vendorSource) && !exceptionsItems.includes(item.itemHash) ? 26 : definitionItem.itemType;
 
-      const isQuest = definitionItem.itemType === 12 || questOverrides.includes[item.itemHash];
+      const isQuest = definitionItem.itemType === 12 || setDataQuestLineOverrides[item.itemHash];
 
       items.push({
         ...item,

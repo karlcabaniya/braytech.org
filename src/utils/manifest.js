@@ -98,16 +98,14 @@ const customs = {
 };
 
 const customsMerge = (bungie, customs) => {
-
   for (const key in customs) {
     if (customs.hasOwnProperty(key) && bungie.hasOwnProperty(key)) {
-      
       bungie[key] = merge(bungie[key], customs[key]);
     }
   }
 
   return bungie;
-}
+};
 
 const manifest = {
   set: (newManifest, lang) => {
@@ -123,13 +121,26 @@ const manifest = {
 
     Object.assign(newManifest.DestinyInventoryItemDefinition, customs[lang].DestinyInventoryItemDefinition);
 
-    // extras
-
     // add emotes to flair presentation node
-    if (newManifest.DestinyPresentationNodeDefinition[3066887728] && newManifest.DestinyPresentationNodeDefinition[3066887728].children && newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes)
+    if (newManifest.DestinyPresentationNodeDefinition[3066887728] && newManifest.DestinyPresentationNodeDefinition[3066887728].children && newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes) {
       newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes.push({
         presentationNodeHash: 'emotes'
       });
+    }
+
+    // build Enigmatic Blueprint quest line
+    if (newManifest.DestinyInventoryItemDefinition[2412366792]) {
+      newManifest.DestinyInventoryItemDefinition['2412366792_enigmatic_blueprint'] = {
+        displayProperties: {
+          description: newManifest.DestinyInventoryItemDefinition[2412366792].displayProperties && newManifest.DestinyInventoryItemDefinition[2412366792].displayProperties.description,
+          name: newManifest.DestinyInventoryItemDefinition[2412366792].displayProperties && newManifest.DestinyInventoryItemDefinition[2412366792].displayProperties.name,
+        },
+        objectives: {
+          objectiveHashes: newManifest.DestinyInventoryItemDefinition[2412366792].objectives && newManifest.DestinyInventoryItemDefinition[2412366792].objectives.objectiveHashes
+        },
+        hash: '2412366792_enigmatic_blueprint'
+      };
+    }
 
     Object.assign(manifest, newManifest);
   }
