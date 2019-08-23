@@ -127,11 +127,27 @@ export const setDataQuestLineOverrides = {
     },
     {
       trackingValue: 0,
+      itemHash: 196262243
+    },
+    {
+      trackingValue: 0,
+      itemHash: 3445216955
+    },
+    {
+      trackingValue: 0,
       itemHash: 196262240
     },
     {
       trackingValue: 0,
+      itemHash: 196262241
+    },
+    {
+      trackingValue: 0,
       itemHash: 196262246
+    },
+    {
+      trackingValue: 0,
+      itemHash: 196262247
     }
   ],
   2412366792: [
