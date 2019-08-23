@@ -25,62 +25,10 @@ class Header extends React.Component {
 
     this.updateFlash = false;
     this.navEl = React.createRef();
-  }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.member.data.updated !== this.props.member.data.updated && this.state.lastUpdate !== this.props.member.data.updated && !this.state.updateFlash) {
-      this.setState({ lastUpdate: this.props.member.data.updated, updateFlash: true });
-    }
-    if (this.state.updateFlash) {
-      window.setTimeout(() => {
-        this.setState({ updateFlash: false });
-      }, 2700);
-    }
-    if (this.state.navOpen) {
-      this.navEl.current.addEventListener('touchmove', this.nav_touchMove, true);
-    }
-  }
+    const { t, viewport } = this.props;
 
-  toggleNav = () => {
-    if (!this.state.navOpen) {
-      this.setState({ navOpen: true });
-    } else {
-      this.setState({ navOpen: false });
-    }
-  };
-
-  closeNav = () => {
-    if (this.state.navOpen) {
-      this.setState({ navOpen: false });
-    }
-  };
-
-  openNav = () => {
-    this.setState({ navOpen: true });
-  };
-
-  navOverlayLink = state => {
-    if (state) {
-      return (
-        <div className='trigger' onClick={this.toggleNav}>
-          <i className='segoe-uniE106' />
-          {this.props.t('Exit')}
-        </div>
-      );
-    } else {
-      return (
-        <div className='trigger' onClick={this.toggleNav}>
-          <i className='segoe-uniEA55' />
-          {this.props.t('Views')}
-        </div>
-      );
-    }
-  };
-
-  render() {
-    const { t, route, viewport, member } = this.props;
-    
-    const views = [
+    this.views = [
       {
         name: t('Clan'),
         desc: t('Check in on your clan'),
@@ -211,6 +159,70 @@ class Header extends React.Component {
         group: 2
       }
     ];
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.member.data.updated !== this.props.member.data.updated && this.state.lastUpdate !== this.props.member.data.updated && !this.state.updateFlash && this.mounted) {
+      this.setState({ lastUpdate: this.props.member.data.updated, updateFlash: true });
+    }
+    if (this.state.updateFlash) {
+      window.setTimeout(() => {
+        if (this.mounted) {
+          this.setState({ updateFlash: false });
+        }
+      }, 2700);
+    }
+    if (this.state.navOpen) {
+      this.navEl.current.addEventListener('touchmove', this.nav_touchMove, true);
+    }
+  }
+
+  toggleNav = () => {
+    if (!this.state.navOpen) {
+      this.setState({ navOpen: true });
+    } else {
+      this.setState({ navOpen: false });
+    }
+  };
+
+  closeNav = () => {
+    if (this.state.navOpen) {
+      this.setState({ navOpen: false });
+    }
+  };
+
+  openNav = () => {
+    this.setState({ navOpen: true });
+  };
+
+  navOverlayLink = state => {
+    if (state) {
+      return (
+        <div className='trigger' onClick={this.toggleNav}>
+          <i className='segoe-uniE106' />
+          {this.props.t('Exit')}
+        </div>
+      );
+    } else {
+      return (
+        <div className='trigger' onClick={this.toggleNav}>
+          <i className='segoe-uniEA55' />
+          {this.props.t('Views')}
+        </div>
+      );
+    }
+  };
+
+  render() {
+    const { t, route, viewport, member } = this.props;
 
     let viewsInline = false;
     if (viewport.width >= 1280) {
@@ -283,7 +295,7 @@ class Header extends React.Component {
             {viewsInline ? (
               <div className='views'>
                 <ul>
-                  {views
+                  {this.views
                     .filter(v => v.inline)
                     .map(view => {
                       if (view.profile) {
@@ -341,7 +353,7 @@ class Header extends React.Component {
               <div className='ui'>
                 <div className='views'>
                   <ul>
-                    {views
+                    {this.views
                       .filter(v => v.inline)
                       .map(view => {
                         if (view.profile) {
@@ -389,7 +401,7 @@ class Header extends React.Component {
               <div className='types'>
                 <div className='type progression'>
                   <ul>
-                    {views
+                    {this.views
                       .filter(v => v.group === 0 && !v.hidden)
                       .map(view => {
                         if (view.profile) {
@@ -414,7 +426,7 @@ class Header extends React.Component {
                 </div>
                 <div className='type ancillary'>
                   <ul>
-                    {views
+                    {this.views
                       .filter(v => v.group === 1 && !v.hidden)
                       .map(view => {
                         if (view.profile) {
@@ -439,7 +451,7 @@ class Header extends React.Component {
                 </div>
                 <div className='type ancillary'>
                   <ul>
-                    {views
+                    {this.views
                       .filter(v => v.group === 2 && !v.hidden)
                       .map(view => {
                         if (view.profile) {
