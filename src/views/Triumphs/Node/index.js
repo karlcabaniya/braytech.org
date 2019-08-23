@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import dudRecords from '../../../data/dudRecords';
 import { enumerateRecordState } from '../../../utils/destinyEnums';
 import { ProfileNavLink } from '../../../components/ProfileLink';
 import ObservedImage from '../../../components/ObservedImage';
@@ -64,6 +65,8 @@ class PresentationNode extends React.Component {
         const definitionRecord = manifest.DestinyRecordDefinition[r.recordHash];
         const scopeRecord = definitionRecord.scope || 0;
         const dataRecord = scopeRecord === 1 ? characterRecords[member.characterId].records[definitionRecord.hash] : profileRecords[definitionRecord.hash];
+
+        if (collectibles.hideDudRecords && dudRecords.indexOf(r.recordHash) > -1) return;
 
         states.push(dataRecord);
       });

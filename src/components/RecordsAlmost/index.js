@@ -6,6 +6,7 @@ import orderBy from 'lodash/orderBy';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
+import dudRecords from '../../data/dudRecords';
 import { enumerateRecordState } from '../../utils/destinyEnums';
 import { ProfileLink } from '../../components/ProfileLink';
 import Records from '../Records';
@@ -18,7 +19,7 @@ class RecordsAlmost extends React.Component {
   }
 
   render() {
-    const { t, member, sort, limit } = this.props;
+    const { t, member, collectibles, sort, limit } = this.props;
     const characterRecords = member && member.data.profile.characterRecords.data;
     const profileRecords = member && member.data.profile.profileRecords.data.records;
 
@@ -33,23 +34,22 @@ class RecordsAlmost extends React.Component {
       });
     });
 
-    // ignore triumph seals
-    // manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode].children.presentationNodes.forEach(child => {
-    //   ignores.push(manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash].completionRecordHash);
-    // });
-
     let records = {
       ...profileRecords,
       ...characterRecords[member.characterId].records
     }
 
     Object.entries(records).forEach(([key, record]) => {
-      if (manifest.DestinyRecordDefinition[key].redacted) {
+      const hash = parseInt(key, 10);
+
+      if (collectibles.hideDudRecords && dudRecords.indexOf(hash) > -1) return;
+
+      if (manifest.DestinyRecordDefinition[hash].redacted) {
         return;
       }
 
       // ignore collections badges etc
-      if (ignores.includes(parseInt(key, 10))) {
+      if (ignores.includes(hash)) {
         return;
       }
 
@@ -68,12 +68,7 @@ class RecordsAlmost extends React.Component {
         progressValueTotal = progressValueTotal + (p > v ? v : p); // prevents progress values that are greater than the completion value from affecting the average
       });
 
-      // var mark = false;
-
       const distance = progressValueTotal / completionValueTotal;
-      // if (distance > 0.81 && distance < 1.0) {
-      //   mark = true;
-      // }
 
       if (distance >= 1.0) {
         return;
@@ -81,7 +76,7 @@ class RecordsAlmost extends React.Component {
 
       let selfLinkFrom = this.props.selfLinkFrom || false;
 
-      let definitionRecord = manifest.DestinyRecordDefinition[key] || false;
+      let definitionRecord = manifest.DestinyRecordDefinition[hash] || false;
       let score = 0;
 
       if (definitionRecord && definitionRecord.completionInfo) {
@@ -92,7 +87,7 @@ class RecordsAlmost extends React.Component {
         distance,
         score,
         commonality: manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : 0,
-        element: <Records key={key} selfLink selfLinkFrom={selfLinkFrom} hashes={[key]} />
+        element: <Records key={hash} selfLink selfLinkFrom={selfLinkFrom} hashes={[hash]} />
       });
     });
 
@@ -125,7 +120,8 @@ class RecordsAlmost extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    collectibles: state.collectibles
   };
 }
 

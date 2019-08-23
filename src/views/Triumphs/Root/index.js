@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import dudRecords from '../../../data/dudRecords';
 import { enumerateRecordState } from '../../../utils/destinyEnums';
 import { ProfileLink } from '../../../components/ProfileLink';
 import ObservedImage from '../../../components/ObservedImage';
@@ -14,8 +15,7 @@ import RecordsSearch from '../../../components/RecordsSearch';
 
 class Root extends React.Component {
   render() {
-    const { t, member } = this.props;
-    const characters = member.data.profile.characters.data;
+    const { t, member, collectibles } = this.props;
     const character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterRecords = member.data.profile.characterRecords.data;
@@ -69,21 +69,19 @@ class Root extends React.Component {
         nodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
           let nodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
           if (nodeChildNodeChildNode.redacted) {
-            // console.log(nodeChildNodeChildNode)
             return;
           }
           nodeChildNodeChildNode.children.records.forEach(record => {
             let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[member.characterId].records[record.recordHash];
             let def = manifest.DestinyRecordDefinition[record.recordHash] || false;
             if (scope) {
+
+              if (collectibles.hideDudRecords && dudRecords.indexOf(record.recordHash) > -1) return;
+
               scope.hash = record.recordHash;
               scope.scoreValue = def && def.completionInfo ? def.completionInfo.ScoreValue : 0;
               states.push(scope);
               recordsStates.push(scope);
-            } else {
-              // console.log(`107 Undefined state for ${record.recordHash}`);
-              // states.push({ state: 0 });
-              // recordsStates.push({ state: 0 });
             }
           });
         });
@@ -219,7 +217,8 @@ class Root extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    collectibles: state.collectibles
   };
 }
 
