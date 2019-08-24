@@ -354,7 +354,7 @@ class Mode extends React.Component {
       
       let omega = progressStepDescription.split(' ');
 
-      progressStepDescription = omega[0] + ' ' + omega[1].toUpperCase();
+      if (omega.length) progressStepDescription = omega[0] + ' ' + omega[1].toUpperCase();
     }
 
     return (
