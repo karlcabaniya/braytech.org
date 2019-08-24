@@ -112,6 +112,41 @@ export const rewardsQuestLineOverrides = {
       itemHash: 2083630698,
       quantity: 1
     }
+  ],
+  // Malfeasance
+  2791741089: [
+    {
+      itemHash: 204878059,
+      quantity: 1
+    }
+  ],
+  // Legend of Acrius
+  1306722632: [
+    {
+      itemHash: 3580904580,
+      quantity: 1
+    }
+  ],
+  // Luna's Howl
+  1404963370: [
+    {
+      itemHash: 153979396,
+      quantity: 1
+    }
+  ],
+  // Forging the Broadsword
+  2799168771: [
+    {
+      itemHash: 1161276682,
+      quantity: 1
+    }
+  ],
+  // Thorn
+  3080875461: [
+    {
+      itemHash: 3973202132,
+      quantity: 1
+    }
   ]
 };
 
