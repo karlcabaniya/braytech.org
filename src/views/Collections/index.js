@@ -68,15 +68,15 @@ class Collections extends React.Component {
 
     if (!primaryHash) {
       return (
-        <div className={cx('view', 'presentation-node', 'root')} id='collections'>
-          <Root {...this.props} />
+        <div className='view presentation-node root' id='collections'>
+          <Root />
         </div>
       );
     } else if (primaryHash === 'badge') {
       return (
         <>
-          <div className={cx('view', 'presentation-node')} id='collections'>
-            <BadgeNode {...this.props} />
+          <div className='view presentation-node' id='collections'>
+            <BadgeNode />
           </div>
           <div className='sticky-nav'>
             <div />
@@ -95,8 +95,8 @@ class Collections extends React.Component {
     } else if (primaryHash === 'all-ranked-by-rarity') {
       return (
         <>
-          <div className={cx('view')} id='collections'>
-            <AllRankedByRarity {...this.props} />
+          <div className='view' id='collections'>
+            <AllRankedByRarity />
           </div>
           <div className='sticky-nav'>
             <div />
@@ -115,8 +115,8 @@ class Collections extends React.Component {
     } else {
       return (
         <>
-          <div className={cx('view', 'presentation-node')} id='collections'>
-            <Node {...this.props} primaryHash={primaryHash} />
+          <div className='view presentation-node' id='collections'>
+            <Node primaryHash={primaryHash} />
           </div>
           <div className='sticky-nav'>
             <div />

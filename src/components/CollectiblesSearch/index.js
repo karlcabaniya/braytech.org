@@ -1,12 +1,12 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
-import Collectibles from '../Collectibles';
 import manifest from '../../utils/manifest';
+import Collectibles from '../Collectibles';
 
 import './styles.css';
 

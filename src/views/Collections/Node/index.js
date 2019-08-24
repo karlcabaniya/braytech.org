@@ -1,4 +1,7 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -196,4 +199,15 @@ class PresentationNode extends React.Component {
   }
 }
 
-export default PresentationNode;
+function mapStateToProps(state, ownProps) {
+  return {
+    member: state.member
+  };
+}
+
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps
+  )
+)(PresentationNode);

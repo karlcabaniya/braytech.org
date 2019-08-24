@@ -106,24 +106,6 @@
   margin: 7px 0 0;
 }
 
-#this-week .module .collection-items li {
-  background-color: rgba(0, 0, 0, 0.1);
-  color: rgba(255, 255, 255, 0.4);
-}
-
-#this-week .module .collection-items li.completed {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-#this-week .module .collection-items li .image.dl {
-  opacity: 0.4;
-}
-
-#this-week .module .collection-items li.completed .image.dl {
-  opacity: 1;
-}
-
 #this-week .module .collection-items li:hover,
 #this-week .module .inventory-items li:hover {
   background-color: rgba(255, 255, 255, 0.4);

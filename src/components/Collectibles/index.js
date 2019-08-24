@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
@@ -20,6 +20,7 @@ class Collectibles extends React.Component {
   }
 
   selfLink = hash => {
+    hash = parseInt(hash, 10);
     let link = ['/collections'];
     let root = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.collectionRootNode];
 
@@ -37,7 +38,7 @@ class Collectibles extends React.Component {
             if (found) {
               link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.collectibleHash);
             }
-          } else {
+          } else if (nodeTertiary.children.presentationNodes.length) {
             nodeTertiary.children.presentationNodes.forEach(nQ => {
               let nodeQuaternary = manifest.DestinyPresentationNodeDefinition[nQ.presentationNodeHash];
 
@@ -46,6 +47,17 @@ class Collectibles extends React.Component {
                 if (found) {
                   link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.collectibleHash);
                 }
+              } else if (nodeQuaternary.children.presentationNodes.length) {
+                nodeQuaternary.children.presentationNodes.forEach(nQ => {
+                  let nodeQuinary = manifest.DestinyPresentationNodeDefinition[nQ.presentationNodeHash];
+    
+                  if (nodeQuinary.children.collectibles.length) {
+                    let found = nodeQuinary.children.collectibles.find(c => c.collectibleHash === hash);
+                    if (found) {
+                      link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, nodeQuinary.hash, found.collectibleHash);
+                    }
+                  }
+                });
               }
             });
           }
@@ -74,7 +86,7 @@ class Collectibles extends React.Component {
   }
 
   render() {
-    const { t, forceDisplay, collectibles } = this.props;
+    const { t, member, collectibles, selfLinkFrom, forceDisplay } = this.props;
     const inspect = this.props.inspect ? true : false;
     const highlight = parseInt(this.props.match && this.props.match.params.quinary ? this.props.match.params.quinary : this.props.highlight, 10) || false;
 
@@ -94,10 +106,10 @@ class Collectibles extends React.Component {
             const definitionCollectible = manifest.DestinyCollectibleDefinition[child.collectibleHash];
 
             let state = 0;
-            if (this.props.member.data) {
-              const characterId = this.props.member.characterId;
-              const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
-              const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
+            if (member.data) {
+              const characterId = member.characterId;
+              const characterCollectibles = member.data.profile.characterCollectibles.data;
+              const profileCollectibles = member.data.profile.profileCollectibles.data;
               let scope = profileCollectibles.collectibles[child.collectibleHash] ? profileCollectibles.collectibles[child.collectibleHash] : characterCollectibles[characterId].collectibles[child.collectibleHash];
               if (scope) {
                 state = scope.state;
@@ -131,7 +143,7 @@ class Collectibles extends React.Component {
                   <div className='name'>{definitionCollectible.displayProperties.name}</div>
                   <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[definitionCollectible.hash] ? manifest.statistics.collections[definitionCollectible.hash] : `0.00`}%</div>
                 </div>
-                {inspect && definitionCollectible.itemHash ? <Link to={{ pathname: `/inspect/${definitionCollectible.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+                {inspect && definitionCollectible.itemHash ? <Link to={{ pathname: `/inspect/${definitionCollectible.itemHash}`, state: { from: selfLinkFrom } }} /> : null}
               </li>
             );
           });
@@ -164,10 +176,10 @@ class Collectibles extends React.Component {
           const collectibleDefinition = manifest.DestinyCollectibleDefinition[child.collectibleHash];
 
           let state = 0;
-          if (this.props.member.data) {
-            const characterId = this.props.member.characterId;
-            const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
-            const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
+          if (member.data) {
+            const characterId = member.characterId;
+            const characterCollectibles = member.data.profile.characterCollectibles.data;
+            const profileCollectibles = member.data.profile.profileCollectibles.data;
             let scope = profileCollectibles.collectibles[child.collectibleHash] ? profileCollectibles.collectibles[child.collectibleHash] : characterCollectibles[characterId].collectibles[child.collectibleHash];
             if (scope) {
               state = scope.state;
@@ -223,7 +235,7 @@ class Collectibles extends React.Component {
                   <div className='name'>{collectibleDefinition.displayProperties.name}</div>
                   <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
                 </div>
-                {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+                {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: selfLinkFrom } }} /> : null}
               </li>
             );
           }
@@ -238,11 +250,11 @@ class Collectibles extends React.Component {
         let link = this.selfLink(hash);
 
         let state = 0;
-        if (this.props.member.data) {
-          const characterId = this.props.member.characterId;
+        if (member.data) {
+          const characterId = member.characterId;
 
-          const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
-          const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
+          const characterCollectibles = member.data.profile.characterCollectibles.data;
+          const profileCollectibles = member.data.profile.profileCollectibles.data;
 
           let scope = profileCollectibles.collectibles[hash] ? profileCollectibles.collectibles[hash] : characterCollectibles[characterId].collectibles[hash];
           if (scope) {
@@ -262,7 +274,7 @@ class Collectibles extends React.Component {
           <li
             key={collectibleDefinition.hash}
             className={cx('tooltip', {
-              linked: link && this.props.selfLinkFrom,
+              linked: link && selfLinkFrom,
               completed: !enumerateCollectibleState(state).notAcquired
             })}
             data-hash={collectibleDefinition.itemHash}
@@ -274,8 +286,8 @@ class Collectibles extends React.Component {
               <div className='name'>{collectibleDefinition.displayProperties.name}</div>
               <div className='commonality'>{manifest.statistics.collections && manifest.statistics.collections[collectibleDefinition.hash] ? manifest.statistics.collections[collectibleDefinition.hash] : `0.00`}%</div>
             </div>
-            {link && this.props.selfLinkFrom && !inspect ? <ProfileLink to={{ pathname: link, state: { from: this.props.selfLinkFrom } }} /> : null}
-            {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: this.props.selfLinkFrom } }} /> : null}
+            {link && selfLinkFrom && !inspect ? <ProfileLink to={{ pathname: link, state: { from: selfLinkFrom } }} /> : null}
+            {inspect && collectibleDefinition.itemHash ? <Link to={{ pathname: `/inspect/${collectibleDefinition.itemHash}`, state: { from: selfLinkFrom } }} /> : null}
           </li>
         );
       });
@@ -311,6 +323,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default compose(
+  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps

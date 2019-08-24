@@ -1,8 +1,11 @@
 import React from 'react';
-import cx from 'classnames';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
-import manifest from '../../../utils/manifest';
+import cx from 'classnames';
 
+import manifest from '../../../utils/manifest';
 import ObservedImage from '../../../components/ObservedImage';
 import Collectibles from '../../../components/Collectibles';
 import CollectiblesSearch from '../../../components/CollectiblesSearch';
@@ -180,4 +183,16 @@ class Root extends React.Component {
   }
 }
 
-export default withTranslation()(Root);
+function mapStateToProps(state, ownProps) {
+  return {
+    member: state.member
+  };
+}
+
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps
+  ),
+  withTranslation()
+)(Root);

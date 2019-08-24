@@ -1,6 +1,9 @@
 import React from 'react';
-import cx from 'classnames';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
+import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import * as paths from '../../../utils/paths';
@@ -228,4 +231,16 @@ class BadgeNode extends React.Component {
   }
 }
 
-export default withTranslation()(BadgeNode);
+function mapStateToProps(state, ownProps) {
+  return {
+    member: state.member
+  };
+}
+
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps
+  ),
+  withTranslation()
+)(BadgeNode);
