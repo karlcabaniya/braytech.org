@@ -41,11 +41,35 @@ class MemberLink extends React.Component {
       },
       overlay: false
     };
-    this.mounted = false;
   }
 
   componentWillUnmount() {
     this.mounted = false;
+  }
+
+  async componentDidMount() {
+    this.mounted = true;
+    
+    const { type, id, displayName = false } = this.props;
+
+    if (this.mounted) {
+      try {
+        let response = await bungie.GetProfile(type, id, displayName ? '200' : '100,200');
+        let profile = responseUtils.profileScrubber(response, 'activity');
+        if (!profile.characters.data || (profile.characters.data && profile.characters.data.length === 0)) {
+          this.setState((prevState, props) => {
+            prevState.all.error = true;
+            return prevState;
+          });
+        } else {
+          this.setState((prevState, props) => {
+            prevState.basic.data = profile;
+            prevState.basic.loading = false;
+            return prevState;
+          });
+        }
+      } catch (e) {}
+    }
   }
 
   getFullProfileData = async () => {
@@ -105,31 +129,6 @@ class MemberLink extends React.Component {
       });
     }
   };
-
-  async componentDidMount() {
-    this.mounted = true;
-    
-    const { type, id, displayName = false } = this.props;
-
-    if (this.mounted) {
-      try {
-        let response = await bungie.GetProfile(type, id, displayName ? '200' : '100,200');
-        let profile = responseUtils.profileScrubber(response, 'activity');
-        if (!profile.characters.data || (profile.characters.data && profile.characters.data.length === 0)) {
-          this.setState((prevState, props) => {
-            prevState.all.error = true;
-            return prevState;
-          });
-        } else {
-          this.setState((prevState, props) => {
-            prevState.basic.data = profile;
-            prevState.basic.loading = false;
-            return prevState;
-          });
-        }
-      } catch (e) {}
-    }
-  }
 
   render() {
     const { t, type, id, displayName = false, characterId, hideFlair = false, showClassIcon = false, hideEmblemIcon = false } = this.props;
