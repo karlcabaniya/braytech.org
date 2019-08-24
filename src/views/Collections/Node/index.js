@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
-import * as ls from '../../../utils/localStorage';
 import * as paths from '../../../utils/paths';
 import * as enums from '../../../utils/destinyEnums';
 import ObservedImage from '../../../components/ObservedImage';
@@ -15,24 +14,6 @@ import Collectibles from '../../../components/Collectibles';
 import PlugSet from '../../../components/PlugSet';
 
 class PresentationNode extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hideCompleted: ls.get('setting.hideCompletedRecords') ? ls.get('setting.hideCompletedRecords') : false
-    };
-  }
-
-  toggleCompleted = () => {
-    let currentSetting = ls.get('setting.hideCompletedRecords') ? ls.get('setting.hideCompletedRecords') : false;
-
-    ls.set('setting.hideCompletedRecords', currentSetting ? false : true);
-
-    this.setState({
-      hideCompleted: ls.get('setting.hideCompletedRecords')
-    });
-  };
-
   render() {
     const { member, collectibles } = this.props;
     const characterCollectibles = member.data.profile.characterCollectibles.data;

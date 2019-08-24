@@ -1,7 +1,6 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
@@ -14,11 +13,10 @@ import { enumerateCollectibleState } from '../../../utils/destinyEnums';
 
 class Root extends React.Component {
   render() {
-    const { t } = this.props;
-    const characterId = this.props.member.characterId;
+    const { t, member } = this.props;
 
-    const characterCollectibles = this.props.member.data.profile.characterCollectibles.data;
-    const profileCollectibles = this.props.member.data.profile.profileCollectibles.data;
+    const characterCollectibles = member.data.profile.characterCollectibles.data;
+    const profileCollectibles = member.data.profile.profileCollectibles.data;
 
     const parent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.collectionRootNode];
     const parentBadges = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.badgesRootNode];
@@ -41,7 +39,7 @@ class Root extends React.Component {
             nodeChildNodeChildNode.children.presentationNodes.forEach(nodeChildNodeChildNodeChild => {
               let nodeChildNodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChildNodeChild.presentationNodeHash];
               nodeChildNodeChildNodeChildNode.children.collectibles.forEach(collectible => {
-                let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[characterId].collectibles[collectible.collectibleHash];
+                let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
                 if (scope) {
                   states.push(scope.state);
                   collectionsStates.push(scope.state);
@@ -52,12 +50,12 @@ class Root extends React.Component {
             });
           } else {
             nodeChildNodeChildNode.children.collectibles.forEach(collectible => {
-              let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[characterId].collectibles[collectible.collectibleHash];
+              let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
               if (scope) {
                 states.push(scope.state);
                 collectionsStates.push(scope.state);
               } else {
-                console.log(profileCollectibles.collectibles[collectible.collectibleHash], characterCollectibles[characterId].collectibles[collectible.collectibleHash], `68 Undefined state for ${collectible.collectibleHash}`);
+                console.log(profileCollectibles.collectibles[collectible.collectibleHash], characterCollectibles[member.characterId].collectibles[collectible.collectibleHash], `68 Undefined state for ${collectible.collectibleHash}`);
               }
             });
           }
@@ -95,7 +93,7 @@ class Root extends React.Component {
 
         let sweep = [];
         nodeChildNode.children.collectibles.forEach(collectible => {
-          let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[characterId].collectibles[collectible.collectibleHash];
+          let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
           if (scope) {
             sweep.push(scope.state);
           } else {
@@ -190,7 +188,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default compose(
-  withRouter,
   connect(
     mapStateToProps
   ),
