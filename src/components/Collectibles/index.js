@@ -86,7 +86,7 @@ class Collectibles extends React.Component {
   }
 
   render() {
-    const { t, member, collectibles, selfLinkFrom, forceDisplay } = this.props;
+    const { t, member, collectibles, viewport, selfLinkFrom, forceDisplay, forceTooltip } = this.props;
     const inspect = this.props.inspect ? true : false;
     const highlight = parseInt(this.props.match && this.props.match.params.quinary ? this.props.match.params.quinary : this.props.highlight, 10) || false;
 
@@ -273,7 +273,8 @@ class Collectibles extends React.Component {
         output.push(
           <li
             key={collectibleDefinition.hash}
-            className={cx('tooltip', {
+            className={cx({
+              tooltip: viewport.width <= 600 && (link && selfLinkFrom) && !forceTooltip ? false : true,
               linked: link && selfLinkFrom,
               completed: !enumerateCollectibleState(state).notAcquired
             })}
@@ -310,7 +311,8 @@ class Collectibles extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    collectibles: state.collectibles
+    collectibles: state.collectibles,
+    viewport: state.viewport
   };
 }
 
