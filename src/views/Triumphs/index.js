@@ -59,7 +59,7 @@ class Triumphs extends React.Component {
     const { t } = this.props;
     let primaryHash = this.props.match.params.primary ? this.props.match.params.primary : false;
 
-    let toggleCompletedLink = (
+    const toggleCompletedLink = (
       <Button action={this.toggleCompleted}>
         {this.props.collectibles.hideCompletedRecords ? (
           <>
@@ -75,7 +75,6 @@ class Triumphs extends React.Component {
       </Button>
     );
 
-
     let almostCompleteSortText;
     if (this.state.almostCompleteSort === 1) {
       almostCompleteSortText = (
@@ -83,28 +82,24 @@ class Triumphs extends React.Component {
           <i className='segoe-uniE17D' />
           {t('Sorted by score')}
         </>
-      )
+      );
     } else if (this.state.almostCompleteSort === 2) {
       almostCompleteSortText = (
         <>
           <i className='segoe-uniE17D' />
           {t('Sorted by rarity')}
         </>
-      )
+      );
     } else {
       almostCompleteSortText = (
         <>
           <i className='segoe-uniE17D' />
           {t('Sorted by completion')}
         </>
-      )
+      );
     }
 
-    let toggleAlmostCompleteSortLink = (
-      <Button action={this.toggleAlmostCompleteSort}>
-        {almostCompleteSortText}
-      </Button>
-    );
+    let toggleAlmostCompleteSortLink = <Button action={this.toggleAlmostCompleteSort}>{almostCompleteSortText}</Button>;
 
     let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/triumphs';
 
@@ -121,16 +116,18 @@ class Triumphs extends React.Component {
             <SealNode />
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>{toggleCompletedLink}</li>
-              <li>
-                <ProfileLink className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>{toggleCompletedLink}</li>
+                <li>
+                  <ProfileLink className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );
@@ -141,16 +138,18 @@ class Triumphs extends React.Component {
             <AlmostComplete sort={this.state.almostCompleteSort} />
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>{toggleAlmostCompleteSortLink}</li>
-              <li>
-                <ProfileLink className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>{toggleAlmostCompleteSortLink}</li>
+                <li>
+                  <ProfileLink className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );
@@ -161,15 +160,17 @@ class Triumphs extends React.Component {
             <Tracked />
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>
-                <ProfileLink className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>
+                  <ProfileLink className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );
@@ -180,15 +181,17 @@ class Triumphs extends React.Component {
             <Unredeemed />
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>
-                <ProfileLink className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>
+                  <ProfileLink className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );
@@ -199,16 +202,18 @@ class Triumphs extends React.Component {
             <Node />
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>{toggleCompletedLink}</li>
-              <li>
-                <ProfileLink className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>{toggleCompletedLink}</li>
+                <li>
+                  <ProfileLink className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );

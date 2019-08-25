@@ -136,68 +136,72 @@ class Read extends React.Component {
     let backLinkPath = this.state.from;
 
     return (
-      <div className={cx('view', 'dark-mode', kind)} id='read'>
-        <div className='bg' />
-        <div className='wrap'>
-          <div className='flair left' />
-          <div className='flair right' />
-          <div className={cx('page-name', { null: !pageName })}>
-            <span className='quote-l' />
-            <span>{pageName}</span>
-            <span className='quote-r' />
-          </div>
-          <div className='pair'>
-            <div className='nav'>
-              <div className='sticky'>
-                <div className={cx('display', kind)}>
-                  <div className='cover'>
-                    <ObservedImage className='image' src={`/static/images/extracts/books/${bookCovers[parentDefinition.hash]}`} />
-                  </div>
-                  <div className='ui'>
-                    <div className='book-name'>{parentDefinition.displayProperties.name}</div>
-                    <ul className={cx('list', { 'is-root': kind === 'book' })}>
-                      <li className='linked'>
-                        <Link to={`/read/book/${parentDefinition.hash}`}>{t('All pages')}</Link>
-                      </li>
-                      <li className='linked'>
-                        <a href={`https://www.ishtar-collective.net/entries/${recordDefinition ? recordDefinition.loreHash : ''}`} target='_blank' rel='noopener noreferrer'>
-                          <span className='destiny-ishtar' />
-                          Go to Ishtar
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className='dots' />
-              </div>
+      <>
+        <div className={cx('view', 'dark-mode', kind)} id='read'>
+          <div className='bg' />
+          <div className='wrap'>
+            <div className='flair left' />
+            <div className='flair right' />
+            <div className={cx('page-name', { null: !pageName })}>
+              <span className='quote-l' />
+              <span>{pageName}</span>
+              <span className='quote-r' />
             </div>
-            <div className='content'>{content}</div>
+            <div className='pair'>
+              <div className='nav'>
+                <div className='sticky'>
+                  <div className={cx('display', kind)}>
+                    <div className='cover'>
+                      <ObservedImage className='image' src={`/static/images/extracts/books/${bookCovers[parentDefinition.hash]}`} />
+                    </div>
+                    <div className='ui'>
+                      <div className='book-name'>{parentDefinition.displayProperties.name}</div>
+                      <ul className={cx('list', { 'is-root': kind === 'book' })}>
+                        <li className='linked'>
+                          <Link to={`/read/book/${parentDefinition.hash}`}>{t('All pages')}</Link>
+                        </li>
+                        <li className='linked'>
+                          <a href={`https://www.ishtar-collective.net/entries/${recordDefinition ? recordDefinition.loreHash : ''}`} target='_blank' rel='noopener noreferrer'>
+                            <span className='destiny-ishtar' />
+                            Go to Ishtar
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className='dots' />
+                </div>
+              </div>
+              <div className='content'>{content}</div>
+            </div>
           </div>
         </div>
         {kind === 'record' || backLinkPath ? (
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              {kind === 'record' ? (
-                <li>
-                  <Link className='button' to={`/read/book/${parentDefinition.hash}`}>
-                    <i className='destiny-Y_Button' />
-                    {t('All pages')}
-                  </Link>
-                </li>
-              ) : null}
-              {backLinkPath ? (
-                <li>
-                  <Link className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
-                    {t('Dismiss')}
-                  </Link>
-                </li>
-              ) : null}
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                {kind === 'record' ? (
+                  <li>
+                    <Link className='button' to={`/read/book/${parentDefinition.hash}`}>
+                      <i className='destiny-Y_Button' />
+                      {t('All pages')}
+                    </Link>
+                  </li>
+                ) : null}
+                {backLinkPath ? (
+                  <li>
+                    <Link className='button' to={backLinkPath}>
+                      <i className='destiny-B_Button' />
+                      {t('Dismiss')}
+                    </Link>
+                  </li>
+                ) : null}
+              </ul>
+            </div>
           </div>
         ) : null}
-      </div>
+      </>
     );
   }
 }

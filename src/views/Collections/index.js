@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
+import Button from '../../components/UI/Button';
 
 import './styles.css';
 
@@ -49,9 +50,8 @@ class Collections extends React.Component {
 
     let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/collections';
 
-    let toggleCompletedLink = (
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a className='button' onClick={this.toggleCompleted}>
+    const toggleCompletedLink = (
+      <Button action={this.toggleCompleted}>
         {this.props.collectibles.hideCompletedCollectibles ? (
           <>
             <i className='segoe-uniF16E' />
@@ -63,7 +63,7 @@ class Collections extends React.Component {
             {t('Hide acquired')}
           </>
         )}
-      </a>
+      </Button>
     );
 
     if (!primaryHash) {
@@ -79,16 +79,18 @@ class Collections extends React.Component {
             <BadgeNode />
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>{toggleCompletedLink}</li>
-              <li>
-                <ProfileLink className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>{toggleCompletedLink}</li>
+                <li>
+                  <ProfileLink className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );
@@ -99,16 +101,18 @@ class Collections extends React.Component {
             <AllRankedByRarity />
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>{toggleCompletedLink}</li>
-              <li>
-                <ProfileLink className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>{toggleCompletedLink}</li>
+                <li>
+                  <ProfileLink className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );
@@ -119,16 +123,18 @@ class Collections extends React.Component {
             <Node primaryHash={primaryHash} />
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>{toggleCompletedLink}</li>
-              <li>
-                <ProfileLink className='button' to={backLinkPath}>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>{toggleCompletedLink}</li>
+                <li>
+                  <ProfileLink className='button' to={backLinkPath}>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );

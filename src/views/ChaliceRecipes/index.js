@@ -118,14 +118,12 @@ class ChaliceRecipes extends React.Component {
   };
 
   armorClassTypeHandler = e => {
-
     this.setState((prevState, props) => {
       let change = {
         armorClassType: prevState.armorClassType < 2 ? prevState.armorClassType + 1 : -1
       };
       return { ...prevState, ...change };
     });
-
   };
 
   resetHandler = e => {
@@ -251,7 +249,6 @@ class ChaliceRecipes extends React.Component {
       }
 
       c.items.forEach(hash => {
-
         let definitionItem = manifest.DestinyInventoryItemDefinition[hash];
 
         if (!definitionItem) {
@@ -287,9 +284,8 @@ class ChaliceRecipes extends React.Component {
               state: c.masterwork ? 4 : 0,
               plugs
             }
-          })
+          });
         }
-
       });
     });
   }
@@ -313,7 +309,9 @@ class ChaliceRecipes extends React.Component {
             </div>
             <div className='text'>
               <p>{this.chalice.displayProperties.description}</p>
-              <p>This <em>Chalice of Opulence</em> recipe tool is experimental. I've never attempted anything like this before, especially with the added complexity and challenges that come with simulating item tooltips.</p>
+              <p>
+                This <em>Chalice of Opulence</em> recipe tool is experimental. I've never attempted anything like this before, especially with the added complexity and challenges that come with simulating item tooltips.
+              </p>
               <ul>
                 <li>Clicking an item will auto-fill the Chalice's slots</li>
                 <li>The effects of the Masterwork slot are simulated. Items may or may not drop fully masterworked—this is for representation purposes only</li>
@@ -439,40 +437,42 @@ class ChaliceRecipes extends React.Component {
           </div>
         </div>
         <div className='sticky-nav'>
-          <div />
-          <ul>
-            <li>
-              {viewport.width <= 1024 && this.state.slotsPanelOpen ? (
-                <Button
-                  action={e => {
-                    this.toggleSlotsPanelHandler(this.state.slotsPanelOpen);
-                  }}
-                >
-                  <i className='destiny-B_Button' /> {t('Dismiss')}
-                </Button>
-              ) : (
-                <>
-                  <Button action={this.armorClassTypeHandler}>
-                    {this.state.armorClassType === -1 ? (
-                      <>
-                        <i className='segoe-uniE16E' />
-                        {t('All class types')}
-                      </>
-                    ) : (
-                      <>
-                        <i className='segoe-uniE16E' />
-                        {Object.values(manifest.DestinyClassDefinition).find(i => i.classType === this.state.armorClassType).displayProperties.name}
-                      </>
-                    )}
+          <div className='wrapper'>
+            <div />
+            <ul>
+              <li>
+                {viewport.width <= 1024 && this.state.slotsPanelOpen ? (
+                  <Button
+                    action={e => {
+                      this.toggleSlotsPanelHandler(this.state.slotsPanelOpen);
+                    }}
+                  >
+                    <i className='destiny-B_Button' /> {t('Dismiss')}
                   </Button>
-                  <Button action={this.resetHandler}>
-                    <i className='segoe-uniE777' />
-                    {t('Reset')}
-                  </Button>
-                </>
-              )}
-            </li>
-          </ul>
+                ) : (
+                  <>
+                    <Button action={this.armorClassTypeHandler}>
+                      {this.state.armorClassType === -1 ? (
+                        <>
+                          <i className='segoe-uniE16E' />
+                          {t('All class types')}
+                        </>
+                      ) : (
+                        <>
+                          <i className='segoe-uniE16E' />
+                          {Object.values(manifest.DestinyClassDefinition).find(i => i.classType === this.state.armorClassType).displayProperties.name}
+                        </>
+                      )}
+                    </Button>
+                    <Button action={this.resetHandler}>
+                      <i className='segoe-uniE777' />
+                      {t('Reset')}
+                    </Button>
+                  </>
+                )}
+              </li>
+            </ul>
+          </div>
         </div>
       </>
     );

@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import ObservedImage from '../../components/ObservedImage';
+import Button from '../../components/UI/Button';
 
 import './styles.css';
 
@@ -84,20 +85,7 @@ export class Checklists extends React.Component {
 
     const f = new ChecklistFactory(t, member.data.profile, member.characterId, collectibles.hideCompletedChecklistItems);
 
-    const lists = [
-      f.regionChests(),
-      f.lostSectors(),
-      f.adventures(),
-      f.ghostScans(),
-      f.sleeperNodes(),
-      f.latentMemories(),
-      f.corruptedEggs(),
-      f.ahamkaraBones(),
-      f.catStatues(),
-      f.ghostStories(),
-      f.awokenOfTheReef(),
-      f.forsakenPrince()
-    ];
+    const lists = [f.regionChests(), f.lostSectors(), f.adventures(), f.ghostScans(), f.sleeperNodes(), f.latentMemories(), f.corruptedEggs(), f.ahamkaraBones(), f.catStatues(), f.ghostStories(), f.awokenOfTheReef(), f.forsakenPrince()];
 
     // if (Object.values(member.data.profile.profileProgression.data.checklists[2448912219]).filter(i => i).length === 4) {
     //   lists.push(f.caydesJournals());
@@ -108,9 +96,8 @@ export class Checklists extends React.Component {
 
     const visible = lists.slice(sliceStart, sliceEnd);
 
-    let toggleCompletedLink = (
-      // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a className='button' onClick={this.toggleCompleted}>
+    const toggleCompletedLink = (
+      <Button action={this.toggleCompleted}>
         {this.props.collectibles.hideCompletedChecklistItems ? (
           <>
             <i className='segoe-uniF16E' />
@@ -122,44 +109,54 @@ export class Checklists extends React.Component {
             {t('Hide completed')}
           </>
         )}
-      </a>
+      </Button>
     );
 
     return (
-      <div className='view' id='checklists'>
-        <div className={cx('module', 'head', 'cols-' + this.state.itemsPerPage)}>
-          <div className='content'>
-            <div className='page-header'>
-              <div className='sub-name'>{t('Location collections')}</div>
-              <div className='name'>{t('Checklists')}</div>
+      <>
+        <div className='view' id='checklists'>
+          <div className={cx('module', 'head', 'cols-' + this.state.itemsPerPage)}>
+            <div className='content'>
+              <div className='page-header'>
+                <div className='sub-name'>{t('Location collections')}</div>
+                <div className='name'>{t('Checklists')}</div>
+              </div>
+            </div>
+            <div className='content source'>
+              <p>Mapping data</p>
+              <p>
+                Data for some checklists is supplemented by hand of an Iron Lord,{' '}
+                <a href='https://lowlidev.com.au/destiny/' target='_blank' rel='noopener noreferrer'>
+                  lowlidev
+                </a>
+                , and he deserves your favour, Guardian.
+              </p>
             </div>
           </div>
-          <div className='content source'>
-            <p>Mapping data</p>
-            <p>Data for some checklists is supplemented by hand of an Iron Lord, <a href='https://lowlidev.com.au/destiny/' target='_blank' rel='noopener noreferrer'>lowlidev</a>, and he deserves your favour, Guardian.</p>
-          </div>
-        </div>
-        <div className={cx('padder', 'cols-' + this.state.itemsPerPage)}>
-          <div className='module views'>
-            <ul className='list'>
-              {lists.map((list, i) => (
-                <ListButton name={list.name} icon={list.icon} image={list.image} key={i} visible={visible.includes(list)} onClick={() => this.changeSkip(i)} />
-              ))}
-            </ul>
-          </div>
-          {visible.map(list => (
-            <div className='module list' key={list.name}>
-              {list.checklist}
+          <div className={cx('padder', 'cols-' + this.state.itemsPerPage)}>
+            <div className='module views'>
+              <ul className='list'>
+                {lists.map((list, i) => (
+                  <ListButton name={list.name} icon={list.icon} image={list.image} key={i} visible={visible.includes(list)} onClick={() => this.changeSkip(i)} />
+                ))}
+              </ul>
             </div>
-          ))}
+            {visible.map(list => (
+              <div className='module list' key={list.name}>
+                {list.checklist}
+              </div>
+            ))}
+          </div>
         </div>
         <div className='sticky-nav'>
-          <div />
-          <ul>
-            <li>{toggleCompletedLink}</li>
-          </ul>
+          <div className='wrapper'>
+            <div />
+            <ul>
+              <li>{toggleCompletedLink}</li>
+            </ul>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

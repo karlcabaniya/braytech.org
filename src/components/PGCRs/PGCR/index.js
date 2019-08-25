@@ -975,15 +975,17 @@ class PGCR extends React.Component {
             )}
           </div>
           <div className='sticky-nav inline'>
-            <div />
-            <ul>
-              <li>
-                <Button action={() => this.contractHandler(pgcr.activityDetails.instanceId)}>
-                  <i className='destiny-B_Button' />
-                  {t('Close')}
-                </Button>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>
+                  <Button action={() => this.contractHandler(pgcr.activityDetails.instanceId)}>
+                    <i className='destiny-B_Button' />
+                    {t('Close')}
+                  </Button>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );
