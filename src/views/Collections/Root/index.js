@@ -7,7 +7,7 @@ import cx from 'classnames';
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../../components/ObservedImage';
 import Collectibles from '../../../components/Collectibles';
-import CollectiblesSearch from '../../../components/CollectiblesSearch';
+import Search from '../../../components/Search';
 import { ProfileLink } from '../../../components/ProfileLink';
 import { enumerateCollectibleState } from '../../../utils/destinyEnums';
 
@@ -153,7 +153,7 @@ class Root extends React.Component {
           <div className='sub-header'>
             <div>{t('Search')}</div>
           </div>
-          <CollectiblesSearch />
+          <Search scope='collectibles' />
           {profileCollectibles.recentCollectibleHashes ? (
             <>
               <div className='sub-header'>

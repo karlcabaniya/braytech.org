@@ -11,7 +11,7 @@ import { ProfileLink } from '../../../components/ProfileLink';
 import ObservedImage from '../../../components/ObservedImage';
 import RecordsAlmost from '../../../components/RecordsAlmost';
 import RecordsTracked from '../../../components/RecordsTracked';
-import RecordsSearch from '../../../components/RecordsSearch';
+import Search from '../../../components/Search';
 
 class Root extends React.Component {
   render() {
@@ -178,7 +178,7 @@ class Root extends React.Component {
           <div className='sub-header'>
             <div>{t('Search')}</div>
           </div>
-          <RecordsSearch {...this.props} />
+          <Search scope='records' />
           <div className='sub-header'>
             <div>{t('Triumphs')}</div>
             <div>

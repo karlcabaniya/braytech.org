@@ -6,11 +6,12 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
+import Records from '../Records';
 import Collectibles from '../Collectibles';
 
 import './styles.css';
 
-class CollectiblesSearch extends React.Component {
+class Search extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,30 +20,44 @@ class CollectiblesSearch extends React.Component {
       search: ''
     };
 
-    this.collectibles = Object.entries(manifest.DestinyCollectibleDefinition).filter(r => !r[1].redacted);
+    this.index = [];
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.results !== this.state.results) {
+      this.props.rebindTooltips();
+    }
+  }
+
+  componentDidMount() {
+    const { scope } = this.props;
+
+    if (scope === 'records') {
+      this.index.push(...Object.entries(manifest.DestinyRecordDefinition).filter(r => !r[1].redacted))
+    } else if (scope === 'collectibles') {
+      this.index.push(...Object.entries(manifest.DestinyCollectibleDefinition).filter(r => !r[1].redacted))
+    }
   }
 
   onSearchChange = e => {
     this.setState({ search: e.target.value });
-    this.searchForCollectibles();
+    this.performSearch();
   };
 
   onSearchKeyPress = e => {
     // If they pressed enter, ignore the debounce and search
-    if (e.key === 'Enter') this.searchForCollectibles.flush();
+    if (e.key === 'Enter') this.performSearch.flush();
   };
 
-  // Debounced so that we don't make an API request for every single
-  // keypress - only when they stop typing.
-  searchForCollectibles = debounce(async (term = this.state.search) => {
-    term = term.toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").trim();
-
-    if (!term || term === 'type:' || term.length < 2) {
+  performSearch = debounce((term = this.state.search) => {
+    if (!term || term.length < 2) {
       this.setState({ results: [] });
       return;
     };
 
-    let results = this.collectibles.filter(r => {
+    console.log(term);
+
+    let results = this.index.filter(r => {
 
       let name = r[1].displayProperties && r[1].displayProperties.name;
       let description = r[1].displayProperties && r[1].displayProperties.description;
@@ -71,26 +86,33 @@ class CollectiblesSearch extends React.Component {
     
   }, 500);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.results !== this.state.results) {
-      this.props.rebindTooltips();
-    }
-  }
-
   render() {
-    const { t } = this.props;
+    const { t, scope } = this.props;
     const { results, search } = this.state;
 
+    let display;
+    if (scope === 'records') {
+      display = (
+        <ul className='list record-items'>
+          <Records selfLinkFrom='/triumphs' hashes={results.map(r => r[0])} ordered />
+        </ul>
+      )
+    } else if (scope === 'collectibles') {
+      display = (
+        <ul className='list collection-items'>
+          <Collectibles selfLinkFrom='/collections' hashes={results.map(r => r[0])} ordered />
+        </ul>
+      )
+    }
+
     return (
-      <div className={cx('collectibles-search', { 'has-results': results.length })}>
+      <div className={cx('index-search', { 'has-results': results.length })}>
         <div className='form'>
           <div className='field'>
             <input onChange={this.onSearchChange} type='text' placeholder={t('enter name or description')} spellCheck='false' value={search} onKeyPress={this.onSearchKeyPress} />
           </div>
         </div>
-        <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/collections' forceDisplay hashes={results.map(r => r[0])} />
-        </ul>
+        {display}
       </div>
     );
   }
@@ -117,4 +139,4 @@ export default compose(
     mapDispatchToProps
   ),
   withTranslation()
-)(CollectiblesSearch);
+)(Search);
