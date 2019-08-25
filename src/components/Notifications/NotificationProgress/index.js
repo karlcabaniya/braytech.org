@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import _ from 'lodash';
+import { transform, isEqual, isObject } from 'lodash';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
@@ -21,9 +21,9 @@ import './styles.css';
 
 function difference(object, base) {
   function changes(object, base) {
-    return _.transform(object, function(result, value, key) {
-      if (!_.isEqual(value, base[key])) {
-        result[key] = _.isObject(value) && _.isObject(base[key]) ? changes(value, base[key]) : value;
+    return transform(object, function(result, value, key) {
+      if (!isEqual(value, base[key])) {
+        result[key] = isObject(value) && isObject(base[key]) ? changes(value, base[key]) : value;
       }
     });
   }
