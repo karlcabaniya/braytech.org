@@ -613,5 +613,10 @@
     "date": "2019-08-25T08:15:34.498Z",
     "version": "2.8.6",
     "content": "- fixed a _Now_ view bug\n- rewrote a bunch of _Collections_ view code"
+  },
+  {
+    "date": "2019-08-25T10:41:54.118Z",
+    "version": "2.8.7",
+    "content": "- search improvements\n  - filter search by prefixing `name:`, `description:`, or `type:`. for example, `type:trace` will return all Trace Rifles"
   }
 ]

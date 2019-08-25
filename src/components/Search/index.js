@@ -10,6 +10,7 @@ import Records from '../Records';
 import Collectibles from '../Collectibles';
 
 import './styles.css';
+import { allSettled } from 'q';
 
 class Search extends React.Component {
   constructor(props) {
@@ -33,9 +34,9 @@ class Search extends React.Component {
     const { scope } = this.props;
 
     if (scope === 'records') {
-      this.index.push(...Object.entries(manifest.DestinyRecordDefinition).filter(r => !r[1].redacted))
+      this.index.push(...Object.entries(manifest.DestinyRecordDefinition).filter(([hash, definition]) => !definition.redacted))
     } else if (scope === 'collectibles') {
-      this.index.push(...Object.entries(manifest.DestinyCollectibleDefinition).filter(r => !r[1].redacted))
+      this.index.push(...Object.entries(manifest.DestinyCollectibleDefinition).filter(([hash, definition]) => !definition.redacted))
     }
   }
 
@@ -57,29 +58,62 @@ class Search extends React.Component {
 
     console.log(term);
 
-    let results = this.index.filter(r => {
+    term = term.toString().toLowerCase();
 
-      let name = r[1].displayProperties && r[1].displayProperties.name;
-      let description = r[1].displayProperties && r[1].displayProperties.description;
+    // test for filters
+    let filters = term.match(/(type|name|description):/);
+    filters = filters && filters.length ? filters[1] : false;
 
-      let definitionItem = r[1].itemHash ? manifest.DestinyInventoryItemDefinition[r[1].itemHash] : false;
+    let results = this.index.filter(([hash, definition])=> {
 
+      const definitionItem = definition.itemHash ? manifest.DestinyInventoryItemDefinition[definition.itemHash] : false;
+
+      let name = definition.displayProperties && definition.displayProperties.name;
+      let description = definition.displayProperties && definition.displayProperties.description;
+      let type = definitionItem && definitionItem.itemTypeAndTierDisplayName;
+
+      // normalise name, description, and type, removing funny versions of 'e'
       name = name.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
       description = description.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-      let type = definitionItem && definitionItem.itemTypeAndTierDisplayName ? definitionItem.itemTypeAndTierDisplayName.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : false;
+      type = type ? definitionItem.itemTypeAndTierDisplayName.normalize('NFD').replace(/[\u0300-\u036f]/g, "") : false;
 
-      let conjoinedString = `${name} ${description}`;
       let regex = RegExp(term, 'gi');
-      let regexType = RegExp(term.replace('type:','').trim(), 'gi');
-      let typeMatch = /type:(.+)/gi.exec(term)
 
-      if (typeMatch && regexType.test(type)) {
-        return true;
-      } else if (regex.test(conjoinedString)) {
-        return true;
+      if (filters && filters === 'name') {
+        regex = RegExp(term.replace('name:', '').trim(), 'gi');
+        
+        if (regex.test(name)) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (filters && filters === 'description') {
+        regex = RegExp(term.replace('description:', '').trim(), 'gi');
+
+        if (regex.test(description)) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (type && filters && filters === 'type') {
+        regex = RegExp(term.replace('type:', '').trim(), 'gi');
+
+        if (regex.test(type)) {
+          return true;
+        } else {
+          return false;
+        }
       } else {
-        return false;
+        let concatenated = `${name} ${description}`;
+
+        if (regex.test(concatenated)) {
+          return true;
+        } else {
+          return false;
+        }
       }
+
+
     });
 
     this.setState({ results });
