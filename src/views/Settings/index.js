@@ -298,7 +298,7 @@ class Settings extends React.Component {
                 }}
               />
               <div className='info'>
-                <p>{t('Reload the app')}</p>
+                <p>{t('Reload the app lol')}</p>
               </div>
             </div>
           </div>
