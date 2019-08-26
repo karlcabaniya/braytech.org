@@ -32,6 +32,10 @@ class AppEntry extends React.Component {
         registration.waiting.postMessage({ type: "SKIP_WAITING" });
       }
     },
+    onUpdatePreparing: registration => {
+      console.warn('Service worker update downloading');
+      console.log(registration);
+    },
     onSuccess: registration => {
       console.warn('Service worker registered');
       console.log(registration);

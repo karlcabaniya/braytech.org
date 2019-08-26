@@ -58,11 +58,9 @@ function registerValidSW(swUrl, config) {
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
-          // if (config && config.onUpdatePreparing) {
-          //   config.onUpdatePreparing(registration);
-          // }
-
-          console.log('update fetching')
+          if (config && config.onUpdatePreparing) {
+            config.onUpdatePreparing(registration);
+          }
 
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
