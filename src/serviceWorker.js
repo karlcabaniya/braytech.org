@@ -58,10 +58,6 @@ function registerValidSW(swUrl, config) {
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
-          if (config && config.onUpdatePreparing) {
-            config.onUpdatePreparing(registration);
-          }
-
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
@@ -70,8 +66,8 @@ function registerValidSW(swUrl, config) {
               console.log('New content is available and will be used when all tabs for this page are closed.');
 
               // Execute callback
-              if (config && config.onUpdateReady) {
-                config.onUpdateReady(registration);
+              if (config && config.onUpdate) {
+                config.onUpdate(registration);
               }
             } else {
               // At this point, everything has been precached.
@@ -84,8 +80,6 @@ function registerValidSW(swUrl, config) {
                 config.onSuccess(registration);
               }
             }
-          } else {
-            console.log('update fetch failed?')
           }
         };
       };

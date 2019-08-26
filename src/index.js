@@ -20,7 +20,7 @@ class AppEntry extends React.Component {
   }
 
   config = {
-    onUpdateReady: registration => {
+    onUpdate: registration => {
       console.warn('Service worker update available');
       console.log(registration);
 
@@ -31,10 +31,6 @@ class AppEntry extends React.Component {
       if (registration.waiting) {
         registration.waiting.postMessage({ type: "SKIP_WAITING" });
       }
-    },
-    onUpdatePreparing: registration => {
-      console.warn('Service worker update downloading');
-      console.log(registration);
     },
     onSuccess: registration => {
       console.warn('Service worker registered');
