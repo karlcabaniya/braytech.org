@@ -39,13 +39,13 @@ class AppEntry extends React.Component {
   };
 
   componentDidMount() {
-    serviceWorker.register(this.config);
+    this.serviceWorker = serviceWorker.register(this.config);
   }
 
   render() {
     return (
       <Provider store={store}>
-        <App {...this.state} />
+        <App {...this.state} serviceWorker={this.serviceWorker} />
       </Provider>
     );
   }
