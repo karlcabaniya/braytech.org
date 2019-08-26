@@ -20,7 +20,7 @@ class AppEntry extends React.Component {
   }
 
   config = {
-    onUpdate: registration => {
+    onUpdateReady: registration => {
       console.warn('Service worker update available');
       console.log(registration);
 
