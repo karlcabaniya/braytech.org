@@ -36,19 +36,8 @@
 
 #credits .module.thanks .person {
   display: grid;
-  grid-template-columns: calc(48px + 16px) auto;
+  grid-template-columns: auto;
   font-size: 14px;
-}
-
-#credits .module.thanks .person .icon {
-  display: grid;
-  align-content: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 100%;
-  font-size: 20px;
 }
 
 #credits .module.thanks .person .text {

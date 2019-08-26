@@ -16,7 +16,7 @@ const userFlair = [
       {
         hash: 'warmind',
         primary: true,
-        icon: 'destiny-warmind',
+        icon: 'destiny-uniF129',
         classnames: 'me'
       }
     ]

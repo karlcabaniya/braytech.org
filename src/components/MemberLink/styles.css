@@ -60,8 +60,8 @@
 }
 
 .member-link > .user-flair.me i {
-  font-size: 72px;
-  padding-top: 6px;
+  font-size: 48px;
+  padding-top: 2px;
 }
 
 .member-link > .user-flair.one-hundo {
@@ -294,12 +294,16 @@ html.backdropfilter #member-overlay .background .acrylic {
   background-color: #4CAF50;
 }
 
-#member-overlay .wrapper-inner .stamps div i.destiny-platform_pc {
-  background-color: #2196F3;
-}
-
 #member-overlay .wrapper-inner .stamps div i.destiny-platform_playstation {
   background-color: #3F51B5;
+}
+
+#member-overlay .wrapper-inner .stamps div i.destiny-platform_steam {
+  background-color: #0a1b48;
+}
+
+#member-overlay .wrapper-inner .stamps div i.destiny-platform_battlenet {
+  background-color: #009ae4;
 }
 
 #member-overlay .wrapper-inner .stamps div i.destiny-clovis_bray_device {
@@ -519,6 +523,12 @@ html.backdropfilter #member-overlay.error .background .border-top {
   margin: 0 auto;
   max-width: 1280px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#member-overlay .sticky-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;

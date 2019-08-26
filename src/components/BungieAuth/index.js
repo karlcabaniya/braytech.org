@@ -108,7 +108,7 @@ class BungieAuth extends React.Component {
                   return (
                     <li key={m.membershipId} className='linked'>
                       <div className='icon'>
-                        <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType].toLowerCase()}`} />
+                        <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType]}`} />
                       </div>
                       <div className='displayName'>{memberships.bungieNetUser.blizzardDisplayName && m.membershipType === 4 ? memberships.bungieNetUser.blizzardDisplayName : m.displayName}</div>
                       {m.crossSaveOverride === m.membershipType ? <div className='crosssave' /> : null}
@@ -264,7 +264,7 @@ class DiffProfile extends React.Component {
                     return (
                       <li key={m.membershipId} className='linked'>
                         <div className='icon'>
-                          <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType].toLowerCase()}`} />
+                          <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType]}`} />
                         </div>
                         <div className='displayName'>{memberships.bungieNetUser.blizzardDisplayName && m.membershipType === 4 ? memberships.bungieNetUser.blizzardDisplayName : m.displayName}</div>
                         {m.crossSaveOverride === m.membershipType ? <div className='crosssave' /> : null}

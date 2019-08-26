@@ -21,12 +21,10 @@ export const TIGERDEMON = 10;
 export const BUNGIENEXT = 254;
 
 export const PLATFORMS = {
-  [XBOX]: 'Xbox',
-  [PLAYSTATION]: 'PlayStation',
-  [PC_STEAM]: 'PC',
-  [PC_BLIZZARD]: 'PC',
-  [TIGERDEMON]: 'TigerDemon',
-  [BUNGIENEXT]: 'BungieNext'
+  [XBOX]: 'xbox',
+  [PLAYSTATION]: 'playstation',
+  [PC_STEAM]: 'steam',
+  [PC_BLIZZARD]: 'battlenet'
 };
 
 export const CLASSES = {

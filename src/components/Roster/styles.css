@@ -120,7 +120,7 @@
 
 
 .list.roster .row.self > ul .col.member::before {
-  content: '\e9e0';
+  content: '\e90f';
   position: absolute;
   top: 12px;
   left: -18px;

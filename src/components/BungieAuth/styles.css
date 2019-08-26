@@ -91,12 +91,16 @@
   background-color: #4CAF50;
 }
 
-.bungie-auth .memberships .list li.linked span.destiny-platform_pc {
-  background-color: #2196F3;
-}
-
 .bungie-auth .memberships .list li.linked span.destiny-platform_playstation {
   background-color: #3F51B5;
+}
+
+.bungie-auth .memberships .list li.linked span.destiny-platform_steam {
+  background-color: #0a1b48;
+}
+
+.bungie-auth .memberships .list li.linked span.destiny-platform_battlenet {
+  background-color: #009ae4;
 }
 
 .bungie-auth .memberships .list li.linked .crosssave {

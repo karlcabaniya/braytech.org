@@ -95,12 +95,16 @@
   background-color: #4CAF50;
 }
 
-#get-profile .results .list li.linked span.destiny-platform_pc {
-  background-color: #2196F3;
-}
-
 #get-profile .results .list li.linked span.destiny-platform_playstation {
   background-color: #3F51B5;
+}
+
+#get-profile .results .list li.linked span.destiny-platform_steam {
+  background-color: #0a1b48;
+}
+
+#get-profile .results .list li.linked span.destiny-platform_battlenet {
+  background-color: #009ae4;
 }
 
 #get-profile .profile .user {
@@ -153,12 +157,16 @@
   background-color: #4CAF50;
 }
 
-#get-profile .profile .info .stamps div i.destiny-platform_pc {
-  background-color: #2196F3;
-}
-
 #get-profile .profile .info .stamps div i.destiny-platform_playstation {
   background-color: #3F51B5;
+}
+
+#get-profile .profile .info .stamps div i.destiny-platform_steam {
+  background-color: #0a1b48;
+}
+
+#get-profile .profile .info .stamps div i.destiny-platform_battlenet {
+  background-color: #009ae4;
 }
 
 #get-profile .profile .info .stamps div i.destiny-clovis_bray_device {

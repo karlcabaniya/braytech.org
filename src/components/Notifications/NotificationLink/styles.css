@@ -128,6 +128,12 @@ html.backdropfilter #notification-overlay.error .background .border-top {
   background-color: rgb(220, 81, 59);
 }
 
+#notification-overlay .sticky-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 #notification-overlay .sticky-nav-inner {
   padding: 3rem;
   margin: 0 auto;

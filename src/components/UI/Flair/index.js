@@ -21,8 +21,8 @@ class Flair extends React.Component {
 
     return (
       <div className='stamps'>
-        <div className='tooltip' data-hash={`platform_${enums.PLATFORMS[type].toLowerCase()}`} data-table='BraytechDefinition'>
-          <i className={`destiny-platform_${enums.PLATFORMS[type].toLowerCase()}`} />
+        <div className='tooltip' data-hash={`platform_${enums.PLATFORMS[type]}`} data-table='BraytechDefinition'>
+          <i className={`destiny-platform_${enums.PLATFORMS[type]}`} />
         </div>
         {flair
           ? flair.trophies.map((s, i) => {

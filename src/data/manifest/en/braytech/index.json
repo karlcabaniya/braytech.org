@@ -15,9 +15,17 @@
     "itemType": 1,
     "itemTypeDisplayName": "Platform"
   },
-  "platform_pc": {
+  "platform_steam": {
     "displayProperties": {
-      "name": "PC",
+      "name": "Steam",
+      "description": "The platform to which this profile belongs."
+    },
+    "itemType": 1,
+    "itemTypeDisplayName": "Platform"
+  },
+  "platform_battlenet": {
+    "displayProperties": {
+      "name": "Battle.net",
       "description": "The platform to which this profile belongs."
     },
     "itemType": 1,

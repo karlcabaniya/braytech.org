@@ -267,11 +267,11 @@
 }
 
 .list.reports li .entries .team-head.bravo::before {
-  content: '\e9f1';
+  content: '\e9f5';
 }
 
 .list.reports li .entries .team-head.alpha::before {
-  content: '\e9ee';
+  content: '\e9f4';
 }
 
 .list.reports li .entries .team-head div:not(.team) {

@@ -20,33 +20,27 @@ class Credits extends React.Component {
 
   thanks = [
     {
-      name: 'Vendal Thornheart',
-      icon: 'bungie',
+      name: 'Alex Loret de Mola',
       description: 'Senior Software Engineer, Bungie. His efforts literally enable this web site, and similar, to function. Herein known as the Architect.'
     },
     {
       name: 'Michael Pearson',
-      icon: 'destiny',
       description: 'Responsible for refactoring core components that have brought Braytech properly into 2019. He lives in a tree house.'
     },
     {
       name: 'Josh Hunt',
-      icon: 'destiny-sets',
       description: 'Has served as an inpiration through his own API work on projects such as Destiny Sets and Friendgame, and has encouraged me to be better repeatedly.'
     },
     {
       name: 'Richard Deveraux',
-      icon: 'patrol',
       description: "From what I understand, lowlines is a pioneer in all things Destiny and Destiny api stuff. His meticulous work helps power Braytech's checklists."
     },
     {
       name: 'Rob Jones',
-      icon: 'dim',
       description: 'delphiactual prototyped the very popular This Week view. He seems pretty cool, too.'
     },
     {
       name: 'João Paulo Marquesini',
-      icon: 'ghost',
       description: 'The very handsome developer of the Little Light app laid the foundations for a multilingual Braytech.'
     }
   ];
@@ -99,9 +93,6 @@ class Credits extends React.Component {
             {this.thanks.map((person, index) => {
               return (
                 <div key={index} className='person'>
-                  <div className='icon'>
-                    <span className={`destiny-${person.icon}`} />
-                  </div>
                   <div className='text'>
                     <strong>{person.name}</strong>
                     <p>{person.description}</p>

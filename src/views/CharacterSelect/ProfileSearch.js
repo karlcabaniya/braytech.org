@@ -11,7 +11,7 @@ import Spinner from '../../components/UI/Spinner';
 
 const SearchResult = p => (
   <li className='linked' onClick={() => p.onProfileClick(p.profile.membershipType, p.profile.membershipId, p.profile.displayName)}>
-    <div className='icon'><span className={`destiny-platform_${destinyEnums.PLATFORMS[p.profile.membershipType].toLowerCase()}`} /></div>
+    <div className='icon'><span className={`destiny-platform_${destinyEnums.PLATFORMS[p.profile.membershipType]}`} /></div>
     <div className='displayName'>{p.profile.displayName}</div>
   </li>
 );
