@@ -60,10 +60,10 @@ class Settings extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    console.log(this.props.serviceWorker)
-    if (this.props.serviceWorker && this.props.serviceWorker.update) {
+    console.log(this.props.swUpdate)
+    if (this.props.swUpdate) {
       console.log('um')
-      this.props.serviceWorker.update();
+      this.props.swUpdate();
     }
   }
 

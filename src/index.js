@@ -13,7 +13,8 @@ class AppEntry extends React.Component {
     super();
     
     this.state = {
-      updateAvailable: false
+      updateAvailable: false,
+      swUpdate: false
     };
 
     runOnceTasks();
@@ -35,17 +36,21 @@ class AppEntry extends React.Component {
     onSuccess: registration => {
       console.warn('Service worker registered');
       console.log(registration);
+
+      this.setState({
+        swUpdate: registration.update()
+      })
     }
   };
 
   componentDidMount() {
-    this.serviceWorker = serviceWorker.register(this.config);
+    serviceWorker.register(this.config);
   }
 
   render() {
     return (
       <Provider store={store}>
-        <App {...this.state} serviceWorker={this.serviceWorker} />
+        <App {...this.state} />
       </Provider>
     );
   }
