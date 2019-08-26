@@ -207,6 +207,12 @@
   color: rgba(255, 255, 255, 1);
 }
 
+#index .row.about .module.manifest-diff .meta {
+  margin: 1rem 0 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 
 
 

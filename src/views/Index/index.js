@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
+import moment from 'moment';
 import Moment from 'react-moment';
 
 import manifest from '../../utils/manifest';
@@ -120,6 +121,7 @@ class Index extends React.Component {
 
     let elDiff = null;
     if (this.state.manifest.data && this.state.manifest.data.diff) {
+      let state = this.state.manifest.data.state;
       let diff = this.state.manifest.data.diff;
 
       let diffCollectibles = diff.DestinyCollectibleDefinition && Object.keys(diff.DestinyCollectibleDefinition).length ? Object.keys(diff.DestinyCollectibleDefinition) : [];
@@ -187,6 +189,10 @@ class Index extends React.Component {
               </ul>
             </>
           ) : null}
+          <div className='meta'>{t('Comparison between {{versionNew}} and {{versionOld}}', {
+            versionNew: `${state.new.version} (${moment(state.new.fetched).format('DD MMMM')})`,
+            versionOld: `${state.old.version} (${moment(state.old.fetched).format('DD MMMM')})`
+          })}</div>
         </>
       );
     }
