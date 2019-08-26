@@ -13,6 +13,8 @@ import { ReactComponent as Patreon } from '../../components/PatreonDevice.svg';
 
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
+import Items from '../../components/Items';
+import Spinner from '../../components/UI/Spinner';
 import MemberLink from '../../components/MemberLink';
 import userFlair from '../../data/userFlair';
 
@@ -22,7 +24,11 @@ class Index extends React.Component {
   constructor() {
     super();
     this.state = {
-      log: 0
+      log: 0,
+      manifest: {
+        loading: true,
+        data: false
+      }
     };
 
     this.logs = captainsLog.slice().reverse();
@@ -31,7 +37,37 @@ class Index extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    this.mounted = true;
+
+    if (this.mounted) this.init();
   }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  init = async () => {
+    if (!this.state.manifest.data) {
+      let diff = await fetch('https://voluspa.braytech.org/manifest');
+      if (this.mounted) diff = await diff.json();
+
+      if (diff && diff.ErrorCode === 200 && this.mounted) {
+        this.setState({
+          manifest: {
+            loading: false,
+            data: diff.Response
+          }
+        });
+      } else if (this.mounted) {
+        this.setState({
+          manifest: {
+            loading: false,
+            data: false
+          }
+        });
+      }
+    }
+  };
 
   shuffle(array) {
     var currentIndex = array.length,
@@ -74,12 +110,85 @@ class Index extends React.Component {
   render() {
     const { t, viewport } = this.props;
 
-    let records = [4138159715, 4230088036, 2186801540, 2175603070];
-    let collectibles = [564802913, 1657028070, 2094776121, 2982198544, 3490589921, 95860110, 2994358320, 490750432, 2239241192];
+    let displayRecords = [4138159715, 4230088036, 2186801540, 2175603070];
+    let displayCollectibles = [564802913, 1657028070, 2094776121, 2982198544, 3490589921, 95860110, 2994358320, 490750432, 2239241192];
 
     if (viewport.height < 769 && viewport.width <= 1024 && viewport.width > 600) {
-      records = records.splice(0, 3);
+      displayRecords = displayRecords.splice(0, 3);
       // collectibles = collectibles.splice(0, 7);
+    }
+
+    let elDiff = null;
+    if (this.state.manifest.data && this.state.manifest.data.diff) {
+      let diff = this.state.manifest.data.diff;
+
+      let diffCollectibles = diff.DestinyCollectibleDefinition && Object.keys(diff.DestinyCollectibleDefinition).length ? Object.keys(diff.DestinyCollectibleDefinition) : [];
+      let diffRecords = diff.DestinyRecordDefinition && Object.keys(diff.DestinyRecordDefinition).length ? Object.keys(diff.DestinyRecordDefinition) : [];
+      let diffItems =
+        diff.DestinyInventoryItemDefinition && Object.keys(diff.DestinyInventoryItemDefinition).length
+          ? Object.keys(diff.DestinyInventoryItemDefinition)
+              .filter(i => {
+                let definitionItem = manifest.DestinyInventoryItemDefinition[i];
+
+                if (!definitionItem) return false;
+
+                if (definitionItem && definitionItem.collectibleHash && diffCollectibles.indexOf(definitionItem.collectibleHash.toString()) === -1) return i;
+              })
+              .filter(i => i)
+          : [];
+
+      let keysOther = ['DestinyEnemyRaceDefinition', 'DestinyPlaceDefinition', 'DestinyActivityDefinition', 'DestinyActivityTypeDefinition', 'DestinyClassDefinition', 'DestinyGenderDefinition', 'DestinyRaceDefinition', 'DestinySandboxPerkDefinition', 'DestinyStatGroupDefinition', 'DestinyFactionDefinition', 'DestinyDamageTypeDefinition', 'DestinyActivityModeDefinition', 'DestinyStatDefinition', 'DestinyPresentationNodeDefinition', 'DestinyDestinationDefinition', 'DestinyLocationDefinition', 'DestinyLoreDefinition', 'DestinyObjectiveDefinition', 'DestinyProgressionDefinition', 'DestinyVendorDefinition', 'DestinyMilestoneDefinition', 'DestinyChecklistDefinition'];
+
+      let diffRemaining = Object.keys(diff)
+        .filter(key => keysOther.includes(key))
+        .reduce((obj, key) => {
+          obj[key] = diff[key];
+          return obj;
+        }, {});
+
+      elDiff = (
+        <>
+          {diffCollectibles.length ? (
+            <>
+              <h4>{t('Collectibles')}</h4>
+              <ul className='list collection-items'>
+                <Collectibles selfLinkFrom='/' hashes={diffCollectibles} />
+              </ul>
+            </>
+          ) : null}
+          {diffRecords.length ? (
+            <>
+              <h4>{t('Records')}</h4>
+              <ul className='list record-items'>
+                <Records selfLinkFrom='/' hashes={diffRecords} />
+              </ul>
+            </>
+          ) : null}
+          {diffItems.length ? (
+            <>
+              <h4>{t('Items')}</h4>
+              <ul className='list inventory-items'>
+                <Items items={diffItems.map(i => ({ itemHash: i }))} />
+              </ul>
+            </>
+          ) : null}
+          {diffRemaining && Object.keys(diffRemaining).length ? (
+            <>
+              <h4>{t('Other')}</h4>
+              <ul className='other'>
+                {Object.keys(diffRemaining).map((table, i) => {
+                  return (
+                    <li key={i}>
+                      <div className='entries'>{Object.keys(diffRemaining[table]).length}</div>
+                      <div className='table'>{table}</div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </>
+          ) : null}
+        </>
+      );
     }
 
     return (
@@ -95,10 +204,10 @@ class Index extends React.Component {
             <div className='module demo'>
               <div className='wrapper'>
                 <ul className='list record-items'>
-                  <Records selfLinkFrom='/' hashes={records} />
+                  <Records selfLinkFrom='/' hashes={displayRecords} />
                 </ul>
                 <ul className='list collection-items'>
-                  <Collectibles selfLinkFrom='/' hashes={collectibles} />
+                  <Collectibles selfLinkFrom='/' hashes={displayCollectibles} />
                 </ul>
               </div>
             </div>
@@ -120,7 +229,7 @@ class Index extends React.Component {
         <div className='row about'>
           <div className='wrapper'>
             <div className='module text'>
-              <h3>What is Braytech</h3>
+              <h3>{t('What is Braytech')}</h3>
               <div className='description'>
                 <p>Braytech is a Destiny fan site with many features. The exhaustive list includes but is not limited to; a clan roster with admin mode, collections and triumphs as per the game itself with some extra bells and whistles, a curated “this week” view detailing end-games chases and their conditions, exhaustive checklists with links to maps, post game carnage reports with details on activities and their participants, a pursuits view for bounties and quests which are supplemented with extra curated data, and a bunch of other stuff too.</p>
                 <p>Destiny is a game for all Guardians, available in various languages. So is Braytech. It’s beautiful on both desktop computers and smaller touch devices, accessible by anyone from anywhere.</p>
@@ -128,12 +237,18 @@ class Index extends React.Component {
               </div>
             </div>
             <div className='module text'>
-              <h3>Who builds it</h3>
+              <h3>{t('Who builds it')}</h3>
               <div className='description'>
                 <p>An Australian web developer does. Hi, my names Tom, and I'm addicted to Destiny. Okay, so not addicted—I've had time to build this web site. Truthfully, I'm an avid Destiny enthusiast who needs both an outlet for letting off steam and for developing my web skills further for use in my professional activities.</p>
                 <p>Braytech is a stringent exercise in mimicking—and to a small degree, reimagining—Destiny's UI for web and mobile. This has been my first React project, the first time I've heavily used the command line, the first time I've had to use NPM... And it's been super fun and rewarding, most of the time!</p>
               </div>
             </div>
+            {this.state.manifest.loading || this.state.manifest.data ? (
+              <div className='module manifest-diff'>
+                <h3>{t('Manifest changes')}</h3>
+                {this.state.manifest.data && elDiff ? elDiff : <Spinner />}
+              </div>
+            ) : null}
           </div>
         </div>
         <div className='row patreon'>
@@ -142,7 +257,7 @@ class Index extends React.Component {
               <Patreon />
             </div>
             <div className='module text'>
-              <h3>How you can help</h3>
+              <h3>{t('How you can help')}</h3>
               <div className='description'>
                 <p>Building these beautiful interfaces and fencing with Bungie's APIs takes effort and time. I can only devote so much of it to hobby ventures, which also cost money to keep online. I have a firm stance against ads on web sites as we know them. As such, I prefer to support these projects out of my own pocket and depend on the generosity of my community.</p>
                 <p>By supporting me, you can help ensure that I can keep these projects online, as well as help enable me to continue adding cool new features.</p>
@@ -186,7 +301,7 @@ class Index extends React.Component {
         <div className='row changes'>
           <div className='wrapper'>
             <div className='meta'>
-              <h3>Change log</h3>
+              <h3>{t('Change log')}</h3>
               <div className='text'>
                 <div className='number'>{this.logs[this.state.log].version}</div>
                 <div className='time'>
@@ -213,8 +328,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default compose(
-  connect(
-    mapStateToProps
-  ),
+  connect(mapStateToProps),
   withTranslation()
 )(Index);

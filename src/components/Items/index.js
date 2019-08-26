@@ -14,7 +14,7 @@ import './styles.css';
 class Items extends React.Component {
   render() {
     const { member, items, order, asTab, showHash, inspect, action } = this.props;
-    const itemComponents = member.data.profile.itemComponents;
+    const itemComponents = member && member.data && member.data.profile.itemComponents;
     const characterUninstancedItemComponents = false //member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data;
 
     let output = [];

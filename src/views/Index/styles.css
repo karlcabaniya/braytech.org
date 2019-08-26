@@ -15,6 +15,16 @@
   margin: 0 0 1rem;
 }
 
+#index h4 {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  margin: 20px 0 14px;
+}
+
+#index h4:first-child {
+  margin: 0 0 14px;
+}
+
 #index .row {
 
 }
@@ -44,8 +54,8 @@
 
 #index .row.flash .device {
   position: absolute;
-  top: calc(-10% - 15px);
-  left: 6rem;
+  top: -10%;
+  left: 10rem;
   width: 100%;
   height: 120%;
   pointer-events: none;
@@ -88,7 +98,7 @@
   position: relative;
   width: 100%;
   max-width: 400px;
-  animation: index-animation-1 8s ease-in-out infinite;
+  animation: index-animation-1 16s ease-in-out infinite;
 }
 
 #index .row.flash .module.demo .list.collection-items {
@@ -99,7 +109,7 @@
   max-width: 400px;
   height: 100%;
   align-content: center;
-  animation: index-animation-2 8s ease-in-out infinite;
+  animation: index-animation-2 16s ease-in-out infinite;
 }
 
 @keyframes index-animation-1 {
@@ -172,6 +182,29 @@
 
 #index .row.about > .wrapper {
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+#index .row.about .module.manifest-diff .list.collection-items {
+  grid-template-columns: 1fr 1fr;
+}
+
+#index .row.about .module.manifest-diff .list.record-items {
+  grid-template-columns: 1fr;
+}
+
+#index .row.about .module.manifest-diff ul.other li {
+  display: grid;
+  grid-template-columns: 48px auto;
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+#index .row.about .module.manifest-diff ul.other li:last-child {
+  margin: 0;
+}
+
+#index .row.about .module.manifest-diff ul.other li .entries {
+  color: rgba(255, 255, 255, 1);
 }
 
 
@@ -416,6 +449,10 @@
   #index .row.flash .device {
     right: -7rem;
     width: 100%;
+  }
+
+  #index .row.about .module.manifest-diff .list.collection-items {
+    grid-template-columns: 1fr;
   }
 
   #index .row.patreon .module.tags,

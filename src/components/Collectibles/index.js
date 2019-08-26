@@ -247,6 +247,8 @@ class Collectibles extends React.Component {
       collectiblesRequested.forEach(hash => {
         let collectibleDefinition = manifest.DestinyCollectibleDefinition[hash];
 
+        if (!collectibleDefinition) return null;
+
         let link = this.selfLink(hash);
 
         let state = 0;
