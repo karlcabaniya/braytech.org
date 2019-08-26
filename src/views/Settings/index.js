@@ -294,6 +294,7 @@ class Settings extends React.Component {
 
                   navigator.serviceWorker.getRegistration('/').then(function (registration) {
                     registration.update();
+                    console.log(registration)
                   });
                 }}
               />
