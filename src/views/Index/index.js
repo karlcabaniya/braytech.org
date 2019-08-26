@@ -154,24 +154,33 @@ class Index extends React.Component {
             <>
               <h4>{t('Collectibles')}</h4>
               <ul className='list collection-items'>
-                <Collectibles selfLinkFrom='/' hashes={diffCollectibles} />
+                <Collectibles selfLinkFrom='/' hashes={diffCollectibles.slice(0,6)} />
               </ul>
-            </>
-          ) : null}
-          {diffRecords.length ? (
-            <>
-              <h4>{t('Records')}</h4>
-              <ul className='list record-items'>
-                <Records selfLinkFrom='/' hashes={diffRecords} />
-              </ul>
+              {diffCollectibles.length > 6 ? (
+                <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffCollectibles.length - 6 })}</div>
+              ) : null}
             </>
           ) : null}
           {diffItems.length ? (
             <>
               <h4>{t('Items')}</h4>
               <ul className='list inventory-items'>
-                <Items items={diffItems.map(i => ({ itemHash: i }))} />
+                <Items items={diffItems.slice(0,6).map(i => ({ itemHash: i }))} />
               </ul>
+              {diffCollectibles.length > 6 ? (
+                <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffItems.length - 6 })}</div>
+              ) : null}
+            </>
+          ) : null}
+          {diffRecords.length ? (
+            <>
+              <h4>{t('Records')}</h4>
+              <ul className='list record-items'>
+                <Records selfLinkFrom='/' hashes={diffRecords.slice(0,3)} />
+              </ul>
+              {diffCollectibles.length > 3 ? (
+                <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffRecords.length - 3 })}</div>
+              ) : null}
             </>
           ) : null}
           {diffRemaining && Object.keys(diffRemaining).length ? (

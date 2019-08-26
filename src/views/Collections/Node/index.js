@@ -182,7 +182,8 @@ class PresentationNode extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member
+    member: state.member,
+    collectibles: state.collectibles
   };
 }
 
