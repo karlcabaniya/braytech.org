@@ -87,7 +87,7 @@ class Settings extends React.Component {
 
   swAvailable = process.env.NODE_ENV === 'production' && process.env.REACT_APP_BETA === 'true' && 'serviceWorker' in navigator;
 
-  swInstalled = this.swAvailable ? async () => await navigator.serviceWorker.getRegistration('/') : false;
+  swInstalled = this.swAvailable ? async () => await navigator.serviceWorker.getRegistration('/') ? true : false : false;
 
   componentWillUnmount() {
     this.mounted = false;
