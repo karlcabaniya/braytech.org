@@ -13,8 +13,7 @@ class AppEntry extends React.Component {
     super();
     
     this.state = {
-      updateAvailable: false,
-      swUpdate: false
+      updateAvailable: false
     };
 
     runOnceTasks();
@@ -36,10 +35,6 @@ class AppEntry extends React.Component {
     onSuccess: registration => {
       console.warn('Service worker registered');
       console.log(registration);
-
-      this.setState({
-        swUpdate: registration.update()
-      })
     }
   };
 

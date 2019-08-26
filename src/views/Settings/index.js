@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
+import * as serviceWorker from '../../serviceWorker';
 import { getLanguageInfo } from '../../utils/languageInfo';
 import * as ls from '../../utils/localStorage';
 import { BungieAuth } from '../../components/BungieAuth';
@@ -60,14 +61,15 @@ class Settings extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    console.log(this.props.swUpdate)
-    if (this.props.swUpdate) {
-      console.log('um')
-      this.props.swUpdate();
-    }
+
+    navigator.serviceWorker.getRegistration('/').then(function (registration) {
+      console.log(registration)
+    });
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+
+  }
 
   render() {
     const { t, availableLanguages, location } = this.props;
@@ -85,7 +87,9 @@ class Settings extends React.Component {
           <Checkbox linked checked={this.state.language.selected === code}>
             <div className='text'>
               <div className='name'>{langInfo.name || langInfo.code}</div>
-              <div className='coverage tooltip' data-hash='coverage' data-table='BraytechDefinition'>{translationStats[langInfo.code] && Math.floor((translationStats['internal'].notTranslated - translationStats[langInfo.code].notTranslated) / translationStats['internal'].notTranslated * 100)}%</div>
+              <div className='coverage tooltip' data-hash='coverage' data-table='BraytechDefinition'>
+                {translationStats[langInfo.code] && Math.floor(((translationStats['internal'].notTranslated - translationStats[langInfo.code].notTranslated) / translationStats['internal'].notTranslated) * 100)}%
+              </div>
             </div>
           </Checkbox>
         </li>
@@ -267,6 +271,34 @@ class Settings extends React.Component {
               />
               <div className='info'>
                 <p>{t("Reset data pertaining to whether or not you've seen any active notifcation items.")}</p>
+              </div>
+            </div>
+            <div className='sub-header sub'>
+              <div>{t('Troubleshooting')}</div>
+            </div>
+            <div className='buttons'>
+              <Button
+                text={t('Reload')}
+                action={() => {
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 50);
+                }}
+              />
+              <div className='info'>
+                <p>{t('Reload the app')}</p>
+              </div>
+              <Button
+                text={t('Dump service worker')}
+                action={() => {
+
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 50);
+                }}
+              />
+              <div className='info'>
+                <p>{t('Reload the app')}</p>
               </div>
             </div>
           </div>
