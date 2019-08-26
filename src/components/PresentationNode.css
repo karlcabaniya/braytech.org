@@ -73,6 +73,10 @@
   opacity: 1;
 }
 
+.presentation-node .list.primary li:hover .image.dl {
+  opacity: 1;
+}
+
 .presentation-node .list.secondary li {
   text-transform: uppercase;
   font-size: 14px;

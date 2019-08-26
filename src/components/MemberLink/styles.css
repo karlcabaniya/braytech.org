@@ -605,7 +605,7 @@ html.backdropfilter .wrapper.light-mode #member-overlay .sticky-nav {
   } 
 
   #member-overlay .sticky-nav-inner {
-    padding: unset;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

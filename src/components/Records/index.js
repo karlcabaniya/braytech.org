@@ -106,9 +106,9 @@ class Records extends React.Component {
     const highlight = parseInt(this.props.highlight, 10) || false;
     const recordsRequested = collectibles.hideDudRecords ? hashes.filter(hash => dudRecords.indexOf(hash) === -1) : hashes;
     const characterId = member && member.characterId;
-    const characterRecords = member && member.data.profile.characterRecords.data;
-    const profileRecords = member && member.data.profile.profileRecords.data.records;
-    const profileRecordsTracked = member && member.data.profile.profileRecords.data.trackedRecordHash ? [member.data.profile.profileRecords.data.trackedRecordHash] : [];
+    const characterRecords = member && member.data && member.data.profile.characterRecords.data;
+    const profileRecords = member && member.data && member.data.profile.profileRecords.data.records;
+    const profileRecordsTracked = member && member.data && member.data.profile.profileRecords.data.trackedRecordHash ? [member.data.profile.profileRecords.data.trackedRecordHash] : [];
     const tracked = triumphs.tracked;
 
     let recordsOutput = [];

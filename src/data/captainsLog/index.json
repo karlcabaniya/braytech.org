@@ -618,5 +618,10 @@
     "date": "2019-08-25T10:41:54.118Z",
     "version": "2.8.7",
     "content": "- search improvements\n  - filter search by prefixing `name:`, `description:`, or `type:`. for example, `type:trace` will return all Trace Rifles"
+  },
+  {
+    "date": "2019-08-26T09:19:48.419Z",
+    "version": "2.8.8",
+    "content": "- a brand new index page.\n- other minor improvements"
   }
 ]
