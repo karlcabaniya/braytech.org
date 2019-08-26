@@ -292,9 +292,9 @@ class Settings extends React.Component {
                 text={t('Dump service worker')}
                 action={() => {
 
-                  setTimeout(() => {
-                    window.location.reload();
-                  }, 50);
+                  navigator.serviceWorker.getRegistration('/').then(function (registration) {
+                    registration.update();
+                  });
                 }}
               />
               <div className='info'>
