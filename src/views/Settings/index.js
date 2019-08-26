@@ -25,6 +25,7 @@ class Settings extends React.Component {
         current: initLanguage,
         selected: initLanguage
       },
+      swInstalled: false,
       swUpdateAttempt: false,
       swUnregisterAttempt: false
     };
@@ -78,16 +79,26 @@ class Settings extends React.Component {
     });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     window.scrollTo(0, 0);
     this.mounted = true;
 
-    console.log(this.swAvailable, this.swInstalled)
+    const swInstalled = await this.swInstalled();
+    
+    if (this.mounted && swInstalled) this.setState({ swInstalled: true });
   }
 
   swAvailable = process.env.NODE_ENV === 'production' && process.env.REACT_APP_BETA === 'true' && 'serviceWorker' in navigator;
 
-  swInstalled = this.swAvailable ? async () => await navigator.serviceWorker.getRegistration('/') ? true : false : false;
+  swInstalled = async () => {
+    if (this.swAvailable) {
+      let registration = await navigator.serviceWorker.getRegistration('/');
+
+      if (registration) return true;
+    }
+
+    return false;
+  }
 
   componentWillUnmount() {
     this.mounted = false;
@@ -310,13 +321,13 @@ class Settings extends React.Component {
               <div className='info'>
                 <p>{t('Reload the app')}</p>
               </div>
-              {this.swAvailable ? (
+              {this.swAvailable && this.state.swInstalled ? (
                 <>
-                  <Button text={t('Update service worker')} disabled={!this.swInstalled || this.state.swUpdateAttempt || this.state.swUnregisterAttempt} action={this.swUpdate} />
+                  <Button text={t('Update service worker')} disabled={!this.state.swInstalled || this.state.swUpdateAttempt || this.state.swUnregisterAttempt} action={this.swUpdate} />
                   <div className='info'>
                     <p>{t('Attempt to update the service worker immediately. This function will disable the button temporarily. You may continue to use Braytech while it attempts to update in the background. If successful, you will be prompted to restart the app.')}</p>
                   </div>
-                  <Button text={t('Dump service worker')} disabled={!this.swInstalled || this.state.swUnregisterAttempt} action={this.swDump} />
+                  <Button text={t('Dump service worker')} disabled={!this.state.swInstalled || this.state.swUnregisterAttempt} action={this.swDump} />
                   <div className='info'>
                     <p>{t('Attempt to unregister the installed service worker. If successful, reloading the app will allow a new service worker to take its place.')}</p>
                   </div>
