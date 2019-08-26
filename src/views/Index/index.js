@@ -77,7 +77,7 @@ class Index extends React.Component {
     let records = [4138159715, 4230088036, 2186801540, 2175603070];
     let collectibles = [564802913, 1657028070, 2094776121, 2982198544, 3490589921, 95860110, 2994358320, 490750432, 2239241192];
 
-    if (viewport.height < 1300) {
+    if (viewport.height < 769 && viewport.width <= 1024 && viewport.width > 600) {
       records = records.splice(0, 3);
       // collectibles = collectibles.splice(0, 7);
     }

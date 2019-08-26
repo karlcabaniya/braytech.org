@@ -378,6 +378,24 @@
   #index .row.changes .log-content {
     padding: 0;
   }
+
+  #index .row.flash > .wrapper {
+    min-height: unset;
+    grid-template-columns: 1fr;
+    padding: calc(2rem + 40px) 2rem 2rem;
+  }
+
+  #index .row.flash .device {
+    height: 40%;
+    top: calc(-4rem + 26px);
+    right: 4rem;
+    left: unset;
+    width: unset;
+  }
+
+  #index .row.flash .module.demo .list.collection-items {
+    align-content: flex-start;
+  }
 }
 
 
@@ -390,31 +408,19 @@
     font-size: 18px;
   }
 
-  #index .row.flash .module.demo .list.collection-items {
-    align-content: flex-start;
-  }
-
   #index .row > .wrapper {
     padding: 2rem;
     grid-gap: 2rem;
   }
 
+  #index .row.flash .device {
+    right: -7rem;
+    width: 100%;
+  }
+
   #index .row.patreon .module.tags,
   #index .row.patreon .module.stats ul {
     grid-template-columns: 1fr;
-  }
-
-  #index .row.flash > .wrapper {
-    min-height: unset;
-    grid-template-columns: 1fr;
-    padding: calc(2rem + 40px) 2rem 2rem;
-  }
-
-  #index .row.flash .device {
-    height: 40%;
-    top: calc(-4rem + 26px);
-    right: -7rem;
-    left: unset;
   }
 
   #index .row.patreon .device {
