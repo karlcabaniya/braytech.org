@@ -24,7 +24,9 @@ class Settings extends React.Component {
       language: {
         current: initLanguage,
         selected: initLanguage
-      }
+      },
+      swUpdateAttempt: false,
+      swUnregisterAttempt: false
     };
   }
 
@@ -59,20 +61,40 @@ class Settings extends React.Component {
     }, 50);
   };
 
+  swUpdate = () => {
+    if (this.mounted) this.setState({ swUpdateAttempt: true });
+
+    navigator.serviceWorker.getRegistration('/').then(function(registration) {
+      registration.update();
+    });
+  };
+
+  swDump = () => {
+    if (this.mounted) this.setState({ swUnregisterAttempt: true });
+
+    navigator.serviceWorker.getRegistration('/').then(function(registration) {
+      registration.unregister();
+      console.log(registration)
+    });
+  };
+
   componentDidMount() {
     window.scrollTo(0, 0);
+    this.mounted = true;
 
-    navigator.serviceWorker.getRegistration('/').then(function (registration) {
-      console.log(registration)
+    navigator.serviceWorker.getRegistration('/').then(function(registration) {
+      console.log(registration);
     });
   }
 
   componentWillUnmount() {
-
+    this.mounted = false;
   }
 
   render() {
     const { t, availableLanguages, location } = this.props;
+
+    const swAvailable = process.env.NODE_ENV === 'production' && process.env.REACT_APP_BETA === 'true' && 'serviceWorker' in navigator;
 
     let languageButtons = availableLanguages.map(code => {
       let langInfo = getLanguageInfo(code);
@@ -288,18 +310,18 @@ class Settings extends React.Component {
               <div className='info'>
                 <p>{t('Reload the app')}</p>
               </div>
-              <Button
-                text={t('Dump service worker')}
-                action={() => {
-
-                  navigator.serviceWorker.getRegistration('/').then(function (registration) {
-                    registration.update();
-                  });
-                }}
-              />
-              <div className='info'>
-                <p>{t('Reload the app loldddddddddddddd')}</p>
-              </div>
+              {swAvailable ? (
+                <>
+                  <Button text={t('Update service worker')} disabled={this.state.swUpdateAttempt || this.state.swUnregisterAttempt} action={this.swUpdate} />
+                  <div className='info'>
+                    <p>{t('Attempt to update the service worker immediately. This function will disable the button temporarily. You may continue to use Braytech while it attempts to update in the background. If successful, you will be prompted to restart the app.')}</p>
+                  </div>
+                  <Button text={t('Dump service worker')} disabled={this.state.swUnregisterAttempt} action={this.swDump} />
+                  <div className='info'>
+                    <p>{t('Attempt to unregister the installed service worker. If successful, reloading the app will allow a new service worker to take its place.')}</p>
+                  </div>
+                </>
+              ) : null}
             </div>
           </div>
         </div>
