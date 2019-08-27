@@ -14,6 +14,7 @@ import { ReactComponent as Patreon } from '../../components/PatreonDevice.svg';
 
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
+import Activity from '../../components/Tooltip/Activity';
 import Items from '../../components/Items';
 import Spinner from '../../components/UI/Spinner';
 import MemberLink from '../../components/MemberLink';
@@ -111,13 +112,8 @@ class Index extends React.Component {
   render() {
     const { t, viewport } = this.props;
 
-    let displayRecords = [4138159715, 4230088036, 2186801540, 2175603070];
-    let displayCollectibles = [564802913, 1657028070, 2094776121, 2982198544, 3490589921, 95860110, 2994358320, 490750432, 2239241192];
-
-    if (viewport.height < 769 && viewport.width <= 1024 && viewport.width > 600) {
-      displayRecords = displayRecords.splice(0, 3);
-      // collectibles = collectibles.splice(0, 7);
-    }
+    let displayRecords = [2782139949, 1322754255, 3029681530];
+    let displayCollectibles = [564802913, 2982198544, 1186314104, 3490589921, 3773976307, 2239241195];
 
     let elDiff = null;
     if (this.state.manifest.data && this.state.manifest.data.diff) {
@@ -154,33 +150,27 @@ class Index extends React.Component {
             <>
               <h4>{t('Collectibles')}</h4>
               <ul className='list collection-items'>
-                <Collectibles selfLinkFrom='/' hashes={diffCollectibles.slice(0,6)} />
+                <Collectibles selfLinkFrom='/' hashes={diffCollectibles.slice(0, 6)} />
               </ul>
-              {diffCollectibles.length > 6 ? (
-                <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffCollectibles.length - 6 })}</div>
-              ) : null}
+              {diffCollectibles.length > 6 ? <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffCollectibles.length - 6 })}</div> : null}
             </>
           ) : null}
           {diffItems.length ? (
             <>
               <h4>{t('Items')}</h4>
               <ul className='list inventory-items'>
-                <Items items={diffItems.slice(0,6).map(i => ({ itemHash: i }))} />
+                <Items items={diffItems.slice(0, 6).map(i => ({ itemHash: i }))} />
               </ul>
-              {diffCollectibles.length > 6 ? (
-                <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffItems.length - 6 })}</div>
-              ) : null}
+              {diffCollectibles.length > 6 ? <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffItems.length - 6 })}</div> : null}
             </>
           ) : null}
           {diffRecords.length ? (
             <>
               <h4>{t('Records')}</h4>
               <ul className='list record-items'>
-                <Records selfLinkFrom='/' hashes={diffRecords.slice(0,3)} />
+                <Records selfLinkFrom='/' hashes={diffRecords.slice(0, 3)} />
               </ul>
-              {diffCollectibles.length > 3 ? (
-                <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffRecords.length - 3 })}</div>
-              ) : null}
+              {diffCollectibles.length > 3 ? <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffRecords.length - 3 })}</div> : null}
             </>
           ) : null}
           {diffRemaining && Object.keys(diffRemaining).length ? (
@@ -193,15 +183,17 @@ class Index extends React.Component {
                       <div className='entries'>{Object.keys(diffRemaining[table]).length}</div>
                       <div className='table'>{table}</div>
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </>
           ) : null}
-          <div className='meta'>{t('Comparison between {{versionNew}} and {{versionOld}}', {
-            versionNew: `${state.new.version} (${moment(state.new.fetched).format('DD MMMM')})`,
-            versionOld: `${state.old.version} (${moment(state.old.fetched).format('DD MMMM')})`
-          })}</div>
+          <div className='meta'>
+            {t('Comparison between {{versionNew}} and {{versionOld}}', {
+              versionNew: `${state.new.version} (${moment(state.new.fetched).format('DD MMMM')})`,
+              versionOld: `${state.old.version} (${moment(state.old.fetched).format('DD MMMM')})`
+            })}
+          </div>
         </>
       );
     }
@@ -213,19 +205,22 @@ class Index extends React.Component {
             <div className='device'>
               <Logo />
             </div>
-            <div className='module text'>
-              <div className='name'>BRAYTECH</div>
-            </div>
-            <div className='module demo'>
-              <div className='wrapper'>
-                <ul className='list record-items'>
-                  <Records selfLinkFrom='/' hashes={displayRecords} />
-                </ul>
-                <ul className='list collection-items'>
-                  <Collectibles selfLinkFrom='/' hashes={displayCollectibles} />
-                </ul>
+            <div className='big-name'>BRAYTECH</div>
+            {viewport.width > 1024 ? (
+              <div className='module demo'>
+                <div className='wrapper'>
+                  <div id='tooltip'>
+                    <Activity hash='2724706103' table='DestinyActivityDefinition' />
+                  </div>
+                  <ul className='list record-items'>
+                    <Records selfLinkFrom='/' hashes={displayRecords} />
+                  </ul>
+                  <ul className='list collection-items'>
+                    <Collectibles selfLinkFrom='/' hashes={displayCollectibles} />
+                  </ul>
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
         <div className='row patreon-cta'>
