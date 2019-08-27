@@ -628,5 +628,10 @@
     "date": "2019-08-26T14:30:59.712Z",
     "version": "2.8.9",
     "content": "- added a manifest change log to the index page. it's super cool.\n- fixed a tiny tiny bug"
+  },
+  {
+    "date": "2019-08-27T21:49:36.894Z",
+    "version": "2.8.10",
+    "content": "- minor adjustments"
   }
 ]

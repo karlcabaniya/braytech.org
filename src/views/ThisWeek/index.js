@@ -10,6 +10,8 @@ import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
 import Items from '../../components/Items';
 
+import lowlinesMappings from '../../data/lowlinesMappings';
+
 import ChecklistFactory from '../Checklists/ChecklistFactory';
 
 import './styles.css';
@@ -23,7 +25,9 @@ class ThisWeek extends React.Component {
     const { t, member, collectibles } = this.props;
     const { milestones } = member.data;
 
-    this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, collectibles.hideCompletedChecklistItems);
+    this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, false);
+
+    // console.log(Object.values(lowlinesMappings.checklists).filter(i => i.node && [].includes(parseInt(i.node.recordHash, 10))).map(r => parseInt(r.node.checklistHash, 10)))
 
     this.consolidatedInfo = {
       curse: {
@@ -37,7 +41,8 @@ class ThisWeek extends React.Component {
             1768837759 // Bridge Troll (Hidden Boss in Weekly Mission)
           ],
           items: [], // DestinyItemDefinition.Hashes
-          collectibles: [] // DestinyCollectableDefinition.Hashes
+          collectibles: [], // DestinyCollectableDefinition.Hashes
+          checklists: []
         },
         2: {
           strength: t('Middling'),
@@ -49,7 +54,8 @@ class ThisWeek extends React.Component {
             202137963 // Twinsies (Kill ogres in Weekly Mission within 5 secs of each other)
           ],
           items: [],
-          collectibles: []
+          collectibles: [],
+          checklists: []
         },
         3: {
           strength: t('Full strength'),
@@ -57,13 +63,19 @@ class ThisWeek extends React.Component {
             2144075645, // The Taken Champion (Heroic Blind Well)
             3675740698, // War Chests (Ascendant Chests)
             749838902, // Into the Unknown (Visit Mara)
-            1842255613, // Fideicide II (Bones in Mara's Throne World)
             2358176597, // Dark Monastery (Weekly Mission)
+            1236992882, // Odynom-Nom-Nom (Hidden Boss in Weekly Mission)
             1842255615, // Ecstasiate III (Bones in Weekly Mission)
-            1236992882 // Odynom-Nom-Nom (Hidden Boss in Weekly Mission)
+            1842255613 // Fideicide II (Bones in Mara's Throne World)
           ],
           items: [],
-          collectibles: []
+          collectibles: [],
+          checklists: [
+            {
+              name: 'ahamkaraBones',
+              items: [1387596458, 1387596456]
+            }
+          ]
         }
       },
       shatteredThrone: {
@@ -79,6 +91,16 @@ class ThisWeek extends React.Component {
           1859033175, // Cosmogyre II (Bones in Shattered Throne)
           1859033168, // Archiloquy (Bones in Shattered Throne)
           1859033171 // Brephos I (Bones in Shattered Throne)
+        ],
+        checklists: [
+          {
+            name: 'corruptedEggs',
+            items: [1101252162, 1101252163, 1101252168, 1101252169, 1101252171, 1101252172, 1101252173, 1101252174, 1101252175]
+          },
+          {
+            name: 'ahamkaraBones',
+            items: [1370818864, 1370818868, 1370818871, 1387596459]
+          }
         ]
       },
       ascendant: {
@@ -158,11 +180,11 @@ class ThisWeek extends React.Component {
           checklists: [
             {
               name: 'corruptedEggs',
-              items: [2974117605, 2974117605, 2974117605, 2974117605, 2974117605]
+              items: [1084474578, 1084474579, 1118029876, 1118029877, 1118029882]
             },
             {
               name: 'ahamkaraBones',
-              items: [1842255614]
+              items: [1387596457]
             }
           ]
         },
@@ -1021,6 +1043,14 @@ class ThisWeek extends React.Component {
         <ul className='list record-items'>
           <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
         </ul>
+        {this.consolidatedInfo.curse[cycleInfo.week.curse].checklists.length ? (
+          <>
+            <h4>{t('Checklist items')}</h4>
+            {this.consolidatedInfo.curse[cycleInfo.week.curse].checklists.map(list => {
+              return this.checklistFactory[list.name](list.items, true).checklist;
+            })}
+          </>
+        ) : null}
       </div>
     );
 
@@ -1035,6 +1065,10 @@ class ThisWeek extends React.Component {
           <ul className='list record-items'>
             <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.shatteredThrone.triumphs} ordered />
           </ul>
+          <h4>{t('Checklist items')}</h4>
+          {this.consolidatedInfo.shatteredThrone.checklists.map(list => {
+            return this.checklistFactory[list.name](list.items, true).checklist;
+          })}
         </div>
       ) : (
         false
@@ -1070,7 +1104,45 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    modules.push([moduleNightfalls[0]], [moduleNightfalls[1]], [moduleNightfalls[2]], [moduleMenagerie], [raids[0]], [raids[1]], [raids[2]], [raids[3]], [moduleAscendantChallenge], [moduleDreamingCityCycle], [moduleShatteredThrone], [moduleEscalationProtocol, moduleReckoning]);
+    modules.push(
+      [
+        moduleNightfalls[0]
+      ],
+      [
+        moduleNightfalls[1]
+      ],
+      [
+        moduleNightfalls[2]
+      ],
+      [
+        moduleMenagerie
+      ],
+      [
+        raids[0]
+      ],
+      [
+        raids[1]
+      ],
+      [
+        raids[2]
+      ],
+      [
+        raids[3]
+      ],
+      [
+        moduleAscendantChallenge
+      ],
+      [
+        moduleDreamingCityCycle
+      ],
+      [
+        moduleShatteredThrone
+      ],
+      [
+        moduleEscalationProtocol,
+        moduleReckoning
+      ]
+    );
 
     return (
       <div className='view' id='this-week'>

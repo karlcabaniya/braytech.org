@@ -15,7 +15,6 @@ class PostmasterCapacity extends React.Component {
     this.state = {
       ack: false
     };
-    this.mounted = false;
   }
 
   componentWillUnmount() {
@@ -50,7 +49,7 @@ class PostmasterCapacity extends React.Component {
 
       const postmaster = inventory.filter(i => i.bucketHash === 215593132);
 
-      if (postmaster.length === 21 && !this.state.ack) {
+      if (postmaster.length > 18 && !this.state.ack) {
         return (
           <div id='postmaster-capacity' onClick={this.deactivateOverlay}>
             <div className='wrapper-outer'>
@@ -67,7 +66,7 @@ class PostmasterCapacity extends React.Component {
                 <div>
                   <div className='text'>
                     <div className='name'>{t('WARNING!')}</div>
-                    <div className='description'>{t('The Postmaster is completely out of space. If you do not retrieve your items, you will lose them forever!')}</div>
+                    <div className='description'>{postmaster.length === 21 ? t('The Postmaster is completely out of space. If you do not retrieve your items, you will lose them forever!') : t('The Postmaster is almost out of space. If you do not retrieve your items, you will lose them forever!')}</div>
                   </div>
                 </div>
               </div>

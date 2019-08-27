@@ -92,6 +92,8 @@
   position: relative;
   pointer-events: unset;
   width: 100%;
+  box-shadow: none;
+  z-index: 1;
 }
 
 #index .row.flash .module.demo .list.record-items,

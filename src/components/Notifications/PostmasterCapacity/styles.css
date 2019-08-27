@@ -6,26 +6,7 @@
   z-index: 21;
   display: grid;
   align-content: center;
-  background-color: rgba(122, 122, 122, 0.4);
-  transition: background-color 0.25s;
   cursor: pointer;
-}
-
-.wrapper.dark-mode #postmaster-capacity {
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-#postmaster-capacity:hover {
-  background-color: rgba(182, 182, 182, 0.4);
-}
-
-.wrapper.dark-mode #postmaster-capacity:hover {
-  background-color: rgba(17, 17, 17, 0.4);
-}
-
-#postmaster-capacity .wrapper-outer {
-  position: relative;
-  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2);
 }
 
 #postmaster-capacity .background .border-top {
@@ -43,25 +24,15 @@
   left: 0;
   width: 100%;
   height: calc(100% - 6px);
-  background-color: rgba(122, 122, 122, 0.8);
-}
-
-.wrapper.dark-mode #postmaster-capacity .background .acrylic {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-html.backdropfilter #postmaster-capacity .background .border-top {
-  background-color: rgb(220, 81, 59);
+#postmaster-capacity .background .border-top {
   backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
 }
 
 html.backdropfilter #postmaster-capacity .background .acrylic {
-  background-color: rgba(136, 136, 136, 0.4);
-  backdrop-filter: blur(7px) brightness(1.1) saturate(1.2);
-}
-
-html.backdropfilter .wrapper.dark-mode #postmaster-capacity .background .acrylic {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
 }
 
@@ -144,7 +115,6 @@ html.backdropfilter .wrapper.dark-mode #postmaster-capacity .background .acrylic
 @media screen and (max-width: 600px) {
   #postmaster-capacity {
     display: block;
-    overflow-y: scroll;
   }
 
   #postmaster-capacity .wrapper-inner {
@@ -153,7 +123,7 @@ html.backdropfilter .wrapper.dark-mode #postmaster-capacity .background .acrylic
   }
 
   #postmaster-capacity .wrapper-inner div .icon {
-    margin: 0.75rem 2rem 0 2rem;
+    margin: 1rem 2rem 0 2rem;
   }
 
   #postmaster-capacity .wrapper-inner .text {

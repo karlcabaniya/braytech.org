@@ -85,7 +85,7 @@ class Header extends React.Component {
       },
       {
         name: t('Now'),
-        desc: t('View the state of your Guardian, ranks, equipment, milestones'),
+        desc: t('View the state of your Guardian, ranks, milestones'),
         slug: '/now',
         exact: true,
         profile: true,
