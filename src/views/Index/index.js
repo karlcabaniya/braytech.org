@@ -213,10 +213,10 @@ class Index extends React.Component {
                     <Activity hash='2724706103' table='DestinyActivityDefinition' />
                   </div>
                   <ul className='list record-items'>
-                    <Records selfLinkFrom='/' hashes={displayRecords} />
+                    <Records selfLinkFrom='/' hashes={displayRecords} forceDisplay />
                   </ul>
                   <ul className='list collection-items'>
-                    <Collectibles selfLinkFrom='/' hashes={displayCollectibles} />
+                    <Collectibles selfLinkFrom='/' hashes={displayCollectibles} forceDisplay />
                   </ul>
                 </div>
               </div>
