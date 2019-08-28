@@ -101,54 +101,6 @@
   grid-template-columns: 1fr;
 }
 
-/* #index .row.flash .module.demo .list.record-items {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  animation: index-animation-1 16s ease-in-out infinite;
-}
-
-#index .row.flash .module.demo .list.collection-items {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  max-width: 400px;
-  height: 100%;
-  align-content: center;
-  animation: index-animation-2 16s ease-in-out infinite;
-} */
-
-/* @keyframes index-animation-1 {
-  0%, 33%, 100% {
-    transform: scale(1) translateX(0%);
-    filter: blur(0px);
-    opacity: 1;    
-    z-index: 10;
-  }
-  49.5%, 82.5% {
-    transform: scale(0.6) translateX(60%);
-    filter: blur(5px);
-    opacity: 0.5;
-    z-index: 1;
-  }
-}
-
-@keyframes index-animation-2 {
-  0%, 33%, 100% {
-    transform: scale(0.6) translateX(-60%);
-    filter: blur(5px);
-    opacity: 0.5;
-    z-index: 1;
-  }
-  49.5%, 82.5% {
-    transform: scale(1) translateX(0%);
-    filter: blur(0px);
-    opacity: 1;    
-    z-index: 10;
-  }
-} */
-
 
 
 #index .patreon-cta {
@@ -191,7 +143,8 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-#index .row.about .module.manifest-diff .list.collection-items {
+#index .row.about .module.manifest-diff .list.collection-items,
+#index .row.about .module.manifest-diff .list.inventory-items {
   grid-template-columns: 1fr 1fr;
 }
 
