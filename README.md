@@ -13,16 +13,20 @@ Before you can build this project, you must install and configure the following 
 After installing Node, you should be able to run the following command to install development tools.
 You will only need to run this command when dependencies change in [package.json](package.json).
 ```
-    npm install
+npm install
 ```
 2.  Configure enviromental variables by renaming `.env.example` to `.env`
 
 3.  Visit [Bungie.net](https://www.bungie.net/en/Application/Create) and create your own applicaiton credentials and use them to fill the blanks in `.env`
 ```
-Set _OAuth Client Type_ to `Confidential`
-Set _Redirect URL_ to `https://localhost:3000/settings`
-Set _Scope_ to `[x] [x] [x] [x] [ ]`
-Set _Origin Header_ to `https://localhost:3000`
+SET   OAuth Client Type   Confidential
+SET   Redirect URL        https://localhost:3000/settings
+SET   Scope               [x]
+                          [x]
+                          [x]
+                          [x]
+                          [ ]
+SET   Origin Header       https://localhost:3000
 ```
 4.  To start the app running on the default port of 3000 run 
 ```
