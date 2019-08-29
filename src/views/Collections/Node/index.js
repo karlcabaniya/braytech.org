@@ -166,7 +166,7 @@ class PresentationNode extends React.Component {
         </div>
         <div className='collectibles'>
           {definitionTertiary.children.plugs && definitionTertiary.children.plugs.length ? (
-            <ul className={cx('list', 'tertiary', 'inventory-items', 'as-tab')}>
+            <ul className={cx('list', 'tertiary', 'collection-items')}>
               <PlugSet set={definitionTertiary.hash} plugs={definitionTertiary.children.plugs} />
             </ul>
           ) : (
