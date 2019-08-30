@@ -96,12 +96,8 @@
   "Cayde's journals recovered": "Diaros de Cayde recuperados",
   "#####Chalice of Opulence": "🌐",
   "#####Challenge": "🌐",
-<<<<<<< HEAD
-  "Chamber of Starlight": "Cámara de luz de de estrellas",
-  "#####Change log": "🌐",
-=======
   "Chamber of Starlight": "Cámara de luz de estrellas",
->>>>>>> Updated some more spanish translations
+  "#####Change log": "🌐",
   "#####Char": "🌐",
   "Character": "Personaje",
   "Character bound": "Vinculado al personaje",
@@ -247,21 +243,13 @@
   "#####Hide acquired collection items": "🌐",
   "#####Hide completed": "🌐",
   "Hide completed checklist items": "Ocultar elementos de la checklist completados",
-<<<<<<< HEAD
-  "Hide completed triumphs": "Esconder triunfos completos",
+  "Hide completed triumphs": "Ocultar triunfos completos",
   "#####Hide dud records": "🌐",
-=======
-  "Hide completed triumphs": "Ocultar triunfos completados",
->>>>>>> Updated some more spanish translations
   "Hide invisible Collection items": "Ocultar elementos invisibles de la colección",
   "Hide invisible collection items": "Ocultar elementos invisibles de la colección",
   "#####Hide invisible triumph records": "🌐",
-<<<<<<< HEAD
-  "#####Hide redeemed": "🌐",
-  "#####Hides dud (empty, unused, or unobtainable) records from view": "🌐",
-=======
   "Hide redeemed": "Ocultar completados",
->>>>>>> Update spanish translations
+  "#####Hides dud (empty, unused, or unobtainable) records from view": "🌐",
   "High score": "Mayor puntuación",
   "#####High Value Killed": "🌐",
   "Historical stats": "Estadísticas históricas",
@@ -294,10 +282,6 @@
   "#####Invasion Kills": "🌐",
   "Invasion kills": "Bajas de invasor",
   "#####Invasions": "🌐",
-<<<<<<< HEAD
-=======
-  "Inventory": "Inventario",
->>>>>>> Updated some more spanish translations
   "Items": "Objetos",
   "Items your Guardian has acquired": "Objetos que tu Guardián ha adquirido",
   "#####Jind": "🌐",
@@ -429,12 +413,8 @@
   "Recent activities": "Actividades recientes",
   "Recent matches": "Partidas recientes",
   "Recently discovered": "Descubierto recientemente",
-<<<<<<< HEAD
-  "#####Recommended Power": "🌐",
-  "#####Records": "🌐",
-=======
   "Recommended Power": "Poder recomendado",
->>>>>>> Update spanish translations
+  "#####Records": "🌐",
   "Records of your Guardian's achievements": "Registros de logros de tu Guardián",
   "#####Records your Guardian has achieved": "🌐",
   "Refresh the active profile's data every 30 seconds": "Actualizar los datos del perfil activo cada 30 segundos",
@@ -580,16 +560,8 @@
   "Verifying manifest data": "Verificando datos del manifiesto",
   "Version": "Versión",
   "VICTORY": "VICTORIA",
-<<<<<<< HEAD
-  "View full roster": "Ver lista de miembros completa",
-<<<<<<< HEAD
-  "#####View the state of your Guardian, ranks, milestones": "🌐",
-=======
-=======
   "View full roster": "Ver lista completa",
->>>>>>> Update spanish translations
-  "View the state of your Guardian, ranks, equipment, milestones": "Accede al estado de tu Guardian, rangos, equipo, búsquedas",
->>>>>>> Updated some more spanish translations
+  "View the state of your Guardian, ranks, milestones": "Accede al estado de tu Guardian, rangos, búsquedas",
   "Views": "Páginas",
   "Visibility": "Visibilidad",
   "Vlr (R)": "Vlr (R)",
@@ -608,33 +580,20 @@
   "Wayfarer": "Navegante",
   "We Ran Out of Medals": "We Ran Out of Medals",
   "#####Weak": "🌐",
-<<<<<<< HEAD
-  "#####Week": "🌐",
-=======
   "Weapons": "Armas",
   "Week": "Semana",
->>>>>>> Updated some more spanish translations
   "Weekly": "Semanal",
   "Weekly Clan Engrams": "Engramas semanales de Clan",
   "Weekly Clan XP": "Experiencia de Clan semanal",
   "Weekly Personal Contribution": "Contribución semanal personal",
-<<<<<<< HEAD
-  "Weekly Personal XP Contribution": "Contribución de XP semanal",
+  "Weekly Personal XP Contribution": "Contribución de experiencia semanal",
   "#####What is Braytech": "🌐",
   "When all is said and done": "Cuando todo está dicho y hecho",
   "#####Where I keep all of my crazy ideas": "🌐",
   "#####Who builds it": "🌐",
-  "#####win": "🌐",
-  "#####Win streak": "🌐",
-  "#####wins": "🌐",
-=======
-  "Weekly Personal XP Contribution": "Contribución de experiencia semanal",
-  "When all is said and done": "Cuando todo está dicho y hecho",
-  "#####Where I keep all of my crazy ideas": "🌐",
   "win": "victoria",
   "Win streak": "Racha de victorias",
   "wins": "victorias",
->>>>>>> Updated some more spanish translations
   "years": "años",
   "#####You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.": "🌐",
   "You aren't tracking any records yet!": "Aún no estás rastreando ningún triunfo!",
