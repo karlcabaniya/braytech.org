@@ -294,7 +294,7 @@ class Crucible extends React.Component {
             <div>{t('Recent matches')}</div>
           </div>
           <div className='content'>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 5} characterId={member.characterId} limit='20' offset={offset} root='/reports/crucible' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 5} characterId={member.characterId} limit='10' offset={offset} root='/reports/crucible' />
           </div>
         </div>
       </div>

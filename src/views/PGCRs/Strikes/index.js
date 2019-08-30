@@ -141,7 +141,7 @@ class Strikes extends React.Component {
             <div className='sub-header'>
               <div>Recent strikes</div>
             </div>
-            <Matches mode={mode} characterId={member.characterId} limit='20' offset={offset} root='/reports/strikes' />
+            <Matches mode={mode} characterId={member.characterId} limit='10' offset={offset} root='/reports/strikes' />
           </div>
         </div>
       </div>
