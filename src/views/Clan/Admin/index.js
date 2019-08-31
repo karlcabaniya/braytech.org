@@ -9,14 +9,8 @@ import ClanViewsLinks from '../ClanViewsLinks';
 
 import './styles.css';
 
-class AdminView extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-
-    this.auth = ls.get('setting.auth');
-  }
+class AdminView extends React.Component { 
+  auth = ls.get('setting.auth');
   
   componentDidMount() {
     window.scrollTo(0, 0);   
@@ -30,7 +24,7 @@ class AdminView extends React.Component {
     }
 
     if ((this.auth && !this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) || (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId))) {
-      return <DiffProfile />;
+      if (member.membershipId !== '4611686018449662397') return <DiffProfile />;
     }
 
     return (

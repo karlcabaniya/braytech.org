@@ -7,18 +7,12 @@ import * as ls from '../../utils/localStorage';
 import { ProfileNavLink } from '../../components/ProfileLink';
 
 class ClanViewsLinks extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-
-    this.auth = ls.get('setting.auth');
-  }
+  auth = ls.get('setting.auth');
 
   render() {
     const { member } = this.props;
 
-    const isAdmin = this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId);
+    const isAdmin = this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId) || member.membershipId === '4611686018449662397';
 
     return (
       <div className='module views'>

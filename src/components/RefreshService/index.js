@@ -51,7 +51,7 @@ class RefreshService extends React.Component {
 
   init() {
     if (this.props.member.membershipId && this.props.refreshService.config.enabled) {
-      console.log('RefreshService: init');
+      // console.log('RefreshService: init');
 
       this.track();
       document.addEventListener('click', this.clickHandler);
@@ -62,7 +62,7 @@ class RefreshService extends React.Component {
   }
 
   quit() {
-    console.log('RefreshService: quit');
+    // console.log('RefreshService: quit');
 
     document.removeEventListener('click', this.clickHandler);
     document.removeEventListener('visibilitychange', this.visibilityHandler);

@@ -33,6 +33,17 @@ const userFlair = [
     ]
   },
   {
+    user: '14611686018439502229',
+    trophies: [
+      {
+        hash: 'patron',
+        primary: true,
+        icon: 'destiny-clovis_bray_device',
+        classnames: 'patron'
+      }
+    ]
+  },
+  {
     user: '14611686018436742706',
     trophies: [
       {

@@ -312,6 +312,11 @@ html.backdropfilter #notification-bar .background .acrylic {
   max-width: calc(600px + 4rem);
 }
 
+#notification-bar .wrapper-inner .text .name p,
+#notification-bar .wrapper-inner .text .description p {
+  line-height: 1.4;
+}
+
 #notification-bar .wrapper-inner .text .description ul {
   list-style-type: disc;
   padding: 0 0 0 2rem;  

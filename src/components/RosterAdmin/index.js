@@ -470,7 +470,7 @@ class RosterAdmin extends React.Component {
       //   console.log(lastPlayed);
       // }
 
-      console.log(m);
+      // console.log(m);
 
       members.push({
         pending: m.pending,
