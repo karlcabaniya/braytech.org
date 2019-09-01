@@ -18,7 +18,8 @@ class Tooltip extends React.Component {
       quantity: false,
       rollNote: false,
       table: false,
-      tooltipType: false
+      tooltipType: false,
+      mode: false
     };
 
     this.ref_tooltip = React.createRef();
@@ -31,11 +32,11 @@ class Tooltip extends React.Component {
   }
 
   helper_tooltipPositionUpdate = () => {
-    window.requestAnimationFrame(this.helper_tooltipPositionUpdate);
-
     if (this.ref_tooltip.current) {
       this.ref_tooltip.current.style.transform = `translate(${this.mousePosition.x}px, ${this.mousePosition.y}px)`;
     }
+
+    window.requestAnimationFrame(this.helper_tooltipPositionUpdate);
   }
 
   helper_windowMouseMove = e => {
@@ -75,14 +76,17 @@ class Tooltip extends React.Component {
         instanceId: e.currentTarget.dataset.instanceid,
         state: e.currentTarget.dataset.state,
         quantity: e.currentTarget.dataset.quantity,
-        rollNote: e.currentTarget.dataset.rollnote ? true : false,
-        table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false,
-        tooltipType: e.currentTarget.dataset.tooltiptype && e.currentTarget.dataset.tooltiptype !== '' ? e.currentTarget.dataset.tooltiptype : false
+        rollNote: e.currentTarget.dataset.rollnote,
+        table: e.currentTarget.dataset.table,
+        tooltipType: e.currentTarget.dataset.tooltiptype,
+        mode: e.currentTarget.dataset.mode
       });
     }
   };
 
   helper_targetMouseLeave = e => {
+    window.cancelAnimationFrame(this.rAF);
+    
     this.resetState();
   };
 
@@ -102,9 +106,10 @@ class Tooltip extends React.Component {
           instanceId: e.currentTarget.dataset.instanceid,
           state: e.currentTarget.dataset.state,
           quantity: e.currentTarget.dataset.quantity,
-          rollNote: e.currentTarget.dataset.rollnote ? true : false,
-          table: e.currentTarget.dataset.table ? e.currentTarget.dataset.table : false,
-          tooltipType: e.currentTarget.dataset.tooltiptype && e.currentTarget.dataset.tooltiptype !== '' ? e.currentTarget.dataset.tooltiptype : false
+          rollNote: e.currentTarget.dataset.rollnote,
+          table: e.currentTarget.dataset.table,
+          tooltipType: e.currentTarget.dataset.tooltiptype,
+          mode: e.currentTarget.dataset.mode
         });
       }
     }
@@ -133,7 +138,8 @@ class Tooltip extends React.Component {
       quantity: false,
       rollNote: false,
       table: false,
-      tooltipType: false
+      tooltipType: false,
+      mode: false
     });
   };
 
@@ -160,8 +166,7 @@ class Tooltip extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.tooltips.bindTime !== prevProps.tooltips.bindTime) {
-      // console.log('bindTime change');
-      this.bind_TooltipItem(true);
+      this.bind_TooltipItem();
     }
 
     if (this.props.location && prevProps.location.pathname !== this.props.location.pathname) {

@@ -40,10 +40,6 @@ class Roster extends React.Component {
     this.clearInterval();
   }
 
-  componentDidUpdate() {
-    console.log('hi')
-  }
-
   callGetGroupMembers = async () => {
     const { member, groupMembers } = this.props;
     const result = member.data.groups.results.length > 0 ? member.data.groups.results[0] : false;
@@ -100,7 +96,7 @@ class Roster extends React.Component {
     results.forEach(m => {
       let isPrivate = !m.profile || (!m.profile.characterActivities.data || !m.profile.characters.data.length);
       let isSelf = !isPrivate ? m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId : false;
-      let { lastPlayed, lastActivity, lastCharacter, display } = utils.lastPlayerActivity(m);
+      let { lastPlayed, lastActivity, lastCharacter, lastMode, display } = utils.lastPlayerActivity(m);
       let triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
       let valorPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2626549951].currentProgress : 0;
       let valorResets = !isPrivate ? this.calculateResets(3882308435, m.profile.characters.data[0].characterId, m.profile.characterProgressions.data).total : 0;
@@ -130,7 +126,7 @@ class Roster extends React.Component {
       */
 
       // if (m.isOnline) {
-      //   console.log(lastPlayed);
+      //   console.log(lastPlayed, lastActivity, lastCharacter, lastMode, display);
       // }
 
       members.push({
@@ -175,7 +171,7 @@ class Roster extends React.Component {
                     </li>
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && display })}>
                       {m.isOnline ? (
-                        <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash}>
+                        <div data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash} data-mode={lastActivity.currentActivityModeHash}>
                           {m.isOnline && display ? (
                             <div>{display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span></div>
                           ) : (

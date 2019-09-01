@@ -168,7 +168,7 @@ class SitRep extends React.Component {
                   return {
                     light: definitionActivity.activityLightLevel,
                     el: (
-                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={ac.activityHash}>
+                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={ac.activityHash} data-mode='175275639'>
                         <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
                         <div>
                           <div className='time'>

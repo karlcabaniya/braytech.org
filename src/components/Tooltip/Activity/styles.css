@@ -57,8 +57,20 @@
   background-color: hsla(19, 83%, 31%, 0.8);
 }
 
+#tooltip .frame.activity.reckoning .header .icon {
+  background-color: hsla(166, 70%, 10%, 0.8);
+}
+
+#tooltip .frame.activity.reckoning .header .text {
+  background-color: hsla(166, 50%, 20%, 0.8);
+}
+
 #tooltip .frame.activity .description {
   padding: 16px 16px 0;
+}
+
+#tooltip .frame.activity .description:last-child {
+  padding: 16px;
 }
 
 #tooltip .frame.activity .description .destination {
