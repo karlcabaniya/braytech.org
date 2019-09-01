@@ -20,7 +20,7 @@ class Actions extends React.Component {
     super(props);
 
     this.state = {
-      frozen: this.props.available ? false : true,
+      frozen: this.props.available,
       primed: false
     };
   }
