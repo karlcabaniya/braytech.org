@@ -520,14 +520,10 @@ class RosterAdmin extends React.Component {
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && display })}>
                       <div>
                         {m.isOnline && display ? (
-                          <>
-                            {display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span>
-                          </>
+                          <div>{display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span></div>
                         ) : (
-                          moment(lastPlayed)
-                            .locale('en-sml')
-                            .fromNow()
-                        )}
+                            <div>{moment(lastPlayed).locale('en-sml').fromNow()}</div>
+                          )}
                       </div>
                     </li>
                     <li className='col joinDate'>

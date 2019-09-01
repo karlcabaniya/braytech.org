@@ -179,14 +179,22 @@
   background-color: rgba(229, 209, 99, 0.5);
 }
 
-.list.roster .row > ul .col.lastActivity div {
+.list.roster .row:not(.header) > ul .col.lastActivity > div {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-gap: 7px;
+  align-items: center;
+}
+
+.list.roster .row:not(.header) > ul .col.lastActivity > div div {
   white-space: nowrap;
   width: max-content;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.list.roster .row > ul .col.lastActivity span {
+.list.roster .row:not(.header) > ul .col.lastActivity > div span {
   color: rgba(255, 255, 255, 0.6);
 }
 

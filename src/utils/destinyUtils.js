@@ -622,39 +622,32 @@ export function lastPlayerActivity(member) {
 
     lastCharacter = member.profile.characters.data.find(character => character.characterId === lastCharacterId);
 
-    if (lastActivity && member.isOnline !== false) {
-      let activity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
-      let mode = activity ? (activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
-      let place = activity ? activity.placeHash ? manifest.DestinyPlaceDefinition[activity.placeHash] : false : false;
+    const definitionPlaceOrbit = manifest.DestinyPlaceDefinition[2961497387];
 
-      if (mode) {
-        if (place && activity.placeHash === 2096719558) {
-          display = `${activity.displayProperties.name}`;
-        } else if (place && activity.placeHash === 4148998934) {
-          display = `${activity.displayProperties.name}`;
-        } else {
-          display = `${mode.displayProperties.name}: ${activity.displayProperties.name}`;
+    if (lastActivity && member.isOnline !== false) {
+      const definitionActivity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
+      const definitionActivityMode = definitionActivity ? (definitionActivity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
+      const definitionPlace = definitionActivity ? definitionActivity.placeHash ? manifest.DestinyPlaceDefinition[definitionActivity.placeHash] : false : false;
+
+      if (definitionActivityMode) {
+        if (definitionPlace && definitionActivity.placeHash === 2096719558) { // Menagerie
+          display = `${definitionActivity.displayProperties.name}`;
+        } else if (definitionPlace && definitionActivity.placeHash === 4148998934) { // The Reckoning
+          display = `${definitionActivity.displayProperties.name}`;
+        } else { // Default
+          display = `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
         }
-      } else if (activity) {
-        if (activity.placeHash === 2961497387) {
-          display = `Orbit`;
+      } else if (definitionActivity) {
+        if (definitionActivity.placeHash === 2961497387) { // Orbit
+          display = definitionPlaceOrbit.displayProperties.name;
         } else {
-          display = activity.displayProperties.name;
+          display = definitionActivity.displayProperties.name;
         }
       } else {
         display = false;
       }
 
-      if ((mode && mode.parentHashes.length) || (activity && activity.placeHash === 2961497387)) {
-        lastMode =
-          activity.placeHash === 2961497387
-            ? {
-                displayProperties: {
-                  name: 'Orbit'
-                }
-              }
-            : manifest.DestinyActivityModeDefinition[mode.parentHashes[0]];
-      }
+      lastMode = definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.map(hash => manifest.DestinyActivityModeDefinition[hash]);
     }
   }
 
