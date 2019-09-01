@@ -36,7 +36,7 @@ class Roster extends React.Component {
     }
   }
 
-  callGetGroupMembers = () => {
+  callGetGroupMembers = async () => {
     const { member, groupMembers } = this.props;
     const result = member.data.groups.results.length > 0 ? member.data.groups.results[0] : false;
 
@@ -46,7 +46,9 @@ class Roster extends React.Component {
     let now = new Date();
 
     if (result && (now - groupMembers.lastUpdated > 30000 || result.group.groupId !== groupMembers.groupId)) {
-      getGroupMembers(result.group, result.member.memberType > 2 && isAuthed);
+      await getGroupMembers(result.group, result.member.memberType > 2 && isAuthed);
+
+      this.props.rebindTooltips();
     }
   };
 
@@ -168,15 +170,27 @@ class Roster extends React.Component {
                       </div>
                     </li>
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && display })}>
-                      <div>
-                        {m.isOnline && display ? (
-                          <>
-                            {display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span>
-                          </>
-                        ) : (
-                          moment(lastPlayed).locale('en-sml').fromNow()
+                      {m.isOnline ? (
+                        <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash}>
+                          {m.isOnline && display ? (
+                            <>
+                              {display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span>
+                            </>
+                          ) : (
+                              moment(lastPlayed).locale('en-sml').fromNow()
+                            )}
+                        </div>
+                      ) : (
+                          <div>
+                            {m.isOnline && display ? (
+                              <>
+                                {display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span>
+                              </>
+                            ) : (
+                                moment(lastPlayed).locale('en-sml').fromNow()
+                              )}
+                          </div>
                         )}
-                      </div>
                     </li>
                     <li className='col triumphScore'>{triumphScore.toLocaleString('en-us')}</li>
                     <li className='col progression glory'>{gloryPoints.toLocaleString('en-us')}</li>
@@ -331,7 +345,18 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
+  };
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withTranslation()
 )(Roster);
