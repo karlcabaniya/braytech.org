@@ -169,9 +169,10 @@ class Roster extends React.Component {
                         </div>
                       </div>
                     </li>
-                    <li className={cx('col', 'lastActivity', { display: m.isOnline && display })}>
-                      {m.isOnline ? (
-                        <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash}>
+                    
+                    {m.isOnline ? (
+                      <li className={cx('col', 'lastActivity', 'tooltip', { display: m.isOnline && display })} data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash}>
+                        <div>
                           {m.isOnline && display ? (
                             <>
                               {display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span>
@@ -180,7 +181,9 @@ class Roster extends React.Component {
                               moment(lastPlayed).locale('en-sml').fromNow()
                             )}
                         </div>
-                      ) : (
+                        </li>
+                    ) : (
+                      <li className={cx('col', 'lastActivity', { display: m.isOnline && display })}>
                           <div>
                             {m.isOnline && display ? (
                               <>
@@ -189,9 +192,10 @@ class Roster extends React.Component {
                             ) : (
                                 moment(lastPlayed).locale('en-sml').fromNow()
                               )}
-                          </div>
+                        </div>
+                        </li>
                         )}
-                    </li>
+                    
                     <li className='col triumphScore'>{triumphScore.toLocaleString('en-us')}</li>
                     <li className='col progression glory'>{gloryPoints.toLocaleString('en-us')}</li>
                     <li className='col progression valor'>

@@ -29,6 +29,12 @@ class Tooltip extends React.Component {
     };
   }
 
+  updatePosition = () => {
+    if (!this.tooltip.current) return;
+
+    this.tooltip.current.style.cssText = `top: ${this.mouseMoveXY.y}px; left: ${this.mouseMoveXY.x}px`;
+  }
+
   mouseMove = e => {
     let x = 0;
     let y = 0;
@@ -56,7 +62,7 @@ class Tooltip extends React.Component {
         x,
         y
       };
-      this.tooltip.current.style.cssText = `top: ${y}px; left: ${x}px`;
+      window.requestAnimationFrame(this.updatePosition);
     }
   };
 
