@@ -630,8 +630,8 @@ export function lastPlayerActivity(member) {
       const definitionPlace = definitionActivity ? definitionActivity.placeHash ? manifest.DestinyPlaceDefinition[definitionActivity.placeHash] : false : false;
 
       if (definitionActivityMode) {
-        if (definitionPlace && definitionActivity.placeHash === 2096719558) { // Menagerie
-          display = `${definitionActivity.displayProperties.name}`;
+        if (definitionPlace && definitionActivity.placeHash === 2096719558 && definitionActivity.selectionScreenDisplayProperties.name) { // Menagerie
+          display = `${definitionActivity.selectionScreenDisplayProperties.name}`;
         } else if (definitionPlace && definitionActivity.placeHash === 4148998934) { // The Reckoning
           display = `${definitionActivity.displayProperties.name}`;
         } else { // Default
@@ -650,7 +650,13 @@ export function lastPlayerActivity(member) {
       lastMode = definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.map(hash => manifest.DestinyActivityModeDefinition[hash]);
     }
   }
-
+console.log({
+  lastPlayed: lastActivity ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed,
+  lastCharacter,
+  lastActivity,
+  lastMode,
+  display
+})
   return {
     lastPlayed: lastActivity ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed,
     lastCharacter,

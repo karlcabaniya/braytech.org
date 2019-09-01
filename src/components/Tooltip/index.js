@@ -27,15 +27,15 @@ class Tooltip extends React.Component {
       x: 0,
       y: 0
     };
+    this.rAF = null;
   }
 
   helper_tooltipPositionUpdate = () => {
-    if (this.ref_tooltip.current) {
-      this.ref_tooltip.current.style.left = `${this.mousePosition.x}px`;
-      this.ref_tooltip.current.style.top = `${this.mousePosition.y}px`;
-    }    
-
     window.requestAnimationFrame(this.helper_tooltipPositionUpdate);
+
+    if (this.ref_tooltip.current) {
+      this.ref_tooltip.current.style.transform = `translate(${this.mousePosition.x}px, ${this.mousePosition.y}px)`;
+    }
   }
 
   helper_windowMouseMove = e => {
@@ -180,11 +180,12 @@ class Tooltip extends React.Component {
 
   componentDidMount() {
     window.addEventListener('mousemove', this.helper_windowMouseMove);
-    window.requestAnimationFrame(this.helper_tooltipPositionUpdate);
+    this.rAF = window.requestAnimationFrame(this.helper_tooltipPositionUpdate);
   }
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', this.helper_windowMouseMove);
+    window.cancelAnimationFrame(this.rAF);
   }
 
   render() {
@@ -196,7 +197,7 @@ class Tooltip extends React.Component {
       if (this.state.table === 'DestinyVendorDefinition') Type = Vendor;
 
       return (
-        <div id='tooltip' ref={this.ref_tooltip} style={{ top: `${this.mousePosition.y}px`, left: `${this.mousePosition.x}px` }}>
+        <div id='tooltip' ref={this.ref_tooltip}>
           <Type {...this.state} />
         </div>
       );

@@ -425,7 +425,7 @@ class RosterAdmin extends React.Component {
   render() {
     const { t, member, groupMembers, mini, showOnline = false } = this.props;
 
-    const isAdmin = (this.auth && !this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) || (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId));
+    const isAdmin = this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId);
 
     let members = [];
     let results = showOnline ? groupMembers.members.filter(r => r.isOnline) : groupMembers.members.concat(groupMembers.pending);

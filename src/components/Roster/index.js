@@ -36,6 +36,14 @@ class Roster extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.clearInterval();
+  }
+
+  componentDidUpdate() {
+    console.log('hi')
+  }
+
   callGetGroupMembers = async () => {
     const { member, groupMembers } = this.props;
     const result = member.data.groups.results.length > 0 ? member.data.groups.results[0] : false;
@@ -58,10 +66,6 @@ class Roster extends React.Component {
 
   clearInterval() {
     window.clearInterval(this.refreshClanDataInterval);
-  }
-
-  componentWillUnmount() {
-    this.clearInterval();
   }
 
   changeSortTo = to => {
