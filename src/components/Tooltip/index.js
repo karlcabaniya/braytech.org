@@ -21,26 +21,29 @@ class Tooltip extends React.Component {
       tooltipType: false
     };
 
-    this.tooltip = React.createRef();
+    this.ref_tooltip = React.createRef();
     this.touchMovement = false;
-    this.mouseMoveXY = {
+    this.mousePosition = {
       x: 0,
       y: 0
     };
   }
 
-  updatePosition = () => {
-    if (!this.tooltip.current) return;
+  helper_tooltipPositionUpdate = () => {
+    if (this.ref_tooltip.current) {
+      this.ref_tooltip.current.style.left = `${this.mousePosition.x}px`;
+      this.ref_tooltip.current.style.top = `${this.mousePosition.y}px`;
+    }    
 
-    this.tooltip.current.style.cssText = `top: ${this.mouseMoveXY.y}px; left: ${this.mouseMoveXY.x}px`;
+    window.requestAnimationFrame(this.helper_tooltipPositionUpdate);
   }
 
-  mouseMove = e => {
+  helper_windowMouseMove = e => {
     let x = 0;
     let y = 0;
     let offset = 0;
     let tooltipWidth = 384;
-    let tooltipHeight = this.state.hash ? this.tooltip.current.clientHeight : 0;
+    let tooltipHeight = this.state.hash ? this.ref_tooltip.current.clientHeight : 0;
     let scrollbarAllowance = 24;
 
     x = e.clientX;
@@ -58,16 +61,14 @@ class Tooltip extends React.Component {
     y = y < scrollbarAllowance ? scrollbarAllowance : y;
 
     if (this.state.hash) {
-      this.mouseMoveXY = {
+      this.mousePosition = {
         x,
         y
       };
-      window.requestAnimationFrame(this.updatePosition);
     }
   };
 
   helper_targetMouseEnter = e => {
-    // if (e.currentTarget.dataset.ignoretouch) console.warn(`helper_targetMouseEnter: Ignoring touch by target request`);
     if (e.currentTarget.dataset.hash) {
       this.setState({
         hash: e.currentTarget.dataset.hash,
@@ -95,9 +96,7 @@ class Tooltip extends React.Component {
 
   helper_targetTouchEnd = e => {
     if (!this.touchMovement) {
-      // if (e.currentTarget.dataset.ignoretouch) console.warn(`helper_targetTouchEnd: Ignoring touch by target request`);
       if (e.currentTarget.dataset.hash) {
-        // && !e.currentTarget.dataset.ignoretouch
         this.setState({
           hash: e.currentTarget.dataset.hash,
           instanceId: e.currentTarget.dataset.instanceid,
@@ -109,33 +108,6 @@ class Tooltip extends React.Component {
         });
       }
     }
-  };
-
-  resetState = () => {
-    this.setState({
-      hash: false,
-      instanceId: false,
-      state: false,
-      quantity: false,
-      rollNote: false,
-      table: false,
-      tooltipType: false
-    });
-  };
-
-  performBindTooltipItem = reset => {
-    if (reset) {
-      this.resetState();
-    }
-
-    let targets = document.querySelectorAll('.tooltip');
-    targets.forEach(target => {
-      target.addEventListener('touchstart', this.helper_targetTouchStart);
-      target.addEventListener('touchmove', this.helper_targetTouchMove);
-      target.addEventListener('touchend', this.helper_targetTouchEnd);
-      target.addEventListener('mouseenter', this.helper_targetMouseEnter);
-      target.addEventListener('mouseleave', this.helper_targetMouseLeave);
-    });
   };
 
   helper_tooltipTouchStart = e => {
@@ -153,38 +125,66 @@ class Tooltip extends React.Component {
     }
   };
 
-  performBindTooltip = () => {
-    this.tooltip.current.addEventListener('touchstart', this.helper_tooltipTouchStart);
-    this.tooltip.current.addEventListener('touchmove', this.helper_tooltipTouchMove);
-    this.tooltip.current.addEventListener('touchend', this.helper_tooltipTouchEnd);
+  resetState = () => {
+    this.setState({
+      hash: false,
+      instanceId: false,
+      state: false,
+      quantity: false,
+      rollNote: false,
+      table: false,
+      tooltipType: false
+    });
+  };
+
+  bind_TooltipItem = reset => {
+    if (reset) {
+      this.resetState();
+    }
+
+    let targets = document.querySelectorAll('.tooltip');
+    targets.forEach(target => {
+      target.addEventListener('touchstart', this.helper_targetTouchStart);
+      target.addEventListener('touchmove', this.helper_targetTouchMove);
+      target.addEventListener('touchend', this.helper_targetTouchEnd);
+      target.addEventListener('mouseenter', this.helper_targetMouseEnter);
+      target.addEventListener('mouseleave', this.helper_targetMouseLeave);
+    });
+  };
+
+  bind_Tooltip = () => {
+    this.ref_tooltip.current.addEventListener('touchstart', this.helper_tooltipTouchStart);
+    this.ref_tooltip.current.addEventListener('touchmove', this.helper_tooltipTouchMove);
+    this.ref_tooltip.current.addEventListener('touchend', this.helper_tooltipTouchEnd);
   };
 
   componentDidUpdate(prevProps) {
     if (this.props.tooltips.bindTime !== prevProps.tooltips.bindTime) {
       // console.log('bindTime change');
-      this.performBindTooltipItem(true);
+      this.bind_TooltipItem(true);
     }
 
     if (this.props.location && prevProps.location.pathname !== this.props.location.pathname) {
       // console.log('location change');
-      this.performBindTooltipItem(true);
+      this.bind_TooltipItem(true);
     }
 
     if (this.props.member.data !== prevProps.member.data) {
-      this.performBindTooltipItem();
+      this.bind_TooltipItem();
     }
 
     if (this.state.hash) {
-      this.performBindTooltip();
+      this.bind_Tooltip();
     }
   }
 
   componentDidMount() {
-    window.addEventListener('mousemove', this.mouseMove);
+    window.addEventListener('mousemove', this.helper_windowMouseMove);
+    window.requestAnimationFrame(this.helper_tooltipPositionUpdate);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousemove', this.mouseMove);
+    window.removeEventListener('mousemove', this.helper_windowMouseMove);
   }
 
   render() {
@@ -196,7 +196,7 @@ class Tooltip extends React.Component {
       if (this.state.table === 'DestinyVendorDefinition') Type = Vendor;
 
       return (
-        <div id='tooltip' ref={this.tooltip} style={{ top: `${this.mouseMoveXY.y}px`, left: `${this.mouseMoveXY.x}px` }}>
+        <div id='tooltip' ref={this.ref_tooltip} style={{ top: `${this.mousePosition.y}px`, left: `${this.mousePosition.x}px` }}>
           <Type {...this.state} />
         </div>
       );
@@ -213,15 +213,6 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    setTooltipDetailMode: value => {
-      dispatch({ type: 'REBIND_TOOLTIPS', payload: {} });
-    }
-  };
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Tooltip);
