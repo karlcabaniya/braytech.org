@@ -8,6 +8,7 @@ import { orderBy } from 'lodash';
 
 import * as utils from '../../utils/destinyUtils';
 import * as bungie from '../../utils/bungie';
+import * as ls from '../../utils/localStorage';
 import { ProfileLink } from '../ProfileLink';
 import getGroupMembers from '../../utils/getGroupMembers';
 import MemberLink from '../MemberLink';
@@ -372,6 +373,8 @@ class RosterAdmin extends React.Component {
       softUpdate: new Date().getTime()
     };
   }
+
+  auth = ls.get('setting.auth');
 
   componentDidMount() {
     const { member } = this.props;
