@@ -17,14 +17,10 @@ class AdminView extends React.Component {
   }
 
   render() {
-    const { member, groupMembers } = this.props;
+    const { groupMembers } = this.props;
 
     if (!this.auth) {
       return <NoAuth />;
-    }
-
-    if ((this.auth && !this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) || (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId))) {
-      if (member.membershipId !== '4611686018449662397') return <DiffProfile />;
     }
 
     return (

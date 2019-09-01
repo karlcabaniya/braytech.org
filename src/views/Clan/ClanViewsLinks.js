@@ -3,17 +3,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import * as ls from '../../utils/localStorage';
 import { ProfileNavLink } from '../../components/ProfileLink';
 
 class ClanViewsLinks extends React.Component {
-  auth = ls.get('setting.auth');
-
   render() {
-    const { member } = this.props;
-
-    const isAdmin = this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId) || member.membershipId === '4611686018449662397';
-
     return (
       <div className='module views'>
         <ul className='list'>
@@ -25,12 +18,10 @@ class ClanViewsLinks extends React.Component {
             <div className='icon roster' />
             <ProfileNavLink to='/clan/roster' />
           </li>
-          {isAdmin ? (
-            <li className='linked'>
-              <div className='icon admin' />
-              <ProfileNavLink to='/clan/admin' />
-            </li>
-          ) : null}
+          <li className='linked'>
+            <div className='icon admin' />
+            <ProfileNavLink to='/clan/admin' />
+          </li>
         </ul>
       </div>
     );
