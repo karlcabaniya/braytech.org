@@ -386,6 +386,10 @@ class RosterAdmin extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.clearInterval();
+  }
+
   callGetGroupMembers = () => {
     const { member, groupMembers } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
@@ -413,10 +417,6 @@ class RosterAdmin extends React.Component {
     });
   };
 
-  componentWillUnmount() {
-    this.clearInterval();
-  }
-
   changeSortTo = to => {
     this.setState((prevState, props) => {
       prevState.order.dir = prevState.order.sort === to && prevState.order.dir === 'desc' ? 'asc' : 'desc';
@@ -427,8 +427,16 @@ class RosterAdmin extends React.Component {
 
   render() {
     const { t, member, groupMembers, mini, showOnline = false } = this.props;
+    
+    const isAdmin = member.data.groups.results.find(r => {
+      const authed = this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId);
 
-    const isAdmin = this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && member.data.groups.results.find(r => r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId).membershipId);
+      if (r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === authed.membershipId) {
+        return true;
+      } else {
+        return false;
+      }
+    });
 
     let members = [];
     let results = showOnline ? groupMembers.members.filter(r => r.isOnline) : groupMembers.members.concat(groupMembers.pending);
@@ -541,7 +549,7 @@ class RosterAdmin extends React.Component {
                     </li>
                     <li className='col rank'>{m.memberType && utils.groupMemberTypeToString(m.memberType)}</li>
                     <li className='col actions'>
-                      <Actions m={m} softUpdate={this.softUpdate} />
+                      <Actions m={m} softUpdate={this.softUpdate} available={isAdmin} />
                     </li>
                   </>
                 ) : (

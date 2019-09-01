@@ -650,13 +650,7 @@ export function lastPlayerActivity(member) {
       lastMode = definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.map(hash => manifest.DestinyActivityModeDefinition[hash]);
     }
   }
-console.log({
-  lastPlayed: lastActivity ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed,
-  lastCharacter,
-  lastActivity,
-  lastMode,
-  display
-})
+
   return {
     lastPlayed: lastActivity ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed,
     lastCharacter,
