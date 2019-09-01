@@ -20,7 +20,7 @@ class Actions extends React.Component {
     super(props);
 
     this.state = {
-      frozen: this.props.available,
+      frozen: false,
       primed: false
     };
   }
@@ -292,21 +292,21 @@ class Actions extends React.Component {
   };
 
   render() {
-    const { t, m: member } = this.props;
+    const { t, m: member, available } = this.props;
 
     if (member.pending) {
       return (
         <>
           <Button
             text={t('Approve')}
-            disabled={this.state.frozen}
+            disabled={this.state.frozen || !available}
             action={() => {
               this.memberApprove(member.destinyUserInfo.membershipId);
             }}
           />
           <Button
             text={t('Deny')}
-            disabled={this.state.frozen}
+            disabled={this.state.frozen || !available}
             action={() => {
               this.memberDeny(member.destinyUserInfo.membershipId);
             }}
@@ -314,7 +314,7 @@ class Actions extends React.Component {
           <Button
             text={t('Ban')}
             className={cx({ primed: this.state.primed })}
-            disabled={this.state.frozen}
+            disabled={this.state.frozen || !available}
             action={() => {
               this.memberBan(member.destinyUserInfo.membershipId);
             }}
@@ -326,14 +326,14 @@ class Actions extends React.Component {
         <>
           <Button
             text={t('Promote')}
-            disabled={this.state.frozen || member.memberType > 2}
+            disabled={this.state.frozen || !available || member.memberType > 2}
             action={() => {
               this.memberRank(member.destinyUserInfo.membershipId, true);
             }}
           />
           <Button
             text={t('Demote')}
-            disabled={this.state.frozen || member.memberType > 3 || member.memberType === 1}
+            disabled={this.state.frozen || !available || member.memberType > 3 || member.memberType === 1}
             action={() => {
               this.memberRank(member.destinyUserInfo.membershipId, false);
             }}
@@ -341,7 +341,7 @@ class Actions extends React.Component {
           <Button
             text={t('Kick')}
             className={cx({ primed: this.state.primed })}
-            disabled={this.state.frozen || member.memberType === 5}
+            disabled={this.state.frozen || !available || member.memberType === 5}
             action={() => {
               this.memberKick(member.destinyUserInfo.membershipId);
             }}
