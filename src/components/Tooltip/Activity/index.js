@@ -16,6 +16,7 @@ class Activity extends React.Component {
 
     const definitionActivity = cloneDeep(manifest[table][hash]);
     const definitionActivityMode = manifest.DestinyActivityModeDefinition[mode];
+    const definitionActivityModeParent = definitionActivityMode && definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.length && manifest.DestinyActivityModeDefinition[definitionActivityMode.parentHashes[0]];
     const definitionActivityPlaylist = manifest.DestinyActivityDefinition[playlist];
 
     if (!definitionActivity) {
@@ -142,6 +143,7 @@ class Activity extends React.Component {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           name: definitionActivity.displayProperties.name,
+          description: definitionActivity.displayProperties.description,
           mode: definitionActivityMode && definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name,
           className: 'raid',
           icon: <span className='destiny-raid' />
@@ -158,7 +160,13 @@ class Activity extends React.Component {
       if (modeFiltered === 'gambit')
         activityTypeDisplay = {
           ...activityTypeDisplay,
-          mode: definitionActivity.originalDisplayProperties && definitionActivity.originalDisplayProperties.name,
+          name: definitionActivityMode.displayProperties.name,
+          mode: definitionActivityModeParent.displayProperties.name,
+          description: definitionActivityMode.displayProperties.description,
+          destination: {
+            name: definitionActivity.displayProperties.name,
+            place: definitionActivity.displayProperties.description
+          },
           className: 'gambit',
           icon: <span className='destiny-gambit' />
         };
@@ -166,7 +174,6 @@ class Activity extends React.Component {
       if (modeFiltered === 'strike')
         activityTypeDisplay = {
           ...activityTypeDisplay,
-          name: definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name,
           mode: manifest.DestinyActivityTypeDefinition[2884569138].displayProperties.name,
           className: 'strike',
           icon: <span className='destiny-strike' />
