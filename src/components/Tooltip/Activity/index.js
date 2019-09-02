@@ -87,7 +87,7 @@ class Activity extends React.Component {
         icon: <span className='destiny-patrol' />
       };
 
-      console.log(definitionActivity, mode, definitionActivityPlaylist)
+      // console.log(definitionActivity, mode, definitionActivityPlaylist)
 
       if (definitionActivity.placeHash === 2961497387)
         activityTypeDisplay = {

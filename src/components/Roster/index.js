@@ -125,9 +125,9 @@ class Roster extends React.Component {
 
       */
 
-      if (m.isOnline) {
-        console.log(lastPlayed, lastActivity, lastCharacter, lastMode, display);
-      }
+      // if (m.isOnline) {
+      //   console.log(lastPlayed, lastActivity, lastCharacter, lastMode, display);
+      // }
 
       members.push({
         sorts: {

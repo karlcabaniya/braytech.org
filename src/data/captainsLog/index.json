@@ -633,5 +633,10 @@
     "date": "2019-08-27T21:49:36.894Z",
     "version": "2.8.10",
     "content": "- minor adjustments"
+  },
+  {
+    "date": "2019-09-02T06:13:53.726Z",
+    "version": "2.8.13",
+    "content": "- made _Clan Admin_ mode visible to everyone to increase feature visibility\n- Added Tooltips to _Clan Roster_ activity column\n- Performance improvements"
   }
 ]
