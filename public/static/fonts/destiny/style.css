@@ -1,18 +1,22 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?ggv8bn') format('woff');
+  src: url('destiny.woff?r27u0x') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
 [class^="destiny-"], [class*=" destiny-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'destiny' !important;
+  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
+
+  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -279,6 +283,50 @@
 }
 .destiny-gambit:before {
   content: "\e911";
+}
+.destiny-menagerie .path1:before {
+  content: "\e915";
+  color: rgb(255, 255, 255);
+}
+.destiny-menagerie .path2:before {
+  content: "\e916";
+  margin-left: -1em;
+  color: rgb(128, 67, 52);
+}
+.destiny-menagerie .path3:before {
+  content: "\e917";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.destiny-menagerie .path4:before {
+  content: "\e918";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.destiny-menagerie .path5:before {
+  content: "\e919";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.destiny-menagerie .path6:before {
+  content: "\e91a";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.destiny-menagerie .path7:before {
+  content: "\e91b";
+  margin-left: -1em;
+  color: rgb(128, 67, 52);
+}
+.destiny-menagerie .path8:before {
+  content: "\e91c";
+  margin-left: -1em;
+  color: rgb(128, 67, 52);
+}
+.destiny-menagerie .path9:before {
+  content: "\e91d";
+  margin-left: -1em;
+  color: rgb(128, 67, 52);
 }
 .destiny-patrol:before {
   content: "\e912";

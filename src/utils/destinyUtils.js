@@ -682,7 +682,9 @@ export function lastPlayerActivity2(member) {
     let lastActivityString = false;
     if (definitionActivityMode) {
       if (definitionActivity.activityTypeHash === 400075666) { // Menagerie
-        lastActivityString = `${definitionActivity.displayProperties.name}`;
+        lastActivityString = `${definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name}`;
+      } else if (definitionActivity.activityTypeHash === 838603889) { // Forge Ignition
+        lastActivityString = `${definitionActivity.displayProperties.name}: ${definitionActivityPlaylist.displayProperties.name}`;
       } else if (definitionPlace && definitionActivity.placeHash === 4148998934) { // The Reckoning
         lastActivityString = `${definitionActivity.displayProperties.name}`;
       } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]

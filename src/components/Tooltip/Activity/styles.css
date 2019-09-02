@@ -96,6 +96,14 @@
   background-color: hsla(339, 50%, 17%, 0.8);
 }
 
+#tooltip .frame.activity.menagerie .header .icon {
+  background-color: hsla(12, 72%, 5%, 0.8);
+}
+
+#tooltip .frame.activity.menagerie .header .text {
+  background-color: hsla(12, 72%, 12%, 0.8);
+}
+
 #tooltip .frame.activity .description {
   padding: 16px 16px 0;
 }
