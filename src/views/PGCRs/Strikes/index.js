@@ -139,7 +139,7 @@ class Strikes extends React.Component {
         <div className='module-l1' id='matches'>
           <div className='content'>
             <div className='sub-header'>
-              <div>Recent strikes</div>
+              <div>{t('Recent strikes')}</div>
             </div>
             <Matches mode={mode} characterId={member.characterId} limit='10' offset={offset} root='/reports/strikes' />
           </div>
