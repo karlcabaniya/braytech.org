@@ -19,7 +19,8 @@ class Tooltip extends React.Component {
       rollNote: false,
       table: false,
       tooltipType: false,
-      mode: false
+      mode: false,
+      playlist: false
     };
 
     this.ref_tooltip = React.createRef();
@@ -79,7 +80,8 @@ class Tooltip extends React.Component {
         rollNote: e.currentTarget.dataset.rollnote,
         table: e.currentTarget.dataset.table,
         tooltipType: e.currentTarget.dataset.tooltiptype,
-        mode: e.currentTarget.dataset.mode
+        mode: e.currentTarget.dataset.mode,
+        playlist: e.currentTarget.dataset.playlist
       });
     }
   };
@@ -109,7 +111,8 @@ class Tooltip extends React.Component {
           rollNote: e.currentTarget.dataset.rollnote,
           table: e.currentTarget.dataset.table,
           tooltipType: e.currentTarget.dataset.tooltiptype,
-          mode: e.currentTarget.dataset.mode
+          mode: e.currentTarget.dataset.mode,
+          playlist: e.currentTarget.dataset.playlist
         });
       }
     }
@@ -139,7 +142,8 @@ class Tooltip extends React.Component {
       rollNote: false,
       table: false,
       tooltipType: false,
-      mode: false
+      mode: false,
+      playlist: false
     });
   };
 

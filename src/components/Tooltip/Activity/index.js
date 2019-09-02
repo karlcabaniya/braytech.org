@@ -12,9 +12,11 @@ import './styles.css';
 
 class Activity extends React.Component {
   render() {
-    let { t, hash, table, mode = [] } = this.props;
+    const { t, hash, table, mode, playlist } = this.props;
 
-    let definitionActivity = cloneDeep(manifest[table][hash]);
+    const definitionActivity = cloneDeep(manifest[table][hash]);
+    const definitionActivityMode = manifest.DestinyActivityModeDefinition[mode];
+    const definitionActivityPlaylist = manifest.DestinyActivityDefinition[playlist];
 
     if (!definitionActivity) {
       console.warn('Hash not found');
@@ -49,14 +51,22 @@ class Activity extends React.Component {
           return 'story';
         } else if (activityModeHashes.includes(2394616003)) {
           return 'strike';
+        } else if (activityModeHashes.includes(3497767639)) {
+          return 'patrol';
         } else if (activityModeHashes.includes(1164760504)) {
           return 'crucible';
+        } else if (activityModeHashes.includes(2043403989)) {
+          return 'raid';
         } else if (activityModeHashes.includes(3894474826)) {
           return 'reckoning';
+        } else if (activityModeHashes.includes(1418469392)) { // gambit prime
+          return 'gambit';
+        } else if (activityModeHashes.includes(1848252830)) { // gambit
+          return 'gambit';
         }
       }
 
-      const modeFiltered = activityType(definitionActivity.hash, definitionActivity.activityModeHashes.concat(mode));
+      const modeFiltered = activityType(definitionActivity.hash, definitionActivity.activityModeHashes ? definitionActivity.activityModeHashes.concat([mode]) : [mode]);
 
       let activityTypeDisplay = {
         name: definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown'),
@@ -75,7 +85,26 @@ class Activity extends React.Component {
 
         icon: <span className='destiny-patrol' />
       };
-      console.log(definitionActivity)
+
+      console.log(definitionActivity, mode, definitionActivityPlaylist)
+
+      if (definitionActivity.placeHash === 2961497387)
+        activityTypeDisplay = {
+          ...activityTypeDisplay,
+          name: manifest.DestinyPlaceDefinition[2961497387].displayProperties.name,
+          destination: false,
+          description: false,
+          activityLightLevel: false
+        };
+      
+      if (modeFiltered === 'patrol')
+        activityTypeDisplay = {
+          ...activityTypeDisplay,
+          destination: false,
+          description: false,
+          activityLightLevel: false,
+          mode: definitionActivityMode && definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name
+        };
 
       if (modeFiltered === 'story')
         activityTypeDisplay = {
@@ -98,17 +127,40 @@ class Activity extends React.Component {
       if (modeFiltered === 'crucible')
         activityTypeDisplay = {
           ...activityTypeDisplay,
+          name: definitionActivityMode ? definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name : t('Unknown'),
+          mode: manifest.DestinyActivityModeDefinition[1164760504].displayProperties.name,
+          description: definitionActivityPlaylist && definitionActivityPlaylist.displayProperties ? definitionActivityPlaylist.displayProperties.description : t('Unknown'),
+          destination: {
+            name: definitionActivity.displayProperties.description,
+            place: false
+          },
           className: 'crucible',
           activityLightLevel: false,
           icon: <span className='destiny-crucible' />
         };
 
+      if (modeFiltered === 'raid')
+        activityTypeDisplay = {
+          ...activityTypeDisplay,
+          mode: definitionActivityMode && definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name,
+          className: 'raid',
+          icon: <span className='destiny-raid' />
+        };
+      
       if (modeFiltered === 'reckoning')
         activityTypeDisplay = {
           ...activityTypeDisplay,
           mode: definitionActivity.originalDisplayProperties && definitionActivity.originalDisplayProperties.name,
           className: 'reckoning',
           icon: <span className='destiny-reckoning' />
+        };
+      
+      if (modeFiltered === 'gambit')
+        activityTypeDisplay = {
+          ...activityTypeDisplay,
+          mode: definitionActivity.originalDisplayProperties && definitionActivity.originalDisplayProperties.name,
+          className: 'gambit',
+          icon: <span className='destiny-gambit' />
         };
 
       if (modeFiltered === 'strike')
@@ -156,20 +208,22 @@ class Activity extends React.Component {
                   <ObservedImage className='image' src={`https://www.bungie.net${definitionActivity.pgcrImage}`} />
                 </div>
               ) : null}
-              <div className='description'>
-                {activityTypeDisplay.destination ? (
-                  <div className='destination'>
-                    {activityTypeDisplay.destination.name !== activityTypeDisplay.destination.place && !activityTypeDisplay.destination.name.includes(activityTypeDisplay.destination.place) ? (
-                      <>
-                        {activityTypeDisplay.destination.name}, {activityTypeDisplay.destination.place}
-                      </>
-                    ) : (
-                      activityTypeDisplay.destination.name
-                    )}
-                  </div>
-                ) : null}
-                <pre>{activityTypeDisplay.description}</pre>
-              </div>
+              {activityTypeDisplay.destination || activityTypeDisplay.description ? (
+                <div className='description'>
+                  {activityTypeDisplay.destination && activityTypeDisplay.destination.name ? (
+                    <div className='destination'>
+                      {activityTypeDisplay.destination.name !== activityTypeDisplay.destination.place && !activityTypeDisplay.destination.name.includes(activityTypeDisplay.destination.place) && activityTypeDisplay.destination.place ? (
+                        <>
+                          {activityTypeDisplay.destination.name}, {activityTypeDisplay.destination.place}
+                        </>
+                      ) : (
+                          activityTypeDisplay.destination.name
+                        )}
+                    </div>
+                  ) : null}
+                  <pre>{activityTypeDisplay.description}</pre>
+                </div>
+              ) : null}
               {definitionActivity.timeToComplete ? (
                 <div className='time-to-complete'>
                   {t('Time to complete')}: {t('{{number}} minutes', { number: definitionActivity.timeToComplete || 0 })}

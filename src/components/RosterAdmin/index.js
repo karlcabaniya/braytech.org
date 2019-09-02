@@ -390,7 +390,7 @@ class RosterAdmin extends React.Component {
     this.clearInterval();
   }
 
-  callGetGroupMembers = () => {
+  callGetGroupMembers = async () => {
     const { member, groupMembers } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     let now = new Date();
@@ -398,7 +398,9 @@ class RosterAdmin extends React.Component {
     // console.log(now - groupMembers.lastUpdated);
 
     if (group && (now - groupMembers.lastUpdated > 30000 || group.groupId !== groupMembers.groupId)) {
-      getGroupMembers(group, true);
+      await getGroupMembers(group, true);
+
+      this.props.rebindTooltips();
     }
   };
 
@@ -529,13 +531,13 @@ class RosterAdmin extends React.Component {
                       </div>
                     </li>
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && display })}>
-                      <div>
-                        {m.isOnline && display ? (
+                      {m.isOnline && display ? (
+                        <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash} data-mode={lastActivity.currentActivityModeHash} data-playlist={lastActivity.currentPlaylistActivityHash}>
                           <div>{display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span></div>
-                        ) : (
-                            <div>{moment(lastPlayed).locale('en-sml').fromNow()}</div>
-                          )}
-                      </div>
+                        </div>
+                      ) : (
+                        <div>{moment(lastPlayed).locale('en-sml').fromNow()}</div>
+                      )}
                     </li>
                     <li className='col joinDate'>
                       {!m.pending
@@ -692,6 +694,9 @@ function mapDispatchToProps(dispatch) {
     },
     markStale: member => {
       dispatch({ type: 'MEMBER_IS_STALE', payload: { membershipType: member.membershipType, membershipId: member.membershipId } });
+    },
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
     }
   };
 }

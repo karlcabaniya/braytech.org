@@ -9,7 +9,7 @@
 }
 
 #tooltip .frame.activity .header .icon {
-  background-color: hsla(var(--commonDark), 0.9);
+  background-color: hsla(202, 0%, 15%, 0.8);
   min-height: 72px;
   padding: 24px 0 26px;
   display: grid;
@@ -18,7 +18,7 @@
 }
 
 #tooltip .frame.activity .header .text {
-  background-color: hsla(var(--commonDark), 0.8);
+  background-color: hsla(202, 0%, 25%, 0.8);
   display: grid;
   align-content: center;
   padding: 20px 16px 26px;
@@ -27,7 +27,6 @@
 #tooltip .frame.activity .header .text .kind {
   color: rgba(255, 255, 255, 0.4);
 }
-
 
 #tooltip .frame.activity .black {
   background-color: hsla(var(--commonDark), 0.9);
@@ -39,6 +38,14 @@
 
 #tooltip .frame.activity.strike .header .text {
   background-color: hsla(202, 60%, 10%, 0.8);
+}
+
+#tooltip .frame.activity.raid .header .icon {
+  background-color: hsla(202, 0%, 0%, 0.8);
+}
+
+#tooltip .frame.activity.raid .header .text {
+  background-color: hsla(202, 0%, 4%, 0.8);
 }
 
 #tooltip .frame.activity.story .header .icon {
@@ -63,6 +70,22 @@
 
 #tooltip .frame.activity.reckoning .header .text {
   background-color: hsla(166, 50%, 20%, 0.8);
+}
+
+#tooltip .frame.activity.gambit .header .icon {
+  background-color: hsla(166, 70%, 10%, 0.8);
+}
+
+#tooltip .frame.activity.gambit .header .text {
+  background-color: hsla(166, 50%, 20%, 0.8);
+}
+
+#tooltip .frame.activity.crucible .header .icon {
+  background-color: hsla(3, 80%, 15%, 0.8);
+}
+
+#tooltip .frame.activity.crucible .header .text {
+  background-color: hsla(3, 60%, 22%, 0.8);
 }
 
 #tooltip .frame.activity .description {

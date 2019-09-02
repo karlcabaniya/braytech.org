@@ -125,9 +125,9 @@ class Roster extends React.Component {
 
       */
 
-      // if (m.isOnline) {
-      //   console.log(lastPlayed, lastActivity, lastCharacter, lastMode, display);
-      // }
+      if (m.isOnline) {
+        console.log(lastPlayed, lastActivity, lastCharacter, lastMode, display);
+      }
 
       members.push({
         sorts: {
@@ -170,23 +170,13 @@ class Roster extends React.Component {
                       </div>
                     </li>
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && display })}>
-                      {m.isOnline ? (
-                        <div data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash} data-mode={lastActivity.currentActivityModeHash}>
-                          {m.isOnline && display ? (
-                            <div>{display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span></div>
-                          ) : (
-                              <div>{moment(lastPlayed).locale('en-sml').fromNow()}</div>
-                            )}
+                      {m.isOnline && display ? (
+                        <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash} data-mode={lastActivity.currentActivityModeHash} data-playlist={lastActivity.currentPlaylistActivityHash}>
+                          <div>{display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span></div>
                         </div>
                       ) : (
-                          <div>
-                            {m.isOnline && display ? (
-                              <div>{display} <span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span></div>
-                            ) : (
-                                <div>{moment(lastPlayed).locale('en-sml').fromNow()}</div>
-                              )}
-                          </div>
-                        )}
+                        <div>{moment(lastPlayed).locale('en-sml').fromNow()}</div>
+                      )}
                     </li>
                     <li className='col triumphScore'>{triumphScore.toLocaleString('en-us')}</li>
                     <li className='col progression glory'>{gloryPoints.toLocaleString('en-us')}</li>
