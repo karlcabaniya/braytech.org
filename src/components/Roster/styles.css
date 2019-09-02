@@ -198,6 +198,11 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.list.roster .row:not(.header) > ul .col.lastActivity > div span::before {
+  content: '    ';
+  white-space: pre-wrap;
+}
+
 .list.roster .row > ul .col.progression .resets {
   color: rgba(255, 255, 255, 0.5);
 }

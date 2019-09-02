@@ -109,7 +109,6 @@ class Activity extends React.Component {
       if (modeFiltered === 'story')
         activityTypeDisplay = {
           ...activityTypeDisplay,
-          name: definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name,
           mode: manifest.DestinyActivityTypeDefinition[1686739444].displayProperties.name,
           className: 'story',
           icon: (
@@ -131,8 +130,8 @@ class Activity extends React.Component {
           mode: manifest.DestinyActivityModeDefinition[1164760504].displayProperties.name,
           description: definitionActivityPlaylist && definitionActivityPlaylist.displayProperties ? definitionActivityPlaylist.displayProperties.description : t('Unknown'),
           destination: {
-            name: definitionActivity.displayProperties.description,
-            place: false
+            name: definitionActivity.displayProperties.name,
+            place: definitionActivity.displayProperties.description
           },
           className: 'crucible',
           activityLightLevel: false,
@@ -142,6 +141,7 @@ class Activity extends React.Component {
       if (modeFiltered === 'raid')
         activityTypeDisplay = {
           ...activityTypeDisplay,
+          name: definitionActivity.displayProperties.name,
           mode: definitionActivityMode && definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name,
           className: 'raid',
           icon: <span className='destiny-raid' />

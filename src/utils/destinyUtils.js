@@ -622,18 +622,22 @@ export function lastPlayerActivity(member) {
 
     lastCharacter = member.profile.characters.data.find(character => character.characterId === lastCharacterId);
 
-    const definitionPlaceOrbit = manifest.DestinyPlaceDefinition[2961497387];
 
     if (lastActivity && member.isOnline !== false) {
       const definitionActivity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
       const definitionActivityMode = definitionActivity ? (definitionActivity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
       const definitionPlace = definitionActivity ? definitionActivity.placeHash ? manifest.DestinyPlaceDefinition[definitionActivity.placeHash] : false : false;
+      const definitionPlaceOrbit = manifest.DestinyPlaceDefinition[2961497387];
+      const definitionActivityPlaylist = manifest.DestinyActivityDefinition[lastActivity.currentPlaylistActivityHash];
 
       if (definitionActivityMode) {
         if (definitionPlace && definitionActivity.placeHash === 2096719558 && definitionActivity.selectionScreenDisplayProperties.name) { // Menagerie
-          display = `${definitionActivity.selectionScreenDisplayProperties.name}`;
+          //display = `${definitionActivity.selectionScreenDisplayProperties.name}`;
+          display = `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
         } else if (definitionPlace && definitionActivity.placeHash === 4148998934) { // The Reckoning
           display = `${definitionActivity.displayProperties.name}`;
+        } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]
+          display = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
         } else { // Default
           display = `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
         }
