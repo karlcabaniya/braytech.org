@@ -49,7 +49,7 @@ class MemberLink extends React.Component {
 
   async componentDidMount() {
     this.mounted = true;
-    
+
     const { type, id, displayName = false } = this.props;
 
     if (this.mounted) {
@@ -143,58 +143,52 @@ class MemberLink extends React.Component {
       }
     }
 
-    let timePlayed, lastCharacterPlayed;
-    if (this.state.all.data) {
+    const flair = userFlair.find(f => f.user === type + id);
+    const primaryFlair = flair && flair.trophies.find(t => t.primary);
 
-      timePlayed = Math.floor(
+    if (this.state.overlay && this.state.all.data) {
+      const timePlayed = Math.floor(
         Object.keys(this.state.all.data.characters.data).reduce((sum, key) => {
           return sum + parseInt(this.state.all.data.characters.data[key].minutesPlayedTotal);
         }, 0) / 1440
       );
 
-      lastCharacterPlayed = Object.entries(this.state.all.data.characterActivities.data).sort((a, b) => {
+      const lastCharacterPlayedArr = Object.entries(this.state.all.data.characterActivities.data).sort((a, b) => {
         let x = new Date(a[1].dateActivityStarted).getTime();
         let y = new Date(b[1].dateActivityStarted).getTime();
-        
+
         return y - x;
       });
 
-      lastCharacterPlayed = lastCharacterPlayed.length ? lastCharacterPlayed[0][0] : lastCharacterPlayed;
-    }
-
-    let flair = userFlair.find(f => f.user === type + id);
-    let primaryFlair = false;
-    if (flair) {
-      primaryFlair = flair.trophies.find(t => t.primary);
-    }
-
-    return (
-      <>
-        <div className='member-link' onClick={this.activateOverlay}>
-          {!hideFlair && primaryFlair ? (
-            <div className={cx('user-flair', primaryFlair.classnames)}>
-              <i className={primaryFlair.icon} />
-            </div>
-          ) : null}
-          <div className='emblem'>
-            {!this.state.basic.loading && this.state.basic.data ? (
-              showClassIcon ? (
-                <div className='icon'>
-                  <i
-                    className={`destiny-class_${destinyUtils
-                      .classTypeToString(characterBasic.classType)
-                      .toString()
-                      .toLowerCase()}`}
-                  />
-                </div>
-              ) : !hideEmblemIcon ? (
-                <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} />
-              ) : null
+      const lastCharacterPlayed = lastCharacterPlayedArr.length ? lastCharacterPlayedArr[0][0] : lastCharacterPlayedArr;
+      const lastActivities = destinyUtils.lastPlayerActivity2({ profile: { characters: this.state.all.data.characters, characterActivities: this.state.all.data.characterActivities } });
+console.log(lastActivities)
+      return (
+        <>
+          <div className='member-link' onClick={this.activateOverlay}>
+            {!hideFlair && primaryFlair ? (
+              <div className={cx('user-flair', primaryFlair.classnames)}>
+                <i className={primaryFlair.icon} />
+              </div>
             ) : null}
+            <div className='emblem'>
+              {!this.state.basic.loading && this.state.basic.data ? (
+                showClassIcon ? (
+                  <div className='icon'>
+                    <i
+                      className={`destiny-class_${destinyUtils
+                        .classTypeToString(characterBasic.classType)
+                        .toString()
+                        .toLowerCase()}`}
+                    />
+                  </div>
+                ) : !hideEmblemIcon ? (
+                  <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} />
+                ) : null
+              ) : null}
+            </div>
+            <div className='displayName'>{displayName ? displayName : !this.state.basic.loading && this.state.basic.data ? this.state.basic.data.profile.data.userInfo.displayName : null}</div>
           </div>
-          <div className='displayName'>{displayName ? displayName : !this.state.basic.loading && this.state.basic.data ? this.state.basic.data.profile.data.userInfo.displayName : null}</div>
-        </div>
-        {this.state.overlay ? (
           <div id='member-overlay' className={cx({ error: this.state.all.error })}>
             <div className='wrapper-outer'>
               <div className='background'>
@@ -233,73 +227,50 @@ class MemberLink extends React.Component {
                       </div>
                       <div className='characters'>
                         {this.state.all.data.characters.data.map(c => {
-                            let state = null;
-                            if (c.characterId === lastCharacterPlayed && this.state.all.data.characterActivities.data[c.characterId].currentActivityHash !== 0) {
-                              if (manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].placeHash === 2961497387) {
-                                state = (
-                                  <>
-                                    <div className='activity'>Orbit</div>
-                                    <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
-                                  </>
-                                );
-                              } else {
-                                state = (
-                                  <>
-                                    {!manifest.DestinyActivityModeDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityModeHash] || !manifest.DestinyActivityModeDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityModeHash].displayProperties || !manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash] || !manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].displayProperties ? (
-                                      <div className='activity'>Classified</div>
-                                    ) : (
-                                      <div className='activity'>
-                                        {manifest.DestinyActivityModeDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[this.state.all.data.characterActivities.data[c.characterId].currentActivityHash].displayProperties.name}
-                                      </div>
-                                    )}
-                                    <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
-                                  </>
-                                );
-                              }
-                            } else {
-                              state = (
-                                <>
-                                  <div className='time-before'>{t('Last played')}</div>
-                                  <Moment fromNow>{this.state.all.data.characters.data.find(d => d.characterId === c.characterId).dateLastPlayed}</Moment>
-                                </>
-                              );
-                            }
+                          const lastActivity = lastActivities.find(a => a.characterId === c.characterId);
 
-                            return (
-                              <div key={c.characterId} className='char'>
-                                <Button
-                                  className='linked'
-                                  anchor
-                                  to={`/${type}/${id}/${c.characterId}`}
-                                  action={() => {
-                                    store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: type, membershipId: id, characterId: c.characterId } });
-                                  }}
-                                >
-                                  <div className='icon'>
-                                    <i
-                                      className={`destiny-class_${destinyUtils
-                                        .classTypeToString(c.classType)
-                                        .toString()
-                                        .toLowerCase()}`}
-                                    />
+                          const state = (
+                            <>
+                              <div className='activity'>{lastActivity.lastActivityString}</div>
+                              <Moment fromNow>{lastActivity.lastPlayed}</Moment>
+                            </>
+                          );
+
+                          return (
+                            <div key={c.characterId} className='char'>
+                              <Button
+                                className='linked'
+                                anchor
+                                to={`/${type}/${id}/${c.characterId}`}
+                                action={() => {
+                                  store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: type, membershipId: id, characterId: c.characterId } });
+                                }}
+                              >
+                                <div className='icon'>
+                                  <i
+                                    className={`destiny-class_${destinyUtils
+                                      .classTypeToString(c.classType)
+                                      .toString()
+                                      .toLowerCase()}`}
+                                  />
+                                </div>
+                                <div className='text'>
+                                  <div>
+                                    {destinyUtils.raceHashToString(c.raceHash, c.genderType, true)} {destinyUtils.classHashToString(c.classHash, c.genderType)}
                                   </div>
-                                  <div className='text'>
-                                    <div>
-                                      {destinyUtils.raceHashToString(c.raceHash, c.genderType, true)} {destinyUtils.classHashToString(c.classHash, c.genderType)}
-                                    </div>
-                                    <div>
-                                      <span>{c.baseCharacterLevel}</span>
-                                      <span>
-                                        <span>{c.light}</span>
-                                      </span>
-                                    </div>
+                                  <div>
+                                    <span>{c.baseCharacterLevel}</span>
+                                    <span>
+                                      <span>{c.light}</span>
+                                    </span>
                                   </div>
-                                </Button>
-                                {c.titleRecordHash ? <div className='title'>{manifest.DestinyRecordDefinition[c.titleRecordHash].titleInfo.titlesByGenderHash[c.genderHash]}</div> : null}
-                                <div className='state'>{state}</div>
-                              </div>
-                            );
-                          })}
+                                </div>
+                              </Button>
+                              {c.titleRecordHash ? <div className='title'>{manifest.DestinyRecordDefinition[c.titleRecordHash].titleInfo.titlesByGenderHash[c.genderHash]}</div> : null}
+                              <div className='state'>{state}</div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                     <div className='module'>
@@ -308,7 +279,7 @@ class MemberLink extends React.Component {
                       </div>
                       <ul className='list ranks'>
                         {[2772425241, 2626549951, 2000925172].map(hash => {
-                          return <Ranks key={hash} mini data={{ membershipType: type, membershipId: id, characterId: lastCharacterPlayed, characters: this.state.all.data.characters.data, characterProgressions: this.state.all.data.characterProgressions.data }} hash={hash} />
+                          return <Ranks key={hash} mini data={{ membershipType: type, membershipId: id, characterId: lastCharacterPlayed, characters: this.state.all.data.characters.data, characterProgressions: this.state.all.data.characterProgressions.data }} hash={hash} />;
                         })}
                       </ul>
                     </div>
@@ -345,12 +316,136 @@ class MemberLink extends React.Component {
               </div>
             </div>
           </div>
-        ) : null}
-      </>
-    );
+        </>
+      );
+    } else if (this.state.overlay && this.state.basic.data) {
+      return (
+        <>
+          <div className='member-link' onClick={this.activateOverlay}>
+            {!hideFlair && primaryFlair ? (
+              <div className={cx('user-flair', primaryFlair.classnames)}>
+                <i className={primaryFlair.icon} />
+              </div>
+            ) : null}
+            <div className='emblem'>
+              {!this.state.basic.loading && this.state.basic.data ? (
+                showClassIcon ? (
+                  <div className='icon'>
+                    <i
+                      className={`destiny-class_${destinyUtils
+                        .classTypeToString(characterBasic.classType)
+                        .toString()
+                        .toLowerCase()}`}
+                    />
+                  </div>
+                ) : !hideEmblemIcon ? (
+                  <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} />
+                ) : null
+              ) : null}
+            </div>
+            <div className='displayName'>{displayName ? displayName : !this.state.basic.loading && this.state.basic.data ? this.state.basic.data.profile.data.userInfo.displayName : null}</div>
+          </div>
+          <div id='member-overlay' className={cx({ error: this.state.all.error })}>
+            <div className='wrapper-outer'>
+              <div className='background'>
+                <div className='border-top' />
+                <div className='acrylic' />
+              </div>
+              <div className={cx('wrapper-inner')}>
+                {this.state.all.error ? (
+                  <>
+                    <div>
+                      <div className='icon'>
+                        <ObservedImage className='image' src='/static/images/extracts/ui/010A-00000552.PNG' />
+                      </div>
+                    </div>
+                    <div>
+                      <div className='text'>
+                        <div className='name'>{t('Private profile')}</div>
+                        <div className='description'>{t('This user has their profile privacy set to private')}</div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <Spinner />
+                )}
+              </div>
+              <div className='sticky-nav mini ultra-black'>
+                <div className='sticky-nav-inner'>
+                  <div />
+                  <ul>
+                    <li>
+                      <Button action={this.deactivateOverlay}>
+                        <i className='destiny-B_Button' /> {t('Dismiss')}
+                      </Button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    } else if (this.state.basic.data) {
+      return (
+        <>
+          <div className='member-link' onClick={this.activateOverlay}>
+            {!hideFlair && primaryFlair ? (
+              <div className={cx('user-flair', primaryFlair.classnames)}>
+                <i className={primaryFlair.icon} />
+              </div>
+            ) : null}
+            <div className='emblem'>
+              {!this.state.basic.loading && this.state.basic.data ? (
+                showClassIcon ? (
+                  <div className='icon'>
+                    <i
+                      className={`destiny-class_${destinyUtils
+                        .classTypeToString(characterBasic.classType)
+                        .toString()
+                        .toLowerCase()}`}
+                    />
+                  </div>
+                ) : !hideEmblemIcon ? (
+                  <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} />
+                ) : null
+              ) : null}
+            </div>
+            <div className='displayName'>{displayName ? displayName : !this.state.basic.loading && this.state.basic.data ? this.state.basic.data.profile.data.userInfo.displayName : null}</div>
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className='member-link' onClick={this.activateOverlay}>
+            {!hideFlair && primaryFlair ? (
+              <div className={cx('user-flair', primaryFlair.classnames)}>
+                <i className={primaryFlair.icon} />
+              </div>
+            ) : null}
+            <div className='emblem'>
+              {!this.state.basic.loading && this.state.basic.data ? (
+                showClassIcon ? (
+                  <div className='icon'>
+                    <i
+                      className={`destiny-class_${destinyUtils
+                        .classTypeToString(characterBasic.classType)
+                        .toString()
+                        .toLowerCase()}`}
+                    />
+                  </div>
+                ) : !hideEmblemIcon ? (
+                  <ObservedImage className='image' src={`https://www.bungie.net${characterBasic.emblemPath}`} />
+                ) : null
+              ) : null}
+            </div>
+            <div className='displayName'>{displayName ? displayName : !this.state.basic.loading && this.state.basic.data ? this.state.basic.data.profile.data.userInfo.displayName : null}</div>
+          </div>
+        </>
+      );
+    }
   }
 }
 
-export default compose(
-  withTranslation()
-)(MemberLink);
+export default compose(withTranslation())(MemberLink);

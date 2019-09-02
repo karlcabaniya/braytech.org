@@ -1,25 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import PropTypes from 'prop-types';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 import { withTranslation } from 'react-i18next';
 
 import * as destinyEnums from '../../utils/destinyEnums';
 import * as ls from '../../utils/localStorage';
 import * as bungie from '../../utils/bungie';
 import Spinner from '../../components/UI/Spinner';
-
-const SearchResult = p => (
-  <li className='linked' onClick={() => p.onProfileClick(p.profile.membershipType, p.profile.membershipId, p.profile.displayName)}>
-    <div className='icon'><span className={`destiny-platform_${destinyEnums.PLATFORMS[p.profile.membershipType]}`} /></div>
-    <div className='displayName'>{p.profile.displayName}</div>
-  </li>
-);
-
-SearchResult.propTypes = {
-  onProfileClick: PropTypes.func.isRequired,
-  profile: PropTypes.object
-};
 
 class ProfileSearch extends React.Component {
   constructor(props) {
@@ -37,9 +24,6 @@ class ProfileSearch extends React.Component {
   }
 
   componentWillUnmount() {
-    // If we don't do this, the searchForPlayers may attempt to setState on
-    // an unmounted component. We can't cancel it as it's using
-    // fetch, which doesn't support cancels :(
     this.mounted = false;
   }
 
@@ -71,7 +55,14 @@ class ProfileSearch extends React.Component {
   }, 500);
 
   profileList(profiles) {
-    return profiles.map(p => <SearchResult key={p.membershipId} onProfileClick={this.props.onProfileClick} profile={p} />);
+    return profiles.map((p, i) => (
+      <li key={i} className='linked' onClick={() => this.props.onProfileClick(p.membershipType, p.membershipId, p.displayName)}>
+        <div className='icon'>
+          <span className={`destiny-platform_${destinyEnums.PLATFORMS[p.membershipType]}`} />
+        </div>
+        <div className='displayName'>{p.displayName}</div>
+      </li>
+    ));
   }
 
   resultsElement() {
@@ -107,9 +98,7 @@ class ProfileSearch extends React.Component {
           </div>
         </div>
 
-        <div className='results'>
-          {searching ? <Spinner mini /> : <ul className='list'>{this.resultsElement()}</ul>}
-        </div>
+        <div className='results'>{searching ? <Spinner mini /> : <ul className='list'>{this.resultsElement()}</ul>}</div>
 
         {history.length > 0 && (
           <>
@@ -125,9 +114,5 @@ class ProfileSearch extends React.Component {
     );
   }
 }
-
-ProfileSearch.propTypes = {
-  onProfileClick: PropTypes.func.isRequired
-};
 
 export default withTranslation()(ProfileSearch);
