@@ -453,7 +453,7 @@ class RosterAdmin extends React.Component {
       
       const characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
 
-      const lastActivities = destinyUtils.lastPlayerActivity2(m);
+      const lastActivities = destinyUtils.lastPlayerActivity(m);
       const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = orderBy(lastActivities, [a => a.lastPlayed], ['desc'])[0];
 
       const lastCharacter = !isPrivate ? m.profile.characters.data.find(c => c.characterId === lastCharacterId) : false;

@@ -601,71 +601,6 @@ function xpRequiredForLevel(level, progressDef) {
 export function lastPlayerActivity(member) {
 
   if (!member.profile || (!member.profile.characterActivities.data || !member.profile.characters.data.length)) {
-    return {};
-  }
-
-  let lastActivity = false;
-  let lastCharacter = false;
-  let lastMode = false;
-  let display = false;
-
-  if (member.profile.characterActivities.data) {
-    let lastCharacterActivity = Object.entries(member.profile.characterActivities.data);
-    lastCharacterActivity = orderBy(lastCharacterActivity, [character => character[1].dateActivityStarted], ['desc']);
-    lastCharacterActivity = lastCharacterActivity.length > 0 ? lastCharacterActivity[0] : false;
-
-    let lastCharacterTime = Object.entries(member.profile.characterActivities.data);
-    lastCharacterTime = orderBy(lastCharacterTime, [character => character[1].dateActivityStarted], ['desc']);
-
-    let lastCharacterId = lastCharacterActivity ? lastCharacterActivity[0] : lastCharacterTime[0];
-    lastActivity = lastCharacterActivity ? lastCharacterActivity[1] : false;
-
-    lastCharacter = member.profile.characters.data.find(character => character.characterId === lastCharacterId);
-
-
-    if (lastActivity && member.isOnline !== false) {
-      const definitionActivity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
-      const definitionActivityMode = definitionActivity ? (definitionActivity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
-      const definitionPlace = definitionActivity ? definitionActivity.placeHash ? manifest.DestinyPlaceDefinition[definitionActivity.placeHash] : false : false;
-      const definitionPlaceOrbit = manifest.DestinyPlaceDefinition[2961497387];
-      const definitionActivityPlaylist = manifest.DestinyActivityDefinition[lastActivity.currentPlaylistActivityHash];
-
-      if (definitionActivityMode) {
-        if (definitionActivity.activityTypeHash === 400075666) { // Menagerie
-          display = `${definitionActivity.displayProperties.name}`;
-        } else if (definitionPlace && definitionActivity.placeHash === 4148998934) { // The Reckoning
-          display = `${definitionActivity.displayProperties.name}`;
-        } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]
-          display = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
-        } else { // Default
-          display = `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
-        }
-      } else if (definitionActivity) {
-        if (definitionActivity.placeHash === 2961497387) { // Orbit
-          display = definitionPlaceOrbit.displayProperties.name;
-        } else {
-          display = definitionActivity.displayProperties.name;
-        }
-      } else {
-        display = false;
-      }
-
-      lastMode = definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.map(hash => manifest.DestinyActivityModeDefinition[hash]);
-    }
-  }
-
-  return {
-    lastPlayed: lastActivity ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed,
-    lastCharacter,
-    lastActivity,
-    lastMode,
-    display
-  };
-}
-
-export function lastPlayerActivity2(member) {
-
-  if (!member.profile || (!member.profile.characterActivities.data || !member.profile.characters.data.length)) {
     return [{}];
   }
 
@@ -680,20 +615,20 @@ export function lastPlayerActivity2(member) {
     const definitionActivityPlaylist = manifest.DestinyActivityDefinition[lastActivity.currentPlaylistActivityHash];
 
     let lastActivityString = false;
-    if (definitionActivityMode) {
+    if (definitionActivity) {
       if (definitionActivity.activityTypeHash === 400075666) { // Menagerie
         lastActivityString = `${definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name}`;
+      } else if (lastActivity.currentActivityModeHash === 547513715) { // Scored Nightfall Strikes
+        lastActivityString = definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? `${definitionActivityMode.displayProperties.name}: ${definitionActivity.selectionScreenDisplayProperties.name}` : `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
       } else if (definitionActivity.activityTypeHash === 838603889) { // Forge Ignition
         lastActivityString = `${definitionActivity.displayProperties.name}: ${definitionActivityPlaylist.displayProperties.name}`;
       } else if (definitionPlace && definitionActivity.placeHash === 4148998934) { // The Reckoning
         lastActivityString = `${definitionActivity.displayProperties.name}`;
       } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]
         lastActivityString = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
-      } else { // Default
+      } else if (definitionActivityMode) { // Default
         lastActivityString = `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
-      }
-    } else if (definitionActivity) {
-      if (definitionActivity.placeHash === 2961497387) { // Orbit
+      } else if (definitionActivity.placeHash === 2961497387) { // Orbit
         lastActivityString = definitionPlaceOrbit.displayProperties.name;
       } else {
         lastActivityString = definitionActivity.displayProperties.name;

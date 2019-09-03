@@ -161,8 +161,8 @@ class MemberLink extends React.Component {
       });
 
       const lastCharacterPlayed = lastCharacterPlayedArr.length ? lastCharacterPlayedArr[0][0] : lastCharacterPlayedArr;
-      const lastActivities = destinyUtils.lastPlayerActivity2({ profile: { characters: this.state.all.data.characters, characterActivities: this.state.all.data.characterActivities } });
-
+      const lastActivities = destinyUtils.lastPlayerActivity({ profile: { characters: this.state.all.data.characters, characterActivities: this.state.all.data.characterActivities } });
+console.log(lastActivities)
       return (
         <>
           <div className='member-link' onClick={this.activateOverlay}>

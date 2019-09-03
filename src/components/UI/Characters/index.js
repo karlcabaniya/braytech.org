@@ -20,7 +20,7 @@ class Characters extends React.Component {
     const characterProgressions = member.data.profile.characterProgressions.data;
     const characterActivities = member.data.profile.characterActivities;
 
-    const lastActivities = destinyUtils.lastPlayerActivity2({ profile: { characters, characterActivities } });
+    const lastActivities = destinyUtils.lastPlayerActivity({ profile: { characters, characterActivities } });
 
     return (
       <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
