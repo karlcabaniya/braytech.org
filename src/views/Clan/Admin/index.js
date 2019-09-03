@@ -9,7 +9,7 @@ import ClanViewsLinks from '../ClanViewsLinks';
 
 import './styles.css';
 
-class AdminView extends React.Component { 
+class AdminView extends React.Component {
   auth = ls.get('setting.auth');
   
   componentDidMount() {
