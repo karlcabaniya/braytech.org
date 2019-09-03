@@ -125,7 +125,7 @@ class Roster extends React.Component {
 
       if (m.isOnline) {
         // console.log(m)
-        console.log(lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode);
+        // console.log(lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode);
       }
 
       if (filter && filter === 'admins') {
