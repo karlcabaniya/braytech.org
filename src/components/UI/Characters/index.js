@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 import Moment from 'react-moment';
 
-import * as utils from '../../../utils/destinyUtils';
+import * as destinyUtils from '../../../utils/destinyUtils';
 import { removeMemberIds } from '../../../utils/paths';
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
@@ -16,56 +16,27 @@ import './styles.css';
 class Characters extends React.Component {
   render() {
     const { t, member, viewport } = this.props;
-    let characters = member.data.profile.characters.data;
-    let charactersByLastPlayed = Object.entries(member.data.profile.characterActivities.data).sort((a, b) => {
-      let x = new Date(a[1].dateActivityStarted).getTime();
-      let y = new Date(b[1].dateActivityStarted).getTime();
+    const characters = member.data.profile.characters;
+    const characterProgressions = member.data.profile.characterProgressions.data;
+    const characterActivities = member.data.profile.characterActivities;
 
-      return y - x;
-    });
-    let characterProgressions = member.data.profile.characterProgressions.data;
-    let characterActivities = member.data.profile.characterActivities.data;
-
-    let charactersIdLastPlayed = charactersByLastPlayed.length ? charactersByLastPlayed[0][0] : false;
+    const lastActivities = destinyUtils.lastPlayerActivity2({ profile: { characters, characterActivities } });
 
     return (
       <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
-        {characters.map(character => {
+        {characters.data.map(character => {
           let capped = characterProgressions[character.characterId].progressions[1716568313].level >= characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
 
           let progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
 
-          let state = null;
-          if (character.characterId === charactersIdLastPlayed && characterActivities[character.characterId].currentActivityHash !== 0) {
-            if (manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash] && manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].placeHash === 2961497387) {
-              state = (
-                <>
-                  <div className='activity'>Orbit</div>
-                  <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
-                </>
-              );
-            } else {
-              state = (
-                <>
-                  {!manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash] || !manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash].displayProperties || !manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash] || !manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].displayProperties ? (
-                    <div className='activity'>Classified</div>
-                  ) : (
-                    <div className='activity'>
-                      {manifest.DestinyActivityModeDefinition[characterActivities[character.characterId].currentActivityModeHash].displayProperties.name}: {manifest.DestinyActivityDefinition[characterActivities[character.characterId].currentActivityHash].displayProperties.name}
-                    </div>
-                  )}
-                  <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
-                </>
-              );
-            }
-          } else {
-            state = (
-              <>
-                <div className='time-before'>{t('Last played')}</div>
-                <Moment fromNow>{characters.find(d => d.characterId === character.characterId).dateLastPlayed}</Moment>
-              </>
-            );
-          }
+          const lastActivity = lastActivities.find(a => a.characterId === character.characterId);
+
+          const state = (
+            <>
+              <div className='activity'>{lastActivity.lastActivityString}</div>
+              <Moment fromNow>{lastActivity.lastPlayed}</Moment>
+            </>
+          );
 
           return (
             <div key={character.characterId} className='char'>
@@ -83,8 +54,8 @@ class Characters extends React.Component {
                   })}
                   src={`https://www.bungie.net${character.emblemBackgroundPath ? character.emblemBackgroundPath : `/img/misc/missing_icon_d2.png`}`}
                 />
-                <div className='class'>{utils.classHashToString(character.classHash, character.genderType)}</div>
-                <div className='species'>{utils.raceHashToString(character.raceHash, character.genderType)}</div>
+                <div className='class'>{destinyUtils.classHashToString(character.classHash, character.genderType)}</div>
+                <div className='species'>{destinyUtils.raceHashToString(character.raceHash, character.genderType)}</div>
                 <div className='light'>{character.light}</div>
                 <div className='level'>
                   {t('Level')} {character.baseCharacterLevel}

@@ -22,7 +22,7 @@ async function getMember(membershipType, membershipId) {
   let [profile, groups, milestones] = await Promise.all(requests);
 
   try {
-    profile = responseUtils.profileScrubber(profile);
+    profile = responseUtils.profileScrubber(profile, 'activity');
     groups = responseUtils.groupScrubber(groups);
   } catch (e) {
 

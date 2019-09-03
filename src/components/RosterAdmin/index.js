@@ -6,7 +6,7 @@ import cx from 'classnames';
 import moment from 'moment';
 import { orderBy } from 'lodash';
 
-import * as utils from '../../utils/destinyUtils';
+import * as destinyUtils from '../../utils/destinyUtils';
 import * as bungie from '../../utils/bungie';
 import * as ls from '../../utils/localStorage';
 import { ProfileLink } from '../ProfileLink';
@@ -453,7 +453,7 @@ class RosterAdmin extends React.Component {
       
       const characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
 
-      const lastActivities = utils.lastPlayerActivity2(m);
+      const lastActivities = destinyUtils.lastPlayerActivity2(m);
       const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = lastActivities[0];
 
       const lastCharacter = !isPrivate ? m.profile.characters.data.find(c => c.characterId === lastCharacterId) : false;
@@ -491,7 +491,7 @@ class RosterAdmin extends React.Component {
                     <li className='col lastCharacter'>
                       <div className='icon'>
                         <i
-                          className={`destiny-class_${utils
+                          className={`destiny-class_${destinyUtils
                             .classTypeToString(lastCharacter.classType)
                             .toString()
                             .toLowerCase()}`}
@@ -525,7 +525,7 @@ class RosterAdmin extends React.Component {
                     <li className='col weeklyXp'>
                       <span>{weeklyXp.toLocaleString('en-us')}</span> / {(characterIds.length * 5000).toLocaleString('en-us')}
                     </li>
-                    <li className='col rank'>{m.memberType && utils.groupMemberTypeToString(m.memberType)}</li>
+                    <li className='col rank'>{m.memberType && destinyUtils.groupMemberTypeToString(m.memberType)}</li>
                     <li className='col actions'>
                       <Actions m={m} softUpdate={this.softUpdate} available={isAdmin} />
                     </li>
@@ -536,7 +536,7 @@ class RosterAdmin extends React.Component {
                     <li className='col lastActivity'>–</li>
                     <li className='col joinDate'>–</li>
                     <li className='col weeklyXp'>–</li>
-                    <li className='col rank'>{m.memberType && utils.groupMemberTypeToString(m.memberType)}</li>
+                    <li className='col rank'>{m.memberType && destinyUtils.groupMemberTypeToString(m.memberType)}</li>
                     <li className='col actions'>
                       <Actions m={m} softUpdate={this.softUpdate} available={isAdmin} />
                     </li>

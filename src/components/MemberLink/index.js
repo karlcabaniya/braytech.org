@@ -5,17 +5,17 @@ import cx from 'classnames';
 import Moment from 'react-moment';
 import * as entities from 'entities';
 
-import ObservedImage from '../ObservedImage';
-import Spinner from '../UI/Spinner';
-import Button from '../UI/Button';
-import Flair from '../UI/Flair';
-import Ranks from '../Ranks';
 import manifest from '../../utils/manifest';
 import * as bungie from '../../utils/bungie';
 import * as responseUtils from '../../utils/responseUtils';
 import * as destinyUtils from '../../utils/destinyUtils';
 import userFlair from '../../data/userFlair';
 import store from '../../utils/reduxStore';
+import ObservedImage from '../ObservedImage';
+import Spinner from '../UI/Spinner';
+import Button from '../UI/Button';
+import Flair from '../UI/Flair';
+import Ranks from '../Ranks';
 
 import './styles.css';
 
@@ -162,7 +162,7 @@ class MemberLink extends React.Component {
 
       const lastCharacterPlayed = lastCharacterPlayedArr.length ? lastCharacterPlayedArr[0][0] : lastCharacterPlayedArr;
       const lastActivities = destinyUtils.lastPlayerActivity2({ profile: { characters: this.state.all.data.characters, characterActivities: this.state.all.data.characterActivities } });
-console.log(lastActivities)
+
       return (
         <>
           <div className='member-link' onClick={this.activateOverlay}>

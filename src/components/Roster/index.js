@@ -7,7 +7,7 @@ import moment from 'moment';
 import { orderBy } from 'lodash';
 
 import * as ls from '../../utils/localStorage';
-import * as utils from '../../utils/destinyUtils';
+import * as destinyUtils from '../../utils/destinyUtils';
 import { ProfileLink } from '../../components/ProfileLink';
 import getGroupMembers from '../../utils/getGroupMembers';
 import MemberLink from '../MemberLink';
@@ -99,7 +99,7 @@ class Roster extends React.Component {
       
       const characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
 
-      const lastActivities = utils.lastPlayerActivity2(m);
+      const lastActivities = destinyUtils.lastPlayerActivity2(m);
       const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = orderBy(lastActivities, [a => a.lastPlayed], ['desc'])[0];
 
       const lastCharacter = !isPrivate ? m.profile.characters.data.find(c => c.characterId === lastCharacterId) : false;
@@ -117,8 +117,8 @@ class Roster extends React.Component {
       let infamyPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2772425241].currentProgress : 0;
       let infamyResets = !isPrivate ? this.calculateResets(2772425241, m.profile.characters.data[0].characterId, m.profile.characterProgressions.data).total : 0;
 
-      const totalValor = utils.totalValor();
-      const totalInfamy = utils.totalInfamy();
+      const totalValor = destinyUtils.totalValor();
+      const totalInfamy = destinyUtils.totalInfamy();
 
       valorPoints = valorResets * totalValor + valorPoints;
       infamyPoints = infamyResets * totalInfamy + infamyPoints;
@@ -153,7 +153,7 @@ class Roster extends React.Component {
                     <li className='col lastCharacter'>
                       <div className='icon'>
                         <i
-                          className={`destiny-class_${utils
+                          className={`destiny-class_${destinyUtils
                             .classTypeToString(lastCharacter.classType)
                             .toString()
                             .toLowerCase()}`}
