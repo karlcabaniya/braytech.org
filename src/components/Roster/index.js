@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 import moment from 'moment';
-import orderBy from 'lodash/orderBy';
+import { orderBy } from 'lodash';
 
 import * as ls from '../../utils/localStorage';
 import * as utils from '../../utils/destinyUtils';
@@ -100,7 +100,7 @@ class Roster extends React.Component {
       const characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
 
       const lastActivities = utils.lastPlayerActivity2(m);
-      const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = lastActivities[0];
+      const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = orderBy(lastActivities, [a => a.lastPlayed], ['desc'])[0];
 
       const lastCharacter = !isPrivate ? m.profile.characters.data.find(c => c.characterId === lastCharacterId) : false;
       
@@ -123,10 +123,10 @@ class Roster extends React.Component {
       valorPoints = valorResets * totalValor + valorPoints;
       infamyPoints = infamyResets * totalInfamy + infamyPoints;
 
-      if (m.isOnline) {
-        console.log(m)
-        console.log(lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode);
-      }
+      // if (m.isOnline) {
+      //   console.log(m)
+      //   console.log(lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode);
+      // }
 
       members.push({
         sorts: {

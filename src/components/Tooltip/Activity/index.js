@@ -12,13 +12,14 @@ import './styles.css';
 
 class Activity extends React.Component {
   render() {
-    const { t, hash, table, mode, playlist } = this.props;
+    const { t, hash, mode, playlist } = this.props;
 
-    const definitionActivity = cloneDeep(manifest[table][hash]);
+    const definitionActivity = manifest.DestinyActivityDefinition[hash];
     const definitionActivityMode = manifest.DestinyActivityModeDefinition[mode];
     const definitionActivityModeParent = definitionActivityMode && definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.length && manifest.DestinyActivityModeDefinition[definitionActivityMode.parentHashes[0]];
     const definitionActivityPlaylist = manifest.DestinyActivityDefinition[playlist];
     const definitionActivityType = definitionActivityPlaylist && definitionActivityPlaylist.activityTypeHash && manifest.DestinyActivityTypeDefinition[definitionActivityPlaylist.activityTypeHash];
+    const definitionPlaceDefinition = definitionActivity.placeHash && manifest.DestinyPlaceDefinition[definitionActivity.placeHash];
 
     if (!definitionActivity) {
       console.warn('Hash not found');
@@ -212,14 +213,14 @@ class Activity extends React.Component {
               }
             : false,
 
-        activityLightLevel: definitionActivity.activityLightLevel,
+        activityLightLevel: definitionActivity.activityLightLevel && definitionActivity.activityLightLevel !== 10 && definitionActivity.activityLightLevel,
 
         pgcrImage: definitionActivity.pgcrImage,
 
         icon: <span className='destiny-patrol' />
       };
 
-      // console.log(definitionActivity, mode, definitionActivityPlaylist)
+      // console.log(activityTypeDisplay, definitionActivity, mode, definitionActivityPlaylist)
 
       if (definitionActivity.placeHash === 2961497387)
         activityTypeDisplay = {
@@ -233,8 +234,11 @@ class Activity extends React.Component {
       if (modeFiltered === 'patrol')
         activityTypeDisplay = {
           ...activityTypeDisplay,
-          destination: false,
-          description: false,
+          destination: {
+            name: definitionPlaceDefinition.displayProperties.name,
+            place: false
+          },
+          description: manifest.DestinyActivityTypeDefinition[3497767639].displayProperties.description,
           activityLightLevel: false,
           mode: definitionActivityMode && definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name
         };
@@ -336,6 +340,7 @@ class Activity extends React.Component {
             place: definitionActivity.displayProperties.description
           },
           className: 'gambit',
+          activityLightLevel: false,
           icon: <span className='destiny-gambit' />
         };
 
