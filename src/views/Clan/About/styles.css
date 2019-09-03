@@ -1,5 +1,6 @@
 #clan.about .module.banner {
   grid-column: 2/4;
+  position: relative;
 }
 
 #clan.about .module.banner .canvas {
@@ -26,12 +27,22 @@
   grid-column: 9/11;
 }
 
-#clan.about .module.about .bio {
-  margin: 20px 0 0;
+#clan.about .module.about > .name {
+  font-size: 38px;
+  font-weight: 500;
+  margin: 0 0 1rem;
 }
 
-#clan.about .module.about .bio.includes-motto p:first-child {
-  
+#clan.about .module.about .members {
+  font-size: 16px;
+}
+
+#clan.about .module.about .members::before {
+  content: '//\00A0';
+}
+
+#clan.about .module.about .bio {
+  margin: 20px 0 0;
 }
 
 #clan.about .module.about .bio p {
@@ -105,7 +116,7 @@
 
 @media screen and (max-width: 767px) {
 
-  #clan.about > .padder {
+  #clan.about {
     grid-template-columns: 60px 1fr 1fr;
   }
 
@@ -130,8 +141,8 @@
 
 @media screen and (max-width: 600px) {
 
-  #clan.about > .padder {
-    grid-template-columns: 40px 1fr;
+  #clan.about .module.about > .name {
+    font-size: 24px;
   }
 
   #clan.about .module.about,

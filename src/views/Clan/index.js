@@ -11,23 +11,15 @@ import Roster from './Roster';
 import Stats from './Stats';
 import Admin from './Admin';
 import NoClan from './NoClan';
+import ViewportWidth from './ViewportWidth';
 
 class Clan extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      
-    };
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0);   
-
   }
 
   render() {
-    const { t, member, groupMembers, view = 'about' } = this.props;
+    const { member, viewport, view = 'about' } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
 
     if (group) {
@@ -46,43 +38,16 @@ class Clan extends React.Component {
           'component': Stats
         },
         'admin': {
-          'name': 'admin',
-          'component': Admin
+          'name': viewport.width >= 1280 ? 'admin' : 'viewport-width',
+          'component': viewport.width >= 1280 ? Admin : ViewportWidth
         }
       };
 
       let ViewComponent = views[view].component;
 
-      const clanLevel = group.clanInfo.d2ClanProgressions[584850370];
-
       return (
         <div className={cx('view', views[view].name)} id='clan'>
-          <div className='module head'>
-            <div className='content'>
-              <div className='page-header'>
-                <div className='sub-name'>{t('Clan')}</div>
-                <div className='name'>
-                  {group.name}
-                  <div className='tag'>[{group.clanInfo.clanCallsign}]</div>
-                </div>
-              </div>
-            </div>
-            <div className='content highlight'>
-              <div className='value'>{group.memberCount}</div>
-              <div className='name'>{t('Members')}</div>
-            </div>
-            <div className='content highlight'>
-              <div className='value'>{groupMembers.members.filter(member => member.isOnline).length}</div>
-              <div className='name'>{t('Online')}</div>
-            </div>
-            <div className='content highlight'>
-              <div className='value'>{clanLevel.level}</div>
-              <div className='name'>{t('Clan level')}</div>
-            </div>
-          </div>
-          <div className='padder'>
-            <ViewComponent {...this.props} group={group} />
-          </div>
+          <ViewComponent {...this.props} group={group} />
         </div>
       )
     } else {
@@ -94,6 +59,7 @@ class Clan extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
+    viewport: state.viewport,
     groupMembers: state.groupMembers
   };
 }

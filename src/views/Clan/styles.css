@@ -1,26 +1,11 @@
 
 #clan {
-  padding: 0;
+  padding: 4rem 3rem 3rem;
   display: grid;
+  grid-template-columns: 60px repeat(9, 1fr);
+  grid-gap: 3rem;
   margin: 0 auto;
   width: 100%;
-}
-
-#clan > .module.head {
-  width: 100%;
-  padding: 4rem 3rem 3rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  display: grid;
-  grid-template-columns: 60px repeat(9, 1fr);
-  grid-gap: 3rem;
-}
-
-#clan > .padder {
-  width: 100%;
-  padding: 3rem;
-  display: grid;
-  grid-template-columns: 60px repeat(9, 1fr);
-  grid-gap: 3rem;
 }
 
 #clan .module h4 {
@@ -187,31 +172,12 @@
 }
 
 
-
-
-@media screen and (max-width: 1200px) {
-
-
-
-}
-
-@media screen and (max-width: 767px) {
-
-  #clan > .module.head {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  #clan .module.head .content:first-child {
-    grid-column: 1/4;
-  }
-
-}
-
 @media screen and (max-width: 600px) {
 
-  #clan > .module.head {
+  #clan {
     padding: 3rem 2rem 2rem;
-    grid-gap: 3rem;
+    grid-template-columns: 40px 1fr;
+    grid-gap: 2rem;
   }
 
   #clan .module .content.highlight {
@@ -226,12 +192,6 @@
   #clan .module .content.highlight .name {
     font-size: 14px;
     line-height: 1.4;
-  }
-  
-  #clan > .padder {
-    padding: 2rem;
-    grid-template-columns: 40px 1fr;
-    grid-gap: 2rem;
   }
 
   #clan .module.views .list {

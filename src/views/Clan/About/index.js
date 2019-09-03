@@ -1,14 +1,15 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'react-markdown';
+import moment from 'moment';
 import cx from 'classnames';
 
 import * as bungie from '../../../utils/bungie';
+import manifest from '../../../utils/manifest';
 import ClanBanner from '../../../components/UI/ClanBanner';
-import Roster from '../../../components/Roster';
 import Spinner from '../../../components/UI/Spinner';
 import ProgressBar from '../../../components/UI/ProgressBar';
 import Checkbox from '../../../components/UI/Checkbox';
-import manifest from '../../../utils/manifest';
+import Roster from '../../../components/Roster';
 
 import ClanViewsLinks from '../ClanViewsLinks';
 
@@ -35,13 +36,13 @@ class AboutView extends React.Component {
   render() {
     const { t, group, groupMembers } = this.props;
 
-    const weeklyRewardState = this.state.weeklyRewardState;
-
     const clanLevel = group.clanInfo.d2ClanProgressions[584850370];
 
     const weeklyClanEngramsDefinition = manifest.DestinyMilestoneDefinition[4253138191].rewards[1064137897].rewardEntries;
+    const weeklyRewardState = this.state.weeklyRewardState;
+
     let rewardState = null;
-    if (this.state.weeklyRewardState) {
+    if (weeklyRewardState) {
       rewardState = weeklyRewardState.rewards.find(reward => reward.rewardCategoryHash === 1064137897).entries;
     }
 
@@ -52,10 +53,9 @@ class AboutView extends React.Component {
           <ClanBanner bannerData={group.clanInfo.clanBannerData} />
         </div>
         <div className='module about'>
-          <div className='module-header'>
-            <div className='sub-name'>{t('About')}</div>
-          </div>
-          <ReactMarkdown className={cx('bio', { 'includes-motto': group.motto !== '' })} escapeHtml disallowedTypes={['image', 'imageReference']} source={group.motto !== '' ? `_${group.motto}_\n\n${group.about}` : group.about} />
+          <div className='name'>{group.name}</div>
+          <div className='members'>{t('Founded')} {moment(group.creationDate).format('MMMM YYYY')} / {group.memberCount} {t('Members')}</div>
+          <Markdown className={cx('bio', { 'includes-motto': group.motto !== '' })} escapeHtml disallowedTypes={['image', 'imageReference']} source={group.motto !== '' ? `_${group.motto}_\n\n${group.about}` : group.about} />
         </div>
         <div className='module progression'>
           <div className='module-header'>
@@ -105,9 +105,9 @@ class AboutView extends React.Component {
         </div>
         <div className='module roster'>
           <div className='module-header'>
-            <div className='sub-name'>{t('Roster')}</div>
+            <div className='sub-name'>{t('Leadership')}</div>
           </div>
-          {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner mini /> : <Roster mini limit='10' />}
+          {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner mini /> : <Roster mini limit='10' filter='admins' />}
         </div>
       </>
     );

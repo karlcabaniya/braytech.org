@@ -3,19 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-
-
 import './styles.css';
 
 class NoClan extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      
-    };
-  }
-
   render() {
     const { t } = this.props;
 

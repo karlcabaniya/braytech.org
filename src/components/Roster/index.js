@@ -88,7 +88,7 @@ class Roster extends React.Component {
   };
 
   render() {
-    const { t, member, groupMembers, mini, showOnline = false } = this.props;
+    const { t, member, groupMembers, mini, showOnline = false, filter } = this.props;
 
     const results = showOnline ? groupMembers.members.filter(r => r.isOnline) : groupMembers.members;
     let members = [];
@@ -128,6 +128,12 @@ class Roster extends React.Component {
       //   console.log(lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode);
       // }
 
+      if (filter && filter === 'admins') {
+        if (m.memberType < 3) {
+          return null;
+        }
+      }
+
       members.push({
         sorts: {
           private: isPrivate,
@@ -139,7 +145,8 @@ class Roster extends React.Component {
           gloryPoints,
           valorPoints,
           infamyPoints,
-          weeklyXp: weeklyXp / characterIds.length * 5000
+          weeklyXp: weeklyXp / characterIds.length * 5000,
+          rank: m.memberType
         },
         el: {
           full: (
