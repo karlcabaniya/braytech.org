@@ -14,6 +14,10 @@ class ClanViewsLinks extends React.Component {
             <div className='icon about' />
             <ProfileNavLink to='/clan' exact />
           </li>
+          {/* <li className='linked'>
+            <div className='icon stats' />
+            <ProfileNavLink to='/clan/stats' />
+          </li> */}
           <li className='linked'>
             <div className='icon roster' />
             <ProfileNavLink to='/clan/roster' />

@@ -1,0 +1,22 @@
+
+.module .module-header ~ .list.leaderboard {
+  margin: 1rem 0 0;
+}
+
+.list.leaderboard .row {
+  display: grid;
+}
+
+.list.leaderboard > .row > ul {
+  display: grid;
+  grid-template-columns: 60px auto 90px;
+}
+
+.list.leaderboard .row ul .col.value {
+  justify-content: flex-end;
+}
+
+.list.leaderboard .row ul .col.rank,
+.list.leaderboard .row ul .col.value {
+  font-size: 14px;
+}

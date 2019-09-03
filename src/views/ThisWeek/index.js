@@ -574,7 +574,7 @@ class ThisWeek extends React.Component {
           description: manifest.DestinyActivityDefinition[960175301].displayProperties.description,
           challenge: manifest.DestinyVendorDefinition[3347378076].itemList
             .map(item => {
-              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty_eclipse').vendorItemIndexes.includes(item.vendorItemIndex)) {
+              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryHash === 3151502845).vendorItemIndexes.includes(item.vendorItemIndex)) {
                 return item.itemHash;
               } else {
                 return false;
@@ -606,7 +606,7 @@ class ThisWeek extends React.Component {
           description: manifest.DestinyActivityDefinition[548750096].displayProperties.description,
           challenge: manifest.DestinyVendorDefinition[3347378076].itemList
             .map(item => {
-              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty_sunset').vendorItemIndexes.includes(item.vendorItemIndex)) {
+              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryHash === 1750123300).vendorItemIndexes.includes(item.vendorItemIndex)) {
                 return item.itemHash;
               } else {
                 return false;
@@ -638,7 +638,7 @@ class ThisWeek extends React.Component {
           description: manifest.DestinyActivityDefinition[1661734046].displayProperties.description,
           challenge: manifest.DestinyVendorDefinition[3347378076].itemList
             .map(item => {
-              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryId === 'weekly_raid_bounty').vendorItemIndexes.includes(item.vendorItemIndex)) {
+              if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryHash === 4097321267).vendorItemIndexes.includes(item.vendorItemIndex)) {
                 return item.itemHash;
               } else {
                 return false;
@@ -802,28 +802,28 @@ class ThisWeek extends React.Component {
     // scored nightfall strikes
     let nightfalls = [];
 
-    milestones[2171429505].activities
-      .filter(activity => activity.modifierHashes)
-      .forEach(activity => {
-        let nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
+    // milestones[2171429505].activities
+    //   .filter(activity => activity.modifierHashes)
+    //   .forEach(activity => {
+    //     let nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
 
-        nightfalls.push(
-          <div key={nightfall.hash} className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Nightfall')}</div>
-              <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
-            </div>
-            <h4>{t('Collectibles')}</h4>
-            <ul className='list collection-items'>
-              <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
-            </ul>
-            <h4>{t('Triumphs')}</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
-            </ul>
-          </div>
-        );
-      });
+    //     nightfalls.push(
+    //       <div key={nightfall.hash} className='content'>
+    //         <div className='module-header'>
+    //           <div className='sub-name'>{t('Nightfall')}</div>
+    //           <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
+    //         </div>
+    //         <h4>{t('Collectibles')}</h4>
+    //         <ul className='list collection-items'>
+    //           <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
+    //         </ul>
+    //         <h4>{t('Triumphs')}</h4>
+    //         <ul className='list record-items'>
+    //           <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
+    //         </ul>
+    //       </div>
+    //     );
+    //   });
 
     // raids
     let raids = [];

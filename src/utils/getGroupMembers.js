@@ -35,19 +35,17 @@ export async function getGroupMembers(group, getPending = false) {
   let memberResponses = await Promise.all(
     groupMembersResponse.results.map(async member => {
       try {
-        const [profile, historicalStats] = await Promise.all([bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900'), bungie.GetHistoricalStats(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '0', '1', '4,5,7,64', '0')]);
-        member.profile = profile;
-        member.historicalStats = historicalStats;
+        const profile = await bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900');
 
-        if (!member.profile.characterProgressions.data) {
+        if (!profile.characterProgressions.data) {
           return member;
         }
-        member.profile = responseUtils.profileScrubber(member.profile);
+        
+        member.profile = responseUtils.profileScrubber(profile);
 
         return member;
       } catch (e) {
         member.profile = false;
-        member.historicalStats = false;
         return member;
       }
     })
@@ -57,21 +55,19 @@ export async function getGroupMembers(group, getPending = false) {
     ? await Promise.all(
         groupMembersPendingResponse.results.map(async member => {
           try {
-            const [profile] = await Promise.all([bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900')]);
-            member.profile = profile;
-            member.historicalStats = false;
+            const profile = await bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900');
 
-            if (!member.profile.characterProgressions.data) {
+            if (!profile.characterProgressions.data) {
               return member;
             }
-            member.profile = responseUtils.profileScrubber(member.profile);
 
+            member.profile = responseUtils.profileScrubber(profile);
+            
             member.pending = true;
 
             return member;
           } catch (e) {
             member.profile = false;
-            member.historicalStats = false;
 
             member.pending = true;
 

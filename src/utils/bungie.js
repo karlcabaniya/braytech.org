@@ -169,6 +169,8 @@ export const GetMembersOfGroup = async groupId => apiRequest(`/Platform/GroupV2/
 
 export const GetGroup = async groupId => apiRequest(`/Platform/GroupV2/${groupId}/`);
 
+export const GetClanLeaderboards = async (groupId, modes, maxtop = 7) => apiRequest(`/Platform/Destiny2/Stats/Leaderboards/Clans/${groupId}/?modes=${modes.join(',')}&maxtop=${maxtop}`);
+
 export const GetClanWeeklyRewardState = async groupId => apiRequest(`/Platform/Destiny2/Clan/${groupId}/WeeklyRewardState/`);
 
 export const GetHistoricalStats = async (membershipType, membershipId, characterId = '0', groups, modes, periodType) => apiRequest(`/Platform/Destiny2/${membershipType}/Account/${membershipId}/Character/0/Stats/?groups=${groups}&modes=${modes}&periodType=${periodType}`);

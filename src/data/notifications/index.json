@@ -77,5 +77,16 @@
       "description": "Hello Guardian! Braytech's feature set is largely user-inspired. You can directly impact the direction in which Braytech develops by sharing your points of pain and pleasure.\n\nUse this opportunity to go on the record and make your voice heard.\n\nEach suggestion is manually reviewed by me, Tom, before being published. Once published, others may vote on it, potentially affecting its priority.\n\n**You can access the Suggestion box by selecting Views on mobile or More desktop.**\n\nxoxo gossip goat",
       "prompt": true
     }
+  },
+  {
+    "id": "dtsyzrpbeonigm500j5nj",
+    "date": "2019-09-03T18:47:28.614Z",
+    "expiry": 604800000,
+    "showOnce": true,
+    "displayProperties": {
+      "name": "This Week",
+      "description": "Yo. _This Week_, I'd like to play the blame game: _Bungie_ broke some stuff. Nightfalls are noticeably missing from the _This Week_ view, probably due to the way in which they implemented fixed Nightfalls for our first Destiny 2 community challenge.\n\nRead more about this challenge in last week's Bungie.net blog post.\n\nAs a result of this sudden and very unexpected change, production Braytech is currently running the latest changes. This means it's not as tested as I'd prefer.\n\nCheck behind collectibles and records for any shadow thrall.",
+      "prompt": true
+    }
   }
 ]
