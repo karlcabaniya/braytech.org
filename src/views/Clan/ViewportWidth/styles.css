@@ -1,7 +1,7 @@
 #clan.viewport-width {
   padding: 4rem 3rem 3rem;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 60px 1fr;
   justify-content: center;
 }
 
@@ -30,6 +30,7 @@
 
   #clan.viewport-width {
     padding: 3rem 2rem 2rem;
+    grid-template-columns: 40px 1fr;
   }
 
   #clan.viewport-width .properties .name {

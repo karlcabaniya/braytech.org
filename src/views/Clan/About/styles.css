@@ -141,6 +141,10 @@
 
 @media screen and (max-width: 600px) {
 
+  #clan.about {
+    grid-template-columns: 40px 1fr;
+  }
+
   #clan.about .module.about > .name {
     font-size: 24px;
   }
