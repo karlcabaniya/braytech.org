@@ -169,7 +169,7 @@ export const GetMembersOfGroup = async groupId => apiRequest(`/Platform/GroupV2/
 
 export const GetGroup = async groupId => apiRequest(`/Platform/GroupV2/${groupId}/`);
 
-export const GetClanLeaderboards = async (groupId, modes, maxtop = 7) => apiRequest(`/Platform/Destiny2/Stats/Leaderboards/Clans/${groupId}/?modes=${modes.join(',')}&maxtop=${maxtop}`);
+export const GetClanLeaderboards = async (groupId, modes, maxtop = 7, statIds) => apiRequest(`/Platform/Destiny2/Stats/Leaderboards/Clans/${groupId}/?modes=${modes.join(',')}&maxtop=${maxtop}` + (statIds ? `&statid=${statIds.join(',')}` : ''));
 
 export const GetClanWeeklyRewardState = async groupId => apiRequest(`/Platform/Destiny2/Clan/${groupId}/WeeklyRewardState/`);
 

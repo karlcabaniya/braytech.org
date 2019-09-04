@@ -1,7 +1,41 @@
 #clan.stats {
-  grid-template-columns: 60px repeat(4, 1fr);
+  grid-template-columns: 60px 1fr;
 }
 
 #clan.stats .module.views {
-  grid-row: 1/4;
+  /* grid-row: 1/4; */
+}
+
+#clan.stats .wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 3rem;
+}
+
+#clan.stats .wrapper .boards {
+  grid-column: 2/end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+}
+
+#clan .module.views.scopes .list {
+  width: unset;
+}
+
+#clan .module.views.scopes .list li {
+  height: 38px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#clan .module.views.scopes .list li .text {
+  padding: 0 1rem;
+  letter-spacing: 2px;
+}
+
+#clan .module.views.scopes .list li.active .text {
+  color: rgba(255, 255, 255, 1);
 }

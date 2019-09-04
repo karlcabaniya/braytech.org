@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RosterLeaderboard from '../../../components/RosterLeaderboard';
+import RosterLeaderboards from '../../../components/RosterLeaderboards';
 
 import ClanViewsLinks from '../ClanViewsLinks';
 
@@ -12,15 +12,12 @@ class StatsView extends React.Component {
   }
 
   render() {
-    const {  } = this.props;
-
-
-
+    const { subView } = this.props;
 
     return (
       <>
         <ClanViewsLinks {...this.props} />
-        <RosterLeaderboard mode='70' />
+        <RosterLeaderboards mode='70' scope={subView} />
       </>
     );
   }

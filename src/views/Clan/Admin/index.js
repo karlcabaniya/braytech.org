@@ -27,12 +27,13 @@ class AdminView extends React.Component {
       <>
         <ClanViewsLinks {...this.props} />
         <div className='module'>
+          {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : null}
           <div className='status'>{groupMembers.members.length > 0 ? groupMembers.loading ? (
             <Spinner mini />
           ) : (
             <div className='ttl' />
           ) : null}</div>
-          {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <RosterAdmin />}
+          {groupMembers.loading && groupMembers.members.length === 0 ? null : <RosterAdmin />}
         </div>
       </>
     );
