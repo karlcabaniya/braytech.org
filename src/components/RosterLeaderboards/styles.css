@@ -3,13 +3,17 @@
   margin: 1rem 0 0;
 }
 
+.list.leaderboard ~ .button {
+  margin: 1rem 0 0;
+}
+
 .list.leaderboard .row {
   display: grid;
 }
 
 .list.leaderboard > .row > ul {
   display: grid;
-  grid-template-columns: 30px auto 90px;
+  grid-template-columns: 40px minmax(200px, 270px) 90px;
 }
 
 .list.leaderboard .row ul .col.value {

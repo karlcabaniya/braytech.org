@@ -12,12 +12,12 @@ class StatsView extends React.Component {
   }
 
   render() {
-    const { subView } = this.props;
+    const { subView, subSubView } = this.props;
 
     return (
       <>
         <ClanViewsLinks {...this.props} />
-        <RosterLeaderboards mode='70' scope={subView} />
+        <RosterLeaderboards mode='70' scope={subView} stat={subSubView} />
       </>
     );
   }

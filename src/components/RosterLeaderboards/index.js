@@ -11,7 +11,7 @@ import * as ls from '../../utils/localStorage';
 import * as destinyUtils from '../../utils/destinyUtils';
 import * as bungie from '../../utils/bungie';
 import getGroupMembers from '../../utils/getGroupMembers';
-import { ProfileNavLink } from '../ProfileLink';
+import { ProfileNavLink, ProfileLink } from '../ProfileLink';
 import MemberLink from '../MemberLink';
 import Spinner from '../UI/Spinner';
 
@@ -74,22 +74,6 @@ class RosterLeaderboards extends React.Component {
 
   scopes = [
     {
-      name: 'Strikes',
-      value: 'allStrikes'
-    },
-    {
-      name: 'Nightfalls',
-      value: 'scored_nightfall'
-    },
-    {
-      name: 'Menagerie',
-      value: 'caluseum'
-    },
-    {
-      name: 'Raids',
-      value: 'raid'
-    },
-    {
       name: 'Quickplay',
       value: 'pvpQuickplay'
     },
@@ -104,18 +88,34 @@ class RosterLeaderboards extends React.Component {
     {
       name: 'Gambit Prime',
       value: 'pvecomp_mamba'
+    },
+    {
+      name: 'Strikes',
+      value: 'allStrikes'
+    },
+    {
+      name: 'Nightfalls',
+      value: 'scored_nightfall'
+    },
+    {
+      name: 'Menagerie',
+      value: 'caluseum'
+    },
+    {
+      name: 'Raids',
+      value: 'raid'
     }
   ];
 
-  generateLeaderboards = () => {
-    const statIds = ['kills', 'deaths', 'killsDeathsRatio', 'suicides', 'secondsPlayed', 'bestSingleGameKills', 'precisionKills', 'longestKillSpree', 'longestKillDistance', 'longestSingleLife'];
+  statIds = ['kills', 'deaths', 'killsDeathsRatio', 'suicides', 'secondsPlayed', 'bestSingleGameKills', 'precisionKills', 'longestKillSpree', 'longestKillDistance', 'longestSingleLife'];
 
+  generateLeaderboards = () => {
     const leaderboards = {};
 
     this.scopes.forEach(scope => {
       leaderboards[scope.value] = {};
 
-      statIds.forEach(statId => {
+      this.statIds.forEach(statId => {
         leaderboards[scope.value][statId] = orderBy(
           this.responses.map(m => {
             try {
@@ -153,20 +153,50 @@ class RosterLeaderboards extends React.Component {
     }
   }
 
-  render() {
-    const { t, member, scope } = this.props;
+  elScopes = (scope, stat) => {
+    return this.scopes.map(s => {
+      return (
+        <li key={s.value} className={cx('linked', { active: scope === s.value })}>
+          <div className='text'>{s.name}</div>
+          <ProfileNavLink to={`/clan/stats/${s.value}`} />
+        </li>
+      );
+    });
+  };
 
-    console.log(this.state);
+  elBoards = (scope, stat) => {
+    const { t } = this.props;
 
-    // const isSelf = m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId;
-
-    // <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className={cx('row', { self: isSelf })}>
-
-    if (!this.state.loading) {
-      if (scope && this.scopes.find(s => s.value === scope)) {
-        const boards = Object.entries(this.state.leaderboards[scope]).map(([statId, data]) => {
+    if (stat && this.statIds.includes(stat)) {
+      const definitionStat = manifest.DestinyHistoricalStatsDefinition[stat];
+      
+      return (
+        <div key={stat} className='module'>
+          <div className='module-header'>
+            <div className='sub-name'>{definitionStat.statName}</div>
+          </div>
+          <ul key={stat} className='list leaderboard'>
+            {this.state.leaderboards[scope][stat].map((m, i) => {
+              return (
+                <li key={m.destinyUserInfo.membershipId} className={cx('row', { self: false })}>
+                  <ul>
+                    <li className='col rank'>{i + 1}</li>
+                    <li className='col member'>
+                      <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
+                    </li>
+                    <li className='col value'>{m.displayValue}</li>
+                  </ul>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )
+    } else {
+      return Object.entries(this.state.leaderboards[scope])
+        .map(([statId, data]) => {
           const definitionStat = manifest.DestinyHistoricalStatsDefinition[statId];
-  
+
           return {
             name: statId,
             el: (
@@ -189,30 +219,45 @@ class RosterLeaderboards extends React.Component {
                     );
                   })}
                 </ul>
+                <ProfileLink className='button' to={`/clan/stats/${scope}/${statId}`}>
+                  <div className='text'>{t('See all members')}</div>
+                </ProfileLink>
               </div>
             )
           };
-        });
+        })
+        .map(e => e.el);
+    }
+  };
 
+  render() {
+    const { t, member, scope, stat } = this.props;
+
+    console.log(this.state);
+
+    // const isSelf = m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId;
+
+    // <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className={cx('row', { self: isSelf })}>
+
+    if (!this.state.loading) {
+      if (scope && this.scopes.find(s => s.value === scope) && stat) {
         return (
           <div className='wrapper'>
             <div className='module views scopes'>
-              <ul className='list'>
-                {this.scopes.map(s => {
-                  return (
-                    <li key={s.value} className={cx('linked', { active: scope === s.value })}>
-                      <div className='text'>{s.name}</div>
-                      <ProfileNavLink to={`/clan/stats/${s.value}`} />
-                    </li>
-                  )
-                })}
-              </ul>
+              <ul className='list'>{this.elScopes(scope, stat)}</ul>
             </div>
-            <div className='boards'>
-              {boards.map(e => e.el)}
-            </div>
+            <div className='boards single'>{this.elBoards(scope, stat)}</div>
           </div>
-        )
+        );
+      } else if (scope && this.scopes.find(s => s.value === scope)) {
+        return (
+          <div className='wrapper'>
+            <div className='module views scopes'>
+              <ul className='list'>{this.elScopes(scope, stat)}</ul>
+            </div>
+            <div className='boards'>{this.elBoards(scope, stat)}</div>
+          </div>
+        );
       } else {
         return (
           <div className='wrapper'>
@@ -224,17 +269,14 @@ class RosterLeaderboards extends React.Component {
                       <div className='text'>{s.name}</div>
                       <ProfileNavLink to={`/clan/stats/${s.value}`} />
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </div>
-            <div className='boards'>
-              
-            </div>
+            <div className='boards'></div>
           </div>
-        )
+        );
       }
-      
     } else {
       return <Spinner />;
     }

@@ -55,7 +55,7 @@ class ProfileRoutes extends React.Component {
         <PostmasterCapacity />
         <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} />} />
         <Switch>
-          <Route path={`${match.url}/clan/:view?/:subView?`} exact render={route => <Clan view={route.match.params.view} subView={route.match.params.subView} />} />
+          <Route path={`${match.url}/clan/:view?/:subView?/:subSubView?`} exact render={route => <Clan view={route.match.params.view} subView={route.match.params.subView} subSubView={route.match.params.subSubView} />} />
           <Route path={`${match.url}/legend`} exact render={route => <Legend />} />
           <Route path={`${match.url}/checklists`} exact component={Checklists} />
           <Route path={`${match.url}/character`} exact component={Character} />

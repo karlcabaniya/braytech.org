@@ -109,7 +109,7 @@
 
 
 
-#clan .module.views .list {
+#clan .module.views > .list {
   position: sticky;
   top: 3rem;
   display: grid;
