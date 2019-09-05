@@ -107,7 +107,48 @@ class RosterLeaderboards extends React.Component {
     }
   ];
 
-  statIds = ['kills', 'deaths', 'killsDeathsRatio', 'suicides', 'secondsPlayed', 'bestSingleGameKills', 'precisionKills', 'longestKillSpree', 'longestKillDistance', 'longestSingleLife'];
+  statIds = [
+    {
+      value: 'kills',
+      type: 'integer'
+    },
+    {
+      value: 'deaths',
+      type: 'integer'
+    },
+    {
+      value: 'killsDeathsRatio',
+      type: 'float'
+    },
+    {
+      value: 'suicides',
+      type: 'integer'
+    },
+    {
+      value: 'secondsPlayed',
+      type: 'time'
+    },
+    {
+      value: 'bestSingleGameKills',
+      type: 'integer'
+    },
+    {
+      value: 'precisionKills',
+      type: 'integer'
+    },
+    {
+      value: 'longestKillSpree',
+      type: 'integer'
+    },
+    {
+      value: 'longestKillDistance',
+      type: 'distance'
+    },
+    {
+      value: 'longestSingleLife',
+      type: 'time'
+    }
+  ];
 
   generateLeaderboards = () => {
     const leaderboards = {};
@@ -116,7 +157,7 @@ class RosterLeaderboards extends React.Component {
       leaderboards[scope.value] = {};
 
       this.statIds.forEach(statId => {
-        leaderboards[scope.value][statId] = orderBy(
+        leaderboards[scope.value][statId.value] = orderBy(
           this.responses.map(m => {
             try {
               return {
@@ -124,8 +165,8 @@ class RosterLeaderboards extends React.Component {
                   ...m.destinyUserInfo,
                   groupId: m.groupId
                 },
-                value: m.historicalStats[scope.value].allTime[statId].basic.value,
-                displayValue: m.historicalStats[scope.value].allTime[statId].basic.displayValue
+                value: m.historicalStats[scope.value].allTime[statId.value].basic.value,
+                displayValue: m.historicalStats[scope.value].allTime[statId.value].basic.displayValue
               };
             } catch (e) {
               return {
@@ -153,7 +194,21 @@ class RosterLeaderboards extends React.Component {
     }
   }
 
-  elScopes = (scope, stat) => {
+  prettyValue = (statId, value) => {
+    const stat = this.statIds.find(s => s.value === statId);
+
+    if (stat && stat.type === 'time') {
+      return value;
+    } else if (stat && stat.type === 'distance') {
+      return Math.floor(value) + 'm';
+    } else if (stat && stat.type === 'integer') {
+      return parseInt(value, 10).toLocaleString('en-us');
+    } else {
+      return value;
+    }
+  }
+
+  elScopes = scope => {
     const t = this.props.t;
 
     const scopes = this.scopes.map(s => {
@@ -176,9 +231,9 @@ class RosterLeaderboards extends React.Component {
   };
 
   elBoards = (scope, stat) => {
-    const { t, groupMembers } = this.props;
+    const { t, member, groupMembers } = this.props;
 
-    if (stat && this.statIds.includes(stat)) {
+    if (stat) {
       const definitionStat = manifest.DestinyHistoricalStatsDefinition[stat];
       
       return (
@@ -188,14 +243,16 @@ class RosterLeaderboards extends React.Component {
           </div>
           <ul key={stat} className='list leaderboard'>
             {this.state.leaderboards[scope][stat].map((m, i) => {
+              const isSelf = m.destinyUserInfo.membershipType.toString() === member.membershipType && m.destinyUserInfo.membershipId === member.membershipId;
+
               return (
-                <li key={m.destinyUserInfo.membershipId} className={cx('row', { self: false })}>
+                <li key={m.destinyUserInfo.membershipId} className={cx('row', { self: isSelf })}>
                   <ul>
-                    <li className='col rank'>{i + 1}</li>
                     <li className='col member'>
                       <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
                     </li>
-                    <li className='col value'>{m.displayValue}</li>
+                    <li className='col rank'>{i + 1}</li>
+                    <li className='col value'>{this.prettyValue(stat, m.displayValue)}</li>
                   </ul>
                 </li>
               );
@@ -217,14 +274,16 @@ class RosterLeaderboards extends React.Component {
                 </div>
                 <ul key={statId} className='list leaderboard'>
                   {data.slice(0, 10).map((m, i) => {
+                    const isSelf = m.destinyUserInfo.membershipType.toString() === member.membershipType && m.destinyUserInfo.membershipId === member.membershipId;
+
                     return (
-                      <li key={m.destinyUserInfo.membershipId} className={cx('row', { self: false })}>
+                      <li key={m.destinyUserInfo.membershipId} className={cx('row', { self: isSelf })}>
                         <ul>
-                          <li className='col rank'>{i + 1}</li>
                           <li className='col member'>
                             <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
                           </li>
-                          <li className='col value'>{m.displayValue}</li>
+                          <li className='col rank'>{i + 1}</li>
+                          <li className='col value'>{this.prettyValue(statId, m.displayValue)}</li>
                         </ul>
                       </li>
                     );
@@ -246,13 +305,9 @@ class RosterLeaderboards extends React.Component {
 
     console.log(this.state);
 
-    // const isSelf = m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId;
-
-    // <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className={cx('row', { self: isSelf })}>
-
     if (!this.state.loading) {
       const knownScope = this.scopes.find(s => s.value === scope);
-      const knownStat = this.statIds.includes(stat);
+      const knownStat = this.statIds.find(s => s.value === stat);
 
       if (scope && knownScope && stat && knownStat) {
         const definitionStat = manifest.DestinyHistoricalStatsDefinition[stat];
@@ -265,7 +320,7 @@ class RosterLeaderboards extends React.Component {
               <span>{definitionStat.statName}</span>
             </div>
             <div className='module views scopes'>
-              <ul className='list'>{this.elScopes(scope, stat)}</ul>
+              <ul className='list'>{this.elScopes(scope)}</ul>
             </div>
             <div className='boards single'>{this.elBoards(scope, stat)}</div>
           </div>
@@ -278,9 +333,9 @@ class RosterLeaderboards extends React.Component {
               <span>{knownScope.name}</span>
             </div>
             <div className='module views scopes'>
-              <ul className='list'>{this.elScopes(scope, stat)}</ul>
+              <ul className='list'>{this.elScopes(scope)}</ul>
             </div>
-            <div className='boards'>{this.elBoards(scope, stat)}</div>
+            <div className='boards'>{this.elBoards(scope)}</div>
           </div>
         );
       } else {
@@ -290,7 +345,7 @@ class RosterLeaderboards extends React.Component {
               <span>{t('Historical stats')}</span>
             </div>
             <div className='module views scopes'>
-              <ul className='list'>{this.elScopes(scope, stat)}</ul>
+              <ul className='list'>{this.elScopes(scope)}</ul>
             </div>
             <div className='boards'></div>
           </div>

@@ -15,7 +15,7 @@ import ViewportWidth from './ViewportWidth';
 
 class Clan extends React.Component {
   componentDidMount() {
-    window.scrollTo(0, 0);   
+    window.scrollTo(0, 0);
   }
 
   render() {
