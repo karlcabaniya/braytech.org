@@ -800,35 +800,35 @@ class ThisWeek extends React.Component {
     const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
 
     // scored nightfall strikes
-    let nightfalls = [];
+    const moduleNightfalls = [];
 
-    // milestones[2171429505].activities
-    //   .filter(activity => activity.modifierHashes)
-    //   .forEach(activity => {
-    //     let nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
+    milestones[2171429505] && milestones[2171429505].activities
+      .filter(activity => activity.modifierHashes)
+      .forEach(activity => {
+        const nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
 
-    //     nightfalls.push(
-    //       <div key={nightfall.hash} className='content'>
-    //         <div className='module-header'>
-    //           <div className='sub-name'>{t('Nightfall')}</div>
-    //           <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
-    //         </div>
-    //         <h4>{t('Collectibles')}</h4>
-    //         <ul className='list collection-items'>
-    //           <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
-    //         </ul>
-    //         <h4>{t('Triumphs')}</h4>
-    //         <ul className='list record-items'>
-    //           <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
-    //         </ul>
-    //       </div>
-    //     );
-    //   });
+        moduleNightfalls.push(
+          <div key={nightfall.hash} className='content'>
+            <div className='module-header'>
+              <div className='sub-name'>{t('Nightfall')}</div>
+              <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
+            </div>
+            <h4>{t('Collectibles')}</h4>
+            <ul className='list collection-items'>
+              <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
+            </ul>
+            <h4>{t('Triumphs')}</h4>
+            <ul className='list record-items'>
+              <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
+            </ul>
+          </div>
+        );
+      });
 
     // raids
-    let raids = [];
+    const moduleRaids = [];
 
-    raids.push(
+    moduleRaids.push(
       <div key='cos' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Raid')}</div>
@@ -861,7 +861,7 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    raids.push(
+    moduleRaids.push(
       <div key='sotp' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Raid')}</div>
@@ -894,7 +894,7 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    raids.push(
+    moduleRaids.push(
       <div key='lw' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Raid')}</div>
@@ -927,7 +927,7 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    raids.push(
+    moduleRaids.push(
       <div key='lev' className='content'>
         <div className='module-header'>
           <div className='sub-name'>{t('Raid')}</div>
@@ -1009,8 +1009,6 @@ class ThisWeek extends React.Component {
         <div className='aside'>{t('Braytech can not determine which Worldline Zero catalyst components you have attained, but it can tell you which bosses drop which items in case you happened to be keeping a list.')}</div>
       </div>
     );
-
-    const moduleNightfalls = nightfalls;
 
     const moduleAscendantChallenge = (
       <div key='moduleAscendantChallenge' className='content'>
@@ -1118,16 +1116,16 @@ class ThisWeek extends React.Component {
         moduleMenagerie
       ],
       [
-        raids[0]
+        moduleRaids[0]
       ],
       [
-        raids[1]
+        moduleRaids[1]
       ],
       [
-        raids[2]
+        moduleRaids[2]
       ],
       [
-        raids[3]
+        moduleRaids[3]
       ],
       [
         moduleAscendantChallenge

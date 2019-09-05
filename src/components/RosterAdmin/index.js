@@ -467,6 +467,10 @@ class RosterAdmin extends React.Component {
       //   console.log(lastPlayed);
       // }
 
+      // if (m.destinyUserInfo.membershipId == '4611686018449662397') {
+      //   console.log(m)
+      // }
+
       members.push({
         pending: m.pending,
         sorts: {

@@ -56,7 +56,7 @@ class Pursuits extends React.Component {
         <div className='view' id='pursuits'>
           <Spinner />
         </div>
-      )
+      );
     }
 
     const itemComponents = member.data.profile.itemComponents;
@@ -161,15 +161,17 @@ class Pursuits extends React.Component {
             </div>
           </div>
           <div className='sticky-nav'>
-            <div />
-            <ul>
-              <li>
-                <ProfileLink className='button' to='/pursuits'>
-                  <i className='destiny-B_Button' />
-                  {t('Back')}
-                </ProfileLink>
-              </li>
-            </ul>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>
+                  <ProfileLink className='button' to='/pursuits'>
+                    <i className='destiny-B_Button' />
+                    {t('Back')}
+                  </ProfileLink>
+                </li>
+              </ul>
+            </div>
           </div>
         </>
       );
@@ -204,7 +206,6 @@ class Pursuits extends React.Component {
         </div>
       );
     }
-    
   }
 }
 
