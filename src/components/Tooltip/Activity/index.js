@@ -184,6 +184,7 @@ class Activity extends React.Component {
             name: activityTypeDisplay.destination.name,
             place: false
           },
+          mode: false,
           activityLightLevel: definitionActivityPlaylist.activityLightLevel,
           className: 'menagerie',
           icon: (
