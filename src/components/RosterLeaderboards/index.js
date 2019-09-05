@@ -150,8 +150,51 @@ class RosterLeaderboards extends React.Component {
     }
   ];
 
+  statIdsSummary = [
+    {
+      value: 'kills',
+      type: 'integer'
+    },
+    {
+      value: 'deaths',
+      type: 'integer'
+    },
+    {
+      value: 'activitiesCleared',
+      type: 'integer'
+    },
+    {
+      value: 'activitiesWon',
+      type: 'integer'
+    },
+    {
+      value: 'secondsPlayed',
+      type: 'integer'
+    },
+    {
+      value: 'orbsDropped',
+      type: 'integer'
+    },
+    {
+      value: 'motesDeposited',
+      type: 'integer'
+    },
+    {
+      name: 'Primeval Damage',
+      value: 'primevalDamage',
+      type: 'integer'
+    },
+    {
+      name: 'Primeval Kills',
+      value: 'primevalKills',
+      type: 'integer'
+    }
+  ];
+
   generateLeaderboards = () => {
-    const leaderboards = {};
+    const leaderboards = {
+      summary: {}
+    };
 
     this.scopes.forEach(scope => {
       leaderboards[scope.value] = {};
@@ -183,7 +226,21 @@ class RosterLeaderboards extends React.Component {
           ['desc']
         );
       });
+
+      this.statIdsSummary.forEach(statId => {
+        const target = statId.value === 'activitiesWon' ? 'activitiesCleared' : statId.value;
+        
+        leaderboards.summary[target] = this.responses.reduce((a, m) => {
+          try {
+            return a + m.historicalStats[scope.value].allTime[statId.value].basic.value;
+          } catch (e) {
+            return a + 0;
+          }
+        }, leaderboards.summary[target] || 0);
+      });
     });
+
+
 
     this.setState({ loading: false, leaderboards });
   };
@@ -195,7 +252,7 @@ class RosterLeaderboards extends React.Component {
   }
 
   prettyValue = (statId, value) => {
-    const stat = this.statIds.find(s => s.value === statId);
+    const stat = this.statIds.concat(this.statIdsSummary).find(s => s.value === statId);
 
     if (stat && stat.type === 'time') {
       return value;
@@ -347,7 +404,19 @@ class RosterLeaderboards extends React.Component {
             <div className='module views scopes'>
               <ul className='list'>{this.elScopes(scope)}</ul>
             </div>
-            <div className='boards'></div>
+            <div className='boards summary-stats'>
+              {Object.entries(this.state.leaderboards.summary).map(([statId, value]) => {
+                const definitionStat = manifest.DestinyHistoricalStatsDefinition[statId];
+                const stat = this.statIdsSummary.find(s => s.value === statId);
+
+                return (
+                  <div key={statId} className='stat'>
+                    <div className='name'>{stat.name ? stat.name : definitionStat.statName}</div>
+                    <div className='value'>{this.prettyValue(statId, value)}</div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         );
       }

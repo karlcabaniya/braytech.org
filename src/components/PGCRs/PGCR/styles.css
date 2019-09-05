@@ -14,7 +14,7 @@
   font-size: 14px;
 }
 
-.list.reports li.standing .basic::before {
+.list.reports li.standing > .basic::before {
   content: ' ';
   position: absolute;
   top: 0;
