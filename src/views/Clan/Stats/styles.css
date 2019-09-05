@@ -9,7 +9,31 @@
 #clan.stats .wrapper {
   display: grid;
   grid-template-columns: 1fr 5fr;
-  grid-gap: 3rem;
+}
+
+#clan.stats .wrapper .bread {
+  grid-column: 1/end;
+  margin: 0 0 2rem;
+}
+
+#clan.stats .wrapper .bread span {
+  font-size: 30px;
+  line-height: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#clan.stats .wrapper .bread span::before {
+  content: ' // ';
+}
+
+#clan.stats .wrapper .bread span:first-child {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#clan.stats .wrapper .bread span:first-child::before {
+  content: none;
 }
 
 #clan.stats .wrapper .boards {
@@ -17,6 +41,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 3rem;
+  padding: 0 0 0 3rem;
 }
 
 #clan .module.views.scopes .list {

@@ -154,7 +154,9 @@ class RosterLeaderboards extends React.Component {
   }
 
   elScopes = (scope, stat) => {
-    return this.scopes.map(s => {
+    const t = this.props.t;
+
+    const scopes = this.scopes.map(s => {
       return (
         <li key={s.value} className={cx('linked', { active: scope === s.value })}>
           <div className='text'>{s.name}</div>
@@ -162,10 +164,19 @@ class RosterLeaderboards extends React.Component {
         </li>
       );
     });
+
+    scopes.unshift(
+      <li key='summary' className={cx('linked', { active: !scope })}>
+        <div className='text'>{t('Summary')}</div>
+        <ProfileNavLink exact to={`/clan/stats`} />
+      </li>
+    );
+
+    return scopes;
   };
 
   elBoards = (scope, stat) => {
-    const { t } = this.props;
+    const { t, groupMembers } = this.props;
 
     if (stat && this.statIds.includes(stat)) {
       const definitionStat = manifest.DestinyHistoricalStatsDefinition[stat];
@@ -220,7 +231,7 @@ class RosterLeaderboards extends React.Component {
                   })}
                 </ul>
                 <ProfileLink className='button' to={`/clan/stats/${scope}/${statId}`}>
-                  <div className='text'>{t('See all members')}</div>
+                  <div className='text'>{t('See all {{count}}', { count: groupMembers.members.length })}</div>
                 </ProfileLink>
               </div>
             )
@@ -240,18 +251,32 @@ class RosterLeaderboards extends React.Component {
     // <li key={m.destinyUserInfo.membershipType + m.destinyUserInfo.membershipId} className={cx('row', { self: isSelf })}>
 
     if (!this.state.loading) {
-      if (scope && this.scopes.find(s => s.value === scope) && stat) {
+      const knownScope = this.scopes.find(s => s.value === scope);
+      const knownStat = this.statIds.includes(stat);
+
+      if (scope && knownScope && stat && knownStat) {
+        const definitionStat = manifest.DestinyHistoricalStatsDefinition[stat];
+
         return (
           <div className='wrapper'>
+            <div className='bread'>
+              <span>{t('Historical stats')}</span>
+              <span>{knownScope.name}</span>
+              <span>{definitionStat.statName}</span>
+            </div>
             <div className='module views scopes'>
               <ul className='list'>{this.elScopes(scope, stat)}</ul>
             </div>
             <div className='boards single'>{this.elBoards(scope, stat)}</div>
           </div>
         );
-      } else if (scope && this.scopes.find(s => s.value === scope)) {
+      } else if (scope && knownScope) {
         return (
           <div className='wrapper'>
+            <div className='bread'>
+              <span>{t('Historical stats')}</span>
+              <span>{knownScope.name}</span>
+            </div>
             <div className='module views scopes'>
               <ul className='list'>{this.elScopes(scope, stat)}</ul>
             </div>
@@ -261,17 +286,11 @@ class RosterLeaderboards extends React.Component {
       } else {
         return (
           <div className='wrapper'>
+            <div className='bread'>
+              <span>{t('Historical stats')}</span>
+            </div>
             <div className='module views scopes'>
-              <ul className='list'>
-                {this.scopes.map(s => {
-                  return (
-                    <li key={s.value} className={cx('linked', { active: scope === s.value })}>
-                      <div className='text'>{s.name}</div>
-                      <ProfileNavLink to={`/clan/stats/${s.value}`} />
-                    </li>
-                  );
-                })}
-              </ul>
+              <ul className='list'>{this.elScopes(scope, stat)}</ul>
             </div>
             <div className='boards'></div>
           </div>
