@@ -1,0 +1,266 @@
+#sit-rep {
+  padding: 4rem 3rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 3rem;
+}
+
+#sit-rep .module .ranks > div {
+  position: relative;
+  font-size: 14px;
+  line-height: 10px;
+}
+
+#sit-rep .module .prog ~ .prog {
+  margin: 1rem 0 0;
+}
+
+#sit-rep .module .prog > .text {
+  margin: 0 0 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+#sit-rep .module .prog > .text .resets {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#sit-rep .module .list.milestones ~ .sub-header {
+  margin: 2rem 0 1rem;
+}
+
+#sit-rep .module .list.milestones {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
+
+#sit-rep .module .list.milestones li {
+  height: unset;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  grid-gap: 1rem;
+  align-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+#sit-rep .module .list.milestones li .icon {
+  font-size: 32px;
+}
+
+#sit-rep .module .list.milestones li .text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#sit-rep .module .list.milestones li .text .name {
+  margin: 0 0 4px;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#sit-rep .module .list.milestones li .progress-bar {
+  margin: 8px 0 0;
+  height: 3px;
+}
+
+#sit-rep .module .list.milestones li .progress-bar .bar {
+  
+}
+
+#sit-rep .module .list.milestones li .progress-bar .bar .text {
+  display: none;
+}
+
+#sit-rep .module .list.milestones li .progress-bar .bar .fill {
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 100%;
+  top: unset;
+  bottom: 0;
+}
+
+#sit-rep .module .list.milestones li .list.activities {
+  grid-template-columns: 1fr;
+}
+
+#sit-rep .module .list.milestones li .list.activities li {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px 1rem;
+}
+
+#sit-rep .module .list.milestones li .list.activities li > div:not(.name) {
+  display: grid;
+  grid-template-columns: auto 50px;
+  grid-gap: 6px;
+  text-align: right;
+}
+
+#sit-rep .module .list.milestones li .list.activities li .time {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#sit-rep .module .list.milestones li .list.activities li .light {
+  color: #e5d163;
+}
+
+#sit-rep .module .list.milestones li .list.activities li .light span {
+  position: relative;
+  margin: 0 0 0 8px;
+}
+
+#sit-rep .module .list.milestones li .list.activities li .light span::before {
+  content: 'l';
+  position: absolute;
+  top: 3px;
+  left: -7px;
+  font-family: 'destiny' !important;
+  font-size: 6px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#sit-rep .module .list.milestones li.has-icon::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  font-family: 'destiny' !important;
+  font-size: 256px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+#sit-rep .module .list.milestones li.milestone-2171429505::before {
+  content: "\e9a2";
+  font-size: 256px;
+}
+
+#sit-rep .module .list.milestones li.milestone-1300394968::before {
+  content: "\e992";
+  font-size: 200px;
+}
+
+#sit-rep .module .list.milestones li.milestone-3082135827::before {
+  content: "\e97d";
+  font-size: 256px;
+}
+
+
+#sit-rep .module.milestones .milestones-completed {
+  font-style: italic;
+  letter-spacing: 1px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+#sit-rep .module.clan-roster {
+  position: relative;
+}
+
+#sit-rep .module.clan-roster .refresh {
+  position: absolute;
+  left: -2rem;
+}
+
+@media screen and (max-width: 1440px) {
+  #sit-rep {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  #sit-rep .module .list.milestones {
+    grid-template-columns: 1fr;
+  }
+
+  #sit-rep .module .list.milestones li h4 {
+    margin: 16px 8px 0;
+  }
+
+  #sit-rep .module .list.milestones li.full-width {
+    grid-column: unset;
+  }
+
+  #sit-rep .module .list.milestones li.full-width .progress-bar {
+    grid-column: unset;
+  }
+
+  #sit-rep .module .list.milestones li.full-width.supps {
+    grid-template-columns: 1fr;
+  }
+
+  #sit-rep .module .list.milestones li .list.activities {
+    padding: 8px 8px 0;
+  }
+
+  #sit-rep .module .list.milestones li.has-icon::before {
+    left: unset;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    font-size: 128px;
+  }
+
+  #sit-rep .module .list.milestones li.milestone-1300394968::before {
+    font-size: 100px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  #sit-rep {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content 1fr;
+  }
+
+  #sit-rep .module.milestones {
+    grid-row: 1/3;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #sit-rep {
+    grid-template-columns: 1fr;
+    grid-template-rows: unset;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #sit-rep {
+    padding: 3rem 2rem 2rem;
+    grid-gap: 2rem;
+  }
+
+  #sit-rep .module.milestones {
+    grid-row: unset;
+  }
+
+  #sit-rep .module .list.milestones li .list.activities li .light span::before {
+    top: 4px;
+  }
+}

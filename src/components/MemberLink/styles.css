@@ -575,10 +575,6 @@ html.backdropfilter .wrapper.light-mode #member-overlay .sticky-nav {
     font-size: 16px;
   }
 
-  #member-overlay .wrapper-inner .ranks {
-    grid-template-columns: 1fr 1fr;
-  }
-
   #member-overlay.error .wrapper-inner {
     grid-template-columns: min-content auto;
     padding: 1rem 0 0;

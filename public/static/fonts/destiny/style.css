@@ -1,22 +1,18 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?r27u0x') format('woff');
+  src: url('destiny.woff?5ywhoh') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
 [class^="destiny-"], [class*=" destiny-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'destiny' !important;
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -248,6 +244,15 @@
 .destiny-sleeper_nodes:before {
   content: "\e99a";
 }
+.destiny-glory:before {
+  content: "\e920";
+}
+.destiny-infamy:before {
+  content: "\e921";
+}
+.destiny-valor:before {
+  content: "\e922";
+}
 .destiny-faction_fella .path1:before {
   content: "\e9e5";
   color: rgb(245, 246, 245);
@@ -271,6 +276,12 @@
   content: "\e9ed";
   margin-left: -0.6953125em;
   color: rgb(245, 246, 245);
+}
+.destiny-well_rested:before {
+  content: "\e91e";
+}
+.destiny-flashpoint:before {
+  content: "\e91f";
 }
 .destiny-crucible:before {
   content: "\e910";

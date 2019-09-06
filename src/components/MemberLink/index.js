@@ -162,7 +162,7 @@ class MemberLink extends React.Component {
 
       const lastCharacterPlayed = lastCharacterPlayedArr.length ? lastCharacterPlayedArr[0][0] : lastCharacterPlayedArr;
       const lastActivities = destinyUtils.lastPlayerActivity({ profile: { characters: this.state.all.data.characters, characterActivities: this.state.all.data.characterActivities } });
-console.log(lastActivities)
+
       return (
         <>
           <div className='member-link' onClick={this.activateOverlay}>
@@ -277,11 +277,11 @@ console.log(lastActivities)
                       <div className='sub-header'>
                         <div>{t('Ranks')}</div>
                       </div>
-                      <ul className='list ranks'>
+                      <div className='ranks'>
                         {[2772425241, 2626549951, 2000925172].map(hash => {
                           return <Ranks key={hash} mini data={{ membershipType: type, membershipId: id, characterId: lastCharacterPlayed, characters: this.state.all.data.characters.data, characterProgressions: this.state.all.data.characterProgressions.data }} hash={hash} />;
                         })}
-                      </ul>
+                      </div>
                     </div>
                   </>
                 ) : this.state.all.error ? (

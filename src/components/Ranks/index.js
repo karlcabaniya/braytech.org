@@ -30,7 +30,7 @@ class Mode extends React.Component {
       2772425241: {
         hash: 2772425241, // infamy
         activityHash: 3577607128,
-        icon: '/static/images/extracts/ui/modes/01a3-00007365.png',
+        iconClass: 'infamy',
         currentResetCount: this.calculateResets(2772425241).current,
         totalResetCount: this.calculateResets(2772425241).total,
         totalPoints: utils.totalInfamy()
@@ -38,7 +38,7 @@ class Mode extends React.Component {
       2626549951: {
         hash: 2626549951, // valor
         activityHash: 2274172949,
-        icon: '/static/images/extracts/ui/modes/037E-000013D9.PNG',
+        iconClass: 'valor',
         currentResetCount: this.calculateResets(3882308435).current,
         totalResetCount: this.calculateResets(3882308435).total,
         totalPoints: utils.totalValor()
@@ -47,7 +47,7 @@ class Mode extends React.Component {
         hash: 2000925172, // glory
         definition: manifest.DestinyProgressionDefinition[2000925172],
         activityHash: 2947109551,
-        icon: '/static/images/extracts/ui/modes/037E-000013EB.PNG',
+        iconClass: 'glory',
         totalPoints: utils.totalGlory(),
         gains: {
           '0': {
@@ -359,11 +359,11 @@ class Mode extends React.Component {
 
     return (
       <div className={cx('rank', { mini })}>
+        <div className='icon'>
+          <span className={`destiny-${this.data[hash].iconClass}`} />
+        </div>
         <div className='header'>
-          <div className='icon'>
-            <ObservedImage className='image' src={this.data[hash].icon} />
-          </div>
-          <div className='text'>{manifest.DestinyActivityDefinition[this.data[hash].activityHash].displayProperties.name}</div>
+          <div className='text'>{manifest.DestinyProgressionDefinition[hash].displayProperties.name}</div>
         </div>
         <div className='data'>
           {mini ? (
@@ -418,7 +418,6 @@ class Mode extends React.Component {
                 objectiveHash: hash
               }}
               hideCheck
-              chunky
             />
             <ProgressBar
               classNames='total'
@@ -431,7 +430,6 @@ class Mode extends React.Component {
                 objectiveHash: hash
               }}
               hideCheck
-              chunky
             />
           </div>
         ) : null}
