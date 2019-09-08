@@ -130,10 +130,6 @@ class Loading extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {};
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     pushNotification: value => {
@@ -144,7 +140,7 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
   ),
   withTranslation()

@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
-import * as serviceWorker from '../../serviceWorker';
 import { getLanguageInfo } from '../../utils/languageInfo';
 import * as ls from '../../utils/localStorage';
 import { BungieAuth } from '../../components/BungieAuth';
@@ -88,6 +87,10 @@ class Settings extends React.Component {
     if (this.mounted && swInstalled) this.setState({ swInstalled: true });
   }
 
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   swAvailable = process.env.NODE_ENV === 'production' && process.env.REACT_APP_BETA === 'true' && 'serviceWorker' in navigator;
 
   swInstalled = async () => {
@@ -98,10 +101,6 @@ class Settings extends React.Component {
     }
 
     return false;
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
   }
 
   render() {
