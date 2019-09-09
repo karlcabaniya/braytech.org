@@ -19,10 +19,12 @@ class Clan extends React.Component {
   }
 
   render() {
-    const { member, viewport, view = 'about' } = this.props;
+    const { member, viewport } = this.props;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
 
     if (group) {
+
+      let view = this.props.view || 'about';
 
       let views = {
         'about': {
@@ -42,6 +44,8 @@ class Clan extends React.Component {
           'component': viewport.width >= 1280 ? Admin : ViewportWidth
         }
       };
+
+      if (!views[view]) view = 'about';
 
       let ViewComponent = views[view].component;
 
