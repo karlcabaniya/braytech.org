@@ -6,10 +6,10 @@ lsState = lsState && lsState.selected ? lsState : { selected: 'light-mode' };
 function updateScrollbars(selected) {
   let root = document.documentElement;
   if (selected === 'dark-mode') {
-    root.style.setProperty('--scroolbar-track', '#202020');
+    root.style.setProperty('--scrollbar-track', '#202020');
     root.style.setProperty('--scrollbar-draggy', '#414141');
   } else {
-    root.style.setProperty('--scroolbar-track', '#a7a7a7');
+    root.style.setProperty('--scrollbar-track', '#a7a7a7');
     root.style.setProperty('--scrollbar-draggy', '#cacaca');
   }
 }

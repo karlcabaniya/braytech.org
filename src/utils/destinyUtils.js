@@ -615,7 +615,7 @@ export function lastPlayerActivity(member) {
     const definitionActivityPlaylist = manifest.DestinyActivityDefinition[lastActivity.currentPlaylistActivityHash];
 
     let lastActivityString = false;
-    if (definitionActivity) {
+    if (definitionActivity && !definitionActivity.redacted) {
       if (definitionActivity.activityTypeHash === 400075666) { // Menagerie
         lastActivityString = `${definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name}`;
       } else if (lastActivity.currentActivityModeHash === 547513715) { // Scored Nightfall Strikes
@@ -633,6 +633,8 @@ export function lastPlayerActivity(member) {
       } else {
         lastActivityString = definitionActivity.displayProperties.name;
       }
+    } else if (definitionActivity && definitionActivity.redacted) {
+      lastActivityString = `Classified`;
     } else {
       lastActivityString = false;
     }
