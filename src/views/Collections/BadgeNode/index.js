@@ -118,12 +118,12 @@ class BadgeNode extends React.Component {
       });
     });
 
-    let completed = false;
+    let completed = 0;
     let progress = [];
 
     classStates.forEach(obj => {
       if (obj.states.filter(collectible => !enums.enumerateCollectibleState(collectible).notAcquired).length === obj.states.filter(collectible => !enums.enumerateCollectibleState(collectible).invisible).length) {
-        completed = true;
+        completed++;
       }
 
       progress.push(
@@ -189,14 +189,14 @@ class BadgeNode extends React.Component {
         <div className='children'>
           <div className='icon'>
             <ObservedImage className='image badge' src={hires[definitionBadge.hash] ? `/static/images/extracts/badges/${hires[definitionBadge.hash]}` : `https://www.bungie.net${definitionBadge.displayProperties.icon}`} />
-            {completed ? <ObservedImage className='image badge-completed' src={`/static/images/extracts/ui/0560-00001498.png`} /> : null}
+            {completed > 2 ? <ObservedImage className='image badge-completed' src={`/static/images/extracts/ui/0560-00001498.png`} /> : null}
           </div>
           <div className='text'>
             <div className='name'>{definitionBadge.displayProperties.name}</div>
             <div className='description'>{definitionBadge.displayProperties.description}</div>
           </div>
           <div className='until'>
-            {completed ? <h4 className='completed'>{t('Badge completed')}</h4> : <h4>{t('Badge progress')}</h4>}
+            {completed > 0 ? <h4 className='completed'>{t('Badge completed')}</h4> : <h4>{t('Badge progress')}</h4>}
             {progress}
           </div>
         </div>
