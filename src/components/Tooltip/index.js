@@ -83,6 +83,7 @@ class Tooltip extends React.Component {
         mode: e.currentTarget.dataset.mode,
         playlist: e.currentTarget.dataset.playlist
       });
+      this.helper_windowMouseMove(e);
     }
   };
 
@@ -145,6 +146,10 @@ class Tooltip extends React.Component {
       mode: false,
       playlist: false
     });
+    this.mousePosition = {
+      x: 0,
+      y: 0
+    };
   };
 
   bind_TooltipItem = reset => {
