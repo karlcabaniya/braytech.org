@@ -177,7 +177,8 @@ class ChecklistFactoryHelpers {
           completed: i.completed,
           name: options.itemName(i),
           location: options.itemLocation(i),
-          map: i.map
+          map: i.map,
+          destinationHash: i.destinationHash
         })
       )
     } : (
