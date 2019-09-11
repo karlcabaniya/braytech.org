@@ -3,6 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import { Map, ImageOverlay, Marker, Popup } from 'react-leaflet';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
@@ -30,7 +33,52 @@ class Maps extends React.Component {
   }
 
   render() {
-    return null
+    const mapWidth = 2200;
+    const mapHeight = 2200;
+    
+    var viewWidth = 1920;
+	  var viewHeight = 1080;
+
+    var mapXOffset = (mapWidth-viewWidth)/2;
+    var mapYOffset = -(mapHeight - viewHeight) / 2;
+    
+    var bounds = [[0, 0], [mapHeight, mapWidth]];
+
+    const layer = {
+      width: 1845,
+      height: 1535,
+      x: -100,
+      y: -200,
+      opacity: 0.6
+    }
+
+    var layerScale = 1;
+    var layerX = layer.x ? layer.x : 0;
+    var layerY = layer.y ? -layer.y : 0;
+    var layerWidth = layer.width*layerScale;
+    var layerHeight = layer.height*layerScale;
+
+    var offsetX = (mapWidth-layerWidth)/2;
+    var offsetY = (mapHeight-layerHeight)/2;
+
+    offsetX += -offsetX+layerX+mapXOffset;
+    offsetY += offsetY+layerY+mapYOffset;
+
+    var layerBounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
+    
+    console.log(layerWidth, layerHeight, layerBounds)
+
+    return (
+      <div className='view' id='maps'>
+        <Map center={[mapHeight / 2, mapWidth / 2]} zoom='0' minZoom='-1' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false}>
+          <ImageOverlay
+            url="/static/images/extracts/maps/io_01a3-00000926.png"
+            bounds={layerBounds}
+            className='lol'
+          />
+        </Map>
+      </div>
+    )
   }
 }
 

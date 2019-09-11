@@ -5,7 +5,14 @@
   width: 100%;
 }
 
+#maps .leaflet-container {
+  height: calc(100vh - 232px);
+  background-color: transparent;
+}
 
+#maps .leaflet-container .lol {
+  
+}
 
 
 
