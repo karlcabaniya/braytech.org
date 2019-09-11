@@ -155,7 +155,7 @@ class Maps extends React.Component {
                 return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'layer-interaction-none': true })} />;
               })}
           </div>
-          <Map center={[mapHeight / 2, mapWidth / 2]} zoom='0' minZoom='-1' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false}>
+          <Map center={[mapHeight / 2, mapWidth / 2]} zoom='0' minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false}>
             {this.state.layers
               .filter(layer => layer.type !== 'background')
               .map(layer => {
