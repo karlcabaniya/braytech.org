@@ -268,8 +268,6 @@ class Records extends React.Component {
           };
         }
 
-        console.log(link, linkTo, selfLinkFrom, this.props.location.pathname)
-
         let rewards;
         if (definitionRecord.rewardItems && definitionRecord.rewardItems.length) {
           rewards = definitionRecord.rewardItems.map(r => {

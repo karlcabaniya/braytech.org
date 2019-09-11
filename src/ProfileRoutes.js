@@ -13,6 +13,7 @@ import Checklists from './views/Checklists';
 import ThisWeek from './views/ThisWeek';
 import SitRep from './views/SitRep';
 import Pursuits from './views/Pursuits';
+import Maps from './views/Maps';
 
 import Legend from './views/Experiments/Legend';
 
@@ -65,6 +66,7 @@ class ProfileRoutes extends React.Component {
           <Route path={`${match.url}/reports/:type?/:mode?/:offset?`} render={route => <PGCRs {...route} />} />
           <Route path={`${match.url}/now`} exact render={route => <SitRep />} />
           <Route path={`${match.url}/pursuits/:hash?`} render={route => <Pursuits {...route} />} />
+          <Route path={`${match.url}/maps/:hash?`} render={route => <Maps {...route} />} />
           <Route path={`${match.url}/`} render={route => <Redirect to={{ pathname: `${match.url}/now` }} />} />
         </Switch>
       </>

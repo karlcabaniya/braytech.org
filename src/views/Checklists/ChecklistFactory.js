@@ -14,7 +14,7 @@ class ChecklistFactory {
     this.m = new ChecklistFactoryHelpers(t, profile, characterId, hideCompletedItems);
   }
 
-  adventures() {
+  adventures(options = {}) {
     return this.m.checklist({
       name: this.t('Adventures'),
       icon: 'destiny-adventure',
@@ -23,33 +23,36 @@ class ChecklistFactory {
       characterBound: true,
       sortBy: ['completed', 'place', 'bubble', 'activity'],
       itemName: i => i.activity,
-      itemLocation: i => `${i.bubble}, ${i.place}`
+      itemLocation: i => `${i.bubble}, ${i.place}`,
+      ...options
     });
   }
 
-  regionChests() {
+  regionChests(options = {}) {
     return this.m.checklist({
       name: this.t('Region Chests'),
       icon: 'destiny-region_chests',
       progressDescription: this.t('Region chests opened'),
       items: this.m.checklistItems(1697465175, true),
       sortBy: ['completed', 'place', 'bubble'],
-      characterBound: true
+      characterBound: true,
+      ...options
     });
   }
 
-  lostSectors() {
+  lostSectors(options = {}) {
     return this.m.checklist({
       name: this.t('Lost Sectors'),
       icon: 'destiny-lost_sectors',
       progressDescription: this.t('Lost Sectors discovered'),
       characterBound: true,
       items: this.m.checklistItems(3142056444, true),
-      sortBy: ['completed', 'place', 'bubble']
+      sortBy: ['completed', 'place', 'bubble'],
+      ...options
     });
   }
 
-  ahamkaraBones(requested = [], headless = false) {
+  ahamkaraBones(options = {}) {
     return this.m.checklist({
       name: this.t('Ahamkara Bones'),
       icon: 'destiny-ahamkara_bones',
@@ -58,34 +61,33 @@ class ChecklistFactory {
       itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`,
       sortBy: ['itemNumber'],
       items: this.m.checklistItems(1297424116),
-      requested,
-      headless
+      ...options
     });
   }
 
-  corruptedEggs(requested = [], headless = false) {
+  corruptedEggs(options = {}) {
     return this.m.numberedChecklist('Egg', {
       name: this.t('Corrupted Eggs'),
       icon: 'destiny-corrupted_eggs',
       progressDescription: this.t('Eggs destroyed'),
       itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`,
       items: this.m.checklistItems(2609997025, false),
-      requested,
-      headless
+      ...options
     });
   }
 
-  catStatues() {
+  catStatues(options = {}) {
     return this.m.numberedChecklist('Feline friend', {
       name: this.t('Cat Statues'),
       icon: 'destiny-cat_statues',
       progressDescription: this.t('Feline friends satisfied'),
       items: this.m.checklistItems(2726513366),
-      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`
+      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`,
+      ...options
     });
   }
 
-  sleeperNodes() {
+  sleeperNodes(options = {}) {
     return this.m.checklist({
       name: this.t('Sleeper Nodes'),
       icon: 'destiny-sleeper_nodes',
@@ -93,31 +95,34 @@ class ChecklistFactory {
       progressDescription: this.t('Sleeper nodes hacked'),
       itemName: i => i.inventoryItem.replace('CB.NAV/RUN.()', ''),
       itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`,
-      sortBy: ['inventoryItem']
+      sortBy: ['inventoryItem'],
+      ...options
     });
   }
 
-  ghostScans() {
+  ghostScans(options = {}) {
     return this.m.numberedChecklist('Scan', {
       name: this.t('Ghost Scans'),
       icon: 'destiny-ghost',
       items: this.m.checklistItems(2360931290),
       progressDescription: this.t('Ghost scans performed'),
-      itemLocation: i => `${i.bubble}, ${i.place}`
+      itemLocation: i => `${i.bubble}, ${i.place}`,
+      ...options
     });
   }
 
-  latentMemories() {
+  latentMemories(options = {}) {
     return this.m.numberedChecklist('Memory', {
       name: this.t('Lost Memory Fragments'),
       icon: 'destiny-lost_memory_fragments',
       items: this.m.checklistItems(2955980198),
       progressDescription: this.t('Memories destroyed'),
-      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`
+      itemLocation: i => i.bubble && `${i.bubble}, ${i.place}`,
+      ...options
     });
   }
 
-  caydesJournals() {
+  caydesJournals(options = {}) {
     const caydesJournalIds = [78905203, 1394016600, 1399126202, 4195138678];
 
     let items = this.m.checklistItems(2448912219).filter(i => caydesJournalIds.includes(i.hash));
@@ -140,30 +145,33 @@ class ChecklistFactory {
     };
   }
 
-  ghostStories() {
+  ghostStories(options = {}) {
     return this.m.recordChecklist({
       name: this.t('Lore: Ghost Stories'),
       image: '/static/images/extracts/ui/checklists/037e-00004869.png',
       items: this.m.presentationItems(1420597821),
-      progressDescription: this.t('Stories found')
+      progressDescription: this.t('Stories found'),
+      ...options
     });
   }
 
-  awokenOfTheReef() {
+  awokenOfTheReef(options = {}) {
     return this.m.recordChecklist({
       name: this.t('Lore: Awoken of the Reef'),
       image: '/static/images/extracts/ui/checklists/037e-00004874.png',
       items: this.m.presentationItems(3305936921),
-      progressDescription: this.t('Crystals resolved')
+      progressDescription: this.t('Crystals resolved'),
+      ...options
     });
   }
 
-  forsakenPrince() {
+  forsakenPrince(options = {}) {
     return this.m.recordChecklist({
       name: this.t('Lore: Forsaken Prince'),
       image: '/static/images/extracts/ui/checklists/037e-00004886.png',
       items: this.m.presentationItems(655926402),
-      progressDescription: this.t('Data caches decrypted')
+      progressDescription: this.t('Data caches decrypted'),
+      ...options
     });
   }
 }

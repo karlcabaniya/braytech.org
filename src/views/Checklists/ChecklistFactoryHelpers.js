@@ -92,6 +92,10 @@ class ChecklistFactoryHelpers {
       lore: lore && lore.displayProperties.name,
       hash: item.hash,
       destinationHash,
+      map: mapping.node ? {
+        x: mapping.node.x,
+        y: mapping.node.y
+      } : {},
       item,
       completed,
       ...itemOverrides[item.hash]
@@ -165,7 +169,18 @@ class ChecklistFactoryHelpers {
     const requested = options.requested;
     const visible = this.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.hash) > -1) : items;
 
-    const checklist = (
+    const checklist = options.data ? {
+      totalItems: items.length,
+      completedItems: items.filter(i => i.completed).length,
+      items: visible.map(i => ({
+          itemHash: options.itemHash(i),
+          completed: i.completed,
+          name: options.itemName(i),
+          location: options.itemLocation(i),
+          map: i.map
+        })
+      )
+    } : (
       <Checklist key={options.name} name={options.name} characterBound={options.characterBound} headless={options.headless} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
         {visible.map(i => (
           <ChecklistItem key={i.hash} itemHash={options.itemHash(i)} completed={i.completed} name={options.itemName(i)} location={options.itemLocation(i)} mapPath={options.mapPath(i)} />

@@ -733,7 +733,7 @@ class ThisWeek extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-
+    console.log(this.checklistFactory.corruptedEggs({ requested: [1101252162, 1101252163, 1101252168, 1101252169, 1101252171, 1101252172, 1101252173, 1101252174, 1101252175], data: true }))
     this.props.rebindTooltips();
   }
 
@@ -1024,7 +1024,7 @@ class ThisWeek extends React.Component {
         </ul>
         <h4>{t('Checklist items')}</h4>
         {this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists.map(list => {
-          return this.checklistFactory[list.name](list.items, true).checklist;
+          return this.checklistFactory[list.name]({ requested: list.items, headless: true }).checklist;
         })}
       </div>
     );
@@ -1045,7 +1045,7 @@ class ThisWeek extends React.Component {
           <>
             <h4>{t('Checklist items')}</h4>
             {this.consolidatedInfo.curse[cycleInfo.week.curse].checklists.map(list => {
-              return this.checklistFactory[list.name](list.items, true).checklist;
+              return this.checklistFactory[list.name]({ requested: list.items, headless: true }).checklist;
             })}
           </>
         ) : null}
@@ -1065,7 +1065,7 @@ class ThisWeek extends React.Component {
           </ul>
           <h4>{t('Checklist items')}</h4>
           {this.consolidatedInfo.shatteredThrone.checklists.map(list => {
-            return this.checklistFactory[list.name](list.items, true).checklist;
+            return this.checklistFactory[list.name]({ requested: list.items, headless: true }).checklist;
           })}
         </div>
       ) : (
