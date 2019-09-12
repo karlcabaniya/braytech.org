@@ -44,6 +44,7 @@ import Index from './views/Index';
 import CharacterSelect from './views/CharacterSelect';
 import Inspect from './views/Inspect';
 import Read from './views/Read';
+import Maps from './views/Maps';
 import Settings from './views/Settings';
 import Credits from './views/Credits';
 import Experiments from './views/Experiments';
@@ -250,11 +251,11 @@ class App extends React.Component {
                           <RedirectRoute path='/reports' />
                           <RedirectRoute path='/now' exact />
                           <RedirectRoute path='/pursuits' />
-                          <RedirectRoute path='/maps' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />
                           <Route path='/read/:kind?/:hash?' exact component={Read} />
+                          <Route path='/maps/:id?' render={route => <Maps {...route} />} />
                           <Route path='/settings' exact render={route => <Settings {...route} availableLanguages={this.availableLanguages} />} />
                           <Route path='/suggestions/:id?' render={route => <Suggestions {...route} />} />
                           <Route path='/faq' exact component={FAQ} />

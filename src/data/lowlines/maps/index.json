@@ -46,7 +46,7 @@
     "map": {
       "width": 3200,
       "height": 2400,
-      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#8b925d" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#736767" }, { "id": "map", "x": -700, "y": -750, "width": 3331, "height": 2605, "image": "web/02af-00000DD8_1.png", "opacity": 0.6 }, { "id": "template", "x": 0, "y": 0, "width": 1920, "height": 1080, "image": "template.png" }],
+      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#8b925d" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#736767" }, { "id": "map", "x": -700, "y": -750, "width": 3331, "height": 2605, "image": "web/02af-00000DD8_1.png", "opacity": 0.6 }],
       "bubbles": [
         { "name": "The Lighthouse", "id": "lighthouse", "type": "region", "nodes": [{ "type": "fast-travel", "x": 57.58, "y": 63.36 }] },
         { "name": "Pariah's Refuge", "id": "pariahs-refuge", "type": "lost-sector", "nodes": [] },
@@ -75,7 +75,7 @@
     "map": {
       "width": 2800,
       "height": 2200,
-      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#e1705c" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#2e81ce" }, { "id": "map", "x": -300, "y": -1300, "width": 2523, "height": 2959, "image": "web/02AF-00000F89_1.png", "opacity": 0.6 }, { "id": "template", "x": 0, "y": 0, "width": 1920, "height": 1080, "image": "template.png" }],
+      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#e1705c" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#2e81ce" }, { "id": "map", "x": -300, "y": -1300, "width": 2523, "height": 2959, "image": "web/02AF-00000F89_1.png", "opacity": 0.6 }],
       "bubbles": [
         { "name": "Glacial Drift", "id": "glacial-drift", "type": "region", "nodes": [{ "type": "title", "x": 74, "y": -308 }, { "type": "fast-travel", "x": 130, "y": -387 }] },
         { "name": "BrayTech Futurescape", "id": "braytech-futurescape", "type": "region", "nodes": [{ "type": "title", "x": 64, "y": 154 }, { "type": "fast-travel", "x": 70, "y": 59 }] },
@@ -96,7 +96,7 @@
     "map": {
       "width": 2200,
       "height": 2200,
-      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#538e9f" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#71c44e" }, { "id": "map", "x": -100, "y": -200, "width": 1845, "height": 1535, "image": "web/01a3-0000039F_1.png", "opacity": 0.6 }, { "id": "template", "x": 0, "y": 0, "width": 1920, "height": 1080, "image": "template.png" }],
+      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#538e9f" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#71c44e" }, { "id": "map", "x": -100, "y": -200, "width": 1845, "height": 1535, "image": "/static/images/extracts/maps/map_io.png", "opacity": 0.6 }],
       "bubbles": [
         { "name": "The Rupture", "id": "rupture", "type": "region", "nodes": [{ "type": "title", "x": -277, "y": -342 }, { "type": "fast-travel", "x": -532, "y": -104 }] },
         { "name": "Lost Oasis", "id": "lost-oasis", "type": "region", "nodes": [{ "type": "title", "x": -155, "y": 215 }, { "type": "fast-travel", "x": -308, "y": 198 }] },
@@ -119,7 +119,7 @@
     "map": {
       "width": 2800,
       "height": 1800,
-      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#2ea792" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#3a9e6c" }, { "id": "map", "x": -280, "y": -285, "width": 2482, "height": 1756, "image": "web/01a3-000003A3_1.png", "opacity": 0.6 }, { "id": "template", "x": 0, "y": 0, "width": 1920, "height": 1080, "image": "template.png" }],
+      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#2ea792" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#3a9e6c" }, { "id": "map", "x": -280, "y": -285, "width": 2482, "height": 1756, "image": "web/01a3-000003A3_1.png", "opacity": 0.6 }],
       "bubbles": [
         { "name": "Siren's Watch", "id": "sirens-watch", "type": "region", "nodes": [{ "type": "title", "x": -282, "y": 91 }, { "type": "fast-travel", "x": -227.08, "y": 267.4 }] },
         { "name": "The Rig", "id": "rig", "type": "region", "nodes": [{ "type": "title", "x": 112, "y": -4 }, { "type": "fast-travel", "x": -10.6, "y": 72.04 }] },
@@ -139,7 +139,7 @@
     "map": {
       "width": 2400,
       "height": 2400,
-      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#6d3c78" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#693435" }, { "id": "map", "x": -100, "y": -500, "width": 2357, "height": 2288, "image": "director/forsaken/web/01e3-000012a3.png", "opacity": 0.7 }, { "id": "template", "x": 0, "y": 0, "width": 1920, "height": 1080, "image": "template.png" }],
+      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#6d3c78" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#693435" }, { "id": "map", "x": -100, "y": -500, "width": 2357, "height": 2288, "image": "director/forsaken/web/01e3-000012a3.png", "opacity": 0.7 }],
       "bubbles": [
         { "name": "Jetsam of Saturn", "id": "jetsam-of-saturn", "type": "region", "nodes": [{ "type": "title", "x": -262, "y": -282 }] },
         { "name": "Four-Horn Gulch", "id": "four-horn-gulch", "type": "region", "nodes": [{ "type": "title", "x": 644, "y": -121 }] },
@@ -363,7 +363,7 @@
     "map": {
       "width": 3800,
       "height": 2200,
-      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#35a6ce" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#42d777" }, { "id": "map", "x": -800, "y": -600, "width": 3500, "height": 2333, "image": "web/01a3-000003A6_1.png", "opacity": 0.6 }, { "id": "template", "x": 0, "y": 0, "width": 1920, "height": 1080, "image": "template.png" }],
+      "layers": [{ "id": "background-upper", "type": "background", "x": -120, "y": -179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_upper.png", "color": "#35a6ce" }, { "id": "background-lower", "type": "background", "x": -120, "y": 179, "width": 2160, "height": 1080, "image": "/static/images/extracts/maps/background_lower.png", "color": "#42d777" }, { "id": "map", "x": -800, "y": -600, "width": 3500, "height": 2333, "image": "web/01a3-000003A6_1.png", "opacity": 0.6 }],
       "bubbles": [{ "name": "Courtyard", "id": "courtyard", "type": "region", "nodes": [{ "type": "title", "x": -88, "y": -25 }, { "type": "fast-travel", "x": -64, "y": 56 }] }, { "name": "Bazaar", "id": "bazaar", "type": "region", "nodes": [{ "type": "title", "x": -813, "y": 94 }] }, { "name": "Hangar", "id": "hangar", "type": "region", "nodes": [{ "type": "title", "x": 727, "y": 56 }] }, { "name": "The Last City", "id": "the-last-city", "type": "suburb", "nodes": [] }, { "name": "Tower Watch", "id": "tower-watch", "type": "suburb", "nodes": [] }, { "name": "Exodus", "id": "exodus", "type": "suburb", "nodes": [] }, { "name": "Peregrine District", "id": "peregrine-district", "type": "suburb", "nodes": [] }, { "name": "Annex", "id": "annex", "type": "suburb", "nodes": [] }]
     }
   }

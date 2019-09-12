@@ -46,14 +46,19 @@ class ChecklistFactoryHelpers {
   }
 
   checklistItems(checklistId, isCharacterBound) {
-    const progressionSource = isCharacterBound ? this.profile.characterProgressions.data[this.characterId] : this.profile.profileProgression.data;
-    const progression = progressionSource.checklists[checklistId];
+    const progressionSource = this.profile ? isCharacterBound ? this.profile.characterProgressions.data[this.characterId] : this.profile.profileProgression.data : false;
+    const progression = progressionSource && progressionSource.checklists[checklistId];
     const checklist = manifest.DestinyChecklistDefinition[checklistId];
 
-    return Object.entries(progression).map(([id, completed]) => {
-      const item = find(checklist.entries, { hash: parseInt(id) });
+    // return Object.entries(progression).map(([id, completed]) => {
+    //   const item = find(checklist.entries, { hash: parseInt(id) });
 
-      return this.checklistItem(item, completed);
+    //   return this.checklistItem(item, completed);
+    // });
+    return checklist.entries.map(entry => {
+      const completed = progression[entry.hash];
+
+      return this.checklistItem(entry, completed);
     });
   }
 

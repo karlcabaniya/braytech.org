@@ -1,11 +1,11 @@
 #maps {
   padding: 0;
   display: grid;
-  margin: 0 auto;
+  margin: -40px auto 0;
   width: 100%;
 }
 
 #maps .map {
-  height: calc(100vh - 232px);
+  height: 100vh;
 }
 

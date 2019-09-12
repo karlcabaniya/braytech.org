@@ -23,22 +23,30 @@ class Maps extends React.Component {
 
     this.state = {
       layers: []
-    };
-
-    const { t, member } = this.props;
-
-    this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, false);
+    };    
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
 
+    const { t, member } = this.props;
+
+    this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, false);
+
     this.process();
+  }
+
+  componentDidUpdate(pP) {
+    const { t, member } = this.props;
+
+    if (pP.member.data.updated !== member.data.updated) {
+      this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, false);
+    }
   }
 
   process = async () => {
 
-    let layers = maps['earth'].map.layers;
+    let layers = maps['io'].map.layers;
 
     layers = await Promise.all(
       layers.map(async layer => {
@@ -94,8 +102,8 @@ class Maps extends React.Component {
   };
 
   render() {
-    const mapWidth = maps['earth'].map.width;
-    const mapHeight = maps['earth'].map.height;
+    const mapWidth = maps['io'].map.width;
+    const mapHeight = maps['io'].map.height;
 
     const viewWidth = 1920;
     const viewHeight = 1080;
@@ -136,25 +144,27 @@ class Maps extends React.Component {
 
               return <ImageOverlay key={layer.id} url={layer.image} bounds={bounds} />;
             })}
-          {maps['earth'].map.bubbles.map(bubble => bubble.nodes.filter(node => node.type === 'title').map((node, i) => {
+          {maps['io'].map.bubbles.map(bubble => bubble.nodes.filter(node => node.type === 'title').map((node, i) => {
             const markerOffsetX = mapXOffset+viewWidth/2;
             const markerOffsetY = mapYOffset+mapHeight+-viewHeight/2;
 
             const offsetX = markerOffsetX+(node.x ? node.x : 0);
             const offsetY = markerOffsetY + (node.y ? node.y : 0);
             
-            const icon = marker.textMarker(bubble.type, bubble.name);
+            const icon = marker.text([bubble.type], bubble.name);
             
             return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />
           }))}
-          {this.checklistFactory.ghostScans({ data: true }).checklist.items.filter(i => i.destinationHash === maps['earth'].destination.hash).map(node => {
+          {this.checklistFactory && this.checklistFactory.ghostScans({ data: true }).checklist.items.filter(i => i.destinationHash === maps['io'].destination.hash).map(node => {
             const markerOffsetX = mapXOffset+viewWidth/2;
             const markerOffsetY = mapYOffset+mapHeight+-viewHeight/2;
 
             const offsetX = markerOffsetX+(node.map.x ? node.map.x : 0);
             const offsetY = markerOffsetY+(node.map.y ? node.map.y : 0);
+
+            const icon = marker.icon([node.completed ? 'completed' : ''], 'destiny-ghost');
             
-            return <Marker key={node.itemHash} position={[offsetY, offsetX]} icon={marker.ghostScan} />
+            return <Marker key={node.itemHash} position={[offsetY, offsetX]} icon={icon} />
           })}
         </Map>
       </div>
