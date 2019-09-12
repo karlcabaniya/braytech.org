@@ -54,11 +54,13 @@ class Maps extends React.Component {
 
     const checklists = [
       {
+        type: 'region-chests',
         name: t('Region Chests'),
         icon: 'destiny-region_chests',
         items: factory.regionChests({ data: true }).checklist.items.filter(i => i.destinationHash === maps[this.state.destination].destination.hash)
       },
       {
+        type: 'lost-sectors',
         name: t('Lost Sectors'),
         icon: 'destiny-lost_sectors',
         items: factory.lostSectors({ data: true }).checklist.items.filter(i => i.destinationHash === maps[this.state.destination].destination.hash)
@@ -68,6 +70,7 @@ class Maps extends React.Component {
       //   items: factory.adventures({ data: true }).checklist.items.filter(i => i.destinationHash === maps[this.state.destination].destination.hash)
       // },
       {
+        type: 'ghost-scans',
         name: t('Ghost Scans'),
         icon: 'destiny-ghost',
         items: factory.ghostScans({ data: true }).checklist.items.filter(i => i.destinationHash === maps[this.state.destination].destination.hash)
@@ -202,8 +205,8 @@ class Maps extends React.Component {
               const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
               const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
 
-              // const icon = marker.icon([node.completed ? 'completed' : ''], checklist.icon);
-              const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
+              const icon = marker.icon([node.completed ? 'completed' : ''], checklist.icon, checklist.type === 'lost-sectors' && node.name);
+              // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
               
               return <Marker key={node.itemHash} position={[offsetY, offsetX]} icon={icon} />
             })

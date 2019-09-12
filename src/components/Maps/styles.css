@@ -47,7 +47,7 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
-.map .leaflet-container .text-marker .wrapper .value {
+.map .leaflet-container .text-marker .wrapper .name {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -55,7 +55,7 @@
   white-space: nowrap;
 }
 
-.map .leaflet-container .text-marker.region .wrapper .value {
+.map .leaflet-container .text-marker.region .wrapper .name {
   font-family: 'Merriweather', serif;
   font-size: 16px;
   letter-spacing: 3px;
@@ -63,7 +63,7 @@
   opacity: 0.9;
 }
 
-.map .leaflet-container .text-marker.suburb .wrapper .value {
+.map .leaflet-container .text-marker.suburb .wrapper .name {
   font-family: 'Merriweather', serif;
   font-size: 14px;
   letter-spacing: 1px;
@@ -99,10 +99,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.map .leaflet-container .icon-marker .wrapper .name {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateX(16px) translateY(-50%);
+  white-space: nowrap;
+  font-family: 'Merriweather', serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
 .map .leaflet-container .icon-marker {
   opacity: 0.9;
 }
 
 .map .leaflet-container .icon-marker.completed {
   opacity: 0.2;
+}
+
+.map .leaflet-container .icon-marker:hover {
+  opacity: 0.9;
 }

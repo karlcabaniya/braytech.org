@@ -929,7 +929,7 @@
           "y": -1300,
           "width": 2523,
           "height": 2959,
-          "image": "web/02AF-00000F89_1.png",
+          "image": "/static/images/extracts/maps/map_mars.png",
           "opacity": 0.6
         }
       ],
@@ -2328,7 +2328,7 @@
           "y": -600,
           "width": 2829,
           "height": 2421,
-          "image": "director/forsaken/web/01e3-0000129d.png",
+          "image": "/static/images/extracts/maps/map_dreaming-city.png",
           "opacity": 0.9
         },
         {
@@ -3116,7 +3116,7 @@
           "y": -600,
           "width": 3500,
           "height": 2333,
-          "image": "web/01a3-000003A6_1.png",
+          "image": "/static/images/extracts/maps/map_tower.png",
           "opacity": 0.6
         }
       ],
