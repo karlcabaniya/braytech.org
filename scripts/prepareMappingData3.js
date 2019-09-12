@@ -2,10 +2,10 @@ const fs = require('fs');
 const process = require('process');
 const fetch = require('node-fetch');
 
-const outputPath = 'src/data/lowlines/dump/index.json';
+const outputPath = 'src/data/lowlines/maps/index.json';
 
 async function work(input) {
-  let output = [];
+  const output = {};
 
   await Promise.all(input.data.map(async d => {
     const destination = await fetch('https://lowlidev.com.au/destiny/api/v2/map/data/' + d.id).then(res => res.json());
@@ -44,7 +44,7 @@ async function work(input) {
       }))
     };
 
-    output = output.concat(destination.data.map.locations);
+    output[d.id] = temp;
   }));
 
   fs.writeFileSync(outputPath, JSON.stringify(output));

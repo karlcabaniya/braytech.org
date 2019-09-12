@@ -6,14 +6,14 @@ const fs = require('fs');
 const process = require('process');
 const fetch = require('node-fetch');
 
-const outputPath = 'src/data/lowlinesMappings/index.json';
+const outputPath = 'src/data/lowlines/checklists/index.json';
 
 // if (process.argv.length !== 3) {
 //   console.log('Syntax: extractLowlinesData.js <lowlines.json>');
 //   process.exit(1);
 // }
 
-// const input = JSON.parse(fs.readFileSync(process.argv[2]));
+const assisted = JSON.parse(fs.readFileSync('src/data/lowlines/dump/index.json')).filter(a => a);
 
 function work(input) {
   const output = {
@@ -25,6 +25,11 @@ function work(input) {
     if (!indices || indices.length === 0) return;
   
     const item = input.data.nodes[indices[0]];
+
+    let ass = assisted.find(a => a.nodes.find(n => n.checklistHash === parseInt(id, 10))) || {};
+    if (ass.nodes) ass = ass.nodes.find(n => n.checklistHash === parseInt(id, 10)) || {}
+
+    // if (id === '89704164') console.log(item.node.x, ass.x)
   
     output.checklists[id] = {
       destinationId: item.destinationId,
@@ -32,7 +37,10 @@ function work(input) {
       bubbleId: item.bubbleId,
       bubbleHash: item.bubbleHash,
       recordHash: parseInt(item.node.recordHash, 10),
-      node: item.node
+      node: {
+        ...item.node,
+        ...ass
+      }
     };
   });
   
@@ -40,13 +48,19 @@ function work(input) {
     if (!indices || indices.length === 0) return;
   
     const item = input.data.nodes[indices[0]];
+
+    let ass = assisted.find(a => a.nodes.find(n => n.checklistHash === parseInt(id, 10))) || {};
+    if (ass.nodes) ass = ass.nodes.find(n => n.checklistHash === parseInt(id, 10)) || {}
   
     output.records[id] = {
       destinationId: item.destinationId,
       destinationHash: item.destinationHash,
       bubbleId: item.bubbleId,
       bubbleHash: item.bubbleHash,
-      node: item.node
+      node: {
+        ...item.node,
+        ...ass
+      }
     };
   });
   

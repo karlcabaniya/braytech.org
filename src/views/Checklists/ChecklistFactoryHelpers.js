@@ -2,7 +2,7 @@ import React from 'react';
 import { find, sortBy } from 'lodash';
 
 import manifest from '../../utils/manifest';
-import lowlinesMappings from '../../data/lowlinesMappings';
+import lowlines from '../../data/lowlines/checklists';
 import Checklist from './Checklist';
 import ChecklistItem from './ChecklistItem';
 
@@ -37,6 +37,12 @@ const itemOverrides = {
   }
 };
 
+const itemCorrections = [
+  1116662180, // Ghost Scan 74 / The Reservoir, Earth / UNAVAILABLE
+  3856710545, // Ghost Scan 75 / The Reservoir, Earth / UNAVAILABLE
+  508025838,  // Ghost Scan 76 / The Reservoir, Earth / UNAVAILABLE
+];
+
 class ChecklistFactoryHelpers {
   constructor(t, profile, characterId, hideCompletedItems) {
     this.t = t;
@@ -55,7 +61,7 @@ class ChecklistFactoryHelpers {
 
     //   return this.checklistItem(item, completed);
     // });
-    return checklist.entries.map(entry => {
+    return checklist.entries.filter(entry => itemCorrections.indexOf(entry.hash) < 0).map(entry => {
       const completed = progression[entry.hash];
 
       return this.checklistItem(entry, completed);
@@ -63,7 +69,7 @@ class ChecklistFactoryHelpers {
   }
 
   checklistItem(item, completed) {
-    const mapping = lowlinesMappings.checklists[item.hash] || {};
+    const mapping = lowlines.checklists[item.hash] || {};
 
     const destinationHash = item.destinationHash || mapping.destinationHash;
     const bubbleHash = item.bubbleHash || mapping.bubbleHash;
@@ -85,7 +91,7 @@ class ChecklistFactoryHelpers {
     const lore = record && manifest.DestinyLoreDefinition[record.loreHash];
 
     // If we don't have a bubble, see if we can infer one from the bubble ID
-    let bubbleName = (bubble && bubble.displayProperties.name) || (mapping.bubbleId && manualBubbleNames[mapping.bubbleId]) || false;
+    const bubbleName = (bubble && bubble.displayProperties.name) || (mapping.bubbleId && manualBubbleNames[mapping.bubbleId]) || false;
 
     return {
       destination: destination && destination.displayProperties.name,
@@ -119,7 +125,7 @@ class ChecklistFactoryHelpers {
         if (!profileRecord) return false;
         const completed = profileRecord.objectives[0].complete;
 
-        const mapping = lowlinesMappings.records[hash];
+        const mapping = lowlines.records[hash];
         const destinationHash = mapping && mapping.destinationHash;
         const destination = destinationHash && manifest.DestinyDestinationDefinition[destinationHash];
         const place = destination && manifest.DestinyPlaceDefinition[destination.placeHash];
