@@ -52,6 +52,7 @@
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+  white-space: nowrap;
 }
 
 .map .leaflet-container .text-marker.region .wrapper .value {
@@ -59,7 +60,6 @@
   font-size: 16px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  white-space: nowrap;
   opacity: 0.9;
 }
 
@@ -68,7 +68,6 @@
   font-size: 14px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  white-space: nowrap;
   opacity: 0.6;
 }
 

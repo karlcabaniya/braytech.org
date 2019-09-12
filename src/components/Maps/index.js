@@ -24,7 +24,7 @@ class Maps extends React.Component {
     const { t, member } = this.props;
 
     this.state = {
-      destination: 'new-pacific-arcology',
+      destination: this.props.id || 'new-pacific-arcology',
       layers: [],
       checklists: []
     };    
@@ -203,7 +203,7 @@ class Maps extends React.Component {
               const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
 
               // const icon = marker.icon([node.completed ? 'completed' : ''], checklist.icon);
-              const icon = marker.text(['debug'], node.name);
+              const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
               
               return <Marker key={node.itemHash} position={[offsetY, offsetX]} icon={icon} />
             })
