@@ -2,7 +2,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { flatten } from 'lodash';
 import cx from 'classnames';
 
 import L from 'leaflet';
@@ -26,6 +25,7 @@ class Maps extends React.Component {
 
     this.state = {
       destination: this.props.id || 'new-pacific-arcology',
+      zoom: 0,
       layers: [],
       checklists: []
     };
@@ -75,6 +75,18 @@ class Maps extends React.Component {
         name: t('Ghost Scans'),
         icon: 'destiny-ghost',
         items: factory.ghostScans({ data: true }).checklist.items.filter(i => i.destinationHash === maps[this.state.destination].destination.hash)
+      },
+      {
+        type: 'sleeper-nodes',
+        name: t('Sleeper Nodes'),
+        icon: 'destiny-sleeper_nodes',
+        items: factory.sleeperNodes({ data: true }).checklist.items.filter(i => i.destinationHash === maps[this.state.destination].destination.hash)
+      },
+      {
+        type: 'lost-memory-fragments',
+        name: t('Lost Memory Fragments'),
+        icon: 'destiny-lost_memory_fragments',
+        items: factory.latentMemories({ data: true }).checklist.items.filter(i => i.destinationHash === maps[this.state.destination].destination.hash)
       }
     ];
 
@@ -129,7 +141,7 @@ class Maps extends React.Component {
     );
 
     // layers = flatten(layers);
-    
+
     // console.log(layers);
 
     layers = await Promise.all(
@@ -161,83 +173,81 @@ class Maps extends React.Component {
         }
       })
     );
-    
+
     console.log(layers);
 
     this.setState({ layers });
   };
 
+  setZoom = viewport => {
+    this.setState({ zoom: viewport.zoom });
+  };
+
   render() {
     const destination = this.state.destination;
 
-    const mapWidth = maps[destination].map.width;
-    const mapHeight = maps[destination].map.height;
-
+    const map = maps[destination].map;
+    
     const viewWidth = 1920;
     const viewHeight = 1080;
 
-    const mapXOffset = (mapWidth - viewWidth) / 2;
-    const mapYOffset = -(mapHeight - viewHeight) / 2;
+    const mapXOffset = (map.width - viewWidth) / 2;
+    const mapYOffset = -(map.height - viewHeight) / 2;
 
-    const bounds = [[0, 0], [mapHeight, mapWidth]];
+    const bounds = [[0, 0], [map.height, map.width]];
+
+    const centerYOffset = -(map.center && map.center.y) || 0;
+    const centerXOffset = (map.center && map.center.x) || 0;
+
+    const center = [(map.height / 2) + centerYOffset , (map.width / 2) + centerXOffset];
+
+    // console.log(map.width, map.height, mapXOffset, mapYOffset)
 
     // console.log(maps);
 
     return (
-      <div className='map'>
+      <div className={cx('map-omega', `zoom-${this.state.zoom}`)}>
         <div className='leaflet-pane leaflet-background-pane'>
           {this.state.layers
             .filter(layer => layer.type === 'background')
             .map(layer => {
-              return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'layer-interaction-none': true })} />;
+              return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
             })}
         </div>
-        <Map center={[mapHeight / 2, mapWidth / 2]} zoom='-2' minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false}>
+        <Map center={center} zoom={this.state.zoom} minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} onViewportChanged={this.setZoom} zoomControl={false}>
           {this.state.layers
             .filter(layer => layer.type !== 'background')
-            .map(layer => {
-              if (layer.nodes) {
-                return layer.nodes.map(node => {
-                  
-                  const layerX = layer.x ? layer.x : 0;
-                  const layerY = layer.y ? -layer.y : 0;
-                  const layerWidth = layer.width * 1;
-                  const layerHeight = layer.height * 1;
-    
-                  let offsetX = (mapWidth - layerWidth) / 2;
-                  let offsetY = (mapHeight - layerHeight) / 2;
-    
-                  offsetX += -offsetX + layerX + mapXOffset;
-                  offsetY += offsetY + layerY + mapYOffset;
-                  
-                  var nodeOffsetY = offsetY+(layerHeight-node.height)/2+node.y;
-                  var nodeOffsetX = offsetX+(layerWidth-node.width)/2+node.x;
-    
-                  const nodeBounds = [[nodeOffsetY, nodeOffsetX], [node.height + nodeOffsetY, node.width + nodeOffsetX]];
-
-                  console.log(nodeBounds)
-
-                  const bounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
-                  
-                  return <ImageOverlay key={node.id} url={node.image} bounds={nodeBounds} />
-                });
-              } else {
-                
-              
+            .map(layer => {              
               const layerX = layer.x ? layer.x : 0;
               const layerY = layer.y ? -layer.y : 0;
               const layerWidth = layer.width * 1;
               const layerHeight = layer.height * 1;
 
-              let offsetX = (mapWidth - layerWidth) / 2;
-              let offsetY = (mapHeight - layerHeight) / 2;
+              let offsetX = (map.width - layerWidth) / 2;
+              let offsetY = (map.height - layerHeight) / 2;
 
               offsetX += -offsetX + layerX + mapXOffset;
               offsetY += offsetY + layerY + mapYOffset;
 
-                const bounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
-                
-                return <ImageOverlay key={layer.id} url={layer.image} bounds={bounds} />;
+              const bounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
+
+              if (layer.nodes) {
+                return layer.nodes.map(node => {
+                  const nodeX = (node.x ? node.x : 0);
+                  const nodeY = (node.y ? node.y : 0);
+    
+                  const nodeWidth = node.width * 1;
+                  const nodeHeight = node.height * 1;
+    
+                  const nodeOffsetY = offsetY+(layerHeight-nodeHeight)/2+nodeY;
+                  const nodeOffsetX = offsetX+(layerWidth-nodeWidth)/2+nodeX;
+    
+                  const bounds = [[nodeOffsetY, nodeOffsetX], [nodeHeight + nodeOffsetY, nodeWidth + nodeOffsetX]];
+                  
+                  return <ImageOverlay key={node.id} url={node.image} bounds={bounds} opacity={node.opacity || 1} />;
+                });
+              } else {
+                return <ImageOverlay key={layer.id} url={layer.image} bounds={bounds} opacity={layer.opacity || 1} />;
               }
             })}
           {maps[destination].map.bubbles.map(bubble =>
@@ -245,12 +255,12 @@ class Maps extends React.Component {
               .filter(node => node.type === 'title')
               .map((node, i) => {
                 const markerOffsetX = mapXOffset + viewWidth / 2;
-                const markerOffsetY = mapYOffset + mapHeight + -viewHeight / 2;
+                const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
 
                 const offsetX = markerOffsetX + (node.x ? node.x : 0);
                 const offsetY = markerOffsetY + (node.y ? node.y : 0);
 
-                const icon = marker.text([bubble.type], bubble.name);
+                const icon = marker.text(['interaction-none', bubble.type], bubble.name);
 
                 return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
               })
@@ -258,7 +268,7 @@ class Maps extends React.Component {
           {this.state.checklists.map(checklist => {
             return checklist.items.map(node => {
               const markerOffsetX = mapXOffset + viewWidth / 2;
-              const markerOffsetY = mapYOffset + mapHeight + -viewHeight / 2;
+              const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
 
               const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
               const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);

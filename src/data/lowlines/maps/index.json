@@ -1677,8 +1677,12 @@
       "id": "nessus"
     },
     "map": {
-      "width": 3400,
+      "width": 5000,
       "height": 2500,
+      "center": {
+        "x": 1000,
+        "y": 200
+      },
       "layers": [
         {
           "id": "background-upper",
@@ -1702,13 +1706,13 @@
         },
         {
           "id": "map",
+          "x": 100,
+          "y": -355,
           "width": 2499,
           "height": 1791,
           "nodes": [
             {
               "id": "main",
-              "x": 100,
-              "y": -355,
               "width": 2499,
               "height": 1791,
               "image": "/static/images/extracts/maps/map_nessus.png",
@@ -1716,8 +1720,8 @@
             },
             {
               "id": "spire",
-              "x": -1198,
-              "y": 1220,
+              "x": -1712,
+              "y": -776,
               "width": 1468,
               "height": 907,
               "image": "/static/images/extracts/maps/map_nessus-spire.png",
@@ -2287,47 +2291,6 @@
           "height": 2421,
           "image": "/static/images/extracts/maps/map_dreaming-city.png",
           "opacity": 0.9
-        },
-        {
-          "id": "template",
-          "x": 0,
-          "y": 0,
-          "width": 1920,
-          "height": 1080,
-          "image": "template.png"
-        },
-        {
-          "id": "blind-well",
-          "x": 1220,
-          "y": 478,
-          "width": 232,
-          "height": 232,
-          "scale": 0.7,
-          "nodes": [
-            {
-              "id": "well-outer",
-              "width": 232,
-              "height": 232,
-              "wrap": true,
-              "image": "director/forsaken/01e3-00001845.png",
-              "opacity": 0.1
-            },
-            {
-              "id": "well-inner",
-              "width": 232,
-              "height": 232,
-              "wrap": true,
-              "image": "director/forsaken/01e3-000012b6.png",
-              "opacity": 0.5
-            },
-            {
-              "id": "well-icon",
-              "width": 232,
-              "height": 232,
-              "image": "director/forsaken/01e3-0000123d.png",
-              "opacity": 0.7
-            }
-          ]
         }
       ],
       "bubbles": [
@@ -2547,6 +2510,10 @@
     "map": {
       "width": 3200,
       "height": 2400,
+      "center": {
+        "x": 200,
+        "y": 400
+      },
       "layers": [
         {
           "id": "background-upper",

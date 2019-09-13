@@ -1,28 +1,28 @@
-.map {
+.map-omega {
   position: relative;
   height: 600px;
   background-color: black;
   color: white;
 }
 
-.map .leaflet-container  {
+.map-omega .leaflet-container  {
   background-color: transparent;
   height: 100%;
   z-index: 2;
 }
 
-.map .layer-interaction-none {
+.map-omega .interaction-none {
   pointer-events: none;
 }
 
-.map .leaflet-background-pane {
+.map-omega .leaflet-background-pane {
   right: 0;
   bottom: 0;
   z-index: 1;
   overflow: hidden;
 }
 
-.map .leaflet-background-pane .layer-background {
+.map-omega .leaflet-background-pane .layer-background {
   position: absolute;
   left: 50%;
   min-width: 2160px;
@@ -30,15 +30,15 @@
   transform: translateX(-50%);
 }
 
-.map .leaflet-background-pane .layer-background.layer-background-upper {
+.map-omega .leaflet-background-pane .layer-background.layer-background-upper {
   top: -28%;
 }
 
-.map .leaflet-background-pane .layer-background.layer-background-lower {
+.map-omega .leaflet-background-pane .layer-background.layer-background-lower {
   bottom: -18%;
 }
 
-.map .leaflet-container .text-marker .wrapper {
+.map-omega .leaflet-container .text-marker .wrapper {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -47,31 +47,41 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
-.map .leaflet-container .text-marker .wrapper .name {
+.map-omega .leaflet-container .text-marker .wrapper .name {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%) scale(1);
+  transition: transform 0.25s;
   white-space: nowrap;
+  line-height: 1.1;
 }
 
-.map .leaflet-container .text-marker.region .wrapper .name {
+.map-omega .leaflet-container .text-marker.region .wrapper .name {
   font-family: 'Merriweather', serif;
-  font-size: 16px;
-  letter-spacing: 3px;
+  font-size: 14px;
+  letter-spacing: 4px;
   text-transform: uppercase;
   opacity: 0.9;
 }
 
-.map .leaflet-container .text-marker.suburb .wrapper .name {
+.map-omega .leaflet-container .text-marker.suburb .wrapper .name {
   font-family: 'Merriweather', serif;
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-size: 12px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   opacity: 0.6;
 }
 
-.map .leaflet-container .icon-marker .wrapper {
+.map-omega.zoom--1 .leaflet-container .text-marker .wrapper .name {
+  transform: translateX(-50%) translateY(-50%) scale(0.6);
+}
+
+.map-omega.zoom--2 .leaflet-container .text-marker .wrapper .name {
+  transform: translateX(-50%) translateY(-50%) scale(0.4);
+}
+
+.map-omega .leaflet-container .icon-marker .wrapper {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -80,14 +90,22 @@
   transform: translateX(-50%) translateY(-50%);
 }
 
-.map .leaflet-container .icon-marker .wrapper .icon {
+.map-omega .leaflet-container .icon-marker .wrapper .icon {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
 
-.map .leaflet-container .icon-marker .wrapper .icon::before {
+.map-omega.zoom--1 .leaflet-container .icon-marker .wrapper .icon {
+  transform: translateX(-50%) translateY(-50%) scale(0.6);
+}
+
+.map-omega.zoom--2 .leaflet-container .icon-marker .wrapper .icon {
+  transform: translateX(-50%) translateY(-50%) scale(0.4);
+}
+
+.map-omega .leaflet-container .icon-marker .wrapper .icon::before {
   font-family: 'destiny' !important;
   font-size: 22px;
   font-style: normal;
@@ -99,7 +117,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.map .leaflet-container .icon-marker .wrapper .name {
+.map-omega .leaflet-container .icon-marker .wrapper .name {
   position: absolute;
   top: 50%;
   left: 100%;
@@ -111,10 +129,10 @@
   text-transform: uppercase;
 }
 
-.map .leaflet-container .icon-marker {
+.map-omega .leaflet-container .icon-marker {
   opacity: 0.6;
 }
 
-.map .leaflet-container .icon-marker.completed {
+.map-omega .leaflet-container .icon-marker.completed {
   opacity: 0.2;
 }
