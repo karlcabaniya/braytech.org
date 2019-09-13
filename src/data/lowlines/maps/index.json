@@ -1459,7 +1459,7 @@
           "y": -500,
           "width": 2357,
           "height": 2288,
-          "image": "director/forsaken/web/01e3-000012a3.png",
+          "image": "/static/images/extracts/maps/map_tangled-shore.png",
           "opacity": 0.7
         }
       ],
@@ -1702,72 +1702,29 @@
         },
         {
           "id": "map",
-          "x": 100,
-          "y": -355,
           "width": 2499,
           "height": 1791,
           "nodes": [
             {
               "id": "main",
+              "x": 100,
+              "y": -355,
               "width": 2499,
               "height": 1791,
-              "image": "web/01a3-000003A5_1.png",
+              "image": "/static/images/extracts/maps/map_nessus.png",
               "opacity": 0.4
             },
             {
               "id": "spire",
-              "x": -1712,
-              "y": -776,
+              "x": -1198,
+              "y": 1220,
               "width": 1468,
               "height": 907,
-              "image": "web/01a3-00000740_1.png",
+              "image": "/static/images/extracts/maps/map_nessus-spire.png",
               "opacity": 0.6
             }
           ]
-        },
-        {
-          "id": "template",
-          "x": 0,
-          "y": 0,
-          "width": 1920,
-          "height": 1080,
-          "image": "template.png"
-        },
-        {
-          "id": "leviathan",
-          "x": 670,
-          "y": 1010,
-          "width": 768,
-          "height": 512,
-          "image": "01a3-000003F7_1.png"
-        },
-        {
-          "id": "nessus-orbit",
-          "x": 1001,
-          "y": 1092,
-          "width": 120,
-          "height": 120,
-          "page": "nessus-orbit",
-          "label": {
-            "title": "Nessus Orbit",
-            "x": 0,
-            "y": 0
-          },
-          "nodes": [
-            {
-              "id": "outline",
-              "width": 160,
-              "height": 160,
-              "image": "01a3-000003F9_1.png"
-            },
-            {
-              "id": "outline-inner",
-              "width": 160,
-              "height": 160,
-              "image": "01a3-000003FA_1.png"
-            }
-          ]
-        }
+        }      
       ],
       "bubbles": [
         {

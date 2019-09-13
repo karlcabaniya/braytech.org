@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import { flatten } from 'lodash';
 import cx from 'classnames';
 
 import L from 'leaflet';
@@ -27,14 +28,14 @@ class Maps extends React.Component {
       destination: this.props.id || 'new-pacific-arcology',
       layers: [],
       checklists: []
-    };    
+    };
   }
 
   destinations = ['edz', 'new-pacific-arcology', 'echo-mesa', 'nessus', 'mercury', 'hellas-basin', 'tangled-shore', 'dreaming-city', 'tower'];
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    
+
     this.generateMap(this.state.destination);
     this.generateChecklists();
   }
@@ -77,34 +78,59 @@ class Maps extends React.Component {
       }
     ];
 
-    console.log(checklists)
+    console.log(checklists);
 
     this.setState({
       checklists
     });
-  }
+  };
 
   generateMap = async destination => {
-
     let layers = maps[destination].map.layers;
 
     layers = await Promise.all(
       layers.map(async layer => {
-        return await fetch(layer.image)
-          .then(r => {
-            return r.blob();
-          })
-          .then(blob => {
-            const objectURL = URL.createObjectURL(blob);
+        if (layer.nodes) {
+          await Promise.all(
+            layer.nodes.map(async layer => {
+              return await fetch(layer.image)
+                .then(r => {
+                  return r.blob();
+                })
+                .then(blob => {
+                  const objectURL = URL.createObjectURL(blob);
 
-            layer.image = objectURL;
-            return layer;
-          })
-          .catch(e => {
-            console.log(e);
-          });
+                  layer.image = objectURL;
+                  return layer;
+                })
+                .catch(e => {
+                  console.log(e);
+                });
+            })
+          );
+
+          return layer;
+        } else {
+          return await fetch(layer.image)
+            .then(r => {
+              return r.blob();
+            })
+            .then(blob => {
+              const objectURL = URL.createObjectURL(blob);
+
+              layer.image = objectURL;
+              return layer;
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        }
       })
     );
+
+    // layers = flatten(layers);
+    
+    // console.log(layers);
 
     layers = await Promise.all(
       layers.map(async layer => {
@@ -135,8 +161,8 @@ class Maps extends React.Component {
         }
       })
     );
-
-    // console.log(layers);
+    
+    console.log(layers);
 
     this.setState({ layers });
   };
@@ -166,15 +192,42 @@ class Maps extends React.Component {
               return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'layer-interaction-none': true })} />;
             })}
         </div>
-        <Map center={[mapHeight / 2, mapWidth / 2]} zoom='0' minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false}>
+        <Map center={[mapHeight / 2, mapWidth / 2]} zoom='-2' minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false}>
           {this.state.layers
             .filter(layer => layer.type !== 'background')
             .map(layer => {
-              const layerScale = 1;
+              if (layer.nodes) {
+                return layer.nodes.map(node => {
+                  
+                  const layerX = layer.x ? layer.x : 0;
+                  const layerY = layer.y ? -layer.y : 0;
+                  const layerWidth = layer.width * 1;
+                  const layerHeight = layer.height * 1;
+    
+                  let offsetX = (mapWidth - layerWidth) / 2;
+                  let offsetY = (mapHeight - layerHeight) / 2;
+    
+                  offsetX += -offsetX + layerX + mapXOffset;
+                  offsetY += offsetY + layerY + mapYOffset;
+                  
+                  var nodeOffsetY = offsetY+(layerHeight-node.height)/2+node.y;
+                  var nodeOffsetX = offsetX+(layerWidth-node.width)/2+node.x;
+    
+                  const nodeBounds = [[nodeOffsetY, nodeOffsetX], [node.height + nodeOffsetY, node.width + nodeOffsetX]];
+
+                  console.log(nodeBounds)
+
+                  const bounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
+                  
+                  return <ImageOverlay key={node.id} url={node.image} bounds={nodeBounds} />
+                });
+              } else {
+                
+              
               const layerX = layer.x ? layer.x : 0;
               const layerY = layer.y ? -layer.y : 0;
-              const layerWidth = layer.width * layerScale;
-              const layerHeight = layer.height * layerScale;
+              const layerWidth = layer.width * 1;
+              const layerHeight = layer.height * 1;
 
               let offsetX = (mapWidth - layerWidth) / 2;
               let offsetY = (mapHeight - layerHeight) / 2;
@@ -182,34 +235,39 @@ class Maps extends React.Component {
               offsetX += -offsetX + layerX + mapXOffset;
               offsetY += offsetY + layerY + mapYOffset;
 
-              const bounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
-
-              return <ImageOverlay key={layer.id} url={layer.image} bounds={bounds} />;
+                const bounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
+                
+                return <ImageOverlay key={layer.id} url={layer.image} bounds={bounds} />;
+              }
             })}
-          {maps[destination].map.bubbles.map(bubble => bubble.nodes.filter(node => node.type === 'title').map((node, i) => {
-            const markerOffsetX = mapXOffset + viewWidth / 2;
-            const markerOffsetY = mapYOffset + mapHeight +- viewHeight / 2;
+          {maps[destination].map.bubbles.map(bubble =>
+            bubble.nodes
+              .filter(node => node.type === 'title')
+              .map((node, i) => {
+                const markerOffsetX = mapXOffset + viewWidth / 2;
+                const markerOffsetY = mapYOffset + mapHeight + -viewHeight / 2;
 
-            const offsetX = markerOffsetX + (node.x ? node.x : 0);
-            const offsetY = markerOffsetY + (node.y ? node.y : 0);
-            
-            const icon = marker.text([bubble.type], bubble.name);
-            
-            return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />
-          }))}
+                const offsetX = markerOffsetX + (node.x ? node.x : 0);
+                const offsetY = markerOffsetY + (node.y ? node.y : 0);
+
+                const icon = marker.text([bubble.type], bubble.name);
+
+                return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
+              })
+          )}
           {this.state.checklists.map(checklist => {
             return checklist.items.map(node => {
               const markerOffsetX = mapXOffset + viewWidth / 2;
-              const markerOffsetY = mapYOffset + mapHeight +- viewHeight / 2;
+              const markerOffsetY = mapYOffset + mapHeight + -viewHeight / 2;
 
               const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
               const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
 
-              const icon = marker.icon([node.completed ? 'completed' : ''], checklist.icon, checklist.type === 'lost-sectors' && node.name);
+              const icon = marker.icon([node.completed ? 'completed' : ''], checklist.icon);
               // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
-              
-              return <Marker key={node.itemHash} position={[offsetY, offsetX]} icon={icon} />
-            })
+
+              return <Marker key={node.itemHash} position={[offsetY, offsetX]} icon={icon} />;
+            });
           })}
         </Map>
       </div>

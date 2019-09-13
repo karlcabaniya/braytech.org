@@ -112,13 +112,9 @@
 }
 
 .map .leaflet-container .icon-marker {
-  opacity: 0.9;
+  opacity: 0.6;
 }
 
 .map .leaflet-container .icon-marker.completed {
   opacity: 0.2;
-}
-
-.map .leaflet-container .icon-marker:hover {
-  opacity: 0.9;
 }
