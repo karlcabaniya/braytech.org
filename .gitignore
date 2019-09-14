@@ -20,3 +20,6 @@ yarn-debug.log*
 yarn-error.log*
 .env.development
 .env.production
+
+# working stuff
+/public/static/images/extracts/maps/originals
