@@ -87,10 +87,6 @@ export class Checklists extends React.Component {
 
     const lists = [f.regionChests(), f.lostSectors(), f.adventures(), f.ghostScans(), f.sleeperNodes(), f.latentMemories(), f.corruptedEggs(), f.ahamkaraBones(), f.catStatues(), f.ghostStories(), f.awokenOfTheReef(), f.forsakenPrince()];
 
-    // if (Object.values(member.data.profile.profileProgression.data.checklists[2448912219]).filter(i => i).length === 4) {
-    //   lists.push(f.caydesJournals());
-    // }
-
     let sliceStart = parseInt(page, 10) * itemsPerPage;
     let sliceEnd = sliceStart + itemsPerPage;
 

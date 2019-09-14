@@ -22,4 +22,6 @@ yarn-error.log*
 .env.production
 
 # working stuff
+/manifest
+/scripts/checklists/cache
 /public/static/images/extracts/maps/originals

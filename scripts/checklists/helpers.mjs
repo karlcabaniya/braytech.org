@@ -1,10 +1,7 @@
-import React from 'react';
-import { find, sortBy } from 'lodash';
+import Manifest from '../manifest';
+import lowlines from './cache/checklists.json';
 
-import manifest from '../../utils/manifest';
-import lowlines from '../../data/lowlines/checklists';
-import Checklist from './Checklist';
-import ChecklistItem from './ChecklistItem';
+import _ from 'lodash';
 
 // For when the mappings generated from lowlines' data don't have a
 // bubbleHash but do have a bubbleId. Inferred by cross-referencing
@@ -43,15 +40,16 @@ const itemCorrections = [
   508025838,  // Ghost Scan 76 / The Reservoir, Earth / UNAVAILABLE
 ];
 
-class ChecklistFactoryHelpers {
-  constructor(t, profile, characterId, hideCompletedItems) {
-    this.t = t;
-    this.profile = profile;
-    this.characterId = characterId;
-    this.hideCompletedItems = hideCompletedItems;
+class Helpers {
+  constructor() {
+    this.t = v => { return v };
+
+    
   }
 
-  checklistItems(checklistId, isCharacterBound) {
+  async checklistItems(checklistId, isCharacterBound) {
+    const manifest = await Manifest.getManifest();
+    
     const progressionSource = this.profile ? isCharacterBound ? this.profile.characterProgressions.data[this.characterId] : this.profile.profileProgression.data : false;
     const progression = progressionSource && progressionSource.checklists[checklistId];
     const checklist = manifest.DestinyChecklistDefinition[checklistId];
@@ -68,7 +66,9 @@ class ChecklistFactoryHelpers {
     });
   }
 
-  checklistItem(item, completed) {
+  async checklistItem(item, completed) {
+    const manifest = await Manifest.getManifest();
+    
     const mapping = lowlines.checklists[item.hash] || {};
 
     const destinationHash = item.destinationHash || mapping.destinationHash;
@@ -77,7 +77,7 @@ class ChecklistFactoryHelpers {
     // Try to find the destination, place and bubble by the hashes if we have them
     const destination = destinationHash && manifest.DestinyDestinationDefinition[destinationHash];
     const place = destination && manifest.DestinyPlaceDefinition[destination.placeHash];
-    const bubble = bubbleHash && find(destination.bubbles, { hash: bubbleHash });
+    const bubble = bubbleHash && _.find(destination.bubbles, { hash: bubbleHash });
 
     // If the item has a name with a number in it, extract it so we can use it later
     // for sorting & display
@@ -113,7 +113,9 @@ class ChecklistFactoryHelpers {
     };
   }
 
-  presentationItems(presentationHash, dropFirst = true) {
+  async presentationItems(presentationHash, dropFirst = true) {
+    const manifest = await Manifest.getManifest();
+
     const root = manifest.DestinyPresentationNodeDefinition[presentationHash];
     let recordHashes = root.children.records.map(r => r.recordHash);
     if (dropFirst) recordHashes = recordHashes.slice(1);
@@ -129,7 +131,7 @@ class ChecklistFactoryHelpers {
         const destinationHash = mapping && mapping.destinationHash;
         const destination = destinationHash && manifest.DestinyDestinationDefinition[destinationHash];
         const place = destination && manifest.DestinyPlaceDefinition[destination.placeHash];
-        const bubble = destination && find(destination.bubbles, { hash: mapping.bubbleHash });
+        const bubble = destination && _.find(destination.bubbles, { hash: mapping.bubbleHash });
 
         // If we don't have a bubble, see if we can infer one from the bubble ID
         let bubbleName = (bubble && bubble.displayProperties.name) || (mapping && mapping.bubbleId && manualBubbleNames[mapping.bubbleId]) || '';
@@ -159,7 +161,7 @@ class ChecklistFactoryHelpers {
   recordChecklist(options = {}) {
     return this.checklist({
       itemName: i => i.record,
-      itemLocation: i => (i.bubble && i.place ? `${i.bubble}, ${i.place}` : <em>Forsaken Campaign</em>),
+      itemLocation: i => (i.bubble && i.place ? `${i.bubble}, ${i.place}` : `Forsaken Campaign`),
       mapPath: i => i.destinationHash && `destiny/maps/${i.destinationHash}/record/${i.hash}`,
       ...options
     });
@@ -176,37 +178,22 @@ class ChecklistFactoryHelpers {
 
     options = { ...defaultOptions, ...options };
 
-    const items = options.sortBy ? sortBy(options.items, options.sortBy) : options.items;
-    const requested = options.requested;
-    const visible = this.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.hash) > -1) : items;
-
-    const checklist = options.data ? {
-      totalItems: items.length,
-      completedItems: items.filter(i => i.completed).length,
-      items: visible.map(i => ({
+    const items = options.items.map(i => ({
           itemHash: options.itemHash(i),
           completed: i.completed,
           name: options.itemName(i),
           location: options.itemLocation(i),
           map: i.map,
           destinationHash: i.destinationHash
-        })
-      )
-    } : (
-      <Checklist key={options.name} name={options.name} characterBound={options.characterBound} headless={options.headless} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
-        {visible.map(i => (
-          <ChecklistItem key={i.hash} itemHash={options.itemHash(i)} completed={i.completed} name={options.itemName(i)} location={options.itemLocation(i)} mapPath={options.mapPath(i)} />
-        ))}
-      </Checklist>
-    );
+        }))
 
     return {
       name: options.name,
       icon: options.icon,
       image: options.image,
-      checklist: checklist
+      items
     };
   }
 }
 
-export default ChecklistFactoryHelpers;
+export default Helpers;

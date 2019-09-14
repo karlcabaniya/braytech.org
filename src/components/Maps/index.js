@@ -137,7 +137,7 @@ class Maps extends React.Component {
       }
     ];
 
-    console.log(checklists);
+    // console.log(checklists);
 
     this.setState({
       checklists
@@ -148,90 +148,89 @@ class Maps extends React.Component {
     try {
       const layers = {};
 
-    await Promise.all(
-      Object.entries(maps).map(async ([key, value]) => {
-        console.log(key, value);
-        let l = value.map.layers;
+      await Promise.all(
+        Object.entries(maps).map(async ([key, value]) => {
+          let l = value.map.layers;
 
-        l = await Promise.all(
-          l.map(async layer => {
-            if (layer.nodes) {
-              await Promise.all(
-                layer.nodes.map(async layer => {
-                  return await fetch(layer.image)
-                    .then(r => {
-                      return r.blob();
-                    })
-                    .then(blob => {
-                      const objectURL = URL.createObjectURL(blob);
+          l = await Promise.all(
+            l.map(async layer => {
+              if (layer.nodes) {
+                await Promise.all(
+                  layer.nodes.map(async layer => {
+                    return await fetch(layer.image)
+                      .then(r => {
+                        return r.blob();
+                      })
+                      .then(blob => {
+                        const objectURL = URL.createObjectURL(blob);
 
-                      layer.image = objectURL;
-                      return layer;
-                    })
-                    .catch(e => {
-                      console.log(e);
-                    });
-                })
-              );
+                        layer.image = objectURL;
+                        return layer;
+                      })
+                      .catch(e => {
+                        console.log(e);
+                      });
+                  })
+                );
 
-              return layer;
-            } else {
-              return await fetch(layer.image)
-                .then(r => {
-                  return r.blob();
-                })
-                .then(blob => {
-                  const objectURL = URL.createObjectURL(blob);
+                return layer;
+              } else {
+                return await fetch(layer.image)
+                  .then(r => {
+                    return r.blob();
+                  })
+                  .then(blob => {
+                    const objectURL = URL.createObjectURL(blob);
 
-                  layer.image = objectURL;
-                  return layer;
-                })
-                .catch(e => {
-                  console.log(e);
+                    layer.image = objectURL;
+                    return layer;
+                  })
+                  .catch(e => {
+                    console.log(e);
+                  });
+              }
+            })
+          );
+
+          l = await Promise.all(
+            l.map(async layer => {
+              if (layer.color) {
+                const image = document.createElement('img');
+                image.src = layer.image;
+
+                await new Promise(resolve => {
+                  image.onload = e => resolve();
                 });
-            }
-          })
-        );
 
-        l = await Promise.all(
-          l.map(async layer => {
-            if (layer.color) {
-              const image = document.createElement('img');
-              image.src = layer.image;
+                const canvas = document.createElement('canvas');
+                canvas.width = layer.width;
+                canvas.height = layer.height;
+                const context = canvas.getContext('2d');
 
-              await new Promise(resolve => {
-                image.onload = e => resolve();
-              });
+                context.fillStyle = layer.color;
+                context.fillRect(0, 0, layer.width, layer.height);
 
-              const canvas = document.createElement('canvas');
-              canvas.width = layer.width;
-              canvas.height = layer.height;
-              const context = canvas.getContext('2d');
+                context.globalCompositeOperation = 'destination-atop';
+                context.drawImage(image, 0, 0, layer.width, layer.height);
 
-              context.fillStyle = layer.color;
-              context.fillRect(0, 0, layer.width, layer.height);
+                layer.image = canvas.toDataURL();
 
-              context.globalCompositeOperation = 'destination-atop';
-              context.drawImage(image, 0, 0, layer.width, layer.height);
+                return layer;
+              } else {
+                return layer;
+              }
+            })
+          );
 
-              layer.image = canvas.toDataURL();
+          layers[key] = l;
+        })
+      );
 
-              return layer;
-            } else {
-              return layer;
-            }
-          })
-        );
+      // console.log(layers);
 
-        layers[key] = l;
-      })
-    );
-
-    // console.log(layers);
-
-    this.setState({ loading: false, layers });
+      this.setState({ loading: false, layers });
     } catch (e) {
-      console.log(e)
+      console.log(e);
       this.setState({ loading: false, error: true });
     }
   };
@@ -269,9 +268,7 @@ class Maps extends React.Component {
         </div>
       );
     } else if (this.state.error) {
-      return (
-        <div className='map-omega loading'>error lol</div>
-      );
+      return <div className='map-omega loading'>error lol</div>;
     } else {
       const { id: destinationId = 'new-pacific-arcology' } = this.props;
       const destination = this.state.destination;
@@ -374,9 +371,9 @@ class Maps extends React.Component {
                 const name = d.destination && manifest.DestinyDestinationDefinition[d.destination] ? manifest.DestinyDestinationDefinition[d.destination].displayProperties.name : d.activity && manifest.DestinyActivityDefinition[d.activity] ? manifest.DestinyActivityDefinition[d.activity].displayProperties.name : ' lol';
 
                 return (
-                  <li className={cx('linked', { active: d.id === destinationId })}>
+                  <li key={d.id} className={cx('linked', { active: d.id === destinationId })}>
                     <div className='text'>{name}</div>
-                    <Link key={d.id} to={`/maps/${d.id}`} onClick={this.handler_toggleDestinationsList}></Link>
+                    <Link to={`/maps/${d.id}`} onClick={this.handler_toggleDestinationsList}></Link>
                   </li>
                 );
               })}
