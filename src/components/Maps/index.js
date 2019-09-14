@@ -263,7 +263,7 @@ class Maps extends React.Component {
         </div>
       );
     } else {
-      const { id: destinationId } = this.props;
+      const { id: destinationId = 'new-pacific-arcology' } = this.props;
       const destination = this.state.destination;
 
       const map = maps[destination].map;
