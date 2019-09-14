@@ -1,5 +1,5 @@
-.list li.linked:hover,
-.list li.tooltip:hover {
+.list.reports li.linked:hover,
+.list.reports li.tooltip:hover {
   z-index: unset;
 }
 
