@@ -113,7 +113,7 @@ class ChecklistFactory {
 
         return `${bubbleName}, ${destinationName}`;
       },
-      sortBy: ['number'],
+      // sortBy: ['number'],
       items: this.checklistItems(1297424116),
       ...options
     });
@@ -336,7 +336,7 @@ class ChecklistFactory {
 
   numberedChecklist(name, options = {}) {
     return this.checklist({
-      sortBy: ['number'],
+      // sortBy: ['number'],
       itemName: i => `${this.t(name)} ${i.sorts.number}`,
       ...options
     });
