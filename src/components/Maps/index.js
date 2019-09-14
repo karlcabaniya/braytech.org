@@ -25,6 +25,7 @@ class Maps extends React.Component {
 
     this.state = {
       loading: true,
+      error: false,
       destination: this.props.id || 'new-pacific-arcology',
       zoom: 0,
       layers: {},
@@ -144,7 +145,8 @@ class Maps extends React.Component {
   };
 
   prepareLayers = async destination => {
-    const layers = {};
+    try {
+      const layers = {};
 
     await Promise.all(
       Object.entries(maps).map(async ([key, value]) => {
@@ -228,6 +230,10 @@ class Maps extends React.Component {
     // console.log(layers);
 
     this.setState({ loading: false, layers });
+    } catch (e) {
+      console.log(e)
+      this.setState({ loading: false, error: true });
+    }
   };
 
   setZoom = viewport => {
@@ -261,6 +267,10 @@ class Maps extends React.Component {
         <div className='map-omega loading'>
           <Spinner />
         </div>
+      );
+    } else if (this.state.error) {
+      return (
+        <div className='map-omega loading'>error lol</div>
       );
     } else {
       const { id: destinationId = 'new-pacific-arcology' } = this.props;
