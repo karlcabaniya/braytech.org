@@ -6,15 +6,19 @@ import { cloneDeep, orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
-import ObservedImage from '../../ObservedImage';
+import checklists from '../../../data/lowlines/checklists';
 
 import './styles.css';
 
-class Maps extends React.Component {
+class Checklist extends React.Component {
   render() {
     const { t, hash } = this.props;
 
-    
+    const checklistHash = Object.keys(checklists).find(key => checklists[key].find(entry => entry.checklistHash === parseInt(hash, 10)));
+
+    const checklistEntry = checklistHash && checklists[checklistHash].find(entry => entry.checklistHash === parseInt(hash, 10));
+
+    console.log(checklistEntry)
 
     // if (!definitionActivity) {
     //   console.warn('Hash not found');
@@ -24,7 +28,7 @@ class Maps extends React.Component {
     return (
       <>
         <div className='acrylic' />
-        <div className={cx('frame', 'common')}>
+        <div className={cx('frame', 'map')}>
           <div className='header'>
             <div className='name'>Classified</div>
             <div>
@@ -51,7 +55,8 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default compose(
-  connect(mapStateToProps),
-  withTranslation()
-)(Maps);
+Checklist = compose(
+  connect(mapStateToProps)
+)(Checklist);
+
+export { Checklist };

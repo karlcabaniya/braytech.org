@@ -4,15 +4,16 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import ObservedImage from '../../components/ObservedImage';
 import Button from '../../components/UI/Button';
+import Checklist from '../../components/Checklist';
+
+import checklists from '../../utils/checklists';
 
 import './styles.css';
 
-import ChecklistFactory from './ChecklistFactory';
 
 function getItemsPerPage(width) {
   if (width >= 1920) return 6;
@@ -35,14 +36,6 @@ const ListButton = p => (
     />
   </li>
 );
-
-ListButton.propTypes = {
-  name: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  icon: PropTypes.string,
-  image: PropTypes.string,
-  visible: PropTypes.bool
-};
 
 export class Checklists extends React.Component {
   constructor(props) {
@@ -80,12 +73,23 @@ export class Checklists extends React.Component {
   };
 
   render() {
-    const { t, member, collectibles } = this.props;
+    const { t } = this.props;
     const { page, itemsPerPage } = this.state;
 
-    const f = new ChecklistFactory(t, member.data.profile, member.characterId, collectibles.hideCompletedChecklistItems);
-
-    const lists = [f.regionChests(), f.lostSectors(), f.adventures(), f.ghostScans(), f.sleeperNodes(), f.latentMemories(), f.corruptedEggs(), f.ahamkaraBones(), f.catStatues(), f.ghostStories(), f.awokenOfTheReef(), f.forsakenPrince()];
+    const lists = [
+      checklists[1697465175](),
+      checklists[3142056444](),
+      checklists[4178338182](),
+      checklists[2360931290](),
+      checklists[365218222](),
+      checklists[2955980198](),
+      checklists[2609997025](),
+      checklists[1297424116](),
+      checklists[2726513366](),
+      checklists[1420597821](),
+      checklists[3305936921](),
+      checklists[655926402]()
+    ];
 
     let sliceStart = parseInt(page, 10) * itemsPerPage;
     let sliceEnd = sliceStart + itemsPerPage;
@@ -133,13 +137,13 @@ export class Checklists extends React.Component {
             <div className='module views'>
               <ul className='list'>
                 {lists.map((list, i) => (
-                  <ListButton name={list.name} icon={list.icon} image={list.image} key={i} visible={visible.includes(list)} onClick={() => this.changeSkip(i)} />
+                  <ListButton name={list.checklistName} icon={list.checklistIcon} image={list.checklistImage} key={i} visible={visible.includes(list)} onClick={() => this.changeSkip(i)} />
                 ))}
               </ul>
             </div>
             {visible.map(list => (
-              <div className='module list' key={list.name}>
-                {list.checklist}
+              <div className='module list' key={list.checklistName}>
+                <Checklist {...list} />
               </div>
             ))}
           </div>
@@ -156,12 +160,6 @@ export class Checklists extends React.Component {
     );
   }
 }
-
-Checklists.propTypes = {
-  member: PropTypes.object.isRequired,
-  collectibles: PropTypes.object.isRequired,
-  viewport: PropTypes.object.isRequired
-};
 
 function mapStateToProps(state, ownProps) {
   return {

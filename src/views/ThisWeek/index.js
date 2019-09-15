@@ -10,7 +10,7 @@ import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
 import Items from '../../components/Items';
 
-import ChecklistFactory from '../Checklists/ChecklistFactory';
+//import ChecklistFactory from '../Checklists/ChecklistFactory';
 
 import './styles.css';
 
@@ -23,7 +23,7 @@ class ThisWeek extends React.Component {
     const { t, member, collectibles } = this.props;
     const { milestones } = member.data;
 
-    this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, false);
+    //this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, false);
 
     // console.log(Object.values(lowlines.checklists).filter(i => i.node && [].includes(parseInt(i.node.recordHash, 10))).map(r => parseInt(r.node.checklistHash, 10)))
 

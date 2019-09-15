@@ -12,7 +12,7 @@ import { Map, ImageOverlay, Marker } from 'react-leaflet';
 
 import manifest from '../../utils/manifest';
 import maps from '../../data/lowlines/maps';
-import ChecklistFactory from '../../views/Checklists/ChecklistFactory';
+//import ChecklistFactory from '../../views/Checklists/ChecklistFactory';
 import Spinner from '../../components/UI/Spinner';
 
 import * as marker from './markers';
@@ -102,7 +102,7 @@ class Maps extends React.Component {
   generateChecklists = destination => {
     const { t, member } = this.props;
 
-    const factory = new ChecklistFactory(t, member.data.profile, member.characterId, false);
+    const factory = {};
 
     const checklists = [
       {
@@ -390,7 +390,7 @@ class Maps extends React.Component {
                 const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
                 const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
 
-                const icon = marker.icon({ hash: node.checklistHash, table: 'maps' }, [node.completed ? 'completed' : ''], checklist.icon);
+                const icon = marker.icon({ hash: node.checklistHash, table: 'DestinyChecklistDefinition' }, [node.completed ? 'completed' : ''], checklist.icon);
                 // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
                 return <Marker key={node.checklistHash} position={[offsetY, offsetX]} icon={icon} />;

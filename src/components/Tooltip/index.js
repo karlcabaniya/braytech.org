@@ -6,7 +6,7 @@ import './styles.css';
 import Item from './Item';
 import Activity from './Activity';
 import Vendor from './Vendor';
-import Maps from './Maps';
+import { Checklist } from './Maps';
 
 class Tooltip extends React.Component {
   constructor(props) {
@@ -210,7 +210,7 @@ class Tooltip extends React.Component {
 
       if (this.state.table === 'DestinyActivityDefinition') Type = Activity;
       if (this.state.table === 'DestinyVendorDefinition') Type = Vendor;
-      if (this.state.table === 'maps') Type = Maps;
+      if (this.state.table === 'DestinyChecklistDefinition') Type = Checklist;
 
       return (
         <div id='tooltip' ref={this.ref_tooltip}>
