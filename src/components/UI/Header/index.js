@@ -137,6 +137,15 @@ class Header extends React.Component {
         group: 0
       },
       {
+        name: t('Maps'),
+        desc: t('Maps'),
+        slug: '/maps',
+        exact: false,
+        profile: false,
+        inline: true,
+        group: 0
+      },
+      {
         name: t('Reports'),
         desc: t('Explore your Post Game Carnage Reports'),
         slug: '/reports',
