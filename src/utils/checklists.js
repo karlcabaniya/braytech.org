@@ -308,7 +308,7 @@ function checklist(options = {}) {
       ])
     : options.items;
   const requested = options.requested;
-  const visible = state.collectibles.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.hash) > -1) : items;
+  const visible = state.collectibles.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.checklistHash) > -1) : items;
 
   return {
     checklistId: options.checklistId,

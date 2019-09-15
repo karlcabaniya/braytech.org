@@ -9,8 +9,8 @@ import ObservedImage from '../../components/ObservedImage';
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
 import Items from '../../components/Items';
-
-//import ChecklistFactory from '../Checklists/ChecklistFactory';
+import checklists from '../../utils/checklists';
+import Checklist from '../../components/Checklist';
 
 import './styles.css';
 
@@ -22,10 +22,6 @@ class ThisWeek extends React.Component {
 
     const { t, member, collectibles } = this.props;
     const { milestones } = member.data;
-
-    //this.checklistFactory = new ChecklistFactory(t, member.data.profile, member.characterId, false);
-
-    // console.log(Object.values(lowlines.checklists).filter(i => i.node && [].includes(parseInt(i.node.recordHash, 10))).map(r => parseInt(r.node.checklistHash, 10)))
 
     this.consolidatedInfo = {
       curse: {
@@ -70,7 +66,7 @@ class ThisWeek extends React.Component {
           collectibles: [],
           checklists: [
             {
-              name: 'ahamkaraBones',
+              checklistId: 1297424116, // ahamkara bones
               items: [1387596458, 1387596456]
             }
           ]
@@ -92,11 +88,11 @@ class ThisWeek extends React.Component {
         ],
         checklists: [
           {
-            name: 'corruptedEggs',
+            checklistId: 2609997025, // corrupted eggs
             items: [1101252162, 1101252163, 1101252168, 1101252169, 1101252171, 1101252172, 1101252173, 1101252174, 1101252175]
           },
           {
-            name: 'ahamkaraBones',
+            checklistId: 1297424116, // ahamkara bones
             items: [1370818864, 1370818868, 1370818871, 1387596459]
           }
         ]
@@ -114,11 +110,11 @@ class ThisWeek extends React.Component {
           collectibles: [],
           checklists: [
             {
-              name: 'corruptedEggs',
+              checklistId: 2609997025, // corrupted eggs
               items: [1084474576, 1084474577, 1084474591]
             },
             {
-              name: 'ahamkaraBones',
+              checklistId: 1297424116, // ahamkara bones
               items: [1387596463]
             }
           ]
@@ -135,11 +131,11 @@ class ThisWeek extends React.Component {
           collectibles: [],
           checklists: [
             {
-              name: 'corruptedEggs',
+              checklistId: 2609997025, // corrupted eggs
               items: [1034141726, 1067696996, 1067696997, 1067696998, 1084474590]
             },
             {
-              name: 'ahamkaraBones',
+              checklistId: 1297424116, // ahamkara bones
               items: [1387596460]
             }
           ]
@@ -156,11 +152,11 @@ class ThisWeek extends React.Component {
           collectibles: [],
           checklists: [
             {
-              name: 'corruptedEggs',
+              checklistId: 2609997025, // corrupted eggs
               items: [1067696992, 1067696993, 1067696999, 1067697005, 1084474583]
             },
             {
-              name: 'ahamkaraBones',
+              checklistId: 1297424116, // ahamkara bones
               items: [1370818879]
             }
           ]
@@ -177,11 +173,11 @@ class ThisWeek extends React.Component {
           collectibles: [],
           checklists: [
             {
-              name: 'corruptedEggs',
+              checklistId: 2609997025, // corrupted eggs
               items: [1084474578, 1084474579, 1118029876, 1118029877, 1118029882]
             },
             {
-              name: 'ahamkaraBones',
+              checklistId: 1297424116, // ahamkara bones
               items: [1387596457]
             }
           ]
@@ -198,11 +194,11 @@ class ThisWeek extends React.Component {
           collectibles: [],
           checklists: [
             {
-              name: 'corruptedEggs',
+              checklistId: 2609997025, // corrupted eggs
               items: [1084474580, 1084474581, 1084474582]
             },
             {
-              name: 'ahamkaraBones',
+              checklistId: 1297424116, // ahamkara bones
               items: [1370818878]
             }
           ]
@@ -219,11 +215,11 @@ class ThisWeek extends React.Component {
           collectibles: [],
           checklists: [
             {
-              name: 'corruptedEggs',
+              checklistId: 2609997025, // corrupted eggs
               items: [1067696994, 1067696995, 1067697004]
             },
             {
-              name: 'ahamkaraBones',
+              checklistId: 1297424116, // ahamkara bones
               items: [1370818866]
             }
           ]
@@ -731,7 +727,6 @@ class ThisWeek extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    console.log(this.checklistFactory.corruptedEggs({ requested: [1101252162, 1101252163, 1101252168, 1101252169, 1101252171, 1101252172, 1101252173, 1101252174, 1101252175], data: true }))
     this.props.rebindTooltips();
   }
 
@@ -1022,7 +1017,7 @@ class ThisWeek extends React.Component {
         </ul>
         <h4>{t('Checklist items')}</h4>
         {this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists.map(list => {
-          return this.checklistFactory[list.name]({ requested: list.items, headless: true }).checklist;
+          return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: list.items })} />;
         })}
       </div>
     );
@@ -1043,7 +1038,7 @@ class ThisWeek extends React.Component {
           <>
             <h4>{t('Checklist items')}</h4>
             {this.consolidatedInfo.curse[cycleInfo.week.curse].checklists.map(list => {
-              return this.checklistFactory[list.name]({ requested: list.items, headless: true }).checklist;
+              return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: list.items })} />;
             })}
           </>
         ) : null}
@@ -1063,7 +1058,7 @@ class ThisWeek extends React.Component {
           </ul>
           <h4>{t('Checklist items')}</h4>
           {this.consolidatedInfo.shatteredThrone.checklists.map(list => {
-            return this.checklistFactory[list.name]({ requested: list.items, headless: true }).checklist;
+            return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: list.items })} />;
           })}
         </div>
       ) : (
