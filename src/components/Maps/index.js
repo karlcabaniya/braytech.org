@@ -11,9 +11,8 @@ import { Map, ImageOverlay, Marker } from 'react-leaflet';
 
 import manifest from '../../utils/manifest';
 import maps from '../../data/lowlines/maps';
-import Spinner from '../../components/UI/Spinner';
-
 import ChecklistFactory from '../../views/Checklists/ChecklistFactory';
+import Spinner from '../../components/UI/Spinner';
 
 import * as marker from './markers';
 
@@ -105,39 +104,39 @@ class Maps extends React.Component {
         type: 'region-chests',
         name: t('Region Chests'),
         icon: 'destiny-region_chests',
-        items: factory.regionChests({ data: true }).checklist.items.filter(i => i.destinationHash === maps[destination].destination.hash)
+        items: factory.regionChests({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
       },
       {
         type: 'lost-sectors',
         name: t('Lost Sectors'),
         icon: 'destiny-lost_sectors',
-        items: factory.lostSectors({ data: true }).checklist.items.filter(i => i.destinationHash === maps[destination].destination.hash)
+        items: factory.lostSectors({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
       },
       // {
       //   name: t('Adventures'),
-      //   items: factory.adventures({ data: true }).checklist.items.filter(i => i.destinationHash === maps[destination].destination.hash)
+      //   items: factory.adventures({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
       // },
       {
         type: 'ghost-scans',
         name: t('Ghost Scans'),
         icon: 'destiny-ghost',
-        items: factory.ghostScans({ data: true }).checklist.items.filter(i => i.destinationHash === maps[destination].destination.hash)
+        items: factory.ghostScans({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
       },
       {
         type: 'sleeper-nodes',
         name: t('Sleeper Nodes'),
         icon: 'destiny-sleeper_nodes',
-        items: factory.sleeperNodes({ data: true }).checklist.items.filter(i => i.destinationHash === maps[destination].destination.hash)
+        items: factory.sleeperNodes({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
       },
       {
         type: 'lost-memory-fragments',
         name: t('Lost Memory Fragments'),
         icon: 'destiny-lost_memory_fragments',
-        items: factory.latentMemories({ data: true }).checklist.items.filter(i => i.destinationHash === maps[destination].destination.hash)
+        items: factory.latentMemories({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
       }
     ];
 
-    // console.log(checklists);
+    console.log(checklists);
 
     this.setState({
       checklists

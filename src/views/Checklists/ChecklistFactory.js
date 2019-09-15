@@ -318,6 +318,19 @@ class ChecklistFactory {
     const requested = options.requested;
     const visible = this.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.hash) > -1) : items;
 
+    if (options.data) {
+      return {
+        totalItems: items.length,
+        completedItems: items.filter(i => i.completed).length,
+        items: visible.map(i => ({
+            ...i,
+            name: options.itemName(i),
+            completed: i.completed
+          })
+        )
+      };
+    }
+
     const checklist = (
       <Checklist key={options.name} name={options.name} characterBound={options.characterBound} headless={options.headless} progressDescription={options.progressDescription} totalItems={items.length} completedItems={items.filter(i => i.completed).length}>
         {visible.map(i => (
