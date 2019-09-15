@@ -2,11 +2,9 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { cloneDeep, orderBy } from 'lodash';
 import cx from 'classnames';
 
-import manifest from '../../../utils/manifest';
-import checklists from '../../../data/lowlines/checklists';
+import { checklists, lookup } from '../../../utils/checklists';
 
 import './styles.css';
 
@@ -14,30 +12,36 @@ class Checklist extends React.Component {
   render() {
     const { t, hash } = this.props;
 
-    const checklistHash = Object.keys(checklists).find(key => checklists[key].find(entry => entry.checklistHash === parseInt(hash, 10)));
+    const checklistHash = lookup(hash);
 
-    const checklistEntry = checklistHash && checklists[checklistHash].find(entry => entry.checklistHash === parseInt(hash, 10));
+    if (!checklistHash) {
+      console.warn('Hash not found');
+      return null;
+    }
 
-    console.log(checklistEntry)
+    const checklist = checklists[checklistHash]({ requested: [parseInt(hash, 10)] });
+    const item = checklist.items && checklist.items.length && checklist.items[0];
 
-    // if (!definitionActivity) {
-    //   console.warn('Hash not found');
-    //   return null;
-    // }
+    console.log(checklist)
 
     return (
       <>
         <div className='acrylic' />
         <div className={cx('frame', 'map')}>
           <div className='header'>
-            <div className='name'>Classified</div>
-            <div>
-              <div className='kind'>Insufficient clearance</div>
+            <div className='icon'>
+              <span className={cx(checklist.checklistIcon)} />
+            </div>
+            <div className='text'>
+              <div className='name'>{item.formatted.name}{item.formatted.suffix ? ` ${item.formatted.suffix}` : null}</div>
+              <div>
+                <div className='kind'>{t(checklist.checklistName)}</div>
+              </div>
             </div>
           </div>
           <div className='black'>
             <div className='description'>
-              <pre>Keep it clean.</pre>
+              <div className='destination'>{item.formatted.locationExt}</div>
             </div>
           </div>
         </div>
@@ -56,7 +60,8 @@ function mapStateToProps(state, ownProps) {
 }
 
 Checklist = compose(
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  withTranslation()
 )(Checklist);
 
 export { Checklist };

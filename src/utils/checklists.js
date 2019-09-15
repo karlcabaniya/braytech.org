@@ -3,10 +3,10 @@ import { sortBy } from 'lodash';
 
 import store from './reduxStore';
 
-import checklists from '../data/lowlines/checklists';
+import data from '../data/lowlines/checklists';
 import manifest from './manifest';
 
-export default {
+export const checklists = {
   // adventures
   4178338182: options =>
     checklist({
@@ -22,6 +22,17 @@ export default {
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return `${bubbleName}, ${destinationName}`;
+      },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       sortBy: ['completed', 'destination', 'bubble', 'name'],
       checklistName: 'Adventures',
@@ -51,6 +62,17 @@ export default {
 
         return destinationName;
       },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
       checklistName: 'Region Chests',
       checklistIcon: 'destiny-region_chests',
       checklistProgressDescription: 'Region chests opened',
@@ -78,6 +100,17 @@ export default {
 
         return destinationName;
       },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
       checklistName: 'Lost Sectors',
       checklistIcon: 'destiny-lost_sectors',
       checklistProgressDescription: 'Lost Sectors discovered',
@@ -104,6 +137,17 @@ export default {
 
         return `${bubbleName}, ${destinationName}`;
       },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
       checklistName: 'Ahamkara Bones',
       checklistIcon: 'destiny-ahamkara_bones',
       checklistProgressDescription: 'Bones found',
@@ -123,6 +167,17 @@ export default {
 
         return `${bubbleName}, ${destinationName}`;
       },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
       checklistName: 'Corrupted Eggs',
       checklistIcon: 'destiny-corrupted_eggs',
       checklistProgressDescription: 'Eggs destroyed',
@@ -141,6 +196,17 @@ export default {
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return `${bubbleName}, ${destinationName}`;
+      },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Cat Statues',
       checklistIcon: 'destiny-cat_statues',
@@ -163,6 +229,17 @@ export default {
 
         return `${bubbleName}, ${destinationName}`;
       },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
       checklistName: 'Sleeper Nodes',
       checklistIcon: 'destiny-sleeper_nodes',
       checklistProgressDescription: 'Sleeper nodes hacked',
@@ -182,6 +259,17 @@ export default {
 
         return `${bubbleName}, ${destinationName}`;
       },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
       checklistName: 'Ghost Scans',
       checklistIcon: 'destiny-ghost',
       checklistProgressDescription: 'Ghost scans performed',
@@ -200,6 +288,17 @@ export default {
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return `${bubbleName}, ${destinationName}`;
+      },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Lost Memory Fragments',
       checklistIcon: 'destiny-lost_memory_fragments',
@@ -227,6 +326,17 @@ export default {
 
         return `${bubbleName}, ${destinationName}`;
       },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
       checklistName: 'Lore: Ghost Stories',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004869.png',
       checklistProgressDescription: 'Stories found',
@@ -252,6 +362,17 @@ export default {
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return `${bubbleName}, ${destinationName}`;
+      },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Lore: Awoken of the Reef',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004874.png',
@@ -284,12 +405,29 @@ export default {
 
         return `${bubbleName}, ${destinationName}`;
       },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
       checklistName: 'Lore: Forsaken Prince',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004886.png',
       checklistProgressDescription: 'Data caches decrypted',
       ...options
     })
 };
+
+export default checklists;
+
+export function lookup(checklistItemHash) {
+  return Object.keys(data).find(key => data[key].find(entry => entry.checklistHash === parseInt(checklistItemHash, 10)));
+}
 
 function checklist(options = {}) {
   const state = store.getState();
@@ -307,8 +445,8 @@ function checklist(options = {}) {
         }
       ])
     : options.items;
-  const requested = options.requested;
-  const visible = state.collectibles.hideCompletedItems ? items.filter(i => !i.completed) : requested && requested.length ? items.filter(i => requested.indexOf(i.checklistHash) > -1) : items;
+
+  const visible = state.collectibles.hideCompletedItems ? items.filter(i => !i.completed) : options.requested && options.requested.length ? items.filter(i => options.requested.indexOf(i.checklistHash) > -1) : items;
 
   return {
     checklistId: options.checklistId,
@@ -324,7 +462,8 @@ function checklist(options = {}) {
         suffix: options.numbered ? i.sorts.number : '',
         number: i.sorts.number,
         name: options.itemName(i),
-        location: options.itemLocation(i)
+        location: options.itemLocation(i),
+        locationExt: options.itemLocationExt(i)
       },
       completed: i.completed
     }))
@@ -348,7 +487,7 @@ function checklistItems(checklistId, isCharacterBound) {
   const progressionSource = profile ? (isCharacterBound ? profile.characterProgressions.data[characterId] : profile.profileProgression.data) : false;
   const progression = progressionSource && progressionSource.checklists[checklistId];
 
-  return checklists[checklistId].map(entry => {
+  return data[checklistId].map(entry => {
     const completed = progression[entry.checklistHash];
 
     entry.sorts.completed = completed;
@@ -365,7 +504,7 @@ function presentationItems(presentationHash, dropFirst = true) {
 
   const profile = state.member.data && state.member.data.profile;
 
-  return checklists[presentationHash]
+  return data[presentationHash]
     .map(entry => {
       const profileRecord = profile.profileRecords.data.records[entry.recordHash];
       if (!profileRecord) return false;

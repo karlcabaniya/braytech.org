@@ -12,8 +12,8 @@ import { Map, ImageOverlay, Marker } from 'react-leaflet';
 
 import manifest from '../../utils/manifest';
 import maps from '../../data/lowlines/maps';
-//import ChecklistFactory from '../../views/Checklists/ChecklistFactory';
 import Spinner from '../../components/UI/Spinner';
+import checklists from '../../utils/checklists';
 
 import * as marker from './markers';
 
@@ -102,49 +102,24 @@ class Maps extends React.Component {
   generateChecklists = destination => {
     const { t, member } = this.props;
 
-    const factory = {};
 
-    const checklists = [
-      {
-        type: 'region-chests',
-        name: t('Region Chests'),
-        icon: 'destiny-region_chests',
-        items: factory.regionChests({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
-      },
-      {
-        type: 'lost-sectors',
-        name: t('Lost Sectors'),
-        icon: 'destiny-lost_sectors',
-        items: factory.lostSectors({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
-      },
-      // {
-      //   name: t('Adventures'),
-      //   items: factory.adventures({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
-      // },
-      {
-        type: 'ghost-scans',
-        name: t('Ghost Scans'),
-        icon: 'destiny-ghost',
-        items: factory.ghostScans({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
-      },
-      {
-        type: 'sleeper-nodes',
-        name: t('Sleeper Nodes'),
-        icon: 'destiny-sleeper_nodes',
-        items: factory.sleeperNodes({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
-      },
-      {
-        type: 'lost-memory-fragments',
-        name: t('Lost Memory Fragments'),
-        icon: 'destiny-lost_memory_fragments',
-        items: factory.latentMemories({ data: true }).items.filter(i => i.destinationHash === maps[destination].destination.hash)
-      }
-    ];
+    const lists = [
+      checklists[1697465175](),
+      checklists[3142056444](),
+      checklists[2360931290](),
+      checklists[365218222](),
+      checklists[2955980198]()
+    ].map(list => {
+      return {
+        ...list,
+        items: list.items.filter(i => i.destinationHash === maps[destination].destination.hash)
+      };
+    });
 
-    console.log(checklists);
+    // console.log(lists);
 
     this.setState({
-      checklists
+      checklists: lists
     });
   };
 
@@ -390,7 +365,7 @@ class Maps extends React.Component {
                 const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
                 const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
 
-                const icon = marker.icon({ hash: node.checklistHash, table: 'DestinyChecklistDefinition' }, [node.completed ? 'completed' : ''], checklist.icon);
+                const icon = marker.icon({ hash: node.checklistHash, table: 'DestinyChecklistDefinition' }, [node.completed ? 'completed' : ''], checklist.checklistIcon);
                 // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
                 return <Marker key={node.checklistHash} position={[offsetY, offsetX]} icon={icon} />;

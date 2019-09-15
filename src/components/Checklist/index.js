@@ -27,7 +27,7 @@ const ChecklistItem = props => {
 
 const Checklist = props => {
   const { t, headless, totalItems, completedItems, characterBound, checklistName, checklistProgressDescription, items } = props;
-  console.log(props);
+
   if (headless) {
     return (
       <>

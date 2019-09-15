@@ -63,6 +63,7 @@
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
+  word-break: break-word;
 }
 
 #tooltip .header .kind {
