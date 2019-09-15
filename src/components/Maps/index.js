@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { debounce } from 'lodash';
 import cx from 'classnames';
 
 import L from 'leaflet';
@@ -81,7 +82,7 @@ class Maps extends React.Component {
     this.generateChecklists(this.state.destination);
   }
 
-  componentDidUpdate(pP) {
+  componentDidUpdate(pP, pS) {
     const { t, member, id } = this.props;
 
     if (pP.member.data.updated !== member.data.updated) {
@@ -91,6 +92,10 @@ class Maps extends React.Component {
     if (pP.id !== id) {
       this.setState({ destination: id });
       this.generateChecklists(id);
+    }
+
+    if (pS.ui !== this.state.ui || pS.checklists !== this.state.checklists) {
+      this.props.rebindTooltips();
     }
   }
 
@@ -245,18 +250,46 @@ class Maps extends React.Component {
     if (href.includes(id)) {
       this.setState(p => {
         if (p.ui.destinations) {
-          p.ui.destinations = false;
+          return {
+            ...p,
+            ui: {
+              ...p.ui,
+              destinations: false
+            }
+          }
         } else {
-          p.ui.destinations = true;
+          return {
+            ...p,
+            ui: {
+              ...p.ui,
+              destinations: true
+            }
+          }
         }
-        return p;
       });
     } else {
       this.setState(p => {
-        p.ui.destinations = false;
-        return p;
+        return {
+            ...p,
+            ui: {
+              ...p.ui,
+              destinations: false
+            }
+          }
       });
     }
+  };
+
+  handler_layerAdd = debounce(e => {
+    this.props.rebindTooltips();
+  }, 200);
+
+  handler_moveEnd = e => {
+    this.props.rebindTooltips();
+  };
+
+  handler_zoomEnd = e => {
+    this.props.rebindTooltips();
   };
 
   render() {
@@ -297,7 +330,7 @@ class Maps extends React.Component {
                   return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
                 })}
           </div>
-          <Map center={center} zoom={this.state.zoom} minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} onViewportChanged={this.setZoom} zoomControl={false}>
+          <Map center={center} zoom={this.state.zoom} minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.setZoom} onLayerAdd={this.handler_layerAdd} onMoveEnd={this.handler_moveEnd} onZoomEnd={this.handler_zoomEnd}>
             {this.state.layers[destination] &&
               this.state.layers[destination]
                 .filter(layer => layer.type !== 'background')
@@ -357,10 +390,10 @@ class Maps extends React.Component {
                 const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
                 const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
 
-                const icon = marker.icon([node.completed ? 'completed' : ''], checklist.icon);
+                const icon = marker.icon({ hash: node.checklistHash, table: 'maps' }, [node.completed ? 'completed' : ''], checklist.icon);
                 // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
-                return <Marker key={node.itemHash} position={[offsetY, offsetX]} icon={icon} />;
+                return <Marker key={node.checklistHash} position={[offsetY, offsetX]} icon={icon} />;
               });
             })}
           </Map>
