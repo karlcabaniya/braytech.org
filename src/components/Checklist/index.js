@@ -26,7 +26,7 @@ const ChecklistItem = props => {
 };
 
 const Checklist = props => {
-  const { t, headless, totalItems, completedItems, characterBound, checklistName, checklistProgressDescription, items } = props;
+  const { t, headless, totalItems, completedItems, checklistCharacterBound, checklistName, checklistProgressDescription, items } = props;
 
   if (headless) {
     return (
@@ -49,7 +49,7 @@ const Checklist = props => {
       <>
         <div className='module-header'>
           <div className='sub-name'>{t(checklistName)}</div>
-          {characterBound ? (
+          {checklistCharacterBound ? (
             <div className='tooltip' data-hash='character_bound' data-table='BraytechDefinition'>
               <i className='segoe-uniE902' />
             </div>
