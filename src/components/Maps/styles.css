@@ -164,7 +164,7 @@ html.backdropfilter .map-omega .control.destinations li {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.map-omega .leaflet-container .icon-marker .wrapper .name {
+.map-omega .leaflet-container .icon-marker .wrapper .text {
   position: absolute;
   top: 50%;
   left: 100%;

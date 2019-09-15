@@ -123,8 +123,11 @@ function work(input) {
 async function run() {
   const manifest = await Manifest.getManifest();
 
-  function checklistItem(item) {   
+  function checklistItem(item) {
     const mapping = lowlines.checklists[item.hash] || {};
+    
+    let ass = assisted.find(a => a.nodes.find(n => n.checklistHash === parseInt(item.hash, 10))) || {};
+    if (ass.nodes) ass = ass.nodes.find(n => n.checklistHash === parseInt(item.hash, 10)) || {}
 
     const destinationHash = item.destinationHash || mapping.destinationHash;
     const bubbleHash = item.bubbleHash || mapping.bubbleHash;
@@ -172,6 +175,9 @@ async function run() {
       map: mapping.node ? {
         x: mapping.node.x,
         y: mapping.node.y
+      } : ass && ass.x ? {
+        x: ass.x,
+        y: ass.y
       } : {},
       sorts: {
         destination: destination && destination.displayProperties.name,
@@ -194,6 +200,9 @@ async function run() {
         const item = manifest.DestinyRecordDefinition[hash];
 
         const mapping = lowlines.records[hash];
+    
+        let ass = assisted.find(a => a.nodes.find(n => n.recordHash === parseInt(item.hash, 10))) || {};
+        if (ass.nodes) ass = ass.nodes.find(n => n.recordHash === parseInt(item.hash, 10)) || {}
         
         const destinationHash = mapping && mapping.destinationHash;
         const destination = destinationHash && manifest.DestinyDestinationDefinition[destinationHash];
@@ -220,6 +229,13 @@ async function run() {
           bubbleName: backupBubbleName,
           recordName: item.displayProperties.name,
           recordHash: hash,
+          map: mapping && mapping.node ? {
+            x: mapping.node.x,
+            y: mapping.node.y
+          } : ass && ass.x ? {
+            x: ass.x,
+            y: ass.y
+          } : {},
           sorts: {
             destination: destination && destination.displayProperties.name,
             bubble: bubbleName,

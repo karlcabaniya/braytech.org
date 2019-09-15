@@ -106,17 +106,22 @@ class Maps extends React.Component {
     const lists = [
       checklists[1697465175](),
       checklists[3142056444](),
+      checklists[4178338182](),
       checklists[2360931290](),
       checklists[365218222](),
       checklists[2955980198]()
     ].map(list => {
-      return {
+      const adjusted = {
         ...list,
         items: list.items.filter(i => i.destinationHash === maps[destination].destination.hash)
       };
+
+
+
+      return adjusted;
     });
 
-    // console.log(lists);
+    console.log(lists);
 
     this.setState({
       checklists: lists
@@ -365,6 +370,8 @@ class Maps extends React.Component {
                 const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
                 const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
 
+                // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
+
                 const icon = marker.icon({ hash: node.checklistHash, table: 'DestinyChecklistDefinition' }, [node.completed ? 'completed' : ''], checklist.checklistIcon);
                 // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
@@ -375,7 +382,7 @@ class Maps extends React.Component {
           <div className={cx('control', 'destinations', { visible: this.state.ui.destinations })}>
             <ul className='list'>
               {this.destinations.map(d => {
-                const name = d.destination && manifest.DestinyDestinationDefinition[d.destination] ? manifest.DestinyDestinationDefinition[d.destination].displayProperties.name : d.activity && manifest.DestinyActivityDefinition[d.activity] ? manifest.DestinyActivityDefinition[d.activity].displayProperties.name : ' lol';
+                const name = d.destination && manifest.DestinyDestinationDefinition[d.destination] ? manifest.DestinyDestinationDefinition[d.destination].displayProperties.name : d.activity && manifest.DestinyActivityDefinition[d.activity] ? manifest.DestinyActivityDefinition[d.activity].displayProperties.name : '';
 
                 return (
                   <li key={d.id} className={cx('linked', { active: d.id === destinationId })}>

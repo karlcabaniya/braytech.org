@@ -1,7 +1,7 @@
 import L from 'leaflet';
 
-export const icon = (tooltip = {}, classNames = [], destinyIcon, name) => {
-  const html = tooltip.hash ? `<div class='wrapper'><div class='icon ${destinyIcon} tooltip' data-hash='${tooltip.hash}' data-table='${tooltip.table}'></div>${name ? `<div class='name'>${name}</div>` : ''}</div>` : `<div class='wrapper'><div class='icon ${destinyIcon}'></div>${name ? `<div class='name'>${name}</div>` : ''}</div>`;
+export const icon = (tooltip = {}, classNames = [], destinyIcon, text) => {
+  const html = tooltip.hash ? `<div class='wrapper'><div class='icon ${destinyIcon} tooltip' data-hash='${tooltip.hash}' data-table='${tooltip.table}'></div>${text ? `<div class='text'>${text}</div>` : ''}</div>` : `<div class='wrapper'><div class='icon ${destinyIcon}'></div>${text ? `<div class='text'>${text}</div>` : ''}</div>`;
   return L.divIcon({
     className: ['icon-marker'].concat(classNames).join(' '),
     html
