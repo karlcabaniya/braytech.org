@@ -152,6 +152,10 @@ html.backdropfilter .map-omega .control.destinations li {
   transform: translateX(-50%) translateY(-50%) scale(0.4);
 }
 
+.map-omega .leaflet-container .icon-marker .wrapper .icon {
+  font-size: 24px;
+}
+
 .map-omega .leaflet-container .icon-marker .wrapper .icon::before {
   font-family: 'destiny' !important;
   font-size: 22px;
@@ -180,7 +184,12 @@ html.backdropfilter .map-omega .control.destinations li {
   opacity: 0.6;
 }
 
-.map-omega .leaflet-container .icon-marker.completed {
+.map-omega .leaflet-container .icon-marker.checklistId-4178338182 {
+  opacity: 0.8;
+}
+
+.map-omega .leaflet-container .icon-marker.completed,
+.map-omega .leaflet-container .icon-marker.completed.checklistId-4178338182 {
   opacity: 0.2;
 }
 

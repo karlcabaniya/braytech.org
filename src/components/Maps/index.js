@@ -99,10 +99,7 @@ class Maps extends React.Component {
     }
   }
 
-  generateChecklists = destination => {
-    const { t, member } = this.props;
-
-
+  generateChecklists = destination => {   
     const lists = [
       checklists[1697465175](),
       checklists[3142056444](),
@@ -113,10 +110,25 @@ class Maps extends React.Component {
     ].map(list => {
       const adjusted = {
         ...list,
-        items: list.items.filter(i => i.destinationHash === maps[destination].destination.hash)
+        tooltipTable: 'DestinyChecklistDefinition',
+        items: list.items.filter(i => i.destinationHash === maps[destination].destination.hash).map(i => {
+          return {
+            ...i,
+            tooltipHash: i.checklistHash
+          }
+        })
       };
 
-
+      if (list.checklistId === 4178338182) {
+        adjusted.checklistIcon = 'destiny-adventure2';
+        adjusted.tooltipTable = 'DestinyActivityDefinition';
+        adjusted.items = adjusted.items.map(i => {
+          return {
+            ...i,
+            tooltipHash: i.activityHash
+          }
+        });
+      }
 
       return adjusted;
     });
@@ -372,7 +384,7 @@ class Maps extends React.Component {
 
                 // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 
-                const icon = marker.icon({ hash: node.checklistHash, table: 'DestinyChecklistDefinition' }, [node.completed ? 'completed' : ''], checklist.checklistIcon);
+                const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`], checklist.checklistIcon);
                 // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
                 return <Marker key={node.checklistHash} position={[offsetY, offsetX]} icon={icon} />;

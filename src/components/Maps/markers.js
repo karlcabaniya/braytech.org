@@ -1,10 +1,54 @@
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import L from 'leaflet';
 
-export const icon = (tooltip = {}, classNames = [], destinyIcon, text) => {
-  const html = tooltip.hash ? `<div class='wrapper'><div class='icon ${destinyIcon} tooltip' data-hash='${tooltip.hash}' data-table='${tooltip.table}'></div>${text ? `<div class='text'>${text}</div>` : ''}</div>` : `<div class='wrapper'><div class='icon ${destinyIcon}'></div>${text ? `<div class='text'>${text}</div>` : ''}</div>`;
+function generateIcon(destinyIcon) {
+  let icon;
+
+  if (destinyIcon === 'destiny-adventure2') {
+    icon = (
+      <div className='icon'>
+        <span className='destiny-adventure2'>
+          <span className='path1' />
+          <span className='path2' />
+          <span className='path3' />
+          <span className='path4' />
+          <span className='path5' />
+          <span className='path6' />
+        </span>
+      </div>
+    );
+  } else {
+    icon = <div className={`icon ${destinyIcon}`} />;
+  }
+
+  return icon;
+}
+
+export const icon = (tooltip = {}, classNames = [], destinyIcon, opacity = 0.6, text) => {
+  const icon = generateIcon(destinyIcon);
+  const html = (
+    <div className='wrapper'>
+      {tooltip.hash ? (
+        <>
+          <div className='tooltip' data-hash={tooltip.hash} data-table={tooltip.table}>
+            {icon}
+          </div>
+          {text ? <div className='text'>${text}</div> : null}
+        </>
+      ) : (
+        <>
+          {icon}
+          {text ? <div className='text'>${text}</div> : null}
+        </>
+      )}
+    </div>
+  );
+
   return L.divIcon({
     className: ['icon-marker'].concat(classNames).join(' '),
-    html
+    opacity,
+    html: ReactDOMServer.renderToString(html)
   });
 };
 

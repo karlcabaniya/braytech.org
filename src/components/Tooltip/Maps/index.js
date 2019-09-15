@@ -24,13 +24,30 @@ class Checklist extends React.Component {
 
     console.log(checklist)
 
+    if (checklistHash === '4178338182') {
+      checklist.checklistIcon = (
+        <span className='destiny-adventure2'>
+          <span className='path1' />
+          <span className='path2' />
+          <span className='path3' />
+          <span className='path4' />
+          <span className='path5' />
+          <span className='path6' />
+        </span>
+      )
+    } else {
+      checklist.checklistIcon = (
+        <span className={cx(checklist.checklistIcon)} />
+      )
+    }
+
     return (
       <>
         <div className='acrylic' />
         <div className={cx('frame', 'map')}>
           <div className='header'>
             <div className='icon'>
-              <span className={cx(checklist.checklistIcon)} />
+              {checklist.checklistIcon}
             </div>
             <div className='text'>
               <div className='name'>{item.formatted.name}{item.formatted.suffix ? ` ${item.formatted.suffix}` : null}</div>
