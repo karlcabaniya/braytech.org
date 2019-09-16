@@ -36,10 +36,9 @@ class CharacterSelect extends React.Component {
   };
 
   render() {
-    const { t, member, viewport } = this.props;
+    const { t, member, viewport, location } = this.props;
     const { error, loading } = member;
 
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
     const reverseUI = viewport.width <= 600;
 
     const savedProfile = ls.get('setting.profile') || {};
@@ -51,7 +50,7 @@ class CharacterSelect extends React.Component {
             <div className='sub-header'>
               <div>{t(member && member.membershipId === savedProfile.membershipId ? 'Saved profile' : 'Active profile')}</div>
             </div>
-            {member.data && <Profile member={member} onCharacterClick={this.characterClick} from={from} />}
+            {member.data && <Profile member={member} onCharacterClick={this.characterClick} location={location} />}
           </>
         ) : null}
       </>

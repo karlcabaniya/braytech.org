@@ -4,6 +4,10 @@
  * as well.
  */
 export function removeMemberIds(pathname) {
-  const linkHasMemberIds = pathname.match(RegExp('^(/\\d/\\d+/\\d+)+(/.+)$'));
-  return linkHasMemberIds ? linkHasMemberIds[2] : pathname;
+  if (pathname) {
+    const linkHasMemberIds = pathname.match(RegExp('^(/\\d/\\d+/\\d+)+(/.+)$'));
+    return linkHasMemberIds ? linkHasMemberIds[2] : pathname;
+  } else {
+    return pathname;
+  }
 }

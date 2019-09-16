@@ -15,12 +15,15 @@ import './styles.css';
 
 class Characters extends React.Component {
   render() {
-    const { t, member, viewport } = this.props;
+    const { t, member, viewport, location } = this.props;
     const characters = member.data.profile.characters;
     const characterProgressions = member.data.profile.characterProgressions.data;
     const characterActivities = member.data.profile.characterActivities;
 
     const lastActivities = destinyUtils.lastPlayerActivity({ profile: { characters, characterActivities } });
+console.log(location)
+    const publicPaths = ['/maps'];
+    const goto = removeMemberIds((location.state && location.state.from && location.state.from.pathname) || '/now');
 
     return (
       <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
@@ -38,12 +41,14 @@ class Characters extends React.Component {
             </>
           );
 
+          const to = !publicPaths.includes(goto) ? `/${member.membershipType}/${member.membershipId}/${character.characterId}${goto}` : goto;
+
           return (
             <div key={character.characterId} className='char'>
               <Button
                 className='linked'
                 anchor
-                to={`/${member.membershipType}/${member.membershipId}/${character.characterId}${removeMemberIds(this.props.location.pathname)}`}
+                to={to}
                 action={e => {
                   this.props.characterClick(character.characterId);
                 }}

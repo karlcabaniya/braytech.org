@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 
 import * as destinyUtils from '../../utils/destinyUtils';
@@ -8,7 +7,7 @@ import Flair from '../../components/UI/Flair';
 
 class Profile extends React.Component {
   render() {
-    const { t, member, from } = this.props;
+    const { t, member, location } = this.props;
 
     const groups = member.data.groups.results;
 
@@ -41,16 +40,10 @@ class Profile extends React.Component {
             </div>
           </div>
         </div>
-        <Characters data={member.data} location={{ ...from }} characterClick={this.props.onCharacterClick} />
+        <Characters data={member.data} location={location} characterClick={this.props.onCharacterClick} />
       </div>
     );
   }
 }
-
-Profile.propTypes = {
-  onCharacterClick: PropTypes.func.isRequired,
-  from: PropTypes.object.isRequired,
-  member: PropTypes.object.isRequired
-};
 
 export default withTranslation()(Profile);

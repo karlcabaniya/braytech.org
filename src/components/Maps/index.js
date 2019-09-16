@@ -11,7 +11,9 @@ import 'leaflet/dist/leaflet.css';
 import { Map, ImageOverlay, Marker } from 'react-leaflet';
 
 import manifest from '../../utils/manifest';
+import * as ls from '../../utils/localStorage';
 import maps from '../../data/lowlines/maps';
+import CharacterEmblem from '../../components/UI/CharacterEmblem';
 import Spinner from '../../components/UI/Spinner';
 import checklists from '../../utils/checklists';
 
@@ -96,30 +98,36 @@ class Maps extends React.Component {
         }
       },
       ui: {
-        destinations: true
+        destinations: false,
+        characters: false
       }
     };
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    this.mounted = true;
 
     this.prepareLayers(this.state.destination);
     this.generateChecklists(this.state.destination);
   }
 
-  componentDidUpdate(pP, pS) {
-    const { t, member, id } = this.props;
+  componentWillUnmount() {
+    this.mounted = false;
+  }
 
-    if (pP.member.data.updated !== member.data.updated) {
+  componentDidUpdate(pP, pS) {
+    const { member, id } = this.props;
+
+    if ((pP.member.data.updated !== member.data.updated || pP.member.characterId !== member.characterId) && this.mounted) {
       this.generateChecklists(this.state.destination);
     }
 
-    if (pP.id !== id) {
+    if (pP.id !== id && this.mounted) {
       this.setState({ destination: id });
     }
 
-    if (pS.ui !== this.state.ui || pS.checklists !== this.state.checklists) {
+    if ((pS.ui !== this.state.ui || pS.checklists !== this.state.checklists) && this.mounted) {
       this.props.rebindTooltips();
     }
   }
@@ -175,7 +183,7 @@ class Maps extends React.Component {
       lists[key] = adjusted;
     });
 
-    console.log(lists);
+    // console.log(lists);
 
     this.setState({
       checklists: lists
@@ -258,9 +266,9 @@ class Maps extends React.Component {
 
       d.layers = layers;
 
-      console.log(layers);
+      // console.log(layers);
 
-      this.setState(p => {
+      if (this.mounted) this.setState(p => {
         return {
           destinations: {
             ...p.destinations,
@@ -274,7 +282,7 @@ class Maps extends React.Component {
       });
     } catch (e) {
       console.log(e);
-      this.setState(p => {
+      if (this.mounted) this.setState(p => {
         return {
           destinations: {
             ...p.destinations,
@@ -293,7 +301,7 @@ class Maps extends React.Component {
     try {
       await this.loadLayers(this.state.destination);
 
-      this.setState({ loading: false });
+      if (this.mounted) this.setState({ loading: false });
 
       await Promise.all(
         Object.keys(this.state.destinations)
@@ -359,16 +367,56 @@ class Maps extends React.Component {
     }
   };
 
+  handler_changeCharacterId = e => {
+    const characterId = e.currentTarget.dataset.characterid;
+
+    const { member } = this.props;
+
+    if (member.characterId === characterId) {
+      this.setState(p => {
+        if (p.ui.characters) {
+          return {
+            ...p,
+            ui: {
+              ...p.ui,
+              characters: false
+            }
+          };
+        } else {
+          return {
+            ...p,
+            ui: {
+              ...p.ui,
+              characters: true
+            }
+          };
+        }
+      });
+    } else {
+      this.setState(p => {
+        return {
+          ...p,
+          ui: {
+            ...p.ui,
+            characters: false
+          }
+        };
+      });
+      this.props.changeCharacterId({ membershipType: member.membershipType, membershipId: member.membershipId, characterId });
+      ls.set('setting.profile', { membershipType: member.membershipType, membershipId: member.membershipId, characterId });
+    }
+  };
+
   handler_layerAdd = debounce(e => {
-    this.props.rebindTooltips();
+    if (this.mounted) this.props.rebindTooltips();
   }, 200);
 
   handler_moveEnd = e => {
-    this.props.rebindTooltips();
+    if (this.mounted) this.props.rebindTooltips();
   };
 
   handler_zoomEnd = e => {
-    this.props.rebindTooltips();
+    if (this.mounted) this.props.rebindTooltips();
   };
 
   render() {
@@ -381,7 +429,7 @@ class Maps extends React.Component {
     } else if (this.state.error) {
       return <div className='map-omega loading'>error lol</div>;
     } else {
-      const { viewport, id: destinationId = 'echo-mesa' } = this.props;
+      const { member, viewport, id: destinationId = 'echo-mesa' } = this.props;
       const destination = this.state.destination;
 
       const map = maps[destination].map;
@@ -492,29 +540,48 @@ class Maps extends React.Component {
                 });
             })}
           </Map>
-          <div className={cx('control', 'destinations', { visible: this.state.ui.destinations })}>
-            <ul className='list'>
-              {Object.keys(this.state.destinations).map(key => {
-                const destination = maps[key].destination;
-
-                let name = destination.hash && manifest.DestinyDestinationDefinition[destination.hash] && manifest.DestinyDestinationDefinition[destination.hash].displayProperties.name;
-                if (destination.collectibleHash) {
-                  name = manifest.DestinyCollectibleDefinition[destination.collectibleHash].displayProperties.name;
-                } else if (destination.activityHash) {
-                  name = manifest.DestinyActivityDefinition[destination.activityHash].displayProperties.name;
-                }
-
-                return (
-                  <li key={destination.id} className={cx('linked', { active: destination.id === destinationId, disabled: this.state.destinations[destination.id].loading })}>
-                    <div className='text'>
-                      <div className='name'>{name}</div>
-                      <div className='loading'>{this.state.destinations[destination.id].loading ? <Spinner mini /> : null}</div>
-                    </div>
-                    <Link to={`/maps/${destination.id}`} onClick={this.handler_toggleDestinationsList}></Link>
+          <div className='controls left'>
+            <div className={cx('control', 'characters', { visible: this.state.ui.characters })}>
+              <ul className='list'>
+                {member && member.data ? (
+                  member.data.profile.profile.data.characterIds.map(characterId => {
+                    return (
+                      <li key={characterId} className={cx('linked', { active: characterId === member.characterId })} data-characterid={characterId} onClick={this.handler_changeCharacterId}>
+                        <CharacterEmblem characterId={characterId} />
+                      </li>
+                    );
+                  })
+                ) : (
+                  <li className='linked active'>
+                    <CharacterEmblem onBoarding />
                   </li>
-                );
-              })}
-            </ul>
+                )}
+              </ul>
+            </div>
+            <div className={cx('control', 'destinations', { visible: this.state.ui.destinations })}>
+              <ul className='list'>
+                {Object.keys(this.state.destinations).map(key => {
+                  const destination = maps[key].destination;
+
+                  let name = destination.hash && manifest.DestinyDestinationDefinition[destination.hash] && manifest.DestinyDestinationDefinition[destination.hash].displayProperties.name;
+                  if (destination.collectibleHash) {
+                    name = manifest.DestinyCollectibleDefinition[destination.collectibleHash].displayProperties.name;
+                  } else if (destination.activityHash) {
+                    name = manifest.DestinyActivityDefinition[destination.activityHash].displayProperties.name;
+                  }
+
+                  return (
+                    <li key={destination.id} className={cx('linked', { active: destination.id === destinationId, disabled: this.state.destinations[destination.id].loading })}>
+                      <div className='text'>
+                        <div className='name'>{name}</div>
+                        <div className='loading'>{this.state.destinations[destination.id].loading ? <Spinner mini /> : null}</div>
+                      </div>
+                      <Link to={`/maps/${destination.id}`} onClick={this.handler_toggleDestinationsList}></Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
           {viewport.width > 600 ? (
             <div className='control zoom visible'>
@@ -550,6 +617,9 @@ function mapDispatchToProps(dispatch) {
   return {
     rebindTooltips: value => {
       dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    },
+    changeCharacterId: value => {
+      dispatch({ type: 'MEMBER_CHARACTER_SELECT', payload: value });
     }
   };
 }
