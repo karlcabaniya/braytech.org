@@ -457,7 +457,7 @@ class Maps extends React.Component {
                   return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
                 })}
           </div>
-          <Map center={center} zoom={this.state.zoom} minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_viewportChanged} onLayerAdd={this.handler_layerAdd} onMoveEnd={this.handler_moveEnd} onZoomEnd={this.handler_zoomEnd}>
+          <Map center={center} zoom={this.state.zoom} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_viewportChanged} onLayerAdd={this.handler_layerAdd} onMoveEnd={this.handler_moveEnd} onZoomEnd={this.handler_zoomEnd}>
             {this.state.destinations[destination] &&
               this.state.destinations[destination].layers
                 .filter(layer => layer.type !== 'background')
@@ -599,7 +599,7 @@ class Maps extends React.Component {
                     <i className='segoe-uniE1091' />
                   </div>
                 </li>
-                <li className={cx('linked', { disabled: this.state.zoom === -3 })} onClick={this.handler_zoomDecrease}>
+                <li className={cx('linked', { disabled: this.state.zoom === -2 })} onClick={this.handler_zoomDecrease}>
                   <div className='text'>
                     <i className='segoe-uniE1081' />
                   </div>

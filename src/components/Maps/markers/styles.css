@@ -112,7 +112,15 @@
   left: 50%;
   width: 72px;
   height: 72px;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%) scale(0.8);
+}
+
+.map-omega.zoom--1 .leaflet-container .icon-marker .fast-travel {
+  transform: translateX(-50%) translateY(-50%) scale(0.4);
+}
+
+.map-omega.zoom--2 .leaflet-container .icon-marker .fast-travel {
+  transform: translateX(-50%) translateY(-50%) scale(0.2);
 }
 
 .map-omega .leaflet-container .icon-marker .fast-travel .star {
