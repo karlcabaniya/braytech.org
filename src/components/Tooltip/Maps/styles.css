@@ -38,7 +38,7 @@
 }
 
 #tooltip .frame.map .description ~ .completed {
-  margin: 10px 0 0;
+  margin: 6px 0 0;
 }
 
 #tooltip .frame.map .description {
@@ -46,12 +46,13 @@
 }
 
 #tooltip .frame.map .description:last-child {
-  padding: 16px 16px 12px;
+  padding: 16px 16px 8px;
 }
 
 #tooltip .frame.map .description .destination {
-  padding: 6px 0 10px;
+  padding: 0 0 10px;
   font-size: 16px;
+  line-height: 1.4;
   color: #f5eac4;
 }
 
