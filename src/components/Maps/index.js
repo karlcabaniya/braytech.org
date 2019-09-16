@@ -26,12 +26,58 @@ class Maps extends React.Component {
     this.state = {
       loading: true,
       error: false,
-      destination: this.props.id || 'new-pacific-arcology',
       zoom: 0,
-      layers: {},
+      destination: this.props.id || 'echo-mesa',
+      destinations: {
+        'tower': {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'edz': {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'new-pacific-arcology': {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'echo-mesa': {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'arcadian-valley': {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'mercury': {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'hellas-basin': {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'tangled-shore': {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'dreaming-city': {
+          loading: true,
+          error: false,
+          layers: []
+        }
+      },
       checklists: [],
       ui: {
-        destinations: false
+        destinations: true
       }
     };
   }
@@ -99,24 +145,19 @@ class Maps extends React.Component {
     }
   }
 
-  generateChecklists = destination => {   
-    const lists = [
-      checklists[1697465175](),
-      checklists[3142056444](),
-      checklists[4178338182](),
-      checklists[2360931290](),
-      checklists[365218222](),
-      checklists[2955980198]()
-    ].map(list => {
+  generateChecklists = (destination = 'echo-mesa') => {
+    const lists = [checklists[1697465175](), checklists[3142056444](), checklists[4178338182](), checklists[2360931290](), checklists[365218222](), checklists[2955980198]()].map(list => {
       const adjusted = {
         ...list,
         tooltipTable: 'DestinyChecklistDefinition',
-        items: list.items.filter(i => i.destinationHash === maps[destination].destination.hash).map(i => {
-          return {
-            ...i,
-            tooltipHash: i.checklistHash
-          }
-        })
+        items: list.items
+          .filter(i => i.destinationHash === maps[destination].destination.hash)
+          .map(i => {
+            return {
+              ...i,
+              tooltipHash: i.checklistHash
+            };
+          })
       };
 
       if (list.checklistId === 4178338182) {
@@ -126,7 +167,7 @@ class Maps extends React.Component {
           return {
             ...i,
             tooltipHash: i.activityHash
-          }
+          };
         });
       }
 
@@ -140,37 +181,15 @@ class Maps extends React.Component {
     });
   };
 
-  prepareLayers = async destination => {
+  loadLayers = async destination => {
     try {
-      const layers = {};
+      const d = {};
 
-      await Promise.all(
-        Object.entries(maps).map(async ([key, value]) => {
-          let l = value.map.layers;
-
-          l = await Promise.all(
-            l.map(async layer => {
-              if (layer.nodes) {
-                await Promise.all(
-                  layer.nodes.map(async layer => {
-                    return await fetch(layer.image)
-                      .then(r => {
-                        return r.blob();
-                      })
-                      .then(blob => {
-                        const objectURL = URL.createObjectURL(blob);
-
-                        layer.image = objectURL;
-                        return layer;
-                      })
-                      .catch(e => {
-                        console.log(e);
-                      });
-                  })
-                );
-
-                return layer;
-              } else {
+      let layers = await Promise.all(
+        maps[destination].map.layers.map(async layer => {
+          if (layer.nodes) {
+            await Promise.all(
+              layer.nodes.map(async layer => {
                 return await fetch(layer.image)
                   .then(r => {
                     return r.blob();
@@ -184,47 +203,105 @@ class Maps extends React.Component {
                   .catch(e => {
                     console.log(e);
                   });
-              }
-            })
-          );
+              })
+            );
 
-          l = await Promise.all(
-            l.map(async layer => {
-              if (layer.color) {
-                const image = document.createElement('img');
-                image.src = layer.image;
+            return layer;
+          } else {
+            return await fetch(layer.image)
+              .then(r => {
+                return r.blob();
+              })
+              .then(blob => {
+                const objectURL = URL.createObjectURL(blob);
 
-                await new Promise(resolve => {
-                  image.onload = e => resolve();
-                });
-
-                const canvas = document.createElement('canvas');
-                canvas.width = layer.width;
-                canvas.height = layer.height;
-                const context = canvas.getContext('2d');
-
-                context.fillStyle = layer.color;
-                context.fillRect(0, 0, layer.width, layer.height);
-
-                context.globalCompositeOperation = 'destination-atop';
-                context.drawImage(image, 0, 0, layer.width, layer.height);
-
-                layer.image = canvas.toDataURL();
-
+                layer.image = objectURL;
                 return layer;
-              } else {
-                return layer;
-              }
-            })
-          );
-
-          layers[key] = l;
+              })
+              .catch(e => {
+                console.log(e);
+              });
+          }
         })
       );
 
-      // console.log(layers);
+      layers = await Promise.all(
+        layers.map(async layer => {
+          if (layer.color) {
+            const image = document.createElement('img');
+            image.src = layer.image;
 
-      this.setState({ loading: false, layers });
+            await new Promise(resolve => {
+              image.onload = e => resolve();
+            });
+
+            const canvas = document.createElement('canvas');
+            canvas.width = layer.width;
+            canvas.height = layer.height;
+            const context = canvas.getContext('2d');
+
+            context.fillStyle = layer.color;
+            context.fillRect(0, 0, layer.width, layer.height);
+
+            context.globalCompositeOperation = 'destination-atop';
+            context.drawImage(image, 0, 0, layer.width, layer.height);
+
+            layer.image = canvas.toDataURL();
+
+            return layer;
+          } else {
+            return layer;
+          }
+        })
+      );
+
+      d.layers = layers;
+
+      console.log(layers);
+
+      this.setState(p => {
+        return {
+          destinations: {
+            ...p.destinations,
+            [destination]: {
+              loading: false,
+              error: false,
+              layers
+            }
+          }
+        };
+      });
+    } catch (e) {
+      console.log(e);
+      this.setState(p => {
+        return {
+          destinations: {
+            ...p.destinations,
+            [destination]: {
+              loading: false,
+              error: true,
+              layers: []
+            }
+          }
+        };
+      });
+    }
+  };
+
+  prepareLayers = async destination => {
+    try {
+
+      await this.loadLayers(this.state.destination);
+
+      this.setState({ loading: false });
+
+      await Promise.all(
+        Object.keys(this.state.destinations).filter(key => this.state.destinations[key].loading).map(async key => {
+          await this.loadLayers(key);
+        })
+      );
+
+      console.log('done')
     } catch (e) {
       console.log(e);
       this.setState({ loading: false, error: true });
@@ -248,7 +325,7 @@ class Maps extends React.Component {
               ...p.ui,
               destinations: false
             }
-          }
+          };
         } else {
           return {
             ...p,
@@ -256,18 +333,18 @@ class Maps extends React.Component {
               ...p.ui,
               destinations: true
             }
-          }
+          };
         }
       });
     } else {
       this.setState(p => {
         return {
-            ...p,
-            ui: {
-              ...p.ui,
-              destinations: false
-            }
+          ...p,
+          ui: {
+            ...p.ui,
+            destinations: false
           }
+        };
       });
     }
   };
@@ -294,7 +371,7 @@ class Maps extends React.Component {
     } else if (this.state.error) {
       return <div className='map-omega loading'>error lol</div>;
     } else {
-      const { id: destinationId = 'new-pacific-arcology' } = this.props;
+      const { id: destinationId = 'echo-mesa' } = this.props;
       const destination = this.state.destination;
 
       const map = maps[destination].map;
@@ -315,16 +392,16 @@ class Maps extends React.Component {
       return (
         <div className={cx('map-omega', `zoom-${this.state.zoom}`)}>
           <div className='leaflet-pane leaflet-background-pane'>
-            {this.state.layers[destination] &&
-              this.state.layers[destination]
+            {this.state.destinations[destination] &&
+              this.state.destinations[destination].layers
                 .filter(layer => layer.type === 'background')
                 .map(layer => {
                   return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
                 })}
           </div>
           <Map center={center} zoom={this.state.zoom} minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.setZoom} onLayerAdd={this.handler_layerAdd} onMoveEnd={this.handler_moveEnd} onZoomEnd={this.handler_zoomEnd}>
-            {this.state.layers[destination] &&
-              this.state.layers[destination]
+            {this.state.destinations[destination] &&
+              this.state.destinations[destination].layers
                 .filter(layer => layer.type !== 'background')
                 .map(layer => {
                   const layerX = layer.x ? layer.x : 0;
@@ -397,8 +474,11 @@ class Maps extends React.Component {
                 const name = d.destination && manifest.DestinyDestinationDefinition[d.destination] ? manifest.DestinyDestinationDefinition[d.destination].displayProperties.name : d.activity && manifest.DestinyActivityDefinition[d.activity] ? manifest.DestinyActivityDefinition[d.activity].displayProperties.name : '';
 
                 return (
-                  <li key={d.id} className={cx('linked', { active: d.id === destinationId })}>
-                    <div className='text'>{name}</div>
+                  <li key={d.id} className={cx('linked', { active: d.id === destinationId, loading: this.state.destinations[d.id].loading })}>
+                    <div className='text'>
+                      <div className='name'>{name}</div>
+                      <div className='loading'>{this.state.destinations[d.id].loading ? <Spinner mini /> : null}</div>
+                    </div>
                     <Link to={`/maps/${d.id}`} onClick={this.handler_toggleDestinationsList}></Link>
                   </li>
                 );

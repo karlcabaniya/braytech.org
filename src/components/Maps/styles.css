@@ -16,7 +16,7 @@
   position: fixed;
   top: calc(3rem + 40px);
   left: 3rem;
-  width: 260px;
+  width: 280px;
   z-index: 2;
 }
 
@@ -45,11 +45,33 @@ html.backdropfilter .map-omega .control.destinations li {
   display: none;
 }
 
+.map-omega .control.destinations li.loading {
+  pointer-events: none;
+}
+
+.map-omega .control.destinations li.loading .text .name {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .map-omega .control.destinations li .text {
   padding: 0 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+}
+
+.map-omega .control.destinations li .text .name {
+  display: grid;
+  align-content: center;
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 2px;
+}
+
+.map-omega .control.destinations li .text .loading .spinner {
+  width: 18px;
+  height: 18px;
 }
 
 .map-omega .leaflet-container  {
