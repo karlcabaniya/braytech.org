@@ -2,15 +2,11 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { flattenDepth, orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import ObservedImage from '../ObservedImage';
 import ProgressBar from '../UI/ProgressBar';
-import Spinner from '../UI/Spinner';
 import * as utils from '../../utils/destinyUtils';
-import * as bungie from '../../utils/bungie';
 
 import './styles.css';
 
@@ -18,13 +14,7 @@ class Mode extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      glory: {
-        streak: 0,
-        wins: false,
-        loading: true
-      }
-    };
+    this.state = {}
 
     this.data = {
       2772425241: {
@@ -33,7 +23,8 @@ class Mode extends React.Component {
         iconClass: 'infamy',
         currentResetCount: this.calculateResets(2772425241).current,
         totalResetCount: this.calculateResets(2772425241).total,
-        totalPoints: utils.totalInfamy()
+        totalPoints: utils.totalInfamy(),
+        streakHash: 2939151659
       },
       2626549951: {
         hash: 2626549951, // valor
@@ -41,7 +32,8 @@ class Mode extends React.Component {
         iconClass: 'valor',
         currentResetCount: this.calculateResets(3882308435).current,
         totalResetCount: this.calculateResets(3882308435).total,
-        totalPoints: utils.totalValor()
+        totalPoints: utils.totalValor(),
+        streakHash: 2203850209
       },
       2000925172: {
         hash: 2000925172, // glory
@@ -49,6 +41,7 @@ class Mode extends React.Component {
         activityHash: 2947109551,
         iconClass: 'glory',
         totalPoints: utils.totalGlory(),
+        streakHash: 2572719399,
         gains: {
           '0': {
             progressLoss: -60,
@@ -278,71 +271,9 @@ class Mode extends React.Component {
     return winsRequired;
   };
 
-  getRecentActivity = async () => {
-    const { hash, data } = this.props;
-    const { membershipType, membershipId, characters } = data;
-
-    if (hash === 2000925172) {
-      const charactersIds = characters.map(c => c.characterId);
-
-      let activities;
-
-      try {
-        let requests = charactersIds.map(async c => {
-          let response = await bungie.GetActivityHistory(membershipType, membershipId, c, 5, 69, 0);
-          return response.activities || [];
-        });
-
-        activities = await Promise.all(requests);
-      } catch (e) {
-        console.log(e);
-
-        this.setState({ glory: { streak: false, wins: false, loading: false } });
-
-        return;
-      }
-
-      activities = flattenDepth(activities, 1);
-      activities = orderBy(activities, [ac => ac.period], ['desc']);
-
-      let streakCount = 0;
-      let streakBroken = false;
-      activities.forEach((match, i) => {
-        if (match.values.standing.basic.value !== 0) {
-          streakBroken = true;
-        }
-
-        if (!streakBroken && match.values.standing.basic.value === 0) {
-          streakCount++;
-        }
-      });
-
-      let winsRequired = this.winsRequired(streakCount);
-
-      this.setState({ glory: { streak: streakCount, wins: winsRequired, loading: false } });
-    }
-  };
-
-  async componentDidMount() {
-    this.getRecentActivity();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.member.data !== this.props.member.data && !this.state.glory.loading) {
-      this.setState((prevState, props) => {
-        prevState.glory.loading = true;
-        return prevState;
-      });
-      this.getRecentActivity();
-    }
-  }
-
   render() {
     const { t, mini, hash } = this.props;
     const { characterId, characterProgressions } = this.props.data;
-
-    // console.log(data[2000925172].gains)
-    // console.log(characterProgressions[characterId].progressions[2000925172])
     
     let progressStepDescription = characterProgressions[characterId].progressions[hash].currentProgress === this.data[hash].totalPoints && characterProgressions[characterId].progressions[hash].stepIndex === manifest.DestinyProgressionDefinition[hash].steps.length ? manifest.DestinyProgressionDefinition[hash].steps[0].stepName : manifest.DestinyProgressionDefinition[hash].steps[(characterProgressions[characterId].progressions[hash].stepIndex + 1) % manifest.DestinyProgressionDefinition[hash].steps.length].stepName;
 
@@ -391,14 +322,14 @@ class Mode extends React.Component {
               <div>
                 <div className='tooltip' data-hash='glory_streak_calc' data-table='BraytechDefinition'>
                   <div className='name'>{t('Win streak')}</div>
-                  <div className='value'>{!this.state.glory.loading ? Number.isInteger(this.state.glory.streak) ? Math.max(this.state.glory.streak, 1) : t('Unknown') : <Spinner mini />}</div>
+                  <div className='value'>{characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex}</div>
                 </div>
               </div>
               <div>
                 <div className='tooltip' data-hash='glory_wins_until' data-table='BraytechDefinition'>
                   <div className='name'>{characterProgressions[characterId].progressions[2000925172].stepIndex < 9 ? t('Fabled rank') : t('Legend rank')}</div>
                   <div className='value'>
-                    {this.state.glory.wins} {this.state.glory.wins ? (this.state.glory.wins === 1 ? t('win') : t('wins')) : '-'}
+                    {this.winsRequired(characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex)} {this.winsRequired(characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex) ? (this.winsRequired(characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex) === 1 ? t('win') : t('wins')) : '-'}
                   </div>
                 </div>
               </div>
