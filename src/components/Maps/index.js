@@ -29,12 +29,12 @@ class Maps extends React.Component {
       zoom: 0,
       destination: this.props.id || 'echo-mesa',
       destinations: {
-        'tower': {
+        tower: {
           loading: true,
           error: false,
           layers: []
         },
-        'edz': {
+        edz: {
           loading: true,
           error: false,
           layers: []
@@ -75,7 +75,26 @@ class Maps extends React.Component {
           layers: []
         }
       },
-      checklists: [],
+      checklists: {
+        1697465175: {
+          visible: true
+        },
+        3142056444: {
+          visible: true
+        },
+        4178338182: {
+          visible: true
+        },
+        2360931290: {
+          visible: true
+        },
+        365218222: {
+          visible: true
+        },
+        2955980198: {
+          visible: true
+        }
+      },
       ui: {
         destinations: true
       }
@@ -98,7 +117,6 @@ class Maps extends React.Component {
 
     if (pP.id !== id) {
       this.setState({ destination: id });
-      this.generateChecklists(id);
     }
 
     if (pS.ui !== this.state.ui || pS.checklists !== this.state.checklists) {
@@ -107,18 +125,40 @@ class Maps extends React.Component {
   }
 
   generateChecklists = (destination = 'echo-mesa') => {
-    const lists = [checklists[1697465175](), checklists[3142056444](), checklists[4178338182](), checklists[2360931290](), checklists[365218222](), checklists[2955980198]()].map(list => {
+    let lists = {
+      1697465175: {
+        ...checklists[1697465175]()
+      },
+      3142056444: {
+        ...checklists[3142056444]()
+      },
+      4178338182: {
+        ...checklists[4178338182]()
+      },
+      2360931290: {
+        ...checklists[2360931290]()
+      },
+      365218222: {
+        ...checklists[365218222]()
+      },
+      2955980198: {
+        ...checklists[2955980198]()
+      }
+    };
+
+    Object.keys(lists).forEach(key => {
+      const list = lists[key];
+
       const adjusted = {
         ...list,
+        visible: this.state.checklists[key].visible,
         tooltipTable: 'DestinyChecklistDefinition',
-        items: list.items
-          .filter(i => i.destinationHash === maps[destination].destination.hash)
-          .map(i => {
-            return {
-              ...i,
-              tooltipHash: i.checklistHash
-            };
-          })
+        items: list.items.map(i => {
+          return {
+            ...i,
+            tooltipHash: i.checklistHash
+          };
+        })
       };
 
       if (list.checklistId === 4178338182) {
@@ -132,7 +172,7 @@ class Maps extends React.Component {
         });
       }
 
-      return adjusted;
+      lists[key] = adjusted;
     });
 
     console.log(lists);
@@ -251,26 +291,35 @@ class Maps extends React.Component {
 
   prepareLayers = async destination => {
     try {
-
       await this.loadLayers(this.state.destination);
 
       this.setState({ loading: false });
 
       await Promise.all(
-        Object.keys(this.state.destinations).filter(key => this.state.destinations[key].loading).map(async key => {
-          await this.loadLayers(key);
-        })
+        Object.keys(this.state.destinations)
+          .filter(key => this.state.destinations[key].loading)
+          .map(async key => {
+            await this.loadLayers(key);
+          })
       );
 
-      console.log('done')
+      console.log('done');
     } catch (e) {
       console.log(e);
       this.setState({ loading: false, error: true });
     }
   };
 
-  setZoom = viewport => {
+  handler_viewportChanged = viewport => {
     this.setState({ zoom: viewport.zoom });
+  };
+
+  handler_zoomIncrease = e => {
+    this.setState(p => ({ zoom: p.zoom + 1 }));
+  };
+
+  handler_zoomDecrease = e => {
+    this.setState(p => ({ zoom: p.zoom - 1 }));
   };
 
   handler_toggleDestinationsList = e => {
@@ -332,7 +381,7 @@ class Maps extends React.Component {
     } else if (this.state.error) {
       return <div className='map-omega loading'>error lol</div>;
     } else {
-      const { id: destinationId = 'echo-mesa' } = this.props;
+      const { viewport, id: destinationId = 'echo-mesa' } = this.props;
       const destination = this.state.destination;
 
       const map = maps[destination].map;
@@ -360,7 +409,7 @@ class Maps extends React.Component {
                   return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
                 })}
           </div>
-          <Map center={center} zoom={this.state.zoom} minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.setZoom} onLayerAdd={this.handler_layerAdd} onMoveEnd={this.handler_moveEnd} onZoomEnd={this.handler_zoomEnd}>
+          <Map center={center} zoom={this.state.zoom} minZoom='-3' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_viewportChanged} onLayerAdd={this.handler_layerAdd} onMoveEnd={this.handler_moveEnd} onZoomEnd={this.handler_zoomEnd}>
             {this.state.destinations[destination] &&
               this.state.destinations[destination].layers
                 .filter(layer => layer.type !== 'background')
@@ -420,21 +469,27 @@ class Maps extends React.Component {
                   return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
                 })
             )}
-            {this.state.checklists.map(checklist => {
-              return checklist.items.map(node => {
-                const markerOffsetX = mapXOffset + viewWidth / 2;
-                const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
+            {Object.keys(this.state.checklists).map(key => {
+              const checklist = this.state.checklists[key];
 
-                const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
-                const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
+              if (!checklist.visible) return null;
 
-                // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
+              return checklist.items
+                .filter(i => i.destinationHash === maps[destination].destination.hash)
+                .map(node => {
+                  const markerOffsetX = mapXOffset + viewWidth / 2;
+                  const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
 
-                const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`], checklist.checklistIcon);
-                // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
+                  const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
+                  const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
 
-                return <Marker key={node.checklistHash} position={[offsetY, offsetX]} icon={icon} />;
-              });
+                  // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
+
+                  const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`], checklist.checklistIcon);
+                  // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
+
+                  return <Marker key={node.checklistHash} position={[offsetY, offsetX]} icon={icon} />;
+                });
             })}
           </Map>
           <div className={cx('control', 'destinations', { visible: this.state.ui.destinations })}>
@@ -446,11 +501,11 @@ class Maps extends React.Component {
                 if (destination.collectibleHash) {
                   name = manifest.DestinyCollectibleDefinition[destination.collectibleHash].displayProperties.name;
                 } else if (destination.activityHash) {
-                  name = manifest.DestinyActivityDefinition[destination.activityHash].displayProperties.name
+                  name = manifest.DestinyActivityDefinition[destination.activityHash].displayProperties.name;
                 }
 
                 return (
-                  <li key={destination.id} className={cx('linked', { active: destination.id === destinationId, loading: this.state.destinations[destination.id].loading })}>
+                  <li key={destination.id} className={cx('linked', { active: destination.id === destinationId, disabled: this.state.destinations[destination.id].loading })}>
                     <div className='text'>
                       <div className='name'>{name}</div>
                       <div className='loading'>{this.state.destinations[destination.id].loading ? <Spinner mini /> : null}</div>
@@ -461,6 +516,22 @@ class Maps extends React.Component {
               })}
             </ul>
           </div>
+          {viewport.width > 600 ? (
+            <div className='control zoom visible'>
+              <ul className='list'>
+                <li className={cx('linked', { disabled: this.state.zoom === 1 })} onClick={this.handler_zoomIncrease}>
+                  <div className='text'>
+                    <i className='segoe-uniE1091' />
+                  </div>
+                </li>
+                <li className={cx('linked', { disabled: this.state.zoom === -3 })} onClick={this.handler_zoomDecrease}>
+                  <div className='text'>
+                    <i className='segoe-uniE1081' />
+                  </div>
+                </li>
+              </ul>
+            </div>
+          ) : null}
         </div>
       );
     }
@@ -470,7 +541,8 @@ class Maps extends React.Component {
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
-    collectibles: state.collectibles
+    collectibles: state.collectibles,
+    viewport: state.viewport
   };
 }
 

@@ -12,6 +12,47 @@
   background-color: transparent;
 }
 
+html.backdropfilter .map-omega .control li {
+  background-color: transparent;
+  backdrop-filter: blur(7px) brightness(0.9) saturate(1.2);
+}
+
+.map-omega .control .list li::before {
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.2);
+}
+
+.map-omega .control.visible .list li.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.map-omega .control .list li:hover::before {
+  box-shadow: inset 0 0 0 1px #d6d6d6;
+}
+
+.map-omega .control .list li:hover::before {
+  background-color: rgba(214, 214, 214, 0.4);
+}
+
+.map-omega .control:not(.visible) li:not(.active) {
+  display: none;
+}
+
+.map-omega .control li.disabled {
+  pointer-events: none;
+}
+
+.map-omega .control li.disabled .text {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.map-omega .control li .text {
+  padding: 0 1rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: space-between;
+}
+
 .map-omega .control.destinations {
   position: fixed;
   top: calc(3rem + 40px);
@@ -20,45 +61,8 @@
   z-index: 2;
 }
 
-html.backdropfilter .map-omega .control.destinations li {
-  background-color: transparent;
-  backdrop-filter: blur(7px) brightness(0.9) saturate(1.2);
-}
-
-.map-omega .control.destinations .list li::before {
-  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.2);
-}
-
-.map-omega .control.destinations.visible .list li.active {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.map-omega .control.destinations .list li:hover::before {
-  box-shadow: inset 0 0 0 1px #d6d6d6;
-}
-
-.map-omega .control.destinations .list li:hover::before {
-  background-color: rgba(214, 214, 214, 0.4);
-}
-
-.map-omega .control.destinations:not(.visible) li:not(.active) {
-  display: none;
-}
-
-.map-omega .control.destinations li.loading {
-  pointer-events: none;
-}
-
-.map-omega .control.destinations li.loading .text .name {
-  color: rgba(255, 255, 255, 0.4);
-}
-
 .map-omega .control.destinations li .text {
-  padding: 0 1rem;
-  width: 100%;
-  display: grid;
   grid-template-columns: auto 24px;
-  justify-content: space-between;
 }
 
 .map-omega .control.destinations li .text .name {
@@ -79,6 +83,24 @@ html.backdropfilter .map-omega .control.destinations li {
 .map-omega .control.destinations li .text .loading .spinner {
   width: 18px;
   height: 18px;
+}
+
+.map-omega .control.zoom {
+  position: fixed;
+  top: calc(3rem + 40px);
+  right: 3rem;
+  width: 38px;
+  z-index: 2;
+}
+
+.map-omega .control.zoom li {
+  cursor: pointer;
+}
+
+.map-omega .control.zoom li .text {
+  padding: 0;
+  font-size: 12px;
+  justify-content: center;
 }
 
 .map-omega .leaflet-container  {
