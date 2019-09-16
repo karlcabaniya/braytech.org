@@ -17,7 +17,7 @@ import CharacterEmblem from '../../components/UI/CharacterEmblem';
 import Spinner from '../../components/UI/Spinner';
 import checklists from '../../utils/checklists';
 
-import * as marker from './markers';
+import * as marker from './markers/';
 
 import './styles.css';
 
@@ -496,7 +496,7 @@ class Maps extends React.Component {
                 })}
             {maps[destination].map.bubbles.map(bubble =>
               bubble.nodes
-                .filter(node => node.type === 'title')
+                .filter(node => node.type === 'title' || node.type === 'fast-travel')
                 .map((node, i) => {
                   const markerOffsetX = mapXOffset + viewWidth / 2;
                   const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
@@ -504,17 +504,25 @@ class Maps extends React.Component {
                   const offsetX = markerOffsetX + (node.x ? node.x : 0);
                   const offsetY = markerOffsetY + (node.y ? node.y : 0);
 
-                  const definitionDestination = maps[destination].destination.hash && manifest.DestinyDestinationDefinition[maps[destination].destination.hash];
-                  const definitionBubble = bubble.hash && definitionDestination && definitionDestination.bubbles && definitionDestination.bubbles.find(b => b.hash === bubble.hash);
+                  if (node.type === 'title') {
+                    const definitionDestination = maps[destination].destination.hash && manifest.DestinyDestinationDefinition[maps[destination].destination.hash];
+                    const definitionBubble = bubble.hash && definitionDestination && definitionDestination.bubbles && definitionDestination.bubbles.find(b => b.hash === bubble.hash);
 
-                  let name = bubble.name;
-                  if (definitionBubble && definitionBubble.displayProperties.name && definitionBubble.displayProperties.name !== '') {
-                    name = definitionBubble.displayProperties.name;
+                    let name = bubble.name;
+                    if (definitionBubble && definitionBubble.displayProperties.name && definitionBubble.displayProperties.name !== '') {
+                      name = definitionBubble.displayProperties.name;
+                    }
+
+                    const icon = marker.text(['interaction-none', bubble.type], name);
+
+                    return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
+                  } else if (node.type === 'fast-travel') {
+                    const icon = marker.iconFastTravel(['interaction-none']);
+
+                    return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
+                  } else {
+                    return null;
                   }
-
-                  const icon = marker.text(['interaction-none', bubble.type], name);
-
-                  return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
                 })
             )}
             {Object.keys(this.state.checklists).map(key => {

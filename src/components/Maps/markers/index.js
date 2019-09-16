@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import L from 'leaflet';
 
+import './styles.css';
+
 function generateIcon(destinyIcon) {
   let icon;
 
@@ -25,7 +27,7 @@ function generateIcon(destinyIcon) {
   return icon;
 }
 
-export const icon = (tooltip = {}, classNames = [], destinyIcon, opacity = 0.6, text) => {
+export const icon = (tooltip = {}, classNames = [], destinyIcon, text) => {
   const icon = generateIcon(destinyIcon);
   const html = (
     <div className='wrapper'>
@@ -47,7 +49,6 @@ export const icon = (tooltip = {}, classNames = [], destinyIcon, opacity = 0.6, 
 
   return L.divIcon({
     className: ['icon-marker'].concat(classNames).join(' '),
-    opacity,
     html: ReactDOMServer.renderToString(html)
   });
 };
@@ -56,5 +57,28 @@ export const text = (classNames = [], name) => {
   return L.divIcon({
     className: ['text-marker'].concat(classNames).join(' '),
     html: `<div class='wrapper'><div class='name'>${name}</div></div>`
+  });
+};
+
+export const iconFastTravel = (classNames = []) => {
+  const html = (
+    <div className='wrapper'>
+      <div className='fast-travel'>
+        <div className='star' />
+        <div className='outline' />
+        <div className='square'>
+          <div className='sq tl' />
+          <div className='sq tr' />
+          <div className='sq bl' />
+          <div className='sq br' />
+        </div>
+        <div className='triangles' />
+      </div>
+    </div>
+  );
+
+  return L.divIcon({
+    className: ['icon-marker', 'native'].concat(classNames).join(' '),
+    html: ReactDOMServer.renderToString(html)
   });
 };
