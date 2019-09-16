@@ -57,16 +57,23 @@ html.backdropfilter .map-omega .control.destinations li {
   padding: 0 1rem;
   width: 100%;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto 24px;
   justify-content: space-between;
 }
 
 .map-omega .control.destinations li .text .name {
-  display: grid;
-  align-content: center;
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 2px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.map-omega .control.destinations li .text .loading {
+  display: grid;
+  justify-content: right;
 }
 
 .map-omega .control.destinations li .text .loading .spinner {

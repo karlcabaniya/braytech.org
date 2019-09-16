@@ -54,7 +54,7 @@ class Maps extends React.Component {
           error: false,
           layers: []
         },
-        'mercury': {
+        'fields-of-glass': {
           loading: true,
           error: false,
           layers: []
@@ -81,45 +81,6 @@ class Maps extends React.Component {
       }
     };
   }
-
-  destinations = [
-    {
-      id: 'tower',
-      activity: 1502633527
-    },
-    {
-      id: 'edz',
-      destination: 1199524104
-    },
-    {
-      id: 'new-pacific-arcology',
-      destination: 2388758973
-    },
-    {
-      id: 'echo-mesa',
-      destination: 2218917881
-    },
-    {
-      id: 'arcadian-valley',
-      destination: 126924919
-    },
-    {
-      id: 'mercury',
-      destination: 1993421442
-    },
-    {
-      id: 'hellas-basin',
-      destination: 308080871
-    },
-    {
-      id: 'tangled-shore',
-      destination: 359854275
-    },
-    {
-      id: 'dreaming-city',
-      destination: 2779202173
-    }
-  ];
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -446,7 +407,15 @@ class Maps extends React.Component {
                   const offsetX = markerOffsetX + (node.x ? node.x : 0);
                   const offsetY = markerOffsetY + (node.y ? node.y : 0);
 
-                  const icon = marker.text(['interaction-none', bubble.type], bubble.name);
+                  const definitionDestination = maps[destination].destination.hash && manifest.DestinyDestinationDefinition[maps[destination].destination.hash];
+                  const definitionBubble = bubble.hash && definitionDestination && definitionDestination.bubbles && definitionDestination.bubbles.find(b => b.hash === bubble.hash);
+
+                  let name = bubble.name;
+                  if (definitionBubble && definitionBubble.displayProperties.name && definitionBubble.displayProperties.name !== '') {
+                    name = definitionBubble.displayProperties.name;
+                  }
+
+                  const icon = marker.text(['interaction-none', bubble.type], name);
 
                   return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
                 })
@@ -470,16 +439,23 @@ class Maps extends React.Component {
           </Map>
           <div className={cx('control', 'destinations', { visible: this.state.ui.destinations })}>
             <ul className='list'>
-              {this.destinations.map(d => {
-                const name = d.destination && manifest.DestinyDestinationDefinition[d.destination] ? manifest.DestinyDestinationDefinition[d.destination].displayProperties.name : d.activity && manifest.DestinyActivityDefinition[d.activity] ? manifest.DestinyActivityDefinition[d.activity].displayProperties.name : '';
+              {Object.keys(this.state.destinations).map(key => {
+                const destination = maps[key].destination;
+
+                let name = destination.hash && manifest.DestinyDestinationDefinition[destination.hash] && manifest.DestinyDestinationDefinition[destination.hash].displayProperties.name;
+                if (destination.collectibleHash) {
+                  name = manifest.DestinyCollectibleDefinition[destination.collectibleHash].displayProperties.name;
+                } else if (destination.activityHash) {
+                  name = manifest.DestinyActivityDefinition[destination.activityHash].displayProperties.name
+                }
 
                 return (
-                  <li key={d.id} className={cx('linked', { active: d.id === destinationId, loading: this.state.destinations[d.id].loading })}>
+                  <li key={destination.id} className={cx('linked', { active: destination.id === destinationId, loading: this.state.destinations[destination.id].loading })}>
                     <div className='text'>
                       <div className='name'>{name}</div>
-                      <div className='loading'>{this.state.destinations[d.id].loading ? <Spinner mini /> : null}</div>
+                      <div className='loading'>{this.state.destinations[destination.id].loading ? <Spinner mini /> : null}</div>
                     </div>
-                    <Link to={`/maps/${d.id}`} onClick={this.handler_toggleDestinationsList}></Link>
+                    <Link to={`/maps/${destination.id}`} onClick={this.handler_toggleDestinationsList}></Link>
                   </li>
                 );
               })}
