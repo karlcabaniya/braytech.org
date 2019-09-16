@@ -142,7 +142,7 @@ class Header extends React.Component {
         slug: '/maps',
         exact: false,
         profile: false,
-        inline: true,
+        inline: viewport.width >= 1300,
         group: 0
       },
       {
@@ -151,7 +151,7 @@ class Header extends React.Component {
         slug: '/reports',
         exact: false,
         profile: true,
-        inline: viewport.width >= 1450,
+        inline: viewport.width >= 1500,
         group: 0
       },
       {
@@ -169,7 +169,7 @@ class Header extends React.Component {
         slug: '/pursuits',
         exact: false,
         profile: true,
-        inline: viewport.width >= 1360,
+        inline: viewport.width >= 1400,
         group: 0
       },
       {
