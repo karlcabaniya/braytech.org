@@ -12,19 +12,19 @@ class Checklist extends React.Component {
   render() {
     const { t, hash } = this.props;
 
-    const checklistHash = lookup(hash);
+    const checklistEntry = lookup({ key: 'checklistHash', value: hash });
 
-    if (!checklistHash) {
+    if (!checklistEntry) {
       console.warn('Hash not found');
       return null;
     }
 
-    const checklist = checklists[checklistHash]({ requested: [parseInt(hash, 10)] });
-    const item = checklist.items && checklist.items.length && checklist.items[0];
+    const checklist = checklistEntry.checklistId && checklists[checklistEntry.checklistId]({ requested: [checklistEntry.checklistHash] });
+    const checklistItem = checklist && checklist.items && checklist.items.length && checklist.items[0];
 
     console.log(checklist)
 
-    if (checklistHash === '4178338182') {
+    if (checklistEntry.checklistId === '4178338182') {
       checklist.checklistIcon = (
         <span className='destiny-adventure2'>
           <span className='path1' />
@@ -50,7 +50,7 @@ class Checklist extends React.Component {
               {checklist.checklistIcon}
             </div>
             <div className='text'>
-              <div className='name'>{item.formatted.name}{item.formatted.suffix ? ` ${item.formatted.suffix}` : null}</div>
+              <div className='name'>{checklistItem.formatted.name}{checklistItem.formatted.suffix ? ` ${checklistItem.formatted.suffix}` : null}</div>
               <div>
                 <div className='kind'>{t(checklist.checklistName)}</div>
               </div>
@@ -58,8 +58,11 @@ class Checklist extends React.Component {
           </div>
           <div className='black'>
             <div className='description'>
-              <div className='destination'>{item.formatted.locationExt}</div>
+              <div className='destination'>{checklistItem.formatted.locationExt}</div>
             </div>
+            {checklistItem.completed ? (
+              <div className='completed'>{t('Completed')}</div>
+            ) : null}
           </div>
         </div>
       </>

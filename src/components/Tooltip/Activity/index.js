@@ -2,11 +2,11 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { cloneDeep, orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
+import { checklists, lookup } from '../../../utils/checklists';
 
 import './styles.css';
 
@@ -249,6 +249,11 @@ class Activity extends React.Component {
             </span>
           )
         };
+      
+      const checklistEntry = lookup({ key: 'activityHash', value: hash });
+
+      const checklist = checklistEntry.checklistId && checklists[checklistEntry.checklistId]({ requested: [checklistEntry.checklistHash] });
+      const checklistItem = checklist && checklist.items && checklist.items.length && checklist.items[0];
 
       return (
         <>
@@ -294,6 +299,9 @@ class Activity extends React.Component {
                 <div className='recommended-light'>
                   {t('Recommended Power')}: <span>{activityTypeDisplay.activityLightLevel}</span>
                 </div>
+              ) : null}
+              {checklistItem && checklistItem.completed ? (
+                <div className='completed'>{t('Completed')}</div>
               ) : null}
             </div>
           </div>

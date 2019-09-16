@@ -425,8 +425,18 @@ export const checklists = {
 
 export default checklists;
 
-export function lookup(checklistItemHash) {
-  return Object.keys(data).find(key => data[key].find(entry => entry.checklistHash === parseInt(checklistItemHash, 10)));
+export function lookup(item) {
+  const checklistId = Object.keys(data).find(key => data[key].find(entry => entry[item.key] === parseInt(item.value, 10)));
+  const checklistEntry = checklistId && data[checklistId].find(entry => entry[item.key] === parseInt(item.value, 10));
+
+  if (checklistEntry) {
+    return {
+      checklistId,
+      checklistHash: checklistEntry && checklistEntry.checklistHash
+    }
+  } else {
+    return {}
+  }
 }
 
 function checklist(options = {}) {
