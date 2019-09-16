@@ -22,7 +22,7 @@ class Checklist extends React.Component {
     const checklist = checklistEntry.checklistId && checklists[checklistEntry.checklistId]({ requested: [checklistEntry.checklistHash] });
     const checklistItem = checklist && checklist.items && checklist.items.length && checklist.items[0];
 
-    console.log(checklist)
+    // console.log(checklist)
 
     if (checklistEntry.checklistId === '4178338182') {
       checklist.checklistIcon = (

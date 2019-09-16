@@ -127,7 +127,7 @@ class Maps extends React.Component {
       this.setState({ destination: id });
     }
 
-    if ((pS.ui !== this.state.ui || pS.checklists !== this.state.checklists) && this.mounted) {
+    if ((pS.ui !== this.state.ui || pS.checklists !== this.state.checklists || pS.destinations !== this.state.destinations) && this.mounted) {
       this.props.rebindTooltips();
     }
   }
