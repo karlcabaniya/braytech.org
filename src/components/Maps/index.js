@@ -237,7 +237,7 @@ class Maps extends React.Component {
 
   handler_toggleDestinationsList = e => {
     const href = e.target.href;
-    const { id } = this.props;
+    const { id = this.state.destination } = this.props;
 
     if (href.includes(id)) {
       this.setState(p => {
