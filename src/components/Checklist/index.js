@@ -1,4 +1,6 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
@@ -26,7 +28,9 @@ const ChecklistItem = props => {
 };
 
 const Checklist = props => {
-  const { t, headless, totalItems, completedItems, checklistCharacterBound, checklistName, checklistProgressDescription, items } = props;
+  const { t, collectibles, headless, totalItems, completedItems, checklistCharacterBound, checklistName, checklistProgressDescription } = props;
+
+  const items = collectibles.hideCompletedChecklistItems ? props.items.filter(i => !i.completed) : props.items;
 
   if (headless) {
     return (
@@ -82,4 +86,15 @@ const Checklist = props => {
   }
 };
 
-export default withTranslation()(Checklist);
+function mapStateToProps(state, ownProps) {
+  return {
+    collectibles: state.collectibles
+  };
+}
+
+export default compose(
+  connect(
+    mapStateToProps
+  ),
+  withTranslation()
+)(Checklist);

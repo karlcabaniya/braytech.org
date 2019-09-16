@@ -430,8 +430,6 @@ export function lookup(checklistItemHash) {
 }
 
 function checklist(options = {}) {
-  const state = store.getState();
-
   const defaultOptions = {
     characterBound: false
   };
@@ -446,7 +444,7 @@ function checklist(options = {}) {
       ])
     : options.items;
 
-  const visible = state.collectibles.hideCompletedItems ? items.filter(i => !i.completed) : options.requested && options.requested.length ? items.filter(i => options.requested.indexOf(i.checklistHash) > -1) : items;
+  const response = options.requested && options.requested.length ? items.filter(i => options.requested.indexOf(i.checklistHash) > -1) : items;
 
   return {
     checklistId: options.checklistId,
@@ -457,7 +455,7 @@ function checklist(options = {}) {
     checklistCharacterBound: options.characterBound,
     totalItems: items.length,
     completedItems: items.filter(i => i.completed).length,
-    items: visible.map(i => ({
+    items: response.map(i => ({
       ...i,
       formatted: {
         suffix: options.numbered ? i.sorts.number : '',
