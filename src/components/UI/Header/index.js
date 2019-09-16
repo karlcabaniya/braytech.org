@@ -138,7 +138,7 @@ class Header extends React.Component {
       },
       {
         name: t('Maps'),
-        desc: t('Maps'),
+        desc: t('Checklists on maps'),
         slug: '/maps',
         exact: false,
         profile: false,
