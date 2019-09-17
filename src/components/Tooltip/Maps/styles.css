@@ -64,6 +64,46 @@
   letter-spacing: unset;
 }
 
+#tooltip .frame.map.record.lore .book {
+  display: grid;
+  grid-template-columns: 72px auto;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#tooltip .frame.map.record.lore .book .cover {
+  background-color: rgba(255, 255, 255, 0.1);
+  position: relative;
+  width: 72px;
+  padding: 16px;
+}
+
+#tooltip .frame.map.record.lore .book .cover .image {
+  background-size: cover;
+  position: relative;
+  height: unset;
+  padding-bottom: 126%;
+}
+
+#tooltip .frame.map.record.lore .book .text {
+  display: grid;
+  align-content: center;
+  padding: 20px 16px 26px;
+}
+
+#tooltip .frame.map.record.lore .book .text .name {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+#tooltip .frame.map.record.lore .book .text .kind {
+  color: rgba(255, 255, 255, 0.4);
+  margin: 4px 0 0;
+  opacity: 0.8;
+}
+
 
 
 @media screen and (max-width: 600px) {

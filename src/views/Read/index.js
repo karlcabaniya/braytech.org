@@ -7,7 +7,7 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
-import { enumerateRecordState } from '../../utils/destinyEnums';
+import { enumerateRecordState, bookCovers } from '../../utils/destinyEnums';
 
 import './styles.css';
 
@@ -65,32 +65,6 @@ class Read extends React.Component {
     const { t } = this.props;
     const kind = this.props.match.params.kind ? this.props.match.params.kind : false;
     const hash = this.props.match.params.hash ? this.props.match.params.hash : false;
-    const bookCovers = {
-      2447807737: '037E-0000131E.png',
-      396866327: '01A3-0000132F.png',
-      1420597821: '037E-00001308.png',
-      648415847: '037E-00001311.png',
-      335014236: '037E-00001BE0.png',
-      3472295814: '0560-000000D4.png',
-      3239864233: '01A3-00001330.png',
-      2541573665: '01A3-00001336.png',
-      3305936921: '037E-0000130D.png',
-      2077211754: '0560-000000C5.png',
-      655926402: '01A3-000012F4.png',
-      2026987060: '037E-00001328.png',
-      2325462143: '037E-00001323.png',
-      2203266100: '0560-000000CF.png',
-      756584948: '0560-000000CA.png',
-      3148269494: '0560-00001070.png',
-      2741070862: '0560-00001065.png',
-      3758802814: '0560-00001060.png',
-      139066480: '0560-0000105C.png',
-      3762408250: '0560-00001074.png',
-      289742222: '0560-0000106A.png',
-      1070500232: '0560-00006553.png',
-      2721577348: '0560-00006558.png',
-      2761772090: '0560-00006547.png'
-    };
 
     let parentDefinition;
     let recordDefinition;

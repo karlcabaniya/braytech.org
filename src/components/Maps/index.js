@@ -78,22 +78,40 @@ class Maps extends React.Component {
         }
       },
       checklists: {
-        1697465175: {
+        1697465175: {  // region chests
           visible: true
         },
-        3142056444: {
+        3142056444: {  // lost sectors
           visible: true
         },
-        4178338182: {
+        4178338182: {  // adventures
           visible: true
         },
-        2360931290: {
+        2360931290: {  // ghost scans
           visible: true
         },
-        365218222: {
+        365218222: {   // sleeper nodes
           visible: true
         },
-        2955980198: {
+        2955980198: {  // latent memories
+          visible: true
+        },
+        1297424116: {  // ahamkara bones
+          visible: true
+        },
+        2609997025: {  // corrupted eggs
+          visible: true
+        },
+        2726513366: {  // cat statues
+          visible: true
+        },
+        1420597821: {  // lore: ghost stories
+          visible: true
+        },
+        3305936921: {  // lore: awoken of the reef
+          visible: true
+        },
+        655926402: {  // lore: forsaken prince
           visible: true
         }
       },
@@ -134,23 +152,41 @@ class Maps extends React.Component {
 
   generateChecklists = (destination = 'echo-mesa') => {
     let lists = {
-      1697465175: {
+      1697465175: {  // region chests
         ...checklists[1697465175]()
       },
-      3142056444: {
+      3142056444: {  // lost sectors
         ...checklists[3142056444]()
       },
-      4178338182: {
+      4178338182: {  // adventures
         ...checklists[4178338182]()
       },
-      2360931290: {
+      2360931290: {  // ghost scans
         ...checklists[2360931290]()
       },
-      365218222: {
+      365218222: {   // sleeper nodes
         ...checklists[365218222]()
       },
-      2955980198: {
+      2955980198: {  // latent memories
         ...checklists[2955980198]()
+      },
+      1297424116: {  // ahamkara bones
+        ...checklists[1297424116]()
+      },
+      2609997025: {  // corrupted eggs
+        ...checklists[2609997025]()
+      },
+      2726513366: {  // cat statues
+        ...checklists[2726513366]()
+      },
+      1420597821: {  // lore: ghost stories
+        ...checklists[1420597821]()
+      },
+      3305936921: {  // lore: awoken of the reef
+        ...checklists[3305936921]()
+      },
+      655926402: {   // lore: forsaken prince
+        ...checklists[655926402]()
       }
     };
 
@@ -180,10 +216,20 @@ class Maps extends React.Component {
         });
       }
 
+      if ([1420597821, 3305936921, 655926402].includes(list.checklistId)) {
+        adjusted.tooltipTable = 'DestinyRecordDefinition';
+        adjusted.items = adjusted.items.map(i => {
+          return {
+            ...i,
+            tooltipHash: i.recordHash
+          };
+        });
+      }
+
       lists[key] = adjusted;
     });
 
-    // console.log(lists);
+    console.log(lists);
 
     this.setState({
       checklists: lists
@@ -532,7 +578,7 @@ class Maps extends React.Component {
 
               return checklist.items
                 .filter(i => i.destinationHash === maps[destination].destination.hash)
-                .map(node => {
+                .map((node, i) => {
                   const markerOffsetX = mapXOffset + viewWidth / 2;
                   const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
 
@@ -541,10 +587,10 @@ class Maps extends React.Component {
 
                   // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 
-                  const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`], checklist.checklistIcon);
+                  const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`], { icon: checklist.checklistIcon, url: checklist.checklistImage });
                   // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
-                  return <Marker key={node.checklistHash} position={[offsetY, offsetX]} icon={icon} />;
+                  return <Marker key={`${node.checklistHash}-${i}`} position={[offsetY, offsetX]} icon={icon} />;
                 });
             })}
           </Map>

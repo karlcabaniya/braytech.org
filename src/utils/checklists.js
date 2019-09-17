@@ -338,6 +338,7 @@ export const checklists = {
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Lore: Ghost Stories',
+      checklistIcon: 'destiny-ishtar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004869.png',
       checklistProgressDescription: 'Stories found',
       ...options
@@ -375,6 +376,7 @@ export const checklists = {
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Lore: Awoken of the Reef',
+      checklistIcon: 'destiny-ishtar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004874.png',
       checklistProgressDescription: 'Crystals resolved',
       ...options
@@ -417,6 +419,7 @@ export const checklists = {
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Lore: Forsaken Prince',
+      checklistIcon: 'destiny-ishtar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004886.png',
       checklistProgressDescription: 'Data caches decrypted',
       ...options
@@ -432,7 +435,7 @@ export function lookup(item) {
   if (checklistEntry) {
     return {
       checklistId,
-      checklistHash: checklistEntry && checklistEntry.checklistHash
+      [item.key]: checklistEntry && checklistEntry[item.key]
     }
   } else {
     return {}
@@ -454,7 +457,7 @@ function checklist(options = {}) {
       ])
     : options.items;
 
-  const response = options.requested && options.requested.length ? items.filter(i => options.requested.indexOf(i.checklistHash) > -1) : items;
+  const response = options.requested && options.requested.key ? items.filter(i => options.requested.array.indexOf(i[options.requested.key]) > -1) : items;
 
   return {
     checklistId: options.checklistId,
@@ -515,9 +518,11 @@ function presentationItems(presentationHash, dropFirst = true) {
 
   return data[presentationHash]
     .map(entry => {
-      const profileRecord = profile.profileRecords.data.records[entry.recordHash];
-      if (!profileRecord) return false;
-      const completed = profileRecord.objectives[0].complete;
+      const profileRecord = profile && profile.profileRecords.data.records[entry.recordHash];
+      
+      // if (!profileRecord) return false;
+
+      const completed = profileRecord && profileRecord.objectives[0].complete;
 
       return {
         ...entry,

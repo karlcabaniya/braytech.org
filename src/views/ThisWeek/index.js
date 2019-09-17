@@ -1017,7 +1017,7 @@ class ThisWeek extends React.Component {
         </ul>
         <h4>{t('Checklist items')}</h4>
         {this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists.map(list => {
-          return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: list.items })} />;
+          return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: { key: 'checklistHash', array: list.items } })} />;
         })}
       </div>
     );
@@ -1038,7 +1038,7 @@ class ThisWeek extends React.Component {
           <>
             <h4>{t('Checklist items')}</h4>
             {this.consolidatedInfo.curse[cycleInfo.week.curse].checklists.map(list => {
-              return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: list.items })} />;
+              return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: { key: 'checklistHash', array: list.items } })} />;
             })}
           </>
         ) : null}
@@ -1058,7 +1058,7 @@ class ThisWeek extends React.Component {
           </ul>
           <h4>{t('Checklist items')}</h4>
           {this.consolidatedInfo.shatteredThrone.checklists.map(list => {
-            return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: list.items })} />;
+            return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: { key: 'checklistHash', array: list.items } })} />;
           })}
         </div>
       ) : (

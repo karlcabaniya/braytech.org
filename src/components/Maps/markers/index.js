@@ -27,20 +27,20 @@ function generateIcon(destinyIcon) {
   return icon;
 }
 
-export const icon = (tooltip = {}, classNames = [], destinyIcon, text) => {
-  const icon = generateIcon(destinyIcon);
+export const icon = (tooltip = {}, classNames = [], marker = {}, text) => {
+  const icon = marker.icon && generateIcon(marker.icon);
   const html = (
     <div className='wrapper'>
       {tooltip.hash ? (
         <>
           <div className='tooltip' data-hash={tooltip.hash} data-table={tooltip.table}>
-            {icon}
+            {icon ? icon : <div className='icon' />}
           </div>
           {text ? <div className='text'>${text}</div> : null}
         </>
       ) : (
         <>
-          {icon}
+          {icon ? icon : <div className='icon' />}
           {text ? <div className='text'>${text}</div> : null}
         </>
       )}

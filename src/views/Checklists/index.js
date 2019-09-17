@@ -24,14 +24,8 @@ function getItemsPerPage(width) {
 }
 
 const ListButton = p => (
-  <li key={p.name} className='linked'>
-    {p.icon ? <div className={p.icon} /> : <ObservedImage className='image' src={p.image} />}
-    <a
-      className={cx({
-        active: p.visible
-      })}
-      onClick={p.onClick}
-    />
+  <li key={p.checklistName} className={cx('linked', { active: p.visible })} onClick={p.onClick}>
+    {p.checklistImage ? <ObservedImage className='image' src={p.checklistImage} /> : <div className={p.checklistIcon} />}
   </li>
 );
 
@@ -135,7 +129,7 @@ export class Checklists extends React.Component {
             <div className='module views'>
               <ul className='list'>
                 {lists.map((list, i) => (
-                  <ListButton name={list.checklistName} icon={list.checklistIcon} image={list.checklistImage} key={i} visible={visible.includes(list)} onClick={() => this.changeSkip(i)} />
+                  <ListButton checklistName={list.checklistName} checklistIcon={list.checklistIcon} checklistImage={list.checklistImage} key={i} visible={visible.includes(list)} onClick={() => this.changeSkip(i)} />
                 ))}
               </ul>
             </div>
