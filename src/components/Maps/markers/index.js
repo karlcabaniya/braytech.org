@@ -20,6 +20,19 @@ function generateIcon(destinyIcon) {
         </span>
       </div>
     );
+  } else if (destinyIcon === 'destiny-lore_scholar') {
+    icon = (
+      <div className='icon'>
+        <span className='destiny-lore_scholar'>
+          <span className='path1' />
+          <span className='path2' />
+          <span className='path3' />
+          <span className='path4' />
+          <span className='path5' />
+          <span className='path6' />
+        </span>
+      </div>
+    );
   } else {
     icon = <div className={`icon ${destinyIcon}`} />;
   }

@@ -106,6 +106,10 @@
   opacity: 0.2;
 }
 
+.map-omega .leaflet-container .icon-marker .wrapper .icon .destiny-lore_scholar {
+  font-size: 20px;
+}
+
 .map-omega .leaflet-container .icon-marker .fast-travel {
   position: absolute;
   top: 50%;

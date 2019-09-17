@@ -64,6 +64,10 @@
   letter-spacing: unset;
 }
 
+#tooltip .frame.map.record.lore .header .icon {
+  font-size: 36px;
+}
+
 #tooltip .frame.map.record.lore .book {
   display: grid;
   grid-template-columns: 72px auto;
@@ -92,9 +96,9 @@
 
 #tooltip .frame.map.record.lore .book .text .name {
   font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  /* font-weight: 500; */
+  /* letter-spacing: 1px; */
+  /* text-transform: uppercase; */
   word-break: break-word;
 }
 

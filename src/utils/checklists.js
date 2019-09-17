@@ -338,7 +338,7 @@ export const checklists = {
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Lore: Ghost Stories',
-      checklistIcon: 'destiny-ishtar',
+      checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004869.png',
       checklistProgressDescription: 'Stories found',
       ...options
@@ -376,7 +376,7 @@ export const checklists = {
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Lore: Awoken of the Reef',
-      checklistIcon: 'destiny-ishtar',
+      checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004874.png',
       checklistProgressDescription: 'Crystals resolved',
       ...options
@@ -419,7 +419,7 @@ export const checklists = {
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       checklistName: 'Lore: Forsaken Prince',
-      checklistIcon: 'destiny-ishtar',
+      checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004886.png',
       checklistProgressDescription: 'Data caches decrypted',
       ...options

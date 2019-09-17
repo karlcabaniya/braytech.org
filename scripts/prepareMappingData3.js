@@ -2,7 +2,7 @@ const fs = require('fs');
 const process = require('process');
 const fetch = require('node-fetch');
 
-const outputPath = 'src/data/lowlines/maps/index.json';
+const outputPath = 'src/data/lowlines/maps/destinations/index.json';
 
 async function work(input) {
   const output = {};

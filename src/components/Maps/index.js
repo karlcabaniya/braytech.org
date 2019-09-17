@@ -12,7 +12,7 @@ import { Map, ImageOverlay, Marker } from 'react-leaflet';
 
 import manifest from '../../utils/manifest';
 import * as ls from '../../utils/localStorage';
-import maps from '../../data/lowlines/maps';
+import maps from '../../data/lowlines/maps/destinations';
 import CharacterEmblem from '../../components/UI/CharacterEmblem';
 import Spinner from '../../components/UI/Spinner';
 import checklists from '../../utils/checklists';

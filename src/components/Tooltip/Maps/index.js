@@ -8,6 +8,7 @@ import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
 import { bookCovers } from '../../../utils/destinyEnums';
 import { checklists, lookup } from '../../../utils/checklists';
+import nodes from '../../../data/lowlines/maps/nodes';
 
 import './styles.css';
 
@@ -44,6 +45,9 @@ class Checklist extends React.Component {
       )
     }
 
+    const extras = nodes && nodes.find(d => d.checklistHash === checklistItem.checklistHash);
+    const screenshot = extras && extras.screenshot;
+
     return (
       <>
         <div className='acrylic' />
@@ -60,6 +64,11 @@ class Checklist extends React.Component {
             </div>
           </div>
           <div className='black'>
+            {screenshot ? (
+              <div className='screenshot'>
+                <ObservedImage className='image' src={screenshot} />
+              </div>
+            ) : null}
             <div className='description'>
               <div className='destination'>{checklistItem.formatted.locationExt}</div>
             </div>
@@ -97,7 +106,14 @@ class Record extends React.Component {
         <div className={cx('frame', 'map', 'record', 'lore')}>
           <div className='header'>
             <div className='icon'>
-              <span className='destiny-ishtar' />
+              <span className='destiny-lore_scholar'>
+                <span className='path1' />
+                <span className='path2' />
+                <span className='path3' />
+                <span className='path4' />
+                <span className='path5' />
+                <span className='path6' />
+              </span>
             </div>
             <div className='text'>
               <div className='name'>{checklistItem.formatted.name}{checklistItem.formatted.suffix ? ` ${checklistItem.formatted.suffix}` : null}</div>
