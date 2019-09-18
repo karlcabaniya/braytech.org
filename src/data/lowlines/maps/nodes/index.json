@@ -2176,7 +2176,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1157589714,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/maevic-square_ghost-scans-36.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/maevic-square_ghost-scans_36.jpg",
     "debug": {
       "name": "Maevic Square",
       "number": 36
@@ -2187,7 +2187,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2868885819,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/maevic-square_ghost-scans-37.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/maevic-square_ghost-scans_37.jpg",
     "debug": {
       "name": "Maevic Square",
       "number": 37
@@ -2198,7 +2198,7 @@
     "checklistId": 2360931290,
     "checklistHash": 967037272,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/maevic-square_ghost-scans-38.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/maevic-square_ghost-scans_38.jpg",
     "debug": {
       "name": "Maevic Square",
       "number": 38
@@ -2440,7 +2440,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2761367130,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/salt-mines_ghost-scans-60.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/salt-mines_ghost-scans_60.jpg",
     "debug": {
       "name": "Salt Mines",
       "number": 60
@@ -2451,7 +2451,7 @@
     "checklistId": 2360931290,
     "checklistHash": 854884291,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/salt-mines_ghost-scans-61.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/salt-mines_ghost-scans_61.jpg",
     "debug": {
       "name": "Salt Mines",
       "number": 61
@@ -2462,7 +2462,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1141127808,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/salt-mines_ghost-scans-62.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/salt-mines_ghost-scans_62.jpg",
     "debug": {
       "name": "Salt Mines",
       "number": 62
@@ -2476,7 +2476,7 @@
     },
     "checklistId": 2360931290,
     "checklistHash": 2980987172,
-    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans-63.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans_63.jpg",
     "description": "An item lays on the front seat of a rusty truck."
   },
   {
@@ -2486,7 +2486,7 @@
     },
     "checklistId": 2360931290,
     "checklistHash": 1426068241,
-    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans-64.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans_64.jpg",
     "description": "A Fallen house banner hangs between two buildings."
   },
   {
@@ -2496,14 +2496,14 @@
     },
     "checklistId": 2360931290,
     "checklistHash": 2372350830,
-    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans-65.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans_65.jpg",
     "description": "On the uppermost level of a damaged building, in the darkest corner, is a small green toolbox."
   },
   {
     "checklistId": 2360931290,
     "checklistHash": 4187728059,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans-66.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans_66.jpg",
     "debug": {
       "name": "Trostland",
       "number": 66
@@ -2514,7 +2514,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2285879512,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans-67.jpg",
+    "screenshot": "/static/images/screenshots/ghost-scans/trostland_ghost-scans_67.jpg",
     "debug": {
       "name": "Trostland",
       "number": 67
@@ -4288,7 +4288,7 @@
     },
     "checklistId": 3142056444,
     "checklistHash": 526088259,
-    "screenshot": "/static/images/screenshots/lost-sectors/trostland_lost-sector_atrium.jpg",
+    "screenshot": "/static/images/screenshots/lost-sectors/trostland_lost-sectors_atrium.jpg",
     "description": false
   },
   {
@@ -4298,7 +4298,7 @@
     },
     "checklistId": 3142056444,
     "checklistHash": 2954440164,
-    "screenshot": "/static/images/screenshots/lost-sectors/trostland_lost-sector_terminus-east.jpg",
+    "screenshot": "/static/images/screenshots/lost-sectors/trostland_lost-sectors_terminus-east.jpg",
     "description": false
   },
   {
@@ -4308,7 +4308,7 @@
     },
     "checklistId": 3142056444,
     "checklistHash": 1306638037,
-    "screenshot": "/static/images/screenshots/lost-sectors/trostland_lost-sector_widows-walk.jpg",
+    "screenshot": "/static/images/screenshots/lost-sectors/trostland_lost-sectors_widows-walk.jpg",
     "description": false
   },
   {
@@ -4439,7 +4439,7 @@
     },
     "checklistId": 3142056444,
     "checklistHash": 3107552723,
-    "screenshot": "/static/images/screenshots/lost-sectors/fields-of-glass_lost-sector_pariahs-refuge.jpg",
+    "screenshot": "/static/images/screenshots/lost-sectors/fields-of-glass_lost-sectors_pariahs-refuge.jpg",
     "description": false
   },
   {
@@ -4449,7 +4449,7 @@
     },
     "checklistId": 3142056444,
     "checklistHash": 3205937151,
-    "screenshot": "/static/images/screenshots/lost-sectors/braytech-futurescape_lost-sector_core-terminus.jpg",
+    "screenshot": "/static/images/screenshots/lost-sectors/braytech-futurescape_lost-sectors_core-terminus.jpg",
     "description": false
   },
   {
@@ -4459,7 +4459,7 @@
     },
     "checklistId": 3142056444,
     "checklistHash": 2025886454,
-    "screenshot": "/static/images/screenshots/lost-sectors/glacial-drift_lost-sector_maadim-subterrane.jpg",
+    "screenshot": "/static/images/screenshots/lost-sectors/glacial-drift_lost-sectors_maadim-subterrane.jpg",
     "description": false
   },
   {
