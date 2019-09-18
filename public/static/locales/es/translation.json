@@ -615,6 +615,6 @@
   "Your hard-won high scores from your fight against the most feared minions of the Darkness": "Tus puntuaciones altas, ganadas con esfuerzo, de tu lucha contra los súbditos más temidos de la Oscuridad.",
   "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "Es posible que los datos de tu perfil en Bungie.net sean privados. Este error se genera cuando los datos de progreso de caracteres no están disponibles y es la causa más probable.",
   "{{number}} mins": "{{number}} min",
-  "{{number}} minutes": "{{number}} minutos"
+  "{{number}} minutes": "{{number}} minutos",
   "{{vendorName}} is waiting for you at {{destinationName}}.": "{{vendorName}} te está esperando en {{destinationName}}."
 }
