@@ -28,7 +28,7 @@ const ChecklistItem = props => {
 };
 
 const Checklist = props => {
-  const { t, collectibles, headless, totalItems, completedItems, checklistCharacterBound, checklistName, checklistProgressDescription } = props;
+  const { t, collectibles, headless, totalItems, completedItems, checklistCharacterBound, checklistItemName_plural, checklistProgressDescription } = props;
 
   const items = collectibles.hideCompletedChecklistItems ? props.items.filter(i => !i.completed) : props.items;
 
@@ -52,7 +52,7 @@ const Checklist = props => {
     return (
       <>
         <div className='module-header'>
-          <div className='sub-name'>{t(checklistName)}</div>
+          <div className='sub-name'>{checklistItemName_plural}</div>
           {checklistCharacterBound ? (
             <div className='tooltip' data-hash='character_bound' data-table='BraytechDefinition'>
               <i className='segoe-uniE902' />
@@ -61,7 +61,7 @@ const Checklist = props => {
         </div>
         <ProgressBar
           objective={{
-            progressDescription: t(checklistProgressDescription),
+            progressDescription: checklistProgressDescription,
             completionValue: totalItems
           }}
           progress={{

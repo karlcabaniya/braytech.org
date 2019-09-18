@@ -60,7 +60,7 @@ class Checklist extends React.Component {
             <div className='text'>
               <div className='name'>{checklistItem.formatted.name}{checklistItem.formatted.suffix ? ` ${checklistItem.formatted.suffix}` : null}</div>
               <div>
-                <div className='kind'>{t(checklist.checklistName)}</div>
+                <div className='kind'>{t(checklist.checklistItemName)}</div>
               </div>
             </div>
           </div>

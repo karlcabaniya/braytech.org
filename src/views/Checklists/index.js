@@ -129,12 +129,12 @@ export class Checklists extends React.Component {
             <div className='module views'>
               <ul className='list'>
                 {lists.map((list, i) => (
-                  <ListButton checklistName={list.checklistName} checklistIcon={list.checklistIcon} checklistImage={list.checklistImage} key={i} visible={visible.includes(list)} onClick={() => this.changeSkip(i)} />
+                  <ListButton checklistItemName_plural={list.checklistName} checklistIcon={list.checklistIcon} checklistImage={list.checklistImage} key={i} visible={visible.includes(list)} onClick={() => this.changeSkip(i)} />
                 ))}
               </ul>
             </div>
             {visible.map(list => (
-              <div className='module list' key={list.checklistName}>
+              <div className='module list' key={list.checklistItemName_plural}>
                 <Checklist {...list} />
               </div>
             ))}
