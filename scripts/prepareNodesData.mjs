@@ -61,7 +61,7 @@ async function run() {
 
   output = _.orderBy(output, [e => e.checklistId, e => e.debug && e.debug.number, e => e.debug && e.debug.name]);
 
-  fs.writeFileSync(path, JSON.stringify('src/data/lowlines/maps/nodes/index.json', null, '  '));
+  fs.writeFileSync('src/data/lowlines/maps/nodes/index.json', JSON.stringify(output, null, '  '));
 
 }
 
