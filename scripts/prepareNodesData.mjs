@@ -85,7 +85,7 @@ function fromDir(startPath, filter) {
   }
 
   const pattern = new RegExp(filter);
-console.log(pattern)
+
   const files = fs.readdirSync(startPath);
 
   const results = [];
