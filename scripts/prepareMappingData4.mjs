@@ -3,38 +3,73 @@ import fetch from 'node-fetch';
 import Manifest from './manifest';
 import _ from 'lodash';
 
-const input = JSON.parse(fs.readFileSync('src/data/lowlines/maps/original.json'));
-const outputPath = 'src/data/lowlines/maps/index.json';
+const dump = JSON.parse(fs.readFileSync('scripts/dump/index.json'));
+const path = 'src/data/lowlines/maps/destinations/index.json';
+const input = JSON.parse(fs.readFileSync(path));
 
-let output = {};
+let output = input;
 
 async function run() {
   const manifest = await Manifest.getManifest();
 
   Object.entries(input).forEach(([key, value]) => {
+
     if (!value.destination.hash) {
-      output[key] = value;
+      // I really need a hash lol
       return;
     }
 
-    const definitionDestination = manifest.DestinyDestinationDefinition[value.destination.hash];
 
-    value.map.bubbles = value.map.bubbles.map(bubble => {
-      let bubbleHash = definitionDestination.bubbles.find(b => b.displayProperties.name === bubble.name);
+    /* add bubble hashes from manifest */
 
-      if (!bubbleHash) console.log(bubble)
+    // if (!value.destination.hash) {
+    //   output[key] = value;
+    //   return;
+    // }
 
-      return {
-        hash: bubbleHash && bubbleHash.hash,
-        ...bubble,
-      }
+    // const definitionDestination = manifest.DestinyDestinationDefinition[value.destination.hash];
+
+    // value.map.bubbles = value.map.bubbles.map(bubble => {
+    //   let bubbleHash = definitionDestination.bubbles.find(b => b.displayProperties.name === bubble.name);
+
+    //   if (!bubbleHash) console.log(bubble)
+
+    //   return {
+    //     hash: bubbleHash && bubbleHash.hash,
+    //     ...bubble,
+    //   }
+    // });
+
+    // output[key] = value;
+
+
+    /* add more nodes with `type` */
+    
+    const dumpDestination = dump[value.destination.hash];
+    
+    value.map.bubbles.forEach(bubble => {
+      const dumpBubble = dumpDestination.map.bubbles.find(dumpBubble => dumpBubble.id === bubble.id);
+      if (!dumpBubble) console.warn(`couldn't match bubble`);
+
+      dumpBubble.nodes.forEach(dumpNode => {
+        if (dumpNode.type === 'vendor') {
+          if (bubble.nodes.find(node => node.vendorHash === dumpNode.vendorHash)) return; // just one thanks
+
+          bubble.nodes.push({
+            type: dumpNode.type,
+            vendorHash: dumpNode.vendorHash,
+            x: dumpNode.x,
+            y: dumpNode.y
+          });
+        }
+      });
     });
 
-    output[key] = value;
+
   });
 
 
-  fs.writeFileSync(outputPath, JSON.stringify(output));
+  fs.writeFileSync(path, JSON.stringify(output, null, '  '));
 
 }
 
