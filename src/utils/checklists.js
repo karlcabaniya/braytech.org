@@ -2,6 +2,7 @@ import React from 'react';
 import { sortBy } from 'lodash';
 
 import store from './reduxStore';
+import i18n from './i18n';
 
 import data from '../data/lowlines/checklists';
 import manifest from './manifest';
@@ -29,15 +30,16 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
       sortBy: ['completed', 'destination', 'bubble', 'name'],
-      checklistName: 'Adventures',
+      checklistItemName: i18n.t('Adventure'),
+      checklistItemName_plural: i18n.t('Adventures'),
       checklistIcon: 'destiny-adventure',
-      checklistProgressDescription: 'Adventures undertaken',
+      checklistProgressDescription: i18n.t('Adventures undertaken'),
       ...options
     }),
   // region chests
@@ -68,14 +70,15 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Region Chests',
+      checklistItemName: i18n.t('Region Chest'),
+      checklistItemName_plural: i18n.t('Region Chests'),
       checklistIcon: 'destiny-region_chests',
-      checklistProgressDescription: 'Region chests opened',
+      checklistProgressDescription: i18n.t('Chests opened'),
       ...options
     }),
   // lost sectors
@@ -106,14 +109,15 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Lost Sectors',
+      checklistItemName: i18n.t('Lost Sector'),
+      checklistItemName_plural: i18n.t('Lost Sectors'),
       checklistIcon: 'destiny-lost_sectors',
-      checklistProgressDescription: 'Lost Sectors discovered',
+      checklistProgressDescription: i18n.t('Discovered'),
       ...options
     }),
   // ahamkara bones
@@ -143,14 +147,15 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Ahamkara Bones',
+      checklistItemName: i18n.t('Ahamkara Bones'),
+      checklistItemName_plural: i18n.t('Ahamkara Bones'),
       checklistIcon: 'destiny-ahamkara_bones',
-      checklistProgressDescription: 'Bones found',
+      checklistProgressDescription: i18n.t('Bones found'),
       ...options
     }),
   // corrupted eggs
@@ -173,14 +178,15 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Corrupted Eggs',
+      checklistItemName: i18n.t('Corrupted Egg'),
+      checklistItemName_plural: i18n.t('Corrupted Eggs'),
       checklistIcon: 'destiny-corrupted_eggs',
-      checklistProgressDescription: 'Eggs destroyed',
+      checklistProgressDescription: i18n.t('Eggs destroyed'),
       ...options
     }),
   // cat statues
@@ -203,14 +209,15 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Cat Statues',
+      checklistItemName: i18n.t('Cat Statue'),
+      checklistItemName_plural: i18n.t('Cat Statues'),
       checklistIcon: 'destiny-cat_statues',
-      checklistProgressDescription: 'Feline friends satisfied',
+      checklistProgressDescription: i18n.t('Feline friends satisfied'),
       ...options
     }),
   // sleeper nodes
@@ -235,14 +242,15 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Sleeper Nodes',
+      checklistItemName: i18n.t('Sleeper Node'),
+      checklistItemName_plural: i18n.t('Sleeper Nodes'),
       checklistIcon: 'destiny-sleeper_nodes',
-      checklistProgressDescription: 'Sleeper nodes hacked',
+      checklistProgressDescription: i18n.t('Nodes hacked'),
       ...options
     }),
   // ghost scans
@@ -265,14 +273,15 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Ghost Scans',
+      checklistItemName: i18n.t('Ghost Scan'),
+      checklistItemName_plural: i18n.t('Ghost Scans'),
       checklistIcon: 'destiny-ghost',
-      checklistProgressDescription: 'Ghost scans performed',
+      checklistProgressDescription: i18n.t('Scans performed'),
       ...options
     }),
   // latent memories
@@ -295,14 +304,15 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Lost Memory Fragments',
+      checklistItemName: i18n.t('Lost Memory Fragment'),
+      checklistItemName_plural: i18n.t('Lost Memory Fragments'),
       checklistIcon: 'destiny-lost_memory_fragments',
-      checklistProgressDescription: 'Memories resolved',
+      checklistProgressDescription: i18n.t('Memories resolved'),
       ...options
     }),
   // lore: ghost stories
@@ -332,15 +342,16 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Lore: Ghost Stories',
+      checklistItemName: i18n.t('Lore: Ghost Stories'),
+      checklistItemName_plural: i18n.t('Lore: Ghost Stories'),
       checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004869.png',
-      checklistProgressDescription: 'Stories found',
+      checklistProgressDescription: i18n.t('Stories read'),
       ...options
     }),
   // lore: awoken of the reef
@@ -370,15 +381,16 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Lore: Awoken of the Reef',
+      checklistItemName: i18n.t('Lore: Awoken of the Reef'),
+      checklistItemName_plural: i18n.t('Lore: Awoken of the Reef'),
       checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004874.png',
-      checklistProgressDescription: 'Crystals resolved',
+      checklistProgressDescription: i18n.t('Crystals resolved'),
       ...options
     }),
   // lore: forsaken prince
@@ -413,15 +425,16 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistName: 'Lore: Forsaken Prince',
+      checklistItemName: i18n.t('Lore: Forsaken Prince'),
+      checklistItemName_plural: i18n.t('Lore: Forsaken Prince'),
       checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004886.png',
-      checklistProgressDescription: 'Data caches decrypted',
+      checklistProgressDescription: i18n.t('Data caches decrypted'),
       ...options
     })
 };
@@ -461,7 +474,8 @@ function checklist(options = {}) {
 
   return {
     checklistId: options.checklistId,
-    checklistName: options.checklistName,
+    checklistItemName: options.checklistItemName,
+    checklistItemName_plural: options.checklistItemName_plural,
     checklistIcon: options.checklistIcon,
     checklistImage: options.checklistImage,
     checklistProgressDescription: options.checklistProgressDescription,

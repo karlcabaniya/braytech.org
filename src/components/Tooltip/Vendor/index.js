@@ -7,6 +7,7 @@ import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
+import destinations from '../../../data/lowlines/maps/destinations';
 import nodes from '../../../data/lowlines/maps/nodes';
 
 import './styles.css';
@@ -50,16 +51,28 @@ class Vendor extends React.Component {
       const largeIcon = definitionVendor.displayProperties && definitionVendor.displayProperties.largeIcon;
 
       const locations = definitionVendor.locations && definitionVendor.locations.length && definitionVendor.locations;
-      const location = locations.length > 1 ? manifest.DestinyDestinationDefinition[definitionVendor.locations[1].destinationHash] : manifest.DestinyDestinationDefinition[definitionVendor.locations[0].destinationHash];
-      const place = location.placeHash && manifest.DestinyPlaceDefinition[location.placeHash];
+      
+      const definitionDestination = locations.length > 1 ? manifest.DestinyDestinationDefinition[definitionVendor.locations[1].destinationHash] : manifest.DestinyDestinationDefinition[definitionVendor.locations[0].destinationHash];
+
+      const destination = definitionDestination && Object.values(destinations).find(d => d.destination.hash === definitionDestination.hash);
+      const bubble = destination && destination.map.bubbles.find(b => b.nodes.find(n => n.vendorHash === definitionVendor.hash));
+
+      const definitionBubble = (bubble && bubble.hash && definitionDestination.bubbles.find(b => b.hash === bubble.hash)) || (bubble && bubble.name);
+      const definitionPlace = definitionDestination && manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+
+      const destinationName = definitionDestination.displayProperties.name;
+      const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
+      const bubbleName = definitionBubble && definitionBubble.displayProperties.name;
 
       const extras = nodes && nodes.find(d => d.vendorHash === definitionVendor.hash);
       const screenshot = extras && extras.screenshot;
 
+      console.log(definitionVendor.hash, definitionBubble.hash)
+
       return (
         <>
           <div className='acrylic' />
-          <div className={cx('frame', 'vendor')}>
+          <div className='frame vendor'>
             <div className='header'>
               <div className='icon'>
                 <span className='destiny-faction_fella'>
@@ -85,17 +98,11 @@ class Vendor extends React.Component {
                   <ObservedImage className='image' src={screenshot ? screenshot : `https://www.bungie.net${largeIcon}`} />
                 </div>
               ) : null}
-              {description || location ? (
+              {description || definitionDestination ? (
                 <div className='description'>
-                  {location ? (
+                  {definitionDestination ? (
                     <div className='destination'>
-                      {place && place.displayProperties.name !== location.displayProperties.name ? (
-                        <>
-                          {location.displayProperties.name}, {place.displayProperties.name}
-                        </>
-                      ) : (
-                        location.displayProperties.name
-                      )}
+                      {[bubbleName, destinationName, placeName].filter(s => s).join(', ')}
                     </div>
                   ) : null}
                   {description ? <pre>{description}</pre> : null}

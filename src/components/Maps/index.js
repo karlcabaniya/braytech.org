@@ -229,7 +229,7 @@ class Maps extends React.Component {
       lists[key] = adjusted;
     });
 
-    console.log(lists);
+    // console.log(lists);
 
     this.setState({
       checklists: lists
@@ -542,7 +542,6 @@ class Maps extends React.Component {
                 })}
             {maps[destination].map.bubbles.map(bubble =>
               bubble.nodes
-                .filter(node => node.type === 'title' || node.type === 'fast-travel')
                 .map((node, i) => {
                   const markerOffsetX = mapXOffset + viewWidth / 2;
                   const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
@@ -560,6 +559,10 @@ class Maps extends React.Component {
                     }
 
                     const icon = marker.text(['interaction-none', bubble.type], name);
+
+                    return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
+                  } else if (node.type === 'vendor' && node.vendorHash !== 2190858386) {
+                    const icon = marker.icon({ hash: node.vendorHash, table: 'DestinyVendorDefinition' }, ['native'], { icon: 'destiny-faction_fella' });
 
                     return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
                   } else if (node.type === 'fast-travel') {
@@ -618,9 +621,7 @@ class Maps extends React.Component {
                   const destination = maps[key].destination;
 
                   let name = destination.hash && manifest.DestinyDestinationDefinition[destination.hash] && manifest.DestinyDestinationDefinition[destination.hash].displayProperties.name;
-                  if (destination.collectibleHash) {
-                    name = manifest.DestinyCollectibleDefinition[destination.collectibleHash].displayProperties.name;
-                  } else if (destination.activityHash) {
+                  if (destination.activityHash) {
                     name = manifest.DestinyActivityDefinition[destination.activityHash].displayProperties.name;
                   }
 

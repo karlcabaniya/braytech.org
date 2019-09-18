@@ -1,11 +1,10 @@
 const fs = require('fs');
-const process = require('process');
 const fetch = require('node-fetch');
 
-const outputPath = 'src/data/lowlines/dump/index.json';
+const outputPath = './dump/index.json';
 
 async function work(input) {
-  let output = [];
+  let output = {};
 
   await Promise.all(input.data.map(async d => {
     const destination = await fetch('https://lowlidev.com.au/destiny/api/v2/map/data/' + d.id).then(res => res.json());
@@ -28,23 +27,24 @@ async function work(input) {
         id: location.id,
         type: location.public ? 'region' : location.lostSector ? 'lost-sector' : 'suburb',
         nodes: location.nodes
-          .filter(node => ['title', 'fast-travel'].includes(node.type))
-          .map(node => {
-            const n = {
-              id: node.id,
-              type: node.type,
-              x: node.x,
-              y: node.y
-            };
+          // .filter(node => ['title', 'fast-travel'].includes(node.type))
+          // .map(node => {
+          //   const n = {
+          //     id: node.id,
+          //     type: node.type,
+          //     x: node.x,
+          //     y: node.y
+          //   };
 
-            // if (node.type === 'title') n.name = location.title
+          //   // if (node.type === 'title') n.name = location.title
 
-            return n;
-          })
+          //   return n;
+          // })
       }))
     };
 
-    output = output.concat(destination.data.map.locations);
+    //output = output.concat(destination.data.map.locations);
+    output[destination.data.map.destinationHash] = temp;
   }));
 
   fs.writeFileSync(outputPath, JSON.stringify(output));

@@ -26,7 +26,7 @@ class Checklist extends React.Component {
     const checklist = checklistEntry.checklistId && checklists[checklistEntry.checklistId]({ requested: { key: 'checklistHash', array: [checklistEntry.checklistHash] } });
     const checklistItem = checklist && checklist.items && checklist.items.length && checklist.items[0];
 
-    // console.log(checklist)
+    console.log(checklist)
 
     if (checklistEntry.checklistId === '4178338182') {
       checklist.checklistIcon = (
@@ -47,6 +47,7 @@ class Checklist extends React.Component {
 
     const extras = nodes && nodes.find(d => d.checklistHash === checklistItem.checklistHash);
     const screenshot = extras && extras.screenshot;
+    const description = extras && extras.description;
 
     return (
       <>
@@ -59,7 +60,7 @@ class Checklist extends React.Component {
             <div className='text'>
               <div className='name'>{checklistItem.formatted.name}{checklistItem.formatted.suffix ? ` ${checklistItem.formatted.suffix}` : null}</div>
               <div>
-                <div className='kind'>{t(checklist.checklistName)}</div>
+                <div className='kind'>{t(checklist.checklistItemName)}</div>
               </div>
             </div>
           </div>
@@ -71,6 +72,7 @@ class Checklist extends React.Component {
             ) : null}
             <div className='description'>
               <div className='destination'>{checklistItem.formatted.locationExt}</div>
+              {description ? <pre>{description}</pre> : null}
             </div>
             {checklistItem.completed ? (
               <div className='completed'>{t('Completed')}</div>
