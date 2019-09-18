@@ -1,16 +1,16 @@
 import fs from 'fs';
+import path from 'path';
 import fetch from 'node-fetch';
 import Manifest from './manifest';
 import _ from 'lodash';
 
 const dump = JSON.parse(fs.readFileSync('src/data/lowlines/checklists/index.json'));
-const path = 'src/data/lowlines/maps/nodes/index.json';
 const input = JSON.parse(fs.readFileSync('src/data/lowlines/maps/nodes/index.json'));
 
 let output = input;
 
 async function run() {
-  const manifest = await Manifest.getManifest();
+  // const manifest = await Manifest.getManifest();
 
   Object.entries(dump).forEach(([key, value]) => {
 
@@ -27,14 +27,20 @@ async function run() {
       );
 
       if (index > -1) {
+        let screenshot = output[index].screenshot && output[index].screenshot !== "" ? output[index].screenshot : false;
+
+        if (parseInt(key, 10) === 2360931290 && output[index].debug && output[index].debug.number) {
+          screenshot = getScreenshot('ghost-scans', output[index].debug.number)
+        }
+
         output[index] = {
           ...output[index],
-          debug: {
-            name: entry.sorts.name,
-            number: entry.sorts.number
-          },
-          screenshot: output[index].screenshot && output[index].screenshot !== "/static/images/screenshots/" ? output[index].screenshot : false,
-          description: output[index].description && output[index].description !== "" ? output[index].description : false
+          // debug: {
+          //   name: entry.sorts.name,
+          //   number: entry.sorts.number
+          // },
+          screenshot,
+          // description: output[index].description && output[index].description !== "" ? output[index].description : false
         };
       } else {
         output.push({
@@ -55,9 +61,45 @@ async function run() {
 
   output = _.orderBy(output, [e => e.checklistId, e => e.debug && e.debug.number, e => e.debug && e.debug.name]);
 
-  fs.writeFileSync(path, JSON.stringify(output, null, '  '));
+  fs.writeFileSync(path, JSON.stringify('src/data/lowlines/maps/nodes/index.json', null, '  '));
 
 }
 
-run();
+function getScreenshot(listName, number) {
+  let screenshot = false;
+  const look = fromDir(`public/static/images/screenshots/${listName}/`, `${listName}-${number}`);
+  if (look.length === 1) screenshot = `/static/images/screenshots/${listName}/${look[0]}`;
 
+  return screenshot;
+}
+
+function fromDir(startPath, filter) {
+
+  if (!fs.existsSync(startPath)) {
+    console.log('no dir ', startPath);
+    return;
+  }
+
+  const pattern = new RegExp(filter);
+
+  const files = fs.readdirSync(startPath);
+
+  const results = [];
+
+  for (let i = 0; i < files.length; i++) {
+    const filename = path.join(startPath, files[i]);
+    const stat = fs.lstatSync(filename);
+
+    if (stat.isDirectory()) {
+      fromDir(filename, filter);
+
+    } else if (pattern.test(filename)) {
+      results.push(files[i]);
+
+    }
+  }
+
+  return results;
+}
+
+run();
