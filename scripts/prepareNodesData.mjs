@@ -33,6 +33,10 @@ async function run() {
           screenshot = getScreenshot('ghost-scans', output[index].debug.number)
         }
 
+        if (parseInt(key, 10) === 3142056444 && output[index].debug && output[index].debug.name) {
+          screenshot = getScreenshot('lost-sectors', output[index].debug.name.toLowerCase().replace(/'/g,'').replace(/ /g,'-'))
+        }
+
         output[index] = {
           ...output[index],
           // debug: {
@@ -65,9 +69,9 @@ async function run() {
 
 }
 
-function getScreenshot(listName, number) {
+function getScreenshot(listName, pattern) {
   let screenshot = false;
-  const look = fromDir(`public/static/images/screenshots/${listName}/`, `${listName}-${number}`);
+  const look = fromDir(`public/static/images/screenshots/${listName}/`, `${listName}_${pattern}`);
   if (look.length === 1) screenshot = `/static/images/screenshots/${listName}/${look[0]}`;
 
   return screenshot;

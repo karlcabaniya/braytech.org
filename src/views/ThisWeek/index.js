@@ -9,8 +9,6 @@ import ObservedImage from '../../components/ObservedImage';
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
 import Items from '../../components/Items';
-import checklists from '../../utils/checklists';
-import Checklist from '../../components/Checklist';
 
 import './styles.css';
 
@@ -20,7 +18,7 @@ class ThisWeek extends React.Component {
 
     this.state = {};
 
-    const { t, member, collectibles } = this.props;
+    const { t, member } = this.props;
     const { milestones } = member.data;
 
     this.consolidatedInfo = {
@@ -1015,10 +1013,6 @@ class ThisWeek extends React.Component {
         <ul className='list record-items'>
           <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
         </ul>
-        <h4>{t('Checklist items')}</h4>
-        {this.consolidatedInfo.ascendant[cycleInfo.week.ascendant].checklists.map(list => {
-          return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: { key: 'checklistHash', array: list.items } })} />;
-        })}
       </div>
     );
 
@@ -1034,14 +1028,6 @@ class ThisWeek extends React.Component {
         <ul className='list record-items'>
           <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
         </ul>
-        {this.consolidatedInfo.curse[cycleInfo.week.curse].checklists.length ? (
-          <>
-            <h4>{t('Checklist items')}</h4>
-            {this.consolidatedInfo.curse[cycleInfo.week.curse].checklists.map(list => {
-              return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: { key: 'checklistHash', array: list.items } })} />;
-            })}
-          </>
-        ) : null}
       </div>
     );
 
@@ -1056,10 +1042,6 @@ class ThisWeek extends React.Component {
           <ul className='list record-items'>
             <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.shatteredThrone.triumphs} ordered />
           </ul>
-          <h4>{t('Checklist items')}</h4>
-          {this.consolidatedInfo.shatteredThrone.checklists.map(list => {
-            return <Checklist key={list.checklistId} headless {...checklists[list.checklistId]({ requested: { key: 'checklistHash', array: list.items } })} />;
-          })}
         </div>
       ) : (
         false
