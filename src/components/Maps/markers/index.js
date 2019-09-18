@@ -20,6 +20,18 @@ function generateIcon(destinyIcon) {
         </span>
       </div>
     );
+  } else if (destinyIcon === 'destiny-faction_fella') {
+    icon = (
+      <div className='icon'>
+        <span className='destiny-faction_fella'>
+          <span className='path1' />
+          <span className='path2' />
+          <span className='path3' />
+          <span className='path4' />
+          <span className='path5' />
+        </span>
+      </div>
+    );
   } else if (destinyIcon === 'destiny-lore_scholar') {
     icon = (
       <div className='icon'>

@@ -45,29 +45,52 @@ async function run() {
 
     /* add more nodes with `type` */
     
-    const dumpDestination = dump[value.destination.hash];
+    // const dumpDestination = dump[value.destination.hash];
     
-    value.map.bubbles.forEach(bubble => {
-      const dumpBubble = dumpDestination.map.bubbles.find(dumpBubble => dumpBubble.id === bubble.id);
-      if (!dumpBubble) console.warn(`couldn't match bubble`);
+    // value.map.bubbles.forEach(bubble => {
+    //   const dumpBubble = dumpDestination.map.bubbles.find(dumpBubble => dumpBubble.id === bubble.id);
+    //   if (!dumpBubble) console.warn(`couldn't match bubble`);
 
-      dumpBubble.nodes.forEach(dumpNode => {
-        if (dumpNode.type === 'vendor') {
-          if (bubble.nodes.find(node => node.vendorHash === dumpNode.vendorHash)) return; // just one thanks
+    //   dumpBubble.nodes.forEach(dumpNode => {
+    //     if (dumpNode.type === 'vendor') {
+    //       if (bubble.nodes.find(node => node.vendorHash === dumpNode.vendorHash)) return; // just one thanks
 
-          bubble.nodes.push({
-            type: dumpNode.type,
-            vendorHash: dumpNode.vendorHash,
-            x: dumpNode.x,
-            y: dumpNode.y
-          });
-        }
-      });
+    //       bubble.nodes.push({
+    //         type: dumpNode.type,
+    //         vendorHash: dumpNode.vendorHash,
+    //         x: dumpNode.x,
+    //         y: dumpNode.y
+    //       });
+    //     }
+    //   });
+    // });
+
+
+    /* convert a value from string to int */
+      
+    // value.map.bubbles.forEach(bubble => {
+    //   bubble.nodes.forEach(node => {
+    //     if (node.vendorHash) {
+    //       node.vendorHash = parseInt(node.vendorHash, 10);
+    //     }
+    //   });
+    // });
+
+
+    /* remove a dud node */
+    
+    value.map.bubbles.nodes = value.map.bubbles.nodes.filter(n => {
+      if (n.type === 'vendor' && n.vendorHash !== '') {
+        return n
+      } else if (n.type !== 'vendor') {
+        return n
+      }
     });
 
 
-  });
 
+    
+  });
 
   fs.writeFileSync(path, JSON.stringify(output, null, '  '));
 

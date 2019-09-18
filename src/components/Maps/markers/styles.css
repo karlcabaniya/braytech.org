@@ -106,6 +106,14 @@
   opacity: 0.2;
 }
 
+.map-omega .leaflet-container .icon-marker .wrapper .icon .destiny-faction_fella {
+  font-size: 38px;
+}
+
+.map-omega .leaflet-container .icon-marker .wrapper .icon .destiny-faction_fella .path3 {
+  display: none;
+}
+
 .map-omega .leaflet-container .icon-marker .wrapper .icon .destiny-lore_scholar {
   font-size: 20px;
 }
