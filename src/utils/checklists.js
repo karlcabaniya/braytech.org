@@ -78,7 +78,7 @@ export const checklists = {
       checklistItemName: i18n.t('Region Chest'),
       checklistItemName_plural: i18n.t('Region Chests'),
       checklistIcon: 'destiny-region_chests',
-      checklistProgressDescription: i18n.t('Region chests opened'),
+      checklistProgressDescription: i18n.t('Chests opened'),
       ...options
     }),
   // lost sectors
@@ -117,7 +117,7 @@ export const checklists = {
       checklistItemName: i18n.t('Lost Sector'),
       checklistItemName_plural: i18n.t('Lost Sectors'),
       checklistIcon: 'destiny-lost_sectors',
-      checklistProgressDescription: i18n.t('Lost Sectors discovered'),
+      checklistProgressDescription: i18n.t('Discovered'),
       ...options
     }),
   // ahamkara bones
