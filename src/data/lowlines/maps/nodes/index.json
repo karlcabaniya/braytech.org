@@ -2,15 +2,60 @@
   {
     "checklistId":3142056444,
     "checklistHash":3107552723,
-    "screenshot":"/static/images/screenshots/fields-of-glass_lost-sector_pariahs-refuge.jpg"    
+    "screenshot":"/static/images/screenshots/lost-sectors/fields-of-glass_lost-sector_pariahs-refuge.jpg"    
+  },
+  {
+    "checklistId":3142056444,
+    "checklistHash":2025886454,
+    "screenshot":"/static/images/screenshots/lost-sectors/glacial-drift_lost-sector_maadim-subterrane.jpg"    
+  },
+  {
+    "checklistId":3142056444,
+    "checklistHash":3205937151,
+    "screenshot":"/static/images/screenshots/lost-sectors/braytech-futurescape_lost-sector_core-terminus.jpg"    
+  },
+  {
+    "checklistId":3142056444,
+    "checklistHash":526088259,
+    "screenshot":"/static/images/screenshots/lost-sectors/trostland_lost-sector_atrium.jpg"    
+  },
+  {
+    "checklistId":3142056444,
+    "checklistHash":2954440164,
+    "screenshot":"/static/images/screenshots/lost-sectors/trostland_lost-sector_terminus-east.jpg"    
+  },
+  {
+    "checklistId":3142056444,
+    "checklistHash":1306638037,
+    "screenshot":"/static/images/screenshots/lost-sectors/trostland_lost-sector_widows-walk.jpg"    
+  },
+  {
+    "checklistId":2360931290,
+    "checklistHash":2980987172,
+    "screenshot":"/static/images/screenshots/ghost-scans/trostland_ghost-scan-63.jpg"    
+  },
+  {
+    "checklistId":2360931290,
+    "checklistHash":1426068241,
+    "screenshot":"/static/images/screenshots/ghost-scans/trostland_ghost-scan-64.jpg"    
+  },
+  {
+    "checklistId":2360931290,
+    "checklistHash":2372350830,
+    "screenshot":"/static/images/screenshots/ghost-scans/trostland_ghost-scan-65.jpg"    
   },
   {
     "vendorHash":1735426333,
-    "screenshot":"/static/images/screenshots/vendor_ana-bray-2.jpg"
+    "screenshot":"/static/images/screenshots/vendors/vendor_ana-bray-2.jpg"
   },
   {
     "vendorHash":2398407866,
     "bubbleHash":2822410613,
-    "screenshot":"/static/images/screenshots/vendor_brother-vance-2.jpg"
+    "screenshot":"/static/images/screenshots/vendors/vendor_brother-vance-2.jpg"
+  },
+  {
+    "vendorHash":396892126,
+    "bubbleHash":3091570009,
+    "screenshot":"/static/images/screenshots/vendors/vendor_devrim-kay-2.jpg"
   }
 ]
