@@ -49,7 +49,9 @@ const emblem = item => {
 
   return (
     <>
-      <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${item.secondaryIcon}`} />
+      <div className='emblem'>
+        <ObservedImage className='image' src={`https://www.bungie.net${item.secondaryIcon}`} />
+      </div>
       {description ? (
         <div className='description'>
           <pre>{description}</pre>
