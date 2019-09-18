@@ -47,6 +47,7 @@ class Checklist extends React.Component {
 
     const extras = nodes && nodes.find(d => d.checklistHash === checklistItem.checklistHash);
     const screenshot = extras && extras.screenshot;
+    const description = extras && extras.description;
 
     return (
       <>
@@ -71,6 +72,7 @@ class Checklist extends React.Component {
             ) : null}
             <div className='description'>
               <div className='destination'>{checklistItem.formatted.locationExt}</div>
+              {description ? <pre>{description}</pre> : null}
             </div>
             {checklistItem.completed ? (
               <div className='completed'>{t('Completed')}</div>
