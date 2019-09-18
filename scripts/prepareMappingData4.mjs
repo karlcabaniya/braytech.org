@@ -78,18 +78,22 @@ async function run() {
 
 
     /* remove a dud node */
-    
-    value.map.bubbles.nodes = value.map.bubbles.nodes.filter(n => {
-      if (n.type === 'vendor' && n.vendorHash !== '') {
-        return n
-      } else if (n.type !== 'vendor') {
-        return n
-      }
+
+    value.map.bubbles.forEach(bubble => {
+      bubble.nodes = bubble.nodes
+        .filter(n => {
+          if (n.type === 'vendor' && n.vendorHash !== '') {
+            return n
+          } else if (n.type !== 'vendor') {
+            return n
+          } else {
+            return false;
+          }
+        })
+        .filter(n => n);
     });
 
 
-
-    
   });
 
   fs.writeFileSync(path, JSON.stringify(output, null, '  '));

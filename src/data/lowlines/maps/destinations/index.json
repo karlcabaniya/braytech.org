@@ -1710,12 +1710,6 @@
           "nodes": [
             {
               "type": "vendor",
-              "vendorHash": 1454616762,
-              "x": -12,
-              "y": -183
-            },
-            {
-              "type": "vendor",
               "vendorHash": 863940356,
               "x": -63,
               "y": -195
@@ -2497,12 +2491,6 @@
               "vendorHash": 1841717884,
               "x": 504.32,
               "y": -292.84
-            },
-            {
-              "type": "vendor",
-              "vendorHash": "",
-              "x": 66,
-              "y": -346
             }
           ]
         },
@@ -2527,12 +2515,6 @@
               "vendorHash": 1841717884,
               "x": -465.36,
               "y": -116.76
-            },
-            {
-              "type": "vendor",
-              "vendorHash": "",
-              "x": -263,
-              "y": 67
             }
           ]
         },
@@ -2552,12 +2534,6 @@
               "vendorHash": 1841717884,
               "x": 57.92,
               "y": 254
-            },
-            {
-              "type": "vendor",
-              "vendorHash": "",
-              "x": 285,
-              "y": 84
             }
           ]
         },
@@ -2587,14 +2563,7 @@
           "name": "Harbinger's Seclude",
           "id": "harbingers-seclude",
           "type": "suburb",
-          "nodes": [
-            {
-              "type": "vendor",
-              "vendorHash": "",
-              "x": 571,
-              "y": 663
-            }
-          ]
+          "nodes": []
         },
         {
           "hash": 278887670,

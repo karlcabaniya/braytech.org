@@ -29,7 +29,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -68,7 +68,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -106,7 +106,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -143,7 +143,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -173,7 +173,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -203,7 +203,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -235,7 +235,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -265,7 +265,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -295,7 +295,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -332,7 +332,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -370,7 +370,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
@@ -413,7 +413,7 @@ export const checklists = {
         const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
 
         const destinationName = definitionDestination && definitionDestination.displayProperties.name;
-        const placeName = definitionPlace && definitionPlace.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
         const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
