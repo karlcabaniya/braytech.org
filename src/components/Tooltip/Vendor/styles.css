@@ -41,7 +41,7 @@
   background-color: hsla(140, 65%, 15%, 0.8);
 }
 
-#tooltip .frame.vendor .black .screenshot {
+#tooltip .frame.vendor .black .screenshot:not(.extras) {
   padding-bottom: 28.6%;
 }
 

@@ -7,6 +7,7 @@ import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
+import nodes from '../../../data/lowlines/maps/nodes';
 
 import './styles.css';
 
@@ -52,6 +53,9 @@ class Vendor extends React.Component {
       const location = locations.length > 1 ? manifest.DestinyDestinationDefinition[definitionVendor.locations[1].destinationHash] : manifest.DestinyDestinationDefinition[definitionVendor.locations[0].destinationHash];
       const place = location.placeHash && manifest.DestinyPlaceDefinition[location.placeHash];
 
+      const extras = nodes && nodes.find(d => d.vendorHash === definitionVendor.hash);
+      const screenshot = extras && extras.screenshot;
+
       return (
         <>
           <div className='acrylic' />
@@ -77,8 +81,8 @@ class Vendor extends React.Component {
             </div>
             <div className='black'>
               {largeIcon ? (
-                <div className='screenshot'>
-                  <ObservedImage className='image' src={`https://www.bungie.net${largeIcon}`} />
+                <div className={cx('screenshot', { extras: screenshot })}>
+                  <ObservedImage className='image' src={screenshot ? screenshot : `https://www.bungie.net${largeIcon}`} />
                 </div>
               ) : null}
               {description || location ? (
