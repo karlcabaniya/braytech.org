@@ -22,10 +22,10 @@ _The source code of braytech.org_
 2.  Find screenshots at [/public/static/images/screenshots/original](https://github.com/justrealmilk/braytech.org/tree/master/public/static/images/screenshots/original)
 
 3.  Submit your screenshots with matching file name patterns to these folders
-  *  No HUD
-  *  1080p
-  *  Frame subject in very center
-  *  No ammo, enemies, guardians in frame
+    *  No HUD
+    *  1080p
+    *  Frame subject in very center
+    *  No ammo, enemies, guardians in frame
 
 4.  Submit pull request
 
