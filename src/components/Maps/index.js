@@ -13,6 +13,7 @@ import { Map, ImageOverlay, Marker } from 'react-leaflet';
 import manifest from '../../utils/manifest';
 import * as ls from '../../utils/localStorage';
 import maps from '../../data/lowlines/maps/destinations';
+import nodes from '../../data/lowlines/maps/nodes';
 import CharacterEmblem from '../../components/UI/CharacterEmblem';
 import Spinner from '../../components/UI/Spinner';
 import checklists from '../../utils/checklists';
@@ -29,7 +30,7 @@ class Maps extends React.Component {
       loading: true,
       error: false,
       zoom: 0,
-      destination: this.props.id || 'echo-mesa',
+      destination: this.props.id || 'edz',
       destinations: {
         tower: {
           loading: true,
@@ -78,40 +79,52 @@ class Maps extends React.Component {
         }
       },
       checklists: {
-        1697465175: {  // region chests
+        1697465175: {
+          // region chests
           visible: true
         },
-        3142056444: {  // lost sectors
+        3142056444: {
+          // lost sectors
           visible: true
         },
-        4178338182: {  // adventures
+        4178338182: {
+          // adventures
           visible: true
         },
-        2360931290: {  // ghost scans
+        2360931290: {
+          // ghost scans
           visible: true
         },
-        365218222: {   // sleeper nodes
+        365218222: {
+          // sleeper nodes
           visible: true
         },
-        2955980198: {  // latent memories
+        2955980198: {
+          // latent memories
           visible: true
         },
-        1297424116: {  // ahamkara bones
+        1297424116: {
+          // ahamkara bones
           visible: true
         },
-        2609997025: {  // corrupted eggs
+        2609997025: {
+          // corrupted eggs
           visible: true
         },
-        2726513366: {  // cat statues
+        2726513366: {
+          // cat statues
           visible: true
         },
-        1420597821: {  // lore: ghost stories
+        1420597821: {
+          // lore: ghost stories
           visible: true
         },
-        3305936921: {  // lore: awoken of the reef
+        3305936921: {
+          // lore: awoken of the reef
           visible: true
         },
-        655926402: {  // lore: forsaken prince
+        655926402: {
+          // lore: forsaken prince
           visible: true
         }
       },
@@ -150,42 +163,54 @@ class Maps extends React.Component {
     }
   }
 
-  generateChecklists = (destination = 'echo-mesa') => {
+  generateChecklists = (destination = 'edz') => {
     let lists = {
-      1697465175: {  // region chests
+      1697465175: {
+        // region chests
         ...checklists[1697465175]()
       },
-      3142056444: {  // lost sectors
+      3142056444: {
+        // lost sectors
         ...checklists[3142056444]()
       },
-      4178338182: {  // adventures
+      4178338182: {
+        // adventures
         ...checklists[4178338182]()
       },
-      2360931290: {  // ghost scans
+      2360931290: {
+        // ghost scans
         ...checklists[2360931290]()
       },
-      365218222: {   // sleeper nodes
+      365218222: {
+        // sleeper nodes
         ...checklists[365218222]()
       },
-      2955980198: {  // latent memories
+      2955980198: {
+        // latent memories
         ...checklists[2955980198]()
       },
-      1297424116: {  // ahamkara bones
+      1297424116: {
+        // ahamkara bones
         ...checklists[1297424116]()
       },
-      2609997025: {  // corrupted eggs
+      2609997025: {
+        // corrupted eggs
         ...checklists[2609997025]()
       },
-      2726513366: {  // cat statues
+      2726513366: {
+        // cat statues
         ...checklists[2726513366]()
       },
-      1420597821: {  // lore: ghost stories
+      1420597821: {
+        // lore: ghost stories
         ...checklists[1420597821]()
       },
-      3305936921: {  // lore: awoken of the reef
+      3305936921: {
+        // lore: awoken of the reef
         ...checklists[3305936921]()
       },
-      655926402: {   // lore: forsaken prince
+      655926402: {
+        // lore: forsaken prince
         ...checklists[655926402]()
       }
     };
@@ -198,9 +223,12 @@ class Maps extends React.Component {
         visible: this.state.checklists[key].visible,
         tooltipTable: 'DestinyChecklistDefinition',
         items: list.items.map(i => {
+          const node = nodes.find(n => n.checklistHash === i.checklistHash);
+
           return {
             ...i,
-            tooltipHash: i.checklistHash
+            tooltipHash: i.checklistHash,
+            screenshot: node && node.screenshot && true
           };
         })
       };
@@ -216,12 +244,16 @@ class Maps extends React.Component {
         });
       }
 
+      // record-based nodes
       if ([1420597821, 3305936921, 655926402].includes(list.checklistId)) {
         adjusted.tooltipTable = 'DestinyRecordDefinition';
         adjusted.items = adjusted.items.map(i => {
+          const node = nodes.find(n => n.recordHash === i.recordHash);
+
           return {
             ...i,
-            tooltipHash: i.recordHash
+            tooltipHash: i.recordHash,
+            screenshot: node && node.screenshot && true
           };
         });
       }
@@ -314,32 +346,34 @@ class Maps extends React.Component {
 
       // console.log(layers);
 
-      if (this.mounted) this.setState(p => {
-        return {
-          destinations: {
-            ...p.destinations,
-            [destination]: {
-              loading: false,
-              error: false,
-              layers
+      if (this.mounted)
+        this.setState(p => {
+          return {
+            destinations: {
+              ...p.destinations,
+              [destination]: {
+                loading: false,
+                error: false,
+                layers
+              }
             }
-          }
-        };
-      });
+          };
+        });
     } catch (e) {
       console.log(e);
-      if (this.mounted) this.setState(p => {
-        return {
-          destinations: {
-            ...p.destinations,
-            [destination]: {
-              loading: false,
-              error: true,
-              layers: []
+      if (this.mounted)
+        this.setState(p => {
+          return {
+            destinations: {
+              ...p.destinations,
+              [destination]: {
+                loading: false,
+                error: true,
+                layers: []
+              }
             }
-          }
-        };
-      });
+          };
+        });
     }
   };
 
@@ -364,7 +398,7 @@ class Maps extends React.Component {
     }
   };
 
-  handler_viewportChanged = viewport => {
+  handler_map_viewportChanged = viewport => {
     this.setState({ zoom: viewport.zoom });
   };
 
@@ -453,16 +487,63 @@ class Maps extends React.Component {
     }
   };
 
-  handler_layerAdd = debounce(e => {
+  handler_map_layerAdd = debounce(e => {
     if (this.mounted) this.props.rebindTooltips();
   }, 200);
 
-  handler_moveEnd = e => {
+  handler_map_moveEnd = e => {
     if (this.mounted) this.props.rebindTooltips();
   };
 
-  handler_zoomEnd = e => {
+  handler_map_zoomEnd = e => {
     if (this.mounted) this.props.rebindTooltips();
+  };
+
+  handler_map_mouseDown = e => {
+    if (!this.props.maps.debug || !this.props.maps.logDetails) return;
+
+    const destination = this.state.destination;
+
+    const map = maps[destination].map;
+
+    let originalX, originalY;
+
+    let offsetX = e.latlng.lng;
+    let offsetY = e.latlng.lat;
+
+    let midpointX = map.width / 2;
+    let midpointY = map.height / 2;
+
+    if (offsetX > midpointX) {
+      originalX = -(midpointX - offsetX);
+    } else {
+      originalX = offsetX - midpointX;
+    }
+
+    if (offsetY > midpointY) {
+      originalY = -(midpointY - offsetY);
+    } else {
+      originalY = offsetY - midpointY;
+    }
+
+    console.log(JSON.stringify({ map: { x: originalX, y: originalY } }));
+  };
+
+  handler_markerMouseOver = e => {
+    if (!this.props.maps.debug || !this.props.maps.logDetails) return;
+
+    let dataset = {};
+    try {
+      dataset = e.target._icon.children[0].children[0].dataset;
+    } catch (e) {}
+
+    const node = dataset.hash && nodes.find(n => (dataset.table === 'DestinyChecklistDefinition' && n.checklistHash && n.checklistHash === parseInt(dataset.hash, 10)) || (dataset.table === 'DestinyRecordDefinition' && n.recordHash && n.recordHash === parseInt(dataset.hash, 10)));
+
+    console.log(node);
+
+    const item = node && this.state.checklists[node.checklistId].items.find(i => (i.checklistHash && node.checklistHash && i.checklistHash === node.checklistHash) || (i.recordHash && node.recordHash && i.recordHash === node.recordHash));
+
+    console.log(item);
   };
 
   render() {
@@ -475,7 +556,7 @@ class Maps extends React.Component {
     } else if (this.state.error) {
       return <div className='map-omega loading'>error lol</div>;
     } else {
-      const { member, viewport, id: destinationId = 'echo-mesa' } = this.props;
+      const { member, viewport, maps: settings, id: destinationId = 'edz' } = this.props;
       const destination = this.state.destination;
 
       const map = maps[destination].map;
@@ -493,8 +574,10 @@ class Maps extends React.Component {
 
       const center = [map.height / 2 + centerYOffset, map.width / 2 + centerXOffset];
 
+      // console.log(mapXOffset, mapYOffset, bounds)
+
       return (
-        <div className={cx('map-omega', `zoom-${this.state.zoom}`)}>
+        <div className={cx('map-omega', `zoom-${this.state.zoom}`, { debug: settings.debug, 'highlight-no-screenshot': settings.noScreenshotHighlight })}>
           <div className='leaflet-pane leaflet-background-pane'>
             {this.state.destinations[destination] &&
               this.state.destinations[destination].layers
@@ -503,7 +586,7 @@ class Maps extends React.Component {
                   return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
                 })}
           </div>
-          <Map center={center} zoom={this.state.zoom} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_viewportChanged} onLayerAdd={this.handler_layerAdd} onMoveEnd={this.handler_moveEnd} onZoomEnd={this.handler_zoomEnd}>
+          <Map center={center} zoom={this.state.zoom} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_map_viewportChanged} onLayerAdd={this.handler_map_layerAdd} onMoveEnd={this.handler_map_moveEnd} onZoomEnd={this.handler_map_zoomEnd} onMouseDown={this.handler_map_mouseDown}>
             {this.state.destinations[destination] &&
               this.state.destinations[destination].layers
                 .filter(layer => layer.type !== 'background')
@@ -541,38 +624,37 @@ class Maps extends React.Component {
                   }
                 })}
             {maps[destination].map.bubbles.map(bubble =>
-              bubble.nodes
-                .map((node, i) => {
-                  const markerOffsetX = mapXOffset + viewWidth / 2;
-                  const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
+              bubble.nodes.map((node, i) => {
+                const markerOffsetX = mapXOffset + viewWidth / 2;
+                const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
 
-                  const offsetX = markerOffsetX + (node.x ? node.x : 0);
-                  const offsetY = markerOffsetY + (node.y ? node.y : 0);
+                const offsetX = markerOffsetX + (node.x ? node.x : 0);
+                const offsetY = markerOffsetY + (node.y ? node.y : 0);
 
-                  if (node.type === 'title') {
-                    const definitionDestination = maps[destination].destination.hash && manifest.DestinyDestinationDefinition[maps[destination].destination.hash];
-                    const definitionBubble = bubble.hash && definitionDestination && definitionDestination.bubbles && definitionDestination.bubbles.find(b => b.hash === bubble.hash);
+                if (node.type === 'title') {
+                  const definitionDestination = maps[destination].destination.hash && manifest.DestinyDestinationDefinition[maps[destination].destination.hash];
+                  const definitionBubble = bubble.hash && definitionDestination && definitionDestination.bubbles && definitionDestination.bubbles.find(b => b.hash === bubble.hash);
 
-                    let name = bubble.name;
-                    if (definitionBubble && definitionBubble.displayProperties.name && definitionBubble.displayProperties.name !== '') {
-                      name = definitionBubble.displayProperties.name;
-                    }
-
-                    const icon = marker.text(['interaction-none', bubble.type], name);
-
-                    return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
-                  } else if (node.type === 'vendor' && node.vendorHash !== 2190858386) {
-                    const icon = marker.icon({ hash: node.vendorHash, table: 'DestinyVendorDefinition' }, ['native'], { icon: 'destiny-faction_fella' });
-
-                    return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
-                  } else if (node.type === 'fast-travel') {
-                    const icon = marker.iconFastTravel(['interaction-none']);
-
-                    return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
-                  } else {
-                    return null;
+                  let name = bubble.name;
+                  if (definitionBubble && definitionBubble.displayProperties.name && definitionBubble.displayProperties.name !== '') {
+                    name = definitionBubble.displayProperties.name;
                   }
-                })
+
+                  const icon = marker.text(['interaction-none', bubble.type], name);
+
+                  return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
+                } else if (node.type === 'vendor' && node.vendorHash !== 2190858386) {
+                  const icon = marker.icon({ hash: node.vendorHash, table: 'DestinyVendorDefinition' }, ['native'], { icon: 'destiny-faction_fella' });
+
+                  return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
+                } else if (node.type === 'fast-travel') {
+                  const icon = marker.iconFastTravel(['interaction-none']);
+
+                  return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
+                } else {
+                  return null;
+                }
+              })
             )}
             {Object.keys(this.state.checklists).map(key => {
               const checklist = this.state.checklists[key];
@@ -590,10 +672,12 @@ class Maps extends React.Component {
 
                   // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 
-                  const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`], { icon: checklist.checklistIcon, url: checklist.checklistImage });
+                  const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`, node.screenshot ? `has-screenshot` : ''], { icon: checklist.checklistIcon, url: checklist.checklistImage });
                   // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
-                  return <Marker key={`${node.checklistHash}-${i}`} position={[offsetY, offsetX]} icon={icon} />;
+                  const handler_markerMouseOver = (settings.debug && this.handler_markerMouseOver) || null;
+
+                  return <Marker key={`${node.checklistHash}-${i}`} position={[offsetY, offsetX]} icon={icon} onMouseOver={handler_markerMouseOver} />;
                 });
             })}
           </Map>
@@ -664,7 +748,8 @@ function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
     collectibles: state.collectibles,
-    viewport: state.viewport
+    viewport: state.viewport,
+    maps: state.maps
   };
 }
 

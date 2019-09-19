@@ -1,6 +1,6 @@
 const defaultState = {};
 
-export default function PGCRcacheReducer(state = defaultState, action) {
+export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'PGCR_LOADING':
       return {

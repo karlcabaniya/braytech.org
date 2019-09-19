@@ -14,7 +14,7 @@ function updateScrollbars(selected) {
   }
 }
 
-export default function themeReducer(state = lsState, action) {
+export default function reducer(state = lsState, action) {
   switch (action.type) {
     case 'SET_THEME':
       ls.set('setting.theme', {

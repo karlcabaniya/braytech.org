@@ -41,6 +41,18 @@
   transform: translateX(-50%) translateY(-50%) scale(0.4);
 }
 
+.map-omega.debug.highlight-no-screenshot .leaflet-container .icon-marker:not(.native):not(.has-screenshot)::before {
+  content: ' ';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px rgba(255, 38, 0, 0.5);
+  animation: rotate-linear 4s linear infinite;
+}
+
 .map-omega .leaflet-container .icon-marker .wrapper {
   position: absolute;
   left: 50%;
@@ -254,6 +266,20 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-and-scale-out {
+  0%, 100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  12.5% {
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.2);
+    opacity: 0;
   }
 }
 

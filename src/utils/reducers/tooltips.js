@@ -7,7 +7,7 @@ let defState = {
   bindTime: new Date().getTime()
 };
 
-export default function themeReducer(state = defState, action) {
+export default function reducer(state = defState, action) {
   switch (action.type) {
     case 'SET_TOOLTIPS_DESIGN':
       ls.set('setting.tooltips', action.payload);

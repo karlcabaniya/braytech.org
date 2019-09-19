@@ -209,4 +209,44 @@ html.backdropfilter .map-omega .control li {
     width: calc(100% - 4rem);
   }
 
+  .map-omega .control.characters .character-emblem,
+  .map-omega .control.characters .character-emblem .wrapper {
+    padding-bottom: 0;
+    height: 38px;
+    background-color: transparent;
+  }
+
+  .map-omega .control.characters .character-emblem .wrapper .group,
+  .map-omega .control.characters .character-emblem .wrapper .level,
+  .map-omega .control.characters .character-emblem .wrapper .progress {
+    display: none;
+  }
+
+  .map-omega .control.characters .character-emblem .wrapper .image.emblem,
+  .map-omega .control.characters .character-emblem .wrapper .displayName,
+  .map-omega .control.characters .character-emblem .wrapper .light {
+    position: relative;
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+  }
+
+  .map-omega .control.characters .character-emblem .wrapper {
+    display: grid;
+    grid-template-columns: calc(38px + 16px) 1fr min-content;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .map-omega .control.characters .character-emblem .wrapper .image.emblem {
+    background-size: 580%;
+    background-position: left top;
+    width: 38px;
+  }
+
+  .map-omega .control.characters .character-emblem .wrapper .light {
+    padding: 0 1rem 0 0;
+  }
+
 }

@@ -6,7 +6,7 @@ const defaultState = {
   lastUpdated: 0
 };
 
-export default function groupMembersReducer(state = defaultState, action) {
+export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'GROUP_MEMBERS_LOADING':
       return {

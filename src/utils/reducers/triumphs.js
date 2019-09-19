@@ -6,7 +6,7 @@ const defaultState = ls.get('setting.triumphs')
       tracked: []
     };
 
-export default function triumphsReducer(state = defaultState, action) {
+export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'SET_TRACKED_TRIUMPHS':
       ls.set('setting.triumphs', {
