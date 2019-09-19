@@ -30,11 +30,23 @@ async function run() {
         let screenshot = output[index].screenshot && output[index].screenshot !== "" ? output[index].screenshot : false;
 
         if (parseInt(key, 10) === 2360931290 && output[index].debug && output[index].debug.number) {
-          screenshot = getScreenshot('ghost-scans', output[index].debug.number)
+          screenshot = getScreenshot('ghost-scans', `ghost-scans_${output[index].debug.number}`)
         }
 
         if (parseInt(key, 10) === 3142056444 && output[index].debug && output[index].debug.name) {
-          screenshot = getScreenshot('lost-sectors', output[index].debug.name.toLowerCase().replace(/'/g,'').replace(/ /g,'-'))
+          screenshot = getScreenshot('lost-sectors', `lost-sectors_${output[index].debug.name.toLowerCase().replace(/'/g,'').replace(/ /g,'-')}`)
+        }
+
+        if (parseInt(key, 10) === 1420597821 && output[index].debug && output[index].debug.number) {
+          screenshot = getScreenshot('lore', `ghost-stories_${output[index].debug.number}`)
+        }
+
+        if (parseInt(key, 10) === 655926402 && output[index].debug && output[index].debug.number) {
+          screenshot = getScreenshot('lore', `the-forsaken-prince_${output[index].debug.number}`)
+        }
+
+        if (parseInt(key, 10) === 3305936921 && output[index].debug && output[index].debug.number) {
+          screenshot = getScreenshot('lore', `the-awoken-of-the-reef_${output[index].debug.number}`)
         }
 
         output[index] = {
@@ -71,8 +83,8 @@ async function run() {
 
 function getScreenshot(listName, pattern) {
   let screenshot = false;
-  const look = fromDir(`public/static/images/screenshots/${listName}/`, `${listName}_${pattern}`);
-  if (look.length === 1) screenshot = `/static/images/screenshots/${listName}/${look[0]}`;
+  const look = fromDir(`public/static/images/screenshots/${listName}/`, pattern);
+  if (look && look.length === 1) screenshot = `/static/images/screenshots/${listName}/${look[0]}`;
 
   return screenshot;
 }

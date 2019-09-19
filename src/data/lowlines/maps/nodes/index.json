@@ -441,37 +441,19 @@
   },
   {
     "checklistId": 655926402,
-    "recordHash": 3431961937,
-    "screenshot": false,
+    "recordHash": 3448739524,
+    "screenshot": "/static/images/screenshots/lore/the-drain_the-forsaken-prince_10.jpg",
     "debug": {
-      "name": "Alton Dynamo"
+      "number": 1
     },
     "description": false
   },
   {
     "checklistId": 655926402,
-    "recordHash": 3431961936,
+    "recordHash": 3448739527,
     "screenshot": false,
     "debug": {
-      "name": "Excavation Site XII"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 655926402,
-    "recordHash": 3431961939,
-    "screenshot": false,
-    "debug": {
-      "name": "Flooded Chasm"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 655926402,
-    "recordHash": 3448739532,
-    "screenshot": false,
-    "debug": {
-      "name": "Hall of the Exalted"
+      "number": 2
     },
     "description": false
   },
@@ -480,7 +462,8 @@
     "recordHash": 3448739526,
     "screenshot": false,
     "debug": {
-      "name": "High Plains"
+      "name": "High Plains",
+      "number": 3
     },
     "description": false
   },
@@ -489,7 +472,8 @@
     "recordHash": 3448739521,
     "screenshot": false,
     "debug": {
-      "name": "High Plains"
+      "name": "High Plains",
+      "number": 4
     },
     "description": false
   },
@@ -498,25 +482,17 @@
     "recordHash": 3448739520,
     "screenshot": false,
     "debug": {
-      "name": "High Plains"
+      "name": "High Plains",
+      "number": 5
     },
     "description": false
   },
   {
     "checklistId": 655926402,
-    "recordHash": 3431961941,
+    "recordHash": 3448739523,
     "screenshot": false,
     "debug": {
-      "name": "Kingship Dock"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 655926402,
-    "recordHash": 3431961942,
-    "screenshot": false,
-    "debug": {
-      "name": "Olympus Descent"
+      "number": 6
     },
     "description": false
   },
@@ -525,7 +501,77 @@
     "recordHash": 3448739522,
     "screenshot": false,
     "debug": {
-      "name": "Shipyard AWO-43"
+      "name": "Shipyard AWO-43",
+      "number": 7
+    },
+    "description": false
+  },
+  {
+    "checklistId": 655926402,
+    "recordHash": 3448739533,
+    "screenshot": false,
+    "debug": {
+      "number": 8
+    },
+    "description": false
+  },
+  {
+    "checklistId": 655926402,
+    "recordHash": 3448739532,
+    "screenshot": false,
+    "debug": {
+      "name": "Hall of the Exalted",
+      "number": 9
+    },
+    "description": false
+  },
+  {
+    "checklistId": 655926402,
+    "recordHash": 3431961938,
+    "screenshot": "/static/images/screenshots/lore/the-drain_the-forsaken-prince_10.jpg",
+    "debug": {
+      "name": "The Drain",
+      "number": 10
+    },
+    "description": false
+  },
+  {
+    "checklistId": 655926402,
+    "recordHash": 3431961939,
+    "screenshot": false,
+    "debug": {
+      "name": "Flooded Chasm",
+      "number": 11
+    },
+    "description": false
+  },
+  {
+    "checklistId": 655926402,
+    "recordHash": 3431961936,
+    "screenshot": false,
+    "debug": {
+      "name": "Excavation Site XII",
+      "number": 12
+    },
+    "description": false
+  },
+  {
+    "checklistId": 655926402,
+    "recordHash": 3431961937,
+    "screenshot": false,
+    "debug": {
+      "name": "Alton Dynamo",
+      "number": 13
+    },
+    "description": false
+  },
+  {
+    "checklistId": 655926402,
+    "recordHash": 3431961942,
+    "screenshot": false,
+    "debug": {
+      "name": "Olympus Descent",
+      "number": 14
     },
     "description": false
   },
@@ -534,7 +580,8 @@
     "recordHash": 3431961943,
     "screenshot": false,
     "debug": {
-      "name": "Soriks's Cut"
+      "name": "Soriks's Cut",
+      "number": 15
     },
     "description": false
   },
@@ -543,34 +590,18 @@
     "recordHash": 3431961940,
     "screenshot": false,
     "debug": {
-      "name": "Soriks's Cut"
+      "name": "Soriks's Cut",
+      "number": 16
     },
     "description": false
   },
   {
     "checklistId": 655926402,
-    "recordHash": 3431961947,
+    "recordHash": 3431961941,
     "screenshot": false,
     "debug": {
-      "name": "The Cobble"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 655926402,
-    "recordHash": 3415184383,
-    "screenshot": false,
-    "debug": {
-      "name": "The Cobble"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 655926402,
-    "recordHash": 3431961938,
-    "screenshot": false,
-    "debug": {
-      "name": "The Drain"
+      "name": "Kingship Dock",
+      "number": 17
     },
     "description": false
   },
@@ -579,36 +610,29 @@
     "recordHash": 3431961946,
     "screenshot": false,
     "debug": {
-      "name": "Trapper's Cave"
+      "name": "Trapper's Cave",
+      "number": 18
     },
     "description": false
   },
   {
     "checklistId": 655926402,
-    "recordHash": 3448739524,
+    "recordHash": 3431961947,
     "screenshot": false,
-    "debug": {},
+    "debug": {
+      "name": "The Cobble",
+      "number": 19
+    },
     "description": false
   },
   {
     "checklistId": 655926402,
-    "recordHash": 3448739527,
+    "recordHash": 3415184383,
     "screenshot": false,
-    "debug": {},
-    "description": false
-  },
-  {
-    "checklistId": 655926402,
-    "recordHash": 3448739523,
-    "screenshot": false,
-    "debug": {},
-    "description": false
-  },
-  {
-    "checklistId": 655926402,
-    "recordHash": 3448739533,
-    "screenshot": false,
-    "debug": {},
+    "debug": {
+      "name": "The Cobble",
+      "number": 20
+    },
     "description": false
   },
   {
@@ -788,138 +812,12 @@
     "description": false
   },
   {
-    "debug": {
-      "name": "Pressure",
-      "number": 99
-    },
-    "checklistId": 1420597821,
-    "recordHash": 2121305070,
-    "screenshot": false,
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2104527477,
-    "screenshot": false,
-    "debug": {
-      "name": "Alton Dynamo"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2104527481,
-    "screenshot": false,
-    "debug": {
-      "name": "Aphix Conduit"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2121305063,
-    "screenshot": false,
-    "debug": {
-      "name": "Arboretum"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2104527476,
-    "screenshot": false,
-    "debug": {
-      "name": "Core Terminus"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2104527484,
-    "screenshot": false,
-    "debug": {
-      "name": "DS Quarters-2"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2121305067,
-    "screenshot": false,
-    "debug": {
-      "name": "Hall of the Exalted"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2154860340,
-    "screenshot": false,
-    "debug": {
-      "name": "Kingship Dock"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2104527480,
-    "screenshot": false,
-    "debug": {
-      "name": "Pariah's Refuge"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2104527482,
-    "screenshot": false,
-    "debug": {
-      "name": "Sanctum of Bones"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2121305066,
-    "screenshot": false,
-    "debug": {
-      "name": "Shaft 13"
-    },
-    "description": false
-  },
-  {
     "checklistId": 1420597821,
     "recordHash": 2121305069,
     "screenshot": false,
     "debug": {
-      "name": "Shipyard AWO-43"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2121305062,
-    "screenshot": false,
-    "debug": {
-      "name": "Siren's Watch"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2154860342,
-    "screenshot": false,
-    "debug": {
-      "name": "Spider's Safehouse"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 1420597821,
-    "recordHash": 2104527483,
-    "screenshot": false,
-    "debug": {
-      "name": "Terrabase Charon"
+      "name": "Shipyard AWO-43",
+      "number": 2
     },
     "description": false
   },
@@ -928,25 +826,38 @@
     "recordHash": 2121305068,
     "screenshot": false,
     "debug": {
-      "name": "The Boil"
+      "name": "The Boil",
+      "number": 3
     },
     "description": false
   },
   {
     "checklistId": 1420597821,
-    "recordHash": 2154860343,
+    "recordHash": 2121305067,
     "screenshot": false,
     "debug": {
-      "name": "The Cobble"
+      "name": "Hall of the Exalted",
+      "number": 4
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2121305066,
+    "screenshot": false,
+    "debug": {
+      "name": "Shaft 13",
+      "number": 5
     },
     "description": false
   },
   {
     "checklistId": 1420597821,
     "recordHash": 2121305065,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/the-drain_ghost-stories_6.jpg",
     "debug": {
-      "name": "The Drain"
+      "name": "The Drain",
+      "number": 6
     },
     "description": false
   },
@@ -955,25 +866,38 @@
     "recordHash": 2121305064,
     "screenshot": false,
     "debug": {
-      "name": "The Quarry"
+      "name": "The Quarry",
+      "number": 7
     },
     "description": false
   },
   {
     "checklistId": 1420597821,
-    "recordHash": 2104527487,
+    "recordHash": 2121305063,
     "screenshot": false,
     "debug": {
-      "name": "The Rift"
+      "name": "Arboretum",
+      "number": 8
     },
     "description": false
   },
   {
     "checklistId": 1420597821,
-    "recordHash": 2104527486,
+    "recordHash": 2121305062,
     "screenshot": false,
     "debug": {
-      "name": "The Tangle"
+      "name": "Siren's Watch",
+      "number": 9
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527484,
+    "screenshot": false,
+    "debug": {
+      "name": "DS Quarters-2",
+      "number": 10
     },
     "description": false
   },
@@ -982,7 +906,88 @@
     "recordHash": 2104527485,
     "screenshot": false,
     "debug": {
-      "name": "Watcher's Grave"
+      "name": "Watcher's Grave",
+      "number": 11
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527486,
+    "screenshot": false,
+    "debug": {
+      "name": "The Tangle",
+      "number": 12
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527487,
+    "screenshot": false,
+    "debug": {
+      "name": "The Rift",
+      "number": 13
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527480,
+    "screenshot": false,
+    "debug": {
+      "name": "Pariah's Refuge",
+      "number": 14
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527481,
+    "screenshot": false,
+    "debug": {
+      "name": "Aphix Conduit",
+      "number": 15
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527482,
+    "screenshot": false,
+    "debug": {
+      "name": "Sanctum of Bones",
+      "number": 16
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527483,
+    "screenshot": false,
+    "debug": {
+      "name": "Terrabase Charon",
+      "number": 17
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527476,
+    "screenshot": false,
+    "debug": {
+      "name": "Core Terminus",
+      "number": 18
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2104527477,
+    "screenshot": false,
+    "debug": {
+      "name": "Alton Dynamo",
+      "number": 19
     },
     "description": false
   },
@@ -991,8 +996,49 @@
     "recordHash": 2154860341,
     "screenshot": false,
     "debug": {
-      "name": "Wolfship Turbine"
+      "name": "Wolfship Turbine",
+      "number": 20
     },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2154860340,
+    "screenshot": false,
+    "debug": {
+      "name": "Kingship Dock",
+      "number": 21
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2154860343,
+    "screenshot": false,
+    "debug": {
+      "name": "The Cobble",
+      "number": 22
+    },
+    "description": false
+  },
+  {
+    "checklistId": 1420597821,
+    "recordHash": 2154860342,
+    "screenshot": false,
+    "debug": {
+      "name": "Spider's Safehouse",
+      "number": 23
+    },
+    "description": false
+  },
+  {
+    "debug": {
+      "name": "Pressure",
+      "number": 99
+    },
+    "checklistId": 1420597821,
+    "recordHash": 2121305070,
+    "screenshot": false,
     "description": false
   },
   {
@@ -2209,7 +2255,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2768204331,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/outskirts_ghost-scans_39.jpg",
     "debug": {
       "name": "Outskirts",
       "number": 39
@@ -2220,7 +2266,7 @@
     "checklistId": 2360931290,
     "checklistHash": 145185218,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/outskirts_ghost-scans_40.jpg",
     "debug": {
       "name": "Outskirts",
       "number": 40
@@ -2231,7 +2277,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3849148005,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/outskirts_ghost-scans_41.jpg",
     "debug": {
       "name": "Outskirts",
       "number": 41
@@ -2242,7 +2288,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1561360340,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/outskirts_ghost-scans_42.jpg",
     "debug": {
       "name": "Outskirts",
       "number": 42
@@ -2253,7 +2299,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3578984807,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/outskirts_ghost-scans_43.jpg",
     "debug": {
       "name": "Outskirts",
       "number": 43
@@ -2341,7 +2387,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3448616917,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sojourners-camp_ghost-scans_51.jpg",
     "debug": {
       "name": "Sojourner's Camp",
       "number": 51
@@ -2352,7 +2398,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1333617848,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sojourners-camp_ghost-scans_52.jpg",
     "debug": {
       "name": "Sojourner's Camp",
       "number": 52
@@ -2363,7 +2409,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2451662235,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sojourners-camp_ghost-scans_53.jpg",
     "debug": {
       "name": "Sojourner's Camp",
       "number": 53
@@ -4175,7 +4221,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2777193860,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/outskirts_lost-sectors_whispered-falls.jpg",
     "debug": {
       "name": "Whispered Falls",
       "number": 4
@@ -4186,7 +4232,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3240560483,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/outskirts_lost-sectors_the-drain.jpg",
     "debug": {
       "name": "The Drain",
       "number": 5
@@ -4197,7 +4243,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3402131234,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/outskirts_lost-sectors_scavengers-den.jpg",
     "debug": {
       "name": "Scavenger's Den",
       "number": 6
@@ -4541,190 +4587,11 @@
   },
   {
     "checklistId": 3305936921,
-    "recordHash": 242464657,
-    "screenshot": false,
-    "debug": {
-      "name": "Dark Monastery"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 276019967,
-    "screenshot": false,
-    "debug": {
-      "name": "Divalian Mists"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 276019953,
-    "screenshot": false,
-    "debug": {
-      "name": "Divalian Mists"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 276019964,
-    "screenshot": false,
-    "debug": {
-      "name": "Font of Starlight"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
     "recordHash": 276019960,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/scavengers-den_the-awoken-of-the-reef_17.jpg",
     "debug": {
-      "name": "Gardens of Esila"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 242464659,
-    "screenshot": false,
-    "debug": {
-      "name": "Grove of Ulan-Tan"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242243,
-    "screenshot": false,
-    "debug": {
-      "name": "Hall of the Exalted"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 276019966,
-    "screenshot": false,
-    "debug": {
-      "name": "Harbinger's Seclude"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242242,
-    "screenshot": false,
-    "debug": {
-      "name": "Hellrise Canyon"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 276019952,
-    "screenshot": false,
-    "debug": {
-      "name": "High Plains"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 242464656,
-    "screenshot": false,
-    "debug": {
-      "name": "Ma'adim Subterrane"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 242464658,
-    "screenshot": false,
-    "debug": {
-      "name": "Pariah's Refuge"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 276019962,
-    "screenshot": false,
-    "debug": {
-      "name": "Rheasilvia"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 276019965,
-    "screenshot": false,
-    "debug": {
-      "name": "Rheasilvia"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242241,
-    "screenshot": false,
-    "debug": {
-      "name": "Scavenger's Den"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242245,
-    "screenshot": false,
-    "debug": {
-      "name": "Shipyard AWO-43"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242254,
-    "screenshot": false,
-    "debug": {
-      "name": "Sinking Docks"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242246,
-    "screenshot": false,
-    "debug": {
-      "name": "Spine of Keres"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242244,
-    "screenshot": false,
-    "debug": {
-      "name": "The Boil"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242240,
-    "screenshot": false,
-    "debug": {
-      "name": "The Cobble"
-    },
-    "description": false
-  },
-  {
-    "checklistId": 3305936921,
-    "recordHash": 259242255,
-    "screenshot": false,
-    "debug": {
-      "name": "The Conflux"
+      "name": "Gardens of Esila",
+      "number": 1
     },
     "description": false
   },
@@ -4733,7 +4600,88 @@
     "recordHash": 276019963,
     "screenshot": false,
     "debug": {
-      "name": "The Strand"
+      "name": "The Strand",
+      "number": 2
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 276019962,
+    "screenshot": false,
+    "debug": {
+      "name": "Rheasilvia",
+      "number": 3
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 276019965,
+    "screenshot": false,
+    "debug": {
+      "name": "Rheasilvia",
+      "number": 4
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 276019964,
+    "screenshot": false,
+    "debug": {
+      "name": "Font of Starlight",
+      "number": 5
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 276019967,
+    "screenshot": false,
+    "debug": {
+      "name": "Divalian Mists",
+      "number": 6
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 276019966,
+    "screenshot": false,
+    "debug": {
+      "name": "Harbinger's Seclude",
+      "number": 7
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 276019953,
+    "screenshot": false,
+    "debug": {
+      "name": "Divalian Mists",
+      "number": 8
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 276019952,
+    "screenshot": false,
+    "debug": {
+      "name": "High Plains",
+      "number": 9
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242246,
+    "screenshot": false,
+    "debug": {
+      "name": "Spine of Keres",
+      "number": 10
     },
     "description": false
   },
@@ -4742,7 +4690,128 @@
     "recordHash": 259242247,
     "screenshot": false,
     "debug": {
-      "name": "Trapper's Cave"
+      "name": "Trapper's Cave",
+      "number": 11
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242244,
+    "screenshot": false,
+    "debug": {
+      "name": "The Boil",
+      "number": 12
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242245,
+    "screenshot": false,
+    "debug": {
+      "name": "Shipyard AWO-43",
+      "number": 13
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242242,
+    "screenshot": false,
+    "debug": {
+      "name": "Hellrise Canyon",
+      "number": 14
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242243,
+    "screenshot": false,
+    "debug": {
+      "name": "Hall of the Exalted",
+      "number": 15
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242240,
+    "screenshot": false,
+    "debug": {
+      "name": "The Cobble",
+      "number": 16
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242241,
+    "screenshot": "/static/images/screenshots/lore/scavengers-den_the-awoken-of-the-reef_17.jpg",
+    "debug": {
+      "name": "Scavenger's Den",
+      "number": 17
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242254,
+    "screenshot": false,
+    "debug": {
+      "name": "Sinking Docks",
+      "number": 18
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 259242255,
+    "screenshot": false,
+    "debug": {
+      "name": "The Conflux",
+      "number": 19
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 242464659,
+    "screenshot": false,
+    "debug": {
+      "name": "Grove of Ulan-Tan",
+      "number": 20
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 242464658,
+    "screenshot": false,
+    "debug": {
+      "name": "Pariah's Refuge",
+      "number": 21
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 242464657,
+    "screenshot": false,
+    "debug": {
+      "name": "Dark Monastery",
+      "number": 22
+    },
+    "description": false
+  },
+  {
+    "checklistId": 3305936921,
+    "recordHash": 242464656,
+    "screenshot": false,
+    "debug": {
+      "name": "Ma'adim Subterrane",
+      "number": 23
     },
     "description": false
   },

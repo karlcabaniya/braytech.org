@@ -126,8 +126,9 @@ async function run() {
   function checklistItem(item) {
     const mapping = lowlines.checklists[item.hash] || {};
     
-    let ass = assisted.find(a => a.nodes.find(n => n.checklistHash === parseInt(item.hash, 10))) || {};
-    if (ass.nodes) ass = ass.nodes.find(n => n.checklistHash === parseInt(item.hash, 10)) || {}
+    // let ass = assisted.find(a => a.nodes.find(n => n.checklistHash === parseInt(item.hash, 10))) || {};
+    // if (ass.nodes) ass = ass.nodes.find(n => n.checklistHash === parseInt(item.hash, 10)) || {}
+    let ass = {};
 
     const destinationHash = item.destinationHash || mapping.destinationHash;
     const bubbleHash = item.bubbleHash || mapping.bubbleHash;
@@ -201,8 +202,9 @@ async function run() {
 
         const mapping = lowlines.records[hash];
     
-        let ass = assisted.find(a => a.nodes.find(n => n.recordHash === parseInt(item.hash, 10))) || {};
-        if (ass.nodes) ass = ass.nodes.find(n => n.recordHash === parseInt(item.hash, 10)) || {}
+        // let ass = assisted.find(a => a.nodes.find(n => n.recordHash === parseInt(item.hash, 10))) || {};
+        // if (ass.nodes) ass = ass.nodes.find(n => n.recordHash === parseInt(item.hash, 10)) || {}
+        let ass = {};
         
         const destinationHash = mapping && mapping.destinationHash;
         const destination = destinationHash && manifest.DestinyDestinationDefinition[destinationHash];
@@ -241,7 +243,7 @@ async function run() {
             bubble: bubbleName,
             place: place && place.displayProperties.name,
             name,
-            number: itemNumber
+            number: (itemNumber + 1)
           },
           ...itemOverrides[item.hash]
         };
