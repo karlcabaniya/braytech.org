@@ -9,7 +9,7 @@
     "classnames": "^2.2.6",
     "dexie": "^2.0.4",
     "entities": "^2.0.0",
-    "i18next": "^17.0.15",
+    "i18next": "^17.0.16",
     "i18next-xhr-backend": "^3.1.2",
     "leaflet": "^1.5.1",
     "lodash": "^4.17.15",
@@ -35,11 +35,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "translations": "node ./scripts/extractTranslations2.js",
-    "prepareMappingData": "node ./scripts/prepareMappingData.js",
-    "prepareChaliceData": "node ./scripts/prepareChaliceData.js",
-    "prepareExtraDefinitions": "node ./scripts/prepareExtraDefinitions.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
