@@ -25,6 +25,7 @@ _The source code of braytech.org_
     *  No HUD
     *  1080p
     *  Frame subject in very center
+    *  Feel free to provide multiple variants
     *  No ammo, enemies, guardians in frame
 
 4.  Submit pull request
