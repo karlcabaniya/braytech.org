@@ -6,7 +6,7 @@ import lowlines from './cache/checklists.json';
 
 const outputPath = 'src/data/lowlines/checklists/index.json';
 
-const assisted = JSON.parse(fs.readFileSync('src/data/lowlines/dump/index.json')).filter(a => a);
+const assisted = JSON.parse(fs.readFileSync('scripts/dump/index.json'));
 
 // For when the mappings generated from lowlines' data don't have a
 // bubbleHash but do have a bubbleId. Inferred by cross-referencing
@@ -196,7 +196,7 @@ async function run() {
     if (dropFirst) recordHashes = recordHashes.slice(1);
 
     return recordHashes
-      .map(hash => {
+      .map((hash, itemNumber) => {
         const item = manifest.DestinyRecordDefinition[hash];
 
         const mapping = lowlines.records[hash];
@@ -240,7 +240,8 @@ async function run() {
             destination: destination && destination.displayProperties.name,
             bubble: bubbleName,
             place: place && place.displayProperties.name,
-            name
+            name,
+            number: itemNumber
           },
           ...itemOverrides[item.hash]
         };
