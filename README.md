@@ -3,6 +3,42 @@ _The source code of braytech.org_
 
 © Bungie, Inc. All rights reserved. Destiny, the Destiny Logo, Bungie and the Bungie logo are among the trademarks of Bungie, Inc.
 
+## Contributing translations
+
+1.  Create a pull request
+
+2.  Find translations at [/public/static/locales](https://github.com/justrealmilk/braytech.org/tree/master/public/static/locales)
+
+3.  Add translations by removing the ##### symbols from keys and adding translated equivalents to values
+
+4.  Submit pull request
+
+## Contributing to maps data
+
+### Screenshots
+
+1.  Create a pull request
+
+2.  Find screenshots at [/public/static/images/screenshots/original](https://github.com/justrealmilk/braytech.org/tree/master/public/static/images/screenshots/original)
+
+3.  Submit your screenshots with matching file name patterns to these folders
+  *  No HUD
+  *  1080p
+  *  Frame subject in very center
+  *  No ammo, enemies, guardians in frame
+
+4.  Submit pull request
+
+### Nodes
+
+1.  Create a pull request
+
+2.  Find data at [/src/data/lowlines/maps/nodes/index.json](https://github.com/justrealmilk/braytech.org/tree/master/src/data/lowlines/maps/nodes/index.json)
+
+3.  Make your desired changes i.e. description value
+
+4.  Submit pull request
+
 ## Running the dev build
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
