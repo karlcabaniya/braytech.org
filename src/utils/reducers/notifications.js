@@ -15,7 +15,7 @@ const defaultState = {
   trash: history || []
 };
 
-export default function notificationsReducer(state = defaultState, action) {
+export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'PUSH_NOTIFICATION':
       // console.log(action);

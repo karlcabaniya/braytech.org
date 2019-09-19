@@ -1049,7 +1049,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2754290383,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/outskirts_region-chests_10.jpg",
     "debug": {
       "name": "The Rupture",
       "number": 1
@@ -1148,7 +1148,7 @@
     "checklistId": 1697465175,
     "checklistHash": 3156467474,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/outskirts_region-chests_10.jpg",
     "debug": {
       "name": "Outskirts",
       "number": 10
@@ -1313,12 +1313,12 @@
     "checklistId": 1697465175,
     "checklistHash": 823939877,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/trostland_region-chests_25.jpg",
     "debug": {
       "name": "Trostland",
       "number": 25
     },
-    "description": false
+    "description": "Behind the fast travel landing zone."
   },
   {
     "checklistId": 1697465175,
@@ -1335,12 +1335,12 @@
     "checklistId": 1697465175,
     "checklistHash": 1085712440,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/trostland_region-chests_27.jpg",
     "debug": {
       "name": "Trostland",
       "number": 27
     },
-    "description": false
+    "description": "In the back right room on the third floor of a damaged building."
   },
   {
     "debug": {

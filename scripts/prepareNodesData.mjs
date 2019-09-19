@@ -35,6 +35,10 @@ async function run() {
           screenshot = getScreenshot('ghost-scans', `ghost-scans_${output[index].debug.number}`)
         }
 
+        if (parseInt(key, 10) === 1697465175 && output[index].debug && output[index].debug.number) {
+          screenshot = getScreenshot('region-chests', `region-chests_${output[index].debug.number}`)
+        }
+
         if (parseInt(key, 10) === 3142056444 && output[index].debug && output[index].debug.name) {
           screenshot = getScreenshot('lost-sectors', `lost-sectors_${output[index].debug.name.toLowerCase().replace(/'/g,'').replace(/ /g,'-')}`)
         }

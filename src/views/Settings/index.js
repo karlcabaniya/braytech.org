@@ -74,7 +74,7 @@ class Settings extends React.Component {
 
     navigator.serviceWorker.getRegistration('/').then(function(registration) {
       registration.unregister();
-      console.log(registration)
+      console.log(registration);
     });
   };
 
@@ -83,7 +83,7 @@ class Settings extends React.Component {
     this.mounted = true;
 
     const swInstalled = await this.swInstalled();
-    
+
     if (this.mounted && swInstalled) this.setState({ swInstalled: true });
   }
 
@@ -101,7 +101,31 @@ class Settings extends React.Component {
     }
 
     return false;
-  }
+  };
+
+  handler_toggleMapsDebugMode = e => {
+    if (this.props.maps.debug) {
+      this.props.setMaps({ debug: false });
+    } else {
+      this.props.setMaps({ debug: true });
+    }
+  };
+
+  handler_toggleMapsDebugModeNoScreenshotHighlight = e => {
+    if (this.props.maps.noScreenshotHighlight) {
+      this.props.setMaps({ noScreenshotHighlight: false });
+    } else {
+      this.props.setMaps({ noScreenshotHighlight: true });
+    }
+  };
+
+  handler_toggleMapsDebugModeLogDetails = e => {
+    if (this.props.maps.logDetails) {
+      this.props.setMaps({ logDetails: false });
+    } else {
+      this.props.setMaps({ logDetails: true });
+    }
+  };
 
   render() {
     const { t, availableLanguages, location } = this.props;
@@ -191,88 +215,6 @@ class Settings extends React.Component {
                 </div>
               </li>
             </ul>
-          </div>
-          <div className='module'>
-            <div className='sub-header sub'>
-              <div>{t('Visibility')}</div>
-            </div>
-            <ul className='list settings'>
-              <li
-                key='hideCompletedChecklistItems'
-                onClick={() => {
-                  this.selectCollectibleDisplayState('hideCompletedChecklistItems');
-                }}
-              >
-                <Checkbox linked checked={this.props.collectibles.hideCompletedChecklistItems} text={t('Hide completed checklist items')} />
-                <div className='info'>
-                  <p>{t('If a checklist item is completed, it will be hidden under Checklist view.')}</p>
-                </div>
-              </li>
-              <li
-                key='hideCompletedRecords'
-                onClick={() => {
-                  this.selectCollectibleDisplayState('hideCompletedRecords');
-                }}
-              >
-                <Checkbox linked checked={this.props.collectibles.hideCompletedRecords} text={t('Hide completed triumphs')} />
-                <div className='info'>
-                  <p>{t('If a triumph record is completed and redeemed, it will be hidden under Triumphs views.')}</p>
-                </div>
-              </li>
-              <li
-                key='hideInvisibleRecords'
-                onClick={() => {
-                  this.selectCollectibleDisplayState('hideInvisibleRecords');
-                }}
-              >
-                <Checkbox linked checked={this.props.collectibles.hideInvisibleRecords} text={t('Hide invisible triumph records')} />
-                <div className='info'>
-                  <p>{t('If the game specifies that you are unable to see a particular triumph record, it will be hidden under Triumphs views.')}</p>
-                </div>
-              </li>
-              <li
-                key='hideDudRecords'
-                onClick={() => {
-                  this.selectCollectibleDisplayState('hideDudRecords');
-                }}
-              >
-                <Checkbox linked checked={this.props.collectibles.hideDudRecords} text={t('Hide dud records')} />
-                <div className='info'>
-                  <p>{t('Hides dud (empty, unused, or unobtainable) records from view')}</p>
-                </div>
-              </li>
-              <li
-                key='hideCompletedCollectibles'
-                onClick={() => {
-                  this.selectCollectibleDisplayState('hideCompletedCollectibles');
-                }}
-              >
-                <Checkbox linked checked={this.props.collectibles.hideCompletedCollectibles} text={t('Hide acquired collection items')} />
-                <div className='info'>
-                  <p>{t('If a collectible has been acquired, it will be hidden under Collections views.')}</p>
-                </div>
-              </li>
-              <li
-                key='hideInvisibleCollectibles'
-                onClick={() => {
-                  this.selectCollectibleDisplayState('hideInvisibleCollectibles');
-                }}
-              >
-                <Checkbox linked checked={this.props.collectibles.hideInvisibleCollectibles} text={t('Hide invisible collection items')} />
-                <div className='info'>
-                  <p>{t('If the game specifies that you are unable to see a particular collectible, it will be hidden under Collections views.')}</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div className='module'>
-            <div className='sub-header sub'>
-              <div>{t('Language')}</div>
-            </div>
-            <ul className='list settings'>{languageButtons}</ul>
-            <Button text={t('Save and restart')} invisible={this.state.language.current === this.state.language.selected} action={this.saveAndRestart} />
-          </div>
-          <div className='module'>
             <div className='sub-header sub'>
               <div>{t('Local saved data')}</div>
             </div>
@@ -305,6 +247,109 @@ class Settings extends React.Component {
                 <p>{t("Reset data pertaining to whether or not you've seen any active notifcation items.")}</p>
               </div>
             </div>
+          </div>
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Visibility')}</div>
+            </div>
+            <ul className='list settings'>
+              <li
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideCompletedChecklistItems');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideCompletedChecklistItems} text={t('Hide completed checklist items')} />
+                <div className='info'>
+                  <p>{t('If a checklist item is completed, it will be hidden under Checklist view.')}</p>
+                </div>
+              </li>
+              <li
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideCompletedRecords');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideCompletedRecords} text={t('Hide completed triumphs')} />
+                <div className='info'>
+                  <p>{t('If a triumph record is completed and redeemed, it will be hidden under Triumphs views.')}</p>
+                </div>
+              </li>
+              <li
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideInvisibleRecords');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideInvisibleRecords} text={t('Hide invisible triumph records')} />
+                <div className='info'>
+                  <p>{t('If the game specifies that you are unable to see a particular triumph record, it will be hidden under Triumphs views.')}</p>
+                </div>
+              </li>
+              <li
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideDudRecords');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideDudRecords} text={t('Hide dud records')} />
+                <div className='info'>
+                  <p>{t('Hides dud (empty, unused, or unobtainable) records from view')}</p>
+                </div>
+              </li>
+              <li
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideCompletedCollectibles');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideCompletedCollectibles} text={t('Hide acquired collection items')} />
+                <div className='info'>
+                  <p>{t('If a collectible has been acquired, it will be hidden under Collections views.')}</p>
+                </div>
+              </li>
+              <li
+                onClick={() => {
+                  this.selectCollectibleDisplayState('hideInvisibleCollectibles');
+                }}
+              >
+                <Checkbox linked checked={this.props.collectibles.hideInvisibleCollectibles} text={t('Hide invisible collection items')} />
+                <div className='info'>
+                  <p>{t('If the game specifies that you are unable to see a particular collectible, it will be hidden under Collections views.')}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Language')}</div>
+            </div>
+            <ul className='list settings'>{languageButtons}</ul>
+            <Button text={t('Save and restart')} invisible={this.state.language.current === this.state.language.selected} action={this.saveAndRestart} />
+          </div>
+          <div className='module'>
+            <div className='sub-header sub'>
+              <div>{t('Developer')}</div>
+            </div>
+            <ul className='list settings'>
+              <li onClick={this.handler_toggleMapsDebugMode}>
+                <Checkbox linked checked={this.props.maps.debug} text={t('Maps debug mode')} />
+                <div className='info'>
+                  <p>{t('Enable Maps debugging settings')}</p>
+                </div>
+              </li>
+              {this.props.maps.debug ? (
+                <>
+                  <li onClick={this.handler_toggleMapsDebugModeNoScreenshotHighlight}>
+                    <Checkbox linked checked={this.props.maps.noScreenshotHighlight} text={t('Highlight nodes without screenshots')} />
+                    <div className='info'>
+                      <p>{t('Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.')}</p>
+                    </div>
+                  </li>
+                  <li onClick={this.handler_toggleMapsDebugModeLogDetails}>
+                    <Checkbox linked checked={this.props.maps.logDetails} text={t('Log node details')} />
+                    <div className='info'>
+                      <p>{t('Console.log details for the mouse-invoked node.')}</p>
+                    </div>
+                  </li>
+                </>
+              ) : null}
+            </ul>
             <div className='sub-header sub'>
               <div>{t('Troubleshooting')}</div>
             </div>
@@ -345,7 +390,8 @@ function mapStateToProps(state, ownProps) {
     member: state.member,
     theme: state.theme,
     tooltips: state.tooltips,
-    collectibles: state.collectibles
+    collectibles: state.collectibles,
+    maps: state.maps
   };
 }
 
@@ -362,6 +408,9 @@ function mapDispatchToProps(dispatch) {
     },
     setTrackedTriumphs: value => {
       dispatch({ type: 'SET_TRACKED_TRIUMPHS', payload: value });
+    },
+    setMaps: value => {
+      dispatch({ type: 'SET_MAPS', payload: value });
     }
   };
 }

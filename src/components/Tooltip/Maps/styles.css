@@ -47,7 +47,7 @@
 }
 
 #tooltip .frame.map .description:last-child {
-  padding: 16px 16px 8px;
+  padding: 16px;
 }
 
 #tooltip .frame.map .description .destination {

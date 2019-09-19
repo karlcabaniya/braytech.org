@@ -11,7 +11,7 @@ const defaultState = {
   ...savedState
 };
 
-export default function collectiblesReducer(state = defaultState, action) {
+export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'SET_COLLECTIBLES':
       let newState = {

@@ -7,7 +7,7 @@ const defaultState = {
   }
 };
 
-export default function profileReducer(state = defaultState, action) {
+export default function reducer(state = defaultState, action) {
   switch (action.type) {
     case 'SET_REFRESH_OPTIONS':
       ls.set('setting.refreshService', {

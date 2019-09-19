@@ -1,86 +1,190 @@
 {
   "de": {
     "translated": 570,
-    "notTranslated": 3,
-    "added": [],
+    "notTranslated": 10,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "en": {
-    "translated": 502,
+    "translated": 509,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 451,
-    "added": [],
+    "notTranslated": 458,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "es": {
     "translated": 594,
-    "notTranslated": 25,
-    "added": [],
+    "notTranslated": 32,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "fr": {
     "translated": 585,
-    "notTranslated": 36,
-    "added": [],
+    "notTranslated": 43,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 451,
-    "added": [],
+    "notTranslated": 458,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "it": {
     "translated": 473,
-    "notTranslated": 28,
-    "added": [],
+    "notTranslated": 35,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 451,
-    "added": [],
+    "notTranslated": 458,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "ko": {
     "translated": 482,
-    "notTranslated": 97,
-    "added": [],
+    "notTranslated": 104,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 451,
-    "added": [],
+    "notTranslated": 458,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "pt-br": {
     "translated": 737,
-    "notTranslated": 27,
-    "added": [],
+    "notTranslated": 34,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 451,
-    "added": [],
+    "notTranslated": 458,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "zh-chs": {
     "translated": 0,
-    "notTranslated": 451,
-    "added": [],
+    "notTranslated": 458,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 451,
-    "added": [],
+    "notTranslated": 458,
+    "added": [
+      "Console.log details for the mouse-invoked node.",
+      "Developer",
+      "Enable Maps debugging settings",
+      "Highlight nodes without screenshots",
+      "Log node details",
+      "Map nodes, such as region chests, which do not have an associated screenshot will be highlighted in order to assist users with contributing to maps data.",
+      "Maps debug mode"
+    ],
     "removed": []
   }
 }
