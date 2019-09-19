@@ -444,6 +444,7 @@
     "recordHash": 3448739524,
     "screenshot": "/static/images/screenshots/lore/the-drain_the-forsaken-prince_10.jpg",
     "debug": {
+      "name": "The Length of a Chain | Part I",
       "number": 1
     },
     "description": false
@@ -453,6 +454,7 @@
     "recordHash": 3448739527,
     "screenshot": false,
     "debug": {
+      "name": "The Length of a Chain | Part II",
       "number": 2
     },
     "description": false
@@ -462,7 +464,7 @@
     "recordHash": 3448739526,
     "screenshot": false,
     "debug": {
-      "name": "High Plains",
+      "name": "At the Gate | Part I",
       "number": 3
     },
     "description": false
@@ -472,7 +474,7 @@
     "recordHash": 3448739521,
     "screenshot": false,
     "debug": {
-      "name": "High Plains",
+      "name": "At the Gate | Part II",
       "number": 4
     },
     "description": false
@@ -482,7 +484,7 @@
     "recordHash": 3448739520,
     "screenshot": false,
     "debug": {
-      "name": "High Plains",
+      "name": "Through the Gate",
       "number": 5
     },
     "description": false
@@ -492,6 +494,7 @@
     "recordHash": 3448739523,
     "screenshot": false,
     "debug": {
+      "name": "In the Garden",
       "number": 6
     },
     "description": false
@@ -501,7 +504,7 @@
     "recordHash": 3448739522,
     "screenshot": false,
     "debug": {
-      "name": "Shipyard AWO-43",
+      "name": "On the Hunt",
       "number": 7
     },
     "description": false
@@ -511,6 +514,7 @@
     "recordHash": 3448739533,
     "screenshot": false,
     "debug": {
+      "name": "After the Heart | Part I",
       "number": 8
     },
     "description": false
@@ -520,7 +524,7 @@
     "recordHash": 3448739532,
     "screenshot": false,
     "debug": {
-      "name": "Hall of the Exalted",
+      "name": "After the Heart | Part II",
       "number": 9
     },
     "description": false
@@ -530,17 +534,17 @@
     "recordHash": 3431961938,
     "screenshot": "/static/images/screenshots/lore/the-drain_the-forsaken-prince_10.jpg",
     "debug": {
-      "name": "The Drain",
+      "name": "Jolyon",
       "number": 10
     },
-    "description": false
+    "description": "Outside the lost sector's chest room is a series of metal walking platforms. Beneath these platforms lay a small maze, at the end of which is a data cache."
   },
   {
     "checklistId": 655926402,
     "recordHash": 3431961939,
     "screenshot": false,
     "debug": {
-      "name": "Flooded Chasm",
+      "name": "After the Fall",
       "number": 11
     },
     "description": false
@@ -550,7 +554,7 @@
     "recordHash": 3431961936,
     "screenshot": false,
     "debug": {
-      "name": "Excavation Site XII",
+      "name": "Kings",
       "number": 12
     },
     "description": false
@@ -560,7 +564,7 @@
     "recordHash": 3431961937,
     "screenshot": false,
     "debug": {
-      "name": "Alton Dynamo",
+      "name": "Fanatic | Part I",
       "number": 13
     },
     "description": false
@@ -570,7 +574,7 @@
     "recordHash": 3431961942,
     "screenshot": false,
     "debug": {
-      "name": "Olympus Descent",
+      "name": "Fanatic | Part II",
       "number": 14
     },
     "description": false
@@ -580,7 +584,7 @@
     "recordHash": 3431961943,
     "screenshot": false,
     "debug": {
-      "name": "Soriks's Cut",
+      "name": "The Severance",
       "number": 15
     },
     "description": false
@@ -590,7 +594,7 @@
     "recordHash": 3431961940,
     "screenshot": false,
     "debug": {
-      "name": "Soriks's Cut",
+      "name": "Fikrul",
       "number": 16
     },
     "description": false
@@ -600,7 +604,7 @@
     "recordHash": 3431961941,
     "screenshot": false,
     "debug": {
-      "name": "Kingship Dock",
+      "name": "Docking",
       "number": 17
     },
     "description": false
@@ -610,7 +614,7 @@
     "recordHash": 3431961946,
     "screenshot": false,
     "debug": {
-      "name": "Trapper's Cave",
+      "name": "Petra",
       "number": 18
     },
     "description": false
@@ -620,7 +624,7 @@
     "recordHash": 3431961947,
     "screenshot": false,
     "debug": {
-      "name": "The Cobble",
+      "name": "Free | Part I",
       "number": 19
     },
     "description": false
@@ -630,7 +634,7 @@
     "recordHash": 3415184383,
     "screenshot": false,
     "debug": {
-      "name": "The Cobble",
+      "name": "Free | Part II",
       "number": 20
     },
     "description": false
@@ -816,7 +820,7 @@
     "recordHash": 2121305069,
     "screenshot": false,
     "debug": {
-      "name": "Shipyard AWO-43",
+      "name": "Ghost Hunter",
       "number": 2
     },
     "description": false
@@ -826,7 +830,7 @@
     "recordHash": 2121305068,
     "screenshot": false,
     "debug": {
-      "name": "The Boil",
+      "name": "The Chosen's Choice",
       "number": 3
     },
     "description": false
@@ -836,7 +840,7 @@
     "recordHash": 2121305067,
     "screenshot": false,
     "debug": {
-      "name": "Hall of the Exalted",
+      "name": "The We Before Us",
       "number": 4
     },
     "description": false
@@ -846,7 +850,7 @@
     "recordHash": 2121305066,
     "screenshot": false,
     "debug": {
-      "name": "Shaft 13",
+      "name": "Don't Call Me Ghost",
       "number": 5
     },
     "description": false
@@ -856,17 +860,17 @@
     "recordHash": 2121305065,
     "screenshot": "/static/images/screenshots/lore/the-drain_ghost-stories_6.jpg",
     "debug": {
-      "name": "The Drain",
+      "name": "Compliments",
       "number": 6
     },
-    "description": false
+    "description": "On the farthest side of the largest room, adjacent to the lost sector's chest room, is a large rock wall which has a path leading around into a small poorly lit room with a computer desk. On this desk is a defunct ghost."
   },
   {
     "checklistId": 1420597821,
     "recordHash": 2121305064,
     "screenshot": false,
     "debug": {
-      "name": "The Quarry",
+      "name": "No Rez for the Weary",
       "number": 7
     },
     "description": false
@@ -876,7 +880,7 @@
     "recordHash": 2121305063,
     "screenshot": false,
     "debug": {
-      "name": "Arboretum",
+      "name": "Confession of Hope | Part One",
       "number": 8
     },
     "description": false
@@ -886,7 +890,7 @@
     "recordHash": 2121305062,
     "screenshot": false,
     "debug": {
-      "name": "Siren's Watch",
+      "name": "The Watchful Eye",
       "number": 9
     },
     "description": false
@@ -896,7 +900,7 @@
     "recordHash": 2104527484,
     "screenshot": false,
     "debug": {
-      "name": "DS Quarters-2",
+      "name": "Into the Fray",
       "number": 10
     },
     "description": false
@@ -906,7 +910,7 @@
     "recordHash": 2104527485,
     "screenshot": false,
     "debug": {
-      "name": "Watcher's Grave",
+      "name": "Struck by Wonder",
       "number": 11
     },
     "description": false
@@ -916,7 +920,7 @@
     "recordHash": 2104527486,
     "screenshot": false,
     "debug": {
-      "name": "The Tangle",
+      "name": "Confession of Hope | Part Two",
       "number": 12
     },
     "description": false
@@ -926,7 +930,7 @@
     "recordHash": 2104527487,
     "screenshot": false,
     "debug": {
-      "name": "The Rift",
+      "name": "A Hero's Requiem",
       "number": 13
     },
     "description": false
@@ -936,7 +940,7 @@
     "recordHash": 2104527480,
     "screenshot": false,
     "debug": {
-      "name": "Pariah's Refuge",
+      "name": "From Fallen Ground",
       "number": 14
     },
     "description": false
@@ -946,7 +950,7 @@
     "recordHash": 2104527481,
     "screenshot": false,
     "debug": {
-      "name": "Aphix Conduit",
+      "name": "Ghost Community Theater Presents",
       "number": 15
     },
     "description": false
@@ -956,7 +960,7 @@
     "recordHash": 2104527482,
     "screenshot": false,
     "debug": {
-      "name": "Sanctum of Bones",
+      "name": "Difference of Opinion",
       "number": 16
     },
     "description": false
@@ -966,7 +970,7 @@
     "recordHash": 2104527483,
     "screenshot": false,
     "debug": {
-      "name": "Terrabase Charon",
+      "name": "Protector of Ghosts",
       "number": 17
     },
     "description": false
@@ -976,7 +980,7 @@
     "recordHash": 2104527476,
     "screenshot": false,
     "debug": {
-      "name": "Core Terminus",
+      "name": "Savin",
       "number": 18
     },
     "description": false
@@ -986,7 +990,7 @@
     "recordHash": 2104527477,
     "screenshot": false,
     "debug": {
-      "name": "Alton Dynamo",
+      "name": "Pulled Pork",
       "number": 19
     },
     "description": false
@@ -996,7 +1000,7 @@
     "recordHash": 2154860341,
     "screenshot": false,
     "debug": {
-      "name": "Wolfship Turbine",
+      "name": "Who Guards the Guardians?",
       "number": 20
     },
     "description": false
@@ -1006,7 +1010,7 @@
     "recordHash": 2154860340,
     "screenshot": false,
     "debug": {
-      "name": "Kingship Dock",
+      "name": "Whether Windmills or Cranes",
       "number": 21
     },
     "description": false
@@ -1016,7 +1020,7 @@
     "recordHash": 2154860343,
     "screenshot": false,
     "debug": {
-      "name": "The Cobble",
+      "name": "Batteries Not Included",
       "number": 22
     },
     "description": false
@@ -1026,7 +1030,7 @@
     "recordHash": 2154860342,
     "screenshot": false,
     "debug": {
-      "name": "Spider's Safehouse",
+      "name": "To Map the Unknown",
       "number": 23
     },
     "description": false
@@ -4590,7 +4594,7 @@
     "recordHash": 276019960,
     "screenshot": "/static/images/screenshots/lore/scavengers-den_the-awoken-of-the-reef_17.jpg",
     "debug": {
-      "name": "Gardens of Esila",
+      "name": "Revanche II",
       "number": 1
     },
     "description": false
@@ -4600,7 +4604,7 @@
     "recordHash": 276019963,
     "screenshot": false,
     "debug": {
-      "name": "The Strand",
+      "name": "Revanche III",
       "number": 2
     },
     "description": false
@@ -4610,7 +4614,7 @@
     "recordHash": 276019962,
     "screenshot": false,
     "debug": {
-      "name": "Rheasilvia",
+      "name": "Revanche IV",
       "number": 3
     },
     "description": false
@@ -4620,7 +4624,7 @@
     "recordHash": 276019965,
     "screenshot": false,
     "debug": {
-      "name": "Rheasilvia",
+      "name": "Revanche V",
       "number": 4
     },
     "description": false
@@ -4630,7 +4634,7 @@
     "recordHash": 276019964,
     "screenshot": false,
     "debug": {
-      "name": "Font of Starlight",
+      "name": "Telic I",
       "number": 5
     },
     "description": false
@@ -4640,7 +4644,7 @@
     "recordHash": 276019967,
     "screenshot": false,
     "debug": {
-      "name": "Divalian Mists",
+      "name": "Telic II",
       "number": 6
     },
     "description": false
@@ -4650,7 +4654,7 @@
     "recordHash": 276019966,
     "screenshot": false,
     "debug": {
-      "name": "Harbinger's Seclude",
+      "name": "Tyrannocide I",
       "number": 7
     },
     "description": false
@@ -4660,7 +4664,7 @@
     "recordHash": 276019953,
     "screenshot": false,
     "debug": {
-      "name": "Divalian Mists",
+      "name": "Tyrannocide II",
       "number": 8
     },
     "description": false
@@ -4670,7 +4674,7 @@
     "recordHash": 276019952,
     "screenshot": false,
     "debug": {
-      "name": "High Plains",
+      "name": "Tyrannocide III",
       "number": 9
     },
     "description": false
@@ -4680,7 +4684,7 @@
     "recordHash": 259242246,
     "screenshot": false,
     "debug": {
-      "name": "Spine of Keres",
+      "name": "Tyrannocide IV",
       "number": 10
     },
     "description": false
@@ -4690,7 +4694,7 @@
     "recordHash": 259242247,
     "screenshot": false,
     "debug": {
-      "name": "Trapper's Cave",
+      "name": "Tyrannocide V",
       "number": 11
     },
     "description": false
@@ -4700,7 +4704,7 @@
     "recordHash": 259242244,
     "screenshot": false,
     "debug": {
-      "name": "The Boil",
+      "name": "Regent",
       "number": 12
     },
     "description": false
@@ -4710,7 +4714,7 @@
     "recordHash": 259242245,
     "screenshot": false,
     "debug": {
-      "name": "Shipyard AWO-43",
+      "name": "Illyn",
       "number": 13
     },
     "description": false
@@ -4720,7 +4724,7 @@
     "recordHash": 259242242,
     "screenshot": false,
     "debug": {
-      "name": "Hellrise Canyon",
+      "name": "Nitrogen",
       "number": 14
     },
     "description": false
@@ -4730,7 +4734,7 @@
     "recordHash": 259242243,
     "screenshot": false,
     "debug": {
-      "name": "Hall of the Exalted",
+      "name": "Refusal",
       "number": 15
     },
     "description": false
@@ -4740,7 +4744,7 @@
     "recordHash": 259242240,
     "screenshot": false,
     "debug": {
-      "name": "The Cobble",
+      "name": "Fleet",
       "number": 16
     },
     "description": false
@@ -4750,7 +4754,7 @@
     "recordHash": 259242241,
     "screenshot": "/static/images/screenshots/lore/scavengers-den_the-awoken-of-the-reef_17.jpg",
     "debug": {
-      "name": "Scavenger's Den",
+      "name": "Of Earth and the Reef",
       "number": 17
     },
     "description": false
@@ -4760,7 +4764,7 @@
     "recordHash": 259242254,
     "screenshot": false,
     "debug": {
-      "name": "Sinking Docks",
+      "name": "Pilgrimage",
       "number": 18
     },
     "description": false
@@ -4770,7 +4774,7 @@
     "recordHash": 259242255,
     "screenshot": false,
     "debug": {
-      "name": "The Conflux",
+      "name": "Flayed",
       "number": 19
     },
     "description": false
@@ -4780,7 +4784,7 @@
     "recordHash": 242464659,
     "screenshot": false,
     "debug": {
-      "name": "Grove of Ulan-Tan",
+      "name": "Gensym Scribe",
       "number": 20
     },
     "description": false
@@ -4790,7 +4794,7 @@
     "recordHash": 242464658,
     "screenshot": false,
     "debug": {
-      "name": "Pariah's Refuge",
+      "name": "Exegesis",
       "number": 21
     },
     "description": false
@@ -4800,7 +4804,7 @@
     "recordHash": 242464657,
     "screenshot": false,
     "debug": {
-      "name": "Dark Monastery",
+      "name": "King's Wrath",
       "number": 22
     },
     "description": false
@@ -4810,7 +4814,7 @@
     "recordHash": 242464656,
     "screenshot": false,
     "debug": {
-      "name": "Ma'adim Subterrane",
+      "name": "Emissary",
       "number": 23
     },
     "description": false

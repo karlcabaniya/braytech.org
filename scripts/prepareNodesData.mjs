@@ -10,7 +10,7 @@ const input = JSON.parse(fs.readFileSync('src/data/lowlines/maps/nodes/index.jso
 let output = input;
 
 async function run() {
-  // const manifest = await Manifest.getManifest();
+  const manifest = await Manifest.getManifest();
 
   Object.entries(dump).forEach(([key, value]) => {
 
@@ -25,6 +25,8 @@ async function run() {
           && e.recordHash === entry.recordHash
         )
       );
+
+      const definitionLore = entry.recordHash && manifest.DestinyRecordDefinition[entry.recordHash] && manifest.DestinyRecordDefinition[entry.recordHash].loreHash && manifest.DestinyLoreDefinition[manifest.DestinyRecordDefinition[entry.recordHash].loreHash];
 
       if (index > -1) {
         let screenshot = output[index].screenshot && output[index].screenshot !== "" ? output[index].screenshot : false;
@@ -52,7 +54,7 @@ async function run() {
         output[index] = {
           ...output[index],
           // debug: {
-          //   name: entry.sorts.name,
+          //   name: definitionLore && definitionLore.displayProperties && definitionLore.displayProperties.name || entry.sorts.name,
           //   number: entry.sorts.number
           // },
           screenshot,
@@ -66,7 +68,7 @@ async function run() {
           screenshot: false,
           description: false,
           debug: {
-            name: entry.sorts.name,
+            name: definitionLore && definitionLore.displayProperties && definitionLore.displayProperties.name || entry.sorts.name,
             number: entry.sorts.number
           }
         });
