@@ -206,17 +206,17 @@ class MemberLink extends React.Component {
                       </div>
                       <div className='basics'>
                         <div>
-                          <div className='name'>Time played across characters</div>
+                          <div className='name'>{t('Time played across characters')}</div>
                           <div className='value'>
                             {timePlayed} {timePlayed === 1 ? t('day played') : t('days played')}
                           </div>
                         </div>
                         <div>
-                          <div className='name'>Triumph score</div>
+                          <div className='name'>{t('Triumph score')}</div>
                           <div className='value'>{this.state.all.data.profileRecords.data.score.toLocaleString('en-us')}</div>
                         </div>
                         <div>
-                          <div className='name'>Collection total</div>
+                          <div className='name'>{t('Collection total')}</div>
                           <div className='value'>{destinyUtils.collectionTotal(this.state.all.data).toLocaleString('en-us')}</div>
                         </div>
                       </div>
