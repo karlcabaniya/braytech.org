@@ -7,6 +7,19 @@ import lowlines from './cache/checklists.json';
 const outputPath = 'src/data/lowlines/checklists/index.json';
 
 const assisted = JSON.parse(fs.readFileSync('scripts/dump/index.json'));
+const nodes = [];
+
+Object.keys(assisted).forEach(key => {
+  if (!assisted[key].map.bubbles) return;
+
+  assisted[key].map.bubbles.forEach(bubble => {
+    bubble.nodes.forEach(node => {
+      nodes.push(node);
+    });
+  })
+});
+
+//console.log(nodes)
 
 // For when the mappings generated from lowlines' data don't have a
 // bubbleHash but do have a bubbleId. Inferred by cross-referencing
@@ -59,7 +72,7 @@ const checklists = [
   2726513366, // catStatues
 ];
 
-const nodes = [
+const presentationNodes = [
   1420597821, // ghostStories
   3305936921, // awokenOfTheReef
   655926402,  // forsakenPrince
@@ -126,9 +139,8 @@ async function run() {
   function checklistItem(item) {
     const mapping = lowlines.checklists[item.hash] || {};
     
-    // let ass = assisted.find(a => a.nodes.find(n => n.checklistHash === parseInt(item.hash, 10))) || {};
-    // if (ass.nodes) ass = ass.nodes.find(n => n.checklistHash === parseInt(item.hash, 10)) || {}
-    let ass = {};
+    let ass = nodes.find(n => (n.checklistHash === parseInt(item.hash, 10)) || (n.activityHash === parseInt(item.activityHash, 10))) || {};
+    // let ass = {};
 
     const destinationHash = item.destinationHash || mapping.destinationHash;
     const bubbleHash = item.bubbleHash || mapping.bubbleHash;
@@ -202,9 +214,8 @@ async function run() {
 
         const mapping = lowlines.records[hash];
     
-        // let ass = assisted.find(a => a.nodes.find(n => n.recordHash === parseInt(item.hash, 10))) || {};
-        // if (ass.nodes) ass = ass.nodes.find(n => n.recordHash === parseInt(item.hash, 10)) || {}
-        let ass = {};
+        let ass = nodes.find(n => n.recordHash === parseInt(item.hash, 10)) || {};
+        // let ass = {};
         
         const destinationHash = mapping && mapping.destinationHash;
         const destination = destinationHash && manifest.DestinyDestinationDefinition[destinationHash];
@@ -253,8 +264,8 @@ async function run() {
   
   const lists = {};
 
-  checklists.concat(nodes).forEach(hash => {
-    if (nodes.includes(hash)) {
+  checklists.concat(presentationNodes).forEach(hash => {
+    if (presentationNodes.includes(hash)) {
       lists[hash] = presentationItems(hash);
     } else {
       const checklist = manifest.DestinyChecklistDefinition[hash];
