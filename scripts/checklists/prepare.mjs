@@ -180,6 +180,10 @@ async function run() {
 
     const lostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash) && id !== 3142056444;
 
+    const points = [];
+
+    if ((mapping && mapping.node) || (ass && ass.x)) points.push(mapping && mapping.node ? { x: mapping.node.x, y: mapping.node.y } : { x: ass.x, y: ass.y })
+
     return {
       destinationHash,
       bubbleHash,
@@ -188,13 +192,7 @@ async function run() {
       checklistHash: item.hash,
       itemHash: item && item.itemHash,
       recordHash: mapping.recordHash,
-      map: mapping.node ? {
-        x: mapping.node.x,
-        y: mapping.node.y
-      } : ass && ass.x ? {
-        x: ass.x,
-        y: ass.y
-      } : {},
+      points,
       sorts: {
         destination: destination && destination.displayProperties.name,
         bubble: bubbleName,
@@ -244,19 +242,17 @@ async function run() {
 
         const lostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash);
 
+        const points = [];
+    
+        if ((mapping && mapping.node) || (ass && ass.x)) points.push(mapping && mapping.node ? { x: mapping.node.x, y: mapping.node.y } : { x: ass.x, y: ass.y })
+
         return {
           destinationHash,
           bubbleHash: mapping && mapping.bubbleHash,
           bubbleName: backupBubbleName,
           recordName: item.displayProperties.name,
           recordHash: hash,
-          map: mapping && mapping.node ? {
-            x: mapping.node.x,
-            y: mapping.node.y
-          } : ass && ass.x ? {
-            x: ass.x,
-            y: ass.y
-          } : {},
+          points,
           sorts: {
             destination: destination && destination.displayProperties.name,
             bubble: bubbleName,
@@ -287,7 +283,7 @@ async function run() {
     }
   });
 
-  fs.writeFileSync(outputPath, JSON.stringify(lists));
+  fs.writeFileSync(outputPath, JSON.stringify(lists, null, '  '));
 }
 
 run();

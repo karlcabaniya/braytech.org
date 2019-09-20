@@ -669,20 +669,28 @@ class Maps extends React.Component {
               return checklist.items
                 .filter(i => i.destinationHash === maps[destination].destination.hash)
                 .map((node, i) => {
-                  const markerOffsetX = mapXOffset + viewWidth / 2;
-                  const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
+                  return node.points.map(point => {
+                    const markerOffsetX = mapXOffset + viewWidth / 2;
+                    const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
 
-                  const offsetX = markerOffsetX + (node.map.x ? node.map.x : 0);
-                  const offsetY = markerOffsetY + (node.map.y ? node.map.y : 0);
+                    if (!point.x || !point.y) {
+                      console.warn(node);
+                      
+                      return false;
+                    }
 
-                  // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
+                    const offsetX = markerOffsetX + point.x;
+                    const offsetY = markerOffsetY + point.y;
 
-                  const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`, node.screenshot ? `has-screenshot` : ''], { icon: checklist.checklistIcon, url: checklist.checklistImage });
-                  // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
+                    // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 
-                  const handler_markerMouseOver = (settings.debug && this.handler_markerMouseOver) || null;
+                    const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`, node.screenshot ? `has-screenshot` : ''], { icon: checklist.checklistIcon, url: checklist.checklistImage });
+                    // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
-                  return <Marker key={`${node.checklistHash}-${i}`} position={[offsetY, offsetX]} icon={icon} onMouseOver={handler_markerMouseOver} />;
+                    const handler_markerMouseOver = (settings.debug && this.handler_markerMouseOver) || null;
+
+                    return <Marker key={`${node.checklistHash}-${i}`} position={[offsetY, offsetX]} icon={icon} onMouseOver={handler_markerMouseOver} />;
+                  });
                 });
             })}
           </Map>
