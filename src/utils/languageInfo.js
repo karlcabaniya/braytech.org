@@ -62,12 +62,12 @@ export function getLanguageInfo(code) {
       };
     case 'zh-cht':
       return {
-        name: '中文',
+        name: '繁體中文',
         code: code
       };
     case 'zh-chs':
       return {
-        name: '简化字',
+        name: '简体中文',
         code: code
       };
     default:

@@ -104,8 +104,8 @@ const FilesLogic = {
         const result = [];
         Object.keys(translatedStrings).forEach(rawKey => {
             const key = unplaceholdify(rawKey);
-            if (rawKey === key)
-                return;
+            // Add this line to retain unused translations
+            // if (rawKey === key) return;
             if (!sourceStrings.has(key)) {
                 delete translatedStrings[rawKey];
                 result.push(key);
@@ -239,7 +239,7 @@ const NodesLogic = {
             await FilesLogic.write(jsonFile, JSON.stringify(translatedStrings, null, 2), { encoding: 'utf-8' });
             if (ARG_STATS) {
                 const { translated, notTranslated } = FilesLogic.countStrings(translatedStrings);
-                result[locale] = {
+                result[locale.toLocaleLowerCase()] = {
                     translated,
                     notTranslated,
                     added: addResult,
