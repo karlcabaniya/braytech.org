@@ -1214,7 +1214,7 @@
     "checklistId": 1697465175,
     "checklistHash": 72017611,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/firebase-hades_region-chests_16.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 16
@@ -1225,7 +1225,7 @@
     "checklistId": 1697465175,
     "checklistHash": 3212130160,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/firebase-hades_region-chests_17.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 17
@@ -2314,12 +2314,12 @@
     "checklistId": 2360931290,
     "checklistHash": 3222380274,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_44.jpg",
     "debug": {
       "name": "Legion's Anchor",
       "number": 44
     },
-    "description": false
+    "description": "To the right, just off of the strike's beat and path, under a ramp."
   },
   {
     "checklistId": 2360931290,
@@ -2347,18 +2347,18 @@
     "checklistId": 2360931290,
     "checklistHash": 1427361604,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_47.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 47
     },
-    "description": false
+    "description": "On the ceiling of a platform that extends above some large ammunition."
   },
   {
     "checklistId": 2360931290,
     "checklistHash": 3446252721,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_48.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 48
@@ -2369,7 +2369,7 @@
     "checklistId": 2360931290,
     "checklistHash": 97567758,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_49.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 49
@@ -2380,7 +2380,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2209645019,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_50.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 50
@@ -4269,7 +4269,7 @@
     "checklistId": 3142056444,
     "checklistHash": 4091723403,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/firebase-hades_lost-sectors_the-pit.jpg",
     "debug": {
       "name": "The Pit",
       "number": 8
@@ -4280,7 +4280,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2554253964,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/firebase-hades_lost-sectors_pathfinders-crash.jpg",
     "debug": {
       "name": "Pathfinder's Crash",
       "number": 9
@@ -4291,7 +4291,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3850160541,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/firebase-hades_lost-sectors_excavation-site-xii.jpg",
     "debug": {
       "name": "Excavation Site XII",
       "number": 10
@@ -4302,7 +4302,7 @@
     "checklistId": 3142056444,
     "checklistHash": 1850051473,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/winding-cove_lost-sectors_flooded-chasm.jpg",
     "debug": {
       "name": "Flooded Chasm",
       "number": 11
