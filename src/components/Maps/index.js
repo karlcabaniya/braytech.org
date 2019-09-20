@@ -47,12 +47,12 @@ class Maps extends React.Component {
           error: false,
           layers: []
         },
-        'echo-mesa': {
+        'arcadian-valley': {
           loading: true,
           error: false,
           layers: []
         },
-        'arcadian-valley': {
+        'echo-mesa': {
           loading: true,
           error: false,
           layers: []
@@ -155,7 +155,7 @@ class Maps extends React.Component {
     }
 
     if (pP.id !== id && this.mounted) {
-      this.setState({ destination: id });
+      this.setState({ destination: id || 'edz' });
     }
 
     if ((pS.ui !== this.state.ui || pS.checklists !== this.state.checklists || pS.destinations !== this.state.destinations) && this.mounted) {
@@ -649,7 +649,11 @@ class Maps extends React.Component {
 
                   return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
                 } else if (node.type === 'fast-travel') {
-                  const icon = marker.iconFastTravel(['interaction-none']);
+                  const icon = marker.iconFastTravel({}, ['interaction-none']);
+
+                  return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
+                } else if (node.type === 'forge') {
+                  const icon = marker.iconForge({ hash: node.activityHash, table: 'DestinyActivityDefinition' }, []);
 
                   return <Marker key={i} position={[offsetY, offsetX]} icon={icon} />;
                 } else {

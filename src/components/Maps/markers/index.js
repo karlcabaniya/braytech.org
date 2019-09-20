@@ -85,7 +85,7 @@ export const text = (classNames = [], name) => {
   });
 };
 
-export const iconFastTravel = (classNames = []) => {
+export const iconFastTravel = (tooltip = {}, classNames = []) => {
   const html = (
     <div className='wrapper'>
       <div className='fast-travel'>
@@ -98,6 +98,23 @@ export const iconFastTravel = (classNames = []) => {
           <div className='sq br' />
         </div>
         <div className='triangles' />
+      </div>
+    </div>
+  );
+
+  return L.divIcon({
+    className: ['icon-marker', 'native'].concat(classNames).join(' '),
+    html: ReactDOMServer.renderToString(html)
+  });
+};
+
+export const iconForge = (tooltip = {}, classNames = []) => {
+  const html = (
+    <div className='wrapper'>
+      <div className='forge tooltip' data-hash='10898844' data-playlist={tooltip.hash} data-table={tooltip.table}>
+        <div className='dial' />
+        <div className='frame' />
+        <div className='logo' />
       </div>
     </div>
   );
