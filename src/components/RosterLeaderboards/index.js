@@ -65,8 +65,6 @@ class RosterLeaderboards extends React.Component {
       if (this.mounted) {
         this.responses = responses;
 
-        console.log(responses);
-
         this.generateLeaderboards();
       }
     }

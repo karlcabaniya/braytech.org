@@ -442,7 +442,7 @@
   {
     "checklistId": 655926402,
     "recordHash": 3448739524,
-    "screenshot": "/static/images/screenshots/lore/the-drain_the-forsaken-prince_10.jpg",
+    "screenshot": false,
     "debug": {
       "name": "The Length of a Chain | Part I",
       "number": 1
@@ -542,12 +542,12 @@
   {
     "checklistId": 655926402,
     "recordHash": 3431961939,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/flooded-chasm_the-forsaken-prince_11.jpg",
     "debug": {
       "name": "After the Fall",
       "number": 11
     },
-    "description": false
+    "description": "A hard cache to find, this enigma is hidden at the end of a cave which has a small opening along the wall not far from the lost sector's chest. If you're having difficulting locating its orifice, increase your brightness in settings."
   },
   {
     "checklistId": 655926402,
@@ -1049,7 +1049,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2754290383,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/region-chests/outskirts_region-chests_10.jpg",
+    "screenshot": false,
     "debug": {
       "name": "The Rupture",
       "number": 1
@@ -1181,7 +1181,7 @@
     "checklistId": 1697465175,
     "checklistHash": 3557288846,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/winding-cove_region-chests_13.jpg",
     "debug": {
       "name": "Winding Cove",
       "number": 13
@@ -1192,12 +1192,12 @@
     "checklistId": 1697465175,
     "checklistHash": 3658842337,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/winding-cove_region-chests_14.jpg",
     "debug": {
       "name": "Winding Cove",
       "number": 14
     },
-    "description": false
+    "description": "Up on the ledge, near where Xûr sometimes appears."
   },
   {
     "checklistId": 1697465175,
@@ -2325,7 +2325,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1284663771,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/winding-cove_ghost-scans_45.jpg",
     "debug": {
       "name": "Winding Cove",
       "number": 45
@@ -2336,7 +2336,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1001598066,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/winding-cove_ghost-scans_46.jpg",
     "debug": {
       "name": "Winding Cove",
       "number": 46
@@ -4258,12 +4258,12 @@
     "checklistId": 3142056444,
     "checklistHash": 815928620,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/winding-cove_lost-sectors_the-weep.jpg",
     "debug": {
       "name": "The Weep",
       "number": 7
     },
-    "description": false
+    "description": "The entrance to this lost sector is found firstly through the ceiling of this tiny volcano, secondly keep left and, ..."
   },
   {
     "checklistId": 3142056444,
