@@ -135,7 +135,15 @@ const NodesLogic = {
             case 'MemberExpression': {
                 if (callee.property) {
                     const storage = new Set();
-                    NodesLogic.diveNode(callee.property, storage);
+                    try
+                    {
+                        NodesLogic.diveNode(callee.property, storage);
+                    }
+                    catch (e)
+                    {
+                        console.log(e);
+                        console.error('MemberExpression Parse Failed: ' + e.message);
+                    }
                     if (storage.has('t'))
                         return true;
                 }
