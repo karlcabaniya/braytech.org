@@ -42,7 +42,7 @@
 }
 
 .map-omega.debug.highlight-no-screenshot .leaflet-container .icon-marker.completed:not(.native):not(.has-screenshot) {
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .map-omega.debug.highlight-no-screenshot .leaflet-container .icon-marker:not(.native):not(.has-screenshot)::before {
