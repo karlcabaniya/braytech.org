@@ -3278,12 +3278,6 @@
             },
             {
               "type": "vendor",
-              "vendorHash": 1037843411,
-              "x": 66,
-              "y": -48
-            },
-            {
-              "type": "vendor",
               "vendorHash": 1976548992,
               "x": 156,
               "y": 114
@@ -3402,12 +3396,6 @@
             },
             {
               "type": "vendor",
-              "vendorHash": 1037843411,
-              "x": -151,
-              "y": -201
-            },
-            {
-              "type": "vendor",
               "vendorHash": 2255782930,
               "x": -171,
               "y": -71
@@ -3433,6 +3421,42 @@
           ]
         },
         {
+          "hash": 4101540847,
+          "name": "Annex",
+          "id": "annex",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -1204,
+              "y": -24
+            },
+            {
+              "type": "fast-travel",
+              "x": -1000,
+              "y": -195
+            },
+            {
+              "type": "vendor",
+              "vendorHash": 1265988377,
+              "x": -1073,
+              "y": 21
+            },
+            {
+              "type": "vendor",
+              "vendorHash": 248695599,
+              "x":-958,
+              "y":-97
+            },
+            {
+              "type": "vendor",
+              "vendorHash": 2917531897,
+              "x": -1300,
+              "y": 178
+            }
+          ]
+        },
+        {
           "hash": 2372580540,
           "name": "Bazaar",
           "id": "bazaar",
@@ -3440,8 +3464,8 @@
           "nodes": [
             {
               "type": "title",
-              "x": -813,
-              "y": 94
+              "x": -814,
+              "y": 210
             },
             {
               "type": "vendor",
@@ -3454,12 +3478,6 @@
               "vendorHash": 3347378076,
               "x": -867,
               "y": -23
-            },
-            {
-              "type": "vendor",
-              "vendorHash": 1265988377,
-              "x": -961,
-              "y": -35
             },
             {
               "type": "vendor",

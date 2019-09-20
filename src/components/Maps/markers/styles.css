@@ -41,6 +41,10 @@
   transform: translateX(-50%) translateY(-50%) scale(0.4);
 }
 
+.map-omega.debug.highlight-no-screenshot .leaflet-container .icon-marker.completed:not(.native):not(.has-screenshot) {
+  opacity: 0.6;
+}
+
 .map-omega.debug.highlight-no-screenshot .leaflet-container .icon-marker:not(.native):not(.has-screenshot)::before {
   content: ' ';
   position: absolute;

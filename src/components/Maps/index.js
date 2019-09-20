@@ -527,6 +527,7 @@ class Maps extends React.Component {
     }
 
     console.log(JSON.stringify({ map: { x: originalX, y: originalY } }));
+    console.log(JSON.stringify({ x: originalX, y: originalY }));
   };
 
   handler_markerMouseOver = e => {

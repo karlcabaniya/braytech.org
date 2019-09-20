@@ -5,6 +5,10 @@
   color: white;
 }
 
+.map-omega.debug .leaflet-grab {
+  cursor: default;
+}
+
 .map-omega.loading {
   display: grid;
   align-items: center;
