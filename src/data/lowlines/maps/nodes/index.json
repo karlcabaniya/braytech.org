@@ -4827,7 +4827,8 @@
       "name": "Red Legion, Black Oil",
       "number": 1
     },
-    "description": false
+    "description": false,
+    "activityHash": 122988657
   },
   {
     "checklistId": 4178338182,
@@ -4837,7 +4838,8 @@
       "name": "Anti-Anti-Air",
       "number": 2
     },
-    "description": false
+    "description": false,
+    "activityHash": 1228327586
   },
   {
     "checklistId": 4178338182,
@@ -4847,7 +4849,8 @@
       "name": "Dark Alliance",
       "number": 3
     },
-    "description": false
+    "description": false,
+    "activityHash": 3002511278
   },
   {
     "checklistId": 4178338182,
@@ -4858,7 +4861,8 @@
       "name": "Stop and Go",
       "number": 4
     },
-    "description": false
+    "description": false,
+    "activityHash": 3780356141
   },
   {
     "checklistId": 4178338182,
@@ -4869,7 +4873,8 @@
       "name": "Getting Your Hands Dirty",
       "number": 5
     },
-    "description": false
+    "description": false,
+    "activityHash": 1829866365
   },
   {
     "checklistId": 4178338182,
@@ -4880,7 +4885,8 @@
       "name": "Unsafe at Any Speed",
       "number": 6
     },
-    "description": false
+    "description": false,
+    "activityHash": 1971154629
   },
   {
     "checklistId": 4178338182,
@@ -4890,7 +4896,8 @@
       "name": "A Frame Job",
       "number": 7
     },
-    "description": false
+    "description": false,
+    "activityHash": 2174556965
   },
   {
     "checklistId": 4178338182,
@@ -4900,7 +4907,8 @@
       "name": "Calling Them Home",
       "number": 8
     },
-    "description": false
+    "description": false,
+    "activityHash": 3304835347
   },
   {
     "checklistId": 4178338182,
@@ -4911,7 +4919,8 @@
       "name": "Reversing the Polarity",
       "number": 9
     },
-    "description": false
+    "description": false,
+    "activityHash": 539897061
   },
   {
     "checklistId": 4178338182,
@@ -4922,7 +4931,8 @@
       "name": "Poor Reception",
       "number": 10
     },
-    "description": false
+    "description": false,
+    "activityHash": 1159314159
   },
   {
     "checklistId": 4178338182,
@@ -4932,7 +4942,8 @@
       "name": "Supply and Demand",
       "number": 11
     },
-    "description": false
+    "description": false,
+    "activityHash": 320680002
   },
   {
     "checklistId": 4178338182,
@@ -4942,7 +4953,8 @@
       "name": "No Safe Distance",
       "number": 12
     },
-    "description": false
+    "description": false,
+    "activityHash": 1254990192
   },
   {
     "checklistId": 4178338182,
@@ -4952,7 +4964,8 @@
       "name": "Cliffhanger",
       "number": 13
     },
-    "description": false
+    "description": false,
+    "activityHash": 3500791146
   },
   {
     "checklistId": 4178338182,
@@ -4962,7 +4975,8 @@
       "name": "Unexpected Guests",
       "number": 14
     },
-    "description": false
+    "description": false,
+    "activityHash": 2949941834
   },
   {
     "checklistId": 4178338182,
@@ -4972,7 +4986,8 @@
       "name": "Arecibo",
       "number": 15
     },
-    "description": false
+    "description": false,
+    "activityHash": 622895925
   },
   {
     "checklistId": 4178338182,
@@ -4982,7 +4997,8 @@
       "name": "Road Rage",
       "number": 16
     },
-    "description": false
+    "description": false,
+    "activityHash": 1824067376
   },
   {
     "checklistId": 4178338182,
@@ -4993,7 +5009,8 @@
       "name": "Postmodern Prometheus",
       "number": 17
     },
-    "description": false
+    "description": false,
+    "activityHash": 1651979106
   },
   {
     "checklistId": 4178338182,
@@ -5003,7 +5020,8 @@
       "name": "Unbreakable",
       "number": 18
     },
-    "description": false
+    "description": false,
+    "activityHash": 1289867188
   },
   {
     "checklistId": 4178338182,
@@ -5013,7 +5031,8 @@
       "name": "Release",
       "number": 19
     },
-    "description": false
+    "description": false,
+    "activityHash": 2665134323
   },
   {
     "checklistId": 4178338182,
@@ -5023,7 +5042,8 @@
       "name": "Exodus Siege",
       "number": 20
     },
-    "description": false
+    "description": false,
+    "activityHash": 1981289329
   },
   {
     "checklistId": 4178338182,
@@ -5033,7 +5053,8 @@
       "name": "Invitation from the Emperor",
       "number": 21
     },
-    "description": false
+    "description": false,
+    "activityHash": 1063969232
   },
   {
     "checklistId": 4178338182,
@@ -5043,7 +5064,8 @@
       "name": "Hack the Planet",
       "number": 22
     },
-    "description": false
+    "description": false,
+    "activityHash": 359488722
   },
   {
     "checklistId": 4178338182,
@@ -5053,7 +5075,8 @@
       "name": "Deep Conversation",
       "number": 23
     },
-    "description": false
+    "description": false,
+    "activityHash": 963938931
   },
   {
     "checklistId": 4178338182,
@@ -5063,7 +5086,8 @@
       "name": "Lost Crew",
       "number": 24
     },
-    "description": false
+    "description": false,
+    "activityHash": 1225970098
   },
   {
     "checklistId": 4178338182,
@@ -5073,7 +5097,8 @@
       "name": "Deathless",
       "number": 25
     },
-    "description": false
+    "description": false,
+    "activityHash": 3277510674
   },
   {
     "checklistId": 4178338182,
@@ -5084,7 +5109,8 @@
       "name": "Thief of Thieves",
       "number": 26
     },
-    "description": false
+    "description": false,
+    "activityHash": 789332628
   },
   {
     "checklistId": 4178338182,
@@ -5095,7 +5121,8 @@
       "name": "Siren Song",
       "number": 27
     },
-    "description": false
+    "description": false,
+    "activityHash": 3211568383
   },
   {
     "checklistId": 4178338182,
@@ -5106,7 +5133,8 @@
       "name": "Bad Neighbors",
       "number": 28
     },
-    "description": false
+    "description": false,
+    "activityHash": 3645117987
   },
   {
     "checklistId": 4178338182,
@@ -5117,7 +5145,8 @@
       "name": "Signal Light",
       "number": 29
     },
-    "description": false
+    "description": false,
+    "activityHash": 2307090074
   },
   {
     "checklistId": 4178338182,
@@ -5128,7 +5157,8 @@
       "name": "Not Even the Darkness",
       "number": 30
     },
-    "description": false
+    "description": false,
+    "activityHash": 2067233851
   },
   {
     "checklistId": 4178338182,
@@ -5139,7 +5169,8 @@
       "name": "The Up and Up",
       "number": 31
     },
-    "description": false
+    "description": false,
+    "activityHash": 1725302079
   },
   {
     "checklistId": 4178338182,
@@ -5150,7 +5181,8 @@
       "name": "Bug in the System",
       "number": 32
     },
-    "description": false
+    "description": false,
+    "activityHash": 1279862229
   },
   {
     "checklistId": 4178338182,
@@ -5161,7 +5193,8 @@
       "name": "The Runner",
       "number": 33
     },
-    "description": false
+    "description": false,
+    "activityHash": 1570598249
   },
   {
     "checklistId": 4178338182,
@@ -5171,7 +5204,8 @@
       "name": "Deathly Tremors",
       "number": 34
     },
-    "description": false
+    "description": false,
+    "activityHash": 1294490226
   },
   {
     "checklistId": 4178338182,
@@ -5181,7 +5215,8 @@
       "name": "Hephaestus",
       "number": 35
     },
-    "description": false
+    "description": false,
+    "activityHash": 340004423
   },
   {
     "checklistId": 4178338182,
@@ -5191,7 +5226,8 @@
       "name": "Psionic Potential",
       "number": 36
     },
-    "description": false
+    "description": false,
+    "activityHash": 2302677459
   },
   {
     "checklistId": 4178338182,
@@ -5201,7 +5237,8 @@
       "name": "Incursion",
       "number": 37
     },
-    "description": false
+    "description": false,
+    "activityHash": 2966841322
   },
   {
     "checklistId": 4178338182,
@@ -5212,7 +5249,8 @@
       "name": "Target: The Trickster",
       "number": 38
     },
-    "description": false
+    "description": false,
+    "activityHash": 1042784002
   },
   {
     "checklistId": 4178338182,
@@ -5223,7 +5261,8 @@
       "name": "Target: The Hangman",
       "number": 39
     },
-    "description": false
+    "description": false,
+    "activityHash": 952862146
   },
   {
     "checklistId": 4178338182,
@@ -5234,7 +5273,8 @@
       "name": "Target: The Rifleman",
       "number": 40
     },
-    "description": false
+    "description": false,
+    "activityHash": 2504933700
   },
   {
     "checklistId": 4178338182,
@@ -5245,7 +5285,8 @@
       "name": "Target: The Rider",
       "number": 41
     },
-    "description": false
+    "description": false,
+    "activityHash": 1429621744
   },
   {
     "checklistId": 4178338182,
@@ -5256,7 +5297,8 @@
       "name": "Target: The Mad Bomber",
       "number": 42
     },
-    "description": false
+    "description": false,
+    "activityHash": 1449366986
   },
   {
     "checklistId": 4178338182,
@@ -5267,7 +5309,8 @@
       "name": "Target: The Mindbender",
       "number": 43
     },
-    "description": false
+    "description": false,
+    "activityHash": 3926419686
   },
   {
     "vendorHash": 1735426333,

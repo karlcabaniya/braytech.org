@@ -537,7 +537,7 @@ class Maps extends React.Component {
       dataset = e.target._icon.children[0].children[0].dataset;
     } catch (e) {}
 
-    const node = dataset.hash && nodes.find(n => (dataset.table === 'DestinyChecklistDefinition' && n.checklistHash && n.checklistHash === parseInt(dataset.hash, 10)) || (dataset.table === 'DestinyRecordDefinition' && n.recordHash && n.recordHash === parseInt(dataset.hash, 10)));
+    const node = dataset.hash && nodes.find(n => (dataset.table === 'DestinyChecklistDefinition' && n.checklistHash && n.checklistHash === parseInt(dataset.hash, 10)) || (dataset.table === 'DestinyRecordDefinition' && n.recordHash && n.recordHash === parseInt(dataset.hash, 10)) || (dataset.table === 'DestinyActivityDefinition' && n.activityHash && n.activityHash === parseInt(dataset.hash, 10)));
 
     console.log(node);
 

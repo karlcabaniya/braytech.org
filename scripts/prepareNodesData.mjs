@@ -61,6 +61,7 @@ async function run() {
           //   name: definitionLore && definitionLore.displayProperties && definitionLore.displayProperties.name || entry.sorts.name,
           //   number: entry.sorts.number
           // },
+          activityHash: entry.activityHash,
           screenshot,
           // description: output[index].description && output[index].description !== "" ? output[index].description : false
         };
@@ -69,6 +70,7 @@ async function run() {
           checklistId: parseInt(key, 10),
           checklistHash: entry.checklistHash,
           recordHash: entry.recordHash,
+          activityHash: entry.activityHash,
           screenshot: false,
           description: false,
           debug: {
