@@ -85,6 +85,8 @@ const FilesLogic = {
         }
       });
     } catch (e) {
+      console.log(e);
+      console.log('>> ' + filename + ' <<');
       console.error('ScrapeStrings Failed: ' + e.message);
     }
   },
@@ -126,7 +128,8 @@ const FilesLogic = {
     const result: string[] = [];
     Object.keys(translatedStrings).forEach(rawKey => {
       const key = unplaceholdify(rawKey);
-      if (rawKey === key) return;
+      // Add this line to retain unused translations
+      // if (rawKey === key) return;
       if (!sourceStrings.has(key)) {
         delete translatedStrings[rawKey];
         result.push(key);
@@ -167,7 +170,7 @@ const NodesLogic = {
   getArgumentText(node: ASTNode): SourceStrings | false {
     const { arguments: args = [] } = node;
     if (args.length !== 1) {
-      throw new Error(`Argument count was not 1. Found: ${args.length}`);
+      //throw new Error(`Argument count was not 1. Found: ${args.length}`);
     }
     const arg = args[0];
     const storage: SourceStrings = new Set();
@@ -261,7 +264,7 @@ const NodesLogic = {
 
       if (ARG_STATS) {
         const { translated, notTranslated } = FilesLogic.countStrings(translatedStrings);
-        result[locale] = {
+        result[locale.toLocaleLowerCase()] = {
           translated,
           notTranslated,
           added: addResult,
