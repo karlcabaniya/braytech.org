@@ -107,24 +107,6 @@ export class Checklists extends React.Component {
     return (
       <>
         <div className='view' id='checklists'>
-          <div className={cx('module', 'head', 'cols-' + this.state.itemsPerPage)}>
-            <div className='content'>
-              <div className='page-header'>
-                <div className='sub-name'>{t('Location collections')}</div>
-                <div className='name'>{t('Checklists')}</div>
-              </div>
-            </div>
-            <div className='content source'>
-              <p>Mapping data</p>
-              <p>
-                Data for some checklists is supplemented by hand of an Iron Lord,{' '}
-                <a href='https://lowlidev.com.au/destiny/' target='_blank' rel='noopener noreferrer'>
-                  lowlidev
-                </a>
-                , and he deserves your favour, Guardian.
-              </p>
-            </div>
-          </div>
           <div className={cx('padder', 'cols-' + this.state.itemsPerPage)}>
             <div className='module views'>
               <ul className='list'>

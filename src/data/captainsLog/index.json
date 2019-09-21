@@ -653,5 +653,10 @@
     "date": "2019-09-21T12:25:42.368Z",
     "version": "2.9.0",
     "content": "- fixes\n- _Maps_ view\n- _Collections_ badges are now linked to from _Triumphs_ seals, where appropriate\n- more changes, so many that I can't recall"
+  },
+  {
+    "date": "2019-09-21T18:12:07.657Z",
+    "version": "2.9.1",
+    "content": "- minor fixes\n- removed some more CB.NAVs"
   }
 ]
