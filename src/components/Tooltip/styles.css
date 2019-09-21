@@ -444,6 +444,13 @@
   color: hsla(var(--exotic), 1);
 }
 
+#tooltip .description .destination {
+  padding: 0 0 10px;
+  line-height: 1.4;
+  font-size: 16px;
+  color: #f5eac4;
+}
+
 #tooltip .description pre {
   padding: 16px 16px 12px;
   white-space: pre-wrap;
