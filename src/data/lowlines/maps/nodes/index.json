@@ -5325,5 +5325,15 @@
     "vendorHash": 396892126,
     "bubbleHash": 3091570009,
     "screenshot": "/static/images/screenshots/vendors/vendors_devrim-kay-2.jpg"
+  },
+  {
+    "vendorHash": 1576276905,
+    "bubbleHash": 4205285323,
+    "screenshot": "/static/images/screenshots/vendors/vendors_failsafe-2.jpg"
+  },
+  {
+    "vendorHash": 1062861569,
+    "bubbleHash": 4035573696,
+    "screenshot": "/static/images/screenshots/vendors/vendors_sloane-2.jpg"
   }
 ]
