@@ -552,7 +552,7 @@
   {
     "checklistId": 655926402,
     "recordHash": 3431961936,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/excavation-site-xii_the-forsaken-prince_12.jpg",
     "debug": {
       "name": "Kings",
       "number": 12
@@ -848,12 +848,12 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305066,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/shaft-13_ghost-stories_5.jpg",
     "debug": {
       "name": "Don't Call Me Ghost",
       "number": 5
     },
-    "description": false
+    "description": "In one of the corners of the uppermost floor of this construction is a barely open cupboard along the wall. Look inside."
   },
   {
     "checklistId": 1420597821,
@@ -868,12 +868,12 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305064,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/the-quarry_ghost-stories_7.jpg",
     "debug": {
       "name": "No Rez for the Weary",
       "number": 7
     },
-    "description": false
+    "description": "Right before the lost sector's primary space, on your left."
   },
   {
     "checklistId": 1420597821,
@@ -1071,7 +1071,7 @@
     "checklistId": 1697465175,
     "checklistHash": 3577247371,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-sludge_region-chests_30.jpg",
     "debug": {
       "name": "The Rupture",
       "number": 3
@@ -1247,7 +1247,7 @@
     "checklistId": 1697465175,
     "checklistHash": 113362963,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-gulch_region-chests_19.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 19
@@ -1258,7 +1258,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2355206132,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-gulch_region-chests_20.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 20
@@ -1269,7 +1269,7 @@
     "checklistId": 1697465175,
     "checklistHash": 28658981,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-gulch_region-chests_21.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 21
@@ -1291,23 +1291,23 @@
     "checklistId": 1697465175,
     "checklistHash": 576743835,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sunken-isles_region-chests_23.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 23
     },
-    "description": false
+    "description": "Up in the very top left corner, on the rocks."
   },
   {
     "checklistId": 1697465175,
     "checklistHash": 3307732497,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sunken-isles_region-chests_24.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 24
     },
-    "description": false
+    "description": "Left of the lost sector's entrance, poorly lit, behind some crates."
   },
   {
     "checklistId": 1697465175,
@@ -1345,13 +1345,32 @@
   {
     "debug": {
       "name": "The Sludge",
-      "number": 30
+      "number": 28
     },
     "checklistId": 1697465175,
     "checklistHash": 589814471,
-    "recordHash": 3541301354,
-    "screenshot": false,
-    "description": false
+    "screenshot": "/static/images/screenshots/region-chests/the-sludge_region-chests_28.jpg",
+    "description": "Through the waterfall."
+  },
+  {
+    "debug": {
+      "name": "The Sludge",
+      "number": 29
+    },
+    "checklistId": 1697465175,
+    "checklistHash": 2503906440,
+    "screenshot": "/static/images/screenshots/region-chests/the-sludge_region-chests_29.jpg",
+    "description": "Inside the causeway's ceiling."
+  },
+  {
+    "debug": {
+      "name": "The Sludge",
+      "number": 30
+    },
+    "checklistId": 1697465175,
+    "checklistHash": 3609559330,
+    "screenshot": "/static/images/screenshots/region-chests/the-sludge_region-chests_30.jpg",
+    "description": "Through the rubbled brick wall."
   },
   {
     "checklistId": 1697465175,
@@ -2424,7 +2443,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1483671366,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-gulch_ghost-scans_54.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 54
@@ -2435,7 +2454,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2911741167,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-gulch_ghost-scans_55.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 55
@@ -2446,7 +2465,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2361862620,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-gulch_ghost-scans_56.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 56
@@ -2457,7 +2476,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1326408520,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sunken-isles_ghost-scans_57.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 57
@@ -2468,7 +2487,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3976055845,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sunken-isles_ghost-scans_58.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 58
@@ -2479,12 +2498,12 @@
     "checklistId": 2360931290,
     "checklistHash": 696550530,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sunken-isles_ghost-scans_59.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 59
     },
-    "description": false
+    "description": "Top rear corner of this garage."
   },
   {
     "checklistId": 2360931290,
@@ -2586,7 +2605,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3334635926,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-sludge_ghost-scans_69.jpg",
     "debug": {
       "name": "The Sludge",
       "number": 69
@@ -2597,7 +2616,7 @@
     "checklistId": 2360931290,
     "checklistHash": 532635327,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-sludge_ghost-scans_70.jpg",
     "debug": {
       "name": "The Sludge",
       "number": 70
@@ -2608,7 +2627,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1901808940,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-sludge_ghost-scans_71.jpg",
     "debug": {
       "name": "The Sludge",
       "number": 71
@@ -2619,18 +2638,18 @@
     "checklistId": 2360931290,
     "checklistHash": 2582598949,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-tunnels_ghost-scans_72.jpg",
     "debug": {
       "name": "The Tunnels",
       "number": 72
     },
-    "description": false
+    "description": "One of the minor rooms along the tunnels servers as an access way to an auxiliary area. Search the farthest corner."
   },
   {
     "checklistId": 2360931290,
     "checklistHash": 4227918920,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-tunnels_ghost-scans_73.jpg",
     "debug": {
       "name": "The Tunnels",
       "number": 73
@@ -4313,7 +4332,7 @@
     "checklistId": 3142056444,
     "checklistHash": 1505712119,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/sunken-isles_lost-sectors_skydock-iv.jpg",
     "debug": {
       "name": "Skydock IV",
       "number": 12
@@ -4324,7 +4343,7 @@
     "checklistId": 3142056444,
     "checklistHash": 245987256,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/sunken-isles_lost-sectors_the-quarry.jpg",
     "debug": {
       "name": "The Quarry",
       "number": 13
@@ -4365,7 +4384,7 @@
     "checklistId": 3142056444,
     "checklistHash": 874424041,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-sludge_lost-sectors_cavern-of-souls.jpg",
     "debug": {
       "name": "Cavern of Souls",
       "number": 17
@@ -4376,7 +4395,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3010602390,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-sludge_lost-sectors_hallowed-grove.jpg",
     "debug": {
       "name": "Hallowed Grove",
       "number": 18
@@ -4387,7 +4406,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2508300599,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-sludge_lost-sectors_shaft-13.jpg",
     "debug": {
       "name": "Shaft 13",
       "number": 19

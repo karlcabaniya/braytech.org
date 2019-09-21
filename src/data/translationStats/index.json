@@ -2,14 +2,7 @@
   "de": {
     "translated": 448,
     "notTranslated": 16,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "en": {
@@ -21,157 +14,73 @@
   "es-mx": {
     "translated": 0,
     "notTranslated": 464,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "es": {
     "translated": 426,
     "notTranslated": 38,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "fr": {
     "translated": 415,
     "notTranslated": 49,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "internal": {
     "translated": 0,
     "notTranslated": 464,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "it": {
     "translated": 423,
     "notTranslated": 41,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "ja": {
     "translated": 0,
     "notTranslated": 464,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "ko": {
     "translated": 354,
     "notTranslated": 110,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "pl": {
     "translated": 0,
     "notTranslated": 464,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "pt-br": {
-    "translated": 424,
-    "notTranslated": 40,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "translated": 464,
+    "notTranslated": 0,
+    "added": [],
     "removed": []
   },
   "ru": {
     "translated": 0,
     "notTranslated": 464,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "zh-chs": {
     "translated": 458,
     "notTranslated": 6,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
     "notTranslated": 464,
-    "added": [
-      "Completed",
-      "Hide completed",
-      "Location collections",
-      "Recommended Power",
-      "Time to complete",
-      "{{number}} minutes"
-    ],
+    "added": [],
     "removed": []
   }
 }
