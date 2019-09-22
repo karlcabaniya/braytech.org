@@ -14,24 +14,29 @@ class RecordsTracked extends React.Component {
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
     const profileRecordsTracked = member && member.data.profile.profileRecords.data.trackedRecordHash ? [member.data.profile.profileRecords.data.trackedRecordHash] : [];
-    const characterId = member.characterId;
 
-    let hashes = triumphs.tracked.concat(profileRecordsTracked);
+    const hashes = triumphs.tracked
+      .concat(profileRecordsTracked)
+      .reduce((array, hash) => {
+        if (array.indexOf(hash) === -1) {
+          array.push(hash);
+        }
+        return array;
+      }, [])
+      .filter(hash => {
 
-    hashes = hashes.filter(hash => {
+        let state;
+        if (profileRecords[hash]) {
+          state = profileRecords[hash] ? profileRecords[hash].state : 0;
+        } else if (characterRecords[member.characterId].records[hash]) {
+          state = characterRecords[member.characterId].records[hash] ? characterRecords[member.characterId].records[hash].state : 0;
+        } else {
+          state = 0;
+        }
 
-      let state;
-      if (profileRecords[hash]) {
-        state = profileRecords[hash] ? profileRecords[hash].state : 0;
-      } else if (characterRecords[characterId].records[hash]) {
-        state = characterRecords[characterId].records[hash] ? characterRecords[characterId].records[hash].state : 0;
-      } else {
-        state = 0;
-      }
+        return !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted
 
-      return !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted
-
-    });
+      });
 
     return (
       <>

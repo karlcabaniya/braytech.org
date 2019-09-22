@@ -668,5 +668,10 @@
     "date": "2019-09-22T06:53:12.394Z",
     "version": "2.9.3",
     "content": "- minor fixes"
+  },
+  {
+    "date": "2019-09-22T06:53:12.394Z",
+    "version": "2.9.4",
+    "content": "- did a thing to prevent duplicated tracked records when tracking the same tracked record in-game"
   }
 ]
