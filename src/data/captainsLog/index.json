@@ -658,5 +658,10 @@
     "date": "2019-09-21T18:12:07.657Z",
     "version": "2.9.1",
     "content": "- minor fixes\n- removed some more CB.NAVs"
+  },
+  {
+    "date": "2019-09-22T03:28:15.859Z",
+    "version": "2.9.2",
+    "content": "- minor fixes\n- added images for Titan nodes in _Maps_"
   }
 ]

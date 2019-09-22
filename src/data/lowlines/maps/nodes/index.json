@@ -878,7 +878,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305063,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/arboretum_ghost-stories_8.jpg",
     "debug": {
       "name": "Confession of Hope | Part One",
       "number": 8
@@ -888,7 +888,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305062,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/sirens-watch_ghost-stories_9.jpg",
     "debug": {
       "name": "The Watchful Eye",
       "number": 9
@@ -898,7 +898,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2104527484,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/ds-quarters-2_ghost-stories_10.jpg",
     "debug": {
       "name": "Into the Fray",
       "number": 10
@@ -1071,7 +1071,7 @@
     "checklistId": 1697465175,
     "checklistHash": 3577247371,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/region-chests/the-sludge_region-chests_30.jpg",
+    "screenshot": false,
     "debug": {
       "name": "The Rupture",
       "number": 3
@@ -1387,7 +1387,7 @@
     "checklistId": 1697465175,
     "checklistHash": 1956319555,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sirens-watch_region-chests_32.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 32
@@ -1398,7 +1398,7 @@
     "checklistId": 1697465175,
     "checklistHash": 1375559682,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sirens-watch_region-chests_33.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 33
@@ -1420,7 +1420,7 @@
     "checklistId": 1697465175,
     "checklistHash": 387879790,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-rig_region-chests_34.jpg",
     "debug": {
       "name": "The Rig",
       "number": 34
@@ -1431,7 +1431,7 @@
     "checklistId": 1697465175,
     "checklistHash": 92809392,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-rig_region-chests_35.jpg",
     "debug": {
       "name": "The Rig",
       "number": 35
@@ -2660,7 +2660,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2467921825,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/arboretum_ghost-scans_77.jpg",
     "debug": {
       "name": "Arboretum",
       "number": 77
@@ -2671,7 +2671,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2370332724,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/arboretum_ghost-scans_78.jpg",
     "debug": {
       "name": "Arboretum",
       "number": 78
@@ -2682,7 +2682,7 @@
     "checklistId": 2360931290,
     "checklistHash": 92886727,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/arboretum_ghost-scans_79.jpg",
     "debug": {
       "name": "Arboretum",
       "number": 79
@@ -2693,7 +2693,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2099860274,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/festering-halls_ghost-scans_80.jpg",
     "debug": {
       "name": "Festering Halls",
       "number": 80
@@ -2704,7 +2704,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1640698523,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/festering-halls_ghost-scans_81.jpg",
     "debug": {
       "name": "Festering Halls",
       "number": 81
@@ -2715,7 +2715,7 @@
     "checklistId": 2360931290,
     "checklistHash": 522654136,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/festering-halls_ghost-scans_82.jpg",
     "debug": {
       "name": "Festering Halls",
       "number": 82
@@ -2726,7 +2726,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3809028134,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/solarium_ghost-scans_83.jpg",
     "debug": {
       "name": "Solarium",
       "number": 83
@@ -2737,7 +2737,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3286134225,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_84.jpg",
     "debug": {
       "name": "The Rig",
       "number": 84
@@ -2748,7 +2748,7 @@
     "checklistId": 2360931290,
     "checklistHash": 504509156,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_85.jpg",
     "debug": {
       "name": "The Rig",
       "number": 85
@@ -2759,7 +2759,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2296400119,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_86.jpg",
     "debug": {
       "name": "The Rig",
       "number": 86
@@ -2770,7 +2770,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3594270226,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_87.jpg",
     "debug": {
       "name": "The Rig",
       "number": 87
@@ -2781,7 +2781,7 @@
     "checklistId": 2360931290,
     "checklistHash": 4090383285,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_88.jpg",
     "debug": {
       "name": "The Rig",
       "number": 88
@@ -2792,7 +2792,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2488492993,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/tidal-anchor_ghost-scans_89.jpg",
     "debug": {
       "name": "Tidal Anchor",
       "number": 89
@@ -2803,7 +2803,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3815223124,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/tidal-anchor_ghost-scans_90.jpg",
     "debug": {
       "name": "Tidal Anchor",
       "number": 90
@@ -2814,7 +2814,7 @@
     "checklistId": 2360931290,
     "checklistHash": 369549035,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sirens-watch_ghost-scans_91.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 91
@@ -2825,7 +2825,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2424480898,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sirens-watch_ghost-scans_92.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 92
@@ -2836,7 +2836,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1409018917,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sirens-watch_ghost-scans_93.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 93
@@ -2847,7 +2847,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3416198548,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sirens-watch_ghost-scans_94.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 94
@@ -2858,7 +2858,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3595366409,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sinking-docks_ghost-scans_95.jpg",
     "debug": {
       "name": "Sinking Docks",
       "number": 95
@@ -2869,7 +2869,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3296563836,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sinking-docks_ghost-scans_96.jpg",
     "debug": {
       "name": "Sinking Docks",
       "number": 96
@@ -2880,7 +2880,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2376738191,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sinking-docks_ghost-scans_97.jpg",
     "debug": {
       "name": "Sinking Docks",
       "number": 97
@@ -4417,7 +4417,7 @@
     "checklistId": 3142056444,
     "checklistHash": 1719798656,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/sirens-watch_lost-sectors_methane-flush.jpg",
     "debug": {
       "name": "Methane Flush",
       "number": 20
@@ -4428,7 +4428,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3267113018,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-rig_lost-sectors_ds-quarters-2.jpg",
     "debug": {
       "name": "DS Quarters-2",
       "number": 21
@@ -4439,7 +4439,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3359286509,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-rig_lost-sectors_cargo-bay-3.jpg",
     "debug": {
       "name": "Cargo Bay 3",
       "number": 22
@@ -4611,7 +4611,7 @@
   {
     "checklistId": 3305936921,
     "recordHash": 276019960,
-    "screenshot": "/static/images/screenshots/lore/scavengers-den_the-awoken-of-the-reef_17.jpg",
+    "screenshot": false,
     "debug": {
       "name": "Revanche II",
       "number": 1
@@ -4781,7 +4781,7 @@
   {
     "checklistId": 3305936921,
     "recordHash": 259242254,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/sinking-docks_the-awoken-of-the-reef_18.jpg",
     "debug": {
       "name": "Pilgrimage",
       "number": 18
