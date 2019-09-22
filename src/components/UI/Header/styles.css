@@ -684,6 +684,7 @@ html.backdropfilter #header .nav {
 
   #header.profile-header .ui {
     padding: 0 2rem;
+    grid-template-columns: 1fr;
   }
 
   #header.profile-header .profile {
