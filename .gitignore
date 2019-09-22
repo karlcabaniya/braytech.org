@@ -25,4 +25,3 @@ yarn-error.log*
 /temp
 /manifest
 /scripts/checklists/cache
-/public/static/images/extracts/maps/originals
