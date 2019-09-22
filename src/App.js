@@ -15,6 +15,7 @@ import 'moment/locale/ko';
 // import 'moment/locale/pl';
 import 'moment/locale/pt-br';
 // import 'moment/locale/ru';
+import 'moment/locale/zh-cn';
 
 import './Core.css';
 import './App.css';
@@ -121,6 +122,10 @@ class App extends React.Component {
         y: '1y',
         yy: '%dy'
       }
+    });
+
+    moment.defineLocale('zh-chs', {
+      parentLocale: 'zh-cn'
     });
 
     moment.locale(this.currentLanguage);
