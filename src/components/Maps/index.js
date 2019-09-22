@@ -26,23 +26,11 @@ class Maps extends React.Component {
   constructor(props) {
     super(props);
 
-    const destination = this.props.id || 'edz';
-
-    const map = maps[destination].map;
-
-    const centerYOffset = -(map.center && map.center.y) || 0;
-    const centerXOffset = (map.center && map.center.x) || 0;
-
-    const center = [map.height / 2 + centerYOffset, map.width / 2 + centerXOffset];
-
     this.state = {
       loading: true,
       error: false,
-      viewport: {
-        center,
-        zoom: 0
-      },
-      destination,
+      zoom: 0,
+      destination: this.props.id || 'edz',
       destinations: {
         tower: {
           loading: true,
@@ -167,7 +155,7 @@ class Maps extends React.Component {
     }
 
     if (pP.id !== id && this.mounted) {
-      //this.setMap(id || 'edz');
+      this.setState({ destination: id || 'edz' });
     }
 
     if ((pS.ui !== this.state.ui || pS.checklists !== this.state.checklists || pS.destinations !== this.state.destinations) && this.mounted) {
@@ -410,50 +398,16 @@ class Maps extends React.Component {
     }
   };
 
-  setMap = destination => {
-    const map = maps[destination].map;
-
-    const centerYOffset = -(map.center && map.center.y) || 0;
-    const centerXOffset = (map.center && map.center.x) || 0;
-
-    const center = [map.height / 2 + centerYOffset, map.width / 2 + centerXOffset];
-
-    this.setState(p => ({
-      ...p,
-      viewport: {
-        ...p.viewport,
-        center
-      },
-      destination
-    }));
-  }
-
   handler_map_viewportChanged = viewport => {
-    console.log(viewport)
-    this.setState(p => ({
-      ...p,
-      viewport
-    }));
+    this.setState({ zoom: viewport.zoom });
   };
 
   handler_zoomIncrease = e => {
-    this.setState(p => ({
-      ...p,
-      viewport: {
-        ...p.viewport,
-        zoom: p.viewport.zoom + 1
-      }
-    }));
+    this.setState(p => ({ zoom: p.zoom + 1 }));
   };
 
   handler_zoomDecrease = e => {
-    this.setState(p => ({
-      ...p,
-      viewport: {
-        ...p.viewport,
-        zoom: p.viewport.zoom - 1
-      }
-    }));
+    this.setState(p => ({ zoom: p.zoom - 1 }));
   };
 
   handler_toggleDestinationsList = e => {
@@ -616,6 +570,11 @@ class Maps extends React.Component {
 
       const bounds = [[0, 0], [map.height, map.width]];
 
+      const centerYOffset = -(map.center && map.center.y) || 0;
+      const centerXOffset = (map.center && map.center.x) || 0;
+
+      const center = [map.height / 2 + centerYOffset, map.width / 2 + centerXOffset];
+
       // console.log(mapXOffset, mapYOffset, bounds)
 
       return (
@@ -628,7 +587,7 @@ class Maps extends React.Component {
                   return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
                 })}
           </div>
-          <Map viewport={this.state.viewport} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_map_viewportChanged} onLayerAdd={this.handler_map_layerAdd} onMoveEnd={this.handler_map_moveEnd} onZoomEnd={this.handler_map_zoomEnd} onMouseDown={this.handler_map_mouseDown}>           
+          <Map center={center} zoom={this.state.zoom} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_map_viewportChanged} onLayerAdd={this.handler_map_layerAdd} onMoveEnd={this.handler_map_moveEnd} onZoomEnd={this.handler_map_zoomEnd} onMouseDown={this.handler_map_mouseDown}>           
             {this.state.destinations[destination] &&
               this.state.destinations[destination].layers
                 .filter(layer => layer.type !== 'background')
