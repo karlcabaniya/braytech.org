@@ -15,6 +15,7 @@ import 'moment/locale/ko';
 // import 'moment/locale/pl';
 import 'moment/locale/pt-br';
 // import 'moment/locale/ru';
+import 'moment/locale/zh-cn';
 
 import './Core.css';
 import './App.css';
@@ -24,10 +25,10 @@ import './utils/i18n';
 import dexie from './utils/dexie';
 import * as bungie from './utils/bungie';
 import * as voluspa from './utils/voluspa';
+import * as ls from './utils/localStorage';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import store from './utils/reduxStore';
 import manifest from './utils/manifest';
-import * as ls from './utils/localStorage';
 
 import Header from './components/UI/Header';
 import Tooltip from './components/Tooltip';
@@ -103,27 +104,39 @@ class App extends React.Component {
       payload: profile
     });
 
-    moment.defineLocale('en-sml', {
-      parentLocale: 'en',
-      relativeTime: {
-        future: 'in %s',
-        past: '%s ago',
-        s: 'now',
-        ss: '%ss',
-        m: '<1m',
-        mm: '%dm',
-        h: '1h',
-        hh: '%dh',
-        d: '1d',
-        dd: '%dd',
-        M: '1M',
-        MM: '%dM',
-        y: '1y',
-        yy: '%dy'
-      }
-    });
+    let momentLocale = this.currentLanguage;
+    if (this.currentLanguage === 'zh-chs') momentLocale = 'zh-cn';
+    if (this.currentLanguage === 'zh-cht') momentLocale = 'zh-tw';
 
-    moment.locale(this.currentLanguage);
+    moment.locale(momentLocale);
+
+    console.log(moment)
+
+    if (['zh-cn', 'zh-tw'].indexOf(momentLocale) > -1) {
+      moment.defineLocale('relative-sml', {
+        parentLocale: momentLocale
+      });
+    } else {
+      moment.defineLocale('relative-sml', {
+        parentLocale: 'en',
+        relativeTime: {
+          future: 'in %s',
+          past: '%s ago',
+          s: 'now',
+          ss: '%ss',
+          m: '<1m',
+          mm: '%dm',
+          h: '1h',
+          hh: '%dh',
+          d: '1d',
+          dd: '%dd',
+          M: '1M',
+          MM: '%dM',
+          y: '1y',
+          yy: '%dy'
+        }
+      });
+    }
   }
 
   updateViewport = () => {

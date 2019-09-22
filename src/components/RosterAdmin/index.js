@@ -513,16 +513,16 @@ class RosterAdmin extends React.Component {
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && lastActivityString })}>
                       {m.isOnline && lastActivityString ? (
                         <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash} data-mode={lastActivity.currentActivityModeHash} data-playlist={lastActivity.currentPlaylistActivityHash}>
-                          <div>{lastActivityString}<span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span></div>
+                          <div>{lastActivityString}<span>{moment(lastPlayed).locale('relative-sml').fromNow(true)}</span></div>
                         </div>
                       ) : (
-                        <div>{moment(lastPlayed).locale('en-sml').fromNow()}</div>
+                        <div>{moment(lastPlayed).locale('relative-sml').fromNow()}</div>
                       )}
                     </li>
                     <li className='col joinDate'>
                       {!m.pending
                         ? moment(m.joinDate)
-                            .locale('en-sml')
+                            .locale('relative-sml')
                             .fromNow()
                         : null}
                     </li>
