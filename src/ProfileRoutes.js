@@ -23,6 +23,7 @@ import PostmasterCapacity from './components/Notifications/PostmasterCapacity';
 class ProfileRoutes extends React.Component {
   componentDidMount() {
     const { membershipId, membershipType, characterId } = this.props.match.params;
+    
     store.dispatch({
       type: 'MEMBER_SET_BY_PROFILE_ROUTE',
       payload: { membershipType, membershipId, characterId }
