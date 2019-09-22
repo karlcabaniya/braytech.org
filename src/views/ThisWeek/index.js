@@ -562,7 +562,7 @@ class ThisWeek extends React.Component {
       },
       raids: {
         cos: {
-          name: manifest.DestinyMilestoneDefinition[2590427074].displayProperties.name,
+          name: manifest.DestinyCollectibleDefinition[193320249].displayProperties.name,
           description: manifest.DestinyActivityDefinition[960175301].displayProperties.description,
           challenge: manifest.DestinyVendorDefinition[3347378076].itemList
             .map(item => {
