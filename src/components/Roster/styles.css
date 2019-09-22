@@ -192,6 +192,7 @@
   width: max-content;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
 }
 
 .list.roster .row:not(.header) > ul .col.lastActivity > div span {

@@ -127,7 +127,7 @@ class Root extends React.Component {
       // // MOMENTS OF TRIUMPH: MMXIX does not have the above ^
       if (definitionSeal.hash === 1002334440) {
         nodeProgress = states.filter(s => !enumerateRecordState(s.state).objectiveNotCompleted && enumerateRecordState(s.state).recordRedeemed).length;
-        nodeTotal = states.length;
+        nodeTotal = 23;
       }
 
       let isComplete = nodeTotal && nodeProgress === nodeTotal ? true : false;

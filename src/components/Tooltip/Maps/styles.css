@@ -32,6 +32,12 @@
   background-color: hsla(var(--commonDark), 0.9);
 }
 
+#tooltip .frame.map .in-lost-sector {
+  padding: 12px 16px;
+  font-size: 14px;
+  background-color: hsla(47, 90%, 83%, 0.4);
+}
+
 #tooltip .frame.map .completed {
   padding: 12px 16px;
   font-size: 14px;
@@ -52,9 +58,6 @@
 
 #tooltip .frame.map .description .destination {
   padding: 0;
-  font-size: 16px;
-  line-height: 1.4;
-  color: #f5eac4;
 }
 
 #tooltip .frame.map .description pre {

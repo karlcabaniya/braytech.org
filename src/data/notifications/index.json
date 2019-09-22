@@ -88,5 +88,16 @@
       "description": "Yo. _This Week_, I'd like to play the blame game: _Bungie_ broke some stuff. Nightfalls are noticeably missing from the _This Week_ view, probably due to the way in which they implemented fixed Nightfalls for our first Destiny 2 community challenge.\n\nRead more about this challenge in last week's Bungie.net blog post.\n\nAs a result of this sudden and very unexpected change, production Braytech is currently running the latest changes. This means it's not as tested as I'd prefer.\n\nCheck behind collectibles and records for any shadow thrall.",
       "prompt": true
     }
+  },
+  {
+    "id": "c1buc6f9snby8ix56ickvb",
+    "date": "2019-09-21T12:25:42.368Z",
+    "expiry": 604800000,
+    "showOnce": true,
+    "displayProperties": {
+      "name": "Hello gamers",
+      "description": "Nightfalls, daily heroic adventure, and daily heroic story missions, are still missing from _Now_, and _This Week_. Bungie are investigating a fix and [if possible] it will be come with Shadowkeep's API deployment.\n\nWelcome to version 2.9.0: Maps.\n\nOver the past week I've been experimenting with maps, based on lowlidev's work. It's all still new and I'm actively working to fill out its data.\n\nThere's a bunch of other little cool bits too.\n\nLove, justrealmilk x0x0",
+      "prompt": true
+    }
   }
 ]

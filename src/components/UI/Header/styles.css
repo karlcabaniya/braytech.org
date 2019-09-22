@@ -86,7 +86,6 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   margin: 0;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
 }
 
 #header .views {
@@ -167,6 +166,10 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   max-width: 1920px;
   padding: 0 3rem;
   margin: 0 auto;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: minmax(384px, 512px) max-content;
+  grid-gap: 2rem;
 }
 
 #header.profile-header .profile {
@@ -216,7 +219,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
 
 #header.profile-header .background .image {
   background-size: cover;
-  background-position: -53px bottom;
+  background-position: -52px bottom;
 }
 
 @media screen and (min-width: 1921px) {
@@ -252,7 +255,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
 #header.profile-header .characters {
   position: relative;
   margin: 38px 0 0;
-  width: 512px;
+  width: 100%;
   z-index: 10;
 }
 

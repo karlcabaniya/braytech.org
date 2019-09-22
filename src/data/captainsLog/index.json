@@ -648,5 +648,25 @@
     "date": "2019-09-05T07:33:24.063Z",
     "version": "2.8.18",
     "content": "- minor fixes\n- _Clan Stats_ view v1"
+  },
+  {
+    "date": "2019-09-21T12:25:42.368Z",
+    "version": "2.9.0",
+    "content": "- fixes\n- _Maps_ view\n- _Collections_ badges are now linked to from _Triumphs_ seals, where appropriate\n- more changes, so many that I can't recall"
+  },
+  {
+    "date": "2019-09-21T18:12:07.657Z",
+    "version": "2.9.1",
+    "content": "- minor fixes\n- removed some more CB.NAVs"
+  },
+  {
+    "date": "2019-09-22T03:28:15.859Z",
+    "version": "2.9.2",
+    "content": "- minor fixes\n- added images for Titan nodes in _Maps_"
+  },
+  {
+    "date": "2019-09-22T06:53:12.394Z",
+    "version": "2.9.3",
+    "content": "- minor fixes"
   }
 ]

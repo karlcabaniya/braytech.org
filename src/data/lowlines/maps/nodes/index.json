@@ -442,7 +442,7 @@
   {
     "checklistId": 655926402,
     "recordHash": 3448739524,
-    "screenshot": "/static/images/screenshots/lore/the-drain_the-forsaken-prince_10.jpg",
+    "screenshot": false,
     "debug": {
       "name": "The Length of a Chain | Part I",
       "number": 1
@@ -542,17 +542,17 @@
   {
     "checklistId": 655926402,
     "recordHash": 3431961939,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/flooded-chasm_the-forsaken-prince_11.jpg",
     "debug": {
       "name": "After the Fall",
       "number": 11
     },
-    "description": false
+    "description": "A hard cache to find, this enigma is hidden at the end of a cave which has a small opening along the wall not far from the lost sector's chest. If you're having difficulting locating its orifice, increase your brightness in settings."
   },
   {
     "checklistId": 655926402,
     "recordHash": 3431961936,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/excavation-site-xii_the-forsaken-prince_12.jpg",
     "debug": {
       "name": "Kings",
       "number": 12
@@ -848,12 +848,12 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305066,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/shaft-13_ghost-stories_5.jpg",
     "debug": {
       "name": "Don't Call Me Ghost",
       "number": 5
     },
-    "description": false
+    "description": "In one of the corners of the uppermost floor of this construction is a barely open cupboard along the wall. Look inside."
   },
   {
     "checklistId": 1420597821,
@@ -868,17 +868,17 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305064,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/the-quarry_ghost-stories_7.jpg",
     "debug": {
       "name": "No Rez for the Weary",
       "number": 7
     },
-    "description": false
+    "description": "Right before the lost sector's primary space, on your left."
   },
   {
     "checklistId": 1420597821,
     "recordHash": 2121305063,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/arboretum_ghost-stories_8.jpg",
     "debug": {
       "name": "Confession of Hope | Part One",
       "number": 8
@@ -888,7 +888,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305062,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/sirens-watch_ghost-stories_9.jpg",
     "debug": {
       "name": "The Watchful Eye",
       "number": 9
@@ -898,7 +898,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2104527484,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/ds-quarters-2_ghost-stories_10.jpg",
     "debug": {
       "name": "Into the Fray",
       "number": 10
@@ -1049,7 +1049,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2754290383,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/region-chests/outskirts_region-chests_10.jpg",
+    "screenshot": false,
     "debug": {
       "name": "The Rupture",
       "number": 1
@@ -1181,7 +1181,7 @@
     "checklistId": 1697465175,
     "checklistHash": 3557288846,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/winding-cove_region-chests_13.jpg",
     "debug": {
       "name": "Winding Cove",
       "number": 13
@@ -1192,12 +1192,12 @@
     "checklistId": 1697465175,
     "checklistHash": 3658842337,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/winding-cove_region-chests_14.jpg",
     "debug": {
       "name": "Winding Cove",
       "number": 14
     },
-    "description": false
+    "description": "Up on the cliff, overlooking Winding Cove, near where Xûr sometimes appears."
   },
   {
     "checklistId": 1697465175,
@@ -1214,7 +1214,7 @@
     "checklistId": 1697465175,
     "checklistHash": 72017611,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/firebase-hades_region-chests_16.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 16
@@ -1225,7 +1225,7 @@
     "checklistId": 1697465175,
     "checklistHash": 3212130160,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/firebase-hades_region-chests_17.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 17
@@ -1247,7 +1247,7 @@
     "checklistId": 1697465175,
     "checklistHash": 113362963,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-gulch_region-chests_19.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 19
@@ -1258,7 +1258,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2355206132,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-gulch_region-chests_20.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 20
@@ -1269,7 +1269,7 @@
     "checklistId": 1697465175,
     "checklistHash": 28658981,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-gulch_region-chests_21.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 21
@@ -1291,23 +1291,23 @@
     "checklistId": 1697465175,
     "checklistHash": 576743835,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sunken-isles_region-chests_23.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 23
     },
-    "description": false
+    "description": "Up in the very top left corner, on the rocks."
   },
   {
     "checklistId": 1697465175,
     "checklistHash": 3307732497,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sunken-isles_region-chests_24.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 24
     },
-    "description": false
+    "description": "Left of the lost sector's entrance, poorly lit, behind some crates."
   },
   {
     "checklistId": 1697465175,
@@ -1345,13 +1345,32 @@
   {
     "debug": {
       "name": "The Sludge",
-      "number": 30
+      "number": 28
     },
     "checklistId": 1697465175,
     "checklistHash": 589814471,
-    "recordHash": 3541301354,
-    "screenshot": false,
-    "description": false
+    "screenshot": "/static/images/screenshots/region-chests/the-sludge_region-chests_28.jpg",
+    "description": "Through the waterfall."
+  },
+  {
+    "debug": {
+      "name": "The Sludge",
+      "number": 29
+    },
+    "checklistId": 1697465175,
+    "checklistHash": 2503906440,
+    "screenshot": "/static/images/screenshots/region-chests/the-sludge_region-chests_29.jpg",
+    "description": "Inside the causeway's ceiling."
+  },
+  {
+    "debug": {
+      "name": "The Sludge",
+      "number": 30
+    },
+    "checklistId": 1697465175,
+    "checklistHash": 3609559330,
+    "screenshot": "/static/images/screenshots/region-chests/the-sludge_region-chests_30.jpg",
+    "description": "Through the rubbled brick wall."
   },
   {
     "checklistId": 1697465175,
@@ -1368,7 +1387,7 @@
     "checklistId": 1697465175,
     "checklistHash": 1956319555,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sirens-watch_region-chests_32.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 32
@@ -1379,7 +1398,7 @@
     "checklistId": 1697465175,
     "checklistHash": 1375559682,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sirens-watch_region-chests_33.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 33
@@ -1401,7 +1420,7 @@
     "checklistId": 1697465175,
     "checklistHash": 387879790,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-rig_region-chests_34.jpg",
     "debug": {
       "name": "The Rig",
       "number": 34
@@ -1412,7 +1431,7 @@
     "checklistId": 1697465175,
     "checklistHash": 92809392,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-rig_region-chests_35.jpg",
     "debug": {
       "name": "The Rig",
       "number": 35
@@ -2314,18 +2333,18 @@
     "checklistId": 2360931290,
     "checklistHash": 3222380274,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_44.jpg",
     "debug": {
       "name": "Legion's Anchor",
       "number": 44
     },
-    "description": false
+    "description": "To the right, just off of the strike's beat and path, under a ramp."
   },
   {
     "checklistId": 2360931290,
     "checklistHash": 1284663771,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/winding-cove_ghost-scans_45.jpg",
     "debug": {
       "name": "Winding Cove",
       "number": 45
@@ -2336,7 +2355,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1001598066,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/winding-cove_ghost-scans_46.jpg",
     "debug": {
       "name": "Winding Cove",
       "number": 46
@@ -2347,18 +2366,18 @@
     "checklistId": 2360931290,
     "checklistHash": 1427361604,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_47.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 47
     },
-    "description": false
+    "description": "On the ceiling of a platform that extends above some large ammunition."
   },
   {
     "checklistId": 2360931290,
     "checklistHash": 3446252721,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_48.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 48
@@ -2369,7 +2388,7 @@
     "checklistId": 2360931290,
     "checklistHash": 97567758,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_49.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 49
@@ -2380,7 +2399,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2209645019,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/firebase-hades_ghost-scans_50.jpg",
     "debug": {
       "name": "Firebase Hades",
       "number": 50
@@ -2424,7 +2443,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1483671366,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-gulch_ghost-scans_54.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 54
@@ -2435,7 +2454,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2911741167,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-gulch_ghost-scans_55.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 55
@@ -2446,7 +2465,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2361862620,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-gulch_ghost-scans_56.jpg",
     "debug": {
       "name": "The Gulch",
       "number": 56
@@ -2457,7 +2476,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1326408520,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sunken-isles_ghost-scans_57.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 57
@@ -2468,7 +2487,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3976055845,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sunken-isles_ghost-scans_58.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 58
@@ -2479,12 +2498,12 @@
     "checklistId": 2360931290,
     "checklistHash": 696550530,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sunken-isles_ghost-scans_59.jpg",
     "debug": {
       "name": "Sunken Isles",
       "number": 59
     },
-    "description": false
+    "description": "Top rear corner of this garage."
   },
   {
     "checklistId": 2360931290,
@@ -2586,7 +2605,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3334635926,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-sludge_ghost-scans_69.jpg",
     "debug": {
       "name": "The Sludge",
       "number": 69
@@ -2597,7 +2616,7 @@
     "checklistId": 2360931290,
     "checklistHash": 532635327,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-sludge_ghost-scans_70.jpg",
     "debug": {
       "name": "The Sludge",
       "number": 70
@@ -2608,7 +2627,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1901808940,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-sludge_ghost-scans_71.jpg",
     "debug": {
       "name": "The Sludge",
       "number": 71
@@ -2619,18 +2638,18 @@
     "checklistId": 2360931290,
     "checklistHash": 2582598949,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-tunnels_ghost-scans_72.jpg",
     "debug": {
       "name": "The Tunnels",
       "number": 72
     },
-    "description": false
+    "description": "One of the minor rooms along the tunnels servers as an access way to an auxiliary area. Search the farthest corner."
   },
   {
     "checklistId": 2360931290,
     "checklistHash": 4227918920,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-tunnels_ghost-scans_73.jpg",
     "debug": {
       "name": "The Tunnels",
       "number": 73
@@ -2641,7 +2660,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2467921825,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/arboretum_ghost-scans_77.jpg",
     "debug": {
       "name": "Arboretum",
       "number": 77
@@ -2652,7 +2671,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2370332724,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/arboretum_ghost-scans_78.jpg",
     "debug": {
       "name": "Arboretum",
       "number": 78
@@ -2663,7 +2682,7 @@
     "checklistId": 2360931290,
     "checklistHash": 92886727,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/arboretum_ghost-scans_79.jpg",
     "debug": {
       "name": "Arboretum",
       "number": 79
@@ -2674,7 +2693,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2099860274,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/festering-halls_ghost-scans_80.jpg",
     "debug": {
       "name": "Festering Halls",
       "number": 80
@@ -2685,7 +2704,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1640698523,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/festering-halls_ghost-scans_81.jpg",
     "debug": {
       "name": "Festering Halls",
       "number": 81
@@ -2696,7 +2715,7 @@
     "checklistId": 2360931290,
     "checklistHash": 522654136,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/festering-halls_ghost-scans_82.jpg",
     "debug": {
       "name": "Festering Halls",
       "number": 82
@@ -2707,7 +2726,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3809028134,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/solarium_ghost-scans_83.jpg",
     "debug": {
       "name": "Solarium",
       "number": 83
@@ -2718,7 +2737,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3286134225,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_84.jpg",
     "debug": {
       "name": "The Rig",
       "number": 84
@@ -2729,7 +2748,7 @@
     "checklistId": 2360931290,
     "checklistHash": 504509156,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_85.jpg",
     "debug": {
       "name": "The Rig",
       "number": 85
@@ -2740,7 +2759,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2296400119,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_86.jpg",
     "debug": {
       "name": "The Rig",
       "number": 86
@@ -2751,7 +2770,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3594270226,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_87.jpg",
     "debug": {
       "name": "The Rig",
       "number": 87
@@ -2762,7 +2781,7 @@
     "checklistId": 2360931290,
     "checklistHash": 4090383285,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-rig_ghost-scans_88.jpg",
     "debug": {
       "name": "The Rig",
       "number": 88
@@ -2773,7 +2792,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2488492993,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/tidal-anchor_ghost-scans_89.jpg",
     "debug": {
       "name": "Tidal Anchor",
       "number": 89
@@ -2784,7 +2803,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3815223124,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/tidal-anchor_ghost-scans_90.jpg",
     "debug": {
       "name": "Tidal Anchor",
       "number": 90
@@ -2795,7 +2814,7 @@
     "checklistId": 2360931290,
     "checklistHash": 369549035,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sirens-watch_ghost-scans_91.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 91
@@ -2806,7 +2825,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2424480898,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sirens-watch_ghost-scans_92.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 92
@@ -2817,7 +2836,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1409018917,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sirens-watch_ghost-scans_93.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 93
@@ -2828,7 +2847,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3416198548,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sirens-watch_ghost-scans_94.jpg",
     "debug": {
       "name": "Siren's Watch",
       "number": 94
@@ -2839,7 +2858,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3595366409,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sinking-docks_ghost-scans_95.jpg",
     "debug": {
       "name": "Sinking Docks",
       "number": 95
@@ -2850,7 +2869,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3296563836,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sinking-docks_ghost-scans_96.jpg",
     "debug": {
       "name": "Sinking Docks",
       "number": 96
@@ -2861,7 +2880,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2376738191,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/sinking-docks_ghost-scans_97.jpg",
     "debug": {
       "name": "Sinking Docks",
       "number": 97
@@ -4258,18 +4277,18 @@
     "checklistId": 3142056444,
     "checklistHash": 815928620,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/winding-cove_lost-sectors_the-weep.jpg",
     "debug": {
       "name": "The Weep",
       "number": 7
     },
-    "description": false
+    "description": "The entrance to this lost sector is found firstly through the ceiling of this tiny volcano, secondly keep left and, ..."
   },
   {
     "checklistId": 3142056444,
     "checklistHash": 4091723403,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/firebase-hades_lost-sectors_the-pit.jpg",
     "debug": {
       "name": "The Pit",
       "number": 8
@@ -4280,7 +4299,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2554253964,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/firebase-hades_lost-sectors_pathfinders-crash.jpg",
     "debug": {
       "name": "Pathfinder's Crash",
       "number": 9
@@ -4291,7 +4310,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3850160541,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/firebase-hades_lost-sectors_excavation-site-xii.jpg",
     "debug": {
       "name": "Excavation Site XII",
       "number": 10
@@ -4302,7 +4321,7 @@
     "checklistId": 3142056444,
     "checklistHash": 1850051473,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/winding-cove_lost-sectors_flooded-chasm.jpg",
     "debug": {
       "name": "Flooded Chasm",
       "number": 11
@@ -4313,7 +4332,7 @@
     "checklistId": 3142056444,
     "checklistHash": 1505712119,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/sunken-isles_lost-sectors_skydock-iv.jpg",
     "debug": {
       "name": "Skydock IV",
       "number": 12
@@ -4324,7 +4343,7 @@
     "checklistId": 3142056444,
     "checklistHash": 245987256,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/sunken-isles_lost-sectors_the-quarry.jpg",
     "debug": {
       "name": "The Quarry",
       "number": 13
@@ -4365,7 +4384,7 @@
     "checklistId": 3142056444,
     "checklistHash": 874424041,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-sludge_lost-sectors_cavern-of-souls.jpg",
     "debug": {
       "name": "Cavern of Souls",
       "number": 17
@@ -4376,7 +4395,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3010602390,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-sludge_lost-sectors_hallowed-grove.jpg",
     "debug": {
       "name": "Hallowed Grove",
       "number": 18
@@ -4387,7 +4406,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2508300599,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-sludge_lost-sectors_shaft-13.jpg",
     "debug": {
       "name": "Shaft 13",
       "number": 19
@@ -4398,7 +4417,7 @@
     "checklistId": 3142056444,
     "checklistHash": 1719798656,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/sirens-watch_lost-sectors_methane-flush.jpg",
     "debug": {
       "name": "Methane Flush",
       "number": 20
@@ -4409,7 +4428,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3267113018,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-rig_lost-sectors_ds-quarters-2.jpg",
     "debug": {
       "name": "DS Quarters-2",
       "number": 21
@@ -4420,7 +4439,7 @@
     "checklistId": 3142056444,
     "checklistHash": 3359286509,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-rig_lost-sectors_cargo-bay-3.jpg",
     "debug": {
       "name": "Cargo Bay 3",
       "number": 22
@@ -4592,7 +4611,7 @@
   {
     "checklistId": 3305936921,
     "recordHash": 276019960,
-    "screenshot": "/static/images/screenshots/lore/scavengers-den_the-awoken-of-the-reef_17.jpg",
+    "screenshot": false,
     "debug": {
       "name": "Revanche II",
       "number": 1
@@ -4762,7 +4781,7 @@
   {
     "checklistId": 3305936921,
     "recordHash": 259242254,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/sinking-docks_the-awoken-of-the-reef_18.jpg",
     "debug": {
       "name": "Pilgrimage",
       "number": 18
@@ -5325,5 +5344,15 @@
     "vendorHash": 396892126,
     "bubbleHash": 3091570009,
     "screenshot": "/static/images/screenshots/vendors/vendors_devrim-kay-2.jpg"
+  },
+  {
+    "vendorHash": 1576276905,
+    "bubbleHash": 4205285323,
+    "screenshot": "/static/images/screenshots/vendors/vendors_failsafe-2.jpg"
+  },
+  {
+    "vendorHash": 1062861569,
+    "bubbleHash": 4035573696,
+    "screenshot": "/static/images/screenshots/vendors/vendors_sloane-2.jpg"
   }
 ]

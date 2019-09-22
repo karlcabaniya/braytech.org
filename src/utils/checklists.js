@@ -226,7 +226,11 @@ export const checklists = {
       checklistId: 365218222,
       items: checklistItems(365218222),
       sortBy: ['name', 'destination', 'bubble'],
-      itemName: i => manifest.DestinyInventoryItemDefinition[i.itemHash].displayProperties.description.replace('CB.NAV/RUN.()', ''),
+      itemName: i => ['CB.NAV/RUN.()', 'CB.NAV/EXÉC.()', 'CB.NAV/EJECUTAR.()', 'CB.NAV/ESEGUI.()', 'КБ.НАВ/ЗАПУСК().']
+        .reduce(
+          (a, v) => a.replace(v, ''),
+          manifest.DestinyInventoryItemDefinition[i.itemHash].displayProperties.description
+        ),
       itemLocation: i => {
         const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
         const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);

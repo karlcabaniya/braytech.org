@@ -19,7 +19,7 @@ _The source code of braytech.org_
 
 1.  Create a pull request
 
-2.  Find screenshots at [/public/static/images/screenshots/original](https://github.com/justrealmilk/braytech.org/tree/master/public/static/images/screenshots/original)
+2.  Find screenshots at [/screenshots/](https://github.com/justrealmilk/braytech.org/tree/master/screenshots/)
 
 3.  Submit your screenshots with matching file name patterns to these folders
     *  No HUD

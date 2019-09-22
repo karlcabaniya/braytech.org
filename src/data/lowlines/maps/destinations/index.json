@@ -2724,7 +2724,7 @@
     },
     "map": {
       "width": 3200,
-      "height": 2400,
+      "height": 3200,
       "center": {
         "x": 200,
         "y": 400
@@ -2756,8 +2756,33 @@
           "y": -648,
           "width": 2710,
           "height": 2377,
-          "image": "/static/images/extracts/maps/map_edz.png",
-          "opacity": 0.6
+          "nodes": [
+            {
+              "id": "main",
+              "width": 2710,
+              "height": 2377,
+              "image": "/static/images/extracts/maps/map_edz.png",
+              "opacity": 0.6
+            },
+            {
+              "id": "volundr",
+              "x": -431,
+              "y": 671,
+              "width": 243,
+              "height": 403,
+              "image": "/static/images/extracts/maps/map_edz-volundr.png",
+              "opacity": 0.6
+            },
+            {
+              "id": "bergusia",
+              "x": -55,
+              "y": -1110,
+              "width": 581,
+              "height": 410,
+              "image": "/static/images/extracts/maps/map_edz-bergusia.png",
+              "opacity": 0.6
+            }
+          ]
         }
       ],
       "bubbles": [
@@ -2780,8 +2805,8 @@
             {
               "type": "vendor",
               "vendorHash": 396892126,
-              "x": 403.6,
-              "y": -401.45
+              "x": 406,
+              "y": -402
             }
           ]
         },
@@ -2942,6 +2967,25 @@
           ]
         },
         {
+          "hash": 3796420578,
+          "name": "Niobe Labs",
+          "id": "niobe-labs",
+          "type": "suburb",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 22,
+              "y": -1103
+            },
+            {
+              "type": "forge",
+              "x": -10,
+              "y": -1193,
+              "activityHash": 1434072700
+            }
+          ]
+        },
+        {
           "hash": 4206151375,
           "name": "Legion's Anchor",
           "id": "legions-anchor",
@@ -3008,7 +3052,26 @@
             {
               "type": "title",
               "x": -375,
-              "y": 513
+              "y": 505
+            }
+          ]
+        },
+        {
+          "hash": 1663138818,
+          "name": "Smidur's Cavern",
+          "id": "smidurs-cavern",
+          "type": "suburb",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -310,
+              "y": 600
+            },
+            {
+              "type": "forge",
+              "x": -465,
+              "y": 595,
+              "activityHash": 1506080581
             }
           ]
         },

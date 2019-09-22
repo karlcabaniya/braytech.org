@@ -38,11 +38,9 @@ class Checklist extends React.Component {
           <span className='path5' />
           <span className='path6' />
         </span>
-      )
+      );
     } else {
-      checklist.checklistIcon = (
-        <span className={cx(checklist.checklistIcon)} />
-      )
+      checklist.checklistIcon = <span className={cx(checklist.checklistIcon)} />;
     }
 
     const extras = nodes && nodes.find(d => d.checklistHash === checklistItem.checklistHash);
@@ -54,11 +52,12 @@ class Checklist extends React.Component {
         <div className='acrylic' />
         <div className={cx('frame', 'map', 'checklist')}>
           <div className='header'>
-            <div className='icon'>
-              {checklist.checklistIcon}
-            </div>
+            <div className='icon'>{checklist.checklistIcon}</div>
             <div className='text'>
-              <div className='name'>{checklistItem.formatted.name}{checklistItem.formatted.suffix ? ` ${checklistItem.formatted.suffix}` : null}</div>
+              <div className='name'>
+                {checklistItem.formatted.name}
+                {checklistItem.formatted.suffix ? ` ${checklistItem.formatted.suffix}` : null}
+              </div>
               <div>
                 <div className='kind'>{t(checklist.checklistItemName)}</div>
               </div>
@@ -70,18 +69,20 @@ class Checklist extends React.Component {
                 <ObservedImage className='image' src={screenshot} />
               </div>
             ) : null}
+            {checklistItem.extended.lostSector ? (
+              <div className='in-lost-sector'>
+                {t('Located inside lost sector')} {}
+              </div>
+            ) : null}
             <div className='description'>
               <div className='destination'>{checklistItem.formatted.locationExt}</div>
               {description ? <pre>{description}</pre> : null}
             </div>
-            {checklistItem.completed ? (
-              <div className='completed'>{t('Completed')}</div>
-            ) : null}
+            {checklistItem.completed ? <div className='completed'>{t('Completed')}</div> : null}
           </div>
         </div>
       </>
     );
-    
   }
 }
 
@@ -101,7 +102,7 @@ class Record extends React.Component {
 
     const definitionRecord = manifest.DestinyRecordDefinition[checklistItem.recordHash];
     const definitionParentNode = definitionRecord && manifest.DestinyPresentationNodeDefinition[definitionRecord.presentationInfo.parentPresentationNodeHashes[0]];
-    
+
     const extras = nodes && nodes.find(d => d.recordHash === checklistItem.recordHash);
     const screenshot = extras && extras.screenshot;
     const description = extras && extras.description;
@@ -122,7 +123,10 @@ class Record extends React.Component {
               </span>
             </div>
             <div className='text'>
-              <div className='name'>{checklistItem.formatted.name}{checklistItem.formatted.suffix ? ` ${checklistItem.formatted.suffix}` : null}</div>
+              <div className='name'>
+                {checklistItem.formatted.name}
+                {checklistItem.formatted.suffix ? ` ${checklistItem.formatted.suffix}` : null}
+              </div>
               <div>
                 <div className='kind'>{t('Record')}</div>
               </div>
@@ -145,18 +149,20 @@ class Record extends React.Component {
                 <ObservedImage className='image' src={screenshot} />
               </div>
             ) : null}
+            {checklistItem.extended.lostSector ? (
+              <div className='in-lost-sector'>
+                {t('Located inside lost sector')} {}
+              </div>
+            ) : null}
             <div className='description'>
               <div className='destination'>{checklistItem.formatted.locationExt}</div>
               {description ? <pre>{description}</pre> : null}
             </div>
-            {checklistItem.completed ? (
-              <div className='completed'>{t('Completed')}</div>
-            ) : null}
+            {checklistItem.completed ? <div className='completed'>{t('Completed')}</div> : null}
           </div>
         </div>
       </>
     );
-    
   }
 }
 

@@ -5,21 +5,11 @@
   width: 100%;
 }
 
-#checklists > .padder,
-#checklists > .module.head {
+#checklists > .padder {
   width: 100%;
-  padding: 3rem;
+  padding: 4rem 3rem 3rem;
   display: grid;
   grid-gap: 3rem;
-}
-
-#checklists > .module.head {
-  padding: 4rem 3rem 3rem;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-#checklists .module .page-header {
-  margin-bottom: 0;
 }
 
 #checklists .module .module-header {
@@ -46,7 +36,6 @@
   opacity: 0.2;
 }
 
-#checklists .module .page-header .sub-title,
 #checklists .module .module-header .sub-title {
   margin: 0 0 3px;
   font-size: 18px;
@@ -97,76 +86,6 @@
   grid-template-columns: repeat(1, 1fr);
 }
 
-#checklists > .module.head .content:first-child {
-  grid-column: 1/6;
-}
-
-#checklists > .module.head .content.source {
-  grid-column: 6/8;
-  position: relative;
-  padding: 0 0 0 2rem;
-}
-
-#checklists > .module.head.cols-5 .content:first-child {
-  grid-column: 1/5;
-}
-
-#checklists > .module.head.cols-5 .content.source {
-  grid-column: 5/7;
-}
-
-#checklists > .module.head.cols-4 .content:first-child {
-  grid-column: 1/4;
-}
-
-#checklists > .module.head.cols-4 .content.source {
-  grid-column: 4/6;
-}
-
-#checklists > .module.head.cols-3 .content:first-child {
-  grid-column: 1/3;
-}
-
-#checklists > .module.head.cols-3 .content.source {
-  grid-column: 3/5;
-}
-
-#checklists > .module.head.cols-2 .content:first-child {
-  grid-column: 1/3;
-}
-
-#checklists > .module.head.cols-2 .content.source {
-  grid-column: 3/4;
-}
-
-#checklists > .module.head.cols-1 .content:first-child {
-  grid-column: 1/3;
-}
-
-#checklists > .module.head.cols-1 .content.source {
-  grid-column: 1/3;
-  grid-row: 2/4;
-}
-
-#checklists > .module.head .content.source::before {
-  content: ' ';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background-color: #fff;
-  opacity: 0.2;
-}
-
-#checklists > .module.head .content.source p {
-  font-size: 14px;
-}
-
-#checklists > .module.head .content.source p:first-child {
-  font-size: 16px;
-}
-
 #checklists .module.views .list {
   position: sticky;
   top: 3rem;
@@ -181,6 +100,7 @@
   height: 40px;  
   justify-content: center;
   font-size: 24px;
+  cursor: pointer;
 }
 
 #checklists .module.views .list li .image {
@@ -249,7 +169,7 @@
   }
   
   #checklists > .padder {
-    padding: 2rem;
+    padding: 3rem 2rem 2rem;
     grid-gap: 2rem;
   }
 

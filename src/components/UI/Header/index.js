@@ -90,6 +90,8 @@ class Header extends React.Component {
   render() {
     const { t, route, viewport, member } = this.props;
 
+    const isProfileRoute = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)/);
+
     const views = [
       {
         name: t('Clan'),
@@ -142,7 +144,7 @@ class Header extends React.Component {
         slug: '/maps',
         exact: false,
         profile: false,
-        inline: viewport.width >= 1300,
+        inline: !isProfileRoute || viewport.width >= 1400,
         group: 0
       },
       {
@@ -151,7 +153,7 @@ class Header extends React.Component {
         slug: '/reports',
         exact: false,
         profile: true,
-        inline: viewport.width >= 1500,
+        inline: !isProfileRoute || viewport.width >= 1500,
         group: 0
       },
       {
@@ -169,7 +171,7 @@ class Header extends React.Component {
         slug: '/pursuits',
         exact: false,
         profile: true,
-        inline: viewport.width >= 1400,
+        inline: !isProfileRoute || viewport.width >= 1320,
         group: 0
       },
       {
@@ -236,10 +238,6 @@ class Header extends React.Component {
       viewsInline = true;
     }
 
-    let profileRoute = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)/);
-    // let profileRouteView = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)\/(\w+)/);
-    // let profileView = profileRouteView ? profileRouteView[1] : false;
-
     let profileEl = null;
 
     let isActive = (match, location) => {
@@ -250,7 +248,7 @@ class Header extends React.Component {
       }
     };
 
-    if (profileRoute && member.data) {
+    if (isProfileRoute && member.data) {
       const characterId = member.characterId;
       const profile = member.data.profile.profile.data;
       const characters = member.data.profile.characters.data;

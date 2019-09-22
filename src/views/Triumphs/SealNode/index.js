@@ -6,7 +6,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
-import { enumerateRecordState } from '../../../utils/destinyEnums';
+import { enumerateRecordState, sealImages } from '../../../utils/destinyEnums';
 import ObservedImage from '../../../components/ObservedImage';
 import Records from '../../../components/Records';
 
@@ -22,45 +22,12 @@ class SealNode extends React.Component {
     // for MOMENTS OF TRIUMPH: MMXIX
     const characterRecords = this.props.member.data.profile.characterRecords.data;
 
-    const sealBars = {
-      2588182977: {
-        image: '037E-00001367.png'
-      },
-      3481101973: {
-        image: '037E-00001343.png'
-      },
-      147928983: {
-        image: '037E-0000134A.png'
-      },
-      2693736750: {
-        image: '037E-0000133C.png'
-      },
-      2516503814: {
-        image: '037E-00001351.png'
-      },
-      1162218545: {
-        image: '037E-00001358.png'
-      },
-      2039028930: {
-        image: '0560-000000EB.png'
-      },
-      991908404: {
-        image: '0560-0000107E.png'
-      },
-      3170835069: {
-        image: '0560-00006583.png'
-      },
-      1002334440: {
-        image: '0560-00007495.png'
-      }
-    };
-
-    let definitionSeal = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
+    const definitionSeal = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
 
     // for MOMENTS OF TRIUMPH: MMXIX
-    let states = [];
+    const states = [];
     definitionSeal.children.records.forEach(record => {
-      let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];
+      const scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[characterId].records[record.recordHash];
       if (scope) {
         states.push(scope);
       }
@@ -73,21 +40,21 @@ class SealNode extends React.Component {
     // MOMENTS OF TRIUMPH: MMXIX does not have the above ^
     if (definitionSeal.hash === 1002334440) {
       progress = states.filter(s => !enumerateRecordState(s.state).objectiveNotCompleted && enumerateRecordState(s.state).recordRedeemed).length;
-      total = states.length;
+      total = 23;
     }
 
-    let isComplete = progress === total ? true : false;
+    const isComplete = progress === total ? true : false;
 
-    let title = manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[genderHash];
+    const title = manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[genderHash];
 
-    let sealCommonality = manifest.statistics.seals && manifest.statistics.seals[definitionSeal.hash];
+    const sealCommonality = manifest.statistics.seals && manifest.statistics.seals[definitionSeal.hash];
 
     return (
       <div className='node seal'>
         <div className='children'>
           <div className='icon'>
             <div className='corners t' />
-            <ObservedImage className='image' src={sealBars[definitionSeal.hash] ? `/static/images/extracts/badges/${sealBars[definitionSeal.hash].image}` : `https://www.bungie.net${definitionSeal.displayProperties.originalIcon}`} />
+            <ObservedImage className='image' src={sealImages[definitionSeal.hash] ? `/static/images/extracts/badges/${sealImages[definitionSeal.hash]}` : `https://www.bungie.net${definitionSeal.displayProperties.originalIcon}`} />
             <div className='corners b' />
           </div>
           <div className='text'>

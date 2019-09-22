@@ -5,6 +5,7 @@ import _ from 'lodash';
 import lowlines from './cache/checklists.json';
 
 const outputPath = 'src/data/lowlines/checklists/index.json';
+const outputData = JSON.parse(fs.readFileSync('src/data/lowlines/checklists/index.json'));
 
 const assisted = JSON.parse(fs.readFileSync('scripts/dump/index.json'));
 const nodes = [];
@@ -19,7 +20,7 @@ Object.keys(assisted).forEach(key => {
   })
 });
 
-//console.log(nodes)
+// console.log(nodes)
 
 // For when the mappings generated from lowlines' data don't have a
 // bubbleHash but do have a bubbleId. Inferred by cross-referencing
@@ -136,7 +137,7 @@ function work(input) {
 async function run() {
   const manifest = await Manifest.getManifest();
 
-  function checklistItem(item) {
+  function checklistItem(id, item) {
     const mapping = lowlines.checklists[item.hash] || {};
     
     let ass = nodes.find(n => (n.checklistHash === parseInt(item.hash, 10)) || (n.activityHash === parseInt(item.activityHash, 10))) || {};
@@ -177,6 +178,12 @@ async function run() {
       if (definitionLore) name = definitionLore.displayProperties.name;
     }
 
+    const lostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash) && id !== 3142056444;
+
+    const points = [];
+
+    if ((mapping && mapping.node) || (ass && ass.x)) points.push(mapping && mapping.node ? { x: mapping.node.x, y: mapping.node.y } : { x: ass.x, y: ass.y })
+
     return {
       destinationHash,
       bubbleHash,
@@ -185,19 +192,16 @@ async function run() {
       checklistHash: item.hash,
       itemHash: item && item.itemHash,
       recordHash: mapping.recordHash,
-      map: mapping.node ? {
-        x: mapping.node.x,
-        y: mapping.node.y
-      } : ass && ass.x ? {
-        x: ass.x,
-        y: ass.y
-      } : {},
+      points,
       sorts: {
         destination: destination && destination.displayProperties.name,
         bubble: bubbleName,
         place: place && place.displayProperties.name,
         name,
         number: itemNumber && parseInt(itemNumber, 10)
+      },
+      extended: {
+        lostSector
       },
       ...itemOverrides[item.hash]
     };
@@ -236,25 +240,28 @@ async function run() {
           if (definitionLore) name = definitionLore.displayProperties.name;
         }
 
+        const lostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash);
+
+        const points = [];
+    
+        if ((mapping && mapping.node) || (ass && ass.x)) points.push(mapping && mapping.node ? { x: mapping.node.x, y: mapping.node.y } : { x: ass.x, y: ass.y })
+
         return {
           destinationHash,
           bubbleHash: mapping && mapping.bubbleHash,
           bubbleName: backupBubbleName,
           recordName: item.displayProperties.name,
           recordHash: hash,
-          map: mapping && mapping.node ? {
-            x: mapping.node.x,
-            y: mapping.node.y
-          } : ass && ass.x ? {
-            x: ass.x,
-            y: ass.y
-          } : {},
+          points,
           sorts: {
             destination: destination && destination.displayProperties.name,
             bubble: bubbleName,
             place: place && place.displayProperties.name,
             name,
             number: (itemNumber + 1)
+          },
+          extended: {
+            lostSector
           },
           ...itemOverrides[item.hash]
         };
@@ -271,12 +278,12 @@ async function run() {
       const checklist = manifest.DestinyChecklistDefinition[hash];
 
       lists[hash] = checklist.entries.filter(entry => itemDeletions.indexOf(entry.hash) < 0).map(entry => {
-        return checklistItem(entry);
+        return checklistItem(hash, entry);
       });
     }
   });
 
-  fs.writeFileSync(outputPath, JSON.stringify(lists));
+  fs.writeFileSync(outputPath, JSON.stringify(lists, null, '  '));
 }
 
 run();
