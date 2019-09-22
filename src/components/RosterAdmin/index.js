@@ -292,17 +292,6 @@ class Actions extends React.Component {
     }
   };
 
-  getMomentLocaleString()
-  {
-    switch (this.props.i18n.getCurrentLanguage())
-    {
-      case 'zh-chs':
-        return 'zh-cn';
-      default:
-        return 'en-sml';
-    }
-  };
-
   render() {
     const { t, m: member, available } = this.props;
 
@@ -524,10 +513,10 @@ class RosterAdmin extends React.Component {
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && lastActivityString })}>
                       {m.isOnline && lastActivityString ? (
                         <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash} data-mode={lastActivity.currentActivityModeHash} data-playlist={lastActivity.currentPlaylistActivityHash}>
-                          <div>{lastActivityString}<span>{moment(lastPlayed).locale(this.getMomentLocaleString()).fromNow(true)}</span></div>
+                          <div>{lastActivityString}<span>{moment(lastPlayed).locale('en-sml').fromNow(true)}</span></div>
                         </div>
                       ) : (
-                        <div>{moment(lastPlayed).locale(this.getMomentLocaleString()).fromNow()}</div>
+                        <div>{moment(lastPlayed).locale('en-sml').fromNow()}</div>
                       )}
                     </li>
                     <li className='col joinDate'>
