@@ -125,6 +125,11 @@ export const rewardsQuestLineOverrides = {
     {
       itemHash: 3580904580,
       quantity: 1
+    },
+    {
+      // The Emperor's Pleasure (Ornament)
+      itemHash: 2912834745,
+      quantity: 1
     }
   ],
   // Luna's Howl
@@ -145,6 +150,62 @@ export const rewardsQuestLineOverrides = {
   3080875461: [
     {
       itemHash: 3973202132,
+      quantity: 1
+    }
+  ],
+  // 21% Delirium
+  2704319977: [
+    {
+      itemHash: 1600633250,
+      quantity: 1
+    }
+  ],
+  // Oxygen SR3
+  3857337041: [
+    {
+      itemHash: 3907337522,
+      quantity: 1
+    }
+  ],
+  // The Last Word
+  2819937365: [
+    {
+      itemHash: 1364093401,
+      quantity: 1
+    }
+  ],
+  // Izanagi's Burden
+  958496866: [
+    {
+      itemHash: 3211806999,
+      quantity: 1
+    }
+  ],
+  // Nightshade
+  2966837012: [
+    {
+      itemHash: 792755504,
+      quantity: 1
+    }
+  ],
+  // Breakneck
+  799683368: [
+    {
+      itemHash: 324382200,
+      quantity: 1
+    }
+  ],
+  // Loaded Question
+  2723561280: [
+    {
+      itemHash: 580961571,
+      quantity: 1
+    }
+  ],
+  // Bad Juju
+  1350461162: [
+    {
+      itemHash: 2816212794,
       quantity: 1
     }
   ]
