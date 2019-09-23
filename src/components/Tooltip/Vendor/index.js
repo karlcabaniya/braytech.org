@@ -53,7 +53,7 @@ class Vendor extends React.Component {
       const largeIcon = definitionVendor.displayProperties && definitionVendor.displayProperties.largeIcon;
 
       const locations = definitionVendor.locations && definitionVendor.locations.length && definitionVendor.locations;
-      
+
       const definitionDestination = locations.length > 1 ? manifest.DestinyDestinationDefinition[definitionVendor.locations[1].destinationHash] : definitionVendor.locations.length && definitionVendor.locations[0].destinationHash && manifest.DestinyDestinationDefinition[definitionVendor.locations[0].destinationHash];
 
       const destination = definitionDestination && Object.values(destinations).find(d => d.destination.hash === definitionDestination.hash);
@@ -69,7 +69,7 @@ class Vendor extends React.Component {
       const extras = nodes && nodes.find(d => d.vendorHash === definitionVendor.hash);
       const screenshot = extras && extras.screenshot;
 
-      console.log(definitionVendor.hash, definitionBubble.hash)
+      console.log(definitionVendor.hash, (definitionBubble && definitionBubble.hash) || 'No bubble')
 
       return (
         <>
