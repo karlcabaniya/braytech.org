@@ -376,7 +376,7 @@ class Maps extends React.Component {
 
       d.layers = layers;
 
-      console.log(layers);
+      // console.log(layers);
 
       if (this.mounted)
         this.setState(p => {
