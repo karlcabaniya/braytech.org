@@ -653,7 +653,7 @@ class Maps extends React.Component {
 
                   return <Marker key={i} position={[offsetY, offsetX]} icon={icon} zIndexOffset='-1000' />;
                 } else if (node.type === 'forge') {
-                  const icon = marker.iconForge({ hash: node.activityHash, table: 'DestinyActivityDefinition' }, []);
+                  const icon = marker.iconForge({ hash: node.activityHash, playlist: node.playlistHash, table: 'DestinyActivityDefinition' }, []);
 
                   return <Marker key={i} position={[offsetY, offsetX]} icon={icon} zIndexOffset='-1000' />;
                 } else {

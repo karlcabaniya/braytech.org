@@ -111,7 +111,7 @@ export const iconFastTravel = (tooltip = {}, classNames = []) => {
 export const iconForge = (tooltip = {}, classNames = []) => {
   const html = (
     <div className='wrapper'>
-      <div className='forge tooltip' data-hash='10898844' data-playlist={tooltip.hash} data-table={tooltip.table}>
+      <div className='forge tooltip' data-hash={tooltip.hash} data-playlist={tooltip.playlist} data-table={tooltip.table}>
         <div className='dial' />
         <div className='frame' />
         <div className='logo' />

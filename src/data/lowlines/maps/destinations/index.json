@@ -763,7 +763,7 @@
           "y": -750,
           "width": 3331,
           "height": 2605,
-          "image": "/static/images/extracts/maps/map_mercury.png",
+          "image": "/static/images/extracts/maps/map_fields-of-glass.png",
           "opacity": 0.6
         }
       ],
@@ -953,7 +953,7 @@
           "y": -1300,
           "width": 2523,
           "height": 2959,
-          "image": "/static/images/extracts/maps/map_mars.png",
+          "image": "/static/images/extracts/maps/map_hellas-basin.png",
           "opacity": 0.6
         }
       ],
@@ -1144,7 +1144,7 @@
           "y": -200,
           "width": 1845,
           "height": 1535,
-          "image": "/static/images/extracts/maps/map_io.png",
+          "image": "/static/images/extracts/maps/map_echo-mesa.png",
           "opacity": 0.6
         }
       ],
@@ -1366,7 +1366,7 @@
           "y": -285,
           "width": 2482,
           "height": 1756,
-          "image": "/static/images/extracts/maps/map_titan.png",
+          "image": "/static/images/extracts/maps/map_new-pacific-arcology.png",
           "opacity": 0.6
         }
       ],
@@ -1828,7 +1828,16 @@
               "id": "main",
               "width": 2499,
               "height": 1791,
-              "image": "/static/images/extracts/maps/map_nessus.png",
+              "image": "/static/images/extracts/maps/map_arcadian-valley.png",
+              "opacity": 0.4
+            },
+            {
+              "id": "lost-fuselage",
+              "x": 244,
+              "y": -184,
+              "width": 223,
+              "height": 323,
+              "image": "/static/images/extracts/maps/map_arcadian-valley-lost-fuselage.png",
               "opacity": 0.4
             },
             {
@@ -1837,8 +1846,8 @@
               "y": -776,
               "width": 1468,
               "height": 907,
-              "image": "/static/images/extracts/maps/map_nessus-spire.png",
-              "opacity": 0.6
+              "image": "/static/images/extracts/maps/map_arcadian-valley-spire.png",
+              "opacity": 0.4
             }
           ]
         }
@@ -1918,6 +1927,26 @@
           ]
         },
         {
+          "hash": 1394697041,
+          "name": "Lost Fuselage",
+          "id": "lost-fuselage",
+          "type": "suburb",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 565,
+              "y": -297
+            },
+            {
+              "type": "forge",
+              "x": 666,
+              "y": -192,
+              "activityHash": 1483179969,
+              "playlistHash": 957727787
+            }
+          ]
+        },
+        {
           "hash": 3710329679,
           "name": "Hallows",
           "id": "hallows",
@@ -1927,6 +1956,21 @@
               "type": "title",
               "x": 842,
               "y": 29
+            }
+          ]
+        },
+        {
+          "hash": 2807589494,
+          "name": "The Tor",
+          "id": "the tor",
+          "type": "suburb",
+          "nodes": [
+            {
+              "type": "forge",
+              "x": 941,
+              "y": 37,
+              "activityHash": 1878615566,
+              "playlistHash": 2656947700
             }
           ]
         },
@@ -2981,7 +3025,8 @@
               "type": "forge",
               "x": -10,
               "y": -1193,
-              "activityHash": 1434072700
+              "activityHash": 10898844,
+              "playlistHash": 1434072700
             }
           ]
         },
@@ -3071,7 +3116,8 @@
               "type": "forge",
               "x": -465,
               "y": 595,
-              "activityHash": 1506080581
+              "activityHash": 1019949956,
+              "playlistHash": 1506080581
             }
           ]
         },

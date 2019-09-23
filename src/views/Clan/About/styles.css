@@ -186,16 +186,15 @@
   #clan.about .module.progression,
   #clan.about .module.roster {
     grid-row: unset;
-    grid-column: unset;
+    grid-column: 2/4;
   }
 
   #clan.about .module.views {
     grid-row: 1/4;
   }
-  
-  #clan.about .module.progression, 
-  #clan.about .module.roster {
-    grid-column: 2/4;
+
+  #clan.about .module.about .bio p {
+    font-size: 14px;
   }
 
 }
