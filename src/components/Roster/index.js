@@ -2,9 +2,9 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import { orderBy } from 'lodash';
 import cx from 'classnames';
 import moment from 'moment';
-import { orderBy } from 'lodash';
 
 import * as ls from '../../utils/localStorage';
 import * as destinyUtils from '../../utils/destinyUtils';

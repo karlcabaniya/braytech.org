@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { orderBy } from 'lodash';
 import cx from 'classnames';
+import moment from 'moment';
 
 import manifest from '../../utils/manifest';
 import * as ls from '../../utils/localStorage';
@@ -82,11 +83,81 @@ class RosterLeaderboards extends React.Component {
     },
     {
       name: 'Gambit',
-      value: 'pvecomp_gambit'
+      value: 'pvecomp_gambit',
+      statIds: [
+        {
+          value: 'motesDeposited',
+          type: 'integer'
+        },
+        {
+          value: 'motesLost',
+          type: 'integer'
+        },
+        {
+          name: 'High Value Target Kills',
+          value: 'highValueKills',
+          type: 'integer'
+        },
+        {
+          name: 'Invasion Kills',
+          value: 'invasionKills',
+          type: 'integer'
+        },
+        {
+          name: 'Invader Kills',
+          value: 'invaderKills',
+          type: 'integer'
+        },
+        {
+          name: 'Primeval Damage',
+          value: 'primevalDamage',
+          type: 'integer'
+        },
+        {
+          name: 'Primeval Kills',
+          value: 'primevalKills',
+          type: 'integer'
+        }
+      ]
     },
     {
       name: 'Gambit Prime',
-      value: 'pvecomp_mamba'
+      value: 'pvecomp_mamba',
+      statIds: [
+        {
+          value: 'motesDeposited',
+          type: 'integer'
+        },
+        {
+          value: 'motesLost',
+          type: 'integer'
+        },
+        {
+          name: 'High Value Target Kills',
+          value: 'highValueKills',
+          type: 'integer'
+        },
+        {
+          name: 'Invasion Kills',
+          value: 'invasionKills',
+          type: 'integer'
+        },
+        {
+          name: 'Invader Kills',
+          value: 'invaderKills',
+          type: 'integer'
+        },
+        {
+          name: 'Primeval Damage',
+          value: 'primevalDamage',
+          type: 'integer'
+        },
+        {
+          name: 'Primeval Kills',
+          value: 'primevalKills',
+          type: 'integer'
+        }
+      ]
     },
     {
       name: 'Strikes',
@@ -125,7 +196,7 @@ class RosterLeaderboards extends React.Component {
     },
     {
       value: 'secondsPlayed',
-      type: 'time'
+      type: 'moment'
     },
     {
       value: 'bestSingleGameKills',
@@ -168,7 +239,7 @@ class RosterLeaderboards extends React.Component {
     },
     {
       value: 'secondsPlayed',
-      type: 'integer'
+      type: 'moment'
     },
     {
       value: 'orbsDropped',
@@ -198,7 +269,9 @@ class RosterLeaderboards extends React.Component {
     this.scopes.forEach(scope => {
       leaderboards[scope.value] = {};
 
-      this.statIds.forEach(statId => {
+      const scopeStatIds = scope.statIds || [];
+
+      scopeStatIds.concat(this.statIds).forEach(statId => {
         leaderboards[scope.value][statId.value] = orderBy(
           this.responses.map(m => {
             try {
@@ -239,8 +312,6 @@ class RosterLeaderboards extends React.Component {
       });
     });
 
-
-
     this.setState({ loading: false, leaderboards });
   };
 
@@ -250,22 +321,27 @@ class RosterLeaderboards extends React.Component {
     }
   }
 
-  prettyValue = (statId, value) => {
-    const stat = this.statIds.concat(this.statIdsSummary).find(s => s.value === statId);
+  prettyValue = (statId, value, displayValue) => {
+    const stat = this.statIds.concat(this.statIdsSummary).concat(this.scopes.reduce((a, s) => {
+      return [
+        ...a,
+        ...s.statIds || []
+      ]
+    }, [])).find(s => s.value === statId);
 
-    if (stat && stat.type === 'time') {
-      return value;
+    if (stat && stat.type === 'moment') {
+      return moment.duration(value, 'seconds').humanize();
     } else if (stat && stat.type === 'distance') {
       return Math.floor(value) + 'm';
     } else if (stat && stat.type === 'integer') {
       return parseInt(value, 10).toLocaleString('en-us');
     } else {
-      return value;
+      return displayValue;
     }
   }
 
   elScopes = scope => {
-    const t = this.props.t;
+    const { t } = this.props;
 
     const scopes = this.scopes.map(s => {
       return (
@@ -286,19 +362,21 @@ class RosterLeaderboards extends React.Component {
     return scopes;
   };
 
-  elBoards = (scope, stat) => {
+  elBoards = (scopeId, statId) => {
     const { t, member, groupMembers } = this.props;
 
-    if (stat) {
-      const definitionStat = manifest.DestinyHistoricalStatsDefinition[stat];
+    if (statId) {
+      const definitionStat = manifest.DestinyHistoricalStatsDefinition[statId];
+      const scope = this.scopes.find(s => s.value === scopeId);
+      const stat = (scope.statIds || []).concat(this.statIds).find(s => s.value === statId);
       
       return (
-        <div key={stat} className='module'>
+        <div key={statId} className='module'>
           <div className='module-header'>
-            <div className='sub-name'>{definitionStat.statName}</div>
+            <div className='sub-name'>{stat.name ? stat.name : definitionStat.statName}</div>
           </div>
-          <ul key={stat} className='list leaderboard'>
-            {this.state.leaderboards[scope][stat].map((m, i) => {
+          <ul key={statId} className='list leaderboard'>
+            {this.state.leaderboards[scopeId][statId].map((m, i) => {
               const isSelf = m.destinyUserInfo.membershipType.toString() === member.membershipType && m.destinyUserInfo.membershipId === member.membershipId;
 
               return (
@@ -308,7 +386,7 @@ class RosterLeaderboards extends React.Component {
                       <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
                     </li>
                     <li className='col rank'>{i + 1}</li>
-                    <li className='col value'>{this.prettyValue(stat, m.displayValue)}</li>
+                    <li className='col value'>{this.prettyValue(statId, m.value, m.displayValue)}</li>
                   </ul>
                 </li>
               );
@@ -317,16 +395,18 @@ class RosterLeaderboards extends React.Component {
         </div>
       )
     } else {
-      return Object.entries(this.state.leaderboards[scope])
+      return Object.entries(this.state.leaderboards[scopeId])
         .map(([statId, data]) => {
           const definitionStat = manifest.DestinyHistoricalStatsDefinition[statId];
+          const scope = this.scopes.find(s => s.value === scopeId);
+          const stat = (scope.statIds || []).concat(this.statIds).find(s => s.value === statId);
 
           return {
             name: statId,
             el: (
               <div key={statId} className='module'>
                 <div className='module-header'>
-                  <div className='sub-name'>{definitionStat.statName}</div>
+                  <div className='sub-name'>{stat.name ? stat.name : definitionStat.statName}</div>
                 </div>
                 <ul key={statId} className='list leaderboard'>
                   {data.slice(0, 10).map((m, i) => {
@@ -339,13 +419,13 @@ class RosterLeaderboards extends React.Component {
                             <MemberLink type={m.destinyUserInfo.membershipType} id={m.destinyUserInfo.membershipId} groupId={m.destinyUserInfo.groupId} displayName={m.destinyUserInfo.displayName} />
                           </li>
                           <li className='col rank'>{i + 1}</li>
-                          <li className='col value'>{this.prettyValue(statId, m.displayValue)}</li>
+                          <li className='col value'>{this.prettyValue(statId, m.value, m.displayValue)}</li>
                         </ul>
                       </li>
                     );
                   })}
                 </ul>
-                <ProfileLink className='button' to={`/clan/stats/${scope}/${statId}`}>
+                <ProfileLink className='button' to={`/clan/stats/${scopeId}/${statId}`}>
                   <div className='text'>{t('See all {{count}}', { count: groupMembers.members.length })}</div>
                 </ProfileLink>
               </div>
@@ -357,29 +437,29 @@ class RosterLeaderboards extends React.Component {
   };
 
   render() {
-    const { t, scope, stat } = this.props;
+    const { t, scopeId, statId } = this.props;
 
     if (!this.state.loading) {
-      const knownScope = this.scopes.find(s => s.value === scope);
-      const knownStat = this.statIds.find(s => s.value === stat);
+      const knownScope = this.scopes.find(s => s.value === scopeId);
+      const knownStat = ((knownScope && knownScope.statIds) || []).concat(this.statIds).find(s => s.value === statId);
 
-      if (scope && knownScope && stat && knownStat) {
-        const definitionStat = manifest.DestinyHistoricalStatsDefinition[stat];
+      if (scopeId && knownScope && statId && knownStat) {
+        const definitionStat = manifest.DestinyHistoricalStatsDefinition[statId];
 
         return (
           <div className='wrapper'>
             <div className='bread'>
               <span>{t('Historical stats')}</span>
               <span>{knownScope.name}</span>
-              <span>{definitionStat.statName}</span>
+              <span>{knownStat.name ? knownStat.name : definitionStat.statName}</span>
             </div>
             <div className='module views scopes'>
-              <ul className='list'>{this.elScopes(scope)}</ul>
+              <ul className='list'>{this.elScopes(scopeId)}</ul>
             </div>
-            <div className='boards single'>{this.elBoards(scope, stat)}</div>
+            <div className='boards single'>{this.elBoards(scopeId, statId)}</div>
           </div>
         );
-      } else if (scope && knownScope) {
+      } else if (scopeId && knownScope) {
         return (
           <div className='wrapper'>
             <div className='bread'>
@@ -387,9 +467,9 @@ class RosterLeaderboards extends React.Component {
               <span>{knownScope.name}</span>
             </div>
             <div className='module views scopes'>
-              <ul className='list'>{this.elScopes(scope)}</ul>
+              <ul className='list'>{this.elScopes(scopeId)}</ul>
             </div>
-            <div className='boards'>{this.elBoards(scope)}</div>
+            <div className='boards'>{this.elBoards(scopeId)}</div>
           </div>
         );
       } else {
@@ -399,7 +479,7 @@ class RosterLeaderboards extends React.Component {
               <span>{t('Historical stats')}</span>
             </div>
             <div className='module views scopes'>
-              <ul className='list'>{this.elScopes(scope)}</ul>
+              <ul className='list'>{this.elScopes(scopeId)}</ul>
             </div>
             <div className='boards summary-stats'>
               {Object.entries(this.state.leaderboards.summary).map(([statId, value]) => {

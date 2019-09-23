@@ -109,8 +109,6 @@ class App extends React.Component {
 
     moment.locale(momentLocale);
 
-    console.log(moment)
-
     if (['zh-cn', 'zh-tw'].indexOf(momentLocale) > -1) {
       moment.defineLocale('relative-sml', {
         parentLocale: momentLocale
