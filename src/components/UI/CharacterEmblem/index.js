@@ -6,15 +6,14 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import ObservedImage from '../../ObservedImage';
-import * as utils from '../../../utils/destinyUtils';
 
 import './styles.css';
 
 class CharacterEmblem extends React.Component {
   render() {
-    const { t, member, onBoarding, responsive } = this.props;
+    const { t, member, onboarding, characterSelect, responsive } = this.props;
 
-    if (member.data && !onBoarding) {
+    if (member.data && !onboarding && !characterSelect) {
       const { groups } = member.data;
       const { profile, characters, characterProgressions } = member.data.profile;
 
@@ -53,12 +52,24 @@ class CharacterEmblem extends React.Component {
           </div>
         </div>
       );
-    } else if (onBoarding) {
+    } else if (onboarding && !characterSelect) {
       return (
-        <div className={cx('character-emblem', 'onboarding', { responsive })}>
+        <div className={cx('character-emblem', 'auxiliary', { responsive })}>
           <div className='wrapper'>
             <div className='abs'>
               <div className='text'>{t('Select a character')}</div>
+              <div className='icon'><i className='segoe-uniE0AB' /></div>
+              <Link to={{ pathname: '/character-select', state: { from: { pathname: '/maps' } } }} />
+            </div>
+          </div>
+        </div>
+      );
+    } else if (characterSelect) {
+      return (
+        <div className={cx('character-emblem', 'auxiliary', { responsive })}>
+          <div className='wrapper'>
+            <div className='abs'>
+              <div className='text'>{t('Change profile')}</div>
               <div className='icon'><i className='segoe-uniE0AB' /></div>
               <Link to={{ pathname: '/character-select', state: { from: { pathname: '/maps' } } }} />
             </div>

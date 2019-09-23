@@ -587,7 +587,7 @@ class Maps extends React.Component {
                   return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
                 })}
           </div>
-          <Map center={center} zoom={this.state.zoom} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_map_viewportChanged} onLayerAdd={this.handler_map_layerAdd} onMoveEnd={this.handler_map_moveEnd} onZoomEnd={this.handler_map_zoomEnd} onMouseDown={this.handler_map_mouseDown}>           
+          <Map center={center} zoom={this.state.zoom} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_map_viewportChanged} onLayerAdd={this.handler_map_layerAdd} onMoveEnd={this.handler_map_moveEnd} onZoomEnd={this.handler_map_zoomEnd} onMouseDown={this.handler_map_mouseDown}>
             {this.state.destinations[destination] &&
               this.state.destinations[destination].layers
                 .filter(layer => layer.type !== 'background')
@@ -675,7 +675,7 @@ class Maps extends React.Component {
 
                     if (!point.x || !point.y) {
                       console.warn(node);
-                      
+
                       return false;
                     }
 
@@ -698,16 +698,21 @@ class Maps extends React.Component {
             <div className={cx('control', 'characters', { visible: this.state.ui.characters })}>
               <ul className='list'>
                 {member && member.data ? (
-                  member.data.profile.profile.data.characterIds.map(characterId => {
-                    return (
-                      <li key={characterId} className={cx('linked', { active: characterId === member.characterId })} data-characterid={characterId} onClick={this.handler_changeCharacterId}>
-                        <CharacterEmblem characterId={characterId} />
-                      </li>
-                    );
-                  })
+                  <>
+                    {member.data.profile.profile.data.characterIds.map(characterId => {
+                      return (
+                        <li key={characterId} className={cx('linked', { active: characterId === member.characterId })} data-characterid={characterId} onClick={this.handler_changeCharacterId}>
+                          <CharacterEmblem characterId={characterId} />
+                        </li>
+                      );
+                    })}
+                    <li className='linked'>
+                      <CharacterEmblem characterSelect />
+                    </li>
+                  </>
                 ) : (
                   <li className='linked active'>
-                    <CharacterEmblem onBoarding />
+                    <CharacterEmblem onboarding />
                   </li>
                 )}
               </ul>

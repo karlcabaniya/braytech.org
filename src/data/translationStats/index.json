@@ -1,128 +1,112 @@
 {
   "de": {
     "translated": 446,
-    "notTranslated": 16,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 17,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "en": {
-    "translated": 462,
+    "translated": 463,
     "notTranslated": 0,
     "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 462,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 463,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "es": {
     "translated": 462,
-    "notTranslated": 0,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 1,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "fr": {
     "translated": 413,
-    "notTranslated": 49,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 50,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 462,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 463,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "it": {
     "translated": 421,
-    "notTranslated": 41,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 42,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 462,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 463,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "ko": {
     "translated": 352,
-    "notTranslated": 110,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 111,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 462,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 463,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "pt-br": {
     "translated": 461,
-    "notTranslated": 1,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 2,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 462,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 463,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "zh-chs": {
     "translated": 461,
-    "notTranslated": 1,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 2,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 462,
-    "added": [],
-    "removed": [
-      "Animated Emblems",
-      "Animator"
-    ]
+    "notTranslated": 463,
+    "added": [
+      "Change profile"
+    ],
+    "removed": []
   }
 }

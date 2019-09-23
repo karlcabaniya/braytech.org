@@ -928,7 +928,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2104527487,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/the-rift_ghost-stories_13.jpg",
     "debug": {
       "name": "A Hero's Requiem",
       "number": 13
@@ -1082,7 +1082,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2313471548,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/exodus-black_region-chests_42.jpg",
     "debug": {
       "name": "Lost Oasis",
       "number": 4
@@ -1508,7 +1508,7 @@
     "checklistId": 1697465175,
     "checklistHash": 1281044779,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/exodus-black_region-chests_42.jpg",
     "debug": {
       "name": "Exodus Black",
       "number": 42
@@ -1981,7 +1981,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1468797866,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/exodus-black_ghost-scans_129.jpg",
     "debug": {
       "name": "Terrabase Charon",
       "number": 12
@@ -3232,7 +3232,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1450715904,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/exodus-black_ghost-scans_129.jpg",
     "debug": {
       "name": "Exodus Black",
       "number": 129
@@ -3243,7 +3243,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2117645021,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/exodus-black_ghost-scans_130.jpg",
     "debug": {
       "name": "Exodus Black",
       "number": 130
@@ -3254,7 +3254,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3070955226,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/exodus-black_ghost-scans_131.jpg",
     "debug": {
       "name": "Exodus Black",
       "number": 131
@@ -3265,7 +3265,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2384365695,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/exodus-black_ghost-scans_132.jpg",
     "debug": {
       "name": "Exodus Black",
       "number": 132
@@ -4450,7 +4450,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2485656913,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/exodus-black_lost-sectors_the-rift.jpg",
     "debug": {
       "name": "The Rift",
       "number": 23
