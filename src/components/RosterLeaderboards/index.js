@@ -3,12 +3,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { orderBy } from 'lodash';
-import moment from 'moment';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import * as ls from '../../utils/localStorage';
-import * as destinyUtils from '../../utils/destinyUtils';
 import * as bungie from '../../utils/bungie';
 import getGroupMembers from '../../utils/getGroupMembers';
 import { ProfileNavLink, ProfileLink } from '../ProfileLink';
@@ -39,6 +37,7 @@ class RosterLeaderboards extends React.Component {
 
   callGetClanLeaderboards = async () => {
     const { member, groupMembers, mode } = this.props;
+
     const result = member.data.groups.results.length > 0 ? member.data.groups.results[0] : false;
 
     const auth = ls.get('setting.auth');
@@ -46,6 +45,8 @@ class RosterLeaderboards extends React.Component {
 
     if (!groupMembers.groupId && !groupMembers.loading) {
       await getGroupMembers(result.group, result.member.memberType > 2 && isAuthed);
+    } else if (groupMembers.loading && groupMembers.members.length < 1) {
+      return;
     } else {
       const responses = await Promise.all(
         groupMembers.members.map(async member => {
@@ -244,7 +245,7 @@ class RosterLeaderboards extends React.Component {
   };
 
   componentDidUpdate(pP, pS) {
-    if (pP.groupMembers.lastUpdated !== this.props.groupMembers.lastUpdated && this.state.loading) {
+    if (pP.groupMembers.lastUpdated !== this.props.groupMembers.lastUpdated && this.props.groupMembers.members.length && this.state.loading) {
       this.callGetClanLeaderboards();
     }
   }
@@ -356,9 +357,7 @@ class RosterLeaderboards extends React.Component {
   };
 
   render() {
-    const { t, member, scope, stat } = this.props;
-
-    console.log(this.state);
+    const { t, scope, stat } = this.props;
 
     if (!this.state.loading) {
       const knownScope = this.scopes.find(s => s.value === scope);

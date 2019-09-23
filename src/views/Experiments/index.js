@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import cx from 'classnames';
 
 import './styles.css';
 
@@ -36,18 +35,11 @@ class Resources extends React.Component {
         description: "A simple tree view approach to browsing through Destiny's manifest. Like data.destinysets.com, but less useful. I should probably at least add a filter input.",
         author: 'Braytech',
         link: '/experiments/data-inspector'
-      },
-      {
-        name: 'Animated Emblems',
-        icon: 'destiny-road_kill',
-        description: "...",
-        author: 'Braytech',
-        link: '/experiments/animated-emblems'
       }
     ];
 
     return (
-      <div className={cx('view', this.props.theme.selected)} id='experiments'>
+      <div className='view' id='experiments'>
         <div className='module head'>
           <div className='page-header'>
             <div className='name'>{t('Experiments')}</div>
@@ -95,7 +87,7 @@ class Resources extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    theme: state.theme
+    
   };
 }
 

@@ -55,7 +55,6 @@ import ChaliceRecipes from './views/ChaliceRecipes';
 
 import ClanBannerBuilder from './views/Experiments/ClanBannerBuilder';
 import DataInspector from './views/Experiments/DataInspector';
-import AnimatedEmblems from './views/Experiments/AnimatedEmblems';
 
 import OOB from './views/OOB';
 
@@ -277,7 +276,6 @@ class App extends React.Component {
                           <Route path='/experiments' exact component={Experiments} />
                           <Route path='/experiments/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
                           <Route path='/experiments/data-inspector' exact component={DataInspector} />
-                          <Route path='/experiments/animated-emblems' exact render={route => <AnimatedEmblems />} />
                           <Route path='/oob' component={OOB} />
                           <Route path='/' component={Index} />
                         </Switch>

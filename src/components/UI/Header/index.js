@@ -9,7 +9,7 @@ import ProgressBar from '../../UI/ProgressBar';
 import { classHashToString } from '../../../utils/destinyUtils';
 import { ProfileNavLink } from '../../ProfileLink';
 import Footer from '../Footer';
-import { EmblemAnimatedIcon, EmblemAnimatedBackground } from '../EmblemAnimated/';
+import { EmblemIcon, EmblemBackground } from '../Emblem/';
 
 import './styles.css';
 
@@ -263,14 +263,14 @@ class Header extends React.Component {
       profileEl = (
         <div className='profile'>
           <div className={cx('background', { 'update-flash': this.state.updateFlash })}>
-            <EmblemAnimatedBackground hash={character.emblemHash} />
+            <EmblemBackground hash={character.emblemHash} />
           </div>
           <div className='ui'>
             <div className='characters'>
               <ul className='list'>
                 <li>
                   <div className='icon'>
-                    <EmblemAnimatedIcon hash={character.emblemHash} />
+                    <EmblemIcon hash={character.emblemHash} />
                   </div>
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>

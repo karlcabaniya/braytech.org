@@ -673,5 +673,10 @@
     "date": "2019-09-22T16:35:26.421Z",
     "version": "2.9.4",
     "content": "- did a thing to prevent duplicated tracked records when tracking the same tracked record in-game\n- localisation improvements"
+  },
+  {
+    "date": "2019-09-22T16:35:26.421Z",
+    "version": "2.9.6",
+    "content": "- minor fixes\n- localisation improvements\n- some clean up\n- other stuff"
   }
 ]
