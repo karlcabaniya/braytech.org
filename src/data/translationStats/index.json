@@ -1,140 +1,128 @@
 {
   "de": {
-    "translated": 448,
+    "translated": 446,
     "notTranslated": 16,
-    "added": [
-      "Banner Perks"
-    ],
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "en": {
-    "translated": 464,
+    "translated": 462,
     "notTranslated": 0,
     "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 464,
-    "added": [
-      "Banner Perks"
-    ],
+    "notTranslated": 462,
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "es": {
-    "translated": 426,
-    "notTranslated": 38,
-    "added": [
-      "Banner Perks"
-    ],
+    "translated": 462,
+    "notTranslated": 0,
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "fr": {
-    "translated": 415,
+    "translated": 413,
     "notTranslated": 49,
-    "added": [
-      "Banner Perks"
-    ],
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 464,
-    "added": [
-      "Banner Perks"
-    ],
+    "notTranslated": 462,
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "it": {
-    "translated": 423,
+    "translated": 421,
     "notTranslated": 41,
-    "added": [
-      "Banner Perks"
-    ],
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 464,
-    "added": [
-      "Banner Perks"
-    ],
+    "notTranslated": 462,
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "ko": {
-    "translated": 354,
+    "translated": 352,
     "notTranslated": 110,
-    "added": [
-      "Banner Perks"
-    ],
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 464,
-    "added": [
-      "Banner Perks"
-    ],
+    "notTranslated": 462,
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "pt-br": {
-    "translated": 463,
+    "translated": 461,
     "notTranslated": 1,
-    "added": [
-      "Banner Perks"
-    ],
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 464,
-    "added": [
-      "Banner Perks"
-    ],
+    "notTranslated": 462,
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "zh-chs": {
-    "translated": 463,
+    "translated": 461,
     "notTranslated": 1,
-    "added": [
-      "Banner Perks"
-    ],
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 464,
-    "added": [
-      "Banner Perks"
-    ],
+    "notTranslated": 462,
+    "added": [],
     "removed": [
-      "Location collections"
+      "Animated Emblems",
+      "Animator"
     ]
   }
 }
