@@ -759,6 +759,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -700,
           "y": -750,
           "width": 3331,
@@ -949,6 +950,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -300,
           "y": -1300,
           "width": 2523,
@@ -1140,6 +1142,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -100,
           "y": -200,
           "width": 1845,
@@ -1339,6 +1342,10 @@
     "map": {
       "width": 2800,
       "height": 1800,
+      "center": {
+        "x": -91,
+        "y": 34
+      },
       "layers": [
         {
           "id": "background-upper",
@@ -1362,6 +1369,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -280,
           "y": -285,
           "width": 2482,
@@ -1540,6 +1548,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -100,
           "y": -500,
           "width": 2357,
@@ -1819,6 +1828,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": 100,
           "y": -355,
           "width": 2499,
@@ -2510,6 +2520,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -500,
           "y": -600,
           "width": 2829,
@@ -2782,7 +2793,7 @@
           "width": 2160,
           "height": 1080,
           "image": "/static/images/extracts/maps/background_upper.png",
-          "color": "#61b8a8"
+          "color": "#6aaf80"
         },
         {
           "id": "background-lower",
@@ -2796,6 +2807,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -395,
           "y": -648,
           "width": 2710,
@@ -3365,6 +3377,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -395,
           "y": -648,
           "width": 2710,
@@ -3460,6 +3473,7 @@
         },
         {
           "id": "map",
+          "type": "map",
           "x": -800,
           "y": -600,
           "width": 3500,

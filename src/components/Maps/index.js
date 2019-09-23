@@ -26,11 +26,16 @@ class Maps extends React.Component {
   constructor(props) {
     super(props);
 
+    const destination = this.props.id || 'edz';
+
     this.state = {
       loading: true,
       error: false,
-      zoom: 0,
-      destination: this.props.id || 'edz',
+      viewport: {
+        center: this.getMapCenter(destination),
+        zoom: 0
+      },
+      destination,
       destinations: {
         tower: {
           loading: true,
@@ -155,12 +160,39 @@ class Maps extends React.Component {
     }
 
     if (pP.id !== id && this.mounted) {
-      this.setState({ destination: id || 'edz' });
+      this.setDestination(id);
     }
 
     if ((pS.ui !== this.state.ui || pS.checklists !== this.state.checklists || pS.destinations !== this.state.destinations) && this.mounted) {
       this.props.rebindTooltips();
     }
+  }
+
+  getMapCenter = id => {
+    if (!maps[id]) return;
+
+    const map = maps[id].map;
+
+    const centerYOffset = -(map.center && map.center.y) || 0;
+    const centerXOffset = (map.center && map.center.x) || 0;
+
+    const center = [map.height / 2 + centerYOffset, map.width / 2 + centerXOffset];
+
+    return center;
+  }
+
+  setDestination = id => {
+    const destination = id || 'edz';
+
+    if (!this.state.destinations[destination]) return;
+
+    this.setState(p => ({
+      viewport: {
+        ...p.viewport,
+        center: this.getMapCenter(destination)
+      },
+      destination
+    }));
   }
 
   generateChecklists = (destination = 'edz') => {
@@ -344,7 +376,7 @@ class Maps extends React.Component {
 
       d.layers = layers;
 
-      // console.log(layers);
+      console.log(layers);
 
       if (this.mounted)
         this.setState(p => {
@@ -399,15 +431,25 @@ class Maps extends React.Component {
   };
 
   handler_map_viewportChanged = viewport => {
-    this.setState({ zoom: viewport.zoom });
+    this.setState({ viewport });
   };
 
   handler_zoomIncrease = e => {
-    this.setState(p => ({ zoom: p.zoom + 1 }));
+    this.setState(p => ({
+      viewport: {
+        ...p.viewport,
+        zoom: p.viewport.zoom + 1
+      }
+    }));
   };
 
   handler_zoomDecrease = e => {
-    this.setState(p => ({ zoom: p.zoom - 1 }));
+    this.setState(p => ({
+      viewport: {
+        ...p.viewport,
+        zoom: p.viewport.zoom - 1
+      }
+    }));
   };
 
   handler_toggleDestinationsList = e => {
@@ -547,6 +589,12 @@ class Maps extends React.Component {
     console.log(item);
   };
 
+  handler_map_viewportChange = e => {
+    if (!this.props.maps.debug || !this.props.maps.logDetails) return;
+
+    console.log(e);
+  };
+
   render() {
     if (this.state.loading) {
       return (
@@ -558,6 +606,7 @@ class Maps extends React.Component {
       return <div className='map-omega loading'>error lol</div>;
     } else {
       const { member, viewport, maps: settings, id: destinationId = 'edz' } = this.props;
+
       const destination = this.state.destination;
 
       const map = maps[destination].map;
@@ -570,13 +619,6 @@ class Maps extends React.Component {
 
       const bounds = [[0, 0], [map.height, map.width]];
 
-      const centerYOffset = -(map.center && map.center.y) || 0;
-      const centerXOffset = (map.center && map.center.x) || 0;
-
-      const center = [map.height / 2 + centerYOffset, map.width / 2 + centerXOffset];
-
-      // console.log(mapXOffset, mapYOffset, bounds)
-
       return (
         <div className={cx('map-omega', `zoom-${this.state.zoom}`, { debug: settings.debug, 'highlight-no-screenshot': settings.noScreenshotHighlight })}>
           <div className='leaflet-pane leaflet-background-pane'>
@@ -587,43 +629,43 @@ class Maps extends React.Component {
                   return <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />;
                 })}
           </div>
-          <Map center={center} zoom={this.state.zoom} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChanged={this.handler_map_viewportChanged} onLayerAdd={this.handler_map_layerAdd} onMoveEnd={this.handler_map_moveEnd} onZoomEnd={this.handler_map_zoomEnd} onMouseDown={this.handler_map_mouseDown}>
-            {this.state.destinations[destination] &&
-              this.state.destinations[destination].layers
-                .filter(layer => layer.type !== 'background')
-                .map(layer => {
-                  const layerX = layer.x ? layer.x : 0;
-                  const layerY = layer.y ? -layer.y : 0;
-                  const layerWidth = layer.width * 1;
-                  const layerHeight = layer.height * 1;
+          <Map viewport={this.state.viewport} minZoom='-2' maxZoom='1' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChange={this.handler_map_viewportChange} onViewportChanged={this.handler_map_viewportChanged} onLayerAdd={this.handler_map_layerAdd} onMove={this.handler_map_move} onMoveEnd={this.handler_map_moveEnd} onZoomEnd={this.handler_map_zoomEnd} onMouseDown={this.handler_map_mouseDown}>
+            {this.state.destinations[destination].layers
+              .filter(layer => layer.type === 'map')
+              .map(layer => {
+                const layerX = layer.x ? layer.x : 0;
+                const layerY = layer.y ? -layer.y : 0;
 
-                  let offsetX = (map.width - layerWidth) / 2;
-                  let offsetY = (map.height - layerHeight) / 2;
+                const layerWidth = layer.width * 1;
+                const layerHeight = layer.height * 1;
 
-                  offsetX += -offsetX + layerX + mapXOffset;
-                  offsetY += offsetY + layerY + mapYOffset;
+                let offsetX = (map.width - layerWidth) / 2;
+                let offsetY = (map.height - layerHeight) / 2;
 
-                  const bounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
+                offsetX += -offsetX + layerX + mapXOffset;
+                offsetY += offsetY + layerY + mapYOffset;
 
-                  if (layer.nodes) {
-                    return layer.nodes.map(node => {
-                      const nodeX = node.x ? node.x : 0;
-                      const nodeY = node.y ? node.y : 0;
+                const bounds = [[offsetY, offsetX], [layerHeight + offsetY, layerWidth + offsetX]];
 
-                      const nodeWidth = node.width * 1;
-                      const nodeHeight = node.height * 1;
+                if (layer.nodes) {
+                  return layer.nodes.map(node => {
+                    const nodeX = node.x ? node.x : 0;
+                    const nodeY = node.y ? node.y : 0;
 
-                      const nodeOffsetY = offsetY + (layerHeight - nodeHeight) / 2 + nodeY;
-                      const nodeOffsetX = offsetX + (layerWidth - nodeWidth) / 2 + nodeX;
+                    const nodeWidth = node.width * 1;
+                    const nodeHeight = node.height * 1;
 
-                      const bounds = [[nodeOffsetY, nodeOffsetX], [nodeHeight + nodeOffsetY, nodeWidth + nodeOffsetX]];
+                    const nodeOffsetY = offsetY + (layerHeight - nodeHeight) / 2 + nodeY;
+                    const nodeOffsetX = offsetX + (layerWidth - nodeWidth) / 2 + nodeX;
 
-                      return <ImageOverlay key={node.id} url={node.image} bounds={bounds} opacity={node.opacity || 1} />;
-                    });
-                  } else {
-                    return <ImageOverlay key={layer.id} url={layer.image} bounds={bounds} opacity={layer.opacity || 1} />;
-                  }
-                })}
+                    const bounds = [[nodeOffsetY, nodeOffsetX], [nodeHeight + nodeOffsetY, nodeWidth + nodeOffsetX]];
+
+                    return <ImageOverlay key={node.id} url={node.image} bounds={bounds} opacity={node.opacity || 1} />;
+                  });
+                } else {
+                  return <ImageOverlay key={layer.id} url={layer.image} bounds={bounds} opacity={layer.opacity || 1} />;
+                }
+              })}
             {maps[destination].map.bubbles.map(bubble =>
               bubble.nodes.map((node, i) => {
                 const markerOffsetX = mapXOffset + viewWidth / 2;

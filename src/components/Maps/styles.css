@@ -1,8 +1,8 @@
 .map-omega {
   position: relative;
   height: 600px;
-  background-color: black;
-  color: white;
+  background-color: #060606;
+  color: #ffffff;
 }
 
 .map-omega.debug .leaflet-grab {
