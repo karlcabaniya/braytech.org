@@ -1,6 +1,6 @@
 #tooltip {
   position: fixed;
-  width: 384px;
+  width: 420px;
   pointer-events: none;
   z-index: 2000;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);

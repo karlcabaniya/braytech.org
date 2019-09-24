@@ -204,23 +204,22 @@ class Tooltip extends React.Component {
   }
 
   render() {
+
+    let Tooltip = Item;
+
     if (this.state.hash) {
-
-      let Type = Item;
-
-      if (this.state.table === 'DestinyActivityDefinition') Type = Activity;
-      if (this.state.table === 'DestinyVendorDefinition') Type = Vendor;
-      if (this.state.table === 'DestinyChecklistDefinition') Type = Checklist;
-      if (this.state.table === 'DestinyRecordDefinition') Type = Record;
-
-      return (
-        <div id='tooltip' ref={this.ref_tooltip}>
-          <Type {...this.state} />
-        </div>
-      );
-    } else {
-      return null;
+      if (this.state.table === 'DestinyActivityDefinition') Tooltip = Activity;
+      if (this.state.table === 'DestinyVendorDefinition') Tooltip = Vendor;
+      if (this.state.table === 'DestinyChecklistDefinition') Tooltip = Checklist;
+      if (this.state.table === 'DestinyRecordDefinition') Tooltip = Record;
     }
+
+    return (
+      <div ref={this.ref_tooltip} id='tooltip'>
+        {this.state.hash ? <Tooltip {...this.state} /> : null}
+      </div>
+    );
+    
   }
 }
 
