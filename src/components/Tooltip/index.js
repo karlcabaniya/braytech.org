@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 
 import './styles.css';
 
@@ -215,7 +216,7 @@ class Tooltip extends React.Component {
     }
 
     return (
-      <div ref={this.ref_tooltip} id='tooltip'>
+      <div ref={this.ref_tooltip} id='tooltip' className={cx({ visible: this.state.hash })}>
         {this.state.hash ? <Tooltip {...this.state} /> : null}
       </div>
     );
