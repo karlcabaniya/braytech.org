@@ -431,7 +431,7 @@ class Maps extends React.Component {
   };
 
   handler_map_viewportChanged = viewport => {
-    this.setState({ viewport });
+    if (typeof viewport.zoom === 'number' && viewport.center && viewport.center.length === 2) this.setState({ viewport });
   };
 
   handler_zoomIncrease = e => {
@@ -620,7 +620,7 @@ class Maps extends React.Component {
       const bounds = [[0, 0], [map.height, map.width]];
 
       return (
-        <div className={cx('map-omega', `zoom-${this.state.zoom}`, { debug: settings.debug, 'highlight-no-screenshot': settings.noScreenshotHighlight })}>
+        <div className={cx('map-omega', `zoom-${this.state.viewport.zoom}`, { debug: settings.debug, 'highlight-no-screenshot': settings.noScreenshotHighlight })}>
           <div className='leaflet-pane leaflet-background-pane'>
             {this.state.destinations[destination] &&
               this.state.destinations[destination].layers
