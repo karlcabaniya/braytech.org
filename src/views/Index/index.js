@@ -14,7 +14,6 @@ import { ReactComponent as Patreon } from '../../components/PatreonDevice.svg';
 
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
-import Activity from '../../components/Tooltip/Activity';
 import Items from '../../components/Items';
 import Spinner from '../../components/UI/Spinner';
 import MemberLink from '../../components/MemberLink';
@@ -112,9 +111,6 @@ class Index extends React.Component {
   render() {
     const { t, viewport } = this.props;
 
-    let displayRecords = [2782139949, 1322754255, 3029681530];
-    let displayCollectibles = [564802913, 2982198544, 1186314104, 3490589921, 3773976307, 2239241195];
-
     let elDiff = null;
     if (this.state.manifest.data && this.state.manifest.data.diff) {
       let state = this.state.manifest.data.state;
@@ -206,21 +202,6 @@ class Index extends React.Component {
               <Logo />
             </div>
             <div className='big-name'>BRAYTECH</div>
-            {viewport.width > 1024 ? (
-              <div className='module demo'>
-                <div className='wrapper'>
-                  <div id='tooltip'>
-                    <Activity hash='2724706103' table='DestinyActivityDefinition' />
-                  </div>
-                  <ul className='list record-items'>
-                    <Records selfLinkFrom='/' hashes={displayRecords} forceDisplay />
-                  </ul>
-                  <ul className='list collection-items'>
-                    <Collectibles selfLinkFrom='/' hashes={displayCollectibles} forceDisplay />
-                  </ul>
-                </div>
-              </div>
-            ) : null}
           </div>
         </div>
         <div className='row patreon-cta'>
