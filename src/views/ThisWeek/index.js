@@ -778,6 +778,7 @@ class ThisWeek extends React.Component {
     const modules = [];
 
     // flashpoint
+    const definitionMilestoneFLashpoint = manifest.DestinyMilestoneDefinition[463010297];
     const milestoneFlashpoint = milestones[463010297].availableQuests && milestones[463010297].availableQuests.length && manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     const definitionFlashpointVendor =
       milestoneFlashpoint &&
@@ -1130,7 +1131,7 @@ class ThisWeek extends React.Component {
         <div className='module head'>
           <div className='content'>
             <div className='page-header'>
-              <div className='sub-name'>{t('This Week')}</div>
+              <div className='sub-name'>{definitionMilestoneFLashpoint.displayProperties && definitionMilestoneFLashpoint.displayProperties.name}</div>
               <div className='name'>{manifest.DestinyDestinationDefinition[milestoneFlashpoint.destinationHash].displayProperties.name}</div>
             </div>
             {definitionFlashpointFaction && definitionFlashpointFaction.displayProperties ? (

@@ -293,18 +293,22 @@ class Mode extends React.Component {
         <div className='icon'>
           <span className={`destiny-${this.data[hash].iconClass}`} />
         </div>
-        <div className='header'>
-          <div className='text'>{manifest.DestinyProgressionDefinition[hash].displayProperties.name}</div>
-        </div>
+        <h4>{manifest.DestinyProgressionDefinition[hash].displayProperties.name}</h4>
         <div className='data'>
           {mini ? (
             <div>
-              <div className='name'>{t('Total points')}</div>
+              <div className='name'>{t('Points')}</div>
               <div className='value'>{characterProgressions[characterId].progressions[hash].currentProgress.toLocaleString('en-us')}</div>
             </div>
           ) : null}
           {hash !== 2000925172 ? (
             <>
+              {!mini ? (
+                <div>
+                  <div className='name'>{t('Win streak')}</div>
+                  <div className='value'>{characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex}</div>
+                </div>
+              ) : null}
               <div>
                 <div className='tooltip' data-hash='total_resets' data-table='BraytechDefinition'>
                   <div className='name'>{t('Total resets')}</div>
@@ -320,10 +324,8 @@ class Mode extends React.Component {
           {hash === 2000925172 ? (
             <>
               <div>
-                <div className='tooltip' data-hash='glory_streak_calc' data-table='BraytechDefinition'>
-                  <div className='name'>{t('Win streak')}</div>
-                  <div className='value'>{characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex}</div>
-                </div>
+                <div className='name'>{t('Win streak')}</div>
+                <div className='value'>{characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex}</div>
               </div>
               <div>
                 <div className='tooltip' data-hash='glory_wins_until' data-table='BraytechDefinition'>
@@ -353,7 +355,7 @@ class Mode extends React.Component {
             <ProgressBar
               classNames='total'
               objective={{
-                progressDescription: t('Total points'),
+                progressDescription: t('Points'),
                 completionValue: this.data[hash].totalPoints
               }}
               progress={{

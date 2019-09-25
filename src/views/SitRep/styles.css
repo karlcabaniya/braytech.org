@@ -188,19 +188,28 @@
 
 
 
+#sit-rep .module .ranks {
+  margin: 25px 0 0;
+}
+
 #sit-rep .module .ranks > div {
   position: relative;
   font-size: 14px;
   line-height: 10px;
 }
 
-#sit-rep .module.clan-roster {
+#sit-rep .module .clan-roster {
   position: relative;
 }
 
-#sit-rep .module.clan-roster .refresh {
+#sit-rep .module .clan-roster .refresh {
   position: absolute;
   left: -2rem;
+}
+
+#sit-rep .module .clan-roster .duo {
+  display: flex;
+  justify-content: space-between;
 }
 
 

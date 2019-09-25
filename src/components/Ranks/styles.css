@@ -7,30 +7,26 @@
   margin: 0;
 }
 
-.ranks .rank .header {
-  margin: 0 0 1rem;
-}
-
 .ranks .rank .icon {
   position: absolute;
-  top: -8px;
+  top: -12px;
   right: 0;
   pointer-events: none;
-  font-size: 64px;
+  font-size: 128px;
   color: #fff;
-  opacity: 0.2;
+  opacity: 0.1;
 }
 
-.ranks .rank .header .text {
-  display: grid;
-  align-content: center;
+.ranks .rank h4 {
+  color: rgba(255, 255, 255, 0.6);
   font-size: 16px;
+  margin: 20px 0 14px;
 }
 
 .ranks .rank .data {
   margin: 0 0 1rem;
   display: grid;
-  grid-template-columns: 120px auto;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
 }
 

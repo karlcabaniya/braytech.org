@@ -24,56 +24,12 @@ class SitRep extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      bNetNews: {
-        loading: true,
-        error: false,
-        items: []
-      }
-    };
+    this.state = {};
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.rebindTooltips();
-
-    this.bNetNews();
-  }
-
-  bNetNews = async () => {
-    try {
-      const response = await bungie.GetTrendingCategories();
-
-      const news = response.categories && response.categories.find(c => c.categoryId === 'News');
-
-      console.log(news.entries.results);
-
-      if (news) {
-        this.setState({
-          bNetNews: {
-            loading: false,
-            error: false,
-            items: news.entries.results
-          }
-        });
-      } else {
-        this.setState({
-          bNetNews: {
-            loading: false,
-            error: true,
-            items: []
-          }
-        });
-      }
-    } catch (e) {
-      this.setState({
-        bNetNews: {
-          loading: false,
-          error: true,
-          items: []
-        }
-      });
-    }
   }
 
   render() {
@@ -94,6 +50,7 @@ class SitRep extends React.Component {
     });
 
     // flashpoint
+    const definitionMilestoneFLashpoint = manifest.DestinyMilestoneDefinition[463010297];
     const milestoneFlashpointQuestItem = milestones[463010297].availableQuests && milestones[463010297].availableQuests.length && manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     const definitionFlashpointVendor =
     milestoneFlashpointQuestItem &&
@@ -183,7 +140,7 @@ class SitRep extends React.Component {
         <div className='module head'>
           <div className='content'>
             <div className='page-header'>
-              <div className='sub-name'>{t('Now')}</div>
+              <div className='sub-name'>{definitionMilestoneFLashpoint.displayProperties && definitionMilestoneFLashpoint.displayProperties.name}</div>
               <div className='name'>{manifest.DestinyDestinationDefinition[milestoneFlashpointQuestItem.destinationHash].displayProperties.name}</div>
             </div>
             {definitionFlashpointVendor && definitionFlashpointVendor.displayProperties ? (
@@ -250,79 +207,77 @@ class SitRep extends React.Component {
             <div className='module-header'>
               <div className='sub-name'>{weeklyNightfallStrikes.displayProperties.name}</div>
             </div>
-            <ul className='list activities'>
-              {orderBy(
-                weeklyNightfallStrikes.activities.map((a, i) => {
-                  const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+            {weeklyNightfallStrikes.activities.length ? (
+              <ul className='list activities'>
+                {orderBy(
+                  weeklyNightfallStrikes.activities.map((a, i) => {
+                    const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-                  return {
-                    light: definitionActivity.activityLightLevel,
-                    el: (
-                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
-                        <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
-                        <div>
-                          <div className='time'>
-                            {definitionActivity.timeToComplete ? (
-                              <>
-                                {t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}
-                              </>
-                            ) : null}
+                    return {
+                      light: definitionActivity.activityLightLevel,
+                      el: (
+                        <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
+                          <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
+                          <div>
+                            <div className='time'>
+                              {definitionActivity.timeToComplete ? (
+                                <>
+                                  {t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}
+                                </>
+                              ) : null}
+                            </div>
+                            <div className='light'>
+                              <span>{definitionActivity.activityLightLevel}</span>
+                            </div>
                           </div>
-                          <div className='light'>
-                            <span>{definitionActivity.activityLightLevel}</span>
-                          </div>
-                        </div>
-                      </li>
-                    )
-                  };
-                }),
-                [m => m.light],
-                ['asc']
-              ).map(e => e.el)}
-            </ul>
+                        </li>
+                      )
+                    };
+                  }),
+                  [m => m.light],
+                  ['asc']
+                ).map(e => e.el)}
+              </ul>
+            ) : (
+              <p>Nightfalls are currently unavailable.</p>  
+            )}
           </div>
         </div>
         <div className='padder'>
           <div className='module'>
-            <div className='sub-header'>
-              <div>{t('Ranks')}</div>
-            </div>
-            <div className='ranks'>
-              {[2772425241, 2626549951, 2000925172].map(hash => {
-                return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characters: member.data.profile.characters.data, characterProgressions }} />;
-              })}
+            <div className='content'>
+              <div className='module-header'>
+                <div className='sub-name'>{t('Ranks')}</div>
+              </div>
+              {/* <div className='sub-header'>
+                <div>{t('Ranks')}</div>
+              </div> */}
+              <div className='ranks'>
+                {[2772425241, 2626549951, 2000925172].map(hash => {
+                  return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characters: member.data.profile.characters.data, characterProgressions }} />;
+                })}
+              </div>
             </div>
           </div>
           {group ? (
-            <div className='module clan-roster'>
-              <div className='sub-header'>
-                <div>{t('Clan roster')}</div>
-                <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>
+            <div className='module'>
+              <div className='content clan-roster'>
+                <div className='module-header'>
+                  <div className='sub-name'>{t('Clan')}</div>
+                </div>
+                <div className='duo'>
+                  <h4>{t('Roster')}</h4>
+                  <h4>{t('{{number}} online', { number: groupMembers.members.filter(member => member.isOnline).length })}</h4>
+                </div>
+                {/* <div className='sub-header'>
+                  <div>{t('Clan roster')}</div>
+                  <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>
+                </div> */}
+                <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
+                {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
               </div>
-              <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
-              {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
             </div>
           ) : null}
-          <div className='module'>
-            <div className='sub-header'>
-              <div>Bungie.net</div>
-            </div>
-            {this.state.bNetNews.loading ? <Spinner /> : !this.state.bNetNews.loading && !this.state.bNetNews.error ? (
-              <div className='news'>
-                <ObservedImage className='image padding' ratio='0.5' src={`https://www.bungie.net${this.state.bNetNews.items[0].image}`} />
-                <p>Some text</p><p>Some text</p>
-                
-              </div>
-            ) : (
-              <p>There was an error</p>
-            )}
-          </div>
-          <div className='module'>
-            <div className='sub-header'>
-              <div>Braytech</div>
-            </div>
-            <div className=''></div>
-          </div>
         </div>
       </div>
     );
