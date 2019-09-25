@@ -126,6 +126,14 @@
   }
 }
 
+#sit-rep .info {
+  font-style: italic;
+  letter-spacing: 1px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 
 
 
@@ -140,7 +148,7 @@
   justify-content: space-between;
   font-size: 14px;
   margin: 0;
-  padding: 10px 1rem;
+  padding: 0 1rem;
 }
 
 #sit-rep .list.activities li > div:not(.name) {
@@ -148,6 +156,10 @@
   grid-template-columns: auto 50px;
   grid-gap: 6px;
   text-align: right;
+}
+
+#sit-rep .list.activities li .name {
+  font-size: 16px;
 }
 
 #sit-rep .list.activities li .time {

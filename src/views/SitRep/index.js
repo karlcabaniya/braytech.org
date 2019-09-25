@@ -151,9 +151,7 @@ class SitRep extends React.Component {
                 </p>
               </div>
             ) : (
-              <div className='text'>
-                <p>{t('Beep-boop?')}</p>
-              </div>
+              <div className='info'>{t('Beep-boop?')}</div>
             )}
           </div>
           <div className='content highlight crucible'>
@@ -239,7 +237,7 @@ class SitRep extends React.Component {
                 ).map(e => e.el)}
               </ul>
             ) : (
-              <p>Nightfalls are currently unavailable.</p>  
+              <div className='info'>Nightfalls are currently unavailable.</div>
             )}
           </div>
         </div>
@@ -274,7 +272,9 @@ class SitRep extends React.Component {
                   <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>
                 </div> */}
                 <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
-                {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
+                {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : groupMembers.members.filter(member => member.isOnline).length < 1 ? (
+                  <div className='info'>{t("There's no one here right now")}</div>
+                ) : <Roster mini showOnline />}
               </div>
             </div>
           ) : null}
