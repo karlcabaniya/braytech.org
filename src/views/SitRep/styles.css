@@ -92,13 +92,8 @@
 #sit-rep .module .content.highlight.crucible .mode {
   position: relative;
   display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: 140px auto;
-}
-
-#sit-rep .module .content.highlight.crucible .mode .icon {
-  position: relative;
-  max-width: 140px;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 2fr;
 }
 
 #sit-rep .module .content.highlight.crucible .mode .icon svg {
