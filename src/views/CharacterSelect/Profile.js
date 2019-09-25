@@ -19,7 +19,7 @@ class Profile extends React.Component {
 
     return (
       <div className='user'>
-        <div className='info'>
+        <div className='summary'>
           <div className='displayName'>{member.data.profile.profile.data.userInfo.displayName}</div>
           {groups.length === 1 && <div className='clan'>{groups[0].group.name}</div>}
           <Flair type={member.membershipType} id={member.membershipId} />

@@ -139,15 +139,6 @@
   margin: 1rem 0 2rem;
 }
 
-#checklists .module.list .info .text {
-  margin: 0;
-  font-style: italic;
-  letter-spacing: 1px;
-  font-size: 14px;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.4);
-}
-
 @media screen and (max-width: 1200px) {
   .list.checklist-items li .text {
     flex-basis: calc(100% - 1rem - 10px);

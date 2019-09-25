@@ -120,16 +120,6 @@
   }
 }
 
-#sit-rep .info {
-  font-style: italic;
-  letter-spacing: 1px;
-  font-size: 14px;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-
-
 
 #sit-rep .list.activities {
   display: grid;

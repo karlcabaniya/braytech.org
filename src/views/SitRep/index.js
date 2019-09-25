@@ -272,9 +272,7 @@ class SitRep extends React.Component {
                   <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>
                 </div> */}
                 <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
-                {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : groupMembers.members.filter(member => member.isOnline).length < 1 ? (
-                  <div className='info'>{t("There's no one here right now")}</div>
-                ) : <Roster mini showOnline />}
+                {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
               </div>
             </div>
           ) : null}

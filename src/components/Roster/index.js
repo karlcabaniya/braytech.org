@@ -75,16 +75,17 @@ class Roster extends React.Component {
   calculateResets = (progressionHash, characterId, characterProgressions) => {
     return {
       current: characterProgressions[characterId].progressions[progressionHash] && Number.isInteger(characterProgressions[characterId].progressions[progressionHash].currentResetCount) ? characterProgressions[characterId].progressions[progressionHash].currentResetCount : '?',
-      total: characterProgressions[characterId].progressions[progressionHash] && characterProgressions[characterId].progressions[progressionHash].seasonResets
-        ? characterProgressions[characterId].progressions[progressionHash].seasonResets.reduce((acc, curr) => {
-          if (curr.season > 3) {
-            return acc + curr.resets;
-          } else {
-            return acc;
-          }
-        }, 0)
-        : '?'
-    }
+      total:
+        characterProgressions[characterId].progressions[progressionHash] && characterProgressions[characterId].progressions[progressionHash].seasonResets
+          ? characterProgressions[characterId].progressions[progressionHash].seasonResets.reduce((acc, curr) => {
+              if (curr.season > 3) {
+                return acc + curr.resets;
+              } else {
+                return acc;
+              }
+            }, 0)
+          : '?'
+    };
   };
 
   render() {
@@ -96,18 +97,20 @@ class Roster extends React.Component {
     results.forEach(m => {
       const isPrivate = !m.profile || (!m.profile.characterActivities.data || !m.profile.characters.data.length);
       const isSelf = !isPrivate ? m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId : false;
-      
+
       const characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
 
       const lastActivities = destinyUtils.lastPlayerActivity(m);
       const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = orderBy(lastActivities, [a => a.lastPlayed], ['desc'])[0];
 
       const lastCharacter = !isPrivate ? m.profile.characters.data.find(c => c.characterId === lastCharacterId) : false;
-      
-      const weeklyXp = !isPrivate ? characterIds.reduce((currentValue, characterId) => {
-        let characterProgress = m.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;
-        return characterProgress + currentValue;
-      }, 0) : 0;
+
+      const weeklyXp = !isPrivate
+        ? characterIds.reduce((currentValue, characterId) => {
+            let characterProgress = m.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;
+            return characterProgress + currentValue;
+          }, 0)
+        : 0;
 
       const triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
 
@@ -145,7 +148,7 @@ class Roster extends React.Component {
           gloryPoints,
           valorPoints,
           infamyPoints,
-          weeklyXp: weeklyXp / characterIds.length * 5000,
+          weeklyXp: (weeklyXp / characterIds.length) * 5000,
           rank: m.memberType
         },
         el: {
@@ -178,10 +181,21 @@ class Roster extends React.Component {
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && lastActivityString })}>
                       {m.isOnline && lastActivityString ? (
                         <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash} data-mode={lastActivity.currentActivityModeHash} data-playlist={lastActivity.currentPlaylistActivityHash}>
-                          <div>{lastActivityString}<span>{moment(lastPlayed).locale('relative-sml').fromNow(true)}</span></div>
+                          <div>
+                            {lastActivityString}
+                            <span>
+                              {moment(lastPlayed)
+                                .locale('relative-sml')
+                                .fromNow(true)}
+                            </span>
+                          </div>
                         </div>
                       ) : (
-                        <div>{moment(lastPlayed).locale('relative-sml').fromNow()}</div>
+                        <div>
+                          {moment(lastPlayed)
+                            .locale('relative-sml')
+                            .fromNow()}
+                        </div>
                       )}
                     </li>
                     <li className='col triumphScore'>{triumphScore.toLocaleString('en-us')}</li>
@@ -192,7 +206,9 @@ class Roster extends React.Component {
                     <li className='col progression infamy'>
                       {infamyPoints.toLocaleString('en-us')} {infamyResets ? <div className='resets'>({infamyResets})</div> : null}
                     </li>
-                    <li className='col weeklyXp'><span>{weeklyXp.toLocaleString('en-us')}</span> / {(characterIds.length * 5000).toLocaleString('en-us')}</li>
+                    <li className='col weeklyXp'>
+                      <span>{weeklyXp.toLocaleString('en-us')}</span> / {(characterIds.length * 5000).toLocaleString('en-us')}
+                    </li>
                   </>
                 ) : (
                   <>
@@ -317,16 +333,20 @@ class Roster extends React.Component {
       });
     }
 
-    return (
-      <>
-        <ul className={cx('list', 'roster', { mini: mini })}>{mini ? this.props.limit ? members.slice(0, this.props.limit).map(m => m.el.mini) : members.map(m => m.el.mini) : members.map(m => m.el.full)}</ul>
-        {mini ? (
-          <ProfileLink className='button' to='/clan/roster'>
-            <div className='text'>{t('See full roster')}</div>
-          </ProfileLink>
-        ) : null}
-      </>
-    );
+    if (groupMembers.members.filter(member => member.isOnline).length < 1) {
+      return <div className='info'>{t("There's no one here right now")}</div>;
+    } else {
+      return (
+        <>
+          <ul className={cx('list', 'roster', { mini: mini })}>{mini ? (this.props.limit ? members.slice(0, this.props.limit).map(m => m.el.mini) : members.map(m => m.el.mini)) : members.map(m => m.el.full)}</ul>
+          {mini ? (
+            <ProfileLink className='button' to='/clan/roster'>
+              <div className='text'>{t('See full roster')}</div>
+            </ProfileLink>
+          ) : null}
+        </>
+      );
+    }
   }
 }
 
