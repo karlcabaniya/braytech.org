@@ -333,8 +333,15 @@ class Roster extends React.Component {
       });
     }
 
-    if (groupMembers.members.filter(member => member.isOnline).length < 1) {
-      return <div className='info'>{t("There's no one here right now")}</div>;
+    if (mini && groupMembers.members.filter(member => member.isOnline).length < 1) {
+      return (
+        <div className='roster'>
+          <div className='info'>{t("There's no one here right now.")}</div>
+          <ProfileLink className='button' to='/clan/roster'>
+            <div className='text'>{t('See full roster')}</div>
+          </ProfileLink>
+        </div>
+      );
     } else {
       return (
         <>

@@ -2,6 +2,10 @@
   
 }
 
+.roster .info ~ .button {
+  margin: 1rem 0 0;
+}
+
 .list.roster .row,
 .list.roster .row ul .col {
   /* height: unset; */
