@@ -263,10 +263,10 @@ class SitRep extends React.Component {
                 <div className='module-header'>
                   <div className='sub-name'>{t('Clan')}</div>
                 </div>
-                <div className='duo'>
-                  <h4>{t('Roster')}</h4>
-                  <h4>{t('{{number}} online', { number: groupMembers.members.filter(member => member.isOnline).length })}</h4>
-                </div>
+                <h4>
+                  <span>{t('Roster')}</span>
+                  <span>{t('{{number}} online', { number: groupMembers.members.filter(member => member.isOnline).length })}</span>
+                </h4>
                 {/* <div className='sub-header'>
                   <div>{t('Clan roster')}</div>
                   <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>

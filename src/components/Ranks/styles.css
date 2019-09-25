@@ -22,12 +22,6 @@
   font-size: 96px;
 }
 
-.ranks .rank h4 {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 16px;
-  margin: 20px 0 14px;
-}
-
 .ranks .rank .data {
   margin: 0 0 1rem;
   display: grid;

@@ -83,12 +83,6 @@
   margin: 12px 0 0;
 }
 
-#sit-rep .module h4 {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 16px;
-  margin: 20px 0 14px;
-}
-
 #sit-rep .module .content.highlight.crucible .mode {
   position: relative;
   display: grid;

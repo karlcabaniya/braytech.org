@@ -8,12 +8,6 @@
   width: 100%;
 }
 
-#clan .module h4 {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 16px;
-  margin: 20px 0 14px;
-}
-
 #clan .module .module-header {
   position: relative;
   margin: 16px 0 0;
