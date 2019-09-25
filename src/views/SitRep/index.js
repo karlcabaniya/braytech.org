@@ -7,9 +7,9 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import * as utils from '../../utils/destinyUtils';
+import * as bungie from '../../utils/bungie';
 import ObservedImage from '../../components/ObservedImage';
 import Spinner from '../../components/UI/Spinner';
-import ProgressBar from '../../components/UI/ProgressBar';
 import Ranks from '../../components/Ranks';
 import Roster from '../../components/Roster';
 
@@ -24,12 +24,56 @@ class SitRep extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      bNetNews: {
+        loading: true,
+        error: false,
+        items: []
+      }
+    };
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.rebindTooltips();
+
+    this.bNetNews();
+  }
+
+  bNetNews = async () => {
+    try {
+      const response = await bungie.GetTrendingCategories();
+
+      const news = response.categories && response.categories.find(c => c.categoryId === 'News');
+
+      console.log(news.entries.results);
+
+      if (news) {
+        this.setState({
+          bNetNews: {
+            loading: false,
+            error: false,
+            items: news.entries.results
+          }
+        });
+      } else {
+        this.setState({
+          bNetNews: {
+            loading: false,
+            error: true,
+            items: []
+          }
+        });
+      }
+    } catch (e) {
+      this.setState({
+        bNetNews: {
+          loading: false,
+          error: true,
+          items: []
+        }
+      });
+    }
   }
 
   render() {
@@ -119,8 +163,7 @@ class SitRep extends React.Component {
 
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      // if (definitionActivity && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers.length > 2) return true;
-      if (definitionActivity && definitionActivity.activityModeTypes.includes(16)) return true;
+      if (definitionActivity && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
 
       return false;
     });
@@ -131,7 +174,9 @@ class SitRep extends React.Component {
       }
     }
 
-    console.log(weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]))
+    // console.log(weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]))
+
+    
 
     return (
       <div className='view' id='sit-rep'>
@@ -262,7 +307,15 @@ class SitRep extends React.Component {
             <div className='sub-header'>
               <div>Bungie.net</div>
             </div>
-            <div className=''></div>
+            {this.state.bNetNews.loading ? <Spinner /> : !this.state.bNetNews.loading && !this.state.bNetNews.error ? (
+              <div className='news'>
+                <ObservedImage className='image padding' ratio='0.5' src={`https://www.bungie.net${this.state.bNetNews.items[0].image}`} />
+                <p>Some text</p><p>Some text</p>
+                
+              </div>
+            ) : (
+              <p>There was an error</p>
+            )}
           </div>
           <div className='module'>
             <div className='sub-header'>

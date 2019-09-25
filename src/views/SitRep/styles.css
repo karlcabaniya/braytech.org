@@ -107,8 +107,8 @@
   fill: rgba(255, 255, 255, 0.8);
 }
 
-#sit-rep .module .content.highlight.crucible .mode .icon svg .square:not(.rorange) {
-  animation: rotate-linear 10s infinite linear;
+#sit-rep .module .content.highlight.crucible .mode .icon svg .polygon.inner {
+  animation: rotate-linear 20s infinite linear;
   transform-origin: center;
 }
 

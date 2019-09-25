@@ -15,7 +15,7 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-.list.roster .row::after {
+.list.roster:not(.mini) .row::after {
   content: ' ';
   position: absolute;
   left: 0;
