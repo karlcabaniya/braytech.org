@@ -19,20 +19,17 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* #this-week > .module.head .page-header {
-  margin-bottom: 0rem;
-} */
-
 #this-week > .module.head .text p {
   font-size: 16px;
+}
+
+#this-week > .module.head .text p:last-child {
+  font-size: 14px;
 }
 
 #this-week .module .content.highlight .module-header {
   margin: 24px 0 0;
 }
-
-
-
 
 #this-week .module .sub-header ~ .sub-header {
   margin: 3rem 0 1rem;

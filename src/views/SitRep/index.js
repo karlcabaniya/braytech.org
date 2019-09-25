@@ -13,6 +13,11 @@ import ProgressBar from '../../components/UI/ProgressBar';
 import Ranks from '../../components/Ranks';
 import Roster from '../../components/Roster';
 
+import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
+import { ReactComponent as CrucibleIconDoubles } from './icons/doubles.svg';
+import { ReactComponent as CrucibleIconBreakthrough } from './icons/breakthrough.svg';
+import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
+
 import './styles.css';
 
 class SitRep extends React.Component {
@@ -29,146 +34,151 @@ class SitRep extends React.Component {
 
   render() {
     const { t, member, groupMembers } = this.props;
+    const { profile, milestones } = member.data;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     const characters = member.data.profile.characters.data;
     const character = characters.find(c => c.characterId === member.characterId);
     const characterProgressions = member.data.profile.characterProgressions.data;
+    const characterActivities = member.data.profile.characterActivities.data;
 
-    // const milestonesData = Object.values(member.data.milestones).map(m => manifest.DestinyMilestoneDefinition[m.milestoneHash]);
-    // console.log(milestonesData);
+    const wellRestedState = utils.isWellRested(characterProgressions[character.characterId]);
 
-    // const times = [
-    //   { "name": "Ice and Shadow", "mins": 5 },
-    //   { "name": "The Gateway", "mins": 5 },
-    //   { "name": "Riptide", "mins": 5 },
-    //   { "name": "A Deadly Trial", "mins": 5 },
-    //   { "name": "Unbroken", "mins": 5 },
-    //   { "name": "Utopia", "mins": 6 },
-    //   { "name": "Looped", "mins": 6 },
-    //   { "name": "Hope", "mins": 6 },
-    //   { "name": "Hijacked", "mins": 6 },
-    //   { "name": "Deep Storage", "mins": 6 },
-    //   { "name": "Combustion", "mins": 7 },
-    //   { "name": "Payback", "mins": 7 },
-    //   { "name": "Pilgrimage", "mins": 7 },
-    //   { "name": "Larceny", "mins": 7 },
-    //   { "name": "Sacrilege", "mins": 7 },
-    //   { "name": "Homecoming", "mins": 7 },
-    //   { "name": "Six", "mins": 8 },
-    //   { "name": "Chosen", "mins": 9 },
-    //   { "name": "Fury", "mins": 9 },
-    //   { "name": "High Plains Blues", "mins": 9 },
-    //   { "name": "Scorned", "mins": 9 },
-    //   { "name": "Omega", "mins": 11 },
-    //   { "name": "Beyond Infinity", "mins": 11 },
-    //   { "name": "1AU", "mins": 12 },
-    //   { "name": "The Machinist", "mins": 12 },
-    //   { "name": "Last Call", "mins": 13 },
-    //   { "name": "Nothing Left to Say", "mins": 13 },
-    //   { "name": "Off-World Recovery", "mins": 12 }
-    // ];
+    // console.log(wellRestedState)
 
-    // let obj = {};
+    characterActivities[member.characterId].availableActivities.forEach(a => {
+      // console.log(manifest.DestinyActivityDefinition[a.activityHash])
+    });
 
-    // manifest.DestinyMilestoneDefinition[3082135827].activities.forEach(ac => {
-    //   let def = manifest.DestinyActivityDefinition[ac.activityHash];
+    // flashpoint
+    const milestoneFlashpointQuestItem = milestones[463010297].availableQuests && milestones[463010297].availableQuests.length && manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
+    const definitionFlashpointVendor =
+    milestoneFlashpointQuestItem &&
+      Object.values(manifest.DestinyVendorDefinition).find(v => {
+        if (milestoneFlashpointQuestItem.destinationHash === 1993421442) {
+          return v.locations && v.locations.find(l => l.destinationHash === 3669933163);
+        } else {
+          return v.locations && v.locations.find(l => l.destinationHash === milestoneFlashpointQuestItem.destinationHash);
+        }
+      });
+      const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
+    
+    // console.log(definitionMilestoneFLashpoint, milestoneFlashpointQuestItem, definitionFlashpointVendor)
 
-    //   let time = times.find(t => t.name.toLowerCase().trim() === def.selectionScreenDisplayProperties.name.toLowerCase().trim())
-    //   if (!time) console.log(def)
-    //   obj[def.hash] = {
-    //     timeToComplete: time && time.mins || -1
-    //   }
+    const commonCrucibleModes = [
+      3243161126, // Quickplay
+      3062197616, // Competitive
+      1859507212, // Private Match
+      2274172949, // Quickplay
+      2947109551, // Competitive
+      2087163649  // Rumble
+    ];
+    const crucibleModeIcons = {
+      1312786953: <CrucibleIconMayhem />
+    };
+    const featuredCrucibleMode = characterActivities[member.characterId].availableActivities.find(a => {
+      if (!a.activityHash) return false;
+      const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+      if (definitionActivity && definitionActivity.activityModeTypes.includes(5) && !commonCrucibleModes.includes(definitionActivity.hash)) {
+        a.displayProperties = definitionActivity.displayProperties;
+        a.icon = crucibleModeIcons[definitionActivity.hash];
+        return true;
+      }
+
+      return false;
+    });
+
+    console.log(featuredCrucibleMode);
+    
+    const knownStoryActivities = [129918239, 271962655, 589157009, 1023966646, 1070049743, 1132291813, 1259766043, 1313648352, 1513386090, 1534123682, 1602328239, 1872813880, 1882259272, 1906514856, 2000185095, 2146977720, 2568845238, 2660895412, 2772894447, 2776154899, 3008658049, 3205547455, 3271773240, 4009655461, 4234327344, 4237009519, 4244464899];
+    const dailyHeroicStoryActivities = characterActivities[member.characterId].availableActivities.filter(a => {
+      if (!a.activityHash) return false;
+
+      if (!knownStoryActivities.includes(a.activityHash)) return false;
+
+      return true;
+    });
+    const dailyHeroicStories = {
+      activities: dailyHeroicStoryActivities,
+      displayProperties: {
+        name: manifest.DestinyPresentationNodeDefinition[3028486709] && manifest.DestinyPresentationNodeDefinition[3028486709].displayProperties && manifest.DestinyPresentationNodeDefinition[3028486709].displayProperties.name
+      }
+    }
+
+    // orderBy(Object.values(manifest.DestinyActivityDefinition).map(a => {
+    //   if (a.activityModeTypes && a.activityModeTypes.length && a.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers.length > 2) return a;
+    //   return false
+    // }).filter(a => a),
+    // [m => m.displayProperties.name],
+    // ['asc']).forEach(a => {
+    //   console.log(a.displayProperties.name, a.hash, JSON.stringify(a.activityModeTypes))
     // })
 
-    // console.log(JSON.stringify(obj))
+    const weeklyNightfallStrikeActivities = characterActivities[member.characterId].availableActivities.filter(a => {
+      if (!a.activityHash) return false;
 
-    let milestones = [];
-    Object.values(characterProgressions[member.characterId].milestones).forEach(milestone => {
-      let def = manifest.DestinyMilestoneDefinition[milestone.milestoneHash];
+      const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (milestone.milestoneHash === 4253138191) {
-        return; // Weekly Clan Engrams
+      // if (definitionActivity && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers.length > 2) return true;
+      if (definitionActivity && definitionActivity.activityModeTypes.includes(16)) return true;
+
+      return false;
+    });
+    const weeklyNightfallStrikes = {
+      activities: weeklyNightfallStrikeActivities,
+      displayProperties: {
+        name: t('Nightfalls')
       }
+    }
 
-      // console.log(def.displayProperties.name, milestone);
+    console.log(weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]))
 
-      // if (milestone.milestoneHash === 1300394968) console.log(def.displayProperties.name, milestone);
-
-      let state = {
-        earned: false,
-        redeemed: false,
-        objective: {
-          progress: 0,
-          completionValue: 1
-        },
-        rewards: [],
-        supps: false
-      };
-
-      let displayProperties = {
-        name: def.displayProperties.name,
-        description: def.displayProperties.description
-      };
-
-      if (milestone.availableQuests) {
-        let availableQuest = milestone.availableQuests[0];
-
-        state.earned = availableQuest.status.completed;
-        state.redeemed = availableQuest.status.redeemed;
-        state.objective.progress = availableQuest.status.stepObjectives[0].progress;
-        state.objective.completionValue = availableQuest.status.stepObjectives[0].completionValue;
-
-        displayProperties.name = manifest.DestinyMilestoneDefinition[milestone.milestoneHash].quests[availableQuest.questItemHash].displayProperties.name;
-        displayProperties.description = manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].displayProperties.description !== '' ? manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].displayProperties.description : manifest.DestinyObjectiveDefinition[availableQuest.status.stepObjectives[0].objectiveHash].progressDescription;
-
-        let questItem = manifest.DestinyInventoryItemDefinition[availableQuest.questItemHash];
-        if (questItem.value) {
-          let questRewardItem = questItem.value.itemValue.find(i => i.itemHash);
-          if (questRewardItem) {
-            state.rewards.push(questRewardItem.itemHash);
-          }
-        }
-      } else if (milestone.rewards) {
-        if (milestone.activities && milestone.activities.length) {
-          milestone.activities.forEach(a => {
-            if (a.challenges.length > 0) {
-              a.challenges.forEach(c => {
-                state.earned = c.objective.complete;
-                state.objective.progress = c.objective.progress;
-                state.objective.completionValue = c.objective.completionValue;
-              });
-            }
-          });
-        } else {
-          state.earned = milestone.rewards[0].entries[0].earned;
-          state.redeemed = milestone.rewards[0].entries[0].redeemed;
-        }
-
-        let rewardEntryHashes = flattenDepth(milestone.rewards.map(r => r.entries), 1).map(r => r.rewardEntryHash);
-        let mappedRewards = flattenDepth(rewardEntryHashes.map(r => Object.values(manifest.DestinyMilestoneDefinition[milestone.milestoneHash].rewards[r].rewardEntries).find(e => e.rewardEntryHash === r).items), 1).map(i => i.itemHash);
-
-        state.rewards.push(...mappedRewards);
-      } else {
-        return;
-      }
-
-      if ([3082135827, 2171429505, 1300394968].includes(milestone.milestoneHash)) {
-        let activities = milestone.activities;
-        if (milestone.milestoneHash === 2171429505) activities = milestone.activities.filter(nf => nf.modifierHashes);
-        if (milestone.milestoneHash === 1300394968) activities = milestone.activities.filter(ad => ad.challenges.length);
-
-        state.supps = (
-          <>
-            <h4>{t('Activities available')}</h4>
+    return (
+      <div className='view' id='sit-rep'>
+        <div className='module head'>
+          <div className='content'>
+            <div className='page-header'>
+              <div className='sub-name'>{t('Now')}</div>
+              <div className='name'>{manifest.DestinyDestinationDefinition[milestoneFlashpointQuestItem.destinationHash].displayProperties.name}</div>
+            </div>
+            {definitionFlashpointVendor && definitionFlashpointVendor.displayProperties ? (
+              <div className='text'>
+                <p>{t('{{vendorName}} is waiting for you at {{destinationName}}.', { vendorName: definitionFlashpointVendor.displayProperties && definitionFlashpointVendor.displayProperties.name, destinationName: manifest.DestinyDestinationDefinition[milestoneFlashpointQuestItem.destinationHash].displayProperties.name })}</p>
+                <p>
+                  <em>{definitionFlashpointFaction.displayProperties.description}</em>
+                </p>
+              </div>
+            ) : (
+              <div className='text'>
+                <p>{t('Beep-boop?')}</p>
+              </div>
+            )}
+          </div>
+          <div className='content highlight crucible'>
+            <div className='module-header'>
+              <div className='sub-name'>{t('Crucible')}</div>
+            </div>
+            <div className='mode'>
+              <div className='icon'>{featuredCrucibleMode.icon}</div>
+              <div className='text'>
+                <p>{featuredCrucibleMode.displayProperties.name}</p>
+                <p>{featuredCrucibleMode.displayProperties.description}</p>
+              </div>
+            </div>
+          </div>
+          <div className='content highlight'>
+            <div className='module-header'>
+              <div className='sub-name'>{dailyHeroicStories.displayProperties.name}</div>
+            </div>
             <ul className='list activities'>
               {orderBy(
-                activities.map((ac, i) => {
-                  const definitionActivity = manifest.DestinyActivityDefinition[ac.activityHash];
+                dailyHeroicStories.activities.map((a, i) => {
+                  const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
                   return {
                     light: definitionActivity.activityLightLevel,
                     el: (
-                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={ac.activityHash} data-mode='175275639'>
+                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
                         <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
                         <div>
                           <div className='time'>
@@ -190,105 +200,77 @@ class SitRep extends React.Component {
                 ['asc']
               ).map(e => e.el)}
             </ul>
-          </>
-        );
-      }
+          </div>
+          <div className='content highlight'>
+            <div className='module-header'>
+              <div className='sub-name'>{weeklyNightfallStrikes.displayProperties.name}</div>
+            </div>
+            <ul className='list activities'>
+              {orderBy(
+                weeklyNightfallStrikes.activities.map((a, i) => {
+                  const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      // console.log(state.rewards)
-
-      milestones.push({
-        order: milestone.order,
-        element: (
-          <li key={milestone.milestoneHash} className={cx(`milestone-${milestone.milestoneHash}`, { 'has-icon': [3082135827, 2171429505, 1300394968].includes(milestone.milestoneHash), 'full-width': [3082135827, 2171429505, 1300394968].includes(milestone.milestoneHash), supps: state.supps, earned: state.earned })}>
-            <ProgressBar
-              objective={{
-                progressDescription: displayProperties.name,
-                completionValue: state.objective.completionValue
-              }}
-              progress={{
-                progress: state.objective.progress,
-                objectiveHash: milestone.milestoneHash
-              }}
-              hideCheck
-            />
-            <div className='basic'>
-              <div className='text'>{displayProperties.description}</div>
-              {state.rewards.map((r, i) => {
-                const def = manifest.DestinyInventoryItemDefinition[r];
-                return (
-                  <div key={i} className='reward'>
-                    <ObservedImage className='image' src={`https://www.bungie.net${def.displayProperties.icon}`} />
-                    <div className='name'>{def.displayProperties.name}</div>
-                  </div>
-                );
+                  return {
+                    light: definitionActivity.activityLightLevel,
+                    el: (
+                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
+                        <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
+                        <div>
+                          <div className='time'>
+                            {definitionActivity.timeToComplete ? (
+                              <>
+                                {t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}
+                              </>
+                            ) : null}
+                          </div>
+                          <div className='light'>
+                            <span>{definitionActivity.activityLightLevel}</span>
+                          </div>
+                        </div>
+                      </li>
+                    )
+                  };
+                }),
+                [m => m.light],
+                ['asc']
+              ).map(e => e.el)}
+            </ul>
+          </div>
+        </div>
+        <div className='padder'>
+          <div className='module'>
+            <div className='sub-header'>
+              <div>{t('Ranks')}</div>
+            </div>
+            <div className='ranks'>
+              {[2772425241, 2626549951, 2000925172].map(hash => {
+                return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characters: member.data.profile.characters.data, characterProgressions }} />;
               })}
             </div>
-            {state.supps ? <div className='supps'>{state.supps}</div> : null}
-          </li>
-        )
-      });
-    });
-
-    milestones = orderBy(milestones, [m => m.order], ['asc']);
-
-    const wellRestedState = utils.isWellRested(characterProgressions[character.characterId]);
-
-    if (wellRestedState.wellRested) {
-      const definitionSandboxPerk = manifest.DestinySandboxPerkDefinition[1519921522];
-
-      milestones.unshift({
-        order: 0,
-        element: (
-          <li key='rest' className='well-rested'>
-            <ProgressBar
-              objective={{
-                progressDescription: definitionSandboxPerk.displayProperties && definitionSandboxPerk.displayProperties.name,
-                completionValue: wellRestedState.requiredXP
-              }}
-              progress={{
-                progress: wellRestedState.progress,
-                objectiveHash: 'rest'
-              }}
-              hideCheck
-            />
-            <div className='basic'>
-              <div className='text'>{definitionSandboxPerk.displayProperties && definitionSandboxPerk.displayProperties.description}</div>
+          </div>
+          {group ? (
+            <div className='module clan-roster'>
+              <div className='sub-header'>
+                <div>{t('Clan roster')}</div>
+                <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>
+              </div>
+              <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
+              {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
             </div>
-          </li>
-        )
-      });
-    }
-
-    // console.log(member);
-
-    return (
-      <div className='view' id='sit-rep'>
-        <div className='module milestones'>
-          <div className='sub-header sub'>
-            <div>{t('Milestones')}</div>
+          ) : null}
+          <div className='module'>
+            <div className='sub-header'>
+              <div>Bungie.net</div>
+            </div>
+            <div className=''></div>
           </div>
-          {milestones.length ? <ul className='list'>{milestones.map(m => m.element)}</ul> : <div className='milestones-completed'>{t("You've completed all of your milestones for this character.")}</div>}
-        </div>
-        <div className='module'>
-          <div className='sub-header sub'>
-            <div>{t('Ranks')}</div>
-          </div>
-          <div className='ranks'>
-            {[2772425241, 2626549951, 2000925172].map(hash => {
-              return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characters: member.data.profile.characters.data, characterProgressions }} />;
-            })}
+          <div className='module'>
+            <div className='sub-header'>
+              <div>Braytech</div>
+            </div>
+            <div className=''></div>
           </div>
         </div>
-        {group ? (
-          <div className='module clan-roster'>
-            <div className='sub-header sub'>
-              <div>{t('Clan roster')}</div>
-              <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>
-            </div>
-            <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
-            {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
-          </div>
-        ) : null}
       </div>
     );
   }

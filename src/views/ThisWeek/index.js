@@ -730,8 +730,8 @@ class ThisWeek extends React.Component {
 
   render() {
     const { t, member } = this.props;
-    const { characterId } = member;
     const { profile, milestones } = member.data;
+    const characterActivities = member.data.profile.characterActivities.data;
 
     const resetTime = '17:00:00Z';
 
@@ -793,9 +793,17 @@ class ThisWeek extends React.Component {
     // scored nightfall strikes
     const moduleNightfalls = [];
 
-    milestones[2171429505] && milestones[2171429505].activities
-      .filter(activity => activity.modifierHashes)
-      .forEach(activity => {
+    const weeklyNightfallStrikeActivities = characterActivities[member.characterId].availableActivities.filter(a => {
+      if (!a.activityHash) return false;
+
+      const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+      if (definitionActivity && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
+
+      return false;
+    });
+    
+    weeklyNightfallStrikeActivities.forEach(activity => {
         const nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
 
         moduleNightfalls.push(
@@ -968,7 +976,7 @@ class ThisWeek extends React.Component {
     const reckoningModifiers = milestones[601087286].activities[0].modifierHashes;
     const strikesModifiers = milestones[1437935813].activities[0].modifierHashes;
 
-    const availableHeroicMenagerie = profile.characterActivities.data[characterId].availableActivities && profile.characterActivities.data[characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)) && manifest.DestinyActivityDefinition[profile.characterActivities.data[characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)).activityHash];
+    const availableHeroicMenagerie = profile.characterActivities.data[member.characterId].availableActivities && profile.characterActivities.data[member.characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)) && manifest.DestinyActivityDefinition[profile.characterActivities.data[member.characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)).activityHash];
 
     const menagerieHeroicCollectibles = {
       0: [1692129580, 2678796997],
@@ -1055,7 +1063,7 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Heroic Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' hashes={menagerieHeroicCollectibles[profile.characters.data.find(c => c.characterId === characterId).classType]} />
+          <Collectibles selfLinkFrom='/this-week' hashes={menagerieHeroicCollectibles[profile.characters.data.find(c => c.characterId === member.characterId).classType]} />
         </ul>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
@@ -1127,8 +1135,9 @@ class ThisWeek extends React.Component {
             </div>
             {definitionFlashpointFaction && definitionFlashpointFaction.displayProperties ? (
               <div className='text'>
+                <p>{t('{{vendorName}} is waiting for you at {{destinationName}}.', { vendorName: definitionFlashpointVendor.displayProperties && definitionFlashpointVendor.displayProperties.name, destinationName: manifest.DestinyDestinationDefinition[milestoneFlashpoint.destinationHash].displayProperties.name })}</p>
                 <p>
-                  {t('Contact in the field')}: {definitionFlashpointFaction.displayProperties.description}
+                  <em>{definitionFlashpointFaction.displayProperties.description}</em>
                 </p>
               </div>
             ) : (
