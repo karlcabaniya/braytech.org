@@ -22,8 +22,9 @@ _The source code of braytech.org_
 2.  Find screenshots at [/screenshots/](https://github.com/justrealmilk/braytech.org/tree/master/screenshots/)
 
 3.  Submit your screenshots with matching file name patterns to these folders
+    *  Original PNG file
     *  No HUD
-    *  1080p
+    *  1080p or greater, 16:9 aspect ratio
     *  Frame subject in very center
     *  Feel free to provide multiple variants
     *  No ammo, enemies, guardians in frame
