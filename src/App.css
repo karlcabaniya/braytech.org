@@ -15,18 +15,22 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-::-webkit-scrollbar {
-  width: 16px;
-}
+@media (any-pointer: fine) {
 
-::-webkit-scrollbar-track {
-  background: var(--scrollbar-track);
-  border-radius: 0px;
-}
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 0px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-draggy);
+    border-radius: 0px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-draggy);
-  border-radius: 0px;
 }
 
 #root > .wrapper.dark-mode {
