@@ -1082,7 +1082,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2313471548,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/region-chests/exodus-black_region-chests_42.jpg",
+    "screenshot": false,
     "debug": {
       "name": "Lost Oasis",
       "number": 4
@@ -1552,7 +1552,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2662231509,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-cistern_region-chests_46.jpg",
     "debug": {
       "name": "The Cistern",
       "number": 46
@@ -1563,7 +1563,7 @@
     "checklistId": 1697465175,
     "checklistHash": 1881681731,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/the-cistern_region-chests_47.jpg",
     "debug": {
       "name": "The Cistern",
       "number": 47
@@ -1618,7 +1618,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2414643433,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/glade-of-echoes_region-chests_52.jpg",
     "debug": {
       "name": "Glade of Echoes",
       "number": 52
@@ -1629,7 +1629,7 @@
     "checklistId": 1697465175,
     "checklistHash": 4048519991,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/glade-of-echoes_region-chests_53.jpg",
     "debug": {
       "name": "Glade of Echoes",
       "number": 53
@@ -1640,7 +1640,7 @@
     "checklistId": 1697465175,
     "checklistHash": 517025716,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/glade-of-echoes_region-chests_54.jpg",
     "debug": {
       "name": "Glade of Echoes",
       "number": 54
@@ -1981,7 +1981,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1468797866,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/exodus-black_ghost-scans_129.jpg",
+    "screenshot": false,
     "debug": {
       "name": "Terrabase Charon",
       "number": 12
@@ -3100,7 +3100,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3959793642,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-cistern_ghost-scans_117.jpg",
     "debug": {
       "name": "The Cistern",
       "number": 117
@@ -3111,7 +3111,7 @@
     "checklistId": 2360931290,
     "checklistHash": 3903162131,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-cistern_ghost-scans_118.jpg",
     "debug": {
       "name": "The Cistern",
       "number": 118
@@ -3122,7 +3122,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2916483792,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-cistern_ghost-scans_119.jpg",
     "debug": {
       "name": "The Cistern",
       "number": 119
@@ -3133,7 +3133,7 @@
     "checklistId": 2360931290,
     "checklistHash": 850025481,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-cistern_ghost-scans_120.jpg",
     "debug": {
       "name": "The Cistern",
       "number": 120
@@ -3144,7 +3144,7 @@
     "checklistId": 2360931290,
     "checklistHash": 394292070,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-cistern_ghost-scans_121.jpg",
     "debug": {
       "name": "The Cistern",
       "number": 121
@@ -3166,7 +3166,7 @@
     "checklistId": 2360931290,
     "checklistHash": 777902543,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/the-cistern_ghost-scans_123.jpg",
     "debug": {
       "name": "Pools of Luminance",
       "number": 123
@@ -3177,7 +3177,7 @@
     "checklistId": 2360931290,
     "checklistHash": 186016854,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/glade-of-echos_ghost-scans_124.jpg",
     "debug": {
       "name": "Glade of Echoes",
       "number": 124
@@ -3188,7 +3188,7 @@
     "checklistId": 2360931290,
     "checklistHash": 553772159,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/glade-of-echos_ghost-scans_125.jpg",
     "debug": {
       "name": "Glade of Echoes",
       "number": 125
@@ -3199,7 +3199,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2623699692,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/glade-of-echos_ghost-scans_126.jpg",
     "debug": {
       "name": "Glade of Echoes",
       "number": 126
@@ -3210,7 +3210,7 @@
     "checklistId": 2360931290,
     "checklistHash": 287051485,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/glade-of-echos_ghost-scans_127.jpg",
     "debug": {
       "name": "Glade of Echoes",
       "number": 127
@@ -3221,7 +3221,7 @@
     "checklistId": 2360931290,
     "checklistHash": 1240361690,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/glade-of-echos_ghost-scans_128.jpg",
     "debug": {
       "name": "Glade of Echoes",
       "number": 128
@@ -3276,7 +3276,7 @@
     "checklistId": 2360931290,
     "checklistHash": 159325932,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/exodus-black_ghost-scans_133.jpg",
     "debug": {
       "name": "Exodus Black",
       "number": 133
@@ -4461,7 +4461,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2248063191,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/the-cistern_lost-sectors_the-conflux.jpg",
     "debug": {
       "name": "The Conflux",
       "number": 24
@@ -4483,7 +4483,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2806770339,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/glade-of-echoes_lost-sectors_the-carrion-pit.jpg",
     "debug": {
       "name": "The Carrion Pit",
       "number": 26
@@ -4791,7 +4791,7 @@
   {
     "checklistId": 3305936921,
     "recordHash": 259242255,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/the-conflux_the-awoken-of-the-reef_19.jpg",
     "debug": {
       "name": "Flayed",
       "number": 19
