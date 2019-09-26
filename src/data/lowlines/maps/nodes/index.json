@@ -3105,7 +3105,7 @@
       "name": "The Cistern",
       "number": 117
     },
-    "description": false
+    "description": "Use the wall, as pictured, to climb above this particle beam."
   },
   {
     "checklistId": 2360931290,
@@ -3171,7 +3171,7 @@
       "name": "Pools of Luminance",
       "number": 123
     },
-    "description": false
+    "description": "Enter the wall and follow the path for a time. You'll reach a stream of radiolaria. Heading forwards and upwards, you'll notice rays of light shining from behind some boulders on your right. Investigate them and find a small opening at the source of the light. Follow the light to the artifact."
   },
   {
     "checklistId": 2360931290,
