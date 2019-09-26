@@ -79,6 +79,10 @@ const presentationNodes = [
   655926402,  // forsakenPrince
 ];
 
+const strikeBubbles = [
+  3395411000  // EX-077 Command (Exodus Crash)
+];
+
 function work(input) {
   const output = {
     checklists: {},
@@ -178,7 +182,16 @@ async function run() {
       if (definitionLore) name = definitionLore.displayProperties.name;
     }
 
-    const lostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash) && id !== 3142056444;
+    // check to see if location is inside lost sector. look up item's bubble hash inside self's lost sector's checklist... unless this is a lost sector item
+    const withinLostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash) && id !== 3142056444;
+    const withinStrike = bubble && bubble.hash && strikeBubbles.find(hash => hash === bubble.hash);
+
+    let located = undefined;
+    if (withinLostSector) {
+      located = 'lost-sector';
+    } else if (withinStrike) {
+      located = 'strike';
+    }
 
     const points = [];
 
@@ -201,7 +214,7 @@ async function run() {
         number: itemNumber && parseInt(itemNumber, 10)
       },
       extended: {
-        lostSector
+        located
       },
       ...itemOverrides[item.hash]
     };
@@ -239,8 +252,17 @@ async function run() {
     
           if (definitionLore) name = definitionLore.displayProperties.name;
         }
+        
+        // check to see if location is inside lost sector. look up item's bubble hash inside self's lost sector's checklist... unless this is a lost sector item
+        const withinLostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash) && hash !== 3142056444;
+        const withinStrike = bubble && bubble.hash && strikeBubbles.find(hash => hash === bubble.hash);
 
-        const lostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash);
+        let located = undefined;
+        if (withinLostSector) {
+          located = 'lost-sector';
+        } else if (withinStrike) {
+          located = 'strike';
+        }
 
         const points = [];
     
@@ -261,7 +283,7 @@ async function run() {
             number: (itemNumber + 1)
           },
           extended: {
-            lostSector
+            located
           },
           ...itemOverrides[item.hash]
         };

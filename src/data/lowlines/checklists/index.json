@@ -109,7 +109,7 @@
         "number": 5
       },
       "extended": {
-        "lostSector": true
+        "located": "lost-sector"
       }
     },
     {
@@ -771,7 +771,7 @@
         "number": 35
       },
       "extended": {
-        "lostSector": true
+        "located": "lost-sector"
       }
     },
     {
@@ -996,29 +996,7 @@
         "number": 7
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 359854275,
-          "bubbleHash": 628920395,
-          "bubbleName": false,
-          "checklistHash": 592877507,
-          "recordHash": 3308633273,
-          "points": [
-            {
-              "x": -220.5,
-              "y": -244.5
-            }
-          ],
-          "sorts": {
-            "destination": "The Tangled Shore",
-            "bubble": "Shipyard AWO-43",
-            "place": "The Tangled Shore",
-            "name": "Shipyard AWO-43",
-            "number": 31
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1071,29 +1049,7 @@
         "number": 10
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1199524104,
-          "bubbleHash": 3077328795,
-          "bubbleName": false,
-          "checklistHash": 3240560483,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 67.88,
-              "y": -557.32
-            }
-          ],
-          "sorts": {
-            "destination": "European Dead Zone",
-            "bubble": "The Drain",
-            "place": "Earth",
-            "name": "The Drain",
-            "number": 5
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1116,29 +1072,7 @@
         "number": 11
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1199524104,
-          "bubbleHash": 486266603,
-          "bubbleName": false,
-          "checklistHash": 1850051473,
-          "recordHash": null,
-          "points": [
-            {
-              "x": -261.3,
-              "y": -63.55
-            }
-          ],
-          "sorts": {
-            "destination": "European Dead Zone",
-            "bubble": "Flooded Chasm",
-            "place": "Earth",
-            "name": "Flooded Chasm",
-            "number": 11
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1161,29 +1095,7 @@
         "number": 12
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1199524104,
-          "bubbleHash": 698761455,
-          "bubbleName": false,
-          "checklistHash": 3850160541,
-          "recordHash": null,
-          "points": [
-            {
-              "x": -555.6,
-              "y": -66.82
-            }
-          ],
-          "sorts": {
-            "destination": "European Dead Zone",
-            "bubble": "Excavation Site XII",
-            "place": "Earth",
-            "name": "Excavation Site XII",
-            "number": 10
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1290,29 +1202,7 @@
         "number": 17
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 359854275,
-          "bubbleHash": 2299503584,
-          "bubbleName": false,
-          "checklistHash": 4232901662,
-          "recordHash": 3517489196,
-          "points": [
-            {
-              "x": 168,
-              "y": -48
-            }
-          ],
-          "sorts": {
-            "destination": "The Tangled Shore",
-            "bubble": "Kingship Dock",
-            "place": "The Tangled Shore",
-            "name": "Kingship Dock",
-            "number": 32
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1335,29 +1225,7 @@
         "number": 18
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 359854275,
-          "bubbleHash": 699959402,
-          "bubbleName": false,
-          "checklistHash": 1134123378,
-          "recordHash": 376008854,
-          "points": [
-            {
-              "x": 651,
-              "y": -63
-            }
-          ],
-          "sorts": {
-            "destination": "The Tangled Shore",
-            "bubble": "Trapper's Cave",
-            "place": "The Tangled Shore",
-            "name": "Trapper's Cave",
-            "number": 35
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1423,9 +1291,7 @@
         "name": "Archiloquy",
         "number": 1
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1446,9 +1312,7 @@
         "name": "Brephos I",
         "number": 2
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1490,9 +1354,7 @@
         "name": "Brephos III",
         "number": 4
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1513,9 +1375,7 @@
         "name": "Cosmogyre I",
         "number": 5
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1536,9 +1396,7 @@
         "name": "Cosmogyre II",
         "number": 6
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1580,9 +1438,7 @@
         "name": "Cosmogyre IV",
         "number": 8
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1603,9 +1459,7 @@
         "name": "Ecstasiate I",
         "number": 9
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1626,9 +1480,7 @@
         "name": "Ecstasiate II",
         "number": 10
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1649,9 +1501,7 @@
         "name": "Ecstasiate III",
         "number": 11
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1672,9 +1522,7 @@
         "name": "Fideicide I",
         "number": 12
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1695,9 +1543,7 @@
         "name": "Fideicide II",
         "number": 13
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1739,9 +1585,7 @@
         "name": "Heresiology",
         "number": 15
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -1762,9 +1606,7 @@
         "name": "Imponent I",
         "number": 16
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     }
   ],
   "1420597821": [
@@ -1809,29 +1651,7 @@
         "number": 2
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 359854275,
-          "bubbleHash": 628920395,
-          "bubbleName": false,
-          "checklistHash": 592877507,
-          "recordHash": 3308633273,
-          "points": [
-            {
-              "x": -220.5,
-              "y": -244.5
-            }
-          ],
-          "sorts": {
-            "destination": "The Tangled Shore",
-            "bubble": "Shipyard AWO-43",
-            "place": "The Tangled Shore",
-            "name": "Shipyard AWO-43",
-            "number": 31
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1896,29 +1716,7 @@
         "number": 5
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1199524104,
-          "bubbleHash": 656412905,
-          "bubbleName": false,
-          "checklistHash": 2508300599,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 288.06,
-              "y": 32.37
-            }
-          ],
-          "sorts": {
-            "destination": "European Dead Zone",
-            "bubble": "Shaft 13",
-            "place": "Earth",
-            "name": "Shaft 13",
-            "number": 19
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1941,29 +1739,7 @@
         "number": 6
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1199524104,
-          "bubbleHash": 3077328795,
-          "bubbleName": false,
-          "checklistHash": 3240560483,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 67.88,
-              "y": -557.32
-            }
-          ],
-          "sorts": {
-            "destination": "European Dead Zone",
-            "bubble": "The Drain",
-            "place": "Earth",
-            "name": "The Drain",
-            "number": 5
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -1986,29 +1762,7 @@
         "number": 7
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1199524104,
-          "bubbleHash": 2917555722,
-          "bubbleName": false,
-          "checklistHash": 245987256,
-          "recordHash": null,
-          "points": [
-            {
-              "x": -698.39,
-              "y": 646.04
-            }
-          ],
-          "sorts": {
-            "destination": "European Dead Zone",
-            "bubble": "The Quarry",
-            "place": "Earth",
-            "name": "The Quarry",
-            "number": 13
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -2073,29 +1827,7 @@
         "number": 10
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 2388758973,
-          "bubbleHash": 964095576,
-          "bubbleName": false,
-          "checklistHash": 3267113018,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 60.68,
-              "y": 29.8
-            }
-          ],
-          "sorts": {
-            "destination": "New Pacific Arcology",
-            "bubble": "DS Quarters-2",
-            "place": "Titan, Moon of Saturn",
-            "name": "DS Quarters-2",
-            "number": 21
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -2160,29 +1892,7 @@
         "number": 13
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 126924919,
-          "bubbleHash": 2670041043,
-          "bubbleName": false,
-          "checklistHash": 2485656913,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 995,
-              "y": -173
-            }
-          ],
-          "sorts": {
-            "destination": "Arcadian Valley",
-            "bubble": "The Rift",
-            "place": "Nessus",
-            "name": "The Rift",
-            "number": 23
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -2205,29 +1915,7 @@
         "number": 14
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1993421442,
-          "bubbleHash": 1018391425,
-          "bubbleName": false,
-          "checklistHash": 3107552723,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 162.1,
-              "y": -330.6
-            }
-          ],
-          "sorts": {
-            "destination": "Mercury",
-            "bubble": "Pariah's Refuge",
-            "place": "Mercury",
-            "name": "Pariah's Refuge",
-            "number": 28
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -2250,29 +1938,7 @@
         "number": 15
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 2218917881,
-          "bubbleHash": 4012600681,
-          "bubbleName": false,
-          "checklistHash": 4137615299,
-          "recordHash": 1277163032,
-          "points": [
-            {
-              "x": -108,
-              "y": -466
-            }
-          ],
-          "sorts": {
-            "destination": "Echo Mesa",
-            "bubble": "Aphix Conduit",
-            "place": "Io",
-            "name": "Aphix Conduit",
-            "number": 1
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -2295,29 +1961,7 @@
         "number": 16
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 2218917881,
-          "bubbleHash": 4012600682,
-          "bubbleName": false,
-          "checklistHash": 2270999908,
-          "recordHash": 1277163032,
-          "points": [
-            {
-              "x": -393,
-              "y": -107
-            }
-          ],
-          "sorts": {
-            "destination": "Echo Mesa",
-            "bubble": "Sanctum of Bones",
-            "place": "Io",
-            "name": "Sanctum of Bones",
-            "number": 2
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -2361,29 +2005,7 @@
         "number": 18
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 308080871,
-          "bubbleHash": 158407403,
-          "bubbleName": false,
-          "checklistHash": 3205937151,
-          "recordHash": null,
-          "points": [
-            {
-              "x": -47,
-              "y": 117
-            }
-          ],
-          "sorts": {
-            "destination": "Hellas Basin",
-            "bubble": "Core Terminus",
-            "place": "Mars",
-            "name": "Core Terminus",
-            "number": 29
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -2427,29 +2049,7 @@
         "number": 20
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 359854275,
-          "bubbleHash": 1090543652,
-          "bubbleName": false,
-          "checklistHash": 2693451640,
-          "recordHash": 641038864,
-          "points": [
-            {
-              "x": -172.5,
-              "y": 394.5
-            }
-          ],
-          "sorts": {
-            "destination": "The Tangled Shore",
-            "bubble": "Wolfship Turbine",
-            "place": "The Tangled Shore",
-            "name": "Wolfship Turbine",
-            "number": 34
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -2472,29 +2072,7 @@
         "number": 21
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 359854275,
-          "bubbleHash": 2299503584,
-          "bubbleName": false,
-          "checklistHash": 4232901662,
-          "recordHash": 3517489196,
-          "points": [
-            {
-              "x": 168,
-              "y": -48
-            }
-          ],
-          "sorts": {
-            "destination": "The Tangled Shore",
-            "bubble": "Kingship Dock",
-            "place": "The Tangled Shore",
-            "name": "Kingship Dock",
-            "number": 32
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -3113,7 +2691,7 @@
       "bubbleHash": 4200309587,
       "bubbleName": false,
       "checklistHash": 589814471,
-      "recordHash": null,
+      "recordHash": 3541301354,
       "points": [
         {
           "x": 319.67,
@@ -3134,7 +2712,7 @@
       "bubbleHash": 4200309587,
       "bubbleName": false,
       "checklistHash": 2503906440,
-      "recordHash": null,
+      "recordHash": 3541301354,
       "points": [
         {
           "x": 248.82,
@@ -3155,7 +2733,7 @@
       "bubbleHash": 4200309587,
       "bubbleName": false,
       "checklistHash": 3609559330,
-      "recordHash": null,
+      "recordHash": 3541301354,
       "points": [
         {
           "x": 56.98,
@@ -7392,7 +6970,9 @@
         "name": "EX-077 Command",
         "number": 135
       },
-      "extended": {}
+      "extended": {
+        "located": "strike"
+      }
     },
     {
       "destinationHash": 126924919,
@@ -7938,9 +7518,7 @@
         "name": "The Farm",
         "number": 161
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 4188263703,
@@ -7961,9 +7539,7 @@
         "name": "The Farm",
         "number": 162
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 4188263703,
@@ -7984,9 +7560,7 @@
         "name": "The Farm",
         "number": 163
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 4188263703,
@@ -8007,9 +7581,7 @@
         "name": "The Farm",
         "number": 164
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     }
   ],
   "2609997025": [
@@ -8032,9 +7604,7 @@
         "name": "Katabasis",
         "number": 1
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8055,9 +7625,7 @@
         "name": "Katabasis",
         "number": 2
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8078,9 +7646,7 @@
         "name": "Katabasis",
         "number": 3
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8101,9 +7667,7 @@
         "name": "Katabasis",
         "number": 4
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8124,9 +7688,7 @@
         "name": "Katabasis",
         "number": 5
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8147,9 +7709,7 @@
         "name": "Katabasis",
         "number": 6
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8170,9 +7730,7 @@
         "name": "Katabasis",
         "number": 7
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8193,9 +7751,7 @@
         "name": "Katabasis",
         "number": 8
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8216,9 +7772,7 @@
         "name": "Katabasis",
         "number": 9
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8575,9 +8129,7 @@
         "name": "Nigh I",
         "number": 26
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8598,9 +8150,7 @@
         "name": "Nigh I",
         "number": 27
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8621,9 +8171,7 @@
         "name": "Nigh I",
         "number": 28
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8644,9 +8192,7 @@
         "name": "Imponent V",
         "number": 29
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8667,9 +8213,7 @@
         "name": "Imponent V",
         "number": 30
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8690,9 +8234,7 @@
         "name": "Palingenesis I",
         "number": 31
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8713,9 +8255,7 @@
         "name": "Palingenesis I",
         "number": 32
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8736,9 +8276,7 @@
         "name": "Palingenesis I",
         "number": 33
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8759,9 +8297,7 @@
         "name": "Imponent IV",
         "number": 34
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8782,9 +8318,7 @@
         "name": "Imponent IV",
         "number": 35
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8805,9 +8339,7 @@
         "name": "Nigh II",
         "number": 36
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8828,9 +8360,7 @@
         "name": "Nigh II",
         "number": 37
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8851,9 +8381,7 @@
         "name": "Nigh II",
         "number": 38
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8874,9 +8402,7 @@
         "name": "Imponent II",
         "number": 39
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -8897,9 +8423,7 @@
         "name": "Imponent II",
         "number": 40
       },
-      "extended": {
-        "lostSector": 0
-      }
+      "extended": {}
     }
   ],
   "2726513366": [
@@ -9282,7 +8806,7 @@
         "number": 9
       },
       "extended": {
-        "lostSector": true
+        "located": "lost-sector"
       }
     },
     {
@@ -9305,7 +8829,7 @@
         "number": 10
       },
       "extended": {
-        "lostSector": true
+        "located": "lost-sector"
       }
     },
     {
@@ -9706,7 +9230,7 @@
         "number": 29
       },
       "extended": {
-        "lostSector": true
+        "located": "lost-sector"
       }
     },
     {
@@ -10044,7 +9568,7 @@
         "number": 45
       },
       "extended": {
-        "lostSector": true
+        "located": "lost-sector"
       }
     }
   ],
@@ -10068,9 +9592,7 @@
         "name": "Aphix Conduit",
         "number": 1
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2218917881,
@@ -10091,9 +9613,7 @@
         "name": "Sanctum of Bones",
         "number": 2
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2218917881,
@@ -10114,9 +9634,7 @@
         "name": "Grove of Ulan-Tan",
         "number": 3
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10137,9 +9655,7 @@
         "name": "Whispered Falls",
         "number": 4
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10160,9 +9676,7 @@
         "name": "The Drain",
         "number": 5
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10183,9 +9697,7 @@
         "name": "Scavenger's Den",
         "number": 6
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10206,9 +9718,7 @@
         "name": "The Weep",
         "number": 7
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10229,9 +9739,7 @@
         "name": "The Pit",
         "number": 8
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10252,9 +9760,7 @@
         "name": "Pathfinder's Crash",
         "number": 9
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10275,9 +9781,7 @@
         "name": "Excavation Site XII",
         "number": 10
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10287,8 +9791,8 @@
       "recordHash": null,
       "points": [
         {
-          "x": -477,
-          "y": -350
+          "x": -261.3,
+          "y": -63.55
         }
       ],
       "sorts": {
@@ -10298,9 +9802,7 @@
         "name": "Flooded Chasm",
         "number": 11
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10321,9 +9823,7 @@
         "name": "Skydock IV",
         "number": 12
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10344,9 +9844,7 @@
         "name": "The Quarry",
         "number": 13
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10367,9 +9865,7 @@
         "name": "Atrium",
         "number": 14
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10390,9 +9886,7 @@
         "name": "Terminus East",
         "number": 15
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10413,9 +9907,7 @@
         "name": "Widow's Walk",
         "number": 16
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10436,9 +9928,7 @@
         "name": "Cavern of Souls",
         "number": 17
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10459,9 +9949,7 @@
         "name": "Hallowed Grove",
         "number": 18
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1199524104,
@@ -10482,9 +9970,7 @@
         "name": "Shaft 13",
         "number": 19
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2388758973,
@@ -10505,9 +9991,7 @@
         "name": "Methane Flush",
         "number": 20
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2388758973,
@@ -10528,9 +10012,7 @@
         "name": "DS Quarters-2",
         "number": 21
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2388758973,
@@ -10551,9 +10033,7 @@
         "name": "Cargo Bay 3",
         "number": 22
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 126924919,
@@ -10574,9 +10054,7 @@
         "name": "The Rift",
         "number": 23
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 126924919,
@@ -10597,9 +10075,7 @@
         "name": "The Conflux",
         "number": 24
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 126924919,
@@ -10620,9 +10096,7 @@
         "name": "The Orrery",
         "number": 25
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 126924919,
@@ -10643,9 +10117,7 @@
         "name": "The Carrion Pit",
         "number": 26
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 126924919,
@@ -10666,9 +10138,7 @@
         "name": "Ancient's Haunt",
         "number": 27
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 1993421442,
@@ -10689,9 +10159,7 @@
         "name": "Pariah's Refuge",
         "number": 28
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 308080871,
@@ -10712,9 +10180,7 @@
         "name": "Core Terminus",
         "number": 29
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 308080871,
@@ -10735,9 +10201,7 @@
         "name": "Ma'adim Subterrane",
         "number": 30
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 359854275,
@@ -10758,9 +10222,7 @@
         "name": "Shipyard AWO-43",
         "number": 31
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 359854275,
@@ -10781,9 +10243,7 @@
         "name": "Kingship Dock",
         "number": 32
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 359854275,
@@ -10804,9 +10264,7 @@
         "name": "The Empty Tank",
         "number": 33
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 359854275,
@@ -10827,9 +10285,7 @@
         "name": "Wolfship Turbine",
         "number": 34
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 359854275,
@@ -10850,9 +10306,7 @@
         "name": "Trapper's Cave",
         "number": 35
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -10873,9 +10327,7 @@
         "name": "Bay of Drowned Wishes",
         "number": 36
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -10896,9 +10348,7 @@
         "name": "Aphelion's Rest",
         "number": 37
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     },
     {
       "destinationHash": 2779202173,
@@ -10919,9 +10369,7 @@
         "name": "Chamber of Starlight",
         "number": 38
       },
-      "extended": {
-        "lostSector": false
-      }
+      "extended": {}
     }
   ],
   "3305936921": [
@@ -11155,29 +10603,7 @@
         "number": 11
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 359854275,
-          "bubbleHash": 699959402,
-          "bubbleName": false,
-          "checklistHash": 1134123378,
-          "recordHash": 376008854,
-          "points": [
-            {
-              "x": 651,
-              "y": -63
-            }
-          ],
-          "sorts": {
-            "destination": "The Tangled Shore",
-            "bubble": "Trapper's Cave",
-            "place": "The Tangled Shore",
-            "name": "Trapper's Cave",
-            "number": 35
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -11221,29 +10647,7 @@
         "number": 13
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 359854275,
-          "bubbleHash": 628920395,
-          "bubbleName": false,
-          "checklistHash": 592877507,
-          "recordHash": 3308633273,
-          "points": [
-            {
-              "x": -220.5,
-              "y": -244.5
-            }
-          ],
-          "sorts": {
-            "destination": "The Tangled Shore",
-            "bubble": "Shipyard AWO-43",
-            "place": "The Tangled Shore",
-            "name": "Shipyard AWO-43",
-            "number": 31
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -11329,29 +10733,7 @@
         "number": 17
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1199524104,
-          "bubbleHash": 3077328794,
-          "bubbleName": false,
-          "checklistHash": 3402131234,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 194.32,
-              "y": -500.64
-            }
-          ],
-          "sorts": {
-            "destination": "European Dead Zone",
-            "bubble": "Scavenger's Den",
-            "place": "Earth",
-            "name": "Scavenger's Den",
-            "number": 6
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -11395,29 +10777,7 @@
         "number": 19
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 126924919,
-          "bubbleHash": 4135982017,
-          "bubbleName": false,
-          "checklistHash": 2248063191,
-          "recordHash": null,
-          "points": [
-            {
-              "x": -123,
-              "y": -179
-            }
-          ],
-          "sorts": {
-            "destination": "Arcadian Valley",
-            "bubble": "The Conflux",
-            "place": "Nessus",
-            "name": "The Conflux",
-            "number": 24
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -11440,29 +10800,7 @@
         "number": 20
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 2218917881,
-          "bubbleHash": 2815380496,
-          "bubbleName": false,
-          "checklistHash": 3883378312,
-          "recordHash": 1277163032,
-          "points": [
-            {
-              "x": -216,
-              "y": 369
-            }
-          ],
-          "sorts": {
-            "destination": "Echo Mesa",
-            "bubble": "Grove of Ulan-Tan",
-            "place": "Io",
-            "name": "Grove of Ulan-Tan",
-            "number": 3
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -11485,29 +10823,7 @@
         "number": 21
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 1993421442,
-          "bubbleHash": 1018391425,
-          "bubbleName": false,
-          "checklistHash": 3107552723,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 162.1,
-              "y": -330.6
-            }
-          ],
-          "sorts": {
-            "destination": "Mercury",
-            "bubble": "Pariah's Refuge",
-            "place": "Mercury",
-            "name": "Pariah's Refuge",
-            "number": 28
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     },
     {
@@ -11551,29 +10867,7 @@
         "number": 23
       },
       "extended": {
-        "lostSector": {
-          "destinationHash": 308080871,
-          "bubbleHash": 158822960,
-          "bubbleName": false,
-          "checklistHash": 2025886454,
-          "recordHash": null,
-          "points": [
-            {
-              "x": 194,
-              "y": -296
-            }
-          ],
-          "sorts": {
-            "destination": "Hellas Basin",
-            "bubble": "Ma'adim Subterrane",
-            "place": "Mars",
-            "name": "Ma'adim Subterrane",
-            "number": 30
-          },
-          "extended": {
-            "lostSector": false
-          }
-        }
+        "located": "lost-sector"
       }
     }
   ],

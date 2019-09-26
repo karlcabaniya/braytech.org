@@ -47,6 +47,11 @@ class Checklist extends React.Component {
     const screenshot = extras && extras.screenshot;
     const description = extras && extras.description;
 
+    const locatedStrings = {
+      'lost-sector': t('Located inside lost sector'),
+      'strike': t('Located inside strike')
+    }
+
     return (
       <>
         <div className='acrylic' />
@@ -69,9 +74,9 @@ class Checklist extends React.Component {
                 <ObservedImage className='image' src={screenshot} />
               </div>
             ) : null}
-            {checklistItem.extended.lostSector ? (
-              <div className='in-lost-sector'>
-                {t('Located inside lost sector')} {}
+            {checklistItem.extended.located ? (
+              <div className='inside-location'>
+                {locatedStrings[checklistItem.extended.located]}
               </div>
             ) : null}
             <div className='description'>
@@ -107,6 +112,11 @@ class Record extends React.Component {
     const screenshot = extras && extras.screenshot;
     const description = extras && extras.description;
 
+    const locatedStrings = {
+      'lost-sector': t('Located inside lost sector'),
+      'strike': t('Located inside strike')
+    }
+    
     return (
       <>
         <div className='acrylic' />
@@ -149,9 +159,9 @@ class Record extends React.Component {
                 <ObservedImage className='image' src={screenshot} />
               </div>
             ) : null}
-            {checklistItem.extended.lostSector ? (
-              <div className='in-lost-sector'>
-                {t('Located inside lost sector')} {}
+            {checklistItem.extended.located ? (
+              <div className='inside-location'>
+                {locatedStrings[checklistItem.extended.located]}
               </div>
             ) : null}
             <div className='description'>
