@@ -47,6 +47,8 @@ const interpolate = (investmentValue, displayInterpolation) => {
  */
 export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = false, randomizedPlugItems = false, socketExclusions = [], uiStyleTooltips = false, showHiddenStats = false) => {
 
+  randomizedPlugItems = false;
+
   let statGroup = item.stats ? manifest.DestinyStatGroupDefinition[item.stats.statGroupHash] : false;
 
   let statModifiers = [];
