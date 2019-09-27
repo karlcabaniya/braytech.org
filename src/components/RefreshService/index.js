@@ -107,10 +107,12 @@ class RefreshService extends React.Component {
 
     try {
       const data = await getMember(membershipType, membershipId);
-      store.dispatch({
-        type: 'MEMBER_LOADED',
-        payload: { membershipType, membershipId, characterId, data }
-      });
+      if (data) {
+        store.dispatch({
+          type: 'MEMBER_LOADED',
+          payload: { membershipType, membershipId, characterId, data }
+        });
+      }
     } catch (e) {
       console.warn(`Error while refreshing profile, ignoring: ${e}`);
     }

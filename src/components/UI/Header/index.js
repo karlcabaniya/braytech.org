@@ -5,9 +5,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
-import ProgressBar from '../../UI/ProgressBar';
-import { classHashToString } from '../../../utils/destinyUtils';
+import * as utils from '../../../utils/destinyUtils';
 import { ProfileNavLink } from '../../ProfileLink';
+import ProgressBar from '../../UI/ProgressBar';
 import Footer from '../Footer';
 import { EmblemIcon, EmblemBackground } from '../Emblem/';
 
@@ -274,7 +274,7 @@ class Header extends React.Component {
                   </div>
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
-                    {character.baseCharacterLevel} / {classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>
+                    {character.baseCharacterLevel} / {utils.classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>
                   </div>
                   <ProgressBar
                     classNames={{

@@ -1,6 +1,6 @@
-import * as responseUtils from './responseUtils';
-import * as bungie from './bungie';
 import * as ls from './localStorage';
+import * as bungie from './bungie';
+import * as responseUtils from './responseUtils';
 
 async function getMember(membershipType, membershipId) {
   const auth = ls.get('setting.auth');
@@ -13,28 +13,25 @@ async function getMember(membershipType, membershipId) {
     components.push(102,103,201);
   }
 
-  let requests = [
-    bungie.GetProfile(membershipType, membershipId, components.join(','), useAuth), 
-    bungie.GetGroupsForMember(membershipType, membershipId), 
-    bungie.GetPublicMilestones()
-  ];
-
-  let [profile, groups, milestones] = await Promise.all(requests);
-
   try {
-    profile = responseUtils.profileScrubber(profile, 'activity');
-    groups = responseUtils.groupScrubber(groups);
+    const requests = [
+      bungie.GetProfile(membershipType, membershipId, components.join(','), useAuth), 
+      bungie.GetGroupsForMember(membershipType, membershipId), 
+      bungie.GetPublicMilestones()
+    ];
+
+    const [profile, groups, milestones] = await Promise.all(requests);
+  
+    return {
+      profile: responseUtils.profileScrubber(profile, 'activity'),
+      groups: responseUtils.groupScrubber(groups),
+      milestones
+    };
   } catch (e) {
-
+    console.log(e)
+    return false;
   }
-
-  let data = {
-    profile,
-    groups,
-    milestones
-  }
-
-  return data;
+    
 }
 
 export default getMember;

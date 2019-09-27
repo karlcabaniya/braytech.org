@@ -1,4 +1,4 @@
-import entities from 'entities';
+import * as entities from 'entities';
 
 export const profileScrubber = (profile, sortBy = false) => {
   // convert character response to an array
