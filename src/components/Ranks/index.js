@@ -5,8 +5,8 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import ProgressBar from '../UI/ProgressBar';
 import * as utils from '../../utils/destinyUtils';
+import ProgressBar from '../UI/ProgressBar';
 
 import './styles.css';
 
@@ -14,7 +14,7 @@ class Mode extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {}
+    this.state = {};
 
     this.data = {
       2772425241: {
@@ -206,7 +206,7 @@ class Mode extends React.Component {
         }
       }
     };
-    
+
     this.currentLanguage = this.props.i18n.getCurrentLanguage();
   }
 
@@ -215,17 +215,18 @@ class Mode extends React.Component {
 
     return {
       current: characterProgressions[characterId].progressions[progressionHash] && Number.isInteger(characterProgressions[characterId].progressions[progressionHash].currentResetCount) ? characterProgressions[characterId].progressions[progressionHash].currentResetCount : '?',
-      total: characterProgressions[characterId].progressions[progressionHash] && characterProgressions[characterId].progressions[progressionHash].seasonResets
-      ? characterProgressions[characterId].progressions[progressionHash].seasonResets.reduce((acc, curr) => {
-          if (curr.season > 3) {
-            return acc + curr.resets;
-          } else {
-            return acc;
-          }
-        }, 0)
-      : '?'
-    }
-  }
+      total:
+        characterProgressions[characterId].progressions[progressionHash] && characterProgressions[characterId].progressions[progressionHash].seasonResets
+          ? characterProgressions[characterId].progressions[progressionHash].seasonResets.reduce((acc, curr) => {
+              if (curr.season > 3) {
+                return acc + curr.resets;
+              } else {
+                return acc;
+              }
+            }, 0)
+          : '?'
+    };
+  };
 
   winsRequired = streakCount => {
     const { characterId, characterProgressions } = this.props.data;
@@ -274,19 +275,20 @@ class Mode extends React.Component {
   render() {
     const { t, mini, hash } = this.props;
     const { characterId, characterProgressions } = this.props.data;
-    
+
     let progressStepDescription = characterProgressions[characterId].progressions[hash].currentProgress === this.data[hash].totalPoints && characterProgressions[characterId].progressions[hash].stepIndex === manifest.DestinyProgressionDefinition[hash].steps.length ? manifest.DestinyProgressionDefinition[hash].steps[0].stepName : manifest.DestinyProgressionDefinition[hash].steps[(characterProgressions[characterId].progressions[hash].stepIndex + 1) % manifest.DestinyProgressionDefinition[hash].steps.length].stepName;
 
-    if (this.currentLanguage === 'en') {
-      progressStepDescription = progressStepDescription.toLowerCase()
-        .split(' ')
-        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-        .join(' ');
-      
-      let omega = progressStepDescription.split(' ');
+    let progressStepDescription_split = progressStepDescription.split(' ');
 
-      if (omega.length >= 2) progressStepDescription = omega[0] + ' ' + omega[1].toUpperCase();
-    }
+    if (progressStepDescription_split.length === 2)
+      progressStepDescription =
+        progressStepDescription_split[0]
+          .toLowerCase()
+          .split(' ')
+          .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+          .join(' ') +
+        ' ' +
+        progressStepDescription_split[1];
 
     return (
       <div className={cx('rank', { mini })}>

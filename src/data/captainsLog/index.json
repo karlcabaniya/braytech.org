@@ -690,8 +690,8 @@
     "content": "- minor UI changes for _Maps_\n- further Tooltips perf work\n- _Now_ view redesign WIP\n- did some styling clean up\n- paid some attention to scrollbars on native Chrome devices (Android)\n- and more"
   },
   {
-    "date": "2019-09-23T16:55:38.416Z",
+    "date": "2019-09-27T23:43:49.123Z",
     "version": "2.9.12",
-    "content": "- "
+    "content": "- rectified issue with MMXIX unredeemable unredeemed triumphs display\n- a bunch of general clean up\n- tracked and unredeemed records can now be clicked to see them in their original context\n- collections badge class level completion corrected\n- further sit rep view design work\n- shadowkeep prep"
   }
 ]

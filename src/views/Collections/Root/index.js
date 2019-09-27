@@ -21,115 +21,122 @@ class Root extends React.Component {
     const parent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.collectionRootNode];
     const parentBadges = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.badgesRootNode];
 
-    let nodes = [];
-    let badges = [];
-    let collectionsStates = [];
-    let badgesStates = [];
+    const nodes = [];
+    const badges = [];
+    const collectionsStates = [];
+    const badgesStates = [];
 
     // items nodes
     parent.children.presentationNodes.forEach(child => {
-      let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
-      let states = [];
+      const definitionNode = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
+      const states = [];
 
-      node.children.presentationNodes.forEach(nodeChild => {
-        let nodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChild.presentationNodeHash];
-        nodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
-          let nodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
-          if (nodeChildNodeChildNode.children.presentationNodes.length > 0) {
-            nodeChildNodeChildNode.children.presentationNodes.forEach(nodeChildNodeChildNodeChild => {
-              let nodeChildNodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChildNodeChild.presentationNodeHash];
-              nodeChildNodeChildNodeChildNode.children.collectibles.forEach(collectible => {
-                let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
+      definitionNode.children.presentationNodes.forEach(nodeChild => {
+        const definitionNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChild.presentationNodeHash];
+
+        definitionNodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
+          const definitionNodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
+
+          if (definitionNodeChildNodeChildNode.children.presentationNodes.length > 0) {
+            definitionNodeChildNodeChildNode.children.presentationNodes.forEach(nodeChildNodeChildNodeChild => {
+              const definitionNodeChildNodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChildNodeChild.presentationNodeHash];
+
+              definitionNodeChildNodeChildNodeChildNode.children.collectibles.forEach(collectible => {
+
+                const scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
+
                 if (scope) {
                   states.push(scope.state);
                   collectionsStates.push(scope.state);
-                } else {
-                  console.log(`57 Undefined state for ${collectible.collectibleHash}`);
                 }
               });
             });
           } else {
-            nodeChildNodeChildNode.children.collectibles.forEach(collectible => {
-              let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
+            definitionNodeChildNodeChildNode.children.collectibles.forEach(collectible => {
+              const scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
+
               if (scope) {
                 states.push(scope.state);
                 collectionsStates.push(scope.state);
-              } else {
-                console.log(profileCollectibles.collectibles[collectible.collectibleHash], characterCollectibles[member.characterId].collectibles[collectible.collectibleHash], `68 Undefined state for ${collectible.collectibleHash}`);
               }
             });
           }
         });
       });
 
-      let nodeProgress = states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length;
-      let nodeTotal = states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length;
+      const nodeProgress = states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length;
+      const nodeTotal = states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length;
 
       nodes.push(
-        <div key={node.hash} className={cx('node', { completed: nodeTotal > 0 && nodeProgress === nodeTotal })}>
+        <div key={definitionNode.hash} className={cx('node', { completed: nodeTotal > 0 && nodeProgress === nodeTotal })}>
           <div className='images'>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionNode.originalIcon}`} />
           </div>
           <div className='text'>
-            <div>{node.displayProperties.name}</div>
+            <div>{definitionNode.displayProperties.name}</div>
             <div className='state'>
               <span>{nodeProgress}</span> / {nodeTotal}
             </div>
           </div>
-          <ProfileLink to={`/collections/${node.hash}`} />
+          <ProfileLink to={`/collections/${definitionNode.hash}`} />
         </div>
       );
     });
 
     // badges
     parentBadges.children.presentationNodes.forEach(child => {
-      let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
-      let classes = [];
+      const definitionNode = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
+      const classStates = [];
+
       let fullComplete = 0;
       let semiComplete = false;
 
-      node.children.presentationNodes.forEach(nodeChild => {
-        let nodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChild.presentationNodeHash];
+      definitionNode.children.presentationNodes.forEach(nodeChild => {
+        const definitionNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChild.presentationNodeHash];
 
-        let sweep = [];
-        nodeChildNode.children.collectibles.forEach(collectible => {
-          let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
+        const sweep = [];
+        
+        definitionNodeChildNode.children.collectibles.forEach(collectible => {
+          const scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[member.characterId].collectibles[collectible.collectibleHash];
+
           if (scope) {
             sweep.push(scope.state);
-          } else {
-            console.log(`105 Undefined state for ${collectible.collectibleHash}`);
           }
         });
 
-        classes.push({
-          className: nodeChildNode.displayProperties.name,
+        classStates.push({
+          className: definitionNodeChildNode.displayProperties.name,
           states: sweep
         });
       });
 
-      classes.forEach(obj => {
-        if (obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length) {
+      const classTotal = classStates.reduce((a, obj) => {
+        return Math.max(a, obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length);
+      }, 0);
+
+      classStates.forEach(obj => {
+        if (obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === classTotal) {
           fullComplete += 1;
           semiComplete = true;
         }
       });
 
       if (semiComplete) {
-        badgesStates.push(node.displayProperties.name);
+        badgesStates.push(definitionNode.displayProperties.name);
       }
 
       badges.push(
         <li
-          key={node.hash}
+          key={definitionNode.hash}
           className={cx('badge', 'linked', {
             semiComplete: semiComplete,
             fullComplete: fullComplete === 3
           })}
         >
-          <ProfileLink to={`/collections/badge/${node.hash}`}>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
+          <ProfileLink to={`/collections/badge/${definitionNode.hash}`}>
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionNode.originalIcon}`} />
             <div className='text'>
-              <div>{node.displayProperties.name}</div>
+              <div>{definitionNode.displayProperties.name}</div>
             </div>
           </ProfileLink>
         </li>

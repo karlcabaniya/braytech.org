@@ -39,7 +39,7 @@
 .progress-bar .bar {
   flex-basis: calc(100% - 28px);
   position: relative;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .progress-bar .bar.full {
@@ -84,6 +84,6 @@
   transition: background-color 0.25s;
 }
 
-/* .list.record-items li.completed .properties .icon {
-  filter: sepia(1) saturate(5) hue-rotate(-44deg);
-} */
+.wrapper.dark-mode .progress-bar .bar {
+  background-color: rgba(0, 0, 0, 0.1);
+}

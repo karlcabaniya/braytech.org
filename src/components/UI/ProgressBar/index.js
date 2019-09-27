@@ -1,10 +1,10 @@
 import React from 'react';
 import cx from 'classnames';
 
+import manifest from '../../../utils/manifest';
 import { stringToIcons } from '../../../utils/destinyUtils';
 
 import './styles.css';
-import manifest from '../../../utils/manifest';
 
 class ProgressBar extends React.Component {
   constructor(props) {

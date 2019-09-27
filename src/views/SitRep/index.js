@@ -245,7 +245,7 @@ class SitRep extends React.Component {
           <div className='module'>
             <div className='content'>
               <div className='module-header'>
-                <div className='sub-name'>{t('Reserved 4 shadowkeps')}</div>
+                <div className='sub-name'>{t('Character')}</div>
               </div>
               
             </div>
@@ -264,6 +264,13 @@ class SitRep extends React.Component {
           </div>
           {group ? (
             <div className='module'>
+              <div className='content'>
+                <div className='module-header'>
+                  <div className='sub-name'>{t('Fireteam')}</div>
+                </div>
+                <h4>{t('Activity')}</h4>
+                <h4>{t('Members')}</h4>
+              </div>
               <div className='content clan-roster'>
                 <div className='module-header'>
                   <div className='sub-name'>{t('Clan')}</div>
