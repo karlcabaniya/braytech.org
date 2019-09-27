@@ -462,5 +462,5 @@
   "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.": "Il tuo profilo potrebbe essere impostato a privato su Bungie.net. Questo errore è generato quando i dati del progresso del personaggi non è disponibile e, probabilmente, ne è anche la causa più probabile.",
   "{{number}} mins": "{{number}} min",
   "{{number}} minutes": "{{number}} minuti",
-  "{{vendorName}} is waiting for you at {{destinationName}}.": "{{vendorName}} ti sta aspettando alla sua destinazione: {{destinationName}}",
+  "{{vendorName}} is waiting for you at {{destinationName}}.": "{{vendorName}} ti sta aspettando alla sua destinazione: {{destinationName}}"
 }
