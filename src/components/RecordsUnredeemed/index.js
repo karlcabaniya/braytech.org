@@ -10,12 +10,11 @@ import Records from '../Records';
 
 class RecordsUnredeemed extends React.Component {
   render() {
-    const { member, limit } = this.props;
+    const { member, limit, selfLinkFrom = false } = this.props;
     const characterRecords = member && member.data.profile.characterRecords.data;
     const profileRecords = member && member.data.profile.profileRecords.data.records;
 
-    let hashes = [];
-    let ignores = [];
+    const hashes = [];
 
     let records = {
       ...profileRecords,
@@ -29,13 +28,18 @@ class RecordsUnredeemed extends React.Component {
         return;
       }
 
-      // ignore collections badges etc
-      if (ignores.includes(parseInt(key, 10))) {
-        return;
-      }
-
       if (definitionRecord.presentationInfo && definitionRecord.presentationInfo.parentPresentationNodeHashes && definitionRecord.presentationInfo.parentPresentationNodeHashes.length && !enumerateRecordState(record.state).invisible && !enumerateRecordState(record.state).objectiveNotCompleted && !enumerateRecordState(record.state).recordRedeemed) {
-        hashes.push(key);
+        
+        // check to see if belongs to transitory expired seal
+        const definitionParent = definitionRecord.presentationInfo.parentPresentationNodeHashes.length && manifest.DestinyPresentationNodeDefinition[definitionRecord.presentationInfo.parentPresentationNodeHashes[0]];
+        const parentCompletionRecordData = definitionParent && definitionParent.completionRecordHash && definitionParent.scope === 1 ? characterRecords[member.characterId].records[definitionParent.completionRecordHash] : profileRecords[definitionParent.completionRecordHash];
+
+        if (parentCompletionRecordData && enumerateRecordState(parentCompletionRecordData.state).rewardUnavailable && enumerateRecordState(parentCompletionRecordData.state).objectiveNotCompleted) {
+          return;
+        } else {
+          hashes.push(key);
+        }
+
       }
 
     });
@@ -43,7 +47,7 @@ class RecordsUnredeemed extends React.Component {
     return (
       <>
         <ul className={cx('list record-items')}>
-          <Records selfLink hashes={hashes} ordered='rarity' limit={limit} />
+          <Records selfLink hashes={hashes} ordered='rarity' limit={limit} selfLinkFrom={selfLinkFrom} />
         </ul>
       </>
     );

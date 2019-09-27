@@ -6,7 +6,7 @@ import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import dudRecords from '../../../data/dudRecords';
-import { enumerateRecordState } from '../../../utils/destinyEnums';
+import { enumerateRecordState, sealImages } from '../../../utils/destinyEnums';
 import { ProfileLink } from '../../../components/ProfileLink';
 import ObservedImage from '../../../components/ObservedImage';
 import RecordsAlmost from '../../../components/RecordsAlmost';
@@ -20,104 +20,87 @@ class Root extends React.Component {
     const profileRecords = member.data.profile.profileRecords.data.records;
     const characterRecords = member.data.profile.characterRecords.data;
 
-    const sealBars = {
-      2588182977: {
-        image: '037E-00001367.png'
-      },
-      3481101973: {
-        image: '037E-00001343.png'
-      },
-      147928983: {
-        image: '037E-0000134A.png'
-      },
-      2693736750: {
-        image: '037E-0000133C.png'
-      },
-      2516503814: {
-        image: '037E-00001351.png'
-      },
-      1162218545: {
-        image: '037E-00001358.png'
-      },
-      2039028930: {
-        image: '0560-000000EB.png'
-      },
-      991908404: {
-        image: '0560-0000107E.png'
-      },
-      3170835069: {
-        image: '0560-00006583.png'
-      },
-      1002334440: {
-        image: '0560-00007495.png'
-      }
-    };
+    const parent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.recordsRootNode];
+    const sealsParent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
 
-    let parent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.recordsRootNode];
-    let sealsParent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
-
-    let nodes = [];
-    let sealNodes = [];
-    let recordsStates = [];
+    const nodes = [];
+    const sealNodes = [];
+    const recordsStates = [];
 
     parent.children.presentationNodes.forEach(child => {
-      let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
-      let states = [];
+      const definitionNode = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
+      const states = [];
 
-      node.children.presentationNodes.forEach(nodeChild => {
-        let nodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChild.presentationNodeHash];
-        nodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
-          let nodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
-          if (nodeChildNodeChildNode.redacted) {
+      definitionNode.children.presentationNodes.forEach(nodeChild => {
+        const definitionNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChild.presentationNodeHash];
+
+        definitionNodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
+          const definitionNodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
+
+          if (definitionNodeChildNodeChildNode.redacted) {
             return;
           }
-          nodeChildNodeChildNode.children.records.forEach(record => {
-            let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[member.characterId].records[record.recordHash];
-            let def = manifest.DestinyRecordDefinition[record.recordHash] || false;
-            if (scope) {
 
+          definitionNodeChildNodeChildNode.children.records.forEach(record => {
+            const definitionRecord = manifest.DestinyRecordDefinition[record.recordHash];
+            const recordScope = definitionRecord.scope || 0;
+            const recordData = recordScope === 1 ? characterRecords && characterRecords[member.characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
+
+            if (recordData) {
               if (collectibles.hideDudRecords && dudRecords.indexOf(record.recordHash) > -1) return;
 
-              scope.hash = record.recordHash;
-              scope.scoreValue = def && def.completionInfo ? def.completionInfo.ScoreValue : 0;
-              states.push(scope);
-              recordsStates.push(scope);
+              recordData.hash = definitionRecord.hash;
+              recordData.scoreValue = (definitionRecord.completionInfo && definitionRecord.completionInfo.ScoreValue) || 0;
+
+              states.push(recordData);
+              recordsStates.push(recordData);
             }
           });
         });
       });
 
-      let nodeProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length;
-      let nodeTotal = states.filter(record => !enumerateRecordState(record.state).invisible).length;
+      const nodeProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length;
+      const nodeTotal = states.filter(record => !enumerateRecordState(record.state).invisible).length;
 
       nodes.push(
-        <li key={node.hash} className={cx('linked', { completed: nodeTotal > 0 && nodeProgress === nodeTotal })}>
+        <li key={definitionNode.hash} className={cx('linked', { completed: nodeTotal > 0 && nodeProgress === nodeTotal })}>
           {nodeTotal && nodeProgress !== nodeTotal ? <div className='progress-bar-background' style={{ width: `${(nodeProgress / nodeTotal) * 100}%` }} /> : null}
-          <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
+          <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionNode.originalIcon}`} />
           <div className='displayProperties'>
-            <div className='name'>{node.displayProperties.name}</div>
-            {nodeTotal ? <div className='progress'>
-              <span>{nodeProgress}</span> / {nodeTotal}
-            </div> : null}
+            <div className='name'>{definitionNode.displayProperties.name}</div>
+            {nodeTotal ? (
+              <div className='progress'>
+                <span>{nodeProgress}</span> / {nodeTotal}
+              </div>
+            ) : null}
           </div>
-          <ProfileLink to={`/triumphs/${node.hash}`} />
+          <ProfileLink to={`/triumphs/${definitionNode.hash}`} />
         </li>
       );
     });
 
     sealsParent.children.presentationNodes.forEach(child => {
-      let definitionSeal = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
-      let states = [];
+      const definitionSeal = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
       if (definitionSeal.redacted) {
         return;
       }
 
+      const completionRecordData = definitionSeal && definitionSeal.completionRecordHash && definitionSeal.scope === 1 ? characterRecords[member.characterId].records[definitionSeal.completionRecordHash] : profileRecords[definitionSeal.completionRecordHash];
+
+      if (completionRecordData && enumerateRecordState(completionRecordData.state).rewardUnavailable && enumerateRecordState(completionRecordData.state).objectiveNotCompleted) {
+        return;
+      }
+
+      const states = [];
       definitionSeal.children.records.forEach(record => {
-        let scope = profileRecords[record.recordHash] ? profileRecords[record.recordHash] : characterRecords[member.characterId].records[record.recordHash];
-        if (scope) {
-          states.push(scope);
-          recordsStates.push({...scope, seal: true});
+        const definitionRecord = manifest.DestinyRecordDefinition[record.recordHash];
+        const recordScope = definitionRecord.scope || 0;
+        const recordData = recordScope === 1 ? characterRecords && characterRecords[member.characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
+
+        if (recordData) {
+          states.push(recordData);
+          recordsStates.push({ ...recordData, seal: true });
         }
       });
 
@@ -130,7 +113,7 @@ class Root extends React.Component {
         nodeTotal = 23;
       }
 
-      let isComplete = nodeTotal && nodeProgress === nodeTotal ? true : false;
+      const isComplete = nodeTotal && nodeProgress === nodeTotal ? true : false;
 
       sealNodes.push({
         completed: isComplete,
@@ -142,7 +125,7 @@ class Root extends React.Component {
             })}
           >
             {nodeTotal && nodeProgress !== nodeTotal ? <div className='progress-bar-background' style={{ width: `${(nodeProgress / nodeTotal) * 100}%` }} /> : null}
-            <ObservedImage className={cx('image', 'icon')} src={sealBars[definitionSeal.hash] ? `/static/images/extracts/badges/${sealBars[definitionSeal.hash].image}` : `https://www.bungie.net${definitionSeal.displayProperties.icon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={sealImages[definitionSeal.hash] ? `/static/images/extracts/badges/${sealImages[definitionSeal.hash]}` : `https://www.bungie.net${definitionSeal.displayProperties.icon}`} />
             <div className='displayProperties'>
               <div className='name'>{manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[character.genderHash]}</div>
               {nodeTotal ? (
@@ -157,7 +140,7 @@ class Root extends React.Component {
       });
     });
 
-    let unredeemedTriumphCount = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).length;
+    const unredeemedTriumphCount = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).length;
 
     return (
       <>
@@ -169,7 +152,9 @@ class Root extends React.Component {
           {unredeemedTriumphCount > 0 ? (
             <ul className='list record-items notification-unredeemed'>
               <li className='linked unredeemed'>
-                <div className='text'>{unredeemedTriumphCount} {t('unredeemed triumphs')}</div>
+                <div className='text'>
+                  {unredeemedTriumphCount} {t('unredeemed triumphs')}
+                </div>
                 <i className='segoe-uniE0AB' />
                 <ProfileLink to={{ pathname: '/triumphs/unredeemed', state: { from: '/triumphs' } }} />
               </li>

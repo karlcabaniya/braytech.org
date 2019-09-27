@@ -17,26 +17,26 @@ class PresentationNode extends React.Component {
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
 
-    let primaryHash = this.props.match.params.primary;
-    let definitionPrimary = manifest.DestinyPresentationNodeDefinition[primaryHash];
+    const primaryHash = this.props.match.params.primary;
+    const definitionPrimary = (manifest.DestinyPresentationNodeDefinition[primaryHash] && manifest.DestinyPresentationNodeDefinition[primaryHash].children.presentationNodes.length && manifest.DestinyPresentationNodeDefinition[primaryHash]) || manifest.DestinyPresentationNodeDefinition[4230728762];
 
     if (!definitionPrimary) {
       return null;
     }
     
-    let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : definitionPrimary.children.presentationNodes[0].presentationNodeHash;
-    let definitionSecondary = manifest.DestinyPresentationNodeDefinition[secondaryHash];
+    const secondaryHash = this.props.match.params.secondary || definitionPrimary.children.presentationNodes[0].presentationNodeHash;
+    const definitionSecondary = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 
-    let tertiaryHash = this.props.match.params.tertiary ? this.props.match.params.tertiary : definitionSecondary.children.presentationNodes[0].presentationNodeHash;
-    let definitionTertiary = manifest.DestinyPresentationNodeDefinition[tertiaryHash];
+    const tertiaryHash = this.props.match.params.tertiary || definitionSecondary.children.presentationNodes[0].presentationNodeHash;
+    const definitionTertiary = manifest.DestinyPresentationNodeDefinition[tertiaryHash];
 
-    let quaternaryHash = this.props.match.params.quaternary ? this.props.match.params.quaternary : false;
+    const quaternaryHash = this.props.match.params.quaternary || false;
 
-    let primaryChildren = [];
+    const primaryChildren = [];
     definitionPrimary.children.presentationNodes.forEach(child => {
-      let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
+      const definitionNode = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
-      let isActive = (match, location) => {
+      const isActive = (match, location) => {
         if (this.props.match.params.secondary === undefined && definitionPrimary.children.presentationNodes.indexOf(child) === 0) {
           return true;
         } else if (match) {
@@ -47,25 +47,25 @@ class PresentationNode extends React.Component {
       };
 
       primaryChildren.push(
-        <li key={node.hash} className='linked'>
-          <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${node.hash}`}>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.displayProperties.icon}`} />
+        <li key={definitionNode.hash} className='linked'>
+          <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${definitionNode.hash}`}>
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionNode.displayProperties.icon}`} />
           </ProfileNavLink>
         </li>
       );
     });
 
-    let secondaryChildren = [];
+    const secondaryChildren = [];
     definitionSecondary.children.presentationNodes.forEach(child => {
-      let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
+      const definitionNode = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
-      if (node.redacted) {
+      if (definitionNode.redacted) {
         return;
       }
 
-      let states = [];
+      const states = [];
 
-      node.children.records.forEach(r => {
+      definitionNode.children.records.forEach(r => {
         const definitionRecord = manifest.DestinyRecordDefinition[r.recordHash];
         const scopeRecord = definitionRecord.scope || 0;
         const dataRecord = scopeRecord === 1 ? characterRecords[member.characterId].records[definitionRecord.hash] : profileRecords[definitionRecord.hash];
@@ -75,7 +75,7 @@ class PresentationNode extends React.Component {
         states.push(dataRecord);
       });
 
-      let isActive = (match, location) => {
+      const isActive = (match, location) => {
         if (this.props.match.params.tertiary === undefined && definitionSecondary.children.presentationNodes.indexOf(child) === 0) {
           return true;
         } else if (match) {
@@ -85,22 +85,22 @@ class PresentationNode extends React.Component {
         }
       };
 
-      let secondaryProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length;
-      let secondaryTotal = collectibles && collectibles.hideInvisibleRecords ? states.filter(record => !enumerateRecordState(record.state).invisible).length : states.length;
+      const secondaryProgress = states.filter(record => enumerateRecordState(record.state).recordRedeemed).length;
+      const secondaryTotal = collectibles && collectibles.hideInvisibleRecords ? states.filter(record => !enumerateRecordState(record.state).invisible).length : states.length;
 
       if (secondaryTotal === 0) {
         return;
       }
 
       secondaryChildren.push(
-        <li key={node.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0, active: definitionTertiary.hash === child.presentationNodeHash })}>
+        <li key={definitionNode.hash} className={cx('linked', { completed: secondaryProgress === secondaryTotal && secondaryTotal !== 0, active: definitionTertiary.hash === child.presentationNodeHash })}>
           <div className='text'>
-            <div className='name'>{node.displayProperties.name.length > 24 ? node.displayProperties.name.slice(0, 24) + '...' : node.displayProperties.name}</div>
+            <div className='name'>{definitionNode.displayProperties.name.length > 24 ? definitionNode.displayProperties.name.slice(0, 24) + '...' : definitionNode.displayProperties.name}</div>
             <div className='progress'>
               <span>{secondaryProgress}</span> / {secondaryTotal}
             </div>
           </div>
-          <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${secondaryHash}/${node.hash}`} />
+          <ProfileNavLink isActive={isActive} to={`/triumphs/${primaryHash}/${secondaryHash}/${definitionNode.hash}`} />
         </li>
       );
     });

@@ -8,7 +8,7 @@ import { orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import { enumerateRecordState } from '../../utils/destinyEnums';
+import { enumerateRecordState, associationsCollectionsBadges } from '../../utils/destinyEnums';
 import * as paths from '../../utils/paths';
 import dudRecords from '../../data/dudRecords';
 import ObservedImage from '../ObservedImage';
@@ -200,45 +200,6 @@ class Records extends React.Component {
       } else {
         let description = definitionRecord.displayProperties.description !== '' ? definitionRecord.displayProperties.description : false;
         description = !description && definitionRecord.loreHash ? manifest.DestinyLoreDefinition[definitionRecord.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
-
-        const associationsCollectionsBadges = [
-          {
-            recordHash: 3488769908, // Destinations: Red War
-            badgeHash: 2904806741
-          },
-          {
-            recordHash: 2676320666, // Destinations: Curse of Osiris and Warmind
-            badgeHash: 1331476689
-          },
-          {
-            recordHash: 4269157841, // Destinations: Forsaken
-            badgeHash: 2881240068
-          },
-          {
-            recordHash: 751035753, // Raid: Last Wish
-            badgeHash: 1086048586
-          },
-          {
-            recordHash: 1522035006, // Destinations: Dreaming City
-            badgeHash: 3642989833
-          },
-          {
-            recordHash: 1975718024, // Playing for Keeps
-            badgeHash: 1420354007
-          },
-          {
-            recordHash: 4160670554, // Annual Pass: Black Armory
-            badgeHash: 2399267278
-          },
-          {
-            recordHash: 2794426212, // Annual Pass: Jokers Wild
-            badgeHash: 2503214417
-          },
-          {
-            recordHash: 52802522, // Mint in Box
-            badgeHash: 2759158924
-          }
-        ];
         
         const isCollectionBadge = associationsCollectionsBadges.find(ass => ass.recordHash === definitionRecord.hash);
 
@@ -281,7 +242,7 @@ class Records extends React.Component {
             }
           }).filter(r => r);
         }
-
+        
         recordsOutput.push({
           completed: enumerateRecordState(state).recordRedeemed,
           progressDistance,

@@ -195,12 +195,8 @@
 
 #sit-rep .module .clan-roster .refresh {
   position: absolute;
-  left: -2rem;
-}
-
-#sit-rep .module .clan-roster .duo {
-  display: flex;
-  justify-content: space-between;
+  top: 0;
+  right: 0;
 }
 
 

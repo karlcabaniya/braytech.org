@@ -1,6 +1,5 @@
 import React from 'react';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
 import RecordsTracked from '../../../components/RecordsTracked';
@@ -22,14 +21,6 @@ class Tracked extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    member: state.member,
-    theme: state.theme
-  };
-}
-
 export default compose(
-  connect(mapStateToProps),
   withTranslation()
 )(Tracked);

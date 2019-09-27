@@ -10,7 +10,7 @@ import { enumerateRecordState } from '../../utils/destinyEnums';
 
 class RecordsTracked extends React.Component {
   render() {
-    const { t, member, triumphs, limit, pageLink } = this.props;
+    const { t, member, triumphs, limit, pageLink, selfLinkFrom = false } = this.props;
     const characterRecords = member.data.profile.characterRecords.data;
     const profileRecords = member.data.profile.profileRecords.data.records;
     const profileRecordsTracked = member && member.data.profile.profileRecords.data.trackedRecordHash ? [member.data.profile.profileRecords.data.trackedRecordHash] : [];
@@ -41,7 +41,7 @@ class RecordsTracked extends React.Component {
     return (
       <>
         <ul className={cx('list record-items')}>
-          <Records selfLink hashes={hashes} ordered='progress' limit={limit} />
+          <Records hashes={hashes} ordered='progress' limit={limit} selfLinkFrom={selfLinkFrom} />
           {hashes.length < 1 ? (
             <li key='none-tracked' className='none-tracked'>
               <div className='text'>{t("You aren't tracking any records yet!")}</div>

@@ -245,11 +245,16 @@ class SitRep extends React.Component {
           <div className='module'>
             <div className='content'>
               <div className='module-header'>
+                <div className='sub-name'>{t('Reserved 4 shadowkeps')}</div>
+              </div>
+              
+            </div>
+          </div>
+          <div className='module'>
+            <div className='content'>
+              <div className='module-header'>
                 <div className='sub-name'>{t('Ranks')}</div>
               </div>
-              {/* <div className='sub-header'>
-                <div>{t('Ranks')}</div>
-              </div> */}
               <div className='ranks'>
                 {[2772425241, 2626549951, 2000925172].map(hash => {
                   return <Ranks key={hash} hash={hash} data={{ membershipType: member.membershipType, membershipId: member.membershipId, characterId: member.characterId, characters: member.data.profile.characters.data, characterProgressions }} />;
@@ -267,10 +272,6 @@ class SitRep extends React.Component {
                   <span>{t('Roster')}</span>
                   <span>{t('{{number}} online', { number: groupMembers.members.filter(member => member.isOnline).length })}</span>
                 </h4>
-                {/* <div className='sub-header'>
-                  <div>{t('Clan roster')}</div>
-                  <div>{groupMembers.members.filter(member => member.isOnline).length} online</div>
-                </div> */}
                 <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
                 {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
               </div>
