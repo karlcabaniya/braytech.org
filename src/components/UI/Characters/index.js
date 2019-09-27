@@ -21,7 +21,7 @@ class Characters extends React.Component {
     const characterActivities = member.data.profile.characterActivities;
 
     const lastActivities = destinyUtils.lastPlayerActivity({ profile: { characters, characterActivities } });
-console.log(location)
+
     const publicPaths = ['/maps'];
     const goto = removeMemberIds((location.state && location.state.from && location.state.from.pathname) || '/now');
 

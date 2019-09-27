@@ -82,7 +82,7 @@ class SitRep extends React.Component {
 
       if (definitionActivity && definitionActivity.activityModeTypes.includes(5) && !commonCrucibleModes.includes(definitionActivity.hash)) {
         a.displayProperties = definitionActivity.displayProperties;
-        a.icon = crucibleModeIcons[definitionActivity.hash];
+        a.icon = crucibleModeIcons[definitionActivity.hash] || null;
         return true;
       }
 
