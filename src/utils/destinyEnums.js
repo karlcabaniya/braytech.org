@@ -64,6 +64,14 @@ export const enumerateItemState = state => ({
   masterworked: flagEnum(state, 4)
 });
 
+export const enumeratePartyMemberState = state => ({
+  none: flagEnum(state, 0),
+  fireteamMember: flagEnum(state, 1),
+  posseMember: flagEnum(state, 2),
+  groupMember: flagEnum(state, 4),
+  partyLeader: flagEnum(state, 8)
+});
+
 export const bookCovers = {
   2447807737: '037E-0000131E.png',
   396866327: '01A3-0000132F.png',
