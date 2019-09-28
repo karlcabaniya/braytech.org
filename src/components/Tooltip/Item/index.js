@@ -1,11 +1,14 @@
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import cx from 'classnames';
 import { cloneDeep } from 'lodash';
+import { withTranslation } from 'react-i18next';
+import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
 import { enumerateItemState } from '../../../utils/destinyEnums';
+
 import fallback from './fallback';
 import weapon from './weapon';
 import armour from './armour';
@@ -22,11 +25,10 @@ import sandboxPerk from './sandboxPerk';
 
 class Item extends React.Component {
   render() {
-    let { member, hash, instanceId, state, quantity, rollNote, table, tooltipType, tooltips } = this.props;
-
-    if (!table) {
-      table = 'DestinyInventoryItemDefinition';
-    }
+    const { t, member, hash, instanceId, quantity, rollNote, tooltipType, tooltips } = this.props;
+    
+    const table = this.props.table || 'DestinyInventoryItemDefinition';
+    const state = (this.props.state && parseInt(this.props.state, 10)) || 0;
 
     let item;
     if (hash === '343') {
@@ -46,7 +48,7 @@ class Item extends React.Component {
       let itemComponents = member.data.profile.itemComponents;
 
       item.itemComponents = {
-        state: state ? parseInt(state, 10) : false,
+        state,
         instance: itemComponents.instances.data[instanceId] ? itemComponents.instances.data[instanceId] : false,
         sockets: itemComponents.sockets.data[instanceId] ? itemComponents.sockets.data[instanceId].sockets : false,
         perks: itemComponents.perks.data[instanceId] ? itemComponents.perks.data[instanceId].perks : false,
@@ -99,7 +101,7 @@ class Item extends React.Component {
         masterwork = type.masterwork;
       } else if (item.itemType === 14) {
         kind = 'emblem';
-        black = emblem(item);
+        black = emblem(t, item);
       } else if (item.itemType === 16) {
         kind = 'ui subclass';
         hideRarity = true;
@@ -201,7 +203,7 @@ class Item extends React.Component {
         </>
       );
     } else {
-      state = enumerateItemState(parseInt(state, 10));
+
       let name = item.displayProperties && item.displayProperties.name;
       name = table === 'DestinyHistoricalStatsDefinition' ? item.statName : name;
 
@@ -241,4 +243,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(Item);
+export default compose(
+  connect(mapStateToProps),
+  withTranslation()
+)(Item);

@@ -37,7 +37,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: brightness(1.2) blur(2px);
+  backdrop-filter: brightness(1.2) blur(3px);
 }
 
 #tooltip .frame {
@@ -549,7 +549,7 @@
 }
 
 #tooltip .frame.bounty .header {
-  background-color: hsla(var(--commonDark), 0.7);
+  background-color: hsla(0, 0%, 12%, 0.8);
   color: #fff;
 }
 

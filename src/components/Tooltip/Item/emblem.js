@@ -5,7 +5,7 @@ import ObservedImage from '../../ObservedImage';
 import { getSockets } from '../../../utils/destinyItems';
 import manifest from '../../../utils/manifest';
 
-const emblem = item => {
+const emblem = (t, item) => {
   let sockets = [];
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
@@ -33,7 +33,7 @@ const emblem = item => {
                 <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionPlug.displayProperties.icon}`} />
                 <div className='text'>
                   <div className='name'>{definitionPlug.displayProperties.name}</div>
-                  <div className='description'>Emblem variant</div>
+                  <div className='description'>{t('Emblem variant')}</div>
                 </div>
               </div>
             )
