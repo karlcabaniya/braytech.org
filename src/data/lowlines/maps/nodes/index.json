@@ -1585,7 +1585,7 @@
     "checklistId": 1697465175,
     "checklistHash": 1704777267,
     "recordHash": 2994199542,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/artifacts-edge_region-chests_49.jpg",
     "debug": {
       "name": "Artifact's Edge",
       "number": 49
@@ -1596,7 +1596,7 @@
     "checklistId": 1697465175,
     "checklistHash": 2779832084,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/artifacts-edge_region-chests_50.jpg",
     "debug": {
       "name": "Artifact's Edge",
       "number": 50
@@ -1607,7 +1607,7 @@
     "checklistId": 1697465175,
     "checklistHash": 4128910789,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/artifacts-edge_region-chests_51.jpg",
     "debug": {
       "name": "Artifact's Edge",
       "number": 51
@@ -3089,7 +3089,7 @@
     "checklistId": 2360931290,
     "checklistHash": 826274860,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/artifacts-edge_ghost-scans_116.jpg",
     "debug": {
       "name": "Artifact's Edge",
       "number": 116
@@ -3155,7 +3155,7 @@
     "checklistId": 2360931290,
     "checklistHash": 2241654182,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/ghost-scans/pools-of-luminance_ghost-scans_122.jpg",
     "debug": {
       "name": "Pools of Luminance",
       "number": 122
@@ -3166,7 +3166,7 @@
     "checklistId": 2360931290,
     "checklistHash": 777902543,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/ghost-scans/the-cistern_ghost-scans_123.jpg",
+    "screenshot": false,
     "debug": {
       "name": "Pools of Luminance",
       "number": 123
@@ -4472,7 +4472,7 @@
     "checklistId": 3142056444,
     "checklistHash": 2069372641,
     "recordHash": null,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/artifacts-edge_lost-sectors_the-orrery.jpg",
     "debug": {
       "name": "The Orrery",
       "number": 25
