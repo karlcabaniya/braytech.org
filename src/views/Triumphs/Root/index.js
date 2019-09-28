@@ -9,6 +9,7 @@ import dudRecords from '../../../data/dudRecords';
 import { enumerateRecordState, sealImages } from '../../../utils/destinyEnums';
 import { ProfileLink } from '../../../components/ProfileLink';
 import ObservedImage from '../../../components/ObservedImage';
+import { unredeemed } from '../../../components/Records';
 import RecordsAlmost from '../../../components/RecordsAlmost';
 import RecordsTracked from '../../../components/RecordsTracked';
 import Search from '../../../components/Search';
@@ -140,7 +141,7 @@ class Root extends React.Component {
       });
     });
 
-    const unredeemedTriumphCount = recordsStates.filter(record => !enumerateRecordState(record.state).recordRedeemed && !enumerateRecordState(record.state).objectiveNotCompleted).length;
+    const unredeemedTriumphCount = unredeemed(member).length;
 
     return (
       <>

@@ -18,6 +18,97 @@ import ProgressBar from '../UI/ProgressBar';
 
 import './styles.css';
 
+const selfLink = hash => {
+  let link = ['/triumphs'];
+  let root = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.recordsRootNode];
+  let seals = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
+
+  root.children.presentationNodes.forEach(nP => {
+    let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+
+    nodePrimary.children.presentationNodes.forEach(nS => {
+      let nodeSecondary = manifest.DestinyPresentationNodeDefinition[nS.presentationNodeHash];
+
+      nodeSecondary.children.presentationNodes.forEach(nT => {
+        let nodeTertiary = manifest.DestinyPresentationNodeDefinition[nT.presentationNodeHash];
+
+        if (nodeTertiary.children.records.length) {
+          let found = nodeTertiary.children.records.find(c => c.recordHash === parseInt(hash, 10));
+          if (found) {
+            link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.recordHash)
+          }
+        } else {
+          nodeTertiary.children.presentationNodes.forEach(nQ => {
+            let nodeQuaternary = manifest.DestinyPresentationNodeDefinition[nQ.presentationNodeHash];
+
+            if (nodeQuaternary.children.records.length) {
+              let found = nodeQuaternary.children.records.find(c => c.recordHash === hash);
+              if (found) {
+                link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.recordHash)
+              }
+            }      
+          });
+        }
+
+      });
+    });
+  });
+
+  if (link.length === 1) {
+    seals.children.presentationNodes.forEach(nP => {
+      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+
+      if (nodePrimary.children.records.length) {
+        let found = nodePrimary.children.records.find(c => c.recordHash === parseInt(hash, 10));
+        if (found) {
+          link.push('seal', nodePrimary.hash, found.recordHash)
+        }
+      }
+
+    });
+  }
+
+  link = link.join('/');
+  return link;
+}
+
+const unredeemed = member => {
+  const characterRecords = member && member.data.profile.characterRecords.data;
+  const profileRecords = member && member.data.profile.profileRecords.data.records;
+
+  const hashes = [];
+
+  let records = {
+    ...profileRecords,
+    ...characterRecords[member.characterId].records
+  }
+
+  Object.entries(records).forEach(([key, record]) => {
+    const definitionRecord = manifest.DestinyRecordDefinition[key];
+    
+    if (definitionRecord && definitionRecord.redacted) {
+      return;
+    }
+
+    if (definitionRecord.presentationInfo && definitionRecord.presentationInfo.parentPresentationNodeHashes && definitionRecord.presentationInfo.parentPresentationNodeHashes.length && !enumerateRecordState(record.state).invisible && !enumerateRecordState(record.state).objectiveNotCompleted && !enumerateRecordState(record.state).recordRedeemed) {
+      
+      // check to see if belongs to transitory expired seal
+      const definitionParent = definitionRecord.presentationInfo.parentPresentationNodeHashes.length && manifest.DestinyPresentationNodeDefinition[definitionRecord.presentationInfo.parentPresentationNodeHashes[0]];
+      const parentCompletionRecordData = definitionParent && definitionParent.completionRecordHash && definitionParent.scope === 1 ? characterRecords[member.characterId].records[definitionParent.completionRecordHash] : profileRecords[definitionParent.completionRecordHash];
+
+      if (parentCompletionRecordData && enumerateRecordState(parentCompletionRecordData.state).rewardUnavailable && enumerateRecordState(parentCompletionRecordData.state).objectiveNotCompleted) {
+        return;
+      } else {
+        hashes.push(key);
+      }
+
+    }
+
+  });
+
+  return hashes;
+}
+
 class Records extends React.Component {
   constructor(props) {
     super(props);
@@ -47,60 +138,6 @@ class Records extends React.Component {
     this.props.setTrackedTriumphs(tracked);
   };
 
-  selfLink = hash => {
-    let link = ['/triumphs'];
-    let root = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.recordsRootNode];
-    let seals = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
-
-    root.children.presentationNodes.forEach(nP => {
-      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
-
-      nodePrimary.children.presentationNodes.forEach(nS => {
-        let nodeSecondary = manifest.DestinyPresentationNodeDefinition[nS.presentationNodeHash];
-
-        nodeSecondary.children.presentationNodes.forEach(nT => {
-          let nodeTertiary = manifest.DestinyPresentationNodeDefinition[nT.presentationNodeHash];
-
-          if (nodeTertiary.children.records.length) {
-            let found = nodeTertiary.children.records.find(c => c.recordHash === parseInt(hash, 10));
-            if (found) {
-              link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.recordHash)
-            }
-          } else {
-            nodeTertiary.children.presentationNodes.forEach(nQ => {
-              let nodeQuaternary = manifest.DestinyPresentationNodeDefinition[nQ.presentationNodeHash];
-
-              if (nodeQuaternary.children.records.length) {
-                let found = nodeQuaternary.children.records.find(c => c.recordHash === hash);
-                if (found) {
-                  link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.recordHash)
-                }
-              }      
-            });
-          }
-
-        });
-      });
-    });
-
-    if (link.length === 1) {
-      seals.children.presentationNodes.forEach(nP => {
-        let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
-
-        if (nodePrimary.children.records.length) {
-          let found = nodePrimary.children.records.find(c => c.recordHash === parseInt(hash, 10));
-          if (found) {
-            link.push('seal', nodePrimary.hash, found.recordHash)
-          }
-        }
-
-      });
-    }
-
-    link = link.join('/');
-    return link;
-  }
-
   render() {
     const { t, hashes, member, triumphs, collectibles, ordered, limit, selfLinkFrom, readLink, forceDisplay = false } = this.props;
     const highlight = parseInt(this.props.highlight, 10) || false;
@@ -121,7 +158,7 @@ class Records extends React.Component {
       let completionValueTotal = 0;
       let progressValueTotal = 0;
       
-      let link = this.selfLink(hash);
+      let link = selfLink(hash);
 
       // readLink
       if (definitionRecord.loreHash && !selfLinkFrom && readLink) {
@@ -334,7 +371,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default compose(
+Records = compose(
   withRouter,
   connect(
     mapStateToProps,
@@ -342,3 +379,7 @@ export default compose(
   ),
   withTranslation()
 )(Records);
+
+export { Records, selfLink, unredeemed };
+
+export default Records;

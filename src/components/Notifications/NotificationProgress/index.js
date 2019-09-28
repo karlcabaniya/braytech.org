@@ -9,6 +9,7 @@ import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
 import { ProfileLink } from '../../ProfileLink';
 import { enumerateRecordState } from '../../../utils/destinyEnums';
+import { selfLink } from '../../Records';
 
 import './styles.css';
 
@@ -150,52 +151,21 @@ class NotificationProgress extends React.Component {
 
   render() {
     if (this.state.progress.type === 'record') {
-      let record = manifest.DestinyRecordDefinition[this.state.progress.hash];
+      let definitionRecord = manifest.DestinyRecordDefinition[this.state.progress.hash];
 
-      let link = false;
-      try {
-        let reverse1;
-        let reverse2;
-        let reverse3;
+      let link = selfLink(definitionRecord.hash);
 
-        manifest.DestinyRecordDefinition[record.hash].presentationInfo.parentPresentationNodeHashes.forEach(element => {
-          if (manifest.DestinyPresentationNodeDefinition[1652422747].children.presentationNodes.filter(el => el.presentationNodeHash === element).length > 0) {
-            return; // if hash is a child of seals, skip it
-          }
-          if (reverse1) {
-            return;
-          }
-          reverse1 = manifest.DestinyPresentationNodeDefinition[element];
-        });
-
-        let iteratees = reverse1.presentationInfo ? reverse1.presentationInfo.parentPresentationNodeHashes : reverse1.parentNodeHashes;
-        iteratees.forEach(element => {
-          if (reverse2) {
-            return;
-          }
-          reverse2 = manifest.DestinyPresentationNodeDefinition[element];
-        });
-
-        if (reverse2 && reverse2.parentNodeHashes) {
-          reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
-        }
-
-        link = `/triumphs/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${record.hash}`;
-      } catch (e) {
-        // console.log(e);
-      }
-
-      let description = record.displayProperties.description !== '' ? record.displayProperties.description : false;
-      description = !description && record.loreHash ? manifest.DestinyLoreDefinition[record.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
+      let description = definitionRecord.displayProperties.description !== '' ? definitionRecord.displayProperties.description : false;
+      description = !description && definitionRecord.loreHash ? manifest.DestinyLoreDefinition[definitionRecord.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
       return (
-        <div id='notification-progress' className={cx('record', { lore: record.loreHash, timedOut: this.state.progress.timedOut })}>
+        <div id='notification-progress' className={cx('record', { lore: definitionRecord.loreHash, timedOut: this.state.progress.timedOut })}>
           <div className='type'>
             <div className='text'>Triumph completed</div>
           </div>
           <div className='item'>
             <div className='properties'>
-              <div className='name'>{record.displayProperties.name}</div>
-              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${record.displayProperties.icon}`} noConstraints />
+              <div className='name'>{definitionRecord.displayProperties.name}</div>
+              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionRecord.displayProperties.icon}`} noConstraints />
               <div className='description'>{description}</div>
             </div>
             {this.state.progress.number > 1 ? <div className='more'>And {this.state.progress.number - 1} more</div> : null}
