@@ -693,5 +693,10 @@
     "date": "2019-09-27T23:43:49.123Z",
     "version": "2.9.12",
     "content": "- rectified issue with MMXIX unredeemable unredeemed triumphs display\n- a bunch of general clean up\n- tracked and unredeemed records can now be clicked to see them in their original context\n- collections badge class level completion corrected\n- further sit rep view design work\n- shadowkeep prep"
+  },
+  {
+    "date": "2019-09-30T10:35:52.957Z",
+    "version": "2.9.13",
+    "content": "_The night before Shadowkeep_\n\n- minor improvements to various components\n- seal records in almost complete now correctly link to relevant seal views\n- progress notifcation improvements\n- unredeemed triumphs improvements\n- icons"
   }
 ]

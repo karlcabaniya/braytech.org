@@ -2,13 +2,12 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { orderBy, flattenDepth } from 'lodash';
+import { orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import * as utils from '../../utils/destinyUtils';
 import * as bungie from '../../utils/bungie';
-import ObservedImage from '../../components/ObservedImage';
 import Spinner from '../../components/UI/Spinner';
 import Ranks from '../../components/Ranks';
 import Roster from '../../components/Roster';
@@ -76,7 +75,12 @@ class SitRep extends React.Component {
       2087163649  // Rumble
     ];
     const crucibleModeIcons = {
-      1312786953: <CrucibleIconMayhem />
+      1312786953: <CrucibleIconMayhem />,
+      1: <CrucibleIconDoubles />,
+      2: <CrucibleIconBreakthrough />,
+      3: <CrucibleIconElimination />,
+      4: <CrucibleIconControl />,
+      5: <CrucibleIconRumble />
     };
     const featuredCrucibleMode = characterActivities[member.characterId].availableActivities.find(a => {
       if (!a.activityHash) return false;
