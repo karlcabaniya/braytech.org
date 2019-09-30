@@ -24,7 +24,7 @@ const selfLink = hash => {
   let seals = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
 
   root.children.presentationNodes.forEach(nP => {
-    let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+    let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];
 
     nodePrimary.children.presentationNodes.forEach(nS => {
       let nodeSecondary = manifest.DestinyPresentationNodeDefinition[nS.presentationNodeHash];
@@ -35,7 +35,7 @@ const selfLink = hash => {
         if (nodeTertiary.children.records.length) {
           let found = nodeTertiary.children.records.find(c => c.recordHash === parseInt(hash, 10));
           if (found) {
-            link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.recordHash)
+            link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.recordHash);
           }
         } else {
           nodeTertiary.children.presentationNodes.forEach(nQ => {
@@ -44,33 +44,37 @@ const selfLink = hash => {
             if (nodeQuaternary.children.records.length) {
               let found = nodeQuaternary.children.records.find(c => c.recordHash === hash);
               if (found) {
-                link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.recordHash)
+                link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.recordHash);
               }
-            }      
+            }
           });
         }
-
       });
     });
   });
 
   if (link.length === 1) {
     seals.children.presentationNodes.forEach(nP => {
-      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];
+
+      if (nodePrimary.completionRecordHash === parseInt(hash, 10)) {
+        link.push('seal', nodePrimary.hash);
+
+        return;
+      }
 
       if (nodePrimary.children.records.length) {
         let found = nodePrimary.children.records.find(c => c.recordHash === parseInt(hash, 10));
         if (found) {
-          link.push('seal', nodePrimary.hash, found.recordHash)
+          link.push('seal', nodePrimary.hash, found.recordHash);
         }
       }
-
     });
   }
 
   link = link.join('/');
   return link;
-}
+};
 
 const unredeemed = member => {
   const characterRecords = member && member.data.profile.characterRecords.data;
@@ -81,17 +85,16 @@ const unredeemed = member => {
   let records = {
     ...profileRecords,
     ...characterRecords[member.characterId].records
-  }
+  };
 
   Object.entries(records).forEach(([key, record]) => {
     const definitionRecord = manifest.DestinyRecordDefinition[key];
-    
+
     if (definitionRecord && definitionRecord.redacted) {
       return;
     }
 
     if (definitionRecord.presentationInfo && definitionRecord.presentationInfo.parentPresentationNodeHashes && definitionRecord.presentationInfo.parentPresentationNodeHashes.length && !enumerateRecordState(record.state).invisible && !enumerateRecordState(record.state).objectiveNotCompleted && !enumerateRecordState(record.state).recordRedeemed) {
-      
       // check to see if belongs to transitory expired seal
       const definitionParent = definitionRecord.presentationInfo.parentPresentationNodeHashes.length && manifest.DestinyPresentationNodeDefinition[definitionRecord.presentationInfo.parentPresentationNodeHashes[0]];
       const parentCompletionRecordData = definitionParent && definitionParent.completionRecordHash && definitionParent.scope === 1 ? characterRecords[member.characterId].records[definitionParent.completionRecordHash] : profileRecords[definitionParent.completionRecordHash];
@@ -101,13 +104,11 @@ const unredeemed = member => {
       } else {
         hashes.push(key);
       }
-
     }
-
   });
 
   return hashes;
-}
+};
 
 class Records extends React.Component {
   constructor(props) {
@@ -157,7 +158,7 @@ class Records extends React.Component {
       let objectives = [];
       let completionValueTotal = 0;
       let progressValueTotal = 0;
-      
+
       let link = selfLink(hash);
 
       // readLink
@@ -170,11 +171,13 @@ class Records extends React.Component {
           let definitionObjective = manifest.DestinyObjectiveDefinition[hash];
 
           let playerProgress = recordData && recordData.objectives.find(o => o.objectiveHash === hash);
-          playerProgress = playerProgress ? playerProgress : {
-            complete: false,
-            progress: 0,
-            objectiveHash: definitionObjective.hash
-          };
+          playerProgress = playerProgress
+            ? playerProgress
+            : {
+                complete: false,
+                progress: 0,
+                objectiveHash: definitionObjective.hash
+              };
 
           // override
           if (hash === 1278866930 && playerProgress.complete) {
@@ -237,7 +240,7 @@ class Records extends React.Component {
       } else {
         let description = definitionRecord.displayProperties.description !== '' ? definitionRecord.displayProperties.description : false;
         description = !description && definitionRecord.loreHash ? manifest.DestinyLoreDefinition[definitionRecord.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
-        
+
         const isCollectionBadge = associationsCollectionsBadges.find(ass => ass.recordHash === definitionRecord.hash);
 
         let linkTo;
@@ -268,18 +271,20 @@ class Records extends React.Component {
 
         let rewards;
         if (definitionRecord.rewardItems && definitionRecord.rewardItems.length) {
-          rewards = definitionRecord.rewardItems.map(r => {
-            let definitionItem = manifest.DestinyInventoryItemDefinition[r.itemHash];
-            let definitionCollectible = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] : false;
+          rewards = definitionRecord.rewardItems
+            .map(r => {
+              let definitionItem = manifest.DestinyInventoryItemDefinition[r.itemHash];
+              let definitionCollectible = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] : false;
 
-            if (definitionCollectible && !definitionCollectible.redacted) {
-              return definitionCollectible.hash;
-            } else {
-              return false;
-            }
-          }).filter(r => r);
+              if (definitionCollectible && !definitionCollectible.redacted) {
+                return definitionCollectible.hash;
+              } else {
+                return false;
+              }
+            })
+            .filter(r => r);
         }
-        
+
         recordsOutput.push({
           completed: enumerateRecordState(state).recordRedeemed,
           progressDistance,
@@ -309,8 +314,14 @@ class Records extends React.Component {
                 <div className='text'>
                   <div className='name'>{definitionRecord.displayProperties.name}</div>
                   <div className='meta'>
-                    <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>{manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%</div>
-                    {definitionRecord.completionInfo && definitionRecord.completionInfo.ScoreValue !== 0 ? <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>{definitionRecord.completionInfo.ScoreValue}</div> : null}
+                    <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>
+                      {manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%
+                    </div>
+                    {definitionRecord.completionInfo && definitionRecord.completionInfo.ScoreValue !== 0 ? (
+                      <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>
+                        {definitionRecord.completionInfo.ScoreValue}
+                      </div>
+                    ) : null}
                   </div>
                   <div className='description'>{description}</div>
                 </div>
