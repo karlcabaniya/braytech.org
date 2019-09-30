@@ -11,9 +11,9 @@ async function getMember(membershipType, membershipId) {
     const tokens = ls.get('setting.auth');
     const now = new Date().getTime() + 10000;
 
-    const tokenExpiry = tokens && new Date(tokens.access.expires).getTime();
+    const refreshTokenExpired = tokens && now > new Date(tokens.refresh.expires).getTime();
 
-    if (tokens && tokens.destinyMemberships.find(m => m.membershipId === membershipId) && now < tokenExpiry) {
+    if (tokens && tokens.destinyMemberships.find(m => m.membershipId === membershipId) && !refreshTokenExpired) {
       useAuth = true;
       components.push(102,103,201);
     }

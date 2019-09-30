@@ -51,13 +51,12 @@ class NotificationProgress extends React.Component {
       this.timer = setTimeout((prevState = this.state) => {
         this.timer = false;
         console.log('timed out');
-        this.setState({
+        this.setState(p => ({
           progress: {
-            type: prevState.progress.type,
-            hash: prevState.progress.hash,
+            ...p.progress,
             timedOut: true
           }
-        });
+        }));
       }, 10000);
     }
   };
@@ -65,9 +64,9 @@ class NotificationProgress extends React.Component {
   componentDidUpdate(prevProps) {
     this.timeOut();
 
+    const member = this.props.member;
     const fresh = this.props.member.data;
-    const stale = this.props.member.prevData ? this.props.member.prevData : false;
-    const characterId = this.props.member.characterId;
+    const stale = this.props.member.prevData || false;
 
     if (prevProps.member.membershipId !== this.props.member.membershipId) {
       // console.log('membershipId mismatch');
@@ -93,7 +92,7 @@ class NotificationProgress extends React.Component {
     }
 
     let profileRecords = difference(fresh.profile.profileRecords.data.records, stale.profile.profileRecords.data.records);
-    let characterRecords = difference(fresh.profile.characterRecords.data[characterId].records, stale.profile.characterRecords.data[characterId].records);
+    let characterRecords = difference(fresh.profile.characterRecords.data[member.characterId].records, stale.profile.characterRecords.data[member.characterId].records);
 
     // console.log(profileRecords);
 
@@ -144,7 +143,7 @@ class NotificationProgress extends React.Component {
 
     if (this.state.progress.timedOut && progress.type && this.state.progress.hash !== progress.hash) {
       this.setState({
-        progress: progress
+        progress
       });
     }
   }
@@ -157,6 +156,7 @@ class NotificationProgress extends React.Component {
 
       let description = definitionRecord.displayProperties.description !== '' ? definitionRecord.displayProperties.description : false;
       description = !description && definitionRecord.loreHash ? manifest.DestinyLoreDefinition[definitionRecord.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
+
       return (
         <div id='notification-progress' className={cx('record', { lore: definitionRecord.loreHash, timedOut: this.state.progress.timedOut })}>
           <div className='type'>
@@ -181,8 +181,7 @@ class NotificationProgress extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member,
-    theme: state.theme
+    member: state.member
   };
 }
 
