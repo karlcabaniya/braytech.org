@@ -93,7 +93,7 @@
 #sit-rep .module .content.highlight.crucible .mode .icon svg {
   width: 100%;
   height: auto;
-  fill: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
 }
 
 #sit-rep .module .content.highlight.crucible .mode .icon svg .polygon.inner {

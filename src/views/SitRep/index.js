@@ -16,7 +16,9 @@ import Roster from '../../components/Roster';
 import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
 import { ReactComponent as CrucibleIconDoubles } from './icons/doubles.svg';
 import { ReactComponent as CrucibleIconBreakthrough } from './icons/breakthrough.svg';
-import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
+import { ReactComponent as CrucibleIconElimination } from './icons/elimination.svg';
+import { ReactComponent as CrucibleIconControl } from './icons/control.svg';
+import { ReactComponent as CrucibleIconRumble } from './icons/rumble.svg';
 
 import './styles.css';
 
