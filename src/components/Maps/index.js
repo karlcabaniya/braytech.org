@@ -47,6 +47,11 @@ class Maps extends React.Component {
           error: false,
           layers: []
         },
+        'the-moon': {
+          loading: true,
+          error: false,
+          layers: []
+        },
         'new-pacific-arcology': {
           loading: true,
           error: false,

@@ -3345,6 +3345,73 @@
       ]
     }
   },
+  "the-moon": {
+    "destination": {
+      "hash": 290444260,
+      "name": "The Moon",
+      "id": "the-moon"
+    },
+    "map": {
+      "width": 2594,
+      "height": 2779,
+      "center": {
+        "x": -200,
+        "y": 550
+      },
+      "layers": [
+        {
+          "id": "background-upper",
+          "type": "background",
+          "x": -120,
+          "y": -179,
+          "width": 2160,
+          "height": 1080,
+          "image": "/static/images/extracts/maps/background_upper.png",
+          "color": "#e60000"
+        },
+        {
+          "id": "background-lower",
+          "type": "background",
+          "x": -120,
+          "y": 179,
+          "width": 2160,
+          "height": 1080,
+          "image": "/static/images/extracts/maps/background_lower.png",
+          "color": "#790000"
+        },
+        {
+          "id": "map",
+          "type": "map",
+          "x": -200,
+          "y": -1000,
+          "width": 2594,
+          "height": 2779,
+          "image": "/static/images/extracts/maps/map_the-moon.png",
+          "opacity": 0.4
+        }
+      ],
+      "bubbles": [
+        {
+          "hash": 3899539020,
+          "name": "Glacial Drift",
+          "id": "glacial-drift",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 0,
+              "y": 0
+            },
+            {
+              "type": "fast-travel",
+              "x": 0,
+              "y": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
   "farm": {
     "destination": {
       "hash": 4188263703,

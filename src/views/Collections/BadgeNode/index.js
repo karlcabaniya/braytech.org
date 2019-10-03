@@ -26,6 +26,23 @@ class BadgeNode extends React.Component {
     const characters = member.data.profile.characters.data;
     const character = characters.find(c => c.characterId === member.characterId);
 
+    // associates class with hash
+    //
+    // let obj = {}
+    // for (const n of Object.values(manifest.DestinyPresentationNodeDefinition)) {
+    //   n.children && n.children.presentationNodes && n.children.presentationNodes.length && n.children.presentationNodes.forEach(p => {
+    //     let def = manifest.DestinyPresentationNodeDefinition[p.presentationNodeHash];
+    //     if (def && def.displayProperties && def.displayProperties.name && def.displayProperties.name.toLowerCase() === 'titan') {
+    //       obj[def.hash] = 0
+    //     } else if (def && def.displayProperties && def.displayProperties.name && def.displayProperties.name.toLowerCase() === 'hunter') {
+    //       obj[def.hash] = 1
+    //     } else if (def && def.displayProperties && def.displayProperties.name && def.displayProperties.name.toLowerCase() === 'warlock') {
+    //       obj[def.hash] = 2
+    //     }
+    //   })
+    // }
+    // console.log(JSON.stringify(obj))
+
     const definitionBadge = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
 
     let classNode = this.props.match.params.tertiary ? parseInt(this.props.match.params.tertiary, 10) : false;
@@ -105,23 +122,6 @@ class BadgeNode extends React.Component {
         </div>
       );
     });
-
-    // associates class with hash
-    //
-    // let obj = {}
-    // for (const n of Object.values(manifest.DestinyPresentationNodeDefinition)) {
-    //   n.children && n.children.presentationNodes && n.children.presentationNodes.length && n.children.presentationNodes.forEach(p => {
-    //     let def = manifest.DestinyPresentationNodeDefinition[p.presentationNodeHash];
-    //     if (def && def.displayProperties && def.displayProperties.name && def.displayProperties.name.toLowerCase() === 'titan') {
-    //       obj[def.hash] = 0
-    //     } else if (def && def.displayProperties && def.displayProperties.name && def.displayProperties.name.toLowerCase() === 'hunter') {
-    //       obj[def.hash] = 1
-    //     } else if (def && def.displayProperties && def.displayProperties.name && def.displayProperties.name.toLowerCase() === 'warlock') {
-    //       obj[def.hash] = 2
-    //     }
-    //   })
-    // }
-    // console.log(JSON.stringify(obj))
 
     return (
       <div className='node badge'>

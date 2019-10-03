@@ -639,7 +639,7 @@ export function lastPlayerActivity(member) {
       lastActivityString = false;
     }
 
-    const lastMode = (definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.map(hash => manifest.DestinyActivityModeDefinition[hash])) || [];
+    const lastMode = (definitionActivityMode && definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.map(hash => manifest.DestinyActivityModeDefinition[hash])) || [];
 
     return {
       characterId: character.characterId,

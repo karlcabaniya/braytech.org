@@ -16,13 +16,15 @@ class SealNode extends React.Component {
     const characterId = this.props.member.characterId;
 
     const characters = this.props.member.data.profile.characters.data;
-    const genderHash = characters.find(character => character.characterId === characterId).genderHash;
+    const character = characters.find(character => character.characterId === characterId);
     const profileRecords = this.props.member.data.profile.profileRecords.data.records;
 
     // for MOMENTS OF TRIUMPH: MMXIX
     const characterRecords = this.props.member.data.profile.characterRecords.data;
 
     const definitionSeal = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
+    
+    const definitionCompletionRecord = definitionSeal.completionRecordHash && manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash];
 
     // for MOMENTS OF TRIUMPH: MMXIX
     const states = [];
@@ -45,7 +47,7 @@ class SealNode extends React.Component {
 
     const isComplete = progress === total ? true : false;
 
-    const title = manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[genderHash];
+     const title = !definitionCompletionRecord.redacted && definitionCompletionRecord.titleInfo && definitionCompletionRecord.titleInfo.titlesByGenderHash[character.genderHash];
 
     const sealCommonality = manifest.statistics.seals && manifest.statistics.seals[definitionSeal.hash];
 
