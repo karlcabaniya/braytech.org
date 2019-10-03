@@ -545,19 +545,31 @@ class ThisWeek extends React.Component {
           boss: t('Hasapiko, Beloved by Calus'),
           triumphs: [3141945846, 2422246606, 2422246593],
           items: [],
-          collectibles: []
+          collectibles: {
+            0: [1692129580, 2678796997],
+            1: [3376099856, 2678796997],
+            2: [1572606157, 2678796997]
+          }
         },
         2: {
           boss: t('Arunak, Beloved by Calus'),
           triumphs: [1959753477, 2422246607, 2472579457],
           items: [],
-          collectibles: []
+          collectibles: {
+            0: [1692129580, 2678796997],
+            1: [3376099856, 2678796997],
+            2: [1572606157, 2678796997]
+          }
         },
         3: {
           boss: t('Pagouri, Beloved by Calus'),
           triumphs: [2351146132, 2422246605, 2422246592],
           items: [],
-          collectibles: []
+          collectibles: {
+            0: [1692129580, 2678796997],
+            1: [3376099856, 2678796997],
+            2: [1572606157, 2678796997]
+          }
         }
       },
       raids: {
@@ -775,6 +787,12 @@ class ThisWeek extends React.Component {
     //   return m;
     // }));
 
+    console.log(Object.values(milestones).map(m => {
+      m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
+      m.name = manifest.DestinyMilestoneDefinition[m.milestoneHash].displayProperties.name;
+      return m;
+    }));
+
     const modules = [];
 
     // flashpoint
@@ -799,7 +817,7 @@ class ThisWeek extends React.Component {
 
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
+      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
 
       return false;
     });
@@ -974,17 +992,6 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    const reckoningModifiers = milestones[601087286].activities[0].modifierHashes;
-    const strikesModifiers = milestones[1437935813].activities[0].modifierHashes;
-
-    const availableHeroicMenagerie = profile.characterActivities.data[member.characterId].availableActivities && profile.characterActivities.data[member.characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)) && manifest.DestinyActivityDefinition[profile.characterActivities.data[member.characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)).activityHash];
-
-    const menagerieHeroicCollectibles = {
-      0: [1692129580, 2678796997],
-      1: [3376099856, 2678796997],
-      2: [1572606157, 2678796997]
-    };
-
     const moduleEscalationProtocol = (
       <div key='moduleEscalationProtocol' className='content'>
         <div className='module-header'>
@@ -1064,7 +1071,7 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Heroic Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' hashes={menagerieHeroicCollectibles[profile.characters.data.find(c => c.characterId === member.characterId).classType]} />
+          <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.menagerie[cycleInfo.week.menagerie].collectibles[profile.characters.data.find(c => c.characterId === member.characterId).classType]} />
         </ul>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
@@ -1147,74 +1154,6 @@ class ThisWeek extends React.Component {
               </div>
             )}
           </div>
-          <div className='content highlight'>
-            <div className='module-header'>
-              <div className='sub-name'>{manifest.DestinyPresentationNodeDefinition[1396056784].displayProperties.name}</div>
-            </div>
-            <h4>{t('Active Modifiers')}</h4>
-            <ul className='list modifiers'>
-              {strikesModifiers.map((m, i) => {
-                let modDef = manifest.DestinyActivityModifierDefinition[m];
-                return (
-                  <li key={i}>
-                    <div className='icon'>
-                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                    </div>
-                    <div className='text'>
-                      <div className='name'>{modDef.displayProperties.name}</div>
-                      <div className='description'>{modDef.displayProperties.description}</div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className='content highlight'>
-            <div className='module-header'>
-              <div className='sub-name'>{manifest.DestinyPlaceDefinition[4148998934].displayProperties.name}</div>
-            </div>
-            <h4>{t('Active Modifiers')}</h4>
-            <ul className='list modifiers'>
-              {reckoningModifiers.map((m, i) => {
-                let modDef = manifest.DestinyActivityModifierDefinition[m];
-                return (
-                  <li key={i}>
-                    <div className='icon'>
-                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                    </div>
-                    <div className='text'>
-                      <div className='name'>{modDef.displayProperties.name}</div>
-                      <div className='description'>{modDef.displayProperties.description}</div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          {availableHeroicMenagerie ? (
-            <div className='content highlight'>
-              <div className='module-header'>
-                <div className='sub-name'>{manifest.DestinyPlaceDefinition[2096719558].displayProperties.name}</div>
-              </div>
-              <h4>{t('Active Heroic Modifiers')}</h4>
-              <ul className='list modifiers'>
-                {availableHeroicMenagerie.modifiers.map((m, i) => {
-                  let modDef = manifest.DestinyActivityModifierDefinition[m.activityModifierHash];
-                  return (
-                    <li key={i}>
-                      <div className='icon'>
-                        <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                      </div>
-                      <div className='text'>
-                        <div className='name'>{modDef.displayProperties.name}</div>
-                        <div className='description'>{modDef.displayProperties.description}</div>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ) : null}
         </div>
         <div className='padder'>
           {modules

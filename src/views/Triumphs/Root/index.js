@@ -128,7 +128,7 @@ class Root extends React.Component {
             {nodeTotal && nodeProgress !== nodeTotal ? <div className='progress-bar-background' style={{ width: `${(nodeProgress / nodeTotal) * 100}%` }} /> : null}
             <ObservedImage className={cx('image', 'icon')} src={sealImages[definitionSeal.hash] ? `/static/images/extracts/badges/${sealImages[definitionSeal.hash]}` : `https://www.bungie.net${definitionSeal.displayProperties.icon}`} />
             <div className='displayProperties'>
-              <div className='name'>{manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[character.genderHash]}</div>
+              <div className='name'>{manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo && manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[character.genderHash]}</div>
               {nodeTotal ? (
                 <div className='progress'>
                   <span>{nodeProgress}</span> / {nodeTotal}

@@ -86,7 +86,7 @@ class SitRep extends React.Component {
       if (!a.activityHash) return false;
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes.includes(5) && !commonCrucibleModes.includes(definitionActivity.hash)) {
+      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(5) && !commonCrucibleModes.includes(definitionActivity.hash)) {
         a.displayProperties = definitionActivity.displayProperties;
         a.icon = crucibleModeIcons[definitionActivity.hash] || null;
         return true;
@@ -126,7 +126,7 @@ class SitRep extends React.Component {
 
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
+      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
 
       return false;
     });
@@ -136,9 +136,6 @@ class SitRep extends React.Component {
         name: t('Nightfalls')
       }
     }
-
-    // console.log(weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]))
-
     
 
     return (

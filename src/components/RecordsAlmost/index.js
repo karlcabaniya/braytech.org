@@ -48,10 +48,11 @@ class RecordsAlmost extends React.Component {
         return;
       }
 
-      // ignore collections badges etc
       if (ignores.includes(hash)) {
         return;
       }
+
+      if (!record.objectives) return;
 
       if (enumerateRecordState(record.state).invisible || enumerateRecordState(record.state).recordRedeemed) {
         return;
