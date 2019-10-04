@@ -279,7 +279,7 @@ async function run() {
     }
   });
 
-  // fs.writeFileSync(path, JSON.stringify(lists, null, '  '));
+  fs.writeFileSync(path, JSON.stringify(lists, null, '  '));
 }
 
 run();

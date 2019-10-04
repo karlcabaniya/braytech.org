@@ -7591,7 +7591,8 @@
       "sorts": {
         "number": 1
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "I.II: Of Tattered Blood and Broken Bone",
@@ -7599,7 +7600,8 @@
       "sorts": {
         "number": 2
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "I.III: Of Tattered Blood and Broken Bone",
@@ -7607,7 +7609,8 @@
       "sorts": {
         "number": 3
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "I.IV: Of Tattered Blood and Broken Bone",
@@ -7615,7 +7618,8 @@
       "sorts": {
         "number": 4
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "II: An Audience with Slaughter",
@@ -7623,7 +7627,8 @@
       "sorts": {
         "number": 5
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "III: Ritualistic Circle Pit",
@@ -7631,7 +7636,8 @@
       "sorts": {
         "number": 6
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "IV: Blood Sport",
@@ -7639,7 +7645,8 @@
       "sorts": {
         "number": 7
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "V: A Sinister Plot",
@@ -7647,7 +7654,8 @@
       "sorts": {
         "number": 8
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "VI: Blood Sport",
@@ -7655,7 +7663,8 @@
       "sorts": {
         "number": 9
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "VII: The Severed and the Unmade",
@@ -7663,7 +7672,8 @@
       "sorts": {
         "number": 10
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "VIII: A Sacrifice of Self",
@@ -7671,7 +7681,8 @@
       "sorts": {
         "number": 11
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "IX.I: The Unmaking",
@@ -7679,7 +7690,8 @@
       "sorts": {
         "number": 12
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "IX.II: The Unmaking",
@@ -7687,7 +7699,8 @@
       "sorts": {
         "number": 13
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "X: Faith in Bone",
@@ -7695,7 +7708,8 @@
       "sorts": {
         "number": 14
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "XI: The Anti-Logic",
@@ -7703,7 +7717,8 @@
       "sorts": {
         "number": 15
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "",
@@ -7711,7 +7726,8 @@
       "sorts": {
         "number": 16
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "",
@@ -7719,7 +7735,8 @@
       "sorts": {
         "number": 17
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "",
@@ -7727,7 +7744,8 @@
       "sorts": {
         "number": 18
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "",
@@ -7735,7 +7753,8 @@
       "sorts": {
         "number": 19
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "",
@@ -7743,7 +7762,8 @@
       "sorts": {
         "number": 20
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     }
   ],
   "2609997025": [
@@ -11830,7 +11850,8 @@
       "sorts": {
         "number": 1
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "Ghost Fragment: Sai Mota's Ghost",
@@ -11838,7 +11859,8 @@
       "sorts": {
         "number": 2
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "Ghost Fragment: Gimble-4's Ghost",
@@ -11846,7 +11868,8 @@
       "sorts": {
         "number": 3
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "Ghost Fragment: Eris Morn's Ghost",
@@ -11854,7 +11877,8 @@
       "sorts": {
         "number": 4
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "Ghost Fragment: Toland's Ghost",
@@ -11862,7 +11886,8 @@
       "sorts": {
         "number": 5
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "Ghost Fragment: Vyhar's Ghost",
@@ -11870,15 +11895,29 @@
       "sorts": {
         "number": 6
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "Ghost Fragment: Lonesome Ghost",
       "recordHash": 3390078237,
       "sorts": {
-        "number": 7
+        "number": 7,
+        "destination": "The Moon",
+        "bubble": "Anchor of Light",
+        "place": "The Moon",
+        "name": "Anchor of Light"
       },
-      "extended": {}
+      "extended": {},
+      "destinationHash": 290444260,
+      "bubbleHash": 4025450777,
+      "bubbleName": false,
+      "points": [
+        {
+          "x": -52,
+          "y": -492
+        }
+      ]
     },
     {
       "recordName": "Ghost Fragment: Omar Agah's Ghost",
@@ -11886,7 +11925,8 @@
       "sorts": {
         "number": 8
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "Ghost Fragment: Eriana-3's Ghost",
@@ -11894,7 +11934,8 @@
       "sorts": {
         "number": 9
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     },
     {
       "recordName": "Ghost Fragment: Vell Tarlowe's Ghost",
@@ -11902,7 +11943,8 @@
       "sorts": {
         "number": 10
       },
-      "extended": {}
+      "extended": {},
+      "points": []
     }
   ]
 }

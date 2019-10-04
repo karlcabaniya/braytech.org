@@ -253,6 +253,10 @@ class Maps extends React.Component {
       655926402: {
         // lore: forsaken prince
         ...checklists[655926402]()
+      },
+      4285512244: {
+        // lore: lunas lost
+        ...checklists[4285512244]()
       }
     };
 
