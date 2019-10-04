@@ -290,7 +290,7 @@ class Maps extends React.Component {
       }
 
       // record-based nodes
-      if ([1420597821, 3305936921, 655926402].includes(list.checklistId)) {
+      if ([1420597821, 3305936921, 655926402, 4285512244, 2474271317].includes(list.checklistId)) {
         adjusted.tooltipTable = 'DestinyRecordDefinition';
         adjusted.items = adjusted.items.map(i => {
           const node = nodes.find(n => n.recordHash === i.recordHash);
