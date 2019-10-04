@@ -1,6 +1,6 @@
 const userFlair = [
   {
-    user: '44611686018467516892',
+    user: '34611686018467516892',
     trophies: [
       {
         hash: 'patron-vip',
@@ -55,7 +55,7 @@ const userFlair = [
     ]
   },
   {
-    user: '44611686018467367772',
+    user: '34611686018467367772',
     trophies: [
       {
         hash: 'patron',
@@ -77,7 +77,7 @@ const userFlair = [
     ]
   },
   {
-    user: '44611686018467293140',
+    user: '34611686018467293140',
     trophies: [
       {
         hash: 'patron',
@@ -88,7 +88,7 @@ const userFlair = [
     ]
   },
   {
-    user: '44611686018468077675',
+    user: '34611686018468077675',
     trophies: [
       {
         hash: 'patron',
@@ -99,7 +99,7 @@ const userFlair = [
     ]
   },
   {
-    user: '44611686018468058152',
+    user: '34611686018468058152',
     trophies: [
       {
         hash: 'patron',
@@ -110,7 +110,7 @@ const userFlair = [
     ]
   },
   {
-    user: '44611686018467184682',
+    user: '34611686018467184682',
     trophies: [
       {
         hash: 'patron',

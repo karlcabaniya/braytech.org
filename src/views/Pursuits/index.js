@@ -124,17 +124,13 @@ class Pursuits extends React.Component {
             {progressData && progressData.filter(o => !o.complete).length > 0 && nowMs + 7200 * 1000 > expiryMs ? <div className='expires-soon' /> : null}
             {progressData && progressData.filter(o => !o.complete).length > 0 ? (
               <ProgressBar
-                progress={{
-                  progress: progressData.reduce((acc, curr) => {
-                    return acc + curr.progress;
-                  }, 0),
-                  objectiveHash: progressData[0].objectiveHash
-                }}
-                objective={{
-                  completionValue: progressData.reduce((acc, curr) => {
-                    return acc + curr.completionValue;
-                  }, 0)
-                }}
+                objectiveHash={progressData[0].objectiveHash}
+                progress={progressData.reduce((acc, curr) => {
+                  return acc + curr.progress;
+                }, 0)}
+                completionValue={progressData.reduce((acc, curr) => {
+                  return acc + curr.completionValue;
+                }, 0)}
                 hideCheck
               />
             ) : null}

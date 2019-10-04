@@ -351,6 +351,10 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
+#header.profile-header .characters .list li .progress-bar .bar .text {
+  display: none;
+}
+
 #header.profile-header .characters .list li .progress-bar .bar .fill {
   background-color: #5aa366;
   transition: width 0.5s;

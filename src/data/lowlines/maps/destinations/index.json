@@ -3392,20 +3392,110 @@
       ],
       "bubbles": [
         {
-          "hash": 3899539020,
-          "name": "Glacial Drift",
-          "id": "glacial-drift",
+          "hash": 240420607,
+          "name": "Sanctuary",
+          "id": "sanctuary",
           "type": "region",
           "nodes": [
             {
               "type": "title",
-              "x": 0,
-              "y": 0
+              "x": -185,
+              "y": -844
             },
             {
               "type": "fast-travel",
-              "x": 0,
-              "y": 0
+              "x": -323,
+              "y": -806
+            },
+            {
+              "type": "vendor",
+              "vendorHash": 1616085565,
+              "x": -247,
+              "y": -768
+            },
+            {
+              "type": "vendor",
+              "vendorHash": 3411552308,
+              "x": -312,
+              "y": -740
+            }
+          ]
+        },
+        {
+          "hash": 3326367698,
+          "name": "Archer's Line",
+          "id": "archers-Line",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -576,
+              "y": -380
+            }
+          ]
+        },
+        {
+          "hash": 4025450777,
+          "name": "Anchor of Light",
+          "id": "anchor-of-light",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -108,
+              "y": -432
+            }
+          ]
+        },
+        {
+          "hash": 4195493657,
+          "name": "Hellmouth",
+          "id": "hellmouth",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -189,
+              "y": 144
+            }
+          ]
+        },
+        {
+          "hash": 417490937,
+          "name": "Sorrow's Harbor",
+          "id": "sorrows-harbor",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 267,
+              "y": 231
+            }
+          ]
+        },
+        {
+          "hash": 1835313730,
+          "name": "Lunar Battlegrounds",
+          "id": "lunar-battlegrounds",
+          "type": "suburb",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 249,
+              "y": -196
+            }
+          ]
+        },
+        {
+          "hash": 2685756106,
+          "name": "Scarlet Keep",
+          "id": "scarlet-keep",
+          "type": "suburb",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 693,
+              "y": 763
             }
           ]
         }

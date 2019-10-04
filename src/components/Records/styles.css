@@ -176,6 +176,15 @@
   background-color: rgba(90, 163, 102, 0.6);
 }
 
+.list.record-items li .interval-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 .list.record-items li .track-this {
   position: absolute;
   top: -1px;

@@ -209,7 +209,7 @@ class Header extends React.Component {
       },
       {
         name: t('Suggestion box'),
-        desc: t("Suggest your ideas for Braytech and impact its future"),
+        desc: t('Suggest your ideas for Braytech and impact its future'),
         slug: '/suggestions',
         exact: false,
         profile: false,
@@ -256,9 +256,11 @@ class Header extends React.Component {
 
       const character = characters.find(character => character.characterId === characterId);
 
-      const capped = characterProgressions[character.characterId].progressions[1716568313].level >= characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
+      const capped = characterProgressions[character.characterId].progressions[1716568313].level >= characterProgressions[character.characterId].progressions[1716568313].levelCap;
 
-      const progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
+      const progress = (capped && characterProgressions[character.characterId].progressions[2030054750]) || characterProgressions[character.characterId].progressions[1716568313];
+
+      console.log(progress)
 
       profileEl = (
         <div className='profile'>
@@ -276,18 +278,7 @@ class Header extends React.Component {
                   <div className='basics'>
                     {character.baseCharacterLevel} / {utils.classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>
                   </div>
-                  <ProgressBar
-                    classNames={{
-                      capped: capped
-                    }}
-                    objective={{
-                      completionValue: 1
-                    }}
-                    progress={{
-                      progress: progress
-                    }}
-                    hideCheck
-                  />
+                  <ProgressBar classNames={{ capped: capped }} hideCheck {...progress} />
                   <Link
                     to={{
                       pathname: '/character-select',

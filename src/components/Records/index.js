@@ -152,12 +152,12 @@ class Records extends React.Component {
     let recordsOutput = [];
     recordsRequested.forEach(hash => {
       const definitionRecord = manifest.DestinyRecordDefinition[hash];
+
       const recordScope = definitionRecord.scope || 0;
       const recordData = recordScope === 1 ? characterRecords && characterRecords[characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
 
-      let objectives = [];
-      let completionValueTotal = 0;
-      let progressValueTotal = 0;
+      // if (definitionRecord.intervalInfo.intervalObjectives.length) 
+      console.log(recordData);
 
       let link = selfLink(hash);
 
@@ -166,46 +166,96 @@ class Records extends React.Component {
         link = `/read/record/${definitionRecord.hash}`;
       }
 
+      const recordState = {
+        completion: {
+          value: 0,
+          progress: 0,
+          distance: 0
+        },
+        score: {
+          value: 0,
+          progress: 0,
+        },
+        objectives: [],
+        intervals: []
+      };
+
       if (definitionRecord.objectiveHashes) {
-        definitionRecord.objectiveHashes.forEach((hash, index) => {
-          let definitionObjective = manifest.DestinyObjectiveDefinition[hash];
+        
+        recordState.score = {
+          value: definitionRecord.completionInfo.ScoreValue,
+          progress: definitionRecord.completionInfo.ScoreValue
+        };
 
-          let playerProgress = recordData && recordData.objectives.find(o => o.objectiveHash === hash);
-          playerProgress = playerProgress
-            ? playerProgress
-            : {
-                complete: false,
-                progress: 0,
-                objectiveHash: definitionObjective.hash
-              };
+        recordState.objectives = definitionRecord.objectiveHashes.map((hash, i) => {
 
-          // override
-          if (hash === 1278866930 && playerProgress.complete) {
-            playerProgress.progress = 16;
-          }
+          const data = recordData && recordData.objectives.find(o => o.objectiveHash === hash);
 
-          objectives.push(<ProgressBar key={`${hash}${index}`} objective={definitionObjective} progress={playerProgress} />);
-
-          if (playerProgress) {
-            let v = parseInt(playerProgress.completionValue, 10);
-            let p = parseInt(playerProgress.progress, 10);
-
-            completionValueTotal = completionValueTotal + v;
-            progressValueTotal = progressValueTotal + (p > v ? v : p);
+          recordState.completion.value += data.completionValue;
+          recordState.completion.progress += data.progress;
+          
+          return {
+            ...data,
+            score: definitionRecord.completionInfo.ScoreValue,
+            el: <ProgressBar key={`${hash}${i}`} {...data} />
           }
         });
       }
 
-      let progressDistance = progressValueTotal / completionValueTotal;
-      progressDistance = Number.isNaN(progressDistance) ? 0 : progressDistance;
+      if (definitionRecord.intervalInfo && definitionRecord.intervalInfo.intervalObjectives && definitionRecord.intervalInfo.intervalObjectives.length) {
 
-      let state = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
+        recordState.intervals = definitionRecord.intervalInfo.intervalObjectives.map((interval, i) => {
 
-      if (enumerateRecordState(state).invisible && (collectibles && collectibles.hideInvisibleRecords)) {
+          const data = recordData && recordData.intervalObjectives.find(o => o.objectiveHash === interval.intervalObjectiveHash);
+          
+          return {
+            ...data,
+            score: interval.intervalScoreValue,
+            el: <ProgressBar key={`${hash}${i}`} {...data} />
+          }
+        });
+
+        recordState.score = {
+          value: definitionRecord.intervalInfo.intervalObjectives.reduce((a, v) => {
+            return a + (v.intervalScoreValue || 0);
+          }, 0),
+          progress: definitionRecord.intervalInfo.intervalObjectives.reduce((a, v, i) => {
+            if (recordData && recordData.intervalsRedeemedCount > i) {
+              return a + (v.intervalScoreValue || 0);
+            } else {
+              return a;
+            }
+          }, 0)
+        };
+
+        recordState.objectives = [...recordState.intervals.slice(-1)];
+
+        recordState.completion.value += recordState.objectives[0].completionValue;
+        recordState.completion.progress += recordState.objectives[0].progress;
+      }
+
+      console.log(recordState)
+
+      /* distance stuff */
+
+      // if (playerProgress) {
+      //   let v = parseInt(playerProgress.completionValue, 10);
+      //   let p = parseInt(playerProgress.progress, 10);
+
+      //   completionValueTotal = completionValueTotal + v;
+      //   progressValueTotal = progressValueTotal + (p > v ? v : p);
+      // }
+
+      // let progressDistance = progressValueTotal / completionValueTotal;
+      // progressDistance = Number.isNaN(progressDistance) ? 0 : progressDistance;
+
+      const enumerableState = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
+
+      if (enumerateRecordState(enumerableState).invisible && (collectibles && collectibles.hideInvisibleRecords)) {
         return;
       }
 
-      if (enumerateRecordState(state).recordRedeemed && (collectibles && collectibles.hideCompletedRecords) && !forceDisplay) {
+      if (enumerateRecordState(enumerableState).recordRedeemed && (collectibles && collectibles.hideCompletedRecords) && !forceDisplay) {
         return;
       }
 
@@ -213,8 +263,8 @@ class Records extends React.Component {
 
       if (definitionRecord.redacted) {
         recordsOutput.push({
-          completed: enumerateRecordState(state).recordRedeemed,
-          progressDistance,
+          completed: enumerateRecordState(enumerableState).recordRedeemed,
+          progressDistance: recordState.completion.distance,
           hash: definitionRecord.hash,
           element: (
             <li
@@ -286,8 +336,8 @@ class Records extends React.Component {
         }
 
         recordsOutput.push({
-          completed: enumerateRecordState(state).recordRedeemed,
-          progressDistance,
+          completed: enumerateRecordState(enumerableState).recordRedeemed,
+          progressDistance: recordState.completion.distance,
           hash: definitionRecord.hash,
           element: (
             <li
@@ -296,16 +346,19 @@ class Records extends React.Component {
               className={cx({
                 linked: link && linkTo,
                 highlight: highlight && highlight === definitionRecord.hash,
-                completed: enumerateRecordState(state).recordRedeemed,
-                unredeemed: !enumerateRecordState(state).recordRedeemed && !enumerateRecordState(state).objectiveNotCompleted,
-                tracked: tracked.concat(profileRecordsTracked).includes(definitionRecord.hash) && !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted,
+                completed: enumerateRecordState(enumerableState).recordRedeemed,
+                unredeemed: !enumerateRecordState(enumerableState).recordRedeemed && !enumerateRecordState(enumerableState).objectiveNotCompleted,
+                tracked: tracked.concat(profileRecordsTracked).includes(definitionRecord.hash) && !enumerateRecordState(enumerableState).recordRedeemed && enumerateRecordState(enumerableState).objectiveNotCompleted,
                 'no-description': !description
               })}
             >
-              {!enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted && !profileRecordsTracked.includes(definitionRecord.hash) ? (
+              {!enumerateRecordState(enumerableState).recordRedeemed && enumerateRecordState(enumerableState).objectiveNotCompleted && !profileRecordsTracked.includes(definitionRecord.hash) ? (
                 <div className='track-this' onClick={this.trackThisClick} data-hash={definitionRecord.hash}>
                   <div />
                 </div>
+              ) : null}
+              {recordState.intervals.length && recordState.intervals.filter(i => i.complete).length < recordState.intervals.length ? (
+                <div className='interval-progress' style={{ width: `${Math.min((recordState.intervals.filter(i => i.complete).length / recordState.intervals.length) * 100, 100)}%` }} />
               ) : null}
               <div className='properties'>
                 <div className='icon'>
@@ -317,16 +370,16 @@ class Records extends React.Component {
                     <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>
                       {manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%
                     </div>
-                    {definitionRecord.completionInfo && definitionRecord.completionInfo.ScoreValue !== 0 ? (
+                    {recordState.score.value !== 0 ? (
                       <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>
-                        {definitionRecord.completionInfo.ScoreValue}
+                        {recordState.score.value}
                       </div>
                     ) : null}
                   </div>
                   <div className='description'>{description}</div>
                 </div>
               </div>
-              <div className='objectives'>{objectives}</div>
+              <div className='objectives'>{recordState.objectives.map(e => e.el)}</div>
               {rewards && rewards.length ? (
                 <ul className='list rewards collection-items'>
                   <Collectibles forceDisplay selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={rewards} />

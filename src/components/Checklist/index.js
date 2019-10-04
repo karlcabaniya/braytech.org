@@ -60,13 +60,9 @@ const Checklist = props => {
           ) : null}
         </div>
         <ProgressBar
-          objective={{
-            progressDescription: checklistProgressDescription,
-            completionValue: totalItems
-          }}
-          progress={{
-            progress: completedItems
-          }}
+          description={checklistProgressDescription}
+          completionValue={totalItems}
+          progress={completedItems}
           hideCheck
           chunky
         />

@@ -14,36 +14,45 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    const { classNames, hideCheck, chunky, progress, objective } = this.props;
+    const { classNames, hideCheck, chunky, progressionHash, objectiveHash } = this.props;
 
-    if (!progress || !objective) {
-      return null;
+    let progress = this.props.progress || 0;
+    let completionValue = this.props.completionValue || 0;
+    let description = '';
+
+    if (objectiveHash && manifest.DestinyObjectiveDefinition[objectiveHash]) {
+
+      description = manifest.DestinyObjectiveDefinition[objectiveHash].progressDescription;
+      
+    } else if (progressionHash && manifest.DestinyProgressionDefinition[progressionHash]) {
+
+      progress = this.props.progressToNextLevel;
+      completionValue = this.props.nextLevelAt;
+      description = manifest.DestinyProgressionDefinition[progressionHash].displayProperties && manifest.DestinyProgressionDefinition[progressionHash].displayProperties.displayUnitsName;
+      
     }
 
-    let { complete = false, progress: value, objectiveHash } = progress;
-    let { progressDescription = '', completionValue, allowOvercompletion = true } = objective;
+    if (this.props.description) {
+      description = this.props.description;
+    }
 
-    if (progressDescription === '' && objectiveHash && manifest.DestinyObjectiveDefinition[objectiveHash] && manifest.DestinyObjectiveDefinition[objectiveHash].progressDescription) progressDescription = manifest.DestinyObjectiveDefinition[objectiveHash].progressDescription;
-
-    progressDescription = stringToIcons(progressDescription);
-
-    value = allowOvercompletion ? value : Math.min(value, completionValue);
-    let wholeFraction = completionValue === 1 ? true : false;
-    let completeText = complete ? 'Complete' : 'Incomplete';
+    description = stringToIcons(description);
+    const complete = progress >= completionValue;
+    const boolean = completionValue === 1;
 
     return (
-      <div key={objectiveHash} className={cx('progress-bar', classNames, { complete: completionValue && complete, chunky: chunky })}>
+      <div key={objectiveHash || progressionHash} className={cx('progress-bar', classNames, { complete: completionValue && complete, chunky: chunky })}>
         {!hideCheck ? <div className={cx('check', { ed: completionValue && complete })} /> : null}
         <div className={cx('bar', { full: hideCheck })}>
           <div className='text'>
-            <div className='description'>{progressDescription !== '' ? progressDescription : completeText}</div>
-            {completionValue && !wholeFraction ? (
+            <div className='description'>{description}</div>
+            {completionValue && !boolean ? (
               <div className='fraction'>
-                {value}/{completionValue}
+                {progress}/{completionValue}
               </div>
             ) : null}
           </div>
-          {completionValue ? <div className='fill' style={{ width: `${(value / completionValue) * 100}%` }} /> : null}
+          {completionValue ? <div className='fill' style={{ width: `${Math.min((progress / completionValue) * 100, 100)}%` }} /> : null}
         </div>
       </div>
     );
