@@ -3,7 +3,10 @@
 
   },
   "records": {
-    "3390078237": {
+    "3390078237": {      
+      "destinationHash": 290444260,
+      "bubbleHash": 4025450777,
+      "pursuitHash": 2962817690,
       "points": [
         {
           "x": -52,

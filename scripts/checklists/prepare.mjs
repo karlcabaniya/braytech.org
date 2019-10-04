@@ -140,6 +140,7 @@ async function run() {
       checklistHash: item.hash,
       itemHash: item && item.itemHash,
       recordHash: mapping.recordHash,
+      points: (mapping && mapping.points) || [],
       sorts: {
         destination: destination && destination.displayProperties.name,
         bubble: bubbleName,
@@ -152,19 +153,32 @@ async function run() {
       }
     }
 
-    function merger(e, c) {
-      if (typeof c === 'object') {
-        return _.mergeWith(e, c, merger);
-      } else if (c && c !== '') {
-        return c;
-      } else {
-        return e;
-      }
-    }
-
     const updates = _.mergeWith(existing, changes, merger);
 
     return updates;
+  }
+
+  function merger(e, c) {
+    if (Array.isArray(c)) {
+      if (!Array.isArray(e)) {
+        return c;
+      } else if (e.length < 1 && c.length >= 1) {
+        return c;
+      } else if (c.length === 1 && e.length >= 1) {
+        return c;
+      } else if (c.length > 1 && e.length > 1) {
+        // not emotionally ready to deal with this sorry
+        return e;
+      } else {
+        return e;
+      }
+    } else if (typeof c === 'object') {
+      return _.mergeWith(e, c, merger);
+    } else if (c && c !== '') {
+      return c;
+    } else {
+      return e;
+    }
   }
 
   function presentationItems(presentationHash, dropFirst = true) {
@@ -216,6 +230,7 @@ async function run() {
           bubbleName: backupBubbleName,
           recordName: item.displayProperties.name,
           recordHash: hash,
+          points: (mapping && mapping.points) || [],
           sorts: {
             destination: destination && destination.displayProperties.name,
             bubble: bubbleName,
@@ -228,7 +243,7 @@ async function run() {
           }
         }
 
-        if (changes.recordHash === 3415184383) console.log(existing)
+        if (changes.recordHash === 3390078237) console.log(existing)
         // console.log(changes)
         // console.log({
         //   ...existing,
@@ -241,19 +256,9 @@ async function run() {
         //   if (!changes[key]) delete changes[key];
         // });
 
-        function merger(e, c) {
-          if (typeof c === 'object') {
-            return _.mergeWith(e, c, merger);
-          } else if (c && c !== '') {
-            return c;
-          } else {
-            return e;
-          }
-        }
-
         const updates = _.mergeWith(existing, changes, merger);
 
-        if (changes.recordHash === 3415184383) console.log(updates)
+        if (changes.recordHash === 3390078237) console.log(updates)
 
         return updates;
       })
@@ -274,7 +279,7 @@ async function run() {
     }
   });
 
-  fs.writeFileSync(path, JSON.stringify(lists, null, '  '));
+  // fs.writeFileSync(path, JSON.stringify(lists, null, '  '));
 }
 
 run();
