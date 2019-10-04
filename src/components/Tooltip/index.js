@@ -46,7 +46,7 @@ class Tooltip extends React.Component {
     let x = 0;
     let y = 0;
     let offset = 0;
-    let tooltipWidth = 384;
+    let tooltipWidth = 420;
     let tooltipHeight = this.state.hash ? this.ref_tooltip.current.clientHeight : 0;
     let scrollbarAllowance = 24;
 

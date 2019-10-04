@@ -344,26 +344,18 @@ class Mode extends React.Component {
           <div className='progress'>
             <ProgressBar
               classNames='step'
-              objective={{
-                progressDescription: progressStepDescription,
-                completionValue: characterProgressions[characterId].progressions[hash].nextLevelAt
-              }}
-              progress={{
-                progress: characterProgressions[characterId].progressions[hash].progressToNextLevel,
-                objectiveHash: hash
-              }}
+              objectiveHash={hash}
+              description={progressStepDescription}
+              progress={characterProgressions[characterId].progressions[hash].progressToNextLevel}
+              completionValue={characterProgressions[characterId].progressions[hash].nextLevelAt}
               hideCheck
             />
             <ProgressBar
               classNames='total'
-              objective={{
-                progressDescription: t('Points'),
-                completionValue: this.data[hash].totalPoints
-              }}
-              progress={{
-                progress: characterProgressions[characterId].progressions[hash].currentProgress,
-                objectiveHash: hash
-              }}
+              objectiveHash={hash}
+              description={t('Points')}
+              progress={characterProgressions[characterId].progressions[hash].currentProgress}
+              completionValue={this.data[hash].totalPoints}
               hideCheck
             />
           </div>

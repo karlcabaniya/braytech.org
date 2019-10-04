@@ -7584,6 +7584,168 @@
       "extended": {}
     }
   ],
+  "2474271317": [
+    {
+      "recordName": "I.I: Of Tattered Blood and Broken Bone",
+      "recordHash": 4212118078,
+      "sorts": {
+        "number": 1
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "I.II: Of Tattered Blood and Broken Bone",
+      "recordHash": 4212118079,
+      "sorts": {
+        "number": 2
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "I.III: Of Tattered Blood and Broken Bone",
+      "recordHash": 4212118076,
+      "sorts": {
+        "number": 3
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "I.IV: Of Tattered Blood and Broken Bone",
+      "recordHash": 4212118077,
+      "sorts": {
+        "number": 4
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "II: An Audience with Slaughter",
+      "recordHash": 4212118074,
+      "sorts": {
+        "number": 5
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "III: Ritualistic Circle Pit",
+      "recordHash": 4212118075,
+      "sorts": {
+        "number": 6
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "IV: Blood Sport",
+      "recordHash": 4212118072,
+      "sorts": {
+        "number": 7
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "V: A Sinister Plot",
+      "recordHash": 4212118073,
+      "sorts": {
+        "number": 8
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "VI: Blood Sport",
+      "recordHash": 4212118070,
+      "sorts": {
+        "number": 9
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "VII: The Severed and the Unmade",
+      "recordHash": 4212118071,
+      "sorts": {
+        "number": 10
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "VIII: A Sacrifice of Self",
+      "recordHash": 2028468509,
+      "sorts": {
+        "number": 11
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "IX.I: The Unmaking",
+      "recordHash": 2028468508,
+      "sorts": {
+        "number": 12
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "IX.II: The Unmaking",
+      "recordHash": 2028468511,
+      "sorts": {
+        "number": 13
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "X: Faith in Bone",
+      "recordHash": 2028468510,
+      "sorts": {
+        "number": 14
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "XI: The Anti-Logic",
+      "recordHash": 2028468505,
+      "sorts": {
+        "number": 15
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468504,
+      "sorts": {
+        "number": 16
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468507,
+      "sorts": {
+        "number": 17
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468506,
+      "sorts": {
+        "number": 18
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468501,
+      "sorts": {
+        "number": 19
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468500,
+      "sorts": {
+        "number": 20
+      },
+      "extended": {}
+    }
+  ],
   "2609997025": [
     {
       "destinationHash": 2779202173,
@@ -11659,136 +11821,86 @@
         "number": 37
       },
       "extended": {}
-    },
+    }
+  ],
+  "4285512244": [
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 3520035140,
-      "bubbleName": false,
-      "activityHash": 1042784002,
-      "checklistHash": 1126566222,
-      "recordHash": 2052987728,
-      "points": [
-        {
-          "x": -118.5,
-          "y": 240
-        }
-      ],
+      "recordName": "Ghost Fragment: Gunnvor's Ghost",
+      "recordHash": 3390078235,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Soriks's Cut",
-        "place": "The Tangled Shore",
-        "name": "Target: The Trickster",
-        "number": 38
+        "number": 1
       },
       "extended": {}
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 3520035140,
-      "bubbleName": false,
-      "activityHash": 952862146,
-      "checklistHash": 2789836294,
-      "recordHash": 2216522217,
-      "points": [
-        {
-          "x": -85.5,
-          "y": 426
-        }
-      ],
+      "recordName": "Ghost Fragment: Sai Mota's Ghost",
+      "recordHash": 3390078234,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Soriks's Cut",
-        "place": "The Tangled Shore",
-        "name": "Target: The Hangman",
-        "number": 39
+        "number": 2
       },
       "extended": {}
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 3520035140,
-      "bubbleName": false,
-      "activityHash": 2504933700,
-      "checklistHash": 2243679480,
-      "recordHash": 2133906881,
-      "points": [
-        {
-          "x": -282,
-          "y": 184.5
-        }
-      ],
+      "recordName": "Ghost Fragment: Gimble-4's Ghost",
+      "recordHash": 3390078233,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Soriks's Cut",
-        "place": "The Tangled Shore",
-        "name": "Target: The Rifleman",
-        "number": 40
+        "number": 3
       },
       "extended": {}
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 1608679832,
-      "bubbleName": false,
-      "activityHash": 1429621744,
-      "checklistHash": 3723964334,
-      "recordHash": 3853730685,
-      "points": [
-        {
-          "x": 154.5,
-          "y": -220.5
-        }
-      ],
+      "recordName": "Ghost Fragment: Eris Morn's Ghost",
+      "recordHash": 3390078232,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Thieves' Landing",
-        "place": "The Tangled Shore",
-        "name": "Target: The Rider",
-        "number": 41
+        "number": 4
       },
       "extended": {}
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 1608679832,
-      "bubbleName": false,
-      "activityHash": 1449366986,
-      "checklistHash": 806941660,
-      "recordHash": 267060719,
-      "points": [
-        {
-          "x": 397.5,
-          "y": 30
-        }
-      ],
+      "recordName": "Ghost Fragment: Toland's Ghost",
+      "recordHash": 3390078239,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Thieves' Landing",
-        "place": "The Tangled Shore",
-        "name": "Target: The Mad Bomber",
-        "number": 42
+        "number": 5
       },
       "extended": {}
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 1635947699,
-      "bubbleName": false,
-      "activityHash": 3926419686,
-      "checklistHash": 1735547533,
-      "recordHash": 3393552539,
-      "points": [
-        {
-          "x": -342,
-          "y": -273
-        }
-      ],
+      "recordName": "Ghost Fragment: Vyhar's Ghost",
+      "recordHash": 3390078238,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Jetsam of Saturn",
-        "place": "The Tangled Shore",
-        "name": "Target: The Mindbender",
-        "number": 43
+        "number": 6
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "Ghost Fragment: Lonesome Ghost",
+      "recordHash": 3390078237,
+      "sorts": {
+        "number": 7
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "Ghost Fragment: Omar Agah's Ghost",
+      "recordHash": 3390078236,
+      "sorts": {
+        "number": 8
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "Ghost Fragment: Eriana-3's Ghost",
+      "recordHash": 3390078227,
+      "sorts": {
+        "number": 9
+      },
+      "extended": {}
+    },
+    {
+      "recordName": "Ghost Fragment: Vell Tarlowe's Ghost",
+      "recordHash": 3390078226,
+      "sorts": {
+        "number": 10
       },
       "extended": {}
     }

@@ -86,6 +86,7 @@ class QuestLine extends React.Component {
               return {
                 complete: true,
                 progress: definitionObjective.completionValue,
+                completionValue: definitionObjective.completionValue,
                 objectiveHash: definitionObjective.hash
               };
             });

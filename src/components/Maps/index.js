@@ -26,7 +26,7 @@ class Maps extends React.Component {
   constructor(props) {
     super(props);
 
-    const destination = this.props.id || 'edz';
+    const destination = this.props.id || 'the-moon';
 
     this.state = {
       loading: true,
@@ -136,6 +136,10 @@ class Maps extends React.Component {
         655926402: {
           // lore: forsaken prince
           visible: true
+        },
+        4285512244: {
+          // lore: lunas lost
+          visible: true
         }
       },
       ui: {
@@ -187,7 +191,7 @@ class Maps extends React.Component {
   }
 
   setDestination = id => {
-    const destination = id || 'edz';
+    const destination = id || 'the-moon';
 
     if (!this.state.destinations[destination]) return;
 
@@ -200,7 +204,7 @@ class Maps extends React.Component {
     }));
   }
 
-  generateChecklists = (destination = 'edz') => {
+  generateChecklists = (destination = 'the-moon') => {
     let lists = {
       1697465175: {
         // region chests
@@ -610,7 +614,7 @@ class Maps extends React.Component {
     } else if (this.state.error) {
       return <div className='map-omega loading'>error lol</div>;
     } else {
-      const { member, viewport, maps: settings, id: destinationId = 'edz' } = this.props;
+      const { member, viewport, maps: settings, id: destinationId = 'the-moon' } = this.props;
 
       const destination = this.state.destination;
 

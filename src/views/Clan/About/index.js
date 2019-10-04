@@ -104,27 +104,17 @@ class AboutView extends React.Component {
           {clanLevel.level === clanLevel.levelCap ? (
             <ProgressBar
               classNames='level-6'
-              objective={{
-                progressDescription: `${t('Level')} ${clanLevel.level}`,
-                completionValue: 1
-              }}
-              progress={{
-                progress: 1,
-                objectiveHash: 'clanLevel'
-              }}
+              progress='1'
+              completionValue='1'
+              description={`${t('Level')} ${clanLevel.level}`}
               hideCheck
               chunky
             />
           ) : (
             <ProgressBar
-              objective={{
-                progressDescription: `${t('Level')} ${clanLevel.level}`,
-                completionValue: clanLevel.nextLevelAt
-              }}
-              progress={{
-                progress: clanLevel.progressToNextLevel,
-                objectiveHash: 'clanLevel'
-              }}
+              progress={clanLevel.progressToNextLevel}
+              completionValue={clanLevel.nextLevelAt}
+              description={`${t('Level')} ${clanLevel.level}`}
               hideCheck
               chunky
             />

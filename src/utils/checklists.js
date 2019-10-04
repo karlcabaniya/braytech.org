@@ -15,7 +15,7 @@ export const checklists = {
       items: checklistItems(4178338182, true),
       characterBound: true,
       itemName: i => {
-        if (!manifest.DestinyActivityDefinition[i.activityHash]) console.log(i)
+        if (!manifest.DestinyActivityDefinition[i.activityHash]) console.log(i);
         return manifest.DestinyActivityDefinition[i.activityHash] && manifest.DestinyActivityDefinition[i.activityHash].displayProperties.name;
       },
       itemLocation: i => {
@@ -229,11 +229,7 @@ export const checklists = {
       checklistId: 365218222,
       items: checklistItems(365218222),
       sortBy: ['name', 'destination', 'bubble'],
-      itemName: i => ['CB.NAV/RUN.()', 'CB.NAV/EXÉC.()', 'CB.NAV/EJECUTAR.()', 'CB.NAV/ESEGUI.()', 'КБ.НАВ/ЗАПУСК().']
-        .reduce(
-          (a, v) => a.replace(v, ''),
-          manifest.DestinyInventoryItemDefinition[i.itemHash].displayProperties.description
-        ),
+      itemName: i => ['CB.NAV/RUN.()', 'CB.NAV/EXÉC.()', 'CB.NAV/EJECUTAR.()', 'CB.NAV/ESEGUI.()', 'КБ.НАВ/ЗАПУСК().'].reduce((a, v) => a.replace(v, ''), manifest.DestinyInventoryItemDefinition[i.itemHash].displayProperties.description),
       itemLocation: i => {
         const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
         const definitionBubble = definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
@@ -354,8 +350,8 @@ export const checklists = {
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistItemName: i18n.t('Lore: Ghost Stories'),
-      checklistItemName_plural: i18n.t('Lore: Ghost Stories'),
+      checklistItemName: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[1420597821].displayProperties.name}`,
+      checklistItemName_plural: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[1420597821].displayProperties.name}`,
       checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004869.png',
       checklistProgressDescription: i18n.t('Stories read'),
@@ -393,8 +389,8 @@ export const checklists = {
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistItemName: i18n.t('Lore: Awoken of the Reef'),
-      checklistItemName_plural: i18n.t('Lore: Awoken of the Reef'),
+      checklistItemName: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[3305936921].displayProperties.name}`,
+      checklistItemName_plural: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[3305936921].displayProperties.name}`,
       checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004874.png',
       checklistProgressDescription: i18n.t('Crystals resolved'),
@@ -437,11 +433,91 @@ export const checklists = {
 
         return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
       },
-      checklistItemName: i18n.t('Lore: Forsaken Prince'),
-      checklistItemName_plural: i18n.t('Lore: Forsaken Prince'),
+      checklistItemName: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[655926402].displayProperties.name}`,
+      checklistItemName_plural: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[655926402].displayProperties.name}`,
       checklistIcon: 'destiny-lore_scholar',
       checklistImage: '/static/images/extracts/ui/checklists/037e-00004886.png',
       checklistProgressDescription: i18n.t('Data caches decrypted'),
+      ...options
+    }),
+  // lore: lunas lost
+  4285512244: options =>
+    checklist({
+      checklistId: 4285512244,
+      items: presentationItems(4285512244),
+      sortBy: ['completed', 'destination', 'bubble'],
+      itemName: i => {
+        const definitionRecord = manifest.DestinyRecordDefinition[i.recordHash];
+        const definitionLore = manifest.DestinyLoreDefinition[definitionRecord.loreHash];
+
+        return definitionLore.displayProperties.name;
+      },
+      itemLocation: i => {
+        const definitionDestination = i.destinationHash && manifest.DestinyDestinationDefinition[i.destinationHash];
+
+        const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination && definitionDestination.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName].filter(s => s).join(', ');
+      },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = definitionDestination && manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination && definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
+      checklistItemName: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[4285512244].displayProperties.name}`,
+      checklistItemName_plural: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[4285512244].displayProperties.name}`,
+      checklistIcon: 'destiny-lore_scholar',
+      checklistImage: false,
+      checklistProgressDescription: i18n.t('Ghost fragments recovered'),
+      ...options
+    }),
+  // lore: inquisition of the damned
+  2474271317: options =>
+    checklist({
+      checklistId: 2474271317,
+      items: presentationItems(2474271317),
+      sortBy: ['completed', 'destination', 'bubble'],
+      itemName: i => {
+        const definitionRecord = manifest.DestinyRecordDefinition[i.recordHash];
+        const definitionLore = manifest.DestinyLoreDefinition[definitionRecord.loreHash];
+
+        return definitionLore.displayProperties.name;
+      },
+      itemLocation: i => {
+        const definitionDestination = i.destinationHash && manifest.DestinyDestinationDefinition[i.destinationHash];
+
+        const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination && definitionDestination.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName].filter(s => s).join(', ');
+      },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = definitionDestination && manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination && definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
+      checklistItemName: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[2474271317].displayProperties.name}`,
+      checklistItemName_plural: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[2474271317].displayProperties.name}`,
+      checklistIcon: 'destiny-lore_scholar',
+      checklistImage: false,
+      checklistProgressDescription: i18n.t('Necrotic cyphers collected'),
       ...options
     })
 };
@@ -456,9 +532,9 @@ export function lookup(item) {
     return {
       checklistId,
       [item.key]: checklistEntry && checklistEntry[item.key]
-    }
+    };
   } else {
-    return {}
+    return {};
   }
 }
 
@@ -540,7 +616,7 @@ function presentationItems(presentationHash, dropFirst = true) {
   return data[presentationHash]
     .map(entry => {
       const profileRecord = profile && profile.profileRecords.data.records[entry.recordHash];
-      
+
       // if (!profileRecord) return false;
 
       const completed = profileRecord && profileRecord.objectives[0].complete;

@@ -80,7 +80,9 @@ export class Checklists extends React.Component {
       checklists[2726513366](),
       checklists[1420597821](),
       checklists[3305936921](),
-      checklists[655926402]()
+      checklists[655926402](),
+      checklists[4285512244](),
+      checklists[2474271317]()
     ];
 
     let sliceStart = parseInt(page, 10) * itemsPerPage;
