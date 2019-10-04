@@ -306,7 +306,7 @@ class Maps extends React.Component {
       lists[key] = adjusted;
     });
 
-    // console.log(lists);
+    console.log(lists);
 
     this.setState({
       checklists: lists

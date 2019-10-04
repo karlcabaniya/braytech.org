@@ -230,6 +230,7 @@ async function run() {
           bubbleName: backupBubbleName,
           recordName: item.displayProperties.name,
           recordHash: hash,
+          pursuitHash: mapping && mapping.pursuitHash,
           points: (mapping && mapping.points) || [],
           sorts: {
             destination: destination && destination.displayProperties.name,

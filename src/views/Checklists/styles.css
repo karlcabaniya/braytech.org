@@ -149,6 +149,13 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  #checklists .module.views .list {
+    top: 2rem;
+    grid-template-columns: 1fr;
+  }
+}
+
 @media screen and (max-width: 600px) {
   #checklists > .module.head {
     padding: 3rem 2rem 2rem;
@@ -162,10 +169,5 @@
   #checklists > .padder {
     padding: 3rem 2rem 2rem;
     grid-gap: 2rem;
-  }
-
-  #checklists .module.views .list {
-    top: 2rem;
-    grid-template-columns: 1fr;
   }
 }
