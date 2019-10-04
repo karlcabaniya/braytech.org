@@ -3367,7 +3367,7 @@
           "width": 2160,
           "height": 1080,
           "image": "/static/images/extracts/maps/background_upper.png",
-          "color": "#e60000"
+          "color": "#ad401f"
         },
         {
           "id": "background-lower",

@@ -140,6 +140,10 @@ class Maps extends React.Component {
         4285512244: {
           // lore: lunas lost
           visible: true
+        },
+        2474271317: {
+          // lore: inquisition of the damned
+          visible: true
         }
       },
       ui: {
@@ -257,6 +261,10 @@ class Maps extends React.Component {
       4285512244: {
         // lore: lunas lost
         ...checklists[4285512244]()
+      },
+      2474271317: {
+        // lore: inquisition of the damned
+        ...checklists[2474271317]()
       }
     };
 

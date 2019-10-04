@@ -71,19 +71,43 @@
     },
     "4212118077": {      
       "destinationHash": 290444260,
-      "bubbleHash": 3326367698
+      "bubbleHash": 3326367698,
+      "points": [
+        {
+          "x": -591,
+          "y": -364
+        }
+      ]
     },
     "4212118074": {      
       "destinationHash": 290444260,
-      "bubbleHash": 4025450777
+      "bubbleHash": 4025450777,
+      "points": [
+        {
+          "x": -96,
+          "y": -464
+        }
+      ]
     },
     "4212118075": {      
       "destinationHash": 290444260,
-      "bubbleHash": 4025450777
+      "bubbleHash": 4025450777,
+      "points": [
+        {
+          "x": -189,
+          "y": -384
+        }
+      ]
     },
     "4212118072": {      
       "destinationHash": 290444260,
-      "bubbleHash": 417490937
+      "bubbleHash": 417490937,
+      "points": [
+        {
+          "x": 451,
+          "y": 110
+        }
+      ]
     },
     "4212118073": {      
       "destinationHash": 290444260,
@@ -111,7 +135,13 @@
     },
     "2028468510": {      
       "destinationHash": 290444260,
-      "bubbleHash": 1835313730
+      "bubbleHash": 1835313730,
+      "points": [
+        {
+          "x": 325,
+          "y": -259
+        }
+      ]
     },
     "2028468505": {      
       "destinationHash": 290444260

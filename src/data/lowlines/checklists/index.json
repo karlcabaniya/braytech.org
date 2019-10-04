@@ -7644,7 +7644,12 @@
         "name": "Archer's Line"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -591,
+          "y": -364
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 3326367698,
       "bubbleName": false
@@ -7660,7 +7665,12 @@
         "name": "Anchor of Light"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -96,
+          "y": -464
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 4025450777,
       "bubbleName": false
@@ -7676,7 +7686,12 @@
         "name": "Anchor of Light"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -189,
+          "y": -384
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 4025450777,
       "bubbleName": false
@@ -7692,7 +7707,12 @@
         "name": "Sorrow's Harbor"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": 451,
+          "y": 110
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 417490937,
       "bubbleName": false
@@ -7804,7 +7824,12 @@
         "name": "Lunar Battlegrounds"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": 325,
+          "y": -259
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 1835313730,
       "bubbleName": false
