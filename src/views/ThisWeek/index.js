@@ -315,177 +315,223 @@ class ThisWeek extends React.Component {
         }
       },
       nightfall: {
-        3145298904: {
-          // The Arms Dealer
-          triumphs: [
-            3340846443, // The Arms Dealer
-            4267516859 // Trash the Thresher
-          ],
-          items: [],
-          collectibles: [
-            3036030066, // Tilt Fuse
-            3490589921 // The Arms Dealer (Emblem)
-          ]
-        },
-        3108813009: {
-          // Warden of Nothing
-          triumphs: [
-            2836924866, // Warden of Nothing
-            1469598452 // Solar Dance
-          ],
-          items: [],
-          collectibles: [
-            1279318101, // Warden's Law
-            2263264048 // Warden of Nothing (Emblem)
-          ]
-        },
-        3034843176: {
-          // The Corrupted
-          triumphs: [
-            3951275509, // The Corrupted
-            3641166665 // Relic Rumble
-          ],
-          items: [],
-          collectibles: [
-            1099984904, // Horror's Least
-            1410290331 // The Corrupted (Emblem)
-          ]
-        },
-        3280234344: {
-          // Savathûn's Song
-          triumphs: [
-            2099501667, // Savathûn's Song
-            1442950315 // The Best Defense
-          ],
-          items: [],
-          collectibles: [
-            1333654061, // Duty Bounds
-            3490589926 // Savathûn's Song (Emblem)
-          ]
-        },
-        3289589202: {
-          // The Pyramidion
-          triumphs: [
-            1060780635, // The Pyramidion
-            1142177491 // Siege Engine
-          ],
-          items: [],
-          collectibles: [
-            1152758802, // Silicon Neuroma
-            3490589930 // The Pyramidion (Emblem)
-          ]
-        },
-        3718330161: {
-          // Tree of Probabilities
-          triumphs: [
-            2282894388, // Tree of Probabilities
-            3636866482 // Laser Dodger
-          ],
-          items: [],
-          collectibles: [
-            1279318110, // D.F.A.
-            3490589924 // Tree of Probabilities (Emblem)
-          ]
-        },
-        3372160277: {
-          // Lake of Shadows
-          triumphs: [
-            1329556468, // Lake of Shadows
-            413743786 // Tether Time
-          ],
-          items: [],
-          collectibles: [
-            1602518767, // The Militia's Birthright
-            3896331530 // Lake of Shadows (Emblem)
-          ]
-        },
-        //1391780798: { // Broodhold - PS4 exclusive
-        //  triumphs: [],
-        //  items: [],
-        //  collectibles: []
-        //},
-        3701132453: {
-          // The Hollowed Lair
-          triumphs: [
-            3450793480, // The Hollowed Lair
-            3847579126 // Arc Avoidance
-          ],
-          items: [],
-          collectibles: [
-            1074861258, // Mindbender's Ambition
-            3314387486 // The Hollowed Lair (Emblem)
-          ]
-        },
         272852450: {
-          // Will of the Thousands
           triumphs: [
-            1039797865, // Will of the Thousands
-            3013611925 // Three and Out
+            1039797865,
+            3013611925
           ],
           items: [],
           collectibles: [
-            2466440635, // Worm God Incarnation
-            1766893928 // Will of the Thousands (Emblem)
-          ]
-        },
-        4259769141: {
-          // The Inverted Spire
-          triumphs: [
-            3973165904, // The Inverted Spire
-            1498229894 //The Floor Is Lava
+            2466440635,
+            1766893928
           ],
-          items: [],
-          collectibles: [
-            1718922261, // Trichromatica
-            3490589925 //The Inverted SPire (Emblem)
-          ]
+          ordealHashes: []
         },
         522318687: {
-          // Strange Terrain
           triumphs: [
-            165166474, // Strange Terrain
-            1871570556 // Don't Take Five
+            165166474,
+            1871570556
           ],
           items: [],
           collectibles: [
-            1534387877, // BrayTech Osprey
-            1766893929 // Strange Terrain (Emblem)
+            1534387877,
+            1766893929
+          ],
+          ordealHashes: [
+            966580527,
+            1193451437,
+            2357524344,
+            3392133546,
+            4196546910
           ]
         },
-        1282886582: {
-          // Exodus Crash
-          triumphs: [
-            1526865549, // Exodus Crash
-            2140068897 // Faster than Lightning
-          ],
+        629542775: {
+          triumphs: [],
           items: [],
-          collectibles: [
-            3036030067, // Impact Velocity
-            3490589927 // Exodus Crash (Emblem)
-          ]
+          collectibles: [],
+          ordealHashes: []
         },
         936308438: {
-          // A Garden World
           triumphs: [
-            2692332187, // A Garden World
-            1398454187 // The Quickening
+            2692332187,
+            1398454187
           ],
           items: [],
           collectibles: [
-            2448009818, //Universal Wavefunction
-            3490589931 // A Garden World (Emblem)
+            2448009818,
+            3490589931
+          ],
+          ordealHashes: [
+            102545131,
+            1272746497,
+            1822476598,
+            4044386747
           ]
         },
         1034003646: {
-          // The Insight Terminus
           triumphs: [
-            599303591, // Capture Completionist
-            3399168111 // The Insight Terminus
+            599303591,
+            3399168111
           ],
           items: [],
           collectibles: [
-            1186314105, // The Long Goodbye
-            465974149 // Insight Terminus (Emblem)
+            1186314105,
+            465974149
+          ],
+          ordealHashes: []
+        },
+        1282886582: {
+          triumphs: [
+            1526865549,
+            2140068897
+          ],
+          items: [],
+          collectibles: [
+            3036030067,
+            3490589927
+          ],
+          ordealHashes: []
+        },
+        1391780798: {
+          triumphs: [
+            3042714868,
+            4156350130
+          ],
+          items: [],
+          collectibles: [],
+          ordealHashes: []
+        },
+        3034843176: {
+          triumphs: [
+            3951275509,
+            3641166665
+          ],
+          items: [],
+          collectibles: [
+            1099984904,
+            1410290331
+          ],
+          ordealHashes: []
+        },
+        3108813009: {
+          triumphs: [
+            2836924866,
+            1469598452
+          ],
+          items: [],
+          collectibles: [
+            1279318101,
+            2263264048
+          ],
+          ordealHashes: []
+        },
+        3145298904: {
+          triumphs: [
+            3340846443,
+            4267516859
+          ],
+          items: [],
+          collectibles: [
+            3036030066,
+            3490589921
+          ],
+          ordealHashes: []
+        },
+        3280234344: {
+          triumphs: [
+            2099501667,
+            1442950315
+          ],
+          items: [],
+          collectibles: [
+            1333654061,
+            3490589926
+          ],
+          ordealHashes: [
+            997759433,
+            1114928259,
+            2021103427,
+            3815447166
+          ]
+        },
+        3289589202: {
+          triumphs: [
+            1060780635,
+            1142177491
+          ],
+          items: [],
+          collectibles: [
+            1152758802,
+            3490589930
+          ],
+          ordealHashes: [
+            282531137,
+            1198226683,
+            2380555126,
+            3407296811
+          ]
+        },
+        3372160277: {
+          triumphs: [
+            1329556468,
+            413743786
+          ],
+          items: [],
+          collectibles: [
+            1602518767,
+            3896331530
+          ],
+          ordealHashes: []
+        },
+        3701132453: {
+          triumphs: [
+            3450793480,
+            3847579126
+          ],
+          items: [],
+          collectibles: [
+            1074861258,
+            3314387486
+          ],
+          ordealHashes: []
+        },
+        3718330161: {
+          triumphs: [
+            2282894388,
+            3636866482
+          ],
+          items: [],
+          collectibles: [
+            1279318110,
+            3490589924
+          ],
+          ordealHashes: []
+        },
+        3856436847: {
+          triumphs: [],
+          items: [],
+          collectibles: [],
+          ordealHashes: [
+            694558778,
+            1940967975,
+            2359276231
+          ]
+        },
+        4259769141: {
+          triumphs: [
+            3973165904,
+            1498229894
+          ],
+          items: [],
+          collectibles: [
+            1718922261,
+            3490589925
+          ],
+          ordealHashes: [
+            1173782160,
+            1244305605,
+            1390900084,
+            3094633658
           ]
         }
       },

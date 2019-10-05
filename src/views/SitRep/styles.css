@@ -83,25 +83,36 @@
   margin: 12px 0 0;
 }
 
-#sit-rep .module .content.highlight.crucible .mode {
+#sit-rep .module .content.highlight.crucible .text ~ .modes {
+  margin: 20px 0 0;
+}
+
+#sit-rep .module .content.highlight.crucible .modes {
   position: relative;
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: minmax(60px, 120px) minmax(60px, 120px);
 }
 
-#sit-rep .module .content.highlight.crucible .mode .icon svg {
+#sit-rep .module .content.highlight.crucible .modes > div {
+  position: relative;
+  display: grid;
+  grid-gap: 4px;
+  grid-template-columns: 1fr;
+}
+
+#sit-rep .module .content.highlight.crucible .modes > div .icon svg {
   width: 100%;
   height: auto;
   transform: scale(1.2);
 }
 
-#sit-rep .module .content.highlight.crucible .mode .icon svg .polygon.inner {
+#sit-rep .module .content.highlight.crucible .modes > div .icon svg .polygon.inner {
   animation: rotate-linear 20s infinite linear;
   transform-origin: center;
 }
 
-#sit-rep .module .content.highlight.crucible .mode .icon svg .polygon.inner.ani {
+#sit-rep .module .content.highlight.crucible .modes > div .icon svg .polygon.inner.ani {
   animation: sit-rep-rotate-and-scale-out 5s infinite ease-out;
   transform-origin: center;
 }
@@ -120,6 +131,10 @@
   }
 }
 
+#sit-rep .module .content.highlight.crucible .modes > div .text {
+  text-align: center;
+  font-size: 16px;
+}
 
 #sit-rep .list.activities {
   display: grid;

@@ -4,7 +4,7 @@ import * as responseUtils from './responseUtils';
 
 async function getMember(membershipType, membershipId) {
 
-  const components = [100, 104, 200, 202, 204, 205, 300, 301, 302, 303, 304, 305, 306, 307, 800, 900, 1000];
+  const components = [100, 104, 200, 202, 204, 205, 300, 301, 302, 303, 304, 305, 306, 307, 800, 900];
   let useAuth = false;
 
   try {
