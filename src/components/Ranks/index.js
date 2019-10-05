@@ -308,7 +308,7 @@ class Mode extends React.Component {
               {!mini ? (
                 <div>
                   <div className='name'>{t('Win streak')}</div>
-                  <div className='value'>{characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex}</div>
+                  <div className='value'>{characterProgressions[characterId].progressions[this.data[hash].streakHash].stepIndex}</div>
                 </div>
               ) : null}
               <div>
@@ -327,7 +327,7 @@ class Mode extends React.Component {
             <>
               <div>
                 <div className='name'>{t('Win streak')}</div>
-                <div className='value'>{characterProgressions[characterId].progressions[this.data[2000925172].streakHash].stepIndex}</div>
+                <div className='value'>{characterProgressions[characterId].progressions[this.data[hash].streakHash].stepIndex}</div>
               </div>
               <div>
                 <div className='tooltip' data-hash='glory_wins_until' data-table='BraytechDefinition'>

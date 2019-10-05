@@ -70,11 +70,11 @@ class Pursuits extends React.Component {
         expiryMs: expiryMs || (10000 * 10000 * 10000 * 10000),
         el: (
           <li
-            key={i}
+            key={item.itemHash}
             className={cx(
               {
                 linked: true,
-                tooltip: enableTooltip && !viewport.width <= 600,
+                tooltip: (enableTooltip && viewport.width > 600) || (enableTooltip && !isQuest),
                 exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
               },
               bucketName

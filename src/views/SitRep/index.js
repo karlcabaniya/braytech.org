@@ -279,9 +279,9 @@ class SitRep extends React.Component {
       }
     };
 
-    console.log(weeklyNightfallStrikeActivities, weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]));
+    // console.log(weeklyNightfallStrikeActivities, weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]));
 
-    console.log(weeklyNightfallStrikes);
+    // console.log(weeklyNightfallStrikes);
 
     // console.log(profileTransitoryData)
 

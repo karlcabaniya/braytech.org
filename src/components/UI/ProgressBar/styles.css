@@ -83,7 +83,7 @@
   transition: background-color 0.25s;
 }
 
-.wrapper.dark-mode .progress-bar .check::before {
+.wrapper.dark-mode .progress-bar .check:not(.ed)::before {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
