@@ -15,9 +15,6 @@ import Roster from '../../components/Roster';
 import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
 import { ReactComponent as CrucibleIconDoubles } from './icons/doubles.svg';
 import { ReactComponent as CrucibleIconBreakthrough } from './icons/breakthrough.svg';
-import { ReactComponent as CrucibleIconElimination } from './icons/elimination.svg';
-import { ReactComponent as CrucibleIconControl } from './icons/control.svg';
-import { ReactComponent as CrucibleIconRumble } from './icons/rumble.svg';
 
 import './styles.css';
 
@@ -35,12 +32,13 @@ class SitRep extends React.Component {
 
   render() {
     const { t, member, groupMembers } = this.props;
-    const { profile, milestones } = member.data;
+    const milestones = member.data.milestones;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     const characters = member.data.profile.characters.data;
     const character = characters.find(c => c.characterId === member.characterId);
     const characterProgressions = member.data.profile.characterProgressions.data;
     const characterActivities = member.data.profile.characterActivities.data;
+    const profileTransitoryData = member.data.profile.profileTransitoryData.data;
 
     const wellRestedState = utils.isWellRested(characterProgressions[character.characterId]);
 
@@ -54,7 +52,7 @@ class SitRep extends React.Component {
     const definitionMilestoneFLashpoint = manifest.DestinyMilestoneDefinition[463010297];
     const milestoneFlashpointQuestItem = milestones[463010297].availableQuests && milestones[463010297].availableQuests.length && manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     const definitionFlashpointVendor =
-    milestoneFlashpointQuestItem &&
+      milestoneFlashpointQuestItem &&
       Object.values(manifest.DestinyVendorDefinition).find(v => {
         if (milestoneFlashpointQuestItem.destinationHash === 1993421442) {
           return v.locations && v.locations.find(l => l.destinationHash === 3669933163);
@@ -62,31 +60,47 @@ class SitRep extends React.Component {
           return v.locations && v.locations.find(l => l.destinationHash === milestoneFlashpointQuestItem.destinationHash);
         }
       });
-      const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
-    
+    const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
+
     // console.log(definitionMilestoneFLashpoint, milestoneFlashpointQuestItem, definitionFlashpointVendor)
 
-    const commonCrucibleModes = [
-      3243161126, // Quickplay
-      3062197616, // Competitive
-      1859507212, // Private Match
-      2274172949, // Quickplay
-      2947109551, // Competitive
-      2087163649  // Rumble
+    const crucibleRotators = [
+      3753505781, // Iron Banner
+      2303927902, // Clash
+      3780095688, // Supremacy
+      1219083526, // Team Scorched
+      4209226441, // Hardware
+      952904835, // Momentum Control
+      1102379070, // Mayhem
+      3011324617, // Breakthrough
+      3646079260, // Countdown
+      1457072306, // Showdown
+      3239164160, // Lockdown
+      740422335, // Survival
+      920826395 // Doubles
     ];
+
     const crucibleModeIcons = {
-      1312786953: <CrucibleIconMayhem />,
-      1: <CrucibleIconDoubles />,
-      2: <CrucibleIconBreakthrough />,
-      3: <CrucibleIconElimination />,
-      4: <CrucibleIconControl />,
-      5: <CrucibleIconRumble />
+      3753505781: <CrucibleIconDoubles />,
+      2303927902: <CrucibleIconDoubles />,
+      3780095688: <CrucibleIconDoubles />,
+      1219083526: <CrucibleIconDoubles />,
+      4209226441: <CrucibleIconDoubles />,
+      952904835: <CrucibleIconDoubles />,
+      1102379070: <CrucibleIconMayhem />,
+      3011324617: <CrucibleIconBreakthrough />,
+      3646079260: <CrucibleIconDoubles />,
+      1457072306: <CrucibleIconDoubles />,
+      3239164160: <CrucibleIconDoubles />,
+      740422335: <CrucibleIconDoubles />,
+      920826395: <CrucibleIconDoubles />
     };
-    const featuredCrucibleMode = characterActivities[member.characterId].availableActivities.find(a => {
+
+    const featuredCrucibleModes = characterActivities[member.characterId].availableActivities.filter(a => {
       if (!a.activityHash) return false;
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(5) && !commonCrucibleModes.includes(definitionActivity.hash)) {
+      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(5) && crucibleRotators.includes(definitionActivity.hash)) {
         a.displayProperties = definitionActivity.displayProperties;
         a.icon = crucibleModeIcons[definitionActivity.hash] || null;
         return true;
@@ -95,8 +109,8 @@ class SitRep extends React.Component {
       return false;
     });
 
-    console.log(featuredCrucibleMode);
-    
+    // console.log(featuredCrucibleModes);
+
     const knownStoryActivities = [129918239, 271962655, 589157009, 1023966646, 1070049743, 1132291813, 1259766043, 1313648352, 1513386090, 1534123682, 1602328239, 1872813880, 1882259272, 1906514856, 2000185095, 2146977720, 2568845238, 2660895412, 2772894447, 2776154899, 3008658049, 3205547455, 3271773240, 4009655461, 4234327344, 4237009519, 4244464899];
     const dailyHeroicStoryActivities = characterActivities[member.characterId].availableActivities.filter(a => {
       if (!a.activityHash) return false;
@@ -110,7 +124,7 @@ class SitRep extends React.Component {
       displayProperties: {
         name: manifest.DestinyPresentationNodeDefinition[3028486709] && manifest.DestinyPresentationNodeDefinition[3028486709].displayProperties && manifest.DestinyPresentationNodeDefinition[3028486709].displayProperties.name
       }
-    }
+    };
 
     // orderBy(Object.values(manifest.DestinyActivityDefinition).map(a => {
     //   if (a.activityModeTypes && a.activityModeTypes.length && a.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers.length > 2) return a;
@@ -135,8 +149,9 @@ class SitRep extends React.Component {
       displayProperties: {
         name: t('Nightfalls')
       }
-    }
+    };
     
+    // console.log(profileTransitoryData)
 
     return (
       <div className='view' id='sit-rep'>
@@ -161,13 +176,17 @@ class SitRep extends React.Component {
             <div className='module-header'>
               <div className='sub-name'>{t('Crucible')}</div>
             </div>
-            <div className='mode'>
-              <div className='icon'>{featuredCrucibleMode.icon}</div>
-              <div className='text'>
-                <p>{featuredCrucibleMode.displayProperties.name}</p>
-                <p>{featuredCrucibleMode.displayProperties.description}</p>
-              </div>
-            </div>
+            {featuredCrucibleModes.map((f, i) => {
+              return (
+                <div key={i} className='mode'>
+                  <div className='icon'>{f.icon}</div>
+                  <div className='text'>
+                    <p>{f.displayProperties.name}</p>
+                    <p>{f.displayProperties.description}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
           <div className='content highlight'>
             <div className='module-header'>
@@ -184,13 +203,7 @@ class SitRep extends React.Component {
                       <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
                         <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
                         <div>
-                          <div className='time'>
-                            {definitionActivity.timeToComplete ? (
-                              <>
-                                {t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}
-                              </>
-                            ) : null}
-                          </div>
+                          <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
                           <div className='light'>
                             <span>{definitionActivity.activityLightLevel}</span>
                           </div>
@@ -220,13 +233,7 @@ class SitRep extends React.Component {
                         <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
                           <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
                           <div>
-                            <div className='time'>
-                              {definitionActivity.timeToComplete ? (
-                                <>
-                                  {t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}
-                                </>
-                              ) : null}
-                            </div>
+                            <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
                             <div className='light'>
                               <span>{definitionActivity.activityLightLevel}</span>
                             </div>
@@ -250,7 +257,6 @@ class SitRep extends React.Component {
               <div className='module-header'>
                 <div className='sub-name'>{t('Character')}</div>
               </div>
-              
             </div>
           </div>
           <div className='module'>
@@ -265,15 +271,17 @@ class SitRep extends React.Component {
               </div>
             </div>
           </div>
+          {/* <div className='module'>
+            <div className='content'>
+              <div className='module-header'>
+                <div className='sub-name'>{t('Fireteam')}</div>
+              </div>
+              <h4>{t('Activity')}</h4>
+              <h4>{t('Members')}</h4>
+            </div>
+          </div> */}
           {group ? (
             <div className='module'>
-              <div className='content'>
-                <div className='module-header'>
-                  <div className='sub-name'>{t('Fireteam')}</div>
-                </div>
-                <h4>{t('Activity')}</h4>
-                <h4>{t('Members')}</h4>
-              </div>
               <div className='content clan-roster'>
                 <div className='module-header'>
                   <div className='sub-name'>{t('Clan')}</div>

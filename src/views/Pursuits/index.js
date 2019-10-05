@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { orderBy } from 'lodash';
+import { orderBy, groupBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
@@ -38,47 +38,20 @@ class Pursuits extends React.Component {
     }
   }
 
-  render() {
-    const { t, member, viewport } = this.props;
-    const order = this.props.match.params.order || 'rarity';
-    const hash = this.props.match.params.hash;
-
-    if (!this.auth) {
-      return <NoAuth />;
-    }
-
-    if (this.auth && !this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) {
-      return <DiffProfile />;
-    }
-
-    if (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.profile.profileInventory) {
-      return (
-        <div className='view' id='pursuits'>
-          <Spinner />
-        </div>
-      );
-    }
-
+  process = (items, isQuest = false, enableTooltip = true) => {
+    const { member, viewport } = this.props;
     const itemComponents = member.data.profile.itemComponents;
     const characterUninstancedItemComponents = member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data;
 
-    const inventory = member.data.profile.profileInventory.data.items.slice().concat(member.data.profile.characterInventories.data[member.characterId].items);
-    const pursuits = inventory.filter(i => i.bucketHash === 1345459588);
-
     const nowMs = new Date().getTime();
 
-    const exceptionsVendor = [3347378076, 248695599, 2917531897];
-    const exceptionsItems = [1160544509, 1160544508, 1160544511];
-
-    let items = [];
-
-    pursuits.forEach((item, i) => {
+    return items.map((item, i) => {
       const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
       const definitionBucket = item.bucketHash ? manifest.DestinyInventoryBucketDefinition[item.bucketHash] : false;
 
       if (!definitionItem) {
         console.log(`Items: Couldn't find item definition for ${item.itemHash}`);
-        return;
+        return false;
       }
 
       const expiryMs = item.expirationDate && new Date(item.expirationDate).getTime();
@@ -89,25 +62,19 @@ class Pursuits extends React.Component {
 
       const vendorSource = definitionItem.sourceData && definitionItem.sourceData.vendorSources && definitionItem.sourceData.vendorSources.length && definitionItem.sourceData.vendorSources[0] && definitionItem.sourceData.vendorSources[0].vendorHash ? definitionItem.sourceData.vendorSources[0].vendorHash : false;
 
-      const itemType = definitionItem.itemType === 0 && exceptionsVendor.includes(vendorSource) && !exceptionsItems.includes(item.itemHash) ? 26 : definitionItem.itemType;
-
-      const isQuest = definitionItem.itemType === 12 || setDataQuestLineOverrides[item.itemHash];
-
-      items.push({
+      return ({
         ...item,
         name: definitionItem.displayProperties && definitionItem.displayProperties.name,
         rarity: definitionItem.inventory && definitionItem.inventory.tierType,
-        itemType,
-        isQuest,
         vendorSource,
-        expiryMs: expiryMs || false,
+        expiryMs: expiryMs || (10000 * 10000 * 10000 * 10000),
         el: (
           <li
             key={i}
             className={cx(
               {
                 linked: true,
-                tooltip: isQuest && viewport.width <= 600 ? false : true,
+                tooltip: enableTooltip && !viewport.width <= 600,
                 exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6
               },
               bucketName
@@ -138,15 +105,60 @@ class Pursuits extends React.Component {
           </li>
         )
       });
+    }).filter(i => i);
+  }
+
+  render() {
+    const { t, member, viewport } = this.props;
+    const order = this.props.match.params.order || 'rarity';
+    const hash = this.props.match.params.hash;
+
+    if (!this.auth) {
+      return <NoAuth />;
+    }
+
+    if (this.auth && !this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) {
+      return <DiffProfile />;
+    }
+
+    if (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && !member.data.profile.profileInventory) {
+      return (
+        <div className='view' id='pursuits'>
+          <Spinner />
+        </div>
+      );
+    }
+
+    const inventory = member.data.profile.profileInventory.data.items.slice().concat(member.data.profile.characterInventories.data[member.characterId].items).map(i => ({ ...manifest.DestinyInventoryItemDefinition[i.itemHash], ...i}));
+        
+    const filteredInventory = inventory.filter(i => i.bucketHash === 1345459588).concat(
+      // Include prophecy tablets, which are in consumables
+      inventory.filter(i => i.bucketHash === 1469714392).filter(i => i.itemCategoryHashes.includes(2250046497))
+    );
+  
+    const constructed = groupBy(filteredInventory, (item) => {
+
+      if (
+        item.itemCategoryHashes.includes(16) ||
+        item.itemCategoryHashes.includes(2250046497) ||
+        (item.objectives && item.objectives.questlineItemHash)
+      ) {
+        return 'quests';
+      }
+      if (!item.objectives || item.objectives.length === 0 || item.sockets) {
+        return 'items';
+      }
+  
+      return 'bounties';
     });
 
-    let bounties = items.filter(i => i.itemType === 26);
-    let quests = items.filter(i => i.itemType === 12 || !bounties.find(q => i.itemHash === q.itemHash));
+    console.log(constructed);
 
-    quests = order ? orderBy(quests, [i => i.isQuest, i => i[order], i => i.name], ['asc', 'desc', 'asc']) : items;
-    bounties = order ? orderBy(bounties, [i => i.vendorSource, i => i.expiryMs, i => i[order], i => i.name], ['desc', 'asc', 'desc', 'asc']) : items;
+    const quests = orderBy(this.process(constructed.quests, true), [i => i[order], i => i.name], ['desc', 'asc']);
+    const questsItems = orderBy(this.process(constructed.items), [i => i[order], i => i.name], ['desc', 'asc']);
+    const bounties = orderBy(this.process(constructed.bounties), [i => i.expiryMs, i => i[order], i => i.name], ['asc', 'desc', 'asc']);
 
-    let selected = hash ? (pursuits.find(p => p.itemHash.toString() === hash) ? pursuits.find(p => p.itemHash.toString() === hash) : quests[0]) : quests.length && quests[0] && quests[0].itemHash ? quests[0] : false;
+    const selected = hash ? (quests.find(p => p.itemHash.toString() === hash) ? quests.find(p => p.itemHash.toString() === hash) : quests[0]) : quests.length && quests[0] && quests[0].itemHash ? quests[0] : false;
 
     if (viewport.width < 1024 && hash) {
       return (
@@ -191,7 +203,7 @@ class Pursuits extends React.Component {
               <div>{t('Quests')}</div>
             </div>
             {quests.length ? (
-              <ul className='list inventory-items'>{quests.map(i => i.el)}</ul>
+              <ul className='list inventory-items'>{quests.concat(questsItems).map(i => i.el)}</ul>
             ) : (
               <div>
                 <p>{t('No quests. Speak to Zavala, maybe?')}</p>

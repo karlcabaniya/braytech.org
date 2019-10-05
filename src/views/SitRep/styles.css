@@ -87,7 +87,7 @@
   position: relative;
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 3fr;
 }
 
 #sit-rep .module .content.highlight.crucible .mode .icon svg {

@@ -260,8 +260,6 @@ class Header extends React.Component {
 
       const progress = (capped && characterProgressions[character.characterId].progressions[2030054750]) || characterProgressions[character.characterId].progressions[1716568313];
 
-      console.log(progress)
-
       profileEl = (
         <div className='profile'>
           <div className={cx('background', { 'update-flash': this.state.updateFlash })}>
