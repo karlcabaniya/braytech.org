@@ -613,25 +613,49 @@ export function lastPlayerActivity(member) {
     const definitionPlace = definitionActivity ? definitionActivity.placeHash ? manifest.DestinyPlaceDefinition[definitionActivity.placeHash] : false : false;
     const definitionPlaceOrbit = manifest.DestinyPlaceDefinition[2961497387];
     const definitionActivityPlaylist = manifest.DestinyActivityDefinition[lastActivity.currentPlaylistActivityHash];
-
+    
     let lastActivityString = false;
     if (definitionActivity && !definitionActivity.redacted) {
       if (definitionActivity.activityTypeHash === 400075666) { // Menagerie
+
         lastActivityString = `${definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name}`;
-      } else if (lastActivity.currentActivityModeHash === 547513715) { // Scored Nightfall Strikes
-        lastActivityString = definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? `${definitionActivityMode.displayProperties.name}: ${definitionActivity.selectionScreenDisplayProperties.name}` : `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
-      } else if (definitionActivity.activityTypeHash === 838603889) { // Forge Ignition
-        lastActivityString = `${definitionActivity.displayProperties.name}: ${definitionActivityPlaylist.displayProperties.name}`;
-      } else if (definitionPlace && definitionActivity.placeHash === 4148998934) { // The Reckoning
-        lastActivityString = `${definitionActivity.displayProperties.name}`;
-      } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]
-        lastActivityString = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
-      } else if (definitionActivityMode) { // Default
-        lastActivityString = `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
-      } else if (definitionActivity.placeHash === 2961497387) { // Orbit
-        lastActivityString = definitionPlaceOrbit.displayProperties.name;
-      } else {
+
+      } else if (lastActivity.currentActivityModeHash === 547513715 && destinyEnums.ordealHashes.includes(lastActivity.currentActivityHash)) { // Nightfall ordeals
+
         lastActivityString = definitionActivity.displayProperties.name;
+
+      } else if (lastActivity.currentActivityModeHash === 547513715) { // Scored Nightfall Strikes
+
+        lastActivityString = definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? `${definitionActivityMode.displayProperties.name}: ${definitionActivity.selectionScreenDisplayProperties.name}` : `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
+
+      } else if (lastActivity.currentActivityModeHash === 1963485238) { // Vex Offensive
+
+        lastActivityString = `${manifest.DestinyActivityTypeDefinition[definitionActivity.activityTypeHash].displayProperties.name}: ${definitionActivity.displayProperties.name}`;
+
+      } else if (definitionActivity.activityTypeHash === 838603889) { // Forge Ignition
+
+        lastActivityString = `${definitionActivity.displayProperties.name}: ${definitionActivityPlaylist.displayProperties.name}`;
+
+      } else if (definitionPlace && definitionActivity.placeHash === 4148998934) { // The Reckoning
+
+        lastActivityString = `${definitionActivity.displayProperties.name}`;
+
+      } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]
+
+        lastActivityString = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
+
+      } else if (definitionActivityMode) { // Default
+
+        lastActivityString = `${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
+
+      } else if (definitionActivity.placeHash === 2961497387) { // Orbit
+
+        lastActivityString = definitionPlaceOrbit.displayProperties.name;
+
+      } else {
+
+        lastActivityString = definitionActivity.displayProperties.name;
+
       }
     } else if (definitionActivity && definitionActivity.redacted) {
       lastActivityString = `Classified`;

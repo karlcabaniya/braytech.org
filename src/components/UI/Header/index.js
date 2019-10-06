@@ -249,16 +249,12 @@ class Header extends React.Component {
     };
 
     if (isProfileRoute && member.data) {
-      const characterId = member.characterId;
       const profile = member.data.profile.profile.data;
       const characters = member.data.profile.characters.data;
       const characterProgressions = member.data.profile.characterProgressions.data;
+      const character = characters.find(character => character.characterId === member.characterId);
 
-      const character = characters.find(character => character.characterId === characterId);
-
-      const capped = characterProgressions[character.characterId].progressions[1716568313].level >= characterProgressions[character.characterId].progressions[1716568313].levelCap;
-
-      const progress = (capped && characterProgressions[character.characterId].progressions[2030054750]) || characterProgressions[character.characterId].progressions[1716568313];
+      const progressSeasonalRank = characterProgressions[member.characterId].progressions[1628407317];
 
       profileEl = (
         <div className='profile'>
@@ -274,9 +270,9 @@ class Header extends React.Component {
                   </div>
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
-                    {character.baseCharacterLevel} / {utils.classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>
+                    {progressSeasonalRank.level} / {utils.classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>
                   </div>
-                  <ProgressBar classNames={{ capped: capped }} hideCheck {...progress} />
+                  <ProgressBar hideCheck {...progressSeasonalRank} />
                   <Link
                     to={{
                       pathname: '/character-select',

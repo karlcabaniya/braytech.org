@@ -5,17 +5,18 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 import Moment from 'react-moment';
 
-import * as destinyUtils from '../../../utils/destinyUtils';
-import { removeMemberIds } from '../../../utils/paths';
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
+import * as destinyUtils from '../../../utils/destinyUtils';
+import { removeMemberIds } from '../../../utils/paths';
+import ProgressBar from '../../UI/ProgressBar';
 import Button from '../../../components/UI/Button';
 
 import './styles.css';
 
 class Characters extends React.Component {
   render() {
-    const { t, member, viewport, location } = this.props;
+    const { member, viewport, location } = this.props;
     const characters = member.data.profile.characters;
     const characterProgressions = member.data.profile.characterProgressions.data;
     const characterActivities = member.data.profile.characterActivities;
@@ -28,9 +29,8 @@ class Characters extends React.Component {
     return (
       <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
         {characters.data.map(character => {
-          let capped = characterProgressions[character.characterId].progressions[1716568313].level >= characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
 
-          let progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
+          const progressSeasonalRank = characterProgressions[member.characterId].progressions[1628407317];
 
           const lastActivity = lastActivities.find(a => a.characterId === character.characterId);
 
@@ -62,19 +62,7 @@ class Characters extends React.Component {
                 <div className='class'>{destinyUtils.classHashToString(character.classHash, character.genderType)}</div>
                 <div className='species'>{destinyUtils.raceHashToString(character.raceHash, character.genderType)}</div>
                 <div className='light'>{character.light}</div>
-                <div className='level'>
-                  {t('Level')} {character.baseCharacterLevel}
-                </div>
-                <div className='progress'>
-                  <div
-                    className={cx('bar', {
-                      capped: capped
-                    })}
-                    style={{
-                      width: `${progress * 100}%`
-                    }}
-                  />
-                </div>
+                <ProgressBar hideCheck {...progressSeasonalRank} />
               </Button>
               {character.titleRecordHash ? <div className='title'>{manifest.DestinyRecordDefinition[character.titleRecordHash].titleInfo.titlesByGenderHash[character.genderHash]}</div> : null}
               <div className='state'>{state}</div>
