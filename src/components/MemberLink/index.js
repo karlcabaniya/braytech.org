@@ -206,6 +206,10 @@ class MemberLink extends React.Component {
                       </div>
                       <div className='basics'>
                         <div>
+                          <div className='value'>{this.state.all.data.characterProgressions.data[this.state.all.data.profile.data.characterIds[0]].progressions[1628407317].level}</div>
+                          <div className='name'>{t('Season rank')}</div>
+                        </div>
+                        <div>
                           <div className='name'>{t('Time played across characters')}</div>
                           <div className='value'>
                             {timePlayed} {timePlayed === 1 ? t('day played') : t('days played')}

@@ -254,8 +254,6 @@ class Activity extends React.Component {
         const strikeHash = Object.keys(enums.nightfalls).find(k => enums.nightfalls[k].ordealHashes.includes(definitionActivity.hash));
         const definitionStrke = manifest.DestinyActivityDefinition[strikeHash];
 
-        console.log(definitionStrke)
-
         activityTypeDisplay = {
           ...activityTypeDisplay,
           // name: definitionActivity.displayProperties.name,

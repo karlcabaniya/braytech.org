@@ -698,5 +698,10 @@
     "date": "2019-09-30T10:35:52.957Z",
     "version": "2.9.13",
     "content": "_The night before Shadowkeep_\n\n- minor improvements to various components\n- seal records in almost complete now correctly link to relevant seal views\n- progress notifcation improvements\n- unredeemed triumphs improvements\n- icons"
+  },
+  {
+    "date": "2019-10-06T08:21:55.186Z",
+    "version": "2.9.27",
+    "content": "## Cumulative update for Shadowkeep\n- updated to use season rank where appropriate\n- new icons\n- nightfalls are back!\n- fundamental works done on current player activity functions\n- new icons\n- tooltip updates"
   }
 ]
