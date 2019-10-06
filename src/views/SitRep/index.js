@@ -12,9 +12,11 @@ import Spinner from '../../components/UI/Spinner';
 import Ranks from '../../components/Ranks';
 import Roster from '../../components/Roster';
 
+import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
 import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
-import { ReactComponent as CrucibleIconDoubles } from './icons/doubles.svg';
 import { ReactComponent as CrucibleIconBreakthrough } from './icons/breakthrough.svg';
+import { ReactComponent as CrucibleIconClash } from './icons/clash.svg';
+import { ReactComponent as CrucibleIconShowdown } from './icons/showdown.svg';
 
 import './styles.css';
 
@@ -83,19 +85,19 @@ class SitRep extends React.Component {
     ];
 
     const crucibleModeIcons = {
-      3753505781: <CrucibleIconDoubles />,
-      2303927902: <CrucibleIconDoubles />,
-      3780095688: <CrucibleIconDoubles />,
-      1219083526: <CrucibleIconDoubles />,
-      4209226441: <CrucibleIconDoubles />,
-      952904835: <CrucibleIconDoubles />,
+      3753505781: <CrucibleIconDefault />,
+      2303927902: <CrucibleIconClash />,
+      3780095688: <CrucibleIconDefault />,
+      1219083526: <CrucibleIconDefault />,
+      4209226441: <CrucibleIconDefault />,
+      952904835: <CrucibleIconDefault />,
       1102379070: <CrucibleIconMayhem />,
       3011324617: <CrucibleIconBreakthrough />,
-      3646079260: <CrucibleIconDoubles />,
-      1457072306: <CrucibleIconDoubles />,
-      3239164160: <CrucibleIconDoubles />,
-      740422335: <CrucibleIconDoubles />,
-      920826395: <CrucibleIconDoubles />
+      3646079260: <CrucibleIconDefault />,
+      1457072306: <CrucibleIconShowdown />,
+      3239164160: <CrucibleIconDefault />,
+      740422335: <CrucibleIconDefault />,
+      920826395: <CrucibleIconDefault />
     };
 
     const featuredCrucibleModes = {
@@ -126,7 +128,7 @@ class SitRep extends React.Component {
 
     // console.log(featuredCrucibleModes);
 
-    const knownStoryActivities = [129918239, 271962655, 589157009, 1023966646, 1070049743, 1132291813, 1259766043, 1313648352, 1513386090, 1534123682, 1602328239, 1872813880, 1882259272, 1906514856, 2000185095, 2146977720, 2568845238, 2660895412, 2772894447, 2776154899, 3008658049, 3205547455, 3271773240, 4009655461, 4234327344, 4237009519, 4244464899];
+    const knownStoryActivities = [129918239, 271962655, 589157009, 1023966646, 1070049743, 1132291813, 1259766043, 1313648352, 1513386090, 1534123682, 1602328239, 1872813880, 1882259272, 1906514856, 2000185095, 2146977720, 2568845238, 2660895412, 2772894447, 2776154899, 3008658049, 3205547455, 3271773240, 4009655461, 4234327344, 4237009519, 4244464899, 2962137994];
     const dailyHeroicStoryActivities = characterActivities[member.characterId].availableActivities.filter(a => {
       if (!a.activityHash) return false;
 

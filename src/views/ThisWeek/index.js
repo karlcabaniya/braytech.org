@@ -316,34 +316,16 @@ class ThisWeek extends React.Component {
       },
       nightfall: {
         272852450: {
-          triumphs: [
-            1039797865,
-            3013611925
-          ],
+          triumphs: [1039797865, 3013611925],
           items: [],
-          collectibles: [
-            2466440635,
-            1766893928
-          ],
+          collectibles: [2466440635, 1766893928],
           ordealHashes: []
         },
         522318687: {
-          triumphs: [
-            165166474,
-            1871570556
-          ],
+          triumphs: [165166474, 1871570556],
           items: [],
-          collectibles: [
-            1534387877,
-            1766893929
-          ],
-          ordealHashes: [
-            966580527,
-            1193451437,
-            2357524344,
-            3392133546,
-            4196546910
-          ]
+          collectibles: [1534387877, 1766893929],
+          ordealHashes: [966580527, 1193451437, 2357524344, 3392133546, 4196546910]
         },
         629542775: {
           triumphs: [],
@@ -352,187 +334,88 @@ class ThisWeek extends React.Component {
           ordealHashes: []
         },
         936308438: {
-          triumphs: [
-            2692332187,
-            1398454187
-          ],
+          triumphs: [2692332187, 1398454187],
           items: [],
-          collectibles: [
-            2448009818,
-            3490589931
-          ],
-          ordealHashes: [
-            102545131,
-            1272746497,
-            1822476598,
-            4044386747
-          ]
+          collectibles: [2448009818, 3490589931],
+          ordealHashes: [102545131, 1272746497, 1822476598, 4044386747]
         },
         1034003646: {
-          triumphs: [
-            599303591,
-            3399168111
-          ],
+          triumphs: [599303591, 3399168111],
           items: [],
-          collectibles: [
-            1186314105,
-            465974149
-          ],
+          collectibles: [1186314105, 465974149],
           ordealHashes: []
         },
         1282886582: {
-          triumphs: [
-            1526865549,
-            2140068897
-          ],
+          triumphs: [1526865549, 2140068897],
           items: [],
-          collectibles: [
-            3036030067,
-            3490589927
-          ],
+          collectibles: [3036030067, 3490589927],
           ordealHashes: []
         },
         1391780798: {
-          triumphs: [
-            3042714868,
-            4156350130
-          ],
+          triumphs: [3042714868, 4156350130],
           items: [],
           collectibles: [],
           ordealHashes: []
         },
         3034843176: {
-          triumphs: [
-            3951275509,
-            3641166665
-          ],
+          triumphs: [3951275509, 3641166665],
           items: [],
-          collectibles: [
-            1099984904,
-            1410290331
-          ],
+          collectibles: [1099984904, 1410290331],
           ordealHashes: []
         },
         3108813009: {
-          triumphs: [
-            2836924866,
-            1469598452
-          ],
+          triumphs: [2836924866, 1469598452],
           items: [],
-          collectibles: [
-            1279318101,
-            2263264048
-          ],
+          collectibles: [1279318101, 2263264048],
           ordealHashes: []
         },
         3145298904: {
-          triumphs: [
-            3340846443,
-            4267516859
-          ],
+          triumphs: [3340846443, 4267516859],
           items: [],
-          collectibles: [
-            3036030066,
-            3490589921
-          ],
+          collectibles: [3036030066, 3490589921],
           ordealHashes: []
         },
         3280234344: {
-          triumphs: [
-            2099501667,
-            1442950315
-          ],
+          triumphs: [2099501667, 1442950315],
           items: [],
-          collectibles: [
-            1333654061,
-            3490589926
-          ],
-          ordealHashes: [
-            997759433,
-            1114928259,
-            2021103427,
-            3815447166
-          ]
+          collectibles: [1333654061, 3490589926],
+          ordealHashes: [997759433, 1114928259, 2021103427, 3815447166]
         },
         3289589202: {
-          triumphs: [
-            1060780635,
-            1142177491
-          ],
+          triumphs: [1060780635, 1142177491],
           items: [],
-          collectibles: [
-            1152758802,
-            3490589930
-          ],
-          ordealHashes: [
-            282531137,
-            1198226683,
-            2380555126,
-            3407296811
-          ]
+          collectibles: [1152758802, 3490589930],
+          ordealHashes: [282531137, 1198226683, 2380555126, 3407296811]
         },
         3372160277: {
-          triumphs: [
-            1329556468,
-            413743786
-          ],
+          triumphs: [1329556468, 413743786],
           items: [],
-          collectibles: [
-            1602518767,
-            3896331530
-          ],
+          collectibles: [1602518767, 3896331530],
           ordealHashes: []
         },
         3701132453: {
-          triumphs: [
-            3450793480,
-            3847579126
-          ],
+          triumphs: [3450793480, 3847579126],
           items: [],
-          collectibles: [
-            1074861258,
-            3314387486
-          ],
+          collectibles: [1074861258, 3314387486],
           ordealHashes: []
         },
         3718330161: {
-          triumphs: [
-            2282894388,
-            3636866482
-          ],
+          triumphs: [2282894388, 3636866482],
           items: [],
-          collectibles: [
-            1279318110,
-            3490589924
-          ],
+          collectibles: [1279318110, 3490589924],
           ordealHashes: []
         },
         3856436847: {
           triumphs: [],
           items: [],
           collectibles: [],
-          ordealHashes: [
-            694558778,
-            1940967975,
-            2359276231
-          ]
+          ordealHashes: [694558778, 1940967975, 2359276231]
         },
         4259769141: {
-          triumphs: [
-            3973165904,
-            1498229894
-          ],
+          triumphs: [3973165904, 1498229894],
           items: [],
-          collectibles: [
-            1718922261,
-            3490589925
-          ],
-          ordealHashes: [
-            1173782160,
-            1244305605,
-            1390900084,
-            3094633658
-          ]
+          collectibles: [1718922261, 3490589925],
+          ordealHashes: [1173782160, 1244305605, 1390900084, 3094633658]
         }
       },
       flashpoint: {
@@ -833,11 +716,13 @@ class ThisWeek extends React.Component {
     //   return m;
     // }));
 
-    console.log(Object.values(milestones).map(m => {
-      m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
-      m.name = manifest.DestinyMilestoneDefinition[m.milestoneHash].displayProperties.name;
-      return m;
-    }));
+    console.log(
+      Object.values(milestones).map(m => {
+        m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
+        m.name = manifest.DestinyMilestoneDefinition[m.milestoneHash].displayProperties.name;
+        return m;
+      })
+    );
 
     const modules = [];
 
@@ -863,31 +748,52 @@ class ThisWeek extends React.Component {
 
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
+      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(46) && !definitionActivity.guidedGame && definitionActivity.modifiers && definitionActivity.modifiers.length > 2) return true;
 
       return false;
     });
-    
-    weeklyNightfallStrikeActivities.forEach(activity => {
-        const nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
 
-        moduleNightfalls.push(
-          <div key={nightfall.hash} className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Nightfall')}</div>
-              <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
-            </div>
-            <h4>{t('Collectibles')}</h4>
-            <ul className='list collection-items'>
-              <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
-            </ul>
-            <h4>{t('Triumphs')}</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
-            </ul>
+    const weeklyNightfallStrikesOrdeal = Object.keys(this.consolidatedInfo.nightfall)
+      .filter(k => this.consolidatedInfo.nightfall[k].ordealHashes.find(o => weeklyNightfallStrikeActivities.find(w => w.activityHash === o)))
+      .map(h => ({ activityHash: h }));
+    const weeklyNightfallStrikesScored = weeklyNightfallStrikeActivities.filter(w => !Object.keys(this.consolidatedInfo.nightfall).find(k => this.consolidatedInfo.nightfall[k].ordealHashes.find(o => o === w.activityHash)));
+
+    // console.log(weeklyNightfallStrikesOrdeal, weeklyNightfallStrikesScored);
+
+    weeklyNightfallStrikesScored.forEach(activity => {
+      const nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
+
+      moduleNightfalls.push(
+        <div key={nightfall.hash} className='content'>
+          <div className='module-header'>
+            <div className='sub-name'>{t('Nightfall')}</div>
+            <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
           </div>
-        );
-      });
+          {this.consolidatedInfo.nightfall[nightfall.hash].collectibles.length < 1 && this.consolidatedInfo.nightfall[nightfall.hash].triumphs.length < 1 ? (
+            <div className='aside'>{t('This nigthfall has no knwon associated collectibles or triumphs.')}</div>
+          ) : (
+            <>
+              {this.consolidatedInfo.nightfall[nightfall.hash].collectibles.length ? (
+                <>
+                  <h4>{t('Collectibles')}</h4>
+                  <ul className='list collection-items'>
+                    <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
+                  </ul>
+                </>
+              ) : null}
+              {this.consolidatedInfo.nightfall[nightfall.hash].triumphs.length ? (
+                <>
+                  <h4>{t('Triumphs')}</h4>
+                  <ul className='list record-items'>
+                    <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
+                  </ul>
+                </>
+              ) : null}
+            </>
+          )}
+        </div>
+      );
+    });
 
     // raids
     const moduleRaids = [];
@@ -1139,45 +1045,7 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    modules.push(
-      [
-        moduleNightfalls[0]
-      ],
-      [
-        moduleNightfalls[1]
-      ],
-      [
-        moduleNightfalls[2]
-      ],
-      [
-        moduleMenagerie
-      ],
-      [
-        moduleRaids[0]
-      ],
-      [
-        moduleRaids[1]
-      ],
-      [
-        moduleRaids[2]
-      ],
-      [
-        moduleRaids[3]
-      ],
-      [
-        moduleAscendantChallenge
-      ],
-      [
-        moduleDreamingCityCycle
-      ],
-      [
-        moduleShatteredThrone
-      ],
-      [
-        moduleEscalationProtocol,
-        moduleReckoning
-      ]
-    );
+    modules.push([moduleNightfalls[0]], [moduleNightfalls[1]], [moduleNightfalls[2]], [moduleMenagerie], [moduleRaids[0]], [moduleRaids[1]], [moduleRaids[2]], [moduleRaids[3]], [moduleAscendantChallenge], [moduleDreamingCityCycle], [moduleShatteredThrone], [moduleEscalationProtocol, moduleReckoning]);
 
     return (
       <div className='view' id='this-week'>
