@@ -534,7 +534,7 @@ html.backdropfilter #member-overlay.error .background .border-top {
   justify-content: space-between;
 }
 
-.wrapper.light-mode #member-overlay .sticky-nav [class^='destiny-'] {
+.wrapper.light-mode #member-overlay .sticky-nav .destiny-key span {
   color: #333;
 }
 

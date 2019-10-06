@@ -6,6 +6,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import * as utils from '../../../utils/destinyUtils';
+import { DestinyKey } from '../Button';
 import { ProfileNavLink } from '../../ProfileLink';
 import ProgressBar from '../../UI/ProgressBar';
 import Footer from '../Footer';
@@ -184,7 +185,7 @@ class Header extends React.Component {
         hidden: true
       },
       {
-        name: <span className='destiny-settings' />,
+        name: '',
         desc: t('Account, theme, tooltips, visibility, language, and saved data'),
         slug: '/settings',
         exact: true,

@@ -7,7 +7,7 @@ import cx from 'classnames';
 import ReactGA from 'react-ga';
 
 import ObservedImage from '../../ObservedImage';
-import Button from '../../UI/Button';
+import { Button, DestinyKey } from '../../UI/Button';
 
 import './styles.css';
 
@@ -134,7 +134,7 @@ class NotificationLink extends React.Component {
                   <ul>
                     <li>
                       <Button action={this.deactivateOverlay}>
-                        <i className='destiny-B_Button' /> {t('Dismiss')}
+                        <DestinyKey type='dismiss' /> {t('Dismiss')}
                       </Button>
                     </li>
                   </ul>

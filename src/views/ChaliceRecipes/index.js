@@ -7,7 +7,7 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
-import Button from '../../components/UI/Button';
+import { Button, DestinyKey } from '../../components/UI/Button';
 
 import Items from './Items';
 import Rewards from './Rewards';
@@ -447,7 +447,7 @@ class ChaliceRecipes extends React.Component {
                       this.toggleSlotsPanelHandler(this.state.slotsPanelOpen);
                     }}
                   >
-                    <i className='destiny-B_Button' /> {t('Dismiss')}
+                    <DestinyKey type='dismiss' /> {t('Dismiss')}
                   </Button>
                 ) : (
                   <>

@@ -12,7 +12,7 @@ import * as ls from '../../utils/localStorage';
 import { NoAuth } from '../../components/BungieAuth';
 import MemberLink from '../../components/MemberLink';
 import Spinner from '../../components/UI/Spinner';
-import Button from '../../components/UI/Button';
+import { Button, DestinyKey } from '../../components/UI/Button';
 import Checkbox from '../../components/UI/Checkbox';
 import packageJSON from '../../../package.json';
 
@@ -330,7 +330,7 @@ class Suggestions extends React.Component {
             <ul>
               <li>
                 <Link className='button' to='/suggestions'>
-                  <i className='destiny-B_Button' />
+                  <DestinyKey type='dismiss' />
                   {t('Back')}
                 </Link>
               </li>

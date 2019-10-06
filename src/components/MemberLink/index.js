@@ -13,7 +13,7 @@ import userFlair from '../../data/userFlair';
 import store from '../../utils/reduxStore';
 import ObservedImage from '../ObservedImage';
 import Spinner from '../UI/Spinner';
-import Button from '../UI/Button';
+import { Button, DestinyKey } from '../UI/Button';
 import Flair from '../UI/Flair';
 import Ranks from '../Ranks';
 
@@ -312,7 +312,7 @@ class MemberLink extends React.Component {
                   <ul>
                     <li>
                       <Button action={this.deactivateOverlay}>
-                        <i className='destiny-B_Button' /> {t('Dismiss')}
+                        <DestinyKey type='dismiss' /> {t('Dismiss')}
                       </Button>
                     </li>
                   </ul>
@@ -380,7 +380,7 @@ class MemberLink extends React.Component {
                   <ul>
                     <li>
                       <Button action={this.deactivateOverlay}>
-                        <i className='destiny-B_Button' /> {t('Dismiss')}
+                        <DestinyKey type='dismiss' /> {t('Dismiss')}
                       </Button>
                     </li>
                   </ul>

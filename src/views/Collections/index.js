@@ -2,10 +2,9 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
-import Button from '../../components/UI/Button';
+import { Button, DestinyKey } from '../../components/UI/Button';
 
 import './styles.css';
 
@@ -85,7 +84,7 @@ class Collections extends React.Component {
                 <li>{toggleCompletedLink}</li>
                 <li>
                   <ProfileLink className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>
@@ -107,7 +106,7 @@ class Collections extends React.Component {
                 <li>{toggleCompletedLink}</li>
                 <li>
                   <ProfileLink className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>
@@ -129,7 +128,7 @@ class Collections extends React.Component {
                 <li>{toggleCompletedLink}</li>
                 <li>
                   <ProfileLink className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>

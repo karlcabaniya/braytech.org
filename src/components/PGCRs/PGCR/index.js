@@ -10,7 +10,7 @@ import Moment from 'react-moment';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
-import Button from '../../UI/Button';
+import { Button, DestinyKey } from '../../UI/Button';
 import MemberLink from '../../MemberLink';
 import * as bungie from '../../../utils/bungie';
 
@@ -980,7 +980,7 @@ class PGCR extends React.Component {
               <ul>
                 <li>
                   <Button action={() => this.contractHandler(pgcr.activityDetails.instanceId)}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Close')}
                   </Button>
                 </li>

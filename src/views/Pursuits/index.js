@@ -6,7 +6,6 @@ import { orderBy, groupBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import { setDataQuestLineOverrides } from '../../data/questLines';
 import * as ls from '../../utils/localStorage';
 import ObservedImage from '../../components/ObservedImage';
 import { NoAuth, DiffProfile } from '../../components/BungieAuth';
@@ -14,6 +13,7 @@ import { ProfileLink } from '../../components/ProfileLink';
 import QuestLine from '../../components/QuestLine';
 import Spinner from '../../components/UI/Spinner';
 import ProgressBar from '../../components/UI/ProgressBar';
+import { DestinyKey } from '../../components/UI/Button';
 
 import './styles.css';
 
@@ -152,7 +152,7 @@ class Pursuits extends React.Component {
       return 'bounties';
     });
 
-    console.log(constructed);
+    // console.log(constructed);
 
     const quests = orderBy(this.process(constructed.quests, true), [i => i[order], i => i.name], ['desc', 'asc']);
     const questsItems = orderBy(this.process(constructed.items), [i => i[order], i => i.name], ['desc', 'asc']);
@@ -174,7 +174,7 @@ class Pursuits extends React.Component {
               <ul>
                 <li>
                   <ProfileLink className='button' to='/pursuits'>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>

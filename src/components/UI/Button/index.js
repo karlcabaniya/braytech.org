@@ -1,10 +1,69 @@
 import React from 'react';
+// import { compose } from 'redux';
+// import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import './styles.css';
+
+class DestinyKey extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  buttons = {
+    1: {
+      settings: [
+        {
+          char: ''
+        }
+      ],
+      dismiss: [
+        {
+          color: '#f44336',
+          char: ''
+        },
+        {
+          char: ''
+        }
+      ],
+      more: [
+        {
+          color: '#ffc107',
+          char: ''
+        },
+        {
+          char: ''
+        }
+      ]
+    }
+  }
+
+  render() {
+    const { type, platform = 1 } = this.props;
+
+    return (
+      <div className='destiny-key'>
+        {this.buttons[platform][type].map((l, i) => {
+          
+          return (
+            <span key={i} style={{ color: l.color }}>{l.char}</span>
+          )
+        })}
+      </div>
+    )
+  }
+}
+
+// function mapStateToProps(state, ownProps) {
+//   return {
+//     theme: state.theme
+//   };
+// }
+
+// DestinyKey = compose(connect(mapStateToProps))(DestinyKey);
 
 class Button extends React.Component {
   constructor(props) {
@@ -47,10 +106,6 @@ class Button extends React.Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    
-  };
-}
+export { DestinyKey, Button };
 
-export default compose(connect(mapStateToProps))(Button);
+export default Button;

@@ -67,7 +67,13 @@
     },
     "4212118076": {      
       "destinationHash": 290444260,
-      "bubbleHash": 3326367698
+      "bubbleHash": 3326367698,
+      "points": [
+        {
+          "x": -479,
+          "y": -301
+        }
+      ]
     },
     "4212118077": {      
       "destinationHash": 290444260,
