@@ -7628,7 +7628,12 @@
         "name": "Archer's Line"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -479,
+          "y": -301
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 3326367698,
       "bubbleName": false
@@ -11996,7 +12001,12 @@
         "name": "Archer's Line"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -636,
+          "y": -414
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 3326367698,
       "bubbleName": false,
@@ -12081,7 +12091,12 @@
         "name": "Lunar Battlegrounds"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": 532,
+          "y": -310
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 1835313730,
       "bubbleName": false,
@@ -12132,7 +12147,12 @@
         "name": "Circle of Bones"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -188,
+          "y": -126
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 286194652,
       "bubbleName": false,

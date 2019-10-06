@@ -3647,7 +3647,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 4212118076,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/archers-light_necrotic-cyphers_4212118076.jpg",
     "description": false,
     "debug": {
       "name": "I.III: Of Tattered Blood and Broken Bone",
@@ -5534,7 +5534,7 @@
   {
     "checklistId": 4285512244,
     "recordHash": 3390078235,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/archers-line_lunas-lost_3390078235.jpg",
     "description": false,
     "debug": {
       "name": "Ghost Fragment: Gunnvor's Ghost",
@@ -5584,8 +5584,8 @@
   {
     "checklistId": 4285512244,
     "recordHash": 3390078238,
-    "screenshot": false,
-    "description": false,
+    "screenshot": "/static/images/screenshots/lore/lunar-battlegrounds_lunas-lost_3390078238.jpg",
+    "description": "At the side on the hidden side of the pictured module.",
     "debug": {
       "name": "Ghost Fragment: Vyhar's Ghost",
       "number": 6
@@ -5614,7 +5614,7 @@
   {
     "checklistId": 4285512244,
     "recordHash": 3390078227,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/circle-of-bones_lunas-lost_3390078227.jpg",
     "description": false,
     "debug": {
       "name": "Ghost Fragment: Eriana-3's Ghost",

@@ -6,7 +6,13 @@
     "3390078235": {      
       "destinationHash": 290444260,
       "bubbleHash": 3326367698,
-      "pursuitHash": 2313160420
+      "pursuitHash": 2313160420,
+      "points": [
+        {
+          "x": -636,
+          "y": -414
+        }
+      ]
     },
     "3390078234": {      
       "destinationHash": 290444260,
@@ -31,7 +37,13 @@
     "3390078238": {      
       "destinationHash": 290444260,
       "bubbleHash": 1835313730,
-      "pursuitHash": 3140210033
+      "pursuitHash": 3140210033,
+      "points": [
+        {
+          "x": 532,
+          "y": -310
+        }
+      ]
     },
     "3390078237": {      
       "destinationHash": 290444260,
@@ -50,7 +62,13 @@
     "3390078227": {      
       "destinationHash": 290444260,
       "bubbleHash": 286194652,
-      "pursuitHash": 1343473388
+      "pursuitHash": 1343473388,
+      "points": [
+        {
+          "x": -188,
+          "y": -126
+        }
+      ]
     },
     "3390078226": {      
       "destinationHash": 290444260,
