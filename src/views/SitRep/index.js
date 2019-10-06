@@ -226,31 +226,43 @@ class SitRep extends React.Component {
             </div>
             {weeklyNightfallStrikes.activities.scored.length ? (
               <>
-                <h4>{weeklyNightfallStrikes.headings.ordeal}</h4>
-                <ul className='list activities'>
-                  {orderBy(
-                    weeklyNightfallStrikes.activities.ordeal.map((a, i) => {
-                      const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+                {weeklyNightfallStrikes.activities.ordeal.length ? (
+                  <>
+                    <h4>{weeklyNightfallStrikes.headings.ordeal}</h4>
+                    <ul className='list activities'>
+                      {orderBy(
+                        enums.nightfalls[weeklyNightfallStrikes.activities.ordeal[0].activityHash].ordealHashes.map(o => ({
+                          activityLightLevel: manifest.DestinyActivityDefinition[o].activityLightLevel,
+                          activityHash: weeklyNightfallStrikes.activities.ordeal[0].activityHash,
+                          ordealHash: o
+                        })),
+                        [a => a.activityLightLevel],
+                        ['asc']
+                      )
+                        .slice(0, 1)
+                        .map((a, i) => {
+                          const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+                          const definitionOrdeal = manifest.DestinyActivityDefinition[a.ordealHash];
 
-                      return {
-                        light: definitionActivity.activityLightLevel,
-                        el: (
-                          <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
-                            <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
-                            <div>
-                              <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
-                              <div className='light'>
-                                <span>{definitionActivity.activityLightLevel}</span>
-                              </div>
-                            </div>
-                          </li>
-                        )
-                      };
-                    }),
-                    [m => m.light],
-                    ['asc']
-                  ).map(e => e.el)}
-                </ul>
+                          return {
+                            light: definitionOrdeal.activityLightLevel,
+                            el: (
+                              <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.ordealHash} data-mode='175275639'>
+                                <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
+                                <div>
+                                  <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
+                                  <div className='light'>
+                                    <span>{definitionOrdeal.activityLightLevel}</span>
+                                  </div>
+                                </div>
+                              </li>
+                            )
+                          };
+                        })
+                        .map(e => e.el)}
+                    </ul>
+                  </>
+                ) : null}
                 <h4>{weeklyNightfallStrikes.headings.scored}</h4>
                 <ul className='list activities'>
                   {orderBy(

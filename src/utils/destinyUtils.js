@@ -471,39 +471,35 @@ export function ammoTypeToString(type) {
   return string;
 }
 
-function stringToIconWrapper(string) {
-  return <span key={`icon-${string}`} className={`destiny-${string}`} />;
-}
-
 // matches first bracketed thing in the string, or certain private unicode characters
 const hashExtract = /^([^[\]]*)(\[[^[\]]+?\]|[\uE099-\uE154])(.*)$/u;
 
 function supplementedConversionTable() {
   // conversionTable holds input & output rules for icon replacement. baseConversionTable is used to build it.
   const baseConversionTable = [
-    { icon: 'damage_kinetic', objectiveHash: 3924246227, substring: '' },
-    { icon: 'damage_solar', objectiveHash: 2994623161, substring: '' },
-    { icon: 'damage_arc', objectiveHash: 2178780271, substring: '' },
-    { icon: 'damage_void', objectiveHash: 695106797, substring: '' },
-    { icon: 'melee', objectiveHash: 3951261483, substring: '' },
-    { icon: 'grenade', objectiveHash: 3711356257, substring: '' },
-    { icon: 'headshot', objectiveHash: 3287913530, substring: '' },
-    { icon: 'bow', objectiveHash: 1242546978, substring: '' },
-    { icon: 'auto_rifle', objectiveHash: 532914921, substring: '' },
-    { icon: 'pulse_rifle', objectiveHash: 2161000034, substring: '' },
-    { icon: 'scout_rifle', objectiveHash: 2062881933, substring: '' },
-    { icon: 'hand_cannon', objectiveHash: 53304862, substring: '' },
-    { icon: 'shotgun', objectiveHash: 635284441, substring: '' },
-    { icon: 'sniper_rifle', objectiveHash: 3527067345, substring: '' },
-    { icon: 'fusion_rifle', objectiveHash: 3296270292, substring: '' },
-    { icon: 'smg', objectiveHash: 2722409947, substring: '' },
-    { icon: 'rocket_launcher', objectiveHash: 2203404732, substring: '' },
-    { icon: 'sidearm', objectiveHash: 299893109, substring: '' },
-    { icon: 'grenade_launcher', objectiveHash: 2152699013, substring: '' },
-    { icon: 'beam_weapon', objectiveHash: 3080184954, substring: '' },
-    { icon: 'wire_rifle', objectiveHash: 2923868331, substring: '' },
-    { icon: 'sword_heavy', objectiveHash: 989767424, substring: '' },
-    { icon: 'machinegun', objectiveHash: 1788114534, substring: '' }
+    { char: 'lol wot kinetic', objectiveHash: 3924246227, substring: '' },
+    { char: '', objectiveHash: 2994623161, substring: '' },
+    { char: '', objectiveHash: 2178780271, substring: '' },
+    { char: '', objectiveHash: 695106797, substring: '' },
+    { char: '', objectiveHash: 3951261483, substring: '' },
+    { char: '', objectiveHash: 3711356257, substring: '' },
+    { char: '', objectiveHash: 3287913530, substring: '' },
+    { char: '', objectiveHash: 1242546978, substring: '' },
+    { char: '', objectiveHash: 532914921, substring: '' },
+    { char: '', objectiveHash: 2161000034, substring: '' },
+    { char: '', objectiveHash: 2062881933, substring: '' },
+    { char: '', objectiveHash: 53304862, substring: '' },
+    { char: '', objectiveHash: 635284441, substring: '' },
+    { char: '', objectiveHash: 3527067345, substring: '' },
+    { char: '', objectiveHash: 3296270292, substring: '' },
+    { char: '', objectiveHash: 2722409947, substring: '' },
+    { char: '', objectiveHash: 2203404732, substring: '' },
+    { char: '', objectiveHash: 299893109, substring: '' },
+    { char: '', objectiveHash: 2152699013, substring: '' },
+    { char: '', objectiveHash: 3080184954, substring: '' },
+    { char: '', objectiveHash: 2923868331, substring: '' },
+    { char: '', objectiveHash: 989767424, substring: '' },
+    { char: '', objectiveHash: 1788114534, substring: '' }
   ];
 
   // loop through conversionTable entries to update them with manifest string info
@@ -545,7 +541,7 @@ function replaceWithIcons(conversionRules, remainingObjectiveString, alreadyProc
 
   // look through conversionRules, find corresponding icon, group with processed material
   const replacementIndex = conversionRules.find(iconEntry => iconEntry.substring === iconString);
-  const replacement = replacementIndex ? stringToIconWrapper(replacementIndex.icon) : iconString;
+  const replacement = replacementIndex ? replacementIndex.char : iconString;
 
   if (replacement === iconString) console.log(iconString)
 

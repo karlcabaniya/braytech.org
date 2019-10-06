@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import * as enums from '../../../utils/destinyEnums';
 import ObservedImage from '../../ObservedImage';
 import { checklists, lookup } from '../../../utils/checklists';
 
@@ -49,6 +50,8 @@ class Activity extends React.Component {
       const activityType = (hash, activityTypeHash, activityModeHashes = []) => {
         if ([53954174, 78673128, 96442917, 122988657, 185515551, 319240296, 320680002, 340004423, 359488722, 449926115, 539897061, 622895925, 625165976, 632790902, 723733266, 785871069, 789332628, 801458995, 808931822, 856342832, 919252154, 963938931, 993905880, 999972877, 1018040791, 1018385878, 1063969232, 1107208644, 1159314159, 1225970098, 1228327586, 1254990192, 1265390366, 1275562432, 1279862229, 1289867188, 1294490226, 1302437673, 1333621919, 1416597166, 1418217191, 1466550401, 1491022087, 1503376677, 1570598249, 1643069750, 1651979106, 1657356109, 1671235700, 1682036469, 1725302079, 1740310101, 1773400654, 1783922093, 1800749202, 1811228210, 1823921651, 1824067376, 1829866365, 1874578888, 1956541147, 1969800443, 1971154629, 1981289329, 1987624188, 2067233851, 2069143995, 2174556965, 2219006909, 2231840083, 2245202378, 2250935166, 2258680077, 2302677459, 2307090074, 2310677039, 2340776707, 2517540332, 2574607799, 2665134323, 2675435236, 2737739053, 2752743635, 2831644165, 2949941834, 2966841322, 3002511278, 3015346707, 3033151437, 3042112297, 3069330044, 3140524926, 3148431353, 3211568383, 3248193378, 3255524827, 3277510674, 3283790633, 3289681664, 3304835347, 3370527053, 3384410381, 3485876484, 3500791146, 3601218952, 3644215993, 3645117987, 3664729722, 3664915501, 3691789482, 3700722865, 3752039537, 3780356141, 3836086286, 3872525353, 3909841711, 3920569453, 4094398454, 4238309598].includes(hash)) {
           return 'adventure';
+        } else if (enums.ordealHashes.includes(hash)) {
+          return 'nightfall-ordeal';
         } else if (activityTypeHash === 838603889) {
           // Forge Ignition
           return 'forge';
@@ -73,6 +76,10 @@ class Activity extends React.Component {
         } else if (activityModeHashes.includes(1848252830)) {
           // Gambit
           return 'gambit';
+        } else if (activityTypeHash === 332181804) {
+          return 'nightmare-hunt';
+        } else if (hash === 2999911583) {
+          return 'vex-offensive';
         }
       };
 
@@ -102,7 +109,7 @@ class Activity extends React.Component {
 
       // console.log(activityTypeDisplay, definitionActivity, mode, definitionActivityPlaylist)
 
-      if (definitionActivity.placeHash === 2961497387)
+      if (definitionActivity.placeHash === 2961497387) {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           name: manifest.DestinyPlaceDefinition[2961497387].displayProperties.name,
@@ -110,8 +117,9 @@ class Activity extends React.Component {
           description: false,
           activityLightLevel: false
         };
+      }
 
-      if (modeFiltered === 'patrol')
+      if (modeFiltered === 'patrol') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           destination: {
@@ -122,8 +130,9 @@ class Activity extends React.Component {
           activityLightLevel: false,
           mode: definitionActivityMode && definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name
         };
+      }
 
-      if (modeFiltered === 'story')
+      if (modeFiltered === 'story') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           mode: manifest.DestinyActivityTypeDefinition[1686739444].displayProperties.name,
@@ -139,8 +148,9 @@ class Activity extends React.Component {
             </span>
           )
         };
+      }
 
-      if (modeFiltered === 'crucible')
+      if (modeFiltered === 'crucible') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           name: definitionActivityMode ? definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name : t('Unknown'),
@@ -154,8 +164,9 @@ class Activity extends React.Component {
           activityLightLevel: false,
           icon: <span className='destiny-crucible' />
         };
+      }
 
-      if (modeFiltered === 'raid')
+      if (modeFiltered === 'raid') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           name: definitionActivity.displayProperties.name,
@@ -164,8 +175,9 @@ class Activity extends React.Component {
           className: 'raid',
           icon: <span className='destiny-raid' />
         };
+      }
 
-      if (modeFiltered === 'forge')
+      if (modeFiltered === 'forge') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           name: definitionActivityPlaylist && definitionActivityPlaylist.displayProperties ? definitionActivityPlaylist.displayProperties.name : t('Unknown'),
@@ -176,8 +188,9 @@ class Activity extends React.Component {
           pgcrImage: definitionActivityPlaylist.pgcrImage,
           icon: <span className='destiny-black_armory_forge' />
         };
+      }
 
-      if (modeFiltered === 'menagerie')
+      if (modeFiltered === 'menagerie') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           destination: {
@@ -201,16 +214,18 @@ class Activity extends React.Component {
             </span>
           )
         };
+      }
 
-      if (modeFiltered === 'reckoning')
+      if (modeFiltered === 'reckoning') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           mode: definitionActivity.originalDisplayProperties && definitionActivity.originalDisplayProperties.name,
           className: 'reckoning',
           icon: <span className='destiny-reckoning' />
         };
+      }
 
-      if (modeFiltered === 'gambit')
+      if (modeFiltered === 'gambit') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           name: definitionActivityMode.displayProperties.name,
@@ -224,16 +239,36 @@ class Activity extends React.Component {
           activityLightLevel: false,
           icon: <span className='destiny-gambit' />
         };
+      }
 
-      if (modeFiltered === 'strike')
+      if (modeFiltered === 'strike') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           mode: manifest.DestinyActivityTypeDefinition[2884569138].displayProperties.name,
           className: 'strike',
           icon: <span className='destiny-strike' />
         };
+      }
 
-      if (modeFiltered === 'adventure')
+      if (modeFiltered === 'nightfall-ordeal') {
+        const strikeHash = Object.keys(enums.nightfalls).find(k => enums.nightfalls[k].ordealHashes.includes(definitionActivity.hash));
+        const definitionStrke = manifest.DestinyActivityDefinition[strikeHash];
+
+        console.log(definitionStrke)
+
+        activityTypeDisplay = {
+          ...activityTypeDisplay,
+          // name: definitionActivity.displayProperties.name,
+          // mode: manifest.DestinyActivityTypeDefinition[2884569138].displayProperties.name,
+          name: definitionStrke.selectionScreenDisplayProperties.name,
+          mode: definitionActivity.displayProperties.name,
+          description: definitionStrke.displayProperties.description,
+          className: 'strike',
+          icon: <span className='destiny-strike' />
+        };
+      }
+
+      if (modeFiltered === 'adventure') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
           mode: t('Adventure'),
@@ -249,7 +284,35 @@ class Activity extends React.Component {
             </span>
           )
         };
-      
+      }
+
+      if (modeFiltered === 'nightmare-hunt') {
+        console.log(definitionActivity);
+        activityTypeDisplay = {
+          ...activityTypeDisplay,
+          name: definitionActivity.displayProperties.name,
+          mode: manifest.DestinyActivityTypeDefinition[definitionActivity.activityTypeHash].displayProperties.name,
+          description: definitionActivity.displayProperties.description,
+          className: 'nightmare-hunt',
+          icon: <span className='destiny-shadowkeep' />
+        };
+      }
+
+      if (modeFiltered === 'vex-offensive') {
+        activityTypeDisplay = {
+          ...activityTypeDisplay,
+          mode: manifest.DestinyActivityTypeDefinition[definitionActivity.activityTypeHash].displayProperties.name,
+          className: 'vex-offensive',
+          icon: (
+            <span className='destiny-vex-invasion'>
+              <span className='path1' />
+              <span className='path2' />
+              <span className='path3' />
+            </span>
+          )
+        };
+      }
+
       const checklistEntry = lookup({ key: 'activityHash', value: hash });
 
       const checklist = checklistEntry.checklistId && checklists[checklistEntry.checklistId]({ requested: [checklistEntry.checklistHash] });
@@ -300,9 +363,7 @@ class Activity extends React.Component {
                   {t('Recommended Power')}: <span>{activityTypeDisplay.activityLightLevel}</span>
                 </div>
               ) : null}
-              {checklistItem && checklistItem.completed ? (
-                <div className='completed'>{t('Completed')}</div>
-              ) : null}
+              {checklistItem && checklistItem.completed ? <div className='completed'>{t('Completed')}</div> : null}
             </div>
           </div>
         </>
