@@ -763,34 +763,30 @@ class ThisWeek extends React.Component {
     weeklyNightfallStrikesScored.forEach(activity => {
       const nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
 
+      if (this.consolidatedInfo.nightfall[nightfall.hash].collectibles.length < 1 && this.consolidatedInfo.nightfall[nightfall.hash].triumphs.length < 1) return;
+
       moduleNightfalls.push(
         <div key={nightfall.hash} className='content'>
           <div className='module-header'>
             <div className='sub-name'>{t('Nightfall')}</div>
             <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
           </div>
-          {this.consolidatedInfo.nightfall[nightfall.hash].collectibles.length < 1 && this.consolidatedInfo.nightfall[nightfall.hash].triumphs.length < 1 ? (
-            <div className='aside'>{t('This nigthfall has no knwon associated collectibles or triumphs.')}</div>
-          ) : (
+          {this.consolidatedInfo.nightfall[nightfall.hash].collectibles.length ? (
             <>
-              {this.consolidatedInfo.nightfall[nightfall.hash].collectibles.length ? (
-                <>
-                  <h4>{t('Collectibles')}</h4>
-                  <ul className='list collection-items'>
-                    <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
-                  </ul>
-                </>
-              ) : null}
-              {this.consolidatedInfo.nightfall[nightfall.hash].triumphs.length ? (
-                <>
-                  <h4>{t('Triumphs')}</h4>
-                  <ul className='list record-items'>
-                    <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
-                  </ul>
-                </>
-              ) : null}
+              <h4>{t('Collectibles')}</h4>
+              <ul className='list collection-items'>
+                <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
+              </ul>
             </>
-          )}
+          ) : null}
+          {this.consolidatedInfo.nightfall[nightfall.hash].triumphs.length ? (
+            <>
+              <h4>{t('Triumphs')}</h4>
+              <ul className='list record-items'>
+                <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
+              </ul>
+            </>
+          ) : null}
         </div>
       );
     });
