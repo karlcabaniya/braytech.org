@@ -222,7 +222,7 @@ html.backdropfilter .map-omega .control li {
 
   .map-omega .control.characters .character-emblem .wrapper .group,
   .map-omega .control.characters .character-emblem .wrapper .level,
-  .map-omega .control.characters .character-emblem .wrapper .progress {
+  .map-omega .control.characters .character-emblem .wrapper .progress-bar {
     display: none;
   }
 
