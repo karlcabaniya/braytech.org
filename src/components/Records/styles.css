@@ -27,6 +27,14 @@
   flex-basis: 100%;
 }
 
+.list.record-items li .aside {
+  margin: 0 1rem 1rem;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .list.record-items li .properties {
   flex-basis: 100%;
   padding: 1rem;  
@@ -50,7 +58,7 @@
 }
 
 .list.record-items li .properties .text .name {
-  flex-basis: calc(100% - 6rem);
+  flex-basis: calc(100% - 7rem);
 }
 
 .list.record-items li .properties .text .meta {
@@ -59,7 +67,7 @@
   flex-basis: 6rem;
 }
 
-.list.record-items li .properties .text .meta .score::before {
+.list.record-items li .properties .text .meta .commonality ~ .score::before {
   content: '  /  ';
   position: absolute;
   left: -1rem;

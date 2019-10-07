@@ -174,7 +174,8 @@ class Records extends React.Component {
         },
         score: {
           value: 0,
-          progress: 0
+          progress: 0,
+          next: 0
         },
         objectives: [],
         intervals: []
@@ -183,7 +184,8 @@ class Records extends React.Component {
       if (definitionRecord.objectiveHashes) {
         recordState.score = {
           value: definitionRecord.completionInfo.ScoreValue,
-          progress: definitionRecord.completionInfo.ScoreValue
+          progress: definitionRecord.completionInfo.ScoreValue,
+          next: definitionRecord.completionInfo.ScoreValue
         };
 
         recordState.objectives = definitionRecord.objectiveHashes.map((hash, i) => {
@@ -218,22 +220,30 @@ class Records extends React.Component {
       if (definitionRecord.intervalInfo && definitionRecord.intervalInfo.intervalObjectives && definitionRecord.intervalInfo.intervalObjectives.length) {
         recordState.intervals = definitionRecord.intervalInfo.intervalObjectives.map((interval, i) => {
           const data = recordData && recordData.intervalObjectives.find(o => o.objectiveHash === interval.intervalObjectiveHash);
-
           const unredeemed = i + 1 > recordData.intervalsRedeemedCount && data.complete;
 
           return {
             ...data,
             unredeemed,
-            score: interval.intervalScoreValue,
-            el: (
-              <div className={cx('interval', { completed: data.complete && !unredeemed, unredeemed })}>
-                <div className='text'>
-                  <div className='name'>{t('Interval {{i}}', { i: i + 1 })}</div>
-                  <div className='score tooltip' data-hash='score_interval' data-table='BraytechDefinition'>{interval.intervalScoreValue}</div>
-                </div>
-                <ProgressBar key={`${hash}${i}`} {...data} />
-              </div>
-            )
+            score: interval.intervalScoreValue
+          };
+        });
+
+        recordState.intervals = recordState.intervals.map((interval, i) => {
+          const display = {
+            ...interval
+          };
+
+          // if (i > 0) {
+          //   const prevInterval = recordState.intervals[Math.max(i - 1, 0)];
+
+          //   display.progress = interval.progress - prevInterval.completionValue;
+          //   display.completionValue = interval.completionValue - prevInterval.completionValue;
+          // }
+
+          return {
+            ...interval,
+            el: <ProgressBar key={`${hash}${i}`} {...display} />
           };
         });
 
@@ -247,7 +257,8 @@ class Records extends React.Component {
             } else {
               return a;
             }
-          }, 0)
+          }, 0),
+          next: (recordData && definitionRecord.intervalInfo.intervalObjectives[recordData.intervalsRedeemedCount] && definitionRecord.intervalInfo.intervalObjectives[recordData.intervalsRedeemedCount].intervalScoreValue) || 0
         };
 
         recordState.objectives = [...recordState.intervals.slice(-1)];
@@ -374,26 +385,29 @@ class Records extends React.Component {
                 <div className='text'>
                   <div className='name'>{definitionRecord.displayProperties.name}</div>
                   <div className='meta'>
-                    <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>
-                      {manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%
+                    {manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? (
+                      <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>
+                        {manifest.statistics.triumphs[definitionRecord.hash]}%
                     </div>
+                    ) : null}
                     {recordState.score.value !== 0 ? (
                       <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>
-                        {recordState.score.value}
+                        {recordState.intervals.length && recordState.score.progress !== recordState.score.value ? `${recordState.score.next}/${recordState.score.value}` : recordState.score.value}
                       </div>
                     ) : null}
                   </div>
                   <div className='description'>{description}</div>
                 </div>
               </div>
-              <div className={cx('objectives', { 'are-intervals': recordState.intervals.length })}>
-                {recordState.intervals.length ? recordState.intervals.map(e => e.el) : recordState.objectives.map(e => e.el)}
+              <div className='objectives'>
+                {recordState.intervals.length ? recordState.intervals.find(i => !i.complete) ? recordState.intervals.find(i => !i.complete).el : recordState.intervals[recordState.intervals.length - 1].el : recordState.objectives.map(e => e.el)}
               </div>
               {rewards && rewards.length ? (
                 <ul className='list rewards collection-items'>
                   <Collectibles forceDisplay selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={rewards} />
                 </ul>
               ) : null}
+              {recordState.intervals.length ? (<div className='aside'>{t('This record has multiple intervals with different score values and varying levels of progress requirement.')}</div>) : null}
               {link && linkTo ? !selfLinkFrom && readLink ? <Link to={linkTo} /> : <ProfileLink to={linkTo} /> : null}
             </li>
           )
