@@ -221,7 +221,7 @@
     font-size: 14px;
   }
   
-  .characters-list.responsive .char .button .progress {
+  .characters-list.responsive .char .button .progress-bar {
     height: 7px;
   }
 }
@@ -270,7 +270,7 @@
     font-size: 14px;
   }
 
-  .characters-list .char .button .progress {
+  .characters-list .char .button .progress-bar {
     height: 7px;
   }
 }

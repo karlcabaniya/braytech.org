@@ -226,25 +226,8 @@ class Records extends React.Component {
           return {
             ...data,
             unredeemed,
-            score: interval.intervalScoreValue
-          };
-        });
-
-        recordState.intervals = recordState.intervals.map((interval, i) => {
-          const display = {
-            ...interval
-          };
-
-          // if (i > 0) {
-          //   const prevInterval = recordState.intervals[Math.max(i - 1, 0)];
-
-          //   display.progress = interval.progress - prevInterval.completionValue;
-          //   display.completionValue = interval.completionValue - prevInterval.completionValue;
-          // }
-
-          return {
-            ...interval,
-            el: <ProgressBar key={`${hash}${i}`} {...display} />
+            score: interval.intervalScoreValue,
+            el: <ProgressBar key={`${hash}${i}`} {...data} />
           };
         });
 
@@ -273,8 +256,8 @@ class Records extends React.Component {
 
         recordState.intervalEl = (
           <div className='progress-bar intervals'>
-            <div className={cx('check', { ed: lastInterval.completionValue && lastInterval.complete })} />
-            <div className='bar'>
+            {/* <div className={cx('check', { ed: lastInterval.completionValue && lastInterval.complete })} /> */}
+            <div className='bar full'>
               <div className='text'>
                 <div className='description'>{lastInterval.objectiveHash && manifest.DestinyObjectiveDefinition[lastInterval.objectiveHash] && manifest.DestinyObjectiveDefinition[lastInterval.objectiveHash].progressDescription}</div>
                 {lastInterval.completionValue ? (
