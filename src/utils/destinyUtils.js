@@ -636,8 +636,12 @@ export function lastPlayerActivity(member) {
 
         lastActivityString = `${definitionActivity.displayProperties.name}`;
 
-      } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]
+      } else if ([135537449, 740891329].includes(lastActivity.currentPlaylistActivityHash)) { // Survival, Survival: Freelance
 
+        lastActivityString = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
+
+      } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]
+console.log('hi')
         lastActivityString = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
 
       } else if (definitionActivityMode) { // Default

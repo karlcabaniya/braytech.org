@@ -164,6 +164,11 @@ class Activity extends React.Component {
           activityLightLevel: false,
           icon: <span className='destiny-crucible' />
         };
+
+        // Survival, Survival: Freelance
+        if (definitionActivityPlaylist && [135537449, 740891329].includes(definitionActivityPlaylist.hash)) {
+          activityTypeDisplay.name = definitionActivityPlaylist.displayProperties.name;
+        }
       }
 
       if (modeFiltered === 'raid') {
