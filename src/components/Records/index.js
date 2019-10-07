@@ -219,11 +219,21 @@ class Records extends React.Component {
         recordState.intervals = definitionRecord.intervalInfo.intervalObjectives.map((interval, i) => {
           const data = recordData && recordData.intervalObjectives.find(o => o.objectiveHash === interval.intervalObjectiveHash);
 
+          const unredeemed = i + 1 > recordData.intervalsRedeemedCount && data.complete;
+
           return {
             ...data,
-            unredeemed: i + 1 > recordData.intervalsRedeemedCount && data.complete,
+            unredeemed,
             score: interval.intervalScoreValue,
-            el: <ProgressBar key={`${hash}${i}`} {...data} />
+            el: (
+              <div className={cx('interval', { completed: data.complete && !unredeemed, unredeemed })}>
+                <div className='text'>
+                  <div className='name'>{t('Interval {{i}}', { i: i + 1 })}</div>
+                  <div className='score tooltip' data-hash='score_interval' data-table='BraytechDefinition'>{interval.intervalScoreValue}</div>
+                </div>
+                <ProgressBar key={`${hash}${i}`} {...data} />
+              </div>
+            )
           };
         });
 
@@ -250,19 +260,6 @@ class Records extends React.Component {
 
       console.log(recordState);
 
-      /* distance stuff */
-
-      // if (playerProgress) {
-      //   let v = parseInt(playerProgress.completionValue, 10);
-      //   let p = parseInt(playerProgress.progress, 10);
-
-      //   completionValueTotal = completionValueTotal + v;
-      //   progressValueTotal = progressValueTotal + (p > v ? v : p);
-      // }
-
-      // let progressDistance = progressValueTotal / completionValueTotal;
-      // progressDistance = Number.isNaN(progressDistance) ? 0 : progressDistance;
-
       const enumerableState = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
 
       if (enumerateRecordState(enumerableState).invisible && (collectibles && collectibles.hideInvisibleRecords)) {
@@ -285,8 +282,7 @@ class Records extends React.Component {
               key={definitionRecord.hash}
               ref={ref}
               className={cx('redacted', {
-                // eslint-disable-next-line eqeqeq
-                highlight: highlight && highlight == definitionRecord.hash
+                highlight: highlight && highlight === definitionRecord.hash
               })}
             >
               <div className='properties'>
@@ -294,8 +290,8 @@ class Records extends React.Component {
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${manifest.settings.destiny2CoreSettings.undiscoveredCollectibleImage}`} />
                 </div>
                 <div className='text'>
-                  <div className='name'>Classified record</div>
-                  <div className='description'>This record is classified and may be revealed at a later time.</div>
+                  <div className='name'>{t('Classified record')}</div>
+                  <div className='description'>{t('This record is classified and may be revealed at a later time.')}</div>
                 </div>
               </div>
             </li>
@@ -371,63 +367,33 @@ class Records extends React.Component {
                   <div />
                 </div>
               ) : null}
-              {recordState.intervals.length && recordState.intervals.filter(i => i.complete).length < recordState.intervals.length ? <div className='interval-progress' style={{ width: `${Math.min((recordState.intervals.filter(i => i.complete).length / recordState.intervals.length) * 100, 100)}%` }} /> : null}
-              {recordState.intervals.length ? (
-                <div className='intervals'>
-                  {recordState.intervals.map((int, i) => {
-                    const prevInt = recordState.intervals[Math.max(i - 1, 0)];
-
-                    console.log(prevInt, int.progress - prevInt.completionValue);
-
-                    if (int.complete) {
-                      return <div key={i} className={cx({ completed: int.complete, unredeemed: int.unredeemed })} />;
-                    } else if (int.complete && !int.unredeemed) {
-                      return <div key={i} className={cx({ completed: int.complete, unredeemed: int.unredeemed })} />;
-                    } else if (prevInt && prevInt.complete) {
-                      return (
-                        <div key={i} className={cx({ completed: int.complete, unredeemed: int.unredeemed })}>
-                          <div className='fill' style={{ width: `${((int.progress - prevInt.completionValue) / (int.completionValue - prevInt.completionValue)) * 100}%` }} />
-                        </div>
-                      );
-                    } else if (i === 0) {
-                      return (
-                        <div key={i} className={cx({ completed: int.complete, unredeemed: int.unredeemed })}>
-                          <div className='fill' style={{ width: `${(int.progress / int.completionValue) * 100}%` }} />
-                        </div>
-                      );
-                    } else {
-                      return <div key={i} className={cx({ completed: int.complete, unredeemed: int.unredeemed })} />;
-                    }
-                  })}
+              <div className='properties'>
+                <div className='icon'>
+                  <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionRecord.displayProperties.icon}`} />
                 </div>
-              ) : null}
-              <div className='top'>
-                <div className='properties'>
-                  <div className='icon'>
-                    <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionRecord.displayProperties.icon}`} />
-                  </div>
-                  <div className='text'>
-                    <div className='name'>{definitionRecord.displayProperties.name}</div>
-                    <div className='meta'>
-                      <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>
-                        {manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%
-                      </div>
-                      {recordState.score.value !== 0 ? (
-                        <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>
-                          {recordState.score.value}
-                        </div>
-                      ) : null}
+                <div className='text'>
+                  <div className='name'>{definitionRecord.displayProperties.name}</div>
+                  <div className='meta'>
+                    <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>
+                      {manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%
                     </div>
-                    <div className='description'>{description}</div>
+                    {recordState.score.value !== 0 ? (
+                      <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>
+                        {recordState.score.value}
+                      </div>
+                    ) : null}
                   </div>
+                  <div className='description'>{description}</div>
                 </div>
-                <div className='objectives'>{recordState.objectives.map(e => e.el)}</div>
-                {rewards && rewards.length ? (
-                  <ul className='list rewards collection-items'>
-                    <Collectibles forceDisplay selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={rewards} />
-                  </ul>
-                ) : null}
               </div>
+              <div className={cx('objectives', { 'are-intervals': recordState.intervals.length })}>
+                {recordState.intervals.length ? recordState.intervals.map(e => e.el) : recordState.objectives.map(e => e.el)}
+              </div>
+              {rewards && rewards.length ? (
+                <ul className='list rewards collection-items'>
+                  <Collectibles forceDisplay selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={rewards} />
+                </ul>
+              ) : null}
               {link && linkTo ? !selfLinkFrom && readLink ? <Link to={linkTo} /> : <ProfileLink to={linkTo} /> : null}
             </li>
           )

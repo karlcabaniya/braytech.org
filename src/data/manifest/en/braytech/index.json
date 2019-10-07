@@ -69,6 +69,13 @@
     },
     "itemType": 1
   },
+  "score_interval": {
+    "displayProperties": {
+      "name": "Score value",
+      "description": "This interval's score value."
+    },
+    "itemType": 1
+  },
   "character_bound": {
     "displayProperties": {
       "name": "Character bound",
