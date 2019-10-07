@@ -178,7 +178,8 @@ class Records extends React.Component {
           next: 0
         },
         objectives: [],
-        intervals: []
+        intervals: [],
+        intervalEl: null
       };
 
       if (definitionRecord.objectiveHashes) {
@@ -267,6 +268,57 @@ class Records extends React.Component {
         recordState.completion.progress += recordState.objectives[0].progress;
 
         recordState.completion.distance = recordState.intervals[recordState.intervals.length - 1].progress / recordState.intervals[recordState.intervals.length - 1].completionValue;
+
+        const lastInterval = recordState.intervals[recordState.intervals.length - 1];
+
+        recordState.intervalEl = (
+          <div className='progress-bar intervals'>
+            <div className={cx('check', { ed: lastInterval.completionValue && lastInterval.complete })} />
+            <div className='bar'>
+              <div className='text'>
+                <div className='description'>{lastInterval.objectiveHash && manifest.DestinyObjectiveDefinition[lastInterval.objectiveHash] && manifest.DestinyObjectiveDefinition[lastInterval.objectiveHash].progressDescription}</div>
+                {lastInterval.completionValue ? (
+                  <div className='fraction'>
+                    {lastInterval.progress}/{lastInterval.completionValue}
+                  </div>
+                ) : null}
+              </div>
+              <div className='bars'>
+                {recordState.intervals.map((int, i) => {
+                  const prevInt = recordState.intervals[Math.max(i - 1, 0)];
+
+                  if (int.complete) {
+                    return (
+                      <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })}>
+                        <div className='fill' style={{ width: `${(int.progress / int.completionValue) * 100}%` }} />
+                      </div>
+                    );
+                  } else if (int.complete && !int.unredeemed) {
+                    return (
+                      <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })}>
+                        <div className='fill' style={{ width: `${(int.progress / int.completionValue) * 100}%` }} />
+                      </div>
+                    );
+                  } else if (prevInt && prevInt.complete) {
+                    return (
+                      <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })}>
+                        <div className='fill' style={{ width: `${((int.progress - prevInt.completionValue) / (int.completionValue - prevInt.completionValue)) * 100}%` }} />
+                      </div>
+                    );
+                  } else if (i === 0) {
+                    return (
+                      <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })}>
+                        <div className='fill' style={{ width: `${(int.progress / int.completionValue) * 100}%` }} />
+                      </div>
+                    );
+                  } else {
+                    return <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })} />;
+                  }
+                })}
+              </div>
+            </div>
+          </div>
+        );
       }
 
       console.log(recordState);
@@ -388,7 +440,7 @@ class Records extends React.Component {
                     {manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? (
                       <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>
                         {manifest.statistics.triumphs[definitionRecord.hash]}%
-                    </div>
+                      </div>
                     ) : null}
                     {recordState.score.value !== 0 ? (
                       <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>
@@ -399,15 +451,12 @@ class Records extends React.Component {
                   <div className='description'>{description}</div>
                 </div>
               </div>
-              <div className='objectives'>
-                {recordState.intervals.length ? recordState.intervals.find(i => !i.complete) ? recordState.intervals.find(i => !i.complete).el : recordState.intervals[recordState.intervals.length - 1].el : recordState.objectives.map(e => e.el)}
-              </div>
+              <div className='objectives'>{recordState.intervals.length ? recordState.intervalEl : recordState.objectives.map(e => e.el)}</div>
               {rewards && rewards.length ? (
                 <ul className='list rewards collection-items'>
                   <Collectibles forceDisplay selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={rewards} />
                 </ul>
               ) : null}
-              {recordState.intervals.length ? (<div className='aside'>{t('This record has multiple intervals with different score values and varying levels of progress requirement.')}</div>) : null}
               {link && linkTo ? !selfLinkFrom && readLink ? <Link to={linkTo} /> : <ProfileLink to={linkTo} /> : null}
             </li>
           )
