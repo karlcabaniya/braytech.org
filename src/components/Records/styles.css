@@ -54,7 +54,7 @@
 }
 
 .list.record-items li .properties .text .name {
-  flex-basis: calc(100% - 7rem);
+  flex-basis: calc(100% - 147px);
 }
 
 .list.record-items li .properties .text .meta {
@@ -63,6 +63,13 @@
   flex-basis: 6rem;
 }
 
+.list.record-items li .properties .text .meta .intervals,
+.list.record-items li .properties .text .meta .score {
+  position: relative;
+  margin: 0 0 0 1rem;
+}
+
+.list.record-items li .properties .text .meta .commonality ~ .intervals::before,
 .list.record-items li .properties .text .meta .commonality ~ .score::before {
   content: '  /  ';
   position: absolute;
@@ -70,11 +77,6 @@
   white-space: pre-wrap;
   color: rgba(255, 255, 255, 0.6);
   pointer-events: none;
-}
-
-.list.record-items li .properties .text .meta .score {
-  position: relative;
-  margin: 0 0 0 1rem;
 }
 
 .list.record-items li .properties .text .description {

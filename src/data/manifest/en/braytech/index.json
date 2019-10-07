@@ -69,6 +69,13 @@
     },
     "itemType": 1
   },
+  "record_intervals": {
+    "displayProperties": {
+      "name": "Record intervals",
+      "description": "Some records have intervals. Different intervals have varied requirements and score values."
+    },
+    "itemType": 1
+  },
   "character_bound": {
     "displayProperties": {
       "name": "Character bound",

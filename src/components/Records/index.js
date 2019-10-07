@@ -442,6 +442,11 @@ class Records extends React.Component {
                         {manifest.statistics.triumphs[definitionRecord.hash]}%
                       </div>
                     ) : null}
+                    {recordState.intervals.length && recordState.intervals.filter(i => i.complete).length !== recordState.intervals.length ? (
+                      <div className='intervals tooltip' data-hash='record_intervals' data-table='BraytechDefinition'>
+                        {recordState.intervals.filter(i => i.complete).length}/{recordState.intervals.length}
+                      </div>
+                    ) : null}
                     {recordState.score.value !== 0 ? (
                       <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>
                         {recordState.intervals.length && recordState.score.progress !== recordState.score.value ? `${recordState.score.next}/${recordState.score.value}` : recordState.score.value}
