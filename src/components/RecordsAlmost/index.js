@@ -52,8 +52,6 @@ class RecordsAlmost extends React.Component {
         return;
       }
 
-      if (!record.objectives) return;
-
       if (enumerateRecordState(record.state).invisible || enumerateRecordState(record.state).recordRedeemed) {
         return;
       }
@@ -61,13 +59,30 @@ class RecordsAlmost extends React.Component {
       let completionValueTotal = 0;
       let progressValueTotal = 0;
 
-      record.objectives.forEach(obj => {
-        let v = parseInt(obj.completionValue, 10);
-        let p = parseInt(obj.progress, 10);
+      if (record.intervalObjectives) {
+        console.log(record)
+        const nextIncomplete = record.intervalObjectives.find(o => !o.complete);
+
+        // interval record all completed
+        if (!nextIncomplete) return;
+
+        let v = parseInt(nextIncomplete.completionValue, 10);
+        let p = parseInt(nextIncomplete.progress, 10);
 
         completionValueTotal = completionValueTotal + v;
         progressValueTotal = progressValueTotal + (p > v ? v : p); // prevents progress values that are greater than the completion value from affecting the average
-      });
+
+      } else if (record.objectives) {
+        record.objectives.forEach(obj => {
+          let v = parseInt(obj.completionValue, 10);
+          let p = parseInt(obj.progress, 10);
+
+          completionValueTotal = completionValueTotal + v;
+          progressValueTotal = progressValueTotal + (p > v ? v : p); // prevents progress values that are greater than the completion value from affecting the average
+        });
+      } else {
+        return;
+      }
 
       const distance = progressValueTotal / completionValueTotal;
 

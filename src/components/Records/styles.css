@@ -10,7 +10,7 @@
   margin: 0;
   height: initial;
   flex-flow: row wrap;
-  align-content: space-between;
+  align-content: start;
   font-size: 14px;
   background-color: rgba(255, 255, 255, 0);
 }
@@ -21,6 +21,10 @@
 
 .list.record-items li.redacted {
   align-items: flex-start;
+}
+
+.list.record-items li .top {
+  flex-basis: 100%;
 }
 
 .list.record-items li .properties {
@@ -82,10 +86,52 @@
   display: none;
 }
 
+.list.record-items li .interval-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 .list.record-items li .objectives {
   flex-basis: 100%;
-  padding: 0 1rem 1rem calc(2rem + 48px);
   padding: 0 1rem 1rem;
+}
+
+.list.record-items li .intervals {
+  margin: 4px;
+  flex-basis: 100%;
+  display: grid;
+  grid-gap: 4px;
+  grid-auto-flow: column;
+}
+
+.list.record-items li .intervals div {
+  position: relative;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.list.record-items li .intervals div.completed {
+  background-color: rgba(188, 173, 113, 1);
+}
+
+.list.record-items li .intervals div.unredeemed {
+  background-color: rgba(123, 220, 193, 1);
+}
+
+.list.record-items li .intervals div .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  background-color: #5aa366;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: background-color 0.25s;
 }
 
 .list.record-items li .rewards {
@@ -146,10 +192,6 @@
   background-color: rgba(188, 173, 113, 0.8);
 }
 
-.list.record-items li.linked.completed:hover .properties .text .description {
-  /* color: rgba(207, 191, 124, 1); */
-}
-
 .list.record-items li.unredeemed {
   background-color: rgba(123, 220, 193, 0.2);
   box-shadow: inset 0 0 0 2px #7bdcc1;
@@ -174,15 +216,6 @@
 
 .list.record-items li.linked.tracked:hover {
   background-color: rgba(90, 163, 102, 0.6);
-}
-
-.list.record-items li .interval-progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .list.record-items li .track-this {
