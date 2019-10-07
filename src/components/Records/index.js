@@ -422,7 +422,8 @@ class Records extends React.Component {
                 completed: enumerateRecordState(enumerableState).recordRedeemed,
                 unredeemed: !enumerateRecordState(enumerableState).recordRedeemed && !enumerateRecordState(enumerableState).objectiveNotCompleted,
                 tracked: tracked.concat(profileRecordsTracked).includes(definitionRecord.hash) && !enumerateRecordState(enumerableState).recordRedeemed && enumerateRecordState(enumerableState).objectiveNotCompleted,
-                'no-description': !description
+                'no-description': !description,
+                'has-intervals': recordState.intervals.length
               })}
             >
               {!enumerateRecordState(enumerableState).recordRedeemed && enumerateRecordState(enumerableState).objectiveNotCompleted && !profileRecordsTracked.includes(definitionRecord.hash) ? (
@@ -444,7 +445,7 @@ class Records extends React.Component {
                     ) : null}
                     {recordState.intervals.length && recordState.intervals.filter(i => i.complete).length !== recordState.intervals.length ? (
                       <div className='intervals tooltip' data-hash='record_intervals' data-table='BraytechDefinition'>
-                        {recordState.intervals.filter(i => i.complete).length}/{recordState.intervals.length}
+                        {t('{{a}} of {{b}}', { a: recordState.intervals.filter(i => i.complete).length, b: recordState.intervals.length })}
                       </div>
                     ) : null}
                     {recordState.score.value !== 0 ? (

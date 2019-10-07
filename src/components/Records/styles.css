@@ -54,26 +54,29 @@
 }
 
 .list.record-items li .properties .text .name {
-  flex-basis: calc(100% - 147px);
+  flex-basis: calc(100% - 100px);
+}
+
+.list.record-items li.has-intervals .properties .text .name {
+  flex-basis: calc(100% - 200px);
 }
 
 .list.record-items li .properties .text .meta {
   display: flex;
   justify-content: flex-end;
-  flex-basis: 6rem;
 }
 
-.list.record-items li .properties .text .meta .intervals,
-.list.record-items li .properties .text .meta .score {
+.list.record-items li .properties .text .meta .commonality,
+.list.record-items li .properties .text .meta .intervals {
   position: relative;
-  margin: 0 0 0 1rem;
+  margin: 0 1rem 0 0;
 }
 
-.list.record-items li .properties .text .meta .commonality ~ .intervals::before,
-.list.record-items li .properties .text .meta .commonality ~ .score::before {
+.list.record-items li .properties .text .meta .commonality::after,
+.list.record-items li .properties .text .meta .intervals::after {
   content: '  /  ';
   position: absolute;
-  left: -1rem;
+  right: -1rem;
   white-space: pre-wrap;
   color: rgba(255, 255, 255, 0.6);
   pointer-events: none;
