@@ -135,6 +135,7 @@
   grid-gap: 4px;
   grid-auto-flow: column;
   height: 100%;
+  transition: opacity 0.5s;
 }
 
 .list.record-items > li.completed {
