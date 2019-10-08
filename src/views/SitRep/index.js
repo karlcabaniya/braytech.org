@@ -66,7 +66,8 @@ class SitRep extends React.Component {
     if (width > 1280) return 10;
     if (width > 1024) return 8;
     if (width < 1024) return 5;
-    return 5;
+    if (width < 768) return 3;
+    return 3;
   };
 
   render() {
