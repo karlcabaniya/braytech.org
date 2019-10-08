@@ -1,112 +1,517 @@
 {
   "de": {
-    "translated": 446,
-    "notTranslated": 17,
+    "translated": 433,
+    "notTranslated": 34,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "en": {
-    "translated": 463,
+    "translated": 467,
     "notTranslated": 0,
     "added": [],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 463,
+    "notTranslated": 467,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "es": {
-    "translated": 462,
-    "notTranslated": 1,
+    "translated": 449,
+    "notTranslated": 18,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "fr": {
-    "translated": 413,
-    "notTranslated": 50,
+    "translated": 402,
+    "notTranslated": 65,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 463,
+    "notTranslated": 467,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "it": {
-    "translated": 421,
-    "notTranslated": 42,
+    "translated": 450,
+    "notTranslated": 17,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Nightfalls are currently unavailable.",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 463,
+    "notTranslated": 467,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "ko": {
-    "translated": 352,
-    "notTranslated": 111,
+    "translated": 342,
+    "notTranslated": 125,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 463,
+    "notTranslated": 467,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "pt-br": {
-    "translated": 461,
-    "notTranslated": 2,
+    "translated": 448,
+    "notTranslated": 19,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 463,
+    "notTranslated": 467,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "zh-chs": {
-    "translated": 461,
-    "notTranslated": 2,
+    "translated": 448,
+    "notTranslated": 19,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 463,
+    "notTranslated": 467,
     "added": [
-      "Change profile"
+      "Classified record",
+      "Emblem variant",
+      "Ghost fragments recovered",
+      "Located inside lost sector",
+      "Located inside strike",
+      "Lore",
+      "Necrotic cyphers collected",
+      "Ordeal nightfall",
+      "Points",
+      "Rotator playlists",
+      "Scored nightfalls",
+      "Season",
+      "Season rank",
+      "The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.",
+      "There's no one here right now.",
+      "This record is classified and may be revealed at a later time.",
+      "{{a}} of {{b}}"
     ],
-    "removed": []
+    "removed": [
+      "Active Heroic Modifiers",
+      "Active Modifiers",
+      "Activities available",
+      "Clan roster",
+      "Contact in the field",
+      "Dailies",
+      "Lore: Awoken of the Reef",
+      "Lore: Forsaken Prince",
+      "Lore: Ghost Stories",
+      "Milestones",
+      "Total points",
+      "Weeklies",
+      "You've completed all of your milestones for this character."
+    ]
   }
 }
