@@ -10,8 +10,12 @@ import * as utils from '../../utils/destinyUtils';
 import * as enums from '../../utils/destinyEnums';
 import * as bungie from '../../utils/bungie';
 import Spinner from '../../components/UI/Spinner';
+import Button from '../../components/UI/Button';
+import ProgressBar from '../../components/UI/ProgressBar';
+import ObservedImage from '../../components/ObservedImage';
 import Ranks from '../../components/Ranks';
 import Roster from '../../components/Roster';
+import Items from '../../components/Items';
 
 import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
 import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
@@ -25,7 +29,12 @@ class SitRep extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    const { member, viewport } = this.props;
+    const characterProgressions = member.data.profile.characterProgressions.data;
+
+    this.state = {
+      seasonPassRewardsPage: Math.ceil(characterProgressions[member.characterId].progressions[1628407317].level / this.seasonPassItemsPerPage(viewport.width))
+    };
   }
 
   componentDidMount() {
@@ -33,8 +42,35 @@ class SitRep extends React.Component {
     this.props.rebindTooltips();
   }
 
+  componentDidUpdate(p, s) {
+    if (s.seasonPassRewardsPage !== this.state.seasonPassRewardsPage) {
+      this.props.rebindTooltips();
+    }
+  }
+
+  handler_seasonPassPrev = e => {
+    this.setState(p => ({
+      ...p,
+      seasonPassRewardsPage: p.seasonPassRewardsPage - 1
+    }));
+  };
+
+  handler_seasonPassNext = e => {
+    this.setState(p => ({
+      ...p,
+      seasonPassRewardsPage: p.seasonPassRewardsPage + 1
+    }));
+  };
+
+  seasonPassItemsPerPage = width => {
+    if (width > 1280) return 10;
+    if (width > 1024) return 8;
+    if (width < 1024) return 5;
+    return 5;
+  };
+
   render() {
-    const { t, member, groupMembers } = this.props;
+    const { t, member, groupMembers, viewport } = this.props;
     const milestones = member.data.milestones;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     const characters = member.data.profile.characters.data;
@@ -184,6 +220,106 @@ class SitRep extends React.Component {
 
     // console.log(profileTransitoryData)
 
+    console.log(characterProgressions[member.characterId], characterProgressions[member.characterId].progressions[1628407317]);
+
+    // characterProgressions[member.characterId].progressions[1628407317].rewardItemStates.forEach((i, k) => {
+    //   if (enums.enumerateProgressionRewardItemState(i).earned) console.log(manifest.DestinyInventoryItemDefinition[manifest.DestinyProgressionDefinition[1628407317].rewardItems[k].itemHash].displayProperties.name);
+    // });
+
+    const seasonPassItemsPerPage = this.seasonPassItemsPerPage(viewport.width);
+
+    const seasonPass = {
+      season: manifest.DestinySeasonDefinition[3612906877],
+      slice: this.state.seasonPassRewardsPage * seasonPassItemsPerPage - seasonPassItemsPerPage,
+      itemsPerPage: seasonPassItemsPerPage,
+      ranks: manifest.DestinyProgressionDefinition[1628407317].steps.map((s, x) => {
+        const rank = x + 1;
+        const rewards = manifest.DestinyProgressionDefinition[1628407317].rewardItems
+          .map((r, i) => {
+            return {
+              ...r,
+              state: enums.enumerateProgressionRewardItemState(characterProgressions[member.characterId].progressions[1628407317].rewardItemStates[i])
+            };
+          })
+          .filter((r, i) => r.rewardedAtProgressionLevel === rank);
+        const rewardsFree = rewards
+          .filter(r => r.uiDisplayStyle === 'free')
+          .filter(i => {
+            const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
+
+            // if package search contents
+            if (definitionItem.itemCategoryHashes.includes(268598612)) {
+              if (
+                definitionItem.gearset &&
+                definitionItem.gearset.itemList &&
+                definitionItem.gearset.itemList.filter(t => {
+                  const definitionItem = manifest.DestinyInventoryItemDefinition[t];
+
+                  if (definitionItem.classType > -1 && definitionItem.classType < 3 && definitionItem.classType !== character.classType) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }).length
+              ) {
+                return false;
+              } else {
+                return true;
+              }
+            } else if (definitionItem.classType > -1 && definitionItem.classType < 3 && definitionItem.classType !== character.classType) {
+              return false;
+            } else {
+              return true;
+            }
+          });
+        const rewardsPremium = rewards
+          .filter(r => r.uiDisplayStyle === 'premium')
+          .filter(i => {
+            const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
+
+            // if package, search contents
+            if (definitionItem.itemCategoryHashes.includes(268598612)) {
+              if (
+                definitionItem.gearset &&
+                definitionItem.gearset.itemList &&
+                definitionItem.gearset.itemList.filter(t => {
+                  const definitionItem = manifest.DestinyInventoryItemDefinition[t];
+
+                  if (definitionItem.classType > -1 && definitionItem.classType < 3 && definitionItem.classType !== character.classType) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }).length
+              ) {
+                return false;
+              } else {
+                return true;
+              }
+            } else if (definitionItem.plug && definitionItem.plug.previewItemOverrideHash) {
+              const definitionPreviewItem = manifest.DestinyInventoryItemDefinition[definitionItem.plug.previewItemOverrideHash];
+              if (definitionPreviewItem.classType > -1 && definitionPreviewItem.classType < 3 && definitionPreviewItem.classType !== character.classType) {
+                return false;
+              } else {
+                return true;
+              }
+            } else if (definitionItem.classType > -1 && definitionItem.classType < 3 && definitionItem.classType !== character.classType) {
+              return false;
+            } else {
+              return true;
+            }
+          });
+
+        return {
+          rank,
+          free: rewardsFree,
+          premium: rewardsPremium
+        };
+      })
+    };
+
+    console.log(seasonPass);
+
     return (
       <div className='view' id='sit-rep'>
         <div className='module head'>
@@ -324,25 +460,52 @@ class SitRep extends React.Component {
             </ul>
           </div>
         </div>
-        <div className='padder'>
-          {/* <div className='module'>
-            <div className='content'>
-              <div className='module-header'>
-                <div className='sub-name'>{t('Fireteam')}</div>
-              </div>
-              <h4>{t('Activity')}</h4>
-              <h4>{t('Members')}</h4>
+
+        <div className='module season-pass'>
+          <div className='content status'>
+            <div className='module-header'>
+              <div className='sub-name'>{t('Season')}</div>
             </div>
-          </div> */}
-          {/* {group ? (
-            <div className='module'>
-              <div className='content'>
-                <div className='module-header'>
-                  <div className='sub-name'>{t('Clan')}</div>
+            <div className='season-text'>
+              <div className='name'>{seasonPass.season.displayProperties.name}</div>
+              <div className='description'>{seasonPass.season.displayProperties.description}</div>
+            </div>
+          </div>
+          <div className='page'>
+            <Button text={<i className='segoe-uniE973' />} action={this.handler_seasonPassPrev} disabled={this.state.seasonPassRewardsPage * seasonPassItemsPerPage - seasonPassItemsPerPage < 1} />
+          </div>
+          <div className='rewards'>
+            {seasonPass.ranks.slice(seasonPass.slice, seasonPass.slice + seasonPass.itemsPerPage).map(r => {
+              const progressData = { ...characterProgressions[member.characterId].progressions[1628407317] };
+
+              if (r.rank <= progressData.level) {
+                progressData.progressToNextLevel = progressData.nextLevelAt;
+              } else if (r.rank > progressData.level + 1) {
+                progressData.progressToNextLevel = 0;
+              }
+
+              return (
+                <div key={r.rank} className='rank' data-rank={r.rank}>
+                  <ProgressBar hideCheck {...progressData} />
+                  <div className={cx('free', { earned: r.free.length && r.free[0].state.earned, claimed: r.free.length && r.free[0].state.claimed })}>
+                    <ul className='list inventory-items'>
+                      <Items items={r.free} />
+                    </ul>
+                  </div>
+                  <div className={cx('premium', { earned: r.premium.length && r.premium[0].state.earned, claimed: r.premium.length && r.premium[0].state.claimed })}>
+                    <ul className='list inventory-items'>
+                      <Items items={r.premium} />
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ) : null} */}
+              );
+            })}
+          </div>
+          <div className='page'>
+            <Button text={<i className='segoe-uniE974' />} action={this.handler_seasonPassNext} disabled={seasonPass.slice + seasonPass.itemsPerPage >= 100} />
+          </div>
+        </div>
+        <div className='padder'>
           <div className='module'>
             <div className='content'>
               <div className='module-header'>
@@ -355,21 +518,6 @@ class SitRep extends React.Component {
               </div>
             </div>
           </div>
-          {/* {group ? (
-            <div className='module'>
-              <div className='content clan-roster'>
-                <div className='module-header'>
-                  <div className='sub-name'>{t('Clan')}</div>
-                </div>
-                <h4>
-                  <span>{t('Roster')}</span>
-                  <span>{t('{{number}} online', { number: groupMembers.members.filter(member => member.isOnline).length })}</span>
-                </h4>
-                <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
-                {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
-              </div>
-            </div>
-          ) : null} */}
         </div>
       </div>
     );
@@ -380,7 +528,7 @@ function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
     groupMembers: state.groupMembers,
-    collectibles: state.collectibles
+    viewport: state.viewport
   };
 }
 

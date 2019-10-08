@@ -6,7 +6,6 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import * as utils from '../../../utils/destinyUtils';
-import { DestinyKey } from '../Button';
 import { ProfileNavLink } from '../../ProfileLink';
 import ProgressBar from '../../UI/ProgressBar';
 import Footer from '../Footer';

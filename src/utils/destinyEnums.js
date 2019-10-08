@@ -72,6 +72,14 @@ export const enumeratePartyMemberState = state => ({
   partyLeader: flagEnum(state, 8)
 });
 
+export const enumerateProgressionRewardItemState = state => ({
+  none: flagEnum(state, 0),
+  invisible: flagEnum(state, 1),
+  earned: flagEnum(state, 2),
+  claimed: flagEnum(state, 4),
+  claimAllowed: flagEnum(state, 8)
+});
+
 export const bookCovers = {
   2447807737: '037E-0000131E.png',
   396866327: '01A3-0000132F.png',

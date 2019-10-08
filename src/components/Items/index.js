@@ -55,7 +55,7 @@ class Items extends React.Component {
                 linked: true,
                 masterworked: enums.enumerateItemState(item.state).masterworked,
                 exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6,
-                'no-border': definitionItem.uiItemDisplayStyle === 'ui_display_style_engram' || definitionItem.hash === 3159615086
+                'no-border': definitionItem.uiItemDisplayStyle === 'ui_display_style_engram' || definitionItem.hash === 3159615086 || definitionItem.itemCategoryHashes && definitionItem.itemCategoryHashes.includes(268598612)
               },
               bucketName
             )}
