@@ -35,7 +35,7 @@ class SitRep extends React.Component {
     const characterProgressions = member.data.profile.characterProgressions.data;
 
     this.state = {
-      seasonPassRewardsPage: Math.ceil(characterProgressions[member.characterId].progressions[1628407317].level / this.seasonPassItemsPerPage(viewport.width))
+      seasonPassRewardsPage: Math.ceil(characterProgressions[member.characterId].progressions[1628407317].level / (this.seasonPassItemsPerPage(viewport.width) - 1))
     };
   }
 

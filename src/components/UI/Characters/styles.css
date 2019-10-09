@@ -62,6 +62,7 @@
   font-family: 'nhg text';
   line-height: 34px;
   color: #e5d163;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .characters-list .char .button .light::before {

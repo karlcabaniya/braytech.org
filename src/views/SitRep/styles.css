@@ -300,7 +300,7 @@
   grid-template-columns: 1fr;
 }
 
-#sit-rep .season-pass .rewards .rank :not(.earned) .list.inventory-items li {
+#sit-rep .season-pass .rewards .rank div:not(.earned):not(.claimed):not(.claimAllowed) li {
   opacity: 0.6;
 }
 
