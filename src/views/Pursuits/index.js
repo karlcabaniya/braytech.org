@@ -38,7 +38,7 @@ class Pursuits extends React.Component {
     }
   }
 
-  process = (items, isQuest = false, enableTooltip = true) => {
+  process = (items = [], isQuest = false, enableTooltip = true) => {
     const { member, viewport } = this.props;
     const itemComponents = member.data.profile.itemComponents;
     const characterUninstancedItemComponents = member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data;
@@ -152,7 +152,7 @@ class Pursuits extends React.Component {
       return 'bounties';
     });
 
-    // console.log(constructed);
+    console.log(constructed);
 
     const quests = orderBy(this.process(constructed.quests, true), [i => i[order], i => i.name], ['desc', 'asc']);
     const questsItems = orderBy(this.process(constructed.items), [i => i[order], i => i.name], ['desc', 'asc']);

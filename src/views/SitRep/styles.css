@@ -304,7 +304,7 @@
   opacity: 0.6;
 }
 
-#sit-rep .season-pass .rewards .rank :not(.progress-bar).earned:not(.claimed)::before {
+#sit-rep .season-pass .rewards .rank .claimAllowed:not(.progress-bar).earned:not(.claimed)::before {
   content: ' ';
   position: absolute;
   top: 0;

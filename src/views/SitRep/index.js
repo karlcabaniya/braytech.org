@@ -490,14 +490,32 @@ class SitRep extends React.Component {
               return (
                 <div key={r.rank} className='rank' data-rank={r.rank}>
                   <ProgressBar hideCheck {...progressData} />
-                  <div className={cx('free', { earned: r.free.length && r.free[0].state.earned, claimed: r.free.length && r.free[0].state.claimed })}>
+                  <div className={cx('free', { earned: r.free.length && r.free[0].state.earned, claimed: r.free.length && r.free[0].state.claimed, claimAllowed: r.free.length && r.free[0].state.claimAllowed })}>
                     <ul className='list inventory-items'>
-                      <Items items={r.free} />
+                      {r.free.length ? (
+                        <Items
+                          items={r.free.map(r => {
+                            return {
+                              ...r,
+                              state: null
+                            };
+                          })}
+                        />
+                      ) : null}
                     </ul>
                   </div>
-                  <div className={cx('premium', { earned: r.premium.length && r.premium[0].state.earned, claimed: r.premium.length && r.premium[0].state.claimed })}>
+                  <div className={cx('premium', { earned: r.premium.length && r.premium[0].state.earned, claimed: r.premium.length && r.premium[0].state.claimed, claimAllowed: r.premium.length && r.premium[0].state.claimAllowed })}>
                     <ul className='list inventory-items'>
-                      <Items items={r.premium} />
+                      {r.premium.length ? (
+                        <Items
+                          items={r.premium.map(r => {
+                            return {
+                              ...r,
+                              state: null
+                            };
+                          })}
+                        />
+                      ) : null}
                     </ul>
                   </div>
                 </div>
