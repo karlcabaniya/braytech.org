@@ -87,6 +87,8 @@ class Root extends React.Component {
         return;
       }
 
+      const definitionCompletionRecord = definitionSeal.completionRecordHash && manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash];
+
       const completionRecordData = definitionSeal && definitionSeal.completionRecordHash && definitionSeal.scope === 1 ? characterRecords[member.characterId].records[definitionSeal.completionRecordHash] : profileRecords[definitionSeal.completionRecordHash];
 
       if (completionRecordData && enumerateRecordState(completionRecordData.state).rewardUnavailable && enumerateRecordState(completionRecordData.state).objectiveNotCompleted) {
@@ -116,6 +118,8 @@ class Root extends React.Component {
 
       const isComplete = nodeTotal && nodeProgress === nodeTotal ? true : false;
 
+      const title = !definitionCompletionRecord.redacted && definitionCompletionRecord.titleInfo && definitionCompletionRecord.titleInfo.titlesByGenderHash[character.genderHash];
+
       sealNodes.push({
         completed: isComplete,
         element: (
@@ -128,7 +132,7 @@ class Root extends React.Component {
             {nodeTotal && nodeProgress !== nodeTotal ? <div className='progress-bar-background' style={{ width: `${(nodeProgress / nodeTotal) * 100}%` }} /> : null}
             <ObservedImage className={cx('image', 'icon')} src={sealImages[definitionSeal.hash] ? `/static/images/extracts/badges/${sealImages[definitionSeal.hash]}` : `https://www.bungie.net${definitionSeal.displayProperties.icon}`} />
             <div className='displayProperties'>
-              <div className='name'>{manifest.DestinyRecordDefinition[definitionSeal.completionRecordHash].titleInfo.titlesByGenderHash[character.genderHash]}</div>
+              <div className='name'>{title || definitionSeal.displayProperties.name}</div>
               {nodeTotal ? (
                 <div className='progress'>
                   <span>{nodeProgress}</span> / {nodeTotal}

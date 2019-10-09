@@ -11,8 +11,7 @@ class ObservedImageInner extends React.Component {
   }
 
   observe = () => {
-    const src = this.props.src;
-    const ratio = this.props.ratio ? this.props.ratio : false;
+    const { className = 'image', src, ratio = false, noConstraints } = this.props;
 
     if (this.state.downloaded) {
       return;
@@ -30,12 +29,12 @@ class ObservedImageInner extends React.Component {
       entries.forEach(entry => {
         const { isIntersecting } = entry;
 
-        if (isIntersecting || this.props.noConstraints) {
+        if (isIntersecting || noConstraints) {
           this.image = new window.Image();
           this.image.onload = bmp => {
             let ratio = bmp.target.height / bmp.target.width;
 
-            if (this.props.className.includes('padding')) {
+            if (className.includes('padding')) {
               this.setState({
                 downloaded: true,
                 styles: {
@@ -79,7 +78,7 @@ class ObservedImageInner extends React.Component {
   }
 
   render() {
-    const { className, noConstraints, ...attributes } = this.props;
+    const { className = 'image', noConstraints, ...attributes } = this.props;
 
     return (
       <div

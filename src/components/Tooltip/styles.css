@@ -449,6 +449,10 @@
   color: hsla(var(--exotic), 1);
 }
 
+#tooltip .frame .objectives ~ .description {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 #tooltip .description .destination {
   padding: 0 0 10px;
   line-height: 1.4;
@@ -457,7 +461,7 @@
 }
 
 #tooltip .description pre {
-  padding: 16px 16px 12px;
+  padding: 12px 16px 12px;
   white-space: pre-wrap;
   line-height: 1.6;
   font-style: italic;

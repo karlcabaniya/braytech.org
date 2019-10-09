@@ -85,25 +85,32 @@
   font-size: 18px;
 }
 
-.characters-list .char .button .progress {
+.characters-list .char .button .progress-bar {
   position: absolute;
   left: 2px;
   bottom: 2px;
   height: 11px;
   width: calc(100% - 4px);
-  background-color: rgba(255, 255, 255, 0.1);
+  height: 11px;
 }
 
-.characters-list .char .button .progress .bar {
+.characters-list .char .button .progress-bar .bar::before {
+  content: ' ';
   position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background-color: #5aa366;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
 }
 
-.characters-list .char .button .progress .bar.capped {
-  background-color: #c68b15;
+.characters-list .char .button .progress-bar .bar .text {
+  display: none;
+}
+
+.characters-list .char .button .progress-bar .bar .fill {
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: width 1s;
+  opacity: 0;
 }
 
 .characters-list .char .title {
@@ -214,7 +221,7 @@
     font-size: 14px;
   }
   
-  .characters-list.responsive .char .button .progress {
+  .characters-list.responsive .char .button .progress-bar {
     height: 7px;
   }
 }
@@ -263,7 +270,7 @@
     font-size: 14px;
   }
 
-  .characters-list .char .button .progress {
+  .characters-list .char .button .progress-bar {
     height: 7px;
   }
 }

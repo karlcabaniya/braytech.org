@@ -8,6 +8,7 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import { stepsWithRecords, rewardsQuestLineOverrides, setDataQuestLineOverrides } from '../../data/questLines';
+import { checklists, lookup } from '../../utils/checklists';
 import ObservedImage from '../ObservedImage';
 import Records from '../Records/';
 import Items from '../Items';
@@ -86,6 +87,7 @@ class QuestLine extends React.Component {
               return {
                 complete: true,
                 progress: definitionObjective.completionValue,
+                completionValue: definitionObjective.completionValue,
                 objectiveHash: definitionObjective.hash
               };
             });
@@ -102,6 +104,10 @@ class QuestLine extends React.Component {
 
       const rewardsQuestLine = this.getRewardsQuestLine(questLine);
       const rewardsQuestStep = (steps && steps.length && steps.filter(s => s.active) && steps.filter(s => s.active).length && steps.filter(s => s.active)[0].definitionStep && steps.filter(s => s.active)[0].definitionStep.value && steps.filter(s => s.active)[0].definitionStep.value.itemValue && steps.filter(s => s.active)[0].definitionStep.value.itemValue.length && steps.filter(s => s.active)[0].definitionStep.value.itemValue.filter(v => v.itemHash !== 0)) || [];
+
+      // const checklistEntry = lookup({ key: 'pursuitHash', value: definitionItem.hash });
+
+      // console.log(checklistEntry)
 
       return (
         <div className='quest-line'>
@@ -166,7 +172,7 @@ class QuestLine extends React.Component {
 
                           objectives.push(
                             <React.Fragment key={definitionObjective.hash}>
-                              <ProgressBar objective={definitionObjective} progress={progress} />
+                              <ProgressBar objectiveHash={definitionObjective.hash} {...progress} />
                               {relatedRecords && relatedRecords.length ? (
                                 <ul className='list record-items'>
                                   <Records selfLinkFrom={`/inventory/pursuits/${item.itemHash}`} forceDisplay hashes={relatedRecords} />
@@ -241,7 +247,7 @@ class QuestLine extends React.Component {
 
                           objectives.push(
                             <React.Fragment key={definitionObjective.hash}>
-                              <ProgressBar objective={definitionObjective} progress={progress} />
+                              <ProgressBar objectiveHash={definitionObjective.hash} {...progress} />
                               {relatedRecords && relatedRecords.length ? (
                                 <ul className='list record-items'>
                                   <Records selfLinkFrom={`/inventory/pursuits/${item.itemHash}`} forceDisplay hashes={relatedRecords} />

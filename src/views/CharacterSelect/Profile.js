@@ -25,6 +25,10 @@ class Profile extends React.Component {
           <Flair type={member.membershipType} id={member.membershipId} />
           <div className='basics'>
             <div>
+              <div className='value'>{member.data.profile.characterProgressions.data[member.characterId].progressions[1628407317].level}</div>
+              <div className='name'>{t('Season rank')}</div>
+            </div>
+            <div>
               <div className='value'>
                 {timePlayed} {timePlayed === 1 ? t('day played') : t('days played')}
               </div>

@@ -208,6 +208,42 @@ export const rewardsQuestLineOverrides = {
       itemHash: 2816212794,
       quantity: 1
     }
+  ],
+  // Field Testing
+  2354690788: [
+    {
+      itemHash: 2984240082, // Eriana's Vow Catalyst
+      quantity: 1
+    }
+  ],
+  // Joy in Suffering 
+  2039588176: [
+    {
+      itemHash: 3089417789,
+      quantity: 1
+    },
+    {
+      itemHash: 1196526889,
+      quantity: 6
+    }
+  ],
+  // Risk/Reward
+  1296357874: [
+    {
+      itemHash: 3089417789,
+      quantity: 1
+    },
+    {
+      itemHash: 1196526889,
+      quantity: 6
+    }
+  ],
+  // A Death of Nightmares
+  2887971121: [
+    {
+      itemHash: 2232171099,
+      quantity: 1
+    }
   ]
 };
 

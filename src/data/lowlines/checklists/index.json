@@ -7584,6 +7584,334 @@
       "extended": {}
     }
   ],
+  "2474271317": [
+    {
+      "recordName": "I.I: Of Tattered Blood and Broken Bone",
+      "recordHash": 4212118078,
+      "sorts": {
+        "number": 1,
+        "destination": "The Moon",
+        "bubble": "Hellmouth",
+        "place": "The Moon",
+        "name": "Hellmouth"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 4195493657,
+      "bubbleName": false
+    },
+    {
+      "recordName": "I.II: Of Tattered Blood and Broken Bone",
+      "recordHash": 4212118079,
+      "sorts": {
+        "number": 2,
+        "destination": "The Moon",
+        "bubble": "Hellmouth",
+        "place": "The Moon",
+        "name": "Hellmouth"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 4195493657,
+      "bubbleName": false
+    },
+    {
+      "recordName": "I.III: Of Tattered Blood and Broken Bone",
+      "recordHash": 4212118076,
+      "sorts": {
+        "number": 3,
+        "destination": "The Moon",
+        "bubble": "Archer's Line",
+        "place": "The Moon",
+        "name": "Archer's Line"
+      },
+      "extended": {},
+      "points": [
+        {
+          "x": -479,
+          "y": -301
+        }
+      ],
+      "destinationHash": 290444260,
+      "bubbleHash": 3326367698,
+      "bubbleName": false
+    },
+    {
+      "recordName": "I.IV: Of Tattered Blood and Broken Bone",
+      "recordHash": 4212118077,
+      "sorts": {
+        "number": 4,
+        "destination": "The Moon",
+        "bubble": "Archer's Line",
+        "place": "The Moon",
+        "name": "Archer's Line"
+      },
+      "extended": {},
+      "points": [
+        {
+          "x": -591,
+          "y": -364
+        }
+      ],
+      "destinationHash": 290444260,
+      "bubbleHash": 3326367698,
+      "bubbleName": false
+    },
+    {
+      "recordName": "II: An Audience with Slaughter",
+      "recordHash": 4212118074,
+      "sorts": {
+        "number": 5,
+        "destination": "The Moon",
+        "bubble": "Anchor of Light",
+        "place": "The Moon",
+        "name": "Anchor of Light"
+      },
+      "extended": {},
+      "points": [
+        {
+          "x": -96,
+          "y": -464
+        }
+      ],
+      "destinationHash": 290444260,
+      "bubbleHash": 4025450777,
+      "bubbleName": false
+    },
+    {
+      "recordName": "III: Ritualistic Circle Pit",
+      "recordHash": 4212118075,
+      "sorts": {
+        "number": 6,
+        "destination": "The Moon",
+        "bubble": "Anchor of Light",
+        "place": "The Moon",
+        "name": "Anchor of Light"
+      },
+      "extended": {},
+      "points": [
+        {
+          "x": -189,
+          "y": -384
+        }
+      ],
+      "destinationHash": 290444260,
+      "bubbleHash": 4025450777,
+      "bubbleName": false
+    },
+    {
+      "recordName": "IV: Blood Sport",
+      "recordHash": 4212118072,
+      "sorts": {
+        "number": 7,
+        "destination": "The Moon",
+        "bubble": "Sorrow's Harbor",
+        "place": "The Moon",
+        "name": "Sorrow's Harbor"
+      },
+      "extended": {},
+      "points": [
+        {
+          "x": 451,
+          "y": 110
+        }
+      ],
+      "destinationHash": 290444260,
+      "bubbleHash": 417490937,
+      "bubbleName": false
+    },
+    {
+      "recordName": "V: A Sinister Plot",
+      "recordHash": 4212118073,
+      "sorts": {
+        "number": 8,
+        "destination": "The Moon",
+        "bubble": "Sorrow's Harbor",
+        "place": "The Moon",
+        "name": "Sorrow's Harbor"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 417490937,
+      "bubbleName": false
+    },
+    {
+      "recordName": "VI: Blood Sport",
+      "recordHash": 4212118070,
+      "sorts": {
+        "number": 9,
+        "destination": "The Moon",
+        "bubble": "The World's Grave",
+        "place": "The Moon",
+        "name": "The World's Grave"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 1008270286,
+      "bubbleName": false
+    },
+    {
+      "recordName": "VII: The Severed and the Unmade",
+      "recordHash": 4212118071,
+      "sorts": {
+        "number": 10,
+        "destination": "The Moon",
+        "bubble": "Circle of Bones",
+        "place": "The Moon",
+        "name": "Circle of Bones"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 286194652,
+      "bubbleName": false
+    },
+    {
+      "recordName": "VIII: A Sacrifice of Self",
+      "recordHash": 2028468509,
+      "sorts": {
+        "number": 11,
+        "destination": "The Moon",
+        "bubble": "Chamber of Night",
+        "place": "The Moon",
+        "name": "Chamber of Night"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 1973847113,
+      "bubbleName": false
+    },
+    {
+      "recordName": "IX.I: The Unmaking",
+      "recordHash": 2028468508,
+      "sorts": {
+        "number": 12,
+        "destination": "The Moon",
+        "bubble": "The World's Grave",
+        "place": "The Moon",
+        "name": "The World's Grave"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 1008270286,
+      "bubbleName": false
+    },
+    {
+      "recordName": "IX.II: The Unmaking",
+      "recordHash": 2028468511,
+      "sorts": {
+        "number": 13,
+        "destination": "The Moon",
+        "bubble": "The Gatehouse",
+        "place": "The Moon",
+        "name": "The Gatehouse"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 1149128373,
+      "bubbleName": false
+    },
+    {
+      "recordName": "X: Faith in Bone",
+      "recordHash": 2028468510,
+      "sorts": {
+        "number": 14,
+        "destination": "The Moon",
+        "bubble": "Lunar Battlegrounds",
+        "place": "The Moon",
+        "name": "Lunar Battlegrounds"
+      },
+      "extended": {},
+      "points": [
+        {
+          "x": 325,
+          "y": -259
+        }
+      ],
+      "destinationHash": 290444260,
+      "bubbleHash": 1835313730,
+      "bubbleName": false
+    },
+    {
+      "recordName": "XI: The Anti-Logic",
+      "recordHash": 2028468505,
+      "sorts": {
+        "number": 15,
+        "destination": "The Moon",
+        "place": "The Moon"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468504,
+      "sorts": {
+        "number": 16,
+        "destination": "The Moon",
+        "place": "The Moon"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468507,
+      "sorts": {
+        "number": 17,
+        "destination": "The Moon",
+        "place": "The Moon"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468506,
+      "sorts": {
+        "number": 18,
+        "destination": "The Moon",
+        "place": "The Moon"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468501,
+      "sorts": {
+        "number": 19,
+        "destination": "The Moon",
+        "place": "The Moon"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260
+    },
+    {
+      "recordName": "",
+      "recordHash": 2028468500,
+      "sorts": {
+        "number": 20,
+        "destination": "The Moon",
+        "place": "The Moon"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260
+    }
+  ],
   "2609997025": [
     {
       "destinationHash": 2779202173,
@@ -11659,138 +11987,193 @@
         "number": 37
       },
       "extended": {}
-    },
+    }
+  ],
+  "4285512244": [
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 3520035140,
-      "bubbleName": false,
-      "activityHash": 1042784002,
-      "checklistHash": 1126566222,
-      "recordHash": 2052987728,
+      "recordName": "Ghost Fragment: Gunnvor's Ghost",
+      "recordHash": 3390078235,
+      "sorts": {
+        "number": 1,
+        "destination": "The Moon",
+        "bubble": "Archer's Line",
+        "place": "The Moon",
+        "name": "Archer's Line"
+      },
+      "extended": {},
       "points": [
         {
-          "x": -118.5,
-          "y": 240
+          "x": -636,
+          "y": -414
         }
       ],
-      "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Soriks's Cut",
-        "place": "The Tangled Shore",
-        "name": "Target: The Trickster",
-        "number": 38
-      },
-      "extended": {}
+      "destinationHash": 290444260,
+      "bubbleHash": 3326367698,
+      "bubbleName": false,
+      "pursuitHash": 2313160420
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 3520035140,
-      "bubbleName": false,
-      "activityHash": 952862146,
-      "checklistHash": 2789836294,
-      "recordHash": 2216522217,
-      "points": [
-        {
-          "x": -85.5,
-          "y": 426
-        }
-      ],
+      "recordName": "Ghost Fragment: Sai Mota's Ghost",
+      "recordHash": 3390078234,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Soriks's Cut",
-        "place": "The Tangled Shore",
-        "name": "Target: The Hangman",
-        "number": 39
+        "number": 2,
+        "destination": "The Moon",
+        "bubble": "The World's Grave",
+        "place": "The Moon",
+        "name": "The World's Grave"
       },
-      "extended": {}
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 1008270286,
+      "bubbleName": false,
+      "pursuitHash": 993395957
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 3520035140,
-      "bubbleName": false,
-      "activityHash": 2504933700,
-      "checklistHash": 2243679480,
-      "recordHash": 2133906881,
-      "points": [
-        {
-          "x": -282,
-          "y": 184.5
-        }
-      ],
+      "recordName": "Ghost Fragment: Gimble-4's Ghost",
+      "recordHash": 3390078233,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Soriks's Cut",
-        "place": "The Tangled Shore",
-        "name": "Target: The Rifleman",
-        "number": 40
+        "number": 3,
+        "destination": "The Moon",
+        "bubble": "Shrine of Oryx",
+        "place": "The Moon",
+        "name": "Shrine of Oryx"
       },
-      "extended": {}
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 2204642885,
+      "bubbleName": false,
+      "pursuitHash": 2244757358
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 1608679832,
-      "bubbleName": false,
-      "activityHash": 1429621744,
-      "checklistHash": 3723964334,
-      "recordHash": 3853730685,
-      "points": [
-        {
-          "x": 154.5,
-          "y": -220.5
-        }
-      ],
+      "recordName": "Ghost Fragment: Eris Morn's Ghost",
+      "recordHash": 3390078232,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Thieves' Landing",
-        "place": "The Tangled Shore",
-        "name": "Target: The Rider",
-        "number": 41
+        "number": 4,
+        "destination": "The Moon",
+        "bubble": "The Gatehouse",
+        "place": "The Moon",
+        "name": "The Gatehouse"
       },
-      "extended": {}
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 1149128373,
+      "bubbleName": false,
+      "pursuitHash": 687082423
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 1608679832,
-      "bubbleName": false,
-      "activityHash": 1449366986,
-      "checklistHash": 806941660,
-      "recordHash": 267060719,
-      "points": [
-        {
-          "x": 397.5,
-          "y": 30
-        }
-      ],
+      "recordName": "Ghost Fragment: Toland's Ghost",
+      "recordHash": 3390078239,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Thieves' Landing",
-        "place": "The Tangled Shore",
-        "name": "Target: The Mad Bomber",
-        "number": 42
+        "number": 5,
+        "destination": "The Moon",
+        "bubble": "The Summoning Pits",
+        "place": "The Moon",
+        "name": "The Summoning Pits"
       },
-      "extended": {}
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 4066175629,
+      "bubbleName": false,
+      "pursuitHash": 3799864144
     },
     {
-      "destinationHash": 359854275,
-      "bubbleHash": 1635947699,
-      "bubbleName": false,
-      "activityHash": 3926419686,
-      "checklistHash": 1735547533,
-      "recordHash": 3393552539,
+      "recordName": "Ghost Fragment: Vyhar's Ghost",
+      "recordHash": 3390078238,
+      "sorts": {
+        "number": 6,
+        "destination": "The Moon",
+        "bubble": "Lunar Battlegrounds",
+        "place": "The Moon",
+        "name": "Lunar Battlegrounds"
+      },
+      "extended": {},
       "points": [
         {
-          "x": -342,
-          "y": -273
+          "x": 532,
+          "y": -310
         }
       ],
+      "destinationHash": 290444260,
+      "bubbleHash": 1835313730,
+      "bubbleName": false,
+      "pursuitHash": 3140210033
+    },
+    {
+      "recordName": "Ghost Fragment: Lonesome Ghost",
+      "recordHash": 3390078237,
       "sorts": {
-        "destination": "The Tangled Shore",
-        "bubble": "Jetsam of Saturn",
-        "place": "The Tangled Shore",
-        "name": "Target: The Mindbender",
-        "number": 43
+        "number": 7,
+        "destination": "The Moon",
+        "bubble": "Anchor of Light",
+        "place": "The Moon",
+        "name": "Anchor of Light"
       },
-      "extended": {}
+      "extended": {},
+      "destinationHash": 290444260,
+      "bubbleHash": 4025450777,
+      "bubbleName": false,
+      "points": [
+        {
+          "x": -52,
+          "y": -492
+        }
+      ],
+      "pursuitHash": 2962817690
+    },
+    {
+      "recordName": "Ghost Fragment: Omar Agah's Ghost",
+      "recordHash": 3390078236,
+      "sorts": {
+        "number": 8,
+        "destination": "The Moon",
+        "place": "The Moon"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260
+    },
+    {
+      "recordName": "Ghost Fragment: Eriana-3's Ghost",
+      "recordHash": 3390078227,
+      "sorts": {
+        "number": 9,
+        "destination": "The Moon",
+        "bubble": "Circle of Bones",
+        "place": "The Moon",
+        "name": "Circle of Bones"
+      },
+      "extended": {},
+      "points": [
+        {
+          "x": -188,
+          "y": -126
+        }
+      ],
+      "destinationHash": 290444260,
+      "bubbleHash": 286194652,
+      "bubbleName": false,
+      "pursuitHash": 1343473388
+    },
+    {
+      "recordName": "Ghost Fragment: Vell Tarlowe's Ghost",
+      "recordHash": 3390078226,
+      "sorts": {
+        "number": 10,
+        "destination": "The Moon",
+        "bubble": "Hellmouth",
+        "place": "The Moon",
+        "name": "Hellmouth"
+      },
+      "extended": {},
+      "points": [],
+      "destinationHash": 290444260,
+      "bubbleHash": 4195493657,
+      "bubbleName": false,
+      "pursuitHash": 2743180254
     }
   ]
 }

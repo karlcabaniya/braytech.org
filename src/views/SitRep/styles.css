@@ -5,8 +5,9 @@
   width: 100%;
 }
 
+#sit-rep > .module.head,
 #sit-rep > .padder,
-#sit-rep > .module.head {
+#sit-rep > .season-pass {
   width: 100%;
   padding: 3rem;
   display: grid;
@@ -20,7 +21,6 @@
 }
 
 #sit-rep > .module.head .content {
-  
 }
 
 #sit-rep > .module.head .content .text p {
@@ -83,31 +83,43 @@
   margin: 12px 0 0;
 }
 
-#sit-rep .module .content.highlight.crucible .mode {
+#sit-rep .module .content.highlight.crucible .text ~ .modes {
+  margin: 20px 0 0;
+}
+
+#sit-rep .module .content.highlight.crucible .modes {
   position: relative;
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: minmax(60px, 120px) minmax(60px, 120px);
 }
 
-#sit-rep .module .content.highlight.crucible .mode .icon svg {
+#sit-rep .module .content.highlight.crucible .modes > div {
+  position: relative;
+  display: grid;
+  grid-gap: 4px;
+  grid-template-columns: 1fr;
+}
+
+#sit-rep .module .content.highlight.crucible .modes > div .icon svg {
   width: 100%;
   height: auto;
-  fill: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
 }
 
-#sit-rep .module .content.highlight.crucible .mode .icon svg .polygon.inner {
+#sit-rep .module .content.highlight.crucible .modes > div .icon svg .polygon.inner {
   animation: rotate-linear 20s infinite linear;
   transform-origin: center;
 }
 
-#sit-rep .module .content.highlight.crucible .mode .icon svg .polygon.inner.ani {
+#sit-rep .module .content.highlight.crucible .modes > div .icon svg .polygon.inner.ani {
   animation: sit-rep-rotate-and-scale-out 5s infinite ease-out;
   transform-origin: center;
 }
 
 @keyframes sit-rep-rotate-and-scale-out {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(0);
     opacity: 0;
   }
@@ -120,6 +132,10 @@
   }
 }
 
+#sit-rep .module .content.highlight.crucible .modes > div .text {
+  text-align: center;
+  font-size: 16px;
+}
 
 #sit-rep .list.activities {
   display: grid;
@@ -175,10 +191,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-
-
 #sit-rep .module .ranks {
   margin: 25px 0 0;
 }
@@ -199,40 +211,148 @@
   right: 0;
 }
 
+#sit-rep .season-pass {
+  display: grid;
+  grid-template-columns: 1fr 30px 2fr 30px;
+  grid-gap: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+}
 
+#sit-rep .season-pass .status {
+  
+}
 
+#sit-rep .season-pass .status .season-text {
+  margin: 20px 0 0;
+}
 
+#sit-rep .season-pass .status .season-text .name {
+  font-size: 32px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
 
+#sit-rep .season-pass .status .season-text .description {
+  font-size: 16px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
 
+#sit-rep .season-pass .page .button {
+  height: calc(100% - 20px - 2rem);
+  margin: calc(20px + 2rem) 0 0;
+}
 
+#sit-rep .season-pass .page .button .text {
+  padding: 0;
+  width: 100%;
+}
 
+#sit-rep .season-pass .rewards {
+  display: grid;
+  grid-auto-flow: column;
+}
 
+#sit-rep .season-pass .rewards .rank {
+  display: grid;
+  grid-template-rows: calc(5px + 1rem) 2fr 2fr;
+  position: relative;
+  padding: 2rem 0 0;
+  margin: 20px 0 0;
+}
 
+#sit-rep .season-pass .rewards .rank::before {
+  content: attr(data-rank);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
+#sit-rep .season-pass .rewards .rank > div {
+  position: relative;
+  padding: 1rem;
+}
 
+#sit-rep .season-pass .rewards .rank .progress-bar {
+  padding: 0;
+  height: 4px;
+}
+
+#sit-rep .season-pass .rewards .rank .progress-bar .text {
+  display: none;
+}
+
+#sit-rep .season-pass .rewards .rank .progress-bar .fill {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#sit-rep .season-pass .rewards .rank .free {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#sit-rep .season-pass .rewards .rank .premium {
+  background-color: rgba(0, 176, 176, 0.6);
+}
+
+#sit-rep .season-pass .rewards .rank .list.inventory-items {
+  position: relative;
+  grid-template-columns: 1fr;
+}
+
+#sit-rep .season-pass .rewards .rank :not(.earned) .list.inventory-items li {
+  opacity: 0.6;
+}
+
+#sit-rep .season-pass .rewards .rank .claimAllowed:not(.progress-bar).earned:not(.claimed)::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(225deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 80%, rgba(255, 255, 255, 0) 100%);
+  background-repeat: no-repeat;
+  background-size: 400%;
+  animation: animation-update-flash 1.2s linear 0s infinite forwards;
+}
 
 
 
 @media screen and (max-width: 1440px) {
-  #sit-rep > .padder,
-  #sit-rep > .module.head {
+  #sit-rep > .module.head,
+  #sit-rep > .padder {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  #sit-rep > .padder,
-  #sit-rep > .module.head {
+  #sit-rep > .module.head,
+  #sit-rep > .padder {
     grid-template-columns: 1fr 1fr;
   }
 }
 
+@media screen and (max-width: 1023px) {
+  #sit-rep .season-pass {
+    display: grid;
+    grid-template-columns: 30px 2fr 30px;}
+  #sit-rep .season-pass .status {
+    grid-column: 1/4;
+}
+}
+
 @media screen and (max-width: 600px) {
-  #sit-rep > .padder,
-  #sit-rep > .module.head {
+  #sit-rep > .module.head,
+  #sit-rep > .padder {
     padding: 2rem;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
+  }
+
+  #sit-rep > .season-pass {
+    padding: 2rem;
   }
 
   #sit-rep .module .sub-header ~ .sub-header {

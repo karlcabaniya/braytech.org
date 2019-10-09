@@ -43,16 +43,24 @@ async function run() {
           screenshot = getScreenshot('lost-sectors', `lost-sectors_${output[index].debug.name.toLowerCase().replace(/'/g,'').replace(/ /g,'-')}`)
         }
 
-        if (parseInt(key, 10) === 1420597821 && output[index].debug && output[index].debug.number) {
-          screenshot = getScreenshot('lore', `ghost-stories_${output[index].debug.number}`)
+        if (parseInt(key, 10) === 1420597821 && output[index].debug && output[index].recordHash) {
+          screenshot = getScreenshot('lore', `ghost-stories_${output[index].recordHash}`)
         }
 
-        if (parseInt(key, 10) === 655926402 && output[index].debug && output[index].debug.number) {
-          screenshot = getScreenshot('lore', `the-forsaken-prince_${output[index].debug.number}`)
+        if (parseInt(key, 10) === 655926402 && output[index].debug && output[index].recordHash) {
+          screenshot = getScreenshot('lore', `the-forsaken-prince_${output[index].recordHash}`)
         }
 
-        if (parseInt(key, 10) === 3305936921 && output[index].debug && output[index].debug.number) {
-          screenshot = getScreenshot('lore', `the-awoken-of-the-reef_${output[index].debug.number}`)
+        if (parseInt(key, 10) === 3305936921 && output[index].debug && output[index].recordHash) {
+          screenshot = getScreenshot('lore', `the-awoken-of-the-reef_${output[index].recordHash}`)
+        }
+
+        if (parseInt(key, 10) === 4285512244 && output[index].debug && output[index].recordHash) {
+          screenshot = getScreenshot('lore', `lunas-lost_${output[index].recordHash}`)
+        }
+
+        if (parseInt(key, 10) === 2474271317 && output[index].debug && output[index].recordHash) {
+          screenshot = getScreenshot('lore', `necrotic-cyphers_${output[index].recordHash}`)
         }
 
         output[index] = {

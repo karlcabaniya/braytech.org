@@ -18,21 +18,22 @@ const fallback = item => {
   let objectives = [];
   let rewards = [];
 
-  item.objectives && item.objectives.objectiveHashes.forEach(element => {
-    let objectiveDefinition = manifest.DestinyObjectiveDefinition[element];
+  item.objectives &&
+    item.objectives.objectiveHashes.forEach(hash => {
+      const deinitionObjective = manifest.DestinyObjectiveDefinition[hash];
 
-    let playerProgress = {
-      complete: false,
-      progress: 0,
-      objectiveHash: objectiveDefinition.hash
-    };
+      let playerProgress = {
+        complete: false,
+        progress: 0,
+        objectiveHash: deinitionObjective.hash
+      };
 
-    let instanceProgress = item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.find(o => o.objectiveHash === element);
+      let instanceProgress = item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.find(o => o.objectiveHash === hash);
 
-    playerProgress = { ...playerProgress, ...instanceProgress };
+      playerProgress = { ...playerProgress, ...instanceProgress };
 
-    objectives.push(<ProgressBar key={objectiveDefinition.hash} objective={objectiveDefinition} progress={playerProgress} />);
-  });
+      objectives.push(<ProgressBar key={deinitionObjective.hash} objectiveHash={deinitionObjective.hash} {...playerProgress} />);
+    });
 
   item.value &&
     item.value.itemValue.forEach(value => {
@@ -40,7 +41,7 @@ const fallback = item => {
         let definition = manifest.DestinyInventoryItemDefinition[value.itemHash];
         rewards.push(
           <li key={value.itemHash}>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definition.displayProperties.icon}`} />
+            <div className='icon'>{definition.displayProperties.icon && <ObservedImage className='image' src={`https://www.bungie.net${definition.displayProperties.icon}`} />}</div>
             <div className='text'>
               {definition.displayProperties.name}
               {value.quantity > 1 ? <> +{value.quantity}</> : null}
@@ -68,7 +69,9 @@ const fallback = item => {
         </div>
       ) : null}
       {quanityMax && item.inventory.maxStackSize > 1 ? (
-        <div className='quantity'>Quantity: <span>{item.inventory.maxStackSize}</span> (MAX)</div>
+        <div className='quantity'>
+          Quantity: <span>{item.inventory.maxStackSize}</span> (MAX)
+        </div>
       ) : null}
       {sourceString ? (
         <div className='source'>

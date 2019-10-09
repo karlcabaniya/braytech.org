@@ -152,11 +152,7 @@ html.backdropfilter #notification-progress {
 
 
 
-@media screen and (max-width: 1200px) {
-  
-}
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   #notification-progress .item {
     padding: 1rem 2rem;
   }

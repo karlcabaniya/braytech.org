@@ -15,22 +15,21 @@ const bounty = item => {
   let objectives = [];
   let rewards = [];
 
-  item.objectives &&
-    item.objectives.objectiveHashes.forEach(element => {
-      let definitionObjective = manifest.DestinyObjectiveDefinition[element];
+  item.objectives && item.objectives.objectiveHashes.forEach(hash => {
+    const deinitionObjective = manifest.DestinyObjectiveDefinition[hash];
 
-      let defaults = {
-        complete: false,
-        progress: 0,
-        objectiveHash: definitionObjective.hash
-      };
+    let playerProgress = {
+      complete: false,
+      progress: 0,
+      objectiveHash: deinitionObjective.hash
+    };
 
-      let progress = (instanceProgress && instanceProgress.find(o => o.objectiveHash === element)) || {};
+    let instanceProgress = item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.find(o => o.objectiveHash === hash);
 
-      defaults = { ...defaults, ...progress };
+    playerProgress = { ...playerProgress, ...instanceProgress };
 
-      objectives.push(<ProgressBar key={definitionObjective.hash} objective={definitionObjective} progress={defaults} />);
-    });
+    objectives.push(<ProgressBar key={deinitionObjective.hash} objectiveHash={deinitionObjective.hash} {...playerProgress} />);
+  });
 
   item.value &&
     item.value.itemValue.forEach(value => {

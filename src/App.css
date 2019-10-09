@@ -603,28 +603,10 @@ html.backdropfilter .sticky-nav {
   backdrop-filter: blur(7px) brightness(1.2);
 }
 
+.sticky-nav .destiny-key,
 .sticky-nav i {
-  position: relative;
   margin: 0px 7px 0 0;
   font-size: 16px;
-  color: #fff;
-}
-
-.sticky-nav i.destiny-B_Button::after,
-.sticky-nav i.destiny-Y_Button::after {
-  content: ' ';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: calc(100% - 2px);
-  height: calc(100% - 2px);
-  background-color: #f44336;
-  border-radius: 100%;
-  z-index: -1;
-}
-
-.sticky-nav i.destiny-Y_Button::after {
-  background-color: #ffc107;
 }
 
 .sticky-nav ul {
@@ -682,10 +664,6 @@ html.backdropfilter .sticky-nav {
 
 html.backdropfilter .wrapper.dark-mode .sticky-nav {
   background-color: hsla(0, 0%, 3%, 0.8);
-}
-
-.wrapper.dark-mode .sticky-nav [class^='destiny-'] {
-  color: #333;
 }
 
 @keyframes animation-background-highlight {

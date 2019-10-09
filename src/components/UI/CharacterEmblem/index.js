@@ -6,6 +6,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import ObservedImage from '../../ObservedImage';
+import ProgressBar from '../../UI/ProgressBar';
 
 import './styles.css';
 
@@ -21,8 +22,7 @@ class CharacterEmblem extends React.Component {
 
       const character = characters.data.find(c => c.characterId === characterId);
 
-      const capped = characterProgressions.data[characterId].progressions[1716568313].level === characterProgressions.data[characterId].progressions[1716568313].levelCap ? true : false;
-      const progress = capped ? characterProgressions.data[characterId].progressions[2030054750].progressToNextLevel / characterProgressions.data[characterId].progressions[2030054750].nextLevelAt : characterProgressions.data[characterId].progressions[1716568313].progressToNextLevel / characterProgressions.data[characterId].progressions[1716568313].nextLevelAt;
+      const progressSeasonalRank = characterProgressions.data[member.characterId].progressions[1628407317];
 
       return (
         <div className={cx('character-emblem', { responsive })}>
@@ -39,16 +39,7 @@ class CharacterEmblem extends React.Component {
             <div className='level'>
               {t('Level')} {character.baseCharacterLevel}
             </div>
-            <div className='progress'>
-              <div
-                className={cx('bar', {
-                  capped: capped
-                })}
-                style={{
-                  width: `${progress * 100}%`
-                }}
-              />
-            </div>
+            <ProgressBar hideCheck {...progressSeasonalRank} />
           </div>
         </div>
       );

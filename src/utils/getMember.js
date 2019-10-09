@@ -4,16 +4,16 @@ import * as responseUtils from './responseUtils';
 
 async function getMember(membershipType, membershipId) {
 
-  const components = [100, 104, 200, 202, 204, 205, 300, 301, 302, 303, 304, 305, 306, 307, 800, 900, 1000];
+  const components = [100, 104, 200, 202, 204, 205, 300, 301, 302, 303, 304, 305, 306, 307, 800, 900];
   let useAuth = false;
 
   try {
     const tokens = ls.get('setting.auth');
     const now = new Date().getTime() + 10000;
 
-    const tokenExpiry = tokens && new Date(tokens.access.expires).getTime();
+    const refreshTokenExpired = tokens && now > new Date(tokens.refresh.expires).getTime();
 
-    if (tokens && tokens.destinyMemberships.find(m => m.membershipId === membershipId) && now < tokenExpiry) {
+    if (tokens && tokens.destinyMemberships.find(m => m.membershipId === membershipId) && !refreshTokenExpired) {
       useAuth = true;
       components.push(102,103,201);
     }

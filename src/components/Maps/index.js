@@ -26,7 +26,7 @@ class Maps extends React.Component {
   constructor(props) {
     super(props);
 
-    const destination = this.props.id || 'edz';
+    const destination = this.props.id || 'the-moon';
 
     this.state = {
       loading: true,
@@ -43,6 +43,11 @@ class Maps extends React.Component {
           layers: []
         },
         edz: {
+          loading: true,
+          error: false,
+          layers: []
+        },
+        'the-moon': {
           loading: true,
           error: false,
           layers: []
@@ -131,6 +136,14 @@ class Maps extends React.Component {
         655926402: {
           // lore: forsaken prince
           visible: true
+        },
+        4285512244: {
+          // lore: lunas lost
+          visible: true
+        },
+        2474271317: {
+          // lore: inquisition of the damned
+          visible: true
         }
       },
       ui: {
@@ -182,7 +195,7 @@ class Maps extends React.Component {
   }
 
   setDestination = id => {
-    const destination = id || 'edz';
+    const destination = id || 'the-moon';
 
     if (!this.state.destinations[destination]) return;
 
@@ -195,7 +208,7 @@ class Maps extends React.Component {
     }));
   }
 
-  generateChecklists = (destination = 'edz') => {
+  generateChecklists = (destination = 'the-moon') => {
     let lists = {
       1697465175: {
         // region chests
@@ -244,6 +257,14 @@ class Maps extends React.Component {
       655926402: {
         // lore: forsaken prince
         ...checklists[655926402]()
+      },
+      4285512244: {
+        // lore: lunas lost
+        ...checklists[4285512244]()
+      },
+      2474271317: {
+        // lore: inquisition of the damned
+        ...checklists[2474271317]()
       }
     };
 
@@ -277,7 +298,7 @@ class Maps extends React.Component {
       }
 
       // record-based nodes
-      if ([1420597821, 3305936921, 655926402].includes(list.checklistId)) {
+      if ([1420597821, 3305936921, 655926402, 4285512244, 2474271317].includes(list.checklistId)) {
         adjusted.tooltipTable = 'DestinyRecordDefinition';
         adjusted.items = adjusted.items.map(i => {
           const node = nodes.find(n => n.recordHash === i.recordHash);
@@ -293,7 +314,7 @@ class Maps extends React.Component {
       lists[key] = adjusted;
     });
 
-    // console.log(lists);
+    console.log(lists);
 
     this.setState({
       checklists: lists
@@ -605,7 +626,7 @@ class Maps extends React.Component {
     } else if (this.state.error) {
       return <div className='map-omega loading'>error lol</div>;
     } else {
-      const { member, viewport, maps: settings, id: destinationId = 'edz' } = this.props;
+      const { member, viewport, maps: settings, id: destinationId = 'the-moon' } = this.props;
 
       const destination = this.state.destination;
 

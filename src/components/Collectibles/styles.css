@@ -104,13 +104,13 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1280px) {
   .list.collection-items {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
   .list.collection-items {
     grid-template-columns: 1fr;
   }

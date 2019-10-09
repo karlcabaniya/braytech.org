@@ -90,7 +90,7 @@ class Header extends React.Component {
   render() {
     const { t, route, viewport, member } = this.props;
 
-    const isProfileRoute = route.location.pathname.match(/\/(?:[1|2|4])\/(?:[0-9]+)\/(?:[0-9]+)/);
+    const isProfileRoute = route.location.pathname.match(/\/(?:[1|2|3|4])\/(?:[0-9]+)\/(?:[0-9]+)/);
 
     const views = [
       {
@@ -184,7 +184,7 @@ class Header extends React.Component {
         hidden: true
       },
       {
-        name: <span className='destiny-settings' />,
+        name: '',
         desc: t('Account, theme, tooltips, visibility, language, and saved data'),
         slug: '/settings',
         exact: true,
@@ -209,7 +209,7 @@ class Header extends React.Component {
       },
       {
         name: t('Suggestion box'),
-        desc: t("Suggest your ideas for Braytech and impact its future"),
+        desc: t('Suggest your ideas for Braytech and impact its future'),
         slug: '/suggestions',
         exact: false,
         profile: false,
@@ -249,16 +249,12 @@ class Header extends React.Component {
     };
 
     if (isProfileRoute && member.data) {
-      const characterId = member.characterId;
       const profile = member.data.profile.profile.data;
       const characters = member.data.profile.characters.data;
       const characterProgressions = member.data.profile.characterProgressions.data;
+      const character = characters.find(character => character.characterId === member.characterId);
 
-      const character = characters.find(character => character.characterId === characterId);
-
-      const capped = characterProgressions[character.characterId].progressions[1716568313].level >= characterProgressions[character.characterId].progressions[1716568313].levelCap ? true : false;
-
-      const progress = capped ? characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
+      const progressSeasonalRank = characterProgressions[member.characterId].progressions[1628407317];
 
       profileEl = (
         <div className='profile'>
@@ -274,20 +270,9 @@ class Header extends React.Component {
                   </div>
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
-                    {character.baseCharacterLevel} / {utils.classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>
+                    {progressSeasonalRank.level} / {utils.classHashToString(character.classHash, character.genderType)} / <span className='light'>{character.light}</span>
                   </div>
-                  <ProgressBar
-                    classNames={{
-                      capped: capped
-                    }}
-                    objective={{
-                      completionValue: 1
-                    }}
-                    progress={{
-                      progress: progress
-                    }}
-                    hideCheck
-                  />
+                  <ProgressBar hideCheck {...progressSeasonalRank} />
                   <Link
                     to={{
                       pathname: '/character-select',

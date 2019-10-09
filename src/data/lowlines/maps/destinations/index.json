@@ -3345,6 +3345,163 @@
       ]
     }
   },
+  "the-moon": {
+    "destination": {
+      "hash": 290444260,
+      "name": "The Moon",
+      "id": "the-moon"
+    },
+    "map": {
+      "width": 2594,
+      "height": 2779,
+      "center": {
+        "x": -200,
+        "y": 550
+      },
+      "layers": [
+        {
+          "id": "background-upper",
+          "type": "background",
+          "x": -120,
+          "y": -179,
+          "width": 2160,
+          "height": 1080,
+          "image": "/static/images/extracts/maps/background_upper.png",
+          "color": "#ad401f"
+        },
+        {
+          "id": "background-lower",
+          "type": "background",
+          "x": -120,
+          "y": 179,
+          "width": 2160,
+          "height": 1080,
+          "image": "/static/images/extracts/maps/background_lower.png",
+          "color": "#790000"
+        },
+        {
+          "id": "map",
+          "type": "map",
+          "x": -200,
+          "y": -1000,
+          "width": 2594,
+          "height": 2779,
+          "image": "/static/images/extracts/maps/map_the-moon.png",
+          "opacity": 0.4
+        }
+      ],
+      "bubbles": [
+        {
+          "hash": 240420607,
+          "name": "Sanctuary",
+          "id": "sanctuary",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -185,
+              "y": -844
+            },
+            {
+              "type": "fast-travel",
+              "x": -323,
+              "y": -806
+            },
+            {
+              "type": "vendor",
+              "vendorHash": 1616085565,
+              "x": -247,
+              "y": -768
+            },
+            {
+              "type": "vendor",
+              "vendorHash": 3411552308,
+              "x": -312,
+              "y": -740
+            }
+          ]
+        },
+        {
+          "hash": 3326367698,
+          "name": "Archer's Line",
+          "id": "archers-Line",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -576,
+              "y": -380
+            }
+          ]
+        },
+        {
+          "hash": 4025450777,
+          "name": "Anchor of Light",
+          "id": "anchor-of-light",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -108,
+              "y": -432
+            }
+          ]
+        },
+        {
+          "hash": 4195493657,
+          "name": "Hellmouth",
+          "id": "hellmouth",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": -189,
+              "y": 144
+            }
+          ]
+        },
+        {
+          "hash": 417490937,
+          "name": "Sorrow's Harbor",
+          "id": "sorrows-harbor",
+          "type": "region",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 267,
+              "y": 231
+            }
+          ]
+        },
+        {
+          "hash": 1835313730,
+          "name": "Lunar Battlegrounds",
+          "id": "lunar-battlegrounds",
+          "type": "suburb",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 249,
+              "y": -196
+            }
+          ]
+        },
+        {
+          "hash": 2685756106,
+          "name": "Scarlet Keep",
+          "id": "scarlet-keep",
+          "type": "suburb",
+          "nodes": [
+            {
+              "type": "title",
+              "x": 693,
+              "y": 763
+            }
+          ]
+        }
+      ]
+    }
+  },
   "farm": {
     "destination": {
       "hash": 4188263703,

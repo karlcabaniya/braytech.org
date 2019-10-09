@@ -693,5 +693,25 @@
     "date": "2019-09-27T23:43:49.123Z",
     "version": "2.9.12",
     "content": "- rectified issue with MMXIX unredeemable unredeemed triumphs display\n- a bunch of general clean up\n- tracked and unredeemed records can now be clicked to see them in their original context\n- collections badge class level completion corrected\n- further sit rep view design work\n- shadowkeep prep"
+  },
+  {
+    "date": "2019-09-30T10:35:52.957Z",
+    "version": "2.9.13",
+    "content": "_The night before Shadowkeep_\n\n- minor improvements to various components\n- seal records in almost complete now correctly link to relevant seal views\n- progress notifcation improvements\n- unredeemed triumphs improvements\n- icons"
+  },
+  {
+    "date": "2019-10-06T08:21:55.186Z",
+    "version": "2.9.27",
+    "content": "## Cumulative update for Shadowkeep\n- updated to use season rank where appropriate\n- new icons\n- nightfalls are back!\n- fundamental works done on current player activity functions\n- new icons\n- tooltip updates"
+  },
+  {
+    "date": "2019-10-06T14:45:01.760Z",
+    "version": "2.9.28",
+    "content": "- did some more font stuff\n- added some nodes to the moon map"
+  },
+  {
+    "date": "2019-10-09T06:09:37.854Z",
+    "version": "2.9.33",
+    "content": "- Added season pass progression details to _Now_ view\n- added more icons\n- Interval records"
   }
 ]

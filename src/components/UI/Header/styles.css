@@ -115,7 +115,7 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   align-items: center;
   color: rgba(255, 255, 255, 0.6);
   font-size: 16px;
-  font-family: 'nhg text';
+  font-family: 'nhg text', 'Destiny Keys';
 }
 
 #header .views ul li a.active {
@@ -351,13 +351,14 @@ html.backdropfilter .wrapper.dark-mode #header .braytech {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
-#header.profile-header .characters .list li .progress-bar .bar .fill {
-  background-color: #5aa366;
-  transition: width 0.5s;
+#header.profile-header .characters .list li .progress-bar .bar .text {
+  display: none;
 }
 
-#header.profile-header .characters .list li .progress-bar.capped .bar .fill {
-  background-color: #c68b15;
+#header.profile-header .characters .list li .progress-bar .bar .fill {
+  background-color: #00cfcf;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: width 1s;
 }
 
 #header.profile-header .characters .list li:hover {
@@ -509,7 +510,7 @@ html.backdropfilter #header .nav {
   padding: 10px 1rem;
   flex-basis: 100%;
   position: relative;
-  font-family: 'nhg text';
+  font-family: 'nhg text', 'Destiny Keys';
 }
 
 #header .nav .wrap .types li .name {

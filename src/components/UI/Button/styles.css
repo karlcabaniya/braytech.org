@@ -1,3 +1,14 @@
+.destiny-key {
+  font-family: 'Destiny Keys' !important;
+}
+
+.destiny-key span {
+  color: #fff;
+}
+
+.wrapper.dark-mode .destiny-key span {
+  color: #333;
+}
 
 .button {
   position: relative;

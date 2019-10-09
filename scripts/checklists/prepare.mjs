@@ -1,11 +1,11 @@
 import fs from 'fs';
-import fetch from 'node-fetch';
 import Manifest from '../manifest';
 import _ from 'lodash';
-import lowlines from './cache/checklists.json';
 
-const outputPath = 'src/data/lowlines/checklists/index.json';
-const outputData = JSON.parse(fs.readFileSync('src/data/lowlines/checklists/index.json'));
+import newLight from './newLight.json';
+
+const path = 'src/data/lowlines/checklists/index.json';
+const data = JSON.parse(fs.readFileSync(path));
 
 const assisted = JSON.parse(fs.readFileSync('scripts/dump/index.json'));
 const nodes = [];
@@ -77,75 +77,20 @@ const presentationNodes = [
   1420597821, // ghostStories
   3305936921, // awokenOfTheReef
   655926402,  // forsakenPrince
+  2474271317, // inquisitionOfTheDamned
+  4285512244, // lunasLost
 ];
 
 const strikeBubbles = [
   3395411000  // EX-077 Command (Exodus Crash)
 ];
 
-function work(input) {
-  const output = {
-    checklists: {},
-    records: {}
-  };
-  
-  Object.entries(input.data.checklists).forEach(([id, indices]) => {
-    if (!indices || indices.length === 0) return;
-  
-    const item = input.data.nodes[indices[0]];
-
-    let ass = assisted.find(a => a.nodes.find(n => n.checklistHash === parseInt(id, 10))) || {};
-    if (ass.nodes) ass = ass.nodes.find(n => n.checklistHash === parseInt(id, 10)) || {}
-  
-    output.checklists[id] = {
-      destinationId: item.destinationId,
-      destinationHash: item.destinationHash,
-      bubbleId: item.bubbleId,
-      bubbleHash: item.bubbleHash,
-      recordHash: parseInt(item.node.recordHash, 10),
-      node: {
-        ...item.node,
-        ...ass
-      }
-    };
-  });
-  
-  Object.entries(input.data.records).forEach(([id, indices]) => {
-    if (!indices || indices.length === 0) return;
-  
-    const item = input.data.nodes[indices[0]];
-
-    let ass = assisted.find(a => a.nodes.find(n => n.checklistHash === parseInt(id, 10))) || {};
-    if (ass.nodes) ass = ass.nodes.find(n => n.checklistHash === parseInt(id, 10)) || {}
-  
-    output.records[id] = {
-      destinationId: item.destinationId,
-      destinationHash: item.destinationHash,
-      bubbleId: item.bubbleId,
-      bubbleHash: item.bubbleHash,
-      node: {
-        ...item.node,
-        ...ass
-      }
-    };
-  });
-  
-  fs.writeFileSync(outputPath, JSON.stringify(output));
-  
-}
-
-// fetch('https://lowlidev.com.au/destiny/api/v2/map/supported')
-//     .then(res => res.json())
-//     .then(json => work(json));
-
 async function run() {
   const manifest = await Manifest.getManifest();
 
   function checklistItem(id, item) {
-    const mapping = lowlines.checklists[item.hash] || {};
-    
-    let ass = nodes.find(n => (n.checklistHash === parseInt(item.hash, 10)) || (n.activityHash === parseInt(item.activityHash, 10))) || {};
-    // let ass = {};
+    const existing = (data[id] && data[id].find(c => c.checklistHash === item.hash)) || {};
+    const mapping = newLight.checklists[item.hash] || {};
 
     const destinationHash = item.destinationHash || mapping.destinationHash;
     const bubbleHash = item.bubbleHash || mapping.bubbleHash;
@@ -159,12 +104,6 @@ async function run() {
     // for sorting & display
     const numberMatch = item.displayProperties.name.match(/([0-9]+)/);
     const itemNumber = numberMatch && numberMatch[0];
-
-    // Discover things needed only for adventures & sleeper nodes & bones
-    // const activity = item.activityHash && manifest.DestinyActivityDefinition[item.activityHash];
-    // const inventoryItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
-    // const record = mapping.recordHash && manifest.DestinyRecordDefinition[mapping.recordHash];
-    // const lore = record && manifest.DestinyLoreDefinition[record.loreHash];
 
     // If we don't have a bubble, see if we can infer one from the bubble ID
     const bubbleName = (bubble && bubble.displayProperties.name) || (mapping && mapping.bubbleId && manualBubbleNames[mapping.bubbleId]);
@@ -183,7 +122,7 @@ async function run() {
     }
 
     // check to see if location is inside lost sector. look up item's bubble hash inside self's lost sector's checklist... unless this is a lost sector item
-    const withinLostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash) && id !== 3142056444;
+    const withinLostSector = bubble && bubble.hash && data[3142056444].find(l => l.bubbleHash === bubble.hash) && id !== 3142056444;
     const withinStrike = bubble && bubble.hash && strikeBubbles.find(hash => hash === bubble.hash);
 
     let located = undefined;
@@ -192,12 +131,8 @@ async function run() {
     } else if (withinStrike) {
       located = 'strike';
     }
-
-    const points = [];
-
-    if ((mapping && mapping.node) || (ass && ass.x)) points.push(mapping && mapping.node ? { x: mapping.node.x, y: mapping.node.y } : { x: ass.x, y: ass.y })
-
-    return {
+    
+    const changes = {
       destinationHash,
       bubbleHash,
       bubbleName: backupBubbleName,
@@ -205,7 +140,7 @@ async function run() {
       checklistHash: item.hash,
       itemHash: item && item.itemHash,
       recordHash: mapping.recordHash,
-      points,
+      points: (mapping && mapping.points) || [],
       sorts: {
         destination: destination && destination.displayProperties.name,
         bubble: bubbleName,
@@ -215,9 +150,35 @@ async function run() {
       },
       extended: {
         located
-      },
-      ...itemOverrides[item.hash]
-    };
+      }
+    }
+
+    const updates = _.mergeWith(existing, changes, merger);
+
+    return updates;
+  }
+
+  function merger(e, c) {
+    if (Array.isArray(c)) {
+      if (!Array.isArray(e)) {
+        return c;
+      } else if (e.length < 1 && c.length >= 1) {
+        return c;
+      } else if (c.length === 1 && e.length >= 1) {
+        return c;
+      } else if (c.length > 1 && e.length > 1) {
+        // not emotionally ready to deal with this sorry
+        return e;
+      } else {
+        return e;
+      }
+    } else if (typeof c === 'object') {
+      return _.mergeWith(e, c, merger);
+    } else if (c && c !== '') {
+      return c;
+    } else {
+      return e;
+    }
   }
 
   function presentationItems(presentationHash, dropFirst = true) {
@@ -227,13 +188,12 @@ async function run() {
 
     return recordHashes
       .map((hash, itemNumber) => {
+        const existing = (data[presentationHash] && data[presentationHash].find(c => c.recordHash === hash)) || {};
+
         const item = manifest.DestinyRecordDefinition[hash];
 
-        const mapping = lowlines.records[hash];
-    
-        let ass = nodes.find(n => n.recordHash === parseInt(item.hash, 10)) || {};
-        // let ass = {};
-        
+        const mapping = newLight.records[hash];
+            
         const destinationHash = mapping && mapping.destinationHash;
         const destination = destinationHash && manifest.DestinyDestinationDefinition[destinationHash];
         const place = destination && manifest.DestinyPlaceDefinition[destination.placeHash];
@@ -254,7 +214,7 @@ async function run() {
         }
         
         // check to see if location is inside lost sector. look up item's bubble hash inside self's lost sector's checklist... unless this is a lost sector item
-        const withinLostSector = bubble && bubble.hash && outputData[3142056444].find(l => l.bubbleHash === bubble.hash) && hash !== 3142056444;
+        const withinLostSector = bubble && bubble.hash && data[3142056444].find(l => l.bubbleHash === bubble.hash) && hash !== 3142056444;
         const withinStrike = bubble && bubble.hash && strikeBubbles.find(hash => hash === bubble.hash);
 
         let located = undefined;
@@ -264,17 +224,14 @@ async function run() {
           located = 'strike';
         }
 
-        const points = [];
-    
-        if ((mapping && mapping.node) || (ass && ass.x)) points.push(mapping && mapping.node ? { x: mapping.node.x, y: mapping.node.y } : { x: ass.x, y: ass.y })
-
-        return {
+        const changes = {
           destinationHash,
           bubbleHash: mapping && mapping.bubbleHash,
           bubbleName: backupBubbleName,
           recordName: item.displayProperties.name,
           recordHash: hash,
-          points,
+          pursuitHash: mapping && mapping.pursuitHash,
+          points: (mapping && mapping.points) || [],
           sorts: {
             destination: destination && destination.displayProperties.name,
             bubble: bubbleName,
@@ -284,9 +241,27 @@ async function run() {
           },
           extended: {
             located
-          },
-          ...itemOverrides[item.hash]
-        };
+          }
+        }
+
+        if (changes.recordHash === 3390078237) console.log(existing)
+        // console.log(changes)
+        // console.log({
+        //   ...existing,
+        //   ...changes,
+        //   ...itemOverrides[item.hash]
+        // }
+        // )
+
+        // Object.keys(changes).forEach(key => {
+        //   if (!changes[key]) delete changes[key];
+        // });
+
+        const updates = _.mergeWith(existing, changes, merger);
+
+        if (changes.recordHash === 3390078237) console.log(updates)
+
+        return updates;
       })
       .filter(i => i);
   }
@@ -305,7 +280,7 @@ async function run() {
     }
   });
 
-  fs.writeFileSync(outputPath, JSON.stringify(lists, null, '  '));
+  fs.writeFileSync(path, JSON.stringify(lists, null, '  '));
 }
 
 run();

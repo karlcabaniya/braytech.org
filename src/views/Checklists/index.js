@@ -14,12 +14,11 @@ import './styles.css';
 
 
 function getItemsPerPage(width) {
-  if (width >= 1920) return 6;
   if (width >= 1600) return 5;
   if (width >= 1200) return 4;
-  if (width >= 800) return 3;
-  if (width >= 660) return 2;
-  if (width >= 500) return 1;
+  if (width >= 1024) return 3;
+  if (width >= 768) return 2;
+  if (width < 768) return 1;
   return 1;
 }
 
@@ -80,7 +79,9 @@ export class Checklists extends React.Component {
       checklists[2726513366](),
       checklists[1420597821](),
       checklists[3305936921](),
-      checklists[655926402]()
+      checklists[655926402](),
+      checklists[4285512244](),
+      checklists[2474271317]()
     ];
 
     let sliceStart = parseInt(page, 10) * itemsPerPage;

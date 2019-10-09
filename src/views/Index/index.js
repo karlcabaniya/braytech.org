@@ -154,8 +154,8 @@ class Index extends React.Component {
           {diffItems.length ? (
             <>
               <h4>{t('Items')}</h4>
-              <ul className='list inventory-items'>
-                <Items items={diffItems.slice(0, 6).map(i => ({ itemHash: i }))} />
+              <ul className='list inventory-items as-tab'>
+                <Items asTab items={diffItems.slice(0, 6).map(i => ({ itemHash: i }))} />
               </ul>
               {diffItems.length > 6 ? <div className='overflow'>{t('And {{diff}} more which are not displayed for the sake of brevity', { diff: diffItems.length - 6 })}</div> : null}
             </>
@@ -230,7 +230,7 @@ class Index extends React.Component {
             <div className='module text'>
               <h3>{t('Who builds it')}</h3>
               <div className='description'>
-                <p>An Australian web developer does. Hi, my names Tom, and I'm addicted to Destiny. Okay, so not addicted—I've had time to build this web site. Truthfully, I'm an avid Destiny enthusiast who needs both an outlet for letting off steam and for developing my web skills further for use in my professional activities.</p>
+                <p>An Australian web developer does. Hi, my name's Tom, and I'm addicted to Destiny. Okay, so not addicted—I've had time to build this web site. Truthfully, I'm an avid Destiny enthusiast who needs both an outlet for letting off steam and for developing my web skills further for use in my professional activities.</p>
                 <p>Braytech is a stringent exercise in mimicking—and to a small degree, reimagining—Destiny's UI for web and mobile. This has been my first React project, the first time I've heavily used the command line, the first time I've had to use NPM... And it's been super fun and rewarding, most of the time!</p>
               </div>
             </div>

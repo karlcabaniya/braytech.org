@@ -7,6 +7,7 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import ObservedImage from '../../components/ObservedImage';
+import { DestinyKey } from '../../components/UI/Button';
 import { enumerateRecordState, bookCovers } from '../../utils/destinyEnums';
 
 import './styles.css';
@@ -158,7 +159,7 @@ class Read extends React.Component {
                 {kind === 'record' ? (
                   <li>
                     <Link className='button' to={`/read/book/${parentDefinition.hash}`}>
-                      <i className='destiny-Y_Button' />
+                      <DestinyKey type='more' />
                       {t('All pages')}
                     </Link>
                   </li>
@@ -166,7 +167,7 @@ class Read extends React.Component {
                 {backLinkPath ? (
                   <li>
                     <Link className='button' to={backLinkPath}>
-                      <i className='destiny-B_Button' />
+                      <DestinyKey type='dismiss' />
                       {t('Dismiss')}
                     </Link>
                   </li>

@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?equqee') format('woff');
+  src: url('destiny.woff?zcsuc0') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -34,129 +34,6 @@
 }
 .destiny-tracked-triumph_bg:before {
   content: "\e9e8";
-}
-.destiny-settings:before {
-  content: "\e05a";
-}
-.destiny-A_Button:before {
-  content: "\e905";
-}
-.destiny-B_Button:before {
-  content: "\e907";
-}
-.destiny-X_Button:before {
-  content: "\e908";
-}
-.destiny-Y_Button:before {
-  content: "\e973";
-}
-.destiny-left_trigger:before {
-  content: "\e98c";
-}
-.destiny-right_trigger001:before {
-  content: "\e998";
-}
-.destiny-LB:before {
-  content: "\e999";
-}
-.destiny-RB:before {
-  content: "\e99e";
-}
-.destiny-Right_Click001:before {
-  content: "\e9ab";
-}
-.destiny-Right_Stick:before {
-  content: "\e9ac";
-}
-.destiny-left_click001:before {
-  content: "\e9ad";
-}
-.destiny-left_stick001:before {
-  content: "\e9ae";
-}
-.destiny-dpad_down001:before {
-  content: "\e9af";
-}
-.destiny-dpad_left001:before {
-  content: "\e9b0";
-}
-.destiny-dpad_right001:before {
-  content: "\e9b1";
-}
-.destiny-dpad_up001:before {
-  content: "\e9b2";
-}
-.destiny-menu_button:before {
-  content: "\e9b3";
-}
-.destiny-view_button:before {
-  content: "\e9b4";
-}
-.destiny-grenade:before {
-  content: "\e9b8";
-}
-.destiny-headshot:before {
-  content: "\e9bf";
-}
-.destiny-melee:before {
-  content: "\e9c3";
-}
-.destiny-beam_weapon:before {
-  content: "\e9c5";
-}
-.destiny-bow:before {
-  content: "\e09a";
-}
-.destiny-pulse_rifle:before {
-  content: "\e9c6";
-}
-.destiny-rocket_launcher:before {
-  content: "\e9c9";
-}
-.destiny-machinegun:before {
-  content: "\e155";
-}
-.destiny-scout_rifle:before {
-  content: "\e9ca";
-}
-.destiny-shotgun:before {
-  content: "\e9cb";
-}
-.destiny-auto_rifle:before {
-  content: "\e9cc";
-}
-.destiny-shrapnel_launcher:before {
-  content: "\e9cd";
-}
-.destiny-sidearm:before {
-  content: "\e9ce";
-}
-.destiny-hand_cannon:before {
-  content: "\e9cf";
-}
-.destiny-smg:before {
-  content: "\e9d0";
-}
-.destiny-sniper_rifle:before {
-  content: "\e9d1";
-}
-.destiny-grenade_launcher:before {
-  content: "\e9d3";
-}
-.destiny-fusion_rifle:before {
-  content: "\e9d4";
-}
-.destiny-cabal_rifle:before {
-  content: "\e9d5";
-}
-.destiny-spear_launcher:before {
-  content: "\e9d9";
-}
-.destiny-sword_heavy:before {
-  content: "\e9da";
-}
-.destiny-wire_rifle:before {
-  content: "\e9dc";
 }
 .destiny-ammo_heavy:before {
   content: "\e900";
@@ -403,6 +280,20 @@
 .destiny-adventure:before {
   content: "\e992";
 }
+.destiny-vex-invasion .path1:before {
+  content: "\e905";
+  color: rgb(42, 128, 132);
+}
+.destiny-vex-invasion .path2:before {
+  content: "\e907";
+  margin-left: -0.94921875em;
+  color: rgb(255, 255, 255);
+}
+.destiny-vex-invasion .path3:before {
+  content: "\e908";
+  margin-left: -0.94921875em;
+  color: rgb(255, 255, 255);
+}
 .destiny-quest2 .path1:before {
   content: "\e988";
   color: rgb(48, 61, 161);
@@ -437,6 +328,9 @@
 }
 .destiny-strike:before {
   content: "\e9a2";
+}
+.destiny-shadowkeep:before {
+  content: "\e929";
 }
 .destiny-destiny:before {
   content: "\e90a";

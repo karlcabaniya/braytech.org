@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
 import manifest from '../../utils/manifest';
+import * as enums from '../../utils/destinyEnums';
 import ObservedImage from '../../components/ObservedImage';
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
@@ -314,181 +315,7 @@ class ThisWeek extends React.Component {
           modifiers: [2558957669]
         }
       },
-      nightfall: {
-        3145298904: {
-          // The Arms Dealer
-          triumphs: [
-            3340846443, // The Arms Dealer
-            4267516859 // Trash the Thresher
-          ],
-          items: [],
-          collectibles: [
-            3036030066, // Tilt Fuse
-            3490589921 // The Arms Dealer (Emblem)
-          ]
-        },
-        3108813009: {
-          // Warden of Nothing
-          triumphs: [
-            2836924866, // Warden of Nothing
-            1469598452 // Solar Dance
-          ],
-          items: [],
-          collectibles: [
-            1279318101, // Warden's Law
-            2263264048 // Warden of Nothing (Emblem)
-          ]
-        },
-        3034843176: {
-          // The Corrupted
-          triumphs: [
-            3951275509, // The Corrupted
-            3641166665 // Relic Rumble
-          ],
-          items: [],
-          collectibles: [
-            1099984904, // Horror's Least
-            1410290331 // The Corrupted (Emblem)
-          ]
-        },
-        3280234344: {
-          // Savathûn's Song
-          triumphs: [
-            2099501667, // Savathûn's Song
-            1442950315 // The Best Defense
-          ],
-          items: [],
-          collectibles: [
-            1333654061, // Duty Bounds
-            3490589926 // Savathûn's Song (Emblem)
-          ]
-        },
-        3289589202: {
-          // The Pyramidion
-          triumphs: [
-            1060780635, // The Pyramidion
-            1142177491 // Siege Engine
-          ],
-          items: [],
-          collectibles: [
-            1152758802, // Silicon Neuroma
-            3490589930 // The Pyramidion (Emblem)
-          ]
-        },
-        3718330161: {
-          // Tree of Probabilities
-          triumphs: [
-            2282894388, // Tree of Probabilities
-            3636866482 // Laser Dodger
-          ],
-          items: [],
-          collectibles: [
-            1279318110, // D.F.A.
-            3490589924 // Tree of Probabilities (Emblem)
-          ]
-        },
-        3372160277: {
-          // Lake of Shadows
-          triumphs: [
-            1329556468, // Lake of Shadows
-            413743786 // Tether Time
-          ],
-          items: [],
-          collectibles: [
-            1602518767, // The Militia's Birthright
-            3896331530 // Lake of Shadows (Emblem)
-          ]
-        },
-        //1391780798: { // Broodhold - PS4 exclusive
-        //  triumphs: [],
-        //  items: [],
-        //  collectibles: []
-        //},
-        3701132453: {
-          // The Hollowed Lair
-          triumphs: [
-            3450793480, // The Hollowed Lair
-            3847579126 // Arc Avoidance
-          ],
-          items: [],
-          collectibles: [
-            1074861258, // Mindbender's Ambition
-            3314387486 // The Hollowed Lair (Emblem)
-          ]
-        },
-        272852450: {
-          // Will of the Thousands
-          triumphs: [
-            1039797865, // Will of the Thousands
-            3013611925 // Three and Out
-          ],
-          items: [],
-          collectibles: [
-            2466440635, // Worm God Incarnation
-            1766893928 // Will of the Thousands (Emblem)
-          ]
-        },
-        4259769141: {
-          // The Inverted Spire
-          triumphs: [
-            3973165904, // The Inverted Spire
-            1498229894 //The Floor Is Lava
-          ],
-          items: [],
-          collectibles: [
-            1718922261, // Trichromatica
-            3490589925 //The Inverted SPire (Emblem)
-          ]
-        },
-        522318687: {
-          // Strange Terrain
-          triumphs: [
-            165166474, // Strange Terrain
-            1871570556 // Don't Take Five
-          ],
-          items: [],
-          collectibles: [
-            1534387877, // BrayTech Osprey
-            1766893929 // Strange Terrain (Emblem)
-          ]
-        },
-        1282886582: {
-          // Exodus Crash
-          triumphs: [
-            1526865549, // Exodus Crash
-            2140068897 // Faster than Lightning
-          ],
-          items: [],
-          collectibles: [
-            3036030067, // Impact Velocity
-            3490589927 // Exodus Crash (Emblem)
-          ]
-        },
-        936308438: {
-          // A Garden World
-          triumphs: [
-            2692332187, // A Garden World
-            1398454187 // The Quickening
-          ],
-          items: [],
-          collectibles: [
-            2448009818, //Universal Wavefunction
-            3490589931 // A Garden World (Emblem)
-          ]
-        },
-        1034003646: {
-          // The Insight Terminus
-          triumphs: [
-            599303591, // Capture Completionist
-            3399168111 // The Insight Terminus
-          ],
-          items: [],
-          collectibles: [
-            1186314105, // The Long Goodbye
-            465974149 // Insight Terminus (Emblem)
-          ]
-        }
-      },
+      nightfall: enums.nightfalls,
       flashpoint: {
         538154339: {
           // FLASHPOINT: TITAN
@@ -545,19 +372,31 @@ class ThisWeek extends React.Component {
           boss: t('Hasapiko, Beloved by Calus'),
           triumphs: [3141945846, 2422246606, 2422246593],
           items: [],
-          collectibles: []
+          collectibles: {
+            0: [1692129580, 2678796997],
+            1: [3376099856, 2678796997],
+            2: [1572606157, 2678796997]
+          }
         },
         2: {
           boss: t('Arunak, Beloved by Calus'),
           triumphs: [1959753477, 2422246607, 2472579457],
           items: [],
-          collectibles: []
+          collectibles: {
+            0: [1692129580, 2678796997],
+            1: [3376099856, 2678796997],
+            2: [1572606157, 2678796997]
+          }
         },
         3: {
           boss: t('Pagouri, Beloved by Calus'),
           triumphs: [2351146132, 2422246605, 2422246592],
           items: [],
-          collectibles: []
+          collectibles: {
+            0: [1692129580, 2678796997],
+            1: [3376099856, 2678796997],
+            2: [1572606157, 2678796997]
+          }
         }
       },
       raids: {
@@ -775,6 +614,14 @@ class ThisWeek extends React.Component {
     //   return m;
     // }));
 
+    console.log(
+      Object.values(milestones).map(m => {
+        m.def = manifest.DestinyMilestoneDefinition[m.milestoneHash];
+        m.name = manifest.DestinyMilestoneDefinition[m.milestoneHash].displayProperties.name;
+        return m;
+      })
+    );
+
     const modules = [];
 
     // flashpoint
@@ -799,31 +646,48 @@ class ThisWeek extends React.Component {
 
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
+      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(46) && !definitionActivity.guidedGame && definitionActivity.modifiers && definitionActivity.modifiers.length > 2) return true;
 
       return false;
     });
-    
-    weeklyNightfallStrikeActivities.forEach(activity => {
-        const nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
 
-        moduleNightfalls.push(
-          <div key={nightfall.hash} className='content'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Nightfall')}</div>
-              <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
-            </div>
-            <h4>{t('Collectibles')}</h4>
-            <ul className='list collection-items'>
-              <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
-            </ul>
-            <h4>{t('Triumphs')}</h4>
-            <ul className='list record-items'>
-              <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
-            </ul>
+    const weeklyNightfallStrikesOrdeal = Object.keys(this.consolidatedInfo.nightfall)
+      .filter(k => this.consolidatedInfo.nightfall[k].ordealHashes.find(o => weeklyNightfallStrikeActivities.find(w => w.activityHash === o)))
+      .map(h => ({ activityHash: h }));
+    const weeklyNightfallStrikesScored = weeklyNightfallStrikeActivities.filter(w => !Object.keys(this.consolidatedInfo.nightfall).find(k => this.consolidatedInfo.nightfall[k].ordealHashes.find(o => o === w.activityHash)));
+
+    // console.log(weeklyNightfallStrikesOrdeal, weeklyNightfallStrikesScored);
+
+    weeklyNightfallStrikesScored.forEach(activity => {
+      const nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
+
+      if (this.consolidatedInfo.nightfall[nightfall.hash].collectibles.length < 1 && this.consolidatedInfo.nightfall[nightfall.hash].triumphs.length < 1) return;
+
+      moduleNightfalls.push(
+        <div key={nightfall.hash} className='content'>
+          <div className='module-header'>
+            <div className='sub-name'>{t('Nightfall')}</div>
+            <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
           </div>
-        );
-      });
+          {this.consolidatedInfo.nightfall[nightfall.hash].collectibles.length ? (
+            <>
+              <h4>{t('Collectibles')}</h4>
+              <ul className='list collection-items'>
+                <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].collectibles} />
+              </ul>
+            </>
+          ) : null}
+          {this.consolidatedInfo.nightfall[nightfall.hash].triumphs.length ? (
+            <>
+              <h4>{t('Triumphs')}</h4>
+              <ul className='list record-items'>
+                <Records selfLinkFrom='/this-week' hashes={this.consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
+              </ul>
+            </>
+          ) : null}
+        </div>
+      );
+    });
 
     // raids
     const moduleRaids = [];
@@ -974,17 +838,6 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    const reckoningModifiers = milestones[601087286].activities[0].modifierHashes;
-    const strikesModifiers = milestones[1437935813].activities[0].modifierHashes;
-
-    const availableHeroicMenagerie = profile.characterActivities.data[member.characterId].availableActivities && profile.characterActivities.data[member.characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)) && manifest.DestinyActivityDefinition[profile.characterActivities.data[member.characterId].availableActivities.find(a => [2509539864, 2509539865, 2509539867].includes(a.activityHash)).activityHash];
-
-    const menagerieHeroicCollectibles = {
-      0: [1692129580, 2678796997],
-      1: [3376099856, 2678796997],
-      2: [1572606157, 2678796997]
-    };
-
     const moduleEscalationProtocol = (
       <div key='moduleEscalationProtocol' className='content'>
         <div className='module-header'>
@@ -1064,7 +917,7 @@ class ThisWeek extends React.Component {
         </div>
         <h4>{t('Heroic Collectibles')}</h4>
         <ul className='list collection-items'>
-          <Collectibles selfLinkFrom='/this-week' hashes={menagerieHeroicCollectibles[profile.characters.data.find(c => c.characterId === member.characterId).classType]} />
+          <Collectibles selfLinkFrom='/this-week' hashes={this.consolidatedInfo.menagerie[cycleInfo.week.menagerie].collectibles[profile.characters.data.find(c => c.characterId === member.characterId).classType]} />
         </ul>
         <h4>{t('Triumphs')}</h4>
         <ul className='list record-items'>
@@ -1086,45 +939,7 @@ class ThisWeek extends React.Component {
       </div>
     );
 
-    modules.push(
-      [
-        moduleNightfalls[0]
-      ],
-      [
-        moduleNightfalls[1]
-      ],
-      [
-        moduleNightfalls[2]
-      ],
-      [
-        moduleMenagerie
-      ],
-      [
-        moduleRaids[0]
-      ],
-      [
-        moduleRaids[1]
-      ],
-      [
-        moduleRaids[2]
-      ],
-      [
-        moduleRaids[3]
-      ],
-      [
-        moduleAscendantChallenge
-      ],
-      [
-        moduleDreamingCityCycle
-      ],
-      [
-        moduleShatteredThrone
-      ],
-      [
-        moduleEscalationProtocol,
-        moduleReckoning
-      ]
-    );
+    modules.push([moduleNightfalls[0]], [moduleNightfalls[1]], [moduleNightfalls[2]], [moduleMenagerie], [moduleRaids[0]], [moduleRaids[1]], [moduleRaids[2]], [moduleRaids[3]], [moduleAscendantChallenge], [moduleDreamingCityCycle], [moduleShatteredThrone], [moduleEscalationProtocol, moduleReckoning]);
 
     return (
       <div className='view' id='this-week'>
@@ -1147,74 +962,6 @@ class ThisWeek extends React.Component {
               </div>
             )}
           </div>
-          <div className='content highlight'>
-            <div className='module-header'>
-              <div className='sub-name'>{manifest.DestinyPresentationNodeDefinition[1396056784].displayProperties.name}</div>
-            </div>
-            <h4>{t('Active Modifiers')}</h4>
-            <ul className='list modifiers'>
-              {strikesModifiers.map((m, i) => {
-                let modDef = manifest.DestinyActivityModifierDefinition[m];
-                return (
-                  <li key={i}>
-                    <div className='icon'>
-                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                    </div>
-                    <div className='text'>
-                      <div className='name'>{modDef.displayProperties.name}</div>
-                      <div className='description'>{modDef.displayProperties.description}</div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className='content highlight'>
-            <div className='module-header'>
-              <div className='sub-name'>{manifest.DestinyPlaceDefinition[4148998934].displayProperties.name}</div>
-            </div>
-            <h4>{t('Active Modifiers')}</h4>
-            <ul className='list modifiers'>
-              {reckoningModifiers.map((m, i) => {
-                let modDef = manifest.DestinyActivityModifierDefinition[m];
-                return (
-                  <li key={i}>
-                    <div className='icon'>
-                      <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                    </div>
-                    <div className='text'>
-                      <div className='name'>{modDef.displayProperties.name}</div>
-                      <div className='description'>{modDef.displayProperties.description}</div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          {availableHeroicMenagerie ? (
-            <div className='content highlight'>
-              <div className='module-header'>
-                <div className='sub-name'>{manifest.DestinyPlaceDefinition[2096719558].displayProperties.name}</div>
-              </div>
-              <h4>{t('Active Heroic Modifiers')}</h4>
-              <ul className='list modifiers'>
-                {availableHeroicMenagerie.modifiers.map((m, i) => {
-                  let modDef = manifest.DestinyActivityModifierDefinition[m.activityModifierHash];
-                  return (
-                    <li key={i}>
-                      <div className='icon'>
-                        <ObservedImage className='image' src={`https://www.bungie.net${modDef.displayProperties.icon}`} />
-                      </div>
-                      <div className='text'>
-                        <div className='name'>{modDef.displayProperties.name}</div>
-                        <div className='description'>{modDef.displayProperties.description}</div>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ) : null}
         </div>
         <div className='padder'>
           {modules

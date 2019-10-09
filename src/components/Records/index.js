@@ -24,7 +24,7 @@ const selfLink = hash => {
   let seals = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
 
   root.children.presentationNodes.forEach(nP => {
-    let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+    let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];
 
     nodePrimary.children.presentationNodes.forEach(nS => {
       let nodeSecondary = manifest.DestinyPresentationNodeDefinition[nS.presentationNodeHash];
@@ -35,7 +35,7 @@ const selfLink = hash => {
         if (nodeTertiary.children.records.length) {
           let found = nodeTertiary.children.records.find(c => c.recordHash === parseInt(hash, 10));
           if (found) {
-            link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.recordHash)
+            link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, found.recordHash);
           }
         } else {
           nodeTertiary.children.presentationNodes.forEach(nQ => {
@@ -44,33 +44,37 @@ const selfLink = hash => {
             if (nodeQuaternary.children.records.length) {
               let found = nodeQuaternary.children.records.find(c => c.recordHash === hash);
               if (found) {
-                link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.recordHash)
+                link.push(nodePrimary.hash, nodeSecondary.hash, nodeTertiary.hash, nodeQuaternary.hash, found.recordHash);
               }
-            }      
+            }
           });
         }
-
       });
     });
   });
 
   if (link.length === 1) {
     seals.children.presentationNodes.forEach(nP => {
-      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];              
+      let nodePrimary = manifest.DestinyPresentationNodeDefinition[nP.presentationNodeHash];
+
+      if (nodePrimary.completionRecordHash === parseInt(hash, 10)) {
+        link.push('seal', nodePrimary.hash);
+
+        return;
+      }
 
       if (nodePrimary.children.records.length) {
         let found = nodePrimary.children.records.find(c => c.recordHash === parseInt(hash, 10));
         if (found) {
-          link.push('seal', nodePrimary.hash, found.recordHash)
+          link.push('seal', nodePrimary.hash, found.recordHash);
         }
       }
-
     });
   }
 
   link = link.join('/');
   return link;
-}
+};
 
 const unredeemed = member => {
   const characterRecords = member && member.data.profile.characterRecords.data;
@@ -81,17 +85,16 @@ const unredeemed = member => {
   let records = {
     ...profileRecords,
     ...characterRecords[member.characterId].records
-  }
+  };
 
   Object.entries(records).forEach(([key, record]) => {
     const definitionRecord = manifest.DestinyRecordDefinition[key];
-    
+
     if (definitionRecord && definitionRecord.redacted) {
       return;
     }
 
     if (definitionRecord.presentationInfo && definitionRecord.presentationInfo.parentPresentationNodeHashes && definitionRecord.presentationInfo.parentPresentationNodeHashes.length && !enumerateRecordState(record.state).invisible && !enumerateRecordState(record.state).objectiveNotCompleted && !enumerateRecordState(record.state).recordRedeemed) {
-      
       // check to see if belongs to transitory expired seal
       const definitionParent = definitionRecord.presentationInfo.parentPresentationNodeHashes.length && manifest.DestinyPresentationNodeDefinition[definitionRecord.presentationInfo.parentPresentationNodeHashes[0]];
       const parentCompletionRecordData = definitionParent && definitionParent.completionRecordHash && definitionParent.scope === 1 ? characterRecords[member.characterId].records[definitionParent.completionRecordHash] : profileRecords[definitionParent.completionRecordHash];
@@ -101,13 +104,11 @@ const unredeemed = member => {
       } else {
         hashes.push(key);
       }
-
     }
-
   });
 
   return hashes;
-}
+};
 
 class Records extends React.Component {
   constructor(props) {
@@ -151,13 +152,13 @@ class Records extends React.Component {
     let recordsOutput = [];
     recordsRequested.forEach(hash => {
       const definitionRecord = manifest.DestinyRecordDefinition[hash];
+
       const recordScope = definitionRecord.scope || 0;
       const recordData = recordScope === 1 ? characterRecords && characterRecords[characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
 
-      let objectives = [];
-      let completionValueTotal = 0;
-      let progressValueTotal = 0;
-      
+      // if (definitionRecord.intervalInfo.intervalObjectives.length)
+      console.log(recordData);
+
       let link = selfLink(hash);
 
       // readLink
@@ -165,44 +166,153 @@ class Records extends React.Component {
         link = `/read/record/${definitionRecord.hash}`;
       }
 
+      const recordState = {
+        completion: {
+          value: 0,
+          progress: 0,
+          distance: 0
+        },
+        score: {
+          value: 0,
+          progress: 0,
+          next: 0
+        },
+        objectives: [],
+        intervals: [],
+        intervalEl: null
+      };
+
       if (definitionRecord.objectiveHashes) {
-        definitionRecord.objectiveHashes.forEach((hash, index) => {
-          let definitionObjective = manifest.DestinyObjectiveDefinition[hash];
+        recordState.score = {
+          value: definitionRecord.completionInfo.ScoreValue,
+          progress: definitionRecord.completionInfo.ScoreValue,
+          next: definitionRecord.completionInfo.ScoreValue
+        };
 
-          let playerProgress = recordData && recordData.objectives.find(o => o.objectiveHash === hash);
-          playerProgress = playerProgress ? playerProgress : {
-            complete: false,
-            progress: 0,
-            objectiveHash: definitionObjective.hash
+        recordState.objectives = definitionRecord.objectiveHashes.map((hash, i) => {
+          const data = recordData && recordData.objectives.find(o => o.objectiveHash === hash);
+
+          recordState.completion.value += data.completionValue;
+          recordState.completion.progress += data.progress;
+
+          return {
+            ...data,
+            score: definitionRecord.completionInfo.ScoreValue,
+            el: <ProgressBar key={`${hash}${i}`} {...data} />
           };
-
-          // override
-          if (hash === 1278866930 && playerProgress.complete) {
-            playerProgress.progress = 16;
-          }
-
-          objectives.push(<ProgressBar key={`${hash}${index}`} objective={definitionObjective} progress={playerProgress} />);
-
-          if (playerProgress) {
-            let v = parseInt(playerProgress.completionValue, 10);
-            let p = parseInt(playerProgress.progress, 10);
-
-            completionValueTotal = completionValueTotal + v;
-            progressValueTotal = progressValueTotal + (p > v ? v : p);
-          }
         });
+
+        const distance = recordState.objectives.reduce(
+          (a, v) => {
+            return {
+              completion: (a.completion += v.completionValue || 0),
+              progress: (a.progress += v.progress || 0)
+            };
+          },
+          {
+            completion: 0,
+            progress: 0
+          }
+        );
+
+        recordState.completion.distance = distance.progress / distance.completion;
       }
 
-      let progressDistance = progressValueTotal / completionValueTotal;
-      progressDistance = Number.isNaN(progressDistance) ? 0 : progressDistance;
+      if (definitionRecord.intervalInfo && definitionRecord.intervalInfo.intervalObjectives && definitionRecord.intervalInfo.intervalObjectives.length) {
+        recordState.intervals = definitionRecord.intervalInfo.intervalObjectives.map((interval, i) => {
+          const data = recordData && recordData.intervalObjectives.find(o => o.objectiveHash === interval.intervalObjectiveHash);
+          const unredeemed = i + 1 > recordData.intervalsRedeemedCount && data.complete;
 
-      let state = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
+          return {
+            ...data,
+            unredeemed,
+            score: interval.intervalScoreValue,
+            el: <ProgressBar key={`${hash}${i}`} {...data} />
+          };
+        });
 
-      if (enumerateRecordState(state).invisible && (collectibles && collectibles.hideInvisibleRecords)) {
+        recordState.score = {
+          value: definitionRecord.intervalInfo.intervalObjectives.reduce((a, v) => {
+            return a + (v.intervalScoreValue || 0);
+          }, 0),
+          progress: definitionRecord.intervalInfo.intervalObjectives.reduce((a, v, i) => {
+            if (recordData && recordData.intervalsRedeemedCount > i) {
+              return a + (v.intervalScoreValue || 0);
+            } else {
+              return a;
+            }
+          }, 0),
+          next: (recordData && definitionRecord.intervalInfo.intervalObjectives[recordData.intervalsRedeemedCount] && definitionRecord.intervalInfo.intervalObjectives[recordData.intervalsRedeemedCount].intervalScoreValue) || 0
+        };
+
+        recordState.objectives = [...recordState.intervals.slice(-1)];
+
+        recordState.completion.value += recordState.objectives[0].completionValue;
+        recordState.completion.progress += recordState.objectives[0].progress;
+
+        recordState.completion.distance = recordState.intervals[recordState.intervals.length - 1].progress / recordState.intervals[recordState.intervals.length - 1].completionValue;
+
+        const lastInterval = recordState.intervals[recordState.intervals.length - 1];
+
+        recordState.intervalEl = (
+          <div className='progress-bar intervals'>
+            {/* <div className={cx('check', { ed: lastInterval.completionValue && lastInterval.complete })} /> */}
+            <div className='bar full'>
+              <div className='text'>
+                <div className='description'>{lastInterval.objectiveHash && manifest.DestinyObjectiveDefinition[lastInterval.objectiveHash] && manifest.DestinyObjectiveDefinition[lastInterval.objectiveHash].progressDescription}</div>
+                {lastInterval.completionValue ? (
+                  <div className='fraction'>
+                    {lastInterval.progress}/{lastInterval.completionValue}
+                  </div>
+                ) : null}
+              </div>
+              <div className='bars'>
+                {recordState.intervals.map((int, i) => {
+                  const prevInt = recordState.intervals[Math.max(i - 1, 0)];
+
+                  if (int.complete) {
+                    return (
+                      <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })}>
+                        <div className='fill' style={{ width: `${(int.progress / int.completionValue) * 100}%` }} />
+                      </div>
+                    );
+                  } else if (int.complete && !int.unredeemed) {
+                    return (
+                      <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })}>
+                        <div className='fill' style={{ width: `${(int.progress / int.completionValue) * 100}%` }} />
+                      </div>
+                    );
+                  } else if (prevInt && prevInt.complete) {
+                    return (
+                      <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })}>
+                        <div className='fill' style={{ width: `${((int.progress - prevInt.completionValue) / (int.completionValue - prevInt.completionValue)) * 100}%` }} />
+                      </div>
+                    );
+                  } else if (i === 0) {
+                    return (
+                      <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })}>
+                        <div className='fill' style={{ width: `${(int.progress / int.completionValue) * 100}%` }} />
+                      </div>
+                    );
+                  } else {
+                    return <div key={i} className={cx('bar', { completed: int.complete, unredeemed: int.unredeemed })} />;
+                  }
+                })}
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      console.log(recordState);
+
+      const enumerableState = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
+
+      if (enumerateRecordState(enumerableState).invisible && (collectibles && collectibles.hideInvisibleRecords)) {
         return;
       }
 
-      if (enumerateRecordState(state).recordRedeemed && (collectibles && collectibles.hideCompletedRecords) && !forceDisplay) {
+      if (enumerateRecordState(enumerableState).recordRedeemed && (collectibles && collectibles.hideCompletedRecords) && !forceDisplay) {
         return;
       }
 
@@ -210,16 +320,15 @@ class Records extends React.Component {
 
       if (definitionRecord.redacted) {
         recordsOutput.push({
-          completed: enumerateRecordState(state).recordRedeemed,
-          progressDistance,
+          completed: enumerateRecordState(enumerableState).recordRedeemed,
+          progressDistance: recordState.completion.distance,
           hash: definitionRecord.hash,
           element: (
             <li
               key={definitionRecord.hash}
               ref={ref}
               className={cx('redacted', {
-                // eslint-disable-next-line eqeqeq
-                highlight: highlight && highlight == definitionRecord.hash
+                highlight: highlight && highlight === definitionRecord.hash
               })}
             >
               <div className='properties'>
@@ -227,8 +336,8 @@ class Records extends React.Component {
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${manifest.settings.destiny2CoreSettings.undiscoveredCollectibleImage}`} />
                 </div>
                 <div className='text'>
-                  <div className='name'>Classified record</div>
-                  <div className='description'>This record is classified and may be revealed at a later time.</div>
+                  <div className='name'>{t('Classified record')}</div>
+                  <div className='description'>{t('This record is classified and may be revealed at a later time.')}</div>
                 </div>
               </div>
             </li>
@@ -237,7 +346,7 @@ class Records extends React.Component {
       } else {
         let description = definitionRecord.displayProperties.description !== '' ? definitionRecord.displayProperties.description : false;
         description = !description && definitionRecord.loreHash ? manifest.DestinyLoreDefinition[definitionRecord.loreHash].displayProperties.description.slice(0, 117).trim() + '...' : description;
-        
+
         const isCollectionBadge = associationsCollectionsBadges.find(ass => ass.recordHash === definitionRecord.hash);
 
         let linkTo;
@@ -268,21 +377,23 @@ class Records extends React.Component {
 
         let rewards;
         if (definitionRecord.rewardItems && definitionRecord.rewardItems.length) {
-          rewards = definitionRecord.rewardItems.map(r => {
-            let definitionItem = manifest.DestinyInventoryItemDefinition[r.itemHash];
-            let definitionCollectible = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] : false;
+          rewards = definitionRecord.rewardItems
+            .map(r => {
+              let definitionItem = manifest.DestinyInventoryItemDefinition[r.itemHash];
+              let definitionCollectible = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] : false;
 
-            if (definitionCollectible && !definitionCollectible.redacted) {
-              return definitionCollectible.hash;
-            } else {
-              return false;
-            }
-          }).filter(r => r);
+              if (definitionCollectible && !definitionCollectible.redacted) {
+                return definitionCollectible.hash;
+              } else {
+                return false;
+              }
+            })
+            .filter(r => r);
         }
-        
+
         recordsOutput.push({
-          completed: enumerateRecordState(state).recordRedeemed,
-          progressDistance,
+          completed: enumerateRecordState(enumerableState).recordRedeemed,
+          progressDistance: recordState.completion.distance,
           hash: definitionRecord.hash,
           element: (
             <li
@@ -291,13 +402,14 @@ class Records extends React.Component {
               className={cx({
                 linked: link && linkTo,
                 highlight: highlight && highlight === definitionRecord.hash,
-                completed: enumerateRecordState(state).recordRedeemed,
-                unredeemed: !enumerateRecordState(state).recordRedeemed && !enumerateRecordState(state).objectiveNotCompleted,
-                tracked: tracked.concat(profileRecordsTracked).includes(definitionRecord.hash) && !enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted,
-                'no-description': !description
+                completed: enumerateRecordState(enumerableState).recordRedeemed,
+                unredeemed: !enumerateRecordState(enumerableState).recordRedeemed && !enumerateRecordState(enumerableState).objectiveNotCompleted,
+                tracked: tracked.concat(profileRecordsTracked).includes(definitionRecord.hash) && !enumerateRecordState(enumerableState).recordRedeemed && enumerateRecordState(enumerableState).objectiveNotCompleted,
+                'no-description': !description,
+                'has-intervals': recordState.intervals.length
               })}
             >
-              {!enumerateRecordState(state).recordRedeemed && enumerateRecordState(state).objectiveNotCompleted && !profileRecordsTracked.includes(definitionRecord.hash) ? (
+              {!enumerateRecordState(enumerableState).recordRedeemed && enumerateRecordState(enumerableState).objectiveNotCompleted && !profileRecordsTracked.includes(definitionRecord.hash) ? (
                 <div className='track-this' onClick={this.trackThisClick} data-hash={definitionRecord.hash}>
                   <div />
                 </div>
@@ -309,13 +421,26 @@ class Records extends React.Component {
                 <div className='text'>
                   <div className='name'>{definitionRecord.displayProperties.name}</div>
                   <div className='meta'>
-                    <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>{manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? manifest.statistics.triumphs[definitionRecord.hash] : `0.00`}%</div>
-                    {definitionRecord.completionInfo && definitionRecord.completionInfo.ScoreValue !== 0 ? <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>{definitionRecord.completionInfo.ScoreValue}</div> : null}
+                    {manifest.statistics.triumphs && manifest.statistics.triumphs[definitionRecord.hash] ? (
+                      <div className='commonality tooltip' data-hash='commonality' data-table='BraytechDefinition'>
+                        {manifest.statistics.triumphs[definitionRecord.hash]}%
+                      </div>
+                    ) : null}
+                    {recordState.intervals.length && recordState.intervals.filter(i => i.complete).length !== recordState.intervals.length ? (
+                      <div className='intervals tooltip' data-hash='record_intervals' data-table='BraytechDefinition'>
+                        {t('{{a}} of {{b}}', { a: recordState.intervals.filter(i => i.complete).length, b: recordState.intervals.length })}
+                      </div>
+                    ) : null}
+                    {recordState.score.value !== 0 ? (
+                      <div className='score tooltip' data-hash='score' data-table='BraytechDefinition'>
+                        {recordState.intervals.length && recordState.score.progress !== recordState.score.value ? `${recordState.score.next}/${recordState.score.value}` : recordState.score.value}
+                      </div>
+                    ) : null}
                   </div>
                   <div className='description'>{description}</div>
                 </div>
               </div>
-              <div className='objectives'>{objectives}</div>
+              <div className='objectives'>{recordState.intervals.length ? recordState.intervalEl : recordState.objectives.map(e => e.el)}</div>
               {rewards && rewards.length ? (
                 <ul className='list rewards collection-items'>
                   <Collectibles forceDisplay selfLinkFrom={paths.removeMemberIds(this.props.location.pathname)} hashes={rewards} />

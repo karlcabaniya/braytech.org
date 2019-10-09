@@ -21,20 +21,20 @@ const subclass = (item, member) => {
   let objectives = [];
   let rewards = [];
 
-  item.objectives && item.objectives.objectiveHashes.forEach(element => {
-    let objectiveDefinition = manifest.DestinyObjectiveDefinition[element];
+  item.objectives && item.objectives.objectiveHashes.forEach(hash => {
+    const deinitionObjective = manifest.DestinyObjectiveDefinition[hash];
 
     let playerProgress = {
       complete: false,
       progress: 0,
-      objectiveHash: objectiveDefinition.hash
+      objectiveHash: deinitionObjective.hash
     };
 
-    let instanceProgress = item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.find(o => o.objectiveHash === element);
+    let instanceProgress = item.itemComponents && item.itemComponents.objectives && item.itemComponents.objectives.find(o => o.objectiveHash === hash);
 
     playerProgress = { ...playerProgress, ...instanceProgress };
 
-    objectives.push(<ProgressBar key={objectiveDefinition.hash} objective={objectiveDefinition} progress={playerProgress} />);
+    objectives.push(<ProgressBar key={deinitionObjective.hash} objectiveHash={deinitionObjective.hash} {...playerProgress} />);
   });
 
   item.value &&

@@ -144,7 +144,7 @@ html.backdropfilter #notification-overlay.error .background .border-top {
   justify-content: space-between;
 }
 
-.wrapper.light-mode #notification-overlay .sticky-nav [class^='destiny-'] {
+.wrapper.light-mode #notification-overlay .sticky-nav .destiny-key span {
   color: #333;
 }
 

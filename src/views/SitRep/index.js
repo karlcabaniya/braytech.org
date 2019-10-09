@@ -2,21 +2,28 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { orderBy, flattenDepth } from 'lodash';
+import { orderBy } from 'lodash';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import * as utils from '../../utils/destinyUtils';
+import * as enums from '../../utils/destinyEnums';
 import * as bungie from '../../utils/bungie';
-import ObservedImage from '../../components/ObservedImage';
 import Spinner from '../../components/UI/Spinner';
+import Button from '../../components/UI/Button';
+import ProgressBar from '../../components/UI/ProgressBar';
+import ObservedImage from '../../components/ObservedImage';
 import Ranks from '../../components/Ranks';
 import Roster from '../../components/Roster';
+import Items from '../../components/Items';
 
+import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
 import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
-import { ReactComponent as CrucibleIconDoubles } from './icons/doubles.svg';
 import { ReactComponent as CrucibleIconBreakthrough } from './icons/breakthrough.svg';
-import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
+import { ReactComponent as CrucibleIconClash } from './icons/clash.svg';
+import { ReactComponent as CrucibleIconShowdown } from './icons/showdown.svg';
+import { ReactComponent as CrucibleIconTeamScorched } from './icons/team-scorched.svg';
+import { ReactComponent as CrucibleIconCountdown } from './icons/countdown.svg';
 
 import './styles.css';
 
@@ -24,7 +31,12 @@ class SitRep extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    const { member, viewport } = this.props;
+    const characterProgressions = member.data.profile.characterProgressions.data;
+
+    this.state = {
+      seasonPassRewardsPage: Math.ceil(characterProgressions[member.characterId].progressions[1628407317].level / this.seasonPassItemsPerPage(viewport.width))
+    };
   }
 
   componentDidMount() {
@@ -32,28 +44,59 @@ class SitRep extends React.Component {
     this.props.rebindTooltips();
   }
 
+  componentDidUpdate(p, s) {
+    if (s.seasonPassRewardsPage !== this.state.seasonPassRewardsPage) {
+      this.props.rebindTooltips();
+    }
+  }
+
+  handler_seasonPassPrev = e => {
+    this.setState(p => ({
+      ...p,
+      seasonPassRewardsPage: p.seasonPassRewardsPage - 1
+    }));
+  };
+
+  handler_seasonPassNext = e => {
+    this.setState(p => ({
+      ...p,
+      seasonPassRewardsPage: p.seasonPassRewardsPage + 1
+    }));
+  };
+
+  seasonPassItemsPerPage = width => {
+    if (width > 1280) return 10;
+    if (width > 1024) return 8;
+    if (width >= 768) return 5;
+    if (width < 768) return 3;
+    return 3;
+  };
+
   render() {
-    const { t, member, groupMembers } = this.props;
-    const { profile, milestones } = member.data;
+    const { t, member, groupMembers, viewport } = this.props;
+    const milestones = member.data.milestones;
     const group = member.data.groups.results.length > 0 ? member.data.groups.results[0].group : false;
     const characters = member.data.profile.characters.data;
     const character = characters.find(c => c.characterId === member.characterId);
     const characterProgressions = member.data.profile.characterProgressions.data;
     const characterActivities = member.data.profile.characterActivities.data;
+    // const profileTransitoryData = member.data.profile.profileTransitoryData.data;
 
     const wellRestedState = utils.isWellRested(characterProgressions[character.characterId]);
 
     // console.log(wellRestedState)
 
-    characterActivities[member.characterId].availableActivities.forEach(a => {
-      // console.log(manifest.DestinyActivityDefinition[a.activityHash])
-    });
+    //console.log(Object.values(characterProgressions[member.characterId].milestones).map(m => ({...m, def: manifest.DestinyMilestoneDefinition[m.milestoneHash]})))
+
+    // characterActivities[member.characterId].availableActivities.forEach(a => {
+    //   console.log(manifest.DestinyActivityDefinition[a.activityHash])
+    // });
 
     // flashpoint
     const definitionMilestoneFLashpoint = manifest.DestinyMilestoneDefinition[463010297];
     const milestoneFlashpointQuestItem = milestones[463010297].availableQuests && milestones[463010297].availableQuests.length && manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     const definitionFlashpointVendor =
-    milestoneFlashpointQuestItem &&
+      milestoneFlashpointQuestItem &&
       Object.values(manifest.DestinyVendorDefinition).find(v => {
         if (milestoneFlashpointQuestItem.destinationHash === 1993421442) {
           return v.locations && v.locations.find(l => l.destinationHash === 3669933163);
@@ -61,37 +104,71 @@ class SitRep extends React.Component {
           return v.locations && v.locations.find(l => l.destinationHash === milestoneFlashpointQuestItem.destinationHash);
         }
       });
-      const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
-    
+    const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
+
     // console.log(definitionMilestoneFLashpoint, milestoneFlashpointQuestItem, definitionFlashpointVendor)
 
-    const commonCrucibleModes = [
-      3243161126, // Quickplay
-      3062197616, // Competitive
-      1859507212, // Private Match
-      2274172949, // Quickplay
-      2947109551, // Competitive
-      2087163649  // Rumble
+    const crucibleRotators = [
+      3753505781, // Iron Banner
+      2303927902, // Clash
+      3780095688, // Supremacy
+      1219083526, // Team Scorched
+      4209226441, // Hardware
+      952904835, // Momentum Control
+      1102379070, // Mayhem
+      3011324617, // Breakthrough
+      3646079260, // Countdown
+      1457072306, // Showdown
+      3239164160, // Lockdown
+      740422335, // Survival
+      920826395 // Doubles
     ];
+
     const crucibleModeIcons = {
-      1312786953: <CrucibleIconMayhem />
+      3753505781: <CrucibleIconDefault />,
+      2303927902: <CrucibleIconClash />,
+      3780095688: <CrucibleIconDefault />,
+      1219083526: <CrucibleIconTeamScorched />,
+      4209226441: <CrucibleIconDefault />,
+      952904835: <CrucibleIconDefault />,
+      1102379070: <CrucibleIconMayhem />,
+      3011324617: <CrucibleIconBreakthrough />,
+      3646079260: <CrucibleIconCountdown />,
+      1457072306: <CrucibleIconShowdown />,
+      3239164160: <CrucibleIconDefault />,
+      740422335: <CrucibleIconDefault />,
+      920826395: <CrucibleIconDefault />
     };
-    const featuredCrucibleMode = characterActivities[member.characterId].availableActivities.find(a => {
-      if (!a.activityHash) return false;
-      const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes.includes(5) && !commonCrucibleModes.includes(definitionActivity.hash)) {
-        a.displayProperties = definitionActivity.displayProperties;
-        a.icon = crucibleModeIcons[definitionActivity.hash] || null;
-        return true;
+    const featuredCrucibleModes = {
+      activities: characterActivities[member.characterId].availableActivities.filter(a => {
+        if (!a.activityHash) return false;
+        const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+        if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(5) && crucibleRotators.includes(definitionActivity.hash)) {
+          a.displayProperties = definitionActivity.displayProperties;
+          a.icon = crucibleModeIcons[definitionActivity.hash] || null;
+          return true;
+        }
+
+        return false;
+      }),
+      displayProperties: {
+        name: manifest.DestinyPlaceDefinition[4088006058].displayProperties.name,
+        description: (
+          <p>
+            <em>{t('The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.')}</em>
+          </p>
+        )
+      },
+      headings: {
+        rotator: t('Rotator playlists')
       }
+    };
 
-      return false;
-    });
+    // console.log(featuredCrucibleModes);
 
-    console.log(featuredCrucibleMode);
-    
-    const knownStoryActivities = [129918239, 271962655, 589157009, 1023966646, 1070049743, 1132291813, 1259766043, 1313648352, 1513386090, 1534123682, 1602328239, 1872813880, 1882259272, 1906514856, 2000185095, 2146977720, 2568845238, 2660895412, 2772894447, 2776154899, 3008658049, 3205547455, 3271773240, 4009655461, 4234327344, 4237009519, 4244464899];
+    const knownStoryActivities = [129918239, 271962655, 589157009, 1023966646, 1070049743, 1132291813, 1259766043, 1313648352, 1513386090, 1534123682, 1602328239, 1872813880, 1882259272, 1906514856, 2000185095, 2146977720, 2568845238, 2660895412, 2772894447, 2776154899, 3008658049, 3205547455, 3271773240, 4009655461, 4234327344, 4237009519, 4244464899, 2962137994];
     const dailyHeroicStoryActivities = characterActivities[member.characterId].availableActivities.filter(a => {
       if (!a.activityHash) return false;
 
@@ -104,7 +181,7 @@ class SitRep extends React.Component {
       displayProperties: {
         name: manifest.DestinyPresentationNodeDefinition[3028486709] && manifest.DestinyPresentationNodeDefinition[3028486709].displayProperties && manifest.DestinyPresentationNodeDefinition[3028486709].displayProperties.name
       }
-    }
+    };
 
     // orderBy(Object.values(manifest.DestinyActivityDefinition).map(a => {
     //   if (a.activityModeTypes && a.activityModeTypes.length && a.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers.length > 2) return a;
@@ -120,20 +197,131 @@ class SitRep extends React.Component {
 
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers && a.modifiers.length > 2) return true;
+      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(46) && !definitionActivity.guidedGame && definitionActivity.modifiers && definitionActivity.modifiers.length > 2) return true;
 
       return false;
     });
     const weeklyNightfallStrikes = {
-      activities: weeklyNightfallStrikeActivities,
+      activities: {
+        ordeal: Object.keys(enums.nightfalls)
+          .filter(k => enums.nightfalls[k].ordealHashes.find(o => weeklyNightfallStrikeActivities.find(w => w.activityHash === o)))
+          .map(h => ({ activityHash: h })),
+        scored: weeklyNightfallStrikeActivities.filter(w => !Object.keys(enums.nightfalls).find(k => enums.nightfalls[k].ordealHashes.find(o => o === w.activityHash)))
+      },
       displayProperties: {
-        name: t('Nightfalls')
+        name: manifest.DestinyActivityDefinition[492869759].displayProperties.name
+      },
+      headings: {
+        ordeal: t('Ordeal nightfall'),
+        scored: t('Scored nightfalls')
       }
-    }
+    };
 
-    // console.log(weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]))
+    console.log(weeklyNightfallStrikeActivities, weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]));
 
-    
+    console.log(weeklyNightfallStrikes);
+
+    // console.log(profileTransitoryData)
+
+    console.log(characterProgressions[member.characterId], characterProgressions[member.characterId].progressions[1628407317]);
+
+    // characterProgressions[member.characterId].progressions[1628407317].rewardItemStates.forEach((i, k) => {
+    //   if (enums.enumerateProgressionRewardItemState(i).earned) console.log(manifest.DestinyInventoryItemDefinition[manifest.DestinyProgressionDefinition[1628407317].rewardItems[k].itemHash].displayProperties.name);
+    // });
+
+    const seasonPassItemsPerPage = this.seasonPassItemsPerPage(viewport.width);
+
+    const seasonPass = {
+      season: manifest.DestinySeasonDefinition[3612906877],
+      slice: this.state.seasonPassRewardsPage * seasonPassItemsPerPage - seasonPassItemsPerPage,
+      itemsPerPage: seasonPassItemsPerPage,
+      ranks: manifest.DestinyProgressionDefinition[1628407317].steps.map((s, x) => {
+        const rank = x + 1;
+        const rewards = manifest.DestinyProgressionDefinition[1628407317].rewardItems
+          .map((r, i) => {
+            return {
+              ...r,
+              state: enums.enumerateProgressionRewardItemState(characterProgressions[member.characterId].progressions[1628407317].rewardItemStates[i])
+            };
+          })
+          .filter((r, i) => r.rewardedAtProgressionLevel === rank);
+        const rewardsFree = rewards
+          .filter(r => r.uiDisplayStyle === 'free')
+          .filter(i => {
+            const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
+
+            // if package search contents
+            if (definitionItem.itemCategoryHashes.includes(268598612)) {
+              if (
+                definitionItem.gearset &&
+                definitionItem.gearset.itemList &&
+                definitionItem.gearset.itemList.filter(t => {
+                  const definitionItem = manifest.DestinyInventoryItemDefinition[t];
+
+                  if (definitionItem.classType > -1 && definitionItem.classType < 3 && definitionItem.classType !== character.classType) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }).length
+              ) {
+                return false;
+              } else {
+                return true;
+              }
+            } else if (definitionItem.classType > -1 && definitionItem.classType < 3 && definitionItem.classType !== character.classType) {
+              return false;
+            } else {
+              return true;
+            }
+          });
+        const rewardsPremium = rewards
+          .filter(r => r.uiDisplayStyle === 'premium')
+          .filter(i => {
+            const definitionItem = manifest.DestinyInventoryItemDefinition[i.itemHash];
+
+            // if package, search contents
+            if (definitionItem.itemCategoryHashes.includes(268598612)) {
+              if (
+                definitionItem.gearset &&
+                definitionItem.gearset.itemList &&
+                definitionItem.gearset.itemList.filter(t => {
+                  const definitionItem = manifest.DestinyInventoryItemDefinition[t];
+
+                  if (definitionItem.classType > -1 && definitionItem.classType < 3 && definitionItem.classType !== character.classType) {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }).length
+              ) {
+                return false;
+              } else {
+                return true;
+              }
+            } else if (definitionItem.plug && definitionItem.plug.previewItemOverrideHash) {
+              const definitionPreviewItem = manifest.DestinyInventoryItemDefinition[definitionItem.plug.previewItemOverrideHash];
+              if (definitionPreviewItem.classType > -1 && definitionPreviewItem.classType < 3 && definitionPreviewItem.classType !== character.classType) {
+                return false;
+              } else {
+                return true;
+              }
+            } else if (definitionItem.classType > -1 && definitionItem.classType < 3 && definitionItem.classType !== character.classType) {
+              return false;
+            } else {
+              return true;
+            }
+          });
+
+        return {
+          rank,
+          free: rewardsFree,
+          premium: rewardsPremium
+        };
+      })
+    };
+
+    console.log(seasonPass);
 
     return (
       <div className='view' id='sit-rep'>
@@ -156,15 +344,93 @@ class SitRep extends React.Component {
           </div>
           <div className='content highlight crucible'>
             <div className='module-header'>
-              <div className='sub-name'>{t('Crucible')}</div>
+              <div className='sub-name'>{featuredCrucibleModes.displayProperties.name}</div>
             </div>
-            <div className='mode'>
-              <div className='icon'>{featuredCrucibleMode.icon}</div>
-              <div className='text'>
-                <p>{featuredCrucibleMode.displayProperties.name}</p>
-                <p>{featuredCrucibleMode.displayProperties.description}</p>
-              </div>
+            <h4>{featuredCrucibleModes.headings.rotator}</h4>
+            <div className='text'>{featuredCrucibleModes.displayProperties.description}</div>
+            <div className='modes'>
+              {featuredCrucibleModes.activities.map((f, i) => {
+                return (
+                  <div key={i}>
+                    <div className='icon'>{f.icon}</div>
+                    <div className='text'>{f.displayProperties.name}</div>
+                  </div>
+                );
+              })}
             </div>
+          </div>
+          <div className='content highlight'>
+            <div className='module-header'>
+              <div className='sub-name'>{weeklyNightfallStrikes.displayProperties.name}</div>
+            </div>
+            {weeklyNightfallStrikes.activities.scored.length ? (
+              <>
+                {weeklyNightfallStrikes.activities.ordeal.length ? (
+                  <>
+                    <h4>{weeklyNightfallStrikes.headings.ordeal}</h4>
+                    <ul className='list activities'>
+                      {orderBy(
+                        enums.nightfalls[weeklyNightfallStrikes.activities.ordeal[0].activityHash].ordealHashes.map(o => ({
+                          activityLightLevel: manifest.DestinyActivityDefinition[o].activityLightLevel,
+                          activityHash: weeklyNightfallStrikes.activities.ordeal[0].activityHash,
+                          ordealHash: o
+                        })),
+                        [a => a.activityLightLevel],
+                        ['asc']
+                      )
+                        .slice(0, 1)
+                        .map((a, i) => {
+                          const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+                          const definitionOrdeal = manifest.DestinyActivityDefinition[a.ordealHash];
+
+                          return {
+                            light: definitionOrdeal.activityLightLevel,
+                            el: (
+                              <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.ordealHash} data-mode='175275639'>
+                                <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
+                                <div>
+                                  <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
+                                  <div className='light'>
+                                    <span>{definitionOrdeal.activityLightLevel}</span>
+                                  </div>
+                                </div>
+                              </li>
+                            )
+                          };
+                        })
+                        .map(e => e.el)}
+                    </ul>
+                  </>
+                ) : null}
+                <h4>{weeklyNightfallStrikes.headings.scored}</h4>
+                <ul className='list activities'>
+                  {orderBy(
+                    weeklyNightfallStrikes.activities.scored.map((a, i) => {
+                      const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+                      return {
+                        light: definitionActivity.activityLightLevel,
+                        el: (
+                          <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
+                            <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
+                            <div>
+                              <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
+                              <div className='light'>
+                                <span>{definitionActivity.activityLightLevel}</span>
+                              </div>
+                            </div>
+                          </li>
+                        )
+                      };
+                    }),
+                    [m => m.light],
+                    ['asc']
+                  ).map(e => e.el)}
+                </ul>
+              </>
+            ) : (
+              <div className='info'>Nightfalls are currently unavailable.</div>
+            )}
           </div>
           <div className='content highlight'>
             <div className='module-header'>
@@ -177,17 +443,12 @@ class SitRep extends React.Component {
 
                   return {
                     light: definitionActivity.activityLightLevel,
+                    timeToComplete: definitionActivity.timeToComplete || 20,
                     el: (
                       <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
                         <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
                         <div>
-                          <div className='time'>
-                            {definitionActivity.timeToComplete ? (
-                              <>
-                                {t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}
-                              </>
-                            ) : null}
-                          </div>
+                          <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
                           <div className='light'>
                             <span>{definitionActivity.activityLightLevel}</span>
                           </div>
@@ -196,60 +457,76 @@ class SitRep extends React.Component {
                     )
                   };
                 }),
-                [m => m.light],
+                [m => m.timeToComplete],
                 ['asc']
               ).map(e => e.el)}
             </ul>
           </div>
-          <div className='content highlight'>
-            <div className='module-header'>
-              <div className='sub-name'>{weeklyNightfallStrikes.displayProperties.name}</div>
-            </div>
-            {weeklyNightfallStrikes.activities.length ? (
-              <ul className='list activities'>
-                {orderBy(
-                  weeklyNightfallStrikes.activities.map((a, i) => {
-                    const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+        </div>
 
-                    return {
-                      light: definitionActivity.activityLightLevel,
-                      el: (
-                        <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
-                          <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
-                          <div>
-                            <div className='time'>
-                              {definitionActivity.timeToComplete ? (
-                                <>
-                                  {t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}
-                                </>
-                              ) : null}
-                            </div>
-                            <div className='light'>
-                              <span>{definitionActivity.activityLightLevel}</span>
-                            </div>
-                          </div>
-                        </li>
-                      )
-                    };
-                  }),
-                  [m => m.light],
-                  ['asc']
-                ).map(e => e.el)}
-              </ul>
-            ) : (
-              <div className='info'>Nightfalls are currently unavailable.</div>
-            )}
+        <div className='module season-pass'>
+          <div className='content status'>
+            <div className='module-header'>
+              <div className='sub-name'>{t('Season')}</div>
+            </div>
+            <div className='season-text'>
+              <div className='name'>{seasonPass.season.displayProperties.name}</div>
+              <div className='description'>{seasonPass.season.displayProperties.description}</div>
+            </div>
+          </div>
+          <div className='page'>
+            <Button text={<i className='segoe-uniE973' />} action={this.handler_seasonPassPrev} disabled={this.state.seasonPassRewardsPage * seasonPassItemsPerPage - seasonPassItemsPerPage < 1} />
+          </div>
+          <div className='rewards'>
+            {seasonPass.ranks.slice(seasonPass.slice, seasonPass.slice + seasonPass.itemsPerPage).map(r => {
+              const progressData = { ...characterProgressions[member.characterId].progressions[1628407317] };
+
+              if (r.rank <= progressData.level) {
+                progressData.progressToNextLevel = progressData.nextLevelAt;
+              } else if (r.rank > progressData.level + 1) {
+                progressData.progressToNextLevel = 0;
+              }
+
+              return (
+                <div key={r.rank} className='rank' data-rank={r.rank}>
+                  <ProgressBar hideCheck {...progressData} />
+                  <div className={cx('free', { earned: r.free.length && r.free[0].state.earned, claimed: r.free.length && r.free[0].state.claimed, claimAllowed: r.free.length && r.free[0].state.claimAllowed })}>
+                    <ul className='list inventory-items'>
+                      {r.free.length ? (
+                        <Items
+                          items={r.free.map(r => {
+                            return {
+                              ...r,
+                              state: null
+                            };
+                          })}
+                        />
+                      ) : null}
+                    </ul>
+                  </div>
+                  <div className={cx('premium', { earned: r.premium.length && r.premium[0].state.earned, claimed: r.premium.length && r.premium[0].state.claimed, claimAllowed: r.premium.length && r.premium[0].state.claimAllowed })}>
+                    <ul className='list inventory-items'>
+                      {r.premium.length ? (
+                        <Items
+                          items={r.premium.map(r => {
+                            return {
+                              ...r,
+                              state: null
+                            };
+                          })}
+                        />
+                      ) : null}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className='page'>
+            <Button text={<i className='segoe-uniE974' />} action={this.handler_seasonPassNext} disabled={seasonPass.slice + seasonPass.itemsPerPage >= 100} />
           </div>
         </div>
         <div className='padder'>
-          <div className='module'>
-            <div className='content'>
-              <div className='module-header'>
-                <div className='sub-name'>{t('Character')}</div>
-              </div>
-              
-            </div>
-          </div>
           <div className='module'>
             <div className='content'>
               <div className='module-header'>
@@ -262,28 +539,6 @@ class SitRep extends React.Component {
               </div>
             </div>
           </div>
-          {group ? (
-            <div className='module'>
-              <div className='content'>
-                <div className='module-header'>
-                  <div className='sub-name'>{t('Fireteam')}</div>
-                </div>
-                <h4>{t('Activity')}</h4>
-                <h4>{t('Members')}</h4>
-              </div>
-              <div className='content clan-roster'>
-                <div className='module-header'>
-                  <div className='sub-name'>{t('Clan')}</div>
-                </div>
-                <h4>
-                  <span>{t('Roster')}</span>
-                  <span>{t('{{number}} online', { number: groupMembers.members.filter(member => member.isOnline).length })}</span>
-                </h4>
-                <div className='refresh'>{groupMembers.loading && groupMembers.members.length !== 0 ? <Spinner mini /> : null}</div>
-                {groupMembers.loading && groupMembers.members.length === 0 ? <Spinner /> : <Roster mini showOnline />}
-              </div>
-            </div>
-          ) : null}
         </div>
       </div>
     );
@@ -294,7 +549,7 @@ function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
     groupMembers: state.groupMembers,
-    collectibles: state.collectibles
+    viewport: state.viewport
   };
 }
 

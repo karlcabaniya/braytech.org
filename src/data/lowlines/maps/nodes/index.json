@@ -532,7 +532,7 @@
   {
     "checklistId": 655926402,
     "recordHash": 3431961938,
-    "screenshot": "/static/images/screenshots/lore/the-drain_the-forsaken-prince_10.jpg",
+    "screenshot": "/static/images/screenshots/lore/the-drain_the-forsaken-prince_3431961938.jpg",
     "debug": {
       "name": "Jolyon",
       "number": 10
@@ -542,7 +542,7 @@
   {
     "checklistId": 655926402,
     "recordHash": 3431961939,
-    "screenshot": "/static/images/screenshots/lore/flooded-chasm_the-forsaken-prince_11.jpg",
+    "screenshot": "/static/images/screenshots/lore/flooded-chasm_the-forsaken-prince_3431961939.jpg",
     "debug": {
       "name": "After the Fall",
       "number": 11
@@ -552,7 +552,7 @@
   {
     "checklistId": 655926402,
     "recordHash": 3431961936,
-    "screenshot": "/static/images/screenshots/lore/excavation-site-xii_the-forsaken-prince_12.jpg",
+    "screenshot": "/static/images/screenshots/lore/excavation-site-xii_the-forsaken-prince_3431961936.jpg",
     "debug": {
       "name": "Kings",
       "number": 12
@@ -848,7 +848,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305066,
-    "screenshot": "/static/images/screenshots/lore/shaft-13_ghost-stories_5.jpg",
+    "screenshot": "/static/images/screenshots/lore/shaft-13_ghost-stories_2121305066.jpg",
     "debug": {
       "name": "Don't Call Me Ghost",
       "number": 5
@@ -858,7 +858,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305065,
-    "screenshot": "/static/images/screenshots/lore/the-drain_ghost-stories_6.jpg",
+    "screenshot": "/static/images/screenshots/lore/the-drain_ghost-stories_2121305065.jpg",
     "debug": {
       "name": "Compliments",
       "number": 6
@@ -868,7 +868,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305064,
-    "screenshot": "/static/images/screenshots/lore/the-quarry_ghost-stories_7.jpg",
+    "screenshot": "/static/images/screenshots/lore/the-quarry_ghost-stories_2121305064.jpg",
     "debug": {
       "name": "No Rez for the Weary",
       "number": 7
@@ -878,7 +878,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305063,
-    "screenshot": "/static/images/screenshots/lore/arboretum_ghost-stories_8.jpg",
+    "screenshot": "/static/images/screenshots/lore/arboretum_ghost-stories_2121305063.jpg",
     "debug": {
       "name": "Confession of Hope | Part One",
       "number": 8
@@ -888,7 +888,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2121305062,
-    "screenshot": "/static/images/screenshots/lore/sirens-watch_ghost-stories_9.jpg",
+    "screenshot": "/static/images/screenshots/lore/sirens-watch_ghost-stories_2121305062.jpg",
     "debug": {
       "name": "The Watchful Eye",
       "number": 9
@@ -898,7 +898,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2104527484,
-    "screenshot": "/static/images/screenshots/lore/ds-quarters-2_ghost-stories_10.jpg",
+    "screenshot": "/static/images/screenshots/lore/ds-quarters-2_ghost-stories_2104527484.jpg",
     "debug": {
       "name": "Into the Fray",
       "number": 10
@@ -928,7 +928,7 @@
   {
     "checklistId": 1420597821,
     "recordHash": 2104527487,
-    "screenshot": "/static/images/screenshots/lore/the-rift_ghost-stories_13.jpg",
+    "screenshot": "/static/images/screenshots/lore/the-rift_ghost-stories_2104527487.jpg",
     "debug": {
       "name": "A Hero's Requiem",
       "number": 13
@@ -3625,6 +3625,206 @@
     "description": false
   },
   {
+    "checklistId": 2474271317,
+    "recordHash": 4212118078,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "I.I: Of Tattered Blood and Broken Bone",
+      "number": 1
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118079,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "I.II: Of Tattered Blood and Broken Bone",
+      "number": 2
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118076,
+    "screenshot": "/static/images/screenshots/lore/archers-light_necrotic-cyphers_4212118076.jpg",
+    "description": false,
+    "debug": {
+      "name": "I.III: Of Tattered Blood and Broken Bone",
+      "number": 3
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118077,
+    "screenshot": "/static/images/screenshots/lore/archers-light_necrotic-cyphers_4212118077.jpg",
+    "description": false,
+    "debug": {
+      "name": "I.IV: Of Tattered Blood and Broken Bone",
+      "number": 4
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118074,
+    "screenshot": "/static/images/screenshots/lore/anchor-of-light_necrotic-cyphers_4212118074.jpg",
+    "description": false,
+    "debug": {
+      "name": "II: An Audience with Slaughter",
+      "number": 5
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118075,
+    "screenshot": "/static/images/screenshots/lore/anchor-of-light_necrotic-cyphers_4212118075.jpg",
+    "description": false,
+    "debug": {
+      "name": "III: Ritualistic Circle Pit",
+      "number": 6
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118072,
+    "screenshot": "/static/images/screenshots/lore/sorrows-harbor_necrotic-cyphers_4212118072.jpg",
+    "description": false,
+    "debug": {
+      "name": "IV: Blood Sport",
+      "number": 7
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118073,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "V: A Sinister Plot",
+      "number": 8
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118070,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "VI: Blood Sport",
+      "number": 9
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 4212118071,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "VII: The Severed and the Unmade",
+      "number": 10
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468509,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "VIII: A Sacrifice of Self",
+      "number": 11
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468508,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "IX.I: The Unmaking",
+      "number": 12
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468511,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "IX.II: The Unmaking",
+      "number": 13
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468510,
+    "screenshot": "/static/images/screenshots/lore/lunar-battlegrounds_necrotic-cyphers_2028468510.jpg",
+    "description": false,
+    "debug": {
+      "name": "X: Faith in Bone",
+      "number": 14
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468505,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "XI: The Anti-Logic",
+      "number": 15
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468504,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Classified",
+      "number": 16
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468507,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Classified",
+      "number": 17
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468506,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Classified",
+      "number": 18
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468501,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Classified",
+      "number": 19
+    }
+  },
+  {
+    "checklistId": 2474271317,
+    "recordHash": 2028468500,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Classified",
+      "number": 20
+    }
+  },
+  {
     "debug": {
       "name": "Katabasis",
       "number": 9
@@ -4771,7 +4971,7 @@
   {
     "checklistId": 3305936921,
     "recordHash": 259242241,
-    "screenshot": "/static/images/screenshots/lore/scavengers-den_the-awoken-of-the-reef_17.jpg",
+    "screenshot": "/static/images/screenshots/lore/scavengers-den_the-awoken-of-the-reef_259242241.jpg",
     "debug": {
       "name": "Of Earth and the Reef",
       "number": 17
@@ -4781,7 +4981,7 @@
   {
     "checklistId": 3305936921,
     "recordHash": 259242254,
-    "screenshot": "/static/images/screenshots/lore/sinking-docks_the-awoken-of-the-reef_18.jpg",
+    "screenshot": "/static/images/screenshots/lore/sinking-docks_the-awoken-of-the-reef_259242254.jpg",
     "debug": {
       "name": "Pilgrimage",
       "number": 18
@@ -4791,7 +4991,7 @@
   {
     "checklistId": 3305936921,
     "recordHash": 259242255,
-    "screenshot": "/static/images/screenshots/lore/the-conflux_the-awoken-of-the-reef_19.jpg",
+    "screenshot": "/static/images/screenshots/lore/the-conflux_the-awoken-of-the-reef_259242255.jpg",
     "debug": {
       "name": "Flayed",
       "number": 19
@@ -5332,7 +5532,108 @@
     "activityHash": 3926419686
   },
   {
+    "checklistId": 4285512244,
+    "recordHash": 3390078235,
+    "screenshot": "/static/images/screenshots/lore/archers-line_lunas-lost_3390078235.jpg",
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Gunnvor's Ghost",
+      "number": 1
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078234,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Sai Mota's Ghost",
+      "number": 2
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078233,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Gimble-4's Ghost",
+      "number": 3
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078232,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Eris Morn's Ghost",
+      "number": 4
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078239,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Toland's Ghost",
+      "number": 5
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078238,
+    "screenshot": "/static/images/screenshots/lore/lunar-battlegrounds_lunas-lost_3390078238.jpg",
+    "description": "At the side on the hidden side of the pictured module.",
+    "debug": {
+      "name": "Ghost Fragment: Vyhar's Ghost",
+      "number": 6
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078237,
+    "screenshot": "/static/images/screenshots/lore/anchor-of-light_lunas-lost_3390078237.jpg",
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Lonesome Ghost",
+      "number": 7
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078236,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Omar Agah's Ghost",
+      "number": 8
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078227,
+    "screenshot": "/static/images/screenshots/lore/circle-of-bones_lunas-lost_3390078227.jpg",
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Eriana-3's Ghost",
+      "number": 9
+    }
+  },
+  {
+    "checklistId": 4285512244,
+    "recordHash": 3390078226,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Ghost Fragment: Vell Tarlowe's Ghost",
+      "number": 10
+    }
+  },
+  {
     "vendorHash": 1735426333,
+    "bubbleHash": 1461622515,
     "screenshot": "/static/images/screenshots/vendors/vendors_ana-bray-2.jpg"
   },
   {
@@ -5354,5 +5655,15 @@
     "vendorHash": 1062861569,
     "bubbleHash": 4035573696,
     "screenshot": "/static/images/screenshots/vendors/vendors_sloane-2.jpg"
+  },
+  {
+    "vendorHash": 1616085565,
+    "bubbleHash": 240420607,
+    "screenshot": "/static/images/screenshots/vendors/vendors_eris-morn-2.jpg"
+  },
+  {
+    "vendorHash": 3411552308,
+    "bubbleHash": 240420607,
+    "screenshot": "/static/images/screenshots/vendors/vendors_lectern-of-enchantment-2.jpg"
   }
 ]

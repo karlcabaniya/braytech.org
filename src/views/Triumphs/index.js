@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import { ProfileLink } from '../../components/ProfileLink';
-import Button from '../../components/UI/Button';
+import { Button, DestinyKey } from '../../components/UI/Button';
 
 import './styles.css';
 
@@ -122,7 +122,7 @@ class Triumphs extends React.Component {
                 <li>{toggleCompletedLink}</li>
                 <li>
                   <ProfileLink className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>
@@ -144,7 +144,7 @@ class Triumphs extends React.Component {
                 <li>{toggleAlmostCompleteSortLink}</li>
                 <li>
                   <ProfileLink className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>
@@ -165,7 +165,7 @@ class Triumphs extends React.Component {
               <ul>
                 <li>
                   <ProfileLink className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>
@@ -186,7 +186,7 @@ class Triumphs extends React.Component {
               <ul>
                 <li>
                   <ProfileLink className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>
@@ -208,7 +208,7 @@ class Triumphs extends React.Component {
                 <li>{toggleCompletedLink}</li>
                 <li>
                   <ProfileLink className='button' to={backLinkPath}>
-                    <i className='destiny-B_Button' />
+                    <DestinyKey type='dismiss' />
                     {t('Back')}
                   </ProfileLink>
                 </li>
