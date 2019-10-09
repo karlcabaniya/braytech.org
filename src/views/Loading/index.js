@@ -100,10 +100,10 @@ class Loading extends React.Component {
       const isError = this.loadingStates[state.code] && (this.loadingStates[state.code].isError || this.loadingStates[state.code].shh);
 
       return (
-        <div className={cx('view')} id='loading'>
+        <div className='view' id='loading'>
           <div className='bg'>
             <div className='containment'>
-              <ObservedImage className='image' src='/static/images/extracts/flair/01E3-0000130C.png' />
+              {/* <ObservedImage className='image' src='/static/images/extracts/flair/01E3-0000130C.png' /> */}
             </div>
           </div>
           <div className='logo-feature'>
