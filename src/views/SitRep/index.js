@@ -22,6 +22,8 @@ import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
 import { ReactComponent as CrucibleIconBreakthrough } from './icons/breakthrough.svg';
 import { ReactComponent as CrucibleIconClash } from './icons/clash.svg';
 import { ReactComponent as CrucibleIconShowdown } from './icons/showdown.svg';
+import { ReactComponent as CrucibleIconTeamScorched } from './icons/team-scorched.svg';
+import { ReactComponent as CrucibleIconCountdown } from './icons/countdown.svg';
 
 import './styles.css';
 
@@ -65,7 +67,7 @@ class SitRep extends React.Component {
   seasonPassItemsPerPage = width => {
     if (width > 1280) return 10;
     if (width > 1024) return 8;
-    if (width < 1024) return 5;
+    if (width >= 768) return 5;
     if (width < 768) return 3;
     return 3;
   };
@@ -126,12 +128,12 @@ class SitRep extends React.Component {
       3753505781: <CrucibleIconDefault />,
       2303927902: <CrucibleIconClash />,
       3780095688: <CrucibleIconDefault />,
-      1219083526: <CrucibleIconDefault />,
+      1219083526: <CrucibleIconTeamScorched />,
       4209226441: <CrucibleIconDefault />,
       952904835: <CrucibleIconDefault />,
       1102379070: <CrucibleIconMayhem />,
       3011324617: <CrucibleIconBreakthrough />,
-      3646079260: <CrucibleIconDefault />,
+      3646079260: <CrucibleIconCountdown />,
       1457072306: <CrucibleIconShowdown />,
       3239164160: <CrucibleIconDefault />,
       740422335: <CrucibleIconDefault />,
@@ -215,9 +217,9 @@ class SitRep extends React.Component {
       }
     };
 
-    // console.log(weeklyNightfallStrikeActivities, weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]));
+    console.log(weeklyNightfallStrikeActivities, weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]));
 
-    // console.log(weeklyNightfallStrikes);
+    console.log(weeklyNightfallStrikes);
 
     // console.log(profileTransitoryData)
 

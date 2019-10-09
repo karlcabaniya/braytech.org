@@ -707,6 +707,11 @@
   {
     "date": "2019-10-06T14:45:01.760Z",
     "version": "2.9.28",
-    "content": "- udid some more font stuff\n- added some nodes to the moon map"
+    "content": "- did some more font stuff\n- added some nodes to the moon map"
+  },
+  {
+    "date": "2019-10-09T06:09:37.854Z",
+    "version": "2.9.33",
+    "content": "- Added season pass progression details to _Now_ view\n- added more icons\n- Interval records"
   }
 ]
