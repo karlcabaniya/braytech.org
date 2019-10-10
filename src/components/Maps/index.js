@@ -767,8 +767,8 @@ class Maps extends React.Component {
                     const markerOffsetX = mapXOffset + viewWidth / 2;
                     const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
 
-                    const offsetX = markerOffsetX + ((i + 1) * 50) - 247;
-                    const offsetY = markerOffsetY + ((k + 1) * 50) - 1500;
+                    const offsetX = markerOffsetX + ((i + 1) * 50) - 0;
+                    const offsetY = markerOffsetY + ((k + 1) * 30) - 1250;
 
                     // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 

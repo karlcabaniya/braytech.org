@@ -4203,7 +4203,12 @@
       "bubbleHash": 3326367698,
       "bubbleName": false,
       "checklistHash": 3947020272,
-      "points": [],
+      "points": [
+        {
+          "x": -675,
+          "y": -551
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Archer's Line",
@@ -4218,7 +4223,12 @@
       "bubbleHash": 3326367698,
       "bubbleName": false,
       "checklistHash": 3812883599,
-      "points": [],
+      "points": [
+        {
+          "x": -478,
+          "y": -541
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Archer's Line",
@@ -4233,7 +4243,12 @@
       "bubbleHash": 3326367698,
       "bubbleName": false,
       "checklistHash": 731133614,
-      "points": [],
+      "points": [
+        {
+          "x": -417,
+          "y": -408
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Archer's Line",
@@ -4248,7 +4263,12 @@
       "bubbleHash": 417490937,
       "bubbleName": false,
       "checklistHash": 3147488613,
-      "points": [],
+      "points": [
+        {
+          "x": 132,
+          "y": 109
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Sorrow's Harbor",
@@ -4263,7 +4283,12 @@
       "bubbleHash": 417490937,
       "bubbleName": false,
       "checklistHash": 3364328658,
-      "points": [],
+      "points": [
+        {
+          "x": 442,
+          "y": 82
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Sorrow's Harbor",
@@ -4278,7 +4303,12 @@
       "bubbleHash": 417490937,
       "bubbleName": false,
       "checklistHash": 2448388435,
-      "points": [],
+      "points": [
+        {
+          "x": 360,
+          "y": 246
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Sorrow's Harbor",
@@ -4293,7 +4323,12 @@
       "bubbleHash": 4195493657,
       "bubbleName": false,
       "checklistHash": 2499619401,
-      "points": [],
+      "points": [
+        {
+          "x": -92,
+          "y": -95
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Hellmouth",
@@ -4308,7 +4343,12 @@
       "bubbleHash": 4195493657,
       "bubbleName": false,
       "checklistHash": 340933878,
-      "points": [],
+      "points": [
+        {
+          "x": -180,
+          "y": -168
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Hellmouth",
@@ -4323,7 +4363,12 @@
       "bubbleHash": 4195493657,
       "bubbleName": false,
       "checklistHash": 74989591,
-      "points": [],
+      "points": [
+        {
+          "x": -348,
+          "y": -44
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Hellmouth",
@@ -4338,7 +4383,12 @@
       "bubbleHash": 4025450777,
       "bubbleName": false,
       "checklistHash": 204962005,
-      "points": [],
+      "points": [
+        {
+          "x": -207,
+          "y": -551
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Anchor of Light",
@@ -4353,7 +4403,12 @@
       "bubbleHash": 4025450777,
       "bubbleName": false,
       "checklistHash": 3138619650,
-      "points": [],
+      "points": [
+        {
+          "x": 33,
+          "y": -587
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Anchor of Light",
@@ -4368,7 +4423,12 @@
       "bubbleHash": 4025450777,
       "bubbleName": false,
       "checklistHash": 3719379523,
-      "points": [],
+      "points": [
+        {
+          "x": -108,
+          "y": -370
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "Anchor of Light",

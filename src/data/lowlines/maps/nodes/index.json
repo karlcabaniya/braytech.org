@@ -1148,7 +1148,7 @@
     "checklistId": 1697465175,
     "checklistHash": 3156467474,
     "recordHash": null,
-    "screenshot": "/static/images/screenshots/region-chests/outskirts_region-chests_10.jpg",
+    "screenshot": false,
     "debug": {
       "name": "Outskirts",
       "number": 10
@@ -1859,7 +1859,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 3947020272,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/archers-line_region-chests_100.jpg",
     "description": false,
     "debug": {
       "name": "Archer's Line",
@@ -1869,7 +1869,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 3812883599,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/archers-line_region-chests_101.jpg",
     "description": false,
     "debug": {
       "name": "Archer's Line",
@@ -1879,7 +1879,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 731133614,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/archers-line_region-chests_102.jpg",
     "description": false,
     "debug": {
       "name": "Archer's Line",
@@ -1889,7 +1889,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 3147488613,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sorrows-harbor_region-chests_103.jpg",
     "description": false,
     "debug": {
       "name": "Sorrow's Harbor",
@@ -1899,7 +1899,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 3364328658,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sorrows-harbor_region-chests_104.jpg",
     "description": false,
     "debug": {
       "name": "Sorrow's Harbor",
@@ -1909,7 +1909,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 2448388435,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/sorrows-harbor_region-chests_105.jpg",
     "description": false,
     "debug": {
       "name": "Sorrow's Harbor",
@@ -1919,7 +1919,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 2499619401,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/hellmouth_region-chests_106.jpg",
     "description": false,
     "debug": {
       "name": "Hellmouth",
@@ -1929,7 +1929,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 340933878,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/hellmouth_region-chests_107.jpg",
     "description": false,
     "debug": {
       "name": "Hellmouth",
@@ -1939,7 +1939,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 74989591,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/hellmouth_region-chests_108.jpg",
     "description": false,
     "debug": {
       "name": "Hellmouth",
@@ -1949,7 +1949,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 204962005,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/anchor-of-light_region-chests_109.jpg",
     "description": false,
     "debug": {
       "name": "Anchor of Light",
@@ -1959,7 +1959,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 3138619650,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/anchor-of-light_region-chests_110.jpg",
     "description": false,
     "debug": {
       "name": "Anchor of Light",
@@ -1969,7 +1969,7 @@
   {
     "checklistId": 1697465175,
     "checklistHash": 3719379523,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/region-chests/anchor-of-light_region-chests_111.jpg",
     "description": false,
     "debug": {
       "name": "Anchor of Light",
