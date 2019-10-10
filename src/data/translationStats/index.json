@@ -2,211 +2,85 @@
   "de": {
     "translated": 429,
     "notTranslated": 37,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "en": {
     "translated": 466,
     "notTranslated": 0,
     "added": [],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "removed": []
   },
   "es-mx": {
     "translated": 0,
     "notTranslated": 466,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "es": {
     "translated": 445,
     "notTranslated": 21,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "fr": {
     "translated": 398,
     "notTranslated": 68,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "internal": {
     "translated": 0,
     "notTranslated": 466,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "it": {
-    "translated": 446,
-    "notTranslated": 20,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "translated": 466,
+    "notTranslated": 0,
+    "added": [],
+    "removed": []
   },
   "ja": {
     "translated": 0,
     "notTranslated": 466,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "ko": {
     "translated": 338,
     "notTranslated": 128,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "pl": {
     "translated": 0,
     "notTranslated": 466,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "pt-br": {
     "translated": 463,
     "notTranslated": 3,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "ru": {
     "translated": 0,
     "notTranslated": 466,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   },
   "zh-chs": {
     "translated": 451,
     "notTranslated": 15,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Character",
-      "Fabled rank",
-      "Fireteam",
-      "Legend rank",
-      "Roster",
-      "win",
-      "wins",
-      "{{number}} online"
-    ]
+    "added": [],
+    "removed": []
   },
   "zh-cht": {
     "translated": 0,
     "notTranslated": 466,
-    "added": [
-      "Jade Rabbit",
-      "Jade Rabbits",
-      "Rabbits with rice cake"
-    ],
-    "removed": [
-      "Fabled rank",
-      "Legend rank",
-      "win",
-      "wins"
-    ]
+    "added": [],
+    "removed": []
   }
 }
