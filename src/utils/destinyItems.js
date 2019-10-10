@@ -113,7 +113,9 @@ export const getSockets = (item, traitsOnly = false, mods = true, initialOnly = 
             let emptyHim = false;
 
             socket.reusablePlugItems.concat(socket.randomizedPlugItems).forEach(p => {
-              let definitionPlug = manifest.DestinyInventoryItemDefinition[p.plugItemHash];
+              const definitionPlug = p && manifest.DestinyInventoryItemDefinition[p.plugItemHash];
+
+              if (!definitionPlug) return;
               
               if (definitionPlug && definitionPlug.plug.plugCategoryIdentifier === customPlug.plugCategoryIdentifier && definitionPlug.plug.uiPlugLabel === customPlug.uiPlugLabel) {
                 if (customPlug.disable) {

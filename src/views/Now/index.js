@@ -27,7 +27,7 @@ import { ReactComponent as CrucibleIconCountdown } from './icons/countdown.svg';
 
 import './styles.css';
 
-class SitRep extends React.Component {
+class Now extends React.Component {
   constructor(props) {
     super(props);
 
@@ -35,7 +35,7 @@ class SitRep extends React.Component {
     const characterProgressions = member.data.profile.characterProgressions.data;
 
     this.state = {
-      seasonPassRewardsPage: Math.ceil(characterProgressions[member.characterId].progressions[1628407317].level / (this.seasonPassItemsPerPage(viewport.width) - 1))
+      seasonPassRewardsPage: Math.ceil((characterProgressions[member.characterId].progressions[1628407317].level + 1) / this.seasonPassItemsPerPage(viewport.width))
     };
   }
 
@@ -567,4 +567,4 @@ export default compose(
     mapDispatchToProps
   ),
   withTranslation()
-)(SitRep);
+)(Now);
