@@ -196,7 +196,7 @@ class Maps extends React.Component {
     const center = [map.height / 2 + centerYOffset, map.width / 2 + centerXOffset];
 
     return center;
-  }
+  };
 
   setDestination = id => {
     const destination = id || 'the-moon';
@@ -210,7 +210,7 @@ class Maps extends React.Component {
       },
       destination
     }));
-  }
+  };
 
   generateChecklists = (destination = 'the-moon') => {
     let lists = {
@@ -732,7 +732,7 @@ class Maps extends React.Component {
                 }
               })
             )}
-            {Object.keys(this.state.checklists).map(key => {
+            {Object.keys(this.state.checklists).map((key, k) => {
               const checklist = this.state.checklists[key];
 
               if (!checklist.visible) return null;
@@ -740,18 +740,35 @@ class Maps extends React.Component {
               return checklist.items
                 .filter(i => i.destinationHash === maps[destination].destination.hash)
                 .map((node, i) => {
-                  return node.points.map(point => {
+                  if (node.points.length) {
+                    return node.points.map(point => {
+                      const markerOffsetX = mapXOffset + viewWidth / 2;
+                      const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
+
+                      if (!point.x || !point.y) {
+                        console.warn(node);
+
+                        return false;
+                      }
+
+                      const offsetX = markerOffsetX + point.x;
+                      const offsetY = markerOffsetY + point.y;
+
+                      // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
+
+                      const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`, node.screenshot ? `has-screenshot` : ''], { icon: checklist.checklistIcon, url: checklist.checklistImage });
+                      // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
+
+                      const handler_markerMouseOver = (settings.debug && this.handler_markerMouseOver) || null;
+
+                      return <Marker key={`${node.checklistHash}-${i}`} position={[offsetY, offsetX]} icon={icon} onMouseOver={handler_markerMouseOver} />;
+                    });
+                  } else if (this.props.maps.debug) {
                     const markerOffsetX = mapXOffset + viewWidth / 2;
                     const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
 
-                    if (!point.x || !point.y) {
-                      console.warn(node);
-
-                      return false;
-                    }
-
-                    const offsetX = markerOffsetX + point.x;
-                    const offsetY = markerOffsetY + point.y;
+                    const offsetX = markerOffsetX + ((i + 1) * 50) - 247;
+                    const offsetY = markerOffsetY + ((k + 1) * 50) - 1500;
 
                     // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 
@@ -759,9 +776,8 @@ class Maps extends React.Component {
                     // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
                     const handler_markerMouseOver = (settings.debug && this.handler_markerMouseOver) || null;
-
                     return <Marker key={`${node.checklistHash}-${i}`} position={[offsetY, offsetX]} icon={icon} onMouseOver={handler_markerMouseOver} />;
-                  });
+                  }
                 });
             })}
           </Map>
