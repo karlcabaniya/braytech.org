@@ -70,7 +70,7 @@ const checklists = [
   365218222,  // sleeperNodes
   2360931290, // ghostScans
   2955980198, // latentMemories
-  2726513366, // catStatues
+  1912364094, // jadeRabbits
 ];
 
 const presentationNodes = [

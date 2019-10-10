@@ -125,6 +125,10 @@ class Maps extends React.Component {
           // cat statues
           visible: true
         },
+        1912364094: {
+          // jade rabbits
+          visible: true
+        },
         1420597821: {
           // lore: ghost stories
           visible: true
@@ -245,6 +249,10 @@ class Maps extends React.Component {
       2726513366: {
         // cat statues
         ...checklists[2726513366]()
+      },
+      1912364094: {
+        // jade rabbits
+        ...checklists[1912364094]()
       },
       1420597821: {
         // lore: ghost stories

@@ -1857,6 +1857,209 @@
     "description": false
   },
   {
+    "checklistId": 1697465175,
+    "checklistHash": 3947020272,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Archer's Line",
+      "number": 100
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 3812883599,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Archer's Line",
+      "number": 101
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 731133614,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Archer's Line",
+      "number": 102
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 3147488613,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Sorrow's Harbor",
+      "number": 103
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 3364328658,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Sorrow's Harbor",
+      "number": 104
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 2448388435,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Sorrow's Harbor",
+      "number": 105
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 2499619401,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Hellmouth",
+      "number": 106
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 340933878,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Hellmouth",
+      "number": 107
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 74989591,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Hellmouth",
+      "number": 108
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 204962005,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Anchor of Light",
+      "number": 109
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 3138619650,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Anchor of Light",
+      "number": 110
+    }
+  },
+  {
+    "checklistId": 1697465175,
+    "checklistHash": 3719379523,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "Anchor of Light",
+      "number": 111
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 4062796495,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "number": 1
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 269847098,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "number": 2
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 957600697,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "number": 3
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 2293092716,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "number": 4
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 2779900411,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "number": 5
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 3728157446,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "number": 6
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 3977481189,
+    "screenshot": "/static/images/screenshots/jade-rabbits/circle-of-bones_jade-rabbits_3977481189.jpg",
+    "description": "Entering the Circle of Bones via The Gatehouse, turn right and proceed to follow the loop around the Hellmouth. Before reaching the next junction, turn on your heel and look beneath the platform to find two jade eyes piercing through your Traveler-given light.",
+    "debug": {
+      "name": "Circle of Bones",
+      "number": 7
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 1568227000,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "number": 8
+    }
+  },
+  {
+    "checklistId": 1912364094,
+    "checklistHash": 2115406343,
+    "screenshot": "/static/images/screenshots/jade-rabbits/shrine-of-oryx_jade-rabbits_2115406343.jpg",
+    "description": false,
+    "debug": {
+      "name": "Shrine of Oryx",
+      "number": 9
+    }
+  },
+  {
     "checklistId": 2360931290,
     "checklistHash": 2920200623,
     "recordHash": null,
@@ -3627,7 +3830,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 4212118078,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/archers-light_necrotic-cyphers_4212118078.jpg",
     "description": false,
     "debug": {
       "name": "I.I: Of Tattered Blood and Broken Bone",
@@ -3717,7 +3920,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 4212118071,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/circle-of-bones_necrotic-cyphers_4212118071.jpg",
     "description": false,
     "debug": {
       "name": "VII: The Severed and the Unmade",
@@ -3747,7 +3950,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 2028468511,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/the-gatehouse_necrotic-cyphers_2028468511.jpg",
     "description": false,
     "debug": {
       "name": "IX.II: The Unmaking",
@@ -4809,6 +5012,46 @@
     "description": false
   },
   {
+    "checklistId": 3142056444,
+    "checklistHash": 1949102307,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "K1 Logistics",
+      "number": 39
+    }
+  },
+  {
+    "checklistId": 3142056444,
+    "checklistHash": 4102839450,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "K1 Revelation",
+      "number": 40
+    }
+  },
+  {
+    "checklistId": 3142056444,
+    "checklistHash": 3978091702,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "K1 Crew Quarters",
+      "number": 41
+    }
+  },
+  {
+    "checklistId": 3142056444,
+    "checklistHash": 2955806106,
+    "screenshot": false,
+    "description": false,
+    "debug": {
+      "name": "K1 Communion",
+      "number": 42
+    }
+  },
+  {
     "checklistId": 3305936921,
     "recordHash": 276019960,
     "screenshot": false,
@@ -5624,7 +5867,7 @@
   {
     "checklistId": 4285512244,
     "recordHash": 3390078226,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/hellmouth_lunas-lost_3390078226.jpg",
     "description": false,
     "debug": {
       "name": "Ghost Fragment: Vell Tarlowe's Ghost",

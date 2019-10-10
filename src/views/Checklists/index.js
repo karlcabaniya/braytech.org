@@ -77,6 +77,7 @@ export class Checklists extends React.Component {
       checklists[2609997025](),
       checklists[1297424116](),
       checklists[2726513366](),
+      checklists[1912364094](),
       checklists[1420597821](),
       checklists[3305936921](),
       checklists[655926402](),

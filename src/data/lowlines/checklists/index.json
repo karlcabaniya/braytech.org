@@ -4197,6 +4197,312 @@
         "number": 99
       },
       "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 3326367698,
+      "bubbleName": false,
+      "checklistHash": 3947020272,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Archer's Line",
+        "place": "The Moon",
+        "name": "Archer's Line",
+        "number": 100
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 3326367698,
+      "bubbleName": false,
+      "checklistHash": 3812883599,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Archer's Line",
+        "place": "The Moon",
+        "name": "Archer's Line",
+        "number": 101
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 3326367698,
+      "bubbleName": false,
+      "checklistHash": 731133614,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Archer's Line",
+        "place": "The Moon",
+        "name": "Archer's Line",
+        "number": 102
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 417490937,
+      "bubbleName": false,
+      "checklistHash": 3147488613,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Sorrow's Harbor",
+        "place": "The Moon",
+        "name": "Sorrow's Harbor",
+        "number": 103
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 417490937,
+      "bubbleName": false,
+      "checklistHash": 3364328658,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Sorrow's Harbor",
+        "place": "The Moon",
+        "name": "Sorrow's Harbor",
+        "number": 104
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 417490937,
+      "bubbleName": false,
+      "checklistHash": 2448388435,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Sorrow's Harbor",
+        "place": "The Moon",
+        "name": "Sorrow's Harbor",
+        "number": 105
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 4195493657,
+      "bubbleName": false,
+      "checklistHash": 2499619401,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Hellmouth",
+        "place": "The Moon",
+        "name": "Hellmouth",
+        "number": 106
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 4195493657,
+      "bubbleName": false,
+      "checklistHash": 340933878,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Hellmouth",
+        "place": "The Moon",
+        "name": "Hellmouth",
+        "number": 107
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 4195493657,
+      "bubbleName": false,
+      "checklistHash": 74989591,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Hellmouth",
+        "place": "The Moon",
+        "name": "Hellmouth",
+        "number": 108
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 4025450777,
+      "bubbleName": false,
+      "checklistHash": 204962005,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Anchor of Light",
+        "place": "The Moon",
+        "name": "Anchor of Light",
+        "number": 109
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 4025450777,
+      "bubbleName": false,
+      "checklistHash": 3138619650,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Anchor of Light",
+        "place": "The Moon",
+        "name": "Anchor of Light",
+        "number": 110
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 4025450777,
+      "bubbleName": false,
+      "checklistHash": 3719379523,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Anchor of Light",
+        "place": "The Moon",
+        "name": "Anchor of Light",
+        "number": 111
+      },
+      "extended": {}
+    }
+  ],
+  "1912364094": [
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 0,
+      "checklistHash": 4062796495,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "place": "The Moon",
+        "number": 1
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 0,
+      "checklistHash": 269847098,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "place": "The Moon",
+        "number": 2
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 0,
+      "checklistHash": 957600697,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "place": "The Moon",
+        "number": 3
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 0,
+      "checklistHash": 2293092716,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "place": "The Moon",
+        "number": 4
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 0,
+      "checklistHash": 2779900411,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "place": "The Moon",
+        "number": 5
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 0,
+      "checklistHash": 3728157446,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "place": "The Moon",
+        "number": 6
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 286194652,
+      "bubbleName": false,
+      "checklistHash": 3977481189,
+      "points": [
+        {
+          "x": -147,
+          "y": -185
+        }
+      ],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Circle of Bones",
+        "place": "The Moon",
+        "name": "Circle of Bones",
+        "number": 7
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 0,
+      "checklistHash": 1568227000,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "place": "The Moon",
+        "number": 8
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 2204642885,
+      "bubbleName": false,
+      "checklistHash": 2115406343,
+      "points": [
+        {
+          "x": -414,
+          "y": 75
+        }
+      ],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "Shrine of Oryx",
+        "place": "The Moon",
+        "name": "Shrine of Oryx",
+        "number": 9
+      },
+      "extended": {}
     }
   ],
   "2360931290": [
@@ -7596,7 +7902,12 @@
         "name": "Hellmouth"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -197,
+          "y": 89
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 4195493657,
       "bubbleName": false
@@ -7765,7 +8076,12 @@
         "name": "Circle of Bones"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -198,
+          "y": -116
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 286194652,
       "bubbleName": false
@@ -7813,7 +8129,12 @@
         "name": "The Gatehouse"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -185,
+          "y": -176
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 1149128373,
       "bubbleName": false
@@ -10698,6 +11019,66 @@
         "number": 38
       },
       "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 3107092550,
+      "bubbleName": false,
+      "checklistHash": 1949102307,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "K1 Logistics",
+        "place": "The Moon",
+        "name": "K1 Logistics",
+        "number": 39
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 848710979,
+      "bubbleName": false,
+      "checklistHash": 4102839450,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "K1 Revelation",
+        "place": "The Moon",
+        "name": "K1 Revelation",
+        "number": 40
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 730551779,
+      "bubbleName": false,
+      "checklistHash": 3978091702,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "K1 Crew Quarters",
+        "place": "The Moon",
+        "name": "K1 Crew Quarters",
+        "number": 41
+      },
+      "extended": {}
+    },
+    {
+      "destinationHash": 290444260,
+      "bubbleHash": 2367480803,
+      "bubbleName": false,
+      "checklistHash": 2955806106,
+      "points": [],
+      "sorts": {
+        "destination": "The Moon",
+        "bubble": "K1 Communion",
+        "place": "The Moon",
+        "name": "K1 Communion",
+        "number": 42
+      },
+      "extended": {}
     }
   ],
   "3305936921": [
@@ -12169,7 +12550,12 @@
         "name": "Hellmouth"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -195,
+          "y": 40
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 4195493657,
       "bubbleName": false,

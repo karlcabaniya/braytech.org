@@ -223,6 +223,38 @@ export const checklists = {
       checklistProgressDescription: i18n.t('Feline friends satisfied'),
       ...options
     }),
+  // jade rabbits
+  1912364094: options =>
+    numberedChecklist('Jade Rabbit', {
+      checklistId: 1912364094,
+      characterBound: true,
+      items: checklistItems(1912364094, true),
+      itemLocation: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination && definitionDestination.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return `${bubbleName}, ${destinationName}`;
+      },
+      itemLocationExt: i => {
+        const definitionDestination = manifest.DestinyDestinationDefinition[i.destinationHash];
+        const definitionPlace = definitionDestination && manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+        const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === i.bubbleHash);
+
+        const destinationName = definitionDestination && definitionDestination.displayProperties.name;
+        const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
+        const bubbleName = (definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name) || i.bubbleName;
+
+        return [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+      },
+      checklistItemName: i18n.t('Jade Rabbit'),
+      checklistItemName_plural: i18n.t('Jade Rabbits'),
+      checklistIcon: 'destiny-destiny',
+      checklistProgressDescription: i18n.t('Rabbits with rice cake'),
+      ...options
+    }),
   // sleeper nodes
   365218222: options =>
     checklist({
