@@ -121,15 +121,6 @@ class Header extends React.Component {
         group: 0
       },
       {
-        name: t('This Week'),
-        desc: t('Prestigious records and valued items up for grabs this week'),
-        slug: '/this-week',
-        exact: true,
-        profile: true,
-        inline: true,
-        group: 0
-      },
-      {
         name: t('Checklists'),
         desc: t('Complete lists of collectibles, scannables, etc.'),
         slug: '/checklists',
@@ -148,12 +139,12 @@ class Header extends React.Component {
         group: 0
       },
       {
-        name: t('Reports'),
-        desc: t('Explore your Post Game Carnage Reports'),
-        slug: '/reports',
-        exact: false,
+        name: t('This Week'),
+        desc: t('Prestigious records and valued items up for grabs this week'),
+        slug: '/this-week',
+        exact: true,
         profile: true,
-        inline: !isProfileRoute || viewport.width >= 1500,
+        inline: true,
         group: 0
       },
       {
@@ -172,6 +163,15 @@ class Header extends React.Component {
         exact: false,
         profile: true,
         inline: !isProfileRoute || viewport.width >= 1320,
+        group: 0
+      },
+      {
+        name: t('Reports'),
+        desc: t('Explore your Post Game Carnage Reports'),
+        slug: '/reports',
+        exact: false,
+        profile: true,
+        inline: !isProfileRoute || viewport.width >= 1500,
         group: 0
       },
       {

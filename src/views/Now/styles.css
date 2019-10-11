@@ -83,60 +83,6 @@
   margin: 12px 0 0;
 }
 
-#sit-rep .module .content.highlight.crucible .text ~ .modes {
-  margin: 20px 0 0;
-}
-
-#sit-rep .module .content.highlight.crucible .modes {
-  position: relative;
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: minmax(60px, 120px) minmax(60px, 120px);
-}
-
-#sit-rep .module .content.highlight.crucible .modes > div {
-  position: relative;
-  display: grid;
-  grid-gap: 4px;
-  grid-template-columns: 1fr;
-}
-
-#sit-rep .module .content.highlight.crucible .modes > div .icon svg {
-  width: 100%;
-  height: auto;
-  transform: scale(1.2);
-}
-
-#sit-rep .module .content.highlight.crucible .modes > div .icon svg .polygon.inner {
-  animation: rotate-linear 20s infinite linear;
-  transform-origin: center;
-}
-
-#sit-rep .module .content.highlight.crucible .modes > div .icon svg .polygon.inner.ani {
-  animation: sit-rep-rotate-and-scale-out 5s infinite ease-out;
-  transform-origin: center;
-}
-
-@keyframes sit-rep-rotate-and-scale-out {
-  0%,
-  100% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  12.5% {
-    opacity: 0.4;
-  }
-  25% {
-    transform: scale(1.2);
-    opacity: 0;
-  }
-}
-
-#sit-rep .module .content.highlight.crucible .modes > div .text {
-  text-align: center;
-  font-size: 16px;
-}
-
 #sit-rep .list.activities {
   display: grid;
   grid-gap: 3px;
@@ -219,7 +165,6 @@
 }
 
 #sit-rep .season-pass .status {
-  
 }
 
 #sit-rep .season-pass .status .season-text {
@@ -318,8 +263,6 @@
   animation: animation-update-flash 1.2s linear 0s infinite forwards;
 }
 
-
-
 @media screen and (max-width: 1440px) {
   #sit-rep > .module.head,
   #sit-rep > .padder {
@@ -337,10 +280,11 @@
 @media screen and (max-width: 1023px) {
   #sit-rep .season-pass {
     display: grid;
-    grid-template-columns: 30px 2fr 30px;}
+    grid-template-columns: 30px 2fr 30px;
+  }
   #sit-rep .season-pass .status {
     grid-column: 1/4;
-}
+  }
 }
 
 @media screen and (max-width: 600px) {

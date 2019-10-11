@@ -17,14 +17,6 @@ import Ranks from '../../components/Ranks';
 import Roster from '../../components/Roster';
 import Items from '../../components/Items';
 
-import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
-import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
-import { ReactComponent as CrucibleIconBreakthrough } from './icons/breakthrough.svg';
-import { ReactComponent as CrucibleIconClash } from './icons/clash.svg';
-import { ReactComponent as CrucibleIconShowdown } from './icons/showdown.svg';
-import { ReactComponent as CrucibleIconTeamScorched } from './icons/team-scorched.svg';
-import { ReactComponent as CrucibleIconCountdown } from './icons/countdown.svg';
-
 import './styles.css';
 
 class Now extends React.Component {
@@ -115,63 +107,7 @@ class Now extends React.Component {
 
     // console.log(definitionMilestoneFLashpoint, milestoneFlashpointQuestItem, definitionFlashpointVendor)
 
-    const crucibleRotators = [
-      3753505781, // Iron Banner
-      2303927902, // Clash
-      3780095688, // Supremacy
-      1219083526, // Team Scorched
-      4209226441, // Hardware
-      952904835, // Momentum Control
-      1102379070, // Mayhem
-      3011324617, // Breakthrough
-      3646079260, // Countdown
-      1457072306, // Showdown
-      3239164160, // Lockdown
-      740422335, // Survival
-      920826395 // Doubles
-    ];
 
-    const crucibleModeIcons = {
-      3753505781: <CrucibleIconDefault />,
-      2303927902: <CrucibleIconClash />,
-      3780095688: <CrucibleIconDefault />,
-      1219083526: <CrucibleIconTeamScorched />,
-      4209226441: <CrucibleIconDefault />,
-      952904835: <CrucibleIconDefault />,
-      1102379070: <CrucibleIconMayhem />,
-      3011324617: <CrucibleIconBreakthrough />,
-      3646079260: <CrucibleIconCountdown />,
-      1457072306: <CrucibleIconShowdown />,
-      3239164160: <CrucibleIconDefault />,
-      740422335: <CrucibleIconDefault />,
-      920826395: <CrucibleIconDefault />
-    };
-
-    const featuredCrucibleModes = {
-      activities: characterActivities[member.characterId].availableActivities.filter(a => {
-        if (!a.activityHash) return false;
-        const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
-
-        if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(5) && crucibleRotators.includes(definitionActivity.hash)) {
-          a.displayProperties = definitionActivity.displayProperties;
-          a.icon = crucibleModeIcons[definitionActivity.hash] || null;
-          return true;
-        }
-
-        return false;
-      }),
-      displayProperties: {
-        name: manifest.DestinyPlaceDefinition[4088006058].displayProperties.name,
-        description: (
-          <p>
-            <em>{t('The following Crucible modes are currently in rotation and available for you to test your vigour in against other Guardians.')}</em>
-          </p>
-        )
-      },
-      headings: {
-        rotator: t('Rotator playlists')
-      }
-    };
 
     // console.log(featuredCrucibleModes);
 
@@ -349,7 +285,7 @@ class Now extends React.Component {
               <div className='info'>{t('Beep-boop?')}</div>
             )}
           </div>
-          <div className='content highlight crucible'>
+          {/* <div className='content highlight crucible'>
             <div className='module-header'>
               <div className='sub-name'>{featuredCrucibleModes.displayProperties.name}</div>
             </div>
@@ -365,7 +301,7 @@ class Now extends React.Component {
                 );
               })}
             </div>
-          </div>
+          </div> */}
           <div className='content highlight'>
             <div className='module-header'>
               <div className='sub-name'>{weeklyNightfallStrikes.displayProperties.name}</div>
@@ -470,7 +406,6 @@ class Now extends React.Component {
             </ul>
           </div>
         </div>
-
         <div className='module season-pass'>
           <div className='content status'>
             <div className='module-header'>
