@@ -2,7 +2,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import cx from 'classnames';
 
 import Maps from '../../components/Maps';
 
@@ -22,7 +21,7 @@ class MapsView extends React.Component {
   render() {
     return (
       <div className='view' id='maps'>
-        <Maps id={this.props.match.params.id} />
+        <Maps {...this.props.match.params} />
       </div>
     );
   }
@@ -30,8 +29,7 @@ class MapsView extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member,
-    collectibles: state.collectibles
+    
   };
 }
 

@@ -265,7 +265,7 @@ class App extends React.Component {
                           <Route path='/character-select' exact component={CharacterSelect} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />
                           <Route path='/read/:kind?/:hash?' exact component={Read} />
-                          <Route path='/maps/:id?' render={route => <Maps {...route} />} />
+                          <Route path='/maps/:destination?/:highlight?' render={route => <Maps {...route} />} />
                           <Route path='/settings' exact render={route => <Settings {...route} availableLanguages={this.availableLanguages} />} />
                           <Route path='/suggestions/:id?' render={route => <Suggestions {...route} />} />
                           <Route path='/faq' exact component={FAQ} />

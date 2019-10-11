@@ -57,6 +57,28 @@
   animation: rotate-linear 4s linear infinite;
 }
 
+.map-omega .leaflet-container .icon-marker.highlight::before,
+.map-omega .leaflet-container .icon-marker.highlight::after {
+  content: ' ';
+  position: absolute;
+  top: -500%;
+  left: -500%;
+  width: 1000%;
+  height: 1000%;
+  margin: 6px 0 0 6px;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 100%;
+  animation: loading-beacon 5s linear 0.5s infinite;
+}
+
+.map-omega .leaflet-container .icon-marker.highlight::after {
+  box-shadow: 0 0 0 2px rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.1);
+  animation: loading-beacon 2s linear 0s infinite;
+}
+
 .map-omega .leaflet-container .icon-marker .wrapper {
   position: absolute;
   left: 50%;
@@ -113,11 +135,12 @@
   opacity: 0.6;
 }
 
+/* small hack to lighten adventure icons a bit */
 .map-omega .leaflet-container .icon-marker.checklistId-4178338182 {
   opacity: 0.8;
 }
 
-.map-omega .leaflet-container .icon-marker.completed,
+.map-omega .leaflet-container .icon-marker.completed:not(.highlight),
 .map-omega .leaflet-container .icon-marker.completed.checklistId-4178338182 {
   opacity: 0.2;
 }

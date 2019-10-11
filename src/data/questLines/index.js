@@ -238,10 +238,52 @@ export const rewardsQuestLineOverrides = {
       quantity: 6
     }
   ],
+  // Faculties of the Skull
+  613601972: [
+    {
+      itemHash: 2232171099, // Deathbringer
+      quantity: 1
+    }
+  ],
+  // Tainted Lullaby
+  3908666296: [
+    {
+      itemHash: 2232171099, // Deathbringer
+      quantity: 1
+    }
+  ],
+  // Marrow's Elegy
+  1479328354: [
+    {
+      itemHash: 2232171099, // Deathbringer
+      quantity: 1
+    }
+  ],
+  // Thy Honored Conduction
+  926942410: [
+    {
+      itemHash: 2232171099, // Deathbringer
+      quantity: 1
+    }
+  ],
+  // Of Darkest Harmony
+  1325063399: [
+    {
+      itemHash: 2232171099, // Deathbringer
+      quantity: 1
+    }
+  ],
+  // Choir of the Damned
+  1961485542: [
+    {
+      itemHash: 2232171099, // Deathbringer
+      quantity: 1
+    }
+  ],
   // A Death of Nightmares
   2887971121: [
     {
-      itemHash: 2232171099,
+      itemHash: 2232171099, // Deathbringer
       quantity: 1
     }
   ]

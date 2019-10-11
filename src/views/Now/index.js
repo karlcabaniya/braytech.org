@@ -33,7 +33,7 @@ class Now extends React.Component {
 
     const { member, viewport } = this.props;
     const characterProgressions = member.data.profile.characterProgressions.data;
-
+    
     this.state = {
       seasonPassRewardsPage: Math.ceil((characterProgressions[member.characterId].progressions[1628407317].level + 1) / this.seasonPassItemsPerPage(viewport.width))
     };
@@ -47,6 +47,13 @@ class Now extends React.Component {
   componentDidUpdate(p, s) {
     if (s.seasonPassRewardsPage !== this.state.seasonPassRewardsPage) {
       this.props.rebindTooltips();
+    }
+
+    if (p.member.data.profile.characterProgressions.data[p.member.characterId].progressions[1628407317].level !== this.props.member.data.profile.characterProgressions.data[this.props.member.characterId].progressions[1628407317].level) {
+      this.setState(p => ({
+        ...p,
+        seasonPassRewardsPage: Math.ceil((this.props.member.data.profile.characterProgressions.data[this.props.member.characterId].progressions[1628407317].level + 1) / this.seasonPassItemsPerPage(this.props.viewport.width))
+      }));
     }
   }
 
