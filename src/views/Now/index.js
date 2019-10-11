@@ -304,6 +304,36 @@ class Now extends React.Component {
           </div> */}
           <div className='content highlight'>
             <div className='module-header'>
+              <div className='sub-name'>{dailyHeroicStories.displayProperties.name}</div>
+            </div>
+            <ul className='list activities'>
+              {orderBy(
+                dailyHeroicStories.activities.map((a, i) => {
+                  const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+                  return {
+                    light: definitionActivity.activityLightLevel,
+                    timeToComplete: definitionActivity.timeToComplete || 20,
+                    el: (
+                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
+                        <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
+                        <div>
+                          <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
+                          <div className='light'>
+                            <span>{definitionActivity.activityLightLevel}</span>
+                          </div>
+                        </div>
+                      </li>
+                    )
+                  };
+                }),
+                [m => m.timeToComplete],
+                ['asc']
+              ).map(e => e.el)}
+            </ul>
+          </div>
+          <div className='content highlight'>
+            <div className='module-header'>
               <div className='sub-name'>{weeklyNightfallStrikes.displayProperties.name}</div>
             </div>
             {weeklyNightfallStrikes.activities.scored.length ? (
@@ -374,36 +404,6 @@ class Now extends React.Component {
             ) : (
               <div className='info'>Nightfalls are currently unavailable.</div>
             )}
-          </div>
-          <div className='content highlight'>
-            <div className='module-header'>
-              <div className='sub-name'>{dailyHeroicStories.displayProperties.name}</div>
-            </div>
-            <ul className='list activities'>
-              {orderBy(
-                dailyHeroicStories.activities.map((a, i) => {
-                  const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
-
-                  return {
-                    light: definitionActivity.activityLightLevel,
-                    timeToComplete: definitionActivity.timeToComplete || 20,
-                    el: (
-                      <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={a.activityHash} data-mode='175275639'>
-                        <div className='name'>{definitionActivity.selectionScreenDisplayProperties && definitionActivity.selectionScreenDisplayProperties.name ? definitionActivity.selectionScreenDisplayProperties.name : definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
-                        <div>
-                          <div className='time'>{definitionActivity.timeToComplete ? <>{t('{{number}} mins', { number: definitionActivity.timeToComplete || 0 })}</> : null}</div>
-                          <div className='light'>
-                            <span>{definitionActivity.activityLightLevel}</span>
-                          </div>
-                        </div>
-                      </li>
-                    )
-                  };
-                }),
-                [m => m.timeToComplete],
-                ['asc']
-              ).map(e => e.el)}
-            </ul>
           </div>
         </div>
         <div className='module season-pass'>
