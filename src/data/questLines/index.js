@@ -216,7 +216,7 @@ export const rewardsQuestLineOverrides = {
       quantity: 1
     }
   ],
-  // Joy in Suffering 
+  // Joy in Suffering
   2039588176: [
     {
       itemHash: 3089417789,
@@ -237,57 +237,31 @@ export const rewardsQuestLineOverrides = {
       itemHash: 1196526889,
       quantity: 6
     }
-  ],
-  // Faculties of the Skull
-  613601972: [
-    {
-      itemHash: 2232171099, // Deathbringer
-      quantity: 1
-    }
-  ],
-  // Tainted Lullaby
-  3908666296: [
-    {
-      itemHash: 2232171099, // Deathbringer
-      quantity: 1
-    }
-  ],
-  // Marrow's Elegy
-  1479328354: [
-    {
-      itemHash: 2232171099, // Deathbringer
-      quantity: 1
-    }
-  ],
-  // Thy Honored Conduction
-  926942410: [
-    {
-      itemHash: 2232171099, // Deathbringer
-      quantity: 1
-    }
-  ],
-  // Of Darkest Harmony
-  1325063399: [
-    {
-      itemHash: 2232171099, // Deathbringer
-      quantity: 1
-    }
-  ],
-  // Choir of the Damned
-  1961485542: [
-    {
-      itemHash: 2232171099, // Deathbringer
-      quantity: 1
-    }
-  ],
-  // A Death of Nightmares
-  2887971121: [
-    {
-      itemHash: 2232171099, // Deathbringer
-      quantity: 1
-    }
   ]
 };
+
+export const rewardsQuestLineOverridesShadowkeep = [
+  // Faculties of the Skull
+  {
+    itemHash: 613601972,
+    rewards: [
+      {
+        itemHash: 2232171099, // Deathbringer
+        quantity: 1
+      }
+    ]
+  },
+  // What's This… What's This?
+  {
+    itemHash: 1295283020,
+    rewards: [
+      {
+        itemHash: 4103414242, // Divinity
+        quantity: 1
+      }
+    ]
+  }
+];
 
 export const setDataQuestLineOverrides = {
   213655744: [
@@ -330,4 +304,4 @@ export const setDataQuestLineOverrides = {
       itemHash: '2412366792_enigmatic_blueprint'
     }
   ]
-}
+};

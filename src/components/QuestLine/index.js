@@ -7,7 +7,7 @@ import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
-import { stepsWithRecords, rewardsQuestLineOverrides, setDataQuestLineOverrides } from '../../data/questLines';
+import { stepsWithRecords, rewardsQuestLineOverrides, rewardsQuestLineOverridesShadowkeep, setDataQuestLineOverrides } from '../../data/questLines';
 import { checklists, lookup } from '../../utils/checklists';
 import ObservedImage from '../ObservedImage';
 import Records from '../Records/';
@@ -21,6 +21,11 @@ class QuestLine extends React.Component {
     let rewards = (questLine.value && questLine.value.itemValue && questLine.value.itemValue.length && questLine.value.itemValue.filter(v => v.itemHash !== 0)) || [];
 
     if (rewardsQuestLineOverrides[questLine.hash]) rewards = rewardsQuestLineOverrides[questLine.hash];
+
+    const setData = this.getSetDataQuestLine(questLine);
+    const rewardsShadowkeep = setData && rewardsQuestLineOverridesShadowkeep.find(s => setData.find(d => d.itemHash === s.itemHash));
+
+    if (rewardsShadowkeep) rewards = rewardsShadowkeep.rewards;
 
     return rewards;
   };
