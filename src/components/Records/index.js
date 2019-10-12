@@ -157,7 +157,8 @@ class Records extends React.Component {
       const recordData = recordScope === 1 ? characterRecords && characterRecords[characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
 
       // if (definitionRecord.intervalInfo.intervalObjectives.length)
-      console.log(recordData);
+
+      // console.log(recordData);
 
       let link = selfLink(hash);
 
@@ -304,7 +305,7 @@ class Records extends React.Component {
         );
       }
 
-      console.log(recordState);
+      // console.log(recordState);
 
       const enumerableState = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
 

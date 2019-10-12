@@ -718,5 +718,10 @@
     "date": "2019-10-10T12:42:46.485Z",
     "version": "2.9.36",
     "content": "- updated some more map stuff\n- added jade rabbits checklist"
+  },
+  {
+    "date": "2019-10-12T12:29:38.147Z",
+    "version": "2.9.39",
+    "content": "- made an icon for Jade Rabbits\n- added a task to force everyone to re-auth\n- _Now_ and _This Week_ stuff\n- QuestLine stuff"
   }
 ]

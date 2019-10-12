@@ -15,4 +15,9 @@ export default function runOnceTasks() {
     ls.update('history.tasks', { id: 'resetlang_august192019' });
   }
 
+  if (!history.find(t => t.id === 'reauth_october122019')) {
+    ls.del('setting.auth');
+    ls.update('history.tasks', { id: 'reauth_october122019' });
+  }
+
 }

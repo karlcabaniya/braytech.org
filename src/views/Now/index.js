@@ -25,7 +25,7 @@ class Now extends React.Component {
 
     const { member, viewport } = this.props;
     const characterProgressions = member.data.profile.characterProgressions.data;
-    
+
     this.state = {
       seasonPassRewardsPage: Math.ceil((characterProgressions[member.characterId].progressions[1628407317].level + 1) / this.seasonPassItemsPerPage(viewport.width))
     };
@@ -81,7 +81,7 @@ class Now extends React.Component {
     const characterActivities = member.data.profile.characterActivities.data;
     // const profileTransitoryData = member.data.profile.profileTransitoryData.data;
 
-    const wellRestedState = utils.isWellRested(characterProgressions[character.characterId]);
+    // const wellRestedState = utils.isWellRested(characterProgressions[character.characterId]);
 
     // console.log(wellRestedState)
 
@@ -106,8 +106,6 @@ class Now extends React.Component {
     const definitionFlashpointFaction = definitionFlashpointVendor && manifest.DestinyFactionDefinition[definitionFlashpointVendor.factionHash];
 
     // console.log(definitionMilestoneFLashpoint, milestoneFlashpointQuestItem, definitionFlashpointVendor)
-
-
 
     // console.log(featuredCrucibleModes);
 
@@ -160,17 +158,44 @@ class Now extends React.Component {
       }
     };
 
-    console.log(weeklyNightfallStrikeActivities, weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]));
+    // console.log(weeklyNightfallStrikeActivities, weeklyNightfallStrikeActivities.map(a => manifest.DestinyActivityDefinition[a.activityHash]));
 
-    console.log(weeklyNightfallStrikes);
+    // console.log(weeklyNightfallStrikes);
 
     // console.log(profileTransitoryData)
 
-    console.log(characterProgressions[member.characterId], characterProgressions[member.characterId].progressions[1628407317]);
+    // console.log(characterProgressions[member.characterId], characterProgressions[member.characterId].progressions[1628407317]);
 
     // characterProgressions[member.characterId].progressions[1628407317].rewardItemStates.forEach((i, k) => {
     //   if (enums.enumerateProgressionRewardItemState(i).earned) console.log(manifest.DestinyInventoryItemDefinition[manifest.DestinyProgressionDefinition[1628407317].rewardItems[k].itemHash].displayProperties.name);
     // });
+
+    // const dailyBlackArmoryForges = {
+    //   activities: characterActivities[member.characterId].availableActivities.filter(a => {
+    //     const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+    //     if (definitionActivity && definitionActivity.activityTypeHash === 838603889) {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   }),
+    //   displayProperties: {
+    //     name: t('Black Armory Forges')
+    //   },
+    //   headings: {
+    //     current: t('Current forge')
+    //   }
+    // };
+
+    // console.log(characterActivities[member.characterId].availableActivities.map(a => ({name: manifest.DestinyActivityDefinition[a.activityHash] && manifest.DestinyActivityDefinition[a.activityHash].displayProperties && manifest.DestinyActivityDefinition[a.activityHash].displayProperties.name, ...a, def: manifest.DestinyActivityDefinition[a.activityHash]})))
+
+    // characterActivities[member.characterId].availableActivities.filter(a => {
+    //   if (a.activityModeTypes && a.activityModeTypes.length && a.activityModeTypes.includes(46) && !a.guidedGame && a.modifiers.length > 2) return a;
+    //   return false
+    // }).forEach(a => {
+    //   console.log(a.displayProperties.name, a.hash, JSON.stringify(a.activityModeTypes))
+    // })
 
     const seasonPassItemsPerPage = this.seasonPassItemsPerPage(viewport.width);
 
@@ -405,6 +430,24 @@ class Now extends React.Component {
               <div className='info'>Nightfalls are currently unavailable.</div>
             )}
           </div>
+          {/* <div className='content highlight'>
+            <div className='module-header'>
+              <div className='sub-name'>{dailyBlackArmoryForges.displayProperties.name}</div>
+            </div>
+            {dailyBlackArmoryForges.activities.length ? (
+              <ul className='list activities'>
+                {dailyBlackArmoryForges.activities.map((a, i) => {
+                  const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+                  return (
+                    <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={definitionActivity.activityTypeHash} data-playlist={a.activityHash}>
+                      <div className='name'>{definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : null}
+          </div> */}
         </div>
         <div className='module season-pass'>
           <div className='content status'>

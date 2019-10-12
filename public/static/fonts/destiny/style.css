@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?zcsuc0') format('woff');
+  src: url('destiny.woff?blw3cl') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -114,6 +114,9 @@
 }
 .destiny-cat_statues:before {
   content: "\e9dd";
+}
+.destiny-jade_rabbit:before {
+  content: "\e92a";
 }
 .destiny-lore_scholar .path1:before {
   content: "\e923";

@@ -251,7 +251,7 @@ export const checklists = {
       },
       checklistItemName: i18n.t('Jade Rabbit'),
       checklistItemName_plural: i18n.t('Jade Rabbits'),
-      checklistIcon: 'destiny-destiny',
+      checklistIcon: 'destiny-jade_rabbit',
       checklistProgressDescription: i18n.t('Rabbits with rice cake'),
       ...options
     }),

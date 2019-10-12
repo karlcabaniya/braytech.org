@@ -135,8 +135,6 @@
   margin-bottom: 0;
 }
 
-
-
 @media screen and (max-width: 1500px) {
 
   .quest-line .sources {
@@ -164,6 +162,26 @@
 
 @media screen and (max-width: 1024px) {
 
+  .quest-line .current-step {
+    position: relative;
+    margin: 20px 0 0;
+    padding: 20px 0 22px;
+  }
+
+  .quest-line .current-step::before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: -3rem;
+    width: calc(100% + 6rem);
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    z-index: 0;
+  }
+
+  .quest-line .current-step > * {
+    position: relative;
+  }
 
 }
 
@@ -175,6 +193,11 @@
 
   .quest-line > .header .name {
     font-size: 24px;
+  }
+
+  .quest-line .current-step::before {
+    left: -2rem;
+    width: calc(100% + 4rem);
   }
 
 }

@@ -152,7 +152,7 @@ class QuestLine extends React.Component {
               </>
             ) : null}
             {steps && steps.length > 3 ? (
-              <>
+              <div className='current-step'>
                 <h4>{t('Current step')}</h4>
                 <div className='steps'>
                   {steps
@@ -222,7 +222,7 @@ class QuestLine extends React.Component {
                     </div>
                   </>
                 ) : null}
-              </>
+              </div>
             ) : null}
           </div>
           <div className='module'>

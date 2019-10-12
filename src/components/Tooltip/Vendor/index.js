@@ -44,7 +44,6 @@ class Vendor extends React.Component {
       );
     } else {
 
-      console.log(definitionVendor.hash)
       const name = definitionVendor.displayProperties && definitionVendor.displayProperties.name ? definitionVendor.displayProperties.name : t('Unknown');
 
       const subTitle = definitionVendor.displayProperties && definitionVendor.displayProperties.subtitle;
@@ -69,7 +68,7 @@ class Vendor extends React.Component {
       const extras = nodes && nodes.find(d => d.vendorHash === definitionVendor.hash);
       const screenshot = extras && extras.screenshot;
 
-      console.log(definitionVendor.hash, (definitionBubble && definitionBubble.hash) || 'No bubble')
+      // console.log(definitionVendor.hash, (definitionBubble && definitionBubble.hash) || 'No bubble')
 
       return (
         <>

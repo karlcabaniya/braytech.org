@@ -20,7 +20,7 @@ class Activity extends React.Component {
     const definitionActivityModeParent = definitionActivityMode && definitionActivityMode.parentHashes && definitionActivityMode.parentHashes.length && manifest.DestinyActivityModeDefinition[definitionActivityMode.parentHashes[0]];
     const definitionActivityPlaylist = manifest.DestinyActivityDefinition[playlist];
     const definitionActivityType = definitionActivityPlaylist && definitionActivityPlaylist.activityTypeHash && manifest.DestinyActivityTypeDefinition[definitionActivityPlaylist.activityTypeHash];
-    const definitionPlaceDefinition = definitionActivity.placeHash && manifest.DestinyPlaceDefinition[definitionActivity.placeHash];
+    const definitionPlaceDefinition = definitionActivity && definitionActivity.placeHash && manifest.DestinyPlaceDefinition[definitionActivity.placeHash];
 
     if (!definitionActivity) {
       console.warn('Hash not found');
