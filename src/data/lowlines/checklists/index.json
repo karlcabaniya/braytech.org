@@ -11085,7 +11085,12 @@
       "bubbleHash": 3107092550,
       "bubbleName": false,
       "checklistHash": 1949102307,
-      "points": [],
+      "points": [
+        {
+          "x": -690,
+          "y": -233
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "K1 Logistics",
@@ -11100,7 +11105,12 @@
       "bubbleHash": 848710979,
       "bubbleName": false,
       "checklistHash": 4102839450,
-      "points": [],
+      "points": [
+        {
+          "x": 307,
+          "y": 156
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "K1 Revelation",
@@ -11115,7 +11125,12 @@
       "bubbleHash": 730551779,
       "bubbleName": false,
       "checklistHash": 3978091702,
-      "points": [],
+      "points": [
+        {
+          "x": -340,
+          "y": -326
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "K1 Crew Quarters",
@@ -11130,7 +11145,12 @@
       "bubbleHash": 2367480803,
       "bubbleName": false,
       "checklistHash": 2955806106,
-      "points": [],
+      "points": [
+        {
+          "x": 11,
+          "y": -376
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "bubble": "K1 Communion",
