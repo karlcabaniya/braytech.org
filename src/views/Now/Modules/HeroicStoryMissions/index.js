@@ -8,7 +8,7 @@ import manifest from '../../../../utils/manifest';
 
 import './styles.css';
 
-class Flashpoint extends React.Component {
+class HeroicStoryMissions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -93,4 +93,4 @@ export default compose(
     mapDispatchToProps
   ),
   withTranslation()
-)(Flashpoint);
+)(HeroicStoryMissions);

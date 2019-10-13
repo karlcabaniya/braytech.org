@@ -7,7 +7,7 @@ import Ranks from '../../../../components/Ranks';
 
 import './styles.css';
 
-class Flashpoint extends React.Component {
+class RanksComp extends React.Component {
   constructor(props) {
     super(props);
 
@@ -57,4 +57,4 @@ export default compose(
     mapDispatchToProps
   ),
   withTranslation()
-)(Flashpoint);
+)(RanksComp);

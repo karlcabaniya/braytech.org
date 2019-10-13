@@ -9,7 +9,7 @@ import * as enums from '../../../../utils/destinyEnums';
 
 import './styles.css';
 
-class Flashpoint extends React.Component {
+class VanguardStrikes extends React.Component {
   constructor(props) {
     super(props);
 
@@ -147,4 +147,4 @@ export default compose(
     mapDispatchToProps
   ),
   withTranslation()
-)(Flashpoint);
+)(VanguardStrikes);
