@@ -1,0 +1,10 @@
+.seasonal-artifact {
+  position: relative;
+}
+
+.seasonal-artifact .image.artifact {
+  top: -20%;
+  width: 100%;
+  padding-bottom: 100%;
+  height: unset;
+}

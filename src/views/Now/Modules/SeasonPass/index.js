@@ -165,7 +165,7 @@ class SeasonPass extends React.Component {
 
     return (
       <>
-        <div className='status'>
+        <div className='module status'>
           <div className='module-header'>
             <div className='sub-name'>{t('Season')}</div>
           </div>

@@ -6,6 +6,7 @@ import HeroicStoryMissions from './Modules/HeroicStoryMissions';
 import VanguardStrikes from './Modules/VanguardStrikes';
 import Ranks from './Modules/Ranks';
 import SeasonPass from './Modules/SeasonPass';
+import SeasonalArtifact from './Modules/SeasonalArtifact';
 
 import './styles.css';
 
@@ -61,6 +62,15 @@ class Now extends React.Component {
       {
         className: [],
         cols: [
+          // {
+          //   className: [],
+          //   mods: [
+          //     {
+          //       className: ['seasonal-artifact'],
+          //       component: <SeasonalArtifact />
+          //     }
+          //   ]
+          // },
           {
             className: [],
             mods: [
