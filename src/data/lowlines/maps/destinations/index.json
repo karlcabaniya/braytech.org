@@ -3498,6 +3498,62 @@
               "y": 763
             }
           ]
+        },
+        {
+          "hash": 4033993124,
+          "name": "Hall of Wisdom",
+          "id": "hall-of-wisdom",
+          "type": "suburb",
+          "sub": true,
+          "nodes": [
+            {
+              "type": "title",
+              "x": -355,
+              "y": -146
+            }
+          ]
+        },
+        {
+          "hash": 877913945,
+          "name": "Temple of Crota",
+          "id": "temple-of-crota",
+          "type": "suburb",
+          "sub": true,
+          "nodes": [
+            {
+              "type": "title",
+              "x": 125,
+              "y": -288
+            }
+          ]
+        },
+        {
+          "hash": 1008270286,
+          "name": "The World's Grave",
+          "id": "the-worlds-grave",
+          "type": "suburb",
+          "sub": true,
+          "nodes": [
+            {
+              "type": "title",
+              "x": 60,
+              "y": -133
+            }
+          ]
+        },
+        {
+          "hash": 1973847113,
+          "name": "Chamber of Night",
+          "id": "chamber-of-night",
+          "type": "suburb",
+          "sub": true,
+          "nodes": [
+            {
+              "type": "title",
+              "x": -71,
+              "y": -251
+            }
+          ]
         }
       ]
     }

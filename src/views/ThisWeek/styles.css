@@ -5,8 +5,7 @@
   width: 100%;
 }
 
-#this-week > .padder,
-#this-week > .module.head {
+#this-week .group {
   width: 100%;
   padding: 3rem;
   display: grid;
@@ -14,21 +13,21 @@
   grid-gap: 3rem;
 }
 
-#this-week > .module.head {
+#this-week .group.head {
   padding: 4rem 3rem 3rem;
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-#this-week > .module.head .text p {
+#this-week .group.head .module .text p {
   font-size: 16px;
 }
 
-#this-week > .module.head .text p:last-child {
+#this-week .group.head .module .text p:last-child {
   font-size: 14px;
 }
 
-#this-week .module .content.highlight .module-header {
-  margin: 24px 0 0;
+#this-week .group.head .module .module-header {
+  margin: 24px 0 20px;
 }
 
 #this-week .module .sub-header ~ .sub-header {
@@ -71,15 +70,14 @@
   font-weight: 500;
 }
 
-#this-week .module .content:first-child .module-header {
-  margin: 12px 0 0;
+#this-week .module:first-child .module-header {
+  margin-top: 12px;
 }
 
-#this-week .module .content.highlight .module-header {
-  margin: 24px 0 20px;
-}
 
-#this-week .module .content > .aside {
+
+
+#this-week .module .aside {
   margin: 10px 0 0;
   font-size: 14px;
   font-style: italic;
@@ -91,20 +89,6 @@
 #this-week .module .collection-items,
 #this-week .module .inventory-items {
   grid-template-columns: 1fr;
-}
-
-#this-week .module:not(.head) .content + .content {
-  margin: 2rem 0 0;
-}
-
-#this-week .module .list + .list {
-  margin: 7px 0 0;
-}
-
-#this-week .module .collection-items li:hover,
-#this-week .module .inventory-items li:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-  color: rgba(255, 255, 255, 1);
 }
 
 #this-week .module .list.modifiers li {
@@ -145,96 +129,24 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-#this-week .module .raid-challenge {
-  display: grid;
-  grid-template-columns: 48px auto;
-  grid-gap: 1rem;
-  align-items: flex-start;
-}
 
-#this-week .module .raid-challenge .name {
-  margin: 0 0 3px;
-}
 
-#this-week .module .raid-challenge .description {
-}
 
-#this-week .module .raid-challenge .description p {
-  color: rgba(255, 255, 255, 0.4);
-  line-height: normal;
-}
-
-#this-week .module .content.crucible .module-header ~ .text {
-  margin: 20px 0 0;
-}
-
-#this-week .module .crucible-modes {
-  position: relative;
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: minmax(60px, 120px) minmax(60px, 120px);
-}
-
-#this-week .module .crucible-modes > div {
-  position: relative;
-  display: grid;
-  grid-gap: 4px;
-  grid-template-columns: 1fr;
-}
-
-#this-week .module .crucible-modes > div .icon svg {
-  width: 100%;
-  height: auto;
-  transform: scale(1.2);
-}
-
-#this-week .module .crucible-modes > div .icon svg .polygon.inner {
-  animation: rotate-linear 20s infinite linear;
-  transform-origin: center;
-}
-
-#this-week .module .crucible-modes > div .icon svg .polygon.inner.ani {
-  animation: crucible-modes-rotate-and-scale-out 5s infinite ease-out;
-  transform-origin: center;
-}
-
-@keyframes crucible-modes-rotate-and-scale-out {
-  0%,
-  100% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  12.5% {
-    opacity: 0.4;
-  }
-  25% {
-    transform: scale(1.2);
-    opacity: 0;
-  }
-}
-
-#this-week .module .crucible-modes > div .text {
-  text-align: center;
-  font-size: 16px;
-}
 
 @media screen and (max-width: 1440px) {
-  #this-week > .padder,
-  #this-week > .module.head {
+  #this-week .group {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  #this-week > .padder,
-  #this-week > .module.head {
+  #this-week .group {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media screen and (max-width: 600px) {
-  #this-week > .padder,
-  #this-week > .module.head {
+  #this-week .group {
     padding: 2rem;
     grid-template-columns: 1fr;
     grid-gap: 2rem;

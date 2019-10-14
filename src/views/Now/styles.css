@@ -1,11 +1,11 @@
-#sit-rep {
+#now {
   padding: 0;
   display: grid;
   margin: 0 auto;
   width: 100%;
 }
 
-#sit-rep .group {
+#now .group {
   width: 100%;
   padding: 3rem;
   display: grid;
@@ -13,42 +13,42 @@
   grid-gap: 3rem;
 }
 
-#sit-rep .group.head {
+#now .group.head {
   padding: 4rem 3rem 3rem;
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-#sit-rep .group.head .module .text p {
+#now .group.head .module .text p {
   font-size: 16px;
 }
 
-#sit-rep .group.head .module .text p:last-child {
+#now .group.head .module .text p:last-child {
   font-size: 14px;
 }
 
-#sit-rep .group.head .module .module-header {
+#now .group.head .module .module-header {
   margin: 24px 0 20px;
 }
 
-#sit-rep .module .sub-header ~ .sub-header {
+#now .module .sub-header ~ .sub-header {
   margin: 3rem 0 1rem;
 }
 
-#sit-rep .module .module-header {
+#now .module .module-header {
   position: relative;
   margin: 48px 0 0;
 }
 
-#sit-rep .module .module-header .sub-name,
-#sit-rep .module h3 {
+#now .module .module-header .sub-name,
+#now .module h3 {
   color: rgba(255, 255, 255, 0.8);
 }
 
-#sit-rep .module .module-header .sub-name {
+#now .module .module-header .sub-name {
   font-size: 18px;
 }
 
-#sit-rep .module .module-header::after {
+#now .module .module-header::after {
   content: ' ';
   position: absolute;
   top: -12px;
@@ -58,28 +58,28 @@
   opacity: 0.2;
 }
 
-#sit-rep .module .page-header .sub-title,
-#sit-rep .module .module-header .sub-title {
+#now .module .page-header .sub-title,
+#now .module .module-header .sub-title {
   margin: 0 0 3px;
   font-size: 18px;
 }
 
-#sit-rep .module .module-header .name {
+#now .module .module-header .name {
   font-size: 32px;
   line-height: 1;
   font-weight: 500;
 }
 
-#sit-rep .module:first-child .module-header {
+#now .module:first-child .module-header {
   margin-top: 12px;
 }
 
-#sit-rep .list.activities {
+#now .list.activities {
   display: grid;
   grid-gap: 3px;
 }
 
-#sit-rep .list.activities li {
+#now .list.activities li {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: space-between;
@@ -88,31 +88,31 @@
   padding: 0 1rem;
 }
 
-#sit-rep .list.activities li > div:not(.name) {
+#now .list.activities li > div:not(.name) {
   display: grid;
   grid-template-columns: auto 50px;
   grid-gap: 6px;
   text-align: right;
 }
 
-#sit-rep .list.activities li .name {
+#now .list.activities li .name {
   font-size: 16px;
 }
 
-#sit-rep .list.activities li .time {
+#now .list.activities li .time {
   color: rgba(255, 255, 255, 0.6);
 }
 
-#sit-rep .list.activities li .light {
+#now .list.activities li .light {
   color: #e5d163;
 }
 
-#sit-rep .list.activities li .light span {
+#now .list.activities li .light span {
   position: relative;
   margin: 0 0 0 8px;
 }
 
-#sit-rep .list.activities li .light span::before {
+#now .list.activities li .light span::before {
   content: 'l';
   position: absolute;
   top: 3px;
@@ -128,27 +128,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sit-rep .module .ranks {
+#now .module .ranks {
   margin: 25px 0 0;
 }
 
-#sit-rep .module .ranks > div {
+#now .module .ranks > div {
   position: relative;
   font-size: 14px;
   line-height: 10px;
 }
 
-#sit-rep .module .clan-roster {
+#now .module .clan-roster {
   position: relative;
 }
 
-#sit-rep .module .clan-roster .refresh {
+#now .module .clan-roster .refresh {
   position: absolute;
   top: 0;
   right: 0;
 }
 
-#sit-rep .season-pass {
+#now .season-pass {
   display: grid;
   grid-template-columns: 1fr 30px 2fr 30px;
   grid-gap: 1rem;
@@ -158,47 +158,47 @@
 
 
 @media screen and (max-width: 1440px) {
-  #sit-rep .group {
+  #now .group {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  #sit-rep .season-pass {
+  #now .season-pass {
     grid-template-columns: 1fr 30px 2fr 30px;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  #sit-rep .group {
+  #now .group {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media screen and (max-width: 1023px) {
-  #sit-rep .season-pass {
+  #now .season-pass {
     grid-template-columns: 30px 2fr 30px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  #sit-rep .group {
+  #now .group {
     padding: 2rem;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
   }
 
-  #sit-rep .season-pass {
+  #now .season-pass {
     grid-template-columns: 30px 2fr 30px;
   }
 
-  #sit-rep .module .sub-header ~ .sub-header {
+  #now .module .sub-header ~ .sub-header {
     margin: 2rem 0 1rem;
   }
 
-  #sit-rep h3 {
+  #now h3 {
     margin: 0 0 1rem;
   }
 
-  #sit-rep .module .module-header .name {
+  #now .module .module-header .name {
     font-size: 27px;
   }
 }

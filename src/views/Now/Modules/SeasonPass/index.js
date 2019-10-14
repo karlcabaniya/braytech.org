@@ -24,10 +24,6 @@ class SeasonPass extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.props.rebindTooltips();
-  }
-
   componentDidUpdate(p, s) {
     if (s.seasonPassRewardsPage !== this.state.seasonPassRewardsPage) {
       this.props.rebindTooltips();
@@ -237,18 +233,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    rebindTooltips: value => {
-      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
-    }
-  };
-}
-
 export default compose(
   connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
   ),
   withTranslation()
 )(SeasonPass);

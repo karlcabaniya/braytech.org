@@ -30,7 +30,17 @@
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.4;
+}
+
+.map-omega .leaflet-container .text-marker .wrapper .name i {
+  position: absolute;
+  left: -24px;
+  font-size: 16px;
+}
+
+.map-omega .leaflet-container .text-marker .wrapper .name i.segoe-uniE1761 {
+  top: -1px;
 }
 
 .map-omega.zoom--1 .leaflet-container .text-marker .wrapper .name {

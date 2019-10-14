@@ -7983,7 +7983,12 @@
         "name": "Hellmouth"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": 1,
+          "y": -14
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 4195493657,
       "bubbleName": false
@@ -8104,7 +8109,12 @@
         "name": "Sorrow's Harbor"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": 155,
+          "y": 358
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 417490937,
       "bubbleName": false
@@ -8115,14 +8125,19 @@
       "sorts": {
         "number": 9,
         "destination": "The Moon",
-        "bubble": "The World's Grave",
+        "bubble": "Temple of Crota",
         "place": "The Moon",
-        "name": "The World's Grave"
+        "name": "Temple of Crota"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": 139,
+          "y": -207
+        }
+      ],
       "destinationHash": 290444260,
-      "bubbleHash": 1008270286,
+      "bubbleHash": 877913945,
       "bubbleName": false
     },
     {
@@ -8157,7 +8172,12 @@
         "name": "Chamber of Night"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -303,
+          "y": -713
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 1973847113,
       "bubbleName": false
@@ -8173,7 +8193,12 @@
         "name": "The World's Grave"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": 85,
+          "y": -90
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 1008270286,
       "bubbleName": false
@@ -12484,7 +12509,12 @@
         "name": "The World's Grave"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -79,
+          "y": -176
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 1008270286,
       "bubbleName": false,

@@ -1,4 +1,6 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 
 import Flashpoint from './Modules/Flashpoint';
@@ -19,6 +21,8 @@ class Now extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    this.props.rebindTooltips();
   }
 
   render() {
@@ -57,7 +61,7 @@ class Now extends React.Component {
       },
       {
         className: ['season-pass'],
-        component: <SeasonPass />
+        components: [<SeasonPass />]
       },
       {
         className: [],
@@ -85,12 +89,12 @@ class Now extends React.Component {
     ];
 
     return (
-      <div className='view' id='sit-rep'>
+      <div className='view' id='now'>
         {modules.map((grp, g) => {
-          if (grp.component) {
+          if (grp.components) {
             return (
               <div key={g} className={cx('group', ...grp.className)}>
-                {grp.component}
+                {grp.components}
               </div>
             );
           } else {
@@ -126,4 +130,17 @@ class Now extends React.Component {
   }
 }
 
-export default Now;
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
+  };
+}
+
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps
+  )
+)(Now);

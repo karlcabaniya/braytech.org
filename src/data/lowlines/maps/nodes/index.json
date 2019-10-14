@@ -3840,7 +3840,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 4212118079,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/hellmouth_necrotic-cyphers_4212118079.jpg",
     "description": false,
     "debug": {
       "name": "I.II: Of Tattered Blood and Broken Bone",
@@ -3900,7 +3900,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 4212118073,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/sorrows-harbor_necrotic-cyphers_4212118073.jpg",
     "description": false,
     "debug": {
       "name": "V: A Sinister Plot",
@@ -3910,7 +3910,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 4212118070,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/temple-of-crota_necrotic-cyphers_4212118070.jpg",
     "description": false,
     "debug": {
       "name": "VI: Blood Sport",
@@ -3930,7 +3930,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 2028468509,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/chamber-of-night_necrotic-cyphers_2028468509.jpg",
     "description": false,
     "debug": {
       "name": "VIII: A Sacrifice of Self",
@@ -3940,7 +3940,7 @@
   {
     "checklistId": 2474271317,
     "recordHash": 2028468508,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/the-worlds-grave_necrotic-cyphers_2028468508.jpg",
     "description": false,
     "debug": {
       "name": "IX.I: The Unmaking",
@@ -5014,7 +5014,7 @@
   {
     "checklistId": 3142056444,
     "checklistHash": 1949102307,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/archers-line_lost-sectors_k1-logistics.jpg",
     "description": false,
     "debug": {
       "name": "K1 Logistics",
@@ -5024,7 +5024,7 @@
   {
     "checklistId": 3142056444,
     "checklistHash": 4102839450,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/sorrows-harbor_lost-sectors_k1-revelation.jpg",
     "description": false,
     "debug": {
       "name": "K1 Revelation",
@@ -5034,7 +5034,7 @@
   {
     "checklistId": 3142056444,
     "checklistHash": 3978091702,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/hellmouth_lost-sectors_k1-crew-quarters.jpg",
     "description": false,
     "debug": {
       "name": "K1 Crew Quarters",
@@ -5044,7 +5044,7 @@
   {
     "checklistId": 3142056444,
     "checklistHash": 2955806106,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lost-sectors/anchor-of-light_lost-sectors_k1-communion.jpg",
     "description": false,
     "debug": {
       "name": "K1 Communion",
@@ -5787,7 +5787,7 @@
   {
     "checklistId": 4285512244,
     "recordHash": 3390078234,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/the-worlds-grave_lunas-lost_3390078234.jpg",
     "description": false,
     "debug": {
       "name": "Ghost Fragment: Sai Mota's Ghost",

@@ -750,6 +750,10 @@ class Maps extends React.Component {
                     name = definitionBubble.displayProperties.name;
                   }
 
+                  if (bubble.sub) {
+                    name = `<i class='segoe-uniE1761'></i> ${name}`
+                  }
+
                   const icon = marker.text(['interaction-none', bubble.type], name);
 
                   return <Marker key={i} position={[offsetY, offsetX]} icon={icon} zIndexOffset='-1000' />;

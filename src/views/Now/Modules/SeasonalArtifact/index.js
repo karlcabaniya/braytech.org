@@ -9,16 +9,6 @@ import ObservedImage from '../../../../components/ObservedImage';
 import './styles.css';
 
 class SeasonalArtifact extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.props.rebindTooltips();
-  }
-
   render() {
     const { t, member } = this.props;
     const characterEquipment = member.data.profile.characterEquipment.data[member.characterId].items;
@@ -55,18 +45,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    rebindTooltips: value => {
-      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
-    }
-  };
-}
-
 export default compose(
   connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
   ),
   withTranslation()
 )(SeasonalArtifact);

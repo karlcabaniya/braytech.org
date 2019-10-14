@@ -9,16 +9,6 @@ import manifest from '../../../../utils/manifest';
 import './styles.css';
 
 class HeroicStoryMissions extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.props.rebindTooltips();
-  }
-
   render() {
     const { t, member } = this.props;
     const characterActivities = member.data.profile.characterActivities.data;
@@ -79,18 +69,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    rebindTooltips: value => {
-      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
-    }
-  };
-}
-
 export default compose(
   connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
   ),
   withTranslation()
 )(HeroicStoryMissions);
