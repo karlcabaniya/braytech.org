@@ -15,10 +15,42 @@ import './styles.css';
 
 class Raids extends React.Component {
   render() {
-    const { t, member, cycleInfo } = this.props;
+    const { t, member } = this.props;
     const { milestones } = member.data;
 
     const data = {
+      gos: {
+        name: manifest.DestinyActivityDefinition[2659723068].displayProperties.name,
+        description: manifest.DestinyActivityDefinition[2659723068].displayProperties.description,
+        challenge: manifest.DestinyVendorDefinition[3347378076].itemList
+          .map(item => {
+            if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryHash === 3151502845).vendorItemIndexes.includes(item.vendorItemIndex)) {
+              return item.itemHash;
+            } else {
+              return false;
+            }
+          })
+          .filter(t => manifest.statistics.bounties.hawthorne.includes(t)),
+        collectibles: [1988948484],
+        triumphs: [],
+        challenges: {
+          0: {
+            name: manifest.DestinyInventoryItemDefinition[2459033425].displayProperties.name,
+            description: t('Unknown'),
+            triumphs: [3167166053]
+          },
+          1: {
+            name: manifest.DestinyInventoryItemDefinition[2459033425].displayProperties.name,
+            description: t('Unknown'),
+            triumphs: [1925300422]
+          },
+          2: {
+            name: manifest.DestinyInventoryItemDefinition[2459033425].displayProperties.name,
+            description: t('Unknown'),
+            triumphs: [1661612473]
+          }
+        }
+      },
       cos: {
         name: manifest.DestinyCollectibleDefinition[193320249].displayProperties.name,
         description: manifest.DestinyActivityDefinition[960175301].displayProperties.description,

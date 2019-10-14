@@ -233,9 +233,18 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    rebindTooltips: value => {
+      dispatch({ type: 'REBIND_TOOLTIPS', payload: new Date().getTime() });
+    }
+  };
+}
+
 export default compose(
   connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
   ),
   withTranslation()
 )(SeasonPass);
