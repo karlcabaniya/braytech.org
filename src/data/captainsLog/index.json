@@ -723,5 +723,10 @@
     "date": "2019-10-12T12:29:38.147Z",
     "version": "2.9.39",
     "content": "- made an icon for Jade Rabbits\n- added a task to force everyone to re-auth\n- _Now_ and _This Week_ stuff\n- QuestLine stuff"
+  },
+  {
+    "date": "2019-10-14T16:38:16.602Z",
+    "version": "2.9.42",
+    "content": "- major remodelling under the hoods of _Now_ and _This Week_\n- Moon map is up to date as far as my personal progression permits\n- found all the new images for badges, lore books, etc."
   }
 ]
