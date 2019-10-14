@@ -104,7 +104,12 @@ export const bookCovers = {
   289742222: '0560-0000106A.png',
   1070500232: '0560-00006553.png',
   2721577348: '0560-00006558.png',
-  2761772090: '0560-00006547.png'
+  2761772090: '0560-00006547.png',
+  4285512244: '0597_02D2_00.png',
+  1510571147: '0597_02DA_00.png',
+  2399850548: '0597_02C4_00.png',
+  628625882: '0597_02BD_00.png',
+  2474271317: '0597_02CC_00.png'
 };
 
 export const sealImages = {
@@ -117,7 +122,10 @@ export const sealImages = {
   2039028930: '0560-000000EB.png',
   991908404: '0560-0000107E.png',
   3170835069: '0560-00006583.png',
-  1002334440: '0560-00007495.png'
+  1002334440: '0560-00007495.png',
+  3303651244: '0597_057C_00.png',
+  4097789885: '0597_0573_00.png',
+  2209950401: '0597_056A_00.png'
 };
 
 export const badgeImages = {
@@ -133,7 +141,10 @@ export const badgeImages = {
   1420354007: '01E3-0000032C.png',
   1086048586: '01E3-00000377.png',
   2503214417: '0560-00000D7D.png',
-  2759158924: '0560-00006562.png'
+  2759158924: '0560-00006562.png',
+  2388540594: '0597_045D_00.png',
+  3267852685: '0597_0464_00.png',
+  223465203: '0597_048E_00.png'
 };
 
 export const associationsCollectionsBadgesClasses = {
@@ -233,6 +244,14 @@ export const associationsCollectionsBadges = [
   {
     recordHash: 52802522, // Mint in Box
     badgeHash: 2759158924
+  },
+  {
+    recordHash: 3737200951, // Scared Duty (Raid)
+    badgeHash: 223465203
+  },
+  {
+    recordHash: 697150349, // Season of the Undying
+    badgeHash: 3267852685
   }
 ];
 

@@ -508,7 +508,7 @@ export const checklists = {
       checklistItemName: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[4285512244].displayProperties.name}`,
       checklistItemName_plural: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[4285512244].displayProperties.name}`,
       checklistIcon: 'destiny-lore_scholar',
-      checklistImage: false,
+      checklistImage: '/static/images/extracts/ui/checklists/0597_02D2_00.png',
       checklistProgressDescription: i18n.t('Ghost fragments recovered'),
       ...options
     }),
@@ -548,7 +548,7 @@ export const checklists = {
       checklistItemName: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[2474271317].displayProperties.name}`,
       checklistItemName_plural: `${i18n.t('Lore')}: ${manifest.DestinyPresentationNodeDefinition[2474271317].displayProperties.name}`,
       checklistIcon: 'destiny-lore_scholar',
-      checklistImage: false,
+      checklistImage: '/static/images/extracts/ui/checklists/0597_02CC_00.png',
       checklistProgressDescription: i18n.t('Necrotic cyphers collected'),
       ...options
     })
