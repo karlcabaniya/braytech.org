@@ -72,7 +72,7 @@ class Now extends React.Component {
       },
       {
         className: ['season-pass'],
-        components: [<SeasonPass />]
+        components: [<SeasonPass key='sp' />]
       },
       {
         className: [],

@@ -142,10 +142,15 @@
 }
 
 @media screen and (max-width: 600px) {
-  #this-week .group {
+  #this-week .group,
+  #this-week .group.head {
     padding: 2rem;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
+  }
+
+  #this-week .group.head {
+    padding-top: 3rem;
   }
 
   #this-week .module .sub-header ~ .sub-header {

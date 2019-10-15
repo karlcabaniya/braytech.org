@@ -176,10 +176,15 @@
 }
 
 @media screen and (max-width: 600px) {
-  #now .group {
+  #now .group,
+  #now .group.head {
     padding: 2rem;
     grid-template-columns: 1fr;
     grid-gap: 2rem;
+  }
+
+  #now .group.head {
+    padding-top: 3rem;
   }
 
   #now .season-pass {
