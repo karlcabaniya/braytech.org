@@ -1,86 +1,179 @@
 {
   "de": {
-    "translated": 429,
-    "notTranslated": 37,
-    "added": [],
-    "removed": []
+    "translated": 428,
+    "notTranslated": 41,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "en": {
-    "translated": 466,
+    "translated": 469,
     "notTranslated": 0,
     "added": [],
-    "removed": []
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 466,
-    "added": [],
-    "removed": []
+    "notTranslated": 469,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "es": {
-    "translated": 445,
-    "notTranslated": 21,
-    "added": [],
-    "removed": []
+    "translated": 465,
+    "notTranslated": 4,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "fr": {
-    "translated": 398,
-    "notTranslated": 68,
-    "added": [],
-    "removed": []
+    "translated": 397,
+    "notTranslated": 72,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 466,
-    "added": [],
-    "removed": []
+    "notTranslated": 469,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "it": {
-    "translated": 466,
-    "notTranslated": 0,
-    "added": [],
-    "removed": []
+    "translated": 465,
+    "notTranslated": 4,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 466,
-    "added": [],
-    "removed": []
+    "notTranslated": 469,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "ko": {
-    "translated": 338,
-    "notTranslated": 128,
-    "added": [],
-    "removed": []
+    "translated": 337,
+    "notTranslated": 132,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 466,
-    "added": [],
-    "removed": []
+    "notTranslated": 469,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "pt-br": {
-    "translated": 463,
-    "notTranslated": 3,
-    "added": [],
-    "removed": []
+    "translated": 462,
+    "notTranslated": 7,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 466,
-    "added": [],
-    "removed": []
+    "notTranslated": 469,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "zh-chs": {
-    "translated": 451,
-    "notTranslated": 15,
-    "added": [],
-    "removed": []
+    "translated": 465,
+    "notTranslated": 4,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 466,
-    "added": [],
-    "removed": []
+    "notTranslated": 469,
+    "added": [
+      "Black Armory Forges",
+      "Current forge",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view."
+    ],
+    "removed": [
+      "You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view."
+    ]
   }
 }
