@@ -6,9 +6,11 @@ import cx from 'classnames';
 import Flashpoint from './Modules/Flashpoint';
 import HeroicStoryMissions from './Modules/HeroicStoryMissions';
 import VanguardStrikes from './Modules/VanguardStrikes';
+import DailyVanguardModifiers from './Modules/DailyVanguardModifiers';
 import Ranks from './Modules/Ranks';
 import SeasonPass from './Modules/SeasonPass';
 import SeasonalArtifact from './Modules/SeasonalArtifact';
+import Vendor from './Modules/Vendor';
 
 import './styles.css';
 
@@ -39,6 +41,15 @@ class Now extends React.Component {
               }
             ]
           },
+          // {
+          //   className: [],
+          //   mods: [
+          //     {
+          //       className: [],
+          //       component: <DailyVanguardModifiers />
+          //     }
+          //   ]
+          // },
           {
             className: [],
             mods: [
@@ -83,7 +94,16 @@ class Now extends React.Component {
                 component: <Ranks />
               }
             ]
-          }
+          },
+          // {
+          //   className: [],
+          //   mods: [
+          //     {
+          //       className: [],
+          //       component: <Vendor hash='863940356' />
+          //     }
+          //   ]
+          // }
         ]
       }
     ];

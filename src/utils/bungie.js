@@ -153,6 +153,11 @@ export const EditGroupMembership = async (groupId, membershipType, membershipId,
     method: 'post'
   });
 
+export const GetVendor = async (membershipType, membershipId, characterId, vendorHash, components) =>
+  apiRequest(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Character/${characterId}/Vendors/${vendorHash}/?components=${components}`, {
+    auth: true
+  });
+
 export const manifest = async version => fetch(`https://www.bungie.net${version}`).then(a => a.json());
 
 export const GetDestinyManifest = async () => apiRequest('/Platform/Destiny2/Manifest/');

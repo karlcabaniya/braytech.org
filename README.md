@@ -25,8 +25,8 @@ _The source code of braytech.org_
     *  Original PNG file
     *  No HUD
     *  1080p or greater, 16:9 aspect ratio
-    *  Frame subject in very center
-    *  Feel free to provide multiple variants
+    *  Frame subject in very center _unless it's super important to creating location context_
+    *  Feel free to provide multiple variants for consideration
     *  No ammo, enemies, guardians in frame
 
 4.  Submit pull request

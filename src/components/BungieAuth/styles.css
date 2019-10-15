@@ -130,6 +130,10 @@
   justify-content: center;
 }
 
+.bungie-auth.no-auth.inline {
+  padding: 0;
+}
+
 .bungie-auth.no-auth .properties {
   max-width: 800px;
   margin: 0 auto;
@@ -160,6 +164,10 @@
 
   .bungie-auth.no-auth {
     padding: 3rem 2rem 2rem;
+  }
+
+  .bungie-auth.no-auth.inline {
+    padding: 0;
   }
 
   .bungie-auth.no-auth .properties .name {

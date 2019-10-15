@@ -119,6 +119,7 @@ html.backdropfilter .map-omega .control li {
   top: 51%;
   right: 2%;
   font-size: 14px;
+  display: none;
 }
 
 .map-omega .control.characters .character-emblem .wrapper .progress-bar {

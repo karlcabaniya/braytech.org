@@ -160,10 +160,10 @@ class BungieAuth extends React.Component {
 
 class NoAuth extends React.Component {
   render() {
-    const { t } = this.props;
+    const { t, inline } = this.props;
 
     return (
-      <div className='bungie-auth no-auth'>
+      <div className={cx('bungie-auth', 'no-auth', { inline } )}>
         <div className='module'>
           <div className='properties'>
             <div className='name'>{t('Authorization required')}</div>
@@ -225,7 +225,7 @@ class DiffProfile extends React.Component {
   }
 
   render() {
-    const { t, location } = this.props;
+    const { t, inline, location } = this.props;
     const { loading, memberships } = this.state;
     const pathname = paths.removeMemberIds(location.pathname);
 
@@ -244,14 +244,15 @@ class DiffProfile extends React.Component {
         <>
           <div className='name'>{t('Oh, honey')}</div>
           <div className='description'>
-            <p>{t("You are not authorized to view a different user's profile, but you may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.")}</p>
+            <p>{t("You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.")}</p>
+            <p>{t('You can find more information regarding your current authorization in the Settings view.')}</p>
           </div>
         </>
       );
     }
 
     return (
-      <div className='bungie-auth no-auth'>
+      <div className={cx('bungie-auth', 'no-auth', { inline } )}>
         <div className='module'>
           <div className='properties'>
             {properties}

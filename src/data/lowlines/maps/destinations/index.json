@@ -3467,6 +3467,11 @@
           "type": "region",
           "nodes": [
             {
+              "type": "fast-travel",
+              "x": 92,
+              "y": 220
+            },
+            {
               "type": "title",
               "x": 267,
               "y": 231
@@ -3508,8 +3513,8 @@
           "nodes": [
             {
               "type": "title",
-              "x": -355,
-              "y": -146
+              "x": -400,
+              "y": -220
             }
           ]
         },
@@ -3552,6 +3557,34 @@
               "type": "title",
               "x": -71,
               "y": -251
+            }
+          ]
+        },
+        {
+          "hash": 1149128373,
+          "name": "The Gatehouse",
+          "id": "the-gatehouse",
+          "type": "suburb",
+          "sub": true,
+          "nodes": [
+            {
+              "type": "title",
+              "x": -185,
+              "y": -151
+            }
+          ]
+        },
+        {
+          "hash": 286194652,
+          "name": "Circle of Bones",
+          "id": "circle-of-bones",
+          "type": "suburb",
+          "sub": true,
+          "nodes": [
+            {
+              "type": "title",
+              "x": -185,
+              "y": -81
             }
           ]
         }

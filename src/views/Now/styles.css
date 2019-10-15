@@ -26,7 +26,7 @@
   font-size: 14px;
 }
 
-#now .group.head .module .module-header {
+#now .group .module .module-header {
   margin: 24px 0 20px;
 }
 
@@ -68,10 +68,6 @@
   font-size: 32px;
   line-height: 1;
   font-weight: 500;
-}
-
-#now .module:first-child .module-header {
-  margin-top: 12px;
 }
 
 #now .list.activities {

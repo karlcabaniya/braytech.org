@@ -208,12 +208,24 @@
     "3390078232": {
       "destinationHash": 290444260,
       "bubbleHash": 1149128373,
-      "pursuitHash": 687082423
+      "pursuitHash": 687082423,
+      "points": [
+        {
+          "x": -189,
+          "y": -118
+        }
+      ]
     },
     "3390078239": {
       "destinationHash": 290444260,
       "bubbleHash": 4066175629,
-      "pursuitHash": 3799864144
+      "pursuitHash": 3799864144,
+      "points": [
+        {
+          "x": -166,
+          "y": 30
+        }
+      ]
     },
     "3390078238": {
       "destinationHash": 290444260,

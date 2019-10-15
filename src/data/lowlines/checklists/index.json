@@ -12548,7 +12548,12 @@
         "name": "The Gatehouse"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -189,
+          "y": -118
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 1149128373,
       "bubbleName": false,
@@ -12565,7 +12570,12 @@
         "name": "The Summoning Pits"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -166,
+          "y": 30
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 4066175629,
       "bubbleName": false,

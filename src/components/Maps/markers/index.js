@@ -89,6 +89,7 @@ export const iconFastTravel = (tooltip = {}, classNames = []) => {
   const html = (
     <div className='wrapper'>
       <div className='fast-travel'>
+        <div className='shadow' />
         <div className='star' />
         <div className='outline' />
         <div className='square'>

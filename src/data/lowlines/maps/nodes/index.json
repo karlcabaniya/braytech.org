@@ -5807,8 +5807,8 @@
   {
     "checklistId": 4285512244,
     "recordHash": 3390078232,
-    "screenshot": false,
-    "description": false,
+    "screenshot": "/static/images/screenshots/lore/the-gatehouse_lunas-lost_3390078232.jpg",
+    "description": "Enter the The Gatehouse via the HellMouth and follow it to a well-lit circular room. Along the windowed-wall on the right is what you seek.",
     "debug": {
       "name": "Ghost Fragment: Eris Morn's Ghost",
       "number": 4
@@ -5817,7 +5817,7 @@
   {
     "checklistId": 4285512244,
     "recordHash": 3390078239,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/summoning-pits_lunas-lost_3390078239.jpg",
     "description": false,
     "debug": {
       "name": "Ghost Fragment: Toland's Ghost",
