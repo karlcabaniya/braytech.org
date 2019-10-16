@@ -120,5 +120,6 @@
 @media screen and (max-width: 600px) {
   .season-pass {
     padding: 2rem;
+    grid-gap: 10px;
   }
 }

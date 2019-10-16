@@ -311,7 +311,7 @@ class SeasonalArtifact extends React.Component {
 
                           const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
-                          const energyCost = definitionItem && definitionItem.plug && definitionItem.plug.energyCost && definitionItem.plug.energyCost.energyCost;
+                          const energyCost = definitionItem && definitionItem.plug && definitionItem.plug.energyCost ? definitionItem.plug.energyCost.energyCost : 0;
 
                           return (
                             <li

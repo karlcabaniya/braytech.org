@@ -245,6 +245,7 @@
 
   #now .season-pass {
     grid-template-columns: 30px 2fr 30px;
+    grid-gap: 10px;
   }
 
   #now .module .sub-header ~ .sub-header {
