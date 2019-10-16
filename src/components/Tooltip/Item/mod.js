@@ -17,9 +17,10 @@ const mod = item => {
   });
 
   let description = item.displayProperties.description;
-  if (description === '' && item.perks && item.perks.length === 1) {
-    let definitionPerk = manifest.DestinySandboxPerkDefinition[item.perks[0].perkHash]
-    description = definitionPerk.displayProperties.description
+  if (description === '' && item.perks && item.perks.length) {
+    const definitionPerk = manifest.DestinySandboxPerkDefinition[item.perks[0].perkHash]
+    
+    description = definitionPerk && definitionPerk.displayProperties && definitionPerk.displayProperties.description
   }
   
   return (

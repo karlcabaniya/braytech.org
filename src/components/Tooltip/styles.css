@@ -263,6 +263,10 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+#tooltip .stats:first-child {
+  border-top: none;
+}
+
 #tooltip .stats .stat {
   display: flex;
   align-items: center;

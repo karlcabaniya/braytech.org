@@ -28,7 +28,7 @@
   right: -1px;
   width: 2px;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
   pointer-events: none;
 }
 
@@ -47,11 +47,11 @@
 }
 
 .seasonal-artifact .mods .tier.available::after  {
-  background-color: rgba(10, 243, 243, 0.3);
+  background-color: rgba(10, 243, 243, 0.5);
 }
 
 .seasonal-artifact .mods .tier.available.last::after  {
-  background-color: rgba(10, 243, 243, 0.5);
+  background-color: rgba(10, 243, 243, 0.8);
 }
 
 .seasonal-artifact .mods .tier .list.inventory-items {
@@ -71,5 +71,27 @@
 }
 
 .seasonal-artifact .mods .tier .list.inventory-items li.unavailable .icon .image.background {
+  opacity: 0.5;
+}
+
+.seasonal-artifact .mods .tier:not(.available) .list.inventory-items li.unavailable .icon .image {
+  opacity: 0.3;
+}
+
+.seasonal-artifact .mods .tier:not(.available) .list.inventory-items li.unavailable .icon .image.background {
+  opacity: 0.2;
+}
+
+.seasonal-artifact .mods .tier .list.inventory-items li .icon .cost {
+  position: absolute;
+  top: 8px;
+  right: 11px;
+  font-size: 14px;
+  font-family: 'nhg text';
+  color: #fff;
+  pointer-events: none;  
+}
+
+.seasonal-artifact .mods .tier .list.inventory-items li.unavailable .icon .cost {
   opacity: 0.5;
 }

@@ -278,16 +278,19 @@ class SeasonalArtifact extends React.Component {
             const tierItemHashes = tier.items.map(i => i.itemHash);
 
             return (
-              <div key={t} className={cx('tier', { available: items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement, last: (t < 4 && items.filter(i => !tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || t > 2 })}>
+              <div key={t} className={cx('tier', { available: items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement, last: (t < 4 && items.filter(i => !tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || (t > 2 && t < 4) })}>
                 <ul className='list inventory-items'>
                   {items
                     .filter(i => tierItemHashes.includes(i.itemHash))
                     .map((item, i) => {
+
+                      const inactive = item.unavailable || !(items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement);
+
+                      const image = inactive ? mods[item.itemHash].inactive : mods[item.itemHash].active;
+
                       const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
-                      const inactive = item.unavailable || progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement;;
-
-                      const image = inactive ? mods[item.itemHash].inactive : item.saleStatus !== 0 ? mods[item.itemHash].active : `https://www.bungie.net${definitionItem.displayProperties.icon}`
+                      const energyCost = definitionItem && definitionItem.plug && definitionItem.plug.energyCost && definitionItem.plug.energyCost.energyCost;
 
                       return (
                         <li
@@ -301,14 +304,15 @@ class SeasonalArtifact extends React.Component {
                           data-hash={item.itemHash}
                           data-instanceid={item.itemInstanceId}
                           data-state={item.state}
-                          data-vendorhash={item.vendorHash}
-                          data-vendorindex={item.vendorItemIndex}
-                          data-vendorstatus={item.saleStatus}
+                          // data-vendorhash={item.vendorHash}
+                          // data-vendorindex={item.vendorItemIndex}
+                          // data-vendorstatus={item.saleStatus}
                           data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
                         >
                           <div className='icon'>
-                            {item.saleStatus === 0 ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
+                            {inactive ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
                             <ObservedImage className='image' src={image} />
+                            <div className='cost'>{energyCost}</div>
                           </div>
                         </li>
                       );
