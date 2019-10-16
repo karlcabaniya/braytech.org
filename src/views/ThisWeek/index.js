@@ -31,7 +31,6 @@ class ThisWeek extends React.Component {
   }
 
   render() {
-
     const resetTime = '17:00:00Z';
 
     const cycleInfo = {
@@ -93,16 +92,11 @@ class ThisWeek extends React.Component {
       },
       {
         className: [],
-        components: [
-          <Nightfalls />,
-          <Menagerie cycleInfo={cycleInfo} />
-        ]
+        components: [<Nightfalls />]
       },
       {
         className: [],
-        components: [
-          <Raids />
-        ]
+        components: [<Raids />]
       },
       {
         className: [],
@@ -126,11 +120,34 @@ class ThisWeek extends React.Component {
             ]
           },
           {
-            className: [],
+            className: ['shattered-throne'],
             mods: [
               {
                 className: [],
                 component: <DreamingCityShatteredThrone cycleInfo={cycleInfo} />
+              }
+            ]
+          }
+        ]
+      },
+      {
+        className: [],
+        cols: [
+          {
+            className: [],
+            mods: [
+              {
+                className: [],
+                component: <Menagerie cycleInfo={cycleInfo} />
+              }
+            ]
+          },
+          {
+            className: [],
+            mods: [
+              {
+                className: [],
+                component: <Reckoning cycleInfo={cycleInfo} />
               }
             ]
           },
@@ -140,10 +157,6 @@ class ThisWeek extends React.Component {
               {
                 className: [],
                 component: <EscalationProtocol cycleInfo={cycleInfo} />
-              },
-              {
-                className: [],
-                component: <Reckoning cycleInfo={cycleInfo} />
               }
             ]
           }

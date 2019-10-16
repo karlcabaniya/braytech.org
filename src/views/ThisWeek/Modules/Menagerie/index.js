@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
+import manifest from '../../../../utils/manifest';
+import ObservedImage from '../../../../components/ObservedImage';
 import Collectibles from '../../../../components/Collectibles';
 import Records from '../../../../components/Records';
 
@@ -13,6 +15,7 @@ class Menagerie extends React.Component {
   render() {
     const { t, member, cycleInfo } = this.props;
     const characters = member.data.profile.characters.data;
+    const characterActivities = member.data.profile.characterActivities.data;
 
     const rotation = {
       1: {
@@ -47,13 +50,45 @@ class Menagerie extends React.Component {
       }
     };
 
+    const heroicMenagerie = characterActivities[member.characterId].availableActivities.find(a => {
+      const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+      if (definitionActivity && definitionActivity.activityModeHashes && definitionActivity.activityModeHashes.includes(400075666) && definitionActivity.activityTypeHash === 400075666) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
     return [
       <React.Fragment key='menagerie'>
         <div className='module-header'>
           <div className='sub-name'>{t('The Menagerie')}</div>
           <div className='name'>{rotation[cycleInfo.week.menagerie].boss}</div>
         </div>
-        <h4>{t('Heroic Collectibles')}</h4>
+        {heroicMenagerie ? (
+          <>
+            <h4>{t('Active modifiers')}</h4>
+            <ul className='list modifiers'>
+              {heroicMenagerie.modifierHashes.map((hash, h) => {
+                const definitionModifier = manifest.DestinyActivityModifierDefinition[hash];
+
+                return (
+                  <li key={h}>
+                    <div className='icon'>
+                      <ObservedImage className='image' src={`https://www.bungie.net${definitionModifier.displayProperties.icon}`} />
+                    </div>
+                    <div className='text'>
+                      <div className='name'>{definitionModifier.displayProperties.name}</div>
+                      <div className='description'>{definitionModifier.displayProperties.description}</div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
+        ) : null}
+        <h4>{t('Heroic collectibles')}</h4>
         <ul className='list collection-items'>
           <Collectibles selfLinkFrom='/this-week' hashes={rotation[cycleInfo.week.menagerie].collectibles[characters.find(c => c.characterId === member.characterId).classType]} />
         </ul>

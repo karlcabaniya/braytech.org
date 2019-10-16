@@ -41,15 +41,15 @@ class Now extends React.Component {
               }
             ]
           },
-          // {
-          //   className: [],
-          //   mods: [
-          //     {
-          //       className: [],
-          //       component: <DailyVanguardModifiers />
-          //     }
-          //   ]
-          // },
+          {
+            className: [],
+            mods: [
+              {
+                className: [],
+                component: <DailyVanguardModifiers />
+              }
+            ]
+          },
           {
             className: [],
             mods: [
@@ -59,15 +59,15 @@ class Now extends React.Component {
               }
             ]
           },
-          {
-            className: [],
-            mods: [
-              {
-                className: [],
-                component: <VanguardStrikes />
-              }
-            ]
-          }
+          // {
+          //   className: [],
+          //   mods: [
+          //     {
+          //       className: [],
+          //       component: <VanguardStrikes />
+          //     }
+          //   ]
+          // }
         ]
       },
       {
