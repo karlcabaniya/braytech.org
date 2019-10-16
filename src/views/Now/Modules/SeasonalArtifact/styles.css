@@ -84,6 +84,7 @@
   right: -1px;
   width: 2px;
   height: 100%;
+  z-index: 2;
   background-color: rgba(255, 255, 255, 0.2);
   pointer-events: none;
 }
@@ -217,6 +218,13 @@
   .seasonal-artifact .grid {
     grid-template-columns: 1fr;
     grid-gap: 2rem;
+  }
+
+  .seasonal-artifact .tiers .tier .list.inventory-items li .icon .cost {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    font-size: 12px;
   }
 
 }
