@@ -190,6 +190,29 @@
 
 
 @media screen and (max-width: 600px) {
+
+  .seasonal-artifact .artifact {
+    grid-template-columns: 48px auto;
+  }
+  
+  .seasonal-artifact .artifact .icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .seasonal-artifact .artifact .icon .image {
+    box-shadow: inset 0 0 0 2px rgb(204, 204, 204);
+  }
+
+  .seasonal-artifact .artifact .text .name {
+    font-size: 24px;
+    margin: -2px 0 10px 0;
+  }
+  
+  .seasonal-artifact .artifact .text .type {
+    font-size: 18px;
+    line-height: 16px;
+  }
   
   .seasonal-artifact .grid {
     grid-template-columns: 1fr;

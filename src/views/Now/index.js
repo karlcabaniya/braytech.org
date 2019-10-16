@@ -3,6 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 
+import * as ls from '../../utils/localStorage';
+
 import Flashpoint from './Modules/Flashpoint';
 import HeroicStoryMissions from './Modules/HeroicStoryMissions';
 import VanguardStrikes from './Modules/VanguardStrikes';
@@ -19,6 +21,8 @@ class Now extends React.Component {
     super(props);
 
     this.state = {};
+
+    this.auth = ls.get('setting.auth');
   }
 
   componentDidMount() {
@@ -58,7 +62,7 @@ class Now extends React.Component {
                 component: <HeroicStoryMissions />
               }
             ]
-          },
+          }
           // {
           //   className: [],
           //   mods: [
@@ -79,6 +83,7 @@ class Now extends React.Component {
         cols: [
           {
             className: ['double'],
+            condition: !!this.auth,
             mods: [
               {
                 className: ['seasonal-artifact'],
@@ -94,7 +99,7 @@ class Now extends React.Component {
                 component: <Ranks />
               }
             ]
-          },
+          }
           // {
           //   className: [],
           //   mods: [
@@ -128,19 +133,25 @@ class Now extends React.Component {
                         </div>
                       );
                     })
-                  : grp.cols.map((col, c) => {
-                      return (
-                        <div key={c} className={cx('column', ...col.className)}>
-                          {col.mods.map((mod, m) => {
-                            return (
-                              <div key={m} className={cx('module', ...mod.className)}>
-                                {mod.component}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      );
-                    })}
+                  : grp.cols
+                      .map((col, c) => {
+                        if (col.condition === undefined || col.condition) {
+                          return (
+                            <div key={c} className={cx('column', ...col.className)}>
+                              {col.mods.map((mod, m) => {
+                                return (
+                                  <div key={m} className={cx('module', ...mod.className)}>
+                                    {mod.component}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          );
+                        } else {
+                          return false;
+                        }
+                      })
+                      .map(c => c)}
               </div>
             );
           }

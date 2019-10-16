@@ -20,7 +20,7 @@ class SeasonPass extends React.Component {
     const characterProgressions = member.data.profile.characterProgressions.data;
 
     this.state = {
-      seasonPassRewardsPage: Math.ceil((characterProgressions[member.characterId].progressions[1628407317].level + 1) / this.seasonPassItemsPerPage(viewport.width))
+      seasonPassRewardsPage: Math.ceil((Math.min(characterProgressions[member.characterId].progressions[1628407317].level, 99) + 1) / this.seasonPassItemsPerPage(viewport.width))
     };
   }
 
@@ -163,11 +163,13 @@ class SeasonPass extends React.Component {
       <>
         <div className='module status'>
           <div className='module-header'>
-            <div className='sub-name'>{t('Season')}</div>
-          </div>
-          <div className='season-text'>
+            <div className='sub-name'>{t('Season rank')}</div>
             <div className='name'>{seasonPass.season.displayProperties.name}</div>
-            <div className='description'>{seasonPass.season.displayProperties.description}</div>
+          </div>
+          <div className='text'>
+            <p>
+              <em>{seasonPass.season.displayProperties.description}</em>
+            </p>
           </div>
         </div>
         <div className='page'>

@@ -25,7 +25,7 @@ import sandboxPerk from './sandboxPerk';
 
 class Item extends React.Component {
   render() {
-    const { t, member, hash, instanceId, quantity, tooltips } = this.props;
+    const { t, member, hash, instanceid, quantity, tooltips } = this.props;
 
     const table = this.props.table || 'DestinyInventoryItemDefinition';
     const state = (this.props.state && parseInt(this.props.state, 10)) || 0;
@@ -44,19 +44,19 @@ class Item extends React.Component {
       return null;
     }
 
-    if (instanceId && member.data && member.data.profile.itemComponents.instances.data[instanceId]) {
+    if (instanceid && member.data && member.data.profile.itemComponents.instances.data[instanceid]) {
       let itemComponents = member.data.profile.itemComponents;
 
       item.itemComponents = {
         state,
-        instance: itemComponents.instances.data[instanceId] ? itemComponents.instances.data[instanceId] : false,
-        sockets: itemComponents.sockets.data[instanceId] ? itemComponents.sockets.data[instanceId].sockets : false,
-        perks: itemComponents.perks.data[instanceId] ? itemComponents.perks.data[instanceId].perks : false,
-        stats: itemComponents.stats.data[instanceId] ? itemComponents.stats.data[instanceId].stats : false,
-        objectives: itemComponents.objectives.data[instanceId] ? itemComponents.objectives.data[instanceId].objectives : false
+        instance: itemComponents.instances.data[instanceid] ? itemComponents.instances.data[instanceid] : false,
+        sockets: itemComponents.sockets.data[instanceid] ? itemComponents.sockets.data[instanceid].sockets : false,
+        perks: itemComponents.perks.data[instanceid] ? itemComponents.perks.data[instanceid].perks : false,
+        stats: itemComponents.stats.data[instanceid] ? itemComponents.stats.data[instanceid].stats : false,
+        objectives: itemComponents.objectives.data[instanceid] ? itemComponents.objectives.data[instanceid].objectives : false
       };
-    } else if (instanceId && tooltips.itemComponents[instanceId]) {
-      item.itemComponents = tooltips.itemComponents[instanceId];
+    } else if (instanceid && tooltips.itemComponents[instanceid]) {
+      item.itemComponents = tooltips.itemComponents[instanceid];
     } else {
       item.itemComponents = false;
     }
@@ -71,12 +71,12 @@ class Item extends React.Component {
       }
     }
 
-    if (instanceId && member.data.profile && member.data.profile.characterInventories && member.data.profile.characterInventories.data && member.data.profile.characterInventories.data[member.characterId] && member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceId)) {
+    if (instanceid && member.data.profile && member.data.profile.characterInventories && member.data.profile.characterInventories.data && member.data.profile.characterInventories.data[member.characterId] && member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceid)) {
       if (item.itemComponents) {
-        item.itemComponents.item = member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceId);
+        item.itemComponents.item = member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceid);
       } else {
         item.itemComponents = {
-          item: member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceId)
+          item: member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === instanceid)
         };
       }
     }

@@ -32,7 +32,7 @@ async function apiRequest(path, options = {}) {
     options.body = JSON.stringify(options.body);
   }
 
-  if (options.auth && !options.headers.Authorization) {
+  if (tokens && options.auth && !options.headers.Authorization) {
     let now = new Date().getTime() + 10000;
     let then = new Date(tokens.access.expires).getTime();
 

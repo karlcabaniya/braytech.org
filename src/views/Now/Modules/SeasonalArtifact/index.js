@@ -192,6 +192,8 @@ class SeasonalArtifact extends React.Component {
   getVendor = async hash => {
     const { member } = this.props;
 
+    if (!this.auth) return;
+
     const response = await bungie.GetVendor(member.membershipType, member.membershipId, member.characterId, hash, [400, 402, 300, 301, 304, 305, 306, 307, 308, 600].join(','));
 
     if (response) {
