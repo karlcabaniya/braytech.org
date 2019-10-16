@@ -70,10 +70,10 @@ class Now extends React.Component {
           // }
         ]
       },
-      // {
-      //   className: ['season-pass'],
-      //   components: [<SeasonPass key='sp' />]
-      // },
+      {
+        className: ['season-pass'],
+        components: [<SeasonPass key='sp' />]
+      },
       {
         className: [],
         cols: [

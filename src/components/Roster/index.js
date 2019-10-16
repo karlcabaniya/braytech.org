@@ -111,6 +111,8 @@ class Roster extends React.Component {
             return characterProgress + currentValue;
           }, 0)
         : 0;
+      
+      const seasonRank = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[1628407317].level : 0;
 
       const triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
 
@@ -170,10 +172,10 @@ class Roster extends React.Component {
                         />
                       </div>
                       <div className='icon'>
-                        <div>{lastCharacter.baseCharacterLevel}</div>
+                        <div>{seasonRank}</div>
                       </div>
                       <div className='icon'>
-                        <div className={cx({ 'max-ish': lastCharacter.light >= 740, max: lastCharacter.light === 750 })}>
+                        <div className={cx({ 'max-ish': lastCharacter.light >= 930, max: lastCharacter.light === 960 })}>
                           <span>{lastCharacter.light}</span>
                         </div>
                       </div>
@@ -240,7 +242,7 @@ class Roster extends React.Component {
     let order = this.state.order;
 
     if (order.sort === 'lastCharacter') {
-      members = orderBy(members, [m => m.sorts.private, m => m.sorts.lastCharacter.baseCharacterLevel, m => m.sorts.lastCharacter.light, m => m.sorts.lastPlayed], ['asc', order.dir, order.dir, 'desc']);
+      members = orderBy(members, [m => m.sorts.private, m => m.sorts.lastCharacter.light, m => m.sorts.lastPlayed], ['asc', order.dir, order.dir, 'desc']);
     } else if (order.sort === 'triumphScore') {
       members = orderBy(members, [m => m.sorts.private, m => m.sorts.triumphScore, m => m.sorts.lastPlayed], ['asc', order.dir, 'desc']);
     } else if (order.sort === 'valor') {
