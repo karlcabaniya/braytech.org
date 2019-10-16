@@ -15,14 +15,8 @@ class Tooltip extends React.Component {
 
     this.state = {
       hash: false,
-      instanceId: false,
-      state: false,
-      quantity: false,
-      rollNote: false,
       table: false,
-      tooltipType: false,
-      mode: false,
-      playlist: false
+      data: {}
     };
 
     this.ref_tooltip = React.createRef();
@@ -76,14 +70,10 @@ class Tooltip extends React.Component {
     if (e.currentTarget.dataset.hash) {
       this.setState({
         hash: e.currentTarget.dataset.hash,
-        instanceId: e.currentTarget.dataset.instanceid,
-        state: e.currentTarget.dataset.state,
-        quantity: e.currentTarget.dataset.quantity,
-        rollNote: e.currentTarget.dataset.rollnote,
         table: e.currentTarget.dataset.table,
-        tooltipType: e.currentTarget.dataset.tooltiptype,
-        mode: e.currentTarget.dataset.mode,
-        playlist: e.currentTarget.dataset.playlist
+        data: {
+          ...e.currentTarget.dataset
+        }
       });
       this.helper_windowMouseMove(e);
     }
@@ -108,14 +98,10 @@ class Tooltip extends React.Component {
       if (e.currentTarget.dataset.hash) {
         this.setState({
           hash: e.currentTarget.dataset.hash,
-          instanceId: e.currentTarget.dataset.instanceid,
-          state: e.currentTarget.dataset.state,
-          quantity: e.currentTarget.dataset.quantity,
-          rollNote: e.currentTarget.dataset.rollnote,
           table: e.currentTarget.dataset.table,
-          tooltipType: e.currentTarget.dataset.tooltiptype,
-          mode: e.currentTarget.dataset.mode,
-          playlist: e.currentTarget.dataset.playlist
+          data: {
+            ...e.currentTarget.dataset
+          }
         });
       }
     }
@@ -139,14 +125,8 @@ class Tooltip extends React.Component {
   resetState = () => {
     this.setState({
       hash: false,
-      instanceId: false,
-      state: false,
-      quantity: false,
-      rollNote: false,
       table: false,
-      tooltipType: false,
-      mode: false,
-      playlist: false
+      data: {}
     });
     this.mousePosition = {
       x: 0,
@@ -217,7 +197,7 @@ class Tooltip extends React.Component {
 
     return (
       <div ref={this.ref_tooltip} id='tooltip' className={cx({ visible: this.state.hash })}>
-        {this.state.hash ? <Tooltip {...this.state} /> : null}
+        {this.state.hash ? <Tooltip {...this.state.data} /> : null}
       </div>
     );
     

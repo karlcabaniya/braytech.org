@@ -13,7 +13,7 @@ import './styles.css';
 
 class Items extends React.Component {
   render() {
-    const { member, items, order, asTab, showHash, inspect, action } = this.props;
+    const { member, items, order, asTab, noBorder, showHash, inspect, action } = this.props;
     const itemComponents = member && member.data && member.data.profile.itemComponents;
     const characterUninstancedItemComponents = false //member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data;
 
@@ -25,8 +25,8 @@ class Items extends React.Component {
     }
 
     items.forEach((item, i) => {
-      let definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
-      let definitionBucket = item.bucketHash ? manifest.DestinyInventoryBucketDefinition[item.bucketHash] : false;
+      const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
+      const definitionBucket = item.bucketHash && manifest.DestinyInventoryBucketDefinition[item.bucketHash];
 
       if (!definitionItem) {
         console.log(`Items: Couldn't find item definition for ${item.itemHash}`);
@@ -41,7 +41,9 @@ class Items extends React.Component {
         4274335291 // Emblems
       ];
 
-      let bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ', '-').toLowerCase();
+      const bucketName = definitionBucket && definitionBucket.displayProperties && definitionBucket.displayProperties.name && definitionBucket.displayProperties.name.replace(' ', '-').toLowerCase();
+
+      const vendorItemStatus = item.unavailable === undefined && item.saleStatus && enums.enumerateVendorItemStatus(item.saleStatus);
 
       output.push({
         name: definitionItem.displayProperties && definitionItem.displayProperties.name,
@@ -55,13 +57,17 @@ class Items extends React.Component {
                 linked: true,
                 masterworked: enums.enumerateItemState(item.state).masterworked,
                 exotic: definitionItem.inventory && definitionItem.inventory.tierType === 6,
-                'no-border': definitionItem.uiItemDisplayStyle === 'ui_display_style_engram' || (definitionItem.itemCategoryHashes && definitionItem.itemCategoryHashes.includes(268598612)) || (definitionItem.itemCategoryHashes && definitionItem.itemCategoryHashes.includes(18))
+                'no-border': definitionItem.uiItemDisplayStyle === 'ui_display_style_engram' || (definitionItem.itemCategoryHashes && definitionItem.itemCategoryHashes.includes(268598612)) || (definitionItem.itemCategoryHashes && definitionItem.itemCategoryHashes.includes(18)) || noBorder,
+                unavailable: (vendorItemStatus && !vendorItemStatus.success) || item.unavailable
               },
               bucketName
             )}
             data-hash={item.itemHash}
             data-instanceid={item.itemInstanceId}
             data-state={item.state}
+            data-vendorhash={item.vendorHash}
+            data-vendorindex={item.vendorItemIndex}
+            data-vendorstatus={item.saleStatus}
             data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
             onClick={e => {
               if (action) {

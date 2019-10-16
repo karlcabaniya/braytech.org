@@ -26,6 +26,10 @@
   font-size: 14px;
 }
 
+#now .column.double {
+  grid-column: span 2;
+}
+
 #now .group .module .module-header {
   margin: 24px 0 20px;
 }
@@ -233,6 +237,10 @@
 
   #now .group.head {
     padding-top: 3rem;
+  }
+
+  #now .column.double {
+    grid-column: unset;
   }
 
   #now .season-pass {

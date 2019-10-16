@@ -8,3 +8,68 @@
   padding-bottom: 100%;
   height: unset;
 }
+
+.seasonal-artifact .mods {
+  max-width: 450px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.seasonal-artifact .mods .tier {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.seasonal-artifact .mods .tier:first-child::before,
+.seasonal-artifact .mods .tier::after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: -1px;
+  width: 2px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.seasonal-artifact .mods .tier:first-child::before,
+.seasonal-artifact .mods .tier:last-child::after {
+  height: calc(100% + 10px);
+}
+
+.seasonal-artifact .mods .tier:first-child::before {
+  right: unset;
+  left: -1px;
+}
+
+.seasonal-artifact .mods .tier.available {
+  background-color: rgba(49, 139, 144, 0.6);
+}
+
+.seasonal-artifact .mods .tier.available::after  {
+  background-color: rgba(10, 243, 243, 0.3);
+}
+
+.seasonal-artifact .mods .tier.available.last::after  {
+  background-color: rgba(10, 243, 243, 0.5);
+}
+
+.seasonal-artifact .mods .tier .list.inventory-items {
+  grid-template-columns: 1fr;
+}
+
+.seasonal-artifact .mods .tier .list.inventory-items li {
+  padding: 4px;
+}
+
+.seasonal-artifact .mods .tier .list.inventory-items li.unavailable .icon .image {
+  filter: unset;
+}
+
+.seasonal-artifact .mods .tier .list.inventory-items li.unavailable .icon .image {
+  opacity: 0.5;
+}
+
+.seasonal-artifact .mods .tier .list.inventory-items li.unavailable .icon .image.background {
+  opacity: 0.5;
+}

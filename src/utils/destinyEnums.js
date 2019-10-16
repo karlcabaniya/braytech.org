@@ -80,6 +80,24 @@ export const enumerateProgressionRewardItemState = state => ({
   claimAllowed: flagEnum(state, 8)
 });
 
+export const enumerateVendorItemStatus = state => ({
+  success: flagEnum(state, 0),
+  noInventorySpace: flagEnum(state, 1),
+  noFunds: flagEnum(state, 2),
+  noProgression: flagEnum(state, 4),
+  noUnlock: flagEnum(state, 8),
+  noQuantity: flagEnum(state, 16),
+  outsidePurchaseWindow: flagEnum(state, 32),
+  notAvailable: flagEnum(state, 64),
+  uniquenessViolation: flagEnum(state, 128),
+  unknownError: flagEnum(state, 256),
+  alreadySelling: flagEnum(state, 512),
+  unsellable: flagEnum(state, 1024),
+  sellingInhibited: flagEnum(state, 2048),
+  alreadyOwned: flagEnum(state, 4096),
+  displayOnly: flagEnum(state, 8192)
+});
+
 export const bookCovers = {
   2447807737: '037E-0000131E.png',
   396866327: '01A3-0000132F.png',

@@ -70,22 +70,13 @@ class Now extends React.Component {
           // }
         ]
       },
-      {
-        className: ['season-pass'],
-        components: [<SeasonPass key='sp' />]
-      },
+      // {
+      //   className: ['season-pass'],
+      //   components: [<SeasonPass key='sp' />]
+      // },
       {
         className: [],
         cols: [
-          // {
-          //   className: [],
-          //   mods: [
-          //     {
-          //       className: ['seasonal-artifact'],
-          //       component: <SeasonalArtifact />
-          //     }
-          //   ]
-          // },
           {
             className: [],
             mods: [
@@ -95,12 +86,21 @@ class Now extends React.Component {
               }
             ]
           },
+          {
+            className: ['double'],
+            mods: [
+              {
+                className: ['seasonal-artifact'],
+                component: <SeasonalArtifact />
+              }
+            ]
+          },
           // {
           //   className: [],
           //   mods: [
           //     {
           //       className: [],
-          //       component: <Vendor hash='863940356' />
+          //       component: <Vendor hash='2894222926' />
           //     }
           //   ]
           // }

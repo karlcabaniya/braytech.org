@@ -6,8 +6,8 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import * as enums from '../../../utils/destinyEnums';
 import ObservedImage from '../../ObservedImage';
-import { enumerateItemState } from '../../../utils/destinyEnums';
 
 import fallback from './fallback';
 import weapon from './weapon';
@@ -25,8 +25,8 @@ import sandboxPerk from './sandboxPerk';
 
 class Item extends React.Component {
   render() {
-    const { t, member, hash, instanceId, quantity, rollNote, tooltipType, tooltips } = this.props;
-    
+    const { t, member, hash, instanceId, quantity, tooltips } = this.props;
+
     const table = this.props.table || 'DestinyInventoryItemDefinition';
     const state = (this.props.state && parseInt(this.props.state, 10)) || 0;
 
@@ -157,8 +157,8 @@ class Item extends React.Component {
       black = medal(item);
     }
 
-    if (tooltipType) {
-      kind = tooltipType;
+    if (this.props.tooltiptype) {
+      kind = this.props.tooltiptype;
     }
 
     if (item.inventory) {
@@ -203,9 +203,27 @@ class Item extends React.Component {
         </>
       );
     } else {
-
       let name = item.displayProperties && item.displayProperties.name;
       name = table === 'DestinyHistoricalStatsDefinition' ? item.statName : name;
+
+      let note = false;
+
+      if (!item.itemComponents && this.props.uninstanced) {
+
+        note = t('Non-instanced item (displaying collections roll)');
+
+      } else if (this.props.vendorhash && this.props.vendorindex && this.props.vendorstatus) {
+
+        const vendorItemStatus = parseInt(this.props.vendorstatus, 10);
+
+        if (vendorItemStatus !== 0) {
+          const definitionVendor = manifest.DestinyVendorDefinition[this.props.vendorhash];
+          const itemDetails = definitionVendor && definitionVendor.itemList && definitionVendor.itemList[this.props.vendorindex];
+
+          note = itemDetails && itemDetails.failureIndexes && definitionVendor.failureStrings[itemDetails.failureIndexes[0]];
+        }
+
+      }
 
       return (
         <>
@@ -219,7 +237,7 @@ class Item extends React.Component {
                 {!hideRarity && item.inventory ? <div className='rarity'>{item.inventory.tierTypeName}</div> : null}
               </div>
             </div>
-            {!item.itemComponents && rollNote ? <div className='note'>Non-instanced item (displaying collections roll)</div> : null}
+            {note ? <div className='note'>{note}</div> : null}
             <div className='black'>
               {this.props.viewport.width <= 600 && item.screenshot ? (
                 <div className='screenshot'>

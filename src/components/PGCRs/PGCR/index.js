@@ -819,7 +819,7 @@ class PGCR extends React.Component {
                                   let definitionItem = manifest.DestinyInventoryItemDefinition[w.referenceId];
                                   let kills = w.values ? w.values.uniqueWeaponKills.basic.value : '0';
                                   return (
-                                    <li key={p} className={cx('item', 'tooltip')} data-hash={definitionItem.hash} data-rollnote='yes'>
+                                    <li key={p} className={cx('item', 'tooltip')} data-hash={definitionItem.hash} data-uninstanced='yes'>
                                       <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} />
                                       <div className='value'>{kills}</div>
                                     </li>
