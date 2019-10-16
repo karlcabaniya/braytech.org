@@ -28,38 +28,53 @@ class Nightfalls extends React.Component {
       return false;
     });
 
-    // const weeklyNightfallStrikesOrdeal = Object.keys(enums.nightfalls)
-    //   .filter(k => enums.nightfalls[k].ordealHashes.find(o => weeklyNightfallStrikeActivities.find(w => w.activityHash === o)))
-    //   .map(h => ({ activityHash: h }));
+    const weeklyNightfallStrikesOrdeal = Object.keys(enums.nightfalls)
+      .filter(k => enums.nightfalls[k].ordealHashes.find(o => weeklyNightfallStrikeActivities.find(w => w.activityHash === o)))
+      .map(h => ({ activityHash: h, ordeal: true }));
     const weeklyNightfallStrikesScored = weeklyNightfallStrikeActivities.filter(w => !Object.keys(enums.nightfalls).find(k => enums.nightfalls[k].ordealHashes.find(o => o === w.activityHash)));
 
-    weeklyNightfallStrikesScored.forEach(activity => {
+    const stringNightfall = manifest.DestinyPresentationNodeDefinition[4213993861] && manifest.DestinyPresentationNodeDefinition[4213993861].displayProperties && manifest.DestinyPresentationNodeDefinition[4213993861].displayProperties.name;
+    const stringNightfallOrdeal = manifest.DestinyPresentationNodeDefinition[656562339] && manifest.DestinyPresentationNodeDefinition[656562339].displayProperties && manifest.DestinyPresentationNodeDefinition[656562339].displayProperties.name;
+
+    weeklyNightfallStrikesOrdeal.concat(weeklyNightfallStrikesScored).forEach(activity => {
       const nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
 
-      if (enums.nightfalls[nightfall.hash].collectibles.length < 1 && enums.nightfalls[nightfall.hash].triumphs.length < 1) return;
+      // if (enums.nightfalls[nightfall.hash].collectibles.length < 1 && enums.nightfalls[nightfall.hash].triumphs.length < 1) return;
 
       nightfalls.push(
         <React.Fragment key={nightfall.hash}>
           <div className='module-header'>
-            <div className='sub-name'>{t('Nightfall')}</div>
+            <div className='sub-name'>{activity.ordeal ? stringNightfallOrdeal : stringNightfall}</div>
             <div className='name'>{nightfall.selectionScreenDisplayProperties.name}</div>
           </div>
+          <h4>{t('Collectibles')}</h4>
           {enums.nightfalls[nightfall.hash].collectibles.length ? (
             <>
-              <h4>{t('Collectibles')}</h4>
               <ul className='list collection-items'>
                 <Collectibles selfLinkFrom='/this-week' hashes={enums.nightfalls[nightfall.hash].collectibles} />
               </ul>
             </>
-          ) : null}
+          ) : (
+            <div className='aside'>
+              <p>
+                <em>{t("This Nightfall doesn't have any associated collectibles.")}</em>
+              </p>
+            </div>
+          )}
+          <h4>{t('Triumphs')}</h4>
           {enums.nightfalls[nightfall.hash].triumphs.length ? (
             <>
-              <h4>{t('Triumphs')}</h4>
               <ul className='list record-items'>
                 <Records selfLinkFrom='/this-week' hashes={enums.nightfalls[nightfall.hash].triumphs} ordered />
               </ul>
             </>
-          ) : null}
+          ) : (
+            <div className='aside'>
+              <p>
+                <em>{t("This Nightfall doesn't have any associated records.")}</em>
+              </p>
+            </div>
+          )}
         </React.Fragment>
       );
     });

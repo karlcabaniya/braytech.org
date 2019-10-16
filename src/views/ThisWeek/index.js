@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import Flashpoint from './Modules/Flashpoint';
+import FeaturedActivities from './Modules/FeaturedActivities';
 import CrucibleRotators from './Modules/CrucibleRotators';
 import Nightfalls from './Modules/Nightfalls';
 import Menagerie from './Modules/Menagerie';
@@ -31,6 +32,8 @@ class ThisWeek extends React.Component {
   }
 
   render() {
+    const { member } = this.props;
+
     const resetTime = '17:00:00Z';
 
     const cycleInfo = {
@@ -84,6 +87,15 @@ class ThisWeek extends React.Component {
             mods: [
               {
                 className: [],
+                component: <FeaturedActivities />
+              }
+            ]
+          },
+          {
+            className: [],
+            mods: [
+              {
+                className: [],
                 component: <CrucibleRotators />
               }
             ]
@@ -92,11 +104,11 @@ class ThisWeek extends React.Component {
       },
       {
         className: [],
-        components: [<Nightfalls />]
+        components: [<Nightfalls key='nf' />]
       },
       {
         className: [],
-        components: [<Raids />]
+        components: [<Raids key='ra' />]
       },
       {
         className: [],
@@ -208,8 +220,7 @@ class ThisWeek extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member,
-    collectibles: state.collectibles
+    member: state.member
   };
 }
 

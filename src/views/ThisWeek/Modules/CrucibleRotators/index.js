@@ -2,9 +2,9 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
 
 import manifest from '../../../../utils/manifest';
-import * as enums from '../../../../utils/destinyEnums';
 
 import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
 import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
@@ -13,11 +13,14 @@ import { ReactComponent as CrucibleIconClash } from './icons/clash.svg';
 import { ReactComponent as CrucibleIconShowdown } from './icons/showdown.svg';
 import { ReactComponent as CrucibleIconTeamScorched } from './icons/team-scorched.svg';
 import { ReactComponent as CrucibleIconCountdown } from './icons/countdown.svg';
+import { ReactComponent as CrucibleIconSupremacy } from './icons/supremacy.svg';
+import { ReactComponent as CrucibleIconLockdown } from './icons/lockdown.svg';
+import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
 
 import './styles.css';
 
 const crucibleRotators = [
-  3753505781, // Iron Banner
+  // 3753505781, // Iron Banner
   2303927902, // Clash
   3780095688, // Supremacy
   1219083526, // Team Scorched
@@ -33,9 +36,9 @@ const crucibleRotators = [
 ];
 
 const crucibleModeIcons = {
-  3753505781: <CrucibleIconDefault />,
+  3753505781: <CrucibleIconIronBanner />,
   2303927902: <CrucibleIconClash />,
-  3780095688: <CrucibleIconDefault />,
+  3780095688: <CrucibleIconSupremacy />,
   1219083526: <CrucibleIconTeamScorched />,
   4209226441: <CrucibleIconDefault />,
   952904835: <CrucibleIconDefault />,
@@ -43,7 +46,7 @@ const crucibleModeIcons = {
   3011324617: <CrucibleIconBreakthrough />,
   3646079260: <CrucibleIconCountdown />,
   1457072306: <CrucibleIconShowdown />,
-  3239164160: <CrucibleIconDefault />,
+  3239164160: <CrucibleIconLockdown />,
   740422335: <CrucibleIconDefault />,
   920826395: <CrucibleIconDefault />
 };
