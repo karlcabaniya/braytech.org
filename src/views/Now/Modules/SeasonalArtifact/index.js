@@ -8,8 +8,9 @@ import manifest from '../../../../utils/manifest';
 import * as ls from '../../../../utils/localStorage';
 import * as bungie from '../../../../utils/bungie';
 import ObservedImage from '../../../../components/ObservedImage';
-import Spinner from '../../../../components/UI/Spinner';
 import { NoAuth, DiffProfile } from '../../../../components/BungieAuth';
+import Spinner from '../../../../components/UI/Spinner';
+import ProgressBar from '../../../../components/UI/ProgressBar';
 
 import './styles.css';
 
@@ -219,19 +220,21 @@ class SeasonalArtifact extends React.Component {
       return <DiffProfile inline />;
     }
 
-    const definitionArtifact = progressionArtifact.artifactHash && manifest.DestinyArtifactDefinition[progressionArtifact.artifactHash];
-    const definitionVendor = progressionArtifact.artifactHash && manifest.DestinyVendorDefinition[progressionArtifact.artifactHash];
-
     if (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && this.state.loading) {
       return (
         <>
-          <div className='module-header'>
-            <div className='sub-name'>{definitionVendor.displayProperties.name}</div>
+          <div className='head'>
+            <div className='module-header'>
+              <div className='sub-name'>{t('Seasonal progression')}</div>
+            </div>
+            <Spinner />
           </div>
-          <Spinner />
         </>
       );
     }
+
+    const definitionArtifact = progressionArtifact.artifactHash && manifest.DestinyArtifactDefinition[progressionArtifact.artifactHash];
+    const definitionVendor = progressionArtifact.artifactHash && manifest.DestinyVendorDefinition[progressionArtifact.artifactHash];
 
     const items = [];
 
@@ -270,57 +273,97 @@ class SeasonalArtifact extends React.Component {
     return (
       <>
         {/* <ObservedImage className='image artifact' src='/static/images/extracts/flair/VEye.png' /> */}
-        <div className='module-header'>
-          <div className='sub-name'>{definitionVendor.displayProperties.name}</div>
+        <div className='head'>
+          <div className='module-header'>
+            <div className='sub-name'>{t('Seasonal progression')}</div>
+          </div>
+          <div className='artifact'>
+            <div className='icon'>
+              <ObservedImage src={`https://www.bungie.net${definitionArtifact.displayProperties.icon}`} />
+            </div>
+            <div className='text'>
+              <div className='name'>{definitionArtifact.displayProperties.name}</div>
+              <div className='type'>{t('Seasonal Artifact')}</div>
+            </div>
+            <div className='description'>
+              <p>{definitionVendor.displayProperties.description}</p>
+            </div>
+          </div>
         </div>
-        <div className='mods'>
-          {definitionArtifact.tiers.map((tier, t) => {
-            const tierItemHashes = tier.items.map(i => i.itemHash);
+        <div className='grid'>
+          <div className='mods'>
+            <h4>{t('Mods')}</h4>
+            <div className='tiers'>
+              {definitionArtifact.tiers.map((tier, t) => {
+                const tierItemHashes = tier.items.map(i => i.itemHash);
 
-            return (
-              <div key={t} className={cx('tier', { available: items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement, last: (t < 4 && items.filter(i => !tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || (t > 2 && t < 4) })}>
-                <ul className='list inventory-items'>
-                  {items
-                    .filter(i => tierItemHashes.includes(i.itemHash))
-                    .map((item, i) => {
+                return (
+                  <div key={t} className={cx('tier', { available: items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement, last: (t < 4 && items.filter(i => !tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || (t > 2 && t < 4) })}>
+                    <ul className='list inventory-items'>
+                      {items
+                        .filter(i => tierItemHashes.includes(i.itemHash))
+                        .map((item, i) => {
+                          const inactive = item.unavailable || !(items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement);
 
-                      const inactive = item.unavailable || !(items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement);
+                          const image = inactive ? mods[item.itemHash].inactive : mods[item.itemHash].active;
 
-                      const image = inactive ? mods[item.itemHash].inactive : mods[item.itemHash].active;
+                          const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
-                      const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
+                          const energyCost = definitionItem && definitionItem.plug && definitionItem.plug.energyCost && definitionItem.plug.energyCost.energyCost;
 
-                      const energyCost = definitionItem && definitionItem.plug && definitionItem.plug.energyCost && definitionItem.plug.energyCost.energyCost;
-
-                      return (
-                        <li
-                          key={i}
-                          className={cx({
-                            tooltip: true,
-                            linked: true,
-                            'no-border': true,
-                            unavailable: inactive
-                          })}
-                          data-hash={item.itemHash}
-                          data-instanceid={item.itemInstanceId}
-                          data-state={item.state}
-                          // data-vendorhash={item.vendorHash}
-                          // data-vendorindex={item.vendorItemIndex}
-                          // data-vendorstatus={item.saleStatus}
-                          data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
-                        >
-                          <div className='icon'>
-                            {inactive ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
-                            <ObservedImage className='image' src={image} />
-                            <div className='cost'>{energyCost}</div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                </ul>
+                          return (
+                            <li
+                              key={i}
+                              className={cx({
+                                tooltip: true,
+                                linked: true,
+                                'no-border': true,
+                                unavailable: inactive
+                              })}
+                              data-hash={item.itemHash}
+                              data-instanceid={item.itemInstanceId}
+                              data-state={item.state}
+                              // data-vendorhash={item.vendorHash}
+                              // data-vendorindex={item.vendorItemIndex}
+                              // data-vendorstatus={item.saleStatus}
+                              data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
+                            >
+                              <div className='icon'>
+                                {inactive ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
+                                <ObservedImage src={image} />
+                                <div className='cost'>{energyCost}</div>
+                              </div>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className='progression'>
+            <h4>{t('Progression')}</h4>
+            <p>
+              <em>{t('Earning XP grants Power bonuses and unlocks powerful mods that can be slotted into weapons and armor.')}</em>
+            </p>
+            <div className='integers'>
+              <div>
+                <div className='name'>{t('Artifact unlocks')}</div>
+                <div className='value'>
+                  {progressionArtifact.pointProgression.level}/{progressionArtifact.pointProgression.levelCap}
+                </div>
               </div>
-            );
-          })}
+              <div>
+                <div className='name'>{t('Power bonus')}</div>
+                <div className='value power'>+{progressionArtifact.powerBonus}</div>
+              </div>
+            </div>
+            <p>{t('Next power bonus')}</p>
+            <ProgressBar {...progressionArtifact.powerBonusProgression} hideCheck />
+            <p>{t('Next artifact unlock')}</p>
+            <ProgressBar {...progressionArtifact.pointProgression} hideCheck />
+          </div>
         </div>
       </>
     );

@@ -29,6 +29,10 @@ class ProgressBar extends React.Component {
       progress = this.props.progressToNextLevel;
       completionValue = this.props.nextLevelAt;
       description = manifest.DestinyProgressionDefinition[progressionHash].displayProperties && manifest.DestinyProgressionDefinition[progressionHash].displayProperties.displayUnitsName;
+
+      if (description === '') {
+        description = manifest.DestinyProgressionDefinition[progressionHash].displayProperties && manifest.DestinyProgressionDefinition[progressionHash].displayProperties.name;
+      }
       
     }
 

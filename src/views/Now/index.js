@@ -78,20 +78,20 @@ class Now extends React.Component {
         className: [],
         cols: [
           {
-            className: [],
-            mods: [
-              {
-                className: [],
-                component: <Ranks />
-              }
-            ]
-          },
-          {
             className: ['double'],
             mods: [
               {
                 className: ['seasonal-artifact'],
                 component: <SeasonalArtifact />
+              }
+            ]
+          },
+          {
+            className: [],
+            mods: [
+              {
+                className: [],
+                component: <Ranks />
               }
             ]
           },
