@@ -32,6 +32,8 @@ class Now extends React.Component {
   }
 
   render() {
+    const { member } = this.props;
+
     const modules = [
       {
         className: ['head'],
@@ -83,7 +85,7 @@ class Now extends React.Component {
         cols: [
           {
             className: ['double'],
-            condition: !!this.auth,
+            condition: !!(this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)),
             mods: [
               {
                 className: ['seasonal-artifact'],
@@ -161,6 +163,12 @@ class Now extends React.Component {
   }
 }
 
+function mapStateToProps(state, ownProps) {
+  return {
+    member: state.member
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     rebindTooltips: value => {
@@ -171,7 +179,7 @@ function mapDispatchToProps(dispatch) {
 
 export default compose(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(Now);
