@@ -8,6 +8,7 @@ import * as ls from '../../utils/localStorage';
 import Flashpoint from './Modules/Flashpoint';
 import HeroicStoryMissions from './Modules/HeroicStoryMissions';
 import VanguardStrikes from './Modules/VanguardStrikes';
+import BlackArmoryForges from './Modules/BlackArmoryForges';
 import DailyVanguardModifiers from './Modules/DailyVanguardModifiers';
 import Ranks from './Modules/Ranks';
 import SeasonPass from './Modules/SeasonPass';
@@ -64,16 +65,16 @@ class Now extends React.Component {
                 component: <HeroicStoryMissions />
               }
             ]
+          },
+          {
+            className: [],
+            mods: [
+              {
+                className: [],
+                component: <BlackArmoryForges />
+              }
+            ]
           }
-          // {
-          //   className: [],
-          //   mods: [
-          //     {
-          //       className: [],
-          //       component: <VanguardStrikes />
-          //     }
-          //   ]
-          // }
         ]
       },
       {

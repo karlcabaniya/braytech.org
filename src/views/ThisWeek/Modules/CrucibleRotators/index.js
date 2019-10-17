@@ -2,7 +2,6 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import ReactMarkdown from 'react-markdown';
 
 import manifest from '../../../../utils/manifest';
 
@@ -80,7 +79,7 @@ class CrucibleRotators extends React.Component {
           </p>
         </div>
         <h4>{t('Rotator playlists')}</h4>
-        <div className='crucible-modes'>
+        <div className='activity-mode-icons'>
           {featuredCrucibleModes.map((f, i) => {
             return (
               <div key={i}>

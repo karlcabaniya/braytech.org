@@ -1,29 +1,29 @@
-#this-week .crucible-modes {
+.activity-mode-icons {
   position: relative;
   display: grid;
   grid-gap: 20px;
   grid-template-columns: minmax(60px, 120px) minmax(60px, 120px);
 }
 
-#this-week .crucible-modes > div {
+.activity-mode-icons > div {
   position: relative;
   display: grid;
   grid-gap: 4px;
   grid-template-columns: 1fr;
 }
 
-#this-week .crucible-modes > div .icon svg {
+.activity-mode-icons > div .icon svg {
   width: 100%;
   height: auto;
   transform: scale(1.2);
 }
 
-#this-week .crucible-modes > div .icon svg .polygon.inner {
+.activity-mode-icons > div .icon svg .polygon.inner {
   animation: rotate-linear 20s infinite linear;
   transform-origin: center;
 }
 
-#this-week .crucible-modes > div .icon svg .polygon.inner.ani {
+.activity-mode-icons > div .icon svg .polygon.inner.ani {
   animation: crucible-modes-rotate-and-scale-out 5s infinite ease-out;
   transform-origin: center;
 }
@@ -43,24 +43,24 @@
   }
 }
 
-#this-week .crucible-modes > div .text {
+.activity-mode-icons > div .text {
   text-align: center;
   font-size: 16px;
 }
 
-#this-week .crucible-modes .falling-1,
-#this-week .crucible-modes .falling-2,
-#this-week .crucible-modes .falling-3 {
+.activity-mode-icons .falling-1,
+.activity-mode-icons .falling-2,
+.activity-mode-icons .falling-3 {
   transform-origin: center center;
   /* animation: rotate-linear 2s infinite linear; */
   animation: crucible-modes-falling-leaf 3s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
-#this-week .crucible-modes .falling-2 {
+.activity-mode-icons .falling-2 {
   animation-delay: 1s;
 }
 
-#this-week .crucible-modes .falling-3 {
+.activity-mode-icons .falling-3 {
   animation-delay: 1.5s;
 }
 

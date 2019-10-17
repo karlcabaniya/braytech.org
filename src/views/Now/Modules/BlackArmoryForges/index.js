@@ -5,7 +5,13 @@ import { withTranslation } from 'react-i18next';
 
 import manifest from '../../../../utils/manifest';
 
+import { ReactComponent as ForgeGofannon } from './icons/gofannon.svg';
+
 import './styles.css';
+
+const forgeIcons = {
+  957727787: <ForgeGofannon />
+};
 
 class BlackArmoryForges extends React.Component {
   render() {
@@ -13,7 +19,7 @@ class BlackArmoryForges extends React.Component {
     const characterActivities = member.data.profile.characterActivities.data;
 
     const dailyBlackArmoryForges = {
-      activities: characterActivities[member.characterId].availableActivities.filter(a => {
+      active: characterActivities[member.characterId].availableActivities.find(a => {
         const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
         if (definitionActivity && definitionActivity.activityTypeHash === 838603889) {
@@ -21,33 +27,28 @@ class BlackArmoryForges extends React.Component {
         } else {
           return false;
         }
-      }),
-      displayProperties: {
-        name: t('Black Armory Forges')
-      },
-      headings: {
-        current: t('Current forge')
-      }
+      })
     };
+
+    const definitionActivity = manifest.DestinyActivityDefinition[dailyBlackArmoryForges.active.activityHash];
 
     return (
       <>
         <div className='module-header'>
-          <div className='sub-name'>{dailyBlackArmoryForges.displayProperties.name}</div>
+          <div className='sub-name'>{t('Black Armory Forges')}</div>
         </div>
-        {dailyBlackArmoryForges.activities.length ? (
-          <ul className='list activities'>
-            {dailyBlackArmoryForges.activities.map((a, i) => {
-              const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
-
-              return (
-                <li key={i} className='linked tooltip' data-table='DestinyActivityDefinition' data-hash={definitionActivity.activityTypeHash} data-playlist={a.activityHash}>
-                  <div className='name'>{definitionActivity.displayProperties && definitionActivity.displayProperties.name ? definitionActivity.displayProperties.name : t('Unknown')}</div>
-                </li>
-              );
-            })}
-          </ul>
-        ) : null}
+        <div className='text'>
+          <p>
+            <em>{t('Forges are currently running in low-power mode and will only be available during maintenance periods.')}</em>
+          </p>
+        </div>
+        <h4>{t('Active')}</h4>
+        <div className='activity-mode-icons'>
+          <div>
+            <div className='icon'>{forgeIcons[dailyBlackArmoryForges.active.activityHash] ? forgeIcons[dailyBlackArmoryForges.active.activityHash] : null}</div>
+            <div className='text'>{definitionActivity.displayProperties.name}</div>
+          </div>
+        </div>
       </>
     );
   }
@@ -60,8 +61,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default compose(
-  connect(
-    mapStateToProps
-  ),
+  connect(mapStateToProps),
   withTranslation()
 )(BlackArmoryForges);
