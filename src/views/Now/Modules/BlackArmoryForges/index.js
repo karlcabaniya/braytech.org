@@ -30,6 +30,21 @@ class BlackArmoryForges extends React.Component {
       })
     };
 
+    if (!dailyBlackArmoryForges.active) {
+      return (
+        <>
+          <div className='module-header'>
+            <div className='sub-name'>{t('Black Armory Forges')}</div>
+          </div>
+          <div className='text'>
+            <p>
+              <em>An error occurred.</em>
+            </p>
+          </div>
+        </>
+      );
+    }
+
     const definitionActivity = manifest.DestinyActivityDefinition[dailyBlackArmoryForges.active.activityHash];
 
     return (

@@ -240,9 +240,13 @@ class SeasonalArtifact extends React.Component {
 
     const items = [];
 
+    let totalUnlocksUsed = 0;
+
     if (this.state.data) {
       Object.values(this.state.data.sales.data).forEach(sale => {
         if (!this.state.data.itemComponents.plugStates.data[sale.itemHash]) return;
+
+        if (this.state.data.itemComponents.plugStates.data[sale.itemHash].enabled) totalUnlocksUsed++;
 
         items.push({
           vendorHash: definitionVendor.hash,
@@ -298,12 +302,20 @@ class SeasonalArtifact extends React.Component {
               {definitionArtifact.tiers.map((tier, t) => {
                 const tierItemHashes = tier.items.map(i => i.itemHash);
 
+                const previousTierUnlocksUsed = items
+                  .filter(i => definitionArtifact.tiers[Math.max(0, t - 1)]
+                      .items.map(i => i.itemHash)
+                      .includes(i.itemHash)
+                  ).filter(i => i.obtained).length;
+                
+                console.log(t, tier.minimumUnlockPointsUsedRequirement, previousTierUnlocksUsed)
+
                 return (
                   <div
                     key={t}
                     className={cx('tier', {
-                      available: t === 0 || (items.filter(i => tierItemHashes.includes(i.itemHash)).filter(i => i.obtained).length > 0 && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement),
-                      last: (t < 4 && items.filter(i => tierItemHashes.includes(i.itemHash)).filter(i => i.available).length < 1 && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || (t > 2 && t < 4)
+                      available: totalUnlocksUsed >= tier.minimumUnlockPointsUsedRequirement,
+                      last: (t < 4 && totalUnlocksUsed < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || t === 4
                     })}
                   >
                     <ul className='list inventory-items'>
