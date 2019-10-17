@@ -240,22 +240,21 @@ class SeasonalArtifact extends React.Component {
 
     const items = [];
 
-    let unlockPointsUsed = 0;
-
     if (this.state.data) {
       Object.values(this.state.data.sales.data).forEach(sale => {
-        if (sale.saleStatus !== 0) unlockPointsUsed++;
+        if (!this.state.data.itemComponents.plugStates.data[sale.itemHash]) return;
 
         items.push({
           vendorHash: definitionVendor.hash,
           ...sale,
           ...((sale.vendorItemIndex !== undefined && definitionVendor && definitionVendor.itemList && definitionVendor.itemList[sale.vendorItemIndex]) || {}),
-          unavailable: sale.saleStatus === 0
+          available: this.state.data.itemComponents.plugStates.data[sale.itemHash].canInsert,
+          obtained: this.state.data.itemComponents.plugStates.data[sale.itemHash].enabled
         });
       });
     }
 
-    console.log(progressionArtifact, unlockPointsUsed);
+    console.log(progressionArtifact, items);
 
     // let string = ''
     //     definitionArtifact.tiers.forEach(tier => {
@@ -300,14 +299,19 @@ class SeasonalArtifact extends React.Component {
                 const tierItemHashes = tier.items.map(i => i.itemHash);
 
                 return (
-                  <div key={t} className={cx('tier', { available: items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement, last: (t < 4 && items.filter(i => !tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || (t > 2 && t < 4) })}>
+                  <div key={t} className={cx('tier', {
+                    available: t === 0 ||
+                      (items.filter(i => tierItemHashes.includes(i.itemHash)).filter(i => i.obtained).length > 0
+                      && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement),
+                    last: (t < 4 && items.filter(i => tierItemHashes.includes(i.itemHash)).filter(i => i.available).length < 1 && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || (t > 2 && t < 4)
+                  })}>
                     <ul className='list inventory-items'>
                       {items
                         .filter(i => tierItemHashes.includes(i.itemHash))
                         .map((item, i) => {
-                          const inactive = item.unavailable || !(items.filter(i => tierItemHashes.includes(i.itemHash) && i.unavailable).length && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement);
+                          const active = item.obtained;
 
-                          const image = inactive ? mods[item.itemHash].inactive : mods[item.itemHash].active;
+                          const image = !active ? mods[item.itemHash].inactive : mods[item.itemHash].active;
 
                           const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
@@ -320,7 +324,7 @@ class SeasonalArtifact extends React.Component {
                                 tooltip: true,
                                 linked: true,
                                 'no-border': true,
-                                unavailable: inactive
+                                unavailable: !active
                               })}
                               data-hash={item.itemHash}
                               data-instanceid={item.itemInstanceId}
@@ -331,7 +335,7 @@ class SeasonalArtifact extends React.Component {
                               data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
                             >
                               <div className='icon'>
-                                {inactive ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
+                                {!active ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
                                 <ObservedImage src={image} />
                                 <div className='cost'>{energyCost}</div>
                               </div>
