@@ -103,11 +103,11 @@
   background-color: rgba(49, 139, 144, 0.6);
 }
 
-.seasonal-artifact .tiers .tier.available::after  {
+.seasonal-artifact .tiers .tier.available:not(:last-child)::after  {
   background-color: rgba(10, 243, 243, 0.5);
 }
 
-.seasonal-artifact .tiers .tier.available.last::after  {
+.seasonal-artifact .tiers .tier.available.last:not(:last-child)::after  {
   background-color: rgba(10, 243, 243, 0.8);
 }
 

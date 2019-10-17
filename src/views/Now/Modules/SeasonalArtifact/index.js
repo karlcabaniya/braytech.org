@@ -299,12 +299,13 @@ class SeasonalArtifact extends React.Component {
                 const tierItemHashes = tier.items.map(i => i.itemHash);
 
                 return (
-                  <div key={t} className={cx('tier', {
-                    available: t === 0 ||
-                      (items.filter(i => tierItemHashes.includes(i.itemHash)).filter(i => i.obtained).length > 0
-                      && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement),
-                    last: (t < 4 && items.filter(i => tierItemHashes.includes(i.itemHash)).filter(i => i.available).length < 1 && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || (t > 2 && t < 4)
-                  })}>
+                  <div
+                    key={t}
+                    className={cx('tier', {
+                      available: t === 0 || (items.filter(i => tierItemHashes.includes(i.itemHash)).filter(i => i.obtained).length > 0 && progressionArtifact.pointProgression.level >= tier.minimumUnlockPointsUsedRequirement),
+                      last: (t < 4 && items.filter(i => tierItemHashes.includes(i.itemHash)).filter(i => i.available).length < 1 && progressionArtifact.pointProgression.level < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || (t > 2 && t < 4)
+                    })}
+                  >
                     <ul className='list inventory-items'>
                       {items
                         .filter(i => tierItemHashes.includes(i.itemHash))
@@ -367,8 +368,12 @@ class SeasonalArtifact extends React.Component {
             </div>
             <p>{t('Next power bonus')}</p>
             <ProgressBar {...progressionArtifact.powerBonusProgression} hideCheck />
-            <p>{t('Next artifact unlock')}</p>
-            <ProgressBar {...progressionArtifact.pointProgression} hideCheck />
+            {progressionArtifact.pointProgression.level < progressionArtifact.pointProgression.levelCap ? (
+              <>
+                <p>{t('Next artifact unlock')}</p>
+                <ProgressBar {...progressionArtifact.pointProgression} hideCheck />
+              </>
+            ) : null}
           </div>
         </div>
       </>
