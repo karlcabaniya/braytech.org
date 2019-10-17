@@ -32,7 +32,13 @@
     },
     "3728157446": {
       "destinationHash": 290444260,
-      "bubbleHash": 0
+      "bubbleHash": 848710979,
+      "points": [
+        {
+          "x": 49,
+          "y": 343
+        }
+      ]
     },
     "3977481189": {
       "destinationHash": 290444260,

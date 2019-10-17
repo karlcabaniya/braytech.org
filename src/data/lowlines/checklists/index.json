@@ -4502,15 +4502,25 @@
     },
     {
       "destinationHash": 290444260,
-      "bubbleHash": 0,
+      "bubbleHash": 848710979,
       "checklistHash": 3728157446,
-      "points": [],
+      "points": [
+        {
+          "x": 49,
+          "y": 343
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "place": "The Moon",
-        "number": 6
+        "number": 6,
+        "bubble": "K1 Revelation",
+        "name": "K1 Revelation"
       },
-      "extended": {}
+      "extended": {
+        "located": "lost-sector"
+      },
+      "bubbleName": false
     },
     {
       "destinationHash": 290444260,

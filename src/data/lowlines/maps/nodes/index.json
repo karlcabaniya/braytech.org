@@ -2024,8 +2024,8 @@
   {
     "checklistId": 1912364094,
     "checklistHash": 3728157446,
-    "screenshot": false,
-    "description": false,
+    "screenshot": "/static/images/screenshots/jade-rabbits/k1-revelation_jade-rabbits_3728157446.jpg",
+    "description": "Requires a Firewall Data Fragment. Acquire prerequisite through Eris Morn.",
     "debug": {
       "number": 6
     }
