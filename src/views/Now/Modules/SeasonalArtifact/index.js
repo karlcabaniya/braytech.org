@@ -307,13 +307,13 @@ class SeasonalArtifact extends React.Component {
               {definitionArtifact.tiers.map((tier, t) => {
                 const tierItemHashes = tier.items.map(i => i.itemHash);
 
-                const previousTierUnlocksUsed = items
-                  .filter(i => definitionArtifact.tiers[Math.max(0, t - 1)]
-                      .items.map(i => i.itemHash)
-                      .includes(i.itemHash)
-                  ).filter(i => i.obtained).length;
+                // const previousTierUnlocksUsed = items
+                //   .filter(i => definitionArtifact.tiers[Math.max(0, t - 1)]
+                //       .items.map(i => i.itemHash)
+                //       .includes(i.itemHash)
+                //   ).filter(i => i.obtained).length;
                 
-                console.log(t, tier.minimumUnlockPointsUsedRequirement, previousTierUnlocksUsed)
+                // console.log(t, tier.minimumUnlockPointsUsedRequirement, previousTierUnlocksUsed)
 
                 return (
                   <div

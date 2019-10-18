@@ -1,111 +1,137 @@
 {
   "de": {
     "translated": 427,
-    "notTranslated": 59,
+    "notTranslated": 62,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "en": {
-    "translated": 486,
+    "translated": 489,
     "notTranslated": 0,
     "added": [],
     "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 486,
+    "notTranslated": 489,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "es": {
     "translated": 463,
-    "notTranslated": 23,
+    "notTranslated": 26,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "fr": {
     "translated": 396,
-    "notTranslated": 90,
+    "notTranslated": 93,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 486,
+    "notTranslated": 489,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "it": {
     "translated": 463,
-    "notTranslated": 23,
+    "notTranslated": 26,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 486,
+    "notTranslated": 489,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "ko": {
     "translated": 336,
-    "notTranslated": 150,
+    "notTranslated": 153,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 486,
+    "notTranslated": 489,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "pt-br": {
     "translated": 460,
-    "notTranslated": 26,
+    "notTranslated": 29,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 486,
+    "notTranslated": 489,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "zh-chs": {
     "translated": 463,
-    "notTranslated": 23,
+    "notTranslated": 26,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 486,
+    "notTranslated": 489,
     "added": [
-      "Login with Bungie.net"
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more..."
     ],
     "removed": []
   }

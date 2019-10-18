@@ -14,6 +14,7 @@ import Ranks from './Modules/Ranks';
 import SeasonPass from './Modules/SeasonPass';
 import SeasonalArtifact from './Modules/SeasonalArtifact';
 import Vendor from './Modules/Vendor';
+import AuthUpsell from './Modules/AuthUpsell';
 
 import './styles.css';
 
@@ -78,8 +79,9 @@ class Now extends React.Component {
         ]
       },
       {
-        className: ['season-pass'],
-        components: [<SeasonPass key='sp' />]
+        className: ['auth-upsell'],
+        condition: !this.auth,
+        components: [<AuthUpsell key='au' />]
       },
       {
         className: [],
@@ -113,6 +115,10 @@ class Now extends React.Component {
           //   ]
           // }
         ]
+      },
+      {
+        className: ['season-pass'],
+        components: [<SeasonPass key='sp' />]
       }
     ];
 
@@ -120,11 +126,15 @@ class Now extends React.Component {
       <div className='view' id='now'>
         {modules.map((grp, g) => {
           if (grp.components) {
-            return (
-              <div key={g} className={cx('group', ...grp.className)}>
-                {grp.components}
-              </div>
-            );
+            if (grp.condition === undefined || grp.condition) {
+              return (
+                <div key={g} className={cx('group', ...grp.className)}>
+                  {grp.components}
+                </div>
+              );
+            } else {
+              return null;
+            }
           } else {
             return (
               <div key={g} className={cx('group', ...grp.className)}>

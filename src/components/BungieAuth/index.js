@@ -267,6 +267,37 @@ class BungieAuthMini extends React.Component {
   }
 }
 
+class BungieAuthButton extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  render() {
+    const { t } = this.props;
+    
+    return (
+      <div className='bungie-auth'>
+        <Button
+          text={t('Login with Bungie.net')}
+          action={() => {
+            window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+          }}
+        />
+      </div>
+    );
+  }
+}
+
 class NoAuth extends React.Component {
   render() {
     const { t, inline } = this.props;
@@ -401,6 +432,8 @@ BungieAuth = compose(withTranslation())(BungieAuth);
 
 BungieAuthMini = compose(withTranslation())(BungieAuthMini);
 
+BungieAuthButton = compose(withTranslation())(BungieAuthButton);
+
 NoAuth = compose(withTranslation())(NoAuth);
 
 DiffProfile = compose(
@@ -408,4 +441,4 @@ DiffProfile = compose(
   withRouter
 )(DiffProfile);
 
-export { BungieAuth, BungieAuthMini, NoAuth, DiffProfile };
+export { BungieAuth, BungieAuthMini, BungieAuthButton, NoAuth, DiffProfile };

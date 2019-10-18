@@ -197,12 +197,20 @@
 }
 
 #now .season-pass {
-  display: grid;
   grid-template-columns: 1fr 30px 2fr 30px;
   grid-gap: 1rem;
+  background-color: rgba(255, 255, 255, 0.025);
+}
+
+#now .auth-upsell {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 2rem;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+#now .auth-upsell .wrap {
+  grid-column: 2/4;
+}
 
 
 @media screen and (max-width: 1440px) {
@@ -213,17 +221,37 @@
   #now .season-pass {
     grid-template-columns: 1fr 30px 2fr 30px;
   }
+
+  #now .auth-upsell {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  #now .auth-upsell .wrap {
+    grid-column: 2/5;
+  }
 }
 
 @media screen and (max-width: 1024px) {
   #now .group {
     grid-template-columns: 1fr 1fr;
   }
+
+  #now .auth-upsell {
+    grid-template-columns: 1fr;
+  }
+
+  #now .auth-upsell .wrap {
+    grid-column: unset;
+  }
 }
 
 @media screen and (max-width: 1023px) {
   #now .season-pass {
     grid-template-columns: 30px 2fr 30px;
+  }
+
+  #now .auth-upsell {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -246,6 +274,11 @@
   #now .season-pass {
     grid-template-columns: 30px 2fr 30px;
     grid-gap: 10px;
+  }
+
+  #now .auth-upsell {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
   }
 
   #now .module .sub-header ~ .sub-header {

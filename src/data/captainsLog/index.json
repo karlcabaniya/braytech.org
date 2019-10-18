@@ -733,5 +733,10 @@
     "date": "2019-10-17T19:23:23.013Z",
     "version": "2.9.49",
     "content": "- changed character level to season rank on clan roster\n- iterated _This Week_ view design and added more content\n- NEW NEW NEW SEASONAL PROGRESSION MODULE ON _NOW_ VIEW\n- I'm available for hire - looking to work in-office as apart of a team in Brisbane, Australia\n - added daily black armory forge to _Now_"
+  },
+  {
+    "date": "2019-10-18T03:24:35.027Z",
+    "version": "2.9.53",
+    "content": "- minor big fixes\n- Bungie.net auth added to character select\n- Bungie.net auth upsell added to _Now_ view"
   }
 ]
