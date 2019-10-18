@@ -263,7 +263,7 @@ class SeasonalArtifact extends React.Component {
       });
     }
 
-    console.log(progressionArtifact, items);
+    // console.log(progressionArtifact, items);
 
     // let string = ''
     //     definitionArtifact.tiers.forEach(tier => {
