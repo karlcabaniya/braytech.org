@@ -1,15 +1,16 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import cx from 'classnames';
 import { withTranslation } from 'react-i18next';
+import cx from 'classnames';
 
 import store from '../../utils/reduxStore';
 import * as ls from '../../utils/localStorage';
 import Spinner from '../../components/UI/Spinner';
-import ProfileError from './ProfileError';
+import { BungieAuthMini } from '../../components/BungieAuth';
 
 import ProfileSearch from './ProfileSearch';
+import ProfileError from './ProfileError';
 import Profile from './Profile';
 
 import './styles.css';
@@ -57,7 +58,7 @@ class CharacterSelect extends React.Component {
     );
 
     return (
-      <div className={cx('view', { loading })} id='get-profile'>
+      <div className={cx('view', { loading })} id='character-select'>
         <div className='module head'>
           <div className='page-header'>
             <div className='name'>{t('Character Select')}</div>
@@ -71,6 +72,10 @@ class CharacterSelect extends React.Component {
           ) : null}
           <div className='module search'>
             {error && <ProfileError error={error} />}
+            <div className='sub-header'>
+              <div>{t('Bungie.net profile')}</div>
+            </div>
+            <BungieAuthMini location={location} />
             <ProfileSearch onProfileClick={this.profileClick} />
           </div>
           {!reverseUI && profileCharacterSelect && !error ? (

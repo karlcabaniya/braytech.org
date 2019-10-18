@@ -85,7 +85,7 @@ class ProfileSearch extends React.Component {
     const { t } = this.props;
     const { search, searching } = this.state;
 
-    let history = ls.get('history.profiles') || [];
+    const history = ls.get('history.profiles') || [];
 
     return (
       <>
@@ -100,7 +100,7 @@ class ProfileSearch extends React.Component {
 
         <div className='results'>{searching ? <Spinner mini /> : <ul className='list'>{this.resultsElement()}</ul>}</div>
 
-        {history.length > 0 && (
+        {history.length && (
           <>
             <div className='sub-header'>
               <div>{t('Previous searches')}</div>

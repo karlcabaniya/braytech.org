@@ -158,6 +158,115 @@ class BungieAuth extends React.Component {
   }
 }
 
+class BungieAuthMini extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loading: true,
+      memberships: false
+    };
+  }
+
+  getAccessTokens = async code => {
+    await bungie.GetOAuthAccessToken(`client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&grant_type=authorization_code&code=${code}`);
+
+    if (this.mounted) {
+      this.getMemberships();
+    }
+  };
+
+  getMemberships = async () => {
+    let response = await bungie.GetMembershipDataForCurrentUser();
+
+    if (this.mounted) {
+      this.setState((prevState, props) => {
+        prevState.loading = false;
+        prevState.memberships = response;
+        return prevState;
+      });
+    }
+  };
+
+  componentDidMount() {
+    this.mounted = true;
+
+    const { location } = this.props;
+    const tokens = ls.get('setting.auth');
+
+    const code = queryString.parse(location.search) && queryString.parse(location.search).code;
+
+    if (!tokens && code) {
+      this.getAccessTokens(code);
+    } else if (tokens) {
+      this.getMemberships();
+    } else if (this.mounted) {
+      this.setState((prevState, props) => {
+        prevState.loading = false;
+        return prevState;
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
+  render() {
+    const { t, location } = this.props;
+    const { loading, memberships } = this.state;
+
+    const code = queryString.parse(location.search) && queryString.parse(location.search).code;
+
+    if (code) {
+      return <Redirect to='/settings' />;
+    }
+
+    if (loading) {
+      return <Spinner mini />;
+    } else {
+      if (memberships) {
+        return (
+          <div className='bungie-auth'>
+            <div className='memberships'>
+              <ul className='list'>
+                {memberships.destinyMemberships.map(m => {
+                  return (
+                    <li key={m.membershipId} className='linked'>
+                      <div className='icon'>
+                        <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType]}`} />
+                      </div>
+                      <div className='displayName'>{memberships.bungieNetUser.blizzardDisplayName && m.membershipType === 4 ? memberships.bungieNetUser.blizzardDisplayName : m.displayName}</div>
+                      {m.crossSaveOverride === m.membershipType ? <div className='crosssave' /> : null}
+                      <Link
+                        to='/character-select'
+                        onClick={e => {
+                          store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: m.membershipType, membershipId: m.membershipId } });
+                        }}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div className='bungie-auth'>
+            <Button
+              text={t('Login with Bungie.net')}
+              action={() => {
+                window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+              }}
+            />
+          </div>
+        );
+      }
+    }
+  }
+}
+
 class NoAuth extends React.Component {
   render() {
     const { t, inline } = this.props;
@@ -290,6 +399,8 @@ class DiffProfile extends React.Component {
 
 BungieAuth = compose(withTranslation())(BungieAuth);
 
+BungieAuthMini = compose(withTranslation())(BungieAuthMini);
+
 NoAuth = compose(withTranslation())(NoAuth);
 
 DiffProfile = compose(
@@ -297,4 +408,4 @@ DiffProfile = compose(
   withRouter
 )(DiffProfile);
 
-export { BungieAuth, NoAuth, DiffProfile };
+export { BungieAuth, BungieAuthMini, NoAuth, DiffProfile };
