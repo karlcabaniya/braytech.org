@@ -8,6 +8,7 @@ import store from '../../utils/reduxStore';
 import * as ls from '../../utils/localStorage';
 import Spinner from '../../components/UI/Spinner';
 import { BungieAuthMini } from '../../components/BungieAuth';
+import { ReactComponent as Logo } from '../../components/BraytechDevice.svg';
 
 import ProfileSearch from './ProfileSearch';
 import ProfileError from './ProfileError';
@@ -46,7 +47,9 @@ class CharacterSelect extends React.Component {
 
     const profileCharacterSelect = (
       <>
-        {loading ? <Spinner /> : member.data ? (
+        {loading ? (
+          <Spinner />
+        ) : member.data ? (
           <>
             <div className='sub-header'>
               <div>{t(member && member.membershipId === savedProfile.membershipId ? 'Saved profile' : 'Active profile')}</div>
@@ -65,8 +68,11 @@ class CharacterSelect extends React.Component {
           </div>
         </div>
         <div className='padder'>
-          {reverseUI && profileCharacterSelect && !error ? (
+          {reverseUI && member.data && profileCharacterSelect && !error ? (
             <div className='module profile'>
+              <div className='device'>
+                <Logo />
+              </div>
               {profileCharacterSelect}
             </div>
           ) : null}
@@ -78,8 +84,11 @@ class CharacterSelect extends React.Component {
             <BungieAuthMini location={location} />
             <ProfileSearch onProfileClick={this.profileClick} />
           </div>
-          {!reverseUI && profileCharacterSelect && !error ? (
+          {!reverseUI && member.data && profileCharacterSelect && !error ? (
             <div className='module profile'>
+              <div className='device'>
+                <Logo />
+              </div>
               {profileCharacterSelect}
             </div>
           ) : null}

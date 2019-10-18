@@ -107,14 +107,29 @@
   background-color: #009ae4;
 }
 
+#character-select .profile {
+  position: relative;
+}
+
+#character-select .device {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+}
+
+#character-select .device svg {
+  fill: #ffffff;
+  opacity: 0.1;
+  width: auto;
+  height: 100%;
+}
+
 #character-select .profile .user {
   display: grid;
   grid-gap: 3rem;
   grid-template-columns: minmax(200px, 360px) 474px;
-}
-
-#character-select .profile .summary {
-  
 }
 
 #character-select .profile .summary .displayName {
@@ -252,6 +267,7 @@
 }
 
 @media screen and (max-width: 600px) {
+
   #character-select > .padder {
     padding: 2rem;
     grid-gap: 2rem;
@@ -268,6 +284,12 @@
 
   #character-select .error {
     margin: 0 0 2rem;
+  }
+
+  #character-select .device {
+    top: 12.5%;
+    right: -55%;
+    height: 75%;
   }
 
   #character-select .profile .user {

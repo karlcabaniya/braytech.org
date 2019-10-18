@@ -100,7 +100,7 @@ class ProfileSearch extends React.Component {
 
         <div className='results'>{searching ? <Spinner mini /> : <ul className='list'>{this.resultsElement()}</ul>}</div>
 
-        {history.length && (
+        {history.length > 0 && (
           <>
             <div className='sub-header'>
               <div>{t('Previous searches')}</div>
