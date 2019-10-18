@@ -12541,7 +12541,12 @@
         "name": "Shrine of Oryx"
       },
       "extended": {},
-      "points": [],
+      "points": [
+        {
+          "x": -450,
+          "y": 124
+        }
+      ],
       "destinationHash": 290444260,
       "bubbleHash": 2204642885,
       "bubbleName": false,

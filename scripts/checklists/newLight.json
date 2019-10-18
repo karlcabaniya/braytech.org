@@ -209,7 +209,13 @@
     "3390078233": {
       "destinationHash": 290444260,
       "bubbleHash": 2204642885,
-      "pursuitHash": 2244757358
+      "pursuitHash": 2244757358,
+      "points": [
+        {
+          "x": -450,
+          "y": 124
+        }
+      ]
     },
     "3390078232": {
       "destinationHash": 290444260,

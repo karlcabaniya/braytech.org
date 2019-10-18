@@ -187,6 +187,11 @@ class SeasonalArtifact extends React.Component {
     if (s.loading !== this.state.loading) {
       this.props.rebindTooltips();
     }
+
+    if (p.member.data.updated !== this.props.member.data.updated) {
+      this.getVendor(2894222926);
+    }
+
   }
 
   getVendor = async hash => {
