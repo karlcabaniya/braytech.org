@@ -16,7 +16,44 @@ class AuthUpsell extends React.Component {
         <div className='headline'>{t('Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features', { displayName: member.data.profile.profile.data.userInfo.displayName })}</div>
         <div className='text'>
           <p>{t("Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.")}</p>
-          <p>{t("You're a handful of clicks away from simple clan management, inspecting your bounties and quests, receiving helpful reminders regarding your inventory, monitoring your seasonal artifact, and more...")}</p>
+          <ul className='feature-sell'>
+            <li>
+              <div className='icon pursuits' />
+              <div className='text'>
+                <div className='name'>{t('Pursuits')}</div>
+                <div className='description'>
+                  <p>{t('Quests and bounties, step by step, reward by reward')}</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className='icon artifact' />
+              <div className='text'>
+                <div className='name'>{t('Seasonal Artifact')}</div>
+                <div className='description'>
+                  <p>{t('Review your unlocks and monitor your progress')}</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className='icon admin' />
+              <div className='text'>
+                <div className='name'>{t('Clan Admin')}</div>
+                <div className='description'>
+                  <p>{t('Minimal though powerful clan management for rapid sorting and member actions')}</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className='icon inventory' />
+              <div className='text'>
+                <div className='name'>{t('Inventory')}</div>
+                <div className='description'>
+                  <p>{t('Get helpful reminders regarding your soon to be overflowing postmaster')}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
         <BungieAuthButton />
       </div>
