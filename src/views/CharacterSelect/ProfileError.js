@@ -42,9 +42,9 @@ class ProfileError extends React.Component {
     return (
       <div className='error'>
         <div className='sub-header'>
-          <div>{t('Generic error')}</div>
+          <div>{t('Error')}</div>
         </div>
-        <p>{t('If it happens more than 10 times, hop on the Discords.')}</p>
+        <p>{error.message}</p>
       </div>
     );
   }
