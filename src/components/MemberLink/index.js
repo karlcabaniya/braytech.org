@@ -55,18 +55,31 @@ class MemberLink extends React.Component {
     if (this.mounted) {
       try {
         let response = await bungie.GetProfile(type, id, displayName ? '200' : '100,200');
-        let profile = responseUtils.profileScrubber(response, 'activity');
-        if (!profile.characters.data || (profile.characters.data && profile.characters.data.length === 0)) {
-          this.setState((prevState, props) => {
-            prevState.all.error = true;
-            return prevState;
-          });
+
+        if (response && response.ErrorCode === 1) {
+          let profile = responseUtils.profileScrubber(response.Response, 'activity');
+
+          if (!profile.characters.data || (profile.characters.data && profile.characters.data.length === 0)) {
+            this.setState(p => ({
+              ...p,
+              all: {
+                ...p.all,
+                error: true
+              }
+            }));
+          } else {
+            this.setState(p => ({
+              ...p,
+              basic: {
+                ...p.basic,
+                data: profile,
+                loading: false,
+                error: false
+              }
+            }));
+          }
         } else {
-          this.setState((prevState, props) => {
-            prevState.basic.data = profile;
-            prevState.basic.loading = false;
-            return prevState;
-          });
+          throw Error;
         }
       } catch (e) {}
     }
@@ -81,27 +94,37 @@ class MemberLink extends React.Component {
 
         let [profile, group] = await Promise.all(requests);
 
-        profile = responseUtils.profileScrubber(profile, 'activity');
+        if (profile && profile.ErrorCode === 1) {
+          profile = responseUtils.profileScrubber(profile.Response, 'activity');
 
-        if (!profile.profileRecords.data || (profile.profileRecords.data && Object.entries(profile.profileRecords.data.records).length === 0)) {
-          this.setState((prevState, props) => {
-            prevState.all.error = true;
-            return prevState;
-          });
+          if (!profile.profileRecords.data || (profile.profileRecords.data && Object.entries(profile.profileRecords.data.records).length === 0)) {
+            this.setState(p => ({
+              ...p,
+              all: {
+                ...p.all,
+                error: true
+              }
+            }));
+          } else {
+            let data = {
+              ...profile,
+              group: group && group.ErrorCode === 1 && group.Response.results.length ? group.Response.results[0].group : false
+            };
+
+            // console.log(data);
+
+            this.setState(p => ({
+              ...p,
+              all: {
+                ...p.all,
+                error: false,
+                data: data,
+                loading: false
+              }
+            }));
+          }
         } else {
-          let data = {
-            ...profile,
-            group: group && group.results.length ? group.results[0].group : false
-          };
-
-          // console.log(data);
-
-          this.setState((prevState, props) => {
-            prevState.all.error = false;
-            prevState.all.data = data;
-            prevState.all.loading = false;
-            return prevState;
-          });
+          throw Error;
         }
       } catch (e) {
         console.log(e);
