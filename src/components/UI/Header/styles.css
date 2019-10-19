@@ -696,7 +696,7 @@ html.backdropfilter #header .nav {
   }
   
   #header.profile-header .background .image {
-    background-position: center bottom;
+    background-position: 30% bottom;
   }
 
   #header.profile-header .background .animator {

@@ -2,6 +2,12 @@
   position: relative;
 }
 
+.seasonal-artifact .spinner.mini {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .seasonal-artifact .image.artifact {
   top: -20%;
   width: 100%;

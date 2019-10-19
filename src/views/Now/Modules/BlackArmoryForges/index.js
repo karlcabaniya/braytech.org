@@ -7,12 +7,14 @@ import manifest from '../../../../utils/manifest';
 
 import { ReactComponent as ForgeGofannon } from './icons/gofannon.svg';
 import { ReactComponent as ForgeIzanami } from './icons/izanami.svg';
+import { ReactComponent as ForgeBerguisa } from './icons/bergusia.svg';
 
 import './styles.css';
 
 const forgeIcons = {
   957727787: <ForgeGofannon />,
-  2656947700: <ForgeIzanami />
+  2656947700: <ForgeIzanami />,
+  1434072700: <ForgeBerguisa />
 };
 
 class BlackArmoryForges extends React.Component {

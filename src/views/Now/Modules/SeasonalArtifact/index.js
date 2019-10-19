@@ -172,7 +172,7 @@ class SeasonalArtifact extends React.Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loading: false,
       data: false,
       unavailable: false
     };
@@ -181,7 +181,13 @@ class SeasonalArtifact extends React.Component {
   }
 
   componentDidMount() {
+    this.mounted = true;
+
     this.getVendor(2894222926);
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   componentDidUpdate(p, s) {
@@ -200,7 +206,8 @@ class SeasonalArtifact extends React.Component {
 
     const artifactAvailable = characterEquipment.find(i => i.itemHash === 1387688628) || false;
 
-    if (!artifactAvailable) {
+    // artifact not equipped
+    if (!artifactAvailable && this.mounted) {
       this.setState(p => ({
         ...p,
         loading: false,
@@ -210,26 +217,37 @@ class SeasonalArtifact extends React.Component {
       return;
     }
 
+    // need auth for vendors
     if (!this.auth) return;
+
+    // already requesting
+    if (this.state.loading) return;
+
+    this.setState(p => ({
+      ...p,
+      loading: true
+    }));
 
     const response = await bungie.GetVendor(member.membershipType, member.membershipId, member.characterId, hash, [400, 402, 300, 301, 304, 305, 306, 307, 308, 600].join(','));
 
-    if (response && response.ErrorCode === 1) {
-      this.setState({
-        loading: false,
-        data: response.Response
-      });
-    } else if (response && response.ErrorCode === 1627) {
-      this.setState(p => ({
-        ...p,
-        loading: false,
-        unavailable: true
-      }));
-    } else {
-      this.setState(p => ({
-        ...p,
-        loading: false
-      }));
+    if (this.mounted) {
+      if (response && response.ErrorCode === 1) {
+        this.setState({
+          loading: false,
+          data: response.Response
+        });
+      } else if (response && response.ErrorCode === 1627) {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          unavailable: true
+        }));
+      } else {
+        this.setState(p => ({
+          ...p,
+          loading: false
+        }));
+      }
     }
   };
 
@@ -246,7 +264,7 @@ class SeasonalArtifact extends React.Component {
       return <DiffProfile inline />;
     }
 
-    if (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && this.state.loading) {
+    if (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && this.state.loading && !this.state.data) {
       return (
         <>
           <div className='head'>
@@ -306,6 +324,7 @@ class SeasonalArtifact extends React.Component {
     return (
       <>
         {/* <ObservedImage className='image artifact' src='/static/images/extracts/flair/VEye.png' /> */}
+        {this.state.loading && <Spinner mini />}
         <div className='head'>
           <div className='module-header'>
             <div className='sub-name'>{t('Seasonal progression')}</div>
