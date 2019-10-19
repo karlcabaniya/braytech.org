@@ -341,14 +341,14 @@ class DiffProfile extends React.Component {
   getMemberships = async () => {
     let response = await bungie.GetMembershipDataForCurrentUser();
 
-    console.log(response);
-
     if (this.mounted) {
-      this.setState((prevState, props) => {
-        prevState.loading = false;
-        prevState.memberships = response;
-        return prevState;
-      });
+      if (response && response.ErrorCode === 1) {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          memberships: response.Response
+        }));
+      }
     }
   };
 
