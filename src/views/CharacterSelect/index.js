@@ -68,7 +68,7 @@ class CharacterSelect extends React.Component {
           </div>
         </div>
         <div className='padder'>
-          {reverseUI && member.data && profileCharacterSelect && !error ? (
+          {reverseUI && profileCharacterSelect && !error ? (
             <div className='module profile'>
               <div className='device'>
                 <Logo />
@@ -84,7 +84,7 @@ class CharacterSelect extends React.Component {
             <BungieAuthMini location={location} />
             <ProfileSearch onProfileClick={this.profileClick} />
           </div>
-          {!reverseUI && member.data && profileCharacterSelect && !error ? (
+          {!reverseUI && profileCharacterSelect && !error ? (
             <div className='module profile'>
               <div className='device'>
                 <Logo />
