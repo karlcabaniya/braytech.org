@@ -6,9 +6,17 @@ export async function getPGCR(membershipId, id) {
 
   try {
     let response = await bungie.PGCR(id);
-    response.instanceId = id;
+
+    if (response && response.ErrorCode === 1) {
+      
+      response.Response.instanceId = id;
     
-    store.dispatch({ type: 'PGCR_LOADED', payload: { membershipId, response } });
+      store.dispatch({ type: 'PGCR_LOADED', payload: { membershipId, response: response.Response } });
+
+    } else {
+
+    }
+
   } catch (e) {
     console.warn(`PGCR ${id}`, e)
   }

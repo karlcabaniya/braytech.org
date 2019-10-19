@@ -163,11 +163,13 @@ class App extends React.Component {
 
   async setUpManifest() {
     this.setState({ status: { code: 'checkManifest' } });
+
     const storedManifest = await this.startupRequests.storedManifest;
     const manifestIndex = await this.startupRequests.manifestIndex;
 
     const manifestLanuage = this.currentLanguage;
-    const currentVersion = manifestIndex.jsonWorldContentPaths[manifestLanuage];
+    const currentVersion = manifestIndex && manifestIndex.ErrorCode === 1 && manifestIndex.Response.jsonWorldContentPaths[manifestLanuage];
+
     let tmpManifest = null;
 
     if (!storedManifest || currentVersion !== storedManifest.version) {
@@ -178,13 +180,15 @@ class App extends React.Component {
       tmpManifest = storedManifest.value;
     }
 
-    tmpManifest.settings = await this.startupRequests.bungieSettings;
+    const bungieSettings = await this.startupRequests.bungieSettings;
+
+    tmpManifest.settings = bungieSettings && bungieSettings.ErrorCode === 1 && bungieSettings.Response;
 
     if (tmpManifest.settings && tmpManifest.settings.systems && !tmpManifest.settings.systems.D2Profiles.enabled) {
       throw new Error('maintenance');
     }
 
-    this.availableLanguages = Object.keys(manifestIndex.jsonWorldContentPaths);
+    this.availableLanguages = Object.keys(manifestIndex.Response.jsonWorldContentPaths);
 
     tmpManifest.statistics = (await this.startupRequests.voluspaStatistics) || {};
 

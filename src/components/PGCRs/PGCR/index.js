@@ -69,7 +69,7 @@ class PGCR extends React.Component {
   getProgression = async (membershipType, membershipId) => {
     let response = await bungie.GetProfile(membershipType, membershipId, '202,900');
 
-    if (!response.characterProgressions.data) {
+    if ((response && response.ErrorCode !== 1) || !response.Response.characterProgressions.data) {
       return {
         points: {
           
@@ -80,12 +80,12 @@ class PGCR extends React.Component {
       };
     }
 
-    let gloryPoints = Object.values(response.characterProgressions.data)[0].progressions[2000925172].currentProgress.toLocaleString('en-us');
-    let valorPoints = Object.values(response.characterProgressions.data)[0].progressions[2626549951].currentProgress.toLocaleString('en-us');
-    let infamyPoints = Object.values(response.characterProgressions.data)[0].progressions[2772425241].currentProgress.toLocaleString('en-us');
+    let gloryPoints = Object.values(response.Response.characterProgressions.data)[0].progressions[2000925172].currentProgress.toLocaleString('en-us');
+    let valorPoints = Object.values(response.Response.characterProgressions.data)[0].progressions[2626549951].currentProgress.toLocaleString('en-us');
+    let infamyPoints = Object.values(response.Response.characterProgressions.data)[0].progressions[2772425241].currentProgress.toLocaleString('en-us');
 
-    let valorResets = response.profileRecords.data.records[559943871] ? response.profileRecords.data.records[559943871].objectives[0].progress.toLocaleString('en-us') : '0';
-    let infamyResets = response.profileRecords.data.records[3901785488] ? response.profileRecords.data.records[3901785488].objectives[0].progress.toLocaleString('en-us') : '0';
+    let valorResets = response.Response.profileRecords.data.records[559943871] ? response.Response.profileRecords.data.records[559943871].objectives[0].progress.toLocaleString('en-us') : '0';
+    let infamyResets = response.Response.profileRecords.data.records[3901785488] ? response.Response.profileRecords.data.records[3901785488].objectives[0].progress.toLocaleString('en-us') : '0';
 
     return {
       points: {
@@ -197,7 +197,7 @@ class PGCR extends React.Component {
       row = (
         <div className='basic'>
           <div className='mode'>{modeName}</div>
-          <div className='map'>{map.displayProperties.name}</div>
+          <div className='map'>{map && map.displayProperties.name}</div>
           <div className='ago'>
             <Moment fromNow>{realEndTime}</Moment>
           </div>
@@ -893,11 +893,11 @@ class PGCR extends React.Component {
       detail = (
         <>
           <div className='head'>
-            <ObservedImage className='image bg' src={`https://www.bungie.net${map.pgcrImage}`} />
+            {map && map.pgcrImage && <ObservedImage className='image bg' src={`https://www.bungie.net${map.pgcrImage}`} />}
             <div className='detail'>
               <div>
                 <div className='mode'>{modeName}</div>
-                <div className='map'>{map.displayProperties.name}</div>
+                <div className='map'>{map && map.displayProperties.name}</div>
               </div>
               <div>
                 <div className='duration'>{entry.values.activityDurationSeconds.basic.displayValue}</div>

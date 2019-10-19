@@ -54,10 +54,15 @@ class RosterLeaderboards extends React.Component {
           try {
             const response = await bungie.GetHistoricalStats(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '0', '1', '4,18,46,63,75,69,70,77', '0');
 
-            return {
-              ...member,
-              historicalStats: response
-            };
+            if (response && response.ErrorCode === 1) {
+              return {
+                ...member,
+                historicalStats: response.Response
+              };
+            } else {
+              
+              throw Error;
+            }            
           } catch (e) {
             console.log(`Something went wrong with ${member.destinyUserInfo.membershipId}: ${e}`);
           }

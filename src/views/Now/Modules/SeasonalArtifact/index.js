@@ -173,7 +173,8 @@ class SeasonalArtifact extends React.Component {
 
     this.state = {
       loading: true,
-      data: false
+      data: false,
+      unavailable: false
     };
 
     this.auth = ls.get('setting.auth');
@@ -196,16 +197,35 @@ class SeasonalArtifact extends React.Component {
 
   getVendor = async hash => {
     const { member } = this.props;
+    const characterEquipment = member.data.profile.characterEquipment.data[member.characterId].items;
+
+    const artifactAvailable = characterEquipment.find(i => i.itemHash === 1387688628) || false;
+
+    if (!artifactAvailable) {
+      this.setState(p => ({
+        ...p,
+        loading: false,
+        unavailable: true
+      }));
+
+      return;
+    }
 
     if (!this.auth) return;
 
     const response = await bungie.GetVendor(member.membershipType, member.membershipId, member.characterId, hash, [400, 402, 300, 301, 304, 305, 306, 307, 308, 600].join(','));
 
-    if (response) {
+    if (response && response.ErrorCode === 1) {
       this.setState({
         loading: false,
-        data: response
+        data: response.Response
       });
+    } else if (response && response.ErrorCode === 1627) {
+      this.setState(p => ({
+        ...p,
+        loading: false,
+        unavailable: true
+      }));
     } else {
       this.setState(p => ({
         ...p,
@@ -238,6 +258,10 @@ class SeasonalArtifact extends React.Component {
           </div>
         </>
       );
+    }
+
+    if (this.state.unavailable) {
+      return 'Unavailable'
     }
 
     const definitionArtifact = progressionArtifact.artifactHash && manifest.DestinyArtifactDefinition[progressionArtifact.artifactHash];

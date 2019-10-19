@@ -96,7 +96,7 @@ class NotificationLink extends React.Component {
       const state = this.active[0];
 
       let isError, image;
-      if (state && state.error && state.javascript.message === 'maintenance') {
+      if (state && state.error && state.javascript && state.javascript.message === 'maintenance') {
         image = '/static/images/extracts/ui/01A3-00001EE8.PNG';
       } else if (state && state.error) {
         isError = true;

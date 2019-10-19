@@ -35,6 +35,16 @@ export const CLASSES = {
 
 const flagEnum = (state, value) => !!(state & value);
 
+export const enumerateDestinyGameVersions = state => ({
+  none: flagEnum(state, 0),
+  base: flagEnum(state, 1),
+  osiris: flagEnum(state, 2),
+  warmind: flagEnum(state, 4),
+  forsaken: flagEnum(state, 8),
+  forsakenAnnualPass: flagEnum(state, 16),
+  shadowkeep: flagEnum(state, 32)
+});
+
 export const enumerateRecordState = state => ({
   none: flagEnum(state, 0),
   recordRedeemed: flagEnum(state, 1),

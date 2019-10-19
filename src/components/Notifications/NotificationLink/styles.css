@@ -304,6 +304,7 @@ html.backdropfilter #notification-bar .background .acrylic {
 
 #notification-bar .wrapper-inner .text .name {
   color: white;
+  white-space: nowrap;
 }
 
 #notification-bar .wrapper-inner .text .description {

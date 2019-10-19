@@ -6,6 +6,7 @@ import cx from 'classnames';
 import Moment from 'react-moment';
 import queryString from 'query-string';
 
+import store from '../../utils/reduxStore';
 import * as ls from '../../utils/localStorage';
 import * as bungie from '../../utils/bungie';
 import * as destinyEnums from '../../utils/destinyEnums';
@@ -13,7 +14,6 @@ import * as paths from '../../utils/paths';
 import Button from '../UI/Button';
 import Spinner from '../UI/Spinner';
 import ObservedImage from '../ObservedImage';
-import store from '../../utils/reduxStore';
 
 import './styles.css';
 
@@ -39,11 +39,13 @@ class BungieAuth extends React.Component {
     let response = await bungie.GetMembershipDataForCurrentUser();
 
     if (this.mounted) {
-      this.setState((prevState, props) => {
-        prevState.loading = false;
-        prevState.memberships = response;
-        return prevState;
-      });
+      if (response && response.ErrorCode === 1) {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          memberships: response.Response
+        }));
+      }
     }
   };
 
@@ -60,10 +62,10 @@ class BungieAuth extends React.Component {
     } else if (tokens) {
       this.getMemberships();
     } else if (this.mounted) {
-      this.setState((prevState, props) => {
-        prevState.loading = false;
-        return prevState;
-      });
+      this.setState(p => ({
+        ...p,
+        loading: false
+      }));
     }
   }
 
@@ -180,11 +182,13 @@ class BungieAuthMini extends React.Component {
     let response = await bungie.GetMembershipDataForCurrentUser();
 
     if (this.mounted) {
-      this.setState((prevState, props) => {
-        prevState.loading = false;
-        prevState.memberships = response;
-        return prevState;
-      });
+      if (response && response.ErrorCode === 1) {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          memberships: response.Response
+        }));
+      }
     }
   };
 
@@ -201,10 +205,10 @@ class BungieAuthMini extends React.Component {
     } else if (tokens) {
       this.getMemberships();
     } else if (this.mounted) {
-      this.setState((prevState, props) => {
-        prevState.loading = false;
-        return prevState;
-      });
+      this.setState(p => ({
+        ...p,
+        loading: false
+      }));
     }
   }
 
@@ -284,7 +288,7 @@ class BungieAuthButton extends React.Component {
 
   render() {
     const { t } = this.props;
-    
+
     return (
       <div className='bungie-auth'>
         <Button
@@ -303,7 +307,7 @@ class NoAuth extends React.Component {
     const { t, inline } = this.props;
 
     return (
-      <div className={cx('bungie-auth', 'no-auth', { inline } )}>
+      <div className={cx('bungie-auth', 'no-auth', { inline })}>
         <div className='module'>
           <div className='properties'>
             <div className='name'>{t('Authorization required')}</div>
@@ -392,7 +396,7 @@ class DiffProfile extends React.Component {
     }
 
     return (
-      <div className={cx('bungie-auth', 'no-auth', { inline } )}>
+      <div className={cx('bungie-auth', 'no-auth', { inline })}>
         <div className='module'>
           <div className='properties'>
             {properties}

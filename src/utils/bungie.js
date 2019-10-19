@@ -1,15 +1,16 @@
+import store from './reduxStore';
 import * as ls from './localStorage';
 
 // Bungie API access convenience methods
 
-class BungieError extends Error {
-  constructor(request) {
-    super(request.Message);
+// class BungieError extends Error {
+//   constructor(request) {
+//     super(request.Message);
 
-    this.errorCode = request.ErrorCode;
-    this.errorStatus = request.ErrorStatus;
-  }
-}
+//     this.errorCode = request.ErrorCode;
+//     this.errorStatus = request.ErrorStatus;
+//   }
+// }
 
 async function apiRequest(path, options = {}) {
   const defaults = {
@@ -50,34 +51,67 @@ async function apiRequest(path, options = {}) {
   const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options);
   const response = await request.json();
 
-  if (request.ok && response.ErrorCode && response.ErrorCode !== 1) {
-    throw new BungieError(response);
+  if (response && response.ErrorCode && response.ErrorCode !== 1) {
+    store.dispatch({
+      type: 'PUSH_NOTIFICATION',
+      payload: {
+        error: true,
+        date: new Date().toISOString(),
+        expiry: 86400000,
+        displayProperties: {
+          name: 'Bungie',
+          description: `${response.ErrorCode} ${response.ErrorStatus} ${response.Message}`,
+          timeout: 10
+        }
+      }
+    });
+
+    return response;
   } else if (request.ok) {
     if (path === '/Platform/App/OAuth/Token/') {
       let now = new Date().getTime();
 
       let memberships = await GetMembershipDataForCurrentUser(response.access_token);
 
-      const tokens = {
-        access: {
-          value: response.access_token,
-          expires: now + response.expires_in * 1000
-        },
-        refresh: {
-          value: response.refresh_token,
-          expires: now + response.refresh_expires_in * 1000
-        },
-        bnetMembershipId: response.membership_id,
-        destinyMemberships: memberships.destinyMemberships
-      };
-      ls.set('setting.auth', tokens);
-      return response;
+      if (memberships && memberships.ErrorCode === 1) {
+        const tokens = {
+          access: {
+            value: response.access_token,
+            expires: now + response.expires_in * 1000
+          },
+          refresh: {
+            value: response.refresh_token,
+            expires: now + response.refresh_expires_in * 1000
+          },
+          bnetMembershipId: response.membership_id,
+          destinyMemberships: memberships.Response.destinyMemberships
+        };
+
+        ls.set('setting.auth', tokens);
+
+        return response;
+      } else {
+        return false;
+      }
     } else {
-      return response.Response;
+      return response;
     }
   } else {
-    console.log('bungie.js 79', request);
-    throw new BungieError(response);
+    store.dispatch({
+      type: 'PUSH_NOTIFICATION',
+      payload: {
+        error: true,
+        date: new Date().toISOString(),
+        expiry: 86400000,
+        displayProperties: {
+          name: `HTTP ${request.status}`,
+          description: 'A network error occured',
+          timeout: 10
+        }
+      }
+    });
+
+    return request;
   }
 }
 
@@ -132,7 +166,7 @@ export const GetPendingMemberships = async groupId =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/Pending/`, {
     auth: true
   });
-  
+
 export const ApprovePendingForList = async (groupId, body) =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/ApproveList/`, {
     auth: true,

@@ -8,72 +8,58 @@ export async function getGroupMembers(group, getPending = false) {
   });
 
   let groupMembersResponse = await bungie.GetMembersOfGroup(group.groupId);
-  let groupMembersPendingResponse = false;
-
-  if (getPending) {
-    try {
-      groupMembersPendingResponse = await bungie.GetPendingMemberships(group.groupId);
-    } catch (e) {
-
-      store.dispatch({
-        type: 'PUSH_NOTIFICATION',
-        payload: {
-          error: true,
-          date: new Date().toISOString(),
-          expiry: 86400000,
-          displayProperties: {
-            name: e.errorStatus,
-            description: e.message,
-            timeout: 10
-          },
-          javascript: e
-        }
-      });
-    }
-  }
+  let groupMembersPendingResponse = getPending ? await bungie.GetPendingMemberships(group.groupId) : false;
 
   let memberResponses = await Promise.all(
-    groupMembersResponse.results.map(async member => {
-      try {
-        const profile = await bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900');
+    groupMembersResponse &&
+      groupMembersResponse.ErrorCode === 1 &&
+      groupMembersResponse.Response.results.map(async member => {
+        try {
+          const profile = await bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900');
 
-        if (!profile.characterProgressions.data) {
+          if (profile && profile.ErrorCode === 1 && profile.Response) {
+            if (!profile.Response.characterProgressions.data) {
+              return member;
+            }
+
+            member.profile = responseUtils.profileScrubber(profile.Response);
+          }
+
+          return member;
+        } catch (e) {
+          member.profile = false;
           return member;
         }
-        
-        member.profile = responseUtils.profileScrubber(profile);
-
-        return member;
-      } catch (e) {
-        member.profile = false;
-        return member;
-      }
-    })
+      })
   );
 
   let pendingResponses = groupMembersPendingResponse
     ? await Promise.all(
-        groupMembersPendingResponse.results.map(async member => {
-          try {
-            const profile = await bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900');
+        groupMembersPendingResponse &&
+          groupMembersPendingResponse.ErrorCode === 1 &&
+          groupMembersPendingResponse.Response.results.map(async member => {
+            try {
+              const profile = await bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900');
 
-            if (!profile.characterProgressions.data) {
+              if (profile && profile.ErrorCode === 1 && profile.Response) {
+                if (!profile.Response.characterProgressions.data) {
+                  return member;
+                }
+
+                member.profile = responseUtils.profileScrubber(profile.Response);
+
+                member.pending = true;
+              }
+
+              return member;
+            } catch (e) {
+              member.profile = false;
+
+              member.pending = true;
+
               return member;
             }
-
-            member.profile = responseUtils.profileScrubber(profile);
-            
-            member.pending = true;
-
-            return member;
-          } catch (e) {
-            member.profile = false;
-
-            member.pending = true;
-
-            return member;
-          }
-        })
+          })
       )
     : [];
 
