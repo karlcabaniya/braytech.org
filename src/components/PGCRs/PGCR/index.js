@@ -69,7 +69,7 @@ class PGCR extends React.Component {
   getProgression = async (membershipType, membershipId) => {
     let response = await bungie.GetProfile(membershipType, membershipId, '202,900');
 
-    if ((response && response.ErrorCode !== 1) || !response.Response.characterProgressions.data) {
+    if (!response || (response && response.ErrorCode !== 1) || (response && response.ErrorCode === 1 && !response.Response.characterProgressions.data)) {
       return {
         points: {
           

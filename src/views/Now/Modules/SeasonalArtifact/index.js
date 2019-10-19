@@ -192,7 +192,6 @@ class SeasonalArtifact extends React.Component {
     if (p.member.data.updated !== this.props.member.data.updated) {
       this.getVendor(2894222926);
     }
-
   }
 
   getVendor = async hash => {
@@ -261,7 +260,7 @@ class SeasonalArtifact extends React.Component {
     }
 
     if (this.state.unavailable) {
-      return 'Unavailable'
+      return 'Unavailable';
     }
 
     const definitionArtifact = progressionArtifact.artifactHash && manifest.DestinyArtifactDefinition[progressionArtifact.artifactHash];
@@ -328,67 +327,73 @@ class SeasonalArtifact extends React.Component {
           <div className='mods'>
             <h4>{t('Mods')}</h4>
             <div className='tiers'>
-              {definitionArtifact.tiers.map((tier, t) => {
-                const tierItemHashes = tier.items.map(i => i.itemHash);
+              {items.length > 0 &&
+                definitionArtifact.tiers.map((tier, t) => {
+                  const tierItemHashes = tier.items.map(i => i.itemHash);
 
-                // const previousTierUnlocksUsed = items
-                //   .filter(i => definitionArtifact.tiers[Math.max(0, t - 1)]
-                //       .items.map(i => i.itemHash)
-                //       .includes(i.itemHash)
-                //   ).filter(i => i.obtained).length;
-                
-                // console.log(t, tier.minimumUnlockPointsUsedRequirement, previousTierUnlocksUsed)
+                  // const previousTierUnlocksUsed = items
+                  //   .filter(i => definitionArtifact.tiers[Math.max(0, t - 1)]
+                  //       .items.map(i => i.itemHash)
+                  //       .includes(i.itemHash)
+                  //   ).filter(i => i.obtained).length;
 
-                return (
-                  <div
-                    key={t}
-                    className={cx('tier', {
-                      available: totalUnlocksUsed >= tier.minimumUnlockPointsUsedRequirement,
-                      last: (t < 4 && totalUnlocksUsed < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || t === 4
-                    })}
-                  >
-                    <ul className='list inventory-items'>
-                      {items
-                        .filter(i => tierItemHashes.includes(i.itemHash))
-                        .map((item, i) => {
-                          const active = item.obtained;
+                  // console.log(t, tier.minimumUnlockPointsUsedRequirement, previousTierUnlocksUsed)
 
-                          const image = !active ? mods[item.itemHash].inactive : mods[item.itemHash].active;
+                  return (
+                    <div
+                      key={t}
+                      className={cx('tier', {
+                        available: totalUnlocksUsed >= tier.minimumUnlockPointsUsedRequirement,
+                        last: (t < 4 && totalUnlocksUsed < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || t === 4
+                      })}
+                    >
+                      <ul className='list inventory-items'>
+                        {items
+                          .filter(i => tierItemHashes.includes(i.itemHash))
+                          .map((item, i) => {
+                            const active = item.obtained;
 
-                          const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
+                            const image = !active ? mods[item.itemHash].inactive : mods[item.itemHash].active;
 
-                          const energyCost = definitionItem && definitionItem.plug && definitionItem.plug.energyCost ? definitionItem.plug.energyCost.energyCost : 0;
+                            const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
-                          return (
-                            <li
-                              key={i}
-                              className={cx({
-                                tooltip: true,
-                                linked: true,
-                                'no-border': true,
-                                unavailable: !active
-                              })}
-                              data-hash={item.itemHash}
-                              data-instanceid={item.itemInstanceId}
-                              data-state={item.state}
-                              // data-vendorhash={item.vendorHash}
-                              // data-vendorindex={item.vendorItemIndex}
-                              // data-vendorstatus={item.saleStatus}
-                              data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
-                            >
-                              <div className='icon'>
-                                {!active ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
-                                <ObservedImage src={image} />
-                                <div className='cost'>{energyCost}</div>
-                              </div>
-                            </li>
-                          );
-                        })}
-                    </ul>
-                  </div>
-                );
-              })}
+                            const energyCost = definitionItem && definitionItem.plug && definitionItem.plug.energyCost ? definitionItem.plug.energyCost.energyCost : 0;
+
+                            return (
+                              <li
+                                key={i}
+                                className={cx({
+                                  tooltip: true,
+                                  linked: true,
+                                  'no-border': true,
+                                  unavailable: !active
+                                })}
+                                data-hash={item.itemHash}
+                                data-instanceid={item.itemInstanceId}
+                                data-state={item.state}
+                                // data-vendorhash={item.vendorHash}
+                                // data-vendorindex={item.vendorItemIndex}
+                                // data-vendorstatus={item.saleStatus}
+                                data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
+                              >
+                                <div className='icon'>
+                                  {!active ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
+                                  <ObservedImage src={image} />
+                                  <div className='cost'>{energyCost}</div>
+                                </div>
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </div>
+                  );
+                })}
             </div>
+            {items.length < 1 ? (
+              <p>
+                <em>{t('A temporary error has occurred.')}</em>
+              </p>
+            ) : null}
           </div>
           <div className='progression'>
             <h4>{t('Progression')}</h4>

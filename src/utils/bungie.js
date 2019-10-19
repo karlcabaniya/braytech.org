@@ -48,8 +48,23 @@ async function apiRequest(path, options = {}) {
     }
   }
 
-  const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options);
-  const response = await request.json();
+  const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options)
+    .catch(e => {
+      store.dispatch({
+        type: 'PUSH_NOTIFICATION',
+        payload: {
+          error: true,
+          date: new Date().toISOString(),
+          expiry: 86400000,
+          displayProperties: {
+            name: `HTTP error`,
+            description: `A network error occured. ${e.message}.`,
+            timeout: 10
+          }
+        }
+      });
+    });
+  const response = request && await request.json();
 
   if (response && response.ErrorCode && response.ErrorCode !== 1) {
     store.dispatch({
@@ -67,7 +82,7 @@ async function apiRequest(path, options = {}) {
     });
 
     return response;
-  } else if (request.ok) {
+  } else if (request && request.ok) {
     if (path === '/Platform/App/OAuth/Token/') {
       let now = new Date().getTime();
 
@@ -96,7 +111,7 @@ async function apiRequest(path, options = {}) {
     } else {
       return response;
     }
-  } else {
+  } else if (request) {
     store.dispatch({
       type: 'PUSH_NOTIFICATION',
       payload: {
@@ -104,14 +119,17 @@ async function apiRequest(path, options = {}) {
         date: new Date().toISOString(),
         expiry: 86400000,
         displayProperties: {
-          name: `HTTP ${request.status}`,
-          description: 'A network error occured',
+          name: `HTTP error`,
+          description: `Code ${request.status} A network error occured.`,
           timeout: 10
         }
       }
     });
 
     return request;
+  } else {
+
+    return false;
   }
 }
 
