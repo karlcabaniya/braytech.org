@@ -1,114 +1,369 @@
 {
   "de": {
-    "translated": 427,
-    "notTranslated": 65,
-    "added": [],
+    "translated": 422,
+    "notTranslated": 71,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "en": {
-    "translated": 492,
+    "translated": 493,
     "notTranslated": 0,
     "added": [],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 492,
-    "added": [],
+    "notTranslated": 493,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "es": {
-    "translated": 463,
-    "notTranslated": 29,
-    "added": [],
+    "translated": 458,
+    "notTranslated": 35,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "fr": {
-    "translated": 396,
-    "notTranslated": 96,
-    "added": [],
+    "translated": 391,
+    "notTranslated": 102,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 492,
-    "added": [],
+    "notTranslated": 493,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "it": {
-    "translated": 463,
-    "notTranslated": 29,
-    "added": [],
+    "translated": 458,
+    "notTranslated": 35,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "ja": {
     "translated": 0,
-    "notTranslated": 492,
-    "added": [],
+    "notTranslated": 493,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "ko": {
-    "translated": 336,
-    "notTranslated": 156,
-    "added": [],
+    "translated": 331,
+    "notTranslated": 162,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 492,
-    "added": [],
+    "notTranslated": 493,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "pt-br": {
-    "translated": 460,
-    "notTranslated": 32,
-    "added": [],
+    "translated": 455,
+    "notTranslated": 38,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 492,
-    "added": [],
+    "notTranslated": 493,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "zh-chs": {
-    "translated": 463,
-    "notTranslated": 29,
-    "added": [],
+    "translated": 458,
+    "notTranslated": 35,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 492,
-    "added": [],
+    "notTranslated": 493,
+    "added": [
+      "A temporary error has occurred.",
+      "Authenticate",
+      "Authentication required",
+      "Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.",
+      "You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your authentication in the Settings view.",
+      "You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net",
+      "Your profile's progression data isn't available. Your profile may be set to private on Bungie.net."
+    ],
     "removed": [
-      "Seasonal artifact"
+      "Authorization required",
+      "Authorize",
+      "Generic error",
+      "Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features",
+      "If it happens more than 10 times, hop on the Discords.",
+      "Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.",
+      "You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.",
+      "You can find more information regarding your current authorization in the Settings view.",
+      "Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause."
     ]
   }
 }

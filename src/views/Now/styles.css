@@ -74,6 +74,14 @@
   font-weight: 500;
 }
 
+#now .module .aside {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 #now .module .list.activities {
   display: grid;
   grid-gap: 3px;
@@ -194,6 +202,10 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+#now .seasonal-artifact .tiers {
+  margin: 0 0 20px;
 }
 
 #now .season-pass {

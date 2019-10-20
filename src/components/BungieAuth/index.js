@@ -388,7 +388,7 @@ class DiffProfile extends React.Component {
         <>
           <div className='name'>{t('Oh, honey')}</div>
           <div className='description'>
-            <p>{t("You are not authenticated to access a different user's profile data, but you may use these helpful links to return to your own.")}</p>
+            <p>{t("You are not authorised to access a different user's profile data, but you may use these helpful links to return to your own.")}</p>
             <p>{t('You can find more information regarding your authentication in the Settings view.')}</p>
           </div>
         </>

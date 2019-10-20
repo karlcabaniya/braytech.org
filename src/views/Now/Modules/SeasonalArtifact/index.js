@@ -419,6 +419,9 @@ class SeasonalArtifact extends React.Component {
                 <em>{t('A temporary error has occurred.')}</em>
               </p>
             ) : null}
+            <div className='aside'>
+              <p>{t("The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.")}</p>
+            </div>
           </div>
           <div className='progression'>
             <h4>{t('Progression')}</h4>
