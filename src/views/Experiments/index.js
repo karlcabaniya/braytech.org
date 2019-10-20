@@ -28,13 +28,6 @@ class Resources extends React.Component {
         description: "A high-level and more graphical overview of your achievements: A small step in a very different direction, this was something fun I made. It was also my first time loading PGCRs to calculate statistics.",
         author: 'Braytech',
         link: '/legend'
-      },
-      {
-        name: 'Data Inspector',
-        icon: 'destiny-road_kill',
-        description: "A simple tree view approach to browsing through Destiny's manifest. Like data.destinysets.com, but less useful. I should probably at least add a filter input.",
-        author: 'Braytech',
-        link: '/experiments/data-inspector'
       }
     ];
 
