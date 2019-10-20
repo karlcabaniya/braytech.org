@@ -23,7 +23,8 @@ class BungieAuth extends React.Component {
 
     this.state = {
       loading: true,
-      memberships: false
+      memberships: false,
+      error: false
     };
   }
 
@@ -36,7 +37,7 @@ class BungieAuth extends React.Component {
   };
 
   getMemberships = async () => {
-    let response = await bungie.GetMembershipDataForCurrentUser();
+    const response = await bungie.GetMembershipDataForCurrentUser();
 
     if (this.mounted) {
       if (response && response.ErrorCode === 1) {
@@ -44,6 +45,18 @@ class BungieAuth extends React.Component {
           ...p,
           loading: false,
           memberships: response.Response
+        }));
+      } else if (response && response.ErrorCode !== 1) {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          error: response
+        }));
+      } else {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          error: true
         }));
       }
     }
@@ -75,7 +88,7 @@ class BungieAuth extends React.Component {
 
   render() {
     const { t, location } = this.props;
-    const { loading, memberships } = this.state;
+    const { loading, memberships, error } = this.state;
 
     const code = queryString.parse(location.search) && queryString.parse(location.search).code;
 
@@ -86,7 +99,7 @@ class BungieAuth extends React.Component {
     if (loading) {
       return <Spinner mini />;
     } else {
-      if (memberships) {
+      if (memberships && !error) {
         return (
           <div className='bungie-auth'>
             <div className='member'>
@@ -145,16 +158,41 @@ class BungieAuth extends React.Component {
           </div>
         );
       } else {
-        return (
-          <div className='bungie-auth'>
-            <Button
-              text={t('Authenticate')}
-              action={() => {
-                window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
-              }}
-            />
-          </div>
-        );
+        if (error) {
+          return (
+            <div className='bungie-auth'>
+              <div className='text'>
+                {error.ErrorCode ? (
+                  <>
+                    <p>
+                      {error.ErrorCode} {error.ErrorStatus}
+                    </p>
+                    <p>{error.Message}</p>
+                  </>
+                ) : (
+                  t('Unknown error')
+                )}
+              </div>
+              <Button
+                text={t('Authenticate')}
+                action={() => {
+                  window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+                }}
+              />
+            </div>
+          );
+        } else {
+          return (
+            <div className='bungie-auth'>
+              <Button
+                text={t('Authenticate')}
+                action={() => {
+                  window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+                }}
+              />
+            </div>
+          );
+        }
       }
     }
   }
@@ -166,7 +204,8 @@ class BungieAuthMini extends React.Component {
 
     this.state = {
       loading: true,
-      memberships: false
+      memberships: false,
+      error: false
     };
   }
 
@@ -179,7 +218,7 @@ class BungieAuthMini extends React.Component {
   };
 
   getMemberships = async () => {
-    let response = await bungie.GetMembershipDataForCurrentUser();
+    const response = await bungie.GetMembershipDataForCurrentUser();
 
     if (this.mounted) {
       if (response && response.ErrorCode === 1) {
@@ -187,6 +226,18 @@ class BungieAuthMini extends React.Component {
           ...p,
           loading: false,
           memberships: response.Response
+        }));
+      } else if (response && response.ErrorCode !== 1) {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          error: response
+        }));
+      } else {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          error: true
         }));
       }
     }
@@ -218,7 +269,7 @@ class BungieAuthMini extends React.Component {
 
   render() {
     const { t, location } = this.props;
-    const { loading, memberships } = this.state;
+    const { loading, memberships, error } = this.state;
 
     const code = queryString.parse(location.search) && queryString.parse(location.search).code;
 
@@ -229,7 +280,7 @@ class BungieAuthMini extends React.Component {
     if (loading) {
       return <Spinner mini />;
     } else {
-      if (memberships) {
+      if (memberships && !error) {
         return (
           <div className='bungie-auth'>
             <div className='memberships'>
@@ -256,16 +307,41 @@ class BungieAuthMini extends React.Component {
           </div>
         );
       } else {
-        return (
-          <div className='bungie-auth'>
-            <Button
-              text={t('Login with Bungie.net')}
-              action={() => {
-                window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
-              }}
-            />
-          </div>
-        );
+        if (error) {
+          return (
+            <div className='bungie-auth'>
+              <div className='text'>
+                {error.ErrorCode ? (
+                  <>
+                    <p>
+                      {error.ErrorCode} {error.ErrorStatus}
+                    </p>
+                    <p>{error.Message}</p>
+                  </>
+                ) : (
+                  t('Unknown error')
+                )}
+              </div>
+              <Button
+                text={t('Authenticate')}
+                action={() => {
+                  window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+                }}
+              />
+            </div>
+          );
+        } else {
+          return (
+            <div className='bungie-auth'>
+              <Button
+                text={t('Authenticate')}
+                action={() => {
+                  window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+                }}
+              />
+            </div>
+          );
+        }
       }
     }
   }
@@ -334,12 +410,13 @@ class DiffProfile extends React.Component {
 
     this.state = {
       loading: true,
-      memberships: false
+      memberships: false,
+      error: false
     };
   }
 
   getMemberships = async () => {
-    let response = await bungie.GetMembershipDataForCurrentUser();
+    const response = await bungie.GetMembershipDataForCurrentUser();
 
     if (this.mounted) {
       if (response && response.ErrorCode === 1) {
@@ -347,6 +424,18 @@ class DiffProfile extends React.Component {
           ...p,
           loading: false,
           memberships: response.Response
+        }));
+      } else if (response && response.ErrorCode !== 1) {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          error: response
+        }));
+      } else {
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          error: true
         }));
       }
     }
@@ -370,7 +459,7 @@ class DiffProfile extends React.Component {
 
   render() {
     const { t, inline, location } = this.props;
-    const { loading, memberships } = this.state;
+    const { loading, memberships, error } = this.state;
     const pathname = paths.removeMemberIds(location.pathname);
 
     let properties;
@@ -395,40 +484,65 @@ class DiffProfile extends React.Component {
       );
     }
 
-    return (
-      <div className={cx('bungie-auth', 'no-auth', { inline })}>
-        <div className='module'>
-          <div className='properties'>
-            {properties}
-            {loading ? (
-              <Spinner mini />
+    if (error) {
+      return (
+        <div className='bungie-auth'>
+          <div className='text'>
+            {error.ErrorCode ? (
+              <>
+                <p>
+                  {error.ErrorCode} {error.ErrorStatus}
+                </p>
+                <p>{error.Message}</p>
+              </>
             ) : (
-              <div className='memberships'>
-                <ul className='list'>
-                  {memberships.destinyMemberships.map(m => {
-                    return (
-                      <li key={m.membershipId} className='linked'>
-                        <div className='icon'>
-                          <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType]}`} />
-                        </div>
-                        <div className='displayName'>{memberships.bungieNetUser.blizzardDisplayName && m.membershipType === 4 ? memberships.bungieNetUser.blizzardDisplayName : m.displayName}</div>
-                        {m.crossSaveOverride === m.membershipType ? <div className='crosssave' /> : null}
-                        <Link
-                          to='/character-select'
-                          onClick={e => {
-                            store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: m.membershipType, membershipId: m.membershipId } });
-                          }}
-                        />
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
+              t('Unknown error')
             )}
           </div>
+          <Button
+            text={t('Authenticate')}
+            action={() => {
+              window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+            }}
+          />
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className={cx('bungie-auth', 'no-auth', { inline })}>
+          <div className='module'>
+            <div className='properties'>
+              {properties}
+              {loading ? (
+                <Spinner mini />
+              ) : (
+                <div className='memberships'>
+                  <ul className='list'>
+                    {memberships.destinyMemberships.map(m => {
+                      return (
+                        <li key={m.membershipId} className='linked'>
+                          <div className='icon'>
+                            <span className={`destiny-platform_${destinyEnums.PLATFORMS[m.membershipType]}`} />
+                          </div>
+                          <div className='displayName'>{memberships.bungieNetUser.blizzardDisplayName && m.membershipType === 4 ? memberships.bungieNetUser.blizzardDisplayName : m.displayName}</div>
+                          {m.crossSaveOverride === m.membershipType ? <div className='crosssave' /> : null}
+                          <Link
+                            to='/character-select'
+                            onClick={e => {
+                              store.dispatch({ type: 'MEMBER_LOAD_MEMBERSHIP', payload: { membershipType: m.membershipType, membershipId: m.membershipId } });
+                            }}
+                          />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
 

@@ -175,7 +175,7 @@ class Roster extends React.Component {
                         <div>{seasonRank}</div>
                       </div>
                       <div className='icon'>
-                        <div className={cx({ 'max-ish': lastCharacter.light >= 930, max: lastCharacter.light === 960 })}>
+                        <div className={cx({ 'max-ish': lastCharacter.light >= 930, max: lastCharacter.light >= 960 })}>
                           <span>{lastCharacter.light}</span>
                         </div>
                       </div>
