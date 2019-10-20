@@ -157,7 +157,7 @@ class SeasonPass extends React.Component {
       })
     };
 
-    console.log(seasonPass);
+    // console.log(seasonPass);
 
     return (
       <>

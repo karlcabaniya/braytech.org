@@ -8,13 +8,15 @@ import manifest from '../../../../utils/manifest';
 import { ReactComponent as ForgeGofannon } from './icons/gofannon.svg';
 import { ReactComponent as ForgeIzanami } from './icons/izanami.svg';
 import { ReactComponent as ForgeBerguisa } from './icons/bergusia.svg';
+import { ReactComponent as ForgeVolundr } from './icons/volundr.svg';
 
 import './styles.css';
 
 const forgeIcons = {
   957727787: <ForgeGofannon />,
   2656947700: <ForgeIzanami />,
-  1434072700: <ForgeBerguisa />
+  1434072700: <ForgeBerguisa />,
+  1506080581: <ForgeVolundr />
 };
 
 class BlackArmoryForges extends React.Component {
@@ -34,21 +36,7 @@ class BlackArmoryForges extends React.Component {
       })
     };
 
-    if (!dailyBlackArmoryForges.active) {
-      // return (
-      //   <>
-      //     <div className='module-header'>
-      //       <div className='sub-name'>{t('Black Armory Forges')}</div>
-      //     </div>
-      //     <div className='text'>
-      //       <p>
-      //         <em>An error occurred.</em>
-      //       </p>
-      //     </div>
-      //   </>
-      // );
-      return null;
-    }
+    if (!dailyBlackArmoryForges.active) return null;
 
     const definitionActivity = manifest.DestinyActivityDefinition[dailyBlackArmoryForges.active.activityHash];
 

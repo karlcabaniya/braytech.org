@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import * as serviceWorker from './serviceWorker';
 import runOnceTasks from './utils/runOnceTasks';
+import packageJSON from '../package.json';
 import App from './App';
 
 import store from './utils/reduxStore';
@@ -17,6 +18,8 @@ class AppEntry extends React.Component {
     };
 
     runOnceTasks();
+
+    console.log(`%c Braytech ${packageJSON.version}`, 'font-family: sans-serif; font-size: 24px;');
   }
 
   config = {

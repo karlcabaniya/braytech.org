@@ -13,7 +13,7 @@ class DailyVanguardModifiers extends React.Component {
     const { t, member } = this.props;
     const characterActivities = member.data.profile.characterActivities.data;
 
-    console.log(characterActivities[member.characterId].availableActivities.map(m => ({ name: manifest.DestinyActivityDefinition[m.activityHash].displayProperties.name, ...m })));
+    // console.log(characterActivities[member.characterId].availableActivities.map(m => ({ name: manifest.DestinyActivityDefinition[m.activityHash].displayProperties.name, ...m })));
 
     const vanguardStrikes = characterActivities[member.characterId].availableActivities.find(a => a.activityHash === 4252456044);
 
