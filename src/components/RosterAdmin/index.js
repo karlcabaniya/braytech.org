@@ -59,7 +59,7 @@ class Actions extends React.Component {
           displayProperties: {
             name: e.errorStatus,
             description: e.message,
-            timeout: 10
+            timeout: 4
           },
           javascript: e
         });
@@ -103,7 +103,7 @@ class Actions extends React.Component {
             displayProperties: {
               name: e.errorStatus,
               description: e.message,
-              timeout: 10
+              timeout: 4
             },
             javascript: e
           });
@@ -167,7 +167,7 @@ class Actions extends React.Component {
           displayProperties: {
             name: e.errorStatus,
             description: e.message,
-            timeout: 10
+            timeout: 4
           },
           javascript: e
         });
@@ -222,7 +222,7 @@ class Actions extends React.Component {
           displayProperties: {
             name: e.errorStatus,
             description: e.message,
-            timeout: 10
+            timeout: 4
           },
           javascript: e
         });
@@ -269,7 +269,7 @@ class Actions extends React.Component {
             displayProperties: {
               name: e.errorStatus,
               description: e.message,
-              timeout: 10
+              timeout: 4
             },
             javascript: e
           });

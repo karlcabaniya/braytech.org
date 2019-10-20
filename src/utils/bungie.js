@@ -59,7 +59,7 @@ async function apiRequest(path, options = {}) {
           displayProperties: {
             name: `HTTP error`,
             description: `A network error occured. ${e.message}.`,
-            timeout: 10
+            timeout: 4
           }
         }
       });
@@ -76,7 +76,7 @@ async function apiRequest(path, options = {}) {
         displayProperties: {
           name: 'Bungie',
           description: `${response.ErrorCode} ${response.ErrorStatus} ${response.Message}`,
-          timeout: 10
+          timeout: 4
         }
       }
     });
@@ -121,7 +121,7 @@ async function apiRequest(path, options = {}) {
         displayProperties: {
           name: `HTTP error`,
           description: `Code ${request.status} A network error occured.`,
-          timeout: 10
+          timeout: 4
         }
       }
     });
