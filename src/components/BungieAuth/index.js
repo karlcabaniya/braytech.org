@@ -150,7 +150,7 @@ class BungieAuth extends React.Component {
             <Button
               text={t('Authenticate')}
               action={() => {
-                window.location = `https://www.bungie.net/en/OAuth/Authenticate?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+                window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
               }}
             />
           </div>
