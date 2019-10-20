@@ -13,9 +13,9 @@ class AuthUpsell extends React.Component {
 
     return (
       <div className='wrap'>
-        <div className='headline'>{t('Hey {{displayName}}, did you know you can authorize Braytech with Bungie.net for access to more features', { displayName: member.data.profile.profile.data.userInfo.displayName })}</div>
+        <div className='headline'>{t('Hey {{displayName}}, did you know you can authenticate Braytech with Bungie.net for access to more features', { displayName: member.data.profile.profile.data.userInfo.displayName })}</div>
         <div className='text'>
-          <p>{t("Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authorizing with Bungie.net.")}</p>
+          <p>{t("Most of Braytech's features are available to all users and depend on publically available data, but some of Destiny's features require more explicit access permissions which you can grant to Braytech by authenticating with Bungie.net.")}</p>
           <ul className='feature-sell'>
             <li>
               <div className='icon pursuits' />

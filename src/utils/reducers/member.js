@@ -32,19 +32,50 @@ function loadMemberAndReset(membershipType, membershipId, characterId) {
 async function loadMember(membershipType, membershipId, characterId) {
   // Note: while calling store.dispatch from within a reducer is an anti-pattern,
   // calling one asynchronously (eg as a result of a fetch) is just fine.
+  
   try {
     const data = await getMember(membershipType, membershipId);
 
-    if (!data.profile.characterProgressions.data) {
-      store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error: { message: 'private' } } });
+    if (data.profile.ErrorCode === 1 && !data.profile.Response.profileProgression.data) {
+      store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error: { ErrorCode: 'private' } } });
+
       return;
     }
 
-    store.dispatch({ type: 'MEMBER_LOADED', payload: { membershipId, membershipType, characterId, data } });
+    // console.log('member reducer', data);
 
-    voluspa.store({ membershipId, membershipType});
+    ['profile', 'groups', 'milestones'].forEach(key => {
+      
+      if (data[key].ErrorCode !== 1) {
+        
+        store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error: { ...data[key] } } });
+  
+        throw Error('SILENT');
+      }
+    });    
+
+    store.dispatch({
+      type: 'MEMBER_LOADED',
+      payload: {
+        membershipId,
+        membershipType,
+        characterId,
+        data: {
+          profile: data.profile.Response,
+          groups: data.groups.Response,
+          milestones: data.milestones.Response
+        }
+      }
+    });
+
+    voluspa.store({ membershipId, membershipType });
+
   } catch (error) {
-    store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error } });
+
+    if (error.message !== 'SILENT') {
+      store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error } });
+    }
+
     return;
   }
 }
@@ -102,7 +133,7 @@ export default function memberReducer(state = defaultState, action) {
       return {
         ...state,
         characterId: state.characterId ? state.characterId : data.profile.characters.data[0].characterId,
-        data: {...state.data, ...data},
+        data: { ...state.data, ...data },
         prevData: state.data,
         loading: false,
         stale: false,

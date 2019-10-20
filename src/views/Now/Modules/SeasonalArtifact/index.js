@@ -356,6 +356,12 @@ class SeasonalArtifact extends React.Component {
                   //       .includes(i.itemHash)
                   //   ).filter(i => i.obtained).length;
 
+                  const tierUnlocksUsed = items
+                    .filter(i => definitionArtifact.tiers[t]
+                        .items.map(i => i.itemHash)
+                        .includes(i.itemHash)
+                    ).filter(i => i.obtained).length;
+
                   // console.log(t, tier.minimumUnlockPointsUsedRequirement, previousTierUnlocksUsed)
 
                   return (
@@ -363,7 +369,7 @@ class SeasonalArtifact extends React.Component {
                       key={t}
                       className={cx('tier', {
                         available: totalUnlocksUsed >= tier.minimumUnlockPointsUsedRequirement,
-                        last: (t < 4 && totalUnlocksUsed < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement) || t === 4
+                        last: (t < 4 && totalUnlocksUsed < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement && tierUnlocksUsed > 0) || t === 4
                       })}
                     >
                       <ul className='list inventory-items'>

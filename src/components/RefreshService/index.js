@@ -11,7 +11,6 @@ class RefreshService extends React.Component {
   running = false;
 
   componentDidMount() {
-
     // start the countdown
     this.init();
   }
@@ -19,7 +18,6 @@ class RefreshService extends React.Component {
   componentDidUpdate(prevProps) {
     // if previous member prop data doesn't equal current member prop data, if config service was turned off/on
     if (prevProps.member.data !== this.props.member.data || this.props.member.stale || prevProps.refreshService.config.enabled !== this.props.refreshService.config.enabled) {
-
       // if config service was turned off/on
       if (prevProps.refreshService.config.enabled !== this.props.refreshService.config.enabled) {
         if (this.props.refreshService.config.enabled) {
@@ -28,12 +26,12 @@ class RefreshService extends React.Component {
           this.quit();
         }
 
-      // member data is stale -> go now
+        // member data is stale -> go now
       } else if (this.props.member.stale) {
         this.track();
         this.service();
-      
-      // restart the countdown
+
+        // restart the countdown
       } else {
         this.clearInterval();
         this.startInterval();
@@ -102,15 +100,30 @@ class RefreshService extends React.Component {
       return;
     }
 
-    const member = this.props.member;
-    const { membershipType, membershipId, characterId } = member;
+    const { membershipType, membershipId, characterId } = this.props.member;
 
     try {
       const data = await getMember(membershipType, membershipId);
+
+      ['profile', 'groups', 'milestones'].forEach(key => {
+        if (data[key].ErrorCode !== 1) {
+          throw Error;
+        }
+      });
+
       if (data) {
         store.dispatch({
           type: 'MEMBER_LOADED',
-          payload: { membershipType, membershipId, characterId, data }
+          payload: {
+            membershipType,
+            membershipId,
+            characterId,
+            data: {
+              profile: data.profile.Response,
+              groups: data.groups.Response,
+              milestones: data.milestones.Response
+            }
+          }
         });
       }
     } catch (e) {

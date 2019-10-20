@@ -148,9 +148,9 @@ class BungieAuth extends React.Component {
         return (
           <div className='bungie-auth'>
             <Button
-              text={t('Authorize')}
+              text={t('Authenticate')}
               action={() => {
-                window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
+                window.location = `https://www.bungie.net/en/OAuth/Authenticate?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
               }}
             />
           </div>
@@ -310,13 +310,13 @@ class NoAuth extends React.Component {
       <div className={cx('bungie-auth', 'no-auth', { inline })}>
         <div className='module'>
           <div className='properties'>
-            <div className='name'>{t('Authorization required')}</div>
+            <div className='name'>{t('Authentication required')}</div>
             <div className='description'>
               <p>{t('Some features of Braytech require your written permission to activate, generally to protect your privacy.')}</p>
               <p>{t('To use this feature, please tell Bungie that you approve. No personal information is shared by doing so—only an authentication code with which you may interact with more API endpoints.')}</p>
             </div>
             <Button
-              text={t('Authorize')}
+              text={t('Authenticate')}
               action={() => {
                 window.location = `https://www.bungie.net/en/OAuth/Authorize?client_id=${process.env.REACT_APP_BUNGIE_CLIENT_ID}&response_type=code`;
               }}
@@ -388,8 +388,8 @@ class DiffProfile extends React.Component {
         <>
           <div className='name'>{t('Oh, honey')}</div>
           <div className='description'>
-            <p>{t("You are not authorized to access a different user's profile data, but you may use these helpful links to return to your own.")}</p>
-            <p>{t('You can find more information regarding your current authorization in the Settings view.')}</p>
+            <p>{t("You are not authenticated to access a different user's profile data, but you may use these helpful links to return to your own.")}</p>
+            <p>{t('You can find more information regarding your authentication in the Settings view.')}</p>
           </div>
         </>
       );

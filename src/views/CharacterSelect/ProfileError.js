@@ -8,27 +8,28 @@ class ProfileError extends React.Component {
   render() {
     const { t, error } = this.props;
 
-    if (error.errorCode && error.errorStatus && error.message) {
+    if (error.ErrorCode && error.ErrorStatus && error.Message) {
       return (
         <div className='error'>
           <div className='sub-header'>
             <div>{t('Bungie error')}</div>
           </div>
           <p>
-            {t('Error')} {error.errorCode}: {error.errorStatus}
+            {error.ErrorCode}: {error.ErrorStatus}
           </p>
-          <p>{error.message}</p>
+          <p>{error.Message}</p>
         </div>
       );
     }
 
-    if (error.message === 'private') {
+    if (error.ErrorCode === 'private') {
       return (
         <div className='error'>
           <div className='sub-header'>
             <div>{t('Private profile')}</div>
           </div>
-          <p>{t('Your profile data may be set to private on Bungie.net. This error is generated when character progression data is unavailable, and is the most likely cause.')}</p>
+          <p>{t("Your profile's progression data isn't available. Your profile may be set to private on Bungie.net.")}</p>
+          <p>{t("You may change your privacy settings on Bungie.net or authenticate Braytech with Bungie.net")}</p>
           <Button
             text={t('Go to Bungie.net')}
             action={() => {
