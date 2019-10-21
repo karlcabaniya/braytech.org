@@ -2,7 +2,7 @@
   "name": "braytech.org",
   "author": "Tom Chapman <askMeOnTwitter@justrealmilk> (https://thomchap.com.au)",
   "bugs": "https://github.com/justrealmilk/braytech.org/issues",
-  "version": "2.9.68",
+  "version": "2.9.69",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
@@ -13,7 +13,7 @@
     "leaflet": "^1.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.26",
+    "moment-timezone": "^0.5.27",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
     "react": "^16.10.2",
@@ -56,6 +56,6 @@
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "progress-bar-webpack-plugin": "^1.12.1",
-    "webpack-bundle-analyzer": "^3.5.2"
+    "webpack-bundle-analyzer": "^3.6.0"
   }
 }

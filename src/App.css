@@ -570,7 +570,7 @@ button.square.active {
 }
 
 .sticky-nav {
-  position: sticky;
+  position: relative;
   bottom: 0;
   left: 0;
   /* height: 40px; */
@@ -644,6 +644,10 @@ html.backdropfilter .sticky-nav {
 }
 
 @media screen and (max-width: 600px) {
+  .sticky-nav {
+    position: sticky;
+  }
+  
   .sticky-nav > .wrapper {
     padding: 0 2rem;
     font-size: 12px;
