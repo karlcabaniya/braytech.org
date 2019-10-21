@@ -36,6 +36,13 @@ export const rewardsQuestLineOverrides = {
       quantity: 1
     }
   ],
+  // The Recluse
+  1511127118: [
+    {
+      itemHash: 3354242550,
+      quantity: 1
+    }
+  ],
   // Truth
   884082918: [
     {
@@ -236,13 +243,6 @@ export const rewardsQuestLineOverrides = {
     {
       itemHash: 1196526889,
       quantity: 6
-    }
-  ],
-  // The Recluse
-  1511127118: [
-    {
-      itemHash: 3354242550,
-      quantity: 1
     }
   ]
 };
