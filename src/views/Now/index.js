@@ -88,7 +88,6 @@ class Now extends React.Component {
         cols: [
           {
             className: ['double'],
-            condition: !!(this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)),
             mods: [
               {
                 className: ['seasonal-artifact'],

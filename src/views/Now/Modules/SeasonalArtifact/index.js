@@ -5,10 +5,7 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../../utils/manifest';
-import * as ls from '../../../../utils/localStorage';
-import * as bungie from '../../../../utils/bungie';
 import ObservedImage from '../../../../components/ObservedImage';
-import { NoAuth, DiffProfile } from '../../../../components/BungieAuth';
 import Spinner from '../../../../components/UI/Spinner';
 import ProgressBar from '../../../../components/UI/ProgressBar';
 
@@ -171,140 +168,35 @@ class SeasonalArtifact extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: false,
-      data: false,
-      unavailable: false
-    };
-
-    this.auth = ls.get('setting.auth');
+    this.state = {};
   }
-
-  componentDidMount() {
-    this.mounted = true;
-
-    this.getVendor(2894222926);
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  componentDidUpdate(p, s) {
-    if (s.loading !== this.state.loading) {
-      this.props.rebindTooltips();
-    }
-
-    if (p.member.data.updated !== this.props.member.data.updated) {
-      this.getVendor(2894222926);
-    }
-  }
-
-  getVendor = async hash => {
-    const { member } = this.props;
-    const characterEquipment = member.data.profile.characterEquipment.data[member.characterId].items;
-
-    const artifactAvailable = characterEquipment.find(i => i.itemHash === 1387688628) || false;
-
-    // artifact not equipped
-    if (!artifactAvailable && this.mounted) {
-      this.setState(p => ({
-        ...p,
-        loading: false,
-        unavailable: true
-      }));
-
-      return;
-    }
-
-    // need auth for vendors
-    if (!this.auth) return;
-
-    // already requesting
-    if (this.state.loading) return;
-
-    this.setState(p => ({
-      ...p,
-      loading: true
-    }));
-
-    const response = await bungie.GetVendor(member.membershipType, member.membershipId, member.characterId, hash, [400, 402, 300, 301, 304, 305, 306, 307, 308, 600].join(','));
-
-    if (this.mounted) {
-      if (response && response.ErrorCode === 1) {
-        this.setState({
-          loading: false,
-          data: response.Response
-        });
-      } else if (response && response.ErrorCode === 1627) {
-        this.setState(p => ({
-          ...p,
-          loading: false,
-          unavailable: true
-        }));
-      } else {
-        this.setState(p => ({
-          ...p,
-          loading: false
-        }));
-      }
-    }
-  };
 
   render() {
     const { t, member } = this.props;
     const profileProgression = member.data.profile.profileProgression.data;
-    const progressionArtifact = profileProgression.seasonalArtifact;
+    const characterEquipment = member.data.profile.characterEquipment.data[member.characterId].items;
+    const characterProgressions = member.data.profile.characterProgressions.data[member.characterId];
 
-    if (!this.auth) {
-      return <NoAuth inline />;
-    }
+    const artifactAvailable = characterEquipment.find(i => i.itemHash === 1387688628) || false;
 
-    if (this.auth && !this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId)) {
-      return <DiffProfile inline />;
-    }
-
-    if (this.auth && this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId) && this.state.loading && !this.state.data) {
+    if (!artifactAvailable) {
       return (
-        <>
-          <div className='head'>
-            <div className='module-header'>
-              <div className='sub-name'>{t('Seasonal progression')}</div>
-            </div>
-            <Spinner />
+        <div className='head'>
+          <div className='module-header'>
+            <div className='sub-name'>{t('Seasonal progression')}</div>
           </div>
-        </>
-      );
+          <div className='text'>
+            <p>{t("This profile hasn't received an artifact yet.")}</p>
+          </div>
+        </div>
+      )
     }
 
-    if (this.state.unavailable) {
-      return 'Unavailable';
-    }
+    const profileArtifact = profileProgression.seasonalArtifact;
+    const characterArtifact = characterProgressions.seasonalArtifact;
 
-    const definitionArtifact = progressionArtifact.artifactHash && manifest.DestinyArtifactDefinition[progressionArtifact.artifactHash];
-    const definitionVendor = progressionArtifact.artifactHash && manifest.DestinyVendorDefinition[progressionArtifact.artifactHash];
-
-    const items = [];
-
-    let totalUnlocksUsed = 0;
-
-    if (this.state.data) {
-      Object.values(this.state.data.sales.data).forEach(sale => {
-        if (!this.state.data.itemComponents.plugStates.data[sale.itemHash]) return;
-
-        if (this.state.data.itemComponents.plugStates.data[sale.itemHash].enabled) totalUnlocksUsed++;
-
-        items.push({
-          vendorHash: definitionVendor.hash,
-          ...sale,
-          ...((sale.vendorItemIndex !== undefined && definitionVendor && definitionVendor.itemList && definitionVendor.itemList[sale.vendorItemIndex]) || {}),
-          available: this.state.data.itemComponents.plugStates.data[sale.itemHash].canInsert,
-          obtained: this.state.data.itemComponents.plugStates.data[sale.itemHash].enabled
-        });
-      });
-    }
-
-    // console.log(progressionArtifact, items);
+    const definitionArtifact = profileArtifact.artifactHash && manifest.DestinyArtifactDefinition[profileArtifact.artifactHash];
+    const definitionVendor = profileArtifact.artifactHash && manifest.DestinyVendorDefinition[profileArtifact.artifactHash];
 
     // let string = ''
     //     definitionArtifact.tiers.forEach(tier => {
@@ -321,10 +213,11 @@ class SeasonalArtifact extends React.Component {
     //     })
     //     console.log(string)
 
+    // console.log(characterArtifact)
+
     return (
       <>
         {/* <ObservedImage className='image artifact' src='/static/images/extracts/flair/VEye.png' /> */}
-        {this.state.loading && <Spinner mini />}
         <div className='head'>
           <div className='module-header'>
             <div className='sub-name'>{t('Seasonal progression')}</div>
@@ -346,21 +239,14 @@ class SeasonalArtifact extends React.Component {
           <div className='mods'>
             <h4>{t('Mods')}</h4>
             <div className='tiers'>
-              {items.length > 0 &&
-                definitionArtifact.tiers.map((tier, t) => {
-                  const tierItemHashes = tier.items.map(i => i.itemHash);
-
+              {definitionArtifact.tiers.map((tier, t) => {
                   // const previousTierUnlocksUsed = items
                   //   .filter(i => definitionArtifact.tiers[Math.max(0, t - 1)]
                   //       .items.map(i => i.itemHash)
                   //       .includes(i.itemHash)
                   //   ).filter(i => i.obtained).length;
 
-                  const tierUnlocksUsed = items
-                    .filter(i => definitionArtifact.tiers[t]
-                        .items.map(i => i.itemHash)
-                        .includes(i.itemHash)
-                    ).filter(i => i.obtained).length;
+                  const tierUnlocksUsed = characterArtifact.tiers[t].items.filter(i => i.isActive).length;
 
                   // console.log(t, tier.minimumUnlockPointsUsedRequirement, previousTierUnlocksUsed)
 
@@ -368,17 +254,15 @@ class SeasonalArtifact extends React.Component {
                     <div
                       key={t}
                       className={cx('tier', {
-                        available: totalUnlocksUsed >= tier.minimumUnlockPointsUsedRequirement,
-                        last: (t < 4 && totalUnlocksUsed < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement && tierUnlocksUsed > 0) || t === 4
+                        available: characterArtifact.pointsUsed >= tier.minimumUnlockPointsUsedRequirement,
+                        last: (t < 4 && characterArtifact.pointsUsed < definitionArtifact.tiers[t + 1].minimumUnlockPointsUsedRequirement && tierUnlocksUsed > 0) || t === 4
                       })}
                     >
                       <ul className='list inventory-items'>
-                        {items
-                          .filter(i => tierItemHashes.includes(i.itemHash))
+                        {characterArtifact.tiers[t].items
                           .map((item, i) => {
-                            const active = item.obtained;
 
-                            const image = !active ? mods[item.itemHash].inactive : mods[item.itemHash].active;
+                            const image = !item.isActive ? mods[item.itemHash].inactive : mods[item.itemHash].active;
 
                             const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
@@ -391,7 +275,7 @@ class SeasonalArtifact extends React.Component {
                                   tooltip: true,
                                   linked: true,
                                   'no-border': true,
-                                  unavailable: !active
+                                  unavailable: !item.isActive
                                 })}
                                 data-hash={item.itemHash}
                                 data-instanceid={item.itemInstanceId}
@@ -402,7 +286,7 @@ class SeasonalArtifact extends React.Component {
                                 data-quantity={item.quantity && item.quantity > 1 ? item.quantity : null}
                               >
                                 <div className='icon'>
-                                  {!active ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
+                                  {!item.isActive ? <ObservedImage className='image background' src='/static/images/extracts/ui/artifact/01A3_12DB_00.png' /> : null}
                                   <ObservedImage src={image} />
                                   <div className='cost'>{energyCost}</div>
                                 </div>
@@ -414,14 +298,6 @@ class SeasonalArtifact extends React.Component {
                   );
                 })}
             </div>
-            {items.length < 1 ? (
-              <p>
-                <em>{t('A temporary error has occurred.')}</em>
-              </p>
-            ) : null}
-            <div className='aside'>
-              <p>{t("The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.")}</p>
-            </div>
           </div>
           <div className='progression'>
             <h4>{t('Progression')}</h4>
@@ -432,20 +308,20 @@ class SeasonalArtifact extends React.Component {
               <div>
                 <div className='name'>{t('Artifact unlocks')}</div>
                 <div className='value'>
-                  {progressionArtifact.pointProgression.level}/{progressionArtifact.pointProgression.levelCap}
+                  {profileArtifact.pointProgression.level}/{profileArtifact.pointProgression.levelCap}
                 </div>
               </div>
               <div>
                 <div className='name'>{t('Power bonus')}</div>
-                <div className='value power'>+{progressionArtifact.powerBonus}</div>
+                <div className='value power'>+{profileArtifact.powerBonus}</div>
               </div>
             </div>
             <p>{t('Next power bonus')}</p>
-            <ProgressBar {...progressionArtifact.powerBonusProgression} hideCheck />
-            {progressionArtifact.pointProgression.level < progressionArtifact.pointProgression.levelCap ? (
+            <ProgressBar {...profileArtifact.powerBonusProgression} hideCheck />
+            {profileArtifact.pointProgression.level < profileArtifact.pointProgression.levelCap ? (
               <>
                 <p>{t('Next artifact unlock')}</p>
-                <ProgressBar {...progressionArtifact.pointProgression} hideCheck />
+                <ProgressBar {...profileArtifact.pointProgression} hideCheck />
               </>
             ) : null}
           </div>
