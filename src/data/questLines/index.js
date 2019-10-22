@@ -267,6 +267,16 @@ export const rewardsQuestLineOverridesShadowkeep = [
         quantity: 1
       }
     ]
+  },
+  // The Back Way
+  {
+    itemHash: 1029660100,
+    rewards: [
+      {
+        itemHash: 2591746970, // Leviathan's Breath 
+        quantity: 1
+      }
+    ]
   }
 ];
 
