@@ -1,6 +1,5 @@
 {
   "A recipe tool for Emperor Calus' auspicious gift": "卡鲁斯大帝的礼物秘方",
-  "#####A temporary error has occurred.": "🌐",
   "Ability kills": "能力击杀",
   "Account, theme, tooltips, visibility, language, and saved data": "账户，主题，提示，可见性，语言和存储数据",
   "#####Active": "🌐",
@@ -427,7 +426,6 @@
   "The Shattered Throne": "破碎王座",
   "The Swords": "剑",
   "The Throne": "王座",
-  "#####The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.": "🌐",
   "Theme": "主题",
   "There are multiple sources for stats in Destiny. Clan Historical Stats is based on the less intensive HistoricalStats API endpoint.\n\nThe most accurate source for statistics is PGCRs. To display stats in the manner seen on Clan Historical Stats would require downloading terabytes of data from Bungie servers. This said, it's accurate enough fo some friendly competititon.": "当前命运有多个数据源。公会历史数据基于并不细致的 HistoricalStats 接口。\n\n最精准的数据源是赛后报告。如果要展示公会精确的历史数据，需要从 Bungie 服务器下载数以 TB 计的数据。或者说，至少目前来说足够精准了。",
   "There's no one here right now.": "目前这里没有人",
@@ -436,6 +434,7 @@
   "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.": "该公会并非你的公会，你无法修改该公会设置。你可以查看以下帮助链接来跳转到你自己的公会或在设置中了解更多关于你的当前授权的可用信息。",
   "#####This Nightfall doesn't have any associated collectibles.": "🌐",
   "#####This Nightfall doesn't have any associated records.": "🌐",
+  "#####This profile hasn't received an artifact yet.": "🌐",
   "This record is classified and may be revealed at a later time.": "这个记录已被归档并可能在之后被解密",
   "This user has their profile privacy set to private": "这个用户将自己的档案设为私密",
   "This Week": "本周",

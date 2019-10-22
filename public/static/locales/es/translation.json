@@ -1,6 +1,5 @@
 {
   "A recipe tool for Emperor Calus' auspicious gift": "Una herramienta con las recetas para el prometedor regalo del emperador Calus",
-  "A temporary error has occurred.": "Ha ocurrido un error temporal.",
   "Ability kills": "Bajas de habilidad",
   "Account, theme, tooltips, visibility, language, and saved data": "Cuenta, tema, carteles informativos, visibilidad, idioma y datos guardados",
   "Active": "Activa",
@@ -427,7 +426,6 @@
   "The Shattered Throne": "El trono despedazado",
   "The Swords": "Las Espadas",
   "The Throne": "El Trono",
-  "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.": "El endpoint de la API de Vendedores es problemático y necesita mucho amor y ánimo. Si parece que no se ha cargado, no te preocupes, lo intentará de nuevo cuando tu perfil se actualice en segundo plano.",
   "Theme": "Tema",
   "There are multiple sources for stats in Destiny. Clan Historical Stats is based on the less intensive HistoricalStats API endpoint.\n\nThe most accurate source for statistics is PGCRs. To display stats in the manner seen on Clan Historical Stats would require downloading terabytes of data from Bungie servers. This said, it's accurate enough fo some friendly competititon.": "Hay múltiples fuentes de estadísticas en Destiny. Las estadísticas históricas de los clanes se basan en el _endpoint_ menos intensivo de la API de HistoricalStats.\n\n La fuente más precisa de estadísticas son los PGCR. Para poder mostrar las estadísticas como se ve en las estadísticas históricas de los clanes sería necesario descargar terabytes de datos de los servidores de Bungie. Dicho esto, es lo bastante preciso para una competición amistosa.",
   "There's no one here right now.": "Ahora mismo no hay nadie por aquí.",
@@ -436,6 +434,7 @@
   "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.": "Este no parece ser tu clan y por lo tanto no puedes hacer nada al respecto. Puedes usar estos enlaces útiles para acceder al tuyo propio o puedes encontrar más información sobre tu autorización actual en la sección Configuración.",
   "This Nightfall doesn't have any associated collectibles.": "Este Ocaso no tiene ningún coleccionable asociado.",
   "This Nightfall doesn't have any associated records.": "Este Ocaso no tiene ningún triunfo asociado.",
+  "#####This profile hasn't received an artifact yet.": "🌐",
   "This record is classified and may be revealed at a later time.": "Esta entrada está clasificada y puede que sea revelada más adelante.",
   "This user has their profile privacy set to private": "Este usuario tiene su perfil de privacidad configurado como privado",
   "This Week": "Esta semana",

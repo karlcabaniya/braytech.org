@@ -1,6 +1,5 @@
 {
   "A recipe tool for Emperor Calus' auspicious gift": "Ein Rezeptwerkzeug für Imperator Calus' glückverheißendes Geschenk",
-  "#####A temporary error has occurred.": "🌐",
   "Ability kills": "Fähigkeitenkills",
   "Account, theme, tooltips, visibility, language, and saved data": "Account, Design, Tooltips, Anzeige, Sprache und lokale Daten",
   "#####Active": "🌐",
@@ -427,7 +426,6 @@
   "The Shattered Throne": "Der zerbrochene Thron",
   "The Swords": "Die Schwerter",
   "The Throne": "Der Thron",
-  "#####The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.": "🌐",
   "Theme": "Design",
   "There are multiple sources for stats in Destiny. Clan Historical Stats is based on the less intensive HistoricalStats API endpoint.\n\nThe most accurate source for statistics is PGCRs. To display stats in the manner seen on Clan Historical Stats would require downloading terabytes of data from Bungie servers. This said, it's accurate enough fo some friendly competititon.": "Es gibt mehrere Quellen für Statistiken in Destiny. Clanstatistiken basieren auf dem weniger intensiven HistoricalStats API Endpunkt. Die Statistiken die hier abgerufen werden können werden auf Serverseite von Bungie zusammengefasst und können manchmal marginal von den Massakerberichten abweichen.",
   "#####There's no one here right now.": "🌐",
@@ -436,6 +434,7 @@
   "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.": "Das hier ist nicht dein Clan und daher kannst du hier nicht deinen Willen aufzwingen. Du kannst aber diese hilfreichen Links nutzen, um zu deinem Clan zu gelangen oder um mehr Informationen über deine aktuelle Anmeldung in den Einstellungen einzusehen.",
   "#####This Nightfall doesn't have any associated collectibles.": "🌐",
   "#####This Nightfall doesn't have any associated records.": "🌐",
+  "#####This profile hasn't received an artifact yet.": "🌐",
   "#####This record is classified and may be revealed at a later time.": "🌐",
   "This user has their profile privacy set to private": "Dieses Nutzerprofil ist privat",
   "This Week": "Diese Woche",

@@ -1,6 +1,5 @@
 {
   "A recipe tool for Emperor Calus' auspicious gift": "칼루스 황제의 하사품 제작 방법 도구",
-  "#####A temporary error has occurred.": "🌐",
   "Ability kills": "능력 처치",
   "#####Account, theme, tooltips, visibility, language, and saved data": "🌐",
   "#####Active": "🌐",
@@ -427,7 +426,6 @@
   "The Shattered Throne": "부서진 왕관",
   "The Swords": "검",
   "The Throne": "왕좌",
-  "#####The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.": "🌐",
   "Theme": "테마",
   "#####There are multiple sources for stats in Destiny. Clan Historical Stats is based on the less intensive HistoricalStats API endpoint.\n\nThe most accurate source for statistics is PGCRs. To display stats in the manner seen on Clan Historical Stats would require downloading terabytes of data from Bungie servers. This said, it's accurate enough fo some friendly competititon.": "🌐",
   "#####There's no one here right now.": "🌐",
@@ -436,6 +434,7 @@
   "#####This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.": "🌐",
   "#####This Nightfall doesn't have any associated collectibles.": "🌐",
   "#####This Nightfall doesn't have any associated records.": "🌐",
+  "#####This profile hasn't received an artifact yet.": "🌐",
   "#####This record is classified and may be revealed at a later time.": "🌐",
   "This user has their profile privacy set to private": "이용자가 프라이버시 설정을 비공개로 설정했습니다",
   "This Week": "이번 주",

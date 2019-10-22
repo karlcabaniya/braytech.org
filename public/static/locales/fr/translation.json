@@ -1,6 +1,5 @@
 {
   "A recipe tool for Emperor Calus' auspicious gift": "Un cadeau de bon augure offert par l'Empereur Calus à la personne qu'il préfère chez les Gardiens : vous.",
-  "#####A temporary error has occurred.": "🌐",
   "Ability kills": "Frags de capacité",
   "Account, theme, tooltips, visibility, language, and saved data": "Compte, thème visuel, info-bulles, visibilité, langue et données sauvegardées",
   "#####Active": "🌐",
@@ -427,7 +426,6 @@
   "The Shattered Throne": "Le Trône Brisé",
   "The Swords": "Les Épées",
   "The Throne": "Le Trône",
-  "#####The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.": "🌐",
   "Theme": "Thème",
   "#####There are multiple sources for stats in Destiny. Clan Historical Stats is based on the less intensive HistoricalStats API endpoint.\n\nThe most accurate source for statistics is PGCRs. To display stats in the manner seen on Clan Historical Stats would require downloading terabytes of data from Bungie servers. This said, it's accurate enough fo some friendly competititon.": "🌐",
   "#####There's no one here right now.": "🌐",
@@ -436,6 +434,7 @@
   "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.": "Cela ne semble pas être votre clan et vous ne pouvez donc rien y faire. Vous pouvez utiliser ces liens utiles pour accéder directement aux vôtres ou vous pouvez trouver plus d’informations concernant votre autorisation actuelle dans la vue Paramètres.",
   "#####This Nightfall doesn't have any associated collectibles.": "🌐",
   "#####This Nightfall doesn't have any associated records.": "🌐",
+  "#####This profile hasn't received an artifact yet.": "🌐",
   "#####This record is classified and may be revealed at a later time.": "🌐",
   "This user has their profile privacy set to private": "Cet utilisateur a un profil privé",
   "This Week": "Cette semaine",

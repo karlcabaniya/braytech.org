@@ -1,6 +1,5 @@
 {
   "A recipe tool for Emperor Calus' auspicious gift": "Uno strumento per le ricette dei doni dell'Imperatore Calus",
-  "#####A temporary error has occurred.": "🌐",
   "Ability kills": "Uccisioni abilità",
   "Account, theme, tooltips, visibility, language, and saved data": "Account, tema, tooltip, visibilità lingua e dati salvati",
   "#####Active": "🌐",
@@ -427,7 +426,6 @@
   "The Shattered Throne": "Il Trono Infranto",
   "The Swords": "Le Spade",
   "The Throne": "Il Trono",
-  "#####The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed.": "🌐",
   "Theme": "Tema",
   "There are multiple sources for stats in Destiny. Clan Historical Stats is based on the less intensive HistoricalStats API endpoint.\n\nThe most accurate source for statistics is PGCRs. To display stats in the manner seen on Clan Historical Stats would require downloading terabytes of data from Bungie servers. This said, it's accurate enough fo some friendly competititon.": "Esistono varie fonti per statistiche in Destiny. Le Statistiche Storiche del Clan sono basate sull'endpoint dell'API meno intesivo HistoricalStats.\n\nLa fonte più precisa per le statistiche sono i Report Post–Partita. Per mostrare le statistiche come le Statistiche Storiche del Clan richiederebbe scaricare terabyte di dati dai server di Bungie. Detto ciò, sono abbastanza precise per una competizione amichevole.",
   "There's no one here right now.": "Non c'è nessuno qui ora.",
@@ -436,6 +434,7 @@
   "This doesn't appear to be your clan and so you may not will any actions upon it. You may use these helpful links to jump to your own or you may find more information regarding your current authorization in the Settings view.": "Questo non sembra essere il tuo clan e quindi non puoi prendere atto su di esso. Potresti usare questi link utili per vedere il tuo clan o trovare più informazioni sull'attuale autorizzazione nella sezione Impostazioni.",
   "#####This Nightfall doesn't have any associated collectibles.": "🌐",
   "#####This Nightfall doesn't have any associated records.": "🌐",
+  "#####This profile hasn't received an artifact yet.": "🌐",
   "This record is classified and may be revealed at a later time.": "Questo trionfo è censurato e sarà rivelato in futuro",
   "This user has their profile privacy set to private": "La privacy di questo utente è stata impostata su privata",
   "This Week": "Questa Settimana",

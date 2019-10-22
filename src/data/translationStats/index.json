@@ -1,86 +1,154 @@
 {
   "de": {
     "translated": 422,
-    "notTranslated": 71,
-    "added": [],
-    "removed": []
+    "notTranslated": 70,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "en": {
-    "translated": 493,
+    "translated": 492,
     "notTranslated": 0,
     "added": [],
-    "removed": []
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 493,
-    "added": [],
-    "removed": []
+    "notTranslated": 492,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "es": {
-    "translated": 493,
-    "notTranslated": 0,
-    "added": [],
-    "removed": []
+    "translated": 491,
+    "notTranslated": 1,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "fr": {
     "translated": 391,
-    "notTranslated": 102,
-    "added": [],
-    "removed": []
+    "notTranslated": 101,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 493,
-    "added": [],
-    "removed": []
+    "notTranslated": 492,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "it": {
     "translated": 458,
-    "notTranslated": 35,
-    "added": [],
-    "removed": []
+    "notTranslated": 34,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "ja": {
     "translated": 243,
-    "notTranslated": 250,
-    "added": [],
-    "removed": []
+    "notTranslated": 249,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "ko": {
     "translated": 331,
-    "notTranslated": 162,
-    "added": [],
-    "removed": []
+    "notTranslated": 161,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 493,
-    "added": [],
-    "removed": []
+    "notTranslated": 492,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "pt-br": {
     "translated": 455,
-    "notTranslated": 38,
-    "added": [],
-    "removed": []
+    "notTranslated": 37,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 493,
-    "added": [],
-    "removed": []
+    "notTranslated": 492,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "zh-chs": {
     "translated": 458,
-    "notTranslated": 35,
-    "added": [],
-    "removed": []
+    "notTranslated": 34,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   },
   "zh-cht": {
     "translated": 0,
-    "notTranslated": 493,
-    "added": [],
-    "removed": []
+    "notTranslated": 492,
+    "added": [
+      "This profile hasn't received an artifact yet."
+    ],
+    "removed": [
+      "A temporary error has occurred.",
+      "The Vendors API endpoint is a troubled one that needs a lot of love and encouragement. If it appears to have failed to load, don't worry, it will try again when your profile is next background refreshed."
+    ]
   }
 }
