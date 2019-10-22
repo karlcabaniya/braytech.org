@@ -737,6 +737,11 @@
   {
     "date": "2019-10-18T03:24:35.027Z",
     "version": "2.9.53",
-    "content": "- minor big fixes\n- Bungie.net auth added to character select\n- Bungie.net auth upsell added to _Now_ view"
+    "content": "- minor bug fixes\n- Bungie.net auth added to character select\n- Bungie.net auth upsell added to _Now_ view"
+  },
+  {
+    "date": "2019-10-22T07:32:26.544Z",
+    "version": "2.10.0",
+    "content": "## Cumulative update for October\n- overhauled net code\n- added active Black Armory Forge to _Now_\n- translation improvements\n- about 200 other minor changes"
   }
 ]
