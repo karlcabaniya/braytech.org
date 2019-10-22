@@ -33,6 +33,7 @@ class ThisWeek extends React.Component {
 
   render() {
     const { member } = this.props;
+    const characterActivities = member.data.profile.characterActivities.data;
 
     const resetTime = '17:00:00Z';
 
@@ -84,6 +85,7 @@ class ThisWeek extends React.Component {
           },
           {
             className: [],
+            condition: characterActivities[member.characterId].availableActivities.filter(a => [3753505781].includes(a.activityHash)).length,
             mods: [
               {
                 className: [],
@@ -196,19 +198,25 @@ class ThisWeek extends React.Component {
                         </div>
                       );
                     })
-                  : grp.cols.map((col, c) => {
-                      return (
-                        <div key={c} className={cx('column', ...col.className)}>
-                          {col.mods.map((mod, m) => {
-                            return (
-                              <div key={m} className={cx('module', ...mod.className)}>
-                                {mod.component}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      );
-                    })}
+                  : grp.cols
+                      .map((col, c) => {
+                        if (col.condition === undefined || col.condition) {
+                          return (
+                            <div key={c} className={cx('column', ...col.className)}>
+                              {col.mods.map((mod, m) => {
+                                return (
+                                  <div key={m} className={cx('module', ...mod.className)}>
+                                    {mod.component}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          );
+                        } else {
+                          return false;
+                        }
+                      })
+                      .map(c => c)}
               </div>
             );
           }

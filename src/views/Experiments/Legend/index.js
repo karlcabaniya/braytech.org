@@ -67,10 +67,10 @@ class Legend extends React.Component {
       console.log(e);
     }
 
-    this.setState(p => {
-      p.loading = false;
-      return p;
-    });
+    this.setState(p => ({
+      ...p,
+      loading: false
+    }));
   }
 
   render() {

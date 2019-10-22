@@ -33,12 +33,14 @@ class Raids extends React.Component {
   fetch = async () => {
     const { member } = this.props;
 
-    this.setState(p => {
-      p.loading = true;
-      return p;
-    });
+    this.setState(p => ({
+      ...p,
+      loading: true
+    }));
 
     let stats = await bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.raids.all.modes, '0');
+
+    stats = (stats && stats.ErrorCode === 1 && stats.Response) || [];
 
     for (const mode in stats) {
       if (stats.hasOwnProperty(mode)) {
@@ -51,10 +53,10 @@ class Raids extends React.Component {
       }
     }
 
-    this.setState(p => {
-      p.loading = false;
-      return p;
-    });
+    this.setState(p => ({
+      ...p,
+      loading: false
+    }));
 
     return true;
   };

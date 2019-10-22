@@ -743,5 +743,10 @@
     "date": "2019-10-22T07:32:26.544Z",
     "version": "2.10.0",
     "content": "## Cumulative update for October\n- overhauled net code\n- added active Black Armory Forge to _Now_\n- translation improvements\n- about 200 other minor changes"
+  },
+  {
+    "date": "2019-10-22T17:29:49.706Z",
+    "version": "2.10.1",
+    "content": "- minor bug fixes"
   }
 ]

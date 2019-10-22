@@ -101,6 +101,13 @@
   background-color: #009ae4;
 }
 
+.bungie-auth .memberships .list li.linked .displayName {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+}
+
 .bungie-auth .memberships .list li.linked .crosssave {
   width: 24px;
   height: 24px;

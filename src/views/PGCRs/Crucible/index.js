@@ -83,16 +83,20 @@ class Crucible extends React.Component {
   fetch = async () => {
     const { member } = this.props;
 
-    this.setState(p => {
-      p.loading = true;
-      return p;
-    });
+    this.setState(p => ({
+      ...p,
+      loading: true
+    }));
 
     let [stats_allPvP, stats_competitive, stats_quickplay] = await Promise.all([
       bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.all.modes, '0'),
       bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.competitive.modes, '0'),
       bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.quickplay.modes, '0')
     ]);
+
+    stats_allPvP = (stats_allPvP && stats_allPvP.ErrorCode === 1 && stats_allPvP.Response) || [];
+    stats_competitive = (stats_competitive && stats_competitive.ErrorCode === 1 && stats_competitive.Response) || [];
+    stats_quickplay = (stats_quickplay && stats_quickplay.ErrorCode === 1 && stats_quickplay.Response) || [];
 
     for (const mode in stats_allPvP) {
       if (stats_allPvP.hasOwnProperty(mode)) {
@@ -127,10 +131,10 @@ class Crucible extends React.Component {
       }
     }
 
-    this.setState(p => {
-      p.loading = false;
-      return p;
-    });
+    this.setState(p => ({
+      ...p,
+      loading: false
+    }));
 
     return true;
   };
