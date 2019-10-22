@@ -6,6 +6,7 @@ import i18n from './i18n';
 
 import data from '../data/lowlines/checklists';
 import manifest from './manifest';
+import { enumerateRecordState } from './destinyEnums';
 
 export const checklists = {
   // adventures
@@ -643,15 +644,19 @@ function checklistItems(checklistId, isCharacterBound) {
 function presentationItems(presentationHash, dropFirst = true) {
   const state = store.getState();
 
-  const profile = state.member.data && state.member.data.profile;
+  const member = state.member;
+  const profileRecords = member && member.data.profile.profileRecords.data.records;
+  const characterRecords = member && member.data.profile.characterRecords.data;
 
   return data[presentationHash]
     .map(entry => {
-      const profileRecord = profile && profile.profileRecords.data.records[entry.recordHash];
+      const definitionRecord = manifest.DestinyRecordDefinition[entry.recordHash];
+      const recordScope = definitionRecord.scope || 0;
+      const recordData = recordScope === 1 ? characterRecords && characterRecords[member.characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
 
-      // if (!profileRecord) return false;
+      const enumerableState = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
 
-      const completed = profileRecord && profileRecord.objectives[0].complete;
+      const completed = enumerableState && !enumerateRecordState(enumerableState).objectiveNotCompleted;
 
       return {
         ...entry,
