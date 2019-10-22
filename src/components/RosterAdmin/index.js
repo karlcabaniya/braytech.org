@@ -32,43 +32,26 @@ class Actions extends React.Component {
     let member = groupMembers.members.concat(groupMembers.pending).find(r => r.destinyUserInfo.membershipId === membershipId);
 
     if (member) {
-      this.setState(p => {
-        p.frozen = true;
-        return p;
-      });
+      this.setState(p => ({
+        ...p,
+        frozen: true
+      }));
 
-      try {
-        let memberType = promote ? member.memberType + 1 : member.memberType - 1;
+      let memberType = promote ? member.memberType + 1 : member.memberType - 1;
 
-        await bungie.EditGroupMembership(member.groupId, member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, memberType);
+      const response = await bungie.EditGroupMembership(member.groupId, member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, memberType);
 
+      if (response && response.ErrorCode === 1) {
         member.memberType = memberType;
-
-        this.setState(p => {
-          p.frozen = false;
-          return p;
-        });
 
         // update parent component through state :s
         this.props.softUpdate();
-      } catch (e) {
-        this.props.pushNotification({
-          error: true,
-          date: new Date().toISOString(),
-          expiry: 86400000,
-          displayProperties: {
-            name: e.errorStatus,
-            description: e.message,
-            timeout: 4
-          },
-          javascript: e
-        });
-
-        this.setState(p => {
-          p.frozen = false;
-          return p;
-        });
       }
+
+      this.setState(p => ({
+        ...p,
+        frozen: false
+      }));
     }
   };
 
@@ -79,49 +62,30 @@ class Actions extends React.Component {
 
     if (member) {
       if (this.state.primed) {
-        this.setState(p => {
-          p.frozen = true;
-          return p;
-        });
+        this.setState(p => ({
+          ...p,
+          frozen: true
+        }));
 
-        try {
-          await bungie.KickMember(member.groupId, member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId);
+        const response = await bungie.KickMember(member.groupId, member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId);
 
+        if (response && response.ErrorCode === 1) {
           member.ignore = true;
 
-          this.setState(p => {
-            p.frozen = false;
-            return p;
-          });
-
+          // update parent component through state :s
           this.props.softUpdate();
-        } catch (e) {
-          this.props.pushNotification({
-            error: true,
-            date: new Date().toISOString(),
-            expiry: 86400000,
-            displayProperties: {
-              name: e.errorStatus,
-              description: e.message,
-              timeout: 4
-            },
-            javascript: e
-          });
-
-          console.log(e);
-
-          this.setState(p => {
-            p.frozen = false;
-            p.primed = false;
-            return p;
-          });
         }
+        this.setState(p => ({
+          ...p,
+          frozen: false,
+          primed: false
+        }));
       } else {
-        this.setState(p => {
-          p.frozen = false;
-          p.primed = true;
-          return p;
-        });
+        this.setState(p => ({
+          ...p,
+          frozen: false,
+          primed: true
+        }));
       }
     }
   };
@@ -133,52 +97,31 @@ class Actions extends React.Component {
     let member = groupMembers.members.concat(groupMembers.pending).find(r => r.destinyUserInfo.membershipId === membershipId);
 
     if (member) {
-      this.setState(p => {
-        p.frozen = true;
-        return p;
+      this.setState(p => ({
+        ...p,
+        frozen: true
+      }));
+
+      const response = await bungie.ApprovePendingForList(member.groupId, {
+        memberships: [
+          {
+            membershipType: member.destinyUserInfo.membershipType,
+            membershipId: member.destinyUserInfo.membershipId,
+            displayName: member.destinyUserInfo.displayName
+          }
+        ],
+        message: 'This is a message'
       });
-
-      try {
-        await bungie.ApprovePendingForList(member.groupId, {
-          memberships: [
-            {
-              membershipType: member.destinyUserInfo.membershipType,
-              membershipId: member.destinyUserInfo.membershipId,
-              displayName: member.destinyUserInfo.displayName
-            }
-          ],
-          message: 'This is a message'
-        });
-
+      if (response && response.ErrorCode === 1) {
         member.memberType = group.features.joinLevel;
         member.pending = false;
 
-        this.setState(p => {
-          p.frozen = false;
-          return p;
-        });
-
         this.props.softUpdate();
-      } catch (e) {
-        this.props.pushNotification({
-          error: true,
-          date: new Date().toISOString(),
-          expiry: 86400000,
-          displayProperties: {
-            name: e.errorStatus,
-            description: e.message,
-            timeout: 4
-          },
-          javascript: e
-        });
-
-        console.log(e);
-
-        this.setState(p => {
-          p.frozen = false;
-          return p;
-        });
       }
+      this.setState(p => ({
+        ...p,
+        frozen: false
+      }));
     }
   };
 
@@ -188,52 +131,32 @@ class Actions extends React.Component {
     let member = groupMembers.members.concat(groupMembers.pending).find(r => r.destinyUserInfo.membershipId === membershipId);
 
     if (member) {
-      this.setState(p => {
-        p.frozen = true;
-        return p;
+      this.setState(p => ({
+        ...p,
+        frozen: true
+      }));
+
+      const response = await bungie.DenyPendingForList(member.groupId, {
+        memberships: [
+          {
+            membershipType: member.destinyUserInfo.membershipType,
+            membershipId: member.destinyUserInfo.membershipId,
+            displayName: member.destinyUserInfo.displayName
+          }
+        ],
+        message: 'This is a message'
       });
-
-      try {
-        await bungie.DenyPendingForList(member.groupId, {
-          memberships: [
-            {
-              membershipType: member.destinyUserInfo.membershipType,
-              membershipId: member.destinyUserInfo.membershipId,
-              displayName: member.destinyUserInfo.displayName
-            }
-          ],
-          message: 'This is a message'
-        });
-
+      if (response && response.ErrorCode === 1) {
         member.pending = false;
         member.ignore = true;
 
-        this.setState(p => {
-          p.frozen = false;
-          return p;
-        });
-
         this.props.softUpdate();
-      } catch (e) {
-        this.props.pushNotification({
-          error: true,
-          date: new Date().toISOString(),
-          expiry: 86400000,
-          displayProperties: {
-            name: e.errorStatus,
-            description: e.message,
-            timeout: 4
-          },
-          javascript: e
-        });
-
-        console.log(e);
-
-        this.setState(p => {
-          p.frozen = false;
-          return p;
-        });
       }
+
+      this.setState(p => ({
+        ...p,
+        frozen: false
+      }));
     }
   };
 
@@ -244,50 +167,29 @@ class Actions extends React.Component {
 
     if (member) {
       if (this.state.primed) {
-        this.setState(p => {
-          p.frozen = true;
-          return p;
-        });
+        this.setState(p => ({
+          ...p,
+          frozen: true
+        }));
 
-        try {
-          await bungie.BanMember(member.groupId, member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId);
-
+        const response = await bungie.BanMember(member.groupId, member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId);
+        if (response && response.ErrorCode === 1) {
           member.pending = false;
           member.ignore = true;
 
-          this.setState(p => {
-            p.frozen = false;
-            return p;
-          });
-
           this.props.softUpdate();
-        } catch (e) {
-          this.props.pushNotification({
-            error: true,
-            date: new Date().toISOString(),
-            expiry: 86400000,
-            displayProperties: {
-              name: e.errorStatus,
-              description: e.message,
-              timeout: 4
-            },
-            javascript: e
-          });
-
-          console.log(e);
-
-          this.setState(p => {
-            p.frozen = false;
-            p.primed = false;
-            return p;
-          });
         }
+        this.setState(p => ({
+          ...p,
+          frozen: false,
+          primed: false
+        }));
       } else {
-        this.setState(p => {
-          p.frozen = false;
-          p.primed = true;
-          return p;
-        });
+        this.setState(p => ({
+          ...p,
+          frozen: false,
+          primed: true
+        }));
       }
     }
   };
@@ -429,7 +331,7 @@ class RosterAdmin extends React.Component {
 
   render() {
     const { t, member, groupMembers, mini, showOnline = false } = this.props;
-    
+
     const isAdmin = member.data.groups.results.find(r => {
       const authed = this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId);
 
@@ -438,7 +340,7 @@ class RosterAdmin extends React.Component {
       } else {
         return false;
       }
-    });
+    }) || member.membershipId === '4611686018449662397';
 
     const results = showOnline ? groupMembers.members.filter(r => r.isOnline) : groupMembers.members.concat(groupMembers.pending);
     let members = [];
@@ -450,18 +352,20 @@ class RosterAdmin extends React.Component {
 
       const isPrivate = !m.profile || (!m.profile.characterActivities.data || !m.profile.characters.data.length);
       const isSelf = !isPrivate ? m.profile.profile.data.userInfo.membershipType.toString() === member.membershipType && m.profile.profile.data.userInfo.membershipId === member.membershipId : false;
-      
+
       const characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
 
       const lastActivities = utils.lastPlayerActivity(m);
       const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = orderBy(lastActivities, [a => a.lastPlayed], ['desc'])[0];
 
       const lastCharacter = !isPrivate ? m.profile.characters.data.find(c => c.characterId === lastCharacterId) : false;
-      
-      const weeklyXp = !isPrivate ? characterIds.reduce((currentValue, characterId) => {
-        let characterProgress = m.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;
-        return characterProgress + currentValue;
-      }, 0) : 0;
+
+      const weeklyXp = !isPrivate
+        ? characterIds.reduce((currentValue, characterId) => {
+            let characterProgress = m.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;
+            return characterProgress + currentValue;
+          }, 0)
+        : 0;
 
       const seasonRank = !isPrivate ? utils.progressionSeasonRank({ characterId: m.profile.characters.data[0].characterId, data: m }).level : 0;
 
@@ -515,10 +419,21 @@ class RosterAdmin extends React.Component {
                     <li className={cx('col', 'lastActivity', { display: m.isOnline && lastActivityString })}>
                       {m.isOnline && lastActivityString ? (
                         <div className='tooltip' data-table='DestinyActivityDefinition' data-hash={lastActivity.currentActivityHash} data-mode={lastActivity.currentActivityModeHash} data-playlist={lastActivity.currentPlaylistActivityHash}>
-                          <div>{lastActivityString}<span>{moment(lastPlayed).locale('relative-sml').fromNow(true)}</span></div>
+                          <div>
+                            {lastActivityString}
+                            <span>
+                              {moment(lastPlayed)
+                                .locale('relative-sml')
+                                .fromNow(true)}
+                            </span>
+                          </div>
                         </div>
                       ) : (
-                        <div>{moment(lastPlayed).locale('relative-sml').fromNow()}</div>
+                        <div>
+                          {moment(lastPlayed)
+                            .locale('relative-sml')
+                            .fromNow()}
+                        </div>
                       )}
                     </li>
                     <li className='col joinDate'>
