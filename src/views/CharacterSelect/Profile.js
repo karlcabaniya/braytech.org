@@ -1,7 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 
-import * as destinyUtils from '../../utils/destinyUtils';
+import * as utils from '../../utils/destinyUtils';
 import Characters from '../../components/UI/Characters';
 import Flair from '../../components/UI/Flair';
 
@@ -25,7 +25,7 @@ class Profile extends React.Component {
           <Flair type={member.membershipType} id={member.membershipId} />
           <div className='basics'>
             <div>
-              <div className='value'>{member.data.profile.characterProgressions.data[member.characterId].progressions[1628407317].level}</div>
+              <div className='value'>{utils.progressionSeasonRank(member).level}</div>
               <div className='name'>{t('Season rank')}</div>
             </div>
             <div>
@@ -39,7 +39,7 @@ class Profile extends React.Component {
               <div className='name'>{t('Triumph score')}</div>
             </div>
             <div>
-              <div className='value'>{destinyUtils.collectionTotal(member.data.profile).toLocaleString('en-us')}</div>
+              <div className='value'>{utils.collectionTotal(member.data.profile).toLocaleString('en-us')}</div>
               <div className='name'>{t('Collection total')}</div>
             </div>
           </div>

@@ -7,7 +7,7 @@ import Moment from 'react-moment';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
-import * as destinyUtils from '../../../utils/destinyUtils';
+import * as utils from '../../../utils/destinyUtils';
 import { removeMemberIds } from '../../../utils/paths';
 import ProgressBar from '../../UI/ProgressBar';
 import Button from '../../../components/UI/Button';
@@ -18,10 +18,9 @@ class Characters extends React.Component {
   render() {
     const { member, viewport, location } = this.props;
     const characters = member.data.profile.characters;
-    const characterProgressions = member.data.profile.characterProgressions.data;
     const characterActivities = member.data.profile.characterActivities;
 
-    const lastActivities = destinyUtils.lastPlayerActivity({ profile: { characters, characterActivities } });
+    const lastActivities = utils.lastPlayerActivity({ profile: { characters, characterActivities } });
 
     const publicPaths = ['/maps'];
     const goto = removeMemberIds((location.state && location.state.from && location.state.from.pathname) || '/now');
@@ -30,7 +29,7 @@ class Characters extends React.Component {
       <div className={cx('characters-list', { responsive: viewport.width < 1024 })}>
         {characters.data.map(character => {
 
-          const progressSeasonalRank = characterProgressions[member.characterId].progressions[1628407317];
+          const progressSeasonalRank = utils.progressionSeasonRank(member);
 
           const lastActivity = lastActivities.find(a => a.characterId === character.characterId);
 
@@ -59,8 +58,8 @@ class Characters extends React.Component {
                   })}
                   src={`https://www.bungie.net${character.emblemBackgroundPath ? character.emblemBackgroundPath : `/img/misc/missing_icon_d2.png`}`}
                 />
-                <div className='class'>{destinyUtils.classHashToString(character.classHash, character.genderType)}</div>
-                <div className='species'>{destinyUtils.raceHashToString(character.raceHash, character.genderType)}</div>
+                <div className='class'>{utils.classHashToString(character.classHash, character.genderType)}</div>
+                <div className='species'>{utils.raceHashToString(character.raceHash, character.genderType)}</div>
                 <div className='light'>{character.light}</div>
                 <ProgressBar hideCheck {...progressSeasonalRank} />
               </Button>

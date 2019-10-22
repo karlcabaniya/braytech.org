@@ -66,6 +66,23 @@ export function collectionTotal(data) {
   return collectionTotal;
 }
 
+export function progressionSeasonRank(member) {
+  if (!member) {
+    console.warn('No member data provided');
+    
+    return false;
+  }
+
+  let progression = {...member.data.profile.characterProgressions.data[member.characterId].progressions[1628407317]};
+
+  if (progression.level === progression.levelCap) {
+    progression = { ...member.data.profile.characterProgressions.data[member.characterId].progressions[3184735011] };
+    progression.level += 100;
+  }
+  
+  return progression;
+}
+
 /**
  * Convert a gender type to english string
  * @param type Destiny gender type

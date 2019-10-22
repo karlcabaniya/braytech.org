@@ -6,7 +6,7 @@ import cx from 'classnames';
 import moment from 'moment';
 import { orderBy } from 'lodash';
 
-import * as destinyUtils from '../../utils/destinyUtils';
+import * as utils from '../../utils/destinyUtils';
 import * as bungie from '../../utils/bungie';
 import * as ls from '../../utils/localStorage';
 import { ProfileLink } from '../ProfileLink';
@@ -453,7 +453,7 @@ class RosterAdmin extends React.Component {
       
       const characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
 
-      const lastActivities = destinyUtils.lastPlayerActivity(m);
+      const lastActivities = utils.lastPlayerActivity(m);
       const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = orderBy(lastActivities, [a => a.lastPlayed], ['desc'])[0];
 
       const lastCharacter = !isPrivate ? m.profile.characters.data.find(c => c.characterId === lastCharacterId) : false;
@@ -462,6 +462,8 @@ class RosterAdmin extends React.Component {
         let characterProgress = m.profile.characterProgressions.data[characterId].progressions[540048094].weeklyProgress || 0;
         return characterProgress + currentValue;
       }, 0) : 0;
+
+      const seasonRank = !isPrivate ? utils.progressionSeasonRank({ characterId: m.profile.characters.data[0].characterId, data: m }).level : 0;
 
       // if (m.isOnline) {
       //   console.log(lastPlayed);
@@ -495,14 +497,14 @@ class RosterAdmin extends React.Component {
                     <li className='col lastCharacter'>
                       <div className='icon'>
                         <i
-                          className={`destiny-class_${destinyUtils
+                          className={`destiny-class_${utils
                             .classTypeToString(lastCharacter.classType)
                             .toString()
                             .toLowerCase()}`}
                         />
                       </div>
                       <div className='icon'>
-                        <div>{lastCharacter.baseCharacterLevel}</div>
+                        <div>{seasonRank}</div>
                       </div>
                       <div className='icon'>
                         <div className={cx({ 'max-ish': lastCharacter.light >= 930, max: lastCharacter.light >= 960 })}>
@@ -529,7 +531,7 @@ class RosterAdmin extends React.Component {
                     <li className='col weeklyXp'>
                       <span>{weeklyXp.toLocaleString('en-us')}</span> / {(characterIds.length * 5000).toLocaleString('en-us')}
                     </li>
-                    <li className='col rank'>{m.memberType && destinyUtils.groupMemberTypeToString(m.memberType)}</li>
+                    <li className='col rank'>{m.memberType && utils.groupMemberTypeToString(m.memberType)}</li>
                     <li className='col actions'>
                       <Actions m={m} softUpdate={this.softUpdate} available={isAdmin} />
                     </li>
@@ -540,7 +542,7 @@ class RosterAdmin extends React.Component {
                     <li className='col lastActivity'>–</li>
                     <li className='col joinDate'>–</li>
                     <li className='col weeklyXp'>–</li>
-                    <li className='col rank'>{m.memberType && destinyUtils.groupMemberTypeToString(m.memberType)}</li>
+                    <li className='col rank'>{m.memberType && utils.groupMemberTypeToString(m.memberType)}</li>
                     <li className='col actions'>
                       <Actions m={m} softUpdate={this.softUpdate} available={isAdmin} />
                     </li>

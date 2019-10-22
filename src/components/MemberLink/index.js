@@ -8,7 +8,7 @@ import * as entities from 'entities';
 import manifest from '../../utils/manifest';
 import * as bungie from '../../utils/bungie';
 import * as responseUtils from '../../utils/responseUtils';
-import * as destinyUtils from '../../utils/destinyUtils';
+import * as utils from '../../utils/destinyUtils';
 import userFlair from '../../data/userFlair';
 import store from '../../utils/reduxStore';
 import ObservedImage from '../ObservedImage';
@@ -184,7 +184,7 @@ class MemberLink extends React.Component {
       });
 
       const lastCharacterPlayed = lastCharacterPlayedArr.length ? lastCharacterPlayedArr[0][0] : lastCharacterPlayedArr;
-      const lastActivities = destinyUtils.lastPlayerActivity({ profile: { characters: this.state.all.data.characters, characterActivities: this.state.all.data.characterActivities } });
+      const lastActivities = utils.lastPlayerActivity({ profile: { characters: this.state.all.data.characters, characterActivities: this.state.all.data.characterActivities } });
 
       return (
         <>
@@ -199,7 +199,7 @@ class MemberLink extends React.Component {
                 showClassIcon ? (
                   <div className='icon'>
                     <i
-                      className={`destiny-class_${destinyUtils
+                      className={`destiny-class_${utils
                         .classTypeToString(characterBasic.classType)
                         .toString()
                         .toLowerCase()}`}
@@ -229,8 +229,8 @@ class MemberLink extends React.Component {
                       </div>
                       <div className='basics'>
                         <div>
-                          <div className='value'>{this.state.all.data.characterProgressions.data[this.state.all.data.profile.data.characterIds[0]].progressions[1628407317].level}</div>
                           <div className='name'>{t('Season rank')}</div>
+                          <div className='value'>{utils.progressionSeasonRank({ characterId: lastCharacterPlayed, data: { profile: this.state.all.data } }).level}</div>
                         </div>
                         <div>
                           <div className='name'>{t('Time played across characters')}</div>
@@ -244,7 +244,7 @@ class MemberLink extends React.Component {
                         </div>
                         <div>
                           <div className='name'>{t('Collection total')}</div>
-                          <div className='value'>{destinyUtils.collectionTotal(this.state.all.data).toLocaleString('en-us')}</div>
+                          <div className='value'>{utils.collectionTotal(this.state.all.data).toLocaleString('en-us')}</div>
                         </div>
                       </div>
                     </div>
@@ -275,7 +275,7 @@ class MemberLink extends React.Component {
                               >
                                 <div className='icon'>
                                   <i
-                                    className={`destiny-class_${destinyUtils
+                                    className={`destiny-class_${utils
                                       .classTypeToString(c.classType)
                                       .toString()
                                       .toLowerCase()}`}
@@ -283,7 +283,7 @@ class MemberLink extends React.Component {
                                 </div>
                                 <div className='text'>
                                   <div>
-                                    {destinyUtils.raceHashToString(c.raceHash, c.genderType, true)} {destinyUtils.classHashToString(c.classHash, c.genderType)}
+                                    {utils.raceHashToString(c.raceHash, c.genderType, true)} {utils.classHashToString(c.classHash, c.genderType)}
                                   </div>
                                   <div>
                                     <span>{c.baseCharacterLevel}</span>
@@ -359,7 +359,7 @@ class MemberLink extends React.Component {
                 showClassIcon ? (
                   <div className='icon'>
                     <i
-                      className={`destiny-class_${destinyUtils
+                      className={`destiny-class_${utils
                         .classTypeToString(characterBasic.classType)
                         .toString()
                         .toLowerCase()}`}
@@ -427,7 +427,7 @@ class MemberLink extends React.Component {
                 showClassIcon ? (
                   <div className='icon'>
                     <i
-                      className={`destiny-class_${destinyUtils
+                      className={`destiny-class_${utils
                         .classTypeToString(characterBasic.classType)
                         .toString()
                         .toLowerCase()}`}
@@ -456,7 +456,7 @@ class MemberLink extends React.Component {
                 showClassIcon ? (
                   <div className='icon'>
                     <i
-                      className={`destiny-class_${destinyUtils
+                      className={`destiny-class_${utils
                         .classTypeToString(characterBasic.classType)
                         .toString()
                         .toLowerCase()}`}

@@ -7,7 +7,7 @@ import cx from 'classnames';
 import moment from 'moment';
 
 import * as ls from '../../utils/localStorage';
-import * as destinyUtils from '../../utils/destinyUtils';
+import * as utils from '../../utils/destinyUtils';
 import { ProfileLink } from '../../components/ProfileLink';
 import getGroupMembers from '../../utils/getGroupMembers';
 import MemberLink from '../MemberLink';
@@ -100,7 +100,7 @@ class Roster extends React.Component {
 
       const characterIds = !isPrivate ? m.profile.characters.data.map(c => c.characterId) : [];
 
-      const lastActivities = destinyUtils.lastPlayerActivity(m);
+      const lastActivities = utils.lastPlayerActivity(m);
       const { characterId: lastCharacterId, lastPlayed, lastActivity, lastActivityString, lastMode } = orderBy(lastActivities, [a => a.lastPlayed], ['desc'])[0];
 
       const lastCharacter = !isPrivate ? m.profile.characters.data.find(c => c.characterId === lastCharacterId) : false;
@@ -112,7 +112,7 @@ class Roster extends React.Component {
           }, 0)
         : 0;
       
-      const seasonRank = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[1628407317].level : 0;
+      const seasonRank = !isPrivate ? utils.progressionSeasonRank({ characterId: m.profile.characters.data[0].characterId, data: m }).level : 0;
 
       const triumphScore = !isPrivate ? m.profile.profileRecords.data.score : 0;
 
@@ -122,8 +122,8 @@ class Roster extends React.Component {
       let infamyPoints = !isPrivate ? m.profile.characterProgressions.data[m.profile.characters.data[0].characterId].progressions[2772425241].currentProgress : 0;
       let infamyResets = !isPrivate ? this.calculateResets(2772425241, m.profile.characters.data[0].characterId, m.profile.characterProgressions.data).total : 0;
 
-      const totalValor = destinyUtils.totalValor();
-      const totalInfamy = destinyUtils.totalInfamy();
+      const totalValor = utils.totalValor();
+      const totalInfamy = utils.totalInfamy();
 
       valorPoints = valorResets * totalValor + valorPoints;
       infamyPoints = infamyResets * totalInfamy + infamyPoints;
@@ -165,7 +165,7 @@ class Roster extends React.Component {
                     <li className='col lastCharacter'>
                       <div className='icon'>
                         <i
-                          className={`destiny-class_${destinyUtils
+                          className={`destiny-class_${utils
                             .classTypeToString(lastCharacter.classType)
                             .toString()
                             .toLowerCase()}`}

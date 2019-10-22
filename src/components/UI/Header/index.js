@@ -251,10 +251,9 @@ class Header extends React.Component {
     if (isProfileRoute && member.data) {
       const profile = member.data.profile.profile.data;
       const characters = member.data.profile.characters.data;
-      const characterProgressions = member.data.profile.characterProgressions.data;
       const character = characters.find(character => character.characterId === member.characterId);
 
-      const progressSeasonalRank = characterProgressions[member.characterId].progressions[1628407317];
+      const progressSeasonalRank = utils.progressionSeasonRank(member);
 
       profileEl = (
         <div className='profile'>

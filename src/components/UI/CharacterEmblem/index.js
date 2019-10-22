@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
+import * as utils from '../../../utils/destinyUtils';
 import ObservedImage from '../../ObservedImage';
 import ProgressBar from '../../UI/ProgressBar';
 
@@ -16,13 +17,13 @@ class CharacterEmblem extends React.Component {
 
     if (member.data && !onboarding && !characterSelect) {
       const { groups } = member.data;
-      const { profile, characters, characterProgressions } = member.data.profile;
+      const { profile, characters } = member.data.profile;
 
       const characterId = this.props.characterId || member.characterId;
 
       const character = characters.data.find(c => c.characterId === characterId);
 
-      const progressSeasonalRank = characterProgressions.data[member.characterId].progressions[1628407317];
+      const progressSeasonalRank = utils.progressionSeasonRank(member);
 
       return (
         <div className={cx('character-emblem', { responsive })}>
