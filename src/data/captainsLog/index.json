@@ -748,5 +748,10 @@
     "date": "2019-10-22T17:29:49.706Z",
     "version": "2.10.1",
     "content": "- minor bug fixes"
+  },
+  {
+    "date": "2019-10-22T18:20:21.921Z",
+    "version": "2.10.2",
+    "content": "- added Leviathan's Breath to associated pursuit's rewards"
   }
 ]
