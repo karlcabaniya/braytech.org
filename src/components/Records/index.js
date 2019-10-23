@@ -305,7 +305,7 @@ class Records extends React.Component {
         );
       }
 
-      // console.log(recordState);
+      // if (definitionRecord.hash === 810213052) console.log(recordState);
 
       const enumerableState = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
 

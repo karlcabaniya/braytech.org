@@ -7,6 +7,12 @@
   display: grid;
   align-content: center;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: background-color 0.25s;
+}
+
+#postmaster-capacity:hover {
+  background-color: rgba(17, 17, 17, 0.4);
 }
 
 #postmaster-capacity .background .border-top {
@@ -32,7 +38,7 @@
 }
 
 html.backdropfilter #postmaster-capacity .background .acrylic {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(7px) brightness(1.2) saturate(1.2);
 }
 
