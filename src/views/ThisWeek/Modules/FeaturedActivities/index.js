@@ -7,22 +7,25 @@ import manifest from '../../../../utils/manifest';
 
 import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
 import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
+import { ReactComponent as IconFestivalOfTheLost } from './icons/festival-of-the-lost.svg';
 
 import './styles.css';
 
 const featuredActivityHashes = [
   3753505781, // Iron Banner
+  100000, // Festival of the losr haunted forest
 ];
 
 const featuredModeIcons = {
-  3753505781: <CrucibleIconIronBanner />
+  3753505781: <CrucibleIconIronBanner />,
+  100000: <IconFestivalOfTheLost />
 };
 
 class FeaturedActivities extends React.Component {
   render() {
     const { t, member } = this.props;
     const characterActivities = member.data.profile.characterActivities.data;
-    
+
     const featuredActivities = characterActivities[member.characterId].availableActivities.filter(a => {
       if (!a.activityHash) return false;
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
@@ -47,12 +50,17 @@ class FeaturedActivities extends React.Component {
           </p>
         </div>
         <h4>{t('Playlists')}</h4>
-        <div className='crucible-modes'>
+        <div className='activity-mode-icons featured'>
           {featuredActivities.map((f, i) => {
             return (
               <div key={i}>
                 <div className='icon'>{f.icon}</div>
-                <div className='text'>{f.displayProperties.name}</div>
+                <div className='text'>
+                  <div className='name'>{f.displayProperties.name}</div>
+                  <div className='description'>
+                    <p>{f.displayProperties.description}</p>
+                  </div>
+                </div>
               </div>
             );
           })}
