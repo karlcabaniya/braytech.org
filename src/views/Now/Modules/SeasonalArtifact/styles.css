@@ -23,15 +23,15 @@
 
 .seasonal-artifact .artifact {
   display: grid;
-  grid-template-columns: 56px auto;
+  grid-template-columns: 64px auto;
   grid-gap: 1rem;
   margin: 0 0 2rem;
 }
 
 .seasonal-artifact .artifact .icon {
   position: relative;
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
 }
 
 .seasonal-artifact .artifact .icon .image {
@@ -45,17 +45,17 @@
 
 .seasonal-artifact .artifact .text .name {
   font-family: 'nhg text';
-  font-size: 34px;
+  font-size: 38px;
   text-transform: uppercase;
   font-weight: 500;
   line-height: 1;
   color: rgb(238, 238, 238);
-  margin: -3px 0 7px 0px;
+  margin: -3px 0 10px 0px;
 }
 
 .seasonal-artifact .artifact .text .type {
   font-family: 'nhg text';
-  font-size: 20px;
+  font-size: 21px;
   text-transform: uppercase;
   line-height: 18px;
   color: rgba(255, 255, 255, 0.7);
@@ -212,12 +212,12 @@
   }
 
   .seasonal-artifact .artifact .text .name {
-    font-size: 23px;
-    margin: -1px 0 8px 0;
+    font-size: 26px;
+    margin: -1px 0 6px 0;
   }
   
   .seasonal-artifact .artifact .text .type {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 16px;
   }
   

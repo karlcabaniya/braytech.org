@@ -153,7 +153,7 @@ class Root extends React.Component {
           <div className='sub-header'>
             <div>{t('Total score')}</div>
           </div>
-          <div className='total-score'>{this.props.member.data.profile.profileRecords.data.score}</div>
+          <div className='total-score'>{this.props.member.data.profile.profileRecords.data.score.toLocaleString('en-us')}</div>
           {unredeemedTriumphCount > 0 ? (
             <ul className='list record-items notification-unredeemed'>
               <li className='linked unredeemed'>
