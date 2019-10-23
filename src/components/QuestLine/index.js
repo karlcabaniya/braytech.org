@@ -165,11 +165,10 @@ class QuestLine extends React.Component {
                           let definitionObjective = manifest.DestinyObjectiveDefinition[element];
 
                           let progress = {
-                            ...{
-                              complete: false,
-                              progress: 0,
-                              objectiveHash: definitionObjective.hash
-                            },
+                            complete: false,
+                            progress: 0,
+                            completionValue: definitionObjective.completionValue,
+                            objectiveHash: definitionObjective.hash,
                             ...s.progress.find(o => o.objectiveHash === definitionObjective.hash)
                           };
 
@@ -240,11 +239,10 @@ class QuestLine extends React.Component {
                           let definitionObjective = manifest.DestinyObjectiveDefinition[element];
 
                           let progress = {
-                            ...{
-                              complete: false,
-                              progress: 0,
-                              objectiveHash: definitionObjective.hash
-                            },
+                            complete: false,
+                            progress: 0,
+                            completionValue: definitionObjective.completionValue,
+                            objectiveHash: definitionObjective.hash,
                             ...s.progress.find(o => o.objectiveHash === definitionObjective.hash)
                           };
 
@@ -252,7 +250,7 @@ class QuestLine extends React.Component {
 
                           objectives.push(
                             <React.Fragment key={definitionObjective.hash}>
-                              <ProgressBar objectiveHash={definitionObjective.hash} {...progress} />
+                              <ProgressBar {...progress} />
                               {relatedRecords && relatedRecords.length ? (
                                 <ul className='list record-items'>
                                   <Records selfLinkFrom={`/inventory/pursuits/${item.itemHash}`} forceDisplay hashes={relatedRecords} />

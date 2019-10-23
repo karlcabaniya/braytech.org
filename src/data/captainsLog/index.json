@@ -753,5 +753,10 @@
     "date": "2019-10-22T18:20:21.921Z",
     "version": "2.10.2",
     "content": "- added Leviathan's Breath to associated pursuit's rewards"
+  },
+  {
+    "date": "2019-10-23T08:47:31.104Z",
+    "version": "2.10.3",
+    "content": "- fixed bug preventing future quest line steps from display objective values"
   }
 ]
