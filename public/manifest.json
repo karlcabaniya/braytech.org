@@ -3,6 +3,15 @@
   "name": "Braytech",
   "icons": [
     {
+      "src": "/static/images/favicon.ico",
+      "sizes": "16x16 32x32 64x64 96x96"
+    },
+    {
+      "src": "/static/images/icon-16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
       "src": "/static/images/icon-32.png",
       "type": "image/png",
       "sizes": "32x32"
