@@ -763,5 +763,10 @@
     "date": "2019-10-23T12:31:02.923Z",
     "version": "2.10.4",
     "content": "- minor style changes\n- translation updates"
+  },
+  {
+    "date": "2019-10-24T02:09:43.899Z",
+    "version": "2.10.7",
+    "content": "- translation updates"
   }
 ]
