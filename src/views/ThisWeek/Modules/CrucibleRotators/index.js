@@ -14,6 +14,7 @@ import { ReactComponent as CrucibleIconTeamScorched } from './icons/team-scorche
 import { ReactComponent as CrucibleIconCountdown } from './icons/countdown.svg';
 import { ReactComponent as CrucibleIconSupremacy } from './icons/supremacy.svg';
 import { ReactComponent as CrucibleIconLockdown } from './icons/lockdown.svg';
+import { ReactComponent as CrucibleIconMomentumControl } from './icons/momentum-control.svg';
 import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
 
 import './styles.css';
@@ -40,7 +41,7 @@ const crucibleModeIcons = {
   3780095688: <CrucibleIconSupremacy />,
   1219083526: <CrucibleIconTeamScorched />,
   4209226441: <CrucibleIconDefault />,
-  952904835: <CrucibleIconDefault />,
+  952904835: <CrucibleIconMomentumControl />,
   1102379070: <CrucibleIconMayhem />,
   3011324617: <CrucibleIconBreakthrough />,
   3646079260: <CrucibleIconCountdown />,

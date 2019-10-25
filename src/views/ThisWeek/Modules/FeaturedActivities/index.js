@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
 
 import manifest from '../../../../utils/manifest';
 
@@ -9,16 +10,20 @@ import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
 import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
 import { ReactComponent as IconFestivalOfTheLost } from './icons/festival-of-the-lost.svg';
 
+import { ReactComponent as CrucibleIconMomentumControl } from '../CrucibleRotators/icons/momentum-control.svg';
+
 import './styles.css';
 
 const featuredActivityHashes = [
   3753505781, // Iron Banner
-  100000, // Festival of the losr haunted forest
+  1454880421, // Festival of the Lost: Haunted Forest
+  952904835 // Momentum Control
 ];
 
 const featuredModeIcons = {
   3753505781: <CrucibleIconIronBanner />,
-  100000: <IconFestivalOfTheLost />
+  1454880421: <IconFestivalOfTheLost />,
+  952904835: <CrucibleIconMomentumControl />,
 };
 
 class FeaturedActivities extends React.Component {
@@ -57,9 +62,7 @@ class FeaturedActivities extends React.Component {
                 <div className='icon'>{f.icon}</div>
                 <div className='text'>
                   <div className='name'>{f.displayProperties.name}</div>
-                  <div className='description'>
-                    <p>{f.displayProperties.description}</p>
-                  </div>
+                  <ReactMarkdown className='description' source={f.displayProperties.description} />
                 </div>
               </div>
             );

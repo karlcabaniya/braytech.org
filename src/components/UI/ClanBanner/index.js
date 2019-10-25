@@ -1,7 +1,7 @@
 import React from 'react';
+import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
-// import rgbToHsl from '../../../utils/rgbToHsl';
 import Spinner from '../../UI/Spinner';
 
 import './styles.css';
@@ -46,7 +46,7 @@ class ClanBanner extends React.Component {
     };
   }
 
-  buildBannerConfig = clanBannerData => {
+  buildBannerConfig = (clanBannerData = this.props.bannerData) => {
     this.setState({
       loaded: 0
     });
@@ -76,23 +76,16 @@ class ClanBanner extends React.Component {
       let cache = new Image();
       image.el = cache;
       cache.onload = () => {
-        let state = this.state.loaded + 1;
-        this.setState({
-          loaded: state
-        });
+        this.setState(p => ({
+          loaded: p.loaded + 1
+        }));
       };
       cache.src = key === 'StandImage' ? '/static/images/extracts/flair/FlagStand01.png' : 'https://www.bungie.net' + image.src;
     });
   };
 
   componentDidMount() {
-    // manifest.DestinyClanBannerDefinitionFetch().then(clanBannerManifest => {
-    //   // console.log(clanBannerManifest);
-    //   manifest.DestinyClanBannerDefinition = clanBannerManifest;
-
-    //   this.buildBannerConfig(this.props.bannerData);
-    // });
-    this.buildBannerConfig(this.props.bannerData);
+    this.buildBannerConfig();
   }
 
   componentDidUpdate(prevProps) {
@@ -113,8 +106,6 @@ class ClanBanner extends React.Component {
   }
 
   render() {
-    // console.log('render', this.props.bannerData)
-
     let canvasWidth = 410;
     let canvasHeight = 700;
 
@@ -191,7 +182,7 @@ class ClanBanner extends React.Component {
     }
 
     return (
-      <div className='canvas'>
+      <div className={cx('clan-banner', { loading: this.state.loaded < 6 } )}>
         {this.state.loaded !== 6 ? <Spinner /> : null}
         <canvas ref='canvas' width={canvasWidth} height={canvasHeight} />
       </div>
