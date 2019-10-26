@@ -643,16 +643,17 @@ function checklistItems(checklistId, isCharacterBound) {
 
 function presentationItems(presentationHash, dropFirst = true) {
   const state = store.getState();
+  const characterId = state.member.characterId;
+  const profile = state.member.data && state.member.data.profile;
 
-  const member = state.member;
-  const profileRecords = member && member.data.profile.profileRecords.data.records;
-  const characterRecords = member && member.data.profile.characterRecords.data;
+  const profileRecords = profile && profile.profileRecords.data.records;
+  const characterRecords = profile && profile.characterRecords.data;
 
   return data[presentationHash]
     .map(entry => {
       const definitionRecord = manifest.DestinyRecordDefinition[entry.recordHash];
       const recordScope = definitionRecord.scope || 0;
-      const recordData = recordScope === 1 ? characterRecords && characterRecords[member.characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
+      const recordData = recordScope === 1 ? characterRecords && characterRecords[characterId].records[definitionRecord.hash] : profileRecords && profileRecords[definitionRecord.hash];
 
       const enumerableState = recordData && Number.isInteger(recordData.state) ? recordData.state : 4;
 
