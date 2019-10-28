@@ -1,7 +1,6 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { DestinyItemType } from 'bungie-api-ts/destiny2';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
@@ -19,9 +18,9 @@ class Item extends React.Component {
 
     const item = {
       itemHash: this.props.hash,
-      instanceid: this.props.instanceid,
-      quantity: this.props.quantity,
-      state: this.props.state && (parseInt(this.props.state, 10) || 0)
+      instanceId: this.props.instanceid || false,
+      quantity: this.props.quantity || 1,
+      state: (this.props.state && parseInt(this.props.state, 10)) || 0
     };
 
     if (item.instanceId && member.data && member.data.profile.itemComponents.instances.data[item.instanceId]) {
@@ -63,9 +62,9 @@ class Item extends React.Component {
     item.sockets = sockets(item);
     item.stats = stats(item);
   
-    console.log(item.sockets, item.stats);
+    console.log(item);
 
-    if (item.itemComponents && item.itemComponents.instance) {
+    if (item.itemComponents && item.itemComponents.instance && item.itemComponents.instance.primaryStat) {
       item.powerLevel = item.itemComponents.instance.primaryStat.value;
     } else if (member && member.data) {
       let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);

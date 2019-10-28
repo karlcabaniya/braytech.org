@@ -1,7 +1,8 @@
-import { DestinySocketCategoryStyle } from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 
 import manifest from '../manifest';
+import * as enums from '../destinyEnums';
+
 import * as utils from './utils';
 
 /**
@@ -116,7 +117,7 @@ function buildSocket(
   }
 
   // Is this socket a perk-style socket, or something more general (mod-like)?
-  const isPerk = socketCategoryDef.categoryStyle === DestinySocketCategoryStyle.Reusable;
+  const isPerk = socketCategoryDef.categoryStyle === enums.DestinySocketCategoryStyle.Reusable;
 
   // The currently equipped plug, if any.
   const plug = buildPlug(socket, socketDef, plugObjectivesData);
@@ -265,7 +266,7 @@ function buildDefinedSocket(socketDef, index) {
   }
 
   // Is this socket a perk-style socket, or something more general (mod-like)?
-  const isPerk = socketCategoryDef.categoryStyle === DestinySocketCategoryStyle.Reusable;
+  const isPerk = socketCategoryDef.categoryStyle === enums.DestinySocketCategoryStyle.Reusable;
 
   // The currently equipped plug, if any
   const reusablePlugs = _.compact(

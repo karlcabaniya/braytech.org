@@ -7,12 +7,6 @@ export const KINETIC_WEAPON = 2;
 export const ENERGY_WEAPON = 3;
 export const POWER_WEAPON = 4;
 
-export const LEGENDARY = 4008398120;
-export const EXOTIC = 2759499571;
-export const UNCOMMON = 2395677314;
-export const RARE = 2127292149;
-export const COMMON = 3340296461;
-
 export const XBOX = 1;
 export const PLAYSTATION = 2;
 export const PC_STEAM = 3;
@@ -32,6 +26,59 @@ export const CLASSES = {
   [TITAN]: 'Titan',
   [HUNTER]: 'Hunter'
 };
+
+export const DestinyItemType = {
+  None: 0,
+  Currency: 1,
+  Armor: 2,
+  Weapon: 3,
+  Message: 7,
+  Engram: 8,
+  Consumable: 9,
+  ExchangeMaterial: 10,
+  MissionReward: 11,
+  QuestStep: 12,
+  QuestStepComplete: 13,
+  Emblem: 14,
+  Quest: 15,
+  Subclass: 16,
+  ClanBanner: 17,
+  Aura: 18,
+  Mod: 19,
+  Dummy: 20,
+  Ship: 21,
+  Vehicle: 22,
+  Emote: 23,
+  Ghost: 24,
+  Package: 25,
+  Bounty: 26,
+  Wrapper: 27,
+  SeasonalArtifact: 28,
+  Finisher: 29
+}
+
+export const DestinySocketCategoryStyle = {
+  Unknown: 0,
+  Reusable: 1,
+  Consumable: 2,
+  Unlockable: 3,
+  Intrinsic: 4,
+  EnergyMeter: 5,
+  LargePerk: 6
+}
+
+export const DestinyStatAggregationType = {
+  CharacterAverage: 0,
+  Character: 1,
+  Item: 2
+}
+
+export const DestinyStatCategory = {
+  Gameplay: 0,
+  Weapon: 1,
+  Defense: 2,
+  Primary: 3
+}
 
 const flagEnum = (state, value) => !!(state & value);
 

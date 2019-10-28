@@ -1,33 +1,37 @@
 import React from 'react';
-import { DestinyItemType } from 'bungie-api-ts/destiny2';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import * as enums from '../../../utils/destinyEnums';
 import { damageTypeToString, ammoTypeToString } from '../../../utils/destinyUtils';
 import ObservedImage from '../../ObservedImage';
 
 const standard = (item, member) => {
   const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
+  // source string
   let sourceString = definitionItem.collectibleHash ? (manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash].sourceString : false) : false;
 
-  console.log(DestinyItemType)
-
-  let damageTypeHash = definitionItem.itemType === DestinyItemType.Weapon && definitionItem.damageTypeHashes[0];
+  // weapon damage type
+  let damageTypeHash = definitionItem.itemType === enums.DestinyItemType.Weapon && definitionItem.damageTypeHashes[0];
   damageTypeHash = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.damageTypeHash : damageTypeHash;
 
   return (
     <>
-      <div className='damage weapon'>
-        <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
-          <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
-          <div className='text'>{item.powerLevel}</div>
-        </div>
-        <div className='slot'>
-          <div className={cx('icon', ammoTypeToString(definitionItem.equippingBlock.ammoType).toLowerCase())} />
-          <div className='text'>{ammoTypeToString(definitionItem.equippingBlock.ammoType)}</div>
-        </div>
-      </div>
+      {definitionItem.itemType === enums.DestinyItemType.Weapon || definitionItem.itemType === enums.DestinyItemType.Armor ? (
+        <>
+          <div className='damage weapon'>
+            <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
+              <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
+              <div className='text'>{item.powerLevel}</div>
+            </div>
+            <div className='slot'>
+              <div className={cx('icon', ammoTypeToString(definitionItem.equippingBlock.ammoType).toLowerCase())} />
+              <div className='text'>{ammoTypeToString(definitionItem.equippingBlock.ammoType)}</div>
+            </div>
+          </div>
+        </>
+      ) : null}
       {sourceString && !item.itemComponents ? (
         <div className='source'>
           <p>{sourceString}</p>
@@ -35,6 +39,7 @@ const standard = (item, member) => {
       ) : null}
       <div className='stats'>
         {item.stats &&
+          item.stats.length &&
           item.stats.map(s => {
             // map through stats
 
@@ -57,6 +62,7 @@ const standard = (item, member) => {
       </div>
       <div className='sockets'>
         {item.sockets &&
+          item.sockets.socketCategories &&
           item.sockets.socketCategories
             .map((c, i) => {
               // map through socketCategories

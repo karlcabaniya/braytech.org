@@ -1,13 +1,11 @@
-import {
-  DestinyStatCategory,
-  DestinyStatAggregationType
-} from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 
 import manifest from '../manifest';
-import * as utils from './utils';
+import * as enums from '../destinyEnums';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/UI/ProgressBar';
+
+import * as utils from './utils';
 
 /**
  * These are the utilities that deal with Stats on items - specifically, how to calculate them.
@@ -145,8 +143,8 @@ function buildStat(itemStat, statGroup, statDisplays) {
     // Only set additive for defense stats, because for some reason Zoom is
     // set to use DestinyStatAggregationType.Character
     additive:
-      definitionStat.statCategory === DestinyStatCategory.Defense &&
-      definitionStat.aggregationType === DestinyStatAggregationType.Character
+      definitionStat.statCategory === enums.DestinyStatCategory.Defense &&
+      definitionStat.aggregationType === enums.DestinyStatAggregationType.Character
   };
 }
 
