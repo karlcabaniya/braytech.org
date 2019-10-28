@@ -52,6 +52,7 @@ import Experiments from './views/Experiments';
 import Suggestions from './views/Suggestions';
 import FAQ from './views/FAQ';
 import ChaliceRecipes from './views/ChaliceRecipes';
+import Test from './views/Test';
 
 import ClanBannerBuilder from './views/Experiments/ClanBannerBuilder';
 
@@ -277,6 +278,7 @@ class App extends React.Component {
                           <Route path='/experiments' exact component={Experiments} />
                           <Route path='/experiments/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
                           <Route path='/oob' component={OOB} />
+                          <Route path='/test' component={Test} />
                           <Route path='/' component={Index} />
                         </Switch>
                       </>

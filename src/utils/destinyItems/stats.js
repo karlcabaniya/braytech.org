@@ -3,6 +3,7 @@ import cx from 'classnames';
 import _ from 'lodash';
 
 import manifest from '../manifest';
+import * as utils from './utils';
 import ObservedImage from '../../components/ObservedImage';
 import ProgressBar from '../../components/UI/ProgressBar';
 
@@ -36,7 +37,6 @@ export const armorStats = [
  * Which stats to display, and in which order.
  */
 export const statWhiteList = [
-  4284893193, // Rounds Per Minute
   2961396640, // Charge Time
   447667954, // Draw Time
   3614673599, // Blast Radius
@@ -52,7 +52,8 @@ export const statWhiteList = [
   4188031367, // Reload Speed
   1345609583, // Aim Assistance
   3555269338, // Zoom
-  2715839340, // Recoil Direction
+  2715839340, // Recoil Direction  
+  4284893193, // Rounds Per Minute
   3871231066, // Magazine
   1931675084, // Inventory Size
   925767036, // Ammo Capacity
@@ -300,20 +301,6 @@ export const stats = item => {
     );
   }
 
-  return investmentStats;
-
-  // // Include the contributions from perks and mods
-  // if (item.sockets && item.sockets.sockets.length) {
-  //   investmentStats = enhanceStatsWithPlugs(
-  //     itemDef,
-  //     investmentStats,
-  //     item.sockets.sockets,
-  //     defs,
-  //     statGroup,
-  //     statDisplays
-  //   );
-  // }
-
   // // For Armor, we always replace the previous stats with live stats, even if they were already created
   // if ((!investmentStats.length || item.bucket.inArmor) && stats && stats[item.id]) {
   //   // TODO: build a version of enhanceStatsWithPlugs that only calculates plug values
@@ -328,7 +315,7 @@ export const stats = item => {
   //   }
   // }
 
-  // return investmentStats.length ? investmentStats.sort(compareBy((s) => s.sort)) : null;
+  return investmentStats.length ? investmentStats.sort(utils.compareBy((s) => s.sort)) : null;
 }
 
 

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import manifest from '../manifest';
+import * as utils from './utils';
 
 /**
  * These are the utilities that deal with Sockets and Plugs on items. Sockets and Plugs
@@ -36,22 +37,6 @@ const GHOST_MOD_CATEGORY = 1404791674;
 
 /** the default shader InventoryItem in every empty shader slot */
 export const DEFAULT_SHADER = 4248210736;
-
-
-/**
- * Generate a comparator from a mapping function.
- *
- * @example
- * // Returns a comparator that compares items by primary stat
- * compareBy((item) => item.primStat.value)
- */
-export function compareBy(fn) {
-  return (a, b) => {
-    const aVal = fn(a);
-    const bVal = fn(b);
-    return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
-  };
-}
 
 /**
  * Calculate all the sockets we want to display (or make searchable). Sockets represent perks,
@@ -123,6 +108,7 @@ function buildSocket(
   if (!socketTypeDef) {
     return undefined;
   }
+
   const socketCategoryDef = manifest.DestinySocketCategoryDefinition[socketTypeDef.socketCategoryHash];
   if (!socketCategoryDef) {
     return undefined;
@@ -228,7 +214,7 @@ export function buildInstancedSockets(item, sockets, reusablePlugData, plugObjec
 
   return {
     sockets: realSockets.filter(Boolean), // Flat list of sockets
-    socketCategories: categories.sort(compareBy((c) => c.category.index)) // Sockets organized by category
+    socketCategories: categories.sort(utils.compareBy((c) => c.category.index)) // Sockets organized by category
   };
 }
 
@@ -258,7 +244,7 @@ function buildDefinedSockets(item) {
 
   return {
     sockets: _.compact(realSockets), // Flat list of sockets
-    socketCategories: categories.sort(compareBy((c) => c.category.index)) // Sockets organized by category
+    socketCategories: categories.sort(utils.compareBy((c) => c.category.index)) // Sockets organized by category
   };
 }
 
@@ -295,22 +281,27 @@ function buildDefinedSocket(socketDef, index) {
     });
   }
 
+  const plugItem = socketDef.singleInitialItemHash && manifest.DestinyInventoryItemDefinition[socketDef.singleInitialItemHash];
+
+  const isIntrinsic = plugItem && plugItem.itemCategoryHashes && plugItem.itemCategoryHashes.includes(2237038328);
+
   return {
     socketIndex: index,
     plug: {
-      plugItem: socketDef.singleInitialItemHash && manifest.DestinyInventoryItemDefinition[socketDef.singleInitialItemHash]
+      plugItem
     },
     plugOptions,
     hasRandomizedPlugItems:
       Boolean(socketDef.randomizedPlugSetHash) || socketTypeDef.alwaysRandomizeSockets,
     isPerk,
+    isIntrinsic,
     socketDefinition: socketDef
   };
 }
 
 function buildPlug(plug, socketDef, plugObjectivesData) {
   const plugHash = isDestinyItemPlug(plug) ? plug.plugItemHash : plug.plugHash;
-  const enabled = isDestinyItemPlug(plug) ? plug.enabled : plug.isEnabled;
+  const isEnabled = isDestinyItemPlug(plug) ? plug.enabled : plug.isEnabled;
 
   if (!plugHash) {
     return null;
@@ -333,7 +324,7 @@ function buildPlug(plug, socketDef, plugObjectivesData) {
 
   return {
     plugItem,
-    enabled: enabled && (!isDestinyItemPlug(plug) || plug.canInsert),
+    isEnabled: isEnabled && (!isDestinyItemPlug(plug) || plug.canInsert),
     enableFailReasons: failReasons,
     plugObjectives: (plugObjectivesData && plugObjectivesData[plugHash]) || [],
     perks: plugItem.perks ? plugItem.perks.map((perk) => manifest.DestinySandboxPerkDefinition[perk.perkHash]) : [],
@@ -350,7 +341,7 @@ function buildDefinedPlug(plug) {
 
   return {
     plugItem: definitionPlugItem,
-    enabled: true,
+    isEnabled: true,
     enableFailReasons: '',
     plugObjectives: [],
     perks: (definitionPlugItem.perks || []).map((perk) => manifest.DestinySandboxPerkDefinition[perk.perkHash]),

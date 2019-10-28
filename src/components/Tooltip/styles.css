@@ -290,6 +290,7 @@
   position: relative;
   color: #fff;
   display: flex;
+  align-items: center;
 }
 
 #tooltip .stats .stat .value.bar {
@@ -297,23 +298,14 @@
 }
 
 #tooltip .stats .stat .value.bar .int {
-  display: none;
-}
-
-#tooltip .stats.detailed-mode .stat .value.bar .int {
   position: absolute;
   top: 0;
-  right: 3px;
+  right: 7px;
   height: 100%;
   display: grid;
   align-content: center;
-  font-size: 11px;
-  opacity: 0.5;
-}
-
-#tooltip .stats .stat .value.int {
-  display: flex;
-  align-items: center;
+  font-size: 12px;
+  opacity: 0.6;
 }
 
 #tooltip .stats .stat .value.mod {
@@ -355,10 +347,6 @@
 }
 
 #tooltip .sockets {
-  display: none;
-}
-
-#tooltip .sockets.has-sockets {
   display: block;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0 0 12px;
@@ -370,11 +358,7 @@
   opacity: 0.4;
 }
 
-#tooltip .plug.is-active {
-  opacity: 1;
-}
-
-#tooltip .plug.ellipsis {
+#tooltip .plug.enabled {
   opacity: 1;
 }
 
@@ -693,17 +677,17 @@
   font-size: 14px;
 }
 
-#tooltip .frame.is-masterworked .header {
+#tooltip .frame.masterworked .header {
   position: relative;
 }
 
-#tooltip .frame.is-masterworked .image.bg {
+#tooltip .frame.masterworked .image.bg {
   background-size: cover;
   background-position: center top;
 }
 
-#tooltip .frame.is-masterworked .image.bg::before,
-#tooltip .frame.is-masterworked .image.bg::after {
+#tooltip .frame.masterworked .image.bg::before,
+#tooltip .frame.masterworked .image.bg::after {
   content: ' ';
   position: absolute;
   left: 0;
@@ -723,7 +707,7 @@
   }
 }
 
-#tooltip .frame.is-masterworked .image.bg::before {
+#tooltip .frame.masterworked .image.bg::before {
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
   background-size: 200%;
   background-repeat: no-repeat;
@@ -731,7 +715,7 @@
   top: 0;
 }
 
-#tooltip .frame.is-masterworked .image.bg::after {
+#tooltip .frame.masterworked .image.bg::after {
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
   background-size: 200%;
   background-repeat: no-repeat;
@@ -739,7 +723,7 @@
   bottom: 0;
 }
 
-#tooltip .frame.is-masterworked.exotic .image.bg::after {
+#tooltip .frame.masterworked.exotic .image.bg::after {
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
   background-size: 200%;
   background-repeat: no-repeat;
