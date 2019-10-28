@@ -274,7 +274,11 @@ export const associationsCollectionsBadges = [
     badgeHash: 2759158924
   },
   {
-    recordHash: 3737200951, // Scared Duty (Raid)
+    recordHash: 96478725, // Lunar Rover
+    badgeHash: 2388540594
+  },
+  {
+    recordHash: 3737200951, // Sacred Duty (Raid)
     badgeHash: 223465203
   },
   {
