@@ -1,4 +1,5 @@
 import React from 'react';
+import { DestinyItemType } from 'bungie-api-ts/destiny2';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -10,7 +11,9 @@ const standard = (item, member) => {
 
   let sourceString = definitionItem.collectibleHash ? (manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash].sourceString : false) : false;
 
-  let damageTypeHash = definitionItem.damageTypeHashes[0];
+  console.log(DestinyItemType)
+
+  let damageTypeHash = definitionItem.itemType === DestinyItemType.Weapon && definitionItem.damageTypeHashes[0];
   damageTypeHash = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.damageTypeHash : damageTypeHash;
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { cloneDeep } from 'lodash';
+import { DestinyItemType } from 'bungie-api-ts/destiny2';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 

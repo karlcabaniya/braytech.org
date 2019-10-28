@@ -1,5 +1,7 @@
-import React from 'react';
-import cx from 'classnames';
+import {
+  DestinyStatCategory,
+  DestinyStatAggregationType
+} from 'bungie-api-ts/destiny2';
 import _ from 'lodash';
 
 import manifest from '../manifest';
@@ -143,8 +145,8 @@ function buildStat(itemStat, statGroup, statDisplays) {
     // Only set additive for defense stats, because for some reason Zoom is
     // set to use DestinyStatAggregationType.Character
     additive:
-      definitionStat.statCategory === 2 &&
-      definitionStat.aggregationType === 1
+      definitionStat.statCategory === DestinyStatCategory.Defense &&
+      definitionStat.aggregationType === DestinyStatAggregationType.Character
   };
 }
 
