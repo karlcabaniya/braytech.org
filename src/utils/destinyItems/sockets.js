@@ -283,7 +283,11 @@ function buildDefinedSocket(socketDef, index) {
     });
   }
 
-  const plugItem = socketDef.singleInitialItemHash && manifest.DestinyInventoryItemDefinition[socketDef.singleInitialItemHash];
+  const plugItem = socketDef.singleInitialItemHash && socketDef.singleInitialItemHash !== 0 && manifest.DestinyInventoryItemDefinition[socketDef.singleInitialItemHash];
+
+  if (plugOptions.length < 1 && plugItem) {
+    plugOptions.push(buildDefinedPlug({ plugItemHash: plugItem.hash }))
+  }
 
   const isIntrinsic = plugItem && plugItem.itemCategoryHashes && plugItem.itemCategoryHashes.includes(2237038328);
 
@@ -297,6 +301,7 @@ function buildDefinedSocket(socketDef, index) {
       Boolean(socketDef.randomizedPlugSetHash) || socketTypeDef.alwaysRandomizeSockets,
     isPerk,
     isIntrinsic,
+    isTracker: plugItem && plugItem.plug && plugItem.plug.plugCategoryIdentifier && plugItem.plug.plugCategoryIdentifier.includes('trackers'),
     socketDefinition: socketDef
   };
 }

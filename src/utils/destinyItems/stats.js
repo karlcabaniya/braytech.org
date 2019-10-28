@@ -37,8 +37,6 @@ export const armorStats = [
  * Which stats to display, and in which order.
  */
 export const statWhiteList = [
-  2961396640, // Charge Time
-  447667954, // Draw Time
   3614673599, // Blast Radius
   2523465841, // Velocity
   2837207746, // Swing Speed (sword)
@@ -54,6 +52,8 @@ export const statWhiteList = [
   3555269338, // Zoom
   2715839340, // Recoil Direction  
   4284893193, // Rounds Per Minute
+  2961396640, // Charge Time
+  447667954, // Draw Time
   3871231066, // Magazine
   1931675084, // Inventory Size
   925767036, // Ammo Capacity
@@ -184,11 +184,7 @@ function buildInvestmentStats(item, statGroupHash, statDisplays) {
  *
  * Returns a map from stat hash to stat value.
  */
-function buildPlugStats(
-  plug,
-  statsByHash,
-  statDisplays
-) {
+function buildPlugStats(plug, statsByHash, statDisplays) {
   const stats = {};
 
   for (const perkStat of plug.plugItem.investmentStats) {
@@ -207,7 +203,7 @@ function buildPlugStats(
     }
     stats[perkStat.statTypeHash] = value;
   }
-
+  
   return stats;
 }
 
@@ -269,13 +265,59 @@ function enhanceStatsWithPlugs(item, stats, statDisplays) {
 
   for (const socket of sortedSockets) {
     for (const plug of socket.plugOptions) {
-      if (plug.plugItem && plug.plugItem.investmentStats && plug.plugItem.investmentStats.length) {
+      if (plug && plug.plugItem && plug.plugItem.investmentStats && plug.plugItem.investmentStats.length) {
         plug.stats = buildPlugStats(plug, statsByHash, statDisplays);
       }
     }
   }
 
   return stats;
+}
+
+/**
+ * Build the stats that come "live" from the API's data on real instances. This is required
+ * for Armor 2.0 since it has random stat rolls.
+ */
+function buildLiveStats(item, stats, statGroup, statDisplays) {
+  return _.compact(
+    Object.values(stats.stats).map((itemStat) => {
+      const statHash = itemStat.statHash;
+      if (!itemStat || !shouldShowStat(item, statHash, statDisplays)) {
+        return undefined;
+      }
+
+      const statDef = manifest.DestinyStatDefinition[statHash];
+      if (!statDef) {
+        return undefined;
+      }
+
+      let maximumValue = statGroup.maximumValue;
+      let bar = !statsNoBar.includes(statHash);
+      let smallerIsBetter = false;
+      const statDisplay = statDisplays[statHash];
+      if (statDisplay) {
+        const firstInterp = statDisplay.displayInterpolation[0];
+        const lastInterp =
+          statDisplay.displayInterpolation[statDisplay.displayInterpolation.length - 1];
+        smallerIsBetter = firstInterp.weight > lastInterp.weight;
+        maximumValue = Math.max(statDisplay.maximumValue, firstInterp.weight, lastInterp.weight);
+        bar = !statDisplay.displayAsNumeric;
+      }
+
+      return {
+        investmentValue: itemStat.value || 0,
+        statHash,
+        displayProperties: statDef.displayProperties,
+        sort: statWhiteList.indexOf(statHash),
+        value: itemStat.value,
+        base: itemStat.value,
+        maximumValue,
+        bar,
+        smallerIsBetter,
+        additive: statDef.aggregationType === enums.DestinyStatAggregationType.Character
+      };
+    })
+  );
 }
 
 /** Build the full list of stats for an item. If the item has no stats, this returns null. */
@@ -301,7 +343,7 @@ export const stats = item => {
     );
   }
 
-  // // For Armor, we always replace the previous stats with live stats, even if they were already created
+  // For Armor, we always replace the previous stats with live stats, even if they were already created
   // if ((!investmentStats.length || item.bucket.inArmor) && stats && stats[item.id]) {
   //   // TODO: build a version of enhanceStatsWithPlugs that only calculates plug values
   //   investmentStats = buildLiveStats(stats[item.id], itemDef, defs, statGroup, statDisplays);

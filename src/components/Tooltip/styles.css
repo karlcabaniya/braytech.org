@@ -337,12 +337,7 @@
   opacity: 0;
 }
 
-#tooltip .stats .stat .value .tip {
-  height: 100%;
-  background-color: #ddcd8c;
-}
-
-#tooltip .stats .stat .value .tip.masterwork {
+#tooltip .stats .stat .value .bar.masterwork {
   background-color: #c6ab3c;
 }
 
@@ -350,6 +345,10 @@
   display: block;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0 0 12px;
+}
+
+#tooltip .sockets.intrinsic-only {
+  padding-bottom: 0;
 }
 
 #tooltip .plug {

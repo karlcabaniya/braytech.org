@@ -7,6 +7,7 @@ import cx from 'classnames';
 import manifest from '../../../utils/manifest';
 import { sockets } from '../../../utils/destinyItems/sockets';
 import { stats } from '../../../utils/destinyItems/stats';
+import { masterwork } from '../../../utils/destinyItems/masterwork';
 import * as enums from '../../../utils/destinyEnums';
 import ObservedImage from '../../ObservedImage';
 
@@ -22,6 +23,12 @@ class Item extends React.Component {
       quantity: this.props.quantity || 1,
       state: (this.props.state && parseInt(this.props.state, 10)) || 0
     };
+
+    const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
+
+    if (!definitionItem) {
+      return null;
+    }
 
     if (item.instanceId && member.data && member.data.profile.itemComponents.instances.data[item.instanceId]) {
       let itemComponents = member.data.profile.itemComponents;
@@ -59,27 +66,31 @@ class Item extends React.Component {
       }
     }
 
+    item.masterwork = enums.enumerateItemState(item.state).masterwork;
     item.sockets = sockets(item);
     item.stats = stats(item);
+    item.masterworkInfo = masterwork(item);
+
+    item.primaryStat = definitionItem.stats && !definitionItem.stats.disablePrimaryStatDisplay && definitionItem.stats.primaryBaseStatHash && {
+      hash: definitionItem.stats.primaryBaseStatHash,
+      displayProperties: manifest.DestinyStatDefinition[definitionItem.stats.primaryBaseStatHash].displayProperties,
+      value: 750
+    };
+
+    if (item.primaryStat && item.itemComponents && item.itemComponents.instance && item.itemComponents.instance.primaryStat) {
+      item.primaryStat.value = item.itemComponents.instance.primaryStat.value;
+    } else if (item.primaryStat && member && member.data) {
+      let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
+
+      item.primaryStat.value = Math.floor((733 / 750) * character.light);
+    }
   
     console.log(item);
-
-    if (item.itemComponents && item.itemComponents.instance && item.itemComponents.instance.primaryStat) {
-      item.powerLevel = item.itemComponents.instance.primaryStat.value;
-    } else if (member && member.data) {
-      let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
-      item.powerLevel = Math.floor((733 / 750) * character.light);
-    } else {
-      item.powerLevel = '750';
-    }
-
-    const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
     let itemRarity = 'common';
     let itemRarityHide = false;
     let kind;
     let meat = standard(item, member);
-    let masterwork = false;
 
     if (definitionItem.inventory) {
       switch (definitionItem.inventory.tierType) {
@@ -135,9 +146,9 @@ class Item extends React.Component {
     return (
       <>
         <div className='acrylic' />
-        <div className={cx('frame', kind, itemRarity, { 'masterworked': masterwork })}>
+        <div className={cx('frame', kind, itemRarity, { 'masterworked': item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) })}>
           <div className='header'>
-            {masterwork ? <ObservedImage className={cx('image', 'bg')} src={itemRarity === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
+            {item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) ? <ObservedImage className={cx('image', 'bg')} src={itemRarity === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
             <div className='name'>{name}</div>
             <div>
               {definitionItem.itemTypeDisplayName && definitionItem.itemTypeDisplayName !== '' ? <div className='kind'>{definitionItem.itemTypeDisplayName}</div> : null}
@@ -146,9 +157,9 @@ class Item extends React.Component {
           </div>
           {note ? <div className='note'>{note}</div> : null}
           <div className='black'>
-            {this.props.viewport.width <= 600 && item.screenshot ? (
+            {this.props.viewport.width <= 600 && definitionItem.screenshot ? (
               <div className='screenshot'>
-                <ObservedImage className='image' src={`https://www.bungie.net${item.screenshot}`} />
+                <ObservedImage className='image' src={`https://www.bungie.net${definitionItem.screenshot}`} />
               </div>
             ) : null}
             {meat}

@@ -18,30 +18,43 @@ const standard = (item, member) => {
 
   return (
     <>
-      {definitionItem.itemType === enums.DestinyItemType.Weapon || definitionItem.itemType === enums.DestinyItemType.Armor ? (
-        <>
-          <div className='damage weapon'>
-            <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
-              <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
-              <div className='text'>{item.powerLevel}</div>
+      {item.primaryStat ? (
+        definitionItem.itemType === enums.DestinyItemType.Weapon ? (
+          <>
+            <div className='damage weapon'>
+              <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
+                <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
+                <div className='text'>{item.primaryStat.value}</div>
+              </div>
+              <div className='slot'>
+                <div className={cx('icon', ammoTypeToString(definitionItem.equippingBlock.ammoType).toLowerCase())} />
+                <div className='text'>{ammoTypeToString(definitionItem.equippingBlock.ammoType)}</div>
+              </div>
             </div>
-            <div className='slot'>
-              <div className={cx('icon', ammoTypeToString(definitionItem.equippingBlock.ammoType).toLowerCase())} />
-              <div className='text'>{ammoTypeToString(definitionItem.equippingBlock.ammoType)}</div>
+          </>
+        ) : (
+          <>
+            <div className='damage armour'>
+              <div className='power'>
+                <div className='text'>{item.primaryStat.value}</div>
+                <div className='text'>{item.primaryStat.displayProperties.name}</div>
+              </div>
             </div>
-          </div>
-        </>
+          </>
+        )
       ) : null}
-      {sourceString && !item.itemComponents ? (
+      {/* {sourceString && !item.itemComponents ? (
         <div className='source'>
           <p>{sourceString}</p>
         </div>
-      ) : null}
-      <div className='stats'>
-        {item.stats &&
-          item.stats.length &&
-          item.stats.map(s => {
+      ) : null} */}
+      {item.stats && item.stats.length ? (
+        <div className='stats'>
+          {item.stats.map(s => {
             // map through stats
+
+            const masterwork = (item.masterworkInfo && item.masterworkInfo.statHash === s.statHash && item.masterworkInfo.statValue) || 0;
+            const base = s.value - masterwork;
 
             return (
               <div key={s.statHash} className='stat'>
@@ -49,7 +62,8 @@ const standard = (item, member) => {
                 <div className={cx('value', { bar: s.bar })}>
                   {s.bar ? (
                     <>
-                      <div className='bar' data-value={s.value} style={{ width: `${s.value}%` }} />
+                      <div className='bar' data-value={base} style={{ width: `${base}%` }} />
+                      <div className='bar masterwork' data-value={masterwork} style={{ width: `${masterwork}%` }} />
                       <div className='int'>{s.value}</div>
                     </>
                   ) : (
@@ -59,50 +73,56 @@ const standard = (item, member) => {
               </div>
             );
           })}
-      </div>
-      <div className='sockets'>
-        {item.sockets &&
-          item.sockets.socketCategories &&
-          item.sockets.socketCategories
+        </div>
+      ) : null}
+      {item.sockets && item.sockets.socketCategories && item.sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length ? (
+        <div className={cx('sockets', { 'intrinsic-only': item.sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length === 1 })}>
+          {item.sockets.socketCategories
             .map((c, i) => {
               // map through socketCategories
 
-              if (c.sockets.length > 0) {
-                return (
-                  <div key={c.category.hash} className='category'>
-                    {c.sockets
-                      .filter(s => s.isPerk)
-                      .map(s => {
-                        // filter for perks and map through sockets
+              if (c.sockets.length) {
+                const plugs = c.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker);
 
-                        return (
-                          <div key={s.socketIndex} className='socket'>
-                            {s.plugOptions
-                              .filter(p => p.isEnabled)
-                              .map(p => {
-                                // filter for enabled plugs and map through
+                if (plugs.length) {
+                  return (
+                    <div key={c.category.hash} className='category'>
+                      {plugs
+                        .map(s => {
+                          // filter for perks and map through sockets
 
-                                return (
-                                  <div key={p.plugItem.hash} className={cx('plug', { intrinsic: s.isIntrinsic, enabled: true })}>
-                                    <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${p.plugItem.displayProperties.icon ? p.plugItem.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
-                                    <div className='text'>
-                                      <div className='name'>{p.plugItem.displayProperties.name ? p.plugItem.displayProperties.name : `Unknown`}</div>
-                                      <div className='description'>{p.plugItem.itemTypeDisplayName}</div>
+                          return (
+                            <div key={s.socketIndex} className='socket'>
+                              {s.plugOptions
+                                .filter(p => p.isEnabled)
+                                .map(p => {
+                                  // filter for enabled plugs and map through
+
+                                  return (
+                                    <div key={p.plugItem.hash} className={cx('plug', { intrinsic: s.isIntrinsic, enabled: true })}>
+                                      <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${p.plugItem.displayProperties.icon ? p.plugItem.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
+                                      <div className='text'>
+                                        <div className='name'>{p.plugItem.displayProperties.name}</div>
+                                        <div className='description'>{s.isIntrinsic ? p.plugItem.displayProperties.description : p.plugItem.itemTypeDisplayName}</div>
+                                      </div>
                                     </div>
-                                  </div>
-                                );
-                              })}
-                          </div>
-                        );
-                      })}
-                  </div>
-                );
+                                  );
+                                })}
+                            </div>
+                          );
+                        })}
+                    </div>
+                  );
+                } else {
+                  return false;
+                }
               } else {
-                return null;
+                return false;
               }
             })
             .filter(c => c)}
-      </div>
+        </div>
+      ) : null}
     </>
   );
 };
