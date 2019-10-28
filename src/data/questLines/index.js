@@ -241,6 +241,10 @@ export const rewardsQuestLineOverrides = {
       quantity: 1
     },
     {
+      itemHash: 484491717,
+      quantity: 1
+    },
+    {
       itemHash: 1196526889,
       quantity: 6
     }
