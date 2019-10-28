@@ -6,25 +6,27 @@ import * as enums from '../../../utils/destinyEnums';
 import { damageTypeToString, ammoTypeToString } from '../../../utils/destinyUtils';
 import ObservedImage from '../../ObservedImage';
 
-const standard = (item, member) => {
-  const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
+const Equipment = (props) => {
+  const { itemHash, instanceId, itemComponents, quantity, state, rarity, type, primaryStat, stats, sockets, masterwork, masterworkInfo } = props;
+
+  const definitionItem = manifest.DestinyInventoryItemDefinition[itemHash];
 
   // source string
   let sourceString = definitionItem.collectibleHash ? (manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash].sourceString : false) : false;
 
   // weapon damage type
   let damageTypeHash = definitionItem.itemType === enums.DestinyItemType.Weapon && definitionItem.damageTypeHashes[0];
-  damageTypeHash = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.damageTypeHash : damageTypeHash;
+  damageTypeHash = itemComponents && itemComponents.instance ? itemComponents.instance.damageTypeHash : damageTypeHash;
 
   return (
     <>
-      {item.primaryStat ? (
+      {primaryStat ? (
         definitionItem.itemType === enums.DestinyItemType.Weapon ? (
           <>
             <div className='damage weapon'>
               <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
                 <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
-                <div className='text'>{item.primaryStat.value}</div>
+                <div className='text'>{primaryStat.value}</div>
               </div>
               <div className='slot'>
                 <div className={cx('icon', ammoTypeToString(definitionItem.equippingBlock.ammoType).toLowerCase())} />
@@ -36,8 +38,8 @@ const standard = (item, member) => {
           <>
             <div className='damage armour'>
               <div className='power'>
-                <div className='text'>{item.primaryStat.value}</div>
-                <div className='text'>{item.primaryStat.displayProperties.name}</div>
+                <div className='text'>{primaryStat.value}</div>
+                <div className='text'>{primaryStat.displayProperties.name}</div>
               </div>
             </div>
           </>
@@ -48,12 +50,12 @@ const standard = (item, member) => {
           <p>{sourceString}</p>
         </div>
       ) : null} */}
-      {item.stats && item.stats.length ? (
+      {stats && stats.length ? (
         <div className='stats'>
-          {item.stats.map(s => {
+          {stats.map(s => {
             // map through stats
 
-            const masterwork = (item.masterworkInfo && item.masterworkInfo.statHash === s.statHash && item.masterworkInfo.statValue) || 0;
+            const masterwork = (masterworkInfo && masterworkInfo.statHash === s.statHash && masterworkInfo.statValue) || 0;
             const base = s.value - masterwork;
 
             return (
@@ -75,9 +77,9 @@ const standard = (item, member) => {
           })}
         </div>
       ) : null}
-      {item.sockets && item.sockets.socketCategories && item.sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length ? (
-        <div className={cx('sockets', { 'intrinsic-only': item.sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length === 1 })}>
-          {item.sockets.socketCategories
+      {sockets && sockets.socketCategories && sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length ? (
+        <div className={cx('sockets', { 'intrinsic-only': sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length === 1 })}>
+          {sockets.socketCategories
             .map((c, i) => {
               // map through socketCategories
 
@@ -127,4 +129,4 @@ const standard = (item, member) => {
   );
 };
 
-export default standard;
+export default Equipment;

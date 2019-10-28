@@ -11,7 +11,14 @@ import { masterwork } from '../../../utils/destinyItems/masterwork';
 import * as enums from '../../../utils/destinyEnums';
 import ObservedImage from '../../ObservedImage';
 
-import standard from './standard';
+import Default from './Default';
+import Equipment from './Equipment';
+import Emblem from './Emblem';
+
+const woolworths = {
+  equipment: Equipment,
+  emblem: Emblem
+}
 
 class Item extends React.Component {
   render() {
@@ -20,14 +27,55 @@ class Item extends React.Component {
     const item = {
       itemHash: this.props.hash,
       instanceId: this.props.instanceid || false,
+      itemComponents: false,
       quantity: this.props.quantity || 1,
-      state: (this.props.state && parseInt(this.props.state, 10)) || 0
+      state: (this.props.state && parseInt(this.props.state, 10)) || 0,
+      rarity: false,
+      type: false
     };
 
     const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
     if (!definitionItem) {
       return null;
+    }
+
+    if (definitionItem.inventory) {
+      switch (definitionItem.inventory.tierType) {
+        case 6:
+          item.rarity = 'exotic';
+          break;
+        case 5:
+          item.rarity = 'legendary';
+          break;
+        case 4:
+          item.rarity = 'rare';
+          break;
+        case 3:
+          item.rarity = 'uncommon';
+          break;
+        case 2:
+          item.rarity = 'common';
+          break;
+        default:
+          item.rarity = 'common';
+      }
+
+      if (definitionItem.itemType === 2) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 3) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 21) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 22) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 24) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 28) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 14) {
+        item.type = 'emblem';
+      }
     }
 
     if (item.instanceId && member.data && member.data.profile.itemComponents.instances.data[item.instanceId]) {
@@ -87,33 +135,6 @@ class Item extends React.Component {
   
     console.log(item);
 
-    let itemRarity = 'common';
-    let itemRarityHide = false;
-    let kind;
-    let meat = standard(item, member);
-
-    if (definitionItem.inventory) {
-      switch (definitionItem.inventory.tierType) {
-        case 6:
-          itemRarity = 'exotic';
-          break;
-        case 5:
-          itemRarity = 'legendary';
-          break;
-        case 4:
-          itemRarity = 'rare';
-          break;
-        case 3:
-          itemRarity = 'uncommon';
-          break;
-        case 2:
-          itemRarity = 'common';
-          break;
-        default:
-          itemRarity = 'common';
-      }
-    }
-
     if (definitionItem.redacted) {
       return (
         <>
@@ -135,24 +156,23 @@ class Item extends React.Component {
       );
     }
 
-    let name = definitionItem.displayProperties && definitionItem.displayProperties.name;
-
     let note = false;
-
     if (!item.itemComponents && this.props.uninstanced) {
       note = t('Non-instanced item (displaying collections roll)');
     }
 
+    const Meat = item.type && woolworths[item.type];
+
     return (
       <>
         <div className='acrylic' />
-        <div className={cx('frame', kind, itemRarity, { 'masterworked': item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) })}>
+        <div className={cx('frame', item.kind, item.rarity, { 'masterworked': item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) })}>
           <div className='header'>
-            {item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) ? <ObservedImage className={cx('image', 'bg')} src={itemRarity === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
-            <div className='name'>{name}</div>
+            {item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) ? <ObservedImage className={cx('image', 'bg')} src={item.rarity === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
+            <div className='name'>{definitionItem.displayProperties && definitionItem.displayProperties.name}</div>
             <div>
               {definitionItem.itemTypeDisplayName && definitionItem.itemTypeDisplayName !== '' ? <div className='kind'>{definitionItem.itemTypeDisplayName}</div> : null}
-              {!itemRarityHide && definitionItem.inventory ? <div className='rarity'>{definitionItem.inventory.tierTypeName}</div> : null}
+              {item.rarity ? <div className='rarity'>{definitionItem.inventory.tierTypeName}</div> : null}
             </div>
           </div>
           {note ? <div className='note'>{note}</div> : null}
@@ -162,7 +182,7 @@ class Item extends React.Component {
                 <ObservedImage className='image' src={`https://www.bungie.net${definitionItem.screenshot}`} />
               </div>
             ) : null}
-            {meat}
+            {woolworths[item.type] ? <Meat {...member} {...item} /> : <Default {...member} {...item} />}
           </div>
         </div>
       </>
