@@ -11,8 +11,11 @@ const Equipment = (props) => {
 
   const definitionItem = manifest.DestinyInventoryItemDefinition[itemHash];
 
+  // description as flair string
+  const flair = definitionItem.displayProperties && definitionItem.displayProperties.description !== '' && definitionItem.displayProperties.description;
+
   // source string
-  let sourceString = definitionItem.collectibleHash ? (manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash].sourceString : false) : false;
+  const sourceString = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] && manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash].sourceString : false;
 
   // weapon damage type
   let damageTypeHash = definitionItem.itemType === enums.DestinyItemType.Weapon && definitionItem.damageTypeHashes[0];
@@ -45,11 +48,12 @@ const Equipment = (props) => {
           </>
         )
       ) : null}
-      {/* {sourceString && !item.itemComponents ? (
-        <div className='source'>
-          <p>{sourceString}</p>
+      {flair && <div className='line' />}
+      {flair ? (
+        <div className='flair'>
+          <p>{flair}</p>
         </div>
-      ) : null} */}
+      ) : null}
       {stats && stats.length ? (
         <div className='stats'>
           {stats.map(s => {
@@ -123,6 +127,12 @@ const Equipment = (props) => {
               }
             })
             .filter(c => c)}
+        </div>
+      ) : null}
+      {sockets && sockets.socketCategories && sourceString && <div className='line' />}
+      {sourceString ? (
+        <div className='source'>
+          <p>{sourceString}</p>
         </div>
       ) : null}
     </>

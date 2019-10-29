@@ -5,10 +5,10 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
+import * as enums from '../../../utils/destinyEnums';
 import { sockets } from '../../../utils/destinyItems/sockets';
 import { stats } from '../../../utils/destinyItems/stats';
 import { masterwork } from '../../../utils/destinyItems/masterwork';
-import * as enums from '../../../utils/destinyEnums';
 import ObservedImage from '../../ObservedImage';
 
 import Default from './Default';
@@ -28,7 +28,7 @@ class Item extends React.Component {
       itemHash: this.props.hash,
       instanceId: this.props.instanceid || false,
       itemComponents: false,
-      quantity: this.props.quantity || 1,
+      quantity: parseInt(this.props.quantity, 10) || 1,
       state: (this.props.state && parseInt(this.props.state, 10)) || 0,
       rarity: false,
       type: false
@@ -166,7 +166,7 @@ class Item extends React.Component {
     return (
       <>
         <div className='acrylic' />
-        <div className={cx('frame', item.kind, item.rarity, { 'masterworked': item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) })}>
+        <div className={cx('frame', item.type, item.rarity, { 'masterworked': item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) })}>
           <div className='header'>
             {item.masterwork || (item.masterworkInfo && item.masterworkInfo.tier === 10) ? <ObservedImage className={cx('image', 'bg')} src={item.rarity === 'exotic' ? `/static/images/extracts/flair/01A3-00001DDC.PNG` : `/static/images/extracts/flair/01A3-00001DDE.PNG`} /> : null}
             <div className='name'>{definitionItem.displayProperties && definitionItem.displayProperties.name}</div>
