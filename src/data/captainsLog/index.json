@@ -768,5 +768,10 @@
     "date": "2019-10-24T02:09:43.899Z",
     "version": "2.10.7",
     "content": "- translation updates"
+  },
+  {
+    "date": "2019-10-29T07:38:01.143Z",
+    "version": "2.10.10",
+    "content": "- reworked item tooltips\n- and other good stuff"
   }
 ]

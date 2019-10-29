@@ -4,6 +4,7 @@ import cx from 'classnames';
 
 import './styles.css';
 
+import UI from './UI';
 import Item from './Item';
 import Activity from './Activity';
 import Vendor from './Vendor';
@@ -189,6 +190,7 @@ class Tooltip extends React.Component {
     let Tooltip = Item;
 
     if (this.state.hash) {
+      if (this.state.table === 'BraytechDefinition') Tooltip = UI;
       if (this.state.table === 'DestinyActivityDefinition') Tooltip = Activity;
       if (this.state.table === 'DestinyVendorDefinition') Tooltip = Vendor;
       if (this.state.table === 'DestinyChecklistDefinition') Tooltip = Checklist;

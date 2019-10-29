@@ -36,11 +36,32 @@ class Item extends React.Component {
 
     const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
-    if (!definitionItem) {
+    if (item.itemHash !== '343' && !definitionItem) {
       return null;
     }
+  
+    if (item.itemHash === '343' || definitionItem.redacted) {
+      return (
+        <>
+          <div className='acrylic' />
+          <div className={cx('frame', 'common')}>
+            <div className='header'>
+              <div className='name'>Classified</div>
+              <div>
+                <div className='kind'>Insufficient clearance</div>
+              </div>
+            </div>
+            <div className='black'>
+              <div className='description'>
+                <pre>Keep it clean.</pre>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
 
-    if (definitionItem.inventory) {
+    if (definitionItem && definitionItem.inventory) {
       switch (definitionItem.inventory.tierType) {
         case 6:
           item.rarity = 'exotic';
@@ -131,29 +152,6 @@ class Item extends React.Component {
       let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
 
       item.primaryStat.value = Math.floor((733 / 750) * character.light);
-    }
-  
-    console.log(item);
-
-    if (definitionItem.redacted) {
-      return (
-        <>
-          <div className='acrylic' />
-          <div className={cx('frame', 'common')}>
-            <div className='header'>
-              <div className='name'>Classified</div>
-              <div>
-                <div className='kind'>Insufficient clearance</div>
-              </div>
-            </div>
-            <div className='black'>
-              <div className='description'>
-                <pre>Keep it clean.</pre>
-              </div>
-            </div>
-          </div>
-        </>
-      );
     }
 
     let note = false;
