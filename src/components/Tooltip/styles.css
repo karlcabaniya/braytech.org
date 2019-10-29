@@ -351,7 +351,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-#tooltip .sockets.intrinsic-only {
+#tooltip .sockets.one {
   padding-bottom: 0;
 }
 

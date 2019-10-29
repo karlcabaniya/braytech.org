@@ -3,6 +3,12 @@
   position: relative;
 }
 
+#clan.about .module.banner .button.customise {
+  max-width: unset;
+  width: 92%;
+  margin: 0 auto;
+}
+
 #clan.about .module.about {
   grid-column: 4/7;
 }

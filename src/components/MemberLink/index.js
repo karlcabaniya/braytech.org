@@ -54,7 +54,13 @@ class MemberLink extends React.Component {
 
     if (this.mounted) {
       try {
-        let response = await bungie.GetProfile(type, id, displayName ? '200' : '100,200');
+        let response = await bungie.GetProfile({
+          params: {
+            membershipType: type,
+            membershipId: id,
+            components: displayName ? '200': '100,200'
+          }
+        });
 
         if (response && response.ErrorCode === 1) {
           let profile = responseUtils.profileScrubber(response.Response, 'activity');
@@ -90,7 +96,18 @@ class MemberLink extends React.Component {
 
     if (this.mounted) {
       try {
-        let requests = [bungie.GetProfile(type, id, '100,200,202,204,205,800,900'), bungie.GetGroupsForMember(type, id)];
+        let requests = [bungie.GetProfile({
+          params: {
+            membershipType: type,
+            membershopId: id,
+            components: '100,200,202,204,205,800,900'
+          }
+        }), bungie.GetGroupsForMember({
+          params: {
+            membershipType: type,
+            membershopId: id
+          }
+        })];
 
         let [profile, group] = await Promise.all(requests);
 

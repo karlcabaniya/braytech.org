@@ -14,8 +14,6 @@ import ThisWeek from './views/ThisWeek';
 import Now from './views/Now';
 import Pursuits from './views/Pursuits';
 
-import Legend from './views/Experiments/Legend';
-
 import Header from './components/UI/Header';
 import Spinner from './components/UI/Spinner';
 import PostmasterCapacity from './components/Notifications/PostmasterCapacity';
@@ -57,7 +55,6 @@ class ProfileRoutes extends React.Component {
         <Route path='/' render={route => <Header route={route} {...this.state} {...this.props} />} />
         <Switch>
           <Route path={`${match.url}/clan/:view?/:subView?/:subSubView?`} exact render={route => <Clan view={route.match.params.view} subView={route.match.params.subView} subSubView={route.match.params.subSubView} />} />
-          <Route path={`${match.url}/legend`} exact render={route => <Legend />} />
           <Route path={`${match.url}/checklists`} exact component={Checklists} />
           <Route path={`${match.url}/character`} exact component={Character} />
           <Route path={`${match.url}/collections/:primary?/:secondary?/:tertiary?/:quaternary?/:quinary?`} render={route => <Collections {...route} />} />

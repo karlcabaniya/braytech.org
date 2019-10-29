@@ -5,7 +5,7 @@ import * as responseUtils from './responseUtils';
 async function getMember(membershipType, membershipId) {
 
   const components = [100, 104, 200, 202, 204, 205, 300, 301, 302, 303, 304, 305, 306, 307, 800, 900];
-  let useAuth = false;
+  let withAuth = false;
 
   try {
     const tokens = ls.get('setting.auth');
@@ -14,7 +14,7 @@ async function getMember(membershipType, membershipId) {
     const refreshTokenExpired = tokens && now > new Date(tokens.refresh.expires).getTime();
 
     if (tokens && tokens.destinyMemberships.find(m => m.membershipId === membershipId) && !refreshTokenExpired) {
-      useAuth = true;
+      withAuth = true;
       components.push(102,103,201);
     }
   } catch (e) {
@@ -23,8 +23,20 @@ async function getMember(membershipType, membershipId) {
 
   try {
     const requests = [
-      bungie.GetProfile(membershipType, membershipId, components.join(','), useAuth), 
-      bungie.GetGroupsForMember(membershipType, membershipId), 
+      bungie.GetProfile({
+        params: {
+          membershipType,
+          membershipId,
+          components: components.join(',')
+        },
+        withAuth
+      }), 
+      bungie.GetGroupsForMember({
+        params: {
+          membershipType,
+          membershipId
+        }
+      }), 
       bungie.GetPublicMilestones()
     ];
 

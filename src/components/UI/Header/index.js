@@ -192,36 +192,12 @@ class Header extends React.Component {
         group: 0
       },
       {
-        name: t('Chalice of Opulence'),
-        desc: t("A recipe tool for Emperor Calus' auspicious gift"),
-        slug: '/chalice-tool',
-        exact: false,
-        profile: false,
-        group: 1
-      },
-      {
-        name: t('Experiments'),
-        desc: t('Where I keep all of my crazy ideas'),
-        slug: '/experiments',
-        exact: false,
-        profile: false,
-        group: 1
-      },
-      {
-        name: t('Suggestion box'),
-        desc: t('Suggest your ideas for Braytech and impact its future'),
-        slug: '/suggestions',
-        exact: false,
-        profile: false,
-        group: 2
-      },
-      {
         name: t('FAQ'),
         desc: t("Some of Tom's favourite frequently asked questions"),
         slug: '/faq',
         exact: false,
         profile: false,
-        group: 2
+        group: 1
       },
       {
         name: t('Credits'),
@@ -229,7 +205,7 @@ class Header extends React.Component {
         slug: '/credits',
         exact: false,
         profile: false,
-        group: 2
+        group: 1
       }
     ];
 
@@ -417,31 +393,6 @@ class Header extends React.Component {
                   <ul>
                     {views
                       .filter(v => v.group === 1 && !v.hidden)
-                      .map(view => {
-                        if (view.profile) {
-                          return (
-                            <li key={view.slug}>
-                              <div className='name'>{view.name}</div>
-                              <div className='description'>{view.desc}</div>
-                              <ProfileNavLink to={view.slug} isActive={isActive} exact={view.exact} onClick={this.closeNav} />
-                            </li>
-                          );
-                        } else {
-                          return (
-                            <li key={view.slug}>
-                              <div className='name'>{view.name}</div>
-                              <div className='description'>{view.desc}</div>
-                              <NavLink to={view.slug} exact={view.exact} onClick={this.closeNav} />
-                            </li>
-                          );
-                        }
-                      })}
-                  </ul>
-                </div>
-                <div className='type ancillary'>
-                  <ul>
-                    {views
-                      .filter(v => v.group === 2 && !v.hidden)
                       .map(view => {
                         if (view.profile) {
                           return (

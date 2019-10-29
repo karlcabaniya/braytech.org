@@ -85,7 +85,7 @@ const Equipment = props => {
         </div>
       ) : null}
       {sockets && sockets.socketCategories && sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length ? (
-        <div className={cx('sockets', { 'intrinsic-only': sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length === 1 })}>
+        <div className={cx('sockets', { one: sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length === 1 })}>
           {sockets.socketCategories
             .map((c, i) => {
               // map through socketCategories

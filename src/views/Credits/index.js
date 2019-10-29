@@ -28,10 +28,6 @@ class Credits extends React.Component {
       description: 'Responsible for refactoring core components that have brought Braytech properly into 2019. He lives in a tree house.'
     },
     {
-      name: 'Josh Hunt',
-      description: 'Has served as an inpiration through his own API work on projects such as Destiny Sets and Friendgame, and has encouraged me to be better repeatedly.'
-    },
-    {
       name: 'Richard Deveraux',
       description: "From what I understand, lowlines is a pioneer in all things Destiny and Destiny api stuff. His meticulous work helps power Braytech's checklists."
     },

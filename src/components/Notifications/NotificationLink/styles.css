@@ -205,7 +205,7 @@ html.backdropfilter .wrapper.light-mode #notification-overlay .sticky-nav {
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 21;
+  z-index: 22;
   display: grid;
   align-content: center;
   background-color: rgba(0, 0, 0, 0.4);

@@ -11,6 +11,7 @@ class ClanBanner extends React.Component {
     super(props);
 
     this.state = {
+      loading: false,
       loaded: 0
     };
 
@@ -47,10 +48,6 @@ class ClanBanner extends React.Component {
   }
 
   buildBannerConfig = (clanBannerData = this.props.bannerData) => {
-    this.setState({
-      loaded: 0
-    });
-
     let decals = manifest.DestinyClanBannerDefinition.Decals.find(decal => decal.imageHash === clanBannerData.decalId);
     let decalPrimaryColor = manifest.DestinyClanBannerDefinition.DecalPrimaryColors.find(color => color.colorHash === clanBannerData.decalColorId);
     let decalSecondaryColor = manifest.DestinyClanBannerDefinition.DecalSecondaryColors.find(color => color.colorHash === clanBannerData.decalBackgroundColorId);
@@ -69,19 +66,10 @@ class ClanBanner extends React.Component {
     this.bannerConfig.GonfalonDetailImage.src = gonfalonDetail.foregroundImagePath;
     this.bannerConfig.GonfalonDetailImage.color = `${gonfalonDetailColor.red}, ${gonfalonDetailColor.green}, ${gonfalonDetailColor.blue}, ${Math.min(gonfalonDetailColor.alpha, 1)}`;
 
-    // console.log(this.bannerConfig)
-
-    Object.keys(this.bannerConfig).forEach(key => {
-      let image = this.bannerConfig[key];
-      let cache = new Image();
-      image.el = cache;
-      cache.onload = () => {
-        this.setState(p => ({
-          loaded: p.loaded + 1
-        }));
-      };
-      cache.src = key === 'StandImage' ? '/static/images/extracts/flair/FlagStand01.png' : 'https://www.bungie.net' + image.src;
-    });
+    this.setState(p => ({
+      loading: false,
+      loaded: 0
+    }));
   };
 
   componentDidMount() {
@@ -90,18 +78,22 @@ class ClanBanner extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.bannerData !== this.props.bannerData) {
-      // console.log('componentDidUpdate', this.props.bannerData);
+      this.buildBannerConfig(this.props.bannerData);
+    }
 
-      if (!manifest.DestinyClanBannerDefinition) {
-        manifest.DestinyClanBannerDefinitionFetch().then(clanBannerManifest => {
-          // console.log(clanBannerManifest);
-          manifest.DestinyClanBannerDefinition = clanBannerManifest;
-
-          this.buildBannerConfig(this.props.bannerData);
-        });
-      } else {
-        this.buildBannerConfig(this.props.bannerData);
-      }
+    if (prevProps.bannerData === this.props.bannerData && this.state.loaded === 0 && !this.state.loading) {
+      Object.keys(this.bannerConfig).forEach(key => {
+        let image = this.bannerConfig[key];
+        let cache = new Image();
+        image.el = cache;
+        cache.onload = () => {
+          this.setState(p => ({
+            loading: p.loaded + 1 === 6 ? false : true,
+            loaded: p.loaded + 1
+          }));
+        };
+        cache.src = key === 'StandImage' ? '/static/images/extracts/flair/FlagStand01.png' : 'https://www.bungie.net' + image.src;
+      });
     }
   }
 

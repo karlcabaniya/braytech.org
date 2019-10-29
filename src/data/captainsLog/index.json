@@ -778,5 +778,10 @@
     "date": "2019-10-29T17:46:58.243Z",
     "version": "2.10.12",
     "content": "- stuff"
+  },
+  {
+    "date": "2019-10-29T21:31:47.760Z",
+    "version": "2.10.13",
+    "content": "- deprecated some old stuff\n- highlighted some old stuff\n- taught some stuff how to hide errors when appropriate"
   }
 ]

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Markdown from 'react-markdown';
 import moment from 'moment';
 import cx from 'classnames';
@@ -91,6 +92,9 @@ class AboutView extends React.Component {
         <ClanViewsLinks {...this.props} />
         <div className='module banner'>
           <ClanBanner bannerData={group.clanInfo.clanBannerData} />
+          <Link className='button customise' to={`/clan-banner-builder/${group.clanInfo.clanBannerData.decalBackgroundColorId}/${group.clanInfo.clanBannerData.decalColorId}/${group.clanInfo.clanBannerData.decalId}/${group.clanInfo.clanBannerData.gonfalonColorId}/${group.clanInfo.clanBannerData.gonfalonDetailColorId}/${group.clanInfo.clanBannerData.gonfalonDetailId}/${group.clanInfo.clanBannerData.gonfalonId}/`}>
+            <div className='text'>{t('Clan Banner Builder')}</div>
+          </Link>
         </div>
         <div className='module about'>
           <div className='name'>{group.name}</div>

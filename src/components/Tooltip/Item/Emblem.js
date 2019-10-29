@@ -21,7 +21,7 @@ const Emblem = (props) => {
         <ObservedImage className='image' src={`https://www.bungie.net${definitionItem.secondaryIcon}`} />
       </div>
       {sockets && sockets.socketCategories ? (
-        <div className={cx('sockets', { 'intrinsic-only': sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length === 1 })}>
+        <div className={cx('sockets', { one: sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length === 1 })}>
           {sockets.socketCategories
             .map((c, i) => {
               // map through socketCategories

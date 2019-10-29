@@ -48,13 +48,12 @@ import Read from './views/Read';
 import Maps from './views/Maps';
 import Settings from './views/Settings';
 import Credits from './views/Credits';
-import Experiments from './views/Experiments';
 import Suggestions from './views/Suggestions';
 import FAQ from './views/FAQ';
+import ClanBannerBuilder from './views/ClanBannerBuilder';
 import ChaliceRecipes from './views/ChaliceRecipes';
 import Test from './views/Test';
 
-import ClanBannerBuilder from './views/Experiments/ClanBannerBuilder';
 
 import OOB from './views/OOB';
 
@@ -274,8 +273,7 @@ class App extends React.Component {
                           <Route path='/faq' exact component={FAQ} />
                           <Route path='/credits' exact component={Credits} />
                           <Route path='/chalice-tool/:rune1?/:rune2?/:rune3?' render={route => <ChaliceRecipes {...route} />} />
-                          <Route path='/experiments' exact component={Experiments} />
-                          <Route path='/experiments/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
+                          <Route path='/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact component={ClanBannerBuilder} />
                           <Route path='/oob' component={OOB} />
                           <Route path='/test' component={Test} />
                           <Route path='/' component={Index} />

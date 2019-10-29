@@ -16,7 +16,7 @@ async function apiRequest(path, options = {}) {
   const defaults = {
     headers: {},
     stats: false,
-    auth: false,
+    withAuth: false,
     errors: {
       hide: false
     }
@@ -43,7 +43,7 @@ async function apiRequest(path, options = {}) {
     options.body = JSON.stringify(options.body);
   }
 
-  if (tokens && options.auth && !options.headers.Authorization) {
+  if (tokens && options.withAuth && !options.headers.Authorization) {
     let now = new Date().getTime() + 10000;
     let then = new Date(tokens.access.expires).getTime();
 
@@ -160,70 +160,68 @@ export const GetOAuthAccessToken = async body =>
 
 export const GetMembershipDataForCurrentUser = async (access = false) =>
   apiRequest('/Platform/User/GetMembershipsForCurrentUser/', {
-    auth: true,
+    withAuth: true,
     headers: {
       Authorization: access && `Bearer ${access}`
     }
   });
 
-export const GetProfile = async (membershipType, membershipId, components, auth = false) =>
-  apiRequest(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=${components}`, {
-    auth
-  });
+export const GetProfile = async options =>
+  apiRequest(`/Platform/Destiny2/${options.params.membershipType}/Profile/${options.params.membershipId}/?components=${options.params.components}`, options);
 
 export const EquipItem = async body =>
   apiRequest(`/Platform/Destiny2/Actions/Items/EquipItem/`, {
-    auth: true,
+    withAuth: true,
     method: 'post',
     body
   });
 
 export const KickMember = async (groupId, membershipType, membershipId) =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Kick/`, {
-    auth: true,
+    withAuth: true,
     method: 'post'
   });
 
 export const BanMember = async (groupId, membershipType, membershipId) =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Ban/`, {
-    auth: true,
+    withAuth: true,
     method: 'post'
   });
 
 export const UnbanMember = async (groupId, membershipType, membershipId) =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/Unban/`, {
-    auth: true,
+    withAuth: true,
     method: 'post'
   });
 
 export const GetPendingMemberships = async groupId =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/Pending/`, {
-    auth: true
+    withAuth: true
   });
 
 export const ApprovePendingForList = async (groupId, body) =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/ApproveList/`, {
-    auth: true,
+    withAuth: true,
     method: 'post',
     body
   });
 
 export const DenyPendingForList = async (groupId, body) =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/DenyList/`, {
-    auth: true,
+    withAuth: true,
     method: 'post',
     body
   });
 
 export const EditGroupMembership = async (groupId, membershipType, membershipId, memberType) =>
   apiRequest(`/Platform/GroupV2/${groupId}/Members/${membershipType}/${membershipId}/SetMembershipType/${memberType}/`, {
-    auth: true,
+    withAuth: true,
     method: 'post'
   });
 
 export const GetVendor = async (membershipType, membershipId, characterId, vendorHash, components) =>
   apiRequest(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/Character/${characterId}/Vendors/${vendorHash}/?components=${components}`, {
-    auth: true
+    withAuth: true
   });
 
 export const manifest = async version => fetch(`https://www.bungie.net${version}`).then(a => a.json());
@@ -234,7 +232,7 @@ export const GetCommonSettings = async options => apiRequest(`/Platform/Settings
 
 export const GetPublicMilestones = async () => apiRequest('/Platform/Destiny2/Milestones/');
 
-export const GetGroupsForMember = async (membershipType, membershipId) => apiRequest(`/Platform/GroupV2/User/${membershipType}/${membershipId}/0/1/`);
+export const GetGroupsForMember = async options => apiRequest(`/Platform/GroupV2/User/${options.params.membershipType}/${options.params.membershipId}/0/1/`);
 
 export const GetGroupByName = async (groupName, groupType = 1) => apiRequest(`/Platform/GroupV2/Name/${encodeURIComponent(groupName)}/${groupType}/`);
 

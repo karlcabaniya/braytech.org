@@ -15,7 +15,16 @@ export async function getGroupMembers(group, getPending = false) {
       groupMembersResponse.ErrorCode === 1 &&
       groupMembersResponse.Response.results.map(async member => {
         try {
-          const profile = await bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900');
+          const profile = await bungie.GetProfile({
+            params: {
+              membershipType: member.destinyUserInfo.membershipType,
+              membershipId: member.destinyUserInfo.membershipId,
+              components: [100, 200, 202, 204, 900].join(',')
+            },
+            errors: {
+              hide: true
+            }
+          });
 
           if (profile && profile.ErrorCode === 1 && profile.Response) {
             if (!profile.Response.characterProgressions.data) {
@@ -39,7 +48,16 @@ export async function getGroupMembers(group, getPending = false) {
           groupMembersPendingResponse.ErrorCode === 1 &&
           groupMembersPendingResponse.Response.results.map(async member => {
             try {
-              const profile = await bungie.GetProfile(member.destinyUserInfo.membershipType, member.destinyUserInfo.membershipId, '100,200,202,204,900');
+              const profile = await bungie.GetProfile({
+                params: {
+                  membershipType: member.destinyUserInfo.membershipType,
+                  membershipId: member.destinyUserInfo.membershipId,
+                  components: [100, 200, 202, 204, 900].join(',')
+                },
+                errors: {
+                  hide: true
+                }
+              });
 
               if (profile && profile.ErrorCode === 1 && profile.Response) {
                 if (!profile.Response.characterProgressions.data) {

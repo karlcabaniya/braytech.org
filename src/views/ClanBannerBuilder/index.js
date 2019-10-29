@@ -7,10 +7,10 @@ import assign from 'lodash/assign';
 import cx from 'classnames';
 import mapValues from 'lodash/mapValues';
 
-import manifest from '../../../utils/manifest';
-import ObservedImage from '../../../components/ObservedImage';
-import Spinner from '../../../components/UI/Spinner';
-import ClanBanner from '../../../components/UI/ClanBanner';
+import manifest from '../../utils/manifest';
+import ObservedImage from '../../components/ObservedImage';
+import Spinner from '../../components/UI/Spinner';
+import ClanBanner from '../../components/UI/ClanBanner';
 
 import './styles.css';
 
@@ -35,7 +35,6 @@ class ClanBannerBuilder extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    console.log(manifest.DestinyClanBannerDefinition)
   }
 
   componentWillUnmount() {}
@@ -50,7 +49,7 @@ class ClanBannerBuilder extends React.Component {
 
     const buildLink = object => {
       let potentialData = assign({}, bannerData, object);
-      return `/experiments/clan-banner-builder/${Object.values(potentialData).join('/')}/`;
+      return `/clan-banner-builder/${Object.values(potentialData).join('/')}/`;
     };
 
     let configOptions = [];

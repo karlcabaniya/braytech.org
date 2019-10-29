@@ -15,14 +15,14 @@ const Mod = props => {
   return (
     <>
       {perks && perks.length ? (
-        <div className={cx('sockets', { 'intrinsic-only': perks.length === 0 })}>
+        <div className={cx('sockets', { one: perks.length === 0 })}>
           {perks
             .map(p => {
               const definitionPerk = manifest.DestinySandboxPerkDefinition[p.perkHash];
 
               return (
                 <div key={p.perkHash} className='socket'>
-                  <div className={cx('plug', { 'is-intrinsic': true, enabled: true, 'no-icon': true })}>
+                  <div className={cx('plug', { one: true, enabled: true, 'no-icon': true })}>
                     {/* <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definitionPerk.displayProperties.icon ? definitionPerk.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} /> */}
                     <div className='text'>
                       {/* <div className='name'>{definitionPerk.displayProperties && definitionPerk.displayProperties.name}</div> */}
