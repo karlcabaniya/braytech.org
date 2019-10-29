@@ -85,7 +85,7 @@ class ThisWeek extends React.Component {
           },
           {
             className: [],
-            condition: characterActivities[member.characterId].availableActivities.filter(a => [3753505781, 1454880421, 952904835].includes(a.activityHash)).length,
+            condition: characterActivities[member.characterId].availableActivities.filter(a => [3753505781, 1454880421].includes(a.activityHash)).length,
             mods: [
               {
                 className: [],

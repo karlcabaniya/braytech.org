@@ -773,5 +773,10 @@
     "date": "2019-10-29T07:38:01.143Z",
     "version": "2.10.10",
     "content": "- reworked item tooltips\n- and other good stuff"
+  },
+  {
+    "date": "2019-10-29T17:46:58.243Z",
+    "version": "2.10.12",
+    "content": "- stuff"
   }
 ]

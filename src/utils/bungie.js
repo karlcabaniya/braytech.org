@@ -16,13 +16,23 @@ async function apiRequest(path, options = {}) {
   const defaults = {
     headers: {},
     stats: false,
-    auth: false
+    auth: false,
+    errors: {
+      hide: false
+    }
   };
 
   let tokens = ls.get('setting.auth');
 
   const stats = options.stats || false;
-  options = { ...defaults, ...options };
+  options = {
+    ...defaults,
+    ...options,
+    errors: {
+      ...defaults.errors,
+      ...options.errors
+    }
+  };
 
   options.headers['X-API-Key'] = process.env.REACT_APP_BUNGIE_API_KEY;
 
@@ -50,6 +60,26 @@ async function apiRequest(path, options = {}) {
 
   const request = await fetch(`https://${stats ? 'stats' : 'www'}.bungie.net${path}`, options)
     .catch(e => {
+      if (!options.errors.hide) {
+        store.dispatch({
+          type: 'PUSH_NOTIFICATION',
+          payload: {
+            error: true,
+            date: new Date().toISOString(),
+            expiry: 86400000,
+            displayProperties: {
+              name: `HTTP error`,
+              description: `A network error occured. ${e.message}.`,
+              timeout: 4
+            }
+          }
+        });
+      }
+    });
+  const response = request && await request.json();
+
+  if (response && response.ErrorCode && response.ErrorCode !== 1) {
+    if (!options.errors.hide) {
       store.dispatch({
         type: 'PUSH_NOTIFICATION',
         payload: {
@@ -57,29 +87,13 @@ async function apiRequest(path, options = {}) {
           date: new Date().toISOString(),
           expiry: 86400000,
           displayProperties: {
-            name: `HTTP error`,
-            description: `A network error occured. ${e.message}.`,
+            name: 'Bungie',
+            description: `${response.ErrorCode} ${response.ErrorStatus} ${response.Message}`,
             timeout: 4
           }
         }
       });
-    });
-  const response = request && await request.json();
-
-  if (response && response.ErrorCode && response.ErrorCode !== 1) {
-    store.dispatch({
-      type: 'PUSH_NOTIFICATION',
-      payload: {
-        error: true,
-        date: new Date().toISOString(),
-        expiry: 86400000,
-        displayProperties: {
-          name: 'Bungie',
-          description: `${response.ErrorCode} ${response.ErrorStatus} ${response.Message}`,
-          timeout: 4
-        }
-      }
-    });
+    }
 
     return response;
   } else if (request && request.ok) {
@@ -112,19 +126,21 @@ async function apiRequest(path, options = {}) {
       return response;
     }
   } else if (request) {
-    store.dispatch({
-      type: 'PUSH_NOTIFICATION',
-      payload: {
-        error: true,
-        date: new Date().toISOString(),
-        expiry: 86400000,
-        displayProperties: {
-          name: `HTTP error`,
-          description: `Code ${request.status} A network error occured.`,
-          timeout: 4
+    if (!options.errors.hide) {
+      store.dispatch({
+        type: 'PUSH_NOTIFICATION',
+        payload: {
+          error: true,
+          date: new Date().toISOString(),
+          expiry: 86400000,
+          displayProperties: {
+            name: `HTTP error`,
+            description: `Code ${request.status} A network error occured.`,
+            timeout: 4
+          }
         }
-      }
-    });
+      });
+    }
 
     return request;
   } else {
@@ -212,9 +228,9 @@ export const GetVendor = async (membershipType, membershipId, characterId, vendo
 
 export const manifest = async version => fetch(`https://www.bungie.net${version}`).then(a => a.json());
 
-export const GetDestinyManifest = async () => apiRequest('/Platform/Destiny2/Manifest/');
+export const GetDestinyManifest = async options => apiRequest('/Platform/Destiny2/Manifest/', options);
 
-export const GetCommonSettings = async () => apiRequest(`/Platform/Settings/`);
+export const GetCommonSettings = async options => apiRequest(`/Platform/Settings/`, options);
 
 export const GetPublicMilestones = async () => apiRequest('/Platform/Destiny2/Milestones/');
 

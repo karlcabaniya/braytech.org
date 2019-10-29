@@ -17,7 +17,6 @@ import './styles.css';
 const featuredActivityHashes = [
   3753505781, // Iron Banner
   1454880421, // Festival of the Lost: Haunted Forest
-  952904835 // Momentum Control
 ];
 
 const featuredModeIcons = {

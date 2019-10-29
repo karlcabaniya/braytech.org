@@ -91,8 +91,8 @@ class App extends React.Component {
           .toCollection()
           .first()
       ),
-      manifestIndex: timed('GetDestinyManifest', bungie.GetDestinyManifest()),
-      bungieSettings: timed('GetCommonSettings', bungie.GetCommonSettings()),
+      manifestIndex: timed('GetDestinyManifest', bungie.GetDestinyManifest({ errors: { hide: true } })),
+      bungieSettings: timed('GetCommonSettings', bungie.GetCommonSettings({ errors: { hide: true } })),
       voluspaStatistics: timed('statistics', voluspa.statistics())
     };
 
@@ -166,6 +166,11 @@ class App extends React.Component {
 
     const storedManifest = await this.startupRequests.storedManifest;
     const manifestIndex = await this.startupRequests.manifestIndex;
+    const bungieSettings = await this.startupRequests.bungieSettings;
+
+    if ((bungieSettings.ErrorCode === 1 && bungieSettings.Response.settings && bungieSettings.Response.settings.systems && !bungieSettings.Response.settings.systems.D2Profiles.enabled) || bungieSettings.ErrorCode === 5 || manifestIndex.ErrorCode === 5) {
+      throw new Error('maintenance');
+    }
 
     const manifestLanuage = this.currentLanguage;
     const currentVersion = manifestIndex && manifestIndex.ErrorCode === 1 && manifestIndex.Response.jsonWorldContentPaths[manifestLanuage];
@@ -180,13 +185,7 @@ class App extends React.Component {
       tmpManifest = storedManifest.value;
     }
 
-    const bungieSettings = await this.startupRequests.bungieSettings;
-
     tmpManifest.settings = bungieSettings && bungieSettings.ErrorCode === 1 && bungieSettings.Response;
-
-    if (tmpManifest.settings && tmpManifest.settings.systems && !tmpManifest.settings.systems.D2Profiles.enabled) {
-      throw new Error('maintenance');
-    }
 
     this.availableLanguages = Object.keys(manifestIndex.Response.jsonWorldContentPaths);
 
