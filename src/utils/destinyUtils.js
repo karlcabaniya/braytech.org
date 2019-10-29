@@ -255,6 +255,58 @@ export function damageTypeToString(type) {
   return string;
 }
 
+export function energyTypeToAsset(type) {
+  let string;
+  let icon;
+
+  switch (type) {
+    case 591714140:
+      string = 'solar';
+      icon = '';
+      break;
+    case 728351493:
+      string = 'arc';
+      icon = '';
+      break;
+    case 4069572561:
+      string = 'void';
+      icon = '';
+      break;
+    case 1198124803:
+      string = 'any';
+      icon = '';
+      break;
+    default:
+      string = '';
+      icon = '';
+  }
+
+  return {
+    string,
+    icon
+  };
+}
+
+export function breakerTypeToIcon(type) {
+  let icon;
+
+  switch (type) {
+    case 3178805705:
+      icon = '';
+      break;
+    case 485622768:
+      icon = '';
+      break;
+    case 2611060930:
+      icon = '';
+      break;
+    default:
+      icon = '';
+  }
+
+  return icon;
+}
+
 function getSubclassPath(gridDef, talentGrid) {
   let activatedNodes = talentGrid.nodes.filter(node => node.isActivated).map(node => node.nodeIndex);
   let selectedSkills = gridDef.nodeCategories.filter(category => {

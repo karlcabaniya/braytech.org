@@ -1,6 +1,6 @@
 #tooltip {
   position: fixed;
-  width: 420px;
+  width: 440px;
   pointer-events: none;
   z-index: 2000;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
@@ -117,6 +117,11 @@
   align-items: center;
   padding: 0 16px 0 0;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#tooltip .damage .power .breaker-type {
+  padding: 0 7px 0 0;
+  color: #fff;
 }
 
 #tooltip .damage .power .text {
@@ -466,6 +471,45 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
+#tooltip .energy-cost {
+  padding: 14px 16px 0;
+  color: #fff;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  font-size: 16px;
+}
+
+#tooltip .energy-cost .value {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  font-weight: 500;
+  font-size: 28px;
+}
+
+#tooltip .energy-cost .value .icon {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 3px 0 0;
+}
+
+#tooltip .energy-cost .value.solar {
+  color: #ef641f;
+}
+
+#tooltip .energy-cost .value.arc {
+  color: #79bbe7;
+}
+
+#tooltip .energy-cost .value.void {
+  color: #a371c2;
+}
+
+#tooltip .energy-cost .text {
+  padding: 0 0 0 12px;
+}
+
 #tooltip .quantity {
   padding: 0 16px 16px;
   font-size: 14px;
@@ -643,38 +687,6 @@
   width: 18px;
   height: 18px;
   margin: 0 10px 0 0;
-}
-
-#tooltip .frame.ui.name-only .header .name {
-  margin: 0;
-}
-
-#tooltip .frame.ui.sandbox-perk .black .perk {
-  padding: 12px 16px;
-  display: grid;
-  grid-template-columns: 32px auto;
-  grid-gap: 16px;
-}
-
-#tooltip .frame.ui.sandbox-perk .black .perk .image.icon {
-  position: relative;
-  width: 32px;
-  height: 32px;
-}
-
-#tooltip .frame.ui.sandbox-perk .black .perk .description {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-#tooltip .frame.ui.subclass .header {
-  background-color: hsla(0, 0%, 17%, 0.9);
-  border-top: none;
-}
-
-#tooltip .frame.ui.subclass .black .image.screenshot {
-  display: none;
 }
 
 #tooltip .header::before {

@@ -122,11 +122,11 @@ const manifest = {
     Object.assign(newManifest.DestinyInventoryItemDefinition, customs[lang].DestinyInventoryItemDefinition);
 
     // add emotes to flair presentation node
-    if (newManifest.DestinyPresentationNodeDefinition[3066887728] && newManifest.DestinyPresentationNodeDefinition[3066887728].children && newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes) {
-      newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes.push({
-        presentationNodeHash: 'emotes'
-      });
-    }
+    // if (newManifest.DestinyPresentationNodeDefinition[3066887728] && newManifest.DestinyPresentationNodeDefinition[3066887728].children && newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes) {
+    //   newManifest.DestinyPresentationNodeDefinition[3066887728].children.presentationNodes.push({
+    //     presentationNodeHash: 'emotes'
+    //   });
+    // }
 
     // build Enigmatic Blueprint quest line
     if (newManifest.DestinyInventoryItemDefinition[2412366792]) {

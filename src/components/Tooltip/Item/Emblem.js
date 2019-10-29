@@ -13,8 +13,6 @@ const Emblem = (props) => {
   // source string
   const sourceString = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] && manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash].sourceString : false;
 
-  
-
   return (
     <>
       <div className='emblem'>

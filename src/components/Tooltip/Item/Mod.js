@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
-// import * as enums from '../../../utils/destinyEnums';
+import { energyTypeToAsset } from '../../../utils/destinyUtils';
 // import ObservedImage from '../../ObservedImage';
 
 const Mod = props => {
@@ -10,12 +10,29 @@ const Mod = props => {
 
   const definitionItem = manifest.DestinyInventoryItemDefinition[itemHash];
 
+  // description
+  const description = definitionItem.displayProperties && definitionItem.displayProperties.description !== '' && definitionItem.displayProperties.description;
+
+  // source string
+  const sourceString = definitionItem.collectibleHash ? manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash] && manifest.DestinyCollectibleDefinition[definitionItem.collectibleHash].sourceString : false;
+
+  // perks
   const perks = definitionItem.perks.filter(p => manifest.DestinySandboxPerkDefinition[p.perkHash] && manifest.DestinySandboxPerkDefinition[p.perkHash].isDisplayable);
+
+  // energy cost
+  const energyCost = definitionItem.plug.energyCost;
+  const energyType = energyCost && energyTypeToAsset(energyCost.energyTypeHash);
 
   return (
     <>
+      {energyCost ? (
+        <div className='energy-cost'>
+          <div className={cx('value', energyType.string)}><div className='icon'>{energyType.icon}</div> {energyCost.energyCost}</div>
+          <div className='text'>ENERGY COST</div>
+        </div>
+      ) : null}
       {perks && perks.length ? (
-        <div className={cx('sockets', { one: perks.length === 0 })}>
+        <div className={cx('sockets perks', { one: perks.length === 0 })}>
           {perks
             .map(p => {
               const definitionPerk = manifest.DestinySandboxPerkDefinition[p.perkHash];
@@ -33,6 +50,18 @@ const Mod = props => {
               );
             })
             .filter(c => c)}
+        </div>
+      ) : null}
+      {perks && perks.length > 0 && sourceString && <div className='line' />}
+      {description ? (
+        <div className='description'>
+          <pre>{description}</pre>
+        </div>
+      ) : null}
+      {description && <div className='line' />}
+      {sourceString ? (
+        <div className='source'>
+          <p>{sourceString}</p>
         </div>
       ) : null}
     </>

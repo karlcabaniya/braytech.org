@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
 import * as enums from '../../../utils/destinyEnums';
-import { damageTypeToString, ammoTypeToString } from '../../../utils/destinyUtils';
+import { damageTypeToString, ammoTypeToString, breakerTypeToIcon } from '../../../utils/destinyUtils';
 import { statsMs } from '../../../utils/destinyItems/stats';
 import ObservedImage from '../../ObservedImage';
 
@@ -29,6 +29,7 @@ const Equipment = props => {
           <>
             <div className='damage weapon'>
               <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
+                {definitionItem.breakerType > 0 && <div className='breaker-type'>{breakerTypeToIcon(definitionItem.breakerTypeHash)}</div>}
                 <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
                 <div className='text'>{primaryStat.value}</div>
               </div>

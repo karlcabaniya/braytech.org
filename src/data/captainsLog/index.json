@@ -783,5 +783,10 @@
     "date": "2019-10-29T21:31:47.760Z",
     "version": "2.10.13",
     "content": "- deprecated some old stuff\n- highlighted some old stuff\n- taught some stuff how to hide errors when appropriate"
+  },
+  {
+    "date": "2019-10-29T22:56:23.650Z",
+    "version": "2.10.14",
+    "content": "- improved mod tooltips\n- added breaker types to weapon tooltips"
   }
 ]
