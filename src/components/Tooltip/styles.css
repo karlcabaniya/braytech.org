@@ -381,6 +381,11 @@
   align-items: center;
 }
 
+#tooltip .plug.no-icon > .text {
+  flex-basis: 100%;
+  padding: 0;
+}
+
 #tooltip .plug .text .name {
   margin: 0 0 3px;
   flex-basis: 100%;

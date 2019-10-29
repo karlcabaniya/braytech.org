@@ -48,17 +48,23 @@ export const statWhiteList = [
   155624089, // Stability
   943549884, // Handling
   4188031367, // Reload Speed
-  1345609583, // Aim Assistance
-  3555269338, // Zoom
-  2715839340, // Recoil Direction  
   4284893193, // Rounds Per Minute
   2961396640, // Charge Time
   447667954, // Draw Time
   3871231066, // Magazine
-  1931675084, // Inventory Size
   925767036, // Ammo Capacity
   ...armorStats,
   -1000 // Total
+];
+
+/**
+ * Which hidden stats to display, and in which order.
+ */
+export const statAdvWhiteList = [
+  1345609583, // Aim Assistance
+  3555269338, // Zoom
+  2715839340, // Recoil Direction  
+  1931675084, // Inventory Size
 ];
 
 /** Stats that should be forced to display without a bar (just a number). */
@@ -112,7 +118,7 @@ function buildStat(itemStat, statGroup, statDisplays) {
   const definitionStat = manifest.DestinyStatDefinition[statHash];
 
   let value = itemStat.value || 0;
-  let maximumValue = statGroup.maximumValue;
+  let maximumValue = statGroup.maximumValue || 100; // || 100 to avoid recoil direction NaN
   let bar = !statsNoBar.includes(statHash);
   let smallerIsBetter = false;
 
@@ -120,8 +126,7 @@ function buildStat(itemStat, statGroup, statDisplays) {
 
   if (statDisplay) {
     const firstInterp = statDisplay.displayInterpolation[0];
-    const lastInterp =
-      statDisplay.displayInterpolation[statDisplay.displayInterpolation.length - 1];
+    const lastInterp = statDisplay.displayInterpolation[statDisplay.displayInterpolation.length - 1];
     smallerIsBetter = firstInterp.weight > lastInterp.weight;
     maximumValue = Math.max(statDisplay.maximumValue, firstInterp.weight, lastInterp.weight);
     bar = !statDisplay.displayAsNumeric;
@@ -255,6 +260,8 @@ function enhanceStatsWithPlugs(item, stats, statDisplays) {
       stat.value = statDisplay
         ? interpolateStatValue(stat.investmentValue, statDisplays[stat.statHash])
         : Math.min(stat.investmentValue, stat.maximumValue);
+
+      if (stat.statHash === 2715839340) console.log(stat)
     }
   }
 
@@ -357,6 +364,11 @@ export const stats = item => {
   //   }
   // }
 
+  if (definitionItem && definitionItem.itemType === 2) {
+    // Add the "Total" stat for armor
+    investmentStats.push(totalStat(investmentStats));
+  }
+
   return investmentStats.length ? investmentStats.sort(utils.compareBy((s) => s.sort)) : null;
 }
 
@@ -383,6 +395,9 @@ function totalStat(stats = []) {
 
   return {
     investmentValue: total,
+    displayProperties: {
+      name: 'Total'
+    },
     statHash: -1000,
     sort: statWhiteList.indexOf(-1000),
     value: total,

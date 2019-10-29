@@ -14,10 +14,12 @@ import ObservedImage from '../../ObservedImage';
 import Default from './Default';
 import Equipment from './Equipment';
 import Emblem from './Emblem';
+import Mod from './Mod';
 
 const woolworths = {
   equipment: Equipment,
-  emblem: Emblem
+  emblem: Emblem,
+  mod: Mod
 }
 
 class Item extends React.Component {
@@ -96,6 +98,8 @@ class Item extends React.Component {
         item.type = 'equipment';
       } else if (definitionItem.itemType === 14) {
         item.type = 'emblem';
+      } else if (definitionItem.itemType === 19) {
+        item.type = 'mod';
       }
     }
 

@@ -4,9 +4,10 @@ import cx from 'classnames';
 import manifest from '../../../utils/manifest';
 import * as enums from '../../../utils/destinyEnums';
 import { damageTypeToString, ammoTypeToString } from '../../../utils/destinyUtils';
+import { statsMs } from '../../../utils/destinyItems/stats';
 import ObservedImage from '../../ObservedImage';
 
-const Equipment = (props) => {
+const Equipment = props => {
   const { itemHash, instanceId, itemComponents, quantity, state, rarity, type, primaryStat, stats, sockets, masterwork, masterworkInfo } = props;
 
   const definitionItem = manifest.DestinyInventoryItemDefinition[itemHash];
@@ -73,7 +74,9 @@ const Equipment = (props) => {
                       <div className='int'>{s.value}</div>
                     </>
                   ) : (
-                    s.value
+                    <>
+                      {s.value} {statsMs.includes(s.statHash) && 'ms'}
+                    </>
                   )}
                 </div>
               </div>
@@ -93,30 +96,29 @@ const Equipment = (props) => {
                 if (plugs.length) {
                   return (
                     <div key={c.category.hash} className='category'>
-                      {plugs
-                        .map(s => {
-                          // filter for perks and map through sockets
+                      {plugs.map(s => {
+                        // filter for perks and map through sockets
 
-                          return (
-                            <div key={s.socketIndex} className='socket'>
-                              {s.plugOptions
-                                .filter(p => p.isEnabled)
-                                .map(p => {
-                                  // filter for enabled plugs and map through
+                        return (
+                          <div key={s.socketIndex} className='socket'>
+                            {s.plugOptions
+                              .filter(p => p.isEnabled)
+                              .map(p => {
+                                // filter for enabled plugs and map through
 
-                                  return (
-                                    <div key={p.plugItem.hash} className={cx('plug', { intrinsic: s.isIntrinsic, enabled: true })}>
-                                      <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${p.plugItem.displayProperties.icon ? p.plugItem.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
-                                      <div className='text'>
-                                        <div className='name'>{p.plugItem.displayProperties.name}</div>
-                                        <div className='description'>{s.isIntrinsic ? p.plugItem.displayProperties.description : p.plugItem.itemTypeDisplayName}</div>
-                                      </div>
+                                return (
+                                  <div key={p.plugItem.hash} className={cx('plug', { intrinsic: s.isIntrinsic, enabled: true })}>
+                                    <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${p.plugItem.displayProperties.icon ? p.plugItem.displayProperties.icon : `/img/misc/missing_icon_d2.png`}`} />
+                                    <div className='text'>
+                                      <div className='name'>{p.plugItem.displayProperties.name}</div>
+                                      <div className='description'>{s.isIntrinsic ? p.plugItem.displayProperties.description : p.plugItem.itemTypeDisplayName}</div>
                                     </div>
-                                  );
-                                })}
-                            </div>
-                          );
-                        })}
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        );
+                      })}
                     </div>
                   );
                 } else {

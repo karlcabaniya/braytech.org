@@ -335,7 +335,7 @@ class RosterAdmin extends React.Component {
     const isAdmin = member.data.groups.results.find(r => {
       const authed = this.auth.destinyMemberships.find(m => m.membershipId === member.membershipId);
 
-      if (r.member.memberType > 2 && r.member.destinyUserInfo.membershipId === authed.membershipId) {
+      if (r.member.memberType > 2 && authed && r.member.destinyUserInfo.membershipId === authed.membershipId) {
         return true;
       } else {
         return false;

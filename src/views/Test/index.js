@@ -33,7 +33,7 @@ class Test extends React.Component {
 
     return (
       <div className='view' id='test'>
-        <div id='tooltip' className='visible'>
+        {/* <div id='tooltip' className='visible'>
           <Item hash='2408405461' />
         </div>
         <div id='tooltip' className='visible'>
@@ -50,6 +50,9 @@ class Test extends React.Component {
         </div>
         <div id='tooltip' className='visible'>
           <Item hash='3899270607' />
+        </div> */}
+        <div id='tooltip' className='visible'>
+          <Item hash='1852863732' />
         </div>
       </div>
     );
