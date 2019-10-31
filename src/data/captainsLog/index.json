@@ -793,5 +793,10 @@
     "date": "2019-10-31T03:19:24.171Z",
     "version": "2.10.15",
     "content": "- added tooltip for dungeons\n- trying to fix for Daniel\n- other bugs"
+  },
+  {
+    "date": "2019-10-31T09:32:11.384Z",
+    "version": "2.10.16",
+    "content": "- added fireteams to clan roster\n- reports bug"
   }
 ]

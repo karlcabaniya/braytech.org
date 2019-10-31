@@ -433,7 +433,9 @@
 }
 
 
-
+.list.reports li .sticky-nav {
+  position: sticky;
+}
 
 
 

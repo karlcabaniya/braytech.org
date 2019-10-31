@@ -19,7 +19,7 @@ export async function getGroupMembers(group, getPending = false) {
             params: {
               membershipType: member.destinyUserInfo.membershipType,
               membershipId: member.destinyUserInfo.membershipId,
-              components: [100, 200, 202, 204, 900].join(',')
+              components: [100, 200, 202, 204, 900, 1000].join(',')
             },
             errors: {
               hide: true
@@ -52,7 +52,7 @@ export async function getGroupMembers(group, getPending = false) {
                 params: {
                   membershipType: member.destinyUserInfo.membershipType,
                   membershipId: member.destinyUserInfo.membershipId,
-                  components: [100, 200, 202, 204, 900].join(',')
+                  components: [100, 200, 202, 204, 900, 1000].join(',')
                 },
                 errors: {
                   hide: true

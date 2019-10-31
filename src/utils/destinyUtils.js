@@ -710,7 +710,7 @@ export function lastPlayerActivity(member) {
         lastActivityString = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
 
       } else if ([2274172949, 2947109551].includes(lastActivity.currentPlaylistActivityHash)) { // Crucible playlist [Quickplay, Competitive]
-console.log('hi')
+
         lastActivityString = `${definitionActivityPlaylist.displayProperties.name}: ${definitionActivityMode.displayProperties.name}: ${definitionActivity.displayProperties.name}`;
 
       } else if (definitionActivityMode) { // Default
