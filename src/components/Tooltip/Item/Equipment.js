@@ -50,7 +50,7 @@ const Equipment = props => {
           </>
         )
       ) : null}
-      {flair && <div className='line' />}
+      {primaryStat && flair && <div className='line' />}
       {flair ? (
         <div className='flair'>
           <p>{flair}</p>

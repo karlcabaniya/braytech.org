@@ -144,7 +144,7 @@ class Item extends React.Component {
     item.stats = stats(item);
     item.masterworkInfo = masterwork(item);
 
-    item.primaryStat = definitionItem.stats && !definitionItem.stats.disablePrimaryStatDisplay && definitionItem.stats.primaryBaseStatHash && {
+    item.primaryStat = (definitionItem.itemType === 2 || definitionItem.itemType === 3) && definitionItem.stats && !definitionItem.stats.disablePrimaryStatDisplay && definitionItem.stats.primaryBaseStatHash && {
       hash: definitionItem.stats.primaryBaseStatHash,
       displayProperties: manifest.DestinyStatDefinition[definitionItem.stats.primaryBaseStatHash].displayProperties,
       value: 750

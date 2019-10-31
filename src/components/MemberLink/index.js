@@ -99,13 +99,13 @@ class MemberLink extends React.Component {
         let requests = [bungie.GetProfile({
           params: {
             membershipType: type,
-            membershopId: id,
+            membershipId: id,
             components: '100,200,202,204,205,800,900'
           }
         }), bungie.GetGroupsForMember({
           params: {
             membershipType: type,
-            membershopId: id
+            membershipId: id
           }
         })];
 

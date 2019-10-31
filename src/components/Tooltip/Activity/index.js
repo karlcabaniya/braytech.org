@@ -80,6 +80,8 @@ class Activity extends React.Component {
           return 'nightmare-hunt';
         } else if (hash === 2999911583) {
           return 'vex-offensive';
+        } else if (activityModeHashes.includes(608898761)) {
+          return 'dungeon';
         }
       };
 
@@ -308,6 +310,20 @@ class Activity extends React.Component {
           className: 'vex-offensive',
           icon: (
             <span className='destiny-vex-invasion'>
+              <span className='path1' />
+              <span className='path2' />
+              <span className='path3' />
+            </span>
+          )
+        };
+      }
+
+      if (modeFiltered === 'dungeon') {
+        activityTypeDisplay = {
+          ...activityTypeDisplay,
+          className: 'dungeon',
+          icon: (
+            <span className='destiny-dungeon'>
               <span className='path1' />
               <span className='path2' />
               <span className='path3' />

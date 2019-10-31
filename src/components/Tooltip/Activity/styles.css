@@ -112,6 +112,14 @@
   background-color: hsla(183, 52%, 34%, 0.8);
 }
 
+#tooltip .frame.activity.dungeon .header .icon {
+  background-color: hsla(26, 20%, 30%, 0.8);
+}
+
+#tooltip .frame.activity.dungeon .header .text {
+  background-color: hsla(26, 20%, 42%, 0.8);
+}
+
 #tooltip .frame.activity.nightmare-hunt .header .icon {
   background-color: hsla(0, 75%, 5%, 0.8);
 }

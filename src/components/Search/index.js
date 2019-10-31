@@ -10,7 +10,6 @@ import Records from '../Records';
 import Collectibles from '../Collectibles';
 
 import './styles.css';
-import { allSettled } from 'q';
 
 class Search extends React.Component {
   constructor(props) {

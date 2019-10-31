@@ -36,7 +36,7 @@ async function loadMember(membershipType, membershipId, characterId) {
   try {
     const data = await getMember(membershipType, membershipId);
 
-    if (data.profile.ErrorCode === 1 && !data.profile.Response.profileProgression.data) {
+    if (data.profile && data.profile.ErrorCode === 1 && !data.profile.Response.profileProgression.data) {
       store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error: { ErrorCode: 'private' } } });
 
       return;
@@ -46,7 +46,7 @@ async function loadMember(membershipType, membershipId, characterId) {
 
     ['profile', 'groups', 'milestones'].forEach(key => {
       
-      if (data[key].ErrorCode !== 1) {
+      if (!data[key].ErrorCode || data[key].ErrorCode !== 1) {
         
         store.dispatch({ type: 'MEMBER_LOAD_ERROR', payload: { membershipId, membershipType, error: { ...data[key] } } });
   
