@@ -1,18 +1,17 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 import { orderBy, groupBy } from 'lodash';
-import moment from 'moment';
-import Moment from 'react-moment';
 
 import manifest from '../../../utils/manifest';
 import ObservedImage from '../../ObservedImage';
 import { Button, DestinyKey } from '../../UI/Button';
 import MemberLink from '../../MemberLink';
 import * as bungie from '../../../utils/bungie';
+
+import { ReportHeader, ReportHeaderLarge } from './ReportHeader';
 
 import './styles.css';
 
@@ -140,7 +139,7 @@ class PGCR extends React.Component {
 
     let reports = [];
 
-    let modes = {
+    const modes = {
       crucible: [69, 70, 71, 72, 74, 73, 43, 44, 48, 60, 65, 59, 31, 37, 38],
       clash: [71, 72, 44],
       control: [73, 74, 43],
@@ -157,58 +156,12 @@ class PGCR extends React.Component {
 
       const isExpanded = this.state.expanded.find(e => e.instanceId === pgcr.activityDetails.instanceId);
 
-      if (isExpanded) console.log(pgcr);
+      // if (isExpanded) console.log(pgcr);
 
-      let definitionMode = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === pgcr.activityDetails.mode);
+      const entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
+      const standing = entry.values.standing && entry.values.standing.basic.value !== undefined ? entry.values.standing.basic.value : -1;
 
-      let definitionCompetitive = manifest.DestinyActivityDefinition[2947109551];
-      let definitionQuickplay = manifest.DestinyActivityDefinition[2274172949];
-      let definitionStrikes = manifest.DestinyActivityModeDefinition[2394616003];
-
-      let modeName = definitionMode.displayProperties.name;
-      modeName = definitionMode.hash === 2096553452 ? manifest.DestinyActivityDefinition[3243244011] && manifest.DestinyActivityDefinition[3243244011].displayProperties && manifest.DestinyActivityDefinition[3243244011].displayProperties.name : modeName;
-      modeName = modeName.replace(': ' + definitionCompetitive.displayProperties.name, '');
-      modeName = modeName.replace(': ' + definitionQuickplay.displayProperties.name, '');
-      modeName = modeName.replace(definitionStrikes.displayProperties.name, '').trim();
-
-      let map = manifest.DestinyActivityDefinition[pgcr.activityDetails.referenceId];
-
-      let entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
-
-      let standing = entry.values.standing && entry.values.standing.basic.value !== undefined ? entry.values.standing.basic.value : -1;
-
-      let scoreTotal = entry.values.score ? pgcr.entries.reduce((v, e) => v + e.values.score.basic.value, 0) : false;
-
-      let standingImage, alphaVictory, bravoVictory;
-
-      if (standing > -1) {
-        alphaVictory = pgcr.teams.find(t => t.teamId === 17 && t.standing.basic.value === 0);
-        bravoVictory = pgcr.teams.find(t => t.teamId === 18 && t.standing.basic.value === 0);
-
-        if (modes.crucible.includes(pgcr.activityDetails.mode)) {
-          standingImage = !standing ? `/static/images/extracts/ui/01E3-000004AC.PNG` : `/static/images/extracts/ui/01E3-000004B2.PNG`;
-        }
-        if (modes.ironBanner.includes(pgcr.activityDetails.mode)) {
-          standingImage = !standing ? `/static/images/extracts/ui/0560-000006CB.PNG` : `/static/images/extracts/ui/0560-000006C8.PNG`;
-        }
-        if (modes.gambit.includes(pgcr.activityDetails.mode)) {
-          standingImage = !standing ? `/static/images/extracts/ui/02AF-00001F1E.PNG` : `/static/images/extracts/ui/02AF-00001F1A.PNG`;
-        }
-      }
-
-      let row, detail;
-
-      let realEndTime = moment(pgcr.period).add(entry.values.activityDurationSeconds.basic.value, 'seconds');
-
-      row = (
-        <div className='basic'>
-          <div className='mode'>{modeName}</div>
-          <div className='map'>{map && map.displayProperties.name}</div>
-          <div className='ago'>
-            <Moment fromNow>{realEndTime}</Moment>
-          </div>
-        </div>
-      );
+      let detail;
 
       let displayStatsDefault = {
         header: [
@@ -884,49 +837,11 @@ class PGCR extends React.Component {
         });
       });
 
-      let alpha = pgcr.teams && pgcr.teams.length ? pgcr.teams.find(t => t.teamId === 17) : false;
-      let bravo = pgcr.teams && pgcr.teams.length ? pgcr.teams.find(t => t.teamId === 18) : false;
-      let score;
-      if (pgcr.teams && pgcr.teams.length && alpha && bravo) {
-        score = (
-          <>
-            <div className={cx('value', 'alpha', { victory: alphaVictory })}>{alpha.score.basic.displayValue}</div>
-            <div className={cx('value', 'bravo', { victory: bravoVictory })}>{bravo.score.basic.displayValue}</div>
-          </>
-        );
-      }
+
 
       detail = (
         <>
-          <div className='head'>
-            {map && map.pgcrImage && <ObservedImage className='image bg' src={`https://www.bungie.net${map.pgcrImage}`} />}
-            <div className='detail'>
-              <div>
-                <div className='mode'>{modeName}</div>
-                <div className='map'>{map && map.displayProperties.name}</div>
-              </div>
-              <div>
-                <div className='duration'>{entry.values.activityDurationSeconds.basic.displayValue}</div>
-                <div className='ago'>
-                  <Moment fromNow>{realEndTime}</Moment>
-                </div>
-              </div>
-            </div>
-            {standing > -1 ? (
-              <>
-                <div className='standing'>
-                  {standingImage ? <ObservedImage className='image' src={standingImage} /> : null}
-                  <div className='text'>{standing === 0 ? t('VICTORY') : t('DEFEAT')}</div>
-                </div>
-                <div className='score teams'>{score}</div>
-              </>
-            ) : null}
-            {scoreTotal && standing < 0 ? (
-              <>
-                <div className='score'>{scoreTotal.toLocaleString('en-us')}</div>
-              </>
-            ) : null}
-          </div>
+          <ReportHeaderLarge characterIds={characterIds} pgcr={pgcr} />
           <div className='entries'>
             {pgcr.teams && pgcr.teams.length ? (
               orderBy(pgcr.teams, [t => t.score.basic.value], ['desc']).map(team => {
@@ -1000,7 +915,7 @@ class PGCR extends React.Component {
         instanceId: pgcr.instanceId,
         element: (
           <li key={pgcr.activityDetails.instanceId} className={cx('linked', { isExpanded: isExpanded, standing: standing > -1, victory: standing === 0 })} onClick={() => (!isExpanded ? this.expandHandler(pgcr.activityDetails.instanceId) : false)}>
-            {!isExpanded ? row : detail}
+            {!isExpanded ? <ReportHeader characterIds={characterIds} pgcr={pgcr} /> : detail}
           </li>
         )
       });
