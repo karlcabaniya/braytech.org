@@ -4,8 +4,23 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 
 import manifest from '../../../utils/manifest';
-import ObservedImage from '../../ObservedImage';
 import { ProfileNavLink } from '../../ProfileLink';
+
+import { ReactComponent as CrucibleIconDefault } from '../../../media/crucible/svg/default.svg';
+import { ReactComponent as CrucibleIconControl } from '../../../media/crucible/svg/control.svg';
+import { ReactComponent as CrucibleIconElimination } from '../../../media/crucible/svg/elimination.svg';
+import { ReactComponent as CrucibleIconRumble } from '../../../media/crucible/svg/rumble.svg';
+import { ReactComponent as CrucibleIconMayhem } from '../../../media/crucible/svg/mayhem.svg';
+import { ReactComponent as CrucibleIconDoubles } from '../../../media/crucible/svg/doubles.svg';
+import { ReactComponent as CrucibleIconBreakthrough } from '../../../media/crucible/svg/breakthrough.svg';
+import { ReactComponent as CrucibleIconClash } from '../../../media/crucible/svg/clash.svg';
+import { ReactComponent as CrucibleIconShowdown } from '../../../media/crucible/svg/showdown.svg';
+import { ReactComponent as CrucibleIconTeamScorched } from '../../../media/crucible/svg/team-scorched.svg';
+import { ReactComponent as CrucibleIconCountdown } from '../../../media/crucible/svg/countdown.svg';
+import { ReactComponent as CrucibleIconSupremacy } from '../../../media/crucible/svg/supremacy.svg';
+import { ReactComponent as CrucibleIconLockdown } from '../../../media/crucible/svg/lockdown.svg';
+import { ReactComponent as CrucibleIconMomentumControl } from '../../../media/crucible/svg/momentum-control.svg';
+import { ReactComponent as CrucibleIconIronBanner } from '../../../media/crucible/svg/iron-banner.svg';
 
 import './styles.css';
 
@@ -17,108 +32,103 @@ class Mode extends React.Component {
   }
 
   render() {
-    const { stats, isActive = false, root = '/multiplayer/crucible', defaultMode = 5 } = this.props;
+    const { t, stats, isActive = false, root = '/multiplayer/crucible', defaultMode = 5 } = this.props;
 
-    let definition = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === stats.mode);
+    const definitionActivityMode = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === stats.mode);
 
-    let definitionCompetitive = manifest.DestinyActivityDefinition[2947109551];
-    let definitionQuickplay = manifest.DestinyActivityDefinition[2274172949];
+    const modeName = definitionActivityMode && definitionActivityMode.displayProperties.name;
+    const modeImage = definitionActivityMode && `https://www.bungie.net${definitionActivityMode.displayProperties.icon}`;
 
-    let modeName = definition.displayProperties.name;
-    modeName = definition.hash === 2096553452 ? 'Lockdown' : modeName;
-    modeName = definition.hash === 1164760504 ? 'All modes' : modeName;
-    modeName = definition.hash === 2486723318 ? 'Competitive' : modeName;
-    modeName = definition.hash === 3425110680 ? 'Quickplay' : modeName;
-    modeName = modeName.replace(': ' + definitionCompetitive.displayProperties.name, '');
-    modeName = modeName.replace(': ' + definitionQuickplay.displayProperties.name, '');
-
-    let altIcons = [
+    const modeExtras = [
       {
-        modes: [5],
-        pathname: '/static/images/extracts/ui/modes/01E3-00000059.PNG'
+        modes: [73],
+        icon: <CrucibleIconControl />,
+        name: manifest.DestinyActivityDefinition[3176544780].displayProperties.name
       },
       {
-        modes: [4],
-        pathname: '/static/images/extracts/ui/modes/01E3-00000001.PNG'
-      },
-      {
-        modes: [69],
-        pathname: '/static/images/extracts/ui/modes/01E3-00000181.PNG'
-      },
-      {
-        modes: [70],
-        pathname: '/static/images/extracts/ui/modes/01E3-00000190.PNG'
-      },
-      {
-        modes: [72, 71, 59],
-        pathname: '/static/images/extracts/ui/modes/0560-000005D0.PNG'
-      },
-      {
-        modes: [74, 73, 60],
-        pathname: '/static/images/extracts/ui/modes/01E3-000019F0.PNG'
-      },
-      {
-        modes: [38, 37],
-        pathname: '/static/images/extracts/ui/modes/01E3-0000017A.PNG'
+        modes: [37],
+        icon: <CrucibleIconElimination />
       },
       {
         modes: [48],
-        pathname: '/static/images/extracts/ui/modes/01E3-00000049.PNG'
+        icon: <CrucibleIconRumble />
       },
       {
-        modes: [65],
-        pathname: '/static/images/extracts/ui/modes/01E3-00001845.PNG'
+        modes: [71],
+        icon: <CrucibleIconClash />,
+        name: manifest.DestinyActivityDefinition[2303927902].displayProperties.name
       },
       {
         modes: [43],
-        pathname: '/static/images/extracts/ui/modes/0560-00001729.PNG'
+        icon: <CrucibleIconIronBanner />,
+        name: manifest.DestinyActivityDefinition[3753505781].displayProperties.name
       },
       {
-        modes: [63],
-        pathname: '/static/images/extracts/ui/modes/01E3-000012C9.PNG'
+        modes: [81],
+        icon: <CrucibleIconMomentumControl />,
+        name: manifest.DestinyActivityDefinition[952904835].displayProperties.name
       },
       {
-        modes: [75],
-        pathname: '/static/images/extracts/ui/modes/0560-00001342.PNG'
+        modes: [50],
+        icon: <CrucibleIconDoubles />
       },
       {
-        modes: [76],
-        pathname: '/static/images/extracts/ui/modes/0560-0000134E.PNG'
+        modes: [31],
+        icon: <CrucibleIconSupremacy />
+      },
+      {
+        modes: [60],
+        icon: <CrucibleIconLockdown />
+      },
+      {
+        modes: [65],
+        icon: <CrucibleIconBreakthrough />
+      },
+      {
+        modes: [59],
+        icon: <CrucibleIconShowdown />
+      },
+      {
+        modes: [38],
+        icon: <CrucibleIconCountdown />
+      },
+      {
+        modes: [5],
+        icon: <CrucibleIconDefault />
       }
     ];
 
-    let modeIcon = `https://www.bungie.net${definition.displayProperties.icon}`;
-    modeIcon = altIcons.find(m => m.modes.includes(stats.mode)) ? altIcons.find(m => m.modes.includes(stats.mode)).pathname : modeIcon;
-
+    const modeExtra = modeExtras.find(m => m.modes.includes(stats.mode));
+    
     return (
       <li className='linked'>
         <div className='icon'>
-          <ObservedImage className='image' src={modeIcon} />
+          {modeExtra && modeExtra.icon}
         </div>
         <div className='text'>
-          <div className='name'>{modeName}</div>
+          <div className='name'>{(modeExtra && modeExtra.name) || modeName}</div>
           {stats.killsDeathsRatio ? (
             <>
               <div className='minor-stats'>
                 <div className='stat'>
+                  <div className='name'>{manifest.DestinyHistoricalStatsDefinition['efficiency'].statName}</div>
                   <div className='value'>{Number.parseFloat(stats.efficiency.basic.value).toFixed(2)}</div>
-                  <div className='name'>Efficiency</div>
                 </div>
                 <div className='stat'>
+                  <div className='name'>{manifest.DestinyHistoricalStatsDefinition['kills'].statName}</div>
                   <div className='value'>{stats.kills.basic.value.toLocaleString('en-us')}</div>
-                  <div className='name'>Kills</div>
                 </div>
                 <div className='stat'>
+                  <div className='name'>{manifest.DestinyHistoricalStatsDefinition['deaths'].statName}</div>
                   <div className='value'>{stats.deaths.basic.value.toLocaleString('en-us')}</div>
-                  <div className='name'>Deaths</div>
                 </div>
               </div>
               <div className='stat kdr'>
-                <div className='value'>{Number.parseFloat(stats.killsDeathsRatio.basic.value).toFixed(2)}</div>
                 <div className='name'>K/D</div>
+                <div className='value'>{Number.parseFloat(stats.killsDeathsRatio.basic.value).toFixed(2)}</div>
               </div>
             </>
-          ) : <div className='no-stats'><div>No stats available</div></div>}
+          ) : <div className='no-stats'><div>{t('No stats available')}</div></div>}
         </div>
         <ProfileNavLink isActive={isActive} to={{ pathname: stats.mode === parseInt(defaultMode, 10) ? root : `${root}/${stats.mode}`, state: {  } }} onClick={() => {
           let element = document.getElementById('matches');

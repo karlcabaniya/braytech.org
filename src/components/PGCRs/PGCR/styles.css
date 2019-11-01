@@ -433,7 +433,7 @@
 }
 
 
-.list.reports li .sticky-nav {
+.list.reports li > .sticky-nav {
   position: sticky;
 }
 

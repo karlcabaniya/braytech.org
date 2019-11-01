@@ -22,60 +22,48 @@ class Crucible extends React.Component {
 
   crucible = {
     all: {
-      modes: [5, 69, 70],
-      stats: {
-        allPvP: {
-          mode: 5
-        },
-        pvpCompetitive: {
-          mode: 69
-        },
-        pvpQuickplay: {
-          mode: 70
-        }
+      allPvP: {
+        mode: 5
       }
     },
-    competitive: {
-      modes: [72, 74, 37, 38],
-      stats: {
-        clashCompetitive: {
-          mode: 72
-        },
-        controlCompetitive: {
-          mode: 74
-        },
-        countdown: {
-          mode: 38
-        },
-        survival: {
-          mode: 37
-        }
+    core: {
+      controlQuickplay: {
+        mode: 73
+      },
+      survival: {
+        mode: 37
+      },
+      rumble: {
+        mode: 48
       }
     },
-    quickplay: {
-      modes: [71, 73, 43, 48, 60, 65, 59],
-      stats: {
-        clashQuickplay: {
-          mode: 71
-        },
-        controlQuickplay: {
-          mode: 73
-        },
-        ironBannerControl: {
-          mode: 43
-        },
-        rumble: {
-          mode: 48
-        },
-        lockdown: {
-          mode: 60
-        },
-        breakthrough: {
-          mode: 65
-        },
-        showdown: {
-          mode: 59
-        }
+    rotator: {
+      clashQuickplay: {
+        mode: 71
+      },
+      ironBannerControl: {
+        mode: 43
+      },
+      momentum: {
+        mode: 81
+      },
+      doubles: {
+        mode: 50
+      },
+      supremacy: {
+        mode: 31
+      },
+      lockdown: {
+        mode: 60
+      },
+      breakthrough: {
+        mode: 65
+      },
+      showdown: {
+        mode: 59
+      },
+      countdown: {
+        mode: 38
       }
     }
   };
@@ -88,15 +76,17 @@ class Crucible extends React.Component {
       loading: true
     }));
 
-    let [stats_allPvP, stats_competitive, stats_quickplay] = await Promise.all([
-      bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.all.modes, '0'),
-      bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.competitive.modes, '0'),
-      bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.crucible.quickplay.modes, '0')
-    ]);
+    let [stats_allPvP, stats_core, stats_rotator] = await Promise.all(
+      [
+        bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.all).map(m => m.mode), '0'),
+        bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.core).map(m => m.mode), '0'),
+        bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.rotator).map(m => m.mode), '0')
+      ]
+    );
 
     stats_allPvP = (stats_allPvP && stats_allPvP.ErrorCode === 1 && stats_allPvP.Response) || [];
-    stats_competitive = (stats_competitive && stats_competitive.ErrorCode === 1 && stats_competitive.Response) || [];
-    stats_quickplay = (stats_quickplay && stats_quickplay.ErrorCode === 1 && stats_quickplay.Response) || [];
+    stats_core = (stats_core && stats_core.ErrorCode === 1 && stats_core.Response) || [];
+    stats_rotator = (stats_rotator && stats_rotator.ErrorCode === 1 && stats_rotator.Response) || [];
 
     for (const mode in stats_allPvP) {
       if (stats_allPvP.hasOwnProperty(mode)) {
@@ -104,29 +94,29 @@ class Crucible extends React.Component {
           return;
         }
         Object.entries(stats_allPvP[mode].allTime).forEach(([key, value]) => {
-          this.crucible.all.stats[mode][key] = value;
+          this.crucible.all[mode][key] = value;
         });
       }
     }
 
-    for (const mode in stats_competitive) {
-      if (stats_competitive.hasOwnProperty(mode)) {
-        if (!stats_competitive[mode].allTime) {
+    for (const mode in stats_core) {
+      if (stats_core.hasOwnProperty(mode)) {
+        if (!stats_core[mode].allTime) {
           return;
         }
-        Object.entries(stats_competitive[mode].allTime).forEach(([key, value]) => {
-          this.crucible.competitive.stats[mode][key] = value;
+        Object.entries(stats_core[mode].allTime).forEach(([key, value]) => {
+          this.crucible.core[mode][key] = value;
         });
       }
     }
 
-    for (const mode in stats_quickplay) {
-      if (stats_quickplay.hasOwnProperty(mode)) {
-        if (!stats_quickplay[mode].allTime) {
+    for (const mode in stats_rotator) {
+      if (stats_rotator.hasOwnProperty(mode)) {
+        if (!stats_rotator[mode].allTime) {
           return;
         }
-        Object.entries(stats_quickplay[mode].allTime).forEach(([key, value]) => {
-          this.crucible.quickplay.stats[mode][key] = value;
+        Object.entries(stats_rotator[mode].allTime).forEach(([key, value]) => {
+          this.crucible.rotator[mode][key] = value;
         });
       }
     }
@@ -168,7 +158,7 @@ class Crucible extends React.Component {
 
   render() {
     const { t, member } = this.props;
-    
+
     const offset = parseInt(this.props.offset);
 
     const characterId = member.characterId;
@@ -222,13 +212,36 @@ class Crucible extends React.Component {
             <ParentModeLinks />
           </div>
           <div className='module-l2'>
-            <div className='sub-header'>
+            {/* <div className='sub-header'>
               <div>{t('Summative modes')}</div>
             </div>
             <div className='content'>
-              {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
+              {Object.values(this.crucible.all.allPvP).length > 1 ? (
                 <ul className='list modes'>
-                  {Object.values(this.crucible.all.stats).map(m => {
+                  {Object.values(this.crucible.all).map(m => {
+                    let paramsMode = this.props.mode ? parseInt(this.props.mode) : 5;
+                    let isActive = (match, location) => {
+                      if (paramsMode === m.mode) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    };
+
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/crucible' />;
+                  })}
+                </ul>
+              ) : (
+                <Spinner mini />
+              )}
+            </div> */}
+            <div className='sub-header'>
+              <div>{t('Core modes')}</div>
+            </div>
+            <div className='content'>
+              {Object.values(this.crucible.all.allPvP).length > 1 ? (
+                <ul className='list modes'>
+                  {Object.values(this.crucible.core).map(m => {
                     let paramsMode = this.props.mode ? parseInt(this.props.mode) : 5;
                     let isActive = (match, location) => {
                       if (paramsMode === m.mode) {
@@ -246,35 +259,12 @@ class Crucible extends React.Component {
               )}
             </div>
             <div className='sub-header'>
-              <div>{t('Glory modes')}</div>
+              <div>{t('Rotator modes')}</div>
             </div>
             <div className='content'>
-              {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
+              {Object.values(this.crucible.all.allPvP).length > 1 ? (
                 <ul className='list modes'>
-                  {Object.values(this.crucible.competitive.stats).map(m => {
-                    let paramsMode = this.props.mode ? parseInt(this.props.mode) : 5;
-                    let isActive = (match, location) => {
-                      if (paramsMode === m.mode) {
-                        return true;
-                      } else {
-                        return false;
-                      }
-                    };
-
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/crucible' />;
-                  })}
-                </ul>
-              ) : (
-                <Spinner mini />
-              )}
-            </div>
-            <div className='sub-header'>
-              <div>{t('Valor modes')}</div>
-            </div>
-            <div className='content'>
-              {Object.values(this.crucible.all.stats.allPvP).length > 1 ? (
-                <ul className='list modes'>
-                  {Object.values(this.crucible.quickplay.stats).map(m => {
+                  {Object.values(this.crucible.rotator).map(m => {
                     let paramsMode = this.props.mode ? parseInt(this.props.mode) : 5;
                     let isActive = (match, location) => {
                       if (paramsMode === m.mode) {

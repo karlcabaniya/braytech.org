@@ -8,6 +8,7 @@ import UI from './UI';
 import Item from './Item';
 import Activity from './Activity';
 import Vendor from './Vendor';
+import Stat from './Stat';
 import { Checklist, Record } from './Maps';
 
 class Tooltip extends React.Component {
@@ -191,6 +192,7 @@ class Tooltip extends React.Component {
 
     if (this.state.hash) {
       if (this.state.table === 'BraytechDefinition') Tooltip = UI;
+      if (this.state.table === 'DestinyHistoricalStatsDefinition') Tooltip = Stat;
       if (this.state.table === 'DestinyActivityDefinition') Tooltip = Activity;
       if (this.state.table === 'DestinyVendorDefinition') Tooltip = Vendor;
       if (this.state.table === 'DestinyChecklistDefinition') Tooltip = Checklist;

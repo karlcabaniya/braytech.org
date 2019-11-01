@@ -612,7 +612,8 @@ function replaceWithIcons(conversionRules, remainingObjectiveString, alreadyProc
   const replacementIndex = conversionRules.find(iconEntry => iconEntry.substring === iconString);
   const replacement = replacementIndex ? replacementIndex.char : iconString;
 
-  if (replacement === iconString) console.log(iconString)
+  // what was this even for?
+  // if (replacement === iconString) console.log(iconString)
 
   const nowProcessed = alreadyProcessed.concat([beforeMatch, replacement]);
 

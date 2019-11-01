@@ -6,11 +6,9 @@ import ReactMarkdown from 'react-markdown';
 
 import manifest from '../../../../utils/manifest';
 
-import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
-import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
-import { ReactComponent as IconFestivalOfTheLost } from './icons/festival-of-the-lost.svg';
-
-import { ReactComponent as CrucibleIconMomentumControl } from '../CrucibleRotators/icons/momentum-control.svg';
+import { ReactComponent as CrucibleIconDefault } from '../../../../media/crucible/svg/default.svg';
+import { ReactComponent as CrucibleIconIronBanner } from '../../../../media/crucible/svg/iron-banner.svg';
+import { ReactComponent as IconFestivalOfTheLost } from '../../../../media/events/svg/festival-of-the-lost.svg';
 
 import './styles.css';
 
@@ -22,7 +20,6 @@ const featuredActivityHashes = [
 const featuredModeIcons = {
   3753505781: <CrucibleIconIronBanner />,
   1454880421: <IconFestivalOfTheLost />,
-  952904835: <CrucibleIconMomentumControl />,
 };
 
 class FeaturedActivities extends React.Component {

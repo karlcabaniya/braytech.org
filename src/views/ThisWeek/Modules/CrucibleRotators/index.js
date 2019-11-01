@@ -5,17 +5,17 @@ import { withTranslation } from 'react-i18next';
 
 import manifest from '../../../../utils/manifest';
 
-import { ReactComponent as CrucibleIconDefault } from './icons/default.svg';
-import { ReactComponent as CrucibleIconMayhem } from './icons/mayhem.svg';
-import { ReactComponent as CrucibleIconBreakthrough } from './icons/breakthrough.svg';
-import { ReactComponent as CrucibleIconClash } from './icons/clash.svg';
-import { ReactComponent as CrucibleIconShowdown } from './icons/showdown.svg';
-import { ReactComponent as CrucibleIconTeamScorched } from './icons/team-scorched.svg';
-import { ReactComponent as CrucibleIconCountdown } from './icons/countdown.svg';
-import { ReactComponent as CrucibleIconSupremacy } from './icons/supremacy.svg';
-import { ReactComponent as CrucibleIconLockdown } from './icons/lockdown.svg';
-import { ReactComponent as CrucibleIconMomentumControl } from './icons/momentum-control.svg';
-import { ReactComponent as CrucibleIconIronBanner } from './icons/iron-banner.svg';
+import { ReactComponent as CrucibleIconDefault } from '../../../../media/crucible/svg/default.svg';
+import { ReactComponent as CrucibleIconMayhem } from '../../../../media/crucible/svg/mayhem.svg';
+import { ReactComponent as CrucibleIconBreakthrough } from '../../../../media/crucible/svg/breakthrough.svg';
+import { ReactComponent as CrucibleIconClash } from '../../../../media/crucible/svg/clash.svg';
+import { ReactComponent as CrucibleIconShowdown } from '../../../../media/crucible/svg/showdown.svg';
+import { ReactComponent as CrucibleIconTeamScorched } from '../../../../media/crucible/svg/team-scorched.svg';
+import { ReactComponent as CrucibleIconCountdown } from '../../../../media/crucible/svg/countdown.svg';
+import { ReactComponent as CrucibleIconSupremacy } from '../../../../media/crucible/svg/supremacy.svg';
+import { ReactComponent as CrucibleIconLockdown } from '../../../../media/crucible/svg/lockdown.svg';
+import { ReactComponent as CrucibleIconMomentumControl } from '../../../../media/crucible/svg/momentum-control.svg';
+import { ReactComponent as CrucibleIconIronBanner } from '../../../../media/crucible/svg/iron-banner.svg';
 
 import './styles.css';
 

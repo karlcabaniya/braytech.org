@@ -4,7 +4,7 @@
   "bugs": {
     "url": "https://github.com/justrealmilk/braytech.org/issues"
   },
-  "version": "2.10.15",
+  "version": "2.10.17",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
@@ -34,7 +34,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "analyze": "node scripts/analyzeBundle.js"
+    "analyze": "node scripts/analyzeBundle.js",
+    "translations": "node scripts/extractTranslations2.js --stats",
+    "map-nodes": "node --experimental-modules scripts/prepareNodesData.mjs",
+    "checklists": "node --experimental-modules scripts/checklists/prepare.mjs"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -117,7 +117,7 @@
 #multiplayer .content .modes li {
   height: unset;
   align-items: flex-start;
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 #multiplayer .content .modes li:hover {
@@ -127,19 +127,40 @@
 }
 
 #multiplayer .content .modes li .icon {
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: rgba(255, 255, 255, 0.04);
+  height: 96px;
+  width: 96px;
 }
 
-#multiplayer .content .modes li .icon .image {
-  position: relative;
-  width: 96px;
-  height: 117px;
+#multiplayer .content .modes li .icon svg .polygon.inner {
+  animation: rotate-linear 20s infinite linear;
+  transform-origin: center;
+}
+
+#multiplayer .content .modes li .icon svg .polygon.inner.ani {
+  opacity: 0 !important;
+}
+
+#multiplayer .content .modes li .icon svg .falling-1,
+#multiplayer .content .modes li .icon svg .falling-2,
+#multiplayer .content .modes li .icon svg .falling-3 {
+  transform-origin: center center;
+  /* animation: rotate-linear 2s infinite linear; */
+  animation: crucible-modes-falling-leaf 3s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+#multiplayer .content .modes li .icon svg .falling-2 {
+  animation-delay: 1s;
+}
+
+#multiplayer .content .modes li .icon svg .falling-3 {
+  animation-delay: 1.5s;
 }
 
 #multiplayer .content .modes li .text {
   width: calc(100% - 96px);
-  height: 117px;
-  padding: 1rem;
+  height: 96px;
+  padding: 10px 1rem;
   display: grid;
   grid-template-columns: auto 72px;
 }
@@ -160,14 +181,13 @@
 }
 
 #multiplayer .content .modes li .text .stat .name {
-  margin: 7px 0 0;
-  font-size: 12px;
-  line-height: 1;
-  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 16px;
   color: rgba(255, 255, 255, 0.6);
 }
 
 #multiplayer .content .modes li .text .stat .value {
+  margin: 7px 0 0;
   font-size: 18px;
   line-height: 1;
 }

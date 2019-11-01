@@ -10,81 +10,75 @@ export async function getGroupMembers(group, getPending = false) {
   let groupMembersResponse = await bungie.GetMembersOfGroup(group.groupId);
   let groupMembersPendingResponse = getPending ? await bungie.GetPendingMemberships(group.groupId) : false;
 
-  let memberResponses = await Promise.all(
-    groupMembersResponse &&
-      groupMembersResponse.ErrorCode === 1 &&
-      groupMembersResponse.Response.results.map(async member => {
-        try {
-          const profile = await bungie.GetProfile({
-            params: {
-              membershipType: member.destinyUserInfo.membershipType,
-              membershipId: member.destinyUserInfo.membershipId,
-              components: [100, 200, 202, 204, 900, 1000].join(',')
-            },
-            errors: {
-              hide: true
-            }
-          });
+  let memberResponses = groupMembersResponse && groupMembersResponse.ErrorCode === 1 && await Promise.all(
+    groupMembersResponse.Response.results.map(async member => {
+      try {
+        const profile = await bungie.GetProfile({
+          params: {
+            membershipType: member.destinyUserInfo.membershipType,
+            membershipId: member.destinyUserInfo.membershipId,
+            components: [100, 200, 202, 204, 900, 1000].join(',')
+          },
+          errors: {
+            hide: true
+          }
+        });
 
-          if (profile && profile.ErrorCode === 1 && profile.Response) {
-            if (!profile.Response.characterProgressions.data) {
-              return member;
-            }
-
-            member.profile = responseUtils.profileScrubber(profile.Response);
+        if (profile && profile.ErrorCode === 1 && profile.Response) {
+          if (!profile.Response.characterProgressions.data) {
+            return member;
           }
 
-          return member;
-        } catch (e) {
-          member.profile = false;
-          return member;
+          member.profile = responseUtils.profileScrubber(profile.Response);
         }
-      })
+
+        return member;
+      } catch (e) {
+        member.profile = false;
+        return member;
+      }
+    })
   );
 
-  let pendingResponses = groupMembersPendingResponse
-    ? await Promise.all(
-        groupMembersPendingResponse &&
-          groupMembersPendingResponse.ErrorCode === 1 &&
-          groupMembersPendingResponse.Response.results.map(async member => {
-            try {
-              const profile = await bungie.GetProfile({
-                params: {
-                  membershipType: member.destinyUserInfo.membershipType,
-                  membershipId: member.destinyUserInfo.membershipId,
-                  components: [100, 200, 202, 204, 900, 1000].join(',')
-                },
-                errors: {
-                  hide: true
-                }
-              });
+  let pendingResponses = groupMembersPendingResponse && groupMembersPendingResponse.ErrorCode === 1 && await Promise.all(
+    groupMembersPendingResponse.Response.results.map(async member => {
+      try {
+        const profile = await bungie.GetProfile({
+          params: {
+            membershipType: member.destinyUserInfo.membershipType,
+            membershipId: member.destinyUserInfo.membershipId,
+            components: [100, 200, 202, 204, 900, 1000].join(',')
+          },
+          errors: {
+            hide: true
+          }
+        });
 
-              if (profile && profile.ErrorCode === 1 && profile.Response) {
-                if (!profile.Response.characterProgressions.data) {
-                  return member;
-                }
+        if (profile && profile.ErrorCode === 1 && profile.Response) {
+          if (!profile.Response.characterProgressions.data) {
+            return member;
+          }
 
-                member.profile = responseUtils.profileScrubber(profile.Response);
+          member.profile = responseUtils.profileScrubber(profile.Response);
 
-                member.pending = true;
-              }
+          member.pending = true;
+        }
 
-              return member;
-            } catch (e) {
-              member.profile = false;
+        return member;
+      } catch (e) {
+        member.profile = false;
 
-              member.pending = true;
+        member.pending = true;
 
-              return member;
-            }
-          })
-      )
-    : [];
+        return member;
+      }
+    })
+  );
 
   let payload = {
     groupId: group.groupId,
-    members: memberResponses,
-    pending: pendingResponses,
+    members: memberResponses || [],
+    pending: pendingResponses || [],
     lastUpdated: new Date().getTime()
   };
 
