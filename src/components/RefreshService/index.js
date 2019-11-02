@@ -107,7 +107,7 @@ class RefreshService extends React.Component {
 
       ['profile', 'groups', 'milestones'].forEach(key => {
         if (data[key].ErrorCode !== 1) {
-          throw Error;
+          throw new Error(data[key].ErrorCode);
         }
       });
 

@@ -135,7 +135,6 @@ class Roster extends React.Component {
         isOnline: m.isOnline,
         fireteamId: m.fireteamId,
         lastPlayed,
-        lastActivity,
         lastCharacter,
         triumphScore,
         gloryPoints,

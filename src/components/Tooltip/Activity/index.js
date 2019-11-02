@@ -66,7 +66,7 @@ class Activity extends React.Component {
           return 'patrol';
         } else if (activityModeHashes.includes(1164760504)) {
           return 'crucible';
-        } else if (activityModeHashes.includes(2043403989)) {
+        } else if (activityTypeHash === 2043403989) {
           return 'raid';
         } else if (activityModeHashes.includes(3894474826)) {
           return 'reckoning';
@@ -155,8 +155,8 @@ class Activity extends React.Component {
       if (modeFiltered === 'crucible') {
         activityTypeDisplay = {
           ...activityTypeDisplay,
-          name: definitionActivityMode ? definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name : t('Unknown'),
-          mode: manifest.DestinyActivityModeDefinition[1164760504].displayProperties.name,
+          name: definitionActivityPlaylist && definitionActivityPlaylist.displayProperties ? definitionActivityPlaylist.displayProperties.name : t('Unknown'),
+          mode: definitionActivityMode && definitionActivityMode.displayProperties && definitionActivityMode.displayProperties.name,
           description: definitionActivityPlaylist && definitionActivityPlaylist.displayProperties ? definitionActivityPlaylist.displayProperties.description : t('Unknown'),
           destination: {
             name: definitionActivity.displayProperties.name,
