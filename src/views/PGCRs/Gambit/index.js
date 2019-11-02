@@ -22,20 +22,14 @@ class Gambit extends React.Component {
 
   gambit = {
     all: {
-      modes: [63, 75, 76],
-      stats: {
-        // allPvECompetitive: {
-        //   mode: 64
-        // },
-        pvecomp_gambit: {
-          mode: 63
-        },
-        pvecomp_mamba: {
-          mode: 75
-        },
-        enigma: {
-          mode: 76
-        }
+      pvecomp_mamba: {
+        mode: 75
+      },
+      pvecomp_gambit: {
+        mode: 63
+      },
+      enigma: {
+        mode: 76
       }
     }
   };
@@ -48,7 +42,7 @@ class Gambit extends React.Component {
       loading: true
     }));
 
-    let stats = await bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.gambit.all.modes, '0');
+    let stats = await bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.gambit.all).map(m => m.mode), '0');
 
     stats = (stats && stats.ErrorCode === 1 && stats.Response) || [];
 
@@ -58,7 +52,7 @@ class Gambit extends React.Component {
           return;
         }
         Object.entries(stats[mode].allTime).forEach(([key, value]) => {
-          this.gambit.all.stats[mode][key] = value;
+          this.gambit.all[mode][key] = value;
         });
       }
     }
@@ -103,27 +97,6 @@ class Gambit extends React.Component {
     
     const offset = parseInt(this.props.offset);
 
-    const characterId = member.characterId;
-
-    const characterProgressions = member.data.profile.characterProgressions.data;
-    const profileRecords = member.data.profile.profileRecords.data.records;
-
-    const infamy = {
-      defs: {
-        rank: manifest.DestinyProgressionDefinition[2772425241],
-        activity: manifest.DestinyActivityDefinition[2274172949]
-      },
-      progression: {
-        data: characterProgressions[characterId].progressions[2772425241],
-        total: 0,
-        resets: profileRecords[3901785488] ? profileRecords[3901785488].objectives[0].progress : 0
-      }
-    };
-
-    infamy.progression.total = Object.keys(infamy.defs.rank.steps).reduce((sum, key) => {
-      return sum + infamy.defs.rank.steps[key].progressTotal;
-    }, 0);
-
     return (
       <div className={cx('view', 'gambit')} id='multiplayer'>
         <div className='module-l1'>
@@ -140,13 +113,10 @@ class Gambit extends React.Component {
           </div>
           <div className='module-l2'>
             <div className='content'>
-              <div className='sub-header'>
-                <div>{t('Modes')}</div>
-              </div>
-              {Object.values(this.gambit.all.stats.pvecomp_gambit).length > 1 ? (
+              {Object.values(this.gambit.all.pvecomp_gambit).length > 1 ? (
                 <ul className='list modes'>
-                  {Object.values(this.gambit.all.stats).map(m => {
-                    let paramsMode = this.props.mode ? parseInt(this.props.mode) : 63;
+                  {Object.values(this.gambit.all).map(m => {
+                    let paramsMode = this.props.mode ? parseInt(this.props.mode) : 75;
                     let isActive = (match, location) => {
                       if (paramsMode === m.mode) {
                         return true;
@@ -155,7 +125,7 @@ class Gambit extends React.Component {
                       }
                     };
 
-                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/gambit' defaultMode='63' />;
+                    return <Mode key={m.mode} stats={m} isActive={isActive} root='/reports/gambit' defaultMode='75' />;
                   })}
                 </ul>
               ) : (
@@ -169,7 +139,7 @@ class Gambit extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent matches')}</div>
             </div>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 63} characterId={member.characterId} limit='10' offset={offset} root='/reports/gambit' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 75} characterId={member.characterId} limit='20' offset={offset} root='/reports/gambit' />
           </div>
         </div>
       </div>

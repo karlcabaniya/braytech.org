@@ -22,6 +22,10 @@ import { ReactComponent as CrucibleIconLockdown } from '../../../media/crucible/
 import { ReactComponent as CrucibleIconMomentumControl } from '../../../media/crucible/svg/momentum-control.svg';
 import { ReactComponent as CrucibleIconIronBanner } from '../../../media/crucible/svg/iron-banner.svg';
 
+import { ReactComponent as GambitIconGambit } from '../../../media/gambit/svg/gambit.svg';
+import { ReactComponent as GambitIconGambitPrime } from '../../../media/gambit/svg/gambit-prime.svg';
+import { ReactComponent as GambitIconReckoning } from '../../../media/gambit/svg/reckoning.svg';
+
 import './styles.css';
 
 class Mode extends React.Component {
@@ -40,6 +44,7 @@ class Mode extends React.Component {
     const modeImage = definitionActivityMode && `https://www.bungie.net${definitionActivityMode.displayProperties.icon}`;
 
     const modeExtras = [
+      // Crucible
       {
         modes: [73],
         icon: <CrucibleIconControl />,
@@ -92,6 +97,22 @@ class Mode extends React.Component {
         modes: [38],
         icon: <CrucibleIconCountdown />
       },
+
+      // Gambit
+      {
+        modes: [63],
+        icon: <GambitIconGambit />
+      },
+      {
+        modes: [75],
+        icon: <GambitIconGambitPrime />
+      },
+      {
+        modes: [76],
+        icon: <GambitIconReckoning />
+      },
+
+      // Default
       {
         modes: [5],
         icon: <CrucibleIconDefault />

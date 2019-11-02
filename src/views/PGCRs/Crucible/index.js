@@ -161,42 +161,6 @@ class Crucible extends React.Component {
 
     const offset = parseInt(this.props.offset);
 
-    const characterId = member.characterId;
-
-    const characterProgressions = member.data.profile.characterProgressions.data;
-    const profileRecords = member.data.profile.profileRecords.data.records;
-
-    const valor = {
-      defs: {
-        rank: manifest.DestinyProgressionDefinition[3882308435],
-        activity: manifest.DestinyActivityDefinition[2274172949]
-      },
-      progression: {
-        data: characterProgressions[characterId].progressions[3882308435],
-        total: 0,
-        resets: profileRecords[559943871] ? profileRecords[559943871].objectives[0].progress : 0
-      }
-    };
-
-    valor.progression.total = Object.keys(valor.defs.rank.steps).reduce((sum, key) => {
-      return sum + valor.defs.rank.steps[key].progressTotal;
-    }, 0);
-
-    const glory = {
-      defs: {
-        rank: manifest.DestinyProgressionDefinition[2679551909],
-        activity: manifest.DestinyActivityDefinition[2947109551]
-      },
-      progression: {
-        data: characterProgressions[characterId].progressions[2679551909],
-        total: 0
-      }
-    };
-
-    glory.progression.total = Object.keys(glory.defs.rank.steps).reduce((sum, key) => {
-      return sum + glory.defs.rank.steps[key].progressTotal;
-    }, 0);
-
     return (
       <div className={cx('view', 'crucible')} id='multiplayer'>
         <div className='module-l1'>
