@@ -179,7 +179,9 @@ class Matches extends React.Component {
     return PGCRs.length ? (
       <div className='matches'>
         {this.state.loading ? <Spinner mini /> : null}
-        <PGCR data={PGCRs} limit={limit} />
+        <ul className='list reports'>
+          {PGCRs.map((r, i) => <PGCR key={i} report={r} />)}
+        </ul>
         <div className='pages'>
           <Button classNames='previous' text={t('Previous page')} disabled={this.state.loading ? true : offset > 0 ? false : true} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset - 1}`} action={this.scrollToMatchesHandler} />
           <Button classNames='next' text={t('Next page')} disabled={this.state.loading} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset + 1}`} action={this.scrollToMatchesHandler} />

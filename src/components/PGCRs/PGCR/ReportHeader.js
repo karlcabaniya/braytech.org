@@ -32,7 +32,7 @@ class ReportHeader extends React.Component {
   }
 
   render() {
-    const { t, characterIds, pgcr } = this.props;
+    const { t, characterIds, activityDetails, period, entries } = this.props;
 
     const modeExtras = [
       {
@@ -93,18 +93,18 @@ class ReportHeader extends React.Component {
       }
     ];
 
-    const modeExtra = modeExtras.find(m => m.modes.includes(pgcr.activityDetails.mode));
+    const modeExtra = modeExtras.find(m => m.modes.includes(activityDetails.mode));
 
-    const definitionMode = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === pgcr.activityDetails.mode);
+    const definitionMode = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === activityDetails.mode);
 
     const modeName = definitionMode && definitionMode.displayProperties.name;
 
-    const map = manifest.DestinyActivityDefinition[pgcr.activityDetails.referenceId];
+    const map = manifest.DestinyActivityDefinition[activityDetails.referenceId];
     
 
-    const entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
+    const entry = entries.find(entry => characterIds.includes(entry.characterId));
 
-    const realEndTime = moment(pgcr.period).add(entry.values.activityDurationSeconds.basic.value, 'seconds');
+    const realEndTime = moment(period).add(entry.values.activityDurationSeconds.basic.value, 'seconds');
 
 
     return (
@@ -128,7 +128,7 @@ class ReportHeaderLarge extends React.Component {
   }
 
   render() {
-    const { t, characterIds, pgcr } = this.props;
+    const { t, characterIds, activityDetails, period, entries, teams } = this.props;
 
     const modeExtras = [
       {
@@ -189,30 +189,30 @@ class ReportHeaderLarge extends React.Component {
       }
     ];
 
-    const modeExtra = modeExtras.find(m => m.modes.includes(pgcr.activityDetails.mode));
+    const modeExtra = modeExtras.find(m => m.modes.includes(activityDetails.mode));
 
-    const definitionMode = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === pgcr.activityDetails.mode);
+    const definitionMode = Object.values(manifest.DestinyActivityModeDefinition).find(d => d.modeType === activityDetails.mode);
 
     const modeName = definitionMode && definitionMode.displayProperties.name;
 
-    const map = manifest.DestinyActivityDefinition[pgcr.activityDetails.referenceId];
+    const map = manifest.DestinyActivityDefinition[activityDetails.referenceId];
     
 
-    const entry = pgcr.entries.find(entry => characterIds.includes(entry.characterId));
+    const entry = entries.find(entry => characterIds.includes(entry.characterId));
 
-    const realEndTime = moment(pgcr.period).add(entry.values.activityDurationSeconds.basic.value, 'seconds');
+    const realEndTime = moment(period).add(entry.values.activityDurationSeconds.basic.value, 'seconds');
 
     const standing = entry.values.standing && entry.values.standing.basic.value !== undefined ? entry.values.standing.basic.value : -1;
-    const scoreTotal = entry.values.score ? pgcr.entries.reduce((v, e) => v + e.values.score.basic.value, 0) : false;
+    const scoreTotal = entry.values.score ? entries.reduce((v, e) => v + e.values.score.basic.value, 0) : false;
 
-    let alpha = pgcr.teams && pgcr.teams.length ? pgcr.teams.find(t => t.teamId === 17) : false;
-    let bravo = pgcr.teams && pgcr.teams.length ? pgcr.teams.find(t => t.teamId === 18) : false;
+    let alpha = teams && teams.length ? teams.find(t => t.teamId === 17) : false;
+    let bravo = teams && teams.length ? teams.find(t => t.teamId === 18) : false;
     let score;
-    if (pgcr.teams && pgcr.teams.length && alpha && bravo) {
+    if (teams && teams.length && alpha && bravo) {
       score = (
         <>
-          <div className={cx('value', 'alpha', { victory: pgcr.teams.find(t => t.teamId === 17 && t.standing.basic.value === 0) })}>{alpha.score.basic.displayValue}</div>
-          <div className={cx('value', 'bravo', { victory: pgcr.teams.find(t => t.teamId === 18 && t.standing.basic.value === 0) })}>{bravo.score.basic.displayValue}</div>
+          <div className={cx('value', 'alpha', { victory: teams.find(t => t.teamId === 17 && t.standing.basic.value === 0) })}>{alpha.score.basic.displayValue}</div>
+          <div className={cx('value', 'bravo', { victory: teams.find(t => t.teamId === 18 && t.standing.basic.value === 0) })}>{bravo.score.basic.displayValue}</div>
         </>
       );
     }
