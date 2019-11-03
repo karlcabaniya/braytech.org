@@ -20,7 +20,7 @@ class ReportItem extends React.Component {
     super(props);
 
     this.state = {
-      expandedReport: false,
+      expandedReport: Boolean(this.props.expanded),
       expandedPlayers: [],
       playerCache: []
     };
@@ -130,6 +130,10 @@ class ReportItem extends React.Component {
 
   componentDidMount() {
     this.mounted = true;
+
+    if (this.props.expanded) {
+      this.updatePlayerCache();
+    }
   }
 
   componentWillUnmount() {
@@ -144,10 +148,10 @@ class ReportItem extends React.Component {
   }
 
   render() {
-    const { t, member, report } = this.props;
+    const { t, member, report, expanded } = this.props;
     const { expandedReport, expandedPlayers, playerCache } = this.state;
-    const characters = member.data.profile.characters.data;
-    const characterIds = characters.map(c => c.characterId);
+    const characters = member.data && member.data.profile.characters.data;
+    const characterIds = characters && characters.map(c => c.characterId);
 
     const modes = {
       crucible: [69, 70, 71, 72, 74, 73, 81, 50, 43, 44, 48, 60, 65, 59, 31, 37, 38],
@@ -701,8 +705,8 @@ class ReportItem extends React.Component {
     
     // if (expandedReport) console.log(this.props);
 
-    const entry = report.entries.find(entry => characterIds.includes(entry.characterId));
-    const standing = entry.values.standing && entry.values.standing.basic.value !== undefined ? entry.values.standing.basic.value : -1;
+    const entry = characterIds && report.entries.find(entry => characterIds.includes(entry.characterId));
+    const standing = entry && entry.values.standing && entry.values.standing.basic.value !== undefined ? entry.values.standing.basic.value : -1;
 
     let detail;
 
@@ -893,19 +897,21 @@ class ReportItem extends React.Component {
             </ul>
           )}
         </div>
-        <div className='sticky-nav inline'>
-          <div className='wrapper'>
-            <div />
-            <ul>
-              <li>
-                <Button action={() => this.contractHandler(report.activityDetails.instanceId)}>
-                  <DestinyKey type='dismiss' />
-                  {t('Close')}
-                </Button>
-              </li>
-            </ul>
+        {!expanded && (
+          <div className='sticky-nav inline'>
+            <div className='wrapper'>
+              <div />
+              <ul>
+                <li>
+                  <Button action={() => this.contractHandler(report.activityDetails.instanceId)}>
+                    <DestinyKey type='dismiss' />
+                    {t('Close')}
+                  </Button>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+        )}
       </>
     );
 
@@ -933,10 +939,14 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default compose(
+ReportItem = compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   withTranslation()
 )(ReportItem);
+
+export default ReportItem;
+
+export { ReportItem };

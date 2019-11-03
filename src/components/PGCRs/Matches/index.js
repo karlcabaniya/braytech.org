@@ -44,12 +44,14 @@ class Matches extends React.Component {
     activities = orderBy(activities, [pgcr => pgcr.period], ['desc']);
     activities = activities.slice();
 
-    this.setState(p => {
-      let identifier = mode ? mode : 'all';
-      p.cacheState[identifier] = activities.length;
-      p.instances = activities.map(a => a.activityDetails.instanceId)
-      return p;
-    });
+    if (this.mounted) {
+      this.setState(p => {
+        let identifier = mode ? mode : 'all';
+        p.cacheState[identifier] = activities.length;
+        p.instances = activities.map(a => a.activityDetails.instanceId);
+        return p;
+      });
+    }
 
     let PGCRs = activities.map(async activity => {
       if (PGCRcache[member.membershipId] && activity && !PGCRcache[member.membershipId].find(pgcr => pgcr.activityDetails.instanceId === activity.activityDetails.instanceId)) {
@@ -76,41 +78,53 @@ class Matches extends React.Component {
       // console.log('matches refresh start');
 
       this.running = true;
-      this.setState(p => {
-        p.loading = true;
-        return p;
-      });
+      if (this.mounted) {
+        this.setState(p => {
+          p.loading = true;
+          return p;
+        });
+      }
 
-      let ignition = mode ? await [mode].map(m => {
-        return this.cacheMachine(m, characterId);
-      }) : [await this.cacheMachine(false, characterId)];
-  
+      let ignition = mode
+        ? await [mode].map(m => {
+            return this.cacheMachine(m, characterId);
+          })
+        : [await this.cacheMachine(false, characterId)];
+
       try {
         await Promise.all(ignition);
-      } catch (e) {
-        
+      } catch (e) {}
+
+      if (this.mounted) {
+        this.setState(p => {
+          p.loading = false;
+          return p;
+        });
       }
-  
-      this.setState(p => {
-        p.loading = false;
-        return p;
-      });
       this.running = false;
 
       // console.log('matches refresh end');
     } else {
       // console.log('matches refresh skipped');
     }
-  }
+  };
 
   scrollToMatchesHandler = e => {
     let element = document.getElementById('matches');
-    element.scrollIntoView({behavior: "smooth"});
-  }
+    element.scrollIntoView({ behavior: 'smooth' });
+  };
 
   componentDidMount() {
+    this.mounted = true;
+
     this.run();
     this.startInterval();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+
+    this.clearInterval();
   }
 
   componentDidUpdate(prev) {
@@ -133,17 +147,13 @@ class Matches extends React.Component {
     window.clearInterval(this.refreshDataInterval);
   }
 
-  componentWillUnmount() {
-    this.clearInterval();
-  }
-
   render() {
     const { t, member, PGCRcache, mode, limit = 15, offset, root } = this.props;
 
     let PGCRs = PGCRcache[member.membershipId] || [];
 
     // console.log(this.state)
-    
+
     // if (mode && PGCRcache[member.membershipId]) {
 
     //   // PGCRs = orderBy(
@@ -162,32 +172,32 @@ class Matches extends React.Component {
 
     //   PGCRs = orderBy(
     //     PGCRcache[member.membershipId]
-    //       .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId)), 
+    //       .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId)),
     //     [pgcr => pgcr.period], ['desc']
     //   );
 
     // }
 
-    PGCRs = PGCRs
-              .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId));
+    PGCRs = PGCRs.filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId));
 
-    PGCRs = orderBy(
-      PGCRs, 
-      [pgcr => pgcr.period], ['desc']
-    );
+    PGCRs = orderBy(PGCRs, [pgcr => pgcr.period], ['desc']);
 
     return PGCRs.length ? (
       <div className='matches'>
         {this.state.loading ? <Spinner mini /> : null}
         <ul className='list reports'>
-          {PGCRs.map((r, i) => <PGCR key={i} report={r} />)}
+          {PGCRs.map((r, i) => (
+            <PGCR key={r.activityDetails.instanceId} report={r} />
+          ))}
         </ul>
         <div className='pages'>
           <Button classNames='previous' text={t('Previous page')} disabled={this.state.loading ? true : offset > 0 ? false : true} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset - 1}`} action={this.scrollToMatchesHandler} />
           <Button classNames='next' text={t('Next page')} disabled={this.state.loading} anchor to={`/${member.membershipType}/${member.membershipId}/${member.characterId}${root}/${mode ? mode : '-1'}/${offset + 1}`} action={this.scrollToMatchesHandler} />
         </div>
       </div>
-    ) : <Spinner />;
+    ) : (
+      <Spinner />
+    );
   }
 }
 

@@ -11,17 +11,12 @@ class All extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      
-    };
-  }
-
-  componentDidMount() {
-    
+    this.state = {};
   }
 
   render() {
     const { t, member } = this.props;
+
     const offset = parseInt(this.props.offset);
 
     return (
@@ -43,7 +38,7 @@ class All extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent activities')}</div>
             </div>
-            <Matches mode={false} characterId={member.characterId} limit='10' offset={offset} root='/reports/all' />
+            <Matches mode={false} characterId={member.characterId} limit='20' offset={offset} root='/reports/all' />
           </div>
         </div>
       </div>

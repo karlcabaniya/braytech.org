@@ -22,14 +22,11 @@ class Strikes extends React.Component {
 
   strikes = {
     all: {
-      modes: [18, 46],
-      stats: {
-        allStrikes: {
-          mode: 18
-        },
-        scored_nightfall: {
-          mode: 46
-        }
+      allStrikes: {
+        mode: 18
+      },
+      scored_nightfall: {
+        mode: 46
       }
     }
   };
@@ -37,12 +34,14 @@ class Strikes extends React.Component {
   fetch = async () => {
     const { member } = this.props;
 
-    this.setState(p => ({
-      ...p,
-      loading: true
-    }));
+    if (this.mounted) {
+      this.setState(p => ({
+        ...p,
+        loading: true
+      }));
+    }
 
-    let stats = await bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.strikes.all.modes, '0');
+    let stats = await bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.strikes.all).map(m => m.mode), '0');
 
     stats = (stats && stats.ErrorCode === 1 && stats.Response) || [];
 
@@ -52,22 +51,32 @@ class Strikes extends React.Component {
           return;
         }
         Object.entries(stats[mode].allTime).forEach(([key, value]) => {
-          this.strikes.all.stats[mode][key] = value;
+          this.strikes.all[mode][key] = value;
         });
       }
     }
 
-    this.setState(p => ({
-      ...p,
-      loading: false
-    }));
+    if (this.mounted) {
+      this.setState(p => ({
+        ...p,
+        loading: false
+      }));
+    }
 
     return true;
   };
 
   componentDidMount() {
+    this.mounted = true;
+
     this.refreshData();
     this.startInterval();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+
+    this.clearInterval();
   }
 
   refreshData = async () => {
@@ -86,10 +95,6 @@ class Strikes extends React.Component {
 
   clearInterval() {
     window.clearInterval(this.refreshDataInterval);
-  }
-
-  componentWillUnmount() {
-    this.clearInterval();
   }
 
   render() {
@@ -114,12 +119,9 @@ class Strikes extends React.Component {
           </div>
           <div className='module-l2'>
             <div className='content'>
-              <div className='sub-header'>
-                <div>{t('Modes')}</div>
-              </div>
-              {Object.values(this.strikes.all.stats.allStrikes).length > 1 ? (
+              {Object.values(this.strikes.all.allStrikes).length > 1 ? (
                 <ul className='list modes'>
-                  {Object.values(this.strikes.all.stats).map(m => {
+                  {Object.values(this.strikes.all).map(m => {
                     let paramsMode = this.props.mode ? parseInt(this.props.mode) : 18;
                     let isActive = (match, location) => {
                       if (paramsMode === m.mode) {
@@ -143,7 +145,7 @@ class Strikes extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent strikes')}</div>
             </div>
-            <Matches mode={mode} characterId={member.characterId} limit='10' offset={offset} root='/reports/strikes' />
+            <Matches mode={mode} characterId={member.characterId} limit='20' offset={offset} root='/reports/strikes' />
           </div>
         </div>
       </div>

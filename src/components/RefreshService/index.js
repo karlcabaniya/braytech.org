@@ -127,7 +127,7 @@ class RefreshService extends React.Component {
         });
       }
     } catch (e) {
-      console.warn(`Error while refreshing profile, ignoring: ${e}`);
+      console.warn(`Error while refreshing profile, ignoring: (${e.name}, ${e.message})`);
     }
   };
 }

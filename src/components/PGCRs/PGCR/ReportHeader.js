@@ -1,6 +1,7 @@
 import React from 'react';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
+import { orderBy } from 'lodash';
 import cx from 'classnames';
 import moment from 'moment';
 import Moment from 'react-moment';
@@ -32,7 +33,7 @@ class ReportHeader extends React.Component {
   }
 
   render() {
-    const { t, characterIds, activityDetails, period, entries } = this.props;
+    const { characterIds, activityDetails, period, entries } = this.props;
 
     const modeExtras = [
       {
@@ -102,7 +103,7 @@ class ReportHeader extends React.Component {
     const map = manifest.DestinyActivityDefinition[activityDetails.referenceId];
     
 
-    const entry = entries.find(entry => characterIds.includes(entry.characterId));
+    const entry = entries && ((characterIds && entries.find(entry => characterIds.includes(entry.characterId))) || (entries.length && orderBy(entries, [e => e.values && e.values.activityDurationSeconds && e.values.activityDurationSeconds.basic.value], ['desc'])[0]));
 
     const realEndTime = moment(period).add(entry.values.activityDurationSeconds.basic.value, 'seconds');
 
@@ -198,7 +199,7 @@ class ReportHeaderLarge extends React.Component {
     const map = manifest.DestinyActivityDefinition[activityDetails.referenceId];
     
 
-    const entry = entries.find(entry => characterIds.includes(entry.characterId));
+    const entry = entries && ((characterIds && entries.find(entry => characterIds.includes(entry.characterId))) || (entries.length && orderBy(entries, [e => e.values && e.values.activityDurationSeconds && e.values.activityDurationSeconds.basic.value], ['desc'])[0]));
 
     const realEndTime = moment(period).add(entry.values.activityDurationSeconds.basic.value, 'seconds');
 
@@ -222,8 +223,8 @@ class ReportHeaderLarge extends React.Component {
       {map && map.pgcrImage && <ObservedImage className='image bg' src={`https://www.bungie.net${map.pgcrImage}`} />}
       <div className='detail'>
         <div>
-          <div className='mode'>{(modeExtra && modeExtra.name) || modeName}</div>
           <div className='map'>{map && map.displayProperties.name}</div>
+          <div className='mode'>{(modeExtra && modeExtra.name) || modeName}</div>
         </div>
         <div>
           <div className='duration'>{entry.values.activityDurationSeconds.basic.displayValue}</div>

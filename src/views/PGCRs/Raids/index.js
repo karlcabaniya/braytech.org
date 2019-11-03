@@ -21,11 +21,8 @@ class Raids extends React.Component {
 
   raids = {
     all: {
-      modes: [4],
-      stats: {
-        raid: {
-          mode: 4
-        }
+      raid: {
+        mode: 4
       }
     }
   };
@@ -33,12 +30,14 @@ class Raids extends React.Component {
   fetch = async () => {
     const { member } = this.props;
 
-    this.setState(p => ({
-      ...p,
-      loading: true
-    }));
+    if (this.mounted) {
+      this.setState(p => ({
+        ...p,
+        loading: true
+      }));
+    }
 
-    let stats = await bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', this.raids.all.modes, '0');
+    let stats = await bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.raids.all).map(m => m.mode), '0');
 
     stats = (stats && stats.ErrorCode === 1 && stats.Response) || [];
 
@@ -48,22 +47,32 @@ class Raids extends React.Component {
           return;
         }
         Object.entries(stats[mode].allTime).forEach(([key, value]) => {
-          this.raids.all.stats[mode][key] = value;
+          this.raids.all[mode][key] = value;
         });
       }
     }
 
-    this.setState(p => ({
-      ...p,
-      loading: false
-    }));
+    if (this.mounted) {
+      this.setState(p => ({
+        ...p,
+        loading: false
+      }));
+    }
 
     return true;
   };
 
   componentDidMount() {
+    this.mounted = true;
+
     this.refreshData();
     this.startInterval();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+
+    this.clearInterval();
   }
 
   refreshData = async () => {
@@ -82,10 +91,6 @@ class Raids extends React.Component {
 
   clearInterval() {
     window.clearInterval(this.refreshDataInterval);
-  }
-
-  componentWillUnmount() {
-    this.clearInterval();
   }
 
   render() {
@@ -109,12 +114,9 @@ class Raids extends React.Component {
           </div>
           <div className='module-l2'>
             <div className='content'>
-              <div className='sub-header'>
-                <div>{t('Modes')}</div>
-              </div>
-              {Object.values(this.raids.all.stats.raid).length > 1 ? (
+              {Object.values(this.raids.all.raid).length > 1 ? (
                 <ul className='list modes'>
-                  {Object.values(this.raids.all.stats).map(m => {
+                  {Object.values(this.raids.all).map(m => {
                     let paramsMode = this.props.mode ? parseInt(this.props.mode) : 4;
                     let isActive = (match, location) => {
                       if (paramsMode === m.mode) {
@@ -138,7 +140,7 @@ class Raids extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent raids')}</div>
             </div>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 4} characterId={member.characterId} limit='10' offset={offset} root='/reports/raids' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 4} characterId={member.characterId} limit='20' offset={offset} root='/reports/raids' />
           </div>
         </div>
       </div>

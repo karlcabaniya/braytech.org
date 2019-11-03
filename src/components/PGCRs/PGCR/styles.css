@@ -30,7 +30,7 @@
 
 .list.reports li > .basic .mode {
   font-size: 16px;
-  min-width: 10rem;
+  min-width: 13rem;
 }
 
 .list.reports li > .basic .map {
@@ -74,7 +74,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
   display: flex;
   justify-content: space-between;
   font-size: 16px;
@@ -84,9 +84,9 @@
   text-align: right;
 }
 
-.list.reports li > .head .detail .map,
+.list.reports li > .head .detail .mode,
 .list.reports li > .head .detail .ago {
-  margin: 3px 0 0;
+  margin: 5px 0 0;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.6);
 }

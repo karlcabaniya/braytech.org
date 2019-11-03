@@ -43,16 +43,22 @@ import ProfileRoutes from './ProfileRoutes';
 import Loading from './views/Loading';
 import Index from './views/Index';
 import CharacterSelect from './views/CharacterSelect';
+import Settings from './views/Settings';
+import FAQ from './views/FAQ';
+import Credits from './views/Credits';
+
 import Inspect from './views/Inspect';
 import Read from './views/Read';
 import Maps from './views/Maps';
-import Settings from './views/Settings';
-import Credits from './views/Credits';
-import Suggestions from './views/Suggestions';
-import FAQ from './views/FAQ';
+
 import ClanBannerBuilder from './views/ClanBannerBuilder';
+import PGCR from './views/PGCR';
+
+import Suggestions from './views/Suggestions';
 import ChaliceRecipes from './views/ChaliceRecipes';
+
 import Test from './views/Test';
+
 
 
 import OOB from './views/OOB';
@@ -265,6 +271,7 @@ class App extends React.Component {
                           <RedirectRoute path='/pursuits' />
 
                           <Route path='/character-select' exact component={CharacterSelect} />
+                          <Route path='/pgcr/:instanceId?' exact render={route => <PGCR {...route} />} />
                           <Route path='/inspect/:hash?' exact component={Inspect} />
                           <Route path='/read/:kind?/:hash?' exact component={Read} />
                           <Route path='/maps/:destination?/:highlight?' render={route => <Maps {...route} />} />

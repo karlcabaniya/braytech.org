@@ -71,18 +71,14 @@ class Crucible extends React.Component {
   fetch = async () => {
     const { member } = this.props;
 
-    this.setState(p => ({
-      ...p,
-      loading: true
-    }));
+    if (this.mounted) {
+      this.setState(p => ({
+        ...p,
+        loading: true
+      }));
+    }
 
-    let [stats_allPvP, stats_core, stats_rotator] = await Promise.all(
-      [
-        bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.all).map(m => m.mode), '0'),
-        bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.core).map(m => m.mode), '0'),
-        bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.rotator).map(m => m.mode), '0')
-      ]
-    );
+    let [stats_allPvP, stats_core, stats_rotator] = await Promise.all([bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.all).map(m => m.mode), '0'), bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.core).map(m => m.mode), '0'), bungie.GetHistoricalStats(member.membershipType, member.membershipId, member.characterId, '1', Object.values(this.crucible.rotator).map(m => m.mode), '0')]);
 
     stats_allPvP = (stats_allPvP && stats_allPvP.ErrorCode === 1 && stats_allPvP.Response) || [];
     stats_core = (stats_core && stats_core.ErrorCode === 1 && stats_core.Response) || [];
@@ -121,17 +117,27 @@ class Crucible extends React.Component {
       }
     }
 
-    this.setState(p => ({
-      ...p,
-      loading: false
-    }));
+    if (this.mounted) {
+      this.setState(p => ({
+        ...p,
+        loading: false
+      }));
+    }
 
     return true;
   };
 
   componentDidMount() {
+    this.mounted = true;
+
     this.refreshData();
     this.startInterval();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
+
+    this.clearInterval();
   }
 
   refreshData = async () => {
@@ -150,10 +156,6 @@ class Crucible extends React.Component {
 
   clearInterval() {
     window.clearInterval(this.refreshDataInterval);
-  }
-
-  componentWillUnmount() {
-    this.clearInterval();
   }
 
   render() {
