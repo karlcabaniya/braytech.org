@@ -5,7 +5,6 @@ import { withTranslation } from 'react-i18next';
 
 import { removeMemberIds } from '../../utils/paths';
 import { ProfileNavLink } from '../../components/ProfileLink';
-import ObservedImage from '../../components/ObservedImage';
 
 class ParentModeLinks extends React.Component {
   constructor(props) {
@@ -16,18 +15,12 @@ class ParentModeLinks extends React.Component {
     };
   }
 
-  componentDidMount() {
-    
-  }
-
   render() {
     return (
       <div className='content views'>
         <ul className='list'>
           <li className='linked'>
-            <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000400.png' />
-            </div>
+            <div className='icon destiny-patrol' />
             <ProfileNavLink to='/reports' isActive={(match, location) => {
                 if (['/reports', '/reports/all'].includes(removeMemberIds(location.pathname)) || removeMemberIds(location.pathname).includes('/reports/all')) {
                   return true;
@@ -37,27 +30,19 @@ class ParentModeLinks extends React.Component {
               }} />
           </li>
           <li className='linked'>
-            <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000403.png' />
-            </div>
+            <div className='icon destiny-crucible' />
             <ProfileNavLink to='/reports/crucible' />
           </li>
           <li className='linked'>
-            <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000404.png' />
-            </div>
+            <div className='icon destiny-gambit' />
             <ProfileNavLink to='/reports/gambit' />
           </li>
           <li className='linked'>
-            <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000402.png' />
-            </div>
+            <div className='icon destiny-raid' />
             <ProfileNavLink to='/reports/raids' />
           </li>
           <li className='linked'>
-            <div className='icon'>
-              <ObservedImage className='image' src='/static/images/extracts/ui/modes/01e3-00000401.png' />
-            </div>
+            <div className='icon destiny-strike' />
             <ProfileNavLink to='/reports/strikes' />
           </li>
         </ul>

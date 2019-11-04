@@ -798,5 +798,10 @@
     "date": "2019-10-31T09:32:11.384Z",
     "version": "2.10.16",
     "content": "- added fireteams to clan roster\n- reports bug"
+  },
+  {
+    "date": "2019-11-04T08:41:23.249Z",
+    "version": "2.10.21",
+    "content": "- next level performance improvements to _Reports_\n- lots of new icons\n- misc."
   }
 ]

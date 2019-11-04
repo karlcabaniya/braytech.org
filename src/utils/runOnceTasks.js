@@ -5,19 +5,14 @@ export default function runOnceTasks() {
 
   const history = ls.get('history.tasks') || [];
 
-  if (!history.find(t => t.id === 'reauth_august152019')) {
-    ls.del('setting.auth');
-    ls.update('history.tasks', { id: 'reauth_august152019' });
-  }
-
   if (!history.find(t => t.id === 'resetlang_august192019')) {
     if (ls.get('setting.language') === 'en-au') ls.set('setting.language', 'en');
     ls.update('history.tasks', { id: 'resetlang_august192019' });
   }
 
-  if (!history.find(t => t.id === 'reauth_october122019')) {
+  if (!history.find(t => t.id === 'reauth_november042019')) {
     ls.del('setting.auth');
-    ls.update('history.tasks', { id: 'reauth_october122019' });
+    ls.update('history.tasks', { id: 'reauth_november042019' });
   }
 
 }

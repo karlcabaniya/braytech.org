@@ -25,6 +25,9 @@ import { ReactComponent as CrucibleIconLockdown } from '../../../media/crucible/
 import { ReactComponent as CrucibleIconMomentumControl } from '../../../media/crucible/svg/momentum-control.svg';
 import { ReactComponent as CrucibleIconIronBanner } from '../../../media/crucible/svg/iron-banner.svg';
 
+import { ReactComponent as CrucibleIconStandingVictory } from '../../../media/crucible/svg/standing-victory.svg';
+import { ReactComponent as CrucibleIconStandingDefeat } from '../../../media/crucible/svg/standing-defeat.svg';
+
 class ReportHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -197,7 +200,6 @@ class ReportHeaderLarge extends React.Component {
     const modeName = definitionMode && definitionMode.displayProperties.name;
 
     const map = manifest.DestinyActivityDefinition[activityDetails.referenceId];
-    
 
     const entry = entries && ((characterIds && entries.find(entry => characterIds.includes(entry.characterId))) || (entries.length && orderBy(entries, [e => e.values && e.values.activityDurationSeconds && e.values.activityDurationSeconds.basic.value], ['desc'])[0]));
 
@@ -218,6 +220,15 @@ class ReportHeaderLarge extends React.Component {
       );
     }
 
+    // const standingExtras = [
+    //   {
+    //     mode: 1164760504,
+    //     defeat: 
+    //   }
+    // ]
+
+    // const standingExtra = standingExtras.find(m => m.modes.includes(activityDetails.mode));
+
     return (
       <div className='head'>
       {map && map.pgcrImage && <ObservedImage className='image bg' src={`https://www.bungie.net${map.pgcrImage}`} />}
@@ -236,7 +247,8 @@ class ReportHeaderLarge extends React.Component {
       {standing > -1 ? (
         <>
           <div className='standing'>
-            <div className='text'>{standing === 0 ? t('VICTORY') : t('DEFEAT')}</div>
+            <div className='icon crucible'>{standing === 0 ? <CrucibleIconStandingVictory /> : <CrucibleIconStandingDefeat />}</div>
+            <div className='text'>{standing === 0 ? t('Victory') : t('Defeat')}</div>
           </div>
           <div className='score teams'>{score}</div>
         </>

@@ -26,6 +26,11 @@ import { ReactComponent as GambitIconGambit } from '../../../media/gambit/svg/ga
 import { ReactComponent as GambitIconGambitPrime } from '../../../media/gambit/svg/gambit-prime.svg';
 import { ReactComponent as GambitIconReckoning } from '../../../media/gambit/svg/reckoning.svg';
 
+import { ReactComponent as VanguardIconStrikes } from '../../../media/vanguard/svg/strikes.svg';
+import { ReactComponent as VanguardIconScoredNightfallStrikes } from '../../../media/vanguard/svg/scored-nightfall-strikes.svg';
+
+import { ReactComponent as RaidIcon } from '../../../media/raid/svg/raid.svg';
+
 import './styles.css';
 
 class Mode extends React.Component {
@@ -110,6 +115,22 @@ class Mode extends React.Component {
       {
         modes: [76],
         icon: <GambitIconReckoning />
+      },
+
+      // Raid
+      {
+        modes: [4],
+        icon: <RaidIcon />
+      },
+
+      // Vanfuard
+      {
+        modes: [18],
+        icon: <VanguardIconStrikes />
+      },
+      {
+        modes: [46],
+        icon: <VanguardIconScoredNightfallStrikes />
       },
 
       // Default

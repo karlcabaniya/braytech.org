@@ -37,14 +37,12 @@
 #multiplayer .content.views .list li {
   display: grid;
   margin: 0;
-  height: unset;
+  height: 60px;
+  justify-content: center;
 }
 
-#multiplayer .content.views .list li .image {
-  position: relative;
-  height: unset;
-  padding-bottom: 100%;
-  background-size: 80%;
+#multiplayer .content.views .list li .icon {
+  font-size: 32px;
 }
 
 #multiplayer .content.views .list li::before {

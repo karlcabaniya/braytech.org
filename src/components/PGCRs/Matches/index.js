@@ -148,38 +148,19 @@ class Matches extends React.Component {
   }
 
   render() {
-    const { t, member, PGCRcache, mode, limit = 15, offset, root } = this.props;
+    const { t, member, PGCRcache, mode, offset, root } = this.props;
 
+    // get PGCRs for current membership
     let PGCRs = PGCRcache[member.membershipId] || [];
 
-    // console.log(this.state)
-
-    // if (mode && PGCRcache[member.membershipId]) {
-
-    //   // PGCRs = orderBy(
-    //   //   PGCRcache[member.membershipId]
-    //   //     .filter(pgcr => mode.some(m => pgcr.activityDetails.mode.includes(m))),
-    //   //     [pgcr => pgcr.period], ['desc']
-    //   // );
-
-    //   PGCRs = orderBy(
-    //     PGCRcache[member.membershipId]
-    //       .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId)),
-    //     [pgcr => pgcr.period], ['desc']
-    //   );
-
-    // } else if (PGCRcache[member.membershipId]) {
-
-    //   PGCRs = orderBy(
-    //     PGCRcache[member.membershipId]
-    //       .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId)),
-    //     [pgcr => pgcr.period], ['desc']
-    //   );
-
-    // }
-
-    PGCRs = PGCRs.filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId));
-
+    // filter available PGCRs and ensure uniqueness
+    PGCRs = PGCRs
+      .filter(pgcr => this.state.instances.includes(pgcr.activityDetails.instanceId))
+      .filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj.activityDetails.instanceId).indexOf(obj.activityDetails.instanceId) === pos;
+      });
+    
+    // ensure order
     PGCRs = orderBy(PGCRs, [pgcr => pgcr.period], ['desc']);
 
     return PGCRs.length ? (
