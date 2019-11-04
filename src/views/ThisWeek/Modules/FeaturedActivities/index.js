@@ -27,6 +27,17 @@ class FeaturedActivities extends React.Component {
     const { t, member } = this.props;
     const characterActivities = member.data.profile.characterActivities.data;
 
+    // console.log(characterActivities[member.characterId].availableActivities.map(a => {
+    //   if (!a.activityHash) return false;
+    //   const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+    //   return {
+    //     name: definitionActivity.displayProperties.name,
+    //     ...a,
+    //     definitionActivity
+    //   }
+    // }));
+
     const featuredActivities = characterActivities[member.characterId].availableActivities.filter(a => {
       if (!a.activityHash) return false;
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
