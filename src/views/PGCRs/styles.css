@@ -268,10 +268,9 @@
     grid-gap: 2rem;
   }
 
-  #multiplayer .content .modes li .icon .image {
-    position: relative;
-    width: 66px;
+  #multiplayer .content .modes li .icon {
     height: 72px;
+    width: 72px;
   }
 
   #multiplayer .content .modes li .text {
@@ -286,20 +285,20 @@
   }
 
   #multiplayer .content .modes li .text .minor-stats {
-    margin: 7px 0 0;
+    margin: 6px 0 0;
   }
 
   #multiplayer .content .modes li .text .stat .value {
+    margin: 3px 0 0;
     font-size: 14px;
   }
 
   #multiplayer .content .modes li .text .stat .name {
-    margin: 7px 0 0;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   #multiplayer .content .modes li .text .kdr .value {
-    margin: 3px 0 0;
+    margin: 5px 0 0;
     font-size: 18px;
     line-height: 14px;
   }

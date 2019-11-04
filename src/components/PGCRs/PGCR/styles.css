@@ -587,6 +587,12 @@
     height: 38px;
   }
 
+  .list.reports li > .head .standing .icon {
+    height: 60px;
+    width: 60px;
+    margin: -30px 0 0 -30px;
+  }
+
   .list.reports li > .head .standing .text {
     font-size: 3vh;
     letter-spacing: 0.25vh;
