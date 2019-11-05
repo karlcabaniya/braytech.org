@@ -101,7 +101,7 @@ class Gambit extends React.Component {
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t } = this.props;
 
     const offset = parseInt(this.props.offset);
 
@@ -147,7 +147,7 @@ class Gambit extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent matches')}</div>
             </div>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 75} characterId={member.characterId} limit='20' offset={offset} root='/reports/gambit' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 75} limit='20' offset={offset} root='/reports/gambit' />
           </div>
         </div>
       </div>

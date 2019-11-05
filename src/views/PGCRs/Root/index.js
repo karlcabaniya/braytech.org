@@ -15,7 +15,7 @@ class All extends React.Component {
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t } = this.props;
 
     const offset = parseInt(this.props.offset);
 
@@ -38,7 +38,7 @@ class All extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent activities')}</div>
             </div>
-            <Matches mode={false} characterId={member.characterId} limit='20' offset={offset} root='/reports/all' />
+            <Matches mode={false} limit='20' offset={offset} root='/reports/all' />
           </div>
         </div>
       </div>
@@ -48,8 +48,7 @@ class All extends React.Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    member: state.member,
-    PGCRcache: state.PGCRcache
+    
   };
 }
 

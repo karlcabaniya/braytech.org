@@ -160,7 +160,7 @@ class Item extends React.Component {
 
     let note = false;
     if (!item.itemComponents && this.props.uninstanced) {
-      note = t('Non-instanced item (displaying collections roll)');
+      note = t('Collections roll');
     }
 
     const Meat = item.type && woolworths[item.type];

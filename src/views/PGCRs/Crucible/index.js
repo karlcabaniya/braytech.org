@@ -159,7 +159,7 @@ class Crucible extends React.Component {
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t } = this.props;
 
     const offset = parseInt(this.props.offset);
 
@@ -254,7 +254,7 @@ class Crucible extends React.Component {
             <div>{t('Recent matches')}</div>
           </div>
           <div className='content'>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 5} characterId={member.characterId} limit='20' offset={offset} root='/reports/crucible' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 5} limit='20' offset={offset} root='/reports/crucible' />
           </div>
         </div>
       </div>

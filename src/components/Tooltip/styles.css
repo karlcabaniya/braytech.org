@@ -82,10 +82,12 @@
 }
 
 #tooltip .frame .note {
-  padding: 6px 16px;
-  background-color: rgba(156, 53, 51, 0.8);
-  font-size: 14px;
+  padding: 7px 16px 6px;
+  background-color: rgba(158, 65, 51, 0.9);
+  font-size: 13px;
   line-height: 1.4;
+  text-transform: uppercase;
+  font-family: 'nhg text';
 }
 
 #tooltip .black {

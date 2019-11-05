@@ -94,7 +94,7 @@ class Raids extends React.Component {
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t } = this.props;
 
     const offset = parseInt(this.props.offset);
 
@@ -140,7 +140,7 @@ class Raids extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent raids')}</div>
             </div>
-            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 4} characterId={member.characterId} limit='20' offset={offset} root='/reports/raids' />
+            <Matches mode={this.props.mode ? parseInt(this.props.mode) : 4} limit='20' offset={offset} root='/reports/raids' />
           </div>
         </div>
       </div>

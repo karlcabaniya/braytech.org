@@ -149,9 +149,11 @@ class ReportItem extends React.Component {
 
   render() {
     const { t, member, report, expanded } = this.props;
-    const { expandedReport, expandedPlayers, playerCache } = this.state;
+
     const characters = member.data && member.data.profile.characters.data;
     const characterIds = characters && characters.map(c => c.characterId);
+
+    const { expandedReport, expandedPlayers, playerCache } = this.state;
 
     const modes = {
       crucible: [69, 70, 71, 72, 74, 73, 81, 50, 43, 44, 48, 60, 65, 59, 31, 37, 38],

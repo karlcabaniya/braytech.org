@@ -98,7 +98,7 @@ class Strikes extends React.Component {
   }
 
   render() {
-    const { t, member } = this.props;
+    const { t } = this.props;
 
     const mode = this.props.mode ? parseInt(this.props.mode) : 18;
     const offset = parseInt(this.props.offset);
@@ -145,7 +145,7 @@ class Strikes extends React.Component {
             <div className='sub-header'>
               <div>{t('Recent strikes')}</div>
             </div>
-            <Matches mode={mode} characterId={member.characterId} limit='20' offset={offset} root='/reports/strikes' />
+            <Matches mode={mode} limit='20' offset={offset} root='/reports/strikes' />
           </div>
         </div>
       </div>

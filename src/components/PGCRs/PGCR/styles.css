@@ -119,6 +119,15 @@
   height: 400%;
 }
 
+.list.reports li > .head .standing .icon.crucible .victory .square {
+  transform-origin: center center;
+  animation: rotate-linear 32s infinite linear;
+}
+
+.list.reports li > .head .standing .icon.crucible .victory .square2 {
+  animation: rotate-linear 16s infinite linear;
+}
+
 .list.reports li > .head .standing .icon.crucible .victory .chevron.ani {
   transform-origin: center center;
   opacity: 0;
@@ -442,7 +451,7 @@
 }
 
 .list.reports li .entries .list .isExpandedPlayer:hover {
-  background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .list.reports li .entries .list .isExpandedPlayer:hover::before {

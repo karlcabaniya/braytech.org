@@ -67,7 +67,7 @@ class Matches extends React.Component {
   };
 
   run = async force => {
-    const { mode, characterId = false } = this.props;
+    const { member, mode } = this.props;
 
     let run = !this.state.loading;
     if (force) {
@@ -76,8 +76,8 @@ class Matches extends React.Component {
 
     if (run) {
       // console.log('matches refresh start');
-
       this.running = true;
+
       if (this.mounted) {
         this.setState(p => {
           p.loading = true;
@@ -87,9 +87,9 @@ class Matches extends React.Component {
 
       let ignition = mode
         ? await [mode].map(m => {
-            return this.cacheMachine(m, characterId);
+            return this.cacheMachine(m, member.characterId);
           })
-        : [await this.cacheMachine(false, characterId)];
+        : [await this.cacheMachine(false, member.characterId)];
 
       try {
         await Promise.all(ignition);
@@ -128,7 +128,11 @@ class Matches extends React.Component {
   }
 
   componentDidUpdate(prev) {
-    const { mode, offset } = this.props;
+    const { member, mode, offset } = this.props;
+
+    if (prev.member.characterId !== member.characterId) {
+      this.run(true);
+    }
 
     if (!isEqual(prev.mode, mode)) {
       this.run(true);
