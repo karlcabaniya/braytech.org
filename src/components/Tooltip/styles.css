@@ -553,6 +553,10 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
+#tooltip .frame .emblem .image {
+  background-size: cover;
+}
+
 #tooltip .frame.exotic .header {
   background-color: hsla(var(--exotic), 0.9);
 }
