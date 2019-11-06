@@ -99,5 +99,17 @@
       "description": "Nightfalls, daily heroic adventure, and daily heroic story missions, are still missing from _Now_, and _This Week_. Bungie are investigating a fix and [if possible] it will be come with Shadowkeep's API deployment.\n\nWelcome to version 2.9.0: Maps.\n\nOver the past week I've been experimenting with maps, based on lowlidev's work. It's all still new and I'm actively working to fill out its data.\n\nThere's a bunch of other little cool bits too.\n\nLove, justrealmilk x0x0",
       "prompt": true
     }
+  },
+  {
+    "id": "vhbx6qo824kw22opkcr4h",
+    "date": "2019-11-06T18:24:54.426Z",
+    "expiry": 604800000,
+    "showOnce": true,
+    "displayProperties": {
+      "name": "Dark mode",
+      "image": "/static/images/notifications/darkMode.jpg",
+      "description": "_Yeah, but, did you know there's a dark mode?_ — me, now\n\nHave you been to the _Settings_ view? You can access it by selecting VIEWS on smaller touch devices, or by just pinching the cog. There's some good stuff in there and it's come to my attention that not everyone knows that I have a dark mode.\n\nOkay, that's all. Also, like and subscribe to my Patreon.",
+      "prompt": true
+    }
   }
 ]
