@@ -5,8 +5,11 @@ import { withTranslation } from 'react-i18next';
 import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
+import * as enums from '../../utils/destinyEnums';
+import { sockets } from '../../utils/destinyItems/sockets';
+import { stats, statsMs } from '../../utils/destinyItems/stats';
+import { masterwork } from '../../utils/destinyItems/masterwork';
 import ObservedImage from '../../components/ObservedImage';
-import { getSockets } from '../../utils/destinyItems';
 
 import './styles.css';
 
@@ -36,163 +39,191 @@ class Inspect extends React.Component {
   };
 
   render() {
-    const { t, member } = this.props;
-    const hash = this.props.match.params.hash ? this.props.match.params.hash : false;
-    const item = manifest.DestinyInventoryItemDefinition[hash];
+    const { t, member, tooltips } = this.props;
 
-    let { stats, sockets } = getSockets(item, false, true, false, true, [], true, true);
+    const item = {
+      itemHash: this.props.match.params.hash,
+      instanceId: this.props.instanceid || false,
+      itemComponents: false,
+      quantity: parseInt(this.props.quantity, 10) || 1,
+      state: (this.props.state && parseInt(this.props.state, 10)) || 0,
+      rarity: false,
+      type: false
+    };
 
-    console.log(sockets);
+    const definitionItem = manifest.DestinyInventoryItemDefinition[item.itemHash];
 
-    const modCategoryHashes = [2685412949, 590099826, 3379164649, 4265082475, 4243480345];
-    const socketsPerks = sockets.filter(socket => !modCategoryHashes.includes(socket.socketCategoryHash)).length ? sockets.filter(socket => !modCategoryHashes.includes(socket.socketCategoryHash)).filter(socket => socket.socketTypeHash !== 1282012138) : false;
-    const socketsMods = sockets.filter(socket => modCategoryHashes.includes(socket.socketCategoryHash)).length ? sockets.filter(socket => modCategoryHashes.includes(socket.socketCategoryHash)) : false;
+    if (item.itemHash !== '343' && !definitionItem) {
+      return null;
+    }
 
-    let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/collections';
 
-    let tier;
-    if (item.inventory) {
-      switch (item.inventory.tierType) {
+
+
+
+
+    if (definitionItem && definitionItem.inventory) {
+      switch (definitionItem.inventory.tierType) {
         case 6:
-          tier = 'exotic';
+          item.rarity = 'exotic';
           break;
         case 5:
-          tier = 'legendary';
+          item.rarity = 'legendary';
           break;
         case 4:
-          tier = 'rare';
+          item.rarity = 'rare';
           break;
         case 3:
-          tier = 'uncommon';
+          item.rarity = 'uncommon';
           break;
         case 2:
-          tier = 'basic';
+          item.rarity = 'common';
           break;
         default:
-          tier = 'basic';
+          item.rarity = 'common';
+      }
+
+      if (definitionItem.itemType === 2) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 3) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 21) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 22) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 24) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 28) {
+        item.type = 'equipment';
+      } else if (definitionItem.itemType === 14) {
+        item.type = 'emblem';
+      } else if (definitionItem.itemType === 19) {
+        item.type = 'mod';
       }
     }
 
-    const hasBaseStat = item.stats && manifest.DestinyStatDefinition[item.stats.primaryBaseStatHash] ? manifest.DestinyStatDefinition[item.stats.primaryBaseStatHash] : false;
+    if (item.instanceId && member.data && member.data.profile.itemComponents.instances.data[item.instanceId]) {
+      let itemComponents = member.data.profile.itemComponents;
 
-    let powerLevel;
-    if (member && member.data) {
-      let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
-      powerLevel = Math.floor((680 / 700) * character.light);
-    } else if (item.itemComponents && item.itemComponents.instance) {
-      powerLevel = item.itemComponents.instance.primaryStat.value;
+      item.itemComponents = {
+        instance: itemComponents.instances.data[item.instanceId] ? itemComponents.instances.data[item.instanceId] : false,
+        sockets: itemComponents.sockets.data[item.instanceId] ? itemComponents.sockets.data[item.instanceId].sockets : false,
+        perks: itemComponents.perks.data[item.instanceId] ? itemComponents.perks.data[item.instanceId].perks : false,
+        stats: itemComponents.stats.data[item.instanceId] ? itemComponents.stats.data[item.instanceId].stats : false,
+        objectives: itemComponents.objectives.data[item.instanceId] ? itemComponents.objectives.data[item.instanceId].objectives : false
+      };
+    } else if (item.instanceId && tooltips.itemComponents[item.instanceId]) {
+      item.itemComponents = tooltips.itemComponents[item.instanceId];
     } else {
-      powerLevel = '730';
+      item.itemComponents = false;
     }
 
-    const isArmour = item.itemType === 2;
-    const isWeapon = item.itemType === 3;
+    if (member.data.profile && member.data.profile.characterUninstancedItemComponents && member.data.profile.characterUninstancedItemComponents[member.characterId].objectives && member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[item.itemHash]) {
+      if (item.itemComponents) {
+        item.itemComponents.objectives = member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[item.itemHash].objectives;
+      } else {
+        item.itemComponents = {
+          objectives: member.data.profile.characterUninstancedItemComponents[member.characterId].objectives.data[item.itemHash].objectives
+        };
+      }
+    }
+
+    if (item.instanceId && member.data.profile && member.data.profile.characterInventories && member.data.profile.characterInventories.data && member.data.profile.characterInventories.data[member.characterId] && member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === item.instanceId)) {
+      if (item.itemComponents) {
+        item.itemComponents.item = member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === item.instanceId);
+      } else {
+        item.itemComponents = {
+          item: member.data.profile.characterInventories.data[member.characterId].items.find(i => i.itemInstanceId === item.instanceId)
+        };
+      }
+    }
+
+    item.masterwork = enums.enumerateItemState(item.state).masterwork;
+    item.sockets = sockets(item);
+    item.stats = stats(item);
+    item.masterworkInfo = masterwork(item);
+
+    item.primaryStat = (definitionItem.itemType === 2 || definitionItem.itemType === 3) && definitionItem.stats && !definitionItem.stats.disablePrimaryStatDisplay && definitionItem.stats.primaryBaseStatHash && {
+      hash: definitionItem.stats.primaryBaseStatHash,
+      displayProperties: manifest.DestinyStatDefinition[definitionItem.stats.primaryBaseStatHash].displayProperties,
+      value: 750
+    };
+
+    if (item.primaryStat && item.itemComponents && item.itemComponents.instance && item.itemComponents.instance.primaryStat) {
+      item.primaryStat.value = item.itemComponents.instance.primaryStat.value;
+    } else if (item.primaryStat && member && member.data) {
+      let character = member.data.profile.characters.data.find(c => c.characterId === member.characterId);
+
+      item.primaryStat.value = Math.floor((733 / 750) * character.light);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    console.log(item);
+
+    // let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/collections';
+
+    
 
     return (
       <div className='view' id='inspect'>
-        {item.screenshot && item.screenshot !== '' ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${item.screenshot}`} /> : null}
-        {item.secondaryIcon && item.secondaryIcon !== '' ? <ObservedImage className='image foundry' src={`https://www.bungie.net${item.secondaryIcon}`} /> : null}
+        {definitionItem.screenshot && definitionItem.screenshot !== '' ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${definitionItem.screenshot}`} /> : null}
+        {definitionItem.secondaryIcon && definitionItem.secondaryIcon !== '' ? <ObservedImage className='image foundry' src={`https://www.bungie.net${definitionItem.secondaryIcon}`} /> : null}
         <div className='row displayProperties'>
-          <div className={cx('rarity', tier)} />
-          <div className='icon'>{item.displayProperties.icon ? <ObservedImage className='image' src={`https://www.bungie.net${item.displayProperties.icon}`} /> : null}</div>
+          <div className={cx('rarity', item.rarity)} />
+          <div className='icon'>{definitionItem.displayProperties.icon ? <ObservedImage className='image' src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} /> : null}</div>
           <div className='text'>
-            <div className='name'>{item.displayProperties.name}</div>
-            <div className='type'>{item.itemTypeDisplayName}</div>
-            <div className='description'>{item.displayProperties.description}</div>
+            <div className='name'>{definitionItem.displayProperties.name}</div>
+            <div className='type'>{definitionItem.itemTypeDisplayName}</div>
+            <div className='description'>{definitionItem.displayProperties.description}</div>
           </div>
         </div>
-        {(isWeapon || isArmour) && stats.length ? (
           <div className='row stats'>
             <div className='module'>
               <div className='sub-header'>
                 <div>{t('Stats')}</div>
               </div>
-              {(isWeapon || isArmour) && stats.length ? (
-                <div className='values'>{stats.map(stat => stat.element)}</div>
-              ) : null}
+              {item.stats.map(s => {
+            // map through stats
+
+            const masterwork = (item.masterworkInfo && item.masterworkInfo.statHash === s.statHash && item.masterworkInfo.statValue) || 0;
+            const base = s.value - masterwork;
+
+            return (
+              <div key={s.statHash} className='stat'>
+                <div className='name'>{s.displayProperties.name}</div>
+                <div className={cx('value', { bar: s.bar })}>
+                  {s.bar ? (
+                    <>
+                      <div className='bar' data-value={base} style={{ width: `${base}%` }} />
+                      <div className='bar masterwork' data-value={masterwork} style={{ width: `${masterwork}%` }} />
+                      <div className='int'>{s.value}</div>
+                    </>
+                  ) : (
+                    <>
+                      {s.value} {statsMs.includes(s.statHash) && 'ms'}
+                    </>
+                  )}
+                </div>
+              </div>
+            );
+          })}
             </div>
           </div>
-        ) : null}
-          {socketsPerks.length > 0 ? (
-          <div className='row sockets'>
-            {socketsPerks.length > 0 ? (
-              <div className='module perks'>
-                <div className='sub-header'>
-                  <div>Perks</div>
-                </div>
-                <div className='sockets'>
-                  {socketsPerks.map((socket, i) => {
-                    let group = socket.plugs
-                      .filter(plug => {
-                        if (plug.definition.redacted) {
-                          return false;
-                        } else {
-                          return true;
-                        }
-                      })
-                      .filter(plug => {
-                        if (!plug.definition.itemCategoryHashes || !plug.definition.plug) {
-                          console.log(socket, plug);
-                          return false;
-                        } else {
-                          return true;
-                        }
-                      })
-                      .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142);
-
-                    if (group.length > 0) {
-                      return (
-                        <div key={i} className='socket'>
-                          {group.map(plug => plug.element)}
-                        </div>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </div>
-              </div>
-            ) : null}
-            {socketsMods.length > 0 ? (
-              <div className='module mods'>
-                <div className='sub-header'>
-                  <div>Mods</div>
-                </div>
-                <div className='sockets'>
-                  {socketsMods.map((socket, i) => {
-                    let group = socket.plugs
-                      .filter(plug => {
-                        if (plug.definition.redacted) {
-                          return false;
-                        } else {
-                          return true;
-                        }
-                      })
-                      .filter(plug => {
-                        if (!plug.definition.itemCategoryHashes || !plug.definition.plug) {
-                          console.log(socket, plug);
-                          return false;
-                        } else {
-                          return true;
-                        }
-                      })
-                      .filter(plug => plug.definition.plug.plugCategoryHash !== 2947756142);
-
-                    if (group.length > 0) {
-                      return (
-                        <div key={i} className='socket'>
-                          {group.map(plug => plug.element)}
-                        </div>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </div>
-              </div>
-            ) : null}
-          </div>
-        ) : null}
+          
       </div>
     );
   }

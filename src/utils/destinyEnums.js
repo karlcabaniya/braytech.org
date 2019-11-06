@@ -345,7 +345,7 @@ export const nightfalls = {
     triumphs: [165166474, 1871570556],
     items: [],
     collectibles: [1534387877, 1766893929],
-    ordealHashes: [966580527, 3392133546, 4196546910]
+    ordealHashes: [966580527, 2357524344, 3392133546, 4196546910]
   },
   629542775: {
     triumphs: [],
