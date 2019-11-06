@@ -1997,7 +1997,7 @@
   {
     "checklistId": 1912364094,
     "checklistHash": 957600697,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/jade-rabbits/archers-line_jade-rabbits_957600697.jpg",
     "description": false,
     "debug": {
       "number": 3
@@ -2006,7 +2006,7 @@
   {
     "checklistId": 1912364094,
     "checklistHash": 2293092716,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/jade-rabbits/sorrows-harbor_jade-rabbits_2293092716.jpg",
     "description": false,
     "debug": {
       "number": 4
@@ -2043,7 +2043,7 @@
   {
     "checklistId": 1912364094,
     "checklistHash": 1568227000,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/jade-rabbits/chamber-of-night_jade-rabbits_1568227000.jpg",
     "description": false,
     "debug": {
       "number": 8
@@ -5847,7 +5847,7 @@
   {
     "checklistId": 4285512244,
     "recordHash": 3390078236,
-    "screenshot": false,
+    "screenshot": "/static/images/screenshots/lore/pit-of-heresy_lunas-lost_3390078236.jpg",
     "description": false,
     "debug": {
       "name": "Ghost Fragment: Omar Agah's Ghost",

@@ -16,38 +16,32 @@ import './styles.css';
 class Raids extends React.Component {
   render() {
     const { t, member } = this.props;
-    const { milestones } = member.data;
+    const milestones = member.data.milestones;
+    const characterActivities = member.data.profile.characterActivities.data;
 
     const data = {
       gos: {
         name: manifest.DestinyActivityDefinition[2659723068].displayProperties.name,
         description: manifest.DestinyActivityDefinition[2659723068].displayProperties.description,
-        challenge: manifest.DestinyVendorDefinition[3347378076].itemList
-          .map(item => {
-            if (manifest.DestinyVendorDefinition[3347378076].categories.find(c => c.categoryHash === 3151502845).vendorItemIndexes.includes(item.vendorItemIndex)) {
-              return item.itemHash;
-            } else {
-              return false;
-            }
-          })
-          .filter(t => manifest.statistics.bounties.hawthorne.includes(t)),
+        challenge: characterActivities[member.characterId].availableActivities.find(a => a.activityHash === 2659723068) && characterActivities[member.characterId].availableActivities.find(a => a.activityHash === 2659723068).modifierHashes,
         collectibles: [1988948484],
         triumphs: [],
         challenges: {
-          0: {
-            name: manifest.DestinyInventoryItemDefinition[2459033425].displayProperties.name,
+          2095683347: {
+            description: t("Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed."),
+            triumphs: [3281243931]
+          },
+          2472478405: {
+            description: t('Unknown'),
+            triumphs: [1661612473]
+          },
+          4080157289: {
             description: t('Unknown'),
             triumphs: [3167166053]
           },
-          1: {
-            name: manifest.DestinyInventoryItemDefinition[2459033425].displayProperties.name,
+          405180260: {
             description: t('Unknown'),
             triumphs: [1925300422]
-          },
-          2: {
-            name: manifest.DestinyInventoryItemDefinition[2459033425].displayProperties.name,
-            description: t('Unknown'),
-            triumphs: [1661612473]
           }
         }
       },
@@ -157,7 +151,7 @@ class Raids extends React.Component {
           }
         }
       },
-      lev: {
+      levi: {
         name: manifest.DestinyActivityDefinition[89727599].displayProperties.name,
         description: manifest.DestinyActivityDefinition[89727599].displayProperties.description,
         challenge: milestones[3660836525] && milestones[3660836525].activities && milestones[3660836525].activities.length && milestones[3660836525].activities[0].modifierHashes,
@@ -187,23 +181,19 @@ class Raids extends React.Component {
         challenges: {
           871205855: {
             name: t('The Pleasure Gardens'),
-            description: t('Relic holders may only shoot one plant per phase.'),
-            icon: manifest.DestinyActivityModifierDefinition[871205855].displayProperties.icon
+            description: t('Relic holders may only shoot one plant per phase.')
           },
           3296085675: {
             name: t('The Royal Pools'),
-            description: t('One Guardian must remain in the middle with their feet in the water during the entire encounter.'),
-            icon: manifest.DestinyActivityModifierDefinition[3296085675].displayProperties.icon
+            description: t('One Guardian must remain in the middle with their feet in the water during the entire encounter.')
           },
           2863316929: {
             name: t('The Gauntlet'),
-            description: t('Guardians cannot stand on the same plate more than once.'),
-            icon: manifest.DestinyActivityModifierDefinition[2863316929].displayProperties.icon
+            description: t('Guardians cannot stand on the same plate more than once.')
           },
           2770077977: {
             name: t('The Throne'),
-            description: t('Burn all 4 plates at the same time for every damage phase. Do not fire before all plates are activated.'),
-            icon: manifest.DestinyActivityModifierDefinition[2770077977].displayProperties.icon
+            description: t('Burn all 4 plates at the same time for every damage phase. Do not fire before all plates are activated.')
           }
         },
         collectibles: [199171389],
@@ -211,23 +201,92 @@ class Raids extends React.Component {
       }
     };
 
-    return ['cos', 'sotp', 'lw']
-      .map(r => ({
+    const leviathanStyle = key => {
+      return {
         className: [],
         mods: [
           {
             className: [],
             component: (
-              <React.Fragment key={r}>
+              <React.Fragment key={key}>
                 <div className='module-header'>
                   <div className='sub-name'>{t('Raid')}</div>
-                  <div className='name'>{data[r].name}</div>
+                  <div className='name'>{data[key].name}</div>
+                </div>
+                <h4>{t('Challenge')}</h4>
+                <ul className='list modifiers'>
+                  {data[key].challenge.map((p, i) => {
+                    return (
+                      <li key={i}>
+                        <div className='icon'>
+                          <ObservedImage className='image' src={`https://www.bungie.net${data[key].challenges[p].icon || (manifest.DestinyActivityModifierDefinition[p] && manifest.DestinyActivityModifierDefinition[p].displayProperties && manifest.DestinyActivityModifierDefinition[p].displayProperties.icon)}`} />
+                        </div>
+                        <div className='text'>
+                          <div className='name'>{data[key].challenges[p].name || (manifest.DestinyActivityModifierDefinition[p] && manifest.DestinyActivityModifierDefinition[p].displayProperties && manifest.DestinyActivityModifierDefinition[p].displayProperties.name)}</div>
+                          <div className='description'>
+                            <p>{data[key].challenges[p].description}</p>
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+                {data[key].phases ? (
+                  <>
+                    <h4>{t('Rotation')}</h4>
+                    <ul className='list modifiers'>
+                      {data[key].phaseOrder.map((p, i) => {
+                        return (
+                          <li key={i}>
+                            <div className='icon'>
+                              <ObservedImage className='image' src={`https://www.bungie.net${data[key].phases[p].icon}`} />
+                            </div>
+                            <div className='text'>
+                              <div className='name'>{data[key].phases[p].name}</div>
+                              <div className='description'>{data[key].phases[p].description}</div>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
+                ) : null}
+                <h4>{t('Collectibles')}</h4>
+                <ul className='list collection-items'>
+                  <Collectibles selfLinkFrom='/this-week' hashes={data[key].collectibles} />
+                </ul>
+                {(data[key].challenges[data[key].challenge[0]].triumphs || []).concat(data[key].triumphs).length ? (
+                  <>
+                    <h4>{t('Triumphs')}</h4>
+                    <ul className='list record-items'>
+                      <Records selfLinkFrom='/this-week' hashes={(data[key].challenges[data[key].challenge[0]] || []).triumphs.concat(data[key].triumphs)} ordered />
+                    </ul>
+                  </>
+                ) : null}
+              </React.Fragment>
+            )
+          }
+        ]
+      };
+    };
+
+    const bountyStyle = key => {
+      return {
+        className: [],
+        mods: [
+          {
+            className: [],
+            component: (
+              <React.Fragment key={key}>
+                <div className='module-header'>
+                  <div className='sub-name'>{t('Raid')}</div>
+                  <div className='name'>{data[key].name}</div>
                 </div>
                 <h4>{t('Challenge')}</h4>
                 <div className='raid-challenge'>
                   <ul className='list inventory-items'>
                     <Items
-                      items={data[r].challenge.map(c => {
+                      items={data[key].challenge.map(c => {
                         return {
                           itemHash: c
                         };
@@ -235,79 +294,33 @@ class Raids extends React.Component {
                     />
                   </ul>
                   <div className='text'>
-                    <div className='name'>{data[r].challenges[data[r].challenge[0]].name}</div>
-                    <ReactMarkdown className='description' source={data[r].challenges[data[r].challenge[0]].description} />
+                    <div className='name'>{data[key].challenges[data[key].challenge[0]].name}</div>
+                    <ReactMarkdown className='description' source={data[key].challenges[data[key].challenge[0]].description} />
                   </div>
                 </div>
                 <h4>{t('Collectibles')}</h4>
                 <ul className='list collection-items'>
-                  <Collectibles selfLinkFrom='/this-week' hashes={data[r].collectibles} />
+                  <Collectibles selfLinkFrom='/this-week' hashes={data[key].collectibles} />
                 </ul>
                 <h4>{t('Triumphs')}</h4>
                 <ul className='list record-items'>
-                  <Records selfLinkFrom='/this-week' hashes={data[r].challenges[data[r].challenge[0]].triumphs.concat(data[r].triumphs)} ordered />
+                  <Records selfLinkFrom='/this-week' hashes={data[key].challenges[data[key].challenge[0]].triumphs.concat(data[key].triumphs)} ordered />
                 </ul>
               </React.Fragment>
             )
           }
         ]
-      }))
-      .concat([
-        {
-          className: [],
-          mods: [
-            {
-              className: [],
-              component: (
-                <React.Fragment key='levi'>
-                  <div className='module-header'>
-                    <div className='sub-name'>{t('Raid')}</div>
-                    <div className='name'>{data['lev'].name}</div>
-                  </div>
-                  <h4>{t('Challenge')}</h4>
-                  <ul className='list modifiers'>
-                    {data['lev'].challenge.map((p, i) => {
-                      return (
-                        <li key={i}>
-                          <div className='icon'>
-                            <ObservedImage className='image' src={`https://www.bungie.net${data['lev'].challenges[p].icon}`} />
-                          </div>
-                          <div className='text'>
-                            <div className='name'>{data['lev'].challenges[p].name}</div>
-                            <div className='description'>
-                              <p>{data['lev'].challenges[p].description}</p>
-                            </div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  <h4>{t('Rotation')}</h4>
-                  <ul className='list modifiers'>
-                    {data['lev'].phaseOrder.map((p, i) => {
-                      return (
-                        <li key={i}>
-                          <div className='icon'>
-                            <ObservedImage className='image' src={`https://www.bungie.net${data['lev'].phases[p].icon}`} />
-                          </div>
-                          <div className='text'>
-                            <div className='name'>{data['lev'].phases[p].name}</div>
-                            <div className='description'>{data['lev'].phases[p].description}</div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  <h4>{t('Collectibles')}</h4>
-                  <ul className='list collection-items'>
-                    <Collectibles selfLinkFrom='/this-week' hashes={data['lev'].collectibles} />
-                  </ul>
-                </React.Fragment>
-              )
-            }
-          ]
+      };
+    };
+
+    return ['gos', 'cos', 'sotp', 'lw', 'levi']
+      .map(r => {
+        if (['gos', 'levi'].includes(r)) {
+          return leviathanStyle(r);
+        } else {
+          return bountyStyle(r);
         }
-      ])
+      })
       .map((col, c) => {
         return (
           <div key={c} className={cx('column', ...col.className)}>

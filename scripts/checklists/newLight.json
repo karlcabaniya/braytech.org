@@ -6,11 +6,23 @@
     },
     "957600697": {
       "destinationHash": 290444260,
-      "bubbleHash": 0
+      "bubbleHash": 3326367698,
+      "points": [
+        {
+          "x": -413,
+          "y": -396
+        }
+      ]
     },
     "1568227000": {
       "destinationHash": 290444260,
-      "bubbleHash": 0
+      "bubbleHash": 1973847113,
+      "points": [
+        {
+          "x": -259,
+          "y": -348
+        }
+      ]
     },
     "2115406343": {
       "destinationHash": 290444260,
@@ -24,7 +36,13 @@
     },
     "2293092716": {
       "destinationHash": 290444260,
-      "bubbleHash": 0
+      "bubbleHash": 417490937,
+      "points": [
+        {
+          "x": 276,
+          "y": 319
+        }
+      ]
     },
     "2779900411": {
       "destinationHash": 290444260,
@@ -262,7 +280,15 @@
       ]
     },
     "3390078236": {
-      "destinationHash": 290444260
+      "destinationHash": 290444260,
+      "activityHash": 1375089621,
+      "pursuitHash": 3277020515,
+      "points": [
+        {
+          "x": 171,
+          "y": 340
+        }
+      ]
     },
     "3390078227": {
       "destinationHash": 290444260,

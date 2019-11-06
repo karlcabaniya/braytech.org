@@ -6,6 +6,7 @@ import cx from 'classnames';
 
 import manifest from '../../utils/manifest';
 import * as enums from '../../utils/destinyEnums';
+import { damageTypeToString, ammoTypeToString, breakerTypeToIcon } from '../../utils/destinyUtils';
 import { sockets } from '../../utils/destinyItems/sockets';
 import { stats, statsMs } from '../../utils/destinyItems/stats';
 import { masterwork } from '../../utils/destinyItems/masterwork';
@@ -56,11 +57,6 @@ class Inspect extends React.Component {
     if (item.itemHash !== '343' && !definitionItem) {
       return null;
     }
-
-
-
-
-
 
     if (definitionItem && definitionItem.inventory) {
       switch (definitionItem.inventory.tierType) {
@@ -143,11 +139,14 @@ class Inspect extends React.Component {
     item.stats = stats(item);
     item.masterworkInfo = masterwork(item);
 
-    item.primaryStat = (definitionItem.itemType === 2 || definitionItem.itemType === 3) && definitionItem.stats && !definitionItem.stats.disablePrimaryStatDisplay && definitionItem.stats.primaryBaseStatHash && {
-      hash: definitionItem.stats.primaryBaseStatHash,
-      displayProperties: manifest.DestinyStatDefinition[definitionItem.stats.primaryBaseStatHash].displayProperties,
-      value: 750
-    };
+    item.primaryStat = (definitionItem.itemType === 2 || definitionItem.itemType === 3) &&
+      definitionItem.stats &&
+      !definitionItem.stats.disablePrimaryStatDisplay &&
+      definitionItem.stats.primaryBaseStatHash && {
+        hash: definitionItem.stats.primaryBaseStatHash,
+        displayProperties: manifest.DestinyStatDefinition[definitionItem.stats.primaryBaseStatHash].displayProperties,
+        value: 750
+      };
 
     if (item.primaryStat && item.itemComponents && item.itemComponents.instance && item.itemComponents.instance.primaryStat) {
       item.primaryStat.value = item.itemComponents.instance.primaryStat.value;
@@ -157,32 +156,22 @@ class Inspect extends React.Component {
       item.primaryStat.value = Math.floor((733 / 750) * character.light);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     console.log(item);
+
+    // weapon damage type
+    let damageTypeHash = definitionItem.itemType === enums.DestinyItemType.Weapon && definitionItem.damageTypeHashes[0];
+    damageTypeHash = item.itemComponents && item.itemComponents.instance ? item.itemComponents.instance.damageTypeHash : damageTypeHash;
+
+    const definitionDamageType = damageTypeHash && manifest.DestinyDamageTypeDefinition[damageTypeHash];
+    const definitionBreakerType = definitionItem.breakerTypeHash && manifest.DestinyBreakerTypeDefinition[definitionItem.breakerTypeHash];
 
     // let backLinkPath = this.props.location.state && this.props.location.state.from ? this.props.location.state.from : '/collections';
 
-    
-
     return (
-      <div className='view' id='inspect'>
-        {definitionItem.screenshot && definitionItem.screenshot !== '' ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${definitionItem.screenshot}`} /> : null}
-        {definitionItem.secondaryIcon && definitionItem.secondaryIcon !== '' ? <ObservedImage className='image foundry' src={`https://www.bungie.net${definitionItem.secondaryIcon}`} /> : null}
-        <div className='row displayProperties'>
+      <div className={cx('view', { weapon: definitionItem.itemType === enums.DestinyItemType.Weapon } )} id='inspect'>
+        {/* {definitionItem.screenshot && definitionItem.screenshot !== '' ? <ObservedImage className='image screenshot' src={`https://www.bungie.net${definitionItem.screenshot}`} /> : null} */}
+        {/* {definitionItem.secondaryIcon && definitionItem.secondaryIcon !== '' ? <ObservedImage className='image foundry' src={`https://www.bungie.net${definitionItem.secondaryIcon}`} /> : null} */}
+        <div className='row header'>
           <div className={cx('rarity', item.rarity)} />
           <div className='icon'>{definitionItem.displayProperties.icon ? <ObservedImage className='image' src={`https://www.bungie.net${definitionItem.displayProperties.icon}`} /> : null}</div>
           <div className='text'>
@@ -191,39 +180,60 @@ class Inspect extends React.Component {
             <div className='description'>{definitionItem.displayProperties.description}</div>
           </div>
         </div>
-          <div className='row stats'>
-            <div className='module'>
-              <div className='sub-header'>
-                <div>{t('Stats')}</div>
-              </div>
+        <div className='row'>
+          {item.stats ? (
+            <div className='module stats'>
               {item.stats.map(s => {
-            // map through stats
+                // map through stats
 
-            const masterwork = (item.masterworkInfo && item.masterworkInfo.statHash === s.statHash && item.masterworkInfo.statValue) || 0;
-            const base = s.value - masterwork;
+                const masterwork = (item.masterworkInfo && item.masterworkInfo.statHash === s.statHash && item.masterworkInfo.statValue) || 0;
+                const base = s.value - masterwork;
 
-            return (
-              <div key={s.statHash} className='stat'>
-                <div className='name'>{s.displayProperties.name}</div>
-                <div className={cx('value', { bar: s.bar })}>
-                  {s.bar ? (
-                    <>
-                      <div className='bar' data-value={base} style={{ width: `${base}%` }} />
-                      <div className='bar masterwork' data-value={masterwork} style={{ width: `${masterwork}%` }} />
-                      <div className='int'>{s.value}</div>
-                    </>
-                  ) : (
-                    <>
-                      {s.value} {statsMs.includes(s.statHash) && 'ms'}
-                    </>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+                return (
+                  <div key={s.statHash} className='stat'>
+                    <div className='name'>{s.displayProperties.name}</div>
+                    <div className={cx('value', { bar: s.bar })}>
+                      {s.bar ? (
+                        <>
+                          <div className='bar' data-value={base} style={{ width: `${base}%` }} />
+                          <div className='bar masterwork' data-value={masterwork} style={{ width: `${masterwork}%` }} />
+                          <div className='int'>{s.value}</div>
+                        </>
+                      ) : (
+                        <>
+                          {s.value} {statsMs.includes(s.statHash) && 'ms'}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-          
+          ) : null}
+          {item.primaryStat && definitionItem.itemType === enums.DestinyItemType.Weapon ? (
+            <div className='module primary-stat weapon'>
+              <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
+                <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
+                <div className='text'>{definitionDamageType.displayProperties.name}</div>
+              </div>
+              {definitionItem.breakerType > 0 ? (
+                <div className='breaker-type'>
+                  <div className='icon'>{breakerTypeToIcon(definitionItem.breakerTypeHash)}</div>
+                  <div className='text'>
+                    <div className='name'>{definitionBreakerType.displayProperties.name}</div>
+                    <div className='description'>
+                      <p>{definitionBreakerType.displayProperties.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+              <div className='slot'>
+                <div className={cx('icon', ammoTypeToString(definitionItem.equippingBlock.ammoType).toLowerCase())} />
+                <div className='text'>{ammoTypeToString(definitionItem.equippingBlock.ammoType)}</div>
+              </div>
+            </div>
+          ) : null}
+        </div>
       </div>
     );
   }

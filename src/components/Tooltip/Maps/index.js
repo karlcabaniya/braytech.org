@@ -49,7 +49,8 @@ class Checklist extends React.Component {
 
     const locatedStrings = {
       'lost-sector': t('Located inside lost sector'),
-      'strike': t('Located inside strike')
+      'strike': t('Located inside strike'),
+      'activity': t('Located inside activity: {{activityName}}', { activityName: checklistItem.activityHash && manifest.DestinyActivityDefinition[checklistItem.activityHash] && manifest.DestinyActivityDefinition[checklistItem.activityHash].displayProperties && manifest.DestinyActivityDefinition[checklistItem.activityHash].displayProperties.name })
     }
 
     return (
@@ -114,7 +115,8 @@ class Record extends React.Component {
 
     const locatedStrings = {
       'lost-sector': t('Located inside lost sector'),
-      'strike': t('Located inside strike')
+      'strike': t('Located inside strike'),
+      'activity': t('Located inside activity: {{activityName}}', { activityName: checklistItem.activityHash && manifest.DestinyActivityDefinition[checklistItem.activityHash] && manifest.DestinyActivityDefinition[checklistItem.activityHash].displayProperties && manifest.DestinyActivityDefinition[checklistItem.activityHash].displayProperties.name })
     }
     
     return (

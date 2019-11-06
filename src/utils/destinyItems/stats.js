@@ -2,8 +2,6 @@ import _ from 'lodash';
 
 import manifest from '../manifest';
 import * as enums from '../destinyEnums';
-import ObservedImage from '../../components/ObservedImage';
-import ProgressBar from '../../components/UI/ProgressBar';
 
 import * as utils from './utils';
 
@@ -45,8 +43,8 @@ export const statWhiteList = [
   2762071195, // Efficiency (sword)
   209426660, // Defense (sword)
   1591432999, // Accuracy
-  155624089, // Stability
   943549884, // Handling
+  155624089, // Stability
   4188031367, // Reload Speed
   4284893193, // Rounds Per Minute
   2961396640, // Charge Time

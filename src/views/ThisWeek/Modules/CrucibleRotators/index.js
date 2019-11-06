@@ -15,6 +15,8 @@ import { ReactComponent as CrucibleIconCountdown } from '../../../../media/cruci
 import { ReactComponent as CrucibleIconSupremacy } from '../../../../media/crucible/svg/supremacy.svg';
 import { ReactComponent as CrucibleIconLockdown } from '../../../../media/crucible/svg/lockdown.svg';
 import { ReactComponent as CrucibleIconMomentumControl } from '../../../../media/crucible/svg/momentum-control.svg';
+import { ReactComponent as CrucibleIconDoubles } from '../../../../media/crucible/svg/doubles.svg';
+import { ReactComponent as CrucibleIconSurvival } from '../../../../media/crucible/svg/elimination.svg';
 import { ReactComponent as CrucibleIconIronBanner } from '../../../../media/crucible/svg/iron-banner.svg';
 
 import './styles.css';
@@ -31,7 +33,7 @@ const crucibleRotators = [
   3646079260, // Countdown
   1457072306, // Showdown
   3239164160, // Lockdown
-  740422335, // Survival
+  // 740422335, // Survival
   920826395 // Doubles
 ];
 
@@ -47,20 +49,31 @@ const crucibleModeIcons = {
   3646079260: <CrucibleIconCountdown />,
   1457072306: <CrucibleIconShowdown />,
   3239164160: <CrucibleIconLockdown />,
-  740422335: <CrucibleIconDefault />,
-  920826395: <CrucibleIconDefault />
+  740422335: <CrucibleIconSurvival />,
+  920826395: <CrucibleIconDoubles />
 };
 
 class CrucibleRotators extends React.Component {
   render() {
     const { t, member } = this.props;
     const characterActivities = member.data.profile.characterActivities.data;
+
+    console.log(characterActivities[member.characterId].availableActivities.map(a => {
+      if (!a.activityHash) return false;
+      const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
+
+      return {
+        name: definitionActivity.displayProperties.name,
+        ...a,
+        definitionActivity
+      }
+    }));
     
     const featuredCrucibleModes = characterActivities[member.characterId].availableActivities.filter(a => {
       if (!a.activityHash) return false;
       const definitionActivity = manifest.DestinyActivityDefinition[a.activityHash];
 
-      if (definitionActivity && definitionActivity.activityModeTypes && definitionActivity.activityModeTypes.includes(5) && crucibleRotators.includes(definitionActivity.hash)) {
+      if (definitionActivity && crucibleRotators.includes(definitionActivity.hash)) {
         a.displayProperties = definitionActivity.displayProperties;
         a.icon = crucibleModeIcons[definitionActivity.hash] || null;
         return true;

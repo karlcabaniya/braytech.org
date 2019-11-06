@@ -4466,27 +4466,43 @@
     },
     {
       "destinationHash": 290444260,
-      "bubbleHash": 0,
+      "bubbleHash": 3326367698,
       "checklistHash": 957600697,
-      "points": [],
+      "points": [
+        {
+          "x": -413,
+          "y": -396
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "place": "The Moon",
-        "number": 3
+        "number": 3,
+        "bubble": "Archer's Line",
+        "name": "Archer's Line"
       },
-      "extended": {}
+      "extended": {},
+      "bubbleName": false
     },
     {
       "destinationHash": 290444260,
-      "bubbleHash": 0,
+      "bubbleHash": 417490937,
       "checklistHash": 2293092716,
-      "points": [],
+      "points": [
+        {
+          "x": 276,
+          "y": 319
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "place": "The Moon",
-        "number": 4
+        "number": 4,
+        "bubble": "Sorrow's Harbor",
+        "name": "Sorrow's Harbor"
       },
-      "extended": {}
+      "extended": {},
+      "bubbleName": false
     },
     {
       "destinationHash": 290444260,
@@ -4544,15 +4560,23 @@
     },
     {
       "destinationHash": 290444260,
-      "bubbleHash": 0,
+      "bubbleHash": 1973847113,
       "checklistHash": 1568227000,
-      "points": [],
+      "points": [
+        {
+          "x": -259,
+          "y": -348
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "place": "The Moon",
-        "number": 8
+        "number": 8,
+        "bubble": "Chamber of Night",
+        "name": "Chamber of Night"
       },
-      "extended": {}
+      "extended": {},
+      "bubbleName": false
     },
     {
       "destinationHash": 290444260,
@@ -8277,7 +8301,7 @@
       "bubbleName": false
     },
     {
-      "recordName": "",
+      "recordName": "VIII.X: Apocrypha",
       "recordHash": 2028468504,
       "sorts": {
         "number": 16,
@@ -8289,7 +8313,7 @@
       "destinationHash": 290444260
     },
     {
-      "recordName": "",
+      "recordName": "IX.X: Apocrypha",
       "recordHash": 2028468507,
       "sorts": {
         "number": 17,
@@ -8301,7 +8325,7 @@
       "destinationHash": 290444260
     },
     {
-      "recordName": "",
+      "recordName": "IX.X.I: Apocrypha",
       "recordHash": 2028468506,
       "sorts": {
         "number": 18,
@@ -8313,7 +8337,7 @@
       "destinationHash": 290444260
     },
     {
-      "recordName": "",
+      "recordName": "IX.X.II: Apocrypha",
       "recordHash": 2028468501,
       "sorts": {
         "number": 19,
@@ -8325,7 +8349,7 @@
       "destinationHash": 290444260
     },
     {
-      "recordName": "",
+      "recordName": "XI.X: Apocrypha",
       "recordHash": 2028468500,
       "sorts": {
         "number": 20,
@@ -12657,9 +12681,18 @@
         "destination": "The Moon",
         "place": "The Moon"
       },
-      "extended": {},
-      "points": [],
-      "destinationHash": 290444260
+      "extended": {
+        "located": "activity"
+      },
+      "points": [
+        {
+          "x": 171,
+          "y": 340
+        }
+      ],
+      "destinationHash": 290444260,
+      "pursuitHash": 3277020515,
+      "activityHash": 1375089621
     },
     {
       "recordName": "Ghost Fragment: Eriana-3's Ghost",

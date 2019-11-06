@@ -222,6 +222,8 @@ async function run() {
           located = 'lost-sector';
         } else if (withinStrike) {
           located = 'strike';
+        } else if (mapping && mapping.activityHash) {
+          located = 'activity';
         }
 
         const changes = {
@@ -231,6 +233,7 @@ async function run() {
           recordName: item.displayProperties.name,
           recordHash: hash,
           pursuitHash: mapping && mapping.pursuitHash,
+          activityHash: mapping && mapping.activityHash,
           points: (mapping && mapping.points) || [],
           sorts: {
             destination: destination && destination.displayProperties.name,
@@ -244,7 +247,7 @@ async function run() {
           }
         }
 
-        if (changes.recordHash === 3390078237) console.log(existing)
+        if (changes.recordHash === 3390078236) console.log(mapping, existing)
         // console.log(changes)
         // console.log({
         //   ...existing,
@@ -259,7 +262,7 @@ async function run() {
 
         const updates = _.mergeWith(existing, changes, merger);
 
-        if (changes.recordHash === 3390078237) console.log(updates)
+        //if (changes.recordHash === 3390078237) console.log(updates)
 
         return updates;
       })
