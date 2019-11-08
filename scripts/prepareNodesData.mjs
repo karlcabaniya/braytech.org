@@ -69,10 +69,10 @@ async function run() {
 
         output[index] = {
           ...output[index],
-          // debug: {
-          //   name: definitionLore && definitionLore.displayProperties && definitionLore.displayProperties.name || entry.sorts.name,
-          //   number: entry.sorts.number
-          // },
+          debug: {
+            name: (definitionLore && definitionLore.displayProperties && definitionLore.displayProperties.name) || entry.sorts.name,
+            number: entry.sorts.number
+          },
           activityHash: entry.activityHash,
           screenshot,
           // description: output[index].description && output[index].description !== "" ? output[index].description : false
@@ -86,7 +86,7 @@ async function run() {
           screenshot: false,
           description: false,
           debug: {
-            name: definitionLore && definitionLore.displayProperties && definitionLore.displayProperties.name || entry.sorts.name,
+            name: (definitionLore && definitionLore.displayProperties && definitionLore.displayProperties.name) || entry.sorts.name,
             number: entry.sorts.number
           }
         });

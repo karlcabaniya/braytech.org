@@ -268,9 +268,18 @@ function buildDefinedSocket(socketDef, index) {
   // Is this socket a perk-style socket, or something more general (mod-like)?
   const isPerk = socketCategoryDef.categoryStyle === enums.DestinySocketCategoryStyle.Reusable;
 
-  // The currently equipped plug, if any
+  const reusablePlugItems = (socketDef.reusablePlugSetHash && manifest.DestinyPlugSetDefinition[socketDef.reusablePlugSetHash] && manifest.DestinyPlugSetDefinition[socketDef.reusablePlugSetHash].reusablePlugItems) || [];
+
+  const randomizedPlugs = (socketDef.randomizedPlugSetHash && manifest.DestinyPlugSetDefinition[socketDef.randomizedPlugSetHash] && manifest.DestinyPlugSetDefinition[socketDef.randomizedPlugSetHash].reusablePlugItems) || [];
+
   const reusablePlugs = _.compact(
-    (socketDef.reusablePlugItems || []).map((reusablePlug) => buildDefinedPlug(reusablePlug))
+    (socketDef.reusablePlugItems || [])
+      .concat(reusablePlugItems)
+      .concat(randomizedPlugs)
+      .filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj.plugItemHash).indexOf(obj.plugItemHash) === pos;
+      })
+      .map((reusablePlug) => buildDefinedPlug(socketDef, reusablePlug))
   );
 
   const plugOptions = [];
@@ -286,7 +295,7 @@ function buildDefinedSocket(socketDef, index) {
   const plugItem = socketDef.singleInitialItemHash && socketDef.singleInitialItemHash !== 0 && manifest.DestinyInventoryItemDefinition[socketDef.singleInitialItemHash];
 
   if (plugOptions.length < 1 && plugItem) {
-    plugOptions.push(buildDefinedPlug({ plugItemHash: plugItem.hash }))
+    plugOptions.push(buildDefinedPlug(socketDef, { plugItemHash: plugItem.hash }))
   }
 
   const isIntrinsic = plugItem && plugItem.itemCategoryHashes && plugItem.itemCategoryHashes.includes(2237038328);
@@ -339,16 +348,20 @@ function buildPlug(plug, socketDef, plugObjectivesData) {
   };
 }
 
-function buildDefinedPlug(plug) {
+function buildDefinedPlug(socketDef, plug) {
+  const plugHash = isDestinyItemPlug(plug) ? plug.plugItemHash : plug.plugHash;
+  // const isEnabled = isDestinyItemPlug(plug) ? plug.enabled : plug.isEnabled;
+
   const definitionPlugItem = plug && manifest.DestinyInventoryItemDefinition[plug.plugItemHash];
 
-  if (!definitionPlugItem) {
+  if (!plugHash || !definitionPlugItem) {
     return null;
   }
 
   return {
     plugItem: definitionPlugItem,
     isEnabled: true,
+    isActive: plug.plugItemHash === socketDef.singleInitialItemHash,
     enableFailReasons: '',
     plugObjectives: [],
     perks: (definitionPlugItem.perks || []).map((perk) => manifest.DestinySandboxPerkDefinition[perk.perkHash]),

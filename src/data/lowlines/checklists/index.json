@@ -8308,9 +8308,17 @@
         "destination": "The Moon",
         "place": "The Moon"
       },
-      "extended": {},
-      "points": [],
-      "destinationHash": 290444260
+      "extended": {
+        "located": "activity"
+      },
+      "points": [
+        {
+          "x": 1041,
+          "y": 401
+        }
+      ],
+      "destinationHash": 290444260,
+      "activityHash": 1375089621
     },
     {
       "recordName": "IX.X: Apocrypha",
@@ -8320,9 +8328,17 @@
         "destination": "The Moon",
         "place": "The Moon"
       },
-      "extended": {},
-      "points": [],
-      "destinationHash": 290444260
+      "extended": {
+        "located": "activity"
+      },
+      "points": [
+        {
+          "x": 645,
+          "y": 496
+        }
+      ],
+      "destinationHash": 290444260,
+      "activityHash": 1375089621
     },
     {
       "recordName": "IX.X.I: Apocrypha",
@@ -8332,9 +8348,17 @@
         "destination": "The Moon",
         "place": "The Moon"
       },
-      "extended": {},
-      "points": [],
-      "destinationHash": 290444260
+      "extended": {
+        "located": "activity"
+      },
+      "points": [
+        {
+          "x": 228,
+          "y": 511
+        }
+      ],
+      "destinationHash": 290444260,
+      "activityHash": 1375089621
     },
     {
       "recordName": "IX.X.II: Apocrypha",
@@ -8344,9 +8368,17 @@
         "destination": "The Moon",
         "place": "The Moon"
       },
-      "extended": {},
-      "points": [],
-      "destinationHash": 290444260
+      "extended": {
+        "located": "activity"
+      },
+      "points": [
+        {
+          "x": 477,
+          "y": 333
+        }
+      ],
+      "destinationHash": 290444260,
+      "activityHash": 1375089621
     },
     {
       "recordName": "XI.X: Apocrypha",
@@ -8356,9 +8388,17 @@
         "destination": "The Moon",
         "place": "The Moon"
       },
-      "extended": {},
-      "points": [],
-      "destinationHash": 290444260
+      "extended": {
+        "located": "activity"
+      },
+      "points": [
+        {
+          "x": 297,
+          "y": 332
+        }
+      ],
+      "destinationHash": 290444260,
+      "activityHash": 1375089621
     }
   ],
   "2609997025": [

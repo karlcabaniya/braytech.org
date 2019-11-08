@@ -86,7 +86,15 @@ const Equipment = props => {
         </div>
       ) : null}
       {sockets && sockets.socketCategories && sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length ? (
-        <div className={cx('sockets', { one: sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).length === 1 })}>
+        <div className={cx('sockets', {
+          one: sockets.sockets
+            .filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker)
+            .map(s => s.plugOptions &&
+              s.plugOptions.filter(p => p.isEnabled && p.isActive)
+            )
+            .filter(s => s.length)
+            .length === 1
+        })}>
           {sockets.socketCategories
             .map((c, i) => {
               // map through socketCategories
@@ -103,7 +111,7 @@ const Equipment = props => {
                         return (
                           <div key={s.socketIndex} className='socket'>
                             {s.plugOptions
-                              .filter(p => p.isEnabled)
+                              .filter(p => p.isEnabled && p.isActive)
                               .map(p => {
                                 // filter for enabled plugs and map through
 

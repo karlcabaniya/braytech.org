@@ -2000,6 +2000,7 @@
     "screenshot": "/static/images/screenshots/jade-rabbits/archers-line_jade-rabbits_957600697.jpg",
     "description": false,
     "debug": {
+      "name": "Archer's Line",
       "number": 3
     }
   },
@@ -2009,6 +2010,7 @@
     "screenshot": "/static/images/screenshots/jade-rabbits/sorrows-harbor_jade-rabbits_2293092716.jpg",
     "description": false,
     "debug": {
+      "name": "Sorrow's Harbor",
       "number": 4
     }
   },
@@ -2027,6 +2029,7 @@
     "screenshot": "/static/images/screenshots/jade-rabbits/k1-revelation_jade-rabbits_3728157446.jpg",
     "description": "Requires a Firewall Data Fragment. Acquire prerequisite through Eris Morn.",
     "debug": {
+      "name": "K1 Revelation",
       "number": 6
     }
   },
@@ -2046,6 +2049,7 @@
     "screenshot": "/static/images/screenshots/jade-rabbits/chamber-of-night_jade-rabbits_1568227000.jpg",
     "description": false,
     "debug": {
+      "name": "Chamber of Night",
       "number": 8
     }
   },
@@ -3980,52 +3984,57 @@
   {
     "checklistId": 2474271317,
     "recordHash": 2028468504,
-    "screenshot": false,
-    "description": false,
+    "screenshot": "/static/images/screenshots/lore/pit-of-heresy_necrotic-cyphers_2028468504.jpg",
+    "description": "Enter the dungeon and head to the tower farthest right. Retain some altitude if possible. On the farthest side of the farthest tower, below its foot, is a cypher.",
+    "activityHash": 1375089621,
     "debug": {
-      "name": "Classified",
+      "name": "VIII.X: Apocrypha",
       "number": 16
     }
   },
   {
     "checklistId": 2474271317,
     "recordHash": 2028468507,
-    "screenshot": false,
-    "description": false,
+    "screenshot": "/static/images/screenshots/lore/pit-of-heresy_necrotic-cyphers_2028468507.jpg",
+    "description": "Complete the Necropolis encounter and proceed towards The Pit. Once at the wall of paths, climb and turn around. To the right of the hall is a small ledge along the moonstone wall. Use it to step to the upper level of the hallway and proceed to the farthest right side.",
     "debug": {
-      "name": "Classified",
+      "name": "IX.X: Apocrypha",
       "number": 17
-    }
+    },
+    "activityHash": 1375089621
   },
   {
     "checklistId": 2474271317,
     "recordHash": 2028468506,
-    "screenshot": false,
-    "description": false,
+    "screenshot": "/static/images/screenshots/lore/pit-of-heresy_necrotic-cyphers_2028468506.jpg",
+    "description": "Complete the Pit encounter. Before making your way deeper by traversing the height traps, climb carefully to their higest level.",
     "debug": {
-      "name": "Classified",
+      "name": "IX.X.I: Apocrypha",
       "number": 18
-    }
+    },
+    "activityHash": 1375089621
   },
   {
     "checklistId": 2474271317,
     "recordHash": 2028468501,
-    "screenshot": false,
-    "description": false,
+    "screenshot": "/static/images/screenshots/lore/pit-of-heresy_necrotic-cyphers_2028468501.jpg",
+    "description": "Drop down into the Tunnels of Despair and keep right. Enter at the first crouch-way and follow it to its end. You'll see a red door. Standing at the red door turn 70° clockwise. You'll be staring at a boulder. To the right of the boulder is the prize you seek.",
     "debug": {
-      "name": "Classified",
+      "name": "IX.X.II: Apocrypha",
       "number": 19
-    }
+    },
+    "activityHash": 1375089621
   },
   {
     "checklistId": 2474271317,
     "recordHash": 2028468500,
-    "screenshot": false,
-    "description": false,
+    "screenshot": "/static/images/screenshots/lore/pit-of-heresy_necrotic-cyphers_2028468500.jpg",
+    "description": "In the middlest crouch-way tunnel, closest to the green gas pit where you find the solar orb. Entering the tunnel from the green gas pit side, it will quickly widen into a small room. Stop, turn 180°, and look upwards.",
     "debug": {
-      "name": "Classified",
+      "name": "XI.X: Apocrypha",
       "number": 20
-    }
+    },
+    "activityHash": 1375089621
   },
   {
     "debug": {
@@ -5848,11 +5857,12 @@
     "checklistId": 4285512244,
     "recordHash": 3390078236,
     "screenshot": "/static/images/screenshots/lore/pit-of-heresy_lunas-lost_3390078236.jpg",
-    "description": false,
+    "description": "In the Tunnels of Despair, on a cliff ledge adjacent to the green gas pit.",
     "debug": {
       "name": "Ghost Fragment: Omar Agah's Ghost",
       "number": 8
-    }
+    },
+    "activityHash": 1375089621
   },
   {
     "checklistId": 4285512244,

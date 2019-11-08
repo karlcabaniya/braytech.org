@@ -212,9 +212,9 @@ class Inspect extends React.Component {
           ) : null}
           {item.primaryStat && definitionItem.itemType === enums.DestinyItemType.Weapon ? (
             <div className='module primary-stat weapon'>
-              <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
-                <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
-                <div className='text'>{definitionDamageType.displayProperties.name}</div>
+              <div className='slot'>
+                <div className={cx('icon', ammoTypeToString(definitionItem.equippingBlock.ammoType).toLowerCase())} />
+                <div className='text'>{ammoTypeToString(definitionItem.equippingBlock.ammoType)}</div>
               </div>
               {definitionItem.breakerType > 0 ? (
                 <div className='breaker-type'>
@@ -227,10 +227,31 @@ class Inspect extends React.Component {
                   </div>
                 </div>
               ) : null}
-              <div className='slot'>
-                <div className={cx('icon', ammoTypeToString(definitionItem.equippingBlock.ammoType).toLowerCase())} />
-                <div className='text'>{ammoTypeToString(definitionItem.equippingBlock.ammoType)}</div>
+              <div className={cx('power', damageTypeToString(damageTypeHash).toLowerCase())}>
+                <div className={cx('icon', damageTypeToString(damageTypeHash).toLowerCase())} />
+                <div className='text'>{definitionDamageType.displayProperties.name}</div>
               </div>
+            </div>
+          ) : null}
+          {item.sockets && item.sockets.sockets ? (
+            <div className='module sockets'>
+              {item.sockets.sockets.filter(s => (s.isPerk || s.isIntrinsic) && !s.isTracker).map(s => {
+                // map through sockets
+
+                return (
+                  <div key={s.socketIndex} className={cx('socket', { intrinsic: s.isIntrinsic, columned: s.plugOptions.length > 10 })}>
+                    {s.plugOptions.map((p, i) => {
+                      return (
+                        <div key={i} className={cx('plug', { active: p.isActive })}>
+                          <div className='icon tooltip'>
+                            <ObservedImage src={`https://www.bungie.net${p.plugItem.displayProperties.icon}`} />
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                );
+              })}
             </div>
           ) : null}
         </div>

@@ -463,19 +463,54 @@
       ]
     },
     "2028468504": {
-      "destinationHash": 290444260
+      "destinationHash": 290444260,
+      "activityHash": 1375089621,
+      "points": [
+        {
+          "x": 1041,
+          "y": 401
+        }
+      ]
     },
     "2028468507": {
-      "destinationHash": 290444260
+      "destinationHash": 290444260,
+      "activityHash": 1375089621,
+      "points": [
+        {
+          "x": 645,
+          "y": 496
+        }
+      ]
     },
     "2028468506": {
-      "destinationHash": 290444260
+      "destinationHash": 290444260,
+      "activityHash": 1375089621,
+      "points": [
+        {
+          "x": 228,
+          "y": 511
+        }
+      ]
     },
     "2028468501": {
-      "destinationHash": 290444260
+      "destinationHash": 290444260,
+      "activityHash": 1375089621,
+      "points": [
+        {
+          "x": 477,
+          "y": 333
+        }
+      ]
     },
     "2028468500": {
-      "destinationHash": 290444260
+      "destinationHash": 290444260,
+      "activityHash": 1375089621,
+      "points": [
+        {
+          "x": 297,
+          "y": 332
+        }
+      ]
     }
   }
 }
