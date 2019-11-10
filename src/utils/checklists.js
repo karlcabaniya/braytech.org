@@ -1,5 +1,5 @@
 import React from 'react';
-import { sortBy } from 'lodash';
+import { orderBy } from 'lodash';
 
 import store from './reduxStore';
 import i18n from './i18n';
@@ -252,7 +252,7 @@ export const checklists = {
       },
       checklistItemName: i18n.t('Jade Rabbit'),
       checklistItemName_plural: i18n.t('Jade Rabbits'),
-      checklistIcon: 'destiny-jade_rabbit',
+      checklistIcon: 'destiny-jade_rabbit_2',
       checklistProgressDescription: i18n.t('Rabbits with rice cake'),
       ...options
     }),
@@ -356,7 +356,7 @@ export const checklists = {
     checklist({
       checklistId: 1420597821,
       items: presentationItems(1420597821),
-      sortBy: ['completed', 'destination', 'bubble'],
+      sortBy: ['completed', 'number'],
       itemName: i => {
         const definitionRecord = manifest.DestinyRecordDefinition[i.recordHash];
         const definitionLore = manifest.DestinyLoreDefinition[definitionRecord.loreHash];
@@ -395,7 +395,7 @@ export const checklists = {
     checklist({
       checklistId: 3305936921,
       items: presentationItems(3305936921),
-      sortBy: ['completed', 'destination', 'bubble'],
+      sortBy: ['completed', 'number'],
       itemName: i => {
         const definitionRecord = manifest.DestinyRecordDefinition[i.recordHash];
         const definitionLore = manifest.DestinyLoreDefinition[definitionRecord.loreHash];
@@ -434,7 +434,7 @@ export const checklists = {
     checklist({
       checklistId: 655926402,
       items: presentationItems(655926402),
-      sortBy: ['completed', 'destination', 'bubble'],
+      sortBy: ['completed', 'number'],
       itemName: i => {
         const definitionRecord = manifest.DestinyRecordDefinition[i.recordHash];
         const definitionLore = manifest.DestinyLoreDefinition[definitionRecord.loreHash];
@@ -478,7 +478,7 @@ export const checklists = {
     checklist({
       checklistId: 4285512244,
       items: presentationItems(4285512244),
-      sortBy: ['completed', 'destination', 'bubble'],
+      sortBy: ['completed', 'number'],
       itemName: i => {
         const definitionRecord = manifest.DestinyRecordDefinition[i.recordHash];
         const definitionLore = manifest.DestinyLoreDefinition[definitionRecord.loreHash];
@@ -524,7 +524,7 @@ export const checklists = {
     checklist({
       checklistId: 2474271317,
       items: presentationItems(2474271317),
-      sortBy: ['completed', 'destination', 'bubble'],
+      sortBy: ['completed', 'number'],
       itemName: i => {
         const definitionRecord = manifest.DestinyRecordDefinition[i.recordHash];
         const definitionLore = manifest.DestinyLoreDefinition[definitionRecord.loreHash];
@@ -591,10 +591,15 @@ function checklist(options = {}) {
   options = { ...defaultOptions, ...options };
 
   const items = options.sortBy
-    ? sortBy(options.items, [
-        function(i) {
-          return options.sortBy.map(by => i.sorts[by]);
-        }
+    ? orderBy(options.items, [
+        i =>
+          options.sortBy.map(key => {
+            if (key === 'number') {
+              return { number: Number };
+            } else {
+              return i.sorts[key];
+            }
+          })
       ])
     : options.items;
 

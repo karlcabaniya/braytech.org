@@ -125,3 +125,20 @@ export const iconForge = (tooltip = {}, classNames = []) => {
     html: ReactDOMServer.renderToString(html)
   });
 };
+
+export const iconPatrolBoss = (tooltip = {}, classNames = []) => {
+  const html = (
+    <div className='wrapper'>
+      <div className='icon tooltip' data-hash={tooltip.hash} data-table={tooltip.table}>
+        <div className='patrol-boss'>
+          <span className='destiny-raid' />
+        </div>
+      </div>
+    </div>
+  );
+
+  return L.divIcon({
+    className: ['icon-marker', 'native'].concat(classNames).join(' '),
+    html: ReactDOMServer.renderToString(html)
+  });
+};

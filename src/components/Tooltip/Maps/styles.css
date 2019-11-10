@@ -67,14 +67,16 @@
   padding: 0;
 }
 
-#tooltip .frame.map .description pre {
+#tooltip .frame.map .description pre,
+#tooltip .frame.map .description .text {
   padding: 0;
   font-style: normal;
   font-size: 14px;
   letter-spacing: unset;
 }
 
-#tooltip .frame.map .description .destination ~ pre {
+#tooltip .frame.map .description .destination ~ pre,
+#tooltip .frame.map .description .destination ~ .text {
   padding: 10px 0 0;
 }
 
@@ -121,6 +123,14 @@
   margin: 4px 0 0;
   opacity: 0.8;
 }
+
+#tooltip .frame.map.patrol-boss .header .icon {
+  
+}
+
+/* #tooltip .frame.map.patrol-boss .header .text .name {
+  color: hsla(45, 99%, 54%, 0.8);
+} */
 
 
 

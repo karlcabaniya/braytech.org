@@ -1,7 +1,9 @@
-import * as ls from './localStorage';
+import React from 'react';
 import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
 import backend from 'i18next-xhr-backend';
+import { initReactI18next } from 'react-i18next';
+
+import * as ls from './localStorage';
 
 let _defaultLanguage = 'en';
 let _currentLanguage;
@@ -33,7 +35,10 @@ i18n
     keySeparator: false,
 
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
+      format: function(value, format, lng) {
+        // if (format === 'bold') return <strong>{value}</strong>;
+      }
     },
     react: {
       wait: true,

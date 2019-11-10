@@ -9,7 +9,7 @@ import Item from './Item';
 import Activity from './Activity';
 import Vendor from './Vendor';
 import Stat from './Stat';
-import { Checklist, Record } from './Maps';
+import { Checklist, Record, Node } from './Maps';
 
 class Tooltip extends React.Component {
   constructor(props) {
@@ -197,6 +197,7 @@ class Tooltip extends React.Component {
       if (this.state.table === 'DestinyVendorDefinition') Tooltip = Vendor;
       if (this.state.table === 'DestinyChecklistDefinition') Tooltip = Checklist;
       if (this.state.table === 'DestinyRecordDefinition') Tooltip = Record;
+      if (this.state.table === 'BraytechMapsDefinition') Tooltip = Node;
     }
 
     return (

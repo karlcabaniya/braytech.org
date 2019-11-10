@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
 
 import manifest from '../../../utils/manifest';
@@ -9,6 +10,7 @@ import ObservedImage from '../../ObservedImage';
 import { bookCovers } from '../../../utils/destinyEnums';
 import { checklists, lookup } from '../../../utils/checklists';
 import nodes from '../../../data/lowlines/maps/nodes';
+import runtime from '../../../data/lowlines/maps/runtime';
 
 import './styles.css';
 
@@ -28,6 +30,16 @@ class Checklist extends React.Component {
 
     // console.log(checklist)
 
+    const extras = nodes && nodes.find(d => d.checklistHash === checklistItem.checklistHash);
+    const screenshot = extras && extras.screenshot;
+    const description = extras && extras.description;
+
+    const locatedStrings = {
+      'lost-sector': t('Located inside lost sector'),
+      'strike': t('Located inside strike'),
+      'activity': t('Located inside activity: {{activityName}}', { activityName: checklistItem.activityHash && manifest.DestinyActivityDefinition[checklistItem.activityHash] && manifest.DestinyActivityDefinition[checklistItem.activityHash].displayProperties && manifest.DestinyActivityDefinition[checklistItem.activityHash].displayProperties.name })
+    }
+
     if (checklistEntry.checklistId === '4178338182') {
       checklist.checklistIcon = (
         <span className='destiny-adventure2'>
@@ -41,16 +53,6 @@ class Checklist extends React.Component {
       );
     } else {
       checklist.checklistIcon = <span className={cx(checklist.checklistIcon)} />;
-    }
-
-    const extras = nodes && nodes.find(d => d.checklistHash === checklistItem.checklistHash);
-    const screenshot = extras && extras.screenshot;
-    const description = extras && extras.description;
-
-    const locatedStrings = {
-      'lost-sector': t('Located inside lost sector'),
-      'strike': t('Located inside strike'),
-      'activity': t('Located inside activity: {{activityName}}', { activityName: checklistItem.activityHash && manifest.DestinyActivityDefinition[checklistItem.activityHash] && manifest.DestinyActivityDefinition[checklistItem.activityHash].displayProperties && manifest.DestinyActivityDefinition[checklistItem.activityHash].displayProperties.name })
     }
 
     return (
@@ -178,6 +180,83 @@ class Record extends React.Component {
   }
 }
 
+class Node extends React.Component {
+  render() {
+    const { t, hash } = this.props;
+
+    const nodes = runtime();
+    const node = nodes && Object.values(nodes).find(d => d.find(n => n.hash === hash)) && Object.values(nodes).find(d => d.find(n => n.hash === hash))[0];
+
+    if (!node) {
+      console.warn('Hash not found');
+      return null;
+    }
+
+    const definitionDestination = manifest.DestinyDestinationDefinition[node.location.destinationHash];
+    const definitionPlace = definitionDestination && manifest.DestinyPlaceDefinition[definitionDestination.placeHash];
+    const definitionBubble = definitionDestination && definitionDestination.bubbles.find(b => b.hash === node.location.bubbleHash);
+
+    const destinationName = definitionDestination && definitionDestination.displayProperties.name;
+    const placeName = definitionPlace && definitionPlace.displayProperties.name && definitionPlace.displayProperties.name !== definitionDestination.displayProperties.name && definitionPlace.displayProperties.name;
+    const bubbleName = definitionBubble && definitionBubble.displayProperties && definitionBubble.displayProperties.name;
+
+    const locationString = [bubbleName, destinationName, placeName].filter(s => s).join(', ');
+
+    const locatedStrings = {
+      'lost-sector': t('Located inside lost sector'),
+      'strike': t('Located inside strike'),
+      'activity': t('Located inside activity: {{activityName}}', { activityName: node.location.within && node.location.within.activityHash && manifest.DestinyActivityDefinition[node.location.within.activityHash] && manifest.DestinyActivityDefinition[node.location.within.activityHash].displayProperties && manifest.DestinyActivityDefinition[node.location.within.activityHash].displayProperties.name })
+    }
+    
+    let icon = null;
+    if (node.icon) {
+      icon = <span className={node.icon} />;
+    }
+
+    console.log(node)
+
+    const completed = node.related && node.related.objectives && node.related.objectives.filter(o => !o.complete).length < 1;
+
+    return (
+      <>
+        <div className='acrylic' />
+        <div className={cx('frame', 'map', node.type.hash)}>
+          <div className='header'>
+            <div className='icon'>
+              {icon}
+            </div>
+            <div className='text'>
+              <div className='name'>
+                {node.displayProperties.name}
+              </div>
+              <div>
+                <div className='kind'>{node.type.name}</div>
+              </div>
+            </div>
+          </div>
+          <div className='black'>
+            {node.screenshot ? (
+              <div className='screenshot'>
+                <ObservedImage className='image' src={node.screenshot} />
+              </div>
+            ) : null}
+            {node.location.within ? (
+              <div className='inside-location'>
+                {locatedStrings[node.location.within.id]}
+              </div>
+            ) : null}
+            <div className='description'>
+              <div className='destination'>{locationString}</div>
+              {node.displayProperties.description ? <ReactMarkdown className='text' source={node.displayProperties.description} /> : null}
+            </div>
+            {completed ? <div className='completed'>{t('Completed')}</div> : null}
+          </div>
+        </div>
+      </>
+    );
+  }
+}
+
 function mapStateToProps(state, ownProps) {
   return {
     member: state.member,
@@ -196,4 +275,9 @@ Record = compose(
   withTranslation()
 )(Record);
 
-export { Checklist, Record };
+Node = compose(
+  connect(mapStateToProps),
+  withTranslation()
+)(Node);
+
+export { Checklist, Record, Node };

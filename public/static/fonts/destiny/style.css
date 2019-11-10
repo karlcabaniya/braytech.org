@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'destiny';
-  src: url('destiny.woff?lhpe4g') format('woff');
+  src: url('destiny.woff?frhz8u') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -17,6 +17,48 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.destiny-patrol-minion:before {
+  content: "\e92e";
+  color: #a12624;
+}
+.destiny-patrol-boss:before {
+  content: "\e92f";
+  color: #d9c62f;
+}
+.destiny-patrol-boss-cabal-red-legion:before {
+  content: "\e930";
+  color: #d9c62f;
+}
+.destiny-patrol-boss-fallen-dusk:before {
+  content: "\e931";
+  color: #d9c62f;
+}
+.destiny-patrol-boss-vex:before {
+  content: "\e932";
+  color: #d9c62f;
+}
+.destiny-patrol-boss-hive:before {
+  content: "\e933";
+  color: #d9c62f;
+}
+.destiny-cabal_red-legion:before {
+  content: "\e934";
+}
+.destiny-fallen_dusk:before {
+  content: "\e935";
+}
+.destiny-vex:before {
+  content: "\e936";
+}
+.destiny-hive:before {
+  content: "\e937";
+}
+.destiny-bungie_fist:before {
+  content: "\e938";
+}
+.destiny-fireteams:before {
+  content: "\e939";
+}
 .destiny-arrow_right_hollow:before {
   content: "\e90f";
 }
@@ -117,6 +159,9 @@
 }
 .destiny-jade_rabbit:before {
   content: "\e92a";
+}
+.destiny-jade_rabbit_2:before {
+  content: "\e93a";
 }
 .destiny-lore_scholar .path1:before {
   content: "\e923";
