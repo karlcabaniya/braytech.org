@@ -9,12 +9,12 @@
   cursor: default;
 }
 
-.map-omega.loading {
+/* .map-omega.loading {
   display: grid;
   align-items: center;
   justify-content: center;
   background-color: transparent;
-}
+} */
 
 html.backdropfilter .map-omega .control li {
   background-color: transparent;

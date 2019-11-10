@@ -8,7 +8,7 @@ import cx from 'classnames';
 
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Map, ImageOverlay, Marker } from 'react-leaflet';
+import { Map } from 'react-leaflet';
 
 import maps from '../../data/lowlines/maps/destinations';
 import nodes from '../../data/lowlines/maps/nodes';
@@ -16,14 +16,11 @@ import nodesRuntime from '../../data/lowlines/maps/runtime/';
 
 import manifest from '../../utils/manifest';
 import * as ls from '../../utils/localStorage';
-import checklists from '../../utils/checklists';
 import CharacterEmblem from '../../components/UI/CharacterEmblem';
 import Spinner from '../../components/UI/Spinner';
 
-import { Layers, BackgroundLayer } from './Layers';
+import { Layers, FrameLayer, BackgroundLayer } from './Layers';
 import Checklists from './Nodes/Checklists';
-
-import * as marker from './markers';
 
 import './styles.css';
 
@@ -308,7 +305,7 @@ class Maps extends React.Component {
     //     markerOffsetX + a[0],
     //     markerOffsetY + a[1]
     //   ]
-    // });      
+    // });
 
     return (
       <div className={cx('map-omega', `zoom-${this.state.viewport.zoom}`, { loading: this.state.loading, debug: settings.debug, 'highlight-no-screenshot': settings.noScreenshotHighlight })}>
@@ -380,6 +377,8 @@ class Maps extends React.Component {
         ) : null} */}
       </div>
     );
+
+    
     
   }
 }

@@ -192,14 +192,8 @@ class Layers extends React.Component {
   };
 
   render() {
-    if (this.state.loading) {
-      return (
-        <div className='map-omega loading'>
-          <Spinner />
-        </div>
-      );
-    } else if (this.state.error) {
-      return <div className='map-omega loading'>error lol</div>;
+    if (this.state.loading || this.state.error) {
+      return null;
     } else {
       const map = maps[this.props.id].map;
 
