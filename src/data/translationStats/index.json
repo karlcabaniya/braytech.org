@@ -1,315 +1,86 @@
 {
   "de": {
     "translated": 462,
-    "notTranslated": 8,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 10,
+    "added": [],
+    "removed": []
   },
   "en": {
-    "translated": 470,
+    "translated": 472,
     "notTranslated": 0,
     "added": [],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "removed": []
   },
   "es-mx": {
     "translated": 0,
-    "notTranslated": 470,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 472,
+    "added": [],
+    "removed": []
   },
   "es": {
     "translated": 461,
-    "notTranslated": 9,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 11,
+    "added": [],
+    "removed": []
   },
   "fr": {
     "translated": 361,
-    "notTranslated": 109,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 111,
+    "added": [],
+    "removed": []
   },
   "internal": {
     "translated": 0,
-    "notTranslated": 470,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 472,
+    "added": [],
+    "removed": []
   },
   "it": {
-    "translated": 462,
-    "notTranslated": 8,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "translated": 470,
+    "notTranslated": 2,
+    "added": [],
+    "removed": []
   },
   "ja": {
     "translated": 220,
-    "notTranslated": 250,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 252,
+    "added": [],
+    "removed": []
   },
   "ko": {
     "translated": 302,
-    "notTranslated": 168,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 170,
+    "added": [],
+    "removed": []
   },
   "pl": {
     "translated": 0,
-    "notTranslated": 470,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 472,
+    "added": [],
+    "removed": []
   },
   "pt-br": {
     "translated": 462,
-    "notTranslated": 8,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 10,
+    "added": [],
+    "removed": []
   },
   "ru": {
     "translated": 0,
-    "notTranslated": 470,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 472,
+    "added": [],
+    "removed": []
   },
   "zh-chs": {
     "translated": 462,
-    "notTranslated": 8,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 10,
+    "added": [],
+    "removed": []
   },
   "zh-cht": {
     "translated": 462,
-    "notTranslated": 8,
-    "added": [
-      "Collections roll",
-      "Complete the Consecrated Mind encounter without killing any Cyclops that spawn in the Harpy boss's presence. Cyclops that spawn in other areas, and during the final sprint, can be killed.",
-      "Core modes",
-      "Defeat",
-      "Located inside activity: {{activityName}}",
-      "No stats available",
-      "Rotator modes",
-      "Victory"
-    ],
-    "removed": [
-      "DEFEAT",
-      "Glory modes",
-      "Modes",
-      "Stats",
-      "Summative modes",
-      "Valor modes",
-      "VICTORY"
-    ]
+    "notTranslated": 10,
+    "added": [],
+    "removed": []
   }
 }

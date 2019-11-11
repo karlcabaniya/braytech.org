@@ -73,6 +73,8 @@ export default (member = false) => {
         },
         availability: {
           type: 'cycle',
+          frequency: 'week',
+          cycleLength: cycleInfo.cycle.wanderingNightmares,
           now: cycleInfo.week.wanderingNightmares === 1
         },
         activityLightLevel: 980,
@@ -115,6 +117,8 @@ export default (member = false) => {
         },
         availability: {
           type: 'cycle',
+          frequency: 'week',
+          cycleLength: cycleInfo.cycle.wanderingNightmares,
           now: cycleInfo.week.wanderingNightmares === 2
         },
         activityLightLevel: 980,
@@ -158,6 +162,8 @@ export default (member = false) => {
         },
         availability: {
           type: 'cycle',
+          frequency: 'week',
+          cycleLength: cycleInfo.cycle.wanderingNightmares,
           now: cycleInfo.week.wanderingNightmares === 3
         },
         activityLightLevel: 980,
@@ -200,6 +206,8 @@ export default (member = false) => {
         },
         availability: {
           type: 'cycle',
+          frequency: 'week',
+          cycleLength: cycleInfo.cycle.wanderingNightmares,
           now: cycleInfo.week.wanderingNightmares === 4
         },
         activityLightLevel: 980,

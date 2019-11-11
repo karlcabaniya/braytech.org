@@ -56,7 +56,7 @@
 }
 
 #tooltip .frame.map .description {
-  padding: 16px 16px 8px;
+  padding: 16px 16px 0;
 }
 
 #tooltip .frame.map .description:last-child {
@@ -128,12 +128,10 @@
   
 }
 
-/* #tooltip .frame.map.patrol-boss .header .text .name {
-  color: hsla(45, 99%, 54%, 0.8);
-} */
-
-#tooltip .frame.map .description ~ .recommended-light {
-  padding-top: 0;
+#tooltip .frame.map .availability {
+  padding: 12px 16px 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 1);
 }
 
 
