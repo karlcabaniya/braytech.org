@@ -43,11 +43,53 @@ const hydrateObjectives = (member, objectives) => {
   });
 }
 
-export default member => {
+export default (member = false) => {
   const nodes = {
     tower: [],
     edz: [],
     'the-moon': [
+      {
+        hash: 'wanderingNightmareXortal',
+        displayProperties: {
+          name: manifest.DestinyObjectiveDefinition[1009409498].progressDescription,
+          description: i18next.t("Defeat this Nightmare to progress record _{{recordName}}_.", { recordName: manifest.DestinyRecordDefinition[1842542594].displayProperties.name })
+        },
+        type: {
+          hash: 'patrol-boss',
+          name: i18next.t('Patrol boss'),
+          category: 'enemy',
+          race: 'hive'
+        },
+        icon: 'destiny-patrol-boss-hive',
+        location: {
+          destinationHash: 290444260,
+          bubbleHash: 417490937,
+          points: [
+            {
+              x: 430,
+              y: 347
+            }
+          ]
+        },
+        availability: {
+          type: 'cycle',
+          now: cycleInfo.week.wanderingNightmares === 1
+        },
+        activityLightLevel: 980,
+        related: {
+          records: [
+            {
+              recordHash: 1842542594
+            }
+          ],
+          objectives: [
+            {
+              recordHash: 1842542594,
+              objectiveHash: 1009409498
+            }
+          ]
+        }
+      },
       {
         hash: 'wanderingNightmareHorkis',
         displayProperties: {
@@ -75,6 +117,7 @@ export default member => {
           type: 'cycle',
           now: cycleInfo.week.wanderingNightmares === 2
         },
+        activityLightLevel: 980,
         related: {
           records: [
             {
@@ -89,6 +132,90 @@ export default member => {
           ]
         },
         screenshot: '/static/images/screenshots/enemies/anchor-of-light_patrol-boss_nightmareHorkis.jpg'
+      },
+      {
+        hash: 'wanderingNightmareJaxx',
+        displayProperties: {
+          name: manifest.DestinyObjectiveDefinition[1009409497].progressDescription,
+          description: i18next.t("Defeat this Nightmare to progress record _{{recordName}}_.", { recordName: manifest.DestinyRecordDefinition[1842542594].displayProperties.name })
+        },
+        type: {
+          hash: 'patrol-boss',
+          name: i18next.t('Patrol boss'),
+          category: 'enemy',
+          race: 'hive'
+        },
+        icon: 'destiny-patrol-boss-hive',
+        location: {
+          destinationHash: 290444260,
+          bubbleHash: 4195493657,
+          points: [
+            {
+              x: -192,
+              y: -116
+            }
+          ]
+        },
+        availability: {
+          type: 'cycle',
+          now: cycleInfo.week.wanderingNightmares === 3
+        },
+        activityLightLevel: 980,
+        related: {
+          records: [
+            {
+              recordHash: 1842542594
+            }
+          ],
+          objectives: [
+            {
+              recordHash: 1842542594,
+              objectiveHash: 1009409497
+            }
+          ]
+        }
+      },
+      {
+        hash: 'wanderingNightmareFallenCouncil',
+        displayProperties: {
+          name: manifest.DestinyObjectiveDefinition[1009409499].progressDescription,
+          description: i18next.t("Defeat this Nightmare to progress record _{{recordName}}_.", { recordName: manifest.DestinyRecordDefinition[1842542594].displayProperties.name })
+        },
+        type: {
+          hash: 'patrol-boss',
+          name: i18next.t('Patrol boss'),
+          category: 'enemy',
+          race: 'hive'
+        },
+        icon: 'destiny-patrol-boss-fallen-dusk',
+        location: {
+          destinationHash: 290444260,
+          bubbleHash: 3326367698,
+          points: [
+            {
+              x: -647,
+              y: -539
+            }
+          ]
+        },
+        availability: {
+          type: 'cycle',
+          now: cycleInfo.week.wanderingNightmares === 4
+        },
+        activityLightLevel: 980,
+        related: {
+          records: [
+            {
+              recordHash: 1842542594
+            }
+          ],
+          objectives: [
+            {
+              recordHash: 1842542594,
+              objectiveHash: 1009409499
+            }
+          ]
+        }
       }
     ],
     'new-pacific-arcology': [],

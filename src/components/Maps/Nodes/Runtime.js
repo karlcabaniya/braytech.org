@@ -16,10 +16,10 @@ class Runtime extends React.Component {
     this.state = {};
   }
 
+  runtimeNodes = nodesRuntime(this.props.member);
+
   componentDidMount() {
     this.mounted = true;
-
-    this.runtimeNodes = nodesRuntime(this.props.member);
   }
 
   componentWillUnmount() {
@@ -28,8 +28,8 @@ class Runtime extends React.Component {
 
   componentDidUpdate(pP, pS) {
     const { member } = this.props;
-
-    if ((pP.member.data.updated !== member.data.updated || pP.member.characterId !== member.characterId) && this.mounted) {
+    
+    if (((!pP.member.data && member.data) || pP.member.data.updated !== member.data.updated || pP.member.characterId !== member.characterId) && this.mounted) {
       this.runtimeNodes = nodesRuntime(this.props.member);
     }
   }
@@ -60,7 +60,9 @@ class Runtime extends React.Component {
             const offsetY = markerOffsetY + point.y;
 
             if (node.type.hash === 'patrol-boss') {
-              const icon = marker.icon({ hash: node.hash, table: 'BraytechMapsDefinition' }, ['patrol-boss'], { icon: node.icon || 'destiny-patrol-boss' });
+              if (node.availability && node.availability.now !== undefined && !node.availability.now) return null;
+
+              const icon = marker.icon({ hash: node.hash, table: 'BraytechMapsDefinition' }, ['patrol-boss', node.screenshot ? `has-screenshot` : ''], { icon: node.icon || 'destiny-patrol-boss' });
 
               return <Marker key={i} position={[offsetY, offsetX]} icon={icon} zIndexOffset='-1000' />;
             } else {

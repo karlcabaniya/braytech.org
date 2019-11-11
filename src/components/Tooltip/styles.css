@@ -696,6 +696,37 @@
   margin: 0 10px 0 0;
 }
 
+#tooltip .frame .recommended-light {
+  padding: 12px 16px 8px;
+  font-size: 14px;
+  color: #e5d163;
+}
+
+#tooltip .frame .recommended-light:last-child {
+  padding: 12px 16px 16px;
+}
+
+#tooltip .frame .recommended-light span {
+  position: relative;
+  margin: 0 0 0 8px;
+}
+
+#tooltip .frame .recommended-light span::before {
+  content: 'l';
+  position: absolute;
+  top: 3px;
+  left: -7px;
+  font-family: 'destiny' !important;
+  font-size: 6px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 #tooltip .header::before {
   content: attr(data-debugtip);
   position: absolute;
@@ -790,5 +821,9 @@
     padding: initial;
     width: 100%;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  }
+  
+  #tooltip .frame .recommended-light span::before {
+    top: 4px;
   }
 }

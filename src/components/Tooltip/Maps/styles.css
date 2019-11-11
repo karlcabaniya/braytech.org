@@ -132,6 +132,10 @@
   color: hsla(45, 99%, 54%, 0.8);
 } */
 
+#tooltip .frame.map .description ~ .recommended-light {
+  padding-top: 0;
+}
+
 
 
 @media screen and (max-width: 600px) {

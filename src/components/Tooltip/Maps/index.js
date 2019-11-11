@@ -185,7 +185,7 @@ class Node extends React.Component {
     const { t, member, hash } = this.props;
 
     const nodes = runtime(member);
-    const node = nodes && Object.values(nodes).find(d => d.find(n => n.hash === hash)) && Object.values(nodes).find(d => d.find(n => n.hash === hash))[0];
+    const node = nodes && Object.values(nodes).find(d => d.find(n => n.hash === hash)) && Object.values(nodes).find(d => d.find(n => n.hash === hash)).find(n => n.hash === hash);
 
     if (!node) {
       console.warn('Hash not found');
@@ -249,6 +249,11 @@ class Node extends React.Component {
               <div className='destination'>{locationString}</div>
               {node.displayProperties.description ? <ReactMarkdown className='text' source={node.displayProperties.description} /> : null}
             </div>
+            {node.activityLightLevel ? (
+                <div className='recommended-light'>
+                  {t('Recommended Power')}: <span>{node.activityLightLevel}</span>
+                </div>
+              ) : null}
             {completed ? <div className='completed'>{t('Completed')}</div> : null}
           </div>
         </div>
