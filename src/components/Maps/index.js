@@ -82,7 +82,6 @@ class Maps extends React.Component {
     } else if (destinationByHash) {
       return destinationByHash;
     } else {
-      console.log('yes');
       return utils.destinations.find(d => d.default);
     }
   };
@@ -276,23 +275,25 @@ class Maps extends React.Component {
 
     return (
       <div className={cx('map-omega', `zoom-${this.state.viewport.zoom}`, { loading: this.state.loading, debug: settings.debug, 'highlight-no-screenshot': settings.noScreenshotHighlight })}>
-        <BackgroundLayer {...destination} />
+        <div className='leaflet-pane leaflet-background-pane tinted'>
+          <BackgroundLayer {...destination} />
+        </div>
         <Map
-            viewport={this.state.viewport}
-            minZoom='-2'
-            maxZoom='2'
-            maxBounds={bounds}
-            crs={L.CRS.Simple}
-            attributionControl={false}
-            zoomControl={false}
-            onViewportChange={this.handler_map_viewportChange}
-            onViewportChanged={this.handler_map_viewportChanged}
-            onLayerAdd={this.handler_map_layerAdd}
-            onMove={this.handler_map_move}
-            onMoveEnd={this.handler_map_moveEnd}
-            onZoomEnd={this.handler_map_zoomEnd}
-            onMouseDown={this.handler_map_mouseDown}
-          >
+          viewport={this.state.viewport}
+          minZoom='-2'
+          maxZoom='2'
+          maxBounds={bounds}
+          crs={L.CRS.Simple}
+          attributionControl={false}
+          zoomControl={false}
+          onViewportChange={this.handler_map_viewportChange}
+          onViewportChanged={this.handler_map_viewportChanged}
+          onLayerAdd={this.handler_map_layerAdd}
+          onMove={this.handler_map_move}
+          onMoveEnd={this.handler_map_moveEnd}
+          onZoomEnd={this.handler_map_zoomEnd}
+          onMouseDown={this.handler_map_mouseDown}
+        >
           <Layers {...destination} ready={this.handler_map_layersReady} />
           <Static {...destination} />
           <Checklists {...destination} highlight={params.highlight} />

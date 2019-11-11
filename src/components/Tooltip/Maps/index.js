@@ -182,9 +182,9 @@ class Record extends React.Component {
 
 class Node extends React.Component {
   render() {
-    const { t, hash } = this.props;
+    const { t, member, hash } = this.props;
 
-    const nodes = runtime();
+    const nodes = runtime(member);
     const node = nodes && Object.values(nodes).find(d => d.find(n => n.hash === hash)) && Object.values(nodes).find(d => d.find(n => n.hash === hash))[0];
 
     if (!node) {

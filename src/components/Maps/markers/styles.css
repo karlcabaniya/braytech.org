@@ -1,3 +1,14 @@
+.map-omega .leaflet-container .text-marker,
+.map-omega .leaflet-container .icon-marker {
+  transition: opacity 0.5s;
+}
+
+.map-omega.loading .leaflet-container .text-marker,
+.map-omega.loading .leaflet-container .icon-marker {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .map-omega .leaflet-container .text-marker {
   z-index: 2;
 }
