@@ -19,6 +19,8 @@ import * as ls from '../../utils/localStorage';
 import CharacterEmblem from '../../components/UI/CharacterEmblem';
 import Spinner from '../../components/UI/Spinner';
 
+import * as utils from './utils';
+
 import { Layers, FrameLayer, BackgroundLayer } from './Layers';
 import Checklists from './Nodes/Checklists';
 
@@ -32,10 +34,9 @@ class Maps extends React.Component {
       loading: true,
       error: false,
       viewport: {
-        center: this.getMapCenter(this.resolveDestination(this.props.destination).id),
+        center: this.getMapCenter(this.resolveDestination(this.props.params.map).id),
         zoom: 0
       },
-      destination: this.resolveDestination(this.props.destination),
       ui: {
         destinations: false,
         characters: false
@@ -53,7 +54,9 @@ class Maps extends React.Component {
   }
 
   componentDidUpdate(pP, pS) {
-    
+    if (pP.params.map !== this.props.params.map && this.mounted) {
+      this.setDestination(this.props.params.map);
+    }
   }
 
   getMapCenter = id => {
@@ -69,26 +72,17 @@ class Maps extends React.Component {
     return center;
   };
 
-  resolveDestination = input => {
+  resolveDestination = map => {
 
-    const idCheck = Object.keys(maps).find(key => key === input);
-    const hashCheck = Object.values(maps).find(d => d.destination.hash === parseInt(input, 10));
+    const destinationById = utils.destinations.find(d => d.id === map);
+    const destinationByHash = utils.destinations.find(d => d.hash === map);
 
-    if (idCheck) {
-      return {
-        id: idCheck,
-        hash: maps[idCheck].destination.hash
-      }
-    } else if (hashCheck) {
-      return {
-        id: hashCheck.destination.id,
-        hash: hashCheck.destination.hash
-      }
+    if (destinationById) {
+      return destinationById
+    } else if (destinationByHash) {
+      return destinationByHash
     } else {
-      return {
-        id: 'the-moon',
-        hash: 290444260
-      }
+      return utils.destinations.find(d => d.default)
     }
     
   }
@@ -97,15 +91,10 @@ class Maps extends React.Component {
 
     const resolved = this.resolveDestination(destination);
 
-    if (!this.state.destinations[resolved.id]) return;
-
     this.setState(p => ({
       viewport: {
         ...p.viewport,
         center: this.getMapCenter(resolved.id)
-      },
-      destination: {
-        ...resolved
       }
     }));
   };
@@ -134,7 +123,7 @@ class Maps extends React.Component {
 
   handler_toggleDestinationsList = e => {
     const href = e.target.href;
-    const { id = this.state.destination.id } = this.props;
+    const id = this.resolveDestination(this.props.params.map).id;
 
     if (href.includes(id)) {
       this.setState(p => {
@@ -228,7 +217,7 @@ class Maps extends React.Component {
   handler_map_mouseDown = e => {
     if (!this.props.settings.debug || !this.props.settings.logDetails) return;
 
-    const destination = this.state.destination.id;
+    const destination = this.resolveDestination(this.props.params.map).id;
 
     const map = maps[destination].map;
 
@@ -280,9 +269,9 @@ class Maps extends React.Component {
   };
 
   render() {
-    const { member, viewport, settings, highlight } = this.props;
+    const { member, viewport, settings, params } = this.props;
 
-    const destination = this.state.destination;
+    const destination = this.resolveDestination(this.props.params.map);
 
     const map = maps[destination.id].map;
 
@@ -294,27 +283,29 @@ class Maps extends React.Component {
 
     const bounds = [[0, 0], [map.height, map.width]];
 
-    // [[421, -249], [276, -313], [334, -514], [489, -462]]
-    // [[0, 100], [100, 100], [100, 0], [0, 0]]
-
-    // const test = [[274, -249], [502, -313], [328, -514], [489, -462]].map(a => {
-    //   const markerOffsetX = mapXOffset + viewWidth / 2;
-    //   const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
-      
-    //   return [
-    //     markerOffsetX + a[0],
-    //     markerOffsetY + a[1]
-    //   ]
-    // });
-
     return (
       <div className={cx('map-omega', `zoom-${this.state.viewport.zoom}`, { loading: this.state.loading, debug: settings.debug, 'highlight-no-screenshot': settings.noScreenshotHighlight })}>
         <BackgroundLayer {...destination} />
-        <Map viewport={this.state.viewport} minZoom='-2' maxZoom='2' maxBounds={bounds} crs={L.CRS.Simple} attributionControl={false} zoomControl={false} onViewportChange={this.handler_map_viewportChange} onViewportChanged={this.handler_map_viewportChanged} onLayerAdd={this.handler_map_layerAdd} onMove={this.handler_map_move} onMoveEnd={this.handler_map_moveEnd} onZoomEnd={this.handler_map_zoomEnd} onMouseDown={this.handler_map_mouseDown}>
+        <Map
+          viewport={this.state.viewport}
+          minZoom='-2'
+          maxZoom='2'
+          maxBounds={bounds}
+          crs={L.CRS.Simple}
+          attributionControl={false}
+          zoomControl={false}
+          onViewportChange={this.handler_map_viewportChange}
+          onViewportChanged={this.handler_map_viewportChanged}
+          onLayerAdd={this.handler_map_layerAdd}
+          onMove={this.handler_map_move}
+          onMoveEnd={this.handler_map_moveEnd}
+          onZoomEnd={this.handler_map_zoomEnd}
+          onMouseDown={this.handler_map_mouseDown}
+        >
           <Layers {...destination} ready={this.handler_map_layersReady} />
-          <Checklists {...destination} highlight={highlight} />
+          <Checklists {...destination} highlight={params.highlight} />
         </Map>
-        {/* <div className='controls left'>
+        <div className='controls left'>
           <div className={cx('control', 'characters', { visible: this.state.ui.characters })}>
             <ul className='list'>
               {member && member.data ? (
@@ -339,7 +330,7 @@ class Maps extends React.Component {
           </div>
           <div className={cx('control', 'destinations', { visible: this.state.ui.destinations })}>
             <ul className='list'>
-              {Object.keys(this.state.destinations).map(key => {
+              {['tower', 'edz', 'the-moon', 'new-pacific-arcology', 'arcadian-valley', 'echo-mesa', 'fields-of-glass', 'hellas-basin', 'tangled-shore', 'dreaming-city'].map(key => {
 
                 let name = maps[key].destination.hash && manifest.DestinyDestinationDefinition[maps[key].destination.hash] && manifest.DestinyDestinationDefinition[maps[key].destination.hash].displayProperties.name;
                 if (maps[key].destination.activityHash) {
@@ -347,10 +338,9 @@ class Maps extends React.Component {
                 }
 
                 return (
-                  <li key={maps[key].destination.id} className={cx('linked', { active: maps[key].destination.id === destination.id, disabled: this.state.destinations[maps[key].destination.id].loading })}>
+                  <li key={maps[key].destination.id} className={cx('linked', { active: maps[key].destination.id === destination.id })}>
                     <div className='text'>
                       <div className='name'>{name}</div>
-                      <div className='loading'>{this.state.destinations[maps[key].destination.id].loading ? <Spinner mini /> : null}</div>
                     </div>
                     <Link to={`/maps/${maps[key].destination.id}`} onClick={this.handler_toggleDestinationsList}></Link>
                   </li>
@@ -374,7 +364,7 @@ class Maps extends React.Component {
               </li>
             </ul>
           </div>
-        ) : null} */}
+        ) : null}
       </div>
     );
 

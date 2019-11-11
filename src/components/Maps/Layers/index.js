@@ -268,6 +268,12 @@ class BackgroundLayer extends React.Component {
     this.mounted = false;
   }
 
+  componentDidUpdate(pP, pS) {
+    if (pP.id !== this.props.id) {
+      this.prepareLayers(this.props.id);
+    }
+  }
+
   loadLayers = async destination => {
     try {
       const d = {};

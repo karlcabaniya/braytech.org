@@ -21,7 +21,7 @@ class MapsView extends React.Component {
   render() {
     return (
       <div className='view' id='maps'>
-        <Maps {...this.props.match.params} />
+        <Maps params={this.props.match.params} />
       </div>
     );
   }
