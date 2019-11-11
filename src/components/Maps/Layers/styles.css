@@ -1,0 +1,28 @@
+.map-omega .leaflet-background-pane {
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.map-omega .leaflet-background-pane .layer-background {
+  position: absolute;
+  left: 50%;
+  min-width: 2160px;
+  width: 112.5%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.map-omega .leaflet-background-pane .layer-background.layer-background-upper {
+  top: -28%;
+}
+
+.map-omega .leaflet-background-pane .layer-background.layer-background-lower {
+  bottom: -18%;
+}
+
+.map-omega .leaflet-background-pane .layer-background.dl {
+  opacity: 1;
+}

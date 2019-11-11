@@ -5,16 +5,35 @@
   color: #ffffff;
 }
 
+.map-omega .loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.5s;
+  opacity: 0;
+}
+
+.map-omega.loading .loading {
+  opacity: 1;
+}
+
 .map-omega.debug .leaflet-grab {
   cursor: default;
 }
 
-/* .map-omega.loading {
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-} */
+.map-omega .control {
+  transition: opacity 0.5s;
+}
+
+.map-omega.loading .control {
+  opacity: 0;
+}
 
 html.backdropfilter .map-omega .control li {
   background-color: transparent;
@@ -183,28 +202,7 @@ html.backdropfilter .map-omega .control li {
   pointer-events: none;
 }
 
-.map-omega .leaflet-background-pane {
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  overflow: hidden;
-}
 
-.map-omega .leaflet-background-pane .layer-background {
-  position: absolute;
-  left: 50%;
-  min-width: 2160px;
-  width: 112.5%;
-  transform: translateX(-50%);
-}
-
-.map-omega .leaflet-background-pane .layer-background.layer-background-upper {
-  top: -28%;
-}
-
-.map-omega .leaflet-background-pane .layer-background.layer-background-lower {
-  bottom: -18%;
-}
 
 @media screen and (max-width: 600px) {
 

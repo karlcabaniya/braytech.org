@@ -12,7 +12,6 @@ import { Map } from 'react-leaflet';
 
 import maps from '../../data/lowlines/maps/destinations';
 import nodes from '../../data/lowlines/maps/nodes';
-import nodesRuntime from '../../data/lowlines/maps/runtime/';
 
 import manifest from '../../utils/manifest';
 import * as ls from '../../utils/localStorage';
@@ -21,8 +20,10 @@ import Spinner from '../../components/UI/Spinner';
 
 import * as utils from './utils';
 
-import { Layers, FrameLayer, BackgroundLayer } from './Layers';
+import { Layers, BackgroundLayer } from './Layers';
+import Static from './Nodes/Static';
 import Checklists from './Nodes/Checklists';
+import Runtime from './Nodes/Runtime';
 
 import './styles.css';
 
@@ -72,23 +73,21 @@ class Maps extends React.Component {
     return center;
   };
 
-  resolveDestination = map => {
-
+  resolveDestination = (map = false) => {
     const destinationById = utils.destinations.find(d => d.id === map);
     const destinationByHash = utils.destinations.find(d => d.hash === map);
 
     if (destinationById) {
-      return destinationById
+      return destinationById;
     } else if (destinationByHash) {
-      return destinationByHash
+      return destinationByHash;
     } else {
-      return utils.destinations.find(d => d.default)
+      console.log('yes');
+      return utils.destinations.find(d => d.default);
     }
-    
-  }
+  };
 
   setDestination = destination => {
-
     const resolved = this.resolveDestination(destination);
 
     this.setState(p => ({
@@ -199,8 +198,8 @@ class Maps extends React.Component {
   };
 
   handler_map_layersReady = () => {
-    this.setState({ loading: false })
-  }
+    this.setState({ loading: false });
+  };
 
   handler_map_layerAdd = debounce(e => {
     if (this.mounted) this.props.rebindTooltips();
@@ -271,40 +270,37 @@ class Maps extends React.Component {
   render() {
     const { member, viewport, settings, params } = this.props;
 
-    const destination = this.resolveDestination(this.props.params.map);
-
+    const destination = this.resolveDestination(params.map);
     const map = maps[destination.id].map;
-
-    const viewWidth = 1920;
-    const viewHeight = 1080;
-
-    const mapXOffset = (map.width - viewWidth) / 2;
-    const mapYOffset = -(map.height - viewHeight) / 2;
-
     const bounds = [[0, 0], [map.height, map.width]];
 
     return (
       <div className={cx('map-omega', `zoom-${this.state.viewport.zoom}`, { loading: this.state.loading, debug: settings.debug, 'highlight-no-screenshot': settings.noScreenshotHighlight })}>
         <BackgroundLayer {...destination} />
         <Map
-          viewport={this.state.viewport}
-          minZoom='-2'
-          maxZoom='2'
-          maxBounds={bounds}
-          crs={L.CRS.Simple}
-          attributionControl={false}
-          zoomControl={false}
-          onViewportChange={this.handler_map_viewportChange}
-          onViewportChanged={this.handler_map_viewportChanged}
-          onLayerAdd={this.handler_map_layerAdd}
-          onMove={this.handler_map_move}
-          onMoveEnd={this.handler_map_moveEnd}
-          onZoomEnd={this.handler_map_zoomEnd}
-          onMouseDown={this.handler_map_mouseDown}
-        >
+            viewport={this.state.viewport}
+            minZoom='-2'
+            maxZoom='2'
+            maxBounds={bounds}
+            crs={L.CRS.Simple}
+            attributionControl={false}
+            zoomControl={false}
+            onViewportChange={this.handler_map_viewportChange}
+            onViewportChanged={this.handler_map_viewportChanged}
+            onLayerAdd={this.handler_map_layerAdd}
+            onMove={this.handler_map_move}
+            onMoveEnd={this.handler_map_moveEnd}
+            onZoomEnd={this.handler_map_zoomEnd}
+            onMouseDown={this.handler_map_mouseDown}
+          >
           <Layers {...destination} ready={this.handler_map_layersReady} />
+          <Static {...destination} />
           <Checklists {...destination} highlight={params.highlight} />
+          <Runtime {...destination} />
         </Map>
+        <div className='loading'>
+          <Spinner />
+        </div>
         <div className='controls left'>
           <div className={cx('control', 'characters', { visible: this.state.ui.characters })}>
             <ul className='list'>
@@ -330,19 +326,18 @@ class Maps extends React.Component {
           </div>
           <div className={cx('control', 'destinations', { visible: this.state.ui.destinations })}>
             <ul className='list'>
-              {['tower', 'edz', 'the-moon', 'new-pacific-arcology', 'arcadian-valley', 'echo-mesa', 'fields-of-glass', 'hellas-basin', 'tangled-shore', 'dreaming-city'].map(key => {
-
-                let name = maps[key].destination.hash && manifest.DestinyDestinationDefinition[maps[key].destination.hash] && manifest.DestinyDestinationDefinition[maps[key].destination.hash].displayProperties.name;
-                if (maps[key].destination.activityHash) {
-                  name = manifest.DestinyActivityDefinition[maps[key].destination.activityHash].displayProperties.name;
+              {utils.destinations.map(d => {
+                let name = maps[d.id].destination.hash && manifest.DestinyDestinationDefinition[maps[d.id].destination.hash] && manifest.DestinyDestinationDefinition[maps[d.id].destination.hash].displayProperties.name;
+                if (maps[d.id].destination.activityHash) {
+                  name = manifest.DestinyActivityDefinition[maps[d.id].destination.activityHash].displayProperties.name;
                 }
 
                 return (
-                  <li key={maps[key].destination.id} className={cx('linked', { active: maps[key].destination.id === destination.id })}>
+                  <li key={maps[d.id].destination.id} className={cx('linked', { active: maps[d.id].destination.id === destination.id })}>
                     <div className='text'>
                       <div className='name'>{name}</div>
                     </div>
-                    <Link to={`/maps/${maps[key].destination.id}`} onClick={this.handler_toggleDestinationsList}></Link>
+                    <Link to={`/maps/${maps[d.id].destination.id}`} onClick={this.handler_toggleDestinationsList}></Link>
                   </li>
                 );
               })}
@@ -367,9 +362,6 @@ class Maps extends React.Component {
         ) : null}
       </div>
     );
-
-    
-    
   }
 }
 

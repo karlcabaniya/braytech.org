@@ -82,7 +82,6 @@ class Checklists extends React.Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
     this.mounted = true;
 
     this.generateChecklists(this.id);

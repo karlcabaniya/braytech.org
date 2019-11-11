@@ -3,63 +3,11 @@ import cx from 'classnames';
 
 import { ImageOverlay } from 'react-leaflet';
 
-import Spinner from '../../../components/UI/Spinner';
 import maps from '../../../data/lowlines/maps/destinations';
 
-import './styles.css';
+import * as utils from '../utils';
 
-const destinations = {
-  tower: {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  edz: {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  'the-moon': {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  'new-pacific-arcology': {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  'arcadian-valley': {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  'echo-mesa': {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  'fields-of-glass': {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  'hellas-basin': {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  'tangled-shore': {
-    loading: true,
-    error: false,
-    layers: []
-  },
-  'dreaming-city': {
-    loading: true,
-    error: false,
-    layers: []
-  }
-}
+import './styles.css';
 
 class Layers extends React.Component {
   constructor(props) {
@@ -68,7 +16,7 @@ class Layers extends React.Component {
     this.state = {
       loading: true,
       error: false,
-      destinations
+      destinations: utils.destinations.map(d => ({ ...d, loading: true, error: false, layers: [] }))
     };
   }
 
@@ -88,10 +36,10 @@ class Layers extends React.Component {
     }
   }
 
-  loadLayers = async destination => {
+  loadLayers = async target => {
     try {
       const layers = await Promise.all(
-        maps[destination].map.layers.filter(layer => layer.type !== 'background').map(async layer => {
+        maps[target.id].map.layers.filter(layer => layer.type !== 'background').map(async layer => {
           if (layer.nodes) {
             await Promise.all(
               layer.nodes.map(async layer => {
@@ -130,34 +78,40 @@ class Layers extends React.Component {
         })
       );
 
-      if (this.mounted)
-        this.setState(p => {
-          return {
-            destinations: {
-              ...p.destinations,
-              [destination]: {
+      if (this.mounted) {
+        this.setState(p => ({
+          destinations: p.destinations.map(d => {
+            if (d.destinationHash === target.destinationHash) {
+              return {
+                ...d,
                 loading: false,
                 error: false,
                 layers
               }
+            } else {
+              return d
             }
-          };
-        });
+          })
+        }));
+      }
     } catch (e) {
       console.log(e);
-      if (this.mounted)
-        this.setState(p => {
-          return {
-            destinations: {
-              ...p.destinations,
-              [destination]: {
+
+      if (this.mounted) {
+        this.setState(p => ({
+          destinations: p.destinations.map(d => {
+            if (d.destinationHash === target.destinationHash) {
+              return {
+                ...d,
                 loading: false,
-                error: true,
-                layers: []
+                error: true
               }
+            } else {
+              return d
             }
-          };
-        });
+          })
+        }));
+      }
     }
   };
 
@@ -171,10 +125,10 @@ class Layers extends React.Component {
       // };
 
       await Promise.all(
-        Object.keys(this.state.destinations)
-          .filter(key => this.state.destinations[key].loading)
-          .map(async key => {
-            await this.loadLayers(key);
+        this.state.destinations
+          .filter(d => d.loading)
+          .map(async d => {
+            await this.loadLayers(d);
           })
       );
 
@@ -197,17 +151,15 @@ class Layers extends React.Component {
     } else {
       const map = maps[this.props.id].map;
 
-      console.log(map, this.state.destinations[this.props.id])
-
       const viewWidth = 1920;
       const viewHeight = 1080;
   
       const mapXOffset = (map.width - viewWidth) / 2;
       const mapYOffset = -(map.height - viewHeight) / 2;
-  
-      const bounds = [[0, 0], [map.height, map.width]];
 
-      return this.state.destinations[this.props.id].layers
+      const destination = this.state.destinations.find(d => d.destinationHash === this.props.destinationHash);
+
+      return destination.layers
         .filter(layer => layer.type === 'map')
         .map(layer => {
           const layerX = layer.x ? layer.x : 0;
@@ -254,14 +206,23 @@ class BackgroundLayer extends React.Component {
     this.state = {
       loading: true,
       error: false,
-      destinations
+      layers: [
+        {
+          id: 'background-upper',
+          blob: false
+        },
+        {
+          id: 'background-lower',
+          blob: false
+        }
+      ]
     };
   }
 
   componentDidMount() {
     this.mounted = true;
 
-    this.prepareLayers(this.props.id);
+    this.init();
   }
 
   componentWillUnmount() {
@@ -270,59 +231,46 @@ class BackgroundLayer extends React.Component {
 
   componentDidUpdate(pP, pS) {
     if (pP.id !== this.props.id) {
-      this.prepareLayers(this.props.id);
+      this.init();
     }
   }
 
-  loadLayers = async destination => {
+  load = async layers => {
     try {
-      const d = {};
+      const loaded = await Promise.all(
+        layers.map(async layer => {
+          return await fetch(layer.image)
+            .then(r => {
+              return r.blob();
+            })
+            .then(blob => {
+              const objectURL = URL.createObjectURL(blob);
 
-      let layers = await Promise.all(
-        maps[destination].map.layers.filter(layer => layer.type === 'background').map(async layer => {
-          if (layer.nodes) {
-            await Promise.all(
-              layer.nodes.map(async layer => {
-                return await fetch(layer.image)
-                  .then(r => {
-                    return r.blob();
-                  })
-                  .then(blob => {
-                    const objectURL = URL.createObjectURL(blob);
+              layer.blob = objectURL;
 
-                    layer.image = objectURL;
-                    return layer;
-                  })
-                  .catch(e => {
-                    console.log(e);
-                  });
-              })
-            );
-
-            return layer;
-          } else {
-            return await fetch(layer.image)
-              .then(r => {
-                return r.blob();
-              })
-              .then(blob => {
-                const objectURL = URL.createObjectURL(blob);
-
-                layer.image = objectURL;
-                return layer;
-              })
-              .catch(e => {
-                console.log(e);
-              });
-          }
+              return {
+                ...layer
+              };
+            })
+            .catch(e => {
+              console.log(e);
+            });
         })
       );
 
-      layers = await Promise.all(
+      return loaded;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  tint = async layers => {
+    try {
+      const tinted = await Promise.all(
         layers.map(async layer => {
           if (layer.color) {
             const image = document.createElement('img');
-            image.src = layer.image;
+            image.src = layer.blob;
 
             await new Promise(resolve => {
               image.onload = e => resolve();
@@ -339,7 +287,7 @@ class BackgroundLayer extends React.Component {
             context.globalCompositeOperation = 'destination-atop';
             context.drawImage(image, 0, 0, layer.width, layer.height);
 
-            layer.image = canvas.toDataURL();
+            layer.tinted = canvas.toDataURL();
 
             return layer;
           } else {
@@ -348,67 +296,64 @@ class BackgroundLayer extends React.Component {
         })
       );
 
-      d.layers = layers;
-
-      // console.log(layers);
-
-      if (this.mounted)
-        this.setState(p => {
-          return {
-            destinations: {
-              ...p.destinations,
-              [destination]: {
-                loading: false,
-                error: false,
-                layers
-              }
-            }
-          };
-        });
+      return tinted;
     } catch (e) {
       console.log(e);
-      if (this.mounted)
-        this.setState(p => {
-          return {
-            destinations: {
-              ...p.destinations,
-              [destination]: {
-                loading: false,
-                error: true,
-                layers: []
-              }
-            }
-          };
-        });
     }
   };
 
-  prepareLayers = async destination => {
+  init = async () => {
     try {
-      await this.loadLayers(this.props.id)
+      this.setState({ loading: true, error: false });
+
+      const layers = this.state.layers.map(layer => ({
+        ...layer, ...maps[this.props.id].map.layers.find(l => l.id === layer.id)
+      }));
+            
+      const blobs = (layers.filter(l => l.blob).length < 2 && await this.load(layers)) || layers;
+      const tinted = blobs && await this.tint(blobs);
 
       if (this.mounted) {
-        this.setState({ loading: false });
+        this.setState(p => ({
+          ...p,
+          loading: false,
+          error: false,
+          layers: tinted
+        }));
       }
 
-      console.log('background layer done');
+      console.log('background layers composited');
     } catch (e) {
       console.log(e);
+
       this.setState({ loading: false, error: true });
     }
   };
 
   render() {
-    if (!this.state.loading && !this.state.error) {
-      const layers = this.state.destinations[this.props.id].layers.filter(layer => layer.type === 'background');
-
+    const map = maps[this.props.id].map;
+    if (this.state.loading || this.state.error) {
       return (
         <div className='leaflet-pane leaflet-background-pane'>
-          {layers.map(layer => <img key={layer.id} alt={layer.id} src={layer.image} className={cx('layer-background', `layer-${layer.id}`, { 'interaction-none': true })} />)}
+          {map.layers
+            .filter(layer => layer.type === 'background')
+            .map(l => {
+              return <img key={`${this.props.id}_${l.id}`} alt={l.id} className={cx('layer-background', `layer-${l.id}`, { 'interaction-none': true })} />
+            })}
         </div>
-      )
+      );
     } else {
-      return null;
+      return (
+        <div className='leaflet-pane leaflet-background-pane'>
+          {map.layers
+            .filter(layer => layer.type === 'background')
+            .map(l => {
+              const layer = this.state.layers.find(layer => layer.id === l.id);
+
+              return <img key={`${this.props.id}_${l.id}`} alt={l.id} src={layer.tinted} className={cx('layer-background', `layer-${l.id}`, 'dl', { 'interaction-none': true })} />
+            })}
+        </div>
+      );
     }
   }
 }
