@@ -109,7 +109,7 @@ class Maps extends React.Component {
       }
     }
 
-    if (this.props.viewport <= 600) {
+    if (this.props.viewport.width <= 600) {
       zoom = -1;
     }
 
