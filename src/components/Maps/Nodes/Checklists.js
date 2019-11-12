@@ -245,8 +245,8 @@ class Checklists extends React.Component {
     const viewWidth = 1920;
     const viewHeight = 1080;
 
-    const mapXOffset = (map.width - viewWidth) / 2;
     const mapYOffset = -(map.height - viewHeight) / 2;
+    const mapXOffset = (map.width - viewWidth) / 2;
 
     return Object.keys(this.state.checklists).map((key, k) => {
       const checklist = this.state.checklists[key];
@@ -258,8 +258,8 @@ class Checklists extends React.Component {
         .map((node, i) => {
           if (node.points.length) {
             return node.points.map(point => {
-              const markerOffsetX = mapXOffset + viewWidth / 2;
               const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
+              const markerOffsetX = mapXOffset + viewWidth / 2;
 
               if (!point.x || !point.y) {
                 console.warn(node);
@@ -267,8 +267,8 @@ class Checklists extends React.Component {
                 return null;
               }
 
-              const offsetX = markerOffsetX + point.x;
               const offsetY = markerOffsetY + point.y;
+              const offsetX = markerOffsetX + point.x;
 
               // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 
@@ -280,11 +280,11 @@ class Checklists extends React.Component {
               return <Marker key={`${node.checklistHash}-${i}`} position={[offsetY, offsetX]} icon={icon} onMouseOver={handler_markerMouseOver} />;
             });
           } else if (this.props.settings.debug) {
-            const markerOffsetX = mapXOffset + viewWidth / 2;
             const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
+            const markerOffsetX = mapXOffset + viewWidth / 2;
 
-            const offsetX = markerOffsetX + (i + 1) * 50 - 0;
             const offsetY = markerOffsetY + (k + 1) * 30 - 1250;
+            const offsetX = markerOffsetX + (i + 1) * 50 - 0;
 
             // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 

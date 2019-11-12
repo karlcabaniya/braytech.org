@@ -51,12 +51,8 @@
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-#tooltip .frame.map .description ~ .completed {
-  margin: 12px 0 0;
-}
-
 #tooltip .frame.map .description {
-  padding: 16px 16px 0;
+  padding: 16px 16px;
 }
 
 #tooltip .frame.map .description:last-child {
@@ -129,9 +125,13 @@
 }
 
 #tooltip .frame.map .availability {
-  padding: 12px 16px 0;
+  padding: 0 16px;
   font-size: 14px;
   color: rgba(255, 255, 255, 1);
+}
+
+#tooltip .frame.map .availability ~ .recommended-light {
+  padding-bottom: 16px;
 }
 
 

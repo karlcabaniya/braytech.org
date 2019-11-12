@@ -73,7 +73,7 @@ class Maps extends React.Component {
   };
 
   getMapCenter = id => {
-    if (!maps[id]) return;
+    if (!maps[id]) return [0, 0];
 
     const map = maps[id].map;
 
@@ -98,26 +98,14 @@ class Maps extends React.Component {
 
       const entry = (checklistLookup && checklistLookup.checklistId && checklistLookup) || (recordLookup && recordLookup.checklistId && recordLookup);
 
-      const checklist = entry && entry.checklistId && checklists[entry.checklistId]({ requested: { key: 'checklistHash', array: [entry.checklistHash] } });
+      const checklist = entry && entry.checklistId && checklists[entry.checklistId]({ requested: entry.recordHash ? { key: 'recordHash', array: [entry.recordHash] } : { key: 'checklistHash', array: [entry.checklistHash] } });
       const checklistItem = checklist && checklist.items && checklist.items.length && checklist.items[0];
 
       if (checklistItem && checklistItem.points && checklistItem.points.length && checklistItem.points[0]) {
-        const checklistItemY = checklistItem.points[0].y || 0;
-        const checklistItemX = checklistItem.points[0].x || 0;
+        const markerY = checklistItem.points[0].y || 0;
+        const markerX = checklistItem.points[0].x || 0;
 
-        const viewWidth = 1920;
-        const viewHeight = 1080;
-
-        const mapXOffset = (map.width - viewWidth) / 2;
-        const mapYOffset = -(map.height - viewHeight) / 2;
-
-        const markerOffsetX = mapXOffset + viewWidth / 2;
-        const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
-
-        const centerXOffset = markerOffsetX + checklistItemX;
-        const centerYOffset = markerOffsetY + checklistItemY;
-
-        center = [centerYOffset, centerXOffset];
+        center = [map.height / 2 + markerY, map.width / 2 + markerX];
       }
     }
 
