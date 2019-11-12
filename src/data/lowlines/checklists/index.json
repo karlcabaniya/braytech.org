@@ -4442,27 +4442,43 @@
   "1912364094": [
     {
       "destinationHash": 290444260,
-      "bubbleHash": 0,
+      "bubbleHash": 4025450777,
       "checklistHash": 4062796495,
-      "points": [],
+      "points": [
+        {
+          "x": -197,
+          "y": -402
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "place": "The Moon",
-        "number": 1
+        "number": 1,
+        "bubble": "Anchor of Light",
+        "name": "Anchor of Light"
       },
-      "extended": {}
+      "extended": {},
+      "bubbleName": false
     },
     {
       "destinationHash": 290444260,
-      "bubbleHash": 0,
+      "bubbleHash": 4195493657,
       "checklistHash": 269847098,
-      "points": [],
+      "points": [
+        {
+          "x": -187,
+          "y": -184
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "place": "The Moon",
-        "number": 2
+        "number": 2,
+        "bubble": "Hellmouth",
+        "name": "Hellmouth"
       },
-      "extended": {}
+      "extended": {},
+      "bubbleName": false
     },
     {
       "destinationHash": 290444260,
@@ -4506,15 +4522,25 @@
     },
     {
       "destinationHash": 290444260,
-      "bubbleHash": 0,
+      "bubbleHash": 3107092550,
       "checklistHash": 2779900411,
-      "points": [],
+      "points": [
+        {
+          "x": -910,
+          "y": -288
+        }
+      ],
       "sorts": {
         "destination": "The Moon",
         "place": "The Moon",
-        "number": 5
+        "number": 5,
+        "bubble": "K1 Logistics",
+        "name": "K1 Logistics"
       },
-      "extended": {}
+      "extended": {
+        "located": "lost-sector"
+      },
+      "bubbleName": false
     },
     {
       "destinationHash": 290444260,

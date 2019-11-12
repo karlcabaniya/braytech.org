@@ -2,7 +2,13 @@
   "checklists": {
     "269847098": {
       "destinationHash": 290444260,
-      "bubbleHash": 0
+      "bubbleHash": 4195493657,
+      "points": [
+        {
+          "x": -187,
+          "y": -184
+        }
+      ]
     },
     "957600697": {
       "destinationHash": 290444260,
@@ -46,7 +52,13 @@
     },
     "2779900411": {
       "destinationHash": 290444260,
-      "bubbleHash": 0
+      "bubbleHash": 3107092550,
+      "points": [
+        {
+          "x": -910,
+          "y": -288
+        }
+      ]
     },
     "3728157446": {
       "destinationHash": 290444260,
@@ -70,7 +82,13 @@
     },
     "4062796495": {
       "destinationHash": 290444260,
-      "bubbleHash": 0
+      "bubbleHash": 4025450777,
+      "points": [
+        {
+          "x": -197,
+          "y": -402
+        }
+      ]
     },
     "3812883599": {
       "points": [

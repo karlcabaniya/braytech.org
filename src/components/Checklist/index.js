@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ProgressBar from '../UI/ProgressBar';
@@ -10,7 +11,7 @@ import Checkbox from '../UI/Checkbox';
 import './styles.css';
 
 const ChecklistItem = props => {
-  const { completed, suffix, name, location } = props;
+  const { completed, suffix, name, location, destinationHash, mapHash } = props;
 
   return (
     <li className={cx({ completed })}>
@@ -23,6 +24,7 @@ const ChecklistItem = props => {
         }
       />
       <div className='location'>{location}</div>
+      <Link className='button' to={`/maps/${destinationHash}/${mapHash}`}><i className='segoe-uniE0AB' /></Link>
     </li>
   );
 };
@@ -38,7 +40,7 @@ const Checklist = props => {
         {items.length > 0 ? (
           <ul className='list checklist-items'>
             {items.map((entry, i) => (
-              <ChecklistItem key={i} completed={entry.completed} name={entry.formatted.name} location={entry.formatted.location} />
+              <ChecklistItem key={i} completed={entry.completed} {...entry.formatted} destinationHash={entry.destinationHash} mapHash={entry.checklistHash || entry.recordHash} />
             ))}
           </ul>
         ) : (
@@ -69,7 +71,7 @@ const Checklist = props => {
         {items.length > 0 ? (
           <ul className='list checklist-items'>
             {items.map((entry, i) => (
-              <ChecklistItem key={i} completed={entry.completed} {...entry.formatted} />
+              <ChecklistItem key={i} completed={entry.completed} {...entry.formatted} destinationHash={entry.destinationHash} mapHash={entry.checklistHash || entry.recordHash} />
             ))}
           </ul>
         ) : (

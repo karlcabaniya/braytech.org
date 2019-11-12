@@ -213,11 +213,28 @@ class Checklists extends React.Component {
       lists[key] = adjusted;
     });
 
-    console.log(lists);
+    // console.log(lists);
 
     this.setState({
       checklists: lists
     });
+  };
+
+  handler_markerMouseOver = e => {
+    if (!this.props.settings.debug || !this.props.settings.logDetails) return;
+
+    let dataset = {};
+    try {
+      dataset = e.target._icon.children[0].children[0].dataset;
+    } catch (e) {}
+
+    const node = dataset.hash && nodes.find(n => (dataset.table === 'DestinyChecklistDefinition' && n.checklistHash && n.checklistHash === parseInt(dataset.hash, 10)) || (dataset.table === 'DestinyRecordDefinition' && n.recordHash && n.recordHash === parseInt(dataset.hash, 10)) || (dataset.table === 'DestinyActivityDefinition' && n.activityHash && n.activityHash === parseInt(dataset.hash, 10)));
+
+    console.log(node);
+
+    const item = node && this.state.checklists[node.checklistId].items.find(i => (i.checklistHash && node.checklistHash && i.checklistHash === node.checklistHash) || (i.recordHash && node.recordHash && i.recordHash === node.recordHash));
+
+    console.log(item);
   };
 
   render() {
@@ -255,7 +272,7 @@ class Checklists extends React.Component {
 
               // const text = checklist.checklistId === 3142056444 ? node.formatted.name : false;
 
-              const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`, node.screenshot ? `has-screenshot` : '', highlight && parseInt(highlight, 10) === node.checklistHash ? 'highlight' : ''], { icon: checklist.checklistIcon, url: checklist.checklistImage });
+              const icon = marker.icon({ hash: node.tooltipHash, table: checklist.tooltipTable }, [node.completed ? 'completed' : '', `checklistId-${checklist.checklistId}`, node.screenshot ? `has-screenshot` : '', highlight && parseInt(highlight, 10) === (node.checklistHash || node.recordHash) ? 'highlight' : ''], { icon: checklist.checklistIcon, url: checklist.checklistImage });
               // const icon = marker.text(['debug'], `${checklist.name}: ${node.name}`);
 
               const handler_markerMouseOver = (settings.debug && this.handler_markerMouseOver) || null;

@@ -15,6 +15,7 @@ import nodes from '../../data/lowlines/maps/nodes';
 
 import manifest from '../../utils/manifest';
 import * as ls from '../../utils/localStorage';
+import { checklists, lookup } from '../../utils/checklists';
 import CharacterEmblem from '../../components/UI/CharacterEmblem';
 import Spinner from '../../components/UI/Spinner';
 
@@ -24,6 +25,7 @@ import { Layers, BackgroundLayer } from './Layers';
 import Static from './Nodes/Static';
 import Checklists from './Nodes/Checklists';
 import Runtime from './Nodes/Runtime';
+import CharacterActivities from './Nodes/CharacterActivities';
 
 import './styles.css';
 
@@ -34,10 +36,7 @@ class Maps extends React.Component {
     this.state = {
       loading: true,
       error: false,
-      viewport: {
-        center: this.getMapCenter(this.resolveDestination(this.props.params.map).id),
-        zoom: 0
-      },
+      viewport: this.getInitialViewport(this.resolveDestination(this.props.params.map).id),
       ui: {
         destinations: false,
         characters: false
@@ -60,6 +59,19 @@ class Maps extends React.Component {
     }
   }
 
+  resolveDestination = (map = false) => {
+    const destinationById = map && utils.destinations.find(d => d.id === map);
+    const destinationByHash = map && utils.destinations.find(d => d.destinationHash === parseInt(map, 10));
+
+    if (destinationById) {
+      return destinationById;
+    } else if (destinationByHash) {
+      return destinationByHash;
+    } else {
+      return utils.destinations.find(d => d.default);
+    }
+  };
+
   getMapCenter = id => {
     if (!maps[id]) return;
 
@@ -73,16 +85,49 @@ class Maps extends React.Component {
     return center;
   };
 
-  resolveDestination = (map = false) => {
-    const destinationById = utils.destinations.find(d => d.id === map);
-    const destinationByHash = utils.destinations.find(d => d.hash === map);
+  getInitialViewport = id => {
+    let center = this.getMapCenter(id);
+    let zoom = 0;
 
-    if (destinationById) {
-      return destinationById;
-    } else if (destinationByHash) {
-      return destinationByHash;
-    } else {
-      return utils.destinations.find(d => d.default);
+    if (this.props.params.highlight) {
+      const map = maps[id].map;
+      const hash = parseInt(this.props.params.highlight, 10);
+
+      const checklistLookup = lookup({ key: 'checklistHash', value: hash });
+      const recordLookup = lookup({ key: 'recordHash', value: hash });
+
+      const entry = (checklistLookup && checklistLookup.checklistId && checklistLookup) || (recordLookup && recordLookup.checklistId && recordLookup);
+
+      const checklist = entry && entry.checklistId && checklists[entry.checklistId]({ requested: { key: 'checklistHash', array: [entry.checklistHash] } });
+      const checklistItem = checklist && checklist.items && checklist.items.length && checklist.items[0];
+
+      if (checklistItem && checklistItem.points && checklistItem.points.length && checklistItem.points[0]) {
+        const checklistItemY = checklistItem.points[0].y || 0;
+        const checklistItemX = checklistItem.points[0].x || 0;
+
+        const viewWidth = 1920;
+        const viewHeight = 1080;
+
+        const mapXOffset = (map.width - viewWidth) / 2;
+        const mapYOffset = -(map.height - viewHeight) / 2;
+
+        const markerOffsetX = mapXOffset + viewWidth / 2;
+        const markerOffsetY = mapYOffset + map.height + -viewHeight / 2;
+
+        const centerXOffset = markerOffsetX + checklistItemX;
+        const centerYOffset = markerOffsetY + checklistItemY;
+
+        center = [centerYOffset, centerXOffset];
+      }
+    }
+
+    if (this.props.viewport <= 600) {
+      zoom = -1;
+    }
+
+    return {
+      center,
+      zoom
     }
   };
 
@@ -243,23 +288,6 @@ class Maps extends React.Component {
     console.log(JSON.stringify({ x: originalX, y: originalY }));
   };
 
-  handler_markerMouseOver = e => {
-    if (!this.props.settings.debug || !this.props.settings.logDetails) return;
-
-    let dataset = {};
-    try {
-      dataset = e.target._icon.children[0].children[0].dataset;
-    } catch (e) {}
-
-    const node = dataset.hash && nodes.find(n => (dataset.table === 'DestinyChecklistDefinition' && n.checklistHash && n.checklistHash === parseInt(dataset.hash, 10)) || (dataset.table === 'DestinyRecordDefinition' && n.recordHash && n.recordHash === parseInt(dataset.hash, 10)) || (dataset.table === 'DestinyActivityDefinition' && n.activityHash && n.activityHash === parseInt(dataset.hash, 10)));
-
-    console.log(node);
-
-    const item = node && this.state.checklists[node.checklistId].items.find(i => (i.checklistHash && node.checklistHash && i.checklistHash === node.checklistHash) || (i.recordHash && node.recordHash && i.recordHash === node.recordHash));
-
-    console.log(item);
-  };
-
   handler_map_viewportChange = e => {
     if (!this.props.settings.debug || !this.props.settings.logDetails) return;
 
@@ -298,6 +326,7 @@ class Maps extends React.Component {
           <Static {...destination} />
           <Checklists {...destination} highlight={params.highlight} />
           <Runtime {...destination} />
+          {/* <CharacterActivities {...destination} /> */}
         </Map>
         <div className='loading'>
           <Spinner />

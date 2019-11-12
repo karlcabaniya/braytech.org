@@ -808,5 +808,10 @@
     "date": "2019-11-06T18:24:54.426Z",
     "version": "2.10.25",
     "content": "- various improvements including continued updates to _Inspect_ view, tooltips for items and maps, checklist utilities, and languages"
+  },
+  {
+    "date": "2019-11-12T01:40:46.360Z",
+    "version": "2.10.35",
+    "content": "- _Maps_ refactor\n- connected _Checklists_ to _Maps_"
   }
 ]
